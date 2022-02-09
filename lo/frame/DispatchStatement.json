@@ -19,18 +19,18 @@
     "name": "DispatchStatement",
     "namespace": "com.sun.star.frame",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1frame_1_1DispatchStatement.html",
-    "from_imports": [
+    "from_imports": [],
+    "from_imports_typing": [
       [
         "..beans.property_value",
         "PropertyValue",
         "PropertyValue_c9610c73"
       ]
     ],
-    "from_imports_typing": [],
-    "extends_map": {
-      "com.sun.star.beans.PropertyValue": "PropertyValue_c9610c73"
-    },
-    "quote": [],
+    "extends_map": {},
+    "quote": [
+      "typing.Tuple[PropertyValue_c9610c73, ...]"
+    ],
     "typings": [
       "typing.Tuple[PropertyValue_c9610c73, ...]"
     ],
@@ -45,54 +45,50 @@
     ],
     "imports": [],
     "extends": [],
-    "items": {
-      "properties": [
-        {
-          "name": "aCommand",
-          "returns": "str",
-          "desc": [
-            "specifies the dispatch command",
-            "",
-            "That means the URL parameter of a corresponding XDispatchProvider.queryDispatch() request."
-          ]
-        },
-        {
-          "name": "aTarget",
-          "returns": "str",
-          "desc": [
-            "specifies the frame target",
-            "",
-            "That means the TargetFrameName parameter of a corresponding XDispatchProvider.queryDispatch() request."
-          ]
-        },
-        {
-          "name": "nFlags",
-          "returns": "int",
-          "desc": [
-            "specifies the optional search flags",
-            "",
-            "That means the SearchFlags parameter of a corresponding XDispatchProvider.queryDispatch() request."
-          ]
-        },
-        {
-          "name": "bIsComment",
-          "returns": "bool",
-          "desc": [
-            "specifies if this statement should be recorded as commented out or not"
-          ]
-        }
-      ],
-      "types": [
-        {
-          "name": "aArgs",
-          "returns": "typing.Tuple[PropertyValue_c9610c73, ...]",
-          "desc": [
-            "specifies the dispatch command arguments",
-            "",
-            "That means the Arguments parameter of a corresponding XDispatch.dispatch() request."
-          ]
-        }
-      ]
-    }
+    "items": [
+      {
+        "name": "aArgs",
+        "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+        "lines": [
+          "specifies the dispatch command arguments",
+          "",
+          "That means the Arguments parameter of a corresponding XDispatch.dispatch() request."
+        ]
+      },
+      {
+        "name": "aCommand",
+        "type": "str",
+        "lines": [
+          "specifies the dispatch command",
+          "",
+          "That means the URL parameter of a corresponding XDispatchProvider.queryDispatch() request."
+        ]
+      },
+      {
+        "name": "aTarget",
+        "type": "str",
+        "lines": [
+          "specifies the frame target",
+          "",
+          "That means the TargetFrameName parameter of a corresponding XDispatchProvider.queryDispatch() request."
+        ]
+      },
+      {
+        "name": "nFlags",
+        "type": "int",
+        "lines": [
+          "specifies the optional search flags",
+          "",
+          "That means the SearchFlags parameter of a corresponding XDispatchProvider.queryDispatch() request."
+        ]
+      },
+      {
+        "name": "bIsComment",
+        "type": "bool",
+        "lines": [
+          "specifies if this statement should be recorded as commented out or not"
+        ]
+      }
+    ]
   }
 }

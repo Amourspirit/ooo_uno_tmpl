@@ -17,11 +17,6 @@
     "allow_db": true,
     "from_imports": [
       [
-        "..beans.property_value",
-        "PropertyValue",
-        "PropertyValue_c9610c73"
-      ],
-      [
         ".fill_properties",
         "FillProperties",
         "FillProperties_f1200da8"
@@ -52,9 +47,14 @@
         "Text_7c140999"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
+      ]
+    ],
     "extends_map": {
-      "com.sun.star.beans.PropertyValue": "PropertyValue_c9610c73",
       "com.sun.star.drawing.FillProperties": "FillProperties_f1200da8",
       "com.sun.star.drawing.LineProperties": "LineProperties_f13f0da9",
       "com.sun.star.drawing.RotationDescriptor": "RotationDescriptor_2cec0f63",
@@ -62,14 +62,15 @@
       "com.sun.star.drawing.Shape": "Shape_85cc09e5",
       "com.sun.star.drawing.Text": "Text_7c140999"
     },
-    "quote": [],
+    "quote": [
+      "typing.Tuple[PropertyValue_c9610c73, ...]"
+    ],
     "typings": [
       "typing.Tuple[PropertyValue_c9610c73, ...]"
     ],
     "requires_typing": true,
     "full_imports": {
       "general": [
-        "com.sun.star.beans.PropertyValue",
         "com.sun.star.drawing.FillProperties",
         "com.sun.star.drawing.LineProperties",
         "com.sun.star.drawing.RotationDescriptor",
@@ -77,7 +78,9 @@
         "com.sun.star.drawing.Shape",
         "com.sun.star.drawing.Text"
       ],
-      "typing": []
+      "typing": [
+        "com.sun.star.beans.PropertyValue"
+      ]
     },
     "name": "CustomShape",
     "imports": [],
@@ -105,35 +108,6 @@
             "The CustomShapeEngine that is used should be able to get on with the content of this property.",
             "",
             "If the CustomShapeEngine property is \\\"com.sun.star.drawing.EnhancedCustomShapeEngine\\\", then this property is containing properties as they are specified in the service com.sun.star.drawing.EnhancedCustomShapeGeometry"
-          ],
-          "raises_get": "",
-          "raises_set": ""
-        }
-      ],
-      "properties": [
-        {
-          "name": "CustomShapeData",
-          "returns": "str",
-          "desc": [
-            "This property can be used to store data that the CustomShapeEngine may use for rendering."
-          ],
-          "raises_get": "",
-          "raises_set": ""
-        },
-        {
-          "name": "CustomShapeEngine",
-          "returns": "str",
-          "desc": [
-            "This property contains the CustomShapeEngine service name that has to be used for rendering."
-          ],
-          "raises_get": "",
-          "raises_set": ""
-        },
-        {
-          "name": "CustomShapeReplacementURL",
-          "returns": "str",
-          "desc": [
-            "This property describes the URL to a replacement graphic that could be displayed if the CustomShape engine is not available."
           ],
           "raises_get": "",
           "raises_set": ""

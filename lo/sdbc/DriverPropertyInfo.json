@@ -22,7 +22,9 @@
     "from_imports": [],
     "from_imports_typing": [],
     "extends_map": {},
-    "quote": [],
+    "quote": [
+      "typing.Tuple[str, ...]"
+    ],
     "typings": [
       "typing.Tuple[str, ...]"
     ],
@@ -35,48 +37,44 @@
     ],
     "imports": [],
     "extends": [],
-    "items": {
-      "properties": [
-        {
-          "name": "Name",
-          "returns": "str",
-          "desc": [
-            "is the name of the property."
-          ]
-        },
-        {
-          "name": "Description",
-          "returns": "str",
-          "desc": [
-            "is a brief description of the property, which may be null."
-          ]
-        },
-        {
-          "name": "IsRequired",
-          "returns": "bool",
-          "desc": [
-            "is TRUE if a value must be supplied for this property during Driver.connect and FALSE otherwise."
-          ]
-        },
-        {
-          "name": "Value",
-          "returns": "str",
-          "desc": [
-            "specifies the current value of the property, based on the driver-supplied default values.",
-            "",
-            "This field may be empty if no value is known."
-          ]
-        }
-      ],
-      "types": [
-        {
-          "name": "Choices",
-          "returns": "typing.Tuple[str, ...]",
-          "desc": [
-            "contains a sequence of possible values if the value for the field DriverPropertyInfo.value may be selected from a particular set of values; otherwise empty."
-          ]
-        }
-      ]
-    }
+    "items": [
+      {
+        "name": "Choices",
+        "type": "typing.Tuple[str, ...]",
+        "lines": [
+          "contains a sequence of possible values if the value for the field DriverPropertyInfo.value may be selected from a particular set of values; otherwise empty."
+        ]
+      },
+      {
+        "name": "Name",
+        "type": "str",
+        "lines": [
+          "is the name of the property."
+        ]
+      },
+      {
+        "name": "Description",
+        "type": "str",
+        "lines": [
+          "is a brief description of the property, which may be null."
+        ]
+      },
+      {
+        "name": "IsRequired",
+        "type": "bool",
+        "lines": [
+          "is TRUE if a value must be supplied for this property during Driver.connect and FALSE otherwise."
+        ]
+      },
+      {
+        "name": "Value",
+        "type": "str",
+        "lines": [
+          "specifies the current value of the property, based on the driver-supplied default values.",
+          "",
+          "This field may be empty if no value is known."
+        ]
+      }
+    ]
   }
 }

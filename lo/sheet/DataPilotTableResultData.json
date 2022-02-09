@@ -19,25 +19,23 @@
     "name": "DataPilotTableResultData",
     "namespace": "com.sun.star.sheet",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1sheet_1_1DataPilotTableResultData.html",
-    "from_imports": [
+    "from_imports": [],
+    "from_imports_typing": [
       [
         ".data_pilot_field_filter",
         "DataPilotFieldFilter",
         "DataPilotFieldFilter_271e0eed"
-      ]
-    ],
-    "from_imports_typing": [
+      ],
       [
         ".data_result",
         "DataResult",
         "DataResult_a47d0b1a"
       ]
     ],
-    "extends_map": {
-      "com.sun.star.sheet.DataPilotFieldFilter": "DataPilotFieldFilter_271e0eed"
-    },
+    "extends_map": {},
     "quote": [
-      "DataResult_a47d0b1a"
+      "DataResult_a47d0b1a",
+      "typing.Tuple[DataPilotFieldFilter_271e0eed, ...]"
     ],
     "typings": [
       "typing.Tuple[DataPilotFieldFilter_271e0eed, ...]"
@@ -55,32 +53,28 @@
     ],
     "imports": [],
     "extends": [],
-    "items": {
-      "properties": [
-        {
-          "name": "DataFieldIndex",
-          "returns": "int",
-          "desc": [
-            "This is a 0-based index that specifies which data field the data displayed in the cell is for; the value of 0 means the cell is for the first data field, 1 for the second, and so on."
-          ]
-        },
-        {
-          "name": "Result",
-          "returns": "DataResult_a47d0b1a",
-          "desc": [
-            "more information about the result contained in the DataResult type."
-          ]
-        }
-      ],
-      "types": [
-        {
-          "name": "FieldFilters",
-          "returns": "typing.Tuple[DataPilotFieldFilter_271e0eed, ...]",
-          "desc": [
-            "This is a set of filter criteria that can be used to re-create those data rows that contribute to the value shown in the cell."
-          ]
-        }
-      ]
-    }
+    "items": [
+      {
+        "name": "FieldFilters",
+        "type": "typing.Tuple[DataPilotFieldFilter_271e0eed, ...]",
+        "lines": [
+          "This is a set of filter criteria that can be used to re-create those data rows that contribute to the value shown in the cell."
+        ]
+      },
+      {
+        "name": "DataFieldIndex",
+        "type": "int",
+        "lines": [
+          "This is a 0-based index that specifies which data field the data displayed in the cell is for; the value of 0 means the cell is for the first data field, 1 for the second, and so on."
+        ]
+      },
+      {
+        "name": "Result",
+        "type": "DataResult_a47d0b1a",
+        "lines": [
+          "more information about the result contained in the DataResult type."
+        ]
+      }
+    ]
   }
 }

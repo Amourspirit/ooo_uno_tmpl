@@ -19,25 +19,23 @@
     "name": "FolderList",
     "namespace": "com.sun.star.ucb",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1ucb_1_1FolderList.html",
-    "from_imports": [
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        ".folder_list_command",
+        "FolderListCommand",
+        "FolderListCommand_e0140cf9"
+      ],
       [
         ".folder_list_entry",
         "FolderListEntry",
         "FolderListEntry_c6c30c4c"
       ]
     ],
-    "from_imports_typing": [
-      [
-        ".folder_list_command",
-        "FolderListCommand",
-        "FolderListCommand_e0140cf9"
-      ]
-    ],
-    "extends_map": {
-      "com.sun.star.ucb.FolderListEntry": "FolderListEntry_c6c30c4c"
-    },
+    "extends_map": {},
     "quote": [
-      "FolderListCommand_e0140cf9"
+      "FolderListCommand_e0140cf9",
+      "typing.Tuple[FolderListEntry_c6c30c4c, ...]"
     ],
     "typings": [
       "typing.Tuple[FolderListEntry_c6c30c4c, ...]"
@@ -49,25 +47,21 @@
     ],
     "imports": [],
     "extends": [],
-    "items": {
-      "properties": [
-        {
-          "name": "Command",
-          "returns": "FolderListCommand_e0140cf9",
-          "desc": [
-            "The command to process on this list of folders."
-          ]
-        }
-      ],
-      "types": [
-        {
-          "name": "List",
-          "returns": "typing.Tuple[FolderListEntry_c6c30c4c, ...]",
-          "desc": [
-            "The list of folders (only used in conjunction with FolderListCommand.SET)."
-          ]
-        }
-      ]
-    }
+    "items": [
+      {
+        "name": "List",
+        "type": "typing.Tuple[FolderListEntry_c6c30c4c, ...]",
+        "lines": [
+          "The list of folders (only used in conjunction with FolderListCommand.SET)."
+        ]
+      },
+      {
+        "name": "Command",
+        "type": "FolderListCommand_e0140cf9",
+        "lines": [
+          "The command to process on this list of folders."
+        ]
+      }
+    ]
   }
 }

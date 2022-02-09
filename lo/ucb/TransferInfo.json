@@ -33,47 +33,45 @@
     ],
     "imports": [],
     "extends": [],
-    "items": {
-      "properties": [
-        {
-          "name": "MoveData",
-          "returns": "bool",
-          "desc": [
-            "contains the flags describing whether the data shall be moved instead of copied."
-          ]
-        },
-        {
-          "name": "SourceURL",
-          "returns": "str",
-          "desc": [
-            "contains the URL of the source of the action (e.g.",
-            "",
-            "the URL of a file to move)."
-          ]
-        },
-        {
-          "name": "NewTitle",
-          "returns": "str",
-          "desc": [
-            "contains the title of the transferred object, if it is different from the original one.",
-            "",
-            "If this field is filled, for example, a file will be renamed while it is being transferred."
-          ]
-        },
-        {
-          "name": "NameClash",
-          "returns": "int",
-          "desc": [
-            "describes how to act in case of title clashes while transferring the data.",
-            "",
-            "A title clash for instance occurs, if a file named \\\"foo.txt\\\" is to be transferred to a folder already containing another file named \\\"foo.txt\\\".",
-            "",
-            "The value can be one of the NameClash constants.",
-            "",
-            "Implementations that are not able to detect whether there is a clashing resource may ignore NameClash.ERROR and NameClash.RENAME always write the new data."
-          ]
-        }
-      ]
-    }
+    "items": [
+      {
+        "name": "MoveData",
+        "type": "bool",
+        "lines": [
+          "contains the flags describing whether the data shall be moved instead of copied."
+        ]
+      },
+      {
+        "name": "SourceURL",
+        "type": "str",
+        "lines": [
+          "contains the URL of the source of the action (e.g.",
+          "",
+          "the URL of a file to move)."
+        ]
+      },
+      {
+        "name": "NewTitle",
+        "type": "str",
+        "lines": [
+          "contains the title of the transferred object, if it is different from the original one.",
+          "",
+          "If this field is filled, for example, a file will be renamed while it is being transferred."
+        ]
+      },
+      {
+        "name": "NameClash",
+        "type": "int",
+        "lines": [
+          "describes how to act in case of title clashes while transferring the data.",
+          "",
+          "A title clash for instance occurs, if a file named \\\"foo.txt\\\" is to be transferred to a folder already containing another file named \\\"foo.txt\\\".",
+          "",
+          "The value can be one of the NameClash constants.",
+          "",
+          "Implementations that are not able to detect whether there is a clashing resource may ignore NameClash.ERROR and NameClash.RENAME always write the new data."
+        ]
+      }
+    ]
   }
 }

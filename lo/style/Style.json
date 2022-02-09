@@ -17,16 +17,6 @@
     "allow_db": true,
     "from_imports": [
       [
-        "..beans.named_value",
-        "NamedValue",
-        "NamedValue_a37a0af3"
-      ],
-      [
-        "..beans.property_value",
-        "PropertyValue",
-        "PropertyValue_c9610c73"
-      ],
-      [
         "..beans.x_multi_property_set",
         "XMultiPropertySet",
         "XMultiPropertySet_fd880e05"
@@ -52,17 +42,29 @@
         "UserDefinedAttributesSupplier_9fbe1222"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        "..beans.named_value",
+        "NamedValue",
+        "NamedValue_a37a0af3"
+      ],
+      [
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
+      ]
+    ],
     "extends_map": {
-      "com.sun.star.beans.NamedValue": "NamedValue_a37a0af3",
-      "com.sun.star.beans.PropertyValue": "PropertyValue_c9610c73",
       "com.sun.star.beans.XMultiPropertySet": "XMultiPropertySet_fd880e05",
       "com.sun.star.beans.XMultiPropertyStates": "XMultiPropertyStates_2a3e0f4d",
       "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa",
       "com.sun.star.style.XStyle": "XStyle_7c7f09a2",
       "com.sun.star.xml.UserDefinedAttributesSupplier": "UserDefinedAttributesSupplier_9fbe1222"
     },
-    "quote": [],
+    "quote": [
+      "typing.Tuple[NamedValue_a37a0af3, ...]",
+      "typing.Tuple[PropertyValue_c9610c73, ...]"
+    ],
     "typings": [
       "typing.Tuple[NamedValue_a37a0af3, ...]",
       "typing.Tuple[PropertyValue_c9610c73, ...]"
@@ -70,15 +72,16 @@
     "requires_typing": true,
     "full_imports": {
       "general": [
-        "com.sun.star.beans.NamedValue",
-        "com.sun.star.beans.PropertyValue",
         "com.sun.star.beans.XMultiPropertySet",
         "com.sun.star.beans.XMultiPropertyStates",
         "com.sun.star.beans.XPropertySet",
         "com.sun.star.style.XStyle",
         "com.sun.star.xml.UserDefinedAttributesSupplier"
       ],
-      "typing": []
+      "typing": [
+        "com.sun.star.beans.NamedValue",
+        "com.sun.star.beans.PropertyValue"
+      ]
     },
     "name": "Style",
     "imports": [],
@@ -132,65 +135,6 @@
             "**since**",
             "",
             "    LibreOffice 4.2"
-          ],
-          "raises_get": "",
-          "raises_set": ""
-        }
-      ],
-      "properties": [
-        {
-          "name": "DisplayName",
-          "returns": "str",
-          "desc": [
-            "contains the name of the style as it is displayed in the user interface.",
-            "",
-            "The names of the styles at the API are language independent. The user interface names are localized."
-          ],
-          "raises_get": "",
-          "raises_set": ""
-        },
-        {
-          "name": "FollowStyle",
-          "returns": "str",
-          "desc": [
-            "contains the name of the style that is applied to the next paragraph.",
-            "",
-            "This property is usually available at paragraph styles only."
-          ],
-          "raises_get": "",
-          "raises_set": ""
-        },
-        {
-          "name": "Hidden",
-          "returns": "bool",
-          "desc": [
-            "Flag indicating whether to hide the style in the UI.",
-            "",
-            "**since**",
-            "",
-            "    LibreOffice 4.0"
-          ],
-          "raises_get": "",
-          "raises_set": ""
-        },
-        {
-          "name": "IsAutoUpdate",
-          "returns": "str",
-          "desc": [
-            "determines if a style is automatically updated, if the properties of an object that the style is applied to are changed.",
-            "",
-            "For example, if the style is applied to a paragraph and the properties of the paragraph are changed then the style will be updated accordingly."
-          ],
-          "raises_get": "",
-          "raises_set": ""
-        },
-        {
-          "name": "IsPhysical",
-          "returns": "bool",
-          "desc": [
-            "determines if a style is physically created.",
-            "",
-            "Built in styles may not be created until they are needed. To prevent standard style properties from being exported, it may be useful to check if the style is created first."
           ],
           "raises_get": "",
           "raises_set": ""
