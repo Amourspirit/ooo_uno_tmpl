@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "DictionaryEvent",
@@ -51,25 +51,27 @@
     "extends": [
       "com.sun.star.lang.EventObject"
     ],
-    "items": [
-      {
-        "name": "nEvent",
-        "type": "int",
-        "lines": [
-          "is the type of event.",
-          "",
-          "This must be the value of a single flag. No combinations are allowed."
-        ]
-      },
-      {
-        "name": "xDictionaryEntry",
-        "type": "XDictionaryEntry_49ef0ff5",
-        "lines": [
-          "is the affected dictionary entry (if any).",
-          "",
-          "It must be set if an entry was added or deleted, otherwise it should be empty."
-        ]
-      }
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "nEvent",
+          "returns": "int",
+          "desc": [
+            "is the type of event.",
+            "",
+            "This must be the value of a single flag. No combinations are allowed."
+          ]
+        },
+        {
+          "name": "xDictionaryEntry",
+          "returns": "XDictionaryEntry_49ef0ff5",
+          "desc": [
+            "is the affected dictionary entry (if any).",
+            "",
+            "It must be set if an entry was added or deleted, otherwise it should be empty."
+          ]
+        }
+      ]
+    }
   }
 }

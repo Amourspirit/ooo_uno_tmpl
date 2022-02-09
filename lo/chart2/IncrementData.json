@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "IncrementData",
@@ -19,18 +19,18 @@
     "name": "IncrementData",
     "namespace": "com.sun.star.chart2",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1chart2_1_1IncrementData.html",
-    "from_imports": [],
-    "from_imports_typing": [
+    "from_imports": [
       [
         ".sub_increment",
         "SubIncrement",
         "SubIncrement_c5630c1b"
       ]
     ],
-    "extends_map": {},
-    "quote": [
-      "typing.Tuple[SubIncrement_c5630c1b, ...]"
-    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.chart2.SubIncrement": "SubIncrement_c5630c1b"
+    },
+    "quote": [],
     "typings": [
       "typing.Tuple[SubIncrement_c5630c1b, ...]"
     ],
@@ -41,43 +41,47 @@
     ],
     "imports": [],
     "extends": [],
-    "items": [
-      {
-        "name": "Distance",
-        "type": "object",
-        "lines": [
-          "if the any contains a double value this is used as a fixed Distance value.",
-          "",
-          "Otherwise, if the any is empty or contains an incompatible type, the Distance is meant to be calculated automatically by the view component representing the model containing this increment."
-        ]
-      },
-      {
-        "name": "PostEquidistant",
-        "type": "object",
-        "lines": [
-          "PostEquidistant rules whether the member Distance describes a distance before or after the scaling is applied.",
-          "",
-          "If PostEquidistant equals TRUE Distance is given in values after XScaling is applied, thus resulting main tickmarks will always look equidistant on the screen. If PostEquidistant equals FALSE Distance is given in values before XScaling is applied."
-        ]
-      },
-      {
-        "name": "BaseValue",
-        "type": "object",
-        "lines": [
-          "if the any contains a double value this is used as a fixed BaseValue.",
-          "",
-          "Otherwise, if the any is empty or contains an incompatible type, the BaseValue is meant to be calculated automatically by the view component representing the model containing this increment."
-        ]
-      },
-      {
-        "name": "SubIncrements",
-        "type": "typing.Tuple[SubIncrement_c5630c1b, ...]",
-        "lines": [
-          "SubIncrements describes the positioning of further sub tickmarks on the scale of an axis.",
-          "",
-          "The first SubIncrement in this sequence determines how the distance between two neighboring main tickmarks is divided for positioning of further sub tickmarks. Every following SubIncrement determines the positions of subsequent tickmarks in relation to their parent tickmarks given by the preceding SubIncrement."
-        ]
-      }
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "Distance",
+          "returns": "object",
+          "desc": [
+            "if the any contains a double value this is used as a fixed Distance value.",
+            "",
+            "Otherwise, if the any is empty or contains an incompatible type, the Distance is meant to be calculated automatically by the view component representing the model containing this increment."
+          ]
+        },
+        {
+          "name": "PostEquidistant",
+          "returns": "object",
+          "desc": [
+            "PostEquidistant rules whether the member Distance describes a distance before or after the scaling is applied.",
+            "",
+            "If PostEquidistant equals TRUE Distance is given in values after XScaling is applied, thus resulting main tickmarks will always look equidistant on the screen. If PostEquidistant equals FALSE Distance is given in values before XScaling is applied."
+          ]
+        },
+        {
+          "name": "BaseValue",
+          "returns": "object",
+          "desc": [
+            "if the any contains a double value this is used as a fixed BaseValue.",
+            "",
+            "Otherwise, if the any is empty or contains an incompatible type, the BaseValue is meant to be calculated automatically by the view component representing the model containing this increment."
+          ]
+        }
+      ],
+      "types": [
+        {
+          "name": "SubIncrements",
+          "returns": "typing.Tuple[SubIncrement_c5630c1b, ...]",
+          "desc": [
+            "SubIncrements describes the positioning of further sub tickmarks on the scale of an axis.",
+            "",
+            "The first SubIncrement in this sequence determines how the distance between two neighboring main tickmarks is divided for positioning of further sub tickmarks. Every following SubIncrement determines the positions of subsequent tickmarks in relation to their parent tickmarks given by the preceding SubIncrement."
+          ]
+        }
+      ]
+    }
   }
 }

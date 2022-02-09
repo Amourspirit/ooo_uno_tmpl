@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "WindowDescriptor",
@@ -51,59 +51,61 @@
     ],
     "imports": [],
     "extends": [],
-    "items": [
-      {
-        "name": "Type",
-        "type": "WindowClass_99f60ac2",
-        "lines": [
-          "specifies the type of window."
-        ]
-      },
-      {
-        "name": "WindowServiceName",
-        "type": "str",
-        "lines": [
-          "specifies the name of the component service.",
-          "",
-          "A zero length name means that the VCL creates a blank top, a container, or a simple window. The following service names are defined:"
-        ]
-      },
-      {
-        "name": "Parent",
-        "type": "XWindowPeer_99760ab0",
-        "lines": [
-          "specifies the parent of the component.",
-          "",
-          "If Parent == 0 && ParentIndex == -1, then the window is on the desktop."
-        ]
-      },
-      {
-        "name": "ParentIndex",
-        "type": "int",
-        "lines": [
-          "specifies the index of the parent window, if available.",
-          "",
-          "If Parent == 0 and this struct is a member of an array, then this is the offset from the beginning of the array to the parent. A value of -1 means desktop."
-        ]
-      },
-      {
-        "name": "Bounds",
-        "type": "Rectangle_84b109e9",
-        "lines": [
-          "specifies the position and size of the window.",
-          "",
-          "This member is ignored if the window attribute is com.sun.star.awt.WindowAttribute.FULLSIZE."
-        ]
-      },
-      {
-        "name": "WindowAttributes",
-        "type": "int",
-        "lines": [
-          "specifies the window attributes.",
-          "",
-          "Use one value out of the constant group com.sun.star.awt.WindowAttribute."
-        ]
-      }
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "Type",
+          "returns": "WindowClass_99f60ac2",
+          "desc": [
+            "specifies the type of window."
+          ]
+        },
+        {
+          "name": "WindowServiceName",
+          "returns": "str",
+          "desc": [
+            "specifies the name of the component service.",
+            "",
+            "A zero length name means that the VCL creates a blank top, a container, or a simple window. The following service names are defined:"
+          ]
+        },
+        {
+          "name": "Parent",
+          "returns": "XWindowPeer_99760ab0",
+          "desc": [
+            "specifies the parent of the component.",
+            "",
+            "If Parent == 0 && ParentIndex == -1, then the window is on the desktop."
+          ]
+        },
+        {
+          "name": "ParentIndex",
+          "returns": "int",
+          "desc": [
+            "specifies the index of the parent window, if available.",
+            "",
+            "If Parent == 0 and this struct is a member of an array, then this is the offset from the beginning of the array to the parent. A value of -1 means desktop."
+          ]
+        },
+        {
+          "name": "Bounds",
+          "returns": "Rectangle_84b109e9",
+          "desc": [
+            "specifies the position and size of the window.",
+            "",
+            "This member is ignored if the window attribute is com.sun.star.awt.WindowAttribute.FULLSIZE."
+          ]
+        },
+        {
+          "name": "WindowAttributes",
+          "returns": "int",
+          "desc": [
+            "specifies the window attributes.",
+            "",
+            "Use one value out of the constant group com.sun.star.awt.WindowAttribute."
+          ]
+        }
+      ]
+    }
   }
 }

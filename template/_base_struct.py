@@ -75,7 +75,8 @@ class BaseStruct(BaseJson):
         if not self._sorted_key_index is None:
             return self._sorted_key_index
         sorted = []
-        d_lst: List[Dict[str, object]] = getattr(self, 'attribs', [])
+        
+        d_lst: List[Dict[str, object]] = self.attribs.get('properties', [])
         sort: bool = getattr(self, 'sort', False)
         for i, d in enumerate(d_lst):
             sorted.append((d['name'], i))
@@ -116,7 +117,7 @@ class BaseStruct(BaseJson):
     
     def get_nt_names_str(self) -> str:
         sorted = self.get_sorted_names()
-        d_lst: List[Dict[str, object]] = getattr(self, 'attribs', [])
+        d_lst: List[Dict[str, object]] = self.attribs.get('properties', [])
 
         c_str = ''
         i = 0

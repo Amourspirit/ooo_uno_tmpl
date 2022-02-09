@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "BorderLine2",
@@ -45,25 +45,27 @@
     "extends": [
       "com.sun.star.table.BorderLine"
     ],
-    "items": [
-      {
-        "name": "LineStyle",
-        "type": "int",
-        "lines": [
-          "Style of the border."
-        ]
-      },
-      {
-        "name": "LineWidth",
-        "type": "int",
-        "lines": [
-          "Width of the border, this is the base to compute all the lines and gaps widths.",
-          "",
-          "These widths computations are based on the LineStyle property",
-          "",
-          "This property is prevailing on the old Out, In and Dist width from BorderLine. If this property is set to 0, then the other widths will be used to guess the border width."
-        ]
-      }
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "LineStyle",
+          "returns": "int",
+          "desc": [
+            "Style of the border."
+          ]
+        },
+        {
+          "name": "LineWidth",
+          "returns": "int",
+          "desc": [
+            "Width of the border, this is the base to compute all the lines and gaps widths.",
+            "",
+            "These widths computations are based on the LineStyle property",
+            "",
+            "This property is prevailing on the old Out, In and Dist width from BorderLine. If this property is set to 0, then the other widths will be used to guess the border width."
+          ]
+        }
+      ]
+    }
   }
 }

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "AccessibleEventObject",
@@ -47,34 +47,36 @@
     "extends": [
       "com.sun.star.lang.EventObject"
     ],
-    "items": [
-      {
-        "name": "EventId",
-        "type": "int",
-        "lines": [
-          "specifies the type of this event.",
-          "",
-          "For a list of possible events see AccessibleEventId."
-        ]
-      },
-      {
-        "name": "NewValue",
-        "type": "object",
-        "lines": [
-          "for events that specifies a value change, this is the new value.",
-          "",
-          "Depending on the EventId, this can be void."
-        ]
-      },
-      {
-        "name": "OldValue",
-        "type": "object",
-        "lines": [
-          "for events that specifies a value change, this is the old value.",
-          "",
-          "Depending on the EventId, this can be void."
-        ]
-      }
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "EventId",
+          "returns": "int",
+          "desc": [
+            "specifies the type of this event.",
+            "",
+            "For a list of possible events see AccessibleEventId."
+          ]
+        },
+        {
+          "name": "NewValue",
+          "returns": "object",
+          "desc": [
+            "for events that specifies a value change, this is the new value.",
+            "",
+            "Depending on the EventId, this can be void."
+          ]
+        },
+        {
+          "name": "OldValue",
+          "returns": "object",
+          "desc": [
+            "for events that specifies a value change, this is the old value.",
+            "",
+            "Depending on the EventId, this can be void."
+          ]
+        }
+      ]
+    }
   }
 }

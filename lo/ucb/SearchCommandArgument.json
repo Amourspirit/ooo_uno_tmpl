@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "SearchCommandArgument",
@@ -19,23 +19,25 @@
     "name": "SearchCommandArgument",
     "namespace": "com.sun.star.ucb",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1ucb_1_1SearchCommandArgument.html",
-    "from_imports": [],
-    "from_imports_typing": [
+    "from_imports": [
       [
         "..beans.property",
         "Property",
         "Property_8f4e0a76"
-      ],
+      ]
+    ],
+    "from_imports_typing": [
       [
         ".search_info",
         "SearchInfo",
         "SearchInfo_8daf0a24"
       ]
     ],
-    "extends_map": {},
+    "extends_map": {
+      "com.sun.star.beans.Property": "Property_8f4e0a76"
+    },
     "quote": [
-      "SearchInfo_8daf0a24",
-      "typing.Tuple[Property_8f4e0a76, ...]"
+      "SearchInfo_8daf0a24"
     ],
     "typings": [
       "typing.Tuple[Property_8f4e0a76, ...]"
@@ -47,21 +49,25 @@
     ],
     "imports": [],
     "extends": [],
-    "items": [
-      {
-        "name": "Info",
-        "type": "SearchInfo_8daf0a24",
-        "lines": [
-          "the search criteria."
-        ]
-      },
-      {
-        "name": "Properties",
-        "type": "typing.Tuple[Property_8f4e0a76, ...]",
-        "lines": [
-          "the properties for which values shall be provided through the ContentResultSet returned by the search command."
-        ]
-      }
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "Info",
+          "returns": "SearchInfo_8daf0a24",
+          "desc": [
+            "the search criteria."
+          ]
+        }
+      ],
+      "types": [
+        {
+          "name": "Properties",
+          "returns": "typing.Tuple[Property_8f4e0a76, ...]",
+          "desc": [
+            "the properties for which values shall be provided through the ContentResultSet returned by the search command."
+          ]
+        }
+      ]
+    }
   }
 }

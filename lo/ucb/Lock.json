@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "Lock",
@@ -37,8 +37,7 @@
       "com.sun.star.ucb.LockEntry": "LockEntry_839e09dd"
     },
     "quote": [
-      "LockDepth_835c09c0",
-      "typing.Tuple[str, ...]"
+      "LockDepth_835c09c0"
     ],
     "typings": [
       "typing.Tuple[str, ...]"
@@ -52,41 +51,45 @@
     "extends": [
       "com.sun.star.ucb.LockEntry"
     ],
-    "items": [
-      {
-        "name": "Depth",
-        "type": "LockDepth_835c09c0",
-        "lines": [
-          "defines the lock's depth."
-        ]
-      },
-      {
-        "name": "Owner",
-        "type": "object",
-        "lines": [
-          "the owner of the lock.",
-          "",
-          "This element provides information sufficient for either directly contacting a principal (such as a telephone number or email URI), or for discovering the principal (such as the URL of a homepage) who owns the lock."
-        ]
-      },
-      {
-        "name": "Timeout",
-        "type": "int",
-        "lines": [
-          "a timeout value for the lock.",
-          "",
-          "This element specifies the number of seconds between granting of the lock and the automatic removal of that lock. The value must not be greater than 2^32-1. A value of -1 stands for an infinite lock, that will never be removed automatically."
-        ]
-      },
-      {
-        "name": "LockTokens",
-        "type": "typing.Tuple[str, ...]",
-        "lines": [
-          "the lock tokens.",
-          "",
-          "Each lock token is a URI."
-        ]
-      }
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "Depth",
+          "returns": "LockDepth_835c09c0",
+          "desc": [
+            "defines the lock's depth."
+          ]
+        },
+        {
+          "name": "Owner",
+          "returns": "object",
+          "desc": [
+            "the owner of the lock.",
+            "",
+            "This element provides information sufficient for either directly contacting a principal (such as a telephone number or email URI), or for discovering the principal (such as the URL of a homepage) who owns the lock."
+          ]
+        },
+        {
+          "name": "Timeout",
+          "returns": "int",
+          "desc": [
+            "a timeout value for the lock.",
+            "",
+            "This element specifies the number of seconds between granting of the lock and the automatic removal of that lock. The value must not be greater than 2^32-1. A value of -1 stands for an infinite lock, that will never be removed automatically."
+          ]
+        }
+      ],
+      "types": [
+        {
+          "name": "LockTokens",
+          "returns": "typing.Tuple[str, ...]",
+          "desc": [
+            "the lock tokens.",
+            "",
+            "Each lock token is a URI."
+          ]
+        }
+      ]
+    }
   }
 }

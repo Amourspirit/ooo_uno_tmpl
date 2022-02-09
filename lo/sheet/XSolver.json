@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "libre_office_ver": "7.2",
   "name": "XSolver",
   "type": "interface",
@@ -17,6 +17,16 @@
     "allow_db": true,
     "from_imports": [
       [
+        ".solver_constraint",
+        "SolverConstraint",
+        "SolverConstraint_f1e30dc1"
+      ],
+      [
+        "..table.cell_address",
+        "CellAddress",
+        "CellAddress_ae5f0b56"
+      ],
+      [
         "..uno.x_interface",
         "XInterface",
         "XInterface_8f010a43"
@@ -24,30 +34,19 @@
     ],
     "from_imports_typing": [
       [
-        ".solver_constraint",
-        "SolverConstraint",
-        "SolverConstraint_f1e30dc1"
-      ],
-      [
         ".x_spreadsheet_document",
         "XSpreadsheetDocument",
         "XSpreadsheetDocument_2a1f0f30"
-      ],
-      [
-        "..table.cell_address",
-        "CellAddress",
-        "CellAddress_ae5f0b56"
       ]
     ],
     "extends_map": {
+      "com.sun.star.sheet.SolverConstraint": "SolverConstraint_f1e30dc1",
+      "com.sun.star.table.CellAddress": "CellAddress_ae5f0b56",
       "com.sun.star.uno.XInterface": "XInterface_8f010a43"
     },
     "quote": [
       "CellAddress_ae5f0b56",
-      "XSpreadsheetDocument_2a1f0f30",
-      "typing.Tuple[CellAddress_ae5f0b56, ...]",
-      "typing.Tuple[SolverConstraint_f1e30dc1, ...]",
-      "typing.Tuple[float, ...]"
+      "XSpreadsheetDocument_2a1f0f30"
     ],
     "typings": [
       "typing.Tuple[CellAddress_ae5f0b56, ...]",
@@ -57,12 +56,12 @@
     "requires_typing": true,
     "full_imports": {
       "general": [
+        "com.sun.star.sheet.SolverConstraint",
+        "com.sun.star.table.CellAddress",
         "com.sun.star.uno.XInterface"
       ],
       "typing": [
-        "com.sun.star.sheet.SolverConstraint",
-        "com.sun.star.sheet.XSpreadsheetDocument",
-        "com.sun.star.table.CellAddress"
+        "com.sun.star.sheet.XSpreadsheetDocument"
       ]
     },
     "name": "XSolver",

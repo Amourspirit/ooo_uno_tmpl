@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "FolderList",
@@ -19,23 +19,25 @@
     "name": "FolderList",
     "namespace": "com.sun.star.ucb",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1ucb_1_1FolderList.html",
-    "from_imports": [],
-    "from_imports_typing": [
-      [
-        ".folder_list_command",
-        "FolderListCommand",
-        "FolderListCommand_e0140cf9"
-      ],
+    "from_imports": [
       [
         ".folder_list_entry",
         "FolderListEntry",
         "FolderListEntry_c6c30c4c"
       ]
     ],
-    "extends_map": {},
+    "from_imports_typing": [
+      [
+        ".folder_list_command",
+        "FolderListCommand",
+        "FolderListCommand_e0140cf9"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.ucb.FolderListEntry": "FolderListEntry_c6c30c4c"
+    },
     "quote": [
-      "FolderListCommand_e0140cf9",
-      "typing.Tuple[FolderListEntry_c6c30c4c, ...]"
+      "FolderListCommand_e0140cf9"
     ],
     "typings": [
       "typing.Tuple[FolderListEntry_c6c30c4c, ...]"
@@ -47,21 +49,25 @@
     ],
     "imports": [],
     "extends": [],
-    "items": [
-      {
-        "name": "Command",
-        "type": "FolderListCommand_e0140cf9",
-        "lines": [
-          "The command to process on this list of folders."
-        ]
-      },
-      {
-        "name": "List",
-        "type": "typing.Tuple[FolderListEntry_c6c30c4c, ...]",
-        "lines": [
-          "The list of folders (only used in conjunction with FolderListCommand.SET)."
-        ]
-      }
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "Command",
+          "returns": "FolderListCommand_e0140cf9",
+          "desc": [
+            "The command to process on this list of folders."
+          ]
+        }
+      ],
+      "types": [
+        {
+          "name": "List",
+          "returns": "typing.Tuple[FolderListEntry_c6c30c4c, ...]",
+          "desc": [
+            "The list of folders (only used in conjunction with FolderListCommand.SET)."
+          ]
+        }
+      ]
+    }
   }
 }

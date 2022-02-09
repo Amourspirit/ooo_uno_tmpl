@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "NamedDatabaseObject",
@@ -35,33 +35,35 @@
     ],
     "imports": [],
     "extends": [],
-    "items": [
-      {
-        "name": "Type",
-        "type": "int",
-        "lines": [
-          "denotes the type of the object.",
-          "",
-          "This member is one of the DatabaseObject or DatabaseObjectContainer constants."
-        ]
-      },
-      {
-        "name": "Name",
-        "type": "str",
-        "lines": [
-          "denotes the name of the object",
-          "",
-          "In case of forms, reports, form folders and report folders, this is the hierarchical path to the object, where the path elements are separated by a slash (/).",
-          "",
-          "In case of tables, this is the fully qualified name of the table, as required by the database's table name composition rules.",
-          "",
-          "In case of queries, this is the name of the query.",
-          "",
-          "In case of virtual folders denoted by DatabaseObjectContainer.CATALOG and DatabaseObjectContainer.SCHEMA, it is",
-          "",
-          "In case of the virtual folders denoted by DatabaseObjectContainer.TABLES, DatabaseObjectContainer.QUERIES, DatabaseObjectContainer.DATA_SOURCE, DatabaseObjectContainer.FORMS or DatabaseObjectContainer.REPORTS, this denotes the name of the data source (as denoted by com.sun.star.sdb.DataSource.Name)"
-        ]
-      }
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "Type",
+          "returns": "int",
+          "desc": [
+            "denotes the type of the object.",
+            "",
+            "This member is one of the DatabaseObject or DatabaseObjectContainer constants."
+          ]
+        },
+        {
+          "name": "Name",
+          "returns": "str",
+          "desc": [
+            "denotes the name of the object",
+            "",
+            "In case of forms, reports, form folders and report folders, this is the hierarchical path to the object, where the path elements are separated by a slash (/).",
+            "",
+            "In case of tables, this is the fully qualified name of the table, as required by the database's table name composition rules.",
+            "",
+            "In case of queries, this is the name of the query.",
+            "",
+            "In case of virtual folders denoted by DatabaseObjectContainer.CATALOG and DatabaseObjectContainer.SCHEMA, it is",
+            "",
+            "In case of the virtual folders denoted by DatabaseObjectContainer.TABLES, DatabaseObjectContainer.QUERIES, DatabaseObjectContainer.DATA_SOURCE, DatabaseObjectContainer.FORMS or DatabaseObjectContainer.REPORTS, this denotes the name of the data source (as denoted by com.sun.star.sdb.DataSource.Name)"
+          ]
+        }
+      ]
+    }
   }
 }

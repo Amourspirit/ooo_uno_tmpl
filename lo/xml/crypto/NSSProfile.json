@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "NSSProfile",
@@ -42,30 +42,32 @@
     ],
     "imports": [],
     "extends": [],
-    "items": [
-      {
-        "name": "Name",
-        "type": "str",
-        "lines": [
-          "the name of the NSS profile",
-          "",
-          "Normally the name will reflect the name of the Mozilla profile. But the profile list also contains the following special entries: MANUAL and MOZILLA_CERTIFICATE_FOLDER. These will have a product type of MozillaProductType.Default and might have an empty path, if that value is not available."
-        ]
-      },
-      {
-        "name": "Path",
-        "type": "str",
-        "lines": [
-          "the path to the NSS databases"
-        ]
-      },
-      {
-        "name": "Type",
-        "type": "MozillaProductType_2e210f5b",
-        "lines": [
-          "the type of the NSS profile"
-        ]
-      }
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "Name",
+          "returns": "str",
+          "desc": [
+            "the name of the NSS profile",
+            "",
+            "Normally the name will reflect the name of the Mozilla profile. But the profile list also contains the following special entries: MANUAL and MOZILLA_CERTIFICATE_FOLDER. These will have a product type of MozillaProductType.Default and might have an empty path, if that value is not available."
+          ]
+        },
+        {
+          "name": "Path",
+          "returns": "str",
+          "desc": [
+            "the path to the NSS databases"
+          ]
+        },
+        {
+          "name": "Type",
+          "returns": "MozillaProductType_2e210f5b",
+          "desc": [
+            "the type of the NSS profile"
+          ]
+        }
+      ]
+    }
   }
 }

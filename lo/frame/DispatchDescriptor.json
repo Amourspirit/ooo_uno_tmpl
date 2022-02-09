@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "DispatchDescriptor",
@@ -41,34 +41,36 @@
     ],
     "imports": [],
     "extends": [],
-    "items": [
-      {
-        "name": "FeatureURL",
-        "type": "URL_57ad07b9",
-        "lines": [
-          "specifies the URL of the resource/function",
-          "",
-          "Must be a full parsed URL. Use service com.sun.star.util.URLTransformer for that."
-        ]
-      },
-      {
-        "name": "FrameName",
-        "type": "str",
-        "lines": [
-          "name of the target frame",
-          "",
-          "Special targets (e.g. \\\"_blank\\\", \\\"_self\\\") or really existing target names can be used."
-        ]
-      },
-      {
-        "name": "SearchFlags",
-        "type": "int",
-        "lines": [
-          "describes how the target frame is to be searched",
-          "",
-          "This optional parameter is used if FrameName isn't a special target only."
-        ]
-      }
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "FeatureURL",
+          "returns": "URL_57ad07b9",
+          "desc": [
+            "specifies the URL of the resource/function",
+            "",
+            "Must be a full parsed URL. Use service com.sun.star.util.URLTransformer for that."
+          ]
+        },
+        {
+          "name": "FrameName",
+          "returns": "str",
+          "desc": [
+            "name of the target frame",
+            "",
+            "Special targets (e.g. \\\"_blank\\\", \\\"_self\\\") or really existing target names can be used."
+          ]
+        },
+        {
+          "name": "SearchFlags",
+          "returns": "int",
+          "desc": [
+            "describes how the target frame is to be searched",
+            "",
+            "This optional parameter is used if FrameName isn't a special target only."
+          ]
+        }
+      ]
+    }
   }
 }

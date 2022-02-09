@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "ContextInformation",
@@ -22,9 +22,7 @@
     "from_imports": [],
     "from_imports_typing": [],
     "extends_map": {},
-    "quote": [
-      "typing.Tuple[str, ...]"
-    ],
+    "quote": [],
     "typings": [
       "typing.Tuple[str, ...]"
     ],
@@ -39,62 +37,66 @@
     ],
     "imports": [],
     "extends": [],
-    "items": [
-      {
-        "name": "Name",
-        "type": "str",
-        "lines": [
-          "Full qualified name to address the module or function associated with the context.",
-          "",
-          "If the module or function can't be addressed by name, e.g., in case that a runtime generated eval-module is executed, this string is empty"
-        ]
-      },
-      {
-        "name": "SourceCode",
-        "type": "str",
-        "lines": [
-          "Source code of the Module, that is associated with the context.",
-          "",
-          "If the source can be accessed using the ModuleName or if the source is unknown (executing compiled code) this string can be empty."
-        ]
-      },
-      {
-        "name": "StartLine",
-        "type": "int",
-        "lines": [
-          "contains the first line in the module's source code associated with the context.",
-          "",
-          "If \\\"name\\\" addresses a function, all line and column values are nevertheless given relative to the module's source. If source code is not available, this value addresses a binary position in the compiled code."
-        ]
-      },
-      {
-        "name": "StartColumn",
-        "type": "int",
-        "lines": [
-          "contains the first column in the StartLine associated with the context."
-        ]
-      },
-      {
-        "name": "EndLine",
-        "type": "int",
-        "lines": [
-          "contains the last line in the module's source code associated with the context."
-        ]
-      },
-      {
-        "name": "EndColumn",
-        "type": "int",
-        "lines": [
-          "contains the first column in the EndLine that is NOT associated with the context."
-        ]
-      },
-      {
-        "name": "LocalVariableNames",
-        "type": "typing.Tuple[str, ...]",
-        "lines": [
-          "Get all names of the local variable in this context."
-        ]
-      }
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "Name",
+          "returns": "str",
+          "desc": [
+            "Full qualified name to address the module or function associated with the context.",
+            "",
+            "If the module or function can't be addressed by name, e.g., in case that a runtime generated eval-module is executed, this string is empty"
+          ]
+        },
+        {
+          "name": "SourceCode",
+          "returns": "str",
+          "desc": [
+            "Source code of the Module, that is associated with the context.",
+            "",
+            "If the source can be accessed using the ModuleName or if the source is unknown (executing compiled code) this string can be empty."
+          ]
+        },
+        {
+          "name": "StartLine",
+          "returns": "int",
+          "desc": [
+            "contains the first line in the module's source code associated with the context.",
+            "",
+            "If \\\"name\\\" addresses a function, all line and column values are nevertheless given relative to the module's source. If source code is not available, this value addresses a binary position in the compiled code."
+          ]
+        },
+        {
+          "name": "StartColumn",
+          "returns": "int",
+          "desc": [
+            "contains the first column in the StartLine associated with the context."
+          ]
+        },
+        {
+          "name": "EndLine",
+          "returns": "int",
+          "desc": [
+            "contains the last line in the module's source code associated with the context."
+          ]
+        },
+        {
+          "name": "EndColumn",
+          "returns": "int",
+          "desc": [
+            "contains the first column in the EndLine that is NOT associated with the context."
+          ]
+        }
+      ],
+      "types": [
+        {
+          "name": "LocalVariableNames",
+          "returns": "typing.Tuple[str, ...]",
+          "desc": [
+            "Get all names of the local variable in this context."
+          ]
+        }
+      ]
+    }
   }
 }

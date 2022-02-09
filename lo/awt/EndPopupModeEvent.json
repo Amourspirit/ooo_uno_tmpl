@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "EndPopupModeEvent",
@@ -49,21 +49,23 @@
     "extends": [
       "com.sun.star.lang.EventObject"
     ],
-    "items": [
-      {
-        "name": "bTearoff",
-        "type": "bool",
-        "lines": [
-          "specifies how the pop-up mode was ended TRUE means the window should be teared-off and positioned at FloatingPosition FALSE means the window was closed"
-        ]
-      },
-      {
-        "name": "FloatingPosition",
-        "type": "Point_5fb2085e",
-        "lines": [
-          "specifies the new position of the floating window in frame coordinates if bTearoff is TRUE"
-        ]
-      }
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "bTearoff",
+          "returns": "bool",
+          "desc": [
+            "specifies how the pop-up mode was ended TRUE means the window should be teared-off and positioned at FloatingPosition FALSE means the window was closed"
+          ]
+        },
+        {
+          "name": "FloatingPosition",
+          "returns": "Point_5fb2085e",
+          "desc": [
+            "specifies the new position of the floating window in frame coordinates if bTearoff is TRUE"
+          ]
+        }
+      ]
+    }
   }
 }

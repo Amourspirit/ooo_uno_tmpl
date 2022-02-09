@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "libre_office_ver": "7.2",
   "name": "XDatabaseDocumentUI",
   "type": "interface",
@@ -15,7 +15,13 @@
   },
   "data": {
     "allow_db": true,
-    "from_imports": [],
+    "from_imports": [
+      [
+        "...lang.x_component",
+        "XComponent",
+        "XComponent_98dc0ab5"
+      ]
+    ],
     "from_imports_typing": [
       [
         "...awt.x_window",
@@ -28,11 +34,6 @@
         "PropertyValue_c9610c73"
       ],
       [
-        "...lang.x_component",
-        "XComponent",
-        "XComponent_98dc0ab5"
-      ],
-      [
         "...sdbc.x_connection",
         "XConnection",
         "XConnection_a36a0b0c"
@@ -43,14 +44,15 @@
         "XDataSource_a2990ae7"
       ]
     ],
-    "extends_map": {},
+    "extends_map": {
+      "com.sun.star.lang.XComponent": "XComponent_98dc0ab5"
+    },
     "quote": [
       "XComponent_98dc0ab5",
       "XConnection_a36a0b0c",
       "XDataSource_a2990ae7",
       "XWindow_713b0924",
       "typing.Tuple[PropertyValue_c9610c73, ...]",
-      "typing.Tuple[XComponent_98dc0ab5, ...]",
       "typing.Tuple[int, str]"
     ],
     "typings": [
@@ -60,11 +62,12 @@
     ],
     "requires_typing": true,
     "full_imports": {
-      "general": [],
+      "general": [
+        "com.sun.star.lang.XComponent"
+      ],
       "typing": [
         "com.sun.star.awt.XWindow",
         "com.sun.star.beans.PropertyValue",
-        "com.sun.star.lang.XComponent",
         "com.sun.star.sdbc.XConnection",
         "com.sun.star.sdbc.XDataSource"
       ]

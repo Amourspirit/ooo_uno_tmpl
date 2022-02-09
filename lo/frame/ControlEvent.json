@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "ControlEvent",
@@ -19,23 +19,25 @@
     "name": "ControlEvent",
     "namespace": "com.sun.star.frame",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1frame_1_1ControlEvent.html",
-    "from_imports": [],
-    "from_imports_typing": [
+    "from_imports": [
       [
         "..beans.named_value",
         "NamedValue",
         "NamedValue_a37a0af3"
-      ],
+      ]
+    ],
+    "from_imports_typing": [
       [
         "..util.url",
         "URL",
         "URL_57ad07b9"
       ]
     ],
-    "extends_map": {},
+    "extends_map": {
+      "com.sun.star.beans.NamedValue": "NamedValue_a37a0af3"
+    },
     "quote": [
-      "URL_57ad07b9",
-      "typing.Tuple[NamedValue_a37a0af3, ...]"
+      "URL_57ad07b9"
     ],
     "typings": [
       "typing.Tuple[NamedValue_a37a0af3, ...]"
@@ -51,30 +53,34 @@
     ],
     "imports": [],
     "extends": [],
-    "items": [
-      {
-        "name": "aURL",
-        "type": "URL_57ad07b9",
-        "lines": [
-          "fully parsed URL describing the control that sends this notification."
-        ]
-      },
-      {
-        "name": "Event",
-        "type": "str",
-        "lines": [
-          "specifies the event which has occurred."
-        ]
-      },
-      {
-        "name": "aInformation",
-        "type": "typing.Tuple[NamedValue_a37a0af3, ...]",
-        "lines": [
-          "specifies a sequence of named values which are used as additional values for the event.",
-          "",
-          "The number and types of named values depend on the event."
-        ]
-      }
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "aURL",
+          "returns": "URL_57ad07b9",
+          "desc": [
+            "fully parsed URL describing the control that sends this notification."
+          ]
+        },
+        {
+          "name": "Event",
+          "returns": "str",
+          "desc": [
+            "specifies the event which has occurred."
+          ]
+        }
+      ],
+      "types": [
+        {
+          "name": "aInformation",
+          "returns": "typing.Tuple[NamedValue_a37a0af3, ...]",
+          "desc": [
+            "specifies a sequence of named values which are used as additional values for the event.",
+            "",
+            "The number and types of named values depend on the event."
+          ]
+        }
+      ]
+    }
   }
 }

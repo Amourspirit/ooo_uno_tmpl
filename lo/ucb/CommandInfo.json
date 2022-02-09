@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "CommandInfo",
@@ -31,30 +31,32 @@
     ],
     "imports": [],
     "extends": [],
-    "items": [
-      {
-        "name": "Name",
-        "type": "str",
-        "lines": [
-          "contains the name of a command."
-        ]
-      },
-      {
-        "name": "Handle",
-        "type": "int",
-        "lines": [
-          "contains an implementation specific handle for the command.",
-          "",
-          "It may be -1 if the implementation has no handle."
-        ]
-      },
-      {
-        "name": "ArgType",
-        "type": "object",
-        "lines": [
-          "contains the type of the command's argument."
-        ]
-      }
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "Name",
+          "returns": "str",
+          "desc": [
+            "contains the name of a command."
+          ]
+        },
+        {
+          "name": "Handle",
+          "returns": "int",
+          "desc": [
+            "contains an implementation specific handle for the command.",
+            "",
+            "It may be -1 if the implementation has no handle."
+          ]
+        },
+        {
+          "name": "ArgType",
+          "returns": "object",
+          "desc": [
+            "contains the type of the command's argument."
+          ]
+        }
+      ]
+    }
   }
 }

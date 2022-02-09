@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "ChartSeriesAddress",
@@ -22,9 +22,7 @@
     "from_imports": [],
     "from_imports_typing": [],
     "extends_map": {},
-    "quote": [
-      "typing.Tuple[str, ...]"
-    ],
+    "quote": [],
     "typings": [
       "typing.Tuple[str, ...]"
     ],
@@ -37,32 +35,36 @@
     ],
     "imports": [],
     "extends": [],
-    "items": [
-      {
-        "name": "DataRangeAddress",
-        "type": "str",
-        "lines": [
-          "contains the cell range address of the data for this series."
-        ]
-      },
-      {
-        "name": "LabelAddress",
-        "type": "str",
-        "lines": [
-          "contains the cell address of label (i.e.",
-          "",
-          "name) of this series."
-        ]
-      },
-      {
-        "name": "DomainRangeAddresses",
-        "type": "typing.Tuple[str, ...]",
-        "lines": [
-          "contains cell addresses for each domain of this series.",
-          "",
-          "For XY (scatter) diagrams at least one series has a domain. Most of the other chart types use an empty sequence here."
-        ]
-      }
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "DataRangeAddress",
+          "returns": "str",
+          "desc": [
+            "contains the cell range address of the data for this series."
+          ]
+        },
+        {
+          "name": "LabelAddress",
+          "returns": "str",
+          "desc": [
+            "contains the cell address of label (i.e.",
+            "",
+            "name) of this series."
+          ]
+        }
+      ],
+      "types": [
+        {
+          "name": "DomainRangeAddresses",
+          "returns": "typing.Tuple[str, ...]",
+          "desc": [
+            "contains cell addresses for each domain of this series.",
+            "",
+            "For XY (scatter) diagrams at least one series has a domain. Most of the other chart types use an empty sequence here."
+          ]
+        }
+      ]
+    }
   }
 }

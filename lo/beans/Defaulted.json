@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "Defaulted",
@@ -33,23 +33,25 @@
     ],
     "imports": [],
     "extends": [],
-    "items": [
-      {
-        "name": "Value",
-        "type": "object",
-        "lines": [
-          "The underlying value of this structure instance.",
-          "",
-          "Even if this structure instance is defaulted, this member should contain a useful value. If there is no useful value for a defaulted structure instance, com.sun.star.beans.Optional can be used as the type of this member."
-        ]
-      },
-      {
-        "name": "IsDefaulted",
-        "type": "bool",
-        "lines": [
-          "Marks this structure instance as defaulted."
-        ]
-      }
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "Value",
+          "returns": "object",
+          "desc": [
+            "The underlying value of this structure instance.",
+            "",
+            "Even if this structure instance is defaulted, this member should contain a useful value. If there is no useful value for a defaulted structure instance, com.sun.star.beans.Optional can be used as the type of this member."
+          ]
+        },
+        {
+          "name": "IsDefaulted",
+          "returns": "bool",
+          "desc": [
+            "Marks this structure instance as defaulted."
+          ]
+        }
+      ]
+    }
   }
 }

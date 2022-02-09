@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "OpenCLPlatform",
@@ -19,18 +19,18 @@
     "name": "OpenCLPlatform",
     "namespace": "com.sun.star.sheet.opencl",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1sheet_1_1opencl_1_1OpenCLPlatform.html",
-    "from_imports": [],
-    "from_imports_typing": [
+    "from_imports": [
       [
         ".open_cl_device",
         "OpenCLDevice",
         "OpenCLDevice_180d0e41"
       ]
     ],
-    "extends_map": {},
-    "quote": [
-      "typing.Tuple[OpenCLDevice_180d0e41, ...]"
-    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.sheet.opencl.OpenCLDevice": "OpenCLDevice_180d0e41"
+    },
+    "quote": [],
     "typings": [
       "typing.Tuple[OpenCLDevice_180d0e41, ...]"
     ],
@@ -39,24 +39,28 @@
     "desc": [],
     "imports": [],
     "extends": [],
-    "items": [
-      {
-        "name": "Name",
-        "type": "str",
-        "lines": [
-          "The name of the platform as returned by OpenCL."
-        ]
-      },
-      {
-        "name": "Vendor",
-        "type": "str",
-        "lines": []
-      },
-      {
-        "name": "Devices",
-        "type": "typing.Tuple[OpenCLDevice_180d0e41, ...]",
-        "lines": []
-      }
-    ]
+    "items": {
+      "properties": [
+        {
+          "name": "Name",
+          "returns": "str",
+          "desc": [
+            "The name of the platform as returned by OpenCL."
+          ]
+        },
+        {
+          "name": "Vendor",
+          "returns": "str",
+          "desc": []
+        }
+      ],
+      "types": [
+        {
+          "name": "Devices",
+          "returns": "typing.Tuple[OpenCLDevice_180d0e41, ...]",
+          "desc": []
+        }
+      ]
+    }
   }
 }
