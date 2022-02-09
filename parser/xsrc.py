@@ -129,7 +129,6 @@ class ApiInterfaceData(base.APIData):
         self._cache[key] = result
         return self._cache[key]
 
-
     @AcceptedTypes(str, ftype=DecFuncEnum.METHOD)
     def get_desc_detail(self, a_id: str) -> base.ApiDescDetail:
         """Gets Description obj for method or property"""
@@ -156,7 +155,6 @@ class ApiInterfaceData(base.APIData):
         self._cache[key] = super().get_import_info_method(a_id=a_id)
         return self._cache[key]
 
-    
     # endregion Methods
 
     # region Properties
@@ -182,20 +180,21 @@ class Parser(base.ParserBase):
         arg_info={
             "long_names": 0,
             "remove_parent_inherited": 0
-            },
+        },
         types=[bool],
         ftype=DecFuncEnum.METHOD
     )
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self._long_names: bool = kwargs.get('long_names', False)
-        self._remove_parent_inherited: bool = kwargs.get('remove_parent_inherited', True)
+        self._remove_parent_inherited: bool = kwargs.get(
+            'remove_parent_inherited', True)
         self._api_data = ApiInterfaceData(
             url_soup=self.url,
             allow_cache=self.allow_cache,
             long_names=self._long_names,
             remove_parent_inherited=self._remove_parent_inherited
-            )
+        )
         self._requires_typing = False
         self._imports: Set[str] = set()
         self._cache = {}
@@ -218,7 +217,6 @@ class Parser(base.ParserBase):
     def get_full_name(self) -> str:
         ni = self._api_data.name.get_obj()
         return self._api_data.ns.namespace_str + '.' + ni.name
-        
 
     def get_info(self) -> Dict[str, object]:
         """
@@ -242,11 +240,10 @@ class Parser(base.ParserBase):
             ex.append(el.fullns)
         # ex_s = base.Util.get_clean_imports(ns=ns.namespace_str, imports=ex)
         ni = self._api_data.name.get_obj()
-        import_info = self._api_data.get_import_info_type()
         result = {
             # 'name': ni.name,
             'name': ni.name,
-            'imports': [im for im in import_info.imports],
+            'imports': [],
             'namespace': self._api_data.ns.namespace_str,
             'extends': ex,
             'desc': self._api_data.desc.get_obj(),
@@ -361,7 +358,6 @@ class Parser(base.ParserBase):
                     "%s._get_summary_data() Return '%s' type require typing for: %s, %s",
                     self.__class__.__name__, si.p_type.type, si.name, si.id)
                 self._requires_typing = True
-        
 
         if self.sort:
             if key in attribs:
@@ -370,11 +366,12 @@ class Parser(base.ParserBase):
                 attribs[key] = newlist
         return attribs
 
-
     def _get_properties_data(self):
         si_lst = self._api_data.property_summaries.get_obj()
         key = 'properties'
         import_info = self._api_data.get_import_info_property()
+        if len(import_info.imports) == 0:
+            return {}
         if import_info.requires_typing:
             self._requires_typing = True
         self._imports.update(import_info.imports)
@@ -384,9 +381,12 @@ class Parser(base.ParserBase):
         # treat typedef as property
         si_lst = self._api_data.types_summaries.get_obj()
         key = 'types'
-        if len(si_lst) == 0:
+        import_info = self._api_data.get_import_info_type()
+        if len(import_info.imports) == 0:
             return {}
-        self._requires_typing = True # all typedef require typing
+        if import_info.requires_typing:
+            self._requires_typing = True
+        self._imports.update(import_info.imports)
         return self._get_summary_data(si_lst=si_lst, key=key)
 
     # endregion get data
@@ -404,7 +404,8 @@ class Parser(base.ParserBase):
             if len(self._imports) > 0:
                 info = self.get_info()
                 ns = info['namespace']
-                self._imports = base.Util.get_clean_imports(ns=ns, imports=self._imports)
+                self._imports = base.Util.get_clean_imports(
+                    ns=ns, imports=self._imports)
             self._cache[key] = True
         return self._imports
 
@@ -425,12 +426,11 @@ class Parser(base.ParserBase):
     def api_data(self) -> ApiInterfaceData:
         return self._api_data
 
-
     @property
     def long_names(self) -> bool:
         """Gets long_names value"""
         return self._long_names
-    
+
     @property
     def remove_parent_inherited(self) -> bool:
         """Gets remove_parent_inherited value"""
@@ -466,7 +466,8 @@ class Writer(base.WriteBase):
         self._allow_db = kwargs.get('allow_db', True)
         self._write_template_long: bool = kwargs.get(
             'write_template_long', False)
-        self._allow_known_json: bool = bool(kwargs.get('allow_known_json', True))
+        self._allow_known_json: bool = bool(
+            kwargs.get('allow_known_json', True))
         self._write_path: Union[str, None] = kwargs.get('write_path', None)
         self._indent_amt = 4
         self._json_str = None
@@ -507,7 +508,7 @@ class Writer(base.WriteBase):
             str: interface
         """
         return 'interface'
-    
+
     def _get_template_dyn(self) -> Union[str, None]:
         return 'interface_dyn.tmpl'
 
@@ -564,7 +565,6 @@ class Writer(base.WriteBase):
         p_dict['requires_typing'] = self._p_requires_typing
         p_dict['full_imports'] = self._get_full_imports()
         p_dict.update(self._parser.get_dict_data())
-        p_dict['imports'] = []
 
         json_dict = {
             "id": JSON_ID,
@@ -588,27 +588,31 @@ class Writer(base.WriteBase):
         with open(self._template_file) as f:
             contents = f.read()
         return contents
-       
+
     # region get Imports
     def _get_full_imports(self) -> Dict[str, List[str]]:
         key = '_get_full_imports'
         if key in self._cache:
             return self._cache[key]
+
         def get_imports() -> List[str]:
             ims = []
             lst_im = list(self._p_imports)
             # sort for consistency in json
             lst_im.sort()
             for ns in lst_im:
-                ims.append(base.Util.get_full_import(ns=self._p_namespace, name=ns))
+                ims.append(base.Util.get_full_import(
+                    ns=self._p_namespace, name=ns))
             return ims
+
         def get_imports_typing() -> List[str]:
             ims = []
             lst_im = list(self._p_imports_typing)
             # sort for consistency in json
             lst_im.sort()
             for ns in lst_im:
-                ims.append(base.Util.get_full_import(ns=self._p_namespace, name=ns))
+                ims.append(base.Util.get_full_import(
+                    ns=self._p_namespace, name=ns))
             return ims
         result = {
             "general": get_imports(),
@@ -616,7 +620,7 @@ class Writer(base.WriteBase):
         }
         self._cache[key] = result
         return self._cache[key]
-    
+
     def _get_from_imports(self) -> List[List[str]]:
         key = '_get_from_imports'
         if key in self._cache:
@@ -666,7 +670,8 @@ class Writer(base.WriteBase):
         lst = list(self._p_imports)
         lst.sort()
         for im in lst:
-            results[im] = base.Util.get_rel_import_long_name(im, ns=self._p_namespace)
+            results[im] = base.Util.get_rel_import_long_name(
+                im, ns=self._p_namespace)
         self._cache[key] = results
         return self._cache[key]
 
@@ -692,6 +697,13 @@ class Writer(base.WriteBase):
 
         # grab all the properties that need quotes
         si_lst = self._parser.api_data.property_summaries.get_obj()
+        for si in si_lst:
+            t = si.p_type
+            if t.requires_typing or t.is_py_type is False:
+                t_set.add(t.type)
+
+        # grab all types summaries
+        si_lst = self._parser.api_data.types_summaries.get_obj()
         for si in si_lst:
             t = si.p_type
             if t.requires_typing or t.is_py_type is False:
@@ -811,7 +823,8 @@ class Writer(base.WriteBase):
         self._p_data = self._parser.get_formated_data()
         self._p_requires_typing = False
         self._validate_p_info()
-        self._p_imports.update(data['imports'])
+        _imports = data['imports']
+        self._p_imports.update(_imports)
         for el in self._parser.api_data.inherited.get_obj():
             if el.python_import:
                 continue
@@ -886,7 +899,7 @@ class Writer(base.WriteBase):
         with open(self._file_full_path, 'w') as f:
             f.write(self._template)
         logger.info("Created file: %s", self._file_full_path)
-        
+
     def _write_to_file_dyn(self):
         dyn_name = self._get_template_dyn()
         if dyn_name is None:
@@ -894,14 +907,13 @@ class Writer(base.WriteBase):
         dyn_path = self._template_dir / dyn_name
         with open(dyn_path, 'r') as t_file:
             dyn_contents = t_file.read()
-        
+
         dyn_out_file = self._file_full_path.stem + base.APP_CONFIG.template_dyn_ext
         write_path = self._file_full_path.parent / dyn_out_file
         with open(write_path, 'w') as out_file:
             out_file.write(dyn_contents)
         logger.info('create file: %s', write_path)
-        
-        
+
     def _write_to_json(self):
         p = self._file_full_path.parent
         jsn_p = p / (str(self._file_full_path.stem) + '.json')
@@ -912,6 +924,7 @@ class Writer(base.WriteBase):
 # endregion Writer
 
 # region Parse method
+
 
 class Processer:
     """Processes parsing and writing"""
@@ -962,7 +975,8 @@ class Processer:
         self._write_json = bool(kwargs.get('write_json', False))
         self._verbose = bool(kwargs.get('verbose', False))
         self._include_desc = bool(kwargs.get('include_desc', True))
-        self._long_names = bool(kwargs.get('long_names', base.APP_CONFIG.use_long_import_names))
+        self._long_names = bool(kwargs.get(
+            'long_names', base.APP_CONFIG.use_long_import_names))
         self._remove_parent_inherited = bool(
             kwargs.get('remove_parent_inherited', base.APP_CONFIG.remove_parent_inherited))
         self._allow_know_json = bool(kwargs.get('allow_known_json', True))
@@ -1024,6 +1038,7 @@ def get_kwargs_from_args(args: argparse.ArgumentParser) -> dict:
         d['write_path'] = args.write_path
     return d
 
+
 def parse(**kwargs) -> Union[str, None]:
     """
     Parses data, alternative to running on command line.
@@ -1070,7 +1085,7 @@ def parse(**kwargs) -> Union[str, None]:
     _allow_know_json = bool(kwargs.get('allow_known_json', True))
     _log_file = kwargs.get('log_file', None)
     _verbose = bool(kwargs.get('verbose', False))
-    _write_path= kwargs.get('write_path', None)
+    _write_path = kwargs.get('write_path', None)
 
     if logger is None:
         log_args = {}
@@ -1107,6 +1122,8 @@ def parse(**kwargs) -> Union[str, None]:
 # endregion Parse method
 
 # region Main
+
+
 def _main():
     os.system('cls' if os.name == 'nt' else 'clear')
     # url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XIntrospectionAccess.html' # has a sequence
@@ -1229,6 +1246,7 @@ def set_cmd_args_local(parser) -> None:
         required=False)
 
 # endregion Parser
+
 
 def main():
     global logger
