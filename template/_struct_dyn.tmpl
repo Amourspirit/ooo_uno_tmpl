@@ -72,7 +72,8 @@ if not TYPE_CHECKING and _DYNAMIC:
             for i, arg in enumerate(args):
                 setattr(struct, key_order[i], arg)
             for k, v in kwargs.items():
-                if k in key_order:
+## use hasattrib some values may come from inherited struct
+                if hasattr(struct, k):
                     setattr(struct, k, v)
             _set_attr(struct)
             return struct

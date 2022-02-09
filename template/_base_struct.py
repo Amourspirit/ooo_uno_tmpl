@@ -12,7 +12,6 @@ class BaseStruct(BaseJson):
         # self._linfo('hello')
         self._sorted_key_index = None
 
-
     def _hydrate_data(self, json_data: dict):
         self._validate_data(json_data)
         data: Dict[str, object] = json_data['data']
@@ -65,7 +64,7 @@ class BaseStruct(BaseJson):
 
         if not data['name']:
             raise Exception('Invalid Data: name attribute is not valid')
-        min_ver = Version(0, 1, 11)       
+        min_ver = Version(0, 1, 11)
         if self.json_version < min_ver:
             raise Exception(
                 "Invalid Data: Expected version to be at least '{min_ver}' got {ver}")
@@ -75,8 +74,7 @@ class BaseStruct(BaseJson):
         if not self._sorted_key_index is None:
             return self._sorted_key_index
         sorted = []
-        
-        d_lst: List[Dict[str, object]] = self.attribs.get('properties', [])
+        d_lst: List[Dict[str, object]] = getattr(self, 'attribs', [])
         sort: bool = getattr(self, 'sort', False)
         for i, d in enumerate(d_lst):
             sorted.append((d['name'], i))
@@ -88,15 +86,15 @@ class BaseStruct(BaseJson):
     def get_constructor_str(self, opt: bool) -> str:
         sorted = self.get_sorted_names()
         d_lst: List[Dict[str, object]] = getattr(self, 'attribs', [])
-        
+
         c_str = ''
         for i, tpl in enumerate(sorted):
             if i > 0:
-               c_str += ', ' 
+               c_str += ', '
             index = tpl[1]
             itm: Dict[str, object] = d_lst[index]
             name: str = itm['name']
-            
+
             if opt:
                 t: str = self.get_q_type_opt(itm['type'])
                 s = f"{name}: {t} = None"
@@ -104,7 +102,7 @@ class BaseStruct(BaseJson):
                 t: str = self.get_q_type(itm['type'])
                 s = f"{name}: {t}"
             c_str += s
-            
+
         return c_str
 
     def get_q_type_opt(self, in_type: object) -> object:
@@ -114,10 +112,10 @@ class BaseStruct(BaseJson):
         if in_type in self.quote:
             return f"'typing.Optional[{in_type}]'"
         return f"typing.Optional[{in_type}]"
-    
+
     def get_nt_names_str(self) -> str:
         sorted = self.get_sorted_names()
-        d_lst: List[Dict[str, object]] = self.attribs.get('properties', [])
+        d_lst: List[Dict[str, object]] = getattr(self, 'attribs', [])
 
         c_str = ''
         i = 0
@@ -129,9 +127,9 @@ class BaseStruct(BaseJson):
             c_str += "'" + self.get_safe_word(itm['name']) + "'"
             i += 1
         if i == 1:
-            c_str += ',' # add so tuple is not mistaken as brackets
+            c_str += ','  # add so tuple is not mistaken as brackets
         return c_str
-    
+
     def get_attrib_for_prop(self, index: int) -> Dict[str, object]:
         d_lst: List[Dict[str, object]] = getattr(self, 'attribs', [])
         _ = self.get_sorted_names()
