@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "libre_office_ver": "7.2",
   "name": "DocumentMacroConfirmationRequest",
   "type": "exception",
@@ -17,6 +17,11 @@
     "allow_db": true,
     "from_imports": [
       [
+        "..security.document_signature_information",
+        "DocumentSignatureInformation",
+        "DocumentSignatureInformation_f36c13f7"
+      ],
+      [
         ".classified_interaction_request",
         "ClassifiedInteractionRequest",
         "ClassifiedInteractionRequest_9f72121b"
@@ -27,19 +32,14 @@
         "..embed.x_storage",
         "XStorage",
         "XStorage_8e460a32"
-      ],
-      [
-        "..security.document_signature_information",
-        "DocumentSignatureInformation",
-        "DocumentSignatureInformation_f36c13f7"
       ]
     ],
     "extends_map": {
+      "com.sun.star.security.DocumentSignatureInformation": "DocumentSignatureInformation_f36c13f7",
       "com.sun.star.task.ClassifiedInteractionRequest": "ClassifiedInteractionRequest_9f72121b"
     },
     "quote": [
-      "XStorage_8e460a32",
-      "typing.Tuple[DocumentSignatureInformation_f36c13f7, ...]"
+      "XStorage_8e460a32"
     ],
     "typings": [
       "typing.Tuple[DocumentSignatureInformation_f36c13f7, ...]"
@@ -47,11 +47,11 @@
     "requires_typing": true,
     "full_imports": {
       "general": [
+        "com.sun.star.security.DocumentSignatureInformation",
         "com.sun.star.task.ClassifiedInteractionRequest"
       ],
       "typing": [
-        "com.sun.star.embed.XStorage",
-        "com.sun.star.security.DocumentSignatureInformation"
+        "com.sun.star.embed.XStorage"
       ]
     },
     "name": "DocumentMacroConfirmationRequest",

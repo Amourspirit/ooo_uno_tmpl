@@ -279,7 +279,7 @@ class Parser(base.ParserBase):
         si_lst = self._api_data.types_summaries.get_obj()
         key = 'types'
         if len(si_lst) == 0:
-            return {key:[]}
+            return {}
         self._requires_typing = True # all typedef require typing
         return self._get_summary_data(si_lst=si_lst, key=key)
 

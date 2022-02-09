@@ -242,10 +242,11 @@ class Parser(base.ParserBase):
             ex.append(el.fullns)
         # ex_s = base.Util.get_clean_imports(ns=ns.namespace_str, imports=ex)
         ni = self._api_data.name.get_obj()
+        import_info = self._api_data.get_import_info_type()
         result = {
             # 'name': ni.name,
             'name': ni.name,
-            'imports': [],
+            'imports': [im for im in import_info.imports],
             'namespace': self._api_data.ns.namespace_str,
             'extends': ex,
             'desc': self._api_data.desc.get_obj(),
@@ -383,10 +384,9 @@ class Parser(base.ParserBase):
         # treat typedef as property
         si_lst = self._api_data.types_summaries.get_obj()
         key = 'types'
-        import_info = self._api_data.get_import_info_type()
-        if import_info.requires_typing:
-            self._requires_typing = True
-        self._imports.update(import_info.imports)
+        if len(si_lst) == 0:
+            return {}
+        self._requires_typing = True # all typedef require typing
         return self._get_summary_data(si_lst=si_lst, key=key)
 
     # endregion get data
@@ -564,6 +564,7 @@ class Writer(base.WriteBase):
         p_dict['requires_typing'] = self._p_requires_typing
         p_dict['full_imports'] = self._get_full_imports()
         p_dict.update(self._parser.get_dict_data())
+        p_dict['imports'] = []
 
         json_dict = {
             "id": JSON_ID,
@@ -696,13 +697,6 @@ class Writer(base.WriteBase):
             if t.requires_typing or t.is_py_type is False:
                 t_set.add(t.type)
 
-        # grab all types summaries
-        si_lst = self._parser.api_data.types_summaries.get_obj()
-        for si in si_lst:
-            t = si.p_type
-            if t.requires_typing or t.is_py_type is False:
-                t_set.add(t.type)
-
         # grab all export summaries
         si_lst = self._parser.api_data.exported_summaries.get_obj()
         for si in si_lst:
@@ -817,8 +811,7 @@ class Writer(base.WriteBase):
         self._p_data = self._parser.get_formated_data()
         self._p_requires_typing = False
         self._validate_p_info()
-        _imports = data['imports']
-        self._p_imports.update(_imports)
+        self._p_imports.update(data['imports'])
         for el in self._parser.api_data.inherited.get_obj():
             if el.python_import:
                 continue
