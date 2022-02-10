@@ -53,9 +53,9 @@ if not TYPE_CHECKING and _DYNAMIC:
         global $safe_name
 
         def _set_attr(ex):
-            setattr(ex, '__ooo_ns__', '$namespace')
-            setattr(ex, '__ooo_full_ns__', '$fullname')
-            setattr(ex, '__ooo_type_name__', 'exception')
+            ex.__dict__['__ooo_ns__'] = '$namespace'
+            ex.__dict__['__ooo_full_ns__'] = '$fullname'
+            ex.__dict__['__ooo_type_name__'] = 'exception'
 
         def _ex_init(*args, **kwargs):
             ns = '${fullname}'
