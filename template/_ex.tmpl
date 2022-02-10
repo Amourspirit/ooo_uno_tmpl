@@ -1,10 +1,13 @@
 #from _base_ex import BaseEx
+#import re
 #extends BaseEx
 ## see: https://cheetahtemplate.org/users_guide/inheritanceEtc.html#implements
 #implements respond
 $self.init_data()#slurp
 #attr $name = ""
 #attr $namespace = ""
+#attr $fullname = ""
+#attr $sort = False
 #attr $allow_db = True
 #attr $libre_office_ver = False
 #attr $include_desc = True
@@ -21,11 +24,14 @@ $self.init_data()#slurp
 #attr $attribs = {}
 $self.load_data()#slurp
 ## main Template
+#set $re_underscore_hex = r"(_[0-9A-Fa-f]*)"
 #set $safe_name = $self.get_safe_word($name)
-#set $fullname = $namespace + '.' + $safe_name
+## properties list of dict that combines properties and types with types first
+#set $properties = $self.get_properties_all()
 #set $is_method = 'methods' in $attribs
-#set $is_properties = 'properties' in $attribs
-#set $is_types = 'types' in $attribs
+#set $is_properties = len($properties) > 0
+#set $sorted = $self.get_sorted_names()
+##set $is_types = 'types' in $attribs
 ##set $abc_imports = $self.get_abstract_imports([$is_method],[$is_properties, $is_types])
 #set $abc_imports = []
 # coding: utf-8
@@ -36,7 +42,7 @@ $self.load_data()#slurp
 #if $libre_office_ver:
 # Libre Office Version: $libre_office_ver
 #end if
-#if $requires_typing
+#if $requires_typing or len($sorted) > 0
 import typing
 #end if
 #for $imp in $imports
@@ -58,7 +64,7 @@ if typing.TYPE_CHECKING:
 #if $allow_db:
 class ${safe_name}($self.get_class_inherits_from_db())$self.get_class_end()
 #else
-class ${safe_name}($self.get_class_inherits($name, $inherits))$self.get_class_end()
+class ${safe_name}($self.get_class_inherits($safe_name, $inherits))$self.get_class_end()
 #end if
 #if $include_desc
     """
@@ -82,21 +88,37 @@ class ${safe_name}($self.get_class_inherits($name, $inherits))$self.get_class_en
     typeName: str = '$fullname'
     """Literal Constant ``$fullname``"""
 
-#if $is_types
-#set $properties = $attribs['types']
-#for $property in $properties
-#set $p_name = $self.get_safe_word($property['name'])
-#set $p_return = $self.get_q_type($property['returns'])
-#set $p_desc = $property['desc']
-    ${p_name}: typing.TypeAlias = $p_return
-    """
-    #for $line in $self.line_gen($p_desc)
-    $line
-    #end for
-    """
+    $self.get_constructor()
+        """
+        Constructor
 
+        Keyword Arguments:
+#for $i, $tpl in enumerate($sorted)
+#set $index = tpl[1]
+#set $itm = $properties[$index]
+#set $itm_name = $self.get_safe_word($itm['name'])
+#set $itm_type = $itm['returns'].removeprefix('typing.')
+#set $itm_type = re.sub(re_underscore_hex, '', $itm_type, 1)
+            $itm_name ($itm_type, optional): $itm_name value.
 #end for
+
+            Other ``*args`` and ``**kwargs`` are passed to parent class.
+        """
+
+#for $i, $tpl in enumerate($sorted)
+#set $index = tpl[1]
+#set $itm = $properties[$index]
+#set $itm_name = $self.get_safe_word($itm.name)
+        self.$itm_name = $itm_name
+#end for
+#if $self.has_uno_extends()
+
+        super().__init__(*args, **kwargs)
+#else
+
+        super().__init__(*args)
 #end if
+
 #if $is_method
 #set $methods = $attribs['methods']
     #for $method in $methods
@@ -123,11 +145,9 @@ class ${safe_name}($self.get_class_inherits($name, $inherits))$self.get_class_en
         #end for
     #end if
         """
-
     #end for
 #end if
 #if $is_properties
-#set $properties = $attribs['properties']
 #for $property in $properties
 #set $p_name = $self.get_safe_word($property['name'])
 #set $p_return = $self.get_q_type($property['returns'])
@@ -135,7 +155,7 @@ class ${safe_name}($self.get_class_inherits($name, $inherits))$self.get_class_en
     $p_name: $p_return = None
     """
     #for $line in $self.line_gen($p_desc)
-        $line
+    $line
     #end for
     #if $self.get_prop_has_errors($property)
 

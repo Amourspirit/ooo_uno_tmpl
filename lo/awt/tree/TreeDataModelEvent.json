@@ -21,23 +21,24 @@
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1awt_1_1tree_1_1TreeDataModelEvent.html",
     "from_imports": [
       [
-        ".x_tree_node",
-        "XTreeNode",
-        "XTreeNode_baaf0ba0"
-      ],
-      [
         "...lang.event_object",
         "EventObject",
         "EventObject_a3d70b03"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_tree_node",
+        "XTreeNode",
+        "XTreeNode_baaf0ba0"
+      ]
+    ],
     "extends_map": {
-      "com.sun.star.awt.tree.XTreeNode": "XTreeNode_baaf0ba0",
       "com.sun.star.lang.EventObject": "EventObject_a3d70b03"
     },
     "quote": [
-      "XTreeNode_baaf0ba0"
+      "XTreeNode_baaf0ba0",
+      "typing.Tuple[XTreeNode_baaf0ba0, ...]"
     ],
     "typings": [
       "typing.Tuple[XTreeNode_baaf0ba0, ...]"
@@ -53,29 +54,25 @@
     "extends": [
       "com.sun.star.lang.EventObject"
     ],
-    "items": {
-      "properties": [
-        {
-          "name": "ParentNode",
-          "returns": "XTreeNode_baaf0ba0",
-          "desc": [
-            "holds the parent node for changed, added or removed nodes.",
-            "",
-            "If this is null, Nodes must contain only the root node"
-          ]
-        }
-      ],
-      "types": [
-        {
-          "name": "Nodes",
-          "returns": "typing.Tuple[XTreeNode_baaf0ba0, ...]",
-          "desc": [
-            "contains the changed, added or removed nodes.",
-            "",
-            "All nodes must have ParentNode as parent."
-          ]
-        }
-      ]
-    }
+    "items": [
+      {
+        "name": "Nodes",
+        "type": "typing.Tuple[XTreeNode_baaf0ba0, ...]",
+        "lines": [
+          "contains the changed, added or removed nodes.",
+          "",
+          "All nodes must have ParentNode as parent."
+        ]
+      },
+      {
+        "name": "ParentNode",
+        "type": "XTreeNode_baaf0ba0",
+        "lines": [
+          "holds the parent node for changed, added or removed nodes.",
+          "",
+          "If this is null, Nodes must contain only the root node"
+        ]
+      }
+    ]
   }
 }

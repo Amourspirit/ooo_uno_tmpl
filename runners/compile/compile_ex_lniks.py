@@ -57,7 +57,8 @@ class CompileExLinks(BaseCompile):
             json_file=file,
             write_path=write_path,
             allow_known_json=self.args.allow_known_json,
-            log_file= 'exception.log'
+            log_file= 'exception.log',
+            sort=False
         )
 
     def _process_files(self):

@@ -47,10 +47,38 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from $namespace import $safe_name
-    setattr($safe_name, '__ooo_ns__', '$namespace')
-    setattr($safe_name, '__ooo_full_ns__', '$fullname')
-    setattr($safe_name, '__ooo_type_name__', 'exception')
+    def _dynamic_ex() -> None:
+        import uno
+        # Dynamically create uno $fullname using uno
+        global $safe_name
+
+        def _set_attr(ex):
+            ex.__dict__['__ooo_ns__'] = '$namespace'
+            ex.__dict__['__ooo_full_ns__'] = '$fullname'
+            ex.__dict__['__ooo_type_name__'] = 'exception'
+
+        def _ex_init(*args, **kwargs):
+            ns = '${fullname}'
+            arg_len = len(args)
+            if arg_len == 1:
+                from $namespace import $safe_name as U${safe_name}
+                if isinstance(args[0], U${safe_name}):
+                    ex = uno.createUnoStruct(ns, args[0])
+                    _set_attr(ex)
+                    return ex
+            if arg_len > 0:
+                ex = uno.createUnoStruct(ns, *args)
+            else:
+                ex = uno.createUnoStruct(ns)
+            for k, v in kwargs.items():
+## use hasattrib some values may come from inherited ex
+                if hasattr(ex, k):
+                    setattr(ex, k, v)
+            _set_attr(ex)
+            return ex
+        $safe_name = _ex_init
+
+    _dynamic_ex()
 else:
     $self.get_rel_import(in_str=$uno_obj_in, ns=$uno_obj_ns) as $safe_name
     

@@ -79,21 +79,6 @@ class ${safe_name}($self.get_class_inherits($name, $inherits)):
     __ooo_type_name__: str = 'interface'
     __pyunointerface__: str = '$fullname'
 
-#if $is_types
-#set $properties = $attribs['types']
-#for $property in $properties
-#set $p_name = $self.get_safe_word($property['name'])
-#set $p_return = $self.get_q_type($property['returns'])
-#set $p_desc = $property['desc']
-    ${p_name}: typing.TypeAlias = $p_return
-    """
-    #for $line in $self.line_gen($p_desc)
-    $line
-    #end for
-    """
-
-#end for
-#end if
 #if $is_method
 #set $methods = $attribs['methods']
     #for $method in $methods
@@ -122,6 +107,33 @@ class ${safe_name}($self.get_class_inherits($name, $inherits)):
         """
     #end for
 #end if
+#if $is_types
+#set $properties = $attribs['types']
+#for $property in $properties
+#set $p_name = $self.get_safe_word($property['name'])
+#set $p_return = $self.get_q_type($property['returns'])
+#set $p_desc = $property['desc']
+    @abstractproperty
+    def ${p_name}(self) -> $p_return:
+        """
+    #for $line in $self.line_gen($p_desc)
+        $line
+    #end for
+    #if $self.get_prop_has_errors($property)
+
+        Raises:
+
+    #for $long, $short in $self.get_prop_get_raises($property)
+            $long: get raises ``$short``
+    #end for
+    #for $long, $short in $self.get_prop_set_raises($property)
+            $long: set raises ``$short``
+    #end for
+    #end if
+        """
+
+#end for
+#end if
 #if $is_properties
 #set $properties = $attribs['properties']
 #for $property in $properties
@@ -146,8 +158,8 @@ class ${safe_name}($self.get_class_inherits($name, $inherits)):
     #end for
     #end if
         """
+
 #end for
 #end if
-
 
 __all__ = ['$name']

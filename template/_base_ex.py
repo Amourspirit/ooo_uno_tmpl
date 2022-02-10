@@ -1,5 +1,5 @@
 # coding: utf-8
-from typing import Dict, List, Tuple
+from typing import Dict, List, Tuple, Union
 from _base_json import BaseJson
 from verr import Version
 
@@ -7,6 +7,7 @@ from verr import Version
 class BaseEx(BaseJson):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self._sorted_key_index = None
 
     def _hydrate_data(self, json_data: dict):
         self._validate_data(json_data)
@@ -44,6 +45,7 @@ class BaseEx(BaseJson):
         extends_map = data.get('extends_map', None)
         if extends_map:
             self.extends_map.update(extends_map)
+        self.fullname = f"{self.namespace}.{self.get_safe_word(self.name)}"
 
     def _get_attribs(self, json_data: dict, sort: bool) -> dict:
         items: dict = json_data['data'].get('items', {})
@@ -192,3 +194,105 @@ class BaseEx(BaseJson):
         if not self.include_desc and not self._is_properties():
             end += '\n pass'
         return end
+
+    def get_properties_all(self) -> List[dict]:
+        results: List[dict] = []
+        key = 'types'
+        t_lst = self.attribs.get('types', [])
+        p_lst = self.attribs.get('properties', [])
+        results.extend(t_lst)
+        results.extend(p_lst)
+        return results
+
+    def get_sorted_names(self) -> List[Tuple[str, int]]:
+        """Gets a list of tuples of name and index"""
+        if not self._sorted_key_index is None:
+            return self._sorted_key_index
+        sorted = []
+        d_lst: List[dict] = self.get_properties_all()
+        sort: bool = getattr(self, 'sort', False)
+        for i, d in enumerate(d_lst):
+            sorted.append((d['name'], i))
+        if sort:
+            sorted.sort()
+        self._sorted_key_index = sorted
+        return self._sorted_key_index
+
+    def get_nt_names_str(self) -> str:
+        sorted_names = self.get_sorted_names()
+        d_lst = self.get_properties_all()
+
+        c_str = ''
+        i = 0
+        for tpl in sorted_names:
+            if i > 0:
+               c_str += ', '
+            index = tpl[1]
+            itm: dict = d_lst[index]
+            c_str += "'" + self.get_safe_word(itm['name']) + "'"
+            i += 1
+        if i == 1:
+            c_str += ','  # add so tuple is not mistaken as brackets
+        return c_str
+
+    def get_constructor_args_str(self, include_value: bool = True) -> str:
+        sorted_names = self.get_sorted_names()
+        d_lst = self.get_properties_all()
+
+        c_str = ''
+        i = 0
+        for tpl in sorted_names:
+            if i > 0:
+               c_str += ', '
+            index = tpl[1]
+            itm: dict = d_lst[index]
+            is_q = self.is_q_type(itm['returns'])
+            str_type = f"typing.Optional[{itm['returns']}]"
+            if is_q:
+                str_type = self.get_q_wrapped(str_type)
+            c_str += self.get_safe_word(itm['name'])
+            c_str += ": " + str_type
+            if include_value:
+                c_str += " = None"
+            i += 1
+        return c_str
+
+    def get_constructor(self) -> str:
+        sorted_names = self.get_sorted_names()
+        if len(sorted_names) == 0:
+            return "def __init__(self, *args, **kwargs):"
+        names = self.get_constructor_args_str()
+        return f"def __init__(self, *args, {names}, **kwargs):"
+
+    
+
+    def get_class_inherits_from_db(self, default: str = 'Exception') -> str:
+        # override this method from base class
+        # by overriding can used in other methods such as has_uno_extends()
+        result = super().get_class_inherits_from_db('object')
+        if result == "object":
+            return default  # builtin Exception
+        return result
+
+    def get_class_inherits(self, class_name: str, imports: Union[str, List[str]]) -> str:
+        # override to make default Exception
+        result = super().get_class_inherits(class_name=class_name,imports=imports)
+        if result == 'object':
+            return 'Exception'
+        return result
+        
+
+    def has_uno_extends(self) -> bool:
+        # com.sun.star.uno.Exception inherits from builtins.Exception
+        # and is base class for uno exceptions
+        if self.fullname == 'com.sun.star.uno.Exception':
+            return False
+        if self.allow_db:
+            # get_class_inherits_from_db() is a cached method in base
+            ext = super().get_class_inherits_from_db('object')
+            if ext == 'object':
+                return False
+            return True
+        safe_name = self.get_safe_word(self.name)
+        ext = super().get_class_inherits(safe_name, self.inherits)
+        return ext != 'object'

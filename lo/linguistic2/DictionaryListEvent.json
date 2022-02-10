@@ -24,19 +24,21 @@
         "..lang.event_object",
         "EventObject",
         "EventObject_a3d70b03"
-      ],
+      ]
+    ],
+    "from_imports_typing": [
       [
         ".dictionary_event",
         "DictionaryEvent",
         "DictionaryEvent_3ae00f8d"
       ]
     ],
-    "from_imports_typing": [],
     "extends_map": {
-      "com.sun.star.lang.EventObject": "EventObject_a3d70b03",
-      "com.sun.star.linguistic2.DictionaryEvent": "DictionaryEvent_3ae00f8d"
+      "com.sun.star.lang.EventObject": "EventObject_a3d70b03"
     },
-    "quote": [],
+    "quote": [
+      "typing.Tuple[DictionaryEvent_3ae00f8d, ...]"
+    ],
     "typings": [
       "typing.Tuple[DictionaryEvent_3ae00f8d, ...]"
     ],
@@ -51,29 +53,25 @@
     "extends": [
       "com.sun.star.lang.EventObject"
     ],
-    "items": {
-      "properties": [
-        {
-          "name": "nCondensedEvent",
-          "returns": "int",
-          "desc": [
-            "the combined type of the accumulated events.",
-            "",
-            "The value can be the combination of multiple com.sun.star.linguistic2.DictionaryListEventFlags by applying the logical OR to them."
-          ]
-        }
-      ],
-      "types": [
-        {
-          "name": "aDictionaryEvents",
-          "returns": "typing.Tuple[DictionaryEvent_3ae00f8d, ...]",
-          "desc": [
-            "list of accumulated dictionary events.",
-            "",
-            "It will be empty if all com.sun.star.linguistic2.XDictionaryListEventListener are satisfied with the condensed representation of the com.sun.star.linguistic2.DictionaryListEvent.nCondensedEvent()."
-          ]
-        }
-      ]
-    }
+    "items": [
+      {
+        "name": "aDictionaryEvents",
+        "type": "typing.Tuple[DictionaryEvent_3ae00f8d, ...]",
+        "lines": [
+          "list of accumulated dictionary events.",
+          "",
+          "It will be empty if all com.sun.star.linguistic2.XDictionaryListEventListener are satisfied with the condensed representation of the com.sun.star.linguistic2.DictionaryListEvent.nCondensedEvent()."
+        ]
+      },
+      {
+        "name": "nCondensedEvent",
+        "type": "int",
+        "lines": [
+          "the combined type of the accumulated events.",
+          "",
+          "The value can be the combination of multiple com.sun.star.linguistic2.DictionaryListEventFlags by applying the logical OR to them."
+        ]
+      }
+    ]
   }
 }

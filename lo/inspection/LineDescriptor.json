@@ -51,134 +51,132 @@
     ],
     "imports": [],
     "extends": [],
-    "items": {
-      "properties": [
-        {
-          "name": "DisplayName",
-          "returns": "str",
-          "desc": [
-            "denotes the human-readable display name used to present a property to the user"
-          ]
-        },
-        {
-          "name": "Control",
-          "returns": "XPropertyControl_3f260fe2",
-          "desc": [
-            "denotes the control which should be used to represent the property at the UI."
-          ]
-        },
-        {
-          "name": "HelpURL",
-          "returns": "str",
-          "desc": [
-            "specifies the URL to the help topic to be associated with the property"
-          ]
-        },
-        {
-          "name": "HasPrimaryButton",
-          "returns": "bool",
-          "desc": [
-            "determines whether a button exists which can be used for a more complex, interactive property value input.",
-            "",
-            "If no image for the primary button is specified, but a primary button is present, the three dots will be displayed on the button."
-          ]
-        },
-        {
-          "name": "PrimaryButtonId",
-          "returns": "str",
-          "desc": [
-            "describes a unique id to associate with the primary button",
-            "",
-            "In OpenOffice.org, UI elements sometimes require a so-called UniqueID, which can be used to uniquely (within the whole application) identify this UI element. For instance, automating the OpenOffice.org UI via a dedicated separate application (\\\"TestTool\\\") requires such IDs.",
-            "",
-            "If a primary button exists for a property's UI representation (HasPrimaryButton), it gets the ID specified herein."
-          ]
-        },
-        {
-          "name": "PrimaryButtonImageURL",
-          "returns": "str",
-          "desc": [
-            "describes the URL of an image to display on the primary button, if any.",
-            "",
-            "This URL will be used to obtain an actual com.sun.star.graphic.XGraphic object from a com.sun.star.graphic.GraphicProvider.",
-            "",
-            "The property will be ignored if HasPrimaryButton is FALSE.",
-            "",
-            "If you need to specify a graphic which does not have a URL, but is available as com.sun.star.graphic.XGraphic only, then you must leave PrimaryButtonImageURL empty, and use the PrimaryButtonImage property."
-          ]
-        },
-        {
-          "name": "PrimaryButtonImage",
-          "returns": "XGraphic_a4da0afc",
-          "desc": [
-            "describes a graphics to display at the primary button, if any.",
-            "",
-            "The property will be ignored if HasPrimaryButton is FALSE, or if PrimaryButtonImageURL is a non-empty string."
-          ]
-        },
-        {
-          "name": "HasSecondaryButton",
-          "returns": "bool",
-          "desc": [
-            "determines whether a secondary button exists which can be used for a more complex, interactive property value input.",
-            "",
-            "A secondary button subordinated to the primary button. If no primary button exists (HasPrimaryButton), this member is ignored."
-          ]
-        },
-        {
-          "name": "SecondaryButtonId",
-          "returns": "str",
-          "desc": [
-            "describes a unique id to associate with the primary button",
-            "",
-            "If a secondary button exists for a property's UI representation (HasSecondaryButton), it gets the ID specified herein."
-          ]
-        },
-        {
-          "name": "SecondaryButtonImageURL",
-          "returns": "str",
-          "desc": [
-            "describes the URL of an image to display on the secondary button, if any.",
-            "",
-            "This URL will be used to obtain an actual com.sun.star.graphic.XGraphic object from a com.sun.star.graphic.GraphicProvider.",
-            "",
-            "The property will be ignored if HasSecondaryButton is FALSE.",
-            "",
-            "If you need to specify a graphic which does not have a URL, but is available as com.sun.star.graphic.XGraphic only, then you must leave SecondaryButtonImageURL empty, and use the SecondaryButtonImage property."
-          ]
-        },
-        {
-          "name": "SecondaryButtonImage",
-          "returns": "XGraphic_a4da0afc",
-          "desc": [
-            "describes a graphics to display at the secondary button, if any.",
-            "",
-            "The property will be ignored if HasSecondaryButton is FALSE, or if SecondaryButtonImageURL is a non-empty string."
-          ]
-        },
-        {
-          "name": "IndentLevel",
-          "returns": "int",
-          "desc": [
-            "describes the indent level for the property",
-            "",
-            "If a given property semantically depends on another one, the indent level can be used to visually represent this fact. For this, the dependent property's indent level would be one larger than the indent level of the other property.",
-            "",
-            "Normally, XPropertyHandlers will set this to 0 when describing the UI for a normal property."
-          ]
-        },
-        {
-          "name": "Category",
-          "returns": "str",
-          "desc": [
-            "describes the category into which the property should be sorted by the ObjectInspector.",
-            "",
-            "An ObjectInspector can visually group properties which semantically belong together (for instance using tab pages). The decision which properties actually belong together is made using this Category attribute.",
-            "",
-            "For your implementation of XPropertyHandler, it's recommended that you document the programmatic names used for property categories. This way, your handler might be re-used in different contexts, where only the XObjectInspectorModel needs to provide consistent UI names for the categories."
-          ]
-        }
-      ]
-    }
+    "items": [
+      {
+        "name": "DisplayName",
+        "type": "str",
+        "lines": [
+          "denotes the human-readable display name used to present a property to the user"
+        ]
+      },
+      {
+        "name": "Control",
+        "type": "XPropertyControl_3f260fe2",
+        "lines": [
+          "denotes the control which should be used to represent the property at the UI."
+        ]
+      },
+      {
+        "name": "HelpURL",
+        "type": "str",
+        "lines": [
+          "specifies the URL to the help topic to be associated with the property"
+        ]
+      },
+      {
+        "name": "HasPrimaryButton",
+        "type": "bool",
+        "lines": [
+          "determines whether a button exists which can be used for a more complex, interactive property value input.",
+          "",
+          "If no image for the primary button is specified, but a primary button is present, the three dots will be displayed on the button."
+        ]
+      },
+      {
+        "name": "PrimaryButtonId",
+        "type": "str",
+        "lines": [
+          "describes a unique id to associate with the primary button",
+          "",
+          "In OpenOffice.org, UI elements sometimes require a so-called UniqueID, which can be used to uniquely (within the whole application) identify this UI element. For instance, automating the OpenOffice.org UI via a dedicated separate application (\\\"TestTool\\\") requires such IDs.",
+          "",
+          "If a primary button exists for a property's UI representation (HasPrimaryButton), it gets the ID specified herein."
+        ]
+      },
+      {
+        "name": "PrimaryButtonImageURL",
+        "type": "str",
+        "lines": [
+          "describes the URL of an image to display on the primary button, if any.",
+          "",
+          "This URL will be used to obtain an actual com.sun.star.graphic.XGraphic object from a com.sun.star.graphic.GraphicProvider.",
+          "",
+          "The property will be ignored if HasPrimaryButton is FALSE.",
+          "",
+          "If you need to specify a graphic which does not have a URL, but is available as com.sun.star.graphic.XGraphic only, then you must leave PrimaryButtonImageURL empty, and use the PrimaryButtonImage property."
+        ]
+      },
+      {
+        "name": "PrimaryButtonImage",
+        "type": "XGraphic_a4da0afc",
+        "lines": [
+          "describes a graphics to display at the primary button, if any.",
+          "",
+          "The property will be ignored if HasPrimaryButton is FALSE, or if PrimaryButtonImageURL is a non-empty string."
+        ]
+      },
+      {
+        "name": "HasSecondaryButton",
+        "type": "bool",
+        "lines": [
+          "determines whether a secondary button exists which can be used for a more complex, interactive property value input.",
+          "",
+          "A secondary button subordinated to the primary button. If no primary button exists (HasPrimaryButton), this member is ignored."
+        ]
+      },
+      {
+        "name": "SecondaryButtonId",
+        "type": "str",
+        "lines": [
+          "describes a unique id to associate with the primary button",
+          "",
+          "If a secondary button exists for a property's UI representation (HasSecondaryButton), it gets the ID specified herein."
+        ]
+      },
+      {
+        "name": "SecondaryButtonImageURL",
+        "type": "str",
+        "lines": [
+          "describes the URL of an image to display on the secondary button, if any.",
+          "",
+          "This URL will be used to obtain an actual com.sun.star.graphic.XGraphic object from a com.sun.star.graphic.GraphicProvider.",
+          "",
+          "The property will be ignored if HasSecondaryButton is FALSE.",
+          "",
+          "If you need to specify a graphic which does not have a URL, but is available as com.sun.star.graphic.XGraphic only, then you must leave SecondaryButtonImageURL empty, and use the SecondaryButtonImage property."
+        ]
+      },
+      {
+        "name": "SecondaryButtonImage",
+        "type": "XGraphic_a4da0afc",
+        "lines": [
+          "describes a graphics to display at the secondary button, if any.",
+          "",
+          "The property will be ignored if HasSecondaryButton is FALSE, or if SecondaryButtonImageURL is a non-empty string."
+        ]
+      },
+      {
+        "name": "IndentLevel",
+        "type": "int",
+        "lines": [
+          "describes the indent level for the property",
+          "",
+          "If a given property semantically depends on another one, the indent level can be used to visually represent this fact. For this, the dependent property's indent level would be one larger than the indent level of the other property.",
+          "",
+          "Normally, XPropertyHandlers will set this to 0 when describing the UI for a normal property."
+        ]
+      },
+      {
+        "name": "Category",
+        "type": "str",
+        "lines": [
+          "describes the category into which the property should be sorted by the ObjectInspector.",
+          "",
+          "An ObjectInspector can visually group properties which semantically belong together (for instance using tab pages). The decision which properties actually belong together is made using this Category attribute.",
+          "",
+          "For your implementation of XPropertyHandler, it's recommended that you document the programmatic names used for property categories. This way, your handler might be re-used in different contexts, where only the XObjectInspectorModel needs to provide consistent UI names for the categories."
+        ]
+      }
+    ]
   }
 }

@@ -256,7 +256,7 @@ def main():
     logger.info('Parsing File %s' % args.json_file)
 
     p = ParserException(json_path=args.json_file)
-    w = WriterException(parser=p)
+    w = WriterException(parser=p, sort=False)
     w.Write('t', 'j')
 
 

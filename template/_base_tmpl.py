@@ -162,6 +162,7 @@ class BaseTpml(Template):
         self._is_class_init = True
         self._is_class_data = False
         self._logger = None
+        self.__cache = {}
         get_logger = None
         if not hasattr(self, "extends_map"):
             setattr(self, 'extends_map', {})
@@ -404,13 +405,33 @@ class BaseTpml(Template):
             return in_str + '_'
         return in_str
 
+    def get_q_wrapped(self, in_str: str, quote: Optional[str] = "'") -> str:
+        """
+        Wraps a string in quotes
+
+        Args:
+            in_str (str): string to wrap
+            quote (Optional[str], optional): string prepend and append. Defaults to "'".
+
+        Returns:
+            str: in_str with quote prepended and appended.
+        """
+        return f"{quote}{in_str}{quote}"
+
+    def is_q_type(self, in_type: object) -> bool:
+        """Gets if in_type is in quote"""
+        if not isinstance(in_type, str):
+            return False
+        if in_type in self.quote:
+            return True
+        return False
+
     def get_q_type(self, in_type: object) -> object:
         """If in_type is in quote then it is quoted.  Otherwise in_type is returned"""
-        if not isinstance(in_type, str):
-            return in_type
-        if in_type in self.quote:
-            return f"'{in_type}'"
+        if self.is_q_type(in_type=in_type):
+            return self.get_q_wrapped(in_str=in_type)
         return in_type
+    
 
     def get_timestamp_utc(self) -> str:
         """
@@ -520,6 +541,9 @@ class BaseTpml(Template):
         Returns:
             str: comma sep string of inherits.
         """
+        key = 'get_class_inherits_from_db_' + default
+        if key in self.__cache:
+            return self.__cache[key]
         def get_import(extend: ExtendsInfo) -> str:
             def is_mapped() -> bool:
                 return not extend.map_name is None
@@ -536,9 +560,11 @@ class BaseTpml(Template):
         extends = sql_entends.get_extends(namespace=ns)
         len_ent = len(extends)
         if len_ent == 0:
-            return default
+            self.__cache[key] = default
+            return self.__cache[key]
         if len_ent == 1:
-            return get_import(extends[0])
+            self.__cache[key] = get_import(extends[0])
+            return self.__cache[key]
         extends.sort() # sort, gets it sort order from database
         
         im_lst: List[str] = []
@@ -552,7 +578,8 @@ class BaseTpml(Template):
             if i > 0:
                 s += ', '
             s += im
-        return s
+        self.__cache[key] = s
+        return self.__cache[key]
     # endregion Class inherits and From Imports
 
     def get_abstract_imports(self, abm: List[bool], abp: List[bool]) -> List[str]:

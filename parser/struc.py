@@ -184,14 +184,13 @@ class Parser(base.ParserBase):
             ni = self._api_data.name.get_obj()
             ns = self._api_data.ns.namespace_str
             full_name = ns + '.' + ni.name
-            import_info = self._api_data.get_import_info_type()
             info = {
                 "name": ni.name,
                 "fullname": full_name,
                 "desc": self._api_data.desc.get_obj(),
                 "url": self.url,
                 "namespace": ns,
-                'imports': [im for im in import_info.imports],
+                'imports': [],
                 "extends": ex
             }
             self._cache[key] = info
@@ -222,17 +221,17 @@ class Parser(base.ParserBase):
         self._cache[key] = str_lst
         return self._cache[key]
     
-    def _get_data_items(self) -> dict:
+    def _get_data_items(self) -> List[dict]:
         key = '_get_data_items'
         if key in self._cache:
             return self._cache[key]
-        self._cache[key] = {}
-        p_data = self._get_properties_data()
-        if 'properties' in p_data:
-            self._cache[key].update(p_data)
+        self._cache[key] = []
         t_data = self._get_types_data()
         if 'types' in t_data:
-            self._cache[key].update(t_data)
+            self._cache[key].extend(t_data['types'])
+        p_data = self._get_properties_data()
+        if 'properties' in p_data:
+            self._cache[key].extend(p_data['properties'])
         return self._cache[key]
 
     def _get_summary_data(self, si_lst: List[base.SummaryInfo], key: str) -> dict:
@@ -248,8 +247,8 @@ class Parser(base.ParserBase):
                 continue
             attrib = {
                 "name": si.name,
-                "returns": si.p_type.type,
-                "desc": self._api_data.get_desc_detail(si.id).get_obj()
+                "type": si.p_type.type,
+                "lines": self._api_data.get_desc_detail(si.id).get_obj()
             }
             attribs[key].append(attrib)
             if si.p_type.requires_typing:
@@ -265,7 +264,7 @@ class Parser(base.ParserBase):
                 attribs[key] = newlist
         return attribs
 
-    def _get_properties_data(self) -> dict:
+    def _get_properties_data(self):
         import_info = self._api_data.get_import_info_property()
         if import_info.requires_typing:
             self._requires_typing = True
@@ -275,12 +274,14 @@ class Parser(base.ParserBase):
         key = 'properties'
         return self._get_summary_data(si_lst=si_lst, key=key)
     
-    def _get_types_data(self) -> dict:
+    def _get_types_data(self):
+        import_info = self._api_data.get_import_info_type()
+        if import_info.requires_typing:
+            self._requires_typing = True
+        self._imports.update(import_info.imports)
+
         si_lst = self._api_data.types_summaries.get_obj()
         key = 'types'
-        if len(si_lst) == 0:
-            return {}
-        self._requires_typing = True # all typedef require typing
         return self._get_summary_data(si_lst=si_lst, key=key)
 
     # endregion Data
@@ -438,7 +439,6 @@ class StructWriter(base.WriteBase):
         p_dict['typings'] = self._get_typings()
         p_dict['requires_typing'] = self._p_requires_typing
         p_dict.update(self._parser.get_dict_data())
-        p_dict['imports'] = []
         if 'typing_imports' in p_dict:
             del p_dict['typing_imports']
 
@@ -523,6 +523,11 @@ class StructWriter(base.WriteBase):
         t_set: Set[str] = set()
         # grab all the properties that need quotes
         si_lst = self._parser.api_data.property_summaries.get_obj()
+        for si in si_lst:
+            t = si.p_type
+            if t.requires_typing or t.is_py_type is False:
+                t_set.add(t.type)
+        si_lst = self._parser.api_data.types_summaries.get_obj()
         for si in si_lst:
             t = si.p_type
             if t.requires_typing or t.is_py_type is False:

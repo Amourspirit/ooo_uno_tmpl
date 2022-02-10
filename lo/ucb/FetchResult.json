@@ -22,7 +22,9 @@
     "from_imports": [],
     "from_imports_typing": [],
     "extends_map": {},
-    "quote": [],
+    "quote": [
+      "typing.Tuple[object, ...]"
+    ],
     "typings": [
       "typing.Tuple[object, ...]"
     ],
@@ -35,49 +37,45 @@
     ],
     "imports": [],
     "extends": [],
-    "items": {
-      "properties": [
-        {
-          "name": "StartIndex",
-          "returns": "int",
-          "desc": [
-            "indicates the index of the first row contained in FetchResult.Rows in the original result set.",
-            "",
-            "So if FetchResult.StartIndex equals 3, the first element in the sequence FetchResult.Rows contains the data of the index 3 in the original result set.",
-            "",
-            "The following rows are one after the other, but the direction depends on the value of FetchResult.Direction"
-          ]
-        },
-        {
-          "name": "Orientation",
-          "returns": "bool",
-          "desc": [
-            "indicates the orientation in which the rows are fetched and set into the sequence FetchResult.Rows.",
-            "",
-            "When FetchResult.Orientation equals TRUE, the rows in FetchResult.Rows are ordered in the same way as in the original result set."
-          ]
-        },
-        {
-          "name": "FetchError",
-          "returns": "int",
-          "desc": [
-            "indicates whether and which error has occurred, while fetching.",
-            "",
-            "The value may contain zero or more constants of the FetchError constants group."
-          ]
-        }
-      ],
-      "types": [
-        {
-          "name": "Rows",
-          "returns": "typing.Tuple[object, ...]",
-          "desc": [
-            "contains the demanded data.",
-            "",
-            "One any contains the data of one whole row. Those methods which use this struct have to specify, what the any has to contain."
-          ]
-        }
-      ]
-    }
+    "items": [
+      {
+        "name": "Rows",
+        "type": "typing.Tuple[object, ...]",
+        "lines": [
+          "contains the demanded data.",
+          "",
+          "One any contains the data of one whole row. Those methods which use this struct have to specify, what the any has to contain."
+        ]
+      },
+      {
+        "name": "StartIndex",
+        "type": "int",
+        "lines": [
+          "indicates the index of the first row contained in FetchResult.Rows in the original result set.",
+          "",
+          "So if FetchResult.StartIndex equals 3, the first element in the sequence FetchResult.Rows contains the data of the index 3 in the original result set.",
+          "",
+          "The following rows are one after the other, but the direction depends on the value of FetchResult.Direction"
+        ]
+      },
+      {
+        "name": "Orientation",
+        "type": "bool",
+        "lines": [
+          "indicates the orientation in which the rows are fetched and set into the sequence FetchResult.Rows.",
+          "",
+          "When FetchResult.Orientation equals TRUE, the rows in FetchResult.Rows are ordered in the same way as in the original result set."
+        ]
+      },
+      {
+        "name": "FetchError",
+        "type": "int",
+        "lines": [
+          "indicates whether and which error has occurred, while fetching.",
+          "",
+          "The value may contain zero or more constants of the FetchError constants group."
+        ]
+      }
+    ]
   }
 }
