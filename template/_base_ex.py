@@ -307,6 +307,8 @@ class BaseEx(BaseJson):
         if isinstance(result, uno.Enum):
             return f"{returns}.{result.value}"
         if isinstance(result, uno.ByteSequence):
+            if obj_none is True:
+                return 'UNO_NONE'
             return 'None'
         if hasattr(result, '__pyunostruct__'):
             if obj_none is True:

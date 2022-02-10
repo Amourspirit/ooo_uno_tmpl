@@ -42,7 +42,9 @@ $self.load_data()#slurp
 #if $libre_office_ver:
 # Libre Office Version: $libre_office_ver
 #end if
+#if len($properties) > 0
 from ooo.oenv import UNO_NONE
+#end if
 #if $requires_typing or len($sorted) > 0
 import typing
 #end if
@@ -105,7 +107,6 @@ class ${safe_name}($self.get_class_inherits($safe_name, $inherits))$self.get_cla
 
             Other ``*args`` and ``**kwargs`` are passed to parent class.
         """
-
 #for $i, $tpl in enumerate($sorted)
 #set $index = tpl[1]
 #set $itm = $properties[$index]
@@ -120,7 +121,6 @@ class ${safe_name}($self.get_class_inherits($safe_name, $inherits))$self.get_cla
         self._$self.camel_to_snake($itm_name) = $itm_name
     #end if
 #end for
-
 #if $self.has_uno_extends()
 
         super().__init__(*args, **kwargs)
