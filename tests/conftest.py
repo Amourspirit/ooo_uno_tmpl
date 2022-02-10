@@ -1,5 +1,4 @@
 # coding: utf-8
-from typing import Set
 import pytest
 import logging
 import os

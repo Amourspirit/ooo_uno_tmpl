@@ -1,13 +1,14 @@
 # coding: utf-8
+import uno
 from typing import Dict, List, Tuple, Union
 from _base_json import BaseJson
 from verr import Version
-
-
 class BaseEx(BaseJson):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._sorted_key_index = None
+        self._uno_instance = None
+
 
     def _hydrate_data(self, json_data: dict):
         self._validate_data(json_data)
@@ -246,14 +247,14 @@ class BaseEx(BaseJson):
                c_str += ', '
             index = tpl[1]
             itm: dict = d_lst[index]
-            is_q = self.is_q_type(itm['returns'])
             str_type = f"typing.Optional[{itm['returns']}]"
-            if is_q:
-                str_type = self.get_q_wrapped(str_type)
+            # is_q = self.is_q_type(itm['returns'])
+            # if is_q:
+            #     str_type = self.get_q_wrapped(str_type)
             c_str += self.get_safe_word(itm['name'])
             c_str += ": " + str_type
             if include_value:
-                c_str += " = None"
+                c_str += " = " + self.get_attrib_default(prop=itm, obj_none=True)
             i += 1
         return c_str
 
@@ -296,3 +297,25 @@ class BaseEx(BaseJson):
         safe_name = self.get_safe_word(self.name)
         ext = super().get_class_inherits(safe_name, self.inherits)
         return ext != 'object'
+
+    def get_attrib_default(self, prop:dict, obj_none: bool = False) -> str:
+        name = prop['name']
+        returns = prop['returns']
+        result = getattr(self.uno_instance, name, None)
+        if isinstance(result, str):
+            return f"'{result}'"
+        if isinstance(result, uno.Enum):
+            return f"{returns}.{result.value}"
+        if isinstance(result, uno.ByteSequence):
+            return 'None'
+        if hasattr(result, '__pyunostruct__'):
+            if obj_none is True:
+                return 'UNO_NONE'
+            return f"{returns}()"
+        return str(result)
+
+    @property
+    def uno_instance(self):
+        if self._uno_instance is None:
+            self._uno_instance = uno.createUnoStruct(self.fullname)
+        return self._uno_instance

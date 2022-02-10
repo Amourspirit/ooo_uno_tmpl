@@ -42,6 +42,7 @@ $self.load_data()#slurp
 #if $libre_office_ver:
 # Libre Office Version: $libre_office_ver
 #end if
+from ooo.oenv import UNO_NONE
 #if $requires_typing or len($sorted) > 0
 import typing
 #end if
@@ -55,9 +56,9 @@ from abc import $self.lst_to_str($abc_imports)
 $self.get_from_import($name, $imp)
 #end for
 #if len($from_imports_typing) > 0
-if typing.TYPE_CHECKING:
+##if typing.TYPE_CHECKING:
 #for $imp in $from_imports_typing
-    $self.get_from_import($name, $imp)
+$self.get_from_import($name, $imp)
 #end for
 #end if
 
@@ -109,8 +110,17 @@ class ${safe_name}($self.get_class_inherits($safe_name, $inherits))$self.get_cla
 #set $index = tpl[1]
 #set $itm = $properties[$index]
 #set $itm_name = $self.get_safe_word($itm.name)
-        self.$itm_name = $itm_name
+#set $attrib_default = $self.get_attrib_default($itm, True)
+    #if attrib_default == 'UNO_NONE'
+        if $itm_name is UNO_NONE:
+            self._$self.camel_to_snake($itm_name) = $self.get_attrib_default($itm)
+        else:
+            self._$self.camel_to_snake($itm_name) = $itm_name
+    #else
+        self._$self.camel_to_snake($itm_name) = $itm_name
+    #end if
 #end for
+
 #if $self.has_uno_extends()
 
         super().__init__(*args, **kwargs)
@@ -150,25 +160,31 @@ class ${safe_name}($self.get_class_inherits($safe_name, $inherits))$self.get_cla
 #if $is_properties
 #for $property in $properties
 #set $p_name = $self.get_safe_word($property['name'])
-#set $p_return = $self.get_q_type($property['returns'])
+#set $p_return = $property['returns']
 #set $p_desc = $property['desc']
-    $p_name: $p_return = None
-    """
+    @property
+    def ${p_name}(self) -> $property['returns']:
+        """
     #for $line in $self.line_gen($p_desc)
-    $line
+        $line
     #end for
     #if $self.get_prop_has_errors($property)
 
-    Raises:
+        Raises:
 
     #for $long, $short in $self.get_prop_get_raises($property)
-        $long: get raises ``$short``
+            $long: get raises ``$short``
     #end for
     #for $long, $short in $self.get_prop_set_raises($property)
-        $long: set raises ``$short``
+            $long: set raises ``$short``
     #end for
     #end if
-    """
+        """
+        return self._$self.camel_to_snake($p_name)
+    
+    @${p_name}.setter
+    def ${p_name}(self, value: $property['returns']) -> None:
+        self._$self.camel_to_snake($p_name) = value
 
 #end for
 #end if

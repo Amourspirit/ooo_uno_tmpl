@@ -65,7 +65,7 @@ def create_uno_service(clazz: Union[str, object], ctx: object = None, args: Opti
 # This is the same as ServiceManager.createInstance( ... )
 
 
-def _create_uno_service(clazz: str, ctx: obj = None, args: tuple = None) -> object:
+def _create_uno_service(clazz: str, ctx: object = None, args: tuple = None) -> object:
     """Creates a global objects within the running OOo. 
     Similar to the function of the same name in OOo Basic. 
     
