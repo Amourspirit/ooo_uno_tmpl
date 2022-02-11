@@ -86,13 +86,13 @@ class ${safe_name}($self.get_class_inherits($name, $inherits)):
     """Literal Constant ``$fullname``"""
 
 ##    def __init__(self, *args, **kwargs):
-    $self.get_constructor()
+    def __init__(self, *args, **kwargs) -> None:
         """
         Constructor
 
         Other Arguments:
             First positinal arg can be another ``$safe_name`` instance,
-                if it is the only argument passed to contructor;
+                if it is the only arg passed to contructor;
                 Otherwise, postitional arguments are treated as ``$safe_name``
                 values. Following the order of ``Keyword Arguments``.
 
@@ -106,34 +106,36 @@ class ${safe_name}($self.get_class_inherits($name, $inherits)):
             $itm_name ($itm_type, optional): $itm_name value
 #end for
         """
+#if $self.has_uno_extends()
+        super().__init__(*args, **kwargs)
+#end if
+
         if len(args) == 1 and isinstance(args[0], $safe_name):
             oth: $safe_name = args[0]
 #for $i, $tpl in enumerate($sorted)
 #set $index = tpl[1]
 #set $itm = $attribs[$index]
 #set $itm_name = $self.get_safe_word($itm.name)
-#set $attrib_default = $self.get_attrib_default($itm, True)
+#set $attrib_default = $self.get_attrib_default($itm)
             self._$self.camel_to_snake($itm_name) = oth.$itm_name
 #end for
+            return
         else:
 #for $i, $tpl in enumerate($sorted)
 #set $index = tpl[1]
 #set $itm = $attribs[$index]
 #set $itm_name = $self.get_safe_word($itm.name)
-#set $attrib_default = $self.get_attrib_default($itm, True)
-    #if attrib_default == 'UNO_NONE'
-            if $itm_name is UNO_NONE:
-                self._$self.camel_to_snake($itm_name) = $self.get_attrib_default($itm)
-            else:
-                self._$self.camel_to_snake($itm_name) = $itm_name
-    #else
-            self._$self.camel_to_snake($itm_name) = $itm_name
-    #end if
+#set $attrib_default = $self.get_attrib_default($itm)
+            self._$self.camel_to_snake($itm_name) = $self.get_attrib_default($itm)
 #end for
-#if $self.has_uno_extends()
 
-        super().__init__(*args, **kwargs)
-#end if
+        key_order = ($self.get_nt_names_str())
+        for i, arg in enumerate(args):
+            setattr(self, key_order[i], arg)
+        for k, v in kwargs.items():
+## use hasattrib some values may come from inherited struct
+            if hasattr(self, k):
+                setattr(self, k, v)
 
 #for $i, $tpl in enumerate($sorted)
 #set $index = tpl[1]

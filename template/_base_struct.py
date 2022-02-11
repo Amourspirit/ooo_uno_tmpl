@@ -1,5 +1,6 @@
 # coding: utf-8
 import uno
+import re
 from typing import Dict, Tuple, List, Union
 from _base_json import BaseJson
 from verr import Version
@@ -140,39 +141,6 @@ class BaseStruct(BaseJson):
         result['type'] = self.get_q_type(result['type'])
         return result
 
-    def get_constructor_args_str(self, include_value: bool = True) -> str:
-        sorted_names = self.get_sorted_names()
-        d_lst: List[dict] = getattr(self, 'attribs', [])
-
-        c_str = ''
-        i = 0
-        for tpl in sorted_names:
-            if i > 0:
-               c_str += ', '
-            index = tpl[1]
-            itm: dict = d_lst[index]
-            str_type = f"typing.Optional[{itm['type']}]"
-            is_q = self.is_q_type(itm['type'])
-            if is_q:
-                str_type = self.get_q_wrapped(str_type)
-            c_str += self.get_safe_word(itm['name'])
-            c_str += ": " + str_type
-            if include_value:
-                c_str += " = " + \
-                    self.get_attrib_default(prop=itm, obj_none=True)
-            i += 1
-        return c_str
-
-    def get_constructor(self) -> str:
-        default = "def __init__(self, *args, **kwargs):"
-        sorted_names = self.get_sorted_names()
-        if len(sorted_names) == 0:
-            return default
-        if self.uno_instance is None:
-            return default
-        names = self.get_constructor_args_str()
-        return f"def __init__(self, *args, {names}, **kwargs):"
-
     def get_class_inherits_from_db(self, default: str = 'object') -> str:
         # override this method from base class
         # by overriding can used in other methods such as has_uno_extends()
@@ -199,7 +167,7 @@ class BaseStruct(BaseJson):
         ext = super().get_class_inherits(safe_name, self.inherits)
         return ext != 'object'
 
-    def get_attrib_default(self, prop:dict, obj_none: bool = False) -> str:
+    def get_attrib_default(self, prop:dict) -> str:
         if self.uno_instance is None:
             return 'None'
         name = prop['name']
@@ -209,13 +177,15 @@ class BaseStruct(BaseJson):
             return f"'{result}'"
         if isinstance(result, uno.Enum):
             return f"{returns}.{result.value}"
+        if isinstance(result, uno.Char):
+            char = ''.join(r'\u{:04X}'.format(ord(chr))
+                    for chr in result.value)
+            return f"'{char}'"
         if isinstance(result, uno.ByteSequence):
-            if obj_none is True:
-                return 'UNO_NONE'
+            return 'None'
+        if isinstance(result, uno.Type):
             return 'None'
         if hasattr(result, '__pyunostruct__'):
-            if obj_none is True:
-                return 'UNO_NONE'
             return f"{returns}()"
         return str(result)
 
