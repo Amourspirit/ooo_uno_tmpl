@@ -1,5 +1,4 @@
 # coding: utf-8
-from typing import Set
 import os
 import sys
 
@@ -19,11 +18,23 @@ def pytest_generate_tests(metafunc):
         metafunc.parametrize(
             "enum_data", metafunc.module.enum_data.__wrapped__(
                 MODULE_TYPES))
+    elif metafunc.function.__name__ == "test_imp_enum_uno" and "enum_data" in dir(metafunc.module):
+        metafunc.parametrize(
+            "enum_data", metafunc.module.enum_data.__wrapped__(
+                MODULE_TYPES))
     elif metafunc.function.__name__ == "test_imp_const" and "const_data" in dir(metafunc.module):
         metafunc.parametrize(
             "const_data", metafunc.module.const_data.__wrapped__(
                 MODULE_TYPES))
+    elif metafunc.function.__name__ == "test_imp_const_uno" and "const_data" in dir(metafunc.module):
+        metafunc.parametrize(
+            "const_data", metafunc.module.const_data.__wrapped__(
+                MODULE_TYPES))
     elif metafunc.function.__name__ == "test_imp_ex" and "ex_data" in dir(metafunc.module):
+        metafunc.parametrize(
+            "ex_data", metafunc.module.ex_data.__wrapped__(
+                MODULE_TYPES))
+    elif metafunc.function.__name__ == "test_imp_ex_uno" and "ex_data" in dir(metafunc.module):
         metafunc.parametrize(
             "ex_data", metafunc.module.ex_data.__wrapped__(
                 MODULE_TYPES))
@@ -32,6 +43,10 @@ def pytest_generate_tests(metafunc):
             "typedef_data", metafunc.module.typedef_data.__wrapped__(
                 MODULE_TYPES))
     elif metafunc.function.__name__ == "test_imp_struct" and "struct_data" in dir(metafunc.module):
+        metafunc.parametrize(
+            "struct_data", metafunc.module.struct_data.__wrapped__(
+                MODULE_TYPES))
+    elif metafunc.function.__name__ == "test_imp_struct_uno" and "struct_data" in dir(metafunc.module):
         metafunc.parametrize(
             "struct_data", metafunc.module.struct_data.__wrapped__(
                 MODULE_TYPES))

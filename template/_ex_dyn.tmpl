@@ -59,21 +59,7 @@ if not TYPE_CHECKING and _DYNAMIC:
 
         def _ex_init(*args, **kwargs):
             ns = '${fullname}'
-            arg_len = len(args)
-            if arg_len == 1:
-                from $namespace import $safe_name as U${safe_name}
-                if isinstance(args[0], U${safe_name}):
-                    ex = uno.createUnoStruct(ns, args[0])
-                    _set_attr(ex)
-                    return ex
-            if arg_len > 0:
-                ex = uno.createUnoStruct(ns, *args)
-            else:
-                ex = uno.createUnoStruct(ns)
-            for k, v in kwargs.items():
-## use hasattrib some values may come from inherited ex
-                if hasattr(ex, k):
-                    setattr(ex, k, v)
+            ex = uno.createUnoStruct(ns, *args, **kwargs)
             _set_attr(ex)
             return ex
         $safe_name = _ex_init

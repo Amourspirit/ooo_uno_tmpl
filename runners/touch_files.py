@@ -1,4 +1,5 @@
 # coding: utf-8
+import re
 import logging
 import glob
 import tempfile
@@ -18,6 +19,7 @@ from parser.json_parser.const_parser import ParserConst
 
 
 class TouchFiles(FilesBase):
+    _pattern_generic_name = re.compile(r"([a-zA-Z0-9_]+)(<[A-Z, ]+>)")
     def __init__(self, config: AppConfig, log: logging.Logger, **kwargs) -> None:
         super().__init__(config=config)
         self._log = log
@@ -80,7 +82,7 @@ class TouchFiles(FilesBase):
             links = p.get_links()
             f_path = Path(f).parent
             for link in links:
-                name = link.name
+                name = self._get_clean_filename(link.name)
                 if self._touch_py_files:
                     name += '.py'
                 elif self._touch_dyn_files:
@@ -112,7 +114,7 @@ class TouchFiles(FilesBase):
             links = p.get_links()
             f_path = Path(f).parent
             for link in links:
-                name = link.name
+                name = self._get_clean_filename(link.name)
                 if self._touch_py_files:
                     name += '.py'
                 elif self._touch_dyn_files:
@@ -144,7 +146,7 @@ class TouchFiles(FilesBase):
             links = p.get_links()
             f_path = Path(f).parent
             for link in links:
-                name = link.name
+                name = self._get_clean_filename(link.name)
                 if self._touch_py_files:
                     name += '.py'
                 elif self._touch_dyn_files:
@@ -176,7 +178,7 @@ class TouchFiles(FilesBase):
             links = p.get_links()
             f_path = Path(f).parent
             for link in links:
-                name = link.name
+                name = self._get_clean_filename(link.name)
                 if self._touch_py_files:
                     name += '.py'
                 elif self._touch_dyn_files:
@@ -208,7 +210,7 @@ class TouchFiles(FilesBase):
             links = p.get_links()
             f_path = Path(f).parent
             for link in links:
-                name = link.name
+                name = self._get_clean_filename(link.name)
                 if self._touch_py_files:
                     name += '.py'
                 elif self._touch_dyn_files:
@@ -240,7 +242,7 @@ class TouchFiles(FilesBase):
             links = p.get_links()
             f_path = Path(f).parent
             for link in links:
-                name = link.name
+                name = self._get_clean_filename(link.name)
                 if self._touch_py_files:
                     name += '.py'
                 elif self._touch_dyn_files:
@@ -272,7 +274,7 @@ class TouchFiles(FilesBase):
             links = p.get_links()
             f_path = Path(f).parent
             for link in links:
-                name = link.name
+                name = self._get_clean_filename(link.name)
                 if self._touch_py_files:
                     name += '.py'
                 elif self._touch_dyn_files:
@@ -304,7 +306,7 @@ class TouchFiles(FilesBase):
             links = p.get_links()
             f_path = Path(f).parent
             for link in links:
-                name = link.name
+                name = self._get_clean_filename(link.name)
                 if self._touch_py_files:
                     name += '.py'
                 elif self._touch_dyn_files:
@@ -347,4 +349,18 @@ class TouchFiles(FilesBase):
         self._touch_count += touched
 
 
+    def _get_clean_filename(self, input: str) -> str:
+        """
+        Clean a file name and changes name suah as ``Pair< T, U >`` to ``Pair``
+
+        Args:
+            input (str): filename
+
+        Returns:
+            str: cleaned file name
+        """
+        # convert 'Pair< T, U >' to 'Pair'
+        s = TouchFiles._pattern_generic_name.sub(r'\g<1>', input)
+        s = s.replace(" ", "_")
+        return s
 # endregion Touch Files
