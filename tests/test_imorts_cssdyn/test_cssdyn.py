@@ -10,6 +10,7 @@ def module_data(modules):
     return modules
 
 
-def test_imp_mod(module_data: str):
+def test_imp_mod(module_data: str, monkeypatch):
+    monkeypatch.setenv('ooouno_ignore_runtime', 'True')
     imc = ImportCheck()
     assert imc.load_import(module_data) == True
