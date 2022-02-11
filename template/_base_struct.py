@@ -1,8 +1,7 @@
 # coding: utf-8
-import json
-from typing import Dict, Tuple, List
+import uno
+from typing import Dict, Tuple, List, Union
 from _base_json import BaseJson
-from pathlib import Path
 from verr import Version
 
 
@@ -11,6 +10,7 @@ class BaseStruct(BaseJson):
         super().__init__(*args, **kwargs)
         # self._linfo('hello')
         self._sorted_key_index = None
+        self._uno_instance = False
 
     def _hydrate_data(self, json_data: dict):
         self._validate_data(json_data)
@@ -49,6 +49,7 @@ class BaseStruct(BaseJson):
         extends_map = data.get('extends_map', None)
         if extends_map:
             self.extends_map.update(extends_map)
+        self.fullname = f"{self.namespace}.{self.get_safe_word(self.name)}"
 
     def _get_attribs(self, json_data: dict, sort: bool) -> dict:
         items: List[dict] = json_data['data']['items']
@@ -137,7 +138,94 @@ class BaseStruct(BaseJson):
         result = {}
         result.update(itm)
         result['type'] = self.get_q_type(result['type'])
-        # is_py_type: bool = bool(result.get('is_py_type', False))
-        # if not is_py_type:
-        #     result['type'] = "'" + result['type'] + "'"
         return result
+
+    def get_constructor_args_str(self, include_value: bool = True) -> str:
+        sorted_names = self.get_sorted_names()
+        d_lst: List[dict] = getattr(self, 'attribs', [])
+
+        c_str = ''
+        i = 0
+        for tpl in sorted_names:
+            if i > 0:
+               c_str += ', '
+            index = tpl[1]
+            itm: dict = d_lst[index]
+            str_type = f"typing.Optional[{itm['type']}]"
+            is_q = self.is_q_type(itm['type'])
+            if is_q:
+                str_type = self.get_q_wrapped(str_type)
+            c_str += self.get_safe_word(itm['name'])
+            c_str += ": " + str_type
+            if include_value:
+                c_str += " = " + \
+                    self.get_attrib_default(prop=itm, obj_none=True)
+            i += 1
+        return c_str
+
+    def get_constructor(self) -> str:
+        default = "def __init__(self, *args, **kwargs):"
+        sorted_names = self.get_sorted_names()
+        if len(sorted_names) == 0:
+            return default
+        if self.uno_instance is None:
+            return default
+        names = self.get_constructor_args_str()
+        return f"def __init__(self, *args, {names}, **kwargs):"
+
+    def get_class_inherits_from_db(self, default: str = 'object') -> str:
+        # override this method from base class
+        # by overriding can used in other methods such as has_uno_extends()
+        result = super().get_class_inherits_from_db('object')
+        if result == "object":
+            return default  # builtin Exception
+        return result
+
+    def get_class_inherits(self, class_name: str, imports: Union[str, List[str]]) -> str:
+        # override to make default Exception
+        result = super().get_class_inherits(class_name=class_name, imports=imports)
+        return result
+
+    def has_uno_extends(self) -> bool:
+        # com.sun.star.uno.Exception inherits from builtins.Exception
+        # and is base class for uno exceptions
+        if self.allow_db:
+            # get_class_inherits_from_db() is a cached method in base
+            ext = super().get_class_inherits_from_db('object')
+            if ext == 'object':
+                return False
+            return True
+        safe_name = self.get_safe_word(self.name)
+        ext = super().get_class_inherits(safe_name, self.inherits)
+        return ext != 'object'
+
+    def get_attrib_default(self, prop:dict, obj_none: bool = False) -> str:
+        if self.uno_instance is None:
+            return 'None'
+        name = prop['name']
+        returns = prop['type']
+        result = getattr(self.uno_instance, name, None)
+        if isinstance(result, str):
+            return f"'{result}'"
+        if isinstance(result, uno.Enum):
+            return f"{returns}.{result.value}"
+        if isinstance(result, uno.ByteSequence):
+            if obj_none is True:
+                return 'UNO_NONE'
+            return 'None'
+        if hasattr(result, '__pyunostruct__'):
+            if obj_none is True:
+                return 'UNO_NONE'
+            return f"{returns}()"
+        return str(result)
+
+    @property
+    def uno_instance(self) -> Union[object, None]:
+        if self._uno_instance is False:
+            try:
+                self._uno_instance = uno.createUnoStruct(self.fullname)
+            except Exception as e:
+                self._lwarn(
+                    f"{self.fullname} Error: {e}")
+                self._uno_instance = None
+        return self._uno_instance

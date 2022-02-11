@@ -21,12 +21,12 @@ $self.init_data()#slurp
 #attr $quote = set()
 #attr $typings = set()
 #attr $attribs = []
+#attr $fullname = ''
 $self.load_data()#slurp
 ## Main Template
 #set $re_underscore_hex = r"(_[0-9A-Fa-f]*)"
 #set $safe_name = $self.get_safe_word($name)
 #set $sorted = $self.get_sorted_names()
-#set $fullname = $namespace + '.' + $safe_name
 # coding: utf-8
 #include raw "resources/inc_lic.txt"
 # Struct Class
@@ -35,13 +35,16 @@ $self.load_data()#slurp
 #if $libre_office_ver:
 # Libre Office Version: $libre_office_ver
 #end if
+#if len($sorted) > 0
+from ooo.oenv import UNO_NONE
+#end if
 #for $imp in $imports
 import $imp
 #end for
 #for $imp in $from_imports
 $self.get_from_import($name, $imp)
 #end for
-#if $requires_typing:
+#if $requires_typing or len($sorted) > 0:
 import typing
 #end if
 #if len($from_imports_typing) > 0:
@@ -82,7 +85,8 @@ class ${safe_name}($self.get_class_inherits($name, $inherits)):
     typeName: str = '$fullname'
     """Literal Constant ``$fullname``"""
 
-    def __init__(self, *args, **kwargs):
+##    def __init__(self, *args, **kwargs):
+    $self.get_constructor()
         """
         Constructor
 
@@ -102,44 +106,48 @@ class ${safe_name}($self.get_class_inherits($name, $inherits)):
             $itm_name ($itm_type, optional): $itm_name value
 #end for
         """
+        if len(args) == 1 and isinstance(args[0], $safe_name):
+            oth: $safe_name = args[0]
 #for $i, $tpl in enumerate($sorted)
 #set $index = tpl[1]
 #set $itm = $attribs[$index]
 #set $itm_name = $self.get_safe_word($itm.name)
-        self._$self.camel_to_snake($itm_name) = None
+#set $attrib_default = $self.get_attrib_default($itm, True)
+            self._$self.camel_to_snake($itm_name) = oth.$itm_name
 #end for
+        else:
+#for $i, $tpl in enumerate($sorted)
+#set $index = tpl[1]
+#set $itm = $attribs[$index]
+#set $itm_name = $self.get_safe_word($itm.name)
+#set $attrib_default = $self.get_attrib_default($itm, True)
+    #if attrib_default == 'UNO_NONE'
+            if $itm_name is UNO_NONE:
+                self._$self.camel_to_snake($itm_name) = $self.get_attrib_default($itm)
+            else:
+                self._$self.camel_to_snake($itm_name) = $itm_name
+    #else
+            self._$self.camel_to_snake($itm_name) = $itm_name
+    #end if
+#end for
+#if $self.has_uno_extends()
 
-        key_order = ($self.get_nt_names_str())
-        arg_len = len(args)
-        if arg_len == 1:
-            if isinstance(args[0], $safe_name):
-                oth = args[0]
-                for key in key_order:
-                    setattr(self, key, getattr(oth, key))
-                return
-
-        if  arg_len > len(key_order):
-            raise ValueError("${safe_name}.__init__() To many parameters")
-        for i, arg in enumerate(args):
-            setattr(self, key_order[i], arg)
-        for k, v in kwargs.items():
-## use hasattrib some values may come from inherited struct
-            if hasattr(self, k):
-                setattr(self, k, v)
+        super().__init__(*args, **kwargs)
+#end if
 
 #for $i, $tpl in enumerate($sorted)
 #set $index = tpl[1]
 #set $itm = $self.get_attrib_for_prop($index)
-#set $itm_name = $self.get_safe_word($itm.name)
+#set $itm_name = $self.get_safe_word($itm['name'])
 
     @property
-    def ${itm_name}(self) -> $itm.type:
-#if $include_desc and $itm.lines
+    def ${itm_name}(self) -> $itm['type']:
+#if $include_desc and $itm['lines']
         """
-    #if isinstance($itm.lines, str):
+    #if isinstance($itm['lines'], str):
         $itm.lines
     #else
-        #for $line in $itm.lines
+        #for $line in $itm['lines']
         $line
         #end for
     #end if
@@ -148,7 +156,7 @@ class ${safe_name}($self.get_class_inherits($name, $inherits)):
         return self._$self.camel_to_snake($itm_name)
     
     @${itm_name}.setter
-    def ${itm_name}(self, value: $itm.type) -> None:
+    def ${itm_name}(self, value: $itm['type']) -> None:
         self._$self.camel_to_snake($itm_name) = value
 #end for
 
