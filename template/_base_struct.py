@@ -85,28 +85,6 @@ class BaseStruct(BaseJson):
         self._sorted_key_index = sorted
         return self._sorted_key_index
 
-    def get_constructor_str(self, opt: bool) -> str:
-        sorted = self.get_sorted_names()
-        d_lst: List[Dict[str, object]] = getattr(self, 'attribs', [])
-
-        c_str = ''
-        for i, tpl in enumerate(sorted):
-            if i > 0:
-               c_str += ', '
-            index = tpl[1]
-            itm: Dict[str, object] = d_lst[index]
-            name: str = itm['name']
-
-            if opt:
-                t: str = self.get_q_type_opt(itm['type'])
-                s = f"{name}: {t} = None"
-            else:
-                t: str = self.get_q_type(itm['type'])
-                s = f"{name}: {t}"
-            c_str += s
-
-        return c_str
-
     def get_q_type_opt(self, in_type: object) -> object:
         """If in_type is in quote then it is quoted.  Otherwise in_type is returned"""
         if not isinstance(in_type, str):
@@ -138,7 +116,7 @@ class BaseStruct(BaseJson):
         itm: Dict[str, object] = d_lst[index]
         result = {}
         result.update(itm)
-        result['type'] = self.get_q_type(result['type'])
+        result['type'] = result['type'] ## self.get_q_type(result['type'])
         return result
 
     def get_class_inherits_from_db(self, default: str = 'object') -> str:
