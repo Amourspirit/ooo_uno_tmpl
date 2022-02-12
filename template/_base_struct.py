@@ -1,10 +1,10 @@
 # coding: utf-8
 import uno
 import re
-from typing import Dict, Tuple, List, Union
+from typing import Dict, Set, Tuple, List, Union
 from _base_json import BaseJson
 from verr import Version
-
+from _base_tmpl import SqlComponent
 
 class BaseStruct(BaseJson):
     def __init__(self, *args, **kwargs):
@@ -12,6 +12,8 @@ class BaseStruct(BaseJson):
         # self._linfo('hello')
         self._sorted_key_index = None
         self._uno_instance = False
+        self._is_parent = None
+        self._cache = {}
 
     def _hydrate_data(self, json_data: dict):
         self._validate_data(json_data)
@@ -145,7 +147,43 @@ class BaseStruct(BaseJson):
         ext = super().get_class_inherits(safe_name, self.inherits)
         return ext != 'object'
 
-    def get_attrib_default(self, prop:dict) -> str:
+    def get_constructor_args_str(self, include_value: bool = True, include_type: bool = True,  uno_none: bool = True) -> str:
+        sorted_names = self.get_sorted_names()
+        d_lst: List[dict] = getattr(self, 'attribs', [])
+
+        c_str = ''
+        i = 0
+        for tpl in sorted_names:
+            if i > 0:
+               c_str += ', '
+            index = tpl[1]
+            itm: dict = d_lst[index]
+            # is_q = self.is_q_type(itm['type'])
+            # if is_q:
+            #     str_type = self.get_q_wrapped(str_type)
+            c_str += self.get_safe_word(itm['name'])
+            if include_type:
+                # c_str += f": typing.Optional[{itm['type']}]"
+                c_str += f": {itm['type']}"
+            if include_value:
+                c_str += " = " + \
+                    self.get_attrib_default(prop=itm, uno_none=uno_none)
+            i += 1
+        return c_str
+
+    def get_constructor(self) -> str:
+        default = "def __init__(self, **kwargs) -> None:"
+        sorted_names = self.get_sorted_names()
+        if len(sorted_names) == 0:
+            return default
+        if self.uno_instance is None:
+            return default
+        names = self.get_constructor_args_str()
+        if self.is_parent:
+            return f"def __init__(self, {names}, **kwargs) -> None:"
+        return f"def __init__(self, {names}) -> None:"
+
+    def get_attrib_default(self, prop: dict, uno_none: bool = False) -> str:
         if self.uno_instance is None:
             return 'None'
         name = prop['name']
@@ -153,19 +191,61 @@ class BaseStruct(BaseJson):
         result = getattr(self.uno_instance, name, None)
         if isinstance(result, str):
             return f"'{result}'"
-        if isinstance(result, uno.Enum):
+        elif isinstance(result, uno.Enum):
             return f"{returns}.{result.value}"
-        if isinstance(result, uno.Char):
+        elif isinstance(result, uno.Char):
             char = ''.join(r'\u{:04X}'.format(ord(chr))
                     for chr in result.value)
             return f"'{char}'"
-        if isinstance(result, uno.ByteSequence):
+        elif isinstance(result, uno.ByteSequence):
+            if uno_none is True:
+                return 'UNO_NONE'
             return 'None'
-        if isinstance(result, uno.Type):
+        elif isinstance(result, uno.Type):
             return 'None'
-        if hasattr(result, '__pyunostruct__'):
+        elif hasattr(result, '__pyunostruct__'):
+            if uno_none is True:
+                return 'UNO_NONE'
+            if returns == 'object':
+                return 'None'
+            db_comp = SqlComponent()
+            self._linfo(f"Testing typedef for namespace={result.__pyunostruct__}")
+            is_typedef = db_comp.is_type(namespace=result.__pyunostruct__, tipe='typedef')
+            self._linfo(f"Test Result: {is_typedef}")
+            if is_typedef:
+                return f"{returns}({result})"
+            
             return f"{returns}()"
         return str(result)
+
+    def get_constructor_types(self) -> Set[str]:
+        key = 'get_constructor_types'
+        if key in self._cache:
+            return self._cache[key]
+        d_lst: List[dict] = getattr(self, 'attribs', [])
+        result = set()
+        for itm in d_lst:
+            tipe = itm['type']
+            if tipe == 'object':
+                continue
+            attr = getattr(self.uno_instance, itm['name'], None)
+            if attr is None:
+                continue
+            if isinstance(attr, uno.Enum):
+                result.add(tipe)
+            elif hasattr(attr, '__pyunostruct__'):
+                result.add(tipe)
+        self._cache[key] = result
+        return self._cache[key]
+    
+    def is_constructor_type(self, imp: List) -> bool:
+        # imp will be two or three elements
+        # last element will match constructor type
+        c_types = self.get_constructor_types()
+        el: str = imp[-1:][0]
+        # self._linfo(str(el))
+        return el in c_types
+        
 
     @property
     def uno_instance(self) -> Union[object, None]:
@@ -177,3 +257,9 @@ class BaseStruct(BaseJson):
                     f"{self.fullname} Error: {e}")
                 self._uno_instance = None
         return self._uno_instance
+
+    @property
+    def is_parent(self) -> bool:
+        if self._is_parent is None:
+            self._is_parent = self.has_uno_extends()
+        return self._is_parent

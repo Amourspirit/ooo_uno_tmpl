@@ -98,3 +98,18 @@ createUnoStruct see the first arg for Exception as Context.
 For Example:
     uno.createUnoStruct('com.sun.star.uno.Exception', "Hello")
     Result in uno.RuntimeException, member 'Context' of struct type 'com.sun.star.uno.Exception' not given a value.
+
+For Struct such as Color the same applies.
+    Summary is Red, Green, Blue
+    Details section list alphabetical Blue, Green, Red
+    https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1rendering_1_1RGBColor.html
+
+    >>> rgb = uno.createUnoStruct('com.sun.star.rendering.RGBColor', 122, 144, 200)
+    >>> print(rgb)
+    >>> print(rgb.Red)
+    >>> print(rgb.Green)
+    >>> print(rgb.Blue)
+    (com.sun.star.rendering.RGBColor){ Red = (double)122, Green = (double)144, Blue = (double)200 }
+    122.0
+    144.0
+    200.0

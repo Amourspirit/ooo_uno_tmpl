@@ -253,7 +253,7 @@ class BaseEx(BaseJson):
             
             c_str += self.get_safe_word(itm['name'])
             if include_type:
-                c_str += ": " + f"typing.Optional[{itm['returns']}]"
+                c_str += f": typing.Optional[{itm['returns']}]"
             if include_value:
                 c_str += " = " + \
                     self.get_attrib_default(prop=itm, uno_none=uno_none)
@@ -303,13 +303,17 @@ class BaseEx(BaseJson):
         result = getattr(self.uno_instance, name, None)
         if isinstance(result, str):
             return f"'{result}'"
-        if isinstance(result, uno.Enum):
+        elif isinstance(result, uno.Enum):
             return f"{returns}.{result.value}"
-        if isinstance(result, uno.ByteSequence):
+        elif isinstance(result, uno.Char):
+            char = ''.join(r'\u{:04X}'.format(ord(chr))
+                           for chr in result.value)
+            return f"'{char}'"
+        elif isinstance(result, uno.ByteSequence):
             if uno_none is True:
                 return 'UNO_NONE'
             return 'None'
-        if hasattr(result, '__pyunostruct__'):
+        elif hasattr(result, '__pyunostruct__'):
             if uno_none is True:
                 return 'UNO_NONE'
             if returns == 'object':

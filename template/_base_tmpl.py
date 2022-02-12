@@ -142,6 +142,24 @@ class SqlExtends(BaseSql):
                     ei.sort = int(row['sort'])
         return results
 
+
+class SqlComponent(BaseSql):
+    def __init__(self) -> None:
+        super().__init__()
+
+    def is_type(self, namespace: str, tipe='typedef') -> bool:
+        query = """SELECT * FROM component
+            WHERE component.id_component like :namespace
+            and component.type like :tipe
+            LIMIT 1;"""
+        result = False
+        with SqlCtx(self.conn_str) as db:
+            db.cursor.execute(query, {"namespace": namespace, "tipe": tipe})
+            row = db.cursor.fetchone()
+            if not row is None:
+                result = True
+        return result
+
 # endregion Resource DB Related
 
 @dataclass
@@ -452,7 +470,7 @@ class BaseTpml(Template):
 
         Args:
             class_name (str): Name if the class then is using the import or is extended by import
-            im_data (List[str]): List of str expected to be a length of two.
+            im_data (List[str]): List of str expected to be a length of two or three.
 
         Returns:
             str: string formated for a from statement

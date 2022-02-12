@@ -27,6 +27,7 @@ $self.load_data()#slurp
 #set $re_underscore_hex = r"(_[0-9A-Fa-f]*)"
 #set $safe_name = $self.get_safe_word($name)
 #set $sorted = $self.get_sorted_names()
+#set $is_parent = $self.has_uno_extends()
 # coding: utf-8
 #include raw "resources/inc_lic.txt"
 # Struct Class
@@ -85,37 +86,39 @@ class ${safe_name}($self.get_class_inherits($name, $inherits)):
     typeName: str = '$fullname'
     """Literal Constant ``$fullname``"""
 
-##    def __init__(self, *args, **kwargs):
-    def __init__(self, *args, **kwargs) -> None:
+#set $_, $first_index = $sorted[0]
+#set $first_itm = $attribs[$first_index]
+#set $first_itm_name = $self.get_safe_word($first_itm['name'])
+    $self.get_constructor()
         """
         Constructor
 
         Other Arguments:
-            First positinal arg can be another ``$safe_name`` instance,
-                if it is the only arg passed to contructor;
-                Otherwise, postitional arguments are treated as ``$safe_name``
-                values. Following the order of ``Keyword Arguments``.
+            ``$first_itm_name`` can be another ``$safe_name`` instance,
+                in which case other named args are ignored.
+#if is_parent
+                However ``**kwargs`` are still passed so parent class.
+#end if
 
-        Keyword Arguments:
+        Arguments:
 #for $i, $tpl in enumerate($sorted)
 #set $index = tpl[1]
 #set $itm = $attribs[$index]
-#set $itm_name = $self.get_safe_word($itm.name)
+#set $itm_name = $self.get_safe_word($itm['name'])
 #set $itm_type = $itm.type.removeprefix('typing.')
 #set $itm_type = re.sub(re_underscore_hex, '', $itm_type, 1)
             $itm_name ($itm_type, optional): $itm_name value
 #end for
         """
 #if $self.has_uno_extends()
-        super().__init__(*args, **kwargs)
+        super().__init__(**kwargs)
 #end if
-
-        if len(args) == 1 and isinstance(args[0], $safe_name):
-            oth: $safe_name = args[0]
+        if isinstance($first_itm_name, $safe_name):
+            oth: $safe_name = $first_itm_name
 #for $i, $tpl in enumerate($sorted)
 #set $index = tpl[1]
 #set $itm = $attribs[$index]
-#set $itm_name = $self.get_safe_word($itm.name)
+#set $itm_name = $self.get_safe_word($itm['name'])
 #set $attrib_default = $self.get_attrib_default($itm)
             self._$self.camel_to_snake($itm_name) = oth.$itm_name
 #end for
@@ -124,18 +127,18 @@ class ${safe_name}($self.get_class_inherits($name, $inherits)):
 #for $i, $tpl in enumerate($sorted)
 #set $index = tpl[1]
 #set $itm = $attribs[$index]
-#set $itm_name = $self.get_safe_word($itm.name)
-#set $attrib_default = $self.get_attrib_default($itm)
-            self._$self.camel_to_snake($itm_name) = $self.get_attrib_default($itm)
+#set $itm_name = $self.get_safe_word($itm['name'])
+#set $attrib_default = $self.get_attrib_default($itm, True)
+    #if attrib_default == 'UNO_NONE'
+            if $itm_name is UNO_NONE:
+                self._$self.camel_to_snake($itm_name) = $self.get_attrib_default($itm)
+            else:
+                self._$self.camel_to_snake($itm_name) = $itm_name
+    #else
+            self._$self.camel_to_snake($itm_name) = $itm_name
+    #end if
 #end for
 
-        key_order = ($self.get_nt_names_str())
-        for i, arg in enumerate(args):
-            setattr(self, key_order[i], arg)
-        for k, v in kwargs.items():
-## use hasattrib some values may come from inherited struct
-            if hasattr(self, k):
-                setattr(self, k, v)
 
 #for $i, $tpl in enumerate($sorted)
 #set $index = tpl[1]
