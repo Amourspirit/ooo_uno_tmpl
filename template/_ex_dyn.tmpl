@@ -32,6 +32,8 @@ $self.load_data()#slurp
 #set $uno_obj_ns = $dyn + $fullname.removeprefix('com.sun.star').rsplit(sep='.', maxsplit=1)[0]
 #set $uno_obj_in = $uno_obj + $fullname.removeprefix('com.sun.star')
 #set $uno_helper_namespace = $helper_ns + '.' + $helper_mod
+#set $properties = $self.get_properties_all()
+#set $sorted = $self.get_sorted_names()
 # coding: utf-8
 #include raw "resources/inc_lic.txt"
 # Exception Class
@@ -57,9 +59,21 @@ if not TYPE_CHECKING and _DYNAMIC:
             ex.__dict__['__ooo_full_ns__'] = '$fullname'
             ex.__dict__['__ooo_type_name__'] = 'exception'
 
-        def _ex_init(*args, **kwargs):
+        $self.get_dyn_fn()
             ns = '${fullname}'
-            ex = uno.createUnoStruct(ns, *args, **kwargs)
+            ex = uno.createUnoStruct(ns)
+#for $i, $tpl in enumerate($sorted)
+#set $index = tpl[1]
+#set $itm = $properties[$index]
+#set $itm_name = $self.get_safe_word($itm.name)
+#set $attrib_default = $self.get_attrib_default($itm, True)
+            if getattr(ex, '$itm_name') != $itm_name:
+                setattr(ex, '$itm_name', $itm_name)
+#end for
+
+            for k, v in kwargs.items():
+                if getattr(ex, k) != v:
+                    setattr(ex, k, v)
             _set_attr(ex)
             return ex
         $safe_name = _ex_init

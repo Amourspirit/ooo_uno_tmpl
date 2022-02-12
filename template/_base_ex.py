@@ -236,7 +236,7 @@ class BaseEx(BaseJson):
             c_str += ','  # add so tuple is not mistaken as brackets
         return c_str
 
-    def get_constructor_args_str(self, include_value: bool = True) -> str:
+    def get_constructor_args_str(self, include_value: bool = True, include_type: bool = True, uno_none:bool =True) -> str:
         sorted_names = self.get_sorted_names()
         d_lst = self.get_properties_all()
 
@@ -247,25 +247,25 @@ class BaseEx(BaseJson):
                c_str += ', '
             index = tpl[1]
             itm: dict = d_lst[index]
-            str_type = f"typing.Optional[{itm['returns']}]"
             # is_q = self.is_q_type(itm['returns'])
             # if is_q:
             #     str_type = self.get_q_wrapped(str_type)
+            
             c_str += self.get_safe_word(itm['name'])
-            c_str += ": " + str_type
+            if include_type:
+                c_str += ": " + f"typing.Optional[{itm['returns']}]"
             if include_value:
-                c_str += " = " + self.get_attrib_default(prop=itm, obj_none=True)
+                c_str += " = " + \
+                    self.get_attrib_default(prop=itm, uno_none=uno_none)
             i += 1
         return c_str
 
     def get_constructor(self) -> str:
         sorted_names = self.get_sorted_names()
         if len(sorted_names) == 0:
-            return "def __init__(self, *args, **kwargs):"
-        names = self.get_constructor_args_str()
-        return f"def __init__(self, *args, {names}, **kwargs):"
-
-    
+            return "def __init__(self, **kwargs) -> None:"
+        names = self.get_constructor_args_str(include_value=True, include_type=True)
+        return f"def __init__(self, {names}, **kwargs) -> None:"
 
     def get_class_inherits_from_db(self, default: str = 'Exception') -> str:
         # override this method from base class
@@ -281,7 +281,6 @@ class BaseEx(BaseJson):
         if result == 'object':
             return 'Exception'
         return result
-        
 
     def has_uno_extends(self) -> bool:
         # com.sun.star.uno.Exception inherits from builtins.Exception
@@ -298,7 +297,7 @@ class BaseEx(BaseJson):
         ext = super().get_class_inherits(safe_name, self.inherits)
         return ext != 'object'
 
-    def get_attrib_default(self, prop:dict, obj_none: bool = False) -> str:
+    def get_attrib_default(self, prop:dict, uno_none: bool = False) -> str:
         name = prop['name']
         returns = prop['returns']
         result = getattr(self.uno_instance, name, None)
@@ -307,12 +306,14 @@ class BaseEx(BaseJson):
         if isinstance(result, uno.Enum):
             return f"{returns}.{result.value}"
         if isinstance(result, uno.ByteSequence):
-            if obj_none is True:
+            if uno_none is True:
                 return 'UNO_NONE'
             return 'None'
         if hasattr(result, '__pyunostruct__'):
-            if obj_none is True:
+            if uno_none is True:
                 return 'UNO_NONE'
+            if returns == 'object':
+                return 'None'
             return f"{returns}()"
         return str(result)
 

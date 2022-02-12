@@ -107,6 +107,10 @@ class ${safe_name}($self.get_class_inherits($safe_name, $inherits))$self.get_cla
 
             Other ``*args`` and ``**kwargs`` are passed to parent class.
         """
+#if $self.has_uno_extends()
+        super().__init__(**kwargs)
+
+#end if
 #for $i, $tpl in enumerate($sorted)
 #set $index = tpl[1]
 #set $itm = $properties[$index]
@@ -121,13 +125,6 @@ class ${safe_name}($self.get_class_inherits($safe_name, $inherits))$self.get_cla
         self._$self.camel_to_snake($itm_name) = $itm_name
     #end if
 #end for
-#if $self.has_uno_extends()
-
-        super().__init__(*args, **kwargs)
-#else
-
-        super().__init__(*args)
-#end if
 
 #if $is_method
 #set $methods = $attribs['methods']

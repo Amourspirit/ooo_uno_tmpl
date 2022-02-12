@@ -83,3 +83,18 @@ When a new implementation of these services with better performance or new featu
 the old component can be replaced without breaking existing code, provided that the new features are introduced by adding interfaces.
 
 Sequenes are tuples in python
+
+Oder of Properties
+------------------
+
+The order of summary info (public attributes etc...) may not be in order with the detils order.
+
+For example:
+    Exception class list public attributes in the order of Message, Context but the details section list as Context, Message.
+    See: https://api.libreoffice.org/docs/idl/ref/exceptioncom_1_1sun_1_1star_1_1uno_1_1Exception.html
+
+createUnoStruct see the first arg for Exception as Context.
+
+For Example:
+    uno.createUnoStruct('com.sun.star.uno.Exception', "Hello")
+    Result in uno.RuntimeException, member 'Context' of struct type 'com.sun.star.uno.Exception' not given a value.
