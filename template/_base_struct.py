@@ -175,9 +175,12 @@ class BaseStruct(BaseJson):
         default = "def __init__(self, **kwargs) -> None:"
         sorted_names = self.get_sorted_names()
         if len(sorted_names) == 0:
+            self._linfo("Constructor Args — False")
             return default
         if self.uno_instance is None:
+            self._linfo("Constructor Args — False")
             return default
+        self._linfo("Constructor Args — True")
         names = self.get_constructor_args_str()
         if self.is_parent:
             return f"def __init__(self, {names}, **kwargs) -> None:"
@@ -282,4 +285,6 @@ class BaseStruct(BaseJson):
     def is_parent(self) -> bool:
         if self._is_parent is None:
             self._is_parent = self.has_uno_extends()
+            self._linfo(
+                f"parent — {self._is_parent}")
         return self._is_parent

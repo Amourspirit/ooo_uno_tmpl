@@ -67,13 +67,17 @@ if not TYPE_CHECKING and _DYNAMIC:
 #set $itm = $properties[$index]
 #set $itm_name = $self.get_safe_word($itm['name'])
 #set $attrib_default = $self.get_attrib_default($itm, True)
-            if getattr(ex, '$itm_name') != $itm_name:
-                setattr(ex, '$itm_name', $itm_name)
+            if not $itm_name is UNO_NONE:
+                if getattr(ex, '$itm_name') != $itm_name:
+                    setattr(ex, '$itm_name', $itm_name)
 #end for
-
+#if self.is_parent
             for k, v in kwargs.items():
-                if getattr(ex, k) != v:
+                if v is UNO_NONE:
+                    continue
+                else:
                     setattr(ex, k, v)
+#end if
             _set_attr(ex)
             return ex
         $safe_name = _ex_init

@@ -74,7 +74,8 @@ if not TYPE_CHECKING and _DYNAMIC:
 #set $itm_name = $self.get_safe_word($itm['name'])
 #set $attrib_default = $self.get_attrib_default($itm, True)
             if not $itm_name is UNO_NONE:
-                setattr(struct, '$itm_name', $itm_name)
+                if getattr(struct, '$itm_name') != $itm_name:
+                    setattr(struct, '$itm_name', $itm_name)
             ## if getattr(struct, '$itm_name') != $itm_name:
             ##     setattr(struct, '$itm_name', $itm_name)
 #end for

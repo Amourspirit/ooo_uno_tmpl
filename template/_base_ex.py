@@ -8,6 +8,7 @@ class BaseEx(BaseJson):
         super().__init__(*args, **kwargs)
         self._sorted_key_index = None
         self._uno_instance = None
+        self._is_parent = None
 
 
     def _hydrate_data(self, json_data: dict):
@@ -263,9 +264,15 @@ class BaseEx(BaseJson):
     def get_constructor(self) -> str:
         sorted_names = self.get_sorted_names()
         if len(sorted_names) == 0:
-            return "def __init__(self, **kwargs) -> None:"
+            self._linfo("Constructor Args — False")
+            if self.is_parent:
+                return "def __init__(self, **kwargs) -> None:"
+            return "def __init__(self) -> None:"
+        self._linfo("Constructor Args — True")
         names = self.get_constructor_args_str(include_value=True, include_type=True)
-        return f"def __init__(self, {names}, **kwargs) -> None:"
+        if self.is_parent:
+            return f"def __init__(self, {names}, **kwargs) -> None:"
+        return f"def __init__(self, {names}) -> None:"
 
     def get_class_inherits_from_db(self, default: str = 'Exception') -> str:
         # override this method from base class
@@ -326,3 +333,11 @@ class BaseEx(BaseJson):
         if self._uno_instance is None:
             self._uno_instance = uno.createUnoStruct(self.fullname)
         return self._uno_instance
+
+    @property
+    def is_parent(self) -> bool:
+        if self._is_parent is None:
+            self._is_parent = self.has_uno_extends()
+            self._linfo(
+                f"parent — {self._is_parent}")
+        return self._is_parent
