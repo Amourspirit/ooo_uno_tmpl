@@ -30,7 +30,9 @@ class BaseStructDyn(BaseStruct):
         sorted_names = self.get_sorted_names()
         if len(sorted_names) == 0:
             self._linfo("Constructor Args — False")
-            return "def _struct_init(**kwargs):"
+            if self.is_parent:
+                return "def _struct_init(**kwargs):"
+            return "def _struct_init():"
         self._linfo("Constructor Args — True")
         names = self.get_dyn_constructor_args_str()
         if self.is_parent:

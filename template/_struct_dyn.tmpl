@@ -76,9 +76,14 @@ if not TYPE_CHECKING and _DYNAMIC:
             if not $itm_name is UNO_NONE:
                 if getattr(struct, '$itm_name') != $itm_name:
                     setattr(struct, '$itm_name', $itm_name)
-            ## if getattr(struct, '$itm_name') != $itm_name:
-            ##     setattr(struct, '$itm_name', $itm_name)
 #end for
+#if self.is_parent
+            for k, v in kwargs.items():
+                if v is UNO_NONE:
+                    continue
+                else:
+                    setattr(ex, k, v)
+#end if
             _set_attr(struct)
             return struct
         $safe_name = _struct_init
