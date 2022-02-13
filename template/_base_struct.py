@@ -188,35 +188,55 @@ class BaseStruct(BaseJson):
             return 'None'
         name = prop['name']
         returns = prop['type']
+        key = f"get_attrib_default_{name}_{returns},_{uno_none}"
+        if key in self._cache:
+            return self._cache[key]
         result = getattr(self.uno_instance, name, None)
         if isinstance(result, str):
-            return f"'{result}'"
+            
+            self._cache[key] = f"'{result}'"
+            return self._cache[key]
         elif isinstance(result, uno.Enum):
-            return f"{returns}.{result.value}"
+            self._cache[key] = f"{returns}.{result.value}"
+            return self._cache[key]
         elif isinstance(result, uno.Char):
             char = ''.join(r'\u{:04X}'.format(ord(chr))
                     for chr in result.value)
-            return f"'{char}'"
+            self._cache[key] = f"'{char}'"
+            return self._cache[key]
         elif isinstance(result, uno.ByteSequence):
             if uno_none is True:
-                return 'UNO_NONE'
-            return 'None'
+                self._cache[key] = 'UNO_NONE'
+                return self._cache[key]
+            self._cache[key] = 'None'
+            return self._cache[key]
         elif isinstance(result, uno.Type):
-            return 'None'
+            self._cache[key] = 'None'
+            return self._cache[key]
         elif hasattr(result, '__pyunostruct__'):
             if uno_none is True:
-                return 'UNO_NONE'
+                self._cache[key] = 'UNO_NONE'
+                return self._cache[key]
             if returns == 'object':
-                return 'None'
-            return f"{returns}()"
+                self._cache[key] = 'None'
+                return self._cache[key]
+            self._cache[key] = f"{returns}()"
+            return self._cache[key]
         db_comp = SqlComponent()
-        # self._linfo(f"Testing typedef for namespace={returns}")
         is_typedef = db_comp.is_type_from_map_name(
             map_name=returns, tipe='typedef')
-        # self._linfo(f"Test Result: {is_typedef}")
         if is_typedef:
-            return f"{returns}({result})"
-        return str(result)
+            if result is None:
+                self._linfo(
+                    f"typedef — constructor arg: {name}: {returns} = {result}")
+                self._cache[key] = f"{result}"
+                return self._cache[key]
+            self._linfo(
+                f"typedef — constructor arg: {name}: {returns} = {returns}({result})")
+            self._cache[key] = f"{returns}({result})"
+            return self._cache[key]
+        self._cache[key] = str(result)
+        return self._cache[key]
 
     def get_constructor_types(self) -> Set[str]:
         key = 'get_constructor_types'
