@@ -208,14 +208,14 @@ class BaseStruct(BaseJson):
                 return 'UNO_NONE'
             if returns == 'object':
                 return 'None'
-            db_comp = SqlComponent()
-            self._linfo(f"Testing typedef for namespace={result.__pyunostruct__}")
-            is_typedef = db_comp.is_type(namespace=result.__pyunostruct__, tipe='typedef')
-            self._linfo(f"Test Result: {is_typedef}")
-            if is_typedef:
-                return f"{returns}({result})"
-            
             return f"{returns}()"
+        db_comp = SqlComponent()
+        # self._linfo(f"Testing typedef for namespace={returns}")
+        is_typedef = db_comp.is_type_from_map_name(
+            map_name=returns, tipe='typedef')
+        # self._linfo(f"Test Result: {is_typedef}")
+        if is_typedef:
+            return f"{returns}({result})"
         return str(result)
 
     def get_constructor_types(self) -> Set[str]:

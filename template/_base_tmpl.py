@@ -150,16 +150,28 @@ class SqlComponent(BaseSql):
     def is_type(self, namespace: str, tipe='typedef') -> bool:
         query = """SELECT * FROM component
             WHERE component.id_component like :namespace
-            and component.type like :tipe
+            and component.type like :type
             LIMIT 1;"""
         result = False
         with SqlCtx(self.conn_str) as db:
-            db.cursor.execute(query, {"namespace": namespace, "tipe": tipe})
+            db.cursor.execute(query, {"namespace": namespace, "type": tipe})
             row = db.cursor.fetchone()
             if not row is None:
                 result = True
         return result
 
+    def is_type_from_map_name(self, map_name: str, tipe='typedef') -> bool:
+        query = """SELECT * FROM component
+            WHERE component.map_name like :map_name
+            and component.type like :type
+            LIMIT 1;"""
+        result = False
+        with SqlCtx(self.conn_str) as db:
+            db.cursor.execute(query, {"map_name": map_name, "type": tipe})
+            row = db.cursor.fetchone()
+            if not row is None:
+                result = True
+        return result
 # endregion Resource DB Related
 
 @dataclass
