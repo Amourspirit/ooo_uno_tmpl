@@ -55,6 +55,12 @@ if not TYPE_CHECKING and _DYNAMIC:
         # Dynamically create uno $fullname using uno
         global $safe_name
 
+        def _set_fn_attr(struct):
+            type_name = '$fullname'
+            struct.__dict__['typeName'] = type_name
+            struct.__dict__['__pyunointerface__'] = type_name
+            struct.__dict__['__pyunostruct__'] = type_name
+
         def _set_attr(struct):
             struct.__dict__['__ooo_ns__'] = '$namespace'
             struct.__dict__['__ooo_full_ns__'] = '$fullname'
@@ -85,7 +91,9 @@ if not TYPE_CHECKING and _DYNAMIC:
                     setattr(ex, k, v)
 #end if
             _set_attr(struct)
+            _set_fn_attr(struct)
             return struct
+        _set_attr(_struct_init)
         $safe_name = _struct_init
 
     _dynamic_struct()
