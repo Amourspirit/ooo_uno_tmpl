@@ -1,0 +1,132 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "type": "struct",
+  "name": "DocumentSignatureInformation",
+  "namespace": "com.sun.star.security",
+  "parser_args": {
+    "sort": false,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "sort": true,
+    "dynamic_struct": true,
+    "include_desc": true
+  },
+  "data": {
+    "name": "DocumentSignatureInformation",
+    "namespace": "com.sun.star.security",
+    "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1security_1_1DocumentSignatureInformation.html",
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        "..graphic.x_graphic",
+        "XGraphic",
+        "XGraphic_a4da0afc"
+      ],
+      [
+        ".x_certificate",
+        "XCertificate",
+        "XCertificate_e55b0d3b"
+      ]
+    ],
+    "extends_map": {},
+    "quote": [
+      "XCertificate_e55b0d3b",
+      "XGraphic_a4da0afc"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "fullname": "com.sun.star.security.DocumentSignatureInformation",
+    "desc": [
+      "Status of digital signatures in a document.",
+      "",
+      "This structure has the information about a digital signature in a document, and the status if the signature is valid.",
+      "",
+      "**since**",
+      "",
+      "    LibreOffice 6.0"
+    ],
+    "imports": [],
+    "extends": [],
+    "items": [
+      {
+        "name": "Signer",
+        "type": "XCertificate_e55b0d3b",
+        "lines": []
+      },
+      {
+        "name": "SignatureDate",
+        "type": "int",
+        "lines": []
+      },
+      {
+        "name": "SignatureTime",
+        "type": "int",
+        "lines": [
+          "Time of day, in 100th of seconds."
+        ]
+      },
+      {
+        "name": "SignatureIsValid",
+        "type": "bool",
+        "lines": []
+      },
+      {
+        "name": "CertificateStatus",
+        "type": "int",
+        "lines": [
+          "Reflects the validity of the certificate.",
+          "",
+          "Contains a value from the constants of com.sun.star.security.CertificateValidity."
+        ]
+      },
+      {
+        "name": "PartialDocumentSignature",
+        "type": "bool",
+        "lines": [
+          "Indicates what content of a document is signed.",
+          "",
+          "This value can be ignored when this struct is returned as part of a macro signature validation. As of OpenOffice.org 3.2 and ODF 1.2 the document signature comprises all files except the signature file itself. Signatures in OOo 2.x were only applied to the files in the root of the document, except mimetype, the Pictures and ObjectReplacements/Objects folder. That is, macros were not part of the document signature. OOo 3.0 signed everything, except mimetype and the META-INF folder.",
+          "",
+          "If PartialDocumentSignature is true, then the signature was created by OOo with a version lower than 3.2. In this case, not all files are signed. The signature can still be regarded as valid, as long as SignatureIsValid is true and the certificate could be validated. However, users should be notified about the fact, that not everything in this document is signed."
+        ]
+      },
+      {
+        "name": "SignatureLineId",
+        "type": "str",
+        "lines": [
+          "The ID of the Signature Line.",
+          "",
+          "**since**",
+          "",
+          "    LibreOffice 6.0"
+        ]
+      },
+      {
+        "name": "ValidSignatureLineImage",
+        "type": "XGraphic_a4da0afc",
+        "lines": [
+          "The Signature Line Image which is shown when the signature is valid.",
+          "",
+          "**since**",
+          "",
+          "    LibreOffice 6.0"
+        ]
+      },
+      {
+        "name": "InvalidSignatureLineImage",
+        "type": "XGraphic_a4da0afc",
+        "lines": [
+          "The Signature Line Image which is shown when the signature is invalid.",
+          "",
+          "**since**",
+          "",
+          "    LibreOffice 6.0"
+        ]
+      }
+    ]
+  }
+}

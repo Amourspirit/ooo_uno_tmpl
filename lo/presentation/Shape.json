@@ -1,0 +1,217 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "Shape",
+  "type": "service",
+  "namespace": "com.sun.star.presentation",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        ".animation_effect",
+        "AnimationEffect",
+        "AnimationEffect_4f571011"
+      ],
+      [
+        ".animation_speed",
+        "AnimationSpeed",
+        "AnimationSpeed_3fb20fb5"
+      ],
+      [
+        ".click_action",
+        "ClickAction",
+        "ClickAction_10a30e68"
+      ],
+      [
+        "..util.color",
+        "Color",
+        "Color_68e908c5"
+      ]
+    ],
+    "extends_map": {},
+    "quote": [
+      "AnimationEffect_4f571011",
+      "AnimationSpeed_3fb20fb5",
+      "ClickAction_10a30e68",
+      "Color_68e908c5"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.presentation.AnimationEffect",
+        "com.sun.star.presentation.AnimationSpeed",
+        "com.sun.star.presentation.ClickAction",
+        "com.sun.star.util.Color"
+      ]
+    },
+    "name": "Shape",
+    "imports": [],
+    "namespace": "com.sun.star.presentation",
+    "extends": [],
+    "desc": [
+      "this service is supported from all shapes inside a PresentationDocument.",
+      "",
+      "This usually enhances objects of type com.sun.star.drawing.Shape with presentation properties."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1presentation_1_1Shape.html",
+    "items": {
+      "properties": [
+        {
+          "name": "Bookmark",
+          "returns": "str",
+          "desc": [
+            "is a generic URL for the property OnClick."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "DimColor",
+          "returns": "Color_68e908c5",
+          "desc": [
+            "This is the color for dimming this shape.",
+            "",
+            "This color is used if the property com.sun.star.drawing.Shape.DimPrev is TRUE and com.sun.star.drawing.Shape.DimHide is FALSE."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "DimHide",
+          "returns": "bool",
+          "desc": [
+            "If this property and the property com.sun.star.drawing.Shape.DimPrev are both TRUE, the shape is hidden instead of dimmed to a color."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "DimPrevious",
+          "returns": "bool",
+          "desc": [
+            "If this property is TRUE, this shape is dimmed to the color of property com.sun.star.drawing.Shape.DimColor after executing its animation effect."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Effect",
+          "returns": "AnimationEffect_4f571011",
+          "desc": [
+            "selects the animation effect of this shape."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsEmptyPresentationObject",
+          "returns": "bool",
+          "desc": [
+            "If this is a default presentation object and if it is empty, this property is TRUE."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsPresentationObject",
+          "returns": "bool",
+          "desc": [
+            "If this is a presentation object, this property is TRUE.",
+            "",
+            "Presentation objects are objects like TitleTextShape and OutlinerShape."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "OnClick",
+          "returns": "ClickAction_10a30e68",
+          "desc": [
+            "selects an action performed after the user clicks on this shape."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "PlayFull",
+          "returns": "bool",
+          "desc": [
+            "If this property is TRUE, the sound of this shape is played in full.",
+            "",
+            "The default behavior is to stop the sound after completing the animation effect."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "PresentationOrder",
+          "returns": "int",
+          "desc": [
+            "This is the position of this shape in the order of the shapes which can be animated on its page.",
+            "",
+            "The animations are executed in this order, starting at the shape with the PresentationOrder \\\"one.\\\" You can change the order by changing this number. Setting it to \\\"one\\\" makes this shape the first shape in the execution order for the animation effects."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Sound",
+          "returns": "str",
+          "desc": [
+            "This is the URL to a sound file that is played while the animation effect of this shape is running."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SoundOn",
+          "returns": "bool",
+          "desc": [
+            "If this property is set to TRUE, a sound is played while the animation effect is executed."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Speed",
+          "returns": "AnimationSpeed_3fb20fb5",
+          "desc": [
+            "This is the speed of the animation effect."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TextEffect",
+          "returns": "AnimationEffect_4f571011",
+          "desc": [
+            "This is the animation effect for the text inside this shape."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Verb",
+          "returns": "int",
+          "desc": [
+            "specifies an \\\"OLE2\\\" verb for the ClickAction VERB in the property com.sun.star.drawing.Shape.OnClick."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

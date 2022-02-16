@@ -1,0 +1,209 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XStringResourceResolver",
+  "type": "interface",
+  "namespace": "com.sun.star.resource",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..util.x_modify_broadcaster",
+        "XModifyBroadcaster",
+        "XModifyBroadcaster_fd990df0"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..lang.locale",
+        "Locale",
+        "Locale_70d308fa"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.util.XModifyBroadcaster": "XModifyBroadcaster_fd990df0"
+    },
+    "quote": [
+      "Locale_70d308fa",
+      "typing.Tuple[Locale_70d308fa, ...]",
+      "typing.Tuple[str, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[Locale_70d308fa, ...]",
+      "typing.Tuple[str, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.util.XModifyBroadcaster"
+      ],
+      "typing": [
+        "com.sun.star.lang.Locale"
+      ]
+    },
+    "name": "XStringResourceResolver",
+    "imports": [],
+    "namespace": "com.sun.star.resource",
+    "extends": [
+      "com.sun.star.util.XModifyBroadcaster"
+    ],
+    "desc": [
+      "Interface to access strings in a resource.",
+      "",
+      "The interface is derived from com.sun.star.util.XModifyBroadcaster",
+      "",
+      "All registered com.sun.star.util.XModifyListener interfaces will be notified if either the current locale changes or if a string is added, changed or removed. This usually will only happen if the implementing object also supports the interface com.sun.star.resource.XStringResourceManager and is used in the design mode of a Dialog or String table editor. But also changing the locale at runtime can be supported in this way."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1resource_1_1XStringResourceResolver.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getCurrentLocale",
+          "returns": "Locale_70d308fa",
+          "desc": [
+            "Returns the current locale specified in the accessed resource.",
+            "",
+            "If no locale is available, the returned Locale structure only contains empty strings."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getDefaultLocale",
+          "returns": "Locale_70d308fa",
+          "desc": [
+            "Returns the default locale of the accessed resource.",
+            "",
+            "In many cases this will be the locale of the Office initially used to create the resource."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getLocales",
+          "returns": "typing.Tuple[Locale_70d308fa, ...]",
+          "desc": [
+            "Returns a sequence of all supported locales."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getResourceIDs",
+          "returns": "typing.Tuple[str, ...]",
+          "desc": [
+            "Returns a sequence of all valid Resource IDs for the current locale."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getResourceIDsForLocale",
+          "returns": "typing.Tuple[str, ...]",
+          "desc": [
+            "Returns a sequence of all valid Resource IDs for a specific locale.",
+            "",
+            "It's not recommended to use this method to get the best performance as the implementation may be optimized for the use of the current locale."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "locale",
+              "Locale_70d308fa",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "hasEntryForId",
+          "returns": "bool",
+          "desc": [
+            "Checks if the resource contains an entry for the given ResourceID and current locale."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "ResourceID",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "hasEntryForIdAndLocale",
+          "returns": "bool",
+          "desc": [
+            "Checks if the resource contains an entry for the given ResourceID and locale.",
+            "",
+            "It's not recommended to use this method to get the best performance as the implementation may be optimized for the use of the current locale."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "ResourceID",
+              "str",
+              "in"
+            ],
+            [
+              "locale",
+              "Locale_70d308fa",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "resolveString",
+          "returns": "str",
+          "desc": [
+            "Resolves the passed ResourceID for the current locale.",
+            "",
+            "This locale is set during initialization of the object implementing this interface or - in case that also the interface com.sun.star.resource.XStringResourceManager is supported - by using the XStringResourceManager.setLocale method."
+          ],
+          "raises": [
+            "com.sun.star.resource.MissingResourceException"
+          ],
+          "args": [
+            [
+              "ResourceID",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "resolveStringForLocale",
+          "returns": "str",
+          "desc": [
+            "Resolves the passed ResourceID for a specific locale.",
+            "",
+            "It's not recommended to use this method to get the best performance as the implementation may be optimized for the use of the current locale."
+          ],
+          "raises": [
+            "com.sun.star.resource.MissingResourceException"
+          ],
+          "args": [
+            [
+              "ResourceID",
+              "str",
+              "in"
+            ],
+            [
+              "locale",
+              "Locale_70d308fa",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

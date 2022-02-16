@@ -1,0 +1,325 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XGraphicDevice",
+  "type": "interface",
+  "namespace": "com.sun.star.rendering",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..geometry.integer_size2_d",
+        "IntegerSize2D",
+        "IntegerSize2D_f2690d53"
+      ],
+      [
+        "..geometry.real_bezier_segment2_d",
+        "RealBezierSegment2D",
+        "RealBezierSegment2D_4a970fa2"
+      ],
+      [
+        "..geometry.real_point2_d",
+        "RealPoint2D",
+        "RealPoint2D_d6e70c78"
+      ],
+      [
+        "..geometry.real_size2_d",
+        "RealSize2D",
+        "RealSize2D_ca1a0c09"
+      ],
+      [
+        "..lang.x_multi_service_factory",
+        "XMultiServiceFactory",
+        "XMultiServiceFactory_191e0eb6"
+      ],
+      [
+        ".x_bezier_poly_polygon2_d",
+        "XBezierPolyPolygon2D",
+        "XBezierPolyPolygon2D_6ba01081"
+      ],
+      [
+        ".x_bitmap",
+        "XBitmap",
+        "XBitmap_b1b70b7b"
+      ],
+      [
+        ".x_buffer_controller",
+        "XBufferController",
+        "XBufferController_3a970f9c"
+      ],
+      [
+        ".x_color_space",
+        "XColorSpace",
+        "XColorSpace_e3940d09"
+      ],
+      [
+        ".x_line_poly_polygon2_d",
+        "XLinePolyPolygon2D",
+        "XLinePolyPolygon2D_4a270fa8"
+      ],
+      [
+        ".x_volatile_bitmap",
+        "XVolatileBitmap",
+        "XVolatileBitmap_1ca40ebb"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "IntegerSize2D_f2690d53",
+      "RealSize2D_ca1a0c09",
+      "XBezierPolyPolygon2D_6ba01081",
+      "XBitmap_b1b70b7b",
+      "XBufferController_3a970f9c",
+      "XColorSpace_e3940d09",
+      "XLinePolyPolygon2D_4a270fa8",
+      "XMultiServiceFactory_191e0eb6",
+      "XVolatileBitmap_1ca40ebb",
+      "typing.Tuple[typing.Tuple[RealBezierSegment2D_4a970fa2, ...], ...]",
+      "typing.Tuple[typing.Tuple[RealPoint2D_d6e70c78, ...], ...]"
+    ],
+    "typings": [
+      "typing.Tuple[typing.Tuple[RealBezierSegment2D_4a970fa2, ...], ...]",
+      "typing.Tuple[typing.Tuple[RealPoint2D_d6e70c78, ...], ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.geometry.IntegerSize2D",
+        "com.sun.star.geometry.RealBezierSegment2D",
+        "com.sun.star.geometry.RealPoint2D",
+        "com.sun.star.geometry.RealSize2D",
+        "com.sun.star.lang.XMultiServiceFactory",
+        "com.sun.star.rendering.XBezierPolyPolygon2D",
+        "com.sun.star.rendering.XBitmap",
+        "com.sun.star.rendering.XBufferController",
+        "com.sun.star.rendering.XColorSpace",
+        "com.sun.star.rendering.XLinePolyPolygon2D",
+        "com.sun.star.rendering.XVolatileBitmap"
+      ]
+    },
+    "name": "XGraphicDevice",
+    "imports": [],
+    "namespace": "com.sun.star.rendering",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "This interface provides access to a graphic device, such as a printer, or a screen device.",
+      "",
+      "Every canvas (",
+      "",
+      "For a typical windowing system, the graphic device is equivalent to a distinct OS window, with its own clipped output area, fullscreen and double-buffering attributes. That is, even if one can have multiple canvases per system window, they all share the same graphic device and thus e.g. fullscreen state. If the OS restrictions are in such a way that fullscreen or double-buffering is screen-exclusive, i.e. that per screen, only one object can have this state, it might even be that all windows on the screen share a common graphic device."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1rendering_1_1XGraphicDevice.html",
+    "items": {
+      "methods": [
+        {
+          "name": "createCompatibleAlphaBitmap",
+          "returns": "XBitmap_b1b70b7b",
+          "desc": [
+            "Create a bitmap with alpha channel whose memory layout and sample model is compatible to the graphic device."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "size",
+              "IntegerSize2D_f2690d53",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "createCompatibleBezierPolyPolygon",
+          "returns": "XBezierPolyPolygon2D_6ba01081",
+          "desc": [
+            "Create a Bezier poly-polygon which can internally use device-optimized representations already."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "points",
+              "typing.Tuple[typing.Tuple[RealBezierSegment2D_4a970fa2, ...], ...]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "createCompatibleBitmap",
+          "returns": "XBitmap_b1b70b7b",
+          "desc": [
+            "Create a bitmap whose memory layout and sample model is compatible to the graphic device."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "size",
+              "IntegerSize2D_f2690d53",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "createCompatibleLinePolyPolygon",
+          "returns": "XLinePolyPolygon2D_4a270fa8",
+          "desc": [
+            "Create a line poly-polygon which can internally use device-optimized representations already."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "points",
+              "typing.Tuple[typing.Tuple[RealPoint2D_d6e70c78, ...], ...]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "createVolatileAlphaBitmap",
+          "returns": "XVolatileBitmap_1ca40ebb",
+          "desc": [
+            "Create a volatile bitmap with alpha channel that is usable with this graphic device.",
+            "",
+            "A volatile bitmap's difference in comparison to a plain bitmap (e.g. generated via createCompatibleBitmap()) is the fact that its content might vanish at any point in time (making any operation with them produce a VolatileContentDestroyedException). The benefit, on the other hand, is that they might be easy to hardware-accelerate on certain platforms, without the need to keep a safety copy of the content internally."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "size",
+              "IntegerSize2D_f2690d53",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "createVolatileBitmap",
+          "returns": "XVolatileBitmap_1ca40ebb",
+          "desc": [
+            "Create a volatile bitmap that is usable with this graphic device.",
+            "",
+            "A volatile bitmap's difference in comparison to a plain bitmap (e.g. generated via createCompatibleBitmap()) is the fact that its content might vanish at any point in time (making any operation with them produce a VolatileContentDestroyedException). The benefit, on the other hand, is that they might be easy to hardware-accelerate on certain platforms, without the need to keep a safety copy of the content internally."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "size",
+              "IntegerSize2D_f2690d53",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "enterFullScreenMode",
+          "returns": "bool",
+          "desc": [
+            "Enter or leave the fullscreen mode, if possible.",
+            "",
+            "The return value denotes the success of the operation."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "bEnter",
+              "bool",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getBufferController",
+          "returns": "XBufferController_3a970f9c",
+          "desc": [
+            "Query the controller for multi buffering functionality on this graphic device.",
+            "",
+            "If there is no such functionality available, the NULL reference is returned."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getDeviceColorSpace",
+          "returns": "XColorSpace_e3940d09",
+          "desc": [
+            "Query the color space interface for this graphic device.",
+            "",
+            "This is to be used when interpreting or setting device color values."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getParametricPolyPolygonFactory",
+          "returns": "XMultiServiceFactory_191e0eb6",
+          "desc": [
+            "Get a reference to this device's parametric polygon factory.",
+            "",
+            "Available services (all canvas implementations should provide this minimal set, though are free to add more; just check the getAvailableServiceNames() on the returned interface):"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getPhysicalResolution",
+          "returns": "RealSize2D_ca1a0c09",
+          "desc": [
+            "Query the physical resolution of the device in pixel per millimeter.",
+            "",
+            "A special floating point value of +infinity here indicates \\\"unknown\\\", i.e. at the time of rendering undetermined or possibly infinite resolution along the corresponding direction."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getPhysicalSize",
+          "returns": "RealSize2D_ca1a0c09",
+          "desc": [
+            "Query the physical dimensions of the device in millimeter.",
+            "",
+            "A special floating point value of +infinity here indicates \\\"unknown\\\", i.e. at the time of rendering undetermined or possibly infinite resolution along the corresponding direction."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "hasFullScreenMode",
+          "returns": "bool",
+          "desc": [
+            "Tells whether this graphic device has a full screen mode, i.e.",
+            "",
+            "whether a window can cover the whole screen exclusively."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

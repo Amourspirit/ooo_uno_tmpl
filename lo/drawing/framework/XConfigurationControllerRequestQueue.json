@@ -1,0 +1,79 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XConfigurationControllerRequestQueue",
+  "type": "interface",
+  "namespace": "com.sun.star.drawing.framework",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        ".x_configuration_change_request",
+        "XConfigurationChangeRequest",
+        "XConfigurationChangeRequest_96e716cf"
+      ]
+    ],
+    "extends_map": {},
+    "quote": [
+      "XConfigurationChangeRequest_96e716cf"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.drawing.framework.XConfigurationChangeRequest"
+      ]
+    },
+    "name": "XConfigurationControllerRequestQueue",
+    "imports": [],
+    "namespace": "com.sun.star.drawing.framework",
+    "extends": [],
+    "desc": [
+      "The request queue of the configuration controller handles requests for changes to the current configuration.",
+      "",
+      "This interface allows callers to add requests to the back of the queue and to determine whether the queue is empty. Using this interface should normally not be necessary for anyone else than the XConfigurationController. It may be removed in the future."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1drawing_1_1framework_1_1XConfigurationControllerRequestQueue.html",
+    "items": {
+      "methods": [
+        {
+          "name": "hasPendingRequests",
+          "returns": "bool",
+          "desc": [
+            "Return whether there are pending requests for configuration changes."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "postChangeRequest",
+          "returns": "None",
+          "desc": [
+            "Add a request for a configuration change to the request queue.",
+            "",
+            "This method should not be called from outside the drawing framework. Other sub controllers of the drawing framework are typical callers. They can add change requests that can not be made with the requestResourceActivation() and requestResourceDeactivation() methods."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xRequest",
+              "XConfigurationChangeRequest_96e716cf",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

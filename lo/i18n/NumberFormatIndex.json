@@ -1,0 +1,723 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "NumberFormatIndex",
+  "type": "const",
+  "namespace": "com.sun.star.i18n",
+  "parser_args": {
+    "sort": false,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "hex": false,
+    "flags": false,
+    "include_desc": true
+  },
+  "data": {
+    "name": "NumberFormatIndex",
+    "namespace": "com.sun.star.i18n",
+    "url": "https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1i18n_1_1NumberFormatIndex.html",
+    "flags": false,
+    "base_class": "ConstIntBase",
+    "allow_db": true,
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "from_imports": [],
+    "from_imports_typing": [],
+    "fullname": "com.sun.star.i18n.NumberFormatIndex",
+    "desc": [
+      "Do NOT insert any new values! Locale data number format creation must match these values! Number formatter internals must match these values!",
+      "",
+      "Number format indices to be passed as the index argument to XNumberFormatCode.getFormatCode() or com.sun.star.util.XNumberFormatTypes.getFormatIndex().",
+      "",
+      "Each locale can support up to about 5000 arbitrary format codes. But for backward compatibility reasons, each locale MUST support some predefined format codes. These predefined format codes are accessed through indices as the following, and the locale data format code definitions in i18npool/source/localedata/data/*.xml MUST have matching entries in the form",
+      "",
+      "<FormatElement formatindex=\\\"0\\\">",
+      "",
+      "(see also FormatElement.formatIndex()).",
+      "",
+      "The index values are also used to define the enum NfIndexTableOffset in file svtools/inc/zforlist.hxx",
+      "",
+      "Note: This index has nothing to do with the index key used internally by the number formatter.",
+      "",
+      "Date formats may have a comment of DIN/EN/ISO, meaning",
+      "",
+      "Some names of date format constants indicate a special behavior of those formats in StarOffice 5.2 or older. Those are:"
+    ],
+    "items": [
+      {
+        "name": "NUMBER_START",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 0,
+        "lines": [
+          "Start of simple numerical formats (first format)"
+        ]
+      },
+      {
+        "name": "NUMBER_STANDARD",
+        "type": "int",
+        "value_type": "CONST",
+        "value": "NUMBER_START",
+        "lines": [
+          "The \\\"General\\\" standard format",
+          "formatindex=\\\"0\\\"."
+        ]
+      },
+      {
+        "name": "NUMBER_INT",
+        "type": "int",
+        "value_type": "CONST_PLUS_INT",
+        "value": "NUMBER_START + 1",
+        "lines": [
+          "0",
+          "Integer number",
+          "formatindex=\\\"1\\\""
+        ]
+      },
+      {
+        "name": "NUMBER_DEC2",
+        "type": "int",
+        "value_type": "CONST_PLUS_INT",
+        "value": "NUMBER_START + 2",
+        "lines": [
+          "0.00",
+          "Decimal number with 2 decimals",
+          "formatindex=\\\"2\\\""
+        ]
+      },
+      {
+        "name": "NUMBER_1000INT",
+        "type": "int",
+        "value_type": "CONST_PLUS_INT",
+        "value": "NUMBER_START + 3",
+        "lines": [
+          "#,##0",
+          "Integer number with group separator",
+          "formatindex=\\\"3\\\""
+        ]
+      },
+      {
+        "name": "NUMBER_1000DEC2",
+        "type": "int",
+        "value_type": "CONST_PLUS_INT",
+        "value": "NUMBER_START + 4",
+        "lines": [
+          "#,##0.00",
+          "Decimal number with group separator",
+          "formatindex=\\\"4\\\""
+        ]
+      },
+      {
+        "name": "NUMBER_SYSTEM",
+        "type": "int",
+        "value_type": "CONST_PLUS_INT",
+        "value": "NUMBER_START + 5",
+        "lines": [
+          "#,##0.00",
+          "In SO5/Win this format was retrieved from the Regional Settings",
+          "formatindex=\\\"5\\\""
+        ]
+      },
+      {
+        "name": "NUMBER_END",
+        "type": "int",
+        "value_type": "CONST",
+        "value": "NUMBER_SYSTEM",
+        "lines": [
+          "End of simple numerical formats (last format)"
+        ]
+      },
+      {
+        "name": "SCIENTIFIC_START",
+        "type": "int",
+        "value_type": "CONST_PLUS_INT",
+        "value": "NUMBER_END + 1",
+        "lines": [
+          "Start of Scientific formats (first format)"
+        ]
+      },
+      {
+        "name": "SCIENTIFIC_000E000",
+        "type": "int",
+        "value_type": "CONST",
+        "value": "SCIENTIFIC_START",
+        "lines": [
+          "0.00E+000",
+          "Number in scientific notation with exponent in 3 digit placeholders",
+          "formatindex=\\\"6\\\""
+        ]
+      },
+      {
+        "name": "SCIENTIFIC_000E00",
+        "type": "int",
+        "value_type": "CONST_PLUS_INT",
+        "value": "SCIENTIFIC_START + 1",
+        "lines": [
+          "0.00E+00",
+          "Number in scientific notation with exponent in 2 digit placeholders",
+          "formatindex=\\\"7\\\""
+        ]
+      },
+      {
+        "name": "SCIENTIFIC_END",
+        "type": "int",
+        "value_type": "CONST",
+        "value": "SCIENTIFIC_000E00",
+        "lines": [
+          "End of Scientific formats (last format)"
+        ]
+      },
+      {
+        "name": "PERCENT_START",
+        "type": "int",
+        "value_type": "CONST_PLUS_INT",
+        "value": "SCIENTIFIC_END + 1",
+        "lines": [
+          "Start of Percent formats (first format)"
+        ]
+      },
+      {
+        "name": "PERCENT_INT",
+        "type": "int",
+        "value_type": "CONST",
+        "value": "PERCENT_START",
+        "lines": [
+          "0%",
+          "Percentage format, rounded to integer",
+          "formatindex=\\\"8\\\""
+        ]
+      },
+      {
+        "name": "PERCENT_DEC2",
+        "type": "int",
+        "value_type": "CONST_PLUS_INT",
+        "value": "PERCENT_START + 1",
+        "lines": [
+          "0.00%",
+          "Percentage format, rounded to 2 decimals",
+          "formatindex=\\\"9\\\""
+        ]
+      },
+      {
+        "name": "PERCENT_END",
+        "type": "int",
+        "value_type": "CONST",
+        "value": "PERCENT_DEC2",
+        "lines": [
+          "End of Percent formats (last format)"
+        ]
+      },
+      {
+        "name": "FRACTION_START",
+        "type": "int",
+        "value_type": "CONST_PLUS_INT",
+        "value": "PERCENT_END + 1",
+        "lines": [
+          "Start of Fraction formats (first format)"
+        ]
+      },
+      {
+        "name": "FRACTION_1",
+        "type": "int",
+        "value_type": "CONST",
+        "value": "FRACTION_START",
+        "lines": []
+      },
+      {
+        "name": "FRACTION_2",
+        "type": "int",
+        "value_type": "CONST_PLUS_INT",
+        "value": "FRACTION_START + 1",
+        "lines": []
+      },
+      {
+        "name": "FRACTION_END",
+        "type": "int",
+        "value_type": "CONST",
+        "value": "FRACTION_2",
+        "lines": [
+          "End of Fraction formats (last format)"
+        ]
+      },
+      {
+        "name": "CURRENCY_START",
+        "type": "int",
+        "value_type": "CONST_PLUS_INT",
+        "value": "FRACTION_END + 1",
+        "lines": [
+          "Start of Currency formats (first format)"
+        ]
+      },
+      {
+        "name": "CURRENCY_1000INT",
+        "type": "int",
+        "value_type": "CONST",
+        "value": "CURRENCY_START",
+        "lines": [
+          "#,##0 DM",
+          "Integer currency format with group separator",
+          "formatindex=\\\"12\\\""
+        ]
+      },
+      {
+        "name": "CURRENCY_1000DEC2",
+        "type": "int",
+        "value_type": "CONST_PLUS_INT",
+        "value": "CURRENCY_START + 1",
+        "lines": [
+          "#,##0.00 DM",
+          "Decimal currency format with group separator",
+          "formatindex=\\\"13\\\""
+        ]
+      },
+      {
+        "name": "CURRENCY_1000INT_RED",
+        "type": "int",
+        "value_type": "CONST_PLUS_INT",
+        "value": "CURRENCY_START + 2",
+        "lines": [
+          "#,##0 DM",
+          "Integer currency format with negative in red",
+          "formatindex=\\\"14\\\""
+        ]
+      },
+      {
+        "name": "CURRENCY_1000DEC2_RED",
+        "type": "int",
+        "value_type": "CONST_PLUS_INT",
+        "value": "CURRENCY_START + 3",
+        "lines": [
+          "#,##0.00 DM",
+          "Decimal currency format with negative in red",
+          "formatindex=\\\"15\\\""
+        ]
+      },
+      {
+        "name": "CURRENCY_1000DEC2_CCC",
+        "type": "int",
+        "value_type": "CONST_PLUS_INT",
+        "value": "CURRENCY_START + 4",
+        "lines": [
+          "#,##0.00 DEM",
+          "Currency in ISO-4217 abbreviation format",
+          "formatindex=\\\"16\\\""
+        ]
+      },
+      {
+        "name": "CURRENCY_1000DEC2_DASHED",
+        "type": "int",
+        "value_type": "CONST_PLUS_INT",
+        "value": "CURRENCY_START + 5",
+        "lines": [
+          "#,##0.\u2013 DM",
+          "Currency format with dash representing 0 in decimals",
+          "formatindex=\\\"17\\\""
+        ]
+      },
+      {
+        "name": "CURRENCY_END",
+        "type": "int",
+        "value_type": "CONST",
+        "value": "CURRENCY_1000DEC2_DASHED",
+        "lines": [
+          "End of Currency formats (last format)"
+        ]
+      },
+      {
+        "name": "DATE_START",
+        "type": "int",
+        "value_type": "CONST_PLUS_INT",
+        "value": "CURRENCY_END + 1",
+        "lines": [
+          "Start of Date formats (first format)"
+        ]
+      },
+      {
+        "name": "DATE_SYSTEM_SHORT",
+        "type": "int",
+        "value_type": "CONST",
+        "value": "DATE_START",
+        "lines": [
+          "08.10.97",
+          "see also DATE_SYSTEM_... explanation",
+          "formatindex=\\\"18\\\""
+        ]
+      },
+      {
+        "name": "DATE_SYSTEM_LONG",
+        "type": "int",
+        "value_type": "CONST_PLUS_INT",
+        "value": "DATE_START + 1",
+        "lines": [
+          "Wednesday, 8.",
+          "",
+          "October 1997",
+          "see also DATE_SYSTEM_... explanation",
+          "formatindex=\\\"19\\\""
+        ]
+      },
+      {
+        "name": "DATE_SYS_DDMMYY",
+        "type": "int",
+        "value_type": "CONST_PLUS_INT",
+        "value": "DATE_START + 2",
+        "lines": [
+          "08.10.97",
+          "see also DATE_SYS_... explanation",
+          "formatindex=\\\"20\\\""
+        ]
+      },
+      {
+        "name": "DATE_SYS_DDMMYYYY",
+        "type": "int",
+        "value_type": "CONST_PLUS_INT",
+        "value": "DATE_START + 3",
+        "lines": [
+          "08.10.1997",
+          "see also DATE_SYS_...",
+          "",
+          "explanation",
+          "Note: When editing already existing date data this format is forced in order to always edit the full century.",
+          "formatindex=\\\"21\\\""
+        ]
+      },
+      {
+        "name": "DATE_SYS_DMMMYY",
+        "type": "int",
+        "value_type": "CONST_PLUS_INT",
+        "value": "DATE_START + 4",
+        "lines": []
+      },
+      {
+        "name": "DATE_SYS_DMMMYYYY",
+        "type": "int",
+        "value_type": "CONST_PLUS_INT",
+        "value": "DATE_START + 5",
+        "lines": []
+      },
+      {
+        "name": "DATE_DIN_DMMMYYYY",
+        "type": "int",
+        "value_type": "CONST_PLUS_INT",
+        "value": "DATE_START + 6",
+        "lines": []
+      },
+      {
+        "name": "DATE_SYS_DMMMMYYYY",
+        "type": "int",
+        "value_type": "CONST_PLUS_INT",
+        "value": "DATE_START + 7",
+        "lines": []
+      },
+      {
+        "name": "DATE_DIN_DMMMMYYYY",
+        "type": "int",
+        "value_type": "CONST_PLUS_INT",
+        "value": "DATE_START + 8",
+        "lines": []
+      },
+      {
+        "name": "DATE_SYS_NNDMMMYY",
+        "type": "int",
+        "value_type": "CONST_PLUS_INT",
+        "value": "DATE_START + 9",
+        "lines": [
+          "Wed, 8. Oct 97",
+          "see also DATE_SYS_... explanation",
+          "formatindex=\\\"27\\\"."
+        ]
+      },
+      {
+        "name": "DATE_DEF_NNDDMMMYY",
+        "type": "int",
+        "value_type": "CONST_PLUS_INT",
+        "value": "DATE_START + 10",
+        "lines": [
+          "Wed 08.Oct 97",
+          "see also DATE_DEF_... explanation",
+          "formatindex=\\\"28\\\"."
+        ]
+      },
+      {
+        "name": "DATE_SYS_NNDMMMMYYYY",
+        "type": "int",
+        "value_type": "CONST_PLUS_INT",
+        "value": "DATE_START + 11",
+        "lines": [
+          "Wed, 8. October 1997",
+          "see also DATE_SYS_... explanation",
+          "formatindex=\\\"29\\\"."
+        ]
+      },
+      {
+        "name": "DATE_SYS_NNNNDMMMMYYYY",
+        "type": "int",
+        "value_type": "CONST_PLUS_INT",
+        "value": "DATE_START + 12",
+        "lines": [
+          "Wednesday, 8. October 1997",
+          "formatindex=\\\"30\\\"."
+        ]
+      },
+      {
+        "name": "DATE_DIN_MMDD",
+        "type": "int",
+        "value_type": "CONST_PLUS_INT",
+        "value": "DATE_START + 13",
+        "lines": [
+          "10-08",
+          "DIN/EN",
+          "formatindex=\\\"31\\\""
+        ]
+      },
+      {
+        "name": "DATE_DIN_YYMMDD",
+        "type": "int",
+        "value_type": "CONST_PLUS_INT",
+        "value": "DATE_START + 14",
+        "lines": [
+          "97-10-08",
+          "DIN/EN",
+          "formatindex=\\\"32\\\""
+        ]
+      },
+      {
+        "name": "DATE_DIN_YYYYMMDD",
+        "type": "int",
+        "value_type": "CONST_PLUS_INT",
+        "value": "DATE_START + 15",
+        "lines": [
+          "1997-10-08",
+          "DIN/EN/ISO",
+          "formatindex=\\\"33\\\""
+        ]
+      },
+      {
+        "name": "DATE_SYS_MMYY",
+        "type": "int",
+        "value_type": "CONST_PLUS_INT",
+        "value": "DATE_START + 16",
+        "lines": [
+          "10.97",
+          "see also DATE_SYS_... explanation",
+          "formatindex=\\\"34\\\""
+        ]
+      },
+      {
+        "name": "DATE_SYS_DDMMM",
+        "type": "int",
+        "value_type": "CONST_PLUS_INT",
+        "value": "DATE_START + 17",
+        "lines": [
+          "08.Oct",
+          "see also DATE_SYS_... explanation",
+          "formatindex=\\\"35\\\""
+        ]
+      },
+      {
+        "name": "DATE_MMMM",
+        "type": "int",
+        "value_type": "CONST_PLUS_INT",
+        "value": "DATE_START + 18",
+        "lines": [
+          "October",
+          "formatindex=\\\"36\\\"."
+        ]
+      },
+      {
+        "name": "DATE_QQJJ",
+        "type": "int",
+        "value_type": "CONST_PLUS_INT",
+        "value": "DATE_START + 19",
+        "lines": [
+          "4th quarter 97",
+          "formatindex=\\\"37\\\""
+        ]
+      },
+      {
+        "name": "DATE_WW",
+        "type": "int",
+        "value_type": "CONST_PLUS_INT",
+        "value": "DATE_START + 20",
+        "lines": [
+          "week of year",
+          "formatindex=\\\"38\\\""
+        ]
+      },
+      {
+        "name": "DATE_END",
+        "type": "int",
+        "value_type": "CONST",
+        "value": "DATE_WW",
+        "lines": [
+          "End of Date formats (last format)"
+        ]
+      },
+      {
+        "name": "TIME_START",
+        "type": "int",
+        "value_type": "CONST_PLUS_INT",
+        "value": "DATE_END + 1",
+        "lines": [
+          "Start of Time formats (first format)"
+        ]
+      },
+      {
+        "name": "TIME_HHMM",
+        "type": "int",
+        "value_type": "CONST",
+        "value": "TIME_START",
+        "lines": [
+          "HH:MM",
+          "Time format with hour and minute",
+          "formatindex=\\\"39\\\"."
+        ]
+      },
+      {
+        "name": "TIME_HHMMSS",
+        "type": "int",
+        "value_type": "CONST_PLUS_INT",
+        "value": "TIME_START + 1",
+        "lines": [
+          "HH:MM:SS",
+          "Time format with hour, minute and second",
+          "formatindex=\\\"40\\\"."
+        ]
+      },
+      {
+        "name": "TIME_HHMMAMPM",
+        "type": "int",
+        "value_type": "CONST_PLUS_INT",
+        "value": "TIME_START + 2",
+        "lines": [
+          "HH:MM AM/PM",
+          "Time format with hour, minute and morning/afternoon notation",
+          "formatindex=\\\"41\\\"."
+        ]
+      },
+      {
+        "name": "TIME_HHMMSSAMPM",
+        "type": "int",
+        "value_type": "CONST_PLUS_INT",
+        "value": "TIME_START + 3",
+        "lines": [
+          "HH:MM:SS AM/PM",
+          "Time format with hour, minute, second and morning/afternoon notation",
+          "formatindex=\\\"42\\\"."
+        ]
+      },
+      {
+        "name": "TIME_HH_MMSS",
+        "type": "int",
+        "value_type": "CONST_PLUS_INT",
+        "value": "TIME_START + 4",
+        "lines": [
+          "[HH]:MM:SS",
+          "Time format with amount of hours",
+          "formatindex=\\\"43\\\""
+        ]
+      },
+      {
+        "name": "TIME_MMSS00",
+        "type": "int",
+        "value_type": "CONST_PLUS_INT",
+        "value": "TIME_START + 5",
+        "lines": [
+          "MM:SS,00",
+          "Time format with second in fraction",
+          "formatindex=\\\"44\\\"."
+        ]
+      },
+      {
+        "name": "TIME_HH_MMSS00",
+        "type": "int",
+        "value_type": "CONST_PLUS_INT",
+        "value": "TIME_START + 6",
+        "lines": [
+          "[HH]:MM:SS,00",
+          "Time format with amount of hours and seconds with fraction",
+          "formatindex=\\\"45\\\""
+        ]
+      },
+      {
+        "name": "TIME_END",
+        "type": "int",
+        "value_type": "CONST",
+        "value": "TIME_HH_MMSS00",
+        "lines": [
+          "End of Time formats (last format)"
+        ]
+      },
+      {
+        "name": "DATETIME_START",
+        "type": "int",
+        "value_type": "CONST_PLUS_INT",
+        "value": "TIME_END + 1",
+        "lines": [
+          "Start of DateTime formats (first format)"
+        ]
+      },
+      {
+        "name": "DATETIME_SYSTEM_SHORT_HHMM",
+        "type": "int",
+        "value_type": "CONST",
+        "value": "DATETIME_START",
+        "lines": [
+          "08.10.97 01:23 Date/time format",
+          "formatindex=\\\"46\\\""
+        ]
+      },
+      {
+        "name": "DATETIME_SYS_DDMMYYYY_HHMMSS",
+        "type": "int",
+        "value_type": "CONST_PLUS_INT",
+        "value": "DATETIME_START + 1",
+        "lines": [
+          "08.10.1997 01:23:45 Date/time format with second",
+          "Note: When editing already existing date/time data this format is forced in order to always edit the full century.",
+          "",
+          "formatindex=\\\"47\\\""
+        ]
+      },
+      {
+        "name": "DATETIME_END",
+        "type": "int",
+        "value_type": "CONST",
+        "value": "DATETIME_SYS_DDMMYYYY_HHMMSS",
+        "lines": [
+          "End of DateTime formats (last format)"
+        ]
+      },
+      {
+        "name": "BOOLEAN",
+        "type": "int",
+        "value_type": "CONST_PLUS_INT",
+        "value": "DATETIME_END + 1",
+        "lines": [
+          "BOOLEAN format."
+        ]
+      },
+      {
+        "name": "TEXT",
+        "type": "int",
+        "value_type": "CONST_PLUS_INT",
+        "value": "BOOLEAN + 1",
+        "lines": [
+          "Text format."
+        ]
+      },
+      {
+        "name": "INDEX_TABLE_ENTRIES",
+        "type": "int",
+        "value_type": "CONST_PLUS_INT",
+        "value": "TEXT + 1",
+        "lines": [
+          "count of built-in format codes."
+        ]
+      }
+    ]
+  }
+}

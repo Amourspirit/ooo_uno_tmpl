@@ -1,0 +1,158 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XAccessController",
+  "type": "interface",
+  "namespace": "com.sun.star.security",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_access_control_context",
+        "XAccessControlContext",
+        "XAccessControlContext_6d6a10f0"
+      ],
+      [
+        ".x_action",
+        "XAction",
+        "XAction_a72e0b36"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XAccessControlContext_6d6a10f0",
+      "XAction_a72e0b36"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.security.XAccessControlContext",
+        "com.sun.star.security.XAction"
+      ]
+    },
+    "name": "XAccessController",
+    "imports": [],
+    "namespace": "com.sun.star.security",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "Interface for checking permissions and invoking privileged or restricted actions.",
+      "",
+      "**since**",
+      "",
+      "    OOo 1.1.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1security_1_1XAccessController.html",
+    "items": {
+      "methods": [
+        {
+          "name": "checkPermission",
+          "returns": "None",
+          "desc": [
+            "Determines whether the access request indicated by the specified permission should be allowed or denied, based on the security policy currently in effect.",
+            "",
+            "The semantics are equivalent to the security permission classes of the Java platform.",
+            "",
+            "You can also pass a sequence of permissions (sequence< any >) to check a set of permissions, e.g. for performance reasons. This method quietly returns if the access request is permitted, or throws a suitable AccessControlException otherwise."
+          ],
+          "raises": [
+            "AccessControlException"
+          ],
+          "args": [
+            [
+              "perm",
+              "object",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "doPrivileged",
+          "returns": "object",
+          "desc": [
+            "Perform the specified action adding a set of permissions defined by the given XAccessControlContext.",
+            "",
+            "The action is performed with the union of the permissions of the currently installed XAccessControlContext, the given XAccessControlContext and the security policy currently in effect. The latter includes static security, e.g. based on user credentials.",
+            "",
+            "If the given XAccessControlContext is null, then the action is performed only with the permissions of the security policy currently in effect."
+          ],
+          "raises": [
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            [
+              "action",
+              "XAction_a72e0b36",
+              "in"
+            ],
+            [
+              "restriction",
+              "XAccessControlContext_6d6a10f0",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "doRestricted",
+          "returns": "object",
+          "desc": [
+            "Perform the specified action restricting permissions to the given XAccessControlContext.",
+            "",
+            "The action is performed with the intersection of the permissions of the currently installed XAccessControlContext, the given XAccessControlContext and the security policy currently in effect. The latter includes static security, e.g. based on user credentials.",
+            "",
+            "If the specified XAccessControlContext is null, then the action is performed with unmodified permissions, i.e. the call makes no sense."
+          ],
+          "raises": [
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            [
+              "action",
+              "XAction_a72e0b36",
+              "in"
+            ],
+            [
+              "restriction",
+              "XAccessControlContext_6d6a10f0",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getContext",
+          "returns": "XAccessControlContext_6d6a10f0",
+          "desc": [
+            "This method takes a \\\"snapshot\\\" of the current calling context and returns it.",
+            "",
+            "This context may then be checked at a later point, possibly in another thread."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

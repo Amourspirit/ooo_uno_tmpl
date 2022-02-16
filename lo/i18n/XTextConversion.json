@@ -1,0 +1,190 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XTextConversion",
+  "type": "interface",
+  "namespace": "com.sun.star.i18n",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".text_conversion_result",
+        "TextConversionResult",
+        "TextConversionResult_12d10e92"
+      ],
+      [
+        "..lang.locale",
+        "Locale",
+        "Locale_70d308fa"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "Locale_70d308fa",
+      "TextConversionResult_12d10e92"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.i18n.TextConversionResult",
+        "com.sun.star.lang.Locale"
+      ]
+    },
+    "name": "XTextConversion",
+    "imports": [],
+    "namespace": "com.sun.star.i18n",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "Method to convert text from one type to another.",
+      "",
+      "**since**",
+      "",
+      "    OOo 1.1.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1i18n_1_1XTextConversion.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getConversion",
+          "returns": "str",
+          "desc": [
+            "Method to search dictionaries for the conversion candidate, if there are multiple candidates, it will return first one.",
+            "",
+            "This is for the conversion in non-interactive mode."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.NoSupportException"
+          ],
+          "args": [
+            [
+              "aText",
+              "str",
+              "in"
+            ],
+            [
+              "nStartPos",
+              "int",
+              "in"
+            ],
+            [
+              "nLength",
+              "int",
+              "in"
+            ],
+            [
+              "Locale",
+              "Locale_70d308fa",
+              "in"
+            ],
+            [
+              "nTextConversionType",
+              "int",
+              "in"
+            ],
+            [
+              "nTextConversionOptions",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getConversions",
+          "returns": "TextConversionResult_12d10e92",
+          "desc": [
+            "Method to search dictionaries for the conversion candidates."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.NoSupportException"
+          ],
+          "args": [
+            [
+              "aText",
+              "str",
+              "in"
+            ],
+            [
+              "nStartPos",
+              "int",
+              "in"
+            ],
+            [
+              "nLength",
+              "int",
+              "in"
+            ],
+            [
+              "Locale",
+              "Locale_70d308fa",
+              "in"
+            ],
+            [
+              "nTextConversionType",
+              "int",
+              "in"
+            ],
+            [
+              "nTextConversionOptions",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "interactiveConversion",
+          "returns": "bool",
+          "desc": [
+            "Method to query if the conversion type should be interactive or non-interactive mode."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.NoSupportException"
+          ],
+          "args": [
+            [
+              "Locale",
+              "Locale_70d308fa",
+              "in"
+            ],
+            [
+              "nTextConversionType",
+              "int",
+              "in"
+            ],
+            [
+              "nTextConversionOptions",
+              "int",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

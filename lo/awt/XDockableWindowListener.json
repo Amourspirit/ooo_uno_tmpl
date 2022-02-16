@@ -1,0 +1,204 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XDockableWindowListener",
+  "type": "interface",
+  "namespace": "com.sun.star.awt",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..lang.x_event_listener",
+        "XEventListener",
+        "XEventListener_c7230c4a"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".docking_data",
+        "DockingData",
+        "DockingData_98da0a8d"
+      ],
+      [
+        ".docking_event",
+        "DockingEvent",
+        "DockingEvent_a4210b15"
+      ],
+      [
+        ".end_docking_event",
+        "EndDockingEvent",
+        "EndDockingEvent_c6400c2c"
+      ],
+      [
+        ".end_popup_mode_event",
+        "EndPopupModeEvent",
+        "EndPopupModeEvent_e0bd0d06"
+      ],
+      [
+        "..lang.event_object",
+        "EventObject",
+        "EventObject_a3d70b03"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.lang.XEventListener": "XEventListener_c7230c4a"
+    },
+    "quote": [
+      "DockingData_98da0a8d",
+      "DockingEvent_a4210b15",
+      "EndDockingEvent_c6400c2c",
+      "EndPopupModeEvent_e0bd0d06",
+      "EventObject_a3d70b03"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.lang.XEventListener"
+      ],
+      "typing": [
+        "com.sun.star.awt.DockingData",
+        "com.sun.star.awt.DockingEvent",
+        "com.sun.star.awt.EndDockingEvent",
+        "com.sun.star.awt.EndPopupModeEvent",
+        "com.sun.star.lang.EventObject"
+      ]
+    },
+    "name": "XDockableWindowListener",
+    "imports": [],
+    "namespace": "com.sun.star.awt",
+    "extends": [
+      "com.sun.star.lang.XEventListener"
+    ],
+    "desc": [
+      "makes it possible to receive docking events."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XDockableWindowListener.html",
+    "items": {
+      "methods": [
+        {
+          "name": "closed",
+          "returns": "None",
+          "desc": [
+            "is invoked when the window was actively closed"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "e",
+              "EventObject_a3d70b03",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "docking",
+          "returns": "DockingData_98da0a8d",
+          "desc": [
+            "is invoked during the docking procedure when the window has been moved.",
+            "",
+            "on return the DockingData must contain either the old tracking rectangle or a changed rectangle if required, additionally it must indicate if the window should be docked or floating",
+            "",
+            "Note: the tracking rectangle indicates to the user where the window would be placed if he releases the mouse."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "e",
+              "DockingEvent_a4210b15",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "endDocking",
+          "returns": "None",
+          "desc": [
+            "is invoked when the docking procedure ends.",
+            "",
+            "aWindowRect contains the new position and size of the window"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "e",
+              "EndDockingEvent_c6400c2c",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "endPopupMode",
+          "returns": "None",
+          "desc": [
+            "is invoked when the window currently is in pop-up mode and wants to be undocked or closed"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "e",
+              "EndPopupModeEvent_e0bd0d06",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "prepareToggleFloatingMode",
+          "returns": "bool",
+          "desc": [
+            "is invoked when the floating mode is about to be changed between floating and docked or vice versa",
+            "",
+            "if returned FALSE the floating mode will not be changed"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "e",
+              "EventObject_a3d70b03",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "startDocking",
+          "returns": "None",
+          "desc": [
+            "is invoked when the docking procedure starts."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "e",
+              "DockingEvent_a4210b15",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "toggleFloatingMode",
+          "returns": "None",
+          "desc": [
+            "is invoked when the floating mode is changed between floating and docked or vice versa"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "e",
+              "EventObject_a3d70b03",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

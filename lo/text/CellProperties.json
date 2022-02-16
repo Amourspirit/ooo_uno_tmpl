@@ -1,0 +1,302 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "CellProperties",
+  "type": "service",
+  "namespace": "com.sun.star.text",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..beans.x_property_set",
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
+      ],
+      [
+        "..xml.user_defined_attributes_supplier",
+        "UserDefinedAttributesSupplier",
+        "UserDefinedAttributesSupplier_9fbe1222"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..graphic.x_graphic",
+        "XGraphic",
+        "XGraphic_a4da0afc"
+      ],
+      [
+        "..style.graphic_location",
+        "GraphicLocation",
+        "GraphicLocation_e3ef0d30"
+      ],
+      [
+        "..table.border_line",
+        "BorderLine",
+        "BorderLine_a3f80af6"
+      ],
+      [
+        ".x_text",
+        "XText",
+        "XText_690408ca"
+      ],
+      [
+        ".x_text_section",
+        "XTextSection",
+        "XTextSection_b1730b9f"
+      ],
+      [
+        "..util.color",
+        "Color",
+        "Color_68e908c5"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa",
+      "com.sun.star.xml.UserDefinedAttributesSupplier": "UserDefinedAttributesSupplier_9fbe1222"
+    },
+    "quote": [
+      "BorderLine_a3f80af6",
+      "Color_68e908c5",
+      "GraphicLocation_e3ef0d30",
+      "XGraphic_a4da0afc",
+      "XTextSection_b1730b9f",
+      "XText_690408ca"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XPropertySet",
+        "com.sun.star.xml.UserDefinedAttributesSupplier"
+      ],
+      "typing": [
+        "com.sun.star.graphic.XGraphic",
+        "com.sun.star.style.GraphicLocation",
+        "com.sun.star.table.BorderLine",
+        "com.sun.star.text.XText",
+        "com.sun.star.text.XTextSection",
+        "com.sun.star.util.Color"
+      ]
+    },
+    "name": "CellProperties",
+    "imports": [],
+    "namespace": "com.sun.star.text",
+    "extends": [
+      "com.sun.star.xml.UserDefinedAttributesSupplier",
+      "com.sun.star.beans.XPropertySet"
+    ],
+    "desc": [
+      "service that holds all cell properties of a text table cell in a text document.",
+      "",
+      "**since**",
+      "",
+      "    LibreOffice 6.1"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1text_1_1CellProperties.html",
+    "items": {
+      "properties": [
+        {
+          "name": "BackColor",
+          "returns": "Color_68e908c5",
+          "desc": [
+            "contains the background color."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BackGraphic",
+          "returns": "XGraphic_a4da0afc",
+          "desc": [
+            "contains the graphic object that is displayed as background graphic.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 6.1"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BackGraphicFilter",
+          "returns": "str",
+          "desc": [
+            "contains the name of the graphic filter of the background graphic."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BackGraphicLocation",
+          "returns": "GraphicLocation_e3ef0d30",
+          "desc": [
+            "determines the position of the background graphic."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BackGraphicURL",
+          "returns": "str",
+          "desc": [
+            "contains the URL to the background graphic.",
+            "",
+            "Note the new behaviour since it this was deprecated: This property can only be set and only external URLs are supported (no more vnd.sun.star.GraphicObject scheme). When an URL is set, then it will load the graphic and set the BackGraphic property."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BackTransparent",
+          "returns": "bool",
+          "desc": [
+            "determines whether the background is transparent."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BottomBorder",
+          "returns": "BorderLine_a3f80af6",
+          "desc": [
+            "contains the bottom border line."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BottomBorderDistance",
+          "returns": "int",
+          "desc": [
+            "contains the distance of the bottom border."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CellName",
+          "returns": "str",
+          "desc": [
+            "contains the cell name, see SwXTextTable.getCellByName for more information"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsProtected",
+          "returns": "bool",
+          "desc": [
+            "determines whether the cell is write protected or not."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "LeftBorder",
+          "returns": "BorderLine_a3f80af6",
+          "desc": [
+            "contains the left border line."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "LeftBorderDistance",
+          "returns": "int",
+          "desc": [
+            "contains the distance of the left border."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "NumberFormat",
+          "returns": "int",
+          "desc": [
+            "contains the number format."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParentText",
+          "returns": "XText_690408ca",
+          "desc": [
+            "Parent text of this table cell.",
+            "",
+            "This might be a header text, body text, parent cell, etc.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 6.3"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RightBorder",
+          "returns": "BorderLine_a3f80af6",
+          "desc": [
+            "contains the right border line."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RightBorderDistance",
+          "returns": "int",
+          "desc": [
+            "contains the distance of the right border."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TextSection",
+          "returns": "XTextSection_b1730b9f",
+          "desc": [
+            "contains the text section the text table is contained in if there is any."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TopBorder",
+          "returns": "BorderLine_a3f80af6",
+          "desc": [
+            "contains the top border line."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TopBorderDistance",
+          "returns": "int",
+          "desc": [
+            "contains the distance of the top border."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "VertOrient",
+          "returns": "int",
+          "desc": [
+            "the vertical orientation of the text inside of the table cells in this row."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

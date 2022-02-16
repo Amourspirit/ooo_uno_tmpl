@@ -1,0 +1,134 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XSubmission",
+  "type": "interface",
+  "namespace": "com.sun.star.form.submission",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "...uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_submission_veto_listener",
+        "XSubmissionVetoListener",
+        "XSubmissionVetoListener_18e1149e"
+      ],
+      [
+        "...task.x_interaction_handler",
+        "XInteractionHandler",
+        "XInteractionHandler_bf80e51"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XInteractionHandler_bf80e51",
+      "XSubmissionVetoListener_18e1149e"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.form.submission.XSubmissionVetoListener",
+        "com.sun.star.task.XInteractionHandler"
+      ]
+    },
+    "name": "XSubmission",
+    "imports": [],
+    "namespace": "com.sun.star.form.submission",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "is implemented by components which support submitting data."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1form_1_1submission_1_1XSubmission.html",
+    "items": {
+      "methods": [
+        {
+          "name": "addSubmissionVetoListener",
+          "returns": "None",
+          "desc": [
+            "registers the given listener to be notified when a submission occurs"
+          ],
+          "raises": [
+            "com.sun.star.lang.NoSupportException"
+          ],
+          "args": [
+            [
+              "listener",
+              "XSubmissionVetoListener_18e1149e",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeSubmissionVetoListener",
+          "returns": "None",
+          "desc": [
+            "revokes a listener which has previously been registered to be notified when a submission occurs"
+          ],
+          "raises": [
+            "com.sun.star.lang.NoSupportException"
+          ],
+          "args": [
+            [
+              "listener",
+              "XSubmissionVetoListener_18e1149e",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "submit",
+          "returns": "None",
+          "desc": [
+            "tells the component to submit data"
+          ],
+          "raises": [
+            "com.sun.star.util.VetoException",
+            "com.sun.star.lang.WrappedTargetException"
+          ],
+          "args": []
+        },
+        {
+          "name": "submitWithInteraction",
+          "returns": "None",
+          "desc": [
+            "tells the component to submit data"
+          ],
+          "raises": [
+            "com.sun.star.util.VetoException",
+            "com.sun.star.lang.WrappedTargetException"
+          ],
+          "args": [
+            [
+              "aHandler",
+              "XInteractionHandler_bf80e51",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

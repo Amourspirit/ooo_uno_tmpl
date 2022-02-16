@@ -1,6 +1,5 @@
 # coding: utf-8
-import json
-from typing import Tuple, List
+from typing import Dict, Tuple, List
 from _base_json import BaseJson
 from verr import Version
 
@@ -10,35 +9,45 @@ class BaseInterface(BaseJson):
         super().__init__(*args, **kwargs)
 
     def _hydrate_data(self, json_data: dict):
-        data = json_data['data']
+        self._validate_data(json_data)
+        data: Dict[str, object] = json_data['data']
 
         def set_data(_key: str, a_name=None):
             attr_name = _key if not a_name else a_name
             val = data.get(_key, None)
-            if val:
+            if not val is None:
                 setattr(self, attr_name, val)
-        # validation ensures min version of 0.1.1
-
+    
         set_data('name')
+        set_data('namespace')
+        set_data('allow_db')
         set_data('desc')
         set_data('url', 'link')
-        _inherits = self.convert_lst_last(data.get('extends', []))
-        setattr(self, 'inherits', _inherits)
+        # _inherits = self.convert_lst_last(data.get('extends', []))
+        setattr(self, 'inherits', data.get('extends', []))
         set_data('imports')
-        set_data('namespace')
+        extends_map = data.get('extends_map', None)
+        if extends_map:
+            self.extends_map.update(extends_map)
+        # get lo ver if it exist. Defaut to False
+        self.libre_office_ver = json_data.get('libre_office_ver', False)
         sort = bool(json_data['parser_args'].get('sort', False))
         self.attribs = self._get_attribs(json_data=json_data, sort=sort)
+        setattr(self, 'requires_typing', data.get('requires_typing', False))
         ver_0_1_1 = Version(0, 1, 1)
-        ver_json = Version.parse(json_data.get('version'))
-        if ver_json == ver_0_1_1:
+        if self.json_version == ver_0_1_1:
             self._load_0_1_1(json_data=json_data)
         else:
             setattr(self, 'from_imports', [])
             setattr(self, 'from_imports_typing', [])
             set_data('from_imports')
             set_data('from_imports_typing')
-            self.requires_typing = False if len(
-                self.from_imports_typing) == 0 else True
+            # self.requires_typing = False if len(
+            #     self.from_imports_typing) == 0 else True
+            quote: List[str] = data.get('quote', [])
+            self.quote.update(quote)
+            typings: List[str] = data.get('typings', [])
+            self.typings.update(typings)
 
     def _load_0_1_1(self, json_data: dict):
         def set_j_data(_key: str):
@@ -92,7 +101,7 @@ class BaseInterface(BaseJson):
                 "Invalid Data: Expected version to be at least '{min_ver}' got {ver}")
 
     def _get_formated_arg(self, arg: Tuple[str]) -> str:
-        return f"{arg[0]}: {arg[1]}"
+        return f"{self.get_safe_word(arg[0])}: {self.get_q_type(arg[1])}"
 
     def get_args(self, args: List[Tuple[str]]) -> str:
         result = ''
@@ -108,7 +117,7 @@ class BaseInterface(BaseJson):
         for arg in args:
             if len(arg) >= 3:
                 if self.is_out_arg(arg[2]):  # dir in or out
-                    results.append(arg[1])  # arg name
+                    results.append(arg[0])  # arg name, index 1 is type
         return results
 
     def _get_raises_list(self, d: dict, key: str) -> List[Tuple[str, str]]:
@@ -179,6 +188,6 @@ class BaseInterface(BaseJson):
         if key in meth:
             ret = meth[key]
             if ret:
-                result += f" -> {ret}"
+                result += f" -> {self.get_q_type(ret)}"
         result += ':'
         return result

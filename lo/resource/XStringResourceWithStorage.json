@@ -1,0 +1,103 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XStringResourceWithStorage",
+  "type": "interface",
+  "namespace": "com.sun.star.resource",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_string_resource_persistence",
+        "XStringResourcePersistence",
+        "XStringResourcePersistence_cabc130c"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..embed.x_storage",
+        "XStorage",
+        "XStorage_8e460a32"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.resource.XStringResourcePersistence": "XStringResourcePersistence_cabc130c"
+    },
+    "quote": [
+      "XStorage_8e460a32"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.resource.XStringResourcePersistence"
+      ],
+      "typing": [
+        "com.sun.star.embed.XStorage"
+      ]
+    },
+    "name": "XStringResourceWithStorage",
+    "imports": [],
+    "namespace": "com.sun.star.resource",
+    "extends": [
+      "com.sun.star.resource.XStringResourcePersistence"
+    ],
+    "desc": [
+      "Extends XStringResourcePersistence by methods to handle an associated com.sun.star.embed.XStorage instance."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1resource_1_1XStringResourceWithStorage.html",
+    "items": {
+      "methods": [
+        {
+          "name": "setStorage",
+          "returns": "None",
+          "desc": [
+            "Associates a storage to the StringResourceWithStorage instance which is used on subsequent calls of store().",
+            "",
+            "This call has to be used carefully as it removes the storage previously connected to the StringResourceWithStorage. It may force the implementation to reload data from the previous storage before releasing it. The StringResourceManager will be modified after calling this method as the data isn't stored to the new storage yet. storeAsStorage() should be preferred as it directly stores the data to the new storage and afterwards this storage is in sync with the resource data."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "Storage",
+              "XStorage_8e460a32",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "storeAsStorage",
+          "returns": "None",
+          "desc": [
+            "Stores all string table data to a storage and associates this storage to this instance as if setStorage() was called with this storage.",
+            "",
+            "The modified state will be unmodified after the call.",
+            "",
+            "This method can throw all exceptions thrown by the methods of com.sun.star.embed.XStorage"
+          ],
+          "raises": [
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            [
+              "Storage",
+              "XStorage_8e460a32",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

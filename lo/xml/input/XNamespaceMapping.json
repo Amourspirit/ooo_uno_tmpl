@@ -1,0 +1,85 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XNamespaceMapping",
+  "type": "interface",
+  "namespace": "com.sun.star.xml.input",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "...uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": []
+    },
+    "name": "XNamespaceMapping",
+    "imports": [],
+    "namespace": "com.sun.star.xml.input",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "Interface to map XML namespace URI strings to ordinals (URI-id, short uid)."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1xml_1_1input_1_1XNamespaceMapping.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getUidByUri",
+          "returns": "int",
+          "desc": [
+            "Creates a unique ordinal passing an XML namespace URI."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "uri",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getUriByUid",
+          "returns": "str",
+          "desc": [
+            "Gets the corresponding XML namespace URI passing a uid (created using getUidByUri())."
+          ],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException"
+          ],
+          "args": [
+            [
+              "uid",
+              "int",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

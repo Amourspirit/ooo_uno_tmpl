@@ -1,0 +1,697 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XBreakIterator",
+  "type": "interface",
+  "namespace": "com.sun.star.i18n",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".boundary",
+        "Boundary",
+        "Boundary_7fe2098c"
+      ],
+      [
+        ".line_break_hyphenation_options",
+        "LineBreakHyphenationOptions",
+        "LineBreakHyphenationOptions_7d3b1128"
+      ],
+      [
+        ".line_break_results",
+        "LineBreakResults",
+        "LineBreakResults_d8200ca7"
+      ],
+      [
+        ".line_break_user_options",
+        "LineBreakUserOptions",
+        "LineBreakUserOptions_e440e40"
+      ],
+      [
+        "..lang.locale",
+        "Locale",
+        "Locale_70d308fa"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "Boundary_7fe2098c",
+      "LineBreakHyphenationOptions_7d3b1128",
+      "LineBreakResults_d8200ca7",
+      "LineBreakUserOptions_e440e40",
+      "Locale_70d308fa"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.i18n.Boundary",
+        "com.sun.star.i18n.LineBreakHyphenationOptions",
+        "com.sun.star.i18n.LineBreakResults",
+        "com.sun.star.i18n.LineBreakUserOptions",
+        "com.sun.star.lang.Locale"
+      ]
+    },
+    "name": "XBreakIterator",
+    "imports": [],
+    "namespace": "com.sun.star.i18n",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "contains the base routines for iteration in Unicode string.",
+      "",
+      "Iterates over characters, words, sentences and line breaks.",
+      "",
+      "Assumption: StartPos is inclusive and EndPos is exclusive."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1i18n_1_1XBreakIterator.html",
+    "items": {
+      "methods": [
+        {
+          "name": "beginOfCharBlock",
+          "returns": "int",
+          "desc": [
+            "Traverses in Text from nStartPos to the beginning of the specified character type."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aText",
+              "str",
+              "in"
+            ],
+            [
+              "nStartPos",
+              "int",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale_70d308fa",
+              "in"
+            ],
+            [
+              "nCharType",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "beginOfScript",
+          "returns": "int",
+          "desc": [
+            "Traverses in Text from nStartPos to the beginning of the specified script type."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aText",
+              "str",
+              "in"
+            ],
+            [
+              "nStartPos",
+              "int",
+              "in"
+            ],
+            [
+              "nScriptType",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "beginOfSentence",
+          "returns": "int",
+          "desc": [
+            "Traverses in Text from nStartPos to the start of a sentence."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aText",
+              "str",
+              "in"
+            ],
+            [
+              "nStartPos",
+              "int",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale_70d308fa",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "endOfCharBlock",
+          "returns": "int",
+          "desc": [
+            "Traverses in Text from nStartPos to the end of the specified character type."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aText",
+              "str",
+              "in"
+            ],
+            [
+              "nStartPos",
+              "int",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale_70d308fa",
+              "in"
+            ],
+            [
+              "nCharType",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "endOfScript",
+          "returns": "int",
+          "desc": [
+            "Traverses in Text from nStartPos to the end of the specified script type."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aText",
+              "str",
+              "in"
+            ],
+            [
+              "nStartPos",
+              "int",
+              "in"
+            ],
+            [
+              "nScriptType",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "endOfSentence",
+          "returns": "int",
+          "desc": [
+            "Traverses in Text from nStartPos to the end of a sentence."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aText",
+              "str",
+              "in"
+            ],
+            [
+              "nStartPos",
+              "int",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale_70d308fa",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getLineBreak",
+          "returns": "LineBreakResults_d8200ca7",
+          "desc": [
+            "Calculate the line break position in the Text from the specified nStartPos."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aText",
+              "str",
+              "in"
+            ],
+            [
+              "nStartPos",
+              "int",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale_70d308fa",
+              "in"
+            ],
+            [
+              "nMinBreakPos",
+              "int",
+              "in"
+            ],
+            [
+              "aHyphOptions",
+              "LineBreakHyphenationOptions_7d3b1128",
+              "in"
+            ],
+            [
+              "aUserOptions",
+              "LineBreakUserOptions_e440e40",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getScriptType",
+          "returns": "int",
+          "desc": [
+            "Get the script type of the character at position nPos."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aText",
+              "str",
+              "in"
+            ],
+            [
+              "nPos",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getWordBoundary",
+          "returns": "Boundary_7fe2098c",
+          "desc": [
+            "Identifies StartPos and EndPos of current word.",
+            "",
+            "If nPos is the boundary of a word, it is StartPos of one word and EndPos of previous word. In this situation, the outcome of the algorithm can be indeterminate. In this situation the bPreferForward flag is used. If bPreferForward == FALSE, nPos is considered to be the end of the word and we look backwards for beginning of word, otherwise nPos is considered to be the start of the next word and we look forwards for the end of the word."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aText",
+              "str",
+              "in"
+            ],
+            [
+              "nPos",
+              "int",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale_70d308fa",
+              "in"
+            ],
+            [
+              "nWordType",
+              "int",
+              "in"
+            ],
+            [
+              "bPreferForward",
+              "bool",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getWordType",
+          "returns": "int",
+          "desc": [
+            "This method is mis-defined, since WordType is not an attribute of a word, but a way to break words, like excluding or including tail spaces for spell checker or cursor traveling. It returns 0 always."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aText",
+              "str",
+              "in"
+            ],
+            [
+              "nPos",
+              "int",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale_70d308fa",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "isBeginWord",
+          "returns": "bool",
+          "desc": [
+            "If a word starts at position nPos.",
+            "",
+            "It is possible that both of this method and following method isEndWord all return TRUE, since StartPos of a word is inclusive while EndPos of a word is exclusive."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aText",
+              "str",
+              "in"
+            ],
+            [
+              "nPos",
+              "int",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale_70d308fa",
+              "in"
+            ],
+            [
+              "nWordType",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "isEndWord",
+          "returns": "bool",
+          "desc": [
+            "If a word ends at position nPos."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aText",
+              "str",
+              "in"
+            ],
+            [
+              "nPos",
+              "int",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale_70d308fa",
+              "in"
+            ],
+            [
+              "nWordType",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "nextCharBlock",
+          "returns": "int",
+          "desc": [
+            "Traverses in Text from nStartPos to the next start of the specified character type."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aText",
+              "str",
+              "in"
+            ],
+            [
+              "nStartPos",
+              "int",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale_70d308fa",
+              "in"
+            ],
+            [
+              "nCharType",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "nextCharacters",
+          "returns": "int",
+          "desc": [
+            "Traverses specified number of characters/cells in Text from nStartPos forwards.",
+            "",
+            "CharacterIteratorMode can be cell based or character based. A cell is made of more than one character."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aText",
+              "str",
+              "in"
+            ],
+            [
+              "nStartPos",
+              "int",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale_70d308fa",
+              "in"
+            ],
+            [
+              "nCharacterIteratorMode",
+              "int",
+              "in"
+            ],
+            [
+              "nCount",
+              "int",
+              "in"
+            ],
+            [
+              "nDone",
+              "int",
+              "out"
+            ]
+          ]
+        },
+        {
+          "name": "nextScript",
+          "returns": "int",
+          "desc": [
+            "Traverses in Text from nStartPos to the next start of the specified script type."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aText",
+              "str",
+              "in"
+            ],
+            [
+              "nStartPos",
+              "int",
+              "in"
+            ],
+            [
+              "nScriptType",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "nextWord",
+          "returns": "Boundary_7fe2098c",
+          "desc": [
+            "Traverses one word in Text from nStartPos forwards."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aText",
+              "str",
+              "in"
+            ],
+            [
+              "nStartPos",
+              "int",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale_70d308fa",
+              "in"
+            ],
+            [
+              "nWordType",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "previousCharBlock",
+          "returns": "int",
+          "desc": [
+            "Traverses in Text from nStartPos to the previous start of the specified character type."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aText",
+              "str",
+              "in"
+            ],
+            [
+              "nStartPos",
+              "int",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale_70d308fa",
+              "in"
+            ],
+            [
+              "nCharType",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "previousCharacters",
+          "returns": "int",
+          "desc": [
+            "Traverses specified number of characters/cells in Text from nStartPos backwards.",
+            "",
+            "CharacterIteratorMode can be cell based or character based. A cell is made of more than one character."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aText",
+              "str",
+              "in"
+            ],
+            [
+              "nStartPos",
+              "int",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale_70d308fa",
+              "in"
+            ],
+            [
+              "nCharacterIteratorMode",
+              "int",
+              "in"
+            ],
+            [
+              "nCount",
+              "int",
+              "in"
+            ],
+            [
+              "nDone",
+              "int",
+              "out"
+            ]
+          ]
+        },
+        {
+          "name": "previousScript",
+          "returns": "int",
+          "desc": [
+            "Traverses in Text from nStartPos to the previous start of the specified script type."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aText",
+              "str",
+              "in"
+            ],
+            [
+              "nStartPos",
+              "int",
+              "in"
+            ],
+            [
+              "nScriptType",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "previousWord",
+          "returns": "Boundary_7fe2098c",
+          "desc": [
+            "Traverses one word in Text from nStartPos backwards.",
+            "",
+            "If the previous character is a space character and nWordType indicates spaces should be skipped, and if the first non-space character is an Asian character, then, since Asian word break needs language specific wordbreak dictionaries, the method will return -1 in Boundary.endPos() and the position after the Asian character (i.e. the space character) in Boundary.startPos(). The caller then has to call this method again with a correct aLocale referring to the Asian character, which is then the previous character of the space character where nStartPos points to.",
+            "",
+            "Note that the OpenOffice.org 1.0 / StarOffice 6.0 / StarSuite 6.0 i18n framework doesn't behave like this and mixed Western/CJK text may lead to wrong word iteration. This is fixed in later versions."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aText",
+              "str",
+              "in"
+            ],
+            [
+              "nStartPos",
+              "int",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale_70d308fa",
+              "in"
+            ],
+            [
+              "nWordType",
+              "int",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

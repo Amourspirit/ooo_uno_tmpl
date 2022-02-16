@@ -1,0 +1,64 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XVolatileBitmap",
+  "type": "interface",
+  "namespace": "com.sun.star.rendering",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_bitmap",
+        "XBitmap",
+        "XBitmap_b1b70b7b"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.rendering.XBitmap": "XBitmap_b1b70b7b"
+    },
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.rendering.XBitmap"
+      ],
+      "typing": []
+    },
+    "name": "XVolatileBitmap",
+    "imports": [],
+    "namespace": "com.sun.star.rendering",
+    "extends": [
+      "com.sun.star.rendering.XBitmap"
+    ],
+    "desc": [
+      "This is a specialized interface to a volatile bitmap (which can become invalid at any point in time)."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1rendering_1_1XVolatileBitmap.html",
+    "items": {
+      "methods": [
+        {
+          "name": "isValid",
+          "returns": "bool",
+          "desc": [
+            "Query whether this volatile bitmap still has valid content.",
+            "",
+            "As the video RAM allocated to this bitmap can be reclaimed at any time, a return value of true here does not imply that the next draw operation with this bitmap will succeed. Instead, the exception VolatileContentDestroyed might then be thrown, if lost bitmap data is accessed."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

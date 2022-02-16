@@ -1,0 +1,80 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XAccessControlContext",
+  "type": "interface",
+  "namespace": "com.sun.star.security",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": []
+    },
+    "name": "XAccessControlContext",
+    "imports": [],
+    "namespace": "com.sun.star.security",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "An XAccessControlContext is used to make system resource access decisions based on the context it encapsulates.",
+      "",
+      "More specifically, it encapsulates a context and has methods to check permissions equivalent to XAccessController interface, with one difference: The XAccessControlContext makes access decisions based on the context it encapsulates, rather than that of the current execution thread.",
+      "",
+      "**since**",
+      "",
+      "    OOo 1.1.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1security_1_1XAccessControlContext.html",
+    "items": {
+      "methods": [
+        {
+          "name": "checkPermission",
+          "returns": "None",
+          "desc": [
+            "Determines whether the access request indicated by the specified permission should be allowed or denied, based on this context.",
+            "",
+            "The semantics are equivalent to the security permission classes of the Java platform.",
+            "",
+            "You can also pass a sequence of permissions (sequence< any >) to check a set of permissions, e.g. for performance reasons. This method quietly returns if the access request is permitted, or throws a suitable AccessControlException otherwise."
+          ],
+          "raises": [
+            "AccessControlException"
+          ],
+          "args": [
+            [
+              "perm",
+              "object",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

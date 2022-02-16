@@ -1,0 +1,115 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XIndexEntrySupplier",
+  "type": "interface",
+  "namespace": "com.sun.star.i18n",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..lang.locale",
+        "Locale",
+        "Locale_70d308fa"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "Locale_70d308fa"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.lang.Locale"
+      ]
+    },
+    "name": "XIndexEntrySupplier",
+    "imports": [],
+    "namespace": "com.sun.star.i18n",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "supplies information on index entries to generate a \\\"table of",
+      "alphabetical index\\\" for a given locale."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1i18n_1_1XIndexEntrySupplier.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getIndexCharacter",
+          "returns": "str",
+          "desc": [
+            "returns the capital index key for sorting a table of indexes, to a given index entry, to a given com.sun.star.lang.Locale and to a given sort algorithm.",
+            "",
+            "For example, in English locale it returns \\\"K\\\" for \\\"keyboard\\\""
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aIndexEntry",
+              "str",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale_70d308fa",
+              "in"
+            ],
+            [
+              "aSortAlgorithm",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getIndexFollowPageWord",
+          "returns": "str",
+          "desc": [
+            "returns the page number word of an index entry, where one page or more pages are combined to one page number entry, for a given com.sun.star.lang.Locale.",
+            "",
+            "For example, in English locale it returns",
+            "\\\"p.\\\" for bMorePages == FALSE",
+            "\\\"pp.\\\" for bMorePages == TRUE"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "bMorePages",
+              "bool",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale_70d308fa",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

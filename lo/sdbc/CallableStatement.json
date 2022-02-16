@@ -1,0 +1,77 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "CallableStatement",
+  "type": "service",
+  "namespace": "com.sun.star.sdbc",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".prepared_statement",
+        "PreparedStatement",
+        "PreparedStatement_eef40d8c"
+      ],
+      [
+        ".x_out_parameters",
+        "XOutParameters",
+        "XOutParameters_c6db0c48"
+      ],
+      [
+        ".x_row",
+        "XRow",
+        "XRow_5f360834"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.sdbc.PreparedStatement": "PreparedStatement_eef40d8c",
+      "com.sun.star.sdbc.XOutParameters": "XOutParameters_c6db0c48",
+      "com.sun.star.sdbc.XRow": "XRow_5f360834"
+    },
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.sdbc.PreparedStatement",
+        "com.sun.star.sdbc.XOutParameters",
+        "com.sun.star.sdbc.XRow"
+      ],
+      "typing": []
+    },
+    "name": "CallableStatement",
+    "imports": [],
+    "namespace": "com.sun.star.sdbc",
+    "extends": [
+      "com.sun.star.sdbc.PreparedStatement",
+      "com.sun.star.sdbc.XRow",
+      "com.sun.star.sdbc.XOutParameters"
+    ],
+    "desc": [
+      "is used to execute SQL stored procedures.",
+      "",
+      "SDBC provides a stored procedure SQL escape that allows stored procedures to be called in a standard way for all RDBMSs. This escape syntax has one form that includes a result parameter and one that does not. If used, the result parameter must be registered as an OUT parameter. The other parameters can be used for input, output, or both. Parameters are referred to sequentially, by number. The first parameter is 1.",
+      "",
+      "{?=call&lt;procedure-name&gt;[&lt;arg1&gt;,&lt;arg2&gt;,...]}",
+      "{call&lt;procedure-name&gt;[&lt;arg1&gt;,&lt;arg2&gt;,...]}",
+      "",
+      "IN parameter values are set using the set methods inherited from com.sun.star.sdbc.PreparedStatement . The type of all OUT parameters must be registered prior to executing the stored procedure; their values are retrieved after execution via the get methods provided by the com.sun.star.sdbc.XRow.",
+      "",
+      "A CallableStatement can return one com.sun.star.sdbc.XResultSet or multiple com.sun.star.sdbc.ResultSet objects. Multiple ResultSet objects are handled using operations inherited from com.sun.star.sdbc.XPreparedStatement.",
+      "",
+      "For maximum portability, a call's com.sun.star.sdbc.ResultSet objects and update counts should be processed prior to getting the values of output parameters."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1sdbc_1_1CallableStatement.html",
+    "items": {}
+  }
+}

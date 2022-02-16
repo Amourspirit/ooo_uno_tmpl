@@ -1,0 +1,98 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XScriptURIHelper",
+  "type": "interface",
+  "namespace": "com.sun.star.script.provider",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "...uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": []
+    },
+    "name": "XScriptURIHelper",
+    "imports": [],
+    "namespace": "com.sun.star.script.provider",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "This interface is used to help transform Scripting Framework storage locations to Scripting Framework script URIs and vice versa."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1script_1_1provider_1_1XScriptURIHelper.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getRootStorageURI",
+          "returns": "str",
+          "desc": [
+            "Obtain the root storage URI for this ScriptURIHelper.",
+            "",
+            "The resulting string can be used to access the storage for this using the Universal Content Broker"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getScriptURI",
+          "returns": "str",
+          "desc": [
+            "Obtain the Scripting Framework script URI for a specific UCB URI."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "storageURI",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getStorageURI",
+          "returns": "str",
+          "desc": [
+            "Obtain the storage URI for a specific Scripting Framework script URI."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "scriptURI",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

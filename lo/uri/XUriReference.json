@@ -1,0 +1,234 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XUriReference",
+  "type": "interface",
+  "namespace": "com.sun.star.uri",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": []
+    },
+    "name": "XUriReference",
+    "imports": [],
+    "namespace": "com.sun.star.uri",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "represents generic, mutable URI references.",
+      "",
+      "See RFC\u00a03986 for a description of URI references and related terms.",
+      "",
+      "This interface only handles generic URI references (both absolute and relative). For specific URI schemes, there will be additional interfaces that offer extra, scheme-specific functionality.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.0"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1uri_1_1XUriReference.html",
+    "items": {
+      "methods": [
+        {
+          "name": "clearFragment",
+          "returns": "None",
+          "desc": [
+            "clears the fragment part of this URI reference."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getAuthority",
+          "returns": "str",
+          "desc": [
+            "returns the authority part of this URI reference."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getFragment",
+          "returns": "str",
+          "desc": [
+            "returns the fragment part of this URI reference."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getPath",
+          "returns": "str",
+          "desc": [
+            "returns the path part of this URI reference."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getPathSegment",
+          "returns": "str",
+          "desc": [
+            "returns a given path segment of this URI reference."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "index",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getPathSegmentCount",
+          "returns": "int",
+          "desc": [
+            "returns the number of path segments of this URI reference.",
+            "",
+            "For a URI reference with an empty path, the number of path segments is zero. For a URI reference with an absolute, non-empty path, the number of path segments equals the number of \u201c/\u201d delimiters. For a URI reference with a relative, non-empty path, the number of path segments equals the number of \u201c/\u201d delimiters, plus one."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getQuery",
+          "returns": "str",
+          "desc": [
+            "returns the query part of this URI reference."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getScheme",
+          "returns": "str",
+          "desc": [
+            "returns the scheme part of this (absolute) URI reference."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getSchemeSpecificPart",
+          "returns": "str",
+          "desc": [
+            "returns the scheme-specific part of this URI reference.",
+            "",
+            "For an absolute URI reference, the scheme-specific part is everything after the scheme part and the delimiting \u201c:\u201d, and before the optional \u201c#\u201d and fragment part. For a relative URI reference, the scheme-specific part is everything before the optional \u201c#\u201d and fragment part."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getUriReference",
+          "returns": "str",
+          "desc": [
+            "returns the textual representation of the complete URI reference."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "hasAuthority",
+          "returns": "bool",
+          "desc": [
+            "returns whether this URI reference has an authority part."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "hasFragment",
+          "returns": "bool",
+          "desc": [
+            "returns whether this URI reference has a fragment part."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "hasQuery",
+          "returns": "bool",
+          "desc": [
+            "returns whether this URI reference has a query part."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "hasRelativePath",
+          "returns": "bool",
+          "desc": [
+            "returns whether this URI reference has a relative path."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "isAbsolute",
+          "returns": "bool",
+          "desc": [
+            "returns whether this URI reference is absolute or relative.",
+            "",
+            "A URI is absolute if it has a scheme."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "isHierarchical",
+          "returns": "bool",
+          "desc": [
+            "returns whether this URI reference is hierarchical or opaque, in the sense of RFC&nbsp2396.",
+            "",
+            "An absolute URI reference is hierarchical if its scheme-specific part starts with \u201c/\u201d. A relative URI reference is always hierarchical."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setFragment",
+          "returns": "None",
+          "desc": [
+            "sets the fragment part of this URI reference."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "fragment",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

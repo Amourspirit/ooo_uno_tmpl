@@ -1,0 +1,190 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XPolyPolygon2D",
+  "type": "interface",
+  "namespace": "com.sun.star.rendering",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..geometry.real_point2_d",
+        "RealPoint2D",
+        "RealPoint2D_d6e70c78"
+      ],
+      [
+        ".fill_rule",
+        "FillRule",
+        "FillRule_bdca0be5"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "FillRule_bdca0be5",
+      "RealPoint2D_d6e70c78",
+      "XPolyPolygon2D"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.geometry.RealPoint2D",
+        "com.sun.star.rendering.FillRule"
+      ]
+    },
+    "name": "XPolyPolygon2D",
+    "imports": [],
+    "namespace": "com.sun.star.rendering",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "Generic interface for poly-polygons in 2D.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.0"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1rendering_1_1XPolyPolygon2D.html",
+    "items": {
+      "methods": [
+        {
+          "name": "addPolyPolygon",
+          "returns": "None",
+          "desc": [
+            "Add the specified poly-polygon at the given position.",
+            "",
+            "One can do symbolic path construction with this method. The poly-polygons added by this method are not joined in the sense that they participate in mutual fill rule calculations like the polygons inside a single poly-polygon do. When rendering such a poly-polygon without transparency, it will look like the constituting poly-polygons rendered separately on top of another. Alas, when rendering with transparency, separate rendering will combine the alpha of overlapping areas, whereas addPolyPolygon results in constant alpha, regardless how many internal poly-polygons overlap at a single place."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "position",
+              "RealPoint2D_d6e70c78",
+              "in"
+            ],
+            [
+              "polyPolygon",
+              "XPolyPolygon2D",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getFillRule",
+          "returns": "FillRule_bdca0be5",
+          "desc": [
+            "Query the rule used to determine inside and outside of the poly-polygon."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getNumberOfPolygonPoints",
+          "returns": "int",
+          "desc": [
+            "Query number of points inside given polygon."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            [
+              "polygon",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getNumberOfPolygons",
+          "returns": "int",
+          "desc": [
+            "Query number of polygons inside this poly-polygon."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "isClosed",
+          "returns": "bool",
+          "desc": [
+            "Query whether the specified polygon outline is closed."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            [
+              "index",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setClosed",
+          "returns": "None",
+          "desc": [
+            "Set the close state of the specified polygon outline.",
+            "",
+            "Use -1 as the index to affect all polygons of this poly-polygon."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            [
+              "index",
+              "int",
+              "in"
+            ],
+            [
+              "closedState",
+              "bool",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setFillRule",
+          "returns": "None",
+          "desc": [
+            "Set the rule used to determine inside and outside of the poly-polygon."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "fillRule",
+              "FillRule_bdca0be5",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XHierarchicalStorageAccess2",
+  "type": "interface",
+  "namespace": "com.sun.star.embed",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_hierarchical_storage_access",
+        "XHierarchicalStorageAccess",
+        "XHierarchicalStorageAccess_876b1143"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..beans.named_value",
+        "NamedValue",
+        "NamedValue_a37a0af3"
+      ],
+      [
+        ".x_extended_storage_stream",
+        "XExtendedStorageStream",
+        "XExtendedStorageStream_46750fcf"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.embed.XHierarchicalStorageAccess": "XHierarchicalStorageAccess_876b1143"
+    },
+    "quote": [
+      "XExtendedStorageStream_46750fcf",
+      "typing.Tuple[NamedValue_a37a0af3, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[NamedValue_a37a0af3, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.embed.XHierarchicalStorageAccess"
+      ],
+      "typing": [
+        "com.sun.star.beans.NamedValue",
+        "com.sun.star.embed.XExtendedStorageStream"
+      ]
+    },
+    "name": "XHierarchicalStorageAccess2",
+    "imports": [],
+    "namespace": "com.sun.star.embed",
+    "extends": [
+      "com.sun.star.embed.XHierarchicalStorageAccess"
+    ],
+    "desc": [
+      "This interface extends XHierarchicalStorageAccess interface."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1embed_1_1XHierarchicalStorageAccess2.html",
+    "items": {
+      "methods": [
+        {
+          "name": "openEncryptedStreamByHierarchicalName",
+          "returns": "XExtendedStorageStream_46750fcf",
+          "desc": [
+            "allows to get access to a child encrypted stream with encryption data using hierarchical path.",
+            "",
+            "If storage does not allow any encryption this method will always throw com.sun.star.packages.NoEncryptionException.",
+            "",
+            "In case the stream is open in readonly mode the com.sun.star.io.XStream.getOutputStream() method will return an empty reference."
+          ],
+          "raises": [
+            "com.sun.star.embed.InvalidStorageException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.packages.NoEncryptionException",
+            "com.sun.star.packages.WrongPasswordException",
+            "com.sun.star.container.NoSuchElementException",
+            "com.sun.star.io.IOException",
+            "com.sun.star.embed.StorageWrappedTargetException"
+          ],
+          "args": [
+            [
+              "sStreamName",
+              "str",
+              "in"
+            ],
+            [
+              "nOpenMode",
+              "int",
+              "in"
+            ],
+            [
+              "aEncryptionData",
+              "typing.Tuple[NamedValue_a37a0af3, ...]",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

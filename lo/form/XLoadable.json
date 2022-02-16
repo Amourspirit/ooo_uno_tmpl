@@ -1,0 +1,135 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XLoadable",
+  "type": "interface",
+  "namespace": "com.sun.star.form",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_load_listener",
+        "XLoadListener",
+        "XLoadListener_bb200bda"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XLoadListener_bb200bda"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.form.XLoadListener"
+      ]
+    },
+    "name": "XLoadable",
+    "imports": [],
+    "namespace": "com.sun.star.form",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "provides functionality to implement objects which may be loaded.",
+      "",
+      "The object is typically implemented by high-level objects which can connect to a data source."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1form_1_1XLoadable.html",
+    "items": {
+      "methods": [
+        {
+          "name": "addLoadListener",
+          "returns": "None",
+          "desc": [
+            "adds the specified listener to receive load-related events"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aListener",
+              "XLoadListener_bb200bda",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "isLoaded",
+          "returns": "bool",
+          "desc": [
+            "returns if the object is in loaded state."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "load",
+          "returns": "None",
+          "desc": [
+            "loads the data.",
+            "",
+            "If the data is already loaded (->isLoaded), then the method returns silently. In this case, you should use ->reload."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "reload",
+          "returns": "None",
+          "desc": [
+            "does a smart refresh of the object.",
+            "",
+            "The final state will be the same as if unload and load were called, but reload is the more efficient way to do the same. If the object isn't loaded, nothing happens."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "removeLoadListener",
+          "returns": "None",
+          "desc": [
+            "removes the specified listener."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aListener",
+              "XLoadListener_bb200bda",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "unload",
+          "returns": "None",
+          "desc": [
+            "unloads the data."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

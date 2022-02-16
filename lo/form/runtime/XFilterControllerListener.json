@@ -1,0 +1,126 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XFilterControllerListener",
+  "type": "interface",
+  "namespace": "com.sun.star.form.runtime",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "...lang.x_event_listener",
+        "XEventListener",
+        "XEventListener_c7230c4a"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".filter_event",
+        "FilterEvent",
+        "FilterEvent_d780e56"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.lang.XEventListener": "XEventListener_c7230c4a"
+    },
+    "quote": [
+      "FilterEvent_d780e56"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.lang.XEventListener"
+      ],
+      "typing": [
+        "com.sun.star.form.runtime.FilterEvent"
+      ]
+    },
+    "name": "XFilterControllerListener",
+    "imports": [],
+    "namespace": "com.sun.star.form.runtime",
+    "extends": [
+      "com.sun.star.lang.XEventListener"
+    ],
+    "desc": [
+      "is implemented by components listening for events fired by an XFilterController.",
+      "",
+      "**since**",
+      "",
+      "    OOo 3.3"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1form_1_1runtime_1_1XFilterControllerListener.html",
+    "items": {
+      "methods": [
+        {
+          "name": "disjunctiveTermAdded",
+          "returns": "None",
+          "desc": [
+            "is fired when a disjunctive term was added to the filter of the filter controller.",
+            "",
+            "FilterEvent.DisjunctiveTerm is the index of the disjunctive term which was added.",
+            "",
+            "FilterEvent.FilterComponent and FilterEvent.PredicateExpression are not used for this event type."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Event",
+              "FilterEvent_d780e56",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "disjunctiveTermRemoved",
+          "returns": "None",
+          "desc": [
+            "is fired when a disjunctive term was removed from the filter of the filter controller.",
+            "",
+            "FilterEvent.DisjunctiveTerm is the index of the disjunctive term which was removed.",
+            "",
+            "FilterEvent.FilterComponent and FilterEvent.PredicateExpression are not used for this event type."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Event",
+              "FilterEvent_d780e56",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "predicateExpressionChanged",
+          "returns": "None",
+          "desc": [
+            "is fired when a single predicate expression of the filter represented by the filter controller changed.",
+            "",
+            "FilterEvent.DisjunctiveTerm is the index of the disjunctive term in which the expression changed. This usually equals XFilterController.ActiveTerm.",
+            "",
+            "FilterEvent.FilterComponent denotes the index of the filter component whose predicate expression changed.",
+            "",
+            "FilterEvent.PredicateExpression is the new predicate expressions."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Event",
+              "FilterEvent_d780e56",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

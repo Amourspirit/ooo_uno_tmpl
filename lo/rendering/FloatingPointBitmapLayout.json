@@ -1,0 +1,121 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "type": "struct",
+  "name": "FloatingPointBitmapLayout",
+  "namespace": "com.sun.star.rendering",
+  "parser_args": {
+    "sort": false,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "sort": true,
+    "dynamic_struct": true,
+    "include_desc": true
+  },
+  "data": {
+    "name": "FloatingPointBitmapLayout",
+    "namespace": "com.sun.star.rendering",
+    "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1rendering_1_1FloatingPointBitmapLayout.html",
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        ".x_color_space",
+        "XColorSpace",
+        "XColorSpace_e3940d09"
+      ]
+    ],
+    "extends_map": {},
+    "quote": [
+      "XColorSpace_e3940d09"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "fullname": "com.sun.star.rendering.FloatingPointBitmapLayout",
+    "desc": [
+      "This structure describes the memory layout of a bitmap having floating point color channels.",
+      "",
+      "This structure collects all necessary information to describe the memory layout of a bitmap having floating point color channels",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.0"
+    ],
+    "imports": [],
+    "extends": [],
+    "items": [
+      {
+        "name": "ScanLines",
+        "type": "int",
+        "lines": [
+          "Number of scanlines for this bitmap.",
+          "",
+          "This value must not be negative"
+        ]
+      },
+      {
+        "name": "ScanLineBytes",
+        "type": "int",
+        "lines": [
+          "Number of data bytes per scanline.",
+          "",
+          "This value must not be negative"
+        ]
+      },
+      {
+        "name": "ScanLineStride",
+        "type": "int",
+        "lines": [
+          "Byte offset between the start of two consecutive scanlines.",
+          "",
+          "This value is permitted to be negative, denoting a bitmap whose content is flipped at the x axis."
+        ]
+      },
+      {
+        "name": "PlaneStride",
+        "type": "int",
+        "lines": [
+          "Byte offset between the start of two consecutive planes.",
+          "",
+          "This value is permitted to be negative. If this value is zero, the bitmap is assumed to be in chunky format, otherwise it is assumed to be planar. The difference between chunky and planar layout lies in the way how color channels are interleaved. For a chunky format, all channel data for a single pixel lies consecutively in memory. For a planar layout, the first channel of all pixel is stored consecutive, followed by the second channel, and so forth."
+        ]
+      },
+      {
+        "name": "ColorSpace",
+        "type": "XColorSpace_e3940d09",
+        "lines": [
+          "Color space the bitmap colors shall be interpreted within."
+        ]
+      },
+      {
+        "name": "NumComponents",
+        "type": "int",
+        "lines": [
+          "Number of color components per pixel.",
+          "",
+          "This value must not be negative"
+        ]
+      },
+      {
+        "name": "Endianness",
+        "type": "int",
+        "lines": [
+          "Endianness of the pixel values.",
+          "",
+          "This value must be one of the Endianness constants"
+        ]
+      },
+      {
+        "name": "Format",
+        "type": "int",
+        "lines": [
+          "Format type of this bitmap.",
+          "",
+          "This value must be one of the FloatingPointBitmapFormat constants."
+        ]
+      }
+    ]
+  }
+}

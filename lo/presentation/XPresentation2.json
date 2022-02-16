@@ -1,0 +1,119 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XPresentation2",
+  "type": "interface",
+  "namespace": "com.sun.star.presentation",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..beans.x_property_set",
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
+      ],
+      [
+        ".x_presentation",
+        "XPresentation",
+        "XPresentation_30890f78"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
+      ],
+      [
+        ".x_slide_show_controller",
+        "XSlideShowController",
+        "XSlideShowController_a55c1232"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa",
+      "com.sun.star.presentation.XPresentation": "XPresentation_30890f78"
+    },
+    "quote": [
+      "XSlideShowController_a55c1232",
+      "typing.Tuple[PropertyValue_c9610c73, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[PropertyValue_c9610c73, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XPropertySet",
+        "com.sun.star.presentation.XPresentation"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.presentation.XSlideShowController"
+      ]
+    },
+    "name": "XPresentation2",
+    "imports": [],
+    "namespace": "com.sun.star.presentation",
+    "extends": [
+      "com.sun.star.presentation.XPresentation",
+      "com.sun.star.beans.XPropertySet"
+    ],
+    "desc": [
+      "enhances the XPresentation interface to give access to a XSlideShowController and to start a presentation with arguments.",
+      "",
+      "**since**",
+      "",
+      "    OOo 3.0"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1presentation_1_1XPresentation2.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getController",
+          "returns": "XSlideShowController_a55c1232",
+          "desc": [
+            "if the slide show is running, this returns a controller object to control the running slide show."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "isRunning",
+          "returns": "bool",
+          "desc": [
+            "returns true if the slide show is currently running"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "startWithArguments",
+          "returns": "None",
+          "desc": [
+            "start the slide show with the given arguments.",
+            "",
+            "All arguments override the values from Presentation."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Arguments",
+              "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

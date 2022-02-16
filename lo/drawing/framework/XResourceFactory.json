@@ -1,0 +1,101 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XResourceFactory",
+  "type": "interface",
+  "namespace": "com.sun.star.drawing.framework",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        ".x_resource",
+        "XResource",
+        "XResource_3bcd0f90"
+      ],
+      [
+        ".x_resource_id",
+        "XResourceId",
+        "XResourceId_5be3103d"
+      ]
+    ],
+    "extends_map": {},
+    "quote": [
+      "XResourceId_5be3103d",
+      "XResource_3bcd0f90"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.drawing.framework.XResource",
+        "com.sun.star.drawing.framework.XResourceId"
+      ]
+    },
+    "name": "XResourceFactory",
+    "imports": [],
+    "namespace": "com.sun.star.drawing.framework",
+    "extends": [],
+    "desc": [
+      "Factory and possibly cache for creating and releasing resources.",
+      "",
+      "A resource factory is created and used by the XConfigurationController object.",
+      "",
+      "A factory may want to implement a cache to reuse previously released resources."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1drawing_1_1framework_1_1XResourceFactory.html",
+    "items": {
+      "methods": [
+        {
+          "name": "createResource",
+          "returns": "XResource_3bcd0f90",
+          "desc": [
+            "Create a resource for the given XResourceId object.",
+            "",
+            "Valid values are those for which the factory has previously been registered at the XConfigurationController",
+            "",
+            "."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.WrappedTargetException"
+          ],
+          "args": [
+            [
+              "xResourceId",
+              "XResourceId_5be3103d",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "releaseResource",
+          "returns": "None",
+          "desc": [
+            "Call this method to tell a factory that the given resource is no longer in use.",
+            "",
+            "The factory can decide whether to destroy the resource or to keep it in a cache in order to reuse it later."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xResource",
+              "XResource_3bcd0f90",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

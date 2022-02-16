@@ -1,0 +1,250 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XLocalizedAliases",
+  "type": "interface",
+  "namespace": "com.sun.star.util",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..lang.locale",
+        "Locale",
+        "Locale_70d308fa"
+      ],
+      [
+        ".alias_programmatic_pair",
+        "AliasProgrammaticPair",
+        "AliasProgrammaticPair_2a930f22"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "Locale_70d308fa",
+      "typing.Tuple[AliasProgrammaticPair_2a930f22, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[AliasProgrammaticPair_2a930f22, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.lang.Locale",
+        "com.sun.star.util.AliasProgrammaticPair"
+      ]
+    },
+    "name": "XLocalizedAliases",
+    "imports": [],
+    "namespace": "com.sun.star.util",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "is the interface for binding programmatic names to aliases.",
+      "",
+      "Aliases can be provided in several locales for the same programmatic name."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1util_1_1XLocalizedAliases.html",
+    "items": {
+      "methods": [
+        {
+          "name": "bindAlias",
+          "returns": "None",
+          "desc": [
+            "registers an alias for a programmatic name."
+          ],
+          "raises": [
+            "com.sun.star.container.ElementExistException"
+          ],
+          "args": [
+            [
+              "programmaticName",
+              "str",
+              "in"
+            ],
+            [
+              "locale",
+              "Locale_70d308fa",
+              "in"
+            ],
+            [
+              "alias",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "listAliases",
+          "returns": "typing.Tuple[AliasProgrammaticPair_2a930f22, ...]",
+          "desc": [
+            "retrieves a list of all registered aliases for a certain language."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "locale",
+              "Locale_70d308fa",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "lookupAlias",
+          "returns": "str",
+          "desc": [
+            "retrieves a registered programmatic name identified by an alias."
+          ],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException"
+          ],
+          "args": [
+            [
+              "locale",
+              "Locale_70d308fa",
+              "in"
+            ],
+            [
+              "Alias",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "lookupProgrammatic",
+          "returns": "str",
+          "desc": [
+            "retrieves a given alias for a programmatic name."
+          ],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException"
+          ],
+          "args": [
+            [
+              "locale",
+              "Locale_70d308fa",
+              "in"
+            ],
+            [
+              "programmatic",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "rebindAliases",
+          "returns": "None",
+          "desc": [
+            "rebinds all aliases registered to a given URL to a new one."
+          ],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException",
+            "com.sun.star.container.ElementExistException"
+          ],
+          "args": [
+            [
+              "currentProgrammatic",
+              "str",
+              "in"
+            ],
+            [
+              "newProgrammatic",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "renameAlias",
+          "returns": "None",
+          "desc": [
+            "renames an alias for a programmatic name."
+          ],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException",
+            "com.sun.star.container.ElementExistException"
+          ],
+          "args": [
+            [
+              "locale",
+              "Locale_70d308fa",
+              "in"
+            ],
+            [
+              "oldName",
+              "str",
+              "in"
+            ],
+            [
+              "aNewName",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "unbindAlias",
+          "returns": "None",
+          "desc": [
+            "revokes an alias for a programmatic name."
+          ],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException"
+          ],
+          "args": [
+            [
+              "locale",
+              "Locale_70d308fa",
+              "in"
+            ],
+            [
+              "alias",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "unbindAliases",
+          "returns": "None",
+          "desc": [
+            "removes all aliases for a programmatic name."
+          ],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException"
+          ],
+          "args": [
+            [
+              "programmaticName",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XCommandPreparation",
+  "type": "interface",
+  "namespace": "com.sun.star.sdb",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..sdbc.x_prepared_statement",
+        "XPreparedStatement",
+        "XPreparedStatement_fbc80de4"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XPreparedStatement_fbc80de4"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.sdbc.XPreparedStatement"
+      ]
+    },
+    "name": "XCommandPreparation",
+    "imports": [],
+    "namespace": "com.sun.star.sdb",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "is used for preparation of commands.",
+      "",
+      "A command could be a table, query, or any kind of SQL statement prepared by the user."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sdb_1_1XCommandPreparation.html",
+    "items": {
+      "methods": [
+        {
+          "name": "prepareCommand",
+          "returns": "XPreparedStatement_fbc80de4",
+          "desc": [
+            "creates a com.sun.star.sdbc.PreparedStatement object for sending parameterized SQL statements to the database.",
+            "",
+            "A SQL statement with or without IN parameters can be pre-compiled and stored in a PreparedStatement object. This object can then be used to efficiently execute this statement multiple times."
+          ],
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
+          "args": [
+            [
+              "command",
+              "str",
+              "in"
+            ],
+            [
+              "commandType",
+              "int",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

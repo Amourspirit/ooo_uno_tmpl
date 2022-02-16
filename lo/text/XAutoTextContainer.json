@@ -1,0 +1,105 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XAutoTextContainer",
+  "type": "interface",
+  "namespace": "com.sun.star.text",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..container.x_name_access",
+        "XNameAccess",
+        "XNameAccess_e2ab0cf6"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_auto_text_group",
+        "XAutoTextGroup",
+        "XAutoTextGroup_c9770c70"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.container.XNameAccess": "XNameAccess_e2ab0cf6"
+    },
+    "quote": [
+      "XAutoTextGroup_c9770c70"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.container.XNameAccess"
+      ],
+      "typing": [
+        "com.sun.star.text.XAutoTextGroup"
+      ]
+    },
+    "name": "XAutoTextContainer",
+    "imports": [],
+    "namespace": "com.sun.star.text",
+    "extends": [
+      "com.sun.star.container.XNameAccess"
+    ],
+    "desc": [
+      "handles blocks of AutoTextEntry."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1text_1_1XAutoTextContainer.html",
+    "items": {
+      "methods": [
+        {
+          "name": "insertNewByName",
+          "returns": "XAutoTextGroup_c9770c70",
+          "desc": [
+            "creates a new AutoText group.",
+            "",
+            "The name must follow the pattern groupname*pathid, where:",
+            "",
+            "If only groupname is specified, the path defaults to 0, the Office Basis layer.",
+            "Note that in some systems the user may lack of write access to the Office Basis directory.",
+            "",
+            "Example:"
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.container.ElementExistException"
+          ],
+          "args": [
+            [
+              "aGroupName",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeByName",
+          "returns": "None",
+          "desc": [
+            "deletes the specified AutoText group."
+          ],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException"
+          ],
+          "args": [
+            [
+              "aGroupName",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

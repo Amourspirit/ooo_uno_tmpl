@@ -1,0 +1,160 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "DataForm",
+  "type": "service",
+  "namespace": "com.sun.star.form.component",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..x_database_parameter_broadcaster",
+        "XDatabaseParameterBroadcaster",
+        "XDatabaseParameterBroadcaster_ac7f1234"
+      ],
+      [
+        "..x_loadable",
+        "XLoadable",
+        "XLoadable_8e680a28"
+      ],
+      [
+        "..x_reset",
+        "XReset",
+        "XReset_71670917"
+      ],
+      [
+        ".form",
+        "Form",
+        "Form_ca1d0c51"
+      ],
+      [
+        "...sdb.row_set",
+        "RowSet",
+        "RowSet_67d208a5"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..navigation_bar_mode",
+        "NavigationBarMode",
+        "NavigationBarMode_efbc0d66"
+      ],
+      [
+        "..tabulator_cycle",
+        "TabulatorCycle",
+        "TabulatorCycle_c9250c5a"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.form.XDatabaseParameterBroadcaster": "XDatabaseParameterBroadcaster_ac7f1234",
+      "com.sun.star.form.XLoadable": "XLoadable_8e680a28",
+      "com.sun.star.form.XReset": "XReset_71670917",
+      "com.sun.star.form.component.Form": "Form_ca1d0c51",
+      "com.sun.star.sdb.RowSet": "RowSet_67d208a5"
+    },
+    "quote": [
+      "NavigationBarMode_efbc0d66",
+      "TabulatorCycle_c9250c5a",
+      "typing.Tuple[str, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[str, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.form.XDatabaseParameterBroadcaster",
+        "com.sun.star.form.XLoadable",
+        "com.sun.star.form.XReset",
+        "com.sun.star.form.component.Form",
+        "com.sun.star.sdb.RowSet"
+      ],
+      "typing": [
+        "com.sun.star.form.NavigationBarMode",
+        "com.sun.star.form.TabulatorCycle"
+      ]
+    },
+    "name": "DataForm",
+    "imports": [],
+    "namespace": "com.sun.star.form.component",
+    "extends": [
+      "com.sun.star.sdb.RowSet",
+      "com.sun.star.form.component.Form",
+      "com.sun.star.form.XReset",
+      "com.sun.star.form.XLoadable",
+      "com.sun.star.form.XDatabaseParameterBroadcaster"
+    ],
+    "desc": [
+      "This service specifies a form which is connected to a database and displays the results of SQL queries.",
+      "",
+      "It provides the possibility of adding new data records, modifying existing ones, or deleting them.",
+      "",
+      "A database form is a special kind of enhanced database row set which provides all information for displaying the data and has more possibilities for configuring the data manipulation."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1form_1_1component_1_1DataForm.html",
+    "items": {
+      "properties": [
+        {
+          "name": "AllowDeletes",
+          "returns": "bool",
+          "desc": [
+            "determines if deletions of records of the form are allowed.",
+            "",
+            "Note that this is a recommendation for user interface components displaying the form. Form implementations may decide to allow for deletions done via the API, even if the property is set to FALSE, but the user interface should respect the property value."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "AllowInserts",
+          "returns": "bool",
+          "desc": [
+            "determines if insertions into the form's row set are allowed.",
+            "",
+            "Note that this is a recommendation for user interface components displaying the form. Form implementations may decide to allow for insertions done via the API, even if the property is set to FALSE, but the user interface should respect the property value."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "AllowUpdates",
+          "returns": "bool",
+          "desc": [
+            "determines if modifications of the current record of the form are allowed.",
+            "",
+            "Note that this is a recommendation for user interface components displaying the form. Form implementations may decide to allow for updates done via the API, even if the property is set to FALSE, but the user interface should respect the property value."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Cycle",
+          "returns": "TabulatorCycle_c9250c5a",
+          "desc": [
+            "returns the kind of tabulator controlling."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "NavigationBarMode",
+          "returns": "NavigationBarMode_efbc0d66",
+          "desc": [
+            "determines how a navigation bar for this form should act."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

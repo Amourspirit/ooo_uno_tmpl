@@ -1,0 +1,217 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XConversionDictionaryList",
+  "type": "interface",
+  "namespace": "com.sun.star.linguistic2",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..container.x_name_container",
+        "XNameContainer",
+        "XNameContainer_cb90e47"
+      ],
+      [
+        "..lang.locale",
+        "Locale",
+        "Locale_70d308fa"
+      ],
+      [
+        ".conversion_direction",
+        "ConversionDirection",
+        "ConversionDirection_7dfe113c"
+      ],
+      [
+        ".x_conversion_dictionary",
+        "XConversionDictionary",
+        "XConversionDictionary_a04e1209"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "ConversionDirection_7dfe113c",
+      "Locale_70d308fa",
+      "XConversionDictionary_a04e1209",
+      "XNameContainer_cb90e47",
+      "typing.Tuple[str, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[str, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.container.XNameContainer",
+        "com.sun.star.lang.Locale",
+        "com.sun.star.linguistic2.ConversionDirection",
+        "com.sun.star.linguistic2.XConversionDictionary"
+      ]
+    },
+    "name": "XConversionDictionaryList",
+    "imports": [],
+    "namespace": "com.sun.star.linguistic2",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "is used to manage and maintain a list of conversion dictionaries.",
+      "",
+      "The dictionaries added to the list may or may not support the com.sun.star.util.XFlushable interface. If they do those dictionaries have to be flushed upon termination of the dictionary list.",
+      "",
+      "**since**",
+      "",
+      "    OOo 1.1.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1linguistic2_1_1XConversionDictionaryList.html",
+    "items": {
+      "methods": [
+        {
+          "name": "addNewDictionary",
+          "returns": "XConversionDictionary_a04e1209",
+          "desc": [
+            "creates a new dictionary and adds it to the dictionary list.",
+            "",
+            "The dictionary will be empty and active."
+          ],
+          "raises": [
+            "com.sun.star.lang.NoSupportException",
+            "com.sun.star.container.ElementExistException"
+          ],
+          "args": [
+            [
+              "aName",
+              "str",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale_70d308fa",
+              "in"
+            ],
+            [
+              "nConversionDictionaryType",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getDictionaryContainer",
+          "returns": "XNameContainer_cb90e47",
+          "desc": [
+            "The interface can be used to add, remove or retrieve dictionaries from the list by specifying the name of the dictionary, and (in case of inserting) the interface to the dictionary as second parameter.",
+            "",
+            "A dictionary to be added must support the com.sun.star.linguistic2.XConversionDictionary interface. The dictionary to be added needs not necessarily be created by this service.",
+            "",
+            "The com.sun.star.container.XNameReplace.replaceByName function is implemented empty since renaming of dictionaries is not allowed."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "queryConversions",
+          "returns": "typing.Tuple[str, ...]",
+          "desc": [
+            "searches for entries that match the given text.",
+            "",
+            "All active dictionaries with matching locales and conversion type will be searched for entries matching the given text.",
+            "",
+            "The exact string to be looked for is the substring from the aText parameter that starts at position nStartPos and has the length nLength."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.NoSupportException"
+          ],
+          "args": [
+            [
+              "aText",
+              "str",
+              "in"
+            ],
+            [
+              "nStartPos",
+              "int",
+              "in"
+            ],
+            [
+              "nLength",
+              "int",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale_70d308fa",
+              "in"
+            ],
+            [
+              "nConversionDictionaryType",
+              "int",
+              "in"
+            ],
+            [
+              "eDirection",
+              "ConversionDirection_7dfe113c",
+              "in"
+            ],
+            [
+              "nTextConversionOptions",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "queryMaxCharCount",
+          "returns": "int",
+          "desc": [
+            "returns the maximum number of characters used as left or right text in entries.",
+            "",
+            "All active dictionaries of the specified locale and type will be looked up to get the result.",
+            "",
+            "The parameter eDirection specifies if only the left text or the right text from entries should be considered."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aLocale",
+              "Locale_70d308fa",
+              "in"
+            ],
+            [
+              "nConversionDictionaryType",
+              "int",
+              "in"
+            ],
+            [
+              "eDirection",
+              "ConversionDirection_7dfe113c",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

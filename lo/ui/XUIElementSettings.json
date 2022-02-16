@@ -1,0 +1,110 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XUIElementSettings",
+  "type": "interface",
+  "namespace": "com.sun.star.ui",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..container.x_index_access",
+        "XIndexAccess",
+        "XIndexAccess_f0910d6d"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XIndexAccess_f0910d6d"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.container.XIndexAccess"
+      ]
+    },
+    "name": "XUIElementSettings",
+    "imports": [],
+    "namespace": "com.sun.star.ui",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "provides functions to retrieve and change user interface element structure data and to update its visible representation.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.0"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ui_1_1XUIElementSettings.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getSettings",
+          "returns": "XIndexAccess_f0910d6d",
+          "desc": [
+            "provides a UIElementSettings instance that provides access to the structure of user interface element if the user interface element type supports it."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "bWriteable",
+              "bool",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setSettings",
+          "returns": "None",
+          "desc": [
+            "set changes to the structure of the user interface element.",
+            "",
+            "User interface elements cannot be changed directly. The changed structure data has to be set again. This speeds up the configuration process if many changes have to be made on the structure. The persistence of changes are controlled by the boolean property Persistent."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "UISettings",
+              "XIndexAccess_f0910d6d",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "updateSettings",
+          "returns": "None",
+          "desc": [
+            "forces the user interface element to retrieve new settings from its configuration source.",
+            "",
+            "This is not done automatically as configurable user interface elements are controlled by layout managers. It is more efficient to let the responsible layout manager to control the update process in a single task."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

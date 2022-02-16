@@ -1,0 +1,100 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "ItemState",
+  "type": "const",
+  "namespace": "com.sun.star.frame.status",
+  "parser_args": {
+    "sort": false,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "hex": false,
+    "flags": true,
+    "include_desc": true
+  },
+  "data": {
+    "name": "ItemState",
+    "namespace": "com.sun.star.frame.status",
+    "url": "https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1frame_1_1status_1_1ItemState.html",
+    "flags": true,
+    "base_class": "ConstIntFlagsBase",
+    "allow_db": true,
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "from_imports": [],
+    "from_imports_typing": [],
+    "fullname": "com.sun.star.frame.status.ItemState",
+    "desc": [
+      "these constants describe a state of an ItemStatus.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.0"
+    ],
+    "items": [
+      {
+        "name": "UNKNOWN",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 0,
+        "lines": [
+          "specifies an unknown state."
+        ]
+      },
+      {
+        "name": "DISABLED",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 1,
+        "lines": [
+          "specifies that the property is currently disabled."
+        ]
+      },
+      {
+        "name": "READ_ONLY",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 2,
+        "lines": [
+          "specifies that the property is currently read-only.",
+          "",
+          "Deprecated: There is no equivalent in SfxItemState anymore due to not being used, so remove for simplification reasons and to prepare rework of Item/ItemSet/ItemPool stuff.",
+          "",
+          "There are only three usages of .ItemState in the code which all set the internal SfxItem to SfxVoidItem when triggered, which is equivalent to state SfxItemState.DISABLED (see e.g. SfxItemSet.GetItemState), so READ_ONLY gets not used in internal handling, even when eventually existing UNO API usages hand it over the office."
+        ]
+      },
+      {
+        "name": "DONT_CARE",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 16,
+        "lines": [
+          "specifies that the property is currently in a don't care state.",
+          "",
+          "This is normally used if a selection provides more than one state for a property at the same time."
+        ]
+      },
+      {
+        "name": "DEFAULT_VALUE",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 32,
+        "lines": [
+          "specifies that the property is currently in a default state."
+        ]
+      },
+      {
+        "name": "SET",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 64,
+        "lines": [
+          "specifies that the property is currently in a set state."
+        ]
+      }
+    ]
+  }
+}

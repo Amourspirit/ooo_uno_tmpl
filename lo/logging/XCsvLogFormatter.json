@@ -1,0 +1,80 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XCsvLogFormatter",
+  "type": "interface",
+  "namespace": "com.sun.star.logging",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_log_formatter",
+        "XLogFormatter",
+        "XLogFormatter_e23d0d1d"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.logging.XLogFormatter": "XLogFormatter_e23d0d1d"
+    },
+    "quote": [
+      "typing.Tuple[str, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[str, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.logging.XLogFormatter"
+      ],
+      "typing": []
+    },
+    "name": "XCsvLogFormatter",
+    "imports": [],
+    "namespace": "com.sun.star.logging",
+    "extends": [
+      "com.sun.star.logging.XLogFormatter"
+    ],
+    "desc": [
+      "specifies the interface used for formatting log records for RFC4180 CSV output",
+      "",
+      "**since**",
+      "",
+      "    OOo 3.0"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1logging_1_1XCsvLogFormatter.html",
+    "items": {
+      "methods": [
+        {
+          "name": "formatMultiColumn",
+          "returns": "str",
+          "desc": [
+            "if the CsvLogFormatter is set to have more than one column, any logged information has to be send through this method before calling log().",
+            "",
+            "E.g.:",
+            "",
+            "XLoggerInstance.log(1000, XCsvLogFormatterInstance.formatMultiColumn(columnData))"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "columnData",
+              "typing.Tuple[str, ...]",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

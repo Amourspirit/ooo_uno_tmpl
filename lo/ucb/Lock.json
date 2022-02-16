@@ -1,0 +1,92 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "type": "struct",
+  "name": "Lock",
+  "namespace": "com.sun.star.ucb",
+  "parser_args": {
+    "sort": false,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "sort": true,
+    "dynamic_struct": true,
+    "include_desc": true
+  },
+  "data": {
+    "name": "Lock",
+    "namespace": "com.sun.star.ucb",
+    "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1ucb_1_1Lock.html",
+    "from_imports": [
+      [
+        ".lock_entry",
+        "LockEntry",
+        "LockEntry_839e09dd"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".lock_depth",
+        "LockDepth",
+        "LockDepth_835c09c0"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.ucb.LockEntry": "LockEntry_839e09dd"
+    },
+    "quote": [
+      "LockDepth_835c09c0",
+      "typing.Tuple[str, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[str, ...]"
+    ],
+    "requires_typing": true,
+    "fullname": "com.sun.star.ucb.Lock",
+    "desc": [
+      "defines a lock."
+    ],
+    "imports": [],
+    "extends": [
+      "com.sun.star.ucb.LockEntry"
+    ],
+    "items": [
+      {
+        "name": "LockTokens",
+        "type": "typing.Tuple[str, ...]",
+        "lines": [
+          "the lock tokens.",
+          "",
+          "Each lock token is a URI."
+        ]
+      },
+      {
+        "name": "Depth",
+        "type": "LockDepth_835c09c0",
+        "lines": [
+          "defines the lock's depth."
+        ]
+      },
+      {
+        "name": "Owner",
+        "type": "object",
+        "lines": [
+          "the owner of the lock.",
+          "",
+          "This element provides information sufficient for either directly contacting a principal (such as a telephone number or email URI), or for discovering the principal (such as the URL of a homepage) who owns the lock."
+        ]
+      },
+      {
+        "name": "Timeout",
+        "type": "int",
+        "lines": [
+          "a timeout value for the lock.",
+          "",
+          "This element specifies the number of seconds between granting of the lock and the automatic removal of that lock. The value must not be greater than 2^32-1. A value of -1 stands for an infinite lock, that will never be removed automatically."
+        ]
+      }
+    ]
+  }
+}

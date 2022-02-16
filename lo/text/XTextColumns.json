@@ -1,0 +1,126 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XTextColumns",
+  "type": "interface",
+  "namespace": "com.sun.star.text",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".text_column",
+        "TextColumn",
+        "TextColumn_9b3f0ae0"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "typing.Tuple[TextColumn_9b3f0ae0, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[TextColumn_9b3f0ae0, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.text.TextColumn"
+      ]
+    },
+    "name": "XTextColumns",
+    "imports": [],
+    "namespace": "com.sun.star.text",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "manages columns within the object.",
+      "",
+      "The values used are relative. So it is not necessary to know the width of the object. The sum of the relative width values depends on the object and is defined in \\\"ReferenceValue.\\\""
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1text_1_1XTextColumns.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getColumnCount",
+          "returns": "int",
+          "desc": [],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getColumns",
+          "returns": "typing.Tuple[TextColumn_9b3f0ae0, ...]",
+          "desc": [
+            "returns the column description of the object."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getReferenceValue",
+          "returns": "int",
+          "desc": [
+            "As described above, the width values are relative."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setColumnCount",
+          "returns": "None",
+          "desc": [
+            "sets the number of columns.",
+            "",
+            "The minimum is 1 column."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "nColumns",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setColumns",
+          "returns": "None",
+          "desc": [
+            "sets the descriptors of all columns.",
+            "",
+            "The number of members in the sequence must be the same as the number of columns of the object."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Columns",
+              "typing.Tuple[TextColumn_9b3f0ae0, ...]",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

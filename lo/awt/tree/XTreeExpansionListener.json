@@ -1,0 +1,144 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XTreeExpansionListener",
+  "type": "interface",
+  "namespace": "com.sun.star.awt.tree",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "...lang.x_event_listener",
+        "XEventListener",
+        "XEventListener_c7230c4a"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".tree_expansion_event",
+        "TreeExpansionEvent",
+        "TreeExpansionEvent_378b0f79"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.lang.XEventListener": "XEventListener_c7230c4a"
+    },
+    "quote": [
+      "TreeExpansionEvent_378b0f79"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.lang.XEventListener"
+      ],
+      "typing": [
+        "com.sun.star.awt.tree.TreeExpansionEvent"
+      ]
+    },
+    "name": "XTreeExpansionListener",
+    "imports": [],
+    "namespace": "com.sun.star.awt.tree",
+    "extends": [
+      "com.sun.star.lang.XEventListener"
+    ],
+    "desc": [
+      "An instance of this interface can get notifications from a TreeControl when nodes are expanded or collapsed."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1tree_1_1XTreeExpansionListener.html",
+    "items": {
+      "methods": [
+        {
+          "name": "requestChildNodes",
+          "returns": "None",
+          "desc": [
+            "Invoked when a node with children on demand is about to be expanded.",
+            "",
+            "This event is invoked before the treeExpanding() event."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Event",
+              "TreeExpansionEvent_378b0f79",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "treeCollapsed",
+          "returns": "None",
+          "desc": [
+            "Called whenever a node in the tree has been successfully collapsed."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Event",
+              "TreeExpansionEvent_378b0f79",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "treeCollapsing",
+          "returns": "None",
+          "desc": [
+            "Invoked whenever a node in the tree is about to be collapsed."
+          ],
+          "raises": [
+            "ExpandVetoException"
+          ],
+          "args": [
+            [
+              "Event",
+              "TreeExpansionEvent_378b0f79",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "treeExpanded",
+          "returns": "None",
+          "desc": [
+            "Called whenever a node in the tree has been successfully expanded."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Event",
+              "TreeExpansionEvent_378b0f79",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "treeExpanding",
+          "returns": "None",
+          "desc": [
+            "Invoked whenever a node in the tree is about to be expanded."
+          ],
+          "raises": [
+            "ExpandVetoException"
+          ],
+          "args": [
+            [
+              "Event",
+              "TreeExpansionEvent_378b0f79",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XLockable",
+  "type": "interface",
+  "namespace": "com.sun.star.util",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [],
+    "from_imports_typing": [],
+    "extends_map": {},
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [],
+      "typing": []
+    },
+    "name": "XLockable",
+    "imports": [],
+    "namespace": "com.sun.star.util",
+    "extends": [],
+    "desc": [
+      "allows locking a component",
+      "",
+      "lock and unlock calls can be nested. However, they must be in pairs. As long as there has been one more call to lock than to unlock, the component is considered locked, which is reflected by isLocked() returning TRUE."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1util_1_1XLockable.html",
+    "items": {
+      "methods": [
+        {
+          "name": "isLocked",
+          "returns": "bool",
+          "desc": [
+            "determines whether the component is currently locked."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "lock",
+          "returns": "None",
+          "desc": [
+            "locks the component"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "unlock",
+          "returns": "None",
+          "desc": [
+            "unlocks the component"
+          ],
+          "raises": [
+            "NotLockedException"
+          ],
+          "args": []
+        }
+      ]
+    }
+  }
+}

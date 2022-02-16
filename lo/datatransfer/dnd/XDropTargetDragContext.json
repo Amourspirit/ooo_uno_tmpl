@@ -1,0 +1,85 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XDropTargetDragContext",
+  "type": "interface",
+  "namespace": "com.sun.star.datatransfer.dnd",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "...uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": []
+    },
+    "name": "XDropTargetDragContext",
+    "imports": [],
+    "namespace": "com.sun.star.datatransfer.dnd",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "This interface is implemented by any drop target context object.",
+      "",
+      "A drop target context is created whenever the logical cursor associated with a Drag and Drop operation moves within the visible geometry of a window associated with a drop target.",
+      "",
+      "The drop target context provides the mechanism for a potential receiver of a drop operation to both provide the end user with the appropriate drag under feedback and effect the subsequent data transfer, if appropriate."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1datatransfer_1_1dnd_1_1XDropTargetDragContext.html",
+    "items": {
+      "methods": [
+        {
+          "name": "acceptDrag",
+          "returns": "None",
+          "desc": [
+            "Accept the Drag.",
+            "",
+            "This method should be called from the methods of XDropTargetListener",
+            "",
+            "if the implementation wishes to accept the drag operation with the specified action."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "dragOperation",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "rejectDrag",
+          "returns": "None",
+          "desc": [
+            "Reject the drag as a result of examining the available com.sun.star.datatransfer.DataFlavor types received in the com.sun.star.datatransfer.dnd.XDropTargetListener.dragEnter() method."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

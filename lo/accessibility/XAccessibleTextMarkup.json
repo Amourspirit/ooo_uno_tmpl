@@ -1,0 +1,145 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XAccessibleTextMarkup",
+  "type": "interface",
+  "namespace": "com.sun.star.accessibility",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_accessible_text",
+        "XAccessibleText",
+        "XAccessibleText_5b77105b"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".text_segment",
+        "TextSegment",
+        "TextSegment_1e5b0ee8"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.accessibility.XAccessibleText": "XAccessibleText_5b77105b"
+    },
+    "quote": [
+      "TextSegment_1e5b0ee8",
+      "typing.Tuple[TextSegment_1e5b0ee8, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[TextSegment_1e5b0ee8, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.accessibility.XAccessibleText"
+      ],
+      "typing": [
+        "com.sun.star.accessibility.TextSegment"
+      ]
+    },
+    "name": "XAccessibleTextMarkup",
+    "imports": [],
+    "namespace": "com.sun.star.accessibility",
+    "extends": [
+      "com.sun.star.accessibility.XAccessibleText"
+    ],
+    "desc": [
+      "Implement this interface to expose the text markups of a text.",
+      "",
+      "The XAccessibleTextMarkup interface is the main interface to expose text markups in a text, typically of a text document, that are used to reference other (parts of) documents. For supporting the XAccessibleTextMarkup.getTextMarkupIndex() method of this interface and other character related methods of the XAccessibleTextMarkup interface, it is necessary to also support the XAccessibleText interface.",
+      "",
+      "**since**",
+      "",
+      "    OOo 3.0"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleTextMarkup.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getTextMarkup",
+          "returns": "TextSegment_1e5b0ee8",
+          "desc": [
+            "Returns the text segment of the text markup of the given index and of the given text mark type.",
+            "",
+            "Throws IndexOutOfBoundsException, if given index is out of valid range.",
+            "",
+            "Throws IllegalArgumentException, if given text markup type is out of valid range."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException",
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "TextMarkupIndex",
+              "int",
+              "in"
+            ],
+            [
+              "TextMarkupType",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getTextMarkupAtIndex",
+          "returns": "typing.Tuple[TextSegment_1e5b0ee8, ...]",
+          "desc": [
+            "returns a sequence of the text segments of the text markups at the given character index and of the given text markup type.",
+            "",
+            "Throws IndexOutOfBoundsException, if given character index is out of range [0..number of characters in the text).",
+            "",
+            "Throws IllegalArgumentException, if given text markup type is out of valid range."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException",
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "CharIndex",
+              "int",
+              "in"
+            ],
+            [
+              "TextMarkupType",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getTextMarkupCount",
+          "returns": "int",
+          "desc": [
+            "Returns the number of text markup of the given text markup type of a text.",
+            "",
+            "Throws IllegalArgumentException, if given text markup type is out of valid range."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "TextMarkupType",
+              "int",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

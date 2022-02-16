@@ -1,0 +1,79 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XVersionedSchemaSupplier",
+  "type": "interface",
+  "namespace": "com.sun.star.configuration.backend",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_schema_supplier",
+        "XSchemaSupplier",
+        "XSchemaSupplier_eca11373"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.configuration.backend.XSchemaSupplier": "XSchemaSupplier_eca11373"
+    },
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.configuration.backend.XSchemaSupplier"
+      ],
+      "typing": []
+    },
+    "name": "XVersionedSchemaSupplier",
+    "imports": [],
+    "namespace": "com.sun.star.configuration.backend",
+    "extends": [
+      "com.sun.star.configuration.backend.XSchemaSupplier"
+    ],
+    "desc": [
+      "provides access to versioned configuration component schemas.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.0"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1configuration_1_1backend_1_1XVersionedSchemaSupplier.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getSchemaVersion",
+          "returns": "str",
+          "desc": [
+            "Returns the schema version for a particular component.",
+            "",
+            "The format of the version string is arbitrary. No meaning should be attached to it, unless an implementing service defines one. If no version can be determined, an empty string may be returned.",
+            "",
+            "Clients may assume that all instances of a schema with the same version are identical. The converse is not true. In particular an implementation may return the same version string for all schemas it supplies (i.e. return a version for the complete schema, including all components)"
+          ],
+          "raises": [
+            "BackendAccessException",
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "aComponent",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

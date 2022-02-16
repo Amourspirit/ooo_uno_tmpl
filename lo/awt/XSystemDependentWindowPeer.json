@@ -1,0 +1,87 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XSystemDependentWindowPeer",
+  "type": "interface",
+  "namespace": "com.sun.star.awt",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "typing.Tuple[int, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[int, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": []
+    },
+    "name": "XSystemDependentWindowPeer",
+    "imports": [],
+    "namespace": "com.sun.star.awt",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "provides access to the system dependent implementation of the window."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XSystemDependentWindowPeer.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getWindowHandle",
+          "returns": "object",
+          "desc": [
+            "returns a system-specific window handle.",
+            "",
+            "You must check the machine ID and the process ID.",
+            "WIN32: Returns an HWND if possible, otherwise 0.",
+            "WIN16: Returns an HWND if possible, otherwise 0.",
+            "",
+            "JAVA: Returns a global reference to a java.awt.Component object provided from the JNI-API.",
+            "",
+            "MAC: Returns a ptr to the NSView implementing the window.",
+            "",
+            "XWINDOW: Returns a structure SystemDependentXWindow or void if it is not reachable."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "ProcessId",
+              "typing.Tuple[int, ...]",
+              "in"
+            ],
+            [
+              "SystemType",
+              "int",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

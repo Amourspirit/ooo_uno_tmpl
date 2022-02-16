@@ -1,0 +1,116 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XText",
+  "type": "interface",
+  "namespace": "com.sun.star.text",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_simple_text",
+        "XSimpleText",
+        "XSimpleText_a5ca0b34"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_text_content",
+        "XTextContent",
+        "XTextContent_b16e0ba5"
+      ],
+      [
+        ".x_text_range",
+        "XTextRange",
+        "XTextRange_9a910ab7"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.text.XSimpleText": "XSimpleText_a5ca0b34"
+    },
+    "quote": [
+      "XTextContent_b16e0ba5",
+      "XTextRange_9a910ab7"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.text.XSimpleText"
+      ],
+      "typing": [
+        "com.sun.star.text.XTextContent",
+        "com.sun.star.text.XTextRange"
+      ]
+    },
+    "name": "XText",
+    "imports": [],
+    "namespace": "com.sun.star.text",
+    "extends": [
+      "com.sun.star.text.XSimpleText"
+    ],
+    "desc": [
+      "extends a XSimpleText by the capability of inserting XTextContents."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1text_1_1XText.html",
+    "items": {
+      "methods": [
+        {
+          "name": "insertTextContent",
+          "returns": "None",
+          "desc": [
+            "inserts a content, such as a text table, text frame or text field.",
+            "",
+            "Which contents are accepted is implementation-specific. Some implementations may only accept contents which were created by the factory that supplied the same text or the document which contains the text."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "xRange",
+              "XTextRange_9a910ab7",
+              "in"
+            ],
+            [
+              "xContent",
+              "XTextContent_b16e0ba5",
+              "in"
+            ],
+            [
+              "bAbsorb",
+              "bool",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeTextContent",
+          "returns": "None",
+          "desc": [
+            "removes the specified content from the text object."
+          ],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException"
+          ],
+          "args": [
+            [
+              "xContent",
+              "XTextContent_b16e0ba5",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

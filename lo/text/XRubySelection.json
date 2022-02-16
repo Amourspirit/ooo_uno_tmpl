@@ -1,0 +1,104 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XRubySelection",
+  "type": "interface",
+  "namespace": "com.sun.star.text",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..beans.property_values",
+        "PropertyValues",
+        "PropertyValues_d6470ce6"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "typing.Tuple[PropertyValues_d6470ce6, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[PropertyValues_d6470ce6, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValues"
+      ]
+    },
+    "name": "XRubySelection",
+    "imports": [],
+    "namespace": "com.sun.star.text",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "This interface enables the object to handle list of ruby lines (aka Furigana lines)."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1text_1_1XRubySelection.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getRubyList",
+          "returns": "typing.Tuple[PropertyValues_d6470ce6, ...]",
+          "desc": [
+            "returns a sequence of ruby elements.",
+            "",
+            "Each element contains at least a string that contains the selected text and the ruby text. Additional parameters can be the ruby adjustment, the name of a character style."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Automatic",
+              "bool",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setRubyList",
+          "returns": "None",
+          "desc": [
+            "applies the RubyList to the current selection.",
+            "",
+            "The number of elements must be equal to the number of elements that are returned by getRubyList. Automatic must be set equally, too."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "RubyList",
+              "typing.Tuple[PropertyValues_d6470ce6, ...]",
+              "in"
+            ],
+            [
+              "Automatic",
+              "bool",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XCellRangeFormula",
+  "type": "interface",
+  "namespace": "com.sun.star.sheet",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "typing.Tuple[typing.Tuple[str, ...], ...]"
+    ],
+    "typings": [
+      "typing.Tuple[typing.Tuple[str, ...], ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": []
+    },
+    "name": "XCellRangeFormula",
+    "imports": [],
+    "namespace": "com.sun.star.sheet",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "allows to get and set cell contents (values, text or formulas) for a cell range.",
+      "",
+      "The outer sequence represents the rows and the inner sequence the columns of the array.",
+      "",
+      "**since**",
+      "",
+      "    OOo 1.1.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sheet_1_1XCellRangeFormula.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getFormulaArray",
+          "returns": "typing.Tuple[typing.Tuple[str, ...], ...]",
+          "desc": [
+            "gets an array from the contents of the cell range.",
+            "",
+            "Each element of the result contains the same string that would be returned by com.sun.star.table.XCell.getFormula() for the corresponding cell."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setFormulaArray",
+          "returns": "None",
+          "desc": [
+            "fills the cell range with values from an array.",
+            "",
+            "The size of the array must be the same as the size of the cell range. Each element of the array is interpreted the same way as the argument to a com.sun.star.table.XCell.setFormula() call for the corresponding cell."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aArray",
+              "typing.Tuple[typing.Tuple[str, ...], ...]",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

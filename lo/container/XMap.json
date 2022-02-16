@@ -1,0 +1,169 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XMap",
+  "type": "interface",
+  "namespace": "com.sun.star.container",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_element_access",
+        "XElementAccess",
+        "XElementAccess_cd60e3f"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.container.XElementAccess": "XElementAccess_cd60e3f"
+    },
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.container.XElementAccess"
+      ],
+      "typing": []
+    },
+    "name": "XMap",
+    "imports": [],
+    "namespace": "com.sun.star.container",
+    "extends": [
+      "com.sun.star.container.XElementAccess"
+    ],
+    "desc": [
+      "describes a map between keys and values.",
+      "",
+      "Keys in the map are unique, and each key maps to exactly one value.",
+      "",
+      "Locating elements in the map, both values and keys, requires a notion of equality of two objects. In conformance with the UNO type system, two values are said to be equal if and only if they have the same type, and both denote the same element of this type's value set."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1container_1_1XMap.html",
+    "items": {
+      "methods": [
+        {
+          "name": "clear",
+          "returns": "None",
+          "desc": [
+            "clears the map, removing all key-value pairs from it."
+          ],
+          "raises": [
+            "com.sun.star.lang.NoSupportException"
+          ],
+          "args": []
+        },
+        {
+          "name": "containsKey",
+          "returns": "bool",
+          "desc": [
+            "determines whether a mapping for he given key exists in the map"
+          ],
+          "raises": [
+            "com.sun.star.beans.IllegalTypeException",
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "Key",
+              "object",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "containsValue",
+          "returns": "bool",
+          "desc": [
+            "determines whether the map contains a mapping to a given value."
+          ],
+          "raises": [
+            "com.sun.star.beans.IllegalTypeException",
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "Value",
+              "object",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "get",
+          "returns": "object",
+          "desc": [
+            "gets the value to which a given key maps."
+          ],
+          "raises": [
+            "com.sun.star.beans.IllegalTypeException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.container.NoSuchElementException"
+          ],
+          "args": [
+            [
+              "Key",
+              "object",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "put",
+          "returns": "object",
+          "desc": [
+            "associates a given key with a given value",
+            "",
+            "If the map already contains a mapping for the given key, then the old value is replaced by the given new value."
+          ],
+          "raises": [
+            "com.sun.star.lang.NoSupportException",
+            "com.sun.star.beans.IllegalTypeException",
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "Key",
+              "object",
+              "in"
+            ],
+            [
+              "Value",
+              "object",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "remove",
+          "returns": "object",
+          "desc": [
+            "removes a key-value mapping, given by key, from the map."
+          ],
+          "raises": [
+            "com.sun.star.lang.NoSupportException",
+            "com.sun.star.beans.IllegalTypeException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.container.NoSuchElementException"
+          ],
+          "args": [
+            [
+              "Key",
+              "object",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

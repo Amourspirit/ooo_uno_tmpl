@@ -1,0 +1,99 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XDataFormatTranslator",
+  "type": "interface",
+  "namespace": "com.sun.star.datatransfer",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".data_flavor",
+        "DataFlavor",
+        "DataFlavor_ffd30deb"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "DataFlavor_ffd30deb"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.datatransfer.DataFlavor"
+      ]
+    },
+    "name": "XDataFormatTranslator",
+    "imports": [],
+    "namespace": "com.sun.star.datatransfer",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "Interface to be implemented by objects used to translate a DataFlavor to a system dependent data transfer type and vice versa.",
+      "",
+      "Different platforms use different types to describe data formats available during data exchange operations like clipboard or drag&drop. Windows for instance uses integer values to describe an available clipboard or drag&drop format, Unix X11 uses so called Atoms etc."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1datatransfer_1_1XDataFormatTranslator.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getDataFlavorFromSystemDataType",
+          "returns": "DataFlavor_ffd30deb",
+          "desc": [
+            "Converts a system dependent data type to a DataFlavor.",
+            "",
+            "If there is no appropriate mapping for a system dependent data type, the returned DataFlavor will be empty."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aSysDataType",
+              "object",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getSystemDataTypeFromDataFlavor",
+          "returns": "object",
+          "desc": [
+            "Converts a DataFlavor to system dependent data type.",
+            "",
+            "If the is no system dependent data type for a given DataFlavor the returned any is empty."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aDataFlavor",
+              "DataFlavor_ffd30deb",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

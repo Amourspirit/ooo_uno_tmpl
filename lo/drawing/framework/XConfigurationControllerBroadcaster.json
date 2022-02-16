@@ -1,0 +1,117 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XConfigurationControllerBroadcaster",
+  "type": "interface",
+  "namespace": "com.sun.star.drawing.framework",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        ".configuration_change_event",
+        "ConfigurationChangeEvent",
+        "ConfigurationChangeEvent_55151590"
+      ],
+      [
+        ".x_configuration_change_listener",
+        "XConfigurationChangeListener",
+        "XConfigurationChangeListener_adee172c"
+      ]
+    ],
+    "extends_map": {},
+    "quote": [
+      "ConfigurationChangeEvent_55151590",
+      "XConfigurationChangeListener_adee172c"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.drawing.framework.ConfigurationChangeEvent",
+        "com.sun.star.drawing.framework.XConfigurationChangeListener"
+      ]
+    },
+    "name": "XConfigurationControllerBroadcaster",
+    "imports": [],
+    "namespace": "com.sun.star.drawing.framework",
+    "extends": [],
+    "desc": [
+      "Manage the set of registered event listeners and the event notification for a configuration controller.",
+      "",
+      "The listeners are called in the order in which they are registered."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1drawing_1_1framework_1_1XConfigurationControllerBroadcaster.html",
+    "items": {
+      "methods": [
+        {
+          "name": "addConfigurationChangeListener",
+          "returns": "None",
+          "desc": [
+            "Add a new listener for configuration changes.",
+            "",
+            "The listener is notified only for the specified type of configuration changes. When the listener is interested in more than one event type this method has to be called multiple times. Alternatively it can register as universal listener that will be called for all event types. However, this option is provided primarily to support debugging and monitoring."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xListener",
+              "XConfigurationChangeListener_adee172c",
+              "in"
+            ],
+            [
+              "sEventType",
+              "str",
+              "in"
+            ],
+            [
+              "aUserData",
+              "object",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "notifyEvent",
+          "returns": "None",
+          "desc": [
+            "With this method other objects can send events to all the registered listeners."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aEvent",
+              "ConfigurationChangeEvent_55151590",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeConfigurationChangeListener",
+          "returns": "None",
+          "desc": [
+            "Remove a listener for configuration changes."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xListener",
+              "XConfigurationChangeListener_adee172c",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

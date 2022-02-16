@@ -1,0 +1,151 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XItemListListener",
+  "type": "interface",
+  "namespace": "com.sun.star.awt",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..lang.x_event_listener",
+        "XEventListener",
+        "XEventListener_c7230c4a"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".item_list_event",
+        "ItemListEvent",
+        "ItemListEvent_afba0b81"
+      ],
+      [
+        "..lang.event_object",
+        "EventObject",
+        "EventObject_a3d70b03"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.lang.XEventListener": "XEventListener_c7230c4a"
+    },
+    "quote": [
+      "EventObject_a3d70b03",
+      "ItemListEvent_afba0b81"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.lang.XEventListener"
+      ],
+      "typing": [
+        "com.sun.star.awt.ItemListEvent",
+        "com.sun.star.lang.EventObject"
+      ]
+    },
+    "name": "XItemListListener",
+    "imports": [],
+    "namespace": "com.sun.star.awt",
+    "extends": [
+      "com.sun.star.lang.XEventListener"
+    ],
+    "desc": [
+      "describes a listener for changes in an item list"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XItemListListener.html",
+    "items": {
+      "methods": [
+        {
+          "name": "allItemsRemoved",
+          "returns": "None",
+          "desc": [
+            "is called when the list has been completely cleared, i.e.",
+            "",
+            "after an invocation of XItemList.removeAllItems()"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Event",
+              "EventObject_a3d70b03",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "itemListChanged",
+          "returns": "None",
+          "desc": [
+            "is called when the changes to the item list which occurred are too complex to be notified in single events.",
+            "",
+            "Consumers of this event should discard their cached information about the current item list, and completely refresh it from the XItemList's current state."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Event",
+              "EventObject_a3d70b03",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "listItemInserted",
+          "returns": "None",
+          "desc": [
+            "is called when an item is inserted into the list"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Event",
+              "ItemListEvent_afba0b81",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "listItemModified",
+          "returns": "None",
+          "desc": [
+            "is called when an item in the list is modified, i.e.",
+            "",
+            "its text or image changed"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Event",
+              "ItemListEvent_afba0b81",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "listItemRemoved",
+          "returns": "None",
+          "desc": [
+            "is called when an item is removed from the list"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Event",
+              "ItemListEvent_afba0b81",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

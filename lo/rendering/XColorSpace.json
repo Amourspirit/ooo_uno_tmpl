@@ -1,0 +1,262 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XColorSpace",
+  "type": "interface",
+  "namespace": "com.sun.star.rendering",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
+      ],
+      [
+        ".argb_color",
+        "ARGBColor",
+        "ARGBColor_c6ee0be1"
+      ],
+      [
+        ".color_component",
+        "ColorComponent",
+        "ColorComponent_e4c0e78"
+      ],
+      [
+        ".rgb_color",
+        "RGBColor",
+        "RGBColor_bbdf0ba0"
+      ]
+    ],
+    "extends_map": {},
+    "quote": [
+      "XColorSpace",
+      "typing.Tuple[ARGBColor_c6ee0be1, ...]",
+      "typing.Tuple[ColorComponent_e4c0e78, ...]",
+      "typing.Tuple[PropertyValue_c9610c73, ...]",
+      "typing.Tuple[RGBColor_bbdf0ba0, ...]",
+      "typing.Tuple[int, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[ARGBColor_c6ee0be1, ...]",
+      "typing.Tuple[ColorComponent_e4c0e78, ...]",
+      "typing.Tuple[PropertyValue_c9610c73, ...]",
+      "typing.Tuple[RGBColor_bbdf0ba0, ...]",
+      "typing.Tuple[int, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.rendering.ARGBColor",
+        "com.sun.star.rendering.ColorComponent",
+        "com.sun.star.rendering.RGBColor"
+      ]
+    },
+    "name": "XColorSpace",
+    "imports": [],
+    "namespace": "com.sun.star.rendering",
+    "extends": [],
+    "desc": [
+      "Information how to interpret certain color data.",
+      "",
+      "This interface encapsulates all information that is necessary to interpret color data, by defining a describing color space, like for example CMYK or sRGB. You can either convert between this and an arbitrary other color space, or into the standard RGB or ARGB formats (because those are so overwhelmingly common in computer graphics).",
+      "",
+      "All canvas interfaces standardize to sequences of IEEE doubles for color representation. As this is overly verbose when used for bitmap data, derived interfaces exist, e.g. XIntegerBitmapColorSpace, which use sequences of integers for color representation."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1rendering_1_1XColorSpace.html",
+    "items": {
+      "methods": [
+        {
+          "name": "convertColorSpace",
+          "returns": "typing.Tuple[ColorComponent_e4c0e78, ...]",
+          "desc": [
+            "Convert to color of another color space."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "deviceColor",
+              "typing.Tuple[ColorComponent_e4c0e78, ...]",
+              "in"
+            ],
+            [
+              "targetColorSpace",
+              "XColorSpace",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "convertFromARGB",
+          "returns": "typing.Tuple[ColorComponent_e4c0e78, ...]",
+          "desc": [
+            "Convert sRGB color with linear alpha into this color space.",
+            "",
+            "If this color space does not convey alpha information, the specified alpha value is silently ignored."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "rgbColor",
+              "typing.Tuple[ARGBColor_c6ee0be1, ...]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "convertFromPARGB",
+          "returns": "typing.Tuple[ColorComponent_e4c0e78, ...]",
+          "desc": [
+            "Convert premultiplied sRGB color with linear alpha into this color space.",
+            "",
+            "If this color space does not convey alpha information, the specified alpha value is silently ignored."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "rgbColor",
+              "typing.Tuple[ARGBColor_c6ee0be1, ...]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "convertFromRGB",
+          "returns": "typing.Tuple[ColorComponent_e4c0e78, ...]",
+          "desc": [
+            "Convert sRGB color to a representation in this color space.",
+            "",
+            "If this color space conveys alpha information, it is assumed be fully opaque for the given RGB color value."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "rgbColor",
+              "typing.Tuple[RGBColor_bbdf0ba0, ...]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "convertToARGB",
+          "returns": "typing.Tuple[ARGBColor_c6ee0be1, ...]",
+          "desc": [
+            "Convert color value in this color space to sRGB color values, with linear alpha.",
+            "",
+            "If the given input color does not carry alpha information, an alpha value of 1.0 (fully opaque) is assumed."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "deviceColor",
+              "typing.Tuple[ColorComponent_e4c0e78, ...]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "convertToPARGB",
+          "returns": "typing.Tuple[ARGBColor_c6ee0be1, ...]",
+          "desc": [
+            "Convert color value in this color space to premultiplied sRGB color values, with linear alpha.",
+            "",
+            "If the given input color does not carry alpha information, an alpha value of 1.0 (fully opaque) is assumed. The resulting individual RGB color values are premultiplied by the alpha value (e.g. if alpha is 0.5, each color value has only half of the original intensity)."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "deviceColor",
+              "typing.Tuple[ColorComponent_e4c0e78, ...]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "convertToRGB",
+          "returns": "typing.Tuple[RGBColor_bbdf0ba0, ...]",
+          "desc": [
+            "Convert color value in this color space to sRGB color values.",
+            "",
+            "Any information not representable in the RGBColor struct is discarded during the conversion. This includes alpha information."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "deviceColor",
+              "typing.Tuple[ColorComponent_e4c0e78, ...]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getComponentTags",
+          "returns": "typing.Tuple[int, ...]",
+          "desc": [
+            "Query the kind for each color component.",
+            "",
+            "Color space components tend to correspond to physical attributes like the amount of one specific colorant contained in the final output color. This method returns a sequence of tags, specifying for each component of a color value, to what color attribute (if any) it corresponds. The values must be one of the ColorComponentTag constants.",
+            "",
+            "At the same time, the number of elements in this sequence corresponds to the number of color channels for this color space."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getProperties",
+          "returns": "typing.Tuple[PropertyValue_c9610c73, ...]",
+          "desc": [
+            "Query various optional properties from the color space.",
+            "",
+            "If this color space has an ICC color profile, the sequence contains an element named ICCProfile. Some color spaces also have properties Gamma, Whitepoint and Blackpoint. Background information for these is available here."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getRenderingIntent",
+          "returns": "int",
+          "desc": [
+            "Query rendering intent of this color space."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getType",
+          "returns": "int",
+          "desc": [
+            "Query type of this color space."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

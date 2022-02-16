@@ -1,0 +1,113 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XFunctionManager",
+  "type": "interface",
+  "namespace": "com.sun.star.report.meta",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "...container.x_index_access",
+        "XIndexAccess",
+        "XIndexAccess_f0910d6d"
+      ],
+      [
+        "...lang.x_component",
+        "XComponent",
+        "XComponent_98dc0ab5"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_function_category",
+        "XFunctionCategory",
+        "XFunctionCategory_59e21055"
+      ],
+      [
+        ".x_function_description",
+        "XFunctionDescription",
+        "XFunctionDescription_8d8d119b"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.container.XIndexAccess": "XIndexAccess_f0910d6d",
+      "com.sun.star.lang.XComponent": "XComponent_98dc0ab5"
+    },
+    "quote": [
+      "XFunctionCategory_59e21055",
+      "XFunctionDescription_8d8d119b"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.container.XIndexAccess",
+        "com.sun.star.lang.XComponent"
+      ],
+      "typing": [
+        "com.sun.star.report.meta.XFunctionCategory",
+        "com.sun.star.report.meta.XFunctionDescription"
+      ]
+    },
+    "name": "XFunctionManager",
+    "imports": [],
+    "namespace": "com.sun.star.report.meta",
+    "extends": [
+      "com.sun.star.lang.XComponent",
+      "com.sun.star.container.XIndexAccess"
+    ],
+    "desc": [
+      "identifies a XFunctionManager which allows to retrieve the meta data of all supported functions."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1report_1_1meta_1_1XFunctionManager.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getCategory",
+          "returns": "XFunctionCategory_59e21055",
+          "desc": [
+            "same as getByIndex."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException",
+            "com.sun.star.lang.WrappedTargetException"
+          ],
+          "args": [
+            [
+              "position",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getFunctionByName",
+          "returns": "XFunctionDescription_8d8d119b",
+          "desc": [
+            "get the function description by name"
+          ],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException"
+          ],
+          "args": [
+            [
+              "name",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

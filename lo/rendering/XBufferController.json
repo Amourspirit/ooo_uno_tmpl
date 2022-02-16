@@ -1,0 +1,125 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XBufferController",
+  "type": "interface",
+  "namespace": "com.sun.star.rendering",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": []
+    },
+    "name": "XBufferController",
+    "imports": [],
+    "namespace": "com.sun.star.rendering",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "Interface providing access to double/multi-buffer facilities of screen devices.",
+      "",
+      "This interface provides methods to enable and control double/multi-buffering facilities on screen devices.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.0"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1rendering_1_1XBufferController.html",
+    "items": {
+      "methods": [
+        {
+          "name": "createBuffers",
+          "returns": "int",
+          "desc": [
+            "Create the given number of background buffers.",
+            "",
+            "There's one buffer implicitly available, which is the canvas surface itself. Thus, calling createBuffers(1) creates a double-buffered object."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "nBuffers",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "destroyBuffers",
+          "returns": "None",
+          "desc": [
+            "Destroy all buffers generated via this object."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "showBuffer",
+          "returns": "bool",
+          "desc": [
+            "Switch the display to show the specified buffer.",
+            "",
+            "The method returns, when the switch is performed and the selected buffer is shown on screen, or immediately when an error occurs. If the switch was successful, subsequent render operations will be directed to the new backbuffer.",
+            "",
+            "Use this method if you need your screen display to be in sync with other things, e.g. sound playback."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "bUpdateAll",
+              "bool",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "switchBuffer",
+          "returns": "bool",
+          "desc": [
+            "Schedule the display of the specified buffer.",
+            "",
+            "The method returns, when the switching of the buffer is successfully scheduled, or immediately when an error occurs. If the switch was successful, subsequent render operations will be directed to the new backbuffer. Note that, if the buffer switching is exceedingly slow, or the frequency of switchBuffer() is exceedingly high, the buffer scheduled for display here might become the current render target before it is fully displayed on screen. In this case, any rendering operation to this buffer will block, until it is safe to perform the operation without visible cluttering.",
+            "",
+            "Use this method if you favor maximal render speed, but don't necessarily require your screen display to be in sync with other things, e.g. sound playback."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "bUpdateAll",
+              "bool",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

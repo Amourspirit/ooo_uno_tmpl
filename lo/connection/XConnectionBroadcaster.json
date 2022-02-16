@@ -1,0 +1,99 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XConnectionBroadcaster",
+  "type": "interface",
+  "namespace": "com.sun.star.connection",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..io.x_stream_listener",
+        "XStreamListener",
+        "XStreamListener_baf80bea"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XStreamListener_baf80bea"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.io.XStreamListener"
+      ]
+    },
+    "name": "XConnectionBroadcaster",
+    "imports": [],
+    "namespace": "com.sun.star.connection",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "allows to add listeners to a connection.",
+      "",
+      "Maybe supported by connections returned from XAcceptor.accept() or XConnector.connect()."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1connection_1_1XConnectionBroadcaster.html",
+    "items": {
+      "methods": [
+        {
+          "name": "addStreamListener",
+          "returns": "None",
+          "desc": [
+            "registers an object to receive events from this connection.",
+            "",
+            "It is suggested to allow multiple registration of the same listener, thus for each time a listener is added, it has to be removed."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aListener",
+              "XStreamListener_baf80bea",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeStreamListener",
+          "returns": "None",
+          "desc": [
+            "unregisters an object to receive events from this connection.",
+            "",
+            "It is suggested to allow multiple registration of the same listener, thus for each time a listener is added, it has to be removed."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aListener",
+              "XStreamListener_baf80bea",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "type": "struct",
+  "name": "DocumentEvent",
+  "namespace": "com.sun.star.document",
+  "parser_args": {
+    "sort": false,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "sort": true,
+    "dynamic_struct": true,
+    "include_desc": true
+  },
+  "data": {
+    "name": "DocumentEvent",
+    "namespace": "com.sun.star.document",
+    "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1document_1_1DocumentEvent.html",
+    "from_imports": [
+      [
+        "..lang.event_object",
+        "EventObject",
+        "EventObject_a3d70b03"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..frame.x_controller2",
+        "XController2",
+        "XController2_bbcf0bc1"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.lang.EventObject": "EventObject_a3d70b03"
+    },
+    "quote": [
+      "XController2_bbcf0bc1"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "fullname": "com.sun.star.document.DocumentEvent",
+    "desc": [
+      "describes an event happening in an OfficeDocument",
+      "",
+      "The com.sun.star.lang.EventObject.Source member of the base type refers to the document which broadcasts the event.",
+      "",
+      "This type is the successor of the EventObject type, which should not be used anymore.",
+      "",
+      "**since**",
+      "",
+      "    OOo 3.1"
+    ],
+    "imports": [],
+    "extends": [
+      "com.sun.star.lang.EventObject"
+    ],
+    "items": [
+      {
+        "name": "EventName",
+        "type": "str",
+        "lines": [
+          "specifies the name of the event.",
+          "",
+          "It's the responsibility of the component supporting the XDocumentEventBroadcaster interface to specify which events it supports."
+        ]
+      },
+      {
+        "name": "ViewController",
+        "type": "XController2_bbcf0bc1",
+        "lines": [
+          "denotes the view respectively controller which the event applies to.",
+          "",
+          "Might be NULL if the event is not related to a concrete view of the document."
+        ]
+      },
+      {
+        "name": "Supplement",
+        "type": "object",
+        "lines": [
+          "contains supplemental information about the event which is being notified",
+          "",
+          "The semantics of this additional information needs to be specified by the broadcaster of the event."
+        ]
+      }
+    ]
+  }
+}

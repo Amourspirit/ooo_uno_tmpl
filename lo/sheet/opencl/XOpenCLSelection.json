@@ -1,0 +1,209 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XOpenCLSelection",
+  "type": "interface",
+  "namespace": "com.sun.star.sheet.opencl",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "...uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".open_cl_platform",
+        "OpenCLPlatform",
+        "OpenCLPlatform_36540f36"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "typing.Tuple[OpenCLPlatform_36540f36, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[OpenCLPlatform_36540f36, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.sheet.opencl.OpenCLPlatform"
+      ]
+    },
+    "name": "XOpenCLSelection",
+    "imports": [],
+    "namespace": "com.sun.star.sheet.opencl",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sheet_1_1opencl_1_1XOpenCLSelection.html",
+    "items": {
+      "methods": [
+        {
+          "name": "disableAutomaticDeviceSelection",
+          "returns": "None",
+          "desc": [
+            "Disables automatic OpenCL Device Selection."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "disableOpcodeSubsetTest",
+          "returns": "None",
+          "desc": [],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "enableAutomaticDeviceSelection",
+          "returns": "None",
+          "desc": [
+            "Enables automatic OpenCL Device Selection."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "force",
+              "bool",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "enableOpcodeSubsetTest",
+          "returns": "None",
+          "desc": [],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "enableOpenCL",
+          "returns": "None",
+          "desc": [
+            "Enables or disables use of OpenCL for calculations.",
+            "",
+            "When using this API to enable OpenCL the configuration parameters are set to their built-in default values, not ones read from the installation of user-specific configuration."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "enable",
+              "bool",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getDeviceID",
+          "returns": "int",
+          "desc": [
+            "returns the index of the currently selected device.",
+            "",
+            "This is an index into the sequence of devices in the OpenCLPLatform object the device is part of in the current instance of LibreOffice (and not some a priori defined identifier for a specific model of device accessed through a specific platform)."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getFormulaCellNumberLimit",
+          "returns": "int",
+          "desc": [],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getOpenCLPlatforms",
+          "returns": "typing.Tuple[OpenCLPlatform_36540f36, ...]",
+          "desc": [
+            "lists all OpenCL devices and platforms"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getPlatformID",
+          "returns": "int",
+          "desc": [
+            "returns the index of the platform of the currently selected device.",
+            "",
+            "This is an index into the sequence that getOpenCLPlatforms returns in the current instance of LibreOffice (and not some a priori defined identifier for an OpenCL platform)."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "isOpcodeSubsetTested",
+          "returns": "bool",
+          "desc": [],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "isOpenCLEnabled",
+          "returns": "bool",
+          "desc": [
+            "Returns true if calculation with OpenCL is enabled (at all).",
+            "",
+            "The actual use of OpenCL for a formula is also affected by the configuration settings specifying whether OpenCL is used for all opcodes or just for a subset, and the deny- and allowlists of OpenCL implementations that are in use."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "selectOpenCLDevice",
+          "returns": "None",
+          "desc": [
+            "Select the OpenCL device with the given platform and device number.",
+            "",
+            "The platform number corresponds to an index into the sequence returned by getOpenCLPlatforms, and the device number corresponds to an index into the sequence of devices in that platform."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "platform",
+              "int",
+              "in"
+            ],
+            [
+              "device",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setFormulaCellNumberLimit",
+          "returns": "None",
+          "desc": [],
+          "raises": [],
+          "args": [
+            [
+              "number",
+              "int",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

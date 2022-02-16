@@ -1,0 +1,82 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "type": "struct",
+  "name": "ContentInfo",
+  "namespace": "com.sun.star.ucb",
+  "parser_args": {
+    "sort": false,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "sort": true,
+    "dynamic_struct": true,
+    "include_desc": true
+  },
+  "data": {
+    "name": "ContentInfo",
+    "namespace": "com.sun.star.ucb",
+    "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1ucb_1_1ContentInfo.html",
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        "..beans.property",
+        "Property",
+        "Property_8f4e0a76"
+      ]
+    ],
+    "extends_map": {},
+    "quote": [
+      "typing.Tuple[Property_8f4e0a76, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[Property_8f4e0a76, ...]"
+    ],
+    "requires_typing": true,
+    "fullname": "com.sun.star.ucb.ContentInfo",
+    "desc": [
+      "A structure for information about contents."
+    ],
+    "imports": [],
+    "extends": [],
+    "items": [
+      {
+        "name": "Properties",
+        "type": "typing.Tuple[Property_8f4e0a76, ...]",
+        "lines": [
+          "This field contains a list with the properties which must be set at a content that was just created using XContentCreator.createNewContent() before it can be committed (by executing the command \\\"insert\\\" at the new content).",
+          "",
+          "If one of the properties is missing, the insert command will fail.",
+          "",
+          "In example, a new file system folder content will need a title. The Properties member of the ContentInfo provided for this kind of content must include the property \\\"Title\\\".",
+          "",
+          "Important: The required properties must have one of the following basic data types (in order to make it possible to implement client applications with a small set of generic input methods for the values):"
+        ]
+      },
+      {
+        "name": "Type",
+        "type": "str",
+        "lines": [
+          "A type identifier string for a content.",
+          "",
+          "This is an implementation specific string characterizing the kind of a content (e.g. \\\"application/vnd.sun.star.hierarchy-link\\\"). The value of this member should match the value returned by XContent.getContentType() of an appropriate content."
+        ]
+      },
+      {
+        "name": "Attributes",
+        "type": "int",
+        "lines": [
+          "Additional attributes.",
+          "",
+          "These flags contain extra information on the content, like its kind (KIND_FOLDER, KIND_DOCUMENT, KIND_LINK).",
+          "",
+          "It is highly recommended to fill these flags very accurately, as they are very important when transferring contents between different ContentProviders.",
+          "",
+          "The value can be one of the ContentInfoAttribute constants."
+        ]
+      }
+    ]
+  }
+}

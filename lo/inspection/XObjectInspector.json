@@ -1,0 +1,144 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XObjectInspector",
+  "type": "interface",
+  "namespace": "com.sun.star.inspection",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..frame.x_controller",
+        "XController",
+        "XController_b00e0b8f"
+      ],
+      [
+        "..frame.x_dispatch_provider",
+        "XDispatchProvider",
+        "XDispatchProvider_fc690de6"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_object_inspector_model",
+        "XObjectInspectorModel",
+        "XObjectInspectorModel_9077119b"
+      ],
+      [
+        ".x_object_inspector_ui",
+        "XObjectInspectorUI",
+        "XObjectInspectorUI_5ccd1048"
+      ],
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.frame.XController": "XController_b00e0b8f",
+      "com.sun.star.frame.XDispatchProvider": "XDispatchProvider_fc690de6"
+    },
+    "quote": [
+      "XObjectInspectorModel_9077119b",
+      "XObjectInspectorUI_5ccd1048",
+      "typing.Tuple[XInterface_8f010a43, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[XInterface_8f010a43, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.frame.XController",
+        "com.sun.star.frame.XDispatchProvider"
+      ],
+      "typing": [
+        "com.sun.star.inspection.XObjectInspectorModel",
+        "com.sun.star.inspection.XObjectInspectorUI",
+        "com.sun.star.uno.XInterface"
+      ]
+    },
+    "name": "XObjectInspector",
+    "imports": [],
+    "namespace": "com.sun.star.inspection",
+    "extends": [
+      "com.sun.star.frame.XController",
+      "com.sun.star.frame.XDispatchProvider"
+    ],
+    "desc": [
+      "describes the main interface of an ObjectInspector.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.0.3"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1inspection_1_1XObjectInspector.html",
+    "items": {
+      "methods": [
+        {
+          "name": "inspect",
+          "returns": "None",
+          "desc": [
+            "inspects a new collection of one or more objects.",
+            "",
+            "If the sequence is empty, the UI of the ObjectInspector will be cleared.",
+            "",
+            "If the sequence contains more than one object, the XObjectInspector will create a complete set of property handlers (as indicated by XObjectInspectorModel.HandlerFactories) for every of the objects, and compose their output."
+          ],
+          "raises": [
+            "com.sun.star.util.VetoException"
+          ],
+          "args": [
+            [
+              "Objects",
+              "typing.Tuple[XInterface_8f010a43, ...]",
+              "in"
+            ]
+          ]
+        }
+      ],
+      "properties": [
+        {
+          "name": "InspectorModel",
+          "returns": "XObjectInspectorModel_9077119b",
+          "desc": [
+            "provides access to the current model of the inspector",
+            "",
+            "The model is mainly responsible for providing the property handlers. Additionally, it can provide user interface names and help URLs for property categories.",
+            "",
+            "Note that there are two ways of setting or retrieving the current model: You can either use com.sun.star.frame.XModel.setModel(), or, if you do not want or need to implement the full-blown com.sun.star.frame.XModel interface, you can use this property directly. Both approaches are semantically equivalent.",
+            "",
+            "If a new model is set at the inspector, the complete UI will be rebuilt to reflect the change, using the new property handlers provided by the new model."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "InspectorUI",
+          "returns": "XObjectInspectorUI_5ccd1048",
+          "desc": [
+            "provides access to the user interface of the object inspector.",
+            "",
+            "This interface can be used to access and manipulate various aspects of the user interface. For instance, you can enable and disable certain property controls (or parts thereof), or register observers for all property controls.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.2"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

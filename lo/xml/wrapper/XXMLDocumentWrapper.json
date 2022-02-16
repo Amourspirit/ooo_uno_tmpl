@@ -1,0 +1,261 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XXMLDocumentWrapper",
+  "type": "interface",
+  "namespace": "com.sun.star.xml.wrapper",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "...uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..sax.x_document_handler",
+        "XDocumentHandler",
+        "XDocumentHandler_9b90e28"
+      ],
+      [
+        ".xxml_element_wrapper",
+        "XXMLElementWrapper",
+        "XXMLElementWrapper_66c0107c"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XDocumentHandler_9b90e28",
+      "XXMLElementWrapper_66c0107c",
+      "typing.Tuple[XXMLElementWrapper_66c0107c, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[XXMLElementWrapper_66c0107c, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.xml.sax.XDocumentHandler",
+        "com.sun.star.xml.wrapper.XXMLElementWrapper"
+      ]
+    },
+    "name": "XXMLDocumentWrapper",
+    "imports": [],
+    "namespace": "com.sun.star.xml.wrapper",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "Interface of XML Document Wrapper.",
+      "",
+      "When converting SAX events into a DOM tree, this interface is used to manipulate the DOM data in UNO perspective.",
+      "",
+      "Every language has its own methods to manipulate its native DOM data structure, this interface provides a common method set which each language have to implement.",
+      "",
+      "In another word, this interface wraps language dependent methods, then other component can manipulate DOM data through UNO methods."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1xml_1_1wrapper_1_1XXMLDocumentWrapper.html",
+    "items": {
+      "methods": [
+        {
+          "name": "clearUselessData",
+          "returns": "None",
+          "desc": [
+            "Clears all useless element in a branch of the DOM tree along the tree order."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "node",
+              "XXMLElementWrapper_66c0107c",
+              "in"
+            ],
+            [
+              "reservedDescendants",
+              "typing.Tuple[XXMLElementWrapper_66c0107c, ...]",
+              "in"
+            ],
+            [
+              "stopAtNode",
+              "XXMLElementWrapper_66c0107c",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "collapse",
+          "returns": "None",
+          "desc": [
+            "Collapses a tree path.",
+            "",
+            "Each element in the ancestor path of the node will be checked, if this element is empty, then deletes it."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "node",
+              "XXMLElementWrapper_66c0107c",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "generateSAXEvents",
+          "returns": "None",
+          "desc": [
+            "Converts a part of the DOM tree into SAX events."
+          ],
+          "raises": [
+            "com.sun.star.xml.sax.SAXException"
+          ],
+          "args": [
+            [
+              "handler",
+              "XDocumentHandler_9b90e28",
+              "in"
+            ],
+            [
+              "saxEventKeeperHandler",
+              "XDocumentHandler_9b90e28",
+              "in"
+            ],
+            [
+              "startNode",
+              "XXMLElementWrapper_66c0107c",
+              "in"
+            ],
+            [
+              "endNode",
+              "XXMLElementWrapper_66c0107c",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getCurrentElement",
+          "returns": "XXMLElementWrapper_66c0107c",
+          "desc": [
+            "Gets the current element."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getNodeName",
+          "returns": "str",
+          "desc": [
+            "Gets the name of the element."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "node",
+              "XXMLElementWrapper_66c0107c",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getTree",
+          "returns": "None",
+          "desc": [
+            "Converts the whole DOM tree into a SAX event stream."
+          ],
+          "raises": [
+            "com.sun.star.xml.sax.SAXException"
+          ],
+          "args": [
+            [
+              "handler",
+              "XDocumentHandler_9b90e28",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "isCurrent",
+          "returns": "bool",
+          "desc": [
+            "Checks whether an element is the current element."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "node",
+              "XXMLElementWrapper_66c0107c",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "isCurrentElementEmpty",
+          "returns": "bool",
+          "desc": [
+            "Checks whether the current element is empty."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "rebuildIDLink",
+          "returns": "None",
+          "desc": [
+            "Rebuild the ID attribute in the branch starting from the particular element."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "node",
+              "XXMLElementWrapper_66c0107c",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeCurrentElement",
+          "returns": "None",
+          "desc": [
+            "Removes the current element.",
+            "",
+            "When the current element is removed, then its parent element becomes the new current element."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setCurrentElement",
+          "returns": "None",
+          "desc": [
+            "Sets the current element.",
+            "",
+            "When the current element is replaced outside of this interface, then uses this method can update the current element pointer."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "element",
+              "XXMLElementWrapper_66c0107c",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,199 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XParser",
+  "type": "interface",
+  "namespace": "com.sun.star.xml.sax",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "...uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "...lang.locale",
+        "Locale",
+        "Locale_70d308fa"
+      ],
+      [
+        ".input_source",
+        "InputSource",
+        "InputSource_c88c0c54"
+      ],
+      [
+        ".xdtd_handler",
+        "XDTDHandler",
+        "XDTDHandler_c3df0bc5"
+      ],
+      [
+        ".x_document_handler",
+        "XDocumentHandler",
+        "XDocumentHandler_9b90e28"
+      ],
+      [
+        ".x_entity_resolver",
+        "XEntityResolver",
+        "XEntityResolver_fcf10dfa"
+      ],
+      [
+        ".x_error_handler",
+        "XErrorHandler",
+        "XErrorHandler_e0860cf3"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "InputSource_c88c0c54",
+      "Locale_70d308fa",
+      "XDTDHandler_c3df0bc5",
+      "XDocumentHandler_9b90e28",
+      "XEntityResolver_fcf10dfa",
+      "XErrorHandler_e0860cf3"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.lang.Locale",
+        "com.sun.star.xml.sax.InputSource",
+        "com.sun.star.xml.sax.XDTDHandler",
+        "com.sun.star.xml.sax.XDocumentHandler",
+        "com.sun.star.xml.sax.XEntityResolver",
+        "com.sun.star.xml.sax.XErrorHandler"
+      ]
+    },
+    "name": "XParser",
+    "imports": [],
+    "namespace": "com.sun.star.xml.sax",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "specifies a SAX parser.",
+      "",
+      "This interface is an IDL version of the Java interface org.xml.sax.Parser with some minor adaptations."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1xml_1_1sax_1_1XParser.html",
+    "items": {
+      "methods": [
+        {
+          "name": "parseStream",
+          "returns": "None",
+          "desc": [
+            "parses an XML document from a stream.",
+            "",
+            "Set the desired handlers before calling this method."
+          ],
+          "raises": [
+            "com.sun.star.xml.sax.SAXException",
+            "com.sun.star.io.IOException"
+          ],
+          "args": [
+            [
+              "aInputSource",
+              "InputSource_c88c0c54",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setDTDHandler",
+          "returns": "None",
+          "desc": [
+            "allows an application to register a DTD-Handler."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xHandler",
+              "XDTDHandler_c3df0bc5",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setDocumentHandler",
+          "returns": "None",
+          "desc": [
+            "allows an application to register a document event handler."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xHandler",
+              "XDocumentHandler_9b90e28",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setEntityResolver",
+          "returns": "None",
+          "desc": [
+            "allows an application to register a DTD-Handler."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xResolver",
+              "XEntityResolver_fcf10dfa",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setErrorHandler",
+          "returns": "None",
+          "desc": [
+            "allows an application to register an error event handler.",
+            "",
+            "Note that the error handler can throw an exception when an error or warning occurs. Note that an exception is thrown by the parser when an unrecoverable (fatal) error occurs."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xHandler",
+              "XErrorHandler_e0860cf3",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setLocale",
+          "returns": "None",
+          "desc": [
+            "sets a locale specified for localization of warnings and error messages.",
+            "",
+            "Set the language of the error messages. Useful when the parsing errors will be presented to the user."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "locale",
+              "Locale_70d308fa",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

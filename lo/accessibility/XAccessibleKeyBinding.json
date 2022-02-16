@@ -1,0 +1,101 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XAccessibleKeyBinding",
+  "type": "interface",
+  "namespace": "com.sun.star.accessibility",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..awt.key_stroke",
+        "KeyStroke",
+        "KeyStroke_84cb09f5"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "typing.Tuple[KeyStroke_84cb09f5, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[KeyStroke_84cb09f5, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.awt.KeyStroke"
+      ]
+    },
+    "name": "XAccessibleKeyBinding",
+    "imports": [],
+    "namespace": "com.sun.star.accessibility",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "This interface can be used to represent any number of key bindings which then can be associated to a certain action.",
+      "",
+      "There can be zero, one, or more key bindings. Each key binding consists of a sequence of com.sun.star.awt.KeyStroke objects. The association of an action with a key binding is established by the XAccessibleAction interface returning an XAccessibleKeyBinding object.",
+      "",
+      "A key binding describes alternative ways how to invoke an action with pressing one or more keys after each other. Each individual sequence of key strokes",
+      "",
+      "**since**",
+      "",
+      "    OOo 1.1.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleKeyBinding.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getAccessibleKeyBinding",
+          "returns": "typing.Tuple[KeyStroke_84cb09f5, ...]",
+          "desc": [
+            "The returned sequence of key strokes describes one method to invoke the associated action (the one from which you obtained the object at which you called this method) by pressing keys.",
+            "",
+            "The keys specified by each of the returned key strokes have to be pressed at the same time (the Control-key and the A-key for example). The keys of one key stroke have to be released before pressing those of the next. The order of the key strokes in the sequence define the order in which to press them."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            [
+              "nIndex",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getAccessibleKeyBindingCount",
+          "returns": "int",
+          "desc": [
+            "Return the number of available key bindings."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

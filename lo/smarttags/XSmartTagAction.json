@@ -1,0 +1,399 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XSmartTagAction",
+  "type": "interface",
+  "namespace": "com.sun.star.smarttags",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..lang.x_initialization",
+        "XInitialization",
+        "XInitialization_d46c0cca"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..container.x_string_key_map",
+        "XStringKeyMap",
+        "XStringKeyMap_ffc60de1"
+      ],
+      [
+        "..frame.x_controller",
+        "XController",
+        "XController_b00e0b8f"
+      ],
+      [
+        "..lang.locale",
+        "Locale",
+        "Locale_70d308fa"
+      ],
+      [
+        "..text.x_text_range",
+        "XTextRange",
+        "XTextRange_9a910ab7"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.lang.XInitialization": "XInitialization_d46c0cca"
+    },
+    "quote": [
+      "Locale_70d308fa",
+      "XController_b00e0b8f",
+      "XStringKeyMap_ffc60de1",
+      "XTextRange_9a910ab7"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.lang.XInitialization"
+      ],
+      "typing": [
+        "com.sun.star.container.XStringKeyMap",
+        "com.sun.star.frame.XController",
+        "com.sun.star.lang.Locale",
+        "com.sun.star.text.XTextRange"
+      ]
+    },
+    "name": "XSmartTagAction",
+    "imports": [],
+    "namespace": "com.sun.star.smarttags",
+    "extends": [
+      "com.sun.star.lang.XInitialization"
+    ],
+    "desc": [
+      "provides access to smart tag actions.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.3"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1smarttags_1_1XSmartTagAction.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getActionCaptionFromID",
+          "returns": "str",
+          "desc": [
+            "obtains a caption for a specified action for use in user interfaces."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "nActionID",
+              "int",
+              "in"
+            ],
+            [
+              "aApplicationName",
+              "str",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale_70d308fa",
+              "in"
+            ],
+            [
+              "xProperties",
+              "XStringKeyMap_ffc60de1",
+              "in"
+            ],
+            [
+              "aText",
+              "str",
+              "in"
+            ],
+            [
+              "aXML",
+              "str",
+              "in"
+            ],
+            [
+              "xController",
+              "XController_b00e0b8f",
+              "in"
+            ],
+            [
+              "xTarget",
+              "XTextRange_9a910ab7",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getActionCount",
+          "returns": "int",
+          "desc": [
+            "obtains the number of actions provided for a specified smart tag type."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aSmartTagName",
+              "str",
+              "in"
+            ],
+            [
+              "xController",
+              "XController_b00e0b8f",
+              "in"
+            ],
+            [
+              "xProperties",
+              "XStringKeyMap_ffc60de1",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getActionID",
+          "returns": "int",
+          "desc": [
+            "obtains a unique integer identifier for an action."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "aSmartTagName",
+              "str",
+              "in"
+            ],
+            [
+              "nActionIndex",
+              "int",
+              "in"
+            ],
+            [
+              "xController",
+              "XController_b00e0b8f",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getActionNameFromID",
+          "returns": "str",
+          "desc": [
+            "obtains a language independent name of an action."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "nActionID",
+              "int",
+              "in"
+            ],
+            [
+              "xController",
+              "XController_b00e0b8f",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getDescription",
+          "returns": "str",
+          "desc": [
+            "obtains a detailed description of this action component."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aLocale",
+              "Locale_70d308fa",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getName",
+          "returns": "str",
+          "desc": [
+            "obtains a name that describes this action component."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aLocale",
+              "Locale_70d308fa",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getSmartTagCaption",
+          "returns": "str",
+          "desc": [
+            "obtains the caption of the smart tag type for using in user interfaces."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            [
+              "nSmartTagIndex",
+              "int",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale_70d308fa",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getSmartTagName",
+          "returns": "str",
+          "desc": [
+            "obtains the name of one specific smart tag type supported by this action component."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            [
+              "nSmartTagIndex",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "invokeAction",
+          "returns": "None",
+          "desc": [
+            "invokes an action."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "nActionID",
+              "int",
+              "in"
+            ],
+            [
+              "aApplicationName",
+              "str",
+              "in"
+            ],
+            [
+              "xController",
+              "XController_b00e0b8f",
+              "in"
+            ],
+            [
+              "xTarget",
+              "XTextRange_9a910ab7",
+              "in"
+            ],
+            [
+              "xProperties",
+              "XStringKeyMap_ffc60de1",
+              "in"
+            ],
+            [
+              "aText",
+              "str",
+              "in"
+            ],
+            [
+              "aXML",
+              "str",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale_70d308fa",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "isCaptionDynamic",
+          "returns": "bool",
+          "desc": [
+            "determines whether a caption is dynamic."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "nActionID",
+              "int",
+              "in"
+            ],
+            [
+              "aApplicationName",
+              "str",
+              "in"
+            ],
+            [
+              "xController",
+              "XController_b00e0b8f",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale_70d308fa",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "isShowSmartTagIndicator",
+          "returns": "bool",
+          "desc": [
+            "determines whether the smart tag indicator should be visible."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "nActionID",
+              "int",
+              "in"
+            ],
+            [
+              "aApplicationName",
+              "str",
+              "in"
+            ],
+            [
+              "xController",
+              "XController_b00e0b8f",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale_70d308fa",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

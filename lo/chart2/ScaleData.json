@@ -1,0 +1,156 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "type": "struct",
+  "name": "ScaleData",
+  "namespace": "com.sun.star.chart2",
+  "parser_args": {
+    "sort": false,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "sort": true,
+    "dynamic_struct": true,
+    "include_desc": true
+  },
+  "data": {
+    "name": "ScaleData",
+    "namespace": "com.sun.star.chart2",
+    "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1chart2_1_1ScaleData.html",
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        "..chart.time_increment",
+        "TimeIncrement",
+        "TimeIncrement_c7e70c4e"
+      ],
+      [
+        ".axis_orientation",
+        "AxisOrientation",
+        "AxisOrientation_ecba0d6d"
+      ],
+      [
+        ".increment_data",
+        "IncrementData",
+        "IncrementData_d2000c6b"
+      ],
+      [
+        ".x_scaling",
+        "XScaling",
+        "XScaling_97500a65"
+      ],
+      [
+        ".data.x_labeled_data_sequence",
+        "XLabeledDataSequence",
+        "XLabeledDataSequence_7e1a10c8"
+      ]
+    ],
+    "extends_map": {},
+    "quote": [
+      "AxisOrientation_ecba0d6d",
+      "IncrementData_d2000c6b",
+      "TimeIncrement_c7e70c4e",
+      "XLabeledDataSequence_7e1a10c8",
+      "XScaling_97500a65"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "fullname": "com.sun.star.chart2.ScaleData",
+    "desc": [],
+    "imports": [],
+    "extends": [],
+    "items": [
+      {
+        "name": "Minimum",
+        "type": "object",
+        "lines": [
+          "if the any contains a double value this is used as a fixed maximum.",
+          "",
+          "Otherwise, if the any is empty or contains an incompatible type, the maximum is automatic.",
+          "",
+          "If the maximum is automatic, this means, each view that represents the model containing this scale, has to calculate a maximum by its own means."
+        ]
+      },
+      {
+        "name": "Maximum",
+        "type": "object",
+        "lines": [
+          "if the any contains a double value this is used as a fixed minimum.",
+          "",
+          "Otherwise, if the any is empty or contains an incompatible type, the minimum is automatic.",
+          "",
+          "If the minimum is automatic, this means, each view that represents the model containing this scale, has to calculate a minimum by its own means."
+        ]
+      },
+      {
+        "name": "Origin",
+        "type": "object",
+        "lines": [
+          "The Origin indicates where other axes cross this axis.",
+          "",
+          "If the any contains a double value that value is used. Otherwise an appropriate value has to be calculated by that instances using Origin."
+        ]
+      },
+      {
+        "name": "Orientation",
+        "type": "AxisOrientation_ecba0d6d",
+        "lines": [
+          "Axis orientation (standard or reversed).",
+          "",
+          "If used at the Y axis in pie charts or doughnut charts, specifies the rotation direction of the pie. The value AxisOrientation.MATHEMATICAL rotates the pie counterclockwise, the value AxisOrientation.REVERSE rotates the pie clockwise.",
+          "",
+          "Note: Is this a good place for the axis orientation? Two axes may use the same scale, but point into two different directions."
+        ]
+      },
+      {
+        "name": "Scaling",
+        "type": "XScaling_97500a65",
+        "lines": []
+      },
+      {
+        "name": "Categories",
+        "type": "XLabeledDataSequence_7e1a10c8",
+        "lines": []
+      },
+      {
+        "name": "AxisType",
+        "type": "int",
+        "lines": [
+          "describes the type of the axis.",
+          "",
+          "It can be a real number axis or a category axis or something else. AxisType is one value out of the constant group AxisType."
+        ]
+      },
+      {
+        "name": "AutoDateAxis",
+        "type": "bool",
+        "lines": [
+          "if true an AxisType CATEGORY is interpreted as DATE if the underlying data given in Categories are dates"
+        ]
+      },
+      {
+        "name": "ShiftedCategoryPosition",
+        "type": "bool",
+        "lines": [
+          "describes whether data points on category or date axis are placed between tickmarks or not if true the maximum on the scale will be expanded for one interval"
+        ]
+      },
+      {
+        "name": "IncrementData",
+        "type": "IncrementData_d2000c6b",
+        "lines": [
+          "increment data to be used for not date-time axis"
+        ]
+      },
+      {
+        "name": "TimeIncrement",
+        "type": "TimeIncrement_c7e70c4e",
+        "lines": [
+          "increment data to be used in case of date-time axis"
+        ]
+      }
+    ]
+  }
+}

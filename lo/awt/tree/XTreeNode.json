@@ -1,0 +1,150 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XTreeNode",
+  "type": "interface",
+  "namespace": "com.sun.star.awt.tree",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [],
+    "from_imports_typing": [],
+    "extends_map": {},
+    "quote": [
+      "XTreeNode"
+    ],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [],
+      "typing": []
+    },
+    "name": "XTreeNode",
+    "imports": [],
+    "namespace": "com.sun.star.awt.tree",
+    "extends": [],
+    "desc": [
+      "An instance implementing this interface represents the model data for an entry in a XTreeDataModel.",
+      "",
+      "The TreeControl uses this interface to retrieve the model information needed to display a hierarchical outline",
+      "",
+      "Each XTreeNode in a XTreeDataModel must be unique."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1tree_1_1XTreeNode.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getChildAt",
+          "returns": "XTreeNode",
+          "desc": [
+            "Returns the child tree node at Index."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            [
+              "Index",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getChildCount",
+          "returns": "int",
+          "desc": [
+            "Returns the number of child nodes."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getCollapsedGraphicURL",
+          "returns": "str",
+          "desc": [
+            "The URL for a graphic that is rendered to visualize collapsed non leaf nodes.",
+            "",
+            "If URL is empty, XTreeControl.DefaultCollapsedGraphicURL is used."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getDisplayValue",
+          "returns": "object",
+          "desc": [
+            "If not empty, the textual representation of this any is used as the text part of this node."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getExpandedGraphicURL",
+          "returns": "str",
+          "desc": [
+            "The URL for a graphic that is rendered to visualize expanded non leaf nodes.",
+            "",
+            "If URL is empty, XTreeControl.DefaultExpandedGraphicURL is used."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getIndex",
+          "returns": "int",
+          "desc": [
+            "Returns the index of Node in this instances children."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Node",
+              "XTreeNode",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getNodeGraphicURL",
+          "returns": "str",
+          "desc": [
+            "The URL for a graphic that is rendered before the text part of this node.",
+            "",
+            "If this URL is empty, no graphic is rendered."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getParent",
+          "returns": "XTreeNode",
+          "desc": [
+            "Returns the parent node of this node."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "hasChildrenOnDemand",
+          "returns": "bool",
+          "desc": [
+            "Returns TRUE if the children of this node are created on demand.",
+            "",
+            "A TreeControl will handle a node that returns TRUE always like a node that has child nodes, even if getChildCount() returns 0."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

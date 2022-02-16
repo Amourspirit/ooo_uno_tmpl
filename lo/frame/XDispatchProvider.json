@@ -1,0 +1,123 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XDispatchProvider",
+  "type": "interface",
+  "namespace": "com.sun.star.frame",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".dispatch_descriptor",
+        "DispatchDescriptor",
+        "DispatchDescriptor_b280e62"
+      ],
+      [
+        ".x_dispatch",
+        "XDispatch",
+        "XDispatch_98ff0a9b"
+      ],
+      [
+        "..util.url",
+        "URL",
+        "URL_57ad07b9"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "URL_57ad07b9",
+      "XDispatch_98ff0a9b",
+      "typing.Tuple[DispatchDescriptor_b280e62, ...]",
+      "typing.Tuple[XDispatch_98ff0a9b, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[DispatchDescriptor_b280e62, ...]",
+      "typing.Tuple[XDispatch_98ff0a9b, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.frame.DispatchDescriptor",
+        "com.sun.star.frame.XDispatch",
+        "com.sun.star.util.URL"
+      ]
+    },
+    "name": "XDispatchProvider",
+    "imports": [],
+    "namespace": "com.sun.star.frame",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "provides XDispatch interfaces for certain functions which are useful at the UI."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XDispatchProvider.html",
+    "items": {
+      "methods": [
+        {
+          "name": "queryDispatch",
+          "returns": "XDispatch_98ff0a9b",
+          "desc": [
+            "searches for an XDispatch for the specified URL within the specified target frame."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "URL",
+              "URL_57ad07b9",
+              "in"
+            ],
+            [
+              "TargetFrameName",
+              "str",
+              "in"
+            ],
+            [
+              "SearchFlags",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "queryDispatches",
+          "returns": "typing.Tuple[XDispatch_98ff0a9b, ...]",
+          "desc": [
+            "actually this method is redundant to XDispatchProvider.queryDispatch() to avoid multiple remote calls.",
+            "",
+            "It's not allowed to pack it - because every request must match to its real result. Means: don't delete NULL entries inside this list."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Requests",
+              "typing.Tuple[DispatchDescriptor_b280e62, ...]",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,236 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "DrawPage",
+  "type": "service",
+  "namespace": "com.sun.star.presentation",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..document.link_target",
+        "LinkTarget",
+        "LinkTarget_ca220c5c"
+      ],
+      [
+        "..drawing.draw_page",
+        "DrawPage",
+        "DrawPage_a56e0aff"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".animation_speed",
+        "AnimationSpeed",
+        "AnimationSpeed_3fb20fb5"
+      ],
+      [
+        ".fade_effect",
+        "FadeEffect",
+        "FadeEffect_1890de1"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.document.LinkTarget": "LinkTarget_ca220c5c",
+      "com.sun.star.drawing.DrawPage": "DrawPage_a56e0aff"
+    },
+    "quote": [
+      "AnimationSpeed_3fb20fb5",
+      "FadeEffect_1890de1"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.document.LinkTarget",
+        "com.sun.star.drawing.DrawPage"
+      ],
+      "typing": [
+        "com.sun.star.presentation.AnimationSpeed",
+        "com.sun.star.presentation.FadeEffect"
+      ]
+    },
+    "name": "DrawPage",
+    "imports": [],
+    "namespace": "com.sun.star.presentation",
+    "extends": [
+      "com.sun.star.drawing.DrawPage",
+      "com.sun.star.document.LinkTarget"
+    ],
+    "desc": [
+      "This is the service provided by a com.sun.star.drawing.DrawPage inside a PresentationDocument.",
+      "",
+      "**since**",
+      "",
+      "    LibreOffice 6.1"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1presentation_1_1DrawPage.html",
+    "items": {
+      "properties": [
+        {
+          "name": "Change",
+          "returns": "int",
+          "desc": [
+            "specifies how the page change is triggered.",
+            "",
+            "If this is 0, the user must click to start each object animation and to change the page. If set to 1, the page is automatically switched. If it is set to 2, all object effects run automatically, but the user has to click on the page to change it."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "DateTimeFormat",
+          "returns": "int",
+          "desc": [
+            "defines the format that is used to format a date and time text field on this page.",
+            "",
+            "This is only used if IsDateTimeFixed is FALSE."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "DateTimeText",
+          "returns": "str",
+          "desc": [
+            "defines the text that is displayed in a date and time textfield rendered on this page.",
+            "",
+            "This value is only used if IsDateTimeFixed is TRUE."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Duration",
+          "returns": "int",
+          "desc": [
+            "If the property com.sun.star.drawing.DrawPage.Change is set to 1, this is the time in seconds this page is shown before switching to the next page."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Effect",
+          "returns": "FadeEffect_1890de1",
+          "desc": [
+            "This is the effect that is used to fade in this page."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FooterText",
+          "returns": "str",
+          "desc": [
+            "defines the text that is displayed in a footer textfield rendered on this page."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "HeaderText",
+          "returns": "str",
+          "desc": [
+            "defines the text that is displayed in a header textfield rendered on this page."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "HighResDuration",
+          "returns": "float",
+          "desc": [
+            "If the property com.sun.star.drawing.DrawPage.Change is set to 1, this is the time in seconds this page is shown before switching to the next page, also permitting sub-second precision here."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsDateTimeFixed",
+          "returns": "bool",
+          "desc": [
+            "defines if a date and time text field shows a fixed string value or the current date on this page."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsDateTimeVisible",
+          "returns": "bool",
+          "desc": [
+            "defines if a date and time presentation shape from the master page is visible on this page."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsFooterVisible",
+          "returns": "bool",
+          "desc": [
+            "defines if a footer presentation shape from the master page is visible on this page."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsHeaderVisible",
+          "returns": "bool",
+          "desc": [
+            "defines if a header presentation shape from the master page is visible on this page."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsPageNumberVisible",
+          "returns": "bool",
+          "desc": [
+            "defines if a page number presentation shape from the master page is visible on this page."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Layout",
+          "returns": "int",
+          "desc": [
+            "If this property is not ZERO, this number specifies a presentation layout for this page."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Speed",
+          "returns": "AnimationSpeed_3fb20fb5",
+          "desc": [
+            "Defines the speed of the fade-in effect of this page."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TransitionDuration",
+          "returns": "float",
+          "desc": [
+            "Specifies slide transition time in seconds.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 6.1"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

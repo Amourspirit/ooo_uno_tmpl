@@ -1,0 +1,118 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XMenuProxyListener",
+  "type": "interface",
+  "namespace": "com.sun.star.mozilla",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".menu_multiple_change",
+        "MenuMultipleChange",
+        "MenuMultipleChange_2cc20f27"
+      ],
+      [
+        ".menu_single_change",
+        "MenuSingleChange",
+        "MenuSingleChange_dad0e3d"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "typing.Tuple[MenuMultipleChange_2cc20f27, ...]",
+      "typing.Tuple[MenuSingleChange_dad0e3d, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[MenuMultipleChange_2cc20f27, ...]",
+      "typing.Tuple[MenuSingleChange_dad0e3d, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.mozilla.MenuMultipleChange",
+        "com.sun.star.mozilla.MenuSingleChange"
+      ]
+    },
+    "name": "XMenuProxyListener",
+    "imports": [],
+    "namespace": "com.sun.star.mozilla",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "Listens for changes in menu items."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1mozilla_1_1XMenuProxyListener.html",
+    "items": {
+      "methods": [
+        {
+          "name": "menuChangedMultiple",
+          "returns": "None",
+          "desc": [
+            "is called, if the content or graphical representation/state of the menu changes completely, for one or more menu items"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "MenuMultipleChanges",
+              "typing.Tuple[MenuMultipleChange_2cc20f27, ...]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "menuChangedSingle",
+          "returns": "None",
+          "desc": [
+            "is called, if the content or graphical representation/state of the menu changes, by one property for one or more menu items"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "MenuSingleChanges",
+              "typing.Tuple[MenuSingleChange_dad0e3d, ...]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "menuItemDeleted",
+          "returns": "None",
+          "desc": [
+            "is called, if one menu item designated by the ID, is deleted."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "ID",
+              "int",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

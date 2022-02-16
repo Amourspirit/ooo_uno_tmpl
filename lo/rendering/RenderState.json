@@ -1,0 +1,103 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "type": "struct",
+  "name": "RenderState",
+  "namespace": "com.sun.star.rendering",
+  "parser_args": {
+    "sort": false,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "sort": true,
+    "dynamic_struct": true,
+    "include_desc": true
+  },
+  "data": {
+    "name": "RenderState",
+    "namespace": "com.sun.star.rendering",
+    "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1rendering_1_1RenderState.html",
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        "..geometry.affine_matrix2_d",
+        "AffineMatrix2D",
+        "AffineMatrix2D_ff040da8"
+      ],
+      [
+        ".color_component",
+        "ColorComponent",
+        "ColorComponent_e4c0e78"
+      ],
+      [
+        ".x_poly_polygon2_d",
+        "XPolyPolygon2D",
+        "XPolyPolygon2D_e1b0e20"
+      ]
+    ],
+    "extends_map": {},
+    "quote": [
+      "AffineMatrix2D_ff040da8",
+      "XPolyPolygon2D_e1b0e20",
+      "typing.Tuple[ColorComponent_e4c0e78, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[ColorComponent_e4c0e78, ...]"
+    ],
+    "requires_typing": true,
+    "fullname": "com.sun.star.rendering.RenderState",
+    "desc": [
+      "This structure contains information passed to each XCanvas render operation.",
+      "",
+      "This structure contains information considered as the render state, i.e. the common setup required to render each individual XCanvas primitive.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.0"
+    ],
+    "imports": [],
+    "extends": [],
+    "items": [
+      {
+        "name": "DeviceColor",
+        "type": "typing.Tuple[ColorComponent_e4c0e78, ...]",
+        "lines": [
+          "The device color associated with this render operation.",
+          "",
+          "Note that this need not be RGB here, but depends on the active device color space."
+        ]
+      },
+      {
+        "name": "AffineTransform",
+        "type": "AffineMatrix2D_ff040da8",
+        "lines": [
+          "The affine transform associated with this render operation.",
+          "",
+          "This is used to transform coordinates of canvas primitives from user space to view space (from which they are subsequently transformed to device space by the view transform)."
+        ]
+      },
+      {
+        "name": "Clip",
+        "type": "XPolyPolygon2D_e1b0e20",
+        "lines": [
+          "The clipping area associated with this render operation.",
+          "",
+          "This clipping is interpreted in the user coordinate system, i.e. subject to the render state transform followed by the view transform before mapped to device coordinate space.",
+          "",
+          "Specifying an empty interface denotes no clipping, i.e. everything rendered to the canvas will be visible (subject to device-dependent constraints, of course). Specifying an empty XPolyPolygon2D, i.e. a poly-polygon containing zero polygons, or an XPolyPolygon2D with any number of empty sub-polygons, denotes the NULL clip. That means, nothing rendered to the canvas will be visible."
+        ]
+      },
+      {
+        "name": "CompositeOperation",
+        "type": "int",
+        "lines": [
+          "The composition mode associated with this render operation.",
+          "",
+          "The composite mode determines in which way the primitive and possibly existing background is combined. The permissible values must be one out of the CompositeOperation constants."
+        ]
+      }
+    ]
+  }
+}

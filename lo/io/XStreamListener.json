@@ -1,0 +1,99 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XStreamListener",
+  "type": "interface",
+  "namespace": "com.sun.star.io",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..lang.x_event_listener",
+        "XEventListener",
+        "XEventListener_c7230c4a"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.lang.XEventListener": "XEventListener_c7230c4a"
+    },
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.lang.XEventListener"
+      ],
+      "typing": []
+    },
+    "name": "XStreamListener",
+    "imports": [],
+    "namespace": "com.sun.star.io",
+    "extends": [
+      "com.sun.star.lang.XEventListener"
+    ],
+    "desc": [
+      "makes it possible to receive events from an active data control."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1io_1_1XStreamListener.html",
+    "items": {
+      "methods": [
+        {
+          "name": "closed",
+          "returns": "None",
+          "desc": [
+            "gets called when data transfer terminates normally or when data transfer is terminated from outside.",
+            "",
+            "The termination could be done using the method XActiveDataControl.terminate()."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "error",
+          "returns": "None",
+          "desc": [
+            "gets called when an internal error in source or sink has occurred.",
+            "",
+            "After the method is called, the close is called on the connected streams."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aException",
+              "object",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "started",
+          "returns": "None",
+          "desc": [
+            "gets called as soon as data transfer has started."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "terminated",
+          "returns": "None",
+          "desc": [
+            "gets called when XActiveDataControl.terminate() is called."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

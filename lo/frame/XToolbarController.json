@@ -1,0 +1,129 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XToolbarController",
+  "type": "interface",
+  "namespace": "com.sun.star.frame",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..awt.x_window",
+        "XWindow",
+        "XWindow_713b0924"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XWindow_713b0924"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.awt.XWindow"
+      ]
+    },
+    "name": "XToolbarController",
+    "imports": [],
+    "namespace": "com.sun.star.frame",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "is an abstract service for a component which offers a more complex user interface to users within a toolbar.",
+      "",
+      "A generic toolbar function is represented as a button which has a state (enabled,disabled and selected, not selected). A toolbar controller can be added to a toolbar and provide information or functions with a more sophisticated user interface.",
+      "A typical example for toolbar controller is a font chooser on a toolbar. It provides all available fonts in a dropdown box and shows the current chosen font.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.0"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XToolbarController.html",
+    "items": {
+      "methods": [
+        {
+          "name": "click",
+          "returns": "None",
+          "desc": [
+            "notifies a component that a single click has been made on the toolbar item."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "createItemWindow",
+          "returns": "XWindow_713b0924",
+          "desc": [
+            "requests to create an item window which can be added to the toolbar."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Parent",
+              "XWindow_713b0924",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "createPopupWindow",
+          "returns": "XWindow_713b0924",
+          "desc": [
+            "requests to create a pop-up window for additional functions."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "doubleClick",
+          "returns": "None",
+          "desc": [
+            "notifies a component that a double click has been made on the toolbar item."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "execute",
+          "returns": "None",
+          "desc": [
+            "provides a function to execute the command which is bound to the toolbar controller.",
+            "",
+            "This function is usually called by a toolbar implementation when a user clicked on a toolbar button or pressed enter on the keyboard when the item has the input focus."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "KeyModifier",
+              "int",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XBitmapCanvas",
+  "type": "interface",
+  "namespace": "com.sun.star.rendering",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_canvas",
+        "XCanvas",
+        "XCanvas_b19b0b7a"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..geometry.real_rectangle2_d",
+        "RealRectangle2D",
+        "RealRectangle2D_d9b0e03"
+      ],
+      [
+        ".render_state",
+        "RenderState",
+        "RenderState_e4490d27"
+      ],
+      [
+        ".view_state",
+        "ViewState",
+        "ViewState_cab30c62"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.rendering.XCanvas": "XCanvas_b19b0b7a"
+    },
+    "quote": [
+      "RealRectangle2D_d9b0e03",
+      "RenderState_e4490d27",
+      "ViewState_cab30c62",
+      "XBitmapCanvas"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.rendering.XCanvas"
+      ],
+      "typing": [
+        "com.sun.star.geometry.RealRectangle2D",
+        "com.sun.star.rendering.RenderState",
+        "com.sun.star.rendering.ViewState"
+      ]
+    },
+    "name": "XBitmapCanvas",
+    "imports": [],
+    "namespace": "com.sun.star.rendering",
+    "extends": [
+      "com.sun.star.rendering.XCanvas"
+    ],
+    "desc": [
+      "This is a specialization of the canvas interface for bitmapped canvases.",
+      "",
+      "This interface is a specialization of the canvas interface for bitmapped canvases, where additional methods for accessing and moving of bitmap content are provided.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.0"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1rendering_1_1XBitmapCanvas.html",
+    "items": {
+      "methods": [
+        {
+          "name": "copyRect",
+          "returns": "None",
+          "desc": [
+            "This method copies a rectangular area from a place of one canvas to a place on another.",
+            "",
+            "This method copies a rectangular area from a place of one canvas to a place on another. Source and destination areas are permitted to overlap. If the source view or render state has a clipping set, the regions clipped away from the source rectangle are regarded fully transparent for the copy operation. The device color for both source and destination render state is ignored, the compositing mode only for the source render state."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "VolatileContentDestroyedException"
+          ],
+          "args": [
+            [
+              "sourceCanvas",
+              "XBitmapCanvas",
+              "in"
+            ],
+            [
+              "sourceRect",
+              "RealRectangle2D_d9b0e03",
+              "in"
+            ],
+            [
+              "sourceViewState",
+              "ViewState_cab30c62",
+              "in"
+            ],
+            [
+              "sourceRenderState",
+              "RenderState_e4490d27",
+              "in"
+            ],
+            [
+              "destRect",
+              "RealRectangle2D_d9b0e03",
+              "in"
+            ],
+            [
+              "destViewState",
+              "ViewState_cab30c62",
+              "in"
+            ],
+            [
+              "destRenderState",
+              "RenderState_e4490d27",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

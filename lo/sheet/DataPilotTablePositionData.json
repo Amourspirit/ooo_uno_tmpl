@@ -1,0 +1,61 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "type": "struct",
+  "name": "DataPilotTablePositionData",
+  "namespace": "com.sun.star.sheet",
+  "parser_args": {
+    "sort": false,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "sort": true,
+    "dynamic_struct": true,
+    "include_desc": true
+  },
+  "data": {
+    "name": "DataPilotTablePositionData",
+    "namespace": "com.sun.star.sheet",
+    "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1sheet_1_1DataPilotTablePositionData.html",
+    "from_imports": [],
+    "from_imports_typing": [],
+    "extends_map": {},
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "fullname": "com.sun.star.sheet.DataPilotTablePositionData",
+    "desc": [
+      "This structure contains information on a cell within a DataPilot table.",
+      "",
+      "This structure contains information on a particular cell within a DataPilot table, and is used to retrieve its metadata. The PositionType member specifies in which sub-area of the table the cell is positioned, which in turn determines the type of metadata contained in the PositionData member.",
+      "",
+      "**since**",
+      "",
+      "    OOo 3.0"
+    ],
+    "imports": [],
+    "extends": [],
+    "items": [
+      {
+        "name": "PositionType",
+        "type": "int",
+        "lines": [
+          "This parameter specifies which sub-area of a DataPilot table a given cell is positioned.",
+          "",
+          "See DataPilotTablePositionType for how to interpret the value of this parameter."
+        ]
+      },
+      {
+        "name": "PositionData",
+        "type": "object",
+        "lines": [
+          "This member contains a structure of different types depending on the position type specified in PositionType member.",
+          "",
+          "When the value of PositionType is DataPilotTablePositionType.RESULT, DataPilotTablePositionData.PositionData contains an instance of type DataPilotTableResultData, whereas when the value of DataPilotTablePositionData.PositionType is either DataPilotTablePositionType.ROW_HEADER or DataPilotTablePositionType.COLUMN_HEADER, then the PositionData member contains an instance of type DataPilotTableHeaderData."
+        ]
+      }
+    ]
+  }
+}

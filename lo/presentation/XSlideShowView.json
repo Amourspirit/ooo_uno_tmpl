@@ -1,0 +1,316 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XSlideShowView",
+  "type": "interface",
+  "namespace": "com.sun.star.presentation",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..awt.rectangle",
+        "Rectangle",
+        "Rectangle_84b109e9"
+      ],
+      [
+        "..awt.x_mouse_listener",
+        "XMouseListener",
+        "XMouseListener_bc1d0bfb"
+      ],
+      [
+        "..awt.x_mouse_motion_listener",
+        "XMouseMotionListener",
+        "XMouseMotionListener_c6a0e71"
+      ],
+      [
+        "..awt.x_paint_listener",
+        "XPaintListener",
+        "XPaintListener_bb6d0bee"
+      ],
+      [
+        "..geometry.affine_matrix2_d",
+        "AffineMatrix2D",
+        "AffineMatrix2D_ff040da8"
+      ],
+      [
+        "..geometry.integer_size2_d",
+        "IntegerSize2D",
+        "IntegerSize2D_f2690d53"
+      ],
+      [
+        "..rendering.x_sprite_canvas",
+        "XSpriteCanvas",
+        "XSpriteCanvas_ff8b0df1"
+      ],
+      [
+        "..util.x_modify_listener",
+        "XModifyListener",
+        "XModifyListener_d5c60ccc"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "AffineMatrix2D_ff040da8",
+      "IntegerSize2D_f2690d53",
+      "Rectangle_84b109e9",
+      "XModifyListener_d5c60ccc",
+      "XMouseListener_bc1d0bfb",
+      "XMouseMotionListener_c6a0e71",
+      "XPaintListener_bb6d0bee",
+      "XSpriteCanvas_ff8b0df1"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.awt.Rectangle",
+        "com.sun.star.awt.XMouseListener",
+        "com.sun.star.awt.XMouseMotionListener",
+        "com.sun.star.awt.XPaintListener",
+        "com.sun.star.geometry.AffineMatrix2D",
+        "com.sun.star.geometry.IntegerSize2D",
+        "com.sun.star.rendering.XSpriteCanvas",
+        "com.sun.star.util.XModifyListener"
+      ]
+    },
+    "name": "XSlideShowView",
+    "imports": [],
+    "namespace": "com.sun.star.presentation",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "View interface to display slide show presentations on.",
+      "",
+      "This interface provides the necessary methods to enable an XSlideShow interface to display a presentation. The slide show can be displayed simultaneously on multiple views",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.4"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1presentation_1_1XSlideShowView.html",
+    "items": {
+      "methods": [
+        {
+          "name": "addMouseListener",
+          "returns": "None",
+          "desc": [
+            "Add a mouse listener to the view.",
+            "",
+            "This method registers a listener with the view, which will get called every time the mouse is clicked on the view."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xListener",
+              "XMouseListener_bc1d0bfb",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "addMouseMotionListener",
+          "returns": "None",
+          "desc": [
+            "Add a mouse motion listener to the view.",
+            "",
+            "This method registers a listener with the view, which will get called every time the mouse is moved on the view."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xListener",
+              "XMouseMotionListener_c6a0e71",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "addPaintListener",
+          "returns": "None",
+          "desc": [
+            "Add a listener to get notified when this view needs a repaint.",
+            "",
+            "This method registers a listener with the view, which will get called every time the view needs an update of their screen representation."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xListener",
+              "XPaintListener_bb6d0bee",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "addTransformationChangedListener",
+          "returns": "None",
+          "desc": [
+            "Add a listener to get notified when the transformation matrix changes.",
+            "",
+            "This method registers a listener with the view, which will get called every time the transformation matrix changes."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xListener",
+              "XModifyListener_d5c60ccc",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "clear",
+          "returns": "None",
+          "desc": [
+            "This method clears the whole view area.",
+            "",
+            "The slide show uses this method to fully erase the view content. Since the slide show has no notion of view size, this is the only reliable way to wholly clear the view."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getCanvas",
+          "returns": "XSpriteCanvas_ff8b0df1",
+          "desc": [
+            "Get view canvas.",
+            "",
+            "This method gets the underlying XCanvas to display on this view."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getCanvasArea",
+          "returns": "Rectangle_84b109e9",
+          "desc": [
+            "Get rectangle defining area inside of canvas device which this slide show view uses."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getTransformation",
+          "returns": "AffineMatrix2D_ff040da8",
+          "desc": [
+            "Query the current transformation matrix for this view.",
+            "",
+            "This method returns the transformation matrix of the view. When notified via the transformation change listener, the show will be displayed using the new transformation."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getTranslationOffset",
+          "returns": "IntegerSize2D_f2690d53",
+          "desc": [
+            "Query the current translation offset used to fill the physical screen while keeping aspect ratio.",
+            "",
+            "This method returns the translation offset of the view of the view."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "removeMouseListener",
+          "returns": "None",
+          "desc": [
+            "Revoke a previously registered mouse listener."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xListener",
+              "XMouseListener_bc1d0bfb",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeMouseMotionListener",
+          "returns": "None",
+          "desc": [
+            "Revoke a previously registered mouse move listener."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xListener",
+              "XMouseMotionListener_c6a0e71",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removePaintListener",
+          "returns": "None",
+          "desc": [
+            "Revoke a previously registered paint listener."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xListener",
+              "XPaintListener_bb6d0bee",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeTransformationChangedListener",
+          "returns": "None",
+          "desc": [
+            "Revoke a previously registered transformation matrix change listener."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xListener",
+              "XModifyListener_d5c60ccc",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setMouseCursor",
+          "returns": "None",
+          "desc": [
+            "Change the mouse cursor currently in effect.",
+            "",
+            "This method changes the mouse cursor currently in effect, for this view."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "nPointerShape",
+              "int",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

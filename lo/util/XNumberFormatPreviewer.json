@@ -1,0 +1,139 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XNumberFormatPreviewer",
+  "type": "interface",
+  "namespace": "com.sun.star.util",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..lang.locale",
+        "Locale",
+        "Locale_70d308fa"
+      ],
+      [
+        ".color",
+        "Color",
+        "Color_68e908c5"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "Color_68e908c5",
+      "Locale_70d308fa"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.lang.Locale",
+        "com.sun.star.util.Color"
+      ]
+    },
+    "name": "XNumberFormatPreviewer",
+    "imports": [],
+    "namespace": "com.sun.star.util",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "represents a number formatter which can preview number formats without inserting them."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1util_1_1XNumberFormatPreviewer.html",
+    "items": {
+      "methods": [
+        {
+          "name": "convertNumberToPreviewString",
+          "returns": "str",
+          "desc": [
+            "formats a value using a format string, without inserting a number format into the list."
+          ],
+          "raises": [
+            "com.sun.star.util.MalformedNumberFormatException"
+          ],
+          "args": [
+            [
+              "aFormat",
+              "str",
+              "in"
+            ],
+            [
+              "fValue",
+              "float",
+              "in"
+            ],
+            [
+              "nLocale",
+              "Locale_70d308fa",
+              "in"
+            ],
+            [
+              "bAllowEnglish",
+              "bool",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "queryPreviewColorForNumber",
+          "returns": "Color_68e908c5",
+          "desc": [
+            "returns the color which is to be used for a number."
+          ],
+          "raises": [
+            "com.sun.star.util.MalformedNumberFormatException"
+          ],
+          "args": [
+            [
+              "aFormat",
+              "str",
+              "in"
+            ],
+            [
+              "fValue",
+              "float",
+              "in"
+            ],
+            [
+              "nLocale",
+              "Locale_70d308fa",
+              "in"
+            ],
+            [
+              "bAllowEnglish",
+              "bool",
+              "in"
+            ],
+            [
+              "aDefaultColor",
+              "Color_68e908c5",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

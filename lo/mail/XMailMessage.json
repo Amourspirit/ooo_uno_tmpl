@@ -1,0 +1,236 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XMailMessage",
+  "type": "interface",
+  "namespace": "com.sun.star.mail",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..datatransfer.x_transferable",
+        "XTransferable",
+        "XTransferable_2d800f38"
+      ],
+      [
+        ".mail_attachment",
+        "MailAttachment",
+        "MailAttachment_c6770c37"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "MailAttachment_c6770c37",
+      "XTransferable_2d800f38",
+      "typing.Tuple[MailAttachment_c6770c37, ...]",
+      "typing.Tuple[str, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[MailAttachment_c6770c37, ...]",
+      "typing.Tuple[str, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.datatransfer.XTransferable",
+        "com.sun.star.mail.MailAttachment"
+      ]
+    },
+    "name": "XMailMessage",
+    "imports": [],
+    "namespace": "com.sun.star.mail",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "Represents a mail message.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.0"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1mail_1_1XMailMessage.html",
+    "items": {
+      "methods": [
+        {
+          "name": "addAttachment",
+          "returns": "None",
+          "desc": [
+            "Add a file attachment to a mail message.",
+            "",
+            "param aMailAttachment [in] specifies a file which should be attached to this mail message."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aMailAttachment",
+              "MailAttachment_c6770c37",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "addBccRecipient",
+          "returns": "None",
+          "desc": [
+            "Add a BCC recipients e-mail address to the list of recipients of this mail message.",
+            "",
+            "If the e-mail address doesn't conform to RFC\u00a0822 sending the mail message will fail."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "sRecipientAddress",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "addCcRecipient",
+          "returns": "None",
+          "desc": [
+            "Add a Cc recipients e-mail address to the list of recipients of this mail message.",
+            "",
+            "If the e-mail address doesn't conform to RFC\u00a0822 sending the mail message will fail."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "sRecipientAddress",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "addRecipient",
+          "returns": "None",
+          "desc": [
+            "Add a recipients e-mail address to the list of recipients of this mail message.",
+            "",
+            "If the e-mail address doesn't conform to RFC\u00a0822 sending the mail message will fail."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "sRecipientAddress",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getAttachments",
+          "returns": "typing.Tuple[MailAttachment_c6770c37, ...]",
+          "desc": [
+            "Return a sequence of MailAttachment's that will be attached to this mail message."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getBccRecipients",
+          "returns": "typing.Tuple[str, ...]",
+          "desc": [
+            "Return a sequence of the e-mail addresses of all the BCC recipients of this mail message."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getCcRecipients",
+          "returns": "typing.Tuple[str, ...]",
+          "desc": [
+            "Return a sequence of the e-mail addresses of all the Cc recipients of this mail message."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getRecipients",
+          "returns": "typing.Tuple[str, ...]",
+          "desc": [
+            "Return a sequence of the e-mail addresses of all recipients of this mail message."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ],
+      "properties": [
+        {
+          "name": "Body",
+          "returns": "XTransferable_2d800f38",
+          "desc": [
+            "The body of the mail message.",
+            "",
+            "It is expected that the transferable delivers the data as a string. Although a transferable may support multiple data flavors only the first data flavor supplied will be used to retrieve the data and it is expected that the data will be provided as a string."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ReplyToAddress",
+          "returns": "str",
+          "desc": [
+            "The e-mail address where replies on this mail message should be sent to.",
+            "",
+            "If the e-mail address doesn't conform to RFC\u00a0822 sending the mail message later will fail. If no ReplyToAddress is set replies go to the SenderAddress."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SenderAddress",
+          "returns": "str",
+          "desc": [
+            "The e-mail address of the sender of this mail message.",
+            "",
+            "The e-mail address has to conform to RFC\u00a0822."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SenderName",
+          "returns": "str",
+          "desc": [
+            "The display name of the sender of this mail message."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Subject",
+          "returns": "str",
+          "desc": [
+            "The subject of a mail message."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

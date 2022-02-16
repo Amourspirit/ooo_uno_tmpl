@@ -1,0 +1,132 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XListEntryListener",
+  "type": "interface",
+  "namespace": "com.sun.star.form.binding",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "...lang.x_event_listener",
+        "XEventListener",
+        "XEventListener_c7230c4a"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".list_entry_event",
+        "ListEntryEvent",
+        "ListEntryEvent_37f10f75"
+      ],
+      [
+        "...lang.event_object",
+        "EventObject",
+        "EventObject_a3d70b03"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.lang.XEventListener": "XEventListener_c7230c4a"
+    },
+    "quote": [
+      "EventObject_a3d70b03",
+      "ListEntryEvent_37f10f75"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.lang.XEventListener"
+      ],
+      "typing": [
+        "com.sun.star.form.binding.ListEntryEvent",
+        "com.sun.star.lang.EventObject"
+      ]
+    },
+    "name": "XListEntryListener",
+    "imports": [],
+    "namespace": "com.sun.star.form.binding",
+    "extends": [
+      "com.sun.star.lang.XEventListener"
+    ],
+    "desc": [
+      "specifies a listener for changes in a string entry list"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1form_1_1binding_1_1XListEntryListener.html",
+    "items": {
+      "methods": [
+        {
+          "name": "allEntriesChanged",
+          "returns": "None",
+          "desc": [
+            "notifies the listener that all entries of the list have changed.",
+            "",
+            "The listener should retrieve the complete new list by calling the XListEntrySource.getAllListEntries() method of the event source (which is denoted by com.sun.star.lang.EventObject.Source)."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Source",
+              "EventObject_a3d70b03",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "entryChanged",
+          "returns": "None",
+          "desc": [
+            "notifies the listener that a single entry in the list has change"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Source",
+              "ListEntryEvent_37f10f75",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "entryRangeInserted",
+          "returns": "None",
+          "desc": [
+            "notifies the listener that a range of entries has been inserted into the list"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Source",
+              "ListEntryEvent_37f10f75",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "entryRangeRemoved",
+          "returns": "None",
+          "desc": [
+            "notifies the listener that a range of entries has been removed from the list"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Source",
+              "ListEntryEvent_37f10f75",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

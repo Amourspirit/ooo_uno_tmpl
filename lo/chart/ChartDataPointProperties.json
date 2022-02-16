@@ -1,0 +1,207 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "ChartDataPointProperties",
+  "type": "service",
+  "namespace": "com.sun.star.chart",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".chart3_d_bar_properties",
+        "Chart3DBarProperties",
+        "Chart3DBarProperties_22f00ec5"
+      ],
+      [
+        "..drawing.fill_properties",
+        "FillProperties",
+        "FillProperties_f1200da8"
+      ],
+      [
+        "..drawing.line_properties",
+        "LineProperties",
+        "LineProperties_f13f0da9"
+      ],
+      [
+        "..style.character_properties",
+        "CharacterProperties",
+        "CharacterProperties_1d4f0ef3"
+      ],
+      [
+        "..xml.user_defined_attributes_supplier",
+        "UserDefinedAttributesSupplier",
+        "UserDefinedAttributesSupplier_9fbe1222"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..graphic.x_graphic",
+        "XGraphic",
+        "XGraphic_a4da0afc"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.chart.Chart3DBarProperties": "Chart3DBarProperties_22f00ec5",
+      "com.sun.star.drawing.FillProperties": "FillProperties_f1200da8",
+      "com.sun.star.drawing.LineProperties": "LineProperties_f13f0da9",
+      "com.sun.star.style.CharacterProperties": "CharacterProperties_1d4f0ef3",
+      "com.sun.star.xml.UserDefinedAttributesSupplier": "UserDefinedAttributesSupplier_9fbe1222"
+    },
+    "quote": [
+      "XGraphic_a4da0afc"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.chart.Chart3DBarProperties",
+        "com.sun.star.drawing.FillProperties",
+        "com.sun.star.drawing.LineProperties",
+        "com.sun.star.style.CharacterProperties",
+        "com.sun.star.xml.UserDefinedAttributesSupplier"
+      ],
+      "typing": [
+        "com.sun.star.graphic.XGraphic"
+      ]
+    },
+    "name": "ChartDataPointProperties",
+    "imports": [],
+    "namespace": "com.sun.star.chart",
+    "extends": [
+      "com.sun.star.drawing.FillProperties",
+      "com.sun.star.drawing.LineProperties",
+      "com.sun.star.style.CharacterProperties",
+      "com.sun.star.xml.UserDefinedAttributesSupplier",
+      "com.sun.star.chart.Chart3DBarProperties"
+    ],
+    "desc": [
+      "specifies all the properties for the graphic object of a data point (e.g., a single bar in a bar chart).",
+      "",
+      "Text properties correlate to the data description of the data point. There is a similar service for a group of graphic elements called ChartDataRowProperties for the properties of whole data rows.",
+      "",
+      "**since**",
+      "",
+      "    OOo 1.1.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1chart_1_1ChartDataPointProperties.html",
+    "items": {
+      "properties": [
+        {
+          "name": "DataCaption",
+          "returns": "int",
+          "desc": [
+            "specifies how the captions of data points are displayed."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "LabelPlacement",
+          "returns": "int",
+          "desc": [
+            "specifies a relative position for the data label"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "LabelSeparator",
+          "returns": "str",
+          "desc": [
+            "specifies a string that is used to separate the parts of a data label (caption)"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "NumberFormat",
+          "returns": "int",
+          "desc": [
+            "specifies a number format for the display of the value in the data label"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "PercentageNumberFormat",
+          "returns": "int",
+          "desc": [
+            "specifies a number format for the display of the percentage value in the data label"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SegmentOffset",
+          "returns": "int",
+          "desc": [
+            "the offset by which pie segments in a PieDiagram are dragged outside from the center.",
+            "",
+            "This value is given in percent of the radius."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SymbolBitmap",
+          "returns": "XGraphic_a4da0afc",
+          "desc": [
+            "In charts that support symbols, you can set this property to a graphic object.",
+            "",
+            "This graphic is then used as symbol for each data point.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 6.1"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SymbolBitmapURL",
+          "returns": "str",
+          "desc": [
+            "In charts that support symbols, you can set this property to any valid URL that points to a graphic file.",
+            "",
+            "This graphic is then used as symbol for each data point.",
+            "",
+            "When you query this value you get an internal URL of the embedded graphic."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SymbolType",
+          "returns": "int",
+          "desc": [
+            "specifies the type of symbols if the current chart type supports the usage of symbols."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TextWordWrap",
+          "returns": "bool",
+          "desc": [
+            "specifies if the text of a data label (caption) must be wrapped",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 5.1"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

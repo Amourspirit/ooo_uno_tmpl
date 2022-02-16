@@ -31,3 +31,85 @@ Now log will contain a bunch of empty lines.
 Regex: $\n
 Find and replace with nothing again.
 All done.
+
+-------------------------------------------------------------------------
+Building Services.
+
+Services as show in Api documentation sometime inherit interfaces that are also inherited by a child class.
+One example of this is the AccessibleButton class.
+https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1awt_1_1AccessibleButton.html
+AccessibleButton class inherites XAccessibleComponent and XAccessibleExtendedComponent, However XAccessibleExtendedComponent already inherits XAccessibleComponent.
+
+I could find no way from the api to filter this properly to inherit only XAccessibleExtendedComponent and not also XAccessibleComponent.
+If this is not limited then python complains.
+
+My solution is to dynamically load all the imports when the service is being build. Via the parsers/service.py module.
+For this reason services should be built last after all other classes have been built into scratch directory. This waill make any classes
+needed for dynamic loading available when the service are being built.
+
+Also all folder containing modules need to have an __init__.py in them in order for dynamic importing to work.
+
+-------------------------------------------------------------------------
+Re-exporting a module in pyi.
+To re-export a module the following redundant format is used.
+from .uno import XInterface as XInterface
+
+multiple-inheritance
+--------------------
+
+https://wiki.openoffice.org/wiki/Documentation/DevGuide/ProUNO/Services
+
+Apache OpenOffice objects can inherit services, including interfaces, from only one parent object.
+However, objects can implement multiple interfaces. Inherited methods can be provided by the parent of the object;
+implemented methods must be provided by the object itself.
+Although Apache OpenOffice does not support true multiple-inheritance, objects can implement multiple interfaces,
+which gives them the appearance of having inherited methods from several other objects.
+When the term multiple-inheritance interface is used in Apache OpenOffice, it actually refers to multiple interface implementation.
+
+Referencing Interfaces
+
+References to interfaces in a service definition mean that an implementation of this service must offer the specified interfaces.
+However, optional interfaces are possible. If a multiple-inheritance interface inherits an optional interface,
+or an old-style service contains an optional interface, any given UNO object may or may not support this interface. 
+If you utilize an optional interface of a UNO object, always check if the result of queryInterface()
+is equal to null and react accordingly - otherwise your code will not be compatible with implementations without the optional
+interface and you might end up with null pointer exceptions. 
+
+Such a RemoteTV component could be a jar file or a shared library. It would contain two service implementations,
+TVSet and RemoteControl. Once the RemoteTV component is registered with the global service manager, users can call the
+factory method of the service manager and ask for a TVSet or a RemoteControl service.
+Then they could use their functionality over the interfaces XPower, XChannel and XStandby.
+When a new implementation of these services with better performance or new features is available later on,
+the old component can be replaced without breaking existing code, provided that the new features are introduced by adding interfaces.
+
+Sequenes are tuples in python
+
+Oder of Properties
+------------------
+
+The order of summary info (public attributes etc...) may not be in order with the detils order.
+
+For example:
+    Exception class list public attributes in the order of Message, Context but the details section list as Context, Message.
+    See: https://api.libreoffice.org/docs/idl/ref/exceptioncom_1_1sun_1_1star_1_1uno_1_1Exception.html
+
+createUnoStruct see the first arg for Exception as Context.
+
+For Example:
+    uno.createUnoStruct('com.sun.star.uno.Exception', "Hello")
+    Result in uno.RuntimeException, member 'Context' of struct type 'com.sun.star.uno.Exception' not given a value.
+
+For Struct such as Color the same applies.
+    Summary is Red, Green, Blue
+    Details section list alphabetical Blue, Green, Red
+    https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1rendering_1_1RGBColor.html
+
+    >>> rgb = uno.createUnoStruct('com.sun.star.rendering.RGBColor', 122, 144, 200)
+    >>> print(rgb)
+    >>> print(rgb.Red)
+    >>> print(rgb.Green)
+    >>> print(rgb.Blue)
+    (com.sun.star.rendering.RGBColor){ Red = (double)122, Green = (double)144, Blue = (double)200 }
+    122.0
+    144.0
+    200.0

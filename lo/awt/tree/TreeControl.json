@@ -1,0 +1,64 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "TreeControl",
+  "type": "service",
+  "namespace": "com.sun.star.awt.tree",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_tree_control",
+        "XTreeControl",
+        "XTreeControl_e0500cfb"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.awt.tree.XTreeControl": "XTreeControl_e0500cfb"
+    },
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.awt.tree.XTreeControl"
+      ],
+      "typing": []
+    },
+    "name": "TreeControl",
+    "imports": [],
+    "namespace": "com.sun.star.awt.tree",
+    "extends": [
+      "com.sun.star.awt.tree.XTreeControl"
+    ],
+    "desc": [
+      "A control that displays a set of hierarchical data as an outline.",
+      "",
+      "A specific node in a tree is identified by a XTreeNode. A leaf node is a node without any children and that returns FALSE when calling XTreeNode.hasChildrenOnDemand(). An expanded node is a non-leaf node that will displays its children when all its ancestors are expanded. A collapsed node is one which hides them. A node is visible when all parent nodes are expanded and the node itself is in the display area.",
+      "",
+      "The nodes are retrieved from a XTreeDataModel. You can implement it yourself or use the MutableTreeDataModel which uses XMutableTreeNode and XMutableTreeDataModel for a simple and mutable data model.",
+      "",
+      "The data model must be set at the TreeControlModel.TreeDataModel property.",
+      "",
+      "If you are interested in knowing when the selection changes implement a com.sun.star.view.XSelectionChangeListener and add the instance with the method com.sun.star.view.XSelectionSupplier.addSelectionChangeListener(). You than will be notified for any selection change.",
+      "",
+      "If you are interested in detecting either double-click events or when a user clicks on a node, regardless of whether or not it was selected, you can get the com.sun.star.awt.XWindow and add yourself as a com.sun.star.awt.XMouseClickHandler. You can use the method XTreeControl.getNodeForLocation() to retrieve the node that was under the mouse at the time the event was fired.",
+      "",
+      "If you want to add child nodes to your tree on demand you can do the following.",
+      "",
+      "Now you get called when the node will become expanded or collapsed. So on XTreeExpansionListener.treeExpanding() you can check the TreeExpansionEvent if the parent node with children on demand is going to be expanded and in that case add the missing child nodes. You can also veto the expansion or collapsing of a parent node by using the ExpandVetoException."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1awt_1_1tree_1_1TreeControl.html",
+    "items": {}
+  }
+}

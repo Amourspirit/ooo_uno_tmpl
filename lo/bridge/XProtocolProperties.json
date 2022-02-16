@@ -1,0 +1,120 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XProtocolProperties",
+  "type": "interface",
+  "namespace": "com.sun.star.bridge",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".protocol_property",
+        "ProtocolProperty",
+        "ProtocolProperty_ff280e2c"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "typing.Tuple[ProtocolProperty_ff280e2c, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[ProtocolProperty_ff280e2c, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.bridge.ProtocolProperty"
+      ]
+    },
+    "name": "XProtocolProperties",
+    "imports": [],
+    "namespace": "com.sun.star.bridge",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "Bridge internal interface, that allows to change protocol settings of the remote counter part.",
+      "",
+      "In general, this interface is implemented by the bridge itself. It must not be called from outside the bridge.",
+      "",
+      "INTERNAL INTERFACE, DO NOT USE IT ELSEWHERE!"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1bridge_1_1XProtocolProperties.html",
+    "items": {
+      "methods": [
+        {
+          "name": "commitChange",
+          "returns": "None",
+          "desc": [
+            "called to commit a protocol change.",
+            "",
+            "It is only allowed to call commitChange, if requestChange has been called previously and the return value was true. The new properties are valid after the reply of commitChange has been received. Note, that this is difficult for the callee, because it must marshal the reply with the old settings.",
+            "",
+            "All properties not mentioned in the list are unchanged. Note that the bridge must be blocked for other threads, before commitChange is sent and unblocked after the reply has been received. This blocks the bridge."
+          ],
+          "raises": [
+            "com.sun.star.bridge.InvalidProtocolChangeException"
+          ],
+          "args": [
+            [
+              "newValues",
+              "typing.Tuple[ProtocolProperty_ff280e2c, ...]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getProperties",
+          "returns": "typing.Tuple[ProtocolProperty_ff280e2c, ...]",
+          "desc": [
+            "called to get a list of bridge internal properties.",
+            "",
+            "Which properties can be retrieved, is protocol dependent.",
+            "",
+            "The properties MUST NOT change between a requestChange and a commit change call."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "requestChange",
+          "returns": "int",
+          "desc": [
+            "called to initiate a protocol change.",
+            "",
+            "This method should always be called in the scope of the local bridge setting object, because the remote counter part may do such a call at the same time (typically at startup time)."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "nRandomNumber",
+              "int",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

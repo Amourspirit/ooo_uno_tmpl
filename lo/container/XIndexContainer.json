@@ -1,0 +1,97 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XIndexContainer",
+  "type": "interface",
+  "namespace": "com.sun.star.container",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_index_replace",
+        "XIndexReplace",
+        "XIndexReplace_feed0dd7"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.container.XIndexReplace": "XIndexReplace_feed0dd7"
+    },
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.container.XIndexReplace"
+      ],
+      "typing": []
+    },
+    "name": "XIndexContainer",
+    "imports": [],
+    "namespace": "com.sun.star.container",
+    "extends": [
+      "com.sun.star.container.XIndexReplace"
+    ],
+    "desc": [
+      "This is the generic interface for supporting the insertion and removal of indexed elements."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1container_1_1XIndexContainer.html",
+    "items": {
+      "methods": [
+        {
+          "name": "insertByIndex",
+          "returns": "None",
+          "desc": [
+            "inserts the given element at the specified index.",
+            "",
+            "To append an element, use the index \\\"last index +1\\\"."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.IndexOutOfBoundsException",
+            "com.sun.star.lang.WrappedTargetException"
+          ],
+          "args": [
+            [
+              "Index",
+              "int",
+              "in"
+            ],
+            [
+              "Element",
+              "object",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeByIndex",
+          "returns": "None",
+          "desc": [
+            "removes the element at the specified index."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException",
+            "com.sun.star.lang.WrappedTargetException"
+          ],
+          "args": [
+            [
+              "Index",
+              "int",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

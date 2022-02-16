@@ -1,0 +1,99 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XNameAccess",
+  "type": "interface",
+  "namespace": "com.sun.star.container",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_element_access",
+        "XElementAccess",
+        "XElementAccess_cd60e3f"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.container.XElementAccess": "XElementAccess_cd60e3f"
+    },
+    "quote": [
+      "typing.Tuple[str, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[str, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.container.XElementAccess"
+      ],
+      "typing": []
+    },
+    "name": "XNameAccess",
+    "imports": [],
+    "namespace": "com.sun.star.container",
+    "extends": [
+      "com.sun.star.container.XElementAccess"
+    ],
+    "desc": [
+      "is used to access named objects within a container.",
+      "",
+      "To implement inaccurate name access, support the com.sun.star.beans.XExactName interface."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1container_1_1XNameAccess.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getByName",
+          "returns": "object",
+          "desc": [],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException",
+            "com.sun.star.lang.WrappedTargetException"
+          ],
+          "args": [
+            [
+              "aName",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getElementNames",
+          "returns": "typing.Tuple[str, ...]",
+          "desc": [
+            "The order of the names is not specified."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "hasByName",
+          "returns": "bool",
+          "desc": [
+            "In many cases the next call is XNameAccess.getByName(). You should optimize this case."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aName",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

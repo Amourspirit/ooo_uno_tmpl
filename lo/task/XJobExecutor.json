@@ -1,0 +1,72 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XJobExecutor",
+  "type": "interface",
+  "namespace": "com.sun.star.task",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": []
+    },
+    "name": "XJobExecutor",
+    "imports": [],
+    "namespace": "com.sun.star.task",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "starts action for any triggered event from outside",
+      "",
+      "If somewhere from outside trigger an event on this interface it will be used to find any registered service inside configuration of this executor. If somewhere could be found it will be started and controlled by this instance. After it finish his work it's possible to deactivate further startups or let him run again if a new event will be detected later."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1task_1_1XJobExecutor.html",
+    "items": {
+      "methods": [
+        {
+          "name": "trigger",
+          "returns": "None",
+          "desc": [
+            "trigger event to start registered jobs",
+            "",
+            "Jobs are registered in configuration and will be started by executor automatically, if they are registered for triggered event. The meaning of given string Event mustn't be known. Because for the executor it's enough to use it for searching a registered job inside his own configuration. So no special events will be defined here."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Event",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

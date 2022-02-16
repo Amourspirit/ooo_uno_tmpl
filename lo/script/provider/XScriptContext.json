@@ -1,0 +1,136 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XScriptContext",
+  "type": "interface",
+  "namespace": "com.sun.star.script.provider",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "...uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "...document.x_script_invocation_context",
+        "XScriptInvocationContext",
+        "XScriptInvocationContext_a29f1233"
+      ],
+      [
+        "...frame.x_desktop",
+        "XDesktop",
+        "XDesktop_8e740a45"
+      ],
+      [
+        "...frame.x_model",
+        "XModel",
+        "XModel_7a6e095c"
+      ],
+      [
+        "...uno.x_component_context",
+        "XComponentContext",
+        "XComponentContext_e2e10d4a"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XComponentContext_e2e10d4a",
+      "XDesktop_8e740a45",
+      "XModel_7a6e095c",
+      "XScriptInvocationContext_a29f1233"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.document.XScriptInvocationContext",
+        "com.sun.star.frame.XDesktop",
+        "com.sun.star.frame.XModel",
+        "com.sun.star.uno.XComponentContext"
+      ]
+    },
+    "name": "XScriptContext",
+    "imports": [],
+    "namespace": "com.sun.star.script.provider",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "This interface is provided to scripts, and provides a means of access to the various interfaces which they might need to perform some action on a document.",
+      "",
+      "It is required to be passed as the first argument for any Java scripts.",
+      "",
+      "**since**",
+      "",
+      "    OOo 3.0"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1script_1_1provider_1_1XScriptContext.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getComponentContext",
+          "returns": "XComponentContext_e2e10d4a",
+          "desc": [
+            "Obtain the component context which the script can use to create other uno components."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getDesktop",
+          "returns": "XDesktop_8e740a45",
+          "desc": [
+            "Obtain the desktop reference on which the script can operate."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getDocument",
+          "returns": "XModel_7a6e095c",
+          "desc": [
+            "Obtain the document reference on which the script can operate."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getInvocationContext",
+          "returns": "XScriptInvocationContext_a29f1233",
+          "desc": [
+            "provides access to the context where the script was invoked",
+            "",
+            "In some cases, it is possible that scripts, embedded in a document, are executed from within a context which is not the document itself. In this case, the getInvocationContext member allows to access this context.",
+            "",
+            "Note that the returned context is allowed to be NULL, in this case, the document as returned by getDocument is the invocation context.",
+            "",
+            "If the returned context is not NULL, its ScriptContainer attribute equals the document as returned by XScriptContext.getDocument.",
+            "",
+            "**since**",
+            "",
+            "    OOo 3.0"
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

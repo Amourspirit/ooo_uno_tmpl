@@ -1,0 +1,106 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XNotifyingDispatch",
+  "type": "interface",
+  "namespace": "com.sun.star.frame",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_dispatch",
+        "XDispatch",
+        "XDispatch_98ff0a9b"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
+      ],
+      [
+        ".x_dispatch_result_listener",
+        "XDispatchResultListener",
+        "XDispatchResultListener_582b1060"
+      ],
+      [
+        "..util.url",
+        "URL",
+        "URL_57ad07b9"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.frame.XDispatch": "XDispatch_98ff0a9b"
+    },
+    "quote": [
+      "URL_57ad07b9",
+      "XDispatchResultListener_582b1060",
+      "typing.Tuple[PropertyValue_c9610c73, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[PropertyValue_c9610c73, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.frame.XDispatch"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.frame.XDispatchResultListener",
+        "com.sun.star.util.URL"
+      ]
+    },
+    "name": "XNotifyingDispatch",
+    "imports": [],
+    "namespace": "com.sun.star.frame",
+    "extends": [
+      "com.sun.star.frame.XDispatch"
+    ],
+    "desc": [
+      "dispatch with guaranteed notify (instead of XDispatch)"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XNotifyingDispatch.html",
+    "items": {
+      "methods": [
+        {
+          "name": "dispatchWithNotification",
+          "returns": "None",
+          "desc": [
+            "Do the same like XDispatch.dispatch() but notifies listener in every case.",
+            "",
+            "Should be used if result must be known."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "URL",
+              "URL_57ad07b9",
+              "in"
+            ],
+            [
+              "Arguments",
+              "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "in"
+            ],
+            [
+              "Listener",
+              "XDispatchResultListener_582b1060",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

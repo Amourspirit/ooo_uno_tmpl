@@ -1,0 +1,88 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XIntrospection",
+  "type": "interface",
+  "namespace": "com.sun.star.beans",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_introspection_access",
+        "XIntrospectionAccess",
+        "XIntrospectionAccess_2a050f2c"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XIntrospectionAccess_2a050f2c"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.beans.XIntrospectionAccess"
+      ]
+    },
+    "name": "XIntrospection",
+    "imports": [],
+    "namespace": "com.sun.star.beans",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "allows the inspection of an object's properties and methods.",
+      "",
+      "Important note:An object can only be inspected completely if it supports the com.sun.star.lang.XTypeProvider interface.",
+      "",
+      "For details see method XIntrospection.inspect()."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XIntrospection.html",
+    "items": {
+      "methods": [
+        {
+          "name": "inspect",
+          "returns": "XIntrospectionAccess_2a050f2c",
+          "desc": [
+            "inspects the given object.",
+            "",
+            "It identifies all properties supported by the object if they are represented in one of the following ways:",
+            "",
+            "In addition, the inspect method identifies all listener access methods in the form add...Listener/ remove...Listener (except methods of interface XPropertySet) where \\\"...\\\" stands for the listener type.",
+            "",
+            "Methods which do not belong to a property nor which represent a listener access nor which are methods of XPropertySet, com.sun.star.container.XNameAccess, com.sun.star.container.XIndexAccess, or com.sun.star.container.XEnumerationAccess, are considered to be normal methods."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aObject",
+              "object",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

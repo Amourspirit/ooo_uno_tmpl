@@ -1,0 +1,82 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XPackageManagerFactory",
+  "type": "interface",
+  "namespace": "com.sun.star.deployment",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        ".x_package_manager",
+        "XPackageManager",
+        "XPackageManager_2bc50f08"
+      ]
+    ],
+    "extends_map": {},
+    "quote": [
+      "XPackageManager_2bc50f08"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.deployment.XPackageManager"
+      ]
+    },
+    "name": "XPackageManagerFactory",
+    "imports": [],
+    "namespace": "com.sun.star.deployment",
+    "extends": [],
+    "desc": [
+      "The XPackageManagerFactory interface is used to obtain XPackageManager instances.",
+      "",
+      "You have to use the singleton  /singletons/com.sun.star.deployment.thePackageManagerFactory  exclusively.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.0",
+      "",
+      ".. deprecated::",
+      "",
+      "    Class is deprecated."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1deployment_1_1XPackageManagerFactory.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getPackageManager",
+          "returns": "XPackageManager_2bc50f08",
+          "desc": [
+            "Method to create (or reusing and already existing) XPackageManager object to add or remove UNO packages persistently.",
+            "",
+            "Packages for context strings \\\"user\\\" and \\\"shared\\\" will be registered and revoked persistently.",
+            "",
+            "Context strings other than \\\"user\\\", \\\"shared\\\" will last in an com.sun.star.lang.IllegalArgumentException."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "context",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

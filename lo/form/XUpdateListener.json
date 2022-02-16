@@ -1,0 +1,97 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XUpdateListener",
+  "type": "interface",
+  "namespace": "com.sun.star.form",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..lang.x_event_listener",
+        "XEventListener",
+        "XEventListener_c7230c4a"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..lang.event_object",
+        "EventObject",
+        "EventObject_a3d70b03"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.lang.XEventListener": "XEventListener_c7230c4a"
+    },
+    "quote": [
+      "EventObject_a3d70b03"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.lang.XEventListener"
+      ],
+      "typing": [
+        "com.sun.star.lang.EventObject"
+      ]
+    },
+    "name": "XUpdateListener",
+    "imports": [],
+    "namespace": "com.sun.star.form",
+    "extends": [
+      "com.sun.star.lang.XEventListener"
+    ],
+    "desc": [
+      "used to listen on objects which allow updating their data.",
+      "",
+      "In addition to just get notified when a data update happened, the listener has a chance to veto updates before they happen."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1form_1_1XUpdateListener.html",
+    "items": {
+      "methods": [
+        {
+          "name": "approveUpdate",
+          "returns": "bool",
+          "desc": [
+            "is invoked to check the current data.",
+            "",
+            "For a given update process, if one of the XUpdateListeners vetoes the change, the update is canceled, and no further notification happens."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aEvent",
+              "EventObject_a3d70b03",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "updated",
+          "returns": "None",
+          "desc": [
+            "is invoked when an object has finished processing the updates and the data has been successfully written."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aEvent",
+              "EventObject_a3d70b03",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

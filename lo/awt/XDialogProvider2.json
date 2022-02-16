@@ -1,0 +1,141 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XDialogProvider2",
+  "type": "interface",
+  "namespace": "com.sun.star.awt",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_dialog_provider",
+        "XDialogProvider",
+        "XDialogProvider_c70f0c47"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_dialog",
+        "XDialog",
+        "XDialog_709d08fc"
+      ],
+      [
+        "..beans.named_value",
+        "NamedValue",
+        "NamedValue_a37a0af3"
+      ],
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.awt.XDialogProvider": "XDialogProvider_c70f0c47"
+    },
+    "quote": [
+      "XDialog_709d08fc",
+      "XInterface_8f010a43",
+      "typing.Tuple[NamedValue_a37a0af3, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[NamedValue_a37a0af3, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.awt.XDialogProvider"
+      ],
+      "typing": [
+        "com.sun.star.awt.XDialog",
+        "com.sun.star.beans.NamedValue",
+        "com.sun.star.uno.XInterface"
+      ]
+    },
+    "name": "XDialogProvider2",
+    "imports": [],
+    "namespace": "com.sun.star.awt",
+    "extends": [
+      "com.sun.star.awt.XDialogProvider"
+    ],
+    "desc": [
+      "provides dialogs implementing the com.sun.star.awt.XDialog interface."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XDialogProvider2.html",
+    "items": {
+      "methods": [
+        {
+          "name": "createDialogWithArguments",
+          "returns": "XDialog_709d08fc",
+          "desc": [
+            "creates a dialog for the given URL, accepting additional creation parameters",
+            "",
+            "The arguments accepted so far are"
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "URL",
+              "str",
+              "in"
+            ],
+            [
+              "Arguments",
+              "typing.Tuple[NamedValue_a37a0af3, ...]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "createDialogWithHandler",
+          "returns": "XDialog_709d08fc",
+          "desc": [
+            "creates a dialog for the given URL accepting an Interface used to handle dialog events.",
+            "",
+            "xHandler can handle events in two different ways:",
+            "",
+            "If XDialogEventHandler is supported XDialogEventHandler.callHandlerMethod() is always called first to handle the event. Only if the event cannot be handled by XDialogEventHandler (callHandlerMethod() then has to return false) or if XDialogEventHandler is not supported at all the Introspection based access will be used.",
+            "",
+            "The Introspection based access tries to call a method named according to the HandlerMethodName specified by a vnd.sun.star.UNO:HandlerMethodName URL. First a method",
+            "",
+            "void HandlerMethodName( [in] com.sun.star.awt.XDialog xDialog, [in] any aEvent )",
+            "",
+            "will be searched. The signature is similar to XDialogEventHandler. callHandlerMethod except for MethodName itself that isn't needed here. For more information about these parameters, see com.sun.star.awt.XDialogEventHandler.",
+            "",
+            "If this method is found, it will be called, otherwise a method",
+            "",
+            "void HandlerMethodName( void )",
+            "",
+            "will be searched and called."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "URL",
+              "str",
+              "in"
+            ],
+            [
+              "xHandler",
+              "XInterface_8f010a43",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

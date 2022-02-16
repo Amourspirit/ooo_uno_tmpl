@@ -1,0 +1,126 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XSheetCellCursor",
+  "type": "interface",
+  "namespace": "com.sun.star.sheet",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_sheet_cell_range",
+        "XSheetCellRange",
+        "XSheetCellRange_e09d0cdf"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.sheet.XSheetCellRange": "XSheetCellRange_e09d0cdf"
+    },
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.sheet.XSheetCellRange"
+      ],
+      "typing": []
+    },
+    "name": "XSheetCellCursor",
+    "imports": [],
+    "namespace": "com.sun.star.sheet",
+    "extends": [
+      "com.sun.star.sheet.XSheetCellRange"
+    ],
+    "desc": [
+      "provides advanced methods to control the position of a cursor in a spreadsheet."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sheet_1_1XSheetCellCursor.html",
+    "items": {
+      "methods": [
+        {
+          "name": "collapseToCurrentArray",
+          "returns": "None",
+          "desc": [
+            "collapses the cursor into the range of the array formula to which it is currently pointing.",
+            "",
+            "To get the correct result, the top left cell of the original cursor must point to any cell containing an array formula. If not, the cursor is left unchanged."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "collapseToCurrentRegion",
+          "returns": "None",
+          "desc": [
+            "expands the cursor into the region containing the cells to which it currently points.",
+            "",
+            "A region is a cell range bounded by empty cells."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "collapseToMergedArea",
+          "returns": "None",
+          "desc": [
+            "expands the cursor to merged cell ranges.",
+            "",
+            "Expands the current cursor range in a way so that all merged cell ranges intersecting the current range will fit completely. If the cursor does not point to any range with merged cells, it is left unchanged."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "collapseToSize",
+          "returns": "None",
+          "desc": [
+            "changes the size of a cursor range.",
+            "",
+            "The top left cell of the cursor keeps unmodified."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "nColumns",
+              "int",
+              "in"
+            ],
+            [
+              "nRows",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "expandToEntireColumns",
+          "returns": "None",
+          "desc": [
+            "expands the cursor to include the entire columns of the cells to which it is currently pointing."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "expandToEntireRows",
+          "returns": "None",
+          "desc": [
+            "expands the cursor to include the entire rows of the cells to which it is currently pointing."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

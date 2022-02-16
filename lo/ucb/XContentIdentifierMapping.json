@@ -1,0 +1,134 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XContentIdentifierMapping",
+  "type": "interface",
+  "namespace": "com.sun.star.ucb",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_content",
+        "XContent",
+        "XContent_79db0975"
+      ],
+      [
+        ".x_content_identifier",
+        "XContentIdentifier",
+        "XContentIdentifier_edc90d78"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XContentIdentifier_edc90d78",
+      "XContent_79db0975"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.ucb.XContent",
+        "com.sun.star.ucb.XContentIdentifier"
+      ]
+    },
+    "name": "XContentIdentifierMapping",
+    "imports": [],
+    "namespace": "com.sun.star.ucb",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "A mapping from a (source) set of XContentIdentifiers to another (target) set of XContentIdentifiers.",
+      "",
+      "For convenience and performance, mapping between the string representations of source/target XContentIdentifiers, as well as mapping between XContents identified by source/target XContentIdentifiers is also supported.",
+      "",
+      "This interface can be useful in cases where the identifiers (and associated contents) returned by the various methods of an XContentAccess need to be mapped to some other space of identifiers (and associated contents)."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ucb_1_1XContentIdentifierMapping.html",
+    "items": {
+      "methods": [
+        {
+          "name": "mapContent",
+          "returns": "XContent_79db0975",
+          "desc": [
+            "Map the XContent identified by an XContentIdentifier."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Source",
+              "XContent_79db0975",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "mapContentIdentifier",
+          "returns": "XContentIdentifier_edc90d78",
+          "desc": [
+            "Map an XContentIdentifier."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Source",
+              "XContentIdentifier_edc90d78",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "mapContentIdentifierString",
+          "returns": "str",
+          "desc": [
+            "Map the string representation of an XContentIdentifier."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Source",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "mapRow",
+          "returns": "bool",
+          "desc": [
+            "Map the content identifiers (or related data) contained in the columns of a com.sun.star.sdbc.XRow."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Value",
+              "object",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

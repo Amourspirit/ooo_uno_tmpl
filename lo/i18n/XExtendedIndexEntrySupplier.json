@@ -1,0 +1,227 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XExtendedIndexEntrySupplier",
+  "type": "interface",
+  "namespace": "com.sun.star.i18n",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_index_entry_supplier",
+        "XIndexEntrySupplier",
+        "XIndexEntrySupplier_1cb0dfe"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..lang.locale",
+        "Locale",
+        "Locale_70d308fa"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.i18n.XIndexEntrySupplier": "XIndexEntrySupplier_1cb0dfe"
+    },
+    "quote": [
+      "Locale_70d308fa",
+      "typing.Tuple[Locale_70d308fa, ...]",
+      "typing.Tuple[str, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[Locale_70d308fa, ...]",
+      "typing.Tuple[str, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.i18n.XIndexEntrySupplier"
+      ],
+      "typing": [
+        "com.sun.star.lang.Locale"
+      ]
+    },
+    "name": "XExtendedIndexEntrySupplier",
+    "imports": [],
+    "namespace": "com.sun.star.i18n",
+    "extends": [
+      "com.sun.star.i18n.XIndexEntrySupplier"
+    ],
+    "desc": [
+      "This interface provides information for creating \\\"Table of Index\\\".",
+      "",
+      "It is derived from com.sun.star.i18n.XIndexEntrySupplier and provides following additional functionalities.",
+      "",
+      "**since**",
+      "",
+      "    OOo 1.1.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1i18n_1_1XExtendedIndexEntrySupplier.html",
+    "items": {
+      "methods": [
+        {
+          "name": "compareIndexEntry",
+          "returns": "int",
+          "desc": [
+            "Compares index entries.",
+            "",
+            "Note that loadAlgorithm should be called before calling this function."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aIndexEntry1",
+              "str",
+              "in"
+            ],
+            [
+              "aPhoneticEntry1",
+              "str",
+              "in"
+            ],
+            [
+              "aLocale1",
+              "Locale_70d308fa",
+              "in"
+            ],
+            [
+              "aIndexEntry2",
+              "str",
+              "in"
+            ],
+            [
+              "aPhoneticEntry2",
+              "str",
+              "in"
+            ],
+            [
+              "aLocale2",
+              "Locale_70d308fa",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getAlgorithmList",
+          "returns": "typing.Tuple[str, ...]",
+          "desc": [
+            "Returns index algorithm list for specific locale."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aLocale",
+              "Locale_70d308fa",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getIndexKey",
+          "returns": "str",
+          "desc": [
+            "Returns index key.",
+            "",
+            "Note that loadAlgorithm should be called before calling this function."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aIndexEntry",
+              "str",
+              "in"
+            ],
+            [
+              "aPhoneticEntry",
+              "str",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale_70d308fa",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getLocaleList",
+          "returns": "typing.Tuple[Locale_70d308fa, ...]",
+          "desc": [
+            "Returns locale list for which the IndexEntrySupplier provides service."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getPhoneticCandidate",
+          "returns": "str",
+          "desc": [
+            "Returns phonetic candidate for index entry for the locale."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aIndexEntry",
+              "str",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale_70d308fa",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "loadAlgorithm",
+          "returns": "bool",
+          "desc": [
+            "Loads index algorithm for the locale."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aLocale",
+              "Locale_70d308fa",
+              "in"
+            ],
+            [
+              "aIndexAlgorithm",
+              "str",
+              "in"
+            ],
+            [
+              "nCollatorOptions",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "usePhoneticEntry",
+          "returns": "bool",
+          "desc": [
+            "Checks if Phonetic Entry should be used for the locale."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aLocale",
+              "Locale_70d308fa",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

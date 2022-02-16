@@ -1,0 +1,113 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XTypeConverter",
+  "type": "interface",
+  "namespace": "com.sun.star.script",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..uno.type_class",
+        "TypeClass",
+        "TypeClass_853109f2"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "TypeClass_853109f2"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.uno.TypeClass"
+      ]
+    },
+    "name": "XTypeConverter",
+    "imports": [],
+    "namespace": "com.sun.star.script",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "Interface to provide standard type conversions."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1script_1_1XTypeConverter.html",
+    "items": {
+      "methods": [
+        {
+          "name": "convertTo",
+          "returns": "object",
+          "desc": [
+            "Converts the value aFrom to the specified type xDestinationType.",
+            "",
+            "Throws a CannotConvertException if the conversion failed."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.script.CannotConvertException"
+          ],
+          "args": [
+            [
+              "aFrom",
+              "object",
+              "in"
+            ],
+            [
+              "xDestinationType",
+              "object",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "convertToSimpleType",
+          "returns": "object",
+          "desc": [
+            "Converts the value aFrom to the specified simple type aDestinationType.",
+            "",
+            "Throws a CannotConvertException if the conversion failed and a com.sun.star.lang.IllegalArgumentException if the destination com.sun.star.uno.TypeClass is not simple, e.g. not long or byte."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.script.CannotConvertException"
+          ],
+          "args": [
+            [
+              "aFrom",
+              "object",
+              "in"
+            ],
+            [
+              "aDestinationType",
+              "TypeClass_853109f2",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XDataTypeRepository",
+  "type": "interface",
+  "namespace": "com.sun.star.xforms",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..container.x_enumeration_access",
+        "XEnumerationAccess",
+        "XEnumerationAccess_4bac0ffc"
+      ],
+      [
+        "..container.x_name_access",
+        "XNameAccess",
+        "XNameAccess_e2ab0cf6"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..xsd.x_data_type",
+        "XDataType",
+        "XDataType_83f209cb"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.container.XEnumerationAccess": "XEnumerationAccess_4bac0ffc",
+      "com.sun.star.container.XNameAccess": "XNameAccess_e2ab0cf6"
+    },
+    "quote": [
+      "XDataType_83f209cb"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.container.XEnumerationAccess",
+        "com.sun.star.container.XNameAccess"
+      ],
+      "typing": [
+        "com.sun.star.xsd.XDataType"
+      ]
+    },
+    "name": "XDataTypeRepository",
+    "imports": [],
+    "namespace": "com.sun.star.xforms",
+    "extends": [
+      "com.sun.star.container.XEnumerationAccess",
+      "com.sun.star.container.XNameAccess"
+    ],
+    "desc": [
+      "specifies a repository of XSD data types",
+      "",
+      "The elements of the repository are instances supporting the com.sun.star.xsd.XDataType interface."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1xforms_1_1XDataTypeRepository.html",
+    "items": {
+      "methods": [
+        {
+          "name": "cloneDataType",
+          "returns": "XDataType_83f209cb",
+          "desc": [
+            "creates a clone of the given data type, and inserts it into the repository"
+          ],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException",
+            "com.sun.star.container.ElementExistException"
+          ],
+          "args": [
+            [
+              "sourceName",
+              "str",
+              "in"
+            ],
+            [
+              "newName",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getBasicDataType",
+          "returns": "XDataType_83f209cb",
+          "desc": [
+            "retrieves the basic type for the given type class"
+          ],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException"
+          ],
+          "args": [
+            [
+              "dataTypeClass",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getDataType",
+          "returns": "XDataType_83f209cb",
+          "desc": [],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException"
+          ],
+          "args": [
+            [
+              "typeName",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "revokeDataType",
+          "returns": "None",
+          "desc": [
+            "removes a data type given by name from the repository"
+          ],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException",
+            "com.sun.star.util.VetoException"
+          ],
+          "args": [
+            [
+              "typeName",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

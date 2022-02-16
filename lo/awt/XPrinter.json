@@ -1,0 +1,139 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XPrinter",
+  "type": "interface",
+  "namespace": "com.sun.star.awt",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_printer_property_set",
+        "XPrinterPropertySet",
+        "XPrinterPropertySet_ff190e21"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_device",
+        "XDevice",
+        "XDevice_70ba08fc"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.awt.XPrinterPropertySet": "XPrinterPropertySet_ff190e21"
+    },
+    "quote": [
+      "XDevice_70ba08fc"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.awt.XPrinterPropertySet"
+      ],
+      "typing": [
+        "com.sun.star.awt.XDevice"
+      ]
+    },
+    "name": "XPrinter",
+    "imports": [],
+    "namespace": "com.sun.star.awt",
+    "extends": [
+      "com.sun.star.awt.XPrinterPropertySet"
+    ],
+    "desc": [
+      "represents a virtual printer.",
+      "",
+      "All properties are vetoable properties. If you change the properties between a call to com.sun.star.awt.XPrinter.startPage() and a call to com.sun.star.awt.XPrinter.endPage(), a com.sun.star.beans.PropertyVetoException is thrown."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XPrinter.html",
+    "items": {
+      "methods": [
+        {
+          "name": "end",
+          "returns": "None",
+          "desc": [
+            "notifies the printer spooler that the job is done and printing starts."
+          ],
+          "raises": [
+            "com.sun.star.awt.PrinterException"
+          ],
+          "args": []
+        },
+        {
+          "name": "endPage",
+          "returns": "None",
+          "desc": [
+            "ends the current page."
+          ],
+          "raises": [
+            "com.sun.star.awt.PrinterException"
+          ],
+          "args": []
+        },
+        {
+          "name": "start",
+          "returns": "bool",
+          "desc": [
+            "puts the job into the printer spooler.",
+            "",
+            "This call may block the thread. So release all resources (mutex, semaphore, etc.) before this call."
+          ],
+          "raises": [
+            "com.sun.star.awt.PrinterException",
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "nJobName",
+              "str",
+              "in"
+            ],
+            [
+              "nCopies",
+              "int",
+              "in"
+            ],
+            [
+              "nCollate",
+              "bool",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "startPage",
+          "returns": "XDevice_70ba08fc",
+          "desc": [
+            "begins with a new page."
+          ],
+          "raises": [
+            "com.sun.star.awt.PrinterException"
+          ],
+          "args": []
+        },
+        {
+          "name": "terminate",
+          "returns": "None",
+          "desc": [
+            "stops the current print job.",
+            "",
+            "If the method com.sun.star.awt.XPrinter.end() is called beforehand, then this call does nothing. If you call com.sun.star.awt.XPrinter.terminate() in or before the call to com.sun.star.awt.XPrinter.start(), com.sun.star.awt.XPrinter.terminate() returns FALSE. This call must not block the thread."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

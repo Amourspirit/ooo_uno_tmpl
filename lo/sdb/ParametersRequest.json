@@ -1,0 +1,94 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "ParametersRequest",
+  "type": "exception",
+  "namespace": "com.sun.star.sdb",
+  "parser_args": {
+    "sort": false,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..task.classified_interaction_request",
+        "ClassifiedInteractionRequest",
+        "ClassifiedInteractionRequest_9f72121b"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..container.x_index_access",
+        "XIndexAccess",
+        "XIndexAccess_f0910d6d"
+      ],
+      [
+        "..sdbc.x_connection",
+        "XConnection",
+        "XConnection_a36a0b0c"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.task.ClassifiedInteractionRequest": "ClassifiedInteractionRequest_9f72121b"
+    },
+    "quote": [
+      "XConnection_a36a0b0c",
+      "XIndexAccess_f0910d6d"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.task.ClassifiedInteractionRequest"
+      ],
+      "typing": [
+        "com.sun.star.container.XIndexAccess",
+        "com.sun.star.sdbc.XConnection"
+      ]
+    },
+    "name": "ParametersRequest",
+    "imports": [],
+    "namespace": "com.sun.star.sdb",
+    "extends": [
+      "com.sun.star.task.ClassifiedInteractionRequest"
+    ],
+    "desc": [
+      "an error specifying the lack of parameters values",
+      "",
+      "Usually thrown if someone tries to execute an SQL statement containing parameters which can't be filled by the executing instance."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/exceptioncom_1_1sun_1_1star_1_1sdb_1_1ParametersRequest.html",
+    "items": {
+      "properties": [
+        {
+          "name": "Parameters",
+          "returns": "XIndexAccess_f0910d6d",
+          "desc": [
+            "is the list of parameters requested.",
+            "",
+            "The objects returned by the com.sun.star.container.XIndexAccess have to be property sets describing the respective parameter. For this, the objects have to support the service com.sun.star.sdbcx.Column."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Connection",
+          "returns": "XConnection_a36a0b0c",
+          "desc": [
+            "specifies the connection on which the statement is to be executed.",
+            "",
+            "Somebody handling the request could, e.g., use the connection for determining the identifier quote string, etc."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

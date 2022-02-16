@@ -1,0 +1,133 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XSSOManager",
+  "type": "interface",
+  "namespace": "com.sun.star.auth",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".xsso_acceptor_context",
+        "XSSOAcceptorContext",
+        "XSSOAcceptorContext_6960e1d"
+      ],
+      [
+        ".xsso_initiator_context",
+        "XSSOInitiatorContext",
+        "XSSOInitiatorContext_168c0e9f"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XSSOAcceptorContext_6960e1d",
+      "XSSOInitiatorContext_168c0e9f"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.auth.XSSOAcceptorContext",
+        "com.sun.star.auth.XSSOInitiatorContext"
+      ]
+    },
+    "name": "XSSOManager",
+    "imports": [],
+    "namespace": "com.sun.star.auth",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "supports the creation of security contexts for both the initiator/source side and the acceptor/target side.",
+      "",
+      "**since**",
+      "",
+      "    OOo 1.1.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1auth_1_1XSSOManager.html",
+    "items": {
+      "methods": [
+        {
+          "name": "createAcceptorContext",
+          "returns": "XSSOAcceptorContext_6960e1d",
+          "desc": [
+            "creates an acceptor side security context."
+          ],
+          "raises": [
+            "InvalidArgumentException",
+            "InvalidCredentialException",
+            "InvalidPrincipalException",
+            "UnsupportedException"
+          ],
+          "args": [
+            [
+              "TargetPrincipal",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "createInitiatorContext",
+          "returns": "XSSOInitiatorContext_168c0e9f",
+          "desc": [
+            "creates an initiator side security context."
+          ],
+          "raises": [
+            "InvalidArgumentException",
+            "InvalidCredentialException",
+            "InvalidPrincipalException",
+            "UnsupportedException"
+          ],
+          "args": [
+            [
+              "SourcePrincipal",
+              "str",
+              "in"
+            ],
+            [
+              "TargetPrincipal",
+              "str",
+              "in"
+            ],
+            [
+              "TargetHost",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getMechanism",
+          "returns": "str",
+          "desc": [
+            "retrieves the mechanism name of all security contexts created using this manager."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

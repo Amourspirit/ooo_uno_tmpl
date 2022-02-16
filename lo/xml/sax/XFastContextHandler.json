@@ -1,0 +1,222 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XFastContextHandler",
+  "type": "interface",
+  "namespace": "com.sun.star.xml.sax",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "...uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_fast_attribute_list",
+        "XFastAttributeList",
+        "XFastAttributeList_274d0f09"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XFastAttributeList_274d0f09",
+      "XFastContextHandler"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.xml.sax.XFastAttributeList"
+      ]
+    },
+    "name": "XFastContextHandler",
+    "imports": [],
+    "namespace": "com.sun.star.xml.sax",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "receives notification of sax document events from a XFastParser."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1xml_1_1sax_1_1XFastContextHandler.html",
+    "items": {
+      "methods": [
+        {
+          "name": "characters",
+          "returns": "None",
+          "desc": [
+            "receives notification of character data."
+          ],
+          "raises": [
+            "com.sun.star.xml.sax.SAXException"
+          ],
+          "args": [
+            [
+              "aChars",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "createFastChildContext",
+          "returns": "XFastContextHandler",
+          "desc": [
+            "receives notification of the beginning of a known child element.",
+            "",
+            "If the element has a namespace that was registered with the XFastParser, Element contains the integer token of the elements local name from the XFastTokenHandler and the integer token of the namespace combined with an arithmetic or operation."
+          ],
+          "raises": [
+            "com.sun.star.xml.sax.SAXException"
+          ],
+          "args": [
+            [
+              "Element",
+              "int",
+              "in"
+            ],
+            [
+              "Attribs",
+              "XFastAttributeList_274d0f09",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "createUnknownChildContext",
+          "returns": "XFastContextHandler",
+          "desc": [
+            "receives notification of the beginning of an unknown child element ."
+          ],
+          "raises": [
+            "com.sun.star.xml.sax.SAXException"
+          ],
+          "args": [
+            [
+              "Namespace",
+              "str",
+              "in"
+            ],
+            [
+              "Name",
+              "str",
+              "in"
+            ],
+            [
+              "Attribs",
+              "XFastAttributeList_274d0f09",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "endFastElement",
+          "returns": "None",
+          "desc": [
+            "receives notification of the end of a known element."
+          ],
+          "raises": [
+            "com.sun.star.xml.sax.SAXException"
+          ],
+          "args": [
+            [
+              "Element",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "endUnknownElement",
+          "returns": "None",
+          "desc": [
+            "receives notification of the end of a known element."
+          ],
+          "raises": [
+            "com.sun.star.xml.sax.SAXException"
+          ],
+          "args": [
+            [
+              "Namespace",
+              "str",
+              "in"
+            ],
+            [
+              "Name",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "startFastElement",
+          "returns": "None",
+          "desc": [
+            "receives notification of the beginning of an element .",
+            "",
+            "If the element has a namespace that was registered with the XFastParser, Element contains the integer token of the elements local name from the XFastTokenHandler and the integer token of the namespace combined with an arithmetic or operation."
+          ],
+          "raises": [
+            "com.sun.star.xml.sax.SAXException"
+          ],
+          "args": [
+            [
+              "Element",
+              "int",
+              "in"
+            ],
+            [
+              "Attribs",
+              "XFastAttributeList_274d0f09",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "startUnknownElement",
+          "returns": "None",
+          "desc": [
+            "receives notification of the beginning of an unknown element ."
+          ],
+          "raises": [
+            "com.sun.star.xml.sax.SAXException"
+          ],
+          "args": [
+            [
+              "Namespace",
+              "str",
+              "in"
+            ],
+            [
+              "Name",
+              "str",
+              "in"
+            ],
+            [
+              "Attribs",
+              "XFastAttributeList_274d0f09",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

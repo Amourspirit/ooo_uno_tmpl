@@ -1,0 +1,370 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XTreeControl",
+  "type": "interface",
+  "namespace": "com.sun.star.awt.tree",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "...view.x_multi_selection_supplier",
+        "XMultiSelectionSupplier",
+        "XMultiSelectionSupplier_4b0d1020"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..rectangle",
+        "Rectangle",
+        "Rectangle_84b109e9"
+      ],
+      [
+        ".x_tree_edit_listener",
+        "XTreeEditListener",
+        "XTreeEditListener_25e10ee6"
+      ],
+      [
+        ".x_tree_expansion_listener",
+        "XTreeExpansionListener",
+        "XTreeExpansionListener_78511115"
+      ],
+      [
+        ".x_tree_node",
+        "XTreeNode",
+        "XTreeNode_baaf0ba0"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.view.XMultiSelectionSupplier": "XMultiSelectionSupplier_4b0d1020"
+    },
+    "quote": [
+      "Rectangle_84b109e9",
+      "XTreeEditListener_25e10ee6",
+      "XTreeExpansionListener_78511115",
+      "XTreeNode_baaf0ba0"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.view.XMultiSelectionSupplier"
+      ],
+      "typing": [
+        "com.sun.star.awt.Rectangle",
+        "com.sun.star.awt.tree.XTreeEditListener",
+        "com.sun.star.awt.tree.XTreeExpansionListener",
+        "com.sun.star.awt.tree.XTreeNode"
+      ]
+    },
+    "name": "XTreeControl",
+    "imports": [],
+    "namespace": "com.sun.star.awt.tree",
+    "extends": [
+      "com.sun.star.view.XMultiSelectionSupplier"
+    ],
+    "desc": [
+      "An interface to a control that displays a set of hierarchical data as an outline."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1tree_1_1XTreeControl.html",
+    "items": {
+      "methods": [
+        {
+          "name": "addTreeEditListener",
+          "returns": "None",
+          "desc": [
+            "Adds a XTreeEditListener."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Listener",
+              "XTreeEditListener_25e10ee6",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "addTreeExpansionListener",
+          "returns": "None",
+          "desc": [
+            "Adds a listener for TreeExpansion events."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Listener",
+              "XTreeExpansionListener_78511115",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "cancelEditing",
+          "returns": "None",
+          "desc": [
+            "Cancels the current editing session.",
+            "",
+            "Has no effect if the tree isn't being edited."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "collapseNode",
+          "returns": "None",
+          "desc": [
+            "Ensures that Node is collapsed."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "ExpandVetoException"
+          ],
+          "args": [
+            [
+              "Node",
+              "XTreeNode_baaf0ba0",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "expandNode",
+          "returns": "None",
+          "desc": [
+            "Ensures that Node is expanded and visible.",
+            "",
+            "If Node is a leaf node, this will have no effect."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "ExpandVetoException"
+          ],
+          "args": [
+            [
+              "Node",
+              "XTreeNode_baaf0ba0",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getClosestNodeForLocation",
+          "returns": "XTreeNode_baaf0ba0",
+          "desc": [
+            "Returns the node that is closest to x,y.",
+            "",
+            "If no nodes are currently viewable, or there is no model, returns null, otherwise it always returns a valid node. To test if the node is exactly at x, y, use getNodeForLocation()."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "x",
+              "int",
+              "in"
+            ],
+            [
+              "y",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getNodeForLocation",
+          "returns": "XTreeNode_baaf0ba0",
+          "desc": [
+            "Returns the node at the specified location."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "x",
+              "int",
+              "in"
+            ],
+            [
+              "y",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getNodeRect",
+          "returns": "Rectangle_84b109e9",
+          "desc": [
+            "returns the rectangle occupied by the visual representation of the given node"
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "Node",
+              "XTreeNode_baaf0ba0",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "isEditing",
+          "returns": "bool",
+          "desc": [
+            "Returns TRUE if one of tree's nodes is being currently edited.",
+            "",
+            "The node that is being edited can be obtained using com.sun.star.view.XSelectionSupplier.getSelection()."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "isNodeCollapsed",
+          "returns": "bool",
+          "desc": [
+            "Returns TRUE if Node is currently collapsed."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "Node",
+              "XTreeNode_baaf0ba0",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "isNodeExpanded",
+          "returns": "bool",
+          "desc": [
+            "Returns TRUE if Node is currently expanded."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "Node",
+              "XTreeNode_baaf0ba0",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "isNodeVisible",
+          "returns": "bool",
+          "desc": [
+            "Returns TRUE if Node is currently visible.",
+            "",
+            "Visible means it is either the root or all of its parents are expanded."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "Node",
+              "XTreeNode_baaf0ba0",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "makeNodeVisible",
+          "returns": "None",
+          "desc": [
+            "Ensures that Node is currently visible.",
+            "",
+            "This includes expanding all parent nodes and scroll the control so this node is visible in the controls display area."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "ExpandVetoException"
+          ],
+          "args": [
+            [
+              "Node",
+              "XTreeNode_baaf0ba0",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeTreeEditListener",
+          "returns": "None",
+          "desc": [
+            "Removes a XTreeEditListener."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Listener",
+              "XTreeEditListener_25e10ee6",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeTreeExpansionListener",
+          "returns": "None",
+          "desc": [
+            "Removes a listener for TreeExpansion events."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Listener",
+              "XTreeExpansionListener_78511115",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "startEditingAtNode",
+          "returns": "None",
+          "desc": [
+            "Selects Node and initiates editing.",
+            "",
+            "If TreeControlModel.Editable is FALSE or if there are no registered XTreeEditListener, this call has no effect.",
+            "",
+            "Calling this method also ensures that Node will become visible."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "Node",
+              "XTreeNode_baaf0ba0",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "stopEditing",
+          "returns": "bool",
+          "desc": [
+            "Ends the current editing session.",
+            "",
+            "All registered XTreeEditListener are notified if an editing session was in progress",
+            "",
+            "Has no effect if the tree isn't being edited."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

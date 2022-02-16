@@ -1,0 +1,119 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XSelectionSupplier",
+  "type": "interface",
+  "namespace": "com.sun.star.view",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_selection_change_listener",
+        "XSelectionChangeListener",
+        "XSelectionChangeListener_58bf104d"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XSelectionChangeListener_58bf104d"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.view.XSelectionChangeListener"
+      ]
+    },
+    "name": "XSelectionSupplier",
+    "imports": [],
+    "namespace": "com.sun.star.view",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "makes it possible to access and change the selection in a view."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1view_1_1XSelectionSupplier.html",
+    "items": {
+      "methods": [
+        {
+          "name": "addSelectionChangeListener",
+          "returns": "None",
+          "desc": [
+            "registers an event listener, which is called when the selection changes."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xListener",
+              "XSelectionChangeListener_58bf104d",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getSelection",
+          "returns": "object",
+          "desc": [
+            "The selection is either specified by an object which is contained in the component to which the view belongs, or it is an interface of a collection which contains such objects."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "removeSelectionChangeListener",
+          "returns": "None",
+          "desc": [
+            "unregisters an event listener which was registered with XSelectionSupplier.addSelectionChangeListener()."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xListener",
+              "XSelectionChangeListener_58bf104d",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "select",
+          "returns": "bool",
+          "desc": [
+            "selects the object represented by xSelection if it is known and selectable in this object."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "xSelection",
+              "object",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

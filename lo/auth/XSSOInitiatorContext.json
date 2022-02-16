@@ -1,0 +1,85 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XSSOInitiatorContext",
+  "type": "interface",
+  "namespace": "com.sun.star.auth",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".xsso_context",
+        "XSSOContext",
+        "XSSOContext_a2840aec"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.auth.XSSOContext": "XSSOContext_a2840aec"
+    },
+    "quote": [
+      "typing.Tuple[int, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[int, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.auth.XSSOContext"
+      ],
+      "typing": []
+    },
+    "name": "XSSOInitiatorContext",
+    "imports": [],
+    "namespace": "com.sun.star.auth",
+    "extends": [
+      "com.sun.star.auth.XSSOContext"
+    ],
+    "desc": [
+      "represents an initiator side security context.",
+      "",
+      "This context may be used to initialize authentication tokens to send to an acceptor and to authenticate any token sent back in response.",
+      "",
+      "**since**",
+      "",
+      "    OOo 1.1.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1auth_1_1XSSOInitiatorContext.html",
+    "items": {
+      "methods": [
+        {
+          "name": "init",
+          "returns": "typing.Tuple[int, ...]",
+          "desc": [
+            "initializes an SSO Token to send to the acceptor side and authenticates an SSO Token returned by the acceptor if the context supports mutual authentication.",
+            "",
+            "init should be called only once for contexts which don't support mutual authentication and at most twice for contexts which do support mutual authentication. Additional calls produce undefined results."
+          ],
+          "raises": [
+            "InvalidArgumentException",
+            "InvalidCredentialException",
+            "InvalidContextException",
+            "AuthenticationFailedException"
+          ],
+          "args": [
+            [
+              "Token",
+              "typing.Tuple[int, ...]",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

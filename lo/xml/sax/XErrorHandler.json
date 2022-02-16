@@ -1,0 +1,108 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XErrorHandler",
+  "type": "interface",
+  "namespace": "com.sun.star.xml.sax",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "...uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": []
+    },
+    "name": "XErrorHandler",
+    "imports": [],
+    "namespace": "com.sun.star.xml.sax",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "is the basic interface for SAX error handlers.",
+      "",
+      "If a SAX application needs to implement customized error handling, it must implement this interface and then register an instance with the SAX parser using the parser's XParser.setErrorhandler() method. The parser will then report all errors and warnings through this interface.",
+      "",
+      "This interface is a slight adaptation of the Java interface org.xml.sax.ErrorHandler. In IDL, no exception can be passed as an argument, so an any serves as the container. The type of the exception is SAXParseException or an instance of a derived class."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1xml_1_1sax_1_1XErrorHandler.html",
+    "items": {
+      "methods": [
+        {
+          "name": "error",
+          "returns": "None",
+          "desc": [
+            "receives notification of a recoverable error."
+          ],
+          "raises": [
+            "com.sun.star.xml.sax.SAXException"
+          ],
+          "args": [
+            [
+              "aSAXParseException",
+              "object",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "fatalError",
+          "returns": "None",
+          "desc": [
+            "receives notification of a non-recoverable error."
+          ],
+          "raises": [
+            "com.sun.star.xml.sax.SAXException"
+          ],
+          "args": [
+            [
+              "aSAXParseException",
+              "object",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "warning",
+          "returns": "None",
+          "desc": [
+            "receives notification of a warning."
+          ],
+          "raises": [
+            "com.sun.star.xml.sax.SAXException"
+          ],
+          "args": [
+            [
+              "aSAXParseException",
+              "object",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

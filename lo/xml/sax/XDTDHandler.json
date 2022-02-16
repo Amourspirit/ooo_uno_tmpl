@@ -1,0 +1,110 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XDTDHandler",
+  "type": "interface",
+  "namespace": "com.sun.star.xml.sax",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "...uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": []
+    },
+    "name": "XDTDHandler",
+    "imports": [],
+    "namespace": "com.sun.star.xml.sax",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "receives events according to the DTD of the document.",
+      "",
+      "The SAX parser may report these events in any order, regardless of the order in which the notations and unparsed entities were declared; however, all DTD events must be reported after the document handler's startDocument event, and before the first startElement event. It is up to the application to store the information for future use (perhaps in a hash table or object tree). If the application encounters attributes of type \\\"NOTATION\\\", \\\"ENTITY\\\", or \\\"ENTITIES\\\", it can use the information that it obtained through this interface to find the entity and/or notation that corresponds with the attribute value."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1xml_1_1sax_1_1XDTDHandler.html",
+    "items": {
+      "methods": [
+        {
+          "name": "notationDecl",
+          "returns": "None",
+          "desc": [
+            "receives notification of a notation declaration event."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "sName",
+              "str",
+              "in"
+            ],
+            [
+              "sPublicId",
+              "str",
+              "in"
+            ],
+            [
+              "sSystemId",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "unparsedEntityDecl",
+          "returns": "None",
+          "desc": [
+            "receives notification of an unparsed entity declaration event."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "sName",
+              "str",
+              "in"
+            ],
+            [
+              "sPublicId",
+              "str",
+              "in"
+            ],
+            [
+              "sSystemId",
+              "str",
+              "in"
+            ],
+            [
+              "sNotationName",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

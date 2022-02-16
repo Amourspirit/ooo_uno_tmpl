@@ -1,0 +1,145 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "Style",
+  "type": "service",
+  "namespace": "com.sun.star.style",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..beans.x_multi_property_set",
+        "XMultiPropertySet",
+        "XMultiPropertySet_fd880e05"
+      ],
+      [
+        "..beans.x_multi_property_states",
+        "XMultiPropertyStates",
+        "XMultiPropertyStates_2a3e0f4d"
+      ],
+      [
+        "..beans.x_property_set",
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
+      ],
+      [
+        ".x_style",
+        "XStyle",
+        "XStyle_7c7f09a2"
+      ],
+      [
+        "..xml.user_defined_attributes_supplier",
+        "UserDefinedAttributesSupplier",
+        "UserDefinedAttributesSupplier_9fbe1222"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..beans.named_value",
+        "NamedValue",
+        "NamedValue_a37a0af3"
+      ],
+      [
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.beans.XMultiPropertySet": "XMultiPropertySet_fd880e05",
+      "com.sun.star.beans.XMultiPropertyStates": "XMultiPropertyStates_2a3e0f4d",
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa",
+      "com.sun.star.style.XStyle": "XStyle_7c7f09a2",
+      "com.sun.star.xml.UserDefinedAttributesSupplier": "UserDefinedAttributesSupplier_9fbe1222"
+    },
+    "quote": [
+      "typing.Tuple[NamedValue_a37a0af3, ...]",
+      "typing.Tuple[PropertyValue_c9610c73, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[NamedValue_a37a0af3, ...]",
+      "typing.Tuple[PropertyValue_c9610c73, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XMultiPropertySet",
+        "com.sun.star.beans.XMultiPropertyStates",
+        "com.sun.star.beans.XPropertySet",
+        "com.sun.star.style.XStyle",
+        "com.sun.star.xml.UserDefinedAttributesSupplier"
+      ],
+      "typing": [
+        "com.sun.star.beans.NamedValue",
+        "com.sun.star.beans.PropertyValue"
+      ]
+    },
+    "name": "Style",
+    "imports": [],
+    "namespace": "com.sun.star.style",
+    "extends": [
+      "com.sun.star.xml.UserDefinedAttributesSupplier",
+      "com.sun.star.style.XStyle",
+      "com.sun.star.beans.XPropertySet",
+      "com.sun.star.beans.XMultiPropertySet",
+      "com.sun.star.beans.XMultiPropertyStates"
+    ],
+    "desc": [
+      "This service specifies a single style sheet.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.0.1"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1style_1_1Style.html",
+    "items": {
+      "types": [
+        {
+          "name": "ParaStyleConditions",
+          "returns": "typing.Tuple[NamedValue_a37a0af3, ...]",
+          "desc": [
+            "defines the context and styles for conditional paragraphs.",
+            "",
+            "This property is only available if the style is a conditional paragraph style.",
+            "",
+            "The sequence consists of pairs where the name part of the pair defines the context where it should be applied and the value part is a string naming the style to be used in that context.",
+            "",
+            "Assigning an empty string to the style name will disable the conditional style for that context.",
+            "",
+            "The allowed strings (contexts) for the name part of an entry of the sequence are:",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.0.1"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "StyleInteropGrabBag",
+          "returns": "typing.Tuple[PropertyValue_c9610c73, ...]",
+          "desc": [
+            "Grab bag of style properties, used as a string-any map for interim interop purposes.",
+            "",
+            "This property is intentionally not handled by the ODF filter. Any member that should be handled there should be first moved out from this grab bag to a separate property.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 4.2"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,210 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "LineDiagram",
+  "type": "service",
+  "namespace": "com.sun.star.chart",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".chart_axis_x_supplier",
+        "ChartAxisXSupplier",
+        "ChartAxisXSupplier_a950e4d"
+      ],
+      [
+        ".chart_axis_z_supplier",
+        "ChartAxisZSupplier",
+        "ChartAxisZSupplier_aa70e4f"
+      ],
+      [
+        ".chart_statistics",
+        "ChartStatistics",
+        "ChartStatistics_e2190d37"
+      ],
+      [
+        ".chart_two_axis_y_supplier",
+        "ChartTwoAxisYSupplier",
+        "ChartTwoAxisYSupplier_380d0f88"
+      ],
+      [
+        ".diagram",
+        "Diagram",
+        "Diagram_844409cf"
+      ],
+      [
+        ".dim3_d_diagram",
+        "Dim3DDiagram",
+        "Dim3DDiagram_b7a60b60"
+      ],
+      [
+        ".stackable_diagram",
+        "StackableDiagram",
+        "StackableDiagram_ee760d59"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..awt.size",
+        "Size",
+        "Size_576707ef"
+      ],
+      [
+        "..graphic.x_graphic",
+        "XGraphic",
+        "XGraphic_a4da0afc"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.chart.ChartAxisXSupplier": "ChartAxisXSupplier_a950e4d",
+      "com.sun.star.chart.ChartAxisZSupplier": "ChartAxisZSupplier_aa70e4f",
+      "com.sun.star.chart.ChartStatistics": "ChartStatistics_e2190d37",
+      "com.sun.star.chart.ChartTwoAxisYSupplier": "ChartTwoAxisYSupplier_380d0f88",
+      "com.sun.star.chart.Diagram": "Diagram_844409cf",
+      "com.sun.star.chart.Dim3DDiagram": "Dim3DDiagram_b7a60b60",
+      "com.sun.star.chart.StackableDiagram": "StackableDiagram_ee760d59"
+    },
+    "quote": [
+      "Size_576707ef",
+      "XGraphic_a4da0afc"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.chart.ChartAxisXSupplier",
+        "com.sun.star.chart.ChartAxisZSupplier",
+        "com.sun.star.chart.ChartStatistics",
+        "com.sun.star.chart.ChartTwoAxisYSupplier",
+        "com.sun.star.chart.Diagram",
+        "com.sun.star.chart.Dim3DDiagram",
+        "com.sun.star.chart.StackableDiagram"
+      ],
+      "typing": [
+        "com.sun.star.awt.Size",
+        "com.sun.star.graphic.XGraphic"
+      ]
+    },
+    "name": "LineDiagram",
+    "imports": [],
+    "namespace": "com.sun.star.chart",
+    "extends": [
+      "com.sun.star.chart.Diagram",
+      "com.sun.star.chart.ChartStatistics",
+      "com.sun.star.chart.ChartAxisXSupplier",
+      "com.sun.star.chart.ChartTwoAxisYSupplier",
+      "com.sun.star.chart.ChartAxisZSupplier",
+      "com.sun.star.chart.Dim3DDiagram",
+      "com.sun.star.chart.StackableDiagram"
+    ],
+    "desc": [
+      "specifies line, spline and symbol diagrams.",
+      "",
+      "**since**",
+      "",
+      "    LibreOffice 6.1"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1chart_1_1LineDiagram.html",
+    "items": {
+      "properties": [
+        {
+          "name": "Lines",
+          "returns": "bool",
+          "desc": [
+            "determines if the chart type has lines connecting the data points or contains just symbols."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SplineOrder",
+          "returns": "int",
+          "desc": [
+            "specifies the power of the polynomials used for spline calculation",
+            "",
+            "This property is only valid for B-splines"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SplineResolution",
+          "returns": "int",
+          "desc": [
+            "determines the number of sampling points of a spline"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SplineType",
+          "returns": "int",
+          "desc": [
+            "determines if the chart is a spline-chart type and specifies the type of splines.",
+            "",
+            "You can set the following values:"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SymbolBitmap",
+          "returns": "XGraphic_a4da0afc",
+          "desc": [
+            "Set this property to a graphic object which is then used as symbol for all series.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 6.1"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SymbolBitmapURL",
+          "returns": "str",
+          "desc": [
+            "Set this property to any valid URL that points to a graphic file.",
+            "",
+            "This graphic is then used as symbol for all series.",
+            "",
+            "When you query this value you get an internal URL of the embedded graphic."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SymbolSize",
+          "returns": "Size_576707ef",
+          "desc": [
+            "specifies the size of symbols in 1/100th of a millimeter."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SymbolType",
+          "returns": "int",
+          "desc": [
+            "determines which type of symbols are displayed.",
+            "",
+            "In this interface, only the two values ChartSymbolType.NONE and ChartSymbolType.AUTO are supported. Later versions may support the selection of the symbols shape.",
+            "",
+            "If you set this property to ChartSymbolType.AUTO, you can change the symbol shape for objects supporting the service ChartDataPointProperties or ChartDataRowProperties."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

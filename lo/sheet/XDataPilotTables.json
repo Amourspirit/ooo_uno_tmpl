@@ -1,0 +1,123 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XDataPilotTables",
+  "type": "interface",
+  "namespace": "com.sun.star.sheet",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..container.x_name_access",
+        "XNameAccess",
+        "XNameAccess_e2ab0cf6"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_data_pilot_descriptor",
+        "XDataPilotDescriptor",
+        "XDataPilotDescriptor_27650f1a"
+      ],
+      [
+        "..table.cell_address",
+        "CellAddress",
+        "CellAddress_ae5f0b56"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.container.XNameAccess": "XNameAccess_e2ab0cf6"
+    },
+    "quote": [
+      "CellAddress_ae5f0b56",
+      "XDataPilotDescriptor_27650f1a"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.container.XNameAccess"
+      ],
+      "typing": [
+        "com.sun.star.sheet.XDataPilotDescriptor",
+        "com.sun.star.table.CellAddress"
+      ]
+    },
+    "name": "XDataPilotTables",
+    "imports": [],
+    "namespace": "com.sun.star.sheet",
+    "extends": [
+      "com.sun.star.container.XNameAccess"
+    ],
+    "desc": [
+      "provides access to the data pilot tables via name and inserting and removing data pilot tables.",
+      "",
+      "This interface extends the interface com.sun.star.container.XNameAccess which provides access to existing data pilot tables in the collection."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sheet_1_1XDataPilotTables.html",
+    "items": {
+      "methods": [
+        {
+          "name": "createDataPilotDescriptor",
+          "returns": "XDataPilotDescriptor_27650f1a",
+          "desc": [
+            "creates a data pilot descriptor.",
+            "",
+            "This descriptor can be used with XDataPilotTables.addTable()."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "insertNewByName",
+          "returns": "None",
+          "desc": [
+            "creates a new data pilot table and adds it to the collection."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aName",
+              "str",
+              "in"
+            ],
+            [
+              "OutputAddress",
+              "CellAddress_ae5f0b56",
+              "in"
+            ],
+            [
+              "xDescriptor",
+              "XDataPilotDescriptor_27650f1a",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeByName",
+          "returns": "None",
+          "desc": [
+            "deletes a data pilot table from the collection."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aName",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

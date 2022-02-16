@@ -1,0 +1,258 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XSmartTagRecognizer",
+  "type": "interface",
+  "namespace": "com.sun.star.smarttags",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..lang.x_initialization",
+        "XInitialization",
+        "XInitialization_d46c0cca"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..frame.x_controller",
+        "XController",
+        "XController_b00e0b8f"
+      ],
+      [
+        "..i18n.x_break_iterator",
+        "XBreakIterator",
+        "XBreakIterator_bf270bcf"
+      ],
+      [
+        "..lang.locale",
+        "Locale",
+        "Locale_70d308fa"
+      ],
+      [
+        ".smart_tag_recognizer_mode",
+        "SmartTagRecognizerMode",
+        "SmartTagRecognizerMode_9179119e"
+      ],
+      [
+        "..text.x_text_markup",
+        "XTextMarkup",
+        "XTextMarkup_a5d60b3a"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.lang.XInitialization": "XInitialization_d46c0cca"
+    },
+    "quote": [
+      "Locale_70d308fa",
+      "SmartTagRecognizerMode_9179119e",
+      "XBreakIterator_bf270bcf",
+      "XController_b00e0b8f",
+      "XTextMarkup_a5d60b3a"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.lang.XInitialization"
+      ],
+      "typing": [
+        "com.sun.star.frame.XController",
+        "com.sun.star.i18n.XBreakIterator",
+        "com.sun.star.lang.Locale",
+        "com.sun.star.smarttags.SmartTagRecognizerMode",
+        "com.sun.star.text.XTextMarkup"
+      ]
+    },
+    "name": "XSmartTagRecognizer",
+    "imports": [],
+    "namespace": "com.sun.star.smarttags",
+    "extends": [
+      "com.sun.star.lang.XInitialization"
+    ],
+    "desc": [
+      "provides access to a smart tag recognizer.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.3"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1smarttags_1_1XSmartTagRecognizer.html",
+    "items": {
+      "methods": [
+        {
+          "name": "displayPropertyPage",
+          "returns": "None",
+          "desc": [
+            "launches the property page for a smart tag type."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            [
+              "nSmartTagIndex",
+              "int",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale_70d308fa",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getDescription",
+          "returns": "str",
+          "desc": [
+            "obtains a detailed description of this recognizer component."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aLocale",
+              "Locale_70d308fa",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getName",
+          "returns": "str",
+          "desc": [
+            "obtains a name that describes this recognizer component."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aLocale",
+              "Locale_70d308fa",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getSmartTagDownloadURL",
+          "returns": "str",
+          "desc": [
+            "obtains the URL that can be used to download new or updated recognizers."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            [
+              "nSmartTagIndex",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getSmartTagName",
+          "returns": "str",
+          "desc": [
+            "obtains the name of one specific smart tag type supported by this recognizer component."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            [
+              "nSmartTagIndex",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "hasPropertyPage",
+          "returns": "bool",
+          "desc": [
+            "indicates whether there is a property page for a smart tag type."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            [
+              "nSmartTagIndex",
+              "int",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale_70d308fa",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "recognize",
+          "returns": "None",
+          "desc": [
+            "recognizes smart tags."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aText",
+              "str",
+              "in"
+            ],
+            [
+              "nStart",
+              "int",
+              "in"
+            ],
+            [
+              "nLength",
+              "int",
+              "in"
+            ],
+            [
+              "eDataType",
+              "SmartTagRecognizerMode_9179119e",
+              "in"
+            ],
+            [
+              "aLocale",
+              "Locale_70d308fa",
+              "in"
+            ],
+            [
+              "xTextMarkup",
+              "XTextMarkup_a5d60b3a",
+              "in"
+            ],
+            [
+              "aApplicationName",
+              "str",
+              "in"
+            ],
+            [
+              "xController",
+              "XController_b00e0b8f",
+              "in"
+            ],
+            [
+              "xTokenizer",
+              "XBreakIterator_bf270bcf",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

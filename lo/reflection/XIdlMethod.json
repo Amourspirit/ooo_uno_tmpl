@@ -1,0 +1,155 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XIdlMethod",
+  "type": "interface",
+  "namespace": "com.sun.star.reflection",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_idl_member",
+        "XIdlMember",
+        "XIdlMember_e3400cfc"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".method_mode",
+        "MethodMode",
+        "MethodMode_e4910d19"
+      ],
+      [
+        ".param_info",
+        "ParamInfo",
+        "ParamInfo_d7210cb0"
+      ],
+      [
+        ".x_idl_class",
+        "XIdlClass",
+        "XIdlClass_d63a0c9a"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.reflection.XIdlMember": "XIdlMember_e3400cfc"
+    },
+    "quote": [
+      "MethodMode_e4910d19",
+      "XIdlClass_d63a0c9a",
+      "typing.Tuple[ParamInfo_d7210cb0, ...]",
+      "typing.Tuple[XIdlClass_d63a0c9a, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[ParamInfo_d7210cb0, ...]",
+      "typing.Tuple[XIdlClass_d63a0c9a, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.reflection.XIdlMember"
+      ],
+      "typing": [
+        "com.sun.star.reflection.MethodMode",
+        "com.sun.star.reflection.ParamInfo",
+        "com.sun.star.reflection.XIdlClass"
+      ]
+    },
+    "name": "XIdlMethod",
+    "imports": [],
+    "namespace": "com.sun.star.reflection",
+    "extends": [
+      "com.sun.star.reflection.XIdlMember"
+    ],
+    "desc": [
+      "Reflects an IDL interface method."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1reflection_1_1XIdlMethod.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getExceptionTypes",
+          "returns": "typing.Tuple[XIdlClass_d63a0c9a, ...]",
+          "desc": [
+            "Returns the declared exceptions types of the reflected method."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getMode",
+          "returns": "MethodMode_e4910d19",
+          "desc": [
+            "Returns the method mode in which calls are run, i.e.",
+            "",
+            "either oneway or twoway. Method mode oneway denotes that a call may be run asynchronously (thus having no out parameters or return value)"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getParameterInfos",
+          "returns": "typing.Tuple[ParamInfo_d7210cb0, ...]",
+          "desc": [
+            "Returns formal parameter information of the reflected method in order of IDL declaration.",
+            "",
+            "Parameter information reflects the parameter's access mode (in, out, inout), the parameter's name and formal type."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getParameterTypes",
+          "returns": "typing.Tuple[XIdlClass_d63a0c9a, ...]",
+          "desc": [
+            "Returns the formal parameter types of the reflected method in order of IDL declaration."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getReturnType",
+          "returns": "XIdlClass_d63a0c9a",
+          "desc": [
+            "Returns the return type of the reflected method."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "invoke",
+          "returns": "object",
+          "desc": [
+            "Invokes the reflected method on a given object with the given parameters.",
+            "",
+            "The parameters may be widening converted to fit their exact IDL type, meaning no loss of information."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.reflection.InvocationTargetException"
+          ],
+          "args": [
+            [
+              "obj",
+              "object",
+              "in"
+            ],
+            [
+              "args",
+              "object",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

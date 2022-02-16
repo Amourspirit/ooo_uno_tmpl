@@ -1,0 +1,269 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XPresenterHelper",
+  "type": "interface",
+  "namespace": "com.sun.star.drawing",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        "..awt.rectangle",
+        "Rectangle",
+        "Rectangle_84b109e9"
+      ],
+      [
+        "..awt.x_window",
+        "XWindow",
+        "XWindow_713b0924"
+      ],
+      [
+        "..rendering.x_bitmap",
+        "XBitmap",
+        "XBitmap_b1b70b7b"
+      ],
+      [
+        "..rendering.x_canvas",
+        "XCanvas",
+        "XCanvas_b19b0b7a"
+      ],
+      [
+        "..rendering.x_sprite_canvas",
+        "XSpriteCanvas",
+        "XSpriteCanvas_ff8b0df1"
+      ]
+    ],
+    "extends_map": {},
+    "quote": [
+      "Rectangle_84b109e9",
+      "XBitmap_b1b70b7b",
+      "XCanvas_b19b0b7a",
+      "XSpriteCanvas_ff8b0df1",
+      "XWindow_713b0924"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.awt.Rectangle",
+        "com.sun.star.awt.XWindow",
+        "com.sun.star.rendering.XBitmap",
+        "com.sun.star.rendering.XCanvas",
+        "com.sun.star.rendering.XSpriteCanvas"
+      ]
+    },
+    "name": "XPresenterHelper",
+    "imports": [],
+    "namespace": "com.sun.star.drawing",
+    "extends": [],
+    "desc": [
+      "This interface is a collection of functions that were necessary to implement larger parts of the presenter screen as extension.",
+      "",
+      "The methods of this interface give access to services that could only be implemented in the Office core, not in an extension.",
+      "",
+      "As the presenter screen is no extension any more, this hack can go again; it just needs clean-up."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1drawing_1_1XPresenterHelper.html",
+    "items": {
+      "methods": [
+        {
+          "name": "captureMouse",
+          "returns": "None",
+          "desc": [
+            "Capture the mouse so that no other window will receive mouse events.",
+            "",
+            "Note that this is a potentially dangerous method. Not calling releaseMouse eventually can lead to an unresponsive application."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xWindow",
+              "XWindow_713b0924",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "createCanvas",
+          "returns": "XCanvas_b19b0b7a",
+          "desc": [
+            "Create a new canvas for the given window."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xWindow",
+              "XWindow_713b0924",
+              "in"
+            ],
+            [
+              "nRequestedCanvasFeatureList",
+              "int",
+              "in"
+            ],
+            [
+              "sOptionalCanvasServiceName",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "createSharedCanvas",
+          "returns": "XCanvas_b19b0b7a",
+          "desc": [
+            "Create a new canvas for the given window.",
+            "",
+            "The new canvas is a wrapper around the given shared canvas. The wrapper only modifies the origin in all output and clipping methods."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xUpdateCanvas",
+              "XSpriteCanvas_ff8b0df1",
+              "in"
+            ],
+            [
+              "xUpdateWindow",
+              "XWindow_713b0924",
+              "in"
+            ],
+            [
+              "xSharedCanvas",
+              "XCanvas_b19b0b7a",
+              "in"
+            ],
+            [
+              "xSharedWindow",
+              "XWindow_713b0924",
+              "in"
+            ],
+            [
+              "xWindow",
+              "XWindow_713b0924",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "createWindow",
+          "returns": "XWindow_713b0924",
+          "desc": [
+            "Create a new window as child window of the given parent window."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xParentWindow",
+              "XWindow_713b0924",
+              "in"
+            ],
+            [
+              "bCreateSystemChildWindow",
+              "bool",
+              "in"
+            ],
+            [
+              "bInitiallyVisible",
+              "bool",
+              "in"
+            ],
+            [
+              "bEnableChildTransparentMode",
+              "bool",
+              "in"
+            ],
+            [
+              "bEnableParentClip",
+              "bool",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getWindowExtentsRelative",
+          "returns": "Rectangle_84b109e9",
+          "desc": [
+            "Return the bounding box of the given child window relative to the direct or indirect parent window."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xChildWindow",
+              "XWindow_713b0924",
+              "in"
+            ],
+            [
+              "xParentWindow",
+              "XWindow_713b0924",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "loadBitmap",
+          "returns": "XBitmap_b1b70b7b",
+          "desc": [
+            "Load a bitmap with a given ID."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "id",
+              "str",
+              "in"
+            ],
+            [
+              "xCanvas",
+              "XCanvas_b19b0b7a",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "releaseMouse",
+          "returns": "None",
+          "desc": [
+            "Release a previously captured mouse."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xWindow",
+              "XWindow_713b0924",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "toTop",
+          "returns": "None",
+          "desc": [
+            "Move the specified window to the top of its stacking order.",
+            "",
+            "As a result the window will be painted over all its overlapping siblings."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xWindow",
+              "XWindow_713b0924",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

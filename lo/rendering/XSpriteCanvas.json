@@ -1,0 +1,201 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XSpriteCanvas",
+  "type": "interface",
+  "namespace": "com.sun.star.rendering",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_canvas",
+        "XCanvas",
+        "XCanvas_b19b0b7a"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..geometry.real_size2_d",
+        "RealSize2D",
+        "RealSize2D_ca1a0c09"
+      ],
+      [
+        ".x_animated_sprite",
+        "XAnimatedSprite",
+        "XAnimatedSprite_1bc70eb8"
+      ],
+      [
+        ".x_animation",
+        "XAnimation",
+        "XAnimation_d6910cbe"
+      ],
+      [
+        ".x_bitmap",
+        "XBitmap",
+        "XBitmap_b1b70b7b"
+      ],
+      [
+        ".x_custom_sprite",
+        "XCustomSprite",
+        "XCustomSprite_3a0e10"
+      ],
+      [
+        ".x_sprite",
+        "XSprite",
+        "XSprite_b2470b95"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.rendering.XCanvas": "XCanvas_b19b0b7a"
+    },
+    "quote": [
+      "RealSize2D_ca1a0c09",
+      "XAnimatedSprite_1bc70eb8",
+      "XAnimation_d6910cbe",
+      "XCustomSprite_3a0e10",
+      "XSprite_b2470b95",
+      "typing.Tuple[XBitmap_b1b70b7b, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[XBitmap_b1b70b7b, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.rendering.XCanvas"
+      ],
+      "typing": [
+        "com.sun.star.geometry.RealSize2D",
+        "com.sun.star.rendering.XAnimatedSprite",
+        "com.sun.star.rendering.XAnimation",
+        "com.sun.star.rendering.XBitmap",
+        "com.sun.star.rendering.XCustomSprite",
+        "com.sun.star.rendering.XSprite"
+      ]
+    },
+    "name": "XSpriteCanvas",
+    "imports": [],
+    "namespace": "com.sun.star.rendering",
+    "extends": [
+      "com.sun.star.rendering.XCanvas"
+    ],
+    "desc": [
+      "Specialization of a XCanvas, where moving, animated objects (called sprites) are supported."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1rendering_1_1XSpriteCanvas.html",
+    "items": {
+      "methods": [
+        {
+          "name": "createClonedSprite",
+          "returns": "XSprite_b2470b95",
+          "desc": [
+            "Create a cloned version of an already existing sprite object.",
+            "",
+            "The cloned sprite always shows the same content as its original, but of course the sprite position, visibility, alpha etc. can be modified independently."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "original",
+              "XSprite_b2470b95",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "createCustomSprite",
+          "returns": "XCustomSprite_3a0e10",
+          "desc": [
+            "Create a custom, user-handles-it-all sprite object.",
+            "",
+            "A sprite is a back-buffered object with its own, independent animation."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "spriteSize",
+              "RealSize2D_ca1a0c09",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "createSpriteFromAnimation",
+          "returns": "XAnimatedSprite_1bc70eb8",
+          "desc": [
+            "Create a sprite object from the specified animation sequence.",
+            "",
+            "A sprite is a back-buffered object with its own, independent animation."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "animation",
+              "XAnimation_d6910cbe",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "createSpriteFromBitmaps",
+          "returns": "XAnimatedSprite_1bc70eb8",
+          "desc": [
+            "Create a sprite object from the specified animation sequence.",
+            "",
+            "A sprite is a back-buffered object with its own, independent animation."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "VolatileContentDestroyedException"
+          ],
+          "args": [
+            [
+              "animationBitmaps",
+              "typing.Tuple[XBitmap_b1b70b7b, ...]",
+              "in"
+            ],
+            [
+              "interpolationMode",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "updateScreen",
+          "returns": "bool",
+          "desc": [
+            "Tells the sprite canvas to now update the screen representation.",
+            "",
+            "Required to display rendered changes to the canvas, and updates to stopped animations and XCustomSprites in general. This method will return only after the screen update is done, or earlier if an error happened.",
+            "",
+            "If double buffering is enabled via XBufferController, no explicit call of updateScreen() is necessary, since the XBufferController methods will automatically notify all associated XSpriteCanvas instances."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "bUpdateAll",
+              "bool",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

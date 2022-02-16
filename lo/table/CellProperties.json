@@ -1,0 +1,488 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "CellProperties",
+  "type": "service",
+  "namespace": "com.sun.star.table",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..beans.x_property_set",
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
+      ],
+      [
+        "..container.x_name_container",
+        "XNameContainer",
+        "XNameContainer_cb90e47"
+      ],
+      [
+        ".border_line",
+        "BorderLine",
+        "BorderLine_a3f80af6"
+      ],
+      [
+        ".border_line2",
+        "BorderLine2",
+        "BorderLine2_af200b28"
+      ],
+      [
+        ".cell_hori_justify",
+        "CellHoriJustify",
+        "CellHoriJustify_e0470d10"
+      ],
+      [
+        ".cell_orientation",
+        "CellOrientation",
+        "CellOrientation_e0e40d1c"
+      ],
+      [
+        ".shadow_format",
+        "ShadowFormat",
+        "ShadowFormat_bb840bdf"
+      ],
+      [
+        ".table_border",
+        "TableBorder",
+        "TableBorder_aedf0b56"
+      ],
+      [
+        ".table_border2",
+        "TableBorder2",
+        "TableBorder2_ba670b88"
+      ],
+      [
+        "..util.cell_protection",
+        "CellProtection",
+        "CellProtection_c9290c6d"
+      ],
+      [
+        "..util.color",
+        "Color",
+        "Color_68e908c5"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa"
+    },
+    "quote": [
+      "BorderLine2_af200b28",
+      "BorderLine_a3f80af6",
+      "CellHoriJustify_e0470d10",
+      "CellOrientation_e0e40d1c",
+      "CellProtection_c9290c6d",
+      "Color_68e908c5",
+      "ShadowFormat_bb840bdf",
+      "TableBorder2_ba670b88",
+      "TableBorder_aedf0b56",
+      "XNameContainer_cb90e47",
+      "typing.Tuple[PropertyValue_c9610c73, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[PropertyValue_c9610c73, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XPropertySet"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.container.XNameContainer",
+        "com.sun.star.table.BorderLine",
+        "com.sun.star.table.BorderLine2",
+        "com.sun.star.table.CellHoriJustify",
+        "com.sun.star.table.CellOrientation",
+        "com.sun.star.table.ShadowFormat",
+        "com.sun.star.table.TableBorder",
+        "com.sun.star.table.TableBorder2",
+        "com.sun.star.util.CellProtection",
+        "com.sun.star.util.Color"
+      ]
+    },
+    "name": "CellProperties",
+    "imports": [],
+    "namespace": "com.sun.star.table",
+    "extends": [
+      "com.sun.star.beans.XPropertySet"
+    ],
+    "desc": [
+      "contains the properties of a table cell.",
+      "",
+      "**since**",
+      "",
+      "    LibreOffice 4.3"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1table_1_1CellProperties.html",
+    "items": {
+      "types": [
+        {
+          "name": "CellInteropGrabBag",
+          "returns": "typing.Tuple[PropertyValue_c9610c73, ...]",
+          "desc": [
+            "Grab bag of cell properties, used as a string-any map for interim interop purposes.",
+            "",
+            "This property is intentionally not handled by the ODF filter. Any member that should be handled there should be first moved out from this grab bag to a separate property.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 4.3"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ],
+      "properties": [
+        {
+          "name": "AsianVerticalMode",
+          "returns": "bool",
+          "desc": [
+            "selects Asian character orientation in vertical orientation.",
+            "",
+            "If the CellProperties.Orientation property is CellOrientation.STACKED, in Asian mode only Asian characters are printed in horizontal orientation instead of all characters. For other values of CellProperties.Orientation, this value is not used."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BottomBorder",
+          "returns": "BorderLine_a3f80af6",
+          "desc": [
+            "contains a description of the bottom border line of each cell."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BottomBorder2",
+          "returns": "BorderLine2_af200b28",
+          "desc": [
+            "contains a description of the bottom border line of each cell.",
+            "",
+            "Preferred over BorderLine BottomBorder.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 3.6"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CellBackColor",
+          "returns": "Color_68e908c5",
+          "desc": [
+            "contains the cell background color."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CellProtection",
+          "returns": "CellProtection_c9290c6d",
+          "desc": [
+            "contains a description of the cell protection.",
+            "",
+            "Cell protection is active only if the sheet is protected."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CellStyle",
+          "returns": "str",
+          "desc": [
+            "contains the name of the style of the cell."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "DiagonalBLTR",
+          "returns": "BorderLine_a3f80af6",
+          "desc": [
+            "contains a description of the bottom left to top right diagonal line of each cell."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "DiagonalBLTR2",
+          "returns": "BorderLine2_af200b28",
+          "desc": [
+            "contains a description of the bottom left to top right diagonal line of each cell.",
+            "",
+            "Preferred over BorderLine DiagonalBLTR.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 3.6"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "DiagonalTLBR",
+          "returns": "BorderLine_a3f80af6",
+          "desc": [
+            "contains a description of the top left to bottom right diagonal line of each cell."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "DiagonalTLBR2",
+          "returns": "BorderLine2_af200b28",
+          "desc": [
+            "contains a description of the top left to bottom right diagonal line of each cell.",
+            "",
+            "Preferred over BorderLine DiagonalTLBR.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 3.6"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "HoriJustify",
+          "returns": "CellHoriJustify_e0470d10",
+          "desc": [
+            "contains the horizontal alignment of the cell contents."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsCellBackgroundTransparent",
+          "returns": "bool",
+          "desc": [
+            "is TRUE, if the cell background is transparent.",
+            "",
+            "In this case the CellProperties.CellBackColor value is not used."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsTextWrapped",
+          "returns": "bool",
+          "desc": [
+            "is TRUE, if text in the cells will be wrapped automatically at the right border."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "LeftBorder",
+          "returns": "BorderLine_a3f80af6",
+          "desc": [
+            "contains a description of the left border line of each cell."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "LeftBorder2",
+          "returns": "BorderLine2_af200b28",
+          "desc": [
+            "contains a description of the left border line of each cell.",
+            "",
+            "Preferred over BorderLine LeftBorder.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 3.6"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "NumberFormat",
+          "returns": "int",
+          "desc": [
+            "contains the index of the number format that is used in the cells.",
+            "",
+            "The proper value can be determined by using the com.sun.star.util.NumberFormatter interface of the document."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Orientation",
+          "returns": "CellOrientation_e0e40d1c",
+          "desc": [
+            "contains the orientation of the cell contents.",
+            "",
+            "If the CellProperties.RotateAngle property is non-zero, this value is not used."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParaIndent",
+          "returns": "int",
+          "desc": [
+            "defines the indentation of the cell contents (in 1/100 mm)."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RightBorder",
+          "returns": "BorderLine_a3f80af6",
+          "desc": [
+            "contains a description of the right border line of each cell."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RightBorder2",
+          "returns": "BorderLine2_af200b28",
+          "desc": [
+            "contains a description of the right border line of each cell.",
+            "",
+            "Preferred over BorderLine RightBorder.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 3.6"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RotateAngle",
+          "returns": "int",
+          "desc": [
+            "defines how much the content of cells is rotated (in 1/100 degrees)."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RotateReference",
+          "returns": "int",
+          "desc": [
+            "defines at which edge rotated cells are aligned.",
+            "",
+            "changed from com.sun.star.table.CellVertJustify to long in LibO 3.5"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ShadowFormat",
+          "returns": "ShadowFormat_bb840bdf",
+          "desc": [
+            "contains a description of the shadow."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ShrinkToFit",
+          "returns": "bool",
+          "desc": [
+            "is TRUE, if the cell content will be shrunk to fit in the cell."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TableBorder",
+          "returns": "TableBorder_aedf0b56",
+          "desc": [
+            "contains a description of the cell or cell range border.",
+            "",
+            "If used with a cell range, the top, left, right, and bottom lines are at the edges of the entire range, not at the edges of the individual cell."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TableBorder2",
+          "returns": "TableBorder2_ba670b88",
+          "desc": [
+            "contains a description of the cell or cell range border.",
+            "",
+            "Preferred over TableBorder TableBorder.",
+            "",
+            "If used with a cell range, the top, left, right, and bottom lines are at the edges of the entire range, not at the edges of the individual cell.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 3.6"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TopBorder",
+          "returns": "BorderLine_a3f80af6",
+          "desc": [
+            "contains a description of the top border line of each cell."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TopBorder2",
+          "returns": "BorderLine2_af200b28",
+          "desc": [
+            "contains a description of the top border line of each cell.",
+            "",
+            "Preferred over BorderLine TopBorder.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 3.6"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "UserDefinedAttributes",
+          "returns": "XNameContainer_cb90e47",
+          "desc": [
+            "stores additional attributes.",
+            "",
+            "This property is used i.e. by the XML filters to load and restore unknown attributes."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "VertJustify",
+          "returns": "int",
+          "desc": [
+            "contains the vertical alignment of the cell contents.",
+            "",
+            "changed from com.sun.star.table.CellVertJustify to long in LibO 3.5"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

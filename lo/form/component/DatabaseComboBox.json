@@ -1,0 +1,109 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "DatabaseComboBox",
+  "type": "service",
+  "namespace": "com.sun.star.form.component",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..data_aware_control_model",
+        "DataAwareControlModel",
+        "DataAwareControlModel_27110ef8"
+      ],
+      [
+        ".combo_box",
+        "ComboBox",
+        "ComboBox_fecc0dd6"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..list_source_type",
+        "ListSourceType",
+        "ListSourceType_c9850c6b"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.form.DataAwareControlModel": "DataAwareControlModel_27110ef8",
+      "com.sun.star.form.component.ComboBox": "ComboBox_fecc0dd6"
+    },
+    "quote": [
+      "ListSourceType_c9850c6b"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.form.DataAwareControlModel",
+        "com.sun.star.form.component.ComboBox"
+      ],
+      "typing": [
+        "com.sun.star.form.ListSourceType"
+      ]
+    },
+    "name": "DatabaseComboBox",
+    "imports": [],
+    "namespace": "com.sun.star.form.component",
+    "extends": [
+      "com.sun.star.form.component.ComboBox",
+      "com.sun.star.form.DataAwareControlModel"
+    ],
+    "desc": [
+      "This service specifies a combo box which is data-aware, and can be bound to a database field.",
+      "",
+      "Like most other data aware controls, such a combo box will display the actual content of the field it is bound to. In addition, as a combo box contains a list where the user can choose items to fill into the control, this list can be filled with different data from a database, too."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1form_1_1component_1_1DatabaseComboBox.html",
+    "items": {
+      "properties": [
+        {
+          "name": "ConvertEmptyToNull",
+          "returns": "bool",
+          "desc": [
+            "determines if an empty text should be treated as a NULL value.",
+            "",
+            "When the user enters text into a combo box, and after this, the control content is to be committed into the database field the control is bound to, a decision must be made how to deal with empty strings.",
+            "This is controlled by ConvertEmptyToNull.",
+            "",
+            "If the property is set to TRUE, and an empty text is to be committed, this is converted into NULL, else it is written as empty string."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ListSource",
+          "returns": "str",
+          "desc": [
+            "describes the source of items in the combo box's list.",
+            "",
+            "The concrete meaning of this property depends on the value of ListSourceType"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ListSourceType",
+          "returns": "ListSourceType_c9850c6b",
+          "desc": [
+            "specifies the kind of list source.",
+            "",
+            "Note: A value of com.sun.star.form.ListSourceType.VALUELIST is not valid for a combo box. It won't be rejected when setting it, but controls will usually ignore it and leave the list empty."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

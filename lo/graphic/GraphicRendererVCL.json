@@ -1,0 +1,102 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "GraphicRendererVCL",
+  "type": "service",
+  "namespace": "com.sun.star.graphic",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..beans.x_property_set",
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
+      ],
+      [
+        ".x_graphic_renderer",
+        "XGraphicRenderer",
+        "XGraphicRenderer_aca0e33"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..awt.rectangle",
+        "Rectangle",
+        "Rectangle_84b109e9"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa",
+      "com.sun.star.graphic.XGraphicRenderer": "XGraphicRenderer_aca0e33"
+    },
+    "quote": [
+      "Rectangle_84b109e9"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XPropertySet",
+        "com.sun.star.graphic.XGraphicRenderer"
+      ],
+      "typing": [
+        "com.sun.star.awt.Rectangle"
+      ]
+    },
+    "name": "GraphicRendererVCL",
+    "imports": [],
+    "namespace": "com.sun.star.graphic",
+    "extends": [
+      "com.sun.star.graphic.XGraphicRenderer",
+      "com.sun.star.beans.XPropertySet"
+    ],
+    "desc": [
+      "Service that describes the necessary interfaces and properties to render a graphic container of XGraphic type.",
+      "",
+      "To render a XGraphic container, just create an instance of this service, set the appropriate properties and use the XGraphicRenderer interface to initiate the rendering process itself"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1graphic_1_1GraphicRendererVCL.html",
+    "items": {
+      "properties": [
+        {
+          "name": "DestinationRect",
+          "returns": "Rectangle_84b109e9",
+          "desc": [
+            "Specifies the destination rectangle, into which the graphic content is to be rendered onto the device."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Device",
+          "returns": "object",
+          "desc": [
+            "Holds the device onto which the XGraphic container should be rendered.",
+            "",
+            "In case of using VCL Devices, this property should hold a com.sun.star.awt.XDevice interface"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RenderData",
+          "returns": "object",
+          "desc": [
+            "Additional properties for rendering, unspecified at the moment."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

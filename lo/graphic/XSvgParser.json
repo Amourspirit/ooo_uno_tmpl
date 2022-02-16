@@ -1,0 +1,115 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XSvgParser",
+  "type": "interface",
+  "namespace": "com.sun.star.graphic",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_primitive2_d",
+        "XPrimitive2D",
+        "XPrimitive2D_d5730c6d"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "typing.Tuple[XPrimitive2D_d5730c6d, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[XPrimitive2D_d5730c6d, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.graphic.XPrimitive2D"
+      ]
+    },
+    "name": "XSvgParser",
+    "imports": [],
+    "namespace": "com.sun.star.graphic",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "XSvgParser interface.",
+      "",
+      "This interface allows to parse a SVG stream in form of a sequence of bytes to be parsed into a sequence of XPrimitive2Ds",
+      "",
+      "**since**",
+      "",
+      "    LibreOffice 6.3"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1graphic_1_1XSvgParser.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getDecomposition",
+          "returns": "typing.Tuple[XPrimitive2D_d5730c6d, ...]",
+          "desc": [
+            "Retrieve decomposed list of simpler primitives."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xSvgStream",
+              "object",
+              "in"
+            ],
+            [
+              "aAbsolutePath",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getDrawCommands",
+          "returns": "object",
+          "desc": [
+            "Get the \\\"draw command\\\" graph that is created from the SVG content.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 6.3"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xSvgStream",
+              "object",
+              "in"
+            ],
+            [
+              "aAbsolutePath",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

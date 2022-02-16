@@ -1,0 +1,110 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XOutputStream",
+  "type": "interface",
+  "namespace": "com.sun.star.io",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "typing.Tuple[int, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[int, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": []
+    },
+    "name": "XOutputStream",
+    "imports": [],
+    "namespace": "com.sun.star.io",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "This is the basic interface to write data to a stream.",
+      "",
+      "See the streaming document for further information on chaining and piping streams."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1io_1_1XOutputStream.html",
+    "items": {
+      "methods": [
+        {
+          "name": "closeOutput",
+          "returns": "None",
+          "desc": [
+            "gets called to indicate that all data has been written.",
+            "",
+            "If this method has not yet been called, no attached XInputStream receives an EOF signal. No further bytes may be written after this method has been called."
+          ],
+          "raises": [
+            "com.sun.star.io.NotConnectedException",
+            "com.sun.star.io.BufferSizeExceededException",
+            "com.sun.star.io.IOException"
+          ],
+          "args": []
+        },
+        {
+          "name": "flush",
+          "returns": "None",
+          "desc": [
+            "flushes out of the stream any data that may exist in buffers.",
+            "",
+            "The semantics of this method are rather vague. See com.sun.star.io.XAsyncOutputMonitor.waitForCompletion() for a similar method with very specific semantics, that is useful in certain scenarios."
+          ],
+          "raises": [
+            "com.sun.star.io.NotConnectedException",
+            "com.sun.star.io.BufferSizeExceededException",
+            "com.sun.star.io.IOException"
+          ],
+          "args": []
+        },
+        {
+          "name": "writeBytes",
+          "returns": "None",
+          "desc": [
+            "writes the whole sequence to the stream.",
+            "",
+            "(blocking call)"
+          ],
+          "raises": [
+            "com.sun.star.io.NotConnectedException",
+            "com.sun.star.io.BufferSizeExceededException",
+            "com.sun.star.io.IOException"
+          ],
+          "args": [
+            [
+              "aData",
+              "typing.Tuple[int, ...]",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

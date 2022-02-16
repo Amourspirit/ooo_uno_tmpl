@@ -1,0 +1,88 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XCompatibilityNames",
+  "type": "interface",
+  "namespace": "com.sun.star.sheet",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".localized_name",
+        "LocalizedName",
+        "LocalizedName_c89d0c39"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "typing.Tuple[LocalizedName_c89d0c39, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[LocalizedName_c89d0c39, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.sheet.LocalizedName"
+      ]
+    },
+    "name": "XCompatibilityNames",
+    "imports": [],
+    "namespace": "com.sun.star.sheet",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "gives access to the sequence of compatibility names for an Addin function."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sheet_1_1XCompatibilityNames.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getCompatibilityNames",
+          "returns": "typing.Tuple[LocalizedName_c89d0c39, ...]",
+          "desc": [
+            "returns the compatibility names of the specified function.",
+            "",
+            "Compatibility names are localized names of AddIn functions that are used to import files from other applications.",
+            "",
+            "If on import a localized function name is read, this list of compatibility names is used to find the internal name of the function. The current locale may differ from the locale used in the imported file, so the method XAddIn.getProgrammaticFuntionName() cannot be used here.",
+            "",
+            "The order inside the sequence of compatibility names is used to prioritize the names. Initially the first compatibility name of each function is compared to the imported name (each function may provide a sequence of compatibility names - the first entry of all sequences is used). If no entry is equal, the second entry of each sequence is used and so on.",
+            "",
+            "If a locale is not present in the sequence of compatibility names, the first entry of the sequence is used. So the method should return a sequence which contains first the entry representing the current locale.TRUE"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aProgrammaticName",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

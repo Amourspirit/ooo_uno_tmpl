@@ -1,0 +1,159 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XDatabaseRange",
+  "type": "interface",
+  "namespace": "com.sun.star.sheet",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
+      ],
+      [
+        ".x_sheet_filter_descriptor",
+        "XSheetFilterDescriptor",
+        "XSheetFilterDescriptor_47cc0ff7"
+      ],
+      [
+        ".x_sub_total_descriptor",
+        "XSubTotalDescriptor",
+        "XSubTotalDescriptor_19fd0ec6"
+      ],
+      [
+        "..table.cell_range_address",
+        "CellRangeAddress",
+        "CellRangeAddress_ec450d43"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "CellRangeAddress_ec450d43",
+      "XSheetFilterDescriptor_47cc0ff7",
+      "XSubTotalDescriptor_19fd0ec6",
+      "typing.Tuple[PropertyValue_c9610c73, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[PropertyValue_c9610c73, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.sheet.XSheetFilterDescriptor",
+        "com.sun.star.sheet.XSubTotalDescriptor",
+        "com.sun.star.table.CellRangeAddress"
+      ]
+    },
+    "name": "XDatabaseRange",
+    "imports": [],
+    "namespace": "com.sun.star.sheet",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "provides access to the settings and options of a database range."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sheet_1_1XDatabaseRange.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getDataArea",
+          "returns": "CellRangeAddress_ec450d43",
+          "desc": [
+            "returns the data area of the database range in the spreadsheet document."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getFilterDescriptor",
+          "returns": "XSheetFilterDescriptor_47cc0ff7",
+          "desc": [
+            "returns the filter descriptor stored with the database range.",
+            "",
+            "If the filter descriptor is modified, the new filtering is carried out when XDatabaseRange.refresh() is called."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getImportDescriptor",
+          "returns": "typing.Tuple[PropertyValue_c9610c73, ...]",
+          "desc": [
+            "returns the database import descriptor stored with this database range."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getSortDescriptor",
+          "returns": "typing.Tuple[PropertyValue_c9610c73, ...]",
+          "desc": [
+            "returns the sort descriptor stored with the database range."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getSubTotalDescriptor",
+          "returns": "XSubTotalDescriptor_19fd0ec6",
+          "desc": [
+            "returns the subtotal descriptor stored with the database range.",
+            "",
+            "If the subtotal descriptor is modified, the new subtotals are inserted when XDatabaseRange.refresh() is called."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "refresh",
+          "returns": "None",
+          "desc": [
+            "executes the stored import, filter, sorting, and subtotals descriptors again."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setDataArea",
+          "returns": "None",
+          "desc": [
+            "sets the data area of the database range."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aDataArea",
+              "CellRangeAddress_ec450d43",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

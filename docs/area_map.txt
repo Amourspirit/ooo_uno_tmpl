@@ -1,0 +1,41 @@
+Area maps have coodinates of x1, y1, x2, y2
+
+    x1, y1 is top left corner
+    x2, y2 is the bottom right corner.
+
+The page the component is on does not have an area in the area map.
+
+Enums, components and typedef do not have area maps. They do not inherit anything.
+However Struct can inherit https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1container_1_1ContainerEvent.html
+
+When there is inheritance the first item in the area map is the first
+inheritance level.
+
+All first level inherits have the same y1 and y2 values.
+
+Inheritance:
+    Just because a component inherits on the first level does not mean
+    it the first level inheritance is not further up the inheritance chain.
+
+    For instance: AccessibleButton https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1awt_1_1AccessibleButton.html
+    show on first level that it inherits XAccessibleComponent.
+    However XAccessibleComponent is inherited by XAccessibleExtendedComponent which
+    is also inherited by AccessibleButton on the first level.
+
+    I think one quick way to filter out is to  read each level into groups.
+    Read all first level inherits and then look for them in other groups.
+    If they exist in other groups filter them out of direct inheritance.
+
+Image Notes:
+    The image is a png file.
+    The selected Item is the only part of the image that has a black border.
+    Text is also black.
+    Perhaps scanning the first row of the an image and looking for border color
+    will detect if component has inheritance or not.
+
+    Image is first and only image insde of div.dyncontent
+
+    Pillow can be used to read image:
+    https://python-pillow.org/
+    https://stackoverflow.com/questions/138250/how-to-read-the-rgb-value-of-a-given-pixel-in-python
+    

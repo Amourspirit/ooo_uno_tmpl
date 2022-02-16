@@ -1,0 +1,124 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XResourceFactoryManager",
+  "type": "interface",
+  "namespace": "com.sun.star.drawing.framework",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        ".x_resource_factory",
+        "XResourceFactory",
+        "XResourceFactory_b3561268"
+      ]
+    ],
+    "extends_map": {},
+    "quote": [
+      "XResourceFactory_b3561268"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.drawing.framework.XResourceFactory"
+      ]
+    },
+    "name": "XResourceFactoryManager",
+    "imports": [],
+    "namespace": "com.sun.star.drawing.framework",
+    "extends": [],
+    "desc": [
+      "The XResourceFactoryManager is part of the configuration controller and manages the set of registered resource factories."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1drawing_1_1framework_1_1XResourceFactoryManager.html",
+    "items": {
+      "methods": [
+        {
+          "name": "addResourceFactory",
+          "returns": "None",
+          "desc": [
+            "Register a new resource factory for the given URL.",
+            "",
+            "When one factory is responsible for more than one type of resource then this method has to be called for each type. If this method is called multiple times for the same URL then a previously registered factory is removed for the URL."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "sResourceURL",
+              "str",
+              "in"
+            ],
+            [
+              "xResourceFactory",
+              "XResourceFactory_b3561268",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getResourceFactory",
+          "returns": "XResourceFactory_b3561268",
+          "desc": [
+            "Return the resource factory that was previously registered for the given resource type.",
+            "",
+            "This method is typically called by one of the resource controllers."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "sResourceURL",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeResourceFactoryForReference",
+          "returns": "None",
+          "desc": [
+            "Remove a resource factory for all resource types it has been registered for.",
+            "",
+            "Use removeResourceFactoryForURL() to remove a factory just for one resource type and to leave it registered for others."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xResourceFactory",
+              "XResourceFactory_b3561268",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeResourceFactoryForURL",
+          "returns": "None",
+          "desc": [
+            "Remove a resource factory for one type of resource.",
+            "",
+            "When the factory has been registered for other URLs as well then it remains registered for them. Use the removeResourceFactoryForReference() to remove a factory completely."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "sResourceURL",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,129 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "ResourceId",
+  "type": "service",
+  "namespace": "com.sun.star.drawing.framework",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_resource_id",
+        "XResourceId",
+        "XResourceId_5be3103d"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.drawing.framework.XResourceId": "XResourceId_5be3103d"
+    },
+    "quote": [
+      "XResourceId_5be3103d"
+    ],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.drawing.framework.XResourceId"
+      ],
+      "typing": []
+    },
+    "name": "ResourceId",
+    "imports": [],
+    "namespace": "com.sun.star.drawing.framework",
+    "extends": [
+      "com.sun.star.drawing.framework.XResourceId"
+    ],
+    "desc": [
+      "The ResourceId service provides several constructors for resource ids.",
+      "",
+      "They mainly differ in how the anchor is specified."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1drawing_1_1framework_1_1ResourceId.html",
+    "items": {
+      "methods": [
+        {
+          "name": "create",
+          "returns": "None",
+          "desc": [
+            "Create a resource id that has no anchor.",
+            "",
+            "This constructor can be used to create resource ids for panes."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "sResourceURL",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "createEmpty",
+          "returns": "None",
+          "desc": [
+            "Create an empty resource id.",
+            "",
+            "It does not specify a specific resource but describes the absence of one."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "createWithAnchor",
+          "returns": "None",
+          "desc": [
+            "Create a resource id for an anchor that is given as XResourceId object.",
+            "",
+            "This is the most general of the constructor variants."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "sResourceURL",
+              "str",
+              "in"
+            ],
+            [
+              "xAnchor",
+              "XResourceId_5be3103d",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "createWithAnchorURL",
+          "returns": "None",
+          "desc": [
+            "Create a resource id for a resource that is bound to an anchor that can be specified by a single URL.",
+            "",
+            "This constructor can be used to create resources ids for views where the anchor is a pane."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "sResourceURL",
+              "str",
+              "in"
+            ],
+            [
+              "sAnchorURL",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

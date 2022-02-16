@@ -1,0 +1,74 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "type": "struct",
+  "name": "DispatchDescriptor",
+  "namespace": "com.sun.star.frame",
+  "parser_args": {
+    "sort": false,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "sort": true,
+    "dynamic_struct": true,
+    "include_desc": true
+  },
+  "data": {
+    "name": "DispatchDescriptor",
+    "namespace": "com.sun.star.frame",
+    "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1frame_1_1DispatchDescriptor.html",
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        "..util.url",
+        "URL",
+        "URL_57ad07b9"
+      ]
+    ],
+    "extends_map": {},
+    "quote": [
+      "URL_57ad07b9"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "fullname": "com.sun.star.frame.DispatchDescriptor",
+    "desc": [
+      "describes a feature to be retrieved by a URL that has to be loaded into a specified frame",
+      "",
+      "For a normal dispatch calls all needed parameters are separated. For optimized remote functionality XDispatch.queryDispatches() it's necessary to pack these parameters in a flat structure which can be used in a simple manner."
+    ],
+    "imports": [],
+    "extends": [],
+    "items": [
+      {
+        "name": "FeatureURL",
+        "type": "URL_57ad07b9",
+        "lines": [
+          "specifies the URL of the resource/function",
+          "",
+          "Must be a full parsed URL. Use service com.sun.star.util.URLTransformer for that."
+        ]
+      },
+      {
+        "name": "FrameName",
+        "type": "str",
+        "lines": [
+          "name of the target frame",
+          "",
+          "Special targets (e.g. \\\"_blank\\\", \\\"_self\\\") or really existing target names can be used."
+        ]
+      },
+      {
+        "name": "SearchFlags",
+        "type": "int",
+        "lines": [
+          "describes how the target frame is to be searched",
+          "",
+          "This optional parameter is used if FrameName isn't a special target only."
+        ]
+      }
+    ]
+  }
+}

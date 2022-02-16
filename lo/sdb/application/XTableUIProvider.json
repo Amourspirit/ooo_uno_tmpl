@@ -1,0 +1,114 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XTableUIProvider",
+  "type": "interface",
+  "namespace": "com.sun.star.sdb.application",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        "...graphic.x_graphic",
+        "XGraphic",
+        "XGraphic_a4da0afc"
+      ],
+      [
+        ".x_database_document_ui",
+        "XDatabaseDocumentUI",
+        "XDatabaseDocumentUI_be9c124d"
+      ],
+      [
+        "...uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "extends_map": {},
+    "quote": [
+      "XDatabaseDocumentUI_be9c124d",
+      "XGraphic_a4da0afc",
+      "XInterface_8f010a43"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.graphic.XGraphic",
+        "com.sun.star.sdb.application.XDatabaseDocumentUI",
+        "com.sun.star.uno.XInterface"
+      ]
+    },
+    "name": "XTableUIProvider",
+    "imports": [],
+    "namespace": "com.sun.star.sdb.application",
+    "extends": [],
+    "desc": [
+      "is used by the database application to obtain non-default user interface information and/or components for database tables.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sdb_1_1application_1_1XTableUIProvider.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getTableEditor",
+          "returns": "XInterface_8f010a43",
+          "desc": [
+            "returns a component which can be used to edit the definition of an existing table."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.WrappedTargetException"
+          ],
+          "args": [
+            [
+              "DocumentUI",
+              "XDatabaseDocumentUI_be9c124d",
+              "in"
+            ],
+            [
+              "TableName",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getTableIcon",
+          "returns": "XGraphic_a4da0afc",
+          "desc": [
+            "provides the icon which should be used to represent the table in the database application window.",
+            "",
+            "The icon will usually be requested once per table, and cached. It might be requested again if the application settings change, for instance, if another desktop theme has been activated."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "TableName",
+              "str",
+              "in"
+            ],
+            [
+              "ColorMode",
+              "int",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

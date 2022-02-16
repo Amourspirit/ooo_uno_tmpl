@@ -1,0 +1,16 @@
+# coding: utf-8
+import pytest
+if __name__ == "__main__":
+    pytest.main([__file__])
+from tests.import_check import ImportCheck
+
+
+@pytest.fixture(scope='session')
+def module_data(modules):
+    return modules
+
+
+def test_imp_mod(module_data: str, monkeypatch):
+    monkeypatch.setenv('ooouno_ignore_runtime', 'True')
+    imc = ImportCheck()
+    assert imc.load_import(module_data) == True

@@ -1,0 +1,146 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XDOMImplementation",
+  "type": "interface",
+  "namespace": "com.sun.star.xml.dom",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "...uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_document",
+        "XDocument",
+        "XDocument_aebc0b5e"
+      ],
+      [
+        ".x_document_type",
+        "XDocumentType",
+        "XDocumentType_e0340d00"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XDocumentType_e0340d00",
+      "XDocument_aebc0b5e"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.xml.dom.XDocument",
+        "com.sun.star.xml.dom.XDocumentType"
+      ]
+    },
+    "name": "XDOMImplementation",
+    "imports": [],
+    "namespace": "com.sun.star.xml.dom",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1xml_1_1dom_1_1XDOMImplementation.html",
+    "items": {
+      "methods": [
+        {
+          "name": "createDocument",
+          "returns": "XDocument_aebc0b5e",
+          "desc": [
+            "Creates a DOM Document object of the specified type with its document element.",
+            "",
+            "Throws: DOMException - INVALID_CHARACTER_ERR: Raised if the specified qualified name contains an illegal character. NAMESPACE_ERR: Raised if the qualifiedName is malformed, if the qualifiedName has a prefix and the namespaceURI is null, or if the qualifiedName has a prefix that is \\\"xml\\\" and the namespaceURI is different from \\\" http://www.w3.org/XML/1998/namespace\\\" , or if the DOM implementation does not support the \\\"XML\\\" feature but a non-null namespace URI was provided, since namespaces were defined by XML. WRONG_DOCUMENT_ERR: Raised if doctype has already been used with a different document or was created from a different implementation. NOT_SUPPORTED_ERR: May be raised by DOM implementations which do not support the \\\"XML\\\" feature, if they choose not to support this method. Other features introduced in the future, by the DOM WG or in extensions defined by other groups, may also demand support for this method; please consult the definition of the feature to see if it requires this method."
+          ],
+          "raises": [
+            "DOMException"
+          ],
+          "args": [
+            [
+              "namespaceURI",
+              "str",
+              "in"
+            ],
+            [
+              "qualifiedName",
+              "str",
+              "in"
+            ],
+            [
+              "doctype",
+              "XDocumentType_e0340d00",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "createDocumentType",
+          "returns": "XDocumentType_e0340d00",
+          "desc": [
+            "Creates an empty DocumentType node.",
+            "",
+            "Throws: DOMException - INVALID_CHARACTER_ERR: Raised if the specified qualified name contains an illegal character. NAMESPACE_ERR: Raised if the qualifiedName is malformed. NOT_SUPPORTED_ERR: May be raised by DOM implementations which do not support the \\\"XML\\\" feature, if they choose not to support this method. Other features introduced in the future, by the DOM WG or in extensions defined by other groups, may also demand support for this method; please consult the definition of the feature to see if it requires this method."
+          ],
+          "raises": [
+            "DOMException"
+          ],
+          "args": [
+            [
+              "qualifiedName",
+              "str",
+              "in"
+            ],
+            [
+              "publicId",
+              "str",
+              "in"
+            ],
+            [
+              "systemId",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "hasFeature",
+          "returns": "bool",
+          "desc": [
+            "Test if the DOM implementation implements a specific feature."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "feature",
+              "str",
+              "in"
+            ],
+            [
+              "ver",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

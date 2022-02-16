@@ -1,0 +1,101 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "DocumentScriptLibraryContainer",
+  "type": "service",
+  "namespace": "com.sun.star.script",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_storage_based_library_container",
+        "XStorageBasedLibraryContainer",
+        "XStorageBasedLibraryContainer_d72a1321"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..document.x_storage_based_document",
+        "XStorageBasedDocument",
+        "XStorageBasedDocument_6b1310b2"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.script.XStorageBasedLibraryContainer": "XStorageBasedLibraryContainer_d72a1321"
+    },
+    "quote": [
+      "XStorageBasedDocument_6b1310b2"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.script.XStorageBasedLibraryContainer"
+      ],
+      "typing": [
+        "com.sun.star.document.XStorageBasedDocument"
+      ]
+    },
+    "name": "DocumentScriptLibraryContainer",
+    "imports": [],
+    "namespace": "com.sun.star.script",
+    "extends": [
+      "com.sun.star.script.XStorageBasedLibraryContainer"
+    ],
+    "desc": [
+      "defines a container of StarBasic script libraries, which is to be made persistent in a sub storage of a document storage.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.3"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1script_1_1DocumentScriptLibraryContainer.html",
+    "items": {
+      "methods": [
+        {
+          "name": "create",
+          "returns": "None",
+          "desc": [
+            "creates an instance of the DocumentScriptLibraryContainer, belonging to a document",
+            "",
+            "The current storage of the document will be set as initial root storage (see XPersistentLibraryContainer.RootStorage) of the container.",
+            "",
+            "Usually, you will only create a DocumentScriptLibraryContainer within the implementation of the document to which the container should belong."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "Document",
+              "XStorageBasedDocument_6b1310b2",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "createWithURL",
+          "returns": "None",
+          "desc": [],
+          "raises": [],
+          "args": [
+            [
+              "URL",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

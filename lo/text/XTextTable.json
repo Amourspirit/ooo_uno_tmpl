@@ -1,0 +1,166 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XTextTable",
+  "type": "interface",
+  "namespace": "com.sun.star.text",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_text_content",
+        "XTextContent",
+        "XTextContent_b16e0ba5"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..table.x_cell",
+        "XCell",
+        "XCell_70d408e8"
+      ],
+      [
+        "..table.x_table_columns",
+        "XTableColumns",
+        "XTableColumns_c66d0c31"
+      ],
+      [
+        "..table.x_table_rows",
+        "XTableRows",
+        "XTableRows_a37e0afb"
+      ],
+      [
+        ".x_text_table_cursor",
+        "XTextTableCursor",
+        "XTextTableCursor_e2f90d30"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.text.XTextContent": "XTextContent_b16e0ba5"
+    },
+    "quote": [
+      "XCell_70d408e8",
+      "XTableColumns_c66d0c31",
+      "XTableRows_a37e0afb",
+      "XTextTableCursor_e2f90d30",
+      "typing.Tuple[str, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[str, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.text.XTextContent"
+      ],
+      "typing": [
+        "com.sun.star.table.XCell",
+        "com.sun.star.table.XTableColumns",
+        "com.sun.star.table.XTableRows",
+        "com.sun.star.text.XTextTableCursor"
+      ]
+    },
+    "name": "XTextTable",
+    "imports": [],
+    "namespace": "com.sun.star.text",
+    "extends": [
+      "com.sun.star.text.XTextContent"
+    ],
+    "desc": [
+      "manages a text table."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1text_1_1XTextTable.html",
+    "items": {
+      "methods": [
+        {
+          "name": "createCursorByCellName",
+          "returns": "XTextTableCursor_e2f90d30",
+          "desc": [
+            "creates a text table cursor and returns the XTextTableCursor interface.",
+            "",
+            "Initially the cursor is positioned in the cell with the specified name."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aCellName",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getCellByName",
+          "returns": "XCell_70d408e8",
+          "desc": [
+            "Example: The cell in the 4th column and third row has the name \\\"D3\\\".",
+            "",
+            "In cells that are split, the naming convention is more complex. In this case the name is a concatenation of the former cell name (i.e. \\\"D3\\\") and the number of the new column and row index inside of the original table cell separated by dots. This is done recursively.",
+            "",
+            "Example: If the cell \\\"D3\\\" is horizontally split, it now contains the cells \\\"D3.1.1\\\" and \\\"D3.1.2\\\""
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aCellName",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getCellNames",
+          "returns": "typing.Tuple[str, ...]",
+          "desc": [],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getColumns",
+          "returns": "XTableColumns_c66d0c31",
+          "desc": [],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getRows",
+          "returns": "XTableRows_a37e0afb",
+          "desc": [],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "initialize",
+          "returns": "None",
+          "desc": [
+            "determines the numbers of rows and columns of the text table.",
+            "",
+            "This method must be called after the object is created and before the object is insert or attached elsewhere."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "nRows",
+              "int",
+              "in"
+            ],
+            [
+              "nColumns",
+              "int",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

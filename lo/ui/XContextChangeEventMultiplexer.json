@@ -1,0 +1,170 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XContextChangeEventMultiplexer",
+  "type": "interface",
+  "namespace": "com.sun.star.ui",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".context_change_event_object",
+        "ContextChangeEventObject",
+        "ContextChangeEventObject_37b70f6a"
+      ],
+      [
+        ".x_context_change_event_listener",
+        "XContextChangeEventListener",
+        "XContextChangeEventListener_678510b1"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "ContextChangeEventObject_37b70f6a",
+      "XContextChangeEventListener_678510b1",
+      "XInterface_8f010a43"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.ui.ContextChangeEventObject",
+        "com.sun.star.ui.XContextChangeEventListener"
+      ]
+    },
+    "name": "XContextChangeEventMultiplexer",
+    "imports": [],
+    "namespace": "com.sun.star.ui",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "Provide a central access point for a group of events.",
+      "",
+      "Listeners can be added with a simple restriction on the event source. They are only called for events that originate at the specified source.",
+      "",
+      "Event providers can broadcast an event to all interested listeners.",
+      "",
+      "The XEventMultiplexer interface is typically implemented as a singleton"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ui_1_1XContextChangeEventMultiplexer.html",
+    "items": {
+      "methods": [
+        {
+          "name": "addContextChangeEventListener",
+          "returns": "None",
+          "desc": [
+            "Add an event listener that is called only when events are broadcast for the specified event focus.",
+            "",
+            "One listener may be added more than once for different event foci. Adding a listener a second time for the same event focus results in an InvalidArgumentException.",
+            "",
+            "The event focus may or may not be the source of the event.",
+            "",
+            "A typical example for an event focus is the XController of a view. Using an XController restricts events passed to a listener to events that belong to one view."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "xListener",
+              "XContextChangeEventListener_678510b1",
+              "in"
+            ],
+            [
+              "xEventFocus",
+              "XInterface_8f010a43",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "broadcastContextChangeEvent",
+          "returns": "None",
+          "desc": [
+            "Call all event listeners that were added for the specified event focus."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aEvent",
+              "ContextChangeEventObject_37b70f6a",
+              "in"
+            ],
+            [
+              "xEventFocus",
+              "XInterface_8f010a43",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeAllContextChangeEventListeners",
+          "returns": "None",
+          "desc": [
+            "Remove an event listener for all event foci.",
+            "",
+            "It is not an error when the listener is not registered for any event focus."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "xListener",
+              "XContextChangeEventListener_678510b1",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "removeContextChangeEventListener",
+          "returns": "None",
+          "desc": [
+            "Remove an event listener for the specified event focus.",
+            "",
+            "When the same listener was added for other event foci then these associations remain unmodified.",
+            "",
+            "When the listener is not registered for the given event focus then an InvalidArgumentException is thrown."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "xListener",
+              "XContextChangeEventListener_678510b1",
+              "in"
+            ],
+            [
+              "xEventFocus",
+              "XInterface_8f010a43",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

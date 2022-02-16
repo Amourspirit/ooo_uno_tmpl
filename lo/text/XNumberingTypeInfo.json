@@ -1,0 +1,113 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XNumberingTypeInfo",
+  "type": "interface",
+  "namespace": "com.sun.star.text",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "typing.Tuple[int, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[int, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": []
+    },
+    "name": "XNumberingTypeInfo",
+    "imports": [],
+    "namespace": "com.sun.star.text",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "provides access to the numbering types that are supported by a component.",
+      "",
+      "To be able to store unknown numbering types in a file format the numbering types correspond to an identifier."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1text_1_1XNumberingTypeInfo.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getNumberingIdentifier",
+          "returns": "str",
+          "desc": [
+            "returns the corresponding identifier to a numbering type."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "NumberingType",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getNumberingType",
+          "returns": "int",
+          "desc": [
+            "returns the corresponding numbering type to an identifier."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "NumberingIdentifier",
+              "str",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getSupportedNumberingTypes",
+          "returns": "typing.Tuple[int, ...]",
+          "desc": [
+            "returns the numbering type values that are supported by the component."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "hasNumberingType",
+          "returns": "bool",
+          "desc": [
+            "determines whether an identifier is supported."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "NumberingIdentifier",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

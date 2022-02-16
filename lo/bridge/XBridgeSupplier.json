@@ -1,0 +1,110 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XBridgeSupplier",
+  "type": "interface",
+  "namespace": "com.sun.star.bridge",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..uno.uik",
+        "Uik",
+        "Uik_4fac0783"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "Uik_4fac0783"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.uno.Uik"
+      ]
+    },
+    "name": "XBridgeSupplier",
+    "imports": [],
+    "namespace": "com.sun.star.bridge",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "defines the interface for creating bridges to other object models.",
+      "",
+      "Because bridges sometimes can not be generated in an address space, the implementation needs to check the address space of the caller by comparing the machine and process ID against its own. These IDs are provided by the UNO runtime.",
+      "",
+      "All objects, whether they are part of the UNO object model or not, are carried in an any. The representation of this object is heavily model-dependent and has to be specified in the following list:",
+      "",
+      "Any implementation can supply its own bridges to other object models by implementing this interface and returning the bridge when the method is called with itself as the first parameter.",
+      "",
+      ".. deprecated::",
+      "",
+      "    Class is deprecated."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1bridge_1_1XBridgeSupplier.html",
+    "items": {
+      "methods": [
+        {
+          "name": "createBridge",
+          "returns": "object",
+          "desc": [
+            "creates a bridge to provide an object of one object model with another."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "modelDepObject",
+              "object",
+              "in"
+            ],
+            [
+              "MachineId",
+              "Uik_4fac0783",
+              "in"
+            ],
+            [
+              "ProcessId",
+              "int",
+              "in"
+            ],
+            [
+              "sourceModelType",
+              "int",
+              "in"
+            ],
+            [
+              "destModelType",
+              "int",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

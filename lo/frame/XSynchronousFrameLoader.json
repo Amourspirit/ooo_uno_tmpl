@@ -1,0 +1,105 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XSynchronousFrameLoader",
+  "type": "interface",
+  "namespace": "com.sun.star.frame",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
+      ],
+      [
+        ".x_frame",
+        "XFrame",
+        "XFrame_7a570956"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XFrame_7a570956",
+      "typing.Tuple[PropertyValue_c9610c73, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[PropertyValue_c9610c73, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.frame.XFrame"
+      ]
+    },
+    "name": "XSynchronousFrameLoader",
+    "imports": [],
+    "namespace": "com.sun.star.frame",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "loads a resource into a Frame.",
+      "",
+      "Unlike the XFrameLoader interface, this loading will be synchronous."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XSynchronousFrameLoader.html",
+    "items": {
+      "methods": [
+        {
+          "name": "cancel",
+          "returns": "None",
+          "desc": [
+            "cancels the loading process.",
+            "",
+            "No notifications (neither to the frame or the caller) must be notified. Because it's a synchronous process this cancel call can be forced by another thread the loader thread only. Method XSynchronousFrameLoader.load() must return FALSE then and caller of this method XSynchronousFrameLoader.cancel() already knows the state ..."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "load",
+          "returns": "bool",
+          "desc": [
+            "starts the loading of the specified resource into the specified Frame."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "Descriptor",
+              "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "in"
+            ],
+            [
+              "Frame",
+              "XFrame_7a570956",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

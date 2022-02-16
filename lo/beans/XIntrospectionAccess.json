@@ -1,0 +1,264 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XIntrospectionAccess",
+  "type": "interface",
+  "namespace": "com.sun.star.beans",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".property",
+        "Property",
+        "Property_8f4e0a76"
+      ],
+      [
+        "..reflection.x_idl_method",
+        "XIdlMethod",
+        "XIdlMethod_e3740d05"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "Property_8f4e0a76",
+      "XIdlMethod_e3740d05",
+      "XInterface_8f010a43",
+      "typing.Tuple[Property_8f4e0a76, ...]",
+      "typing.Tuple[XIdlMethod_e3740d05, ...]",
+      "typing.Tuple[object, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[Property_8f4e0a76, ...]",
+      "typing.Tuple[XIdlMethod_e3740d05, ...]",
+      "typing.Tuple[object, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.beans.Property",
+        "com.sun.star.reflection.XIdlMethod"
+      ]
+    },
+    "name": "XIntrospectionAccess",
+    "imports": [],
+    "namespace": "com.sun.star.beans",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "represents the result of an introspection operation done by the inspect method of XIntrospection.",
+      "",
+      "This interface gives information about an object's properties and methods as detected in the introspection process. It's not possible to access properties or call methods directly using this interface but it provides access to other interfaces to do so. See com.sun.star.beans.XIntrospectionAccess.queryAdapter()",
+      "",
+      "The XExactName interface has to be supported in order to implement inaccurate name access for all objects which implement the com.sun.star.container.XNameAccess interface or XPropertySet.",
+      "",
+      "The XMaterialHolder interface has to be supported to give access to the inspected object."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XIntrospectionAccess.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getMethod",
+          "returns": "XIdlMethod_e3740d05",
+          "desc": [
+            "returns information about a method if a method with the demanded name exists and if it accords to one of the demanded MethodConcepts.",
+            "",
+            "The information is provided as com.sun.star.reflection.XIdlMethod."
+          ],
+          "raises": [
+            "com.sun.star.lang.NoSuchMethodException"
+          ],
+          "args": [
+            [
+              "aName",
+              "str",
+              "in"
+            ],
+            [
+              "nMethodConcepts",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getMethods",
+          "returns": "typing.Tuple[XIdlMethod_e3740d05, ...]",
+          "desc": [
+            "returns a sequence of methods of the introspected object."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "nMethodConcepts",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getProperties",
+          "returns": "typing.Tuple[Property_8f4e0a76, ...]",
+          "desc": [
+            "returns a sequence of properties of the introspected object"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "nPropertyConcepts",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getProperty",
+          "returns": "Property_8f4e0a76",
+          "desc": [
+            "returns information about a property if a property with the demanded name exists and if it accords to one of the demanded PropertyConcepts.",
+            "",
+            "The information is provided as Property struct."
+          ],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException"
+          ],
+          "args": [
+            [
+              "aName",
+              "str",
+              "in"
+            ],
+            [
+              "nPropertyConcepts",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getSuppliedMethodConcepts",
+          "returns": "int",
+          "desc": [
+            "returns information about which method concepts described in the MethodConcept constants group are supported by this XIntrospectionAccess implementation.",
+            "",
+            "The minimum supported concepts should be:"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getSuppliedPropertyConcepts",
+          "returns": "int",
+          "desc": [
+            "returns information about which property concepts described in the PropertyConcept constants group are supported by this XIntrospectionAccess implementation.",
+            "",
+            "The minimum supported concepts should be:"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getSupportedListeners",
+          "returns": "typing.Tuple[object, ...]",
+          "desc": [
+            "returns the listener types supported by the introspected object.",
+            "",
+            "If the introspected object has the methods addFooListener( XFooListener xFoo ) and removeFooListener( XFooListener xFoo ) the type of XFooListener will be one of the elements in the returned sequence."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "hasMethod",
+          "returns": "bool",
+          "desc": [
+            "allows to ask if a method with the demanded name exists and if it accords to one of the demanded MethodConcept."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aName",
+              "str",
+              "in"
+            ],
+            [
+              "nMethodConcepts",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "hasProperty",
+          "returns": "bool",
+          "desc": [
+            "allows to ask if a property with the demanded name exists and if it accords to one of the demanded PropertyConcept."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aName",
+              "str",
+              "in"
+            ],
+            [
+              "nPropertyConcepts",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "queryAdapter",
+          "returns": "XInterface_8f010a43",
+          "desc": [
+            "creates an adapter that implements an interface with the specified type.",
+            "",
+            "To access properties, query for the XPropertySet interface. If the XPropertySet can be queried, the XFastPropertySet interface must be supported too.",
+            "",
+            "If the introspected object implements a name container, the introspection should return the com.sun.star.container.XNameAccess and com.sun.star.container.XNameContainer interfaces.",
+            "",
+            "If the introspected object implements an index container, the introspection should return the com.sun.star.container.XIndexAccess and com.sun.star.container.XIndexContainer interfaces.",
+            "",
+            "If the introspected object implements an enumeration container, the introspection should return the com.sun.star.container.XEnumerationAccess interface.",
+            "",
+            "If the introspected object implements the com.sun.star.reflection.XIdlArray interface, the introspection should return this.",
+            "",
+            "To implement inaccurate name access, at all objects, which implement the com.sun.star.container.XNameAccess or XPropertySet interface, the XExactName interface has to be supported."
+          ],
+          "raises": [
+            "com.sun.star.beans.IllegalTypeException"
+          ],
+          "args": [
+            [
+              "aInterfaceType",
+              "object",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

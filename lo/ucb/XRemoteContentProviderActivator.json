@@ -1,0 +1,80 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XRemoteContentProviderActivator",
+  "type": "interface",
+  "namespace": "com.sun.star.ucb",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_content_provider_manager",
+        "XContentProviderManager",
+        "XContentProviderManager_37e00f7b"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XContentProviderManager_37e00f7b"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.ucb.XContentProviderManager"
+      ]
+    },
+    "name": "XRemoteContentProviderActivator",
+    "imports": [],
+    "namespace": "com.sun.star.ucb",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "This interface should be implemented together with XRemoteContentProviderAcceptor and allows for a lazy implementation of XRemoteContentProviderAcceptor.addRemoteContentProvider().",
+      "",
+      "The way this works might change, therefore this interface is marked as deprecated.",
+      "",
+      ".. deprecated::",
+      "",
+      "    Class is deprecated."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ucb_1_1XRemoteContentProviderActivator.html",
+    "items": {
+      "methods": [
+        {
+          "name": "activateRemoteContentProviders",
+          "returns": "XContentProviderManager_37e00f7b",
+          "desc": [
+            "Activate (i.e., register at the broker) the remote content providers that until now have only been remembered by XRemoteContentProviderAcceptor.addRemoteContentProvider(), but not registered.",
+            "",
+            "This allows for XRemoteContentProviderAcceptor.addRemoteContentProvider() to be implemented in a lazy fashion (remember the remote content providers, but do not register them right away), which can increase performance in certain situations. But it is not required that an implementation of XRemoteContentProviderAcceptor uses this lazy strategy (and thus also implements this interface)."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

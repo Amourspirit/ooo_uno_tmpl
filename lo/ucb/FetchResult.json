@@ -1,0 +1,81 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "type": "struct",
+  "name": "FetchResult",
+  "namespace": "com.sun.star.ucb",
+  "parser_args": {
+    "sort": false,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "sort": true,
+    "dynamic_struct": true,
+    "include_desc": true
+  },
+  "data": {
+    "name": "FetchResult",
+    "namespace": "com.sun.star.ucb",
+    "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1ucb_1_1FetchResult.html",
+    "from_imports": [],
+    "from_imports_typing": [],
+    "extends_map": {},
+    "quote": [
+      "typing.Tuple[object, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[object, ...]"
+    ],
+    "requires_typing": true,
+    "fullname": "com.sun.star.ucb.FetchResult",
+    "desc": [
+      "contains data of several rows of a ContentResultSet.",
+      "",
+      "This struct is returned from XFetchProvider.fetch(), for example."
+    ],
+    "imports": [],
+    "extends": [],
+    "items": [
+      {
+        "name": "Rows",
+        "type": "typing.Tuple[object, ...]",
+        "lines": [
+          "contains the demanded data.",
+          "",
+          "One any contains the data of one whole row. Those methods which use this struct have to specify, what the any has to contain."
+        ]
+      },
+      {
+        "name": "StartIndex",
+        "type": "int",
+        "lines": [
+          "indicates the index of the first row contained in FetchResult.Rows in the original result set.",
+          "",
+          "So if FetchResult.StartIndex equals 3, the first element in the sequence FetchResult.Rows contains the data of the index 3 in the original result set.",
+          "",
+          "The following rows are one after the other, but the direction depends on the value of FetchResult.Direction"
+        ]
+      },
+      {
+        "name": "Orientation",
+        "type": "bool",
+        "lines": [
+          "indicates the orientation in which the rows are fetched and set into the sequence FetchResult.Rows.",
+          "",
+          "When FetchResult.Orientation equals TRUE, the rows in FetchResult.Rows are ordered in the same way as in the original result set."
+        ]
+      },
+      {
+        "name": "FetchError",
+        "type": "int",
+        "lines": [
+          "indicates whether and which error has occurred, while fetching.",
+          "",
+          "The value may contain zero or more constants of the FetchError constants group."
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,266 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XRegressionCurveCalculator",
+  "type": "interface",
+  "namespace": "com.sun.star.chart2",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_scaling",
+        "XScaling",
+        "XScaling_97500a65"
+      ],
+      [
+        "..geometry.real_point2_d",
+        "RealPoint2D",
+        "RealPoint2D_d6e70c78"
+      ],
+      [
+        "..util.x_number_formats_supplier",
+        "XNumberFormatsSupplier",
+        "XNumberFormatsSupplier_3afb0fb7"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XNumberFormatsSupplier_3afb0fb7",
+      "XScaling_97500a65",
+      "typing.Tuple[RealPoint2D_d6e70c78, ...]",
+      "typing.Tuple[float, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[RealPoint2D_d6e70c78, ...]",
+      "typing.Tuple[float, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.chart2.XScaling",
+        "com.sun.star.geometry.RealPoint2D",
+        "com.sun.star.util.XNumberFormatsSupplier"
+      ]
+    },
+    "name": "XRegressionCurveCalculator",
+    "imports": [],
+    "namespace": "com.sun.star.chart2",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1chart2_1_1XRegressionCurveCalculator.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getCorrelationCoefficient",
+          "returns": "float",
+          "desc": [
+            "Returns the value of the correlation coefficient for the given regression.",
+            "",
+            "This value is often denoted as r or R.",
+            "",
+            "The value of r is signed. Often r2 is used instead of r to denote a regression curve's accuracy."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getCurveValue",
+          "returns": "float",
+          "desc": [
+            "calculates the value of the regression curve for x."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "x",
+              "float",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getCurveValues",
+          "returns": "typing.Tuple[RealPoint2D_d6e70c78, ...]",
+          "desc": [
+            "calculate multiple points of a regression curve at once.",
+            "",
+            "Note that this method may optimize the output by returning less points, e.g. for a line you may get only two resulting points instead of nPointCount() points. This is only allowed if the parameter bMaySkipPointsInCalculation() is set to TRUE.",
+            "",
+            "It is important that a renderer takes the scalings into account. When one of these parameters is unknown, no optimization must be done."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "min",
+              "float",
+              "in"
+            ],
+            [
+              "max",
+              "float",
+              "in"
+            ],
+            [
+              "nPointCount",
+              "int",
+              "in"
+            ],
+            [
+              "xScalingX",
+              "XScaling_97500a65",
+              "in"
+            ],
+            [
+              "xScalingY",
+              "XScaling_97500a65",
+              "in"
+            ],
+            [
+              "bMaySkipPointsInCalculation",
+              "bool",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getFormattedRepresentation",
+          "returns": "str",
+          "desc": [
+            "Returns a representation using the given number format for formatting all numbers contained in the formula.",
+            "",
+            "Wrap equation to fit in nFormulaLength characters"
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xNumFmtSupplier",
+              "XNumberFormatsSupplier_3afb0fb7",
+              "in"
+            ],
+            [
+              "nNumberFormatKey",
+              "int",
+              "in"
+            ],
+            [
+              "nFormulaLength",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getRepresentation",
+          "returns": "str",
+          "desc": [
+            "Retrieve a string showing the regression curve's function with calculated parameters."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "recalculateRegression",
+          "returns": "None",
+          "desc": [
+            "recalculates the parameters of the internal regression curve according to the x- and y-values given."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aXValues",
+              "typing.Tuple[float, ...]",
+              "in"
+            ],
+            [
+              "aYValues",
+              "typing.Tuple[float, ...]",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setRegressionProperties",
+          "returns": "None",
+          "desc": [
+            "set calculation properties for curve calculation."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "degree",
+              "int",
+              "in"
+            ],
+            [
+              "forceIntercept",
+              "bool",
+              "in"
+            ],
+            [
+              "interceptValue",
+              "float",
+              "in"
+            ],
+            [
+              "period",
+              "int",
+              "in"
+            ],
+            [
+              "movingType",
+              "int",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "setXYNames",
+          "returns": "None",
+          "desc": [
+            "Set the names of X and Y variables of the equation to replace \\\"x\\\" and \\\"f(x)\\\" in representation."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "aXName",
+              "str",
+              "in"
+            ],
+            [
+              "aYName",
+              "str",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}
