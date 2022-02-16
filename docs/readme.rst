@@ -105,7 +105,7 @@ Conda
 Set up env
 ----------
 
-$ conda env create -f  environment.yml
+$ conda env create --prefix ./env -f environment.yml
 
 Set up new env
 --------------
@@ -120,7 +120,9 @@ $ conda env export > environment.yml
 active from command line
 ------------------------
 
-$ conda activate $PWD/env
+$ conda activate ./env
+or
+$ source activate ./env
 
 Links of intrest
 ================
