@@ -7,14 +7,12 @@ Parses Libre Office API webiste and converts to Python classes and types.
 Libre Office API consist of more than 4300 classes and types.
 
 Requirements:
-    This project requires cheeta to be installed.
-    Cheetah is used as the template generation engine.
-    https://cheetahtemplate.org/
+    see: docs/setup_env.rst
 
 Getting Started:
 
     This project already has data compiled of the entire LO API.
-    The file are compiled as *.JSON files and *.tmpl files in project root directorty 'uno_obj'.
+    The file are compiled as *.JSON files, *.tmpl files and *.dyn files in project root directorty 'lo'.
 
     API file generation groups api into the following categories:
         const:      Constant classes
@@ -31,26 +29,33 @@ Getting Started:
 Make Command:
     make does not require any arguments by default.
     running 'python app.py make' will build all templates that require building.
+    
+        *.tmpl files and *.dyn files that do not have corresponding *.py and *.dynpy files respectivally
+        are included in make.
+        
+        *.tmpl files and *.dyn that have a newer modification date then corresponding *.py and *.dynpy
+        files respectivally are included in make.
+
     running 'python app.py make -h' will show help for make.
-    make processes all template and json file in 'uno_obj' directory recursivly.
+    make processes all template and json file in 'lo' directory recursivly.
     make compiles any templates that have not yet been compiled.
-    make writes the python file for each template out to 'data'
+    make writes the output python file for each template out to 'build'
         directory keeping the same directory structure.
     make by default will only compile templates that have been
         updated since compile was last run.
     make writes output to app.log in the project root directory.
     Compiled files are written in place.
-        For Example: 'uno_obj/uno/XInterface.tmpl' once compiled
-            creates 'uno_obj/uno/XInterface.py'.
-    In place compiled files such as 'uno_obj/uno/XInterface.py' are cheetah
+        For Example: 'lo/uno/XInterface.tmpl' once compiled
+            creates 'lo/uno/XInterface.py'.
+    In place compiled files such as 'lo/uno/XInterface.py' are cheetah
         classes that are then written into that actual
         python representation of the tmpl file.
     On first run expect make to take some time to process as all templates must
         be compiled and written on first run.
 
     Example:
-        'uno_obj/uno/XInterface.tmpl' is compiled to
-            'uno_obj/uno/XInterface.py' and then
+        'lo/uno/XInterface.tmpl' is compiled to
+            'lo/uno/XInterface.py' and then
             'build/uno_obj/uno/XInterface.py' is generated.
 
 

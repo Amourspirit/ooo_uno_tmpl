@@ -296,7 +296,7 @@ def parse(**kwargs) -> Union[str, None]:
         url (str): url to parse
         cache (str, optional): Caching. Default ``True``
         print_json (str, optional): Print json to termainl. Default ``False``
-        write_json (str, optional): Write json file into obj_uno subfolder. Default ``False``
+        write_json (str, optional): Write json file into lo subfolder. Default ``False``
         write_path (str, optional): The root path to write json data file.
         log_file (str, optional): Log File
         verbose (str, optional): Verobose output.
@@ -376,7 +376,7 @@ def set_cmd_args(parser: argparse.ArgumentParser) -> None:
         default=False)
     parser.add_argument(
         '-j', '--write-json',
-        help='Write json file into obj_uno subfolder',
+        help=f"Write json file into {base.APP_CONFIG.uno_base_dir} subfolder",
         action='store_true',
         dest='write_json',
         default=False)
