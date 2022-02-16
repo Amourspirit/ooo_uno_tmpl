@@ -6,15 +6,15 @@ Libre Office API to Python code generator.
 Parses Libre Office API webiste and converts to Python classes and types.
 Libre Office API consist of more than 4300 classes and types.
 
+
 Requirements:
-    This project requires cheeta to be installed.
-    Cheetah is used as the template generation engine.
-    https://cheetahtemplate.org/
+    see: docs/setup_env.rst
+
 
 Getting Started:
 
     This project already has data compiled of the entire LO API.
-    The file are compiled as *.JSON files and *.tmpl files in project root directorty 'uno_obj'.
+    The file are compiled as *.JSON files, *.tmpl files and *.dyn files in project root directorty 'lo'.
 
     API file generation groups api into the following categories:
         const:      Constant classes
@@ -28,41 +28,35 @@ Getting Started:
     Template files require compiling to generate python files.
     Compiling template files is done on the command line via the 'make' option.
 
+
 Make Command:
     make does not require any arguments by default.
-    running 'python app.py make' will build all templates that require building.
+    running 'python -m app make' will build all templates that require building.
+    
+        *.tmpl files and *.dyn files that do not have corresponding *.py and *.dynpy files respectivally
+        are included in make.
+        
+        *.tmpl files and *.dyn that have a newer modification date then corresponding *.py and *.dynpy
+        files respectivally are included in make.
+
     running 'python app.py make -h' will show help for make.
-    make processes all template and json file in 'uno_obj' directory recursivly.
+    make processes all template and json file in 'lo' directory recursivly.
     make compiles any templates that have not yet been compiled.
-    make writes the python file for each template out to 'data'
+    make takes care of generating inplace *.py and *.dynpy files in lo sub directories
+    make takes care of writing to build/lo and build/dyn directories and sub directories
+    make writes the output python file for each template out to 'build'
         directory keeping the same directory structure.
     make by default will only compile templates that have been
         updated since compile was last run.
     make writes output to app.log in the project root directory.
     Compiled files are written in place.
-        For Example: 'uno_obj/uno/XInterface.tmpl' once compiled
-            creates 'uno_obj/uno/XInterface.py'.
-    In place compiled files such as 'uno_obj/uno/XInterface.py' are cheetah
+        For Example: 'lo/uno/XInterface.tmpl' once compiled
+            creates 'lo/uno/XInterface.py'.
+    In place compiled files such as 'lo/uno/XInterface.py' are cheetah
         classes that are then written into that actual
         python representation of the tmpl file.
     On first run expect make to take some time to process as all templates must
         be compiled and written on first run.
-
-    Example:
-        'uno_obj/uno/XInterface.tmpl' is compiled to
-            'uno_obj/uno/XInterface.py' and then
-            'build/uno_obj/uno/XInterface.py' is generated.
-
-
-Modifying Templates:
-    Code generation templates are found in the template directory.
-    *.tmpl files are cheetah template files.
-    Template files starting with _base_ can be modified.
-    Changes to files starting with _base_ are automatically picked up on next
-        command line make (python app.py make)
-    Any modification to *.tmpl files in the template directory requires
-        make to be run on the command line in the template directory.
-        Eg: user@user-pc:~/Projects/ooo_uno_tmpl/template$ make
 
 
 Sequence of Build:
@@ -81,10 +75,93 @@ Sequence of Build:
     star.json file can be regenerated using link-json star-links
         command line options.
 
-    module_links.json file are created for all namespaces.
-    module_links.json files are writte into every sub directory of 'uno_obj'.
+    A module_links.json file is created for each namespace.
+    module_links.json files are written into every sub directory of 'lo'.
     module_links.json files can regenerated using link-json mod-links
         command line options.
+
+
+Compile Templates:
+    Note:
+        Before Compile is run database must be up to date. See Regeneration of Database.
+        By default database does not need to be created/updated unless underlying
+        template json data changes.
+        
+        By default all links are already compiled and the resulting *.json, *.tmpl, *.dyn
+        files are located in the lo dir.
+    
+    Compiling reads module_links.json files to get url's of components.
+    Compiling then request url and parses html and converts in to template and json data
+    that are written out to lo dir.
+    Compiling all essentially parsers over 4300 urls.
+        By default caching is built in so that given url is not parsed if it is in the cache.
+        The cache dir is in the systems tmp dir.
+            The name of the sub dir in tmp dir is set in config.json cache_dir property.
+        The cache durration in seconds is set in config.json cache_duration property.
+        Note that the system tmp dir is cleared on most os's when the system is rebooted.
+    
+    The compile option allow for some, many or all templates to be created or overwritten.
+        The following command will compile all enum classes:
+            $ python -m app compile enum --all
+        
+        The following command will compile all ( over 4300 ) classes:
+            $ python -m app compile batch --all
+
+
+Type of Templates:
+    There are currently two types of templates outputed into lo dir, *.tmpl and *.dyn.
+    
+    *.tmpl templates files are converted into corresonding *.py files and are written into
+    build/lo sub directories
+    
+    *.dyn template files are converted into corresonding *.py files and are written into
+    build/dyn sub directories
+    
+    By default *.tmpl and *.dyn files are just stubs that don't contain any acutal data.
+    The template files read from corresponging json files and converts data into py files.
+
+
+Touch Files:
+    The touch command line option allows for setting of various files modification date to current system date and time.
+    
+    On advantage of touching files is it prevents the need to compile components again if the underlying data has not change.
+        Essentially the underlying data will not change unless the LO api has changed.
+    
+    Touching files can be used to force make to include or exclude making of files.
+        If tmpl files are touched then make will rebuild any tmpl file when run again.
+        If dyn files are touched then make will rebuild any dyn file when run again.
+        If py files are touched then make will exclude any corrsponding tmpl template files.
+        If dynpy files are touched then make will exclude any corrsponding dyn template files.
+
+    Example:
+        The following commands force make to rebuild all enum tmpl files:
+            $ python -m app touch --enum --option tmpl
+            $ python -m app make
+    
+    Touch can be used to reset cached data created by compile as well.
+    To update all cached data in the tmp sub dir run:
+        $ python -m app touch --cache-files
+
+
+url-links:
+    url-links allow the compiling of a single url. Sort of like compile with more options and
+    only for a single url. Mostly use for testing and debuging.
+    
+    Note the url is expected to match the type of command.
+    
+    Example:
+        The following command will compile template and write json data for XInterface into lo/uno dir.
+            $ python -m app url-parse interface --write-template --write-json --url https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1uno_1_1XInterface.html
+
+Modifying Templates:
+    Code generation templates are found in the template directory.
+    *.tmpl files are cheetah template files.
+    Template files starting with _base_ can be modified.
+    Changes to files starting with _base_ are automatically picked up on next
+        command line make (python app.py make)
+    Any modification to *.tmpl files in the template directory requires
+        make to be run on the command line in the template directory.
+        Eg: user@user-pc:~/Projects/ooo_uno_tmpl/template$ make
 
 Regeneration of Database:
     'resources/mod_info.sqlite' database is required for templates to build.
@@ -108,7 +185,34 @@ Regeneration of Database:
         python app.py data update --write-all
         Command reads 'data' folder and add/updates database.
         Any preexisting data in the database will be updated.
+
+Other Notes:
+    The underlying parsers that convert html into json and template are located in 
+    the parser directory.
+    
+    Other Config:
+        parsers/config directory contains special configuration files.
+        
+        known_extends.json:
+            This file contains overrides for the extends of matching comonents.
+            If a match is found in this file then the resulting output of json
+            data parser will contain extends for the found match.
+
+            There is a special use case as seen com.sun.star.uno.Exception.
+                When extend ends in ._ it will be treated as a python extend.
+                In short build.lo.uno.Exception extends Exception (builtins.Exception)
+
+        known_json.json.
+            This file contains matches to components that will use predetermined json
+            output that is to be written into lo/**/*.json files.
+            In short this means a matched file will ignore parsed html and use
+            matched known instead.
+
+            Note when parsers that participate have an option to ignore known_json.json.
+            This option is used by app.py when writing data into data dir.
+            The data dir is used to create/update database.
 """
+
 # region Imports
 import logging
 import os
@@ -429,56 +533,56 @@ def _args_links_batch(parser: argparse.ArgumentParser) -> None:
 def _args_touch(parser: argparse.ArgumentParser, config: AppConfig) -> None:
     parser.add_argument(
         '-s', '--struct',
-        help=f"Touch all struct *.tmpl or *.py files in {config.uno_obj_dir} direcotry recursivly.",
+        help=f"Touch all struct files in {config.uno_obj_dir} direcotry recursivly.",
         action='store_true',
         dest='struct_all',
         default=False
     )
     parser.add_argument(
         '-g', '--singleton',
-        help=f"Touch all singleton *.tmpl or *.py files in {config.uno_obj_dir} direcotry recursivly.",
+        help=f"Touch all singleton files in {config.uno_obj_dir} direcotry recursivly.",
         action='store_true',
         dest='singleton_all',
         default=False
     )
     parser.add_argument(
         '-r', '--service',
-        help=f"Touch all service *.tmpl or *.py files in {config.uno_obj_dir} direcotry recursivly.",
+        help=f"Touch all service files in {config.uno_obj_dir} direcotry recursivly.",
         action='store_true',
         dest='service_all',
         default=False
     )
     parser.add_argument(
         '-c', '--const',
-        help=f"Touch all const *.tmpl or *.py files in {config.uno_obj_dir} direcotry recursivly.",
+        help=f"Touch all const files in {config.uno_obj_dir} direcotry recursivly.",
         action='store_true',
         dest='const_all',
         default=False
     )
     parser.add_argument(
         '-e', '--enum',
-        help=f"Touch all enum *.tmpl or *.py files in {config.uno_obj_dir} direcotry recursivly.",
+        help=f"Touch all enum files in {config.uno_obj_dir} direcotry recursivly.",
         action='store_true',
         dest='enum_all',
         default=False
     )
     parser.add_argument(
         '-x', '--exception',
-        help=f"Touch all exception *.tmpl or *.py files in {config.uno_obj_dir} direcotry recursivly.",
+        help=f"Touch all exception files in {config.uno_obj_dir} direcotry recursivly.",
         action='store_true',
         dest='ex_all',
         default=False
     )
     parser.add_argument(
         '-i', '--interface',
-        help=f"Touch all interface *.tmpl or *.py files in {config.uno_obj_dir} direcotry recursivly.",
+        help=f"Touch all interface files in {config.uno_obj_dir} direcotry recursivly.",
         action='store_true',
         dest='interface_all',
         default=False
     )
     parser.add_argument(
         '-t', '--typedef',
-        help=f"Touch all typedef *.tmpl or *.py files in {config.uno_obj_dir} direcotry recursivly.",
+        help=f"Touch all typedef files in {config.uno_obj_dir} direcotry recursivly.",
         action='store_true',
         dest='typedef_all',
         default=False

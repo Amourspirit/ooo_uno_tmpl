@@ -13,7 +13,7 @@ class AppConfig:
     min_json_data_ver: str
     """Min version that can be parsed for .json files of Module Components"""
     uno_base_dir: str
-    """Base Directory for Uno such as uno"""
+    """Base Directory for Uno such as lo"""
     cache_dir: str
     """The cache directory to use. This is generally used in creating a cache directory is system temp dir."""
     base_dir: str
