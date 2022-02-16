@@ -41,6 +41,7 @@ class QryComponent(BaseSql):
                     lo_ver=row['lo_ver'],
                     file=row['file'],
                     c_name=row['c_name'],
+                    map_name=row['map_name'],
                     sort=row['sort']
                 )
 
@@ -77,6 +78,7 @@ class QryComponent(BaseSql):
                     lo_ver=row['lo_ver'],
                     file=row['file'],
                     c_name=row['c_name'],
+                    map_name=row['map_name'],
                     sort=row['sort']
                 ))
 
@@ -117,6 +119,7 @@ class QryComponent(BaseSql):
                     lo_ver=row['lo_ver'],
                     file=row['file'],
                     c_name=row['c_name'],
+                    map_name=row['map_name'],
                     sort=row['sort']
                 )
                 if not component.namespace in results:

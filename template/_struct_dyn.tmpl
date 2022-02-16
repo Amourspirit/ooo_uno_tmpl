@@ -30,6 +30,10 @@ $self.load_data()#slurp
 #set $fullname = $namespace + '.' + $safe_name
 #set $uno_obj_ns = $dyn + $fullname.removeprefix('com.sun.star').rsplit(sep='.', maxsplit=1)[0]
 #set $uno_obj_in = $uno_obj + $fullname.removeprefix('com.sun.star')
+#set $sorted = $self.get_sorted_names()
+#set $_, $first_index = $sorted[0]
+#set $first_itm = $attribs[$first_index]
+#set $first_itm_name = $self.get_safe_word($first_itm['name'])
 # coding: utf-8
 #include raw "resources/inc_lic.txt"
 # Struct Class
@@ -39,41 +43,57 @@ $self.load_data()#slurp
 # Libre Office Version: $libre_office_ver
 #end if
 from typing import TYPE_CHECKING
-from $oenv import UNO_ENVIRONMENT, UNO_RUNTIME
+from $oenv import UNO_ENVIRONMENT, UNO_RUNTIME, UNO_NONE
 _DYNAMIC = False
 if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    def _dynamic_struct() -> None:
+    def _dynamic_struct():
         import uno
+        from $namespace import $safe_name as U${safe_name}
         # Dynamically create uno $fullname using uno
         global $safe_name
+
+        def _set_fn_attr(struct):
+            type_name = '$fullname'
+            struct.__dict__['typeName'] = type_name
+            struct.__dict__['__pyunointerface__'] = type_name
+            struct.__dict__['__pyunostruct__'] = type_name
 
         def _set_attr(struct):
             struct.__dict__['__ooo_ns__'] = '$namespace'
             struct.__dict__['__ooo_full_ns__'] = '$fullname'
             struct.__dict__['__ooo_type_name__'] = 'struct'
 
-        def _struct_init(*args, **kwargs):
-        ns = '${fullname}'
-            arg_len = len(args)
-            if arg_len == 1:
-                from $namespace import $safe_name as U${safe_name}
-                if isinstance(args[0], U${safe_name}):
-                    struct = uno.createUnoStruct(ns, args[0])
-                    _set_attr(struct)
-                    return struct
-            if arg_len > 0:
-                struct = uno.createUnoStruct(ns, *args)
-            else:
-                struct = uno.createUnoStruct(ns)
+        $self.get_dyn_fn()
+            ns = '${fullname}'
+            if isinstance($first_itm_name, U${safe_name}):
+                inst = uno.createUnoStruct(ns, $first_itm_name)
+                _set_attr(inst)
+                return inst
+            struct = uno.createUnoStruct(ns)
+
+#for $i, $tpl in enumerate($sorted)
+#set $index = tpl[1]
+#set $itm = $attribs[$index]
+#set $itm_name = $self.get_safe_word($itm['name'])
+#set $attrib_default = $self.get_attrib_default($itm, True)
+            if not $itm_name is UNO_NONE:
+                if getattr(struct, '$itm_name') != $itm_name:
+                    setattr(struct, '$itm_name', $itm_name)
+#end for
+#if self.is_parent
             for k, v in kwargs.items():
-## use hasattrib some values may come from inherited struct
-                if hasattr(struct, k):
-                    setattr(struct, k, v)
+                if v is UNO_NONE:
+                    continue
+                else:
+                    setattr(ex, k, v)
+#end if
             _set_attr(struct)
             return struct
+        _set_attr(_struct_init)
+        _set_fn_attr(_struct_init)
         $safe_name = _struct_init
 
     _dynamic_struct()

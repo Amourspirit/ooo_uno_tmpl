@@ -1,13 +1,15 @@
 # coding: utf-8
+import uno
 from typing import Dict, List, Tuple, Union
 from _base_json import BaseJson
 from verr import Version
-
-
 class BaseEx(BaseJson):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._sorted_key_index = None
+        self._uno_instance = None
+        self._is_parent = None
+
 
     def _hydrate_data(self, json_data: dict):
         self._validate_data(json_data)
@@ -235,7 +237,7 @@ class BaseEx(BaseJson):
             c_str += ','  # add so tuple is not mistaken as brackets
         return c_str
 
-    def get_constructor_args_str(self, include_value: bool = True) -> str:
+    def get_constructor_args_str(self, include_value: bool = True, include_type: bool = True, uno_none:bool =True) -> str:
         sorted_names = self.get_sorted_names()
         d_lst = self.get_properties_all()
 
@@ -246,25 +248,31 @@ class BaseEx(BaseJson):
                c_str += ', '
             index = tpl[1]
             itm: dict = d_lst[index]
-            is_q = self.is_q_type(itm['returns'])
-            str_type = f"typing.Optional[{itm['returns']}]"
-            if is_q:
-                str_type = self.get_q_wrapped(str_type)
+            # is_q = self.is_q_type(itm['returns'])
+            # if is_q:
+            #     str_type = self.get_q_wrapped(str_type)
+            
             c_str += self.get_safe_word(itm['name'])
-            c_str += ": " + str_type
+            if include_type:
+                c_str += f": typing.Optional[{itm['returns']}]"
             if include_value:
-                c_str += " = None"
+                c_str += " = " + \
+                    self.get_attrib_default(prop=itm, uno_none=uno_none)
             i += 1
         return c_str
 
     def get_constructor(self) -> str:
         sorted_names = self.get_sorted_names()
         if len(sorted_names) == 0:
-            return "def __init__(self, *args, **kwargs):"
-        names = self.get_constructor_args_str()
-        return f"def __init__(self, *args, {names}, **kwargs):"
-
-    
+            self._linfo("Constructor Args — False")
+            if self.is_parent:
+                return "def __init__(self, **kwargs) -> None:"
+            return "def __init__(self) -> None:"
+        self._linfo("Constructor Args — True")
+        names = self.get_constructor_args_str(include_value=True, include_type=True)
+        if self.is_parent:
+            return f"def __init__(self, {names}, **kwargs) -> None:"
+        return f"def __init__(self, {names}) -> None:"
 
     def get_class_inherits_from_db(self, default: str = 'Exception') -> str:
         # override this method from base class
@@ -280,7 +288,6 @@ class BaseEx(BaseJson):
         if result == 'object':
             return 'Exception'
         return result
-        
 
     def has_uno_extends(self) -> bool:
         # com.sun.star.uno.Exception inherits from builtins.Exception
@@ -296,3 +303,41 @@ class BaseEx(BaseJson):
         safe_name = self.get_safe_word(self.name)
         ext = super().get_class_inherits(safe_name, self.inherits)
         return ext != 'object'
+
+    def get_attrib_default(self, prop:dict, uno_none: bool = False) -> str:
+        name = prop['name']
+        returns = prop['returns']
+        result = getattr(self.uno_instance, name, None)
+        if isinstance(result, str):
+            return f"'{result}'"
+        elif isinstance(result, uno.Enum):
+            return f"{returns}.{result.value}"
+        elif isinstance(result, uno.Char):
+            char = ''.join(r'\u{:04X}'.format(ord(chr))
+                           for chr in result.value)
+            return f"'{char}'"
+        elif isinstance(result, uno.ByteSequence):
+            if uno_none is True:
+                return 'UNO_NONE'
+            return 'None'
+        elif hasattr(result, '__pyunostruct__'):
+            if uno_none is True:
+                return 'UNO_NONE'
+            if returns == 'object':
+                return 'None'
+            return f"{returns}()"
+        return str(result)
+
+    @property
+    def uno_instance(self):
+        if self._uno_instance is None:
+            self._uno_instance = uno.createUnoStruct(self.fullname)
+        return self._uno_instance
+
+    @property
+    def is_parent(self) -> bool:
+        if self._is_parent is None:
+            self._is_parent = self.has_uno_extends()
+            self._linfo(
+                f"parent — {self._is_parent}")
+        return self._is_parent

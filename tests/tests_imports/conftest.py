@@ -1,5 +1,4 @@
 # coding: utf-8
-from typing import Set
 import os
 import sys
 from tests.mod_types import get_module_types

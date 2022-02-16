@@ -31,18 +31,23 @@ $self.load_data()#slurp
 #set $fullname = $namespace + '.' + $safe_name
 #set $uno_obj_ns = $dyn + $fullname.removeprefix('com.sun.star').rsplit(sep='.', maxsplit=1)[0]
 #set $uno_obj_in = $uno_obj + $fullname.removeprefix('com.sun.star')
-#set $name_value = '/singletons/' + $fullname + '/service'
 #*
 The following singleton service is not found in ctx
-'/singletons/com.sun.star.script.theServiceDocumenter/service'
+'/singletons/com.sun.star.script.theServiceDocumenter'
 
-However the following is found even though there does not appear
-to be a corrosponding class in the api.
-'/singletons/com.sun.star.util.theServiceDocumenter/service'
+However the following is found:
+'/singletons/com.sun.star.util.theServiceDocumenter'
 
-For this reason alone error checking is being done and an error
-is being raised if not found.
+SupportedServiceNames for this class however does include
+'com.sun.star.script.ServiceDocumenter'
+
+This is the only case that pattern does not follow: '/singletons/' + $fullname
 *#
+#if $fullname == 'com.sun.star.script.theServiceDocumenter'
+#set $name_value = '/singletons/com.sun.star.util.theServiceDocumenter'
+#else
+#set $name_value = '/singletons/' + $fullname
+#end if
 # coding: utf-8
 #include raw "resources/inc_lic.txt"
 # Singleton Class
@@ -51,7 +56,7 @@ is being raised if not found.
 # Libre Office Version: $libre_office_ver
 #end if
 # Namespace: $namespace
-from typing import Tuple, TYPE_CHECKING
+from typing import TYPE_CHECKING
 from $oenv import UNO_ENVIRONMENT, UNO_RUNTIME
 _DYNAMIC = False
 
@@ -67,10 +72,7 @@ if not TYPE_CHECKING and _DYNAMIC:
         def _singleton_init():
             ctx = uno.getComponentContext()
             key = '$name_value'
-            en: Tuple[str] = ctx.getElementNames()
-            if not key in en:
-                raise KeyError("Key '%s' not found in Component Context Element Names", key)
-            singleton = ctx.getValueByName(key)
+            singleton = ctx.getByName(key)
             return singleton
         $safe_name = _singleton_init
     _dynamic_singleton()

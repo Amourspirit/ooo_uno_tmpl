@@ -58,21 +58,18 @@ if not TYPE_CHECKING and _DYNAMIC:
         # Dynamically create class that actually contains UNO enum instances
         global $safe_name
         _dict = {
+            "__doc__": "Dynamically created class that represents $fullname Enum. Class loosly mimics Enum",
+            "__new__": uno_enum_class_new,
+            "__ooo_ns__": "$namespace",
+            "__ooo_full_ns__": "$fullname",
+            "__ooo_type_name__": "enum",
 #for $key in $key_list
 #set $safe_key = $self.get_safe_word($key)
             "$safe_key": ${safe_key},
 #end for
         }
 
-        $safe_name = type('$safe_name', (object,), {
-            '__doc__': 'class created dynamically. Class loosly mimics Enum',
-            "__new__": uno_enum_class_new
-        })
-        for k, v in _dict.items():
-            setattr($safe_name, k, v)
-        setattr($safe_name, '__ooo_ns__', '$namespace')
-        setattr($safe_name, '__ooo_full_ns__', '$fullname')
-        setattr($safe_name, '__ooo_type_name__', 'enum')
+        $safe_name = type('$safe_name', (object,), _dict)
     _dynamic_enum()
 else:
     $self.get_rel_import(in_str=$uno_obj_in, ns=$uno_obj_ns) as $safe_name

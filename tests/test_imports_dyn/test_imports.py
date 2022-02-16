@@ -86,43 +86,69 @@ def service_data(module_types):
         results.append(name)
     return results
 
-def test_imp_singleton(singlton_data: str):
+
+def test_imp_singleton(singlton_data: str, monkeypatch):
+    monkeypatch.setenv('ooouno_ignore_runtime', 'True')
     # https://github.com/pytest-dev/pytest/issues/6374
     imc = ImportCheck()
     assert imc.load_import(singlton_data) == True
 
-
-def test_imp_enum(enum_data: str):
+def test_imp_enum_uno(enum_data: str, monkeypatch):
+    monkeypatch.setenv('ooouno_ignore_runtime', 'False')
     imc = ImportCheck()
     assert imc.load_import(enum_data) == True
 
+def test_imp_enum(enum_data: str, monkeypatch):
+    monkeypatch.setenv('ooouno_ignore_runtime', 'True')
+    imc = ImportCheck()
+    assert imc.load_import(enum_data) == True
 
-def test_imp_const(const_data: str):
+def test_imp_const_uno(const_data: str, monkeypatch):
+    monkeypatch.setenv('ooouno_ignore_runtime', 'False')
     imc = ImportCheck()
     assert imc.load_import(const_data) == True
 
+def test_imp_const(const_data: str, monkeypatch):
+    monkeypatch.setenv('ooouno_ignore_runtime', 'True')
+    imc = ImportCheck()
+    assert imc.load_import(const_data) == True
 
-def test_imp_ex(ex_data: str):
+def test_imp_ex_uno(ex_data: str, monkeypatch):
+    monkeypatch.setenv('ooouno_ignore_runtime', 'False')
+    imc = ImportCheck()
+    assert imc.load_import(ex_data) == True
+    
+def test_imp_ex(ex_data: str, monkeypatch):
+    monkeypatch.setenv('ooouno_ignore_runtime', 'True')
     imc = ImportCheck()
     assert imc.load_import(ex_data) == True
 
 
-def test_imp_typedef(typedef_data: str):
+def test_imp_typedef(typedef_data: str, monkeypatch):
+    monkeypatch.setenv('ooouno_ignore_runtime', 'True')
     imc = ImportCheck()
     assert imc.load_import(typedef_data) == True
 
 
-def test_imp_struct(struct_data: str):
+def test_imp_struct_uno(struct_data: str, monkeypatch):
+    monkeypatch.setenv('ooouno_ignore_runtime', 'True')
+    imc = ImportCheck()
+    assert imc.load_import(struct_data) == True
+
+def test_imp_struct(struct_data: str, monkeypatch):
+    monkeypatch.setenv('ooouno_ignore_runtime', 'False')
     imc = ImportCheck()
     assert imc.load_import(struct_data) == True
 
 
-def test_imp_interface(interface_data: str):
+def test_imp_interface(interface_data: str, monkeypatch):
+    monkeypatch.setenv('ooouno_ignore_runtime', 'True')
     imc = ImportCheck()
     assert imc.load_import(interface_data) == True
 
 
-def test_imp_service(service_data: str):
+def test_imp_service(service_data: str, monkeypatch):
+    monkeypatch.setenv('ooouno_ignore_runtime', 'True')
     imc = ImportCheck()
     assert imc.load_import(service_data) == True
 

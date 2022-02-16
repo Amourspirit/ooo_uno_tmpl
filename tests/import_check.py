@@ -1,9 +1,7 @@
-from ast import Tuple
 import importlib
 import inspect
 from types import ModuleType
 from typing import Set, List
-from parser.base import Util
 
 
 class ImportCheck:

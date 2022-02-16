@@ -67,15 +67,18 @@ class ParseModuleJson:
         rel = Path(file).relative_to(self._json_data_dir)
         ns = json_data['namespace']
         name = json_data['name']
+        full_ns = f"{ns}.{name}"
+        map_name = name + '_' + RelInfo.get_shortened(full_ns)
         c = Component(
-            id_component=f"{ns}.{name}",
+            id_component=full_ns,
             name=name,
             namespace=ns,
             type=json_data['type'],
             version=json_data['version'],
             lo_ver=json_data['libre_office_ver'],
             file=str(rel),
-            c_name=RelInfo.camel_to_snake(name)
+            c_name=RelInfo.camel_to_snake(name),
+            map_name=map_name
         )
         self._read_extends(json_data=json_data, comp=c)
         self._read_full_imports(json_data=json_data, comp=c)
