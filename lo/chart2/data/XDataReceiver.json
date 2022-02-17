@@ -1,0 +1,200 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.21",
+  "libre_office_ver": "7.2",
+  "name": "XDataReceiver",
+  "type": "interface",
+  "namespace": "com.sun.star.chart2.data",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "...uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "...awt.x_request_callback",
+        "XRequestCallback",
+        "XRequestCallback_d4ac0ca2"
+      ],
+      [
+        "...beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
+      ],
+      [
+        ".x_data_provider",
+        "XDataProvider",
+        "XDataProvider_122f0e31"
+      ],
+      [
+        ".x_data_source",
+        "XDataSource",
+        "XDataSource_f6340d57"
+      ],
+      [
+        ".x_range_highlighter",
+        "XRangeHighlighter",
+        "XRangeHighlighter_4e810fc8"
+      ],
+      [
+        "...util.x_number_formats_supplier",
+        "XNumberFormatsSupplier",
+        "XNumberFormatsSupplier_3afb0fb7"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XDataProvider_122f0e31",
+      "XDataSource_f6340d57",
+      "XNumberFormatsSupplier_3afb0fb7",
+      "XRangeHighlighter_4e810fc8",
+      "XRequestCallback_d4ac0ca2",
+      "typing.Tuple[PropertyValue_c9610c73, ...]",
+      "typing.Tuple[str, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[PropertyValue_c9610c73, ...]",
+      "typing.Tuple[str, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.awt.XRequestCallback",
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.chart2.data.XDataProvider",
+        "com.sun.star.chart2.data.XDataSource",
+        "com.sun.star.chart2.data.XRangeHighlighter",
+        "com.sun.star.util.XNumberFormatsSupplier"
+      ]
+    },
+    "name": "XDataReceiver",
+    "imports": [],
+    "namespace": "com.sun.star.chart2.data",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "",
+      "**since**",
+      "",
+      "    LibreOffice 5.4"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1chart2_1_1data_1_1XDataReceiver.html",
+    "items": {
+      "methods": [
+        {
+          "name": "attachDataProvider",
+          "returns": "None",
+          "desc": [
+            "attaches a component that provides data for the document.",
+            "",
+            "The previously set data provider will be released."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xProvider",
+              "XDataProvider_122f0e31",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "attachNumberFormatsSupplier",
+          "returns": "None",
+          "desc": [
+            "attaches an XNumberFormatsSupplier to this XDataReceiver.",
+            "",
+            "The given number formats will be used for display purposes."
+          ],
+          "raises": [],
+          "args": [
+            [
+              "xSupplier",
+              "XNumberFormatsSupplier_3afb0fb7",
+              "in"
+            ]
+          ]
+        },
+        {
+          "name": "getPopupRequest",
+          "returns": "XRequestCallback_d4ac0ca2",
+          "desc": [
+            "A callback object to execute a foreign popup menu window.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 5.4"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getRangeHighlighter",
+          "returns": "XRangeHighlighter_4e810fc8",
+          "desc": [
+            "Returns a component at which a view representing the data of the attached data provider may listen for highlighting the data ranges used by the currently selected objects in the data receiver component.",
+            "",
+            "This is typically used by a spreadsheet to highlight the ranges used by the currently selected object in a chart.",
+            "",
+            "The range highlighter is optional, i.e., this method may return an empty object."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getUsedData",
+          "returns": "XDataSource_f6340d57",
+          "desc": [
+            "Returns the data requested by the most recently attached data provider, that is still used."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getUsedRangeRepresentations",
+          "returns": "typing.Tuple[str, ...]",
+          "desc": [
+            "returns a list of all range strings for which data has been requested by the most recently attached data provider, and which is still used.",
+            "",
+            "This list may be used by the data provider to swap charts out of memory, but still get informed by changes of ranges while the chart is not loaded."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setArguments",
+          "returns": "None",
+          "desc": [],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            [
+              "aArguments",
+              "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "in"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

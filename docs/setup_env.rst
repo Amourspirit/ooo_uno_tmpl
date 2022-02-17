@@ -45,12 +45,12 @@ There are a couple of ways to setup uno for this project after uno has been inst
 
 .. code::
 
-    $ cp '/usr/lib/python3/dist-packages/uno.py' env/lib/python3.7/site-packages/uno.py
+    $ cp '/usr/lib/python3/dist-packages/uno.py' env/lib/python3.10/site-packages/uno.py
 
 2. Link uno file into env subfolder.
 
 .. code::
 
-    $ ln -s '/usr/lib/python3/dist-packages/uno.py' env/lib/python3.7/site-packages/uno.py
+    $ ln -s '/usr/lib/python3/dist-packages/uno.py' env/lib/python3.10/site-packages/uno.py
 
 Linking helps future proof incase of updates.

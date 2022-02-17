@@ -22,7 +22,7 @@ class QryComponent(BaseSql):
         """
         qry_str = """SELECT component.id_component, component.name, component.namespace as ns,
             component.type, component.version, component.lo_ver, component.file, component.c_name,
-            module_detail.sort as sort
+            component.map_name, module_detail.sort as sort
             FROM component
             LEFT JOIN module_detail ON module_detail.id_namespace = component.id_component
             Where component.id_component like :namespace
@@ -96,7 +96,7 @@ class QryComponent(BaseSql):
         """
         qry_str = """SELECT component.id_component, component.name, component.namespace as ns,
             component.type, component.version, component.lo_ver, component.file, component.c_name,
-            module_detail.sort as sort
+            component.map_name, module_detail.sort as sort
             FROM component
             LEFT JOIN module_detail ON module_detail.id_namespace = component.id_component"""
         if search_str:
