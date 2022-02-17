@@ -153,6 +153,7 @@ url-links:
         The following command will compile template and write json data for XInterface into lo/uno dir.
             $ python -m app url-parse interface --write-template --write-json --url https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1uno_1_1XInterface.html
 
+
 Modifying Templates:
     Code generation templates are found in the template directory.
     *.tmpl files are cheetah template files.
@@ -162,6 +163,18 @@ Modifying Templates:
     Any modification to *.tmpl files in the template directory requires
         make to be run on the command line in the template directory.
         Eg: user@user-pc:~/Projects/ooo_uno_tmpl/template$ make
+
+
+Output Other Namespaces:
+    The make command outputs build/lo and build/dyn namesapce and files.
+    There are two other namesapces that are also requilred (csslo and cssdyn).
+    
+    Outputing build/csslo:
+        $ python -m app data star --css-lo
+    
+    Outputing bulid/cssdyn:
+        $ python -m app data star --css-dyn
+
 
 Regeneration of Database:
     'resources/mod_info.sqlite' database is required for templates to build.
@@ -185,6 +198,7 @@ Regeneration of Database:
         python app.py data update --write-all
         Command reads 'data' folder and add/updates database.
         Any preexisting data in the database will be updated.
+
 
 Other Notes:
     The underlying parsers that convert html into json and template are located in 
