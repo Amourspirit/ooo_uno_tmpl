@@ -1,6 +1,5 @@
 # coding: utf-8
 import uno
-import re
 from typing import Dict, Set, Tuple, List, Union
 from _base_json import BaseJson
 from verr import Version
@@ -175,12 +174,14 @@ class BaseStruct(BaseJson):
         default = "def __init__(self, **kwargs) -> None:"
         sorted_names = self.get_sorted_names()
         if len(sorted_names) == 0:
-            self._linfo("Constructor Args — False")
+            self._linfo("Constructor Args — False: No args found")
             return default
         if self.uno_instance is None:
-            self._linfo("Constructor Args — False")
-            return default
-        self._linfo("Constructor Args — True")
+            # could be a generic such as com.sun.star.beans.Pair
+            self._linfo("Constructor Args — False: Not a uno instance")
+            # return default
+        else:
+            self._linfo("Constructor Args — True")
         names = self.get_constructor_args_str()
         if self.is_parent:
             return f"def __init__(self, {names}, **kwargs) -> None:"
@@ -265,6 +266,8 @@ class BaseStruct(BaseJson):
         # imp will be two or three elements
         # last element will match constructor type
         c_types = self.get_constructor_types()
+        if len(c_types) == 0:
+            return False
         el: str = imp[-1:][0]
         # self._linfo(str(el))
         return el in c_types
