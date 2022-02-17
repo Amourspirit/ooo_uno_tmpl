@@ -22,7 +22,7 @@ $ pydoc app
 
 * Install [requirements](docs/setup_env.rst)
 * Activte env: `$ conda activte ./env`
-* run app make: `$ python -m make`
+* run app make: `$ python -m app make`
 * create build/csslo namespace: `$ python -m app data star --css-lo`
 * create build/cssdyn namespace: `$ python -m app data star --css-dyn`
 
