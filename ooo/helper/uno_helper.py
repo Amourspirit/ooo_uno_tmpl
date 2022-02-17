@@ -1,10 +1,10 @@
 # coding: utf-8
 from typing import List, Optional, Tuple, Union
 import uno
+
 StarDesktop=None
 # The ServiceManager of the running OOo.
 # It is cached in a global variable.
-# go_service_manager: Optional[XMultiComponentFactory] = None
 go_service_manager = None
 
 # The CoreReflection object.
@@ -51,18 +51,13 @@ def create_uno_service(clazz: Union[str, object], ctx: object = None, args: Opti
         A service signals that it expects parameters during instantiation by supporting the com.sun.star.lang.XInitialization interface.
         There maybe services which can only be instantiated with parameters
     """
-    is_class = False
     if isinstance(clazz, str):
         _cls = clazz
     elif hasattr(clazz, '__ooo_full_ns__'):
-        # _cls = 'com.sun.star.io.SequenceInputStream'
         _cls = clazz.__ooo_full_ns__
-        is_class = True
     else:
         raise TypeError('create_uno_service() cClass incorrect type')
     return _create_uno_service(clazz=_cls, ctx=ctx, args=args)
-
-# This is the same as ServiceManager.createInstance( ... )
 
 
 def _create_uno_service(clazz: str, ctx: object = None, args: tuple = None) -> object:
@@ -104,15 +99,6 @@ def get_desktop() -> object:
     
     See Also:
         `LibreOffice 7.2 SDK API Desktop Reference <https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1frame_1_1Desktop.html>`_
-    
-    Warning:
-        Method uses "com.sun.star.frame.Desktop" and the
-        `Desktop API <https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1frame_1_1Desktop.html>`_
-        states that it is deprecated.
-        The api suggest; Rather use the 'theDesktop' singleton.
-    
-    Todo:
-        Test if this method would work with 'theDesktop'
     """
     global StarDesktop
     if StarDesktop == None:
@@ -188,8 +174,7 @@ def make_property_value(cName: Optional[str] = None, uValue: object = None, nHan
     See Also:
         `LibreOffice API - PropertyValue Struct Reference <https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1beans_1_1PropertyValue.html>`_
     """
-    oPropertyValue = create_uno_struct(
-        "com.sun.star.beans.PropertyValue")
+    oPropertyValue = create_uno_struct("com.sun.star.beans.PropertyValue")
 
     if cName != None:
         oPropertyValue.Name = cName
@@ -201,9 +186,3 @@ def make_property_value(cName: Optional[str] = None, uValue: object = None, nHan
         oPropertyValue.State = nState
 
     return oPropertyValue
-
-
-
-
-
-
