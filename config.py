@@ -135,6 +135,18 @@ class AppConfig:
     """
     inc_lic: str
     """Path to License Include File"""
+    dyn_ns_import_check: bool
+    """
+    Determines if import checks are done for cssdyn namespace exports
+    
+    Some classes in the cssdyn namespace may not be availible on older version of LO
+    such as ``com.sun.star.util.XBinaryDataContainer`` which is a LO 7.2 interface.
+    If an attempt to import this class in older ver then the entire process will fail
+    Adding import check resolves this issue.
+    
+    Newer releases of this lin can probally turn this off and user can then use previous
+    version for backward compatibility.
+    """
 
 def read_config(config_file: str) -> AppConfig:
     """

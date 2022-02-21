@@ -4,7 +4,7 @@ import logging
 import __main__
 from pathlib import Path
 from .gen_star_ns import GenerateStarNs
-from typing import Dict, Optional, Union
+from typing import Dict, List, Optional, Union
 from data_manage.data_class.component import Component
 from config import AppConfig
 from .opt import WriteNsEnum as WriteNsEnum
@@ -26,6 +26,7 @@ class WriteStarNs:
         self._data = data
         self._config = config
         self._log = log
+        self._dyn_ns_import_check = self._config.dyn_ns_import_check
         root_dir = os.environ.get('project_root', None)
         if root_dir:
             self._root_dir = Path(root_dir)
@@ -65,7 +66,7 @@ class WriteStarNs:
 
     def write(self) -> None:
         """
-        Writes imports for all 'build/uno_obj' (paths set in config.json) files into  css... __init__.py files. 
+        Writes imports for all 'build/lo' (paths set in config.json) files into  css... __init__.py files. 
         """
         self._ensure_init_py()
         header_lines = ['# coding: utf-8']
@@ -74,7 +75,7 @@ class WriteStarNs:
             header_lines.extend(f_lic.read().splitlines())
 
         for ns, c_data in self._data.items():
-            lines = [ln for ln in header_lines]
+            lines = []
             ns_path = ns.removeprefix('com.sun.star.')
             ns_parts = ns_path.split('.')
             if self._rel_import:
@@ -96,13 +97,29 @@ class WriteStarNs:
                 config=self._config, c_data=c_data,
                 write_ns=self._write_ns,  rel_ns=rel_ns)
             lines.extend(gen_star.gen_lines())
-            lines.append('')
-            text = "\n".join(lines)
+            if self._write_ns == WriteNsEnum.CSS_DYN and self._dyn_ns_import_check:
+                text = "\n".join(header_lines)
+                text += '\n'
+                text += self._get_import_check_text(lines)
+            else:
+                lines.append('')
+                all_lines = header_lines + lines
+                text = "\n".join(all_lines)
             with open(write_path, 'w') as f:
                 f.write(text)
             if self._log:
                 rel_path = write_path.relative_to(self._root_dir)
                 self._log.info('Wrote file %s', str(rel_path))
+
+    def _get_import_check_text(self, lines: List[str]) -> str:
+        s = '# all imports are wrapped in try blocks for allowing of backwards compatibility.\n\n'
+        for line in lines:
+            s += "try:\n"
+            s += f"    {line}\n"
+            s += 'except ImportError:\n'
+            s += "    pass\n"
+        return s
+        
 
     def _mkdirp(self, dest_dir: Union[str, Path]):
         """
