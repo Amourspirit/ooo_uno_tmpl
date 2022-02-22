@@ -48,30 +48,20 @@ from $oenv import UNO_ENVIRONMENT, UNO_RUNTIME, UNO_NONE
 
 if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     import uno
-
-    _Uno${safe_name} = uno.getClass("$fullname")
-
-
-    class ${safe_name}(_Uno${safe_name}):
-        __ooo_ns__ = '$namespace'
-        __ooo_full_ns__ = '$fullname'
-        __ooo_type_name__ = 'exception'
-
-        def __new__(cls, *args, **kwargs):
-            return super(${safe_name}, cls).__new__(cls)
-
-        $self.get_dyn_fn(fn_name='__init__')
+ 
+    def _get_class():
+        orig_init = None
+        $self.get_dyn_fn(fn_name='init')
 #if $is_sorted
 #set $sorted_first = $self.get_dyn_constructor_args_lst(add_default=False)[0]
             if getattr($sorted_first, "__class__", None) == self.__class__:
-                super().__init__($sorted_first)
+                orig_init(self, $sorted_first)
                 return
             else:
-                super().__init__()
+                orig_init(self)
 #else
-            super().__init__()
+            orig_init(self)
 #end if
-
 #for $i, $tpl in enumerate($sorted)
 #set $index = tpl[1]
 #set $itm = $properties[$index]
@@ -89,7 +79,18 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
                     setattr(self, k, v)
 #end if
 
+        type_name = '$fullname'
+        ex = uno.getClass(type_name)
+        ex.__ooo_ns__ = '$namespace'
+        ex.__ooo_full_ns__= type_name
+        ex.__ooo_type_name__ = 'exception'
+        orig_init = ex.__init__
+        ex.__init__ = init
+        return ex
+
+    $safe_name = _get_class()
+
 else:
     $self.get_rel_import(in_str=$uno_obj_in, ns=$uno_obj_ns) as $safe_name
 
-__all__ = ['${safe_name}']
+__all__ = ['$safe_name']
