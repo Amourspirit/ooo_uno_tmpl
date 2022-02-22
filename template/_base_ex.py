@@ -9,6 +9,7 @@ class BaseEx(BaseJson):
         self._sorted_key_index = None
         self._uno_instance = None
         self._is_parent = None
+        self._cache = {}
 
 
     def _hydrate_data(self, json_data: dict):
