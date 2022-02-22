@@ -11,30 +11,36 @@ class BaseStructDyn(BaseStruct):
         self.dyn = self.config.dyn_dir
         self.oenv = self.config.env
 
-    def get_dyn_constructor_args_str(self) -> str:
+    def get_dyn_constructor_args_lst(self, add_default: bool) -> List[str]:
+        key = f'get_dyn_constructor_args_lst_{add_default}'
+        if key in self._cache:
+            return self._cache[key]
         sorted_names = self.get_sorted_names()
         d_lst: List[dict] = getattr(self, 'attribs', [])
-        c_str = ''
-        i = 0
+        results = []
         for tpl in sorted_names:
-            if i > 0:
-               c_str += ', '
             index = tpl[1]
             itm: dict = d_lst[index]
-            c_str += self.get_safe_word(itm['name'])
-            c_str += " = UNO_NONE"
-            i += 1
-        return c_str
+            c_str = self.get_safe_word(itm['name'])
+            if add_default:
+                c_str += " = UNO_NONE"
+            results.append(c_str)
+        self._cache[key] = results
+        return self._cache[key]
 
-    def get_dyn_fn(self) -> str:
+    def get_dyn_constructor_args_str(self) -> str:
+        lst = self.get_dyn_constructor_args_lst(add_default=True)
+        return ', '.join(lst)
+
+    def get_dyn_fn(self, fn_name: str = '__init__') -> str:
         sorted_names = self.get_sorted_names()
         if len(sorted_names) == 0:
             self._linfo("Constructor Args — False")
             if self.is_parent:
-                return "def _struct_init(**kwargs):"
-            return "def _struct_init():"
+                return f"def {fn_name}(self, **kwargs):"
+            return f"def {fn_name}():"
         self._linfo("Constructor Args — True")
         names = self.get_dyn_constructor_args_str()
         if self.is_parent:
-            return f"def _struct_init({names}, **kwargs):"
-        return f"def _struct_init({names}):"
+            return f"def {fn_name}(self, {names}, **kwargs):"
+        return f"def {fn_name}(self, {names}):"

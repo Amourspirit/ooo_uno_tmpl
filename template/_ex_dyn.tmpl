@@ -55,7 +55,7 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 #if $is_sorted
 #set $sorted_first = $self.get_dyn_constructor_args_lst(add_default=False)[0]
             if getattr($sorted_first, "__class__", None) == self.__class__:
-                orig_init($sorted_first)
+                orig_init(self, $sorted_first)
                 return
             else:
                 orig_init(self)
