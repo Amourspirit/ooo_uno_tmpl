@@ -234,28 +234,28 @@ import sys
 import argparse
 from typing import Type
 from pathlib import Path
-from data_manage.controller import json_controler
-from data_manage.controller.database_controler import DatabaseControler
-from data_manage.controller.component_controler import ComponentControler
-from data_manage.controller.namespace_controler import NamespaceControler
-from data_manage.controller.module_links_controler import ModuleLinksControler
-from data_manage.controller.star_ns_controller import StarNsControler
-from logger.log_handle import get_logger
-from parser import const as url_parser_const, enm as url_parser_enum, ex as url_parser_ex, xsrc as url_parser_interface, service as url_parser_service, singleton as url_parser_singleton, struc as url_parser_struct, typedef as url_parser_typedef, star as json_parser_star
-from config import AppConfig, read_config
-from parser.json_parser import linkproc
-from runners.touch_files import TouchFiles
-from runners.compile.base_compile import BaseCompile
-from runners.compile.compile_const_links import CompileConstLinks
-from runners.compile.compile_enum_links import CompileEnumLinks
-from runners.compile.compile_ex_lniks import CompileExLinks
-from runners.compile.compile_interface_links import CompileInterfaceLinks
-from runners.compile.compile_service_links import CompileServiceLinks
-from runners.compile.compile_singleton_links import CompileSingletonLinks
-from runners.compile.compile_struct_links import CompileStructLinks
-from runners.compile.compile_typedef_links import CompileTypeDefLinks
-from runners.make import Make
-from runners.data_class import CompileLinkArgs
+from src.data_manage.controller import json_controler
+from src.data_manage.controller.database_controler import DatabaseControler
+from src.data_manage.controller.component_controler import ComponentControler
+from src.data_manage.controller.namespace_controler import NamespaceControler
+from src.data_manage.controller.module_links_controler import ModuleLinksControler
+from src.data_manage.controller.star_ns_controller import StarNsControler
+from src.logger.log_handle import get_logger
+from src.parser import const as url_parser_const, enm as url_parser_enum, ex as url_parser_ex, xsrc as url_parser_interface, service as url_parser_service, singleton as url_parser_singleton, struc as url_parser_struct, typedef as url_parser_typedef, star as json_parser_star
+from src.config import AppConfig, read_config
+from src.parser.json_parser import linkproc
+from src.runners.touch_files import TouchFiles
+from src.runners.compile.base_compile import BaseCompile
+from src.runners.compile.compile_const_links import CompileConstLinks
+from src.runners.compile.compile_enum_links import CompileEnumLinks
+from src.runners.compile.compile_ex_lniks import CompileExLinks
+from src.runners.compile.compile_interface_links import CompileInterfaceLinks
+from src.runners.compile.compile_service_links import CompileServiceLinks
+from src.runners.compile.compile_singleton_links import CompileSingletonLinks
+from src.runners.compile.compile_struct_links import CompileStructLinks
+from src.runners.compile.compile_typedef_links import CompileTypeDefLinks
+from src.runners.make import Make
+from src.runners.data_class import CompileLinkArgs
 # endregion Imports
 
 

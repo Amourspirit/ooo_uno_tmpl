@@ -6,7 +6,6 @@ Process link to star namespace that contains links to modules. Output links to j
 from dataclasses import dataclass
 import sys
 import argparse
-import base
 import re
 import logging
 from typing import Dict, List, Tuple, Union
@@ -14,8 +13,9 @@ from bs4.element import ResultSet, Tag
 from kwhelp.decorator import DecFuncEnum, RuleCheckAllKw, TypeCheckKw, TypeCheck
 from kwhelp import rules
 from pathlib import Path
-from ..logger.log_handle import get_logger
+from . import base
 from . import __version__, JSON_ID
+from ..logger.log_handle import get_logger
 # endregion Imports
 
 # region Logging

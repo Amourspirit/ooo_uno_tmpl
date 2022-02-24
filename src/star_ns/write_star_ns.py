@@ -2,7 +2,7 @@
 import logging
 from pathlib import Path
 from typing import Dict, List, Optional, Union
-from data_manage.data_class.component import Component
+from ..data_manage.data_class.component import Component
 from .gen_star_ns import GenerateStarNs
 from .opt import WriteNsEnum as WriteNsEnum
 from ..config import AppConfig
