@@ -13,8 +13,7 @@ class CompileSingletonLinks(BaseCompile):
         super().__init__(args=args)
         self._do_sub = args.use_sub_process
         if self._do_sub:
-            self._processer = str(
-                Path(self.json_parser_path, 'singleton_parser.py'))
+            self._processer = str(Path(singleton_parser.__file__))
         else:
             self._processer = ''
         if self.args.path:

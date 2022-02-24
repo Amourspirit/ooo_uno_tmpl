@@ -152,6 +152,7 @@ class AppConfig:
     version for backward compatibility.
     """
 
+
 def read_config(config_file: str) -> AppConfig:
     """
     Gets config for given config file

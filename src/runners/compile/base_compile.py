@@ -8,7 +8,6 @@ class BaseCompile(FilesBase):
     def __init__(self, args: CompileLinkArgs) -> None:
         super().__init__(config=args.config)
         self._args = args
-        self._json_parser_path = Path(self._root_dir, 'parser', 'json_parser')
         self._ensure_build_init()
 
     def _ensure_build_init(self) -> None:
