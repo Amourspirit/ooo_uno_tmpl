@@ -17,6 +17,7 @@ from kwhelp.decorator import AcceptedTypes, DecFuncEnum, RequireArgs, TypeCheck,
 from pathlib import Path
 from . import base, __version__, JSON_ID
 from ..logger.log_handle import get_logger
+from ..utilities import util
 # from .base import SummaryInfo, Util
 # endregion Imports
 
@@ -881,7 +882,7 @@ class Writer(base.WriteBase):
             write_path = self._write_path
         else:
             write_path = base.APP_CONFIG.uno_base_dir
-        uno_obj_path = Path(self._path_dir.parent, write_path)
+        uno_obj_path = Path(util.get_root(), write_path)
         name_parts: List[str] = self._p_namespace.split('.')
         # ignore com, sun, star
         path_parts = name_parts[3:]

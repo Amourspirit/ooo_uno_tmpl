@@ -7,6 +7,7 @@ import sys
 import re
 from pathlib import Path
 from typing import Union
+from ..utilities import util
 # from logging.handlers import TimedRotatingFileHandler
 
 FORMATTER = logging.Formatter(
@@ -22,7 +23,8 @@ def _parse_log_options():
     global LOG_FILE, LOG_LEVEL
     if len(sys.argv) <= 1:
         LOG_LEVEL = logging.INFO
-        LOG_FILE = Path(__file__).parent.parent / 'app.log'
+        # LOG_FILE = Path(__file__).parent.parent / 'app.log'
+        LOG_FILE = Path(util.get_root()) / 'app.log'
         return
 
     args_str = " ".join(sys.argv[1:])
@@ -50,7 +52,8 @@ def _parse_log_options():
         return
     except Exception:
         pass
-    LOG_FILE = Path(__file__).parent.parent / "app.log"
+    # LOG_FILE = Path(__file__).parent.parent / "app.log"
+    LOG_FILE = Path(util.get_root()) / 'app.log'
 
 _parse_log_options()
 
@@ -88,7 +91,7 @@ def get_file_handler(log_file: Union[str, Path, None] = None):
     else:
         p_log: Path = log_file
         if isinstance(log_file, str):
-            p_log = Path(Path(__file__).parent.parent, log_file)
+            p_log = Path(Path(util.get_root()), log_file)
         file_handler = logging.FileHandler(p_log)
         file_handler.setFormatter(FORMATTER)
     LOG_FILE_HANDLER = file_handler

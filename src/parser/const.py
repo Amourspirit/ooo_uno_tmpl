@@ -22,6 +22,7 @@ from .base import SoupObj, SummaryInfo
 from ..logger.log_handle import get_logger
 from . import __version__, JSON_ID
 from .mod_type import PythonType
+from ..utilities import util
 # endregion Imports
 
 # region Logger
@@ -1696,7 +1697,7 @@ class ConstWriter(base.WriteBase):
             write_path = self._write_path
         else:
             write_path = base.APP_CONFIG.uno_base_dir
-        uno_obj_path = Path(self._path_dir.parent, write_path)
+        uno_obj_path = Path(util.get_root(), write_path)
         name_parts = self._p_fullname.split('.')
         # ignore com, sun, star
         path_parts = name_parts[3:]

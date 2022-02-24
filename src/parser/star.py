@@ -4,6 +4,7 @@ Process link to star namespace that contains links to modules. Output links to j
 """
 # region Imports
 from dataclasses import dataclass
+import imp
 import sys
 import argparse
 import re
@@ -16,6 +17,7 @@ from pathlib import Path
 from . import base
 from . import __version__, JSON_ID
 from ..logger.log_handle import get_logger
+from ..utilities import util
 # endregion Imports
 
 # region Logging
@@ -248,7 +250,7 @@ class WriteStar:
         key = '_get_path'
         if key in self._cache:
             return self._cache[key]
-        dir_path = Path(self._path_dir.parent, self._dir_name)
+        dir_path = Path(util.get_root(), self._dir_name)
         base.Util.mkdirp(dir_path)
         self._cache[key] = dir_path.joinpath(self._file_name)
         return self._cache[key]
