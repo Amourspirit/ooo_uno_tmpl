@@ -44,48 +44,34 @@ $self.load_data()#slurp
 # Libre Office Version: $libre_office_ver
 #end if
 from typing import TYPE_CHECKING
-from $oenv import UNO_ENVIRONMENT, UNO_RUNTIME, UNO_NONE
+from $oenv import UNO_ENVIRONMENT, UNO_RUNTIME
 
 if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     import uno
- 
     def _get_class():
-        orig_init = None
-        $self.get_dyn_fn(fn_name='init')
 #if $is_sorted
-#set $sorted_first = $self.get_dyn_constructor_args_lst(add_default=False)[0]
-            if getattr($sorted_first, "__class__", None) == self.__class__:
-                orig_init(self, $sorted_first)
+        orig_init = None
+        ordered_keys = ($self.get_nt_names_str())
+        def init(self, *args, **kwargs):
+## set $sorted_first = $self.get_dyn_constructor_args_lst(add_default=False)[0]
+            if len(kwargs) == 0 and len(args) == 1 and getattr(args[0], "__class__", None) == self.__class__:
+                orig_init(self, args[0])
                 return
-            else:
-                orig_init(self)
-#else
-            orig_init(self)
-#end if
-#for $i, $tpl in enumerate($sorted)
-#set $index = tpl[1]
-#set $itm = $properties[$index]
-#set $itm_name = $self.get_safe_word($itm['name'])
-#set $attrib_default = $self.get_attrib_default($itm, True)
-            if not $itm_name is UNO_NONE:
-                if getattr(self, '$itm_name') != $itm_name:
-                    setattr(self, '$itm_name', $itm_name)
-#end for
-#if self.is_parent
-            for k, v in kwargs.items():
-                if v is UNO_NONE:
-                    continue
-                else:
-                    setattr(self, k, v)
-#end if
+            kargs = kwargs.copy()
+            for i, arg in enumerate(args):
+                kargs[ordered_keys[i]] = arg
+            orig_init(self, **kargs)
 
+#end if
         type_name = '$fullname'
         ex = uno.getClass(type_name)
         ex.__ooo_ns__ = '$namespace'
         ex.__ooo_full_ns__= type_name
         ex.__ooo_type_name__ = 'exception'
+#if $is_sorted
         orig_init = ex.__init__
         ex.__init__ = init
+#end if
         return ex
 
     $safe_name = _get_class()
