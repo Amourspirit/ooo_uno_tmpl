@@ -38,7 +38,15 @@ class Make(FilesBase):
                 self._log.info('Deleting %s', str(self._build))
                 shutil.rmtree(str(self._build))
         self._mkdirp(self._build)
+        self._ensure_init(self._build)
         self._make()
+        
+
+    def _ensure_init(self, path: Path):
+        init_file = Path(path, '__init__.py')
+        if not init_file.exists():
+            init_file.touch()
+            self._log.info('Created File: %s', str(init_file))
 
     def _create_sys_links(self, dest: Path):
         # rel = Path('../../template')
@@ -72,7 +80,7 @@ class Make(FilesBase):
         self._make_dyn()
         self._make_tppi()
 
-    # regionn TMPL
+    # region TMPL
     def _compile_tmpl(self, w_info: d_cls.WriteInfo):
         self._log.debug('Compiling file: %s', w_info.file)
         cmd_str = f"cheetah compile --nobackup {w_info.file}"
@@ -115,9 +123,9 @@ class Make(FilesBase):
             pool.map(self._compile_tmpl, c_lst)
         with Pool(processes=self._processes) as pool:
             pool.map(self._write_multi, c_lst)
-    # endregionn TMPL
+    # endregion TMPL
 
-    # regionn DYN
+    # region DYN
 
     def _compile_dyn(self, w_info: d_cls.WriteInfo):
         self._log.debug('Compiling file: %s', w_info.file)
@@ -162,7 +170,7 @@ class Make(FilesBase):
             pool.map(self._compile_dyn, c_lst)
         with Pool(processes=self._processes) as pool:
             pool.map(self._write_multi, c_lst)
-    # endregionn DYN
+    # endregion DYN
 
     # region TPPI
 
