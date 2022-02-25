@@ -312,7 +312,8 @@ def _main():
     # ns = 'com.sun.star.text.TextRange'
     # args = 'data db-json -n com.sun.star.form.control.GridControl'
     url = 'https://api.libreoffice.org/docs/idl/ref/exceptioncom_1_1sun_1_1star_1_1uno_1_1Exception.html'
-    args = 'compile singleton -a --data'
+    # args = 'compile singleton -a --data'
+    args = 'link-json mod-links -r -j -a --data'
     # args += url
     sys.argv.extend(args.split())
     main()
@@ -1624,6 +1625,6 @@ def main():
 
 if __name__ == '__main__':
     # _touch()
-    _main()
+        main()
 
 # endregion Main

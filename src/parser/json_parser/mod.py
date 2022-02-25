@@ -20,6 +20,7 @@ from kwhelp import rules
 from pathlib import Path
 from ...logger.log_handle import get_logger
 from ...parser import __version__, JSON_ID, base
+from ...utilities import util
 # try:
 #     import base
 # except ModuleNotFoundError:
@@ -484,7 +485,7 @@ class WriterMod():
             write_path = self._write_path
         else:
             write_path = base.APP_CONFIG.uno_base_dir
-        uno_obj_path = Path(self._path_dir.parent.parent, write_path)
+        uno_obj_path = Path(util.get_root(), write_path)
         name_parts: List[str] = self._parser.api_data.url_obj.namespace
         # ignore com, sun, star
         path_parts = name_parts[3:]
@@ -577,7 +578,8 @@ def parse(**kwargs):
     _write_path = kwargs.get('write_path', None)
     _verbose = bool(kwargs.get('verbose', False))
     _recursive = bool(kwargs.get('recursive', False))
-    _log_file = str(kwargs.get('log_file', 'mod.log'))
+    _log_file = 'mod.log' if kwargs.get(
+        'log_file', None) is None else str(kwargs.get('log_file'))
 
     if logger is None:
         log_args = {}

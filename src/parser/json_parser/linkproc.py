@@ -49,7 +49,7 @@ class ParserLinks:
     def _load_json(self):
         j_p = Path(self._json_path)
         if not j_p.is_absolute():
-            j_p = Path(Path(__file__).parent.parent, j_p)
+            j_p = Path(Path(util.get_root()), j_p)
         if not j_p.exists():
             msg = f"Unable to find json file: '{self._json_path}'"
             logger.error(msg)
@@ -132,7 +132,11 @@ class WriterLinks:
     def Write(self, **kwargs):
         links = self._parser.get_links()
         # for lnk in links:
-        #     self._process_direct(lnk,*args, **kwargs)
+        #     state, name  = self._process_direct(lnk, **kwargs)
+        #     if state:
+        #         logger.info(f"Success processing: {name}")
+        #     else:
+        #         logger.error(f"Failed processing: {name}")
         # return
         with concurrent.futures.ProcessPoolExecutor() as executor:
             results = [executor.submit(self._process_direct, link, **kwargs)
@@ -203,7 +207,8 @@ def parse(**kwargs):
     """
     global logger
     json_file = str(Path(util.get_root(), 'resources', 'star.json'))
-    _log_file = str(kwargs.get('log_file', 'linkproc.log'))
+    _log_file = 'linkproc.log' if kwargs.get(
+        'log_file', None) is None else str(kwargs.get('log_file'))
     _verbose = bool(kwargs.get('verbose', False))
 
     if logger is None:
