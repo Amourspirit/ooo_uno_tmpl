@@ -9,7 +9,7 @@ from rel import mod_rel as RelInfo
 
 def get_module_types(build_dir = None) -> dict:
     if build_dir is None:
-        build_dir = ['build', 'lo']
+        build_dir = ['ooobuild', 'lo']
     uno_obj_dir_name = 'lo'
     s_uno_obj = str(Path(*build_dir)).replace(os.sep, '.')
     module_links_file = 'module_links.json'

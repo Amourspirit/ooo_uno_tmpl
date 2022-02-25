@@ -234,28 +234,28 @@ import sys
 import argparse
 from typing import Type
 from pathlib import Path
-from data_manage.controller import json_controler
-from data_manage.controller.database_controler import DatabaseControler
-from data_manage.controller.component_controler import ComponentControler
-from data_manage.controller.namespace_controler import NamespaceControler
-from data_manage.controller.module_links_controler import ModuleLinksControler
-from data_manage.controller.star_ns_controller import StarNsControler
-from logger.log_handle import get_logger
-from parser import const as url_parser_const, enm as url_parser_enum, ex as url_parser_ex, xsrc as url_parser_interface, service as url_parser_service, singleton as url_parser_singleton, struc as url_parser_struct, typedef as url_parser_typedef, star as json_parser_star
-from config import AppConfig, read_config
-from parser.json_parser import linkproc
-from runners.touch_files import TouchFiles
-from runners.compile.base_compile import BaseCompile
-from runners.compile.compile_const_links import CompileConstLinks
-from runners.compile.compile_enum_links import CompileEnumLinks
-from runners.compile.compile_ex_lniks import CompileExLinks
-from runners.compile.compile_interface_links import CompileInterfaceLinks
-from runners.compile.compile_service_links import CompileServiceLinks
-from runners.compile.compile_singleton_links import CompileSingletonLinks
-from runners.compile.compile_struct_links import CompileStructLinks
-from runners.compile.compile_typedef_links import CompileTypeDefLinks
-from runners.make import Make
-from runners.data_class import CompileLinkArgs
+from src.data_manage.controller import json_controler
+from src.data_manage.controller.database_controler import DatabaseControler
+from src.data_manage.controller.component_controler import ComponentControler
+from src.data_manage.controller.namespace_controler import NamespaceControler
+from src.data_manage.controller.module_links_controler import ModuleLinksControler
+from src.data_manage.controller.star_ns_controller import StarNsControler
+from src.logger.log_handle import get_logger
+from src.parser import const as url_parser_const, enm as url_parser_enum, ex as url_parser_ex, xsrc as url_parser_interface, service as url_parser_service, singleton as url_parser_singleton, struc as url_parser_struct, typedef as url_parser_typedef, star as json_parser_star
+from src.cfg.config import AppConfig, read_config_default
+from src.parser.json_parser import linkproc
+from src.runners.touch_files import TouchFiles
+from src.runners.compile.base_compile import BaseCompile
+from src.runners.compile.compile_const_links import CompileConstLinks
+from src.runners.compile.compile_enum_links import CompileEnumLinks
+from src.runners.compile.compile_ex_lniks import CompileExLinks
+from src.runners.compile.compile_interface_links import CompileInterfaceLinks
+from src.runners.compile.compile_service_links import CompileServiceLinks
+from src.runners.compile.compile_singleton_links import CompileSingletonLinks
+from src.runners.compile.compile_struct_links import CompileStructLinks
+from src.runners.compile.compile_typedef_links import CompileTypeDefLinks
+from src.runners.make import Make
+from src.runners.data_class import CompileLinkArgs
 # endregion Imports
 
 
@@ -312,8 +312,9 @@ def _main():
     # ns = 'com.sun.star.text.TextRange'
     # args = 'data db-json -n com.sun.star.form.control.GridControl'
     url = 'https://api.libreoffice.org/docs/idl/ref/exceptioncom_1_1sun_1_1star_1_1uno_1_1Exception.html'
-    args = 'url-parse exception -s -t -j -u '
-    args += url
+    # args = 'compile singleton -a --data'
+    args = 'link-json mod-links -r -j -a --data'
+    # args += url
     sys.argv.extend(args.split())
     main()
 
@@ -420,13 +421,13 @@ def _args_links_general(parser: argparse.ArgumentParser, name: str) -> None:
         action='store_true',
         dest='write_data_dir',
         default=False)
-    parser.add_argument(
-        '-u', '--run-as-cmdline',
-        help='Run as command line suprocess. Default False',
-        action='store_true',
-        dest='cmd_line_process',
-        default=False
-    )
+    # parser.add_argument(
+    #     '-u', '--run-as-cmdline',
+    #     help='Run as command line suprocess. Default False',
+    #     action='store_true',
+    #     dest='cmd_line_process',
+    #     default=False
+    # )
 
 def _args_links_ex(parser: argparse.ArgumentParser) -> None:
     _args_links_general(parser=parser, name='exceptions')
@@ -533,13 +534,13 @@ def _args_links_batch(parser: argparse.ArgumentParser) -> None:
         dest='all_typedef',
         default=False
     )
-    parser.add_argument(
-        '-u', '--run-as-cmdline',
-        help='Run as command line suprocess. Default False',
-        action='store_true',
-        dest='cmd_line_process',
-        default=False
-    )
+    # parser.add_argument(
+    #     '-u', '--run-as-cmdline',
+    #     help='Run as command line suprocess. Default False',
+    #     action='store_true',
+    #     dest='cmd_line_process',
+    #     default=False
+    # )
 # endregion     Compile Links
 # region        Touch Parser
 
@@ -967,11 +968,11 @@ def _args_general(parser: argparse.ArgumentParser) -> None:
 
 def _get_compile_args(args: argparse.Namespace, config: AppConfig) -> CompileLinkArgs:
     path = getattr(args, 'path', None)
-    cmd_line_process = getattr(args, 'cmd_line_process', True)
+    # cmd_line_process = getattr(args, 'cmd_line_process', True)
     c_args = CompileLinkArgs(
         config=config,
         path=path,
-        use_sub_process=cmd_line_process,
+        use_sub_process=False,
         log=logger
     )
     return c_args
@@ -994,7 +995,7 @@ def _args_action_make(args: argparse.Namespace, config: AppConfig) -> None:
 def _args_action_compile_links(args: argparse.Namespace, compiler: Type[BaseCompile], config: AppConfig) -> None:
     _log_start_action()
     c_args = _get_compile_args(args=args, config=config)
-    c_args.use_sub_process = args.cmd_line_process
+    c_args.use_sub_process = False # args.cmd_line_process
     if args.write_data_dir:
         c_args.out_dir = config.data_dir
         c_args.write_template = False
@@ -1438,7 +1439,7 @@ def _args_process_cmd(args: argparse.Namespace, config: AppConfig) -> None:
 def main():
     global logger
     # region Config
-    config = read_config('./config.json')
+    config = read_config_default()
     os.environ['config_cache_dir'] = config.cache_dir
     os.environ['config_cache_duration'] = str(config.cache_duration)
     os.environ['project_root'] = str(Path(__file__).parent)
@@ -1624,6 +1625,6 @@ def main():
 
 if __name__ == '__main__':
     # _touch()
-    main()
+        main()
 
 # endregion Main

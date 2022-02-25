@@ -5,7 +5,7 @@ import os
 import sys
 from pathlib import Path
 sys.path.append(os.path.realpath('.'))
-from logger.log_handle import get_logger
+from src.logger.log_handle import get_logger
 
 @pytest.fixture(scope='session')
 def test_log():
@@ -15,10 +15,6 @@ def test_log():
 @pytest.fixture(scope="session")
 def scrtch_uno_path() -> Path:
     return Path('scratch') / 'uno_obj'
-
-@pytest.fixture(scope='session')
-def app_root() -> Path:
-    return Path(__file__).parent.parent
 
 
 

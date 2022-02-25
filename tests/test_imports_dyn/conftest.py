@@ -7,7 +7,7 @@ from tests.mod_types import get_module_types
 sys.path.append(os.path.realpath('.'))
 
 
-MODULE_TYPES = get_module_types(build_dir=['build', 'dyn'])
+MODULE_TYPES = get_module_types(build_dir=['ooobuild', 'dyn'])
 
 def pytest_generate_tests(metafunc):
     if metafunc.function.__name__ == "test_imp_singleton" and "singlton_data" in dir(metafunc.module):

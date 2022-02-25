@@ -7,7 +7,7 @@ if __name__ == "__main__":
     # sys.path.append(os.path.realpath('..'))
     pytest.main([__file__])
 
-import parser.mod_type as tm
+import src.parser.mod_type as tm
 
 
 def test_rule_primative():
