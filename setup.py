@@ -12,9 +12,14 @@ HERE = pathlib.Path(__file__).parent
 with open(HERE / "src" / "README.rst") as fh:
     README = fh.read()
 
-PACKAGES = find_packages('src', exclude=[
+# PACKAGES = find_packages('src', exclude=[
+#     '*.tests',
+#     '*.tests.*'])
+PACKAGES = ['src']
+found_pkg = find_packages('src', exclude=[
     '*.tests',
     '*.tests.*'])
+PACKAGES.extend(['src/' +pkg for pkg in found_pkg])
 # PACKAGES = list(os.walk(str(HERE / 'src')))
 
 
@@ -30,7 +35,7 @@ setup(
     author=":Barry-Thomas-Paul: Moss",
     author_email='bigbytetech@gmail.com',
     license="Apache",
-    package_dir={'': 'src'},
+    # package_dir={'mypackage': 'src'},
     packages=PACKAGES,
     keywords=['ooouno', 'uno', 'libreoffice', 'openoffice', 'pyuno'],
     classifiers=[

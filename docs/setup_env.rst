@@ -41,16 +41,28 @@ uno in env
 
 There are a couple of ways to setup uno for this project after uno has been install on system.
 
+Manual
+++++++
+
 1. Copy uno file into env subfolder.
 
-.. code::
+    .. code::
 
-    $ cp '/usr/lib/python3/dist-packages/uno.py' env/lib/python3.10/site-packages/uno.py
+        $ cp '/usr/lib/python3/dist-packages/uno.py' env/lib/python3.10/site-packages/uno.py
 
 2. Link uno file into env subfolder.
 
-.. code::
+    .. code::
 
-    $ ln -s '/usr/lib/python3/dist-packages/uno.py' env/lib/python3.10/site-packages/uno.py
+        $ ln -s '/usr/lib/python3/dist-packages/uno.py' env/lib/python3.10/site-packages/uno.py
 
 Linking helps future proof incase of updates.
+
+Automatic
++++++++++
+
+Script ``app_cmd/run_uno_lnk.py`` can be used to create these links.
+
+    .. code::
+
+        $ python app_cmd/run_uno_lnk.py
