@@ -421,13 +421,13 @@ def _args_links_general(parser: argparse.ArgumentParser, name: str) -> None:
         action='store_true',
         dest='write_data_dir',
         default=False)
-    parser.add_argument(
-        '-u', '--run-as-cmdline',
-        help='Run as command line suprocess. Default False',
-        action='store_true',
-        dest='cmd_line_process',
-        default=False
-    )
+    # parser.add_argument(
+    #     '-u', '--run-as-cmdline',
+    #     help='Run as command line suprocess. Default False',
+    #     action='store_true',
+    #     dest='cmd_line_process',
+    #     default=False
+    # )
 
 def _args_links_ex(parser: argparse.ArgumentParser) -> None:
     _args_links_general(parser=parser, name='exceptions')
@@ -534,13 +534,13 @@ def _args_links_batch(parser: argparse.ArgumentParser) -> None:
         dest='all_typedef',
         default=False
     )
-    parser.add_argument(
-        '-u', '--run-as-cmdline',
-        help='Run as command line suprocess. Default False',
-        action='store_true',
-        dest='cmd_line_process',
-        default=False
-    )
+    # parser.add_argument(
+    #     '-u', '--run-as-cmdline',
+    #     help='Run as command line suprocess. Default False',
+    #     action='store_true',
+    #     dest='cmd_line_process',
+    #     default=False
+    # )
 # endregion     Compile Links
 # region        Touch Parser
 
@@ -968,11 +968,11 @@ def _args_general(parser: argparse.ArgumentParser) -> None:
 
 def _get_compile_args(args: argparse.Namespace, config: AppConfig) -> CompileLinkArgs:
     path = getattr(args, 'path', None)
-    cmd_line_process = getattr(args, 'cmd_line_process', True)
+    # cmd_line_process = getattr(args, 'cmd_line_process', True)
     c_args = CompileLinkArgs(
         config=config,
         path=path,
-        use_sub_process=cmd_line_process,
+        use_sub_process=False,
         log=logger
     )
     return c_args
@@ -995,7 +995,7 @@ def _args_action_make(args: argparse.Namespace, config: AppConfig) -> None:
 def _args_action_compile_links(args: argparse.Namespace, compiler: Type[BaseCompile], config: AppConfig) -> None:
     _log_start_action()
     c_args = _get_compile_args(args=args, config=config)
-    c_args.use_sub_process = args.cmd_line_process
+    c_args.use_sub_process = False # args.cmd_line_process
     if args.write_data_dir:
         c_args.out_dir = config.data_dir
         c_args.write_template = False
