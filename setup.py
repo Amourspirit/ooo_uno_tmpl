@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 import pathlib
-import os
 from setuptools import setup, find_packages
 from src.parser import __version__
 PKG_NAME = 'oootmpl'
@@ -14,17 +13,6 @@ with open(HERE / "src" / "README.rst") as fh:
     README = fh.read()
 
 PACKAGES = find_packages('src', exclude=[
-    'ooobuild/',
-    'ooobuild',
-    'ooodata',
-    'ooo'
-    'lo'
-    'resources'
-    'tmp',
-    'template',
-    'env',
-    'app_cmd',
-    'docs',
     '*.tests',
     '*.tests.*'])
 # PACKAGES = list(os.walk(str(HERE / 'src')))
