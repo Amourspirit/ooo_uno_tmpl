@@ -4,7 +4,6 @@ import json
 from dataclasses import dataclass
 from pathlib import Path
 from typing import List
-import __main__
 
 @dataclass
 class AppConfig:
@@ -174,10 +173,6 @@ def read_config_default() -> AppConfig:
     Returns:
         AppConfig: Configuration Object
     """
-    root_dir = os.environ.get('project_root', None)
-    if root_dir:
-        root = Path(root_dir)
-    else:
-        root = Path(__main__.__file__).parent
+    root = Path(__file__).parent
     config_file = Path(root, 'config.json')
     return read_config(str(config_file))
