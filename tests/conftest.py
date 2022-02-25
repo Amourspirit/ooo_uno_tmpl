@@ -16,9 +16,5 @@ def test_log():
 def scrtch_uno_path() -> Path:
     return Path('scratch') / 'uno_obj'
 
-@pytest.fixture(scope='session')
-def app_root() -> Path:
-    return Path(__file__).parent.parent
-
 
 
