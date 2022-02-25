@@ -1,6 +1,6 @@
 # coding: utf-8
 from typing import Any
-from ...config import AppConfig
+from ...cfg.config import AppConfig
 from ..parse.parse_module_links import ParseModuleLinks
 from ..db_class.init_db import InitDb
 

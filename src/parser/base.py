@@ -37,7 +37,7 @@ from datetime import datetime, timezone
 from ..utilities import util
 from rel import mod_rel as RelInfo
 from . import mod_type as ModType
-from ..config import AppConfig, read_config_default
+from ..cfg.config import AppConfig, read_config_default
 APP_ROOT: str = util.get_root()
 util.set_os_root_path()
 # endregion imports

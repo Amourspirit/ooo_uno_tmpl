@@ -1,6 +1,6 @@
 # coding: utf-8
 from typing import Any
-from ...config import AppConfig
+from ...cfg.config import AppConfig
 from ..parse.parse_module_json import ParseModuleJson
 
 class ComponentControler:

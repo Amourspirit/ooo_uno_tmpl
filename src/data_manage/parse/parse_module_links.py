@@ -6,7 +6,7 @@ import re
 from pathlib import Path
 from typing import List, Dict, Set
 from collections import namedtuple
-from ...config import AppConfig
+from ...cfg.config import AppConfig
 from ..data_class.module_detail import ModuleDetail
 from ..data_class.module_info import ModuleInfo
 from ..db_class.db_connect import DbConnect

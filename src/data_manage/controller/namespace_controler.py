@@ -4,7 +4,7 @@ import textwrap
 from rel import mod_rel as RelInfo
 from tabulate import tabulate
 from dataclasses import astuple, asdict, fields
-from ...config import AppConfig
+from ...cfg.config import AppConfig
 from ..db_class.db_connect import DbConnect
 from ..db_class.qry_ns_imports import QryNsImports
 from ..data_class.namespace_tree import NamespaceTree

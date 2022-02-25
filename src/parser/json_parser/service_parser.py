@@ -5,10 +5,9 @@ Module reads a json file of links that contain links to enum pages
 This module then parses each link and calls the correct module to process each link.
 """
 # region imports
-import os
 import sys
 import logging
-from typing import Callable, Dict, List, Tuple, Union
+from typing import Callable, Dict, Union
 from pathlib import Path
 from verr import Version
 from ...parser import base, service

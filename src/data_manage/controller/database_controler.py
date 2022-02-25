@@ -1,5 +1,5 @@
 # coding: utf-8
-from ...config import AppConfig
+from ...cfg.config import AppConfig
 from ..parse.parse_module_links import ParseModuleLinks
 from ..db_class.init_db import InitDb
 from ..db_class.db_connect import DbConnect

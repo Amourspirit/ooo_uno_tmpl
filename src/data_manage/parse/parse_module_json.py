@@ -6,7 +6,7 @@ import hashlib
 from pathlib import Path
 from typing import List, Dict
 from rel import mod_rel as RelInfo
-from ...config import AppConfig
+from ...cfg.config import AppConfig
 from ..data_class.extend import Extend
 from ..data_class.component import Component
 from ..data_class.full_import import FullImport

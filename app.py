@@ -242,7 +242,7 @@ from src.data_manage.controller.module_links_controler import ModuleLinksControl
 from src.data_manage.controller.star_ns_controller import StarNsControler
 from src.logger.log_handle import get_logger
 from src.parser import const as url_parser_const, enm as url_parser_enum, ex as url_parser_ex, xsrc as url_parser_interface, service as url_parser_service, singleton as url_parser_singleton, struc as url_parser_struct, typedef as url_parser_typedef, star as json_parser_star
-from src.config import AppConfig, read_config_default
+from src.cfg.config import AppConfig, read_config_default
 from src.parser.json_parser import linkproc
 from src.runners.touch_files import TouchFiles
 from src.runners.compile.base_compile import BaseCompile

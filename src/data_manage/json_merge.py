@@ -7,7 +7,7 @@ import json
 from pathlib import Path
 from typing import Dict, List, Set
 from rel import mod_rel as RelInfo
-from ..config import AppConfig
+from ..cfg.config import AppConfig
 from .db_class.db_connect import DbConnect
 from .db_class.qry_extends import QryExtends
 from .db_class.qry_ns_imports import QryNsImports

@@ -13,7 +13,7 @@ from pathlib import Path
 from . import compare as comp
 from . import data_class as d_cls
 from .file_base import FilesBase
-from ..config import AppConfig
+from ..cfg.config import AppConfig
 from ..utilities import util
 # endregion Imports
 

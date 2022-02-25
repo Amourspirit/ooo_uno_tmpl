@@ -6,7 +6,7 @@ import re
 import glob
 from typing import Optional, Set
 from pathlib import Path
-from ..config import AppConfig
+from ..cfg.config import AppConfig
 from ..utilities import util
 # endregion Imports
 

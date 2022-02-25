@@ -4,7 +4,7 @@ from typing import Any, Union
 from ..db_class.qry_component import QryComponent
 from ..db_class.db_connect import DbConnect
 from ...star_ns.write_star_ns import WriteStarNs, WriteNsEnum
-from ...config import AppConfig
+from ...cfg.config import AppConfig
 
 
 class StarNsControler:

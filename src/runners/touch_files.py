@@ -6,7 +6,7 @@ import tempfile
 from pathlib import Path
 from typing import List
 from .file_base import FilesBase
-from ..config import AppConfig
+from ..cfg.config import AppConfig
 from ..parser.json_parser.interface_parser import Parser as ParserInterface
 from ..parser.json_parser.singleton_parser import Parser as ParserSingleton
 from ..parser.json_parser.service_parser import Parser as ParserService

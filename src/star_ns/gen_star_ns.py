@@ -3,7 +3,7 @@ from typing import List, Optional
 from rel import mod_rel as RelInfo
 from .opt import WriteNsEnum
 from ..data_manage.data_class.component import Component
-from ..config import AppConfig
+from ..cfg.config import AppConfig
 
 
 class GenerateStarNs:

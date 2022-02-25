@@ -1,7 +1,7 @@
 # coding: utf-8
 import os
 from pathlib import Path
-from ...config import AppConfig
+from ...cfg.config import AppConfig
 
 
 class DbConnect:

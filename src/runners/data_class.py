@@ -3,7 +3,7 @@ import logging
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Optional
-from ..config import AppConfig
+from ..cfg.config import AppConfig
 # region Data Class
 
 

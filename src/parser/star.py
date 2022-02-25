@@ -4,7 +4,6 @@ Process link to star namespace that contains links to modules. Output links to j
 """
 # region Imports
 from dataclasses import dataclass
-import imp
 import sys
 import argparse
 import re

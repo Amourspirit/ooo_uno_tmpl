@@ -1,6 +1,6 @@
 # coding: utf-8
 from typing import Any, Union
-from ...config import AppConfig
+from ...cfg.config import AppConfig
 from ..json_merge import JsonMerge
 from ..util import Util
 
