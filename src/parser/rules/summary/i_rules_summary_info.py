@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from ...dataclass.summary_info import SummaryInfo
-
+from .i_rule_summary_info import IRuleSummaryInfo
 
 class IRulesSummaryInfo(ABC):
     @abstractmethod

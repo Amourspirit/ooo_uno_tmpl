@@ -1,6 +1,7 @@
 # coding: utf-8
-from ...dataclass.name_info import NameInfo
+from .i_rule_name import IRuleName
 from .i_rules_name import IRulesName
+from ...dataclass.name_info import NameInfo
 from ...common.util import Util
 
 

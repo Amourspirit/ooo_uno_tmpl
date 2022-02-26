@@ -1,5 +1,5 @@
 # coding: utf-8
-from typing import List, Dict
+from typing import List, Dict, Set
 from ...dataclass.area import Area
 from ...dataclass.area_info import AreaInfo
 from .i_rules_area import IRulesArea

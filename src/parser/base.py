@@ -34,71 +34,10 @@ def _set_loggers(l: Union[logging.Logger, None]):
 
 # endregion Logger
 
-
-# region CONST
-
-_KNOWN_EXTENDS: Dict[str, List[str]] = None
-_KNOWN_JSON: Dict[str, List[str]] = None
-# endregion CONST
-
-
-# region regex
-pattern_id = re.compile(r'[a-z0-9]{28,38}')
-# endregion regex
-
-# region Known Extends
-
-
-def get_known_extends(ns: str, class_name: str) -> Union[List['Ns'], None]:
-    global _KNOWN_EXTENDS
-    key = ns + '.' + class_name
-    if _KNOWN_EXTENDS is None:
-        json_file = Path(__file__).parent / 'config' / 'known_extends.json'
-        with open(json_file, 'r') as file:
-            _KNOWN_EXTENDS = json.load(file)
-    if not key in _KNOWN_EXTENDS:
-        return None
-    results = []
-    known = _KNOWN_EXTENDS[key]
-    for s in known:
-        parts = s.rsplit(sep='.', maxsplit=1)
-        if parts[1] == '_':
-            # python import such as Exception
-            results.append(Ns(name=parts[0], namespace='', python_import=True))
-        else:
-            results.append(Ns(name=parts[1], namespace=parts[0]))
-    return results
-
-# endregion Known Extends
-
-# region Known Extends
-
-
-def get_known_json(full_ns: str) -> Union[str, None]:
-    global _KNOWN_JSON
-    key = full_ns
-    if _KNOWN_JSON is None:
-        json_file = Path(__file__).parent / 'config' / 'known_json.json'
-        with open(json_file, 'r') as file:
-            _KNOWN_JSON = json.load(file)
-    if not key in _KNOWN_JSON:
-        return None
-    file = _KNOWN_JSON[full_ns]
-    json_file = Path(APP_ROOT) / 'parser' / 'known_json' / file
-    with open(json_file, 'r') as file:
-        j_data = json.load(file)
-    return Util.get_formated_dict_list_str(j_data, indent=2)
-
-# endregion Known Extends
-
-
 # region Exceptions
-
-
 class RequiredError(Exception):
     """Error for required"""
 # endregion Exceptions
-
 
 # region Writer/parser base
 

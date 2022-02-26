@@ -13,7 +13,7 @@ from pathlib import Path
 from datetime import datetime, timezone
 from rel import mod_rel as RelInfo
 from . import log_load
-from .constants import URL_SPLIT
+from ..common.constants import TYPE_MAP, TYPE_MAP_EX, URL_SPLIT
 from .. import mod_type as ModType
 from ..dataclass.name_info import NameInfo
 # region Logger

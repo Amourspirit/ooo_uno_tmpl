@@ -1,10 +1,11 @@
 # coding: utf-8
 from abc import ABC, abstractmethod
 from ...dataclass.name_info import NameInfo
+from .i_rules_name import IRulesName
 
 class IRuleName(ABC):
     @abstractmethod
-    def __init__(self, rules: 'IRulesName') -> None:
+    def __init__(self, rules: IRulesName) -> None:
         """Constructor"""
 
     @abstractmethod
