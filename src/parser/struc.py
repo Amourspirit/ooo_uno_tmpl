@@ -17,6 +17,7 @@ from . import base, __version__, JSON_ID
 from .api.api_namespace import ApiNamespace
 from .api.api_data import APIData
 from .common.config import APP_CONFIG
+from .common import log_load
 from .common.util import Util
 from .dataclass.summary_info import SummaryInfo
 from .rules.name.i_rules_name import IRulesName
@@ -33,9 +34,9 @@ logger = None
 
 
 def _set_loggers(l: Union[logging.Logger, None]):
-    global logger, base
+    global logger
     logger = l
-    base.logger = l
+    log_load.set_logger(l)
 
 
 _set_loggers(None)

@@ -1,14 +1,8 @@
 # coding: utf-8
 """
 Base classes and helper functions of various types that are used with different parsers.
-Module logger must be set before calling any class or function.
-eg: import base
-    base.logger = mylogger
 """
 # region imports
-import re
-import json
-import logging
 
 from bs4 import BeautifulSoup
 from bs4.element import ResultSet, Tag
@@ -16,23 +10,12 @@ from glob import glob
 from kwhelp.decorator import DecFuncEnum, RequireArgs, RuleCheckAllKw
 from kwhelp import rules
 from pathlib import Path
-from typing import Dict, List,Union
+from typing import List,Union
 from .common.constants import URL_SPLIT as URL_SPLIT, APP_ROOT as APP_ROOT
 from .common.config import APP_CONFIG as APP_CONFIG
-from .dataclass.ns import Ns
 from .common.util import Util as Util, str_clean
 from .web.response_obj import ResponseObj
 # endregion imports
-
-# region Logger
-logger: logging.Logger = None
-
-
-def _set_loggers(l: Union[logging.Logger, None]):
-    global logger
-    logger = l
-
-# endregion Logger
 
 # region Exceptions
 class RequiredError(Exception):
@@ -40,8 +23,6 @@ class RequiredError(Exception):
 # endregion Exceptions
 
 # region Writer/parser base
-
-
 class WriteBase(object):
     def __init__(self, **kwargs):
         pass

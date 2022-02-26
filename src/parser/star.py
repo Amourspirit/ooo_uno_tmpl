@@ -17,6 +17,7 @@ from . import base
 from . import __version__, JSON_ID
 from .common.util import Util
 from .common.config import APP_CONFIG
+from .common import log_load
 from .web.block_obj import BlockObj
 from .web.soup_obj import SoupObj
 from .web.url_obj import UrlObj
@@ -29,9 +30,9 @@ logger:logging.Logger = None
 
 
 def _set_loggers(l: Union[logging.Logger, None]):
-    global logger, base
+    global logger
     logger = l
-    base.logger = l
+    log_load.set_logger(l)
 
 
 _set_loggers(None)

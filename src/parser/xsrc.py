@@ -22,14 +22,14 @@ from .api.api_desc_detail import ApiDescDetail
 from .api.api_proto_block import ApiProtoBlock
 from .api.api_namespace import ApiNamespace
 from .common.config import APP_CONFIG
-from .common.util import Util
+from .common import log_load
 from .common import known
+from .common.util import Util
 from .dataclass.summary_info import SummaryInfo
 from .dataclass.import_info import ImportInfo
 from .web.soup_obj import SoupObj
 from ..logger.log_handle import get_logger
 from ..utilities import util as mutil
-# from .base import SummaryInfo, Util
 # endregion Imports
 
 # region Logger
@@ -39,7 +39,7 @@ logger = None
 def _set_loggers(l: Union[logging.Logger, None]):
     global logger
     logger = l
-    base._set_loggers(l)
+    log_load.set_logger(l)
 
 
 _set_loggers(None)

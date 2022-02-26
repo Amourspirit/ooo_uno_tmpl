@@ -27,6 +27,7 @@ from .api.api_desc_detail import ApiDescDetail
 from .api.api_summary_block import ApiSummaryBlock
 from .api.api_summary_rows import ApiSummaryRows
 from .common.config import APP_CONFIG
+from .common import log_load
 from .common.util import Util
 from .dataclass.name_info import NameInfo
 from .web.block_obj import BlockObj
@@ -42,9 +43,9 @@ logger = None
 
 
 def _set_loggers(l: Union[logging.Logger, None]):
-    global logger, base
+    global logger
     logger = l
-    base.logger = l
+    log_load.set_logger(l)
 
 
 _set_loggers(None)

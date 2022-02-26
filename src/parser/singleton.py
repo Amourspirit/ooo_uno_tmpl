@@ -8,7 +8,7 @@ import sys
 import logging
 from pathlib import Path
 from typing import Union
-from . import base, xsrc
+from . import xsrc
 from .common.config import APP_CONFIG
 from ..logger.log_handle import get_logger
 
@@ -18,7 +18,6 @@ logger = None
 def _set_loggers(l: Union[logging.Logger, None]):
     global logger
     logger = l
-    base._set_loggers(l)
     xsrc._set_loggers(l)
 
 

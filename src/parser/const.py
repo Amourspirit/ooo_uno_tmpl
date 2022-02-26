@@ -33,6 +33,7 @@ from .api.api_data import APIData
 from .web.soup_obj import SoupObj
 from .web.block_obj import BlockObj
 from .common.config import APP_CONFIG
+from .common import log_load
 from ..logger.log_handle import get_logger
 from ..utilities import util
 # endregion Imports
@@ -44,7 +45,7 @@ logger = None
 def _set_loggers(l: Union[logging.Logger, None]):
     global logger, base
     logger = l
-    base.logger = l
+    log_load.set_logger(l)
 
 
 _set_loggers(None)

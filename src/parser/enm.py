@@ -19,6 +19,7 @@ from .web.soup_obj import SoupObj
 from .web.tag_str_obj import TagsStrObj
 from .common.constants import URL_SPLIT
 from common.config import APP_CONFIG
+from .common import log_load
 from .common.util import Util
 from ..logger.log_handle import get_logger
 from ..utilities import util
@@ -29,7 +30,7 @@ logger = None
 def _set_loggers(l: Union[logging.Logger, None]):
     global logger, base
     logger = l
-    base.logger = l
+    log_load.set_logger(l)
 
 
 _set_loggers(None)
