@@ -9,6 +9,7 @@ import logging
 from pathlib import Path
 from typing import Union
 from . import base, xsrc
+from .common.config import APP_CONFIG
 from ..logger.log_handle import get_logger
 
 logger = None
@@ -33,7 +34,7 @@ class Writer(xsrc.Writer):
         return "service"
 
     def _get_template_ext(self) -> str:
-        return base.APP_CONFIG.template_singleton_ext
+        return APP_CONFIG.template_singleton_ext
 
     def _get_template_dyn(self) -> Union[str, None]:
         return 'service_dyn.tmpl'
