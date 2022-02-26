@@ -8,10 +8,8 @@ from ..dataclass.name_info import NameInfo
 from ..dataclass.summary_info import SummaryInfo
 from ..common.util import Util
 from ..rules.summary.i_rules_summary_info import IRulesSummaryInfo
-from ..common import log_load
-# region Logger
-logger: logging.Logger = log_load.get_logger()
-# endregion Logger
+from ..common.log_load import Log
+log = Log()
 
 
 class ApiSummaries(BlockObj):
@@ -37,7 +35,7 @@ class ApiSummaries(BlockObj):
         self._data = None
 
     def _get_type_from_inner_link(self, mem_item_left: Tag, name: str) -> Union[str, None]:
-        logger.debug(
+        log.logger.debug(
             'ApiSummaries._get_type_from_inner_link() Searching for %s link.', name)
         if not mem_item_left:
             return None
@@ -48,7 +46,7 @@ class ApiSummaries(BlockObj):
         if a_name != name:
             return None
         s = Util.get_ns_from_a_tag(a_tag=a_tag)
-        logger.debug(
+        log.logger.debug(
             'ApiSummaries._get_type_from_inner_link() found: %s', s)
         return s
 
@@ -80,16 +78,16 @@ class ApiSummaries(BlockObj):
                 if itm_name:
                     name = itm_name.text.strip()
                     name = Util.get_clean_method_name(name)
-            # logger.debug('ApiSummaries.get_obj() r_type in: %s', r_type)
+            # log.logger.debug('ApiSummaries.get_obj() r_type in: %s', r_type)
             p_type = Util.get_python_type(
                 in_type=r_type,
                 name_info=self._name_info,
                 ns=self._ns,
                 long_names=self._long_names
             )
-            # logger.debug('ApiSummaries.get_obj() p_type in: %s', p_type.type)
+            # log.logger.debug('ApiSummaries.get_obj() p_type in: %s', p_type.type)
             if p_type.is_default():
-                logger.debug(
+                log.logger.debug(
                     'ApiSummaries.get_obj() %s: p_type is Default. Looking for %s', name, r_type)
                 # defaulted to object.
                 # this could be an object in the same namespace.
@@ -104,10 +102,10 @@ class ApiSummaries(BlockObj):
                     )
                     if not p2_type.is_default():
                         p_type = p2_type
-                        logger.debug(
+                        log.logger.debug(
                             'ApiSummaries.get_obj() %s: p_type is now %s', name, r_type)
             else:
-                logger.debug(
+                log.logger.debug(
                     'ApiSummaries.get_obj() %s: p_type is %s for %s', name, p_type.type, r_type)
             si = SummaryInfo(id=id_str, name=name,
                              type=p_type.type, p_type=p_type)

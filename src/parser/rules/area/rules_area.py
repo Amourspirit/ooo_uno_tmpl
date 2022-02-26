@@ -1,14 +1,11 @@
 # coding: utf-8
-import logging
 from typing import List, Union
 from ...dataclass.area import Area
 from ...dataclass.area_info import AreaInfo
 from .i_rules_area import IRulesArea
 from .i_rule_area import IRuleArea
-from ...common import log_load
-# region Logger
-logger: logging.Logger = log_load.get_logger()
-# endregion Logger
+from ...common.log_load import Log
+log = Log()
 
 
 class RulesArea(IRulesArea):
@@ -40,7 +37,7 @@ class RulesArea(IRulesArea):
             raise TypeError(msg)
         if rule in self._rules:
             msg = f"{self.__class__.__name__}.register_rule() Rule is already registered"
-            logger.warning(msg)
+            log.logger.warning(msg)
             return
         self._reg_rule(rule=rule)
 

@@ -4,10 +4,8 @@ from typing import Union
 from bs4.element import Tag
 from ..web.soup_obj import SoupObj
 from ..web.block_obj import BlockObj
-from ..common import log_load
-# region Logger
-logger: logging.Logger = log_load.get_logger()
-# endregion Logger
+from ..common.log_load import Log
+log = Log()
 
 class ApiDyContent(BlockObj):
     """Gets dyncontent block that contains area data and image data"""
@@ -23,7 +21,7 @@ class ApiDyContent(BlockObj):
         self._data = False
 
     def _log_missing(self):
-        logger.warning(
+        log.logger.warning(
             "ApiDyContent.get_obj() Failed to get find data. Url: %s", self.url_obj.url)
 
     def get_obj(self) -> Union[Tag, None]:

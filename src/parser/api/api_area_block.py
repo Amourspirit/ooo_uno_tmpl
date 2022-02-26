@@ -4,9 +4,9 @@ from typing import Union
 from bs4.element import Tag
 from ..web.block_obj import BlockObj
 from .api_dy_content import ApiDyContent
-from ..common import log_load
+from ..common.log_load import Log
 # region Logger
-logger: logging.Logger = log_load.get_logger()
+log = Log()
 # endregion Logger
 
 
@@ -17,7 +17,7 @@ class ApiAreaBlock(BlockObj):
         self._data = False
 
     def _log_missing(self):
-        logger.warning(
+        log.logger.warning(
             "ApiAreaBlock.get_obj() Failed to get find data. Url: %s", self.url_obj.url)
 
     def get_obj(self) -> Union[Tag, None]:

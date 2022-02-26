@@ -7,10 +7,8 @@ from ..dataclass.ns import Ns
 from ..dataclass.area import Area
 from ..common.regx import pattern_http
 from ..common.constants import URL_SPLIT
-from ..common import log_load
-# region Logger
-logger: logging.Logger = log_load.get_logger()
-# endregion Logger
+from ..common.log_load import Log
+log = Log()
 
 
 class ApiArea(BlockObj):
@@ -26,7 +24,7 @@ class ApiArea(BlockObj):
             f_str = f" for {for_str}"
         else:
             f_str = ''
-        logger.warning(
+        log.logger.warning(
             "ApiArea.get_obj() Failed to get find data%s. Url: %s", f_str, self.url_obj.url)
 
     def _get_ns(self, name: str, href: str) -> Ns:
@@ -65,7 +63,7 @@ class ApiArea(BlockObj):
             title = el.get('title', '')
             a_coords = coords.split(',')
             if len(a_coords) != 4:
-                logger.warning(
+                log.logger.warning(
                     "ApiArea.get_obj() Bad Coords for %s. Url: %s", name, self.url_obj.url)
                 continue
             ns = self._get_ns(name=name, href=href)

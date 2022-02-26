@@ -1,18 +1,15 @@
 # coding: utf-8
-import logging
 import numpy as np
 from PIL import Image
 from typing import Union
 from ..dataclass.shape import Shape
 from ..dataclass.area_info import AreaInfo
 from ..common.config import APP_CONFIG
-from ..common import log_load
 from ..web.response_img import ResponseImg
 from ..cache.pickle_cache import PickleCache
 from ..cache.text_cache import TextCache
-# region Logger
-logger: logging.Logger = log_load.get_logger()
-# endregion Logger
+from ..common.log_load import Log
+log = Log()
 
 _PICKLE_CACHE: PickleCache = None
 _TEXT_CACHE: TextCache = None
@@ -120,7 +117,7 @@ class ImageInfo:
                         cords = x1_y1 + x2_y2
                     else:
                         msg = f"ImageInfo.get_area_info(). Image to and bottom borders did not mathc! Url: {url}"
-                        logger.warning(msg)
+                        log.logger.warning(msg)
                 if not cords is None:
                     break
             if cords is None:
@@ -163,7 +160,7 @@ class ImageInfo:
             _PICKLE_CACHE.save_in_cache(filename=filename, content=ai)
             return ai
         except Exception as e:
-            logger.error(e)
+            log.logger.error(e)
             raise e
         finally:
             # resotore cache time
@@ -199,5 +196,5 @@ class ImageInfo:
             _TEXT_CACHE.save_in_cache(filename=filename, content=content)
             return result == APP_CONFIG.pixel_inherit
         except Exception as e:
-            logger.error(e)
+            log.logger.error(e)
             raise e

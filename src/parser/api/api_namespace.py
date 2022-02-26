@@ -4,10 +4,8 @@ from typing import List
 from bs4.element import Tag
 from ..web.soup_obj import SoupObj
 from ..web.block_obj import BlockObj
-from ..common import log_load
-# region Logger
-logger: logging.Logger = log_load.get_logger()
-# endregion Logger
+from ..common.log_load import Log
+log = Log()
 
 
 class ApiNamespace(BlockObj):
@@ -31,7 +29,7 @@ class ApiNamespace(BlockObj):
                 self._data.append(name.text.strip())
             return self._data
         except Exception as e:
-            logger.error(
+            log.logger.error(
                 "ApiNamespace.get_obj() Error getting Namespace.", exc_info=True)
             raise e
 

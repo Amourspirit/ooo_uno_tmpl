@@ -3,7 +3,6 @@ import calendar
 import re
 import json
 import textwrap
-import logging
 from deprecated import deprecated
 from typing import Iterable, Optional, Set, Tuple, Union, List
 from kwhelp.decorator import AcceptedTypes, DecArgEnum, DecFuncEnum, RuleCheckAllKw, TypeCheckKw
@@ -12,13 +11,12 @@ from bs4.element import Tag
 from pathlib import Path
 from datetime import datetime, timezone
 from rel import mod_rel as RelInfo
-from . import log_load
 from ..common.constants import TYPE_MAP, TYPE_MAP_EX, URL_SPLIT
 from .. import mod_type as ModType
 from ..dataclass.name_info import NameInfo
-# region Logger
-logger: logging.Logger = log_load.get_logger()
-# endregion Logger
+from ..common.log_load import Log
+log = Log()
+
 
 # region util
 py_name_pattern = re.compile('[\W_]+')
@@ -184,7 +182,7 @@ class Util:
             dt_object = datetime.strptime(input, "%Y-%m-%d %H:%M:%S%z")
             return dt_object
         except ValueError as e:
-            logger.error("Util.get_timestamp_from_str() Error: %s", str(e))
+            log.logger.error("Util.get_timestamp_from_str() Error: %s", str(e))
             raise e
 
     @AcceptedTypes(int, opt_all_args=True, ftype=DecFuncEnum.METHOD_STATIC)
@@ -598,7 +596,7 @@ class Util:
                             during callback then the value of returns will be returned from method.
             }
         """
-        logger.warning(
+        log.logger.warning(
             'Util.get_py_type is deprecated, use get_python_type() instead')
 
         if not uno_type:
@@ -739,7 +737,7 @@ class Util:
         if Util.TYPE_RULES is None:
             Util.TYPE_RULES = ModType.TypeRules()
 
-        logger.debug("Util.get_python_type() in_type: '%s'", in_type)
+        log.logger.debug("Util.get_python_type() in_type: '%s'", in_type)
 
         def is_self_import(s: str, class_name: str) -> bool:
             try:
@@ -751,7 +749,7 @@ class Util:
                 full_name = ns + '.' + class_name
                 return p_type.imports == full_name
             except Exception as e:
-                logger.error(e, exc_info=True)
+                log.logger.error(e, exc_info=True)
                 raise e
 
         Util.TYPE_RULES.namespace = ns
@@ -766,7 +764,7 @@ class Util:
                 py_type.imports = None
             return py_type
         except Exception as e:
-            logger.error(e, exc_info=True)
+            log.logger.error(e, exc_info=True)
             raise e
 
     @staticmethod

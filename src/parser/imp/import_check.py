@@ -1,15 +1,12 @@
 # coding: utf-8
-import logging
 import inspect
 import importlib
 from kwhelp.decorator import AcceptedTypes, DecFuncEnum
 from typing import Set, List, Tuple
 from types import ModuleType
 from ..common.util import Util
-from ..common import log_load
-# region Logger
-logger: logging.Logger = log_load.get_logger()
-# endregion Logger
+from ..common.log_load import Log
+log = Log()
 
 
 class ImportCheck:
@@ -71,7 +68,7 @@ class ImportCheck:
             try:
                 mod, cl = self.dynamic_imp(pkg_name, mod_name, cls_name)
             except Exception as e:
-                logger.warn(
+                log.logger.warn(
                     'ImportCheck.load_imports() Unable to load module for : Package:%s, Module: %s Class: %s', pkg_name, mod_name, cls_name)
                 continue
             names_lst = self.get_class_names(cl, False)

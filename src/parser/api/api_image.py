@@ -5,10 +5,8 @@ from bs4.element import Tag
 from ..web.block_obj import BlockObj
 from .api_dy_content import ApiDyContent
 from ..common.regx import pattern_http
-from ..common import log_load
-# region Logger
-logger: logging.Logger = log_load.get_logger()
-# endregion Logger
+from ..common.log_load import Log
+log = Log()
 
 
 class ApiImage(BlockObj):
@@ -24,7 +22,7 @@ class ApiImage(BlockObj):
             f_str = f" for {for_str}"
         else:
             f_str = ''
-        logger.warning(
+        log.logger.warning(
             "ApiImage.get_obj() Failed to get find data%s. Url: %s", f_str, self.url_obj.url)
 
     def get_obj(self) -> Union[str, None]:

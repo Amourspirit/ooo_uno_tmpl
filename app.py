@@ -311,26 +311,13 @@ def _main():
     # ns = 'com.sun.star.form.DataAwareControlModel'
     # ns = 'com.sun.star.text.TextRange'
     # args = 'data db-json -n com.sun.star.form.control.GridControl'
-    url = 'https://api.libreoffice.org/docs/idl/ref/exceptioncom_1_1sun_1_1star_1_1uno_1_1Exception.html'
-    # args = 'compile singleton -a --data'
-    args = 'link-json mod-links -r -j -a --data'
-    # args += url
+    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XDevice.html'
+    args = 'url-parse interface -t -j -u '
+    # args = 'link-json mod-links -r -j -a --data'
+    args += url
     sys.argv.extend(args.split())
     main()
 
-
-def _touch():
-    global logger
-
-    if logger is None:
-        log_args = {
-            "log_file": "debug.log",
-            "level": logging.DEBUG
-        }
-        logger = get_logger(logger_name=Path(__file__).stem, **log_args)
-    config = read_config('./config.json')
-    t = TouchFiles(config=config, log=logger)
-    t._touch_struct()
 # endregion Main Testing
 
 # region Logging

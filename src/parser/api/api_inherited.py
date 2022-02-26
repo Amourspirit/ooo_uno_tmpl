@@ -12,11 +12,9 @@ from ..dataclass.ns import Ns
 from ..web.block_obj import BlockObj
 from ..web.soup_obj import SoupObj
 from ..rules.area.i_rules_area import IRulesArea
-from ..common import log_load
 from ..common.known import get_known_extends
-# region Logger
-logger: logging.Logger = log_load.get_logger()
-# endregion Logger
+from ..common.log_load import Log
+log = Log()
 
 
 class ApiInherited(BlockObj):
@@ -50,9 +48,9 @@ class ApiInherited(BlockObj):
             f_str = ''
         msg = f"ApiInherited.get_obj() Failed to get find data{f_str}. Url: {self.url_obj.url}"
         if raise_error:
-            logger.error(msg)
+            log.logger.error(msg)
             raise Exception(msg)
-        logger.warning(msg)
+        log.logger.warning(msg)
 
     def get_obj(self) -> List[Ns]:
         """
@@ -65,7 +63,7 @@ class ApiInherited(BlockObj):
             return self._data
         known = get_known_extends(ns=self._ns, class_name=self._class_name)
         if known:
-            logger.info('%s: Found Known inherits for %s.%s',
+            log.logger.info('%s: Found Known inherits for %s.%s',
                         self.__class__.__name__, self._ns, self._class_name)
             self._data = known
             return self._data

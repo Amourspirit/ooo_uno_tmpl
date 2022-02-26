@@ -4,12 +4,9 @@ from typing import Union
 from bs4.element import Tag
 from abc import abstractmethod
 from .api_public_members import ApiPublicMembers
-from ..web.soup_obj import SoupObj
 from ..web.block_obj import BlockObj
-from ..common import log_load
-# region Logger
-logger: logging.Logger = log_load.get_logger()
-# endregion Logger
+from ..common.log_load import Log
+log = Log()
 
 
 class ApiSummaryBlock(BlockObj):
@@ -49,7 +46,7 @@ class ApiSummaryBlock(BlockObj):
                 if name == match_name:
                     self._data = tag
                     break
-        if self._data is None and logger.level <= logging.WARNING:
-            logger.warning(
+        if self._data is None and log.logger.level <= logging.WARNING:
+            log.logger.warning(
                 "ApiSummaryBlock.get_obj() No summary block found for '%s'", match_name)
         return self._data

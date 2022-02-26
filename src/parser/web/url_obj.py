@@ -1,14 +1,10 @@
 # coding: utf-8
-import logging
-from typing import List, Union
+from typing import List
 from kwhelp.decorator import DecFuncEnum, RuleCheckAllKw
 from kwhelp import rules
 from ..common.constants import URL_SPLIT
-from ..common import log_load
-# region Logger
-logger: logging.Logger = log_load.get_logger()
-# endregion Logger
-# region Url
+from ..common.log_load import Log
+log = Log()
 
 class UrlObj:
     """Properties of url"""
@@ -68,8 +64,8 @@ class UrlObj:
             s = 'com.' + s.split('.', maxsplit=1)[1]
             result = s.split('.')
         except Exception as e:
-            logger.error(e)
-            logger.info('UrlObj._get_ns() returning empty list.')
+            log.logger.error(e)
+            log.logger.info('UrlObj._get_ns() returning empty list.')
         return result
 
     def _get_ns(self) -> List[str]:
@@ -84,8 +80,8 @@ class UrlObj:
             else:
                 self._ns = result
         except Exception as e:
-            logger.error(e)
-            logger.info('UrlObj._get_ns() returning empty list.')
+            log.logger.error(e)
+            log.logger.info('UrlObj._get_ns() returning empty list.')
         return result
 
     @property
@@ -164,4 +160,3 @@ class UrlObj:
             self._ext = '' if len(parts) == 1 else ('.' + parts[1])
         return self._ext
 
-# endregion Url

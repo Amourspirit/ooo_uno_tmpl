@@ -4,10 +4,8 @@ from typing import List, Union
 from ...dataclass.summary_info import SummaryInfo
 from .i_rule_summary_info import IRuleSummaryInfo
 from .i_rules_summary_info import IRulesSummaryInfo
-from ...common import log_load
-# region Logger
-logger: logging.Logger = log_load.get_logger()
-# endregion Logger
+from ...common.log_load import Log
+log = Log()
 
 
 class RulesSummaryInfo(IRulesSummaryInfo):
@@ -23,7 +21,7 @@ class RulesSummaryInfo(IRulesSummaryInfo):
             raise TypeError(msg)
         if rule in self._rules:
             msg = f"{self.__class__.__name__}.register_rule() Rule is already registered"
-            logger.warning(msg)
+            log.logger.warning(msg)
             return
         self._reg_rule(rule=rule)
 
@@ -78,7 +76,7 @@ class RulesSummaryInfo(IRulesSummaryInfo):
     def get_rule_instance(self, rule: IRuleSummaryInfo) -> IRuleSummaryInfo:
         if not issubclass(rule, IRuleSummaryInfo):
             msg = f"{self.__class__.__name__}.get_rule_instance(), rule arg must be child class of IRuleSummaryInfo"
-            logger.error(msg)
+            log.logger.error(msg)
             raise TypeError(msg)
         key = str(id(rule))
         if key in self._cache:

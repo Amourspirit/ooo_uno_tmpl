@@ -31,8 +31,9 @@ logger:logging.Logger = None
 
 def _set_loggers(l: Union[logging.Logger, None]):
     global logger
-    logger = l
-    log_load.set_logger(l)
+    log = log_load.Log()
+    log.logger = l
+    logger = log.logger
 
 
 _set_loggers(None)

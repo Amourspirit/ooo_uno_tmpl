@@ -10,10 +10,8 @@ from ..dataclass.summary_info import SummaryInfo
 from ..web.block_obj import BlockObj
 from ..mod_type import PythonType
 from ..common.util import Util
-from ..common import log_load
-# region Logger
-logger: logging.Logger = log_load.get_logger()
-# endregion Logger
+from ..common.log_load import Log
+log = Log()
 
 re_dir_pattern = re.compile(r"\[((?:in)|(?:out))\]", re.IGNORECASE)
 
@@ -41,8 +39,8 @@ class ApiMethodPramsInfo(BlockObj):
         p_type_tag = proto.find_all('td', class_='paramtype')
         p_name_tag = proto.find_all('td', class_='paramname')
         if not p_type_tag and not p_name_tag:
-            if logger.level <= logging.DEBUG:
-                logger.debug(
+            if log.logger.level <= logging.DEBUG:
+                log.logger.debug(
                     'ApiInterfacePramsInfoget_obj() No Parmas for %s', self._block.summary_info.name)
             return self._data
 
@@ -56,7 +54,7 @@ class ApiMethodPramsInfo(BlockObj):
         except Exception as e:
             msg = "ApiFnPramsInfo.get_obj(), Parameter Name and Parameter Types do not have the same length. Function Summary: %s Url: %s" % (str(
                 self._block.summary_info), self.url_obj.url)
-            logger.error(msg)
+            log.logger.error(msg)
             raise Exception(msg)
         p_info = zip(p_name_tag, p_type_tag)
         self._data = self._process_params(params=p_info)
@@ -67,7 +65,7 @@ class ApiMethodPramsInfo(BlockObj):
         pinfo.name = Util.get_clean_name(name)
 
     def _get_type_from_inner_link(self, paramtype: Tag, name: str) -> Union[str, None]:
-        logger.debug(
+        log.logger.debug(
             'ApiFnPramsInfo._get_type_from_inner_link() Searching for %s link.', name)
         if not paramtype:
             return None
@@ -78,7 +76,7 @@ class ApiMethodPramsInfo(BlockObj):
         if a_name != name:
             return None
         s = Util.get_ns_from_a_tag(a_tag=a_tag)
-        logger.debug(
+        log.logger.debug(
             'ApiFnPramsInfo._get_type_from_inner_link() found: %s', s)
         return s
 
@@ -100,7 +98,7 @@ class ApiMethodPramsInfo(BlockObj):
             long_names=self._long_names
         )
         if t_info.is_default():
-            logger.debug(
+            log.logger.debug(
                 'ApiFnPramsInfo._process_type_tag() %s type is Default. Looking for %s', pinfo.name, _type)
             t2_type = self._get_type_from_inner_link(type_tag, _type)
             if t2_type:
@@ -112,7 +110,7 @@ class ApiMethodPramsInfo(BlockObj):
                 )
                 if not t2_info.is_default():
                     t_info = t2_info
-        logger.debug(
+        log.logger.debug(
             "ApiFnPramsInfo._process_type_tag() param '%s' type '%s' converted to '%s'", pinfo.name, _type, t_info.type)
         pinfo.type = t_info.type
         pinfo.p_type = t_info
@@ -128,12 +126,12 @@ class ApiMethodPramsInfo(BlockObj):
             self._process_name_tag(name_tag=p_name_tag, pinfo=p_info)
             if not p_info.name:
                 msg = f"ApiFnPramsInfo: unable to find parameter name for method {self.summary_info.name!r}. Url: {self.url_obj.url}"
-                logger.error(msg)
+                log.logger.error(msg)
                 raise Exception(msg)
             self._process_type_tag(type_tag=p_type_tag, pinfo=p_info)
             if not p_info.type:
                 msg = f"ApiFnPramsInfo: unable to find parameter type for method {self.summary_info.name!r} with param name of {p_info.name!r}. Url: {self.url_obj.url}"
-                logger.error(msg)
+                log.logger.error(msg)
                 raise Exception(msg)
             results.append(p_info)
         return results

@@ -1,14 +1,9 @@
 # coding: utf-8
-import logging
 from bs4 import BeautifulSoup
 from kwhelp.decorator import DecFuncEnum, RuleCheckAllKw
 from kwhelp import rules
 from .response_obj import ResponseObj
 from .url_obj import UrlObj
-from ..common import log_load
-# region Logger
-logger: logging.Logger = log_load.get_logger()
-# endregion Logger
 
 
 class SoupObj:

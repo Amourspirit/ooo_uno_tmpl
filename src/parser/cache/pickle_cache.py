@@ -1,14 +1,11 @@
 # coding: utf-8
 import pickle
-import logging
 import time
 from pathlib import Path
 from typing import Union
 from .cache_base import CacheBase
-from ..common import log_load
-# region Logger
-logger: logging.Logger = log_load.get_logger()
-# endregion Logger
+from ..common.log_load import Log
+log = Log()
 
 PICKLE_CACHE: 'PickleCache' = None
 
@@ -40,7 +37,7 @@ class PickleCache(CacheBase):
             try:
                 self.del_from_cache(f)
             except Exception as e:
-                logger.warning(
+                log.logger.warning(
                     'Not able to delete 0 byte file: %s, error: %s', filename, str(e))
             return None
         ti_m = f_stat.st_mtime
@@ -57,7 +54,7 @@ class PickleCache(CacheBase):
         except IOError:
             return None
         except Exception as e:
-            logger.exception(e, exc_info=True)
+            log.logger.exception(e, exc_info=True)
             raise e
 
     def save_in_cache(self, filename: Union[str, Path], content: object):

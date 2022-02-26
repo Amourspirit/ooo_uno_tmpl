@@ -7,10 +7,8 @@ from typing import Optional, Union
 from ..common.config import APP_CONFIG
 from abc import ABC, abstractmethod
 from ..common.util import Util
-from ..common import log_load
-# region Logger
-logger: logging.Logger = log_load.get_logger()
-# endregion Logger
+from ..common.log_load import Log
+log = Log()
 
 class CacheBase(ABC):
     """
@@ -65,7 +63,7 @@ class CacheBase(ABC):
             if os.path.exists(f):
                 os.remove(f)
         except Exception as e:
-            logger.warning(
+            log.logger.warning(
                 'Not able to delete file: %s, error: %s', filename, str(e))
 
     @property

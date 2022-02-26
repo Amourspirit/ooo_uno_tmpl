@@ -1,13 +1,10 @@
 # coding: utf-8
-import logging
 import time
 from pathlib import Path
 from typing import Union
 from .cache_base import CacheBase
-from ..common import log_load
-# region Logger
-logger: logging.Logger = log_load.get_logger()
-# endregion Logger
+from ..common.log_load import Log
+log = Log()
 
 TEXT_CACHE: 'TextCache' = None
 
@@ -39,7 +36,7 @@ class TextCache(CacheBase):
             try:
                 self.del_from_cache(f)
             except Exception as e:
-                logger.warning(
+                log.logger.warning(
                     'Not able to delete 0 byte file: %s, error: %s', filename, str(e))
             return None
         ti_m = f_stat.st_mtime

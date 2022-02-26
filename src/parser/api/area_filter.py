@@ -1,14 +1,11 @@
 # coding: utf-8
-import logging
 from typing import List
 from ..dataclass.ns import Ns
 from ..dataclass.area import Area
 from ..dataclass.area_info import AreaInfo
 from ..rules.area.i_rules_area import IRulesArea
-from ..common import log_load
-# region Logger
-logger: logging.Logger = log_load.get_logger()
-# endregion Logger
+from ..common.log_load import Log
+log = Log()
 
 
 class AreaFilter:
@@ -25,7 +22,7 @@ class AreaFilter:
             return []
         if len(self._rules_engine) == 0:
             msg = f"{self.__class__.__name__}._get_from_rules() Rules must not contain rules to process."
-            logger.error(msg)
+            log.logger.error(msg)
             raise Exception(msg)
 
         # rules_engine determines sorting

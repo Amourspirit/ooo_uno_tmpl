@@ -5,10 +5,8 @@ from ...dataclass.name_info import NameInfo
 from .i_rules_name import IRulesName
 from .i_rule_name import IRuleName
 from .i_rules_name import IRulesName
-from ...common import log_load
-# region Logger
-logger: logging.Logger = log_load.get_logger()
-# endregion Logger
+from ...common.log_load import Log
+log = Log()
 
 class RulesName(IRulesName):
     """Manages rules for NameInfo"""
@@ -33,7 +31,7 @@ class RulesName(IRulesName):
             raise TypeError(msg)
         if rule in self._rules:
             msg = f"{self.__class__.__name__}.register_rule() Rule is already registered"
-            logger.warning(msg)
+            log.logger.warning(msg)
             return
         self._reg_rule(rule=rule)
 
@@ -85,7 +83,7 @@ class RulesName(IRulesName):
     def get_rule_instance(self, rule: IRuleName) -> IRuleName:
         if not issubclass(rule, IRuleName):
             msg = f"{self.__class__.__name__}.get_rule_instance(), rule arg must be child class of IRuleName"
-            logger.error(msg)
+            log.logger.error(msg)
             raise TypeError(msg)
         key = str(id(rule))
         if key in self._cache:

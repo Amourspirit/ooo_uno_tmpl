@@ -1,14 +1,9 @@
 # coding: utf-8
-import logging
 from typing import Union
 from bs4.element import ResultSet
 from kwhelp.decorator import TypeCheck, DecFuncEnum
 from ..web.soup_obj import SoupObj
 from ..web.block_obj import BlockObj
-from ..common import log_load
-# region Logger
-logger: logging.Logger = log_load.get_logger()
-# endregion Logger
 
 
 class ApiPublicMembers(BlockObj):

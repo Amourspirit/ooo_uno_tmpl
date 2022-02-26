@@ -1,15 +1,12 @@
 # coding: utf-8
-import logging
 import requests
 from typing import Optional
 from pathlib import Path
 from .response_base import ResponseBase
 from ..common.config import APP_CONFIG
-from ..common import log_load
 from ..cache.text_cache import TextCache
-# region Logger
-logger: logging.Logger = log_load.get_logger()
-# endregion Logger
+from ..common.log_load import Log
+log = Log()
 
 _TEXT_CACHE: TextCache = None
 
@@ -53,7 +50,7 @@ class ResponseObj(ResponseBase):
                     tmp_dir=APP_CONFIG.cache_dir, lifetime=self.cache_seconds)
             html_text = _TEXT_CACHE.fetch_from_cache(filename=filename)
             if html_text:
-                logger.debug(
+                log.logger.debug(
                     "ResponseObj._get_request_text() retreived data from Cache")
                 return html_text
         response = requests.get(url=self.url)
@@ -62,7 +59,7 @@ class ResponseObj(ResponseBase):
         html_text = response.text
         if allow_cache:
             _TEXT_CACHE.save_in_cache(filename=filename, content=html_text)
-            logger.debug(
+            log.logger.debug(
                 "ResponseObj._get_request_text() Saving to cache as: %s", Path(_TEXT_CACHE.path, filename))
         return html_text
 
@@ -75,6 +72,6 @@ class ResponseObj(ResponseBase):
             try:
                 self._text = self._get_request_text()
             except Exception as e:
-                logger.error(e)
+                log.logger.error(e)
                 raise e
         return self._text

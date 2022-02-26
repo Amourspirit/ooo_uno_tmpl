@@ -1,5 +1,4 @@
 # coding: utf-8
-import logging
 import requests
 from PIL import Image
 from typing import Optional
@@ -7,10 +6,8 @@ from pathlib import Path
 from .response_base import ResponseBase
 from ..cache.image_cache import ImageCache
 from ..common.config import APP_CONFIG
-from ..common import log_load
-# region Logger
-logger: logging.Logger = log_load.get_logger()
-# endregion Logger
+from ..common.log_load import Log
+log = Log()
 
 _IMG_CACHE: ImageCache = None
 
@@ -51,7 +48,7 @@ class ResponseImg(ResponseBase):
         if allow_cache:
             img = _IMG_CACHE.fetch_from_cache(filename=filename)
             if img:
-                logger.debug(
+                log.logger.debug(
                     "ResponseImg._get_request_data() retreived data from Cache")
                 return img
         response = requests.get(url=self.url, stream=True)
@@ -62,7 +59,7 @@ class ResponseImg(ResponseBase):
             filename=filename, content=response.raw)
         img = _IMG_CACHE.fetch_from_cache(filename=filename)
         if allow_cache:
-            logger.debug(
+            log.logger.debug(
                 "ResponseImg._get_request_data() Saving to cache as: %s", Path(_IMG_CACHE.path, filename))
         else:
             _IMG_CACHE.del_from_cache(filename=filename)
@@ -77,6 +74,6 @@ class ResponseImg(ResponseBase):
             try:
                 self._img = self._get_request_data()
             except Exception as e:
-                logger.error(e)
+                log.logger.error(e)
                 raise e
         return self._img
