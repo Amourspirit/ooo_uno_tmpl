@@ -18,7 +18,7 @@ from .web.block_obj import BlockObj
 from .web.soup_obj import SoupObj
 from .web.tag_str_obj import TagsStrObj
 from .common.constants import URL_SPLIT
-from common.config import APP_CONFIG
+from .common.config import APP_CONFIG
 from .common import log_load
 from .common.util import Util
 from ..logger.log_handle import get_logger

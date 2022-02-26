@@ -19,7 +19,6 @@ from pathlib import Path
 from abc import ABC, abstractmethod, abstractproperty
 from . import base
 from . import __version__, JSON_ID
-from .base import SoupObj, SummaryInfo
 from .mod_type import PythonType
 from .common.util import Util
 from .dataclass.summary_info import SummaryInfo
