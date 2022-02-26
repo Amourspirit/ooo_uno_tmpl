@@ -23,6 +23,18 @@ from ..logger.log_handle import get_logger
 from . import __version__, JSON_ID
 from .mod_type import PythonType
 from ..utilities import util
+from .common.util import Util
+from .dataclass.summary_info import SummaryInfo
+from .dataclass.name_info import NameInfo
+from .api.api_summary_block import ApiSummaryBlock
+from .api.api_summary_rows import ApiSummaryRows
+from .api.api_desc_block import ApiDescBlock
+from .api.api_detail_block import ApiDetailBlock
+from .api.api_namespace import ApiNamespace
+from .api.api_data import APIData
+from .web.soup_obj import SoupObj
+from .web.block_obj import BlockObj
+from .common.config import APP_CONFIG
 # endregion Imports
 
 # region Logger
@@ -120,7 +132,7 @@ class IRules(ABC):
         """Gets a Val if there is a rule match"""
 
     @abstractmethod
-    def get_summary_by_name(self, name: str) -> Union[base.SummaryInfo, None]:
+    def get_summary_by_name(self, name: str) -> Union[SummaryInfo, None]:
         """Gets summary info by name"""
     @abstractmethod
     def is_cached(self, sid: str) -> bool:
@@ -143,7 +155,7 @@ class IRules(ABC):
         """set or updates cached"""
 
     @abstractproperty
-    def name_info(self) -> base.NameInfo:
+    def name_info(self) -> NameInfo:
         """Gets Name info"""
 
     @abstractproperty
@@ -151,11 +163,11 @@ class IRules(ABC):
         """Gets api_ns value"""
 
     @abstractproperty
-    def summary_block(self) -> base.ApiSummaryBlock:
+    def summary_block(self) -> ApiSummaryBlock:
         """Gets the block that contains summary info for all constants of the current html page."""
 
     @abstractproperty
-    def summaries(self) -> Dict[str, base.SummaryInfo]:
+    def summaries(self) -> Dict[str, SummaryInfo]:
         """All the summaries for a html page"""
 
     @abstractproperty
@@ -165,9 +177,9 @@ class IRules(ABC):
 
 class Rules(IRules):
     def __init__(
-        self, si_dict: Dict[str, base.SummaryInfo], summary_block: base.ApiSummaryBlock, api_ns: 'ApiNs', name_info: base.NameInfo
+        self, si_dict: Dict[str, SummaryInfo], summary_block: ApiSummaryBlock, api_ns: 'ApiNs', name_info: NameInfo
     ) -> None:
-        self._summary_block: base.ApiSummaryBlock = summary_block
+        self._summary_block: ApiSummaryBlock = summary_block
         self._summaries = si_dict
         self._name_map = {}
         for _, si in si_dict.items():
@@ -277,7 +289,7 @@ class Rules(IRules):
             self._cache[key] = rule(self)
         return self._cache[key]
 
-    def get_summary_by_name(self, name: str) -> Union[base.SummaryInfo, None]:
+    def get_summary_by_name(self, name: str) -> Union[SummaryInfo, None]:
         """Gets summary info by name"""
         _id = self._name_map.get(name, None)
         if _id is None:
@@ -287,7 +299,7 @@ class Rules(IRules):
 
     # region Properties
     @property
-    def name_info(self) -> base.NameInfo:
+    def name_info(self) -> NameInfo:
         """Gets name info"""
         return self._name_info
 
@@ -297,12 +309,12 @@ class Rules(IRules):
         return self._api_ns
 
     @property
-    def summary_block(self) -> base.ApiSummaryBlock:
+    def summary_block(self) -> ApiSummaryBlock:
         """Gets the block that contains summary info for all constants of the current html page."""
         return self._summary_block
 
     @property
-    def summaries(self) -> Dict[str, base.SummaryInfo]:
+    def summaries(self) -> Dict[str, SummaryInfo]:
         """Gets summaries for a html page. Key is ID."""
         return self._summaries
 
@@ -707,10 +719,10 @@ class RuleImport(RuleBase):
             parts = self._val.rsplit(sep='.', maxsplit=1)
             name = parts.pop()
             im = ".".join(parts)
-            p_type = base.Util.get_python_type(
+            p_type = Util.get_python_type(
                 in_type=im, name_info=self._rules.name_info, ns=self._rules.api_ns.namespace_str)
 
-            rel = base.Util.get_rel_import(p_type.imports, ns.namespace_str)
+            rel = Util.get_rel_import(p_type.imports, ns.namespace_str)
 
             val = f"{rel[1]}.{name}"
             result = Val(text=si.name,
@@ -830,8 +842,8 @@ class RuleDetail(RuleBase):
         except ValueError:
             return None
 
-    def _get_details_block(self) -> base.ApiDescBlock:
-        return base.ApiDetailBlock(self._rules.soup, self.identity)
+    def _get_details_block(self) -> ApiDescBlock:
+        return ApiDetailBlock(self._rules.soup, self.identity)
 
     def _get_text(self) -> str:
         block = self._get_details_block()
@@ -863,15 +875,15 @@ class RuleDetail(RuleBase):
 # region API classes
 
 
-class ApiConstBlock(base.ApiSummaryBlock):
+class ApiConstBlock(ApiSummaryBlock):
     def _get_match_name(self) -> str:
         return 'var-members'
 
 
-class ApiNs(base.ApiNamespace):
+class ApiNs(ApiNamespace):
     """Get the Name object for the interface"""
 
-    def __init__(self, soup: base.SoupObj):
+    def __init__(self, soup: SoupObj):
         super().__init__(soup)
         self._namespace_str = None
         self._namespace = None
@@ -890,9 +902,9 @@ class ApiNs(base.ApiNamespace):
         return self._namespace_str
 
 
-class ApiSummaries(base.BlockObj):
-    def __init__(self, block: base.ApiSummaryRows, name_info: base.NameInfo, ns: str) -> None:
-        self._block: base.ApiSummaryRows = block
+class ApiSummaries(BlockObj):
+    def __init__(self, block: ApiSummaryRows, name_info: NameInfo, ns: str) -> None:
+        self._block: ApiSummaryRows = block
         super().__init__(self._block.soup)
         self._requires_typing = False
         self._imports: Set[str] = set()
@@ -908,7 +920,7 @@ class ApiSummaries(base.BlockObj):
             Exception: If error parsing info.
 
         Returns:
-            Dict[str, base.SummaryInfo]: summary info dictionary.
+            Dict[str, SummaryInfo]: summary info dictionary.
         """
         if not self._data is None:
             return self._data
@@ -969,7 +981,7 @@ class ApiSummaries(base.BlockObj):
         text = tag.text.strip()
         parts = text.split()
         type_name = parts.pop()
-        p_type = base.Util.get_python_type(
+        p_type = Util.get_python_type(
             in_type=type_name, name_info=self._name_info, ns=self._ns)
         logger.debug(
             "%s._get_type(), found type: %s for name: %s",
@@ -986,7 +998,7 @@ class ApiSummaries(base.BlockObj):
 
         for c in classes:
             if c.startswith('memitem:'):
-                result = base.Util.get_last_part(input=c, sep=":")
+                result = Util.get_last_part(input=c, sep=":")
                 break
         if result is None:
             msg = f"{self.__class__.__name__}._get_id() Failed to get id. Url: {self.url_obj.url}"
@@ -1008,13 +1020,13 @@ class ApiSummaries(base.BlockObj):
     # endregion Properties
 
 
-class ApiValues(base.BlockObj):
-    def __init__(self, summary_block: base.ApiSummaryBlock, api_summaries: ApiSummaries, api_ns: ApiNs, name_info: base.NameInfo
+class ApiValues(BlockObj):
+    def __init__(self, summary_block: ApiSummaryBlock, api_summaries: ApiSummaries, api_ns: ApiNs, name_info: NameInfo
                  ) -> None:
-        self._summary_block: base.ApiSummaryBlock = summary_block
+        self._summary_block: ApiSummaryBlock = summary_block
         self._api_summaries: ApiSummaries = api_summaries
         self._api_ns: ApiNs = api_ns
-        self._name_info: base.NameInfo = name_info
+        self._name_info: NameInfo = name_info
         super().__init__(self._summary_block.soup)
         self._data = None
 
@@ -1059,15 +1071,15 @@ class ApiValues(base.BlockObj):
         return self._data
 
 
-class ApiData(base.APIData):
-    def __init__(self, url_soup: Union[str, base.SoupObj], allow_cache: bool, remove_parent_inherited: bool = True):
+class ApiData(APIData):
+    def __init__(self, url_soup: Union[str, SoupObj], allow_cache: bool, remove_parent_inherited: bool = True):
         super().__init__(url_soup=url_soup,
                          allow_cache=allow_cache,
                          remove_parent_inherited=remove_parent_inherited
                          )
         self._ns: ApiNs = None
         self._api_const_block: ApiConstBlock = None
-        self._api_const_summary_rows: base.ApiSummaryRows = None
+        self._api_const_summary_rows: ApiSummaryRows = None
         self._api_summaries: ApiSummaries = None
         self._api_values: ApiValues = None
         self._api_summary_dict: Dict[str, SummaryInfo] = None
@@ -1140,10 +1152,10 @@ class ApiData(base.APIData):
         return self._api_const_block
 
     @property
-    def api_summary_rows(self) -> base.ApiSummaryRows:
+    def api_summary_rows(self) -> ApiSummaryRows:
         """Gets the summary rows for api_const_block"""
         if self._api_const_summary_rows is None:
-            self._api_const_summary_rows = base.ApiSummaryRows(
+            self._api_const_summary_rows = ApiSummaryRows(
                 self.api_const_block)
         return self._api_const_summary_rows
 
@@ -1274,7 +1286,7 @@ class Parser(base.ParserBase):
         if key in self._cache:
             return self._cache[key]
         dlst = self._get_data_items()
-        result = base.Util.get_formated_dict_list_str(obj=dlst, indent=2)
+        result = Util.get_formated_dict_list_str(obj=dlst, indent=2)
         self._cache[key] = result
         return self._cache[key]
 
@@ -1306,7 +1318,7 @@ class Parser(base.ParserBase):
             self._cache[key] = False
             return self._cache[key]
 
-        self._cache[key] = base.Util.is_enum_nums(*nums)
+        self._cache[key] = Util.is_enum_nums(*nums)
         return self._cache[key]
 
     def _get_data_items(self) -> List[dict]:
@@ -1374,7 +1386,7 @@ class Parser(base.ParserBase):
                 if itm.val.p_type.requires_typing:
                     self._requires_typing = True
                 im.update(itm.val.p_type.get_all_imports())
-        self._cache[key] = base.Util.get_clean_imports(ns=ns, imports=im)
+        self._cache[key] = Util.get_clean_imports(ns=ns, imports=im)
         return self._cache[key]
 
     @property
@@ -1522,8 +1534,8 @@ class ConstWriter(base.WriteBase):
         json_dict = {
             "id": JSON_ID,
             "version": __version__,
-            # "timestamp": str(base.Util.get_timestamp_utc()),
-            "libre_office_ver": base.APP_CONFIG.libre_office_ver,
+            # "timestamp": str(Util.get_timestamp_utc()),
+            "libre_office_ver": APP_CONFIG.libre_office_ver,
             "name": p_dict['name'],
             "type": "const",
             "namespace": p_dict['namespace'],
@@ -1531,7 +1543,7 @@ class ConstWriter(base.WriteBase):
             "writer_args": self._get_writer_args(),
             "data": p_dict
         }
-        str_jsn = base.Util.get_formated_dict_list_str(obj=json_dict, indent=2)
+        str_jsn = Util.get_formated_dict_list_str(obj=json_dict, indent=2)
         self._cache[key] = str_jsn
         return self._cache[key]
 
@@ -1551,9 +1563,9 @@ class ConstWriter(base.WriteBase):
 
     def _get_const_base_class(self) -> str:
         if self._flags:
-            const_base_cls = base.APP_CONFIG.base_const_int_flags
+            const_base_cls = APP_CONFIG.base_const_int_flags
         else:
-            const_base_cls = base.APP_CONFIG.base_const_int
+            const_base_cls = APP_CONFIG.base_const_int
         return const_base_cls
 
     def _get_from_imports(self) -> List[List[str]]:
@@ -1565,7 +1577,7 @@ class ConstWriter(base.WriteBase):
         sorted.sort()
         lst = []
         for ns in sorted:
-            f, n = base.Util.get_rel_import(
+            f, n = Util.get_rel_import(
                 i_str=ns, ns=self._p_namespace
             )
             lst.append([f, n])
@@ -1588,7 +1600,7 @@ class ConstWriter(base.WriteBase):
         with open(dyn_path, 'r') as t_file:
             dyn_contents = t_file.read()
 
-        dyn_out_file = self._file_full_path.stem + base.APP_CONFIG.template_dyn_ext
+        dyn_out_file = self._file_full_path.stem + APP_CONFIG.template_dyn_ext
         write_path = self._file_full_path.parent / dyn_out_file
         with open(write_path, 'w') as out_file:
             out_file.write(dyn_contents)
@@ -1606,7 +1618,7 @@ class ConstWriter(base.WriteBase):
         if self._write_template_long is False:
             return
         self._template = self._template.replace(
-            '{libre_office_ver}', base.APP_CONFIG.libre_office_ver)
+            '{libre_office_ver}', APP_CONFIG.libre_office_ver)
         self._template = self._template.replace(
             '{allow_db}', str(self._allow_db))
         self._template = self._template.replace('{hex}', str(self._hex))
@@ -1620,15 +1632,15 @@ class ConstWriter(base.WriteBase):
             '{requires_typing}', str(self._p_requires_typing))
         self._template = self._template.replace(
             '{from_imports}',
-            base.Util.get_formated_dict_list_str(self._get_from_imports())
+            Util.get_formated_dict_list_str(self._get_from_imports())
         )
         self._template = self._template.replace(
             '{from_typing_imports}',
-            base.Util.get_formated_dict_list_str(
+            Util.get_formated_dict_list_str(
                 self._get_from_imports_typing())
         )
         indent = ' ' * self._indent_amt
-        str_json_desc = base.Util.get_formated_dict_list_str(self._p_desc)
+        str_json_desc = Util.get_formated_dict_list_str(self._p_desc)
         self._template = self._template.replace('{desc}', str_json_desc)
         indented = textwrap.indent(self._p_data, indent)
         # indented = indented.lstrip()
@@ -1696,7 +1708,7 @@ class ConstWriter(base.WriteBase):
         if self._write_path:
             write_path = self._write_path
         else:
-            write_path = base.APP_CONFIG.uno_base_dir
+            write_path = APP_CONFIG.uno_base_dir
         uno_obj_path = Path(util.get_root(), write_path)
         name_parts = self._p_fullname.split('.')
         # ignore com, sun, star
@@ -1711,7 +1723,7 @@ class ConstWriter(base.WriteBase):
                 raise e
 
         path_parts[index] = path_parts[index] + \
-            base.APP_CONFIG.template_const_ext
+            APP_CONFIG.template_const_ext
         obj_path = uno_obj_path.joinpath(*path_parts)
         self._mkdirp(obj_path.parent)
         self._cache[key] = obj_path
@@ -1808,7 +1820,7 @@ def parse(**kwargs):
         url=_url,
         sort=False,
         cache=_cache,
-        remove_parent_inherited=base.APP_CONFIG.remove_parent_inherited,
+        remove_parent_inherited=APP_CONFIG.remove_parent_inherited,
     )
     w = ConstWriter(
         parser=p,
@@ -1872,7 +1884,7 @@ def set_cmd_args(parser: argparse.ArgumentParser) -> None:
         required=True)
     parser.add_argument(
         '-o', '--out',
-        help=f"Out path of templates and json data. Default: '{base.APP_CONFIG.uno_base_dir}'",
+        help=f"Out path of templates and json data. Default: '{APP_CONFIG.uno_base_dir}'",
         type=str,
         dest='write_path',
         default=None,
