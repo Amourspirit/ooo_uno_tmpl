@@ -18,9 +18,15 @@ from bs4.element import ResultSet, Tag
 from kwhelp.decorator import DecFuncEnum, RequireArgs, RuleCheckAllKw, TypeCheckKw, TypeCheck
 from kwhelp import rules
 from pathlib import Path
+from ..common.config import APP_CONFIG
+from ..common.util import Util
+from ..common import log_load
+from ..web.block_obj import BlockObj
+from ..web.soup_obj import SoupObj
+from ..web.url_obj import UrlObj
 from ...logger.log_handle import get_logger
-from ...parser import __version__, JSON_ID, base
-from ...utilities import util
+from ...parser import __version__, JSON_ID
+from ...utilities import util as mutil
 # try:
 #     import base
 # except ModuleNotFoundError:
@@ -32,9 +38,9 @@ logger: logging.Logger = None
 
 
 def _set_loggers(l: Union[logging.Logger, None]):
-    global logger, base
+    global logger
     logger = l
-    base.logger = l
+    log_load.set_logger(l)
 
 
 _set_loggers(None)
@@ -53,9 +59,9 @@ class Link:
 # region API Classes
 
 
-class ApiTables(base.BlockObj):
-    @TypeCheck(base.SoupObj, ftype=DecFuncEnum.METHOD)
-    def __init__(self, soup: base.SoupObj):
+class ApiTables(BlockObj):
+    @TypeCheck(SoupObj, ftype=DecFuncEnum.METHOD)
+    def __init__(self, soup: SoupObj):
         self._soup = soup
         super().__init__(soup)
         self._data = None
@@ -68,7 +74,7 @@ class ApiTables(base.BlockObj):
         return self._data
 
 
-class ApiTableFindBase(base.BlockObj):
+class ApiTableFindBase(BlockObj):
     """Abstract Class for finding tables"""
     @TypeCheck(ApiTables, ftype=DecFuncEnum.METHOD)
     def __init__(self, tables: ApiTables):
@@ -194,11 +200,11 @@ class ApiTableLinks:
 
 class ApiData:
     # region constructor
-    @TypeCheck((str, base.SoupObj), bool, ftype=DecFuncEnum.METHOD)
-    def __init__(self, url_soup: Union[str, base.SoupObj], allow_cache: bool):
+    @TypeCheck((str, SoupObj), bool, ftype=DecFuncEnum.METHOD)
+    def __init__(self, url_soup: Union[str, SoupObj], allow_cache: bool):
         if isinstance(url_soup, str):
             self._url = url_soup
-            self._soup_obj = base.SoupObj(
+            self._soup_obj = SoupObj(
                 url=url_soup, allow_cache=allow_cache, has_name=False)
         else:
             self._url = url_soup.url
@@ -219,11 +225,11 @@ class ApiData:
 
     # region Properties
     @property
-    def soup_obj(self) -> base.SoupObj:
+    def soup_obj(self) -> SoupObj:
         return self._soup_obj
 
     @property
-    def url_obj(self) -> base.UrlObj:
+    def url_obj(self) -> UrlObj:
         return self._soup_obj.url_obj
 
     @property
@@ -458,15 +464,15 @@ class WriterMod():
         json_dict = {
             "id": JSON_ID,
             "version": __version__,
-            # "timestamp": str(base.Util.get_timestamp_utc()),
-            "libre_office_ver": base.APP_CONFIG.libre_office_ver,
+            # "timestamp": str(Util.get_timestamp_utc()),
+            "libre_office_ver": APP_CONFIG.libre_office_ver,
             "name": name,
             "namespace": name,
             "type": "module_links",
             "url_base": self._parser.api_data.url_obj.url_base,
             "data": self._parser.get_data()
         }
-        str_jsn = base.Util.get_formated_dict_list_str(obj=json_dict, indent=2)
+        str_jsn = Util.get_formated_dict_list_str(obj=json_dict, indent=2)
         self._cache[key] = str_jsn
         return self._cache[key]
 
@@ -484,14 +490,14 @@ class WriterMod():
         if self._write_path:
             write_path = self._write_path
         else:
-            write_path = base.APP_CONFIG.uno_base_dir
-        uno_obj_path = Path(util.get_root(), write_path)
+            write_path = APP_CONFIG.uno_base_dir
+        uno_obj_path = Path(mutil.get_root(), write_path)
         name_parts: List[str] = self._parser.api_data.url_obj.namespace
         # ignore com, sun, star
         path_parts = name_parts[3:]
         path_parts.append('module_links.json')
         obj_path = uno_obj_path.joinpath(*path_parts)
-        base.Util.mkdirp(dest_dir=obj_path.parent)
+        Util.mkdirp(dest_dir=obj_path.parent)
         self._cache[key] = obj_path
         return self._cache[key]
 # endregion Writer Class
@@ -607,7 +613,7 @@ def set_cmd_args(parser: argparse.ArgumentParser) -> None:
         required=True)
     parser.add_argument(
         '-o', '--out',
-        help=f"Out path of templates and json data. Default: '{base.APP_CONFIG.uno_base_dir}'",
+        help=f"Out path of templates and json data. Default: '{APP_CONFIG.uno_base_dir}'",
         type=str,
         dest='write_path',
         default=None,
