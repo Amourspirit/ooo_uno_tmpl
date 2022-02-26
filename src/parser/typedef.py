@@ -21,9 +21,19 @@ from kwhelp.decorator import DecFuncEnum, TypeCheckKw
 from pathlib import Path
 from dataclasses import dataclass, field
 from . import base, __version__, JSON_ID
+from .api.api_namespace import ApiNamespace
+from .api.api_data import APIData
+from .api.api_desc_detail import ApiDescDetail
+from .api.api_summary_block import ApiSummaryBlock
+from .api.api_summary_rows import ApiSummaryRows
+from .common.config import APP_CONFIG
+from .common.util import Util
+from .dataclass.name_info import NameInfo
+from .web.block_obj import BlockObj
+from .web.soup_obj import SoupObj
 from ..logger.log_handle import get_logger
 from .mod_type import PythonType
-from ..utilities import util
+from ..utilities import util as mutil
 
 # endregion Imports
 
@@ -62,18 +72,18 @@ class TypeDef(SummaryInfo):
     desc: List[str] = field(default_factory=list)
 
 
-class ApiTypeDefBlock(base.ApiSummaryBlock):
+class ApiTypeDefBlock(ApiSummaryBlock):
     """TypeDef Summary Block. Inherits ApiSummaryBlock"""
 
     def _get_match_name(self) -> str:
         return 'typedef-members'
 
 
-class ApiSummaries(base.BlockObj):
+class ApiSummaries(BlockObj):
     """Gets summary information for a public member block"""
 
-    def __init__(self, block: base.ApiSummaryRows, name_info: base.NameInfo, ns: str) -> None:
-        self._block: base.ApiSummaryRows = block
+    def __init__(self, block: ApiSummaryRows, name_info: NameInfo, ns: str) -> None:
+        self._block: ApiSummaryRows = block
         self._name_info = name_info
         super().__init__(self._block.soup)
         self._data = None
@@ -101,13 +111,13 @@ class ApiSummaries(base.BlockObj):
                 itm_name = itm_rgt.select_one('a')
                 if itm_name:
                     name = itm_name.text.strip()
-                    name = base.Util.get_clean_method_name(name)
+                    name = Util.get_clean_method_name(name)
             if not name:
                 msg = f"{self.__class__.__name__}.get_obj(). Missing name. Url: {self.url_obj.url_only}"
                 logger.error(msg)
                 raise Exception(msg)
             if _type:
-                p_type = base.Util.get_python_type(
+                p_type = Util.get_python_type(
                     in_type=_type, name_info=self._name_info, ns=self._ns
                 )
                 s_type = p_type.type
@@ -139,10 +149,10 @@ class ApiSummaries(base.BlockObj):
         return self._data
 
 
-class ApiNs(base.ApiNamespace):
+class ApiNs(ApiNamespace):
     """Get the Name object for the interface"""
 
-    def __init__(self, soup: base.SoupObj):
+    def __init__(self, soup: SoupObj):
         super().__init__(soup)
         self._namespace_str = None
         self._namespace = None
@@ -161,21 +171,21 @@ class ApiNs(base.ApiNamespace):
         return self._namespace_str
 
 
-class ApiData(base.APIData):
+class ApiData(APIData):
     # region Constructor
-    def __init__(self, url_soup: Union[str, base.SoupObj], allow_cache: bool):
+    def __init__(self, url_soup: Union[str, SoupObj], allow_cache: bool):
         super().__init__(url_soup=url_soup, allow_cache=allow_cache)
         self._si_key = 'summeries'
         self._detail_block_key = 'detail_block'
         self._type_def_block: ApiTypeDefBlock = None  # ApiSummaryBlock
-        self._type_def_summary_rows: base.ApiSummaryRows = None
+        self._type_def_summary_rows: ApiSummaryRows = None
         self._type_def_summaries: ApiSummaries = None
         self._ns: ApiNs = None
         self._cache = {}
     # endregion Constructor
 
     # region Methods
-    def get_desc_detail(self, a_id: str) -> base.ApiDescDetail:
+    def get_desc_detail(self, a_id: str) -> ApiDescDetail:
         """Gets Description obj for method or property"""
 
         key = f"get_desc_detail_{a_id}"
@@ -204,10 +214,10 @@ class ApiData(base.APIData):
         return self._type_def_block
 
     @property
-    def type_def_summary_rows(self) -> base.ApiSummaryRows:
+    def type_def_summary_rows(self) -> ApiSummaryRows:
         """Get Summary rows for Properties"""
         if self._type_def_summary_rows is None:
-            self._type_def_summary_rows = base.ApiSummaryRows(
+            self._type_def_summary_rows = ApiSummaryRows(
                 self.type_def_block)
         return self._type_def_summary_rows
 
@@ -317,7 +327,7 @@ class ParserTypeDef(base.ParserBase):
         if key in self._cache:
             return self._cache[key]
         attribs = self._get_data_items()
-        str_lst = base.Util.get_formated_dict_list_str(obj=attribs, indent=4)
+        str_lst = Util.get_formated_dict_list_str(obj=attribs, indent=4)
         self._cache[key] = str_lst
         return self._cache[key]
 
@@ -417,8 +427,8 @@ class WriterTypeDef(base.WriteBase):
         json_dict = {
             "id": JSON_ID,
             "version": __version__,
-            # "timestamp": str(base.Util.get_timestamp_utc()),
-            "libre_office_ver": base.APP_CONFIG.libre_office_ver,
+            # "timestamp": str(Util.get_timestamp_utc()),
+            "libre_office_ver": APP_CONFIG.libre_office_ver,
             "name": t_def.name,
             "type": "typedef",
             "namespace": p_dict['namespace'],
@@ -428,7 +438,7 @@ class WriterTypeDef(base.WriteBase):
             },
             "data": p_dict
         }
-        str_jsn = base.Util.get_formated_dict_list_str(obj=json_dict, indent=2)
+        str_jsn = Util.get_formated_dict_list_str(obj=json_dict, indent=2)
         self._json_str = str_jsn
         return self._json_str
 
@@ -450,7 +460,7 @@ class WriterTypeDef(base.WriteBase):
         # sort for consistency in json
         lst_im.sort()
         for ns in lst_im:
-            f, n = base.Util.get_rel_import(
+            f, n = Util.get_rel_import(
                 i_str=ns, ns=self._p_namespace
             )
             lst.append([f, n])
@@ -490,7 +500,7 @@ class WriterTypeDef(base.WriteBase):
             return self._template
         t = self._template
         t = t.replace('{allow_db}', str(self._allow_db))
-        t = t.replace('{libre_office_ver}', base.APP_CONFIG.libre_office_ver)
+        t = t.replace('{libre_office_ver}', APP_CONFIG.libre_office_ver)
         t = t.replace('{name}', t_def.name)
         t = t.replace('{ns}', str(self._p_namespace))
         t = t.replace('{link}', self._p_url)
@@ -507,10 +517,10 @@ class WriterTypeDef(base.WriteBase):
             '{include_desc}', str(self._include_desc))
         t = t.replace(
             '{from_imports}',
-            base.Util.get_formated_dict_list_str(self._get_from_imports(t_def))
+            Util.get_formated_dict_list_str(self._get_from_imports(t_def))
         )
         if len(t_def.desc) > 0:
-            desc = base.Util.get_formated_dict_list_str(t_def.desc, indent=4)
+            desc = Util.get_formated_dict_list_str(t_def.desc, indent=4)
         else:
             desc = "[]"
         t = t.replace('{desc}', desc)
@@ -541,17 +551,17 @@ class WriterTypeDef(base.WriteBase):
         key = '_get_uno_obj_path_' + t_def.id
         if key in self._cache:
             return self._cache[key]
-        # _p_name = base.Util.camel_to_snake(t_def.name)
+        # _p_name = Util.camel_to_snake(t_def.name)
         _p_name = t_def.name
         if self._write_path:
             write_path = self._write_path
         else:
-            write_path = base.APP_CONFIG.uno_base_dir
-        uno_obj_path = Path(util.get_root(), write_path)
+            write_path = APP_CONFIG.uno_base_dir
+        uno_obj_path = Path(mutil.get_root(), write_path)
         name_parts: List[str] = self._p_namespace.split('.')
         # ignore com, sun, star
         path_parts = name_parts[3:]
-        path_parts.append(_p_name + base.APP_CONFIG.template_typedef_ext)
+        path_parts.append(_p_name + APP_CONFIG.template_typedef_ext)
         obj_path = uno_obj_path.joinpath(*path_parts)
         # because all typedef are written to the same dir
         # only need ot call mkdirp once.
@@ -601,7 +611,7 @@ class WriterTypeDef(base.WriteBase):
             tmpl_file_path = self._get_uno_obj_path(t_def)
             file_path = tmpl_file_path.parent
             file_path = file_path.joinpath(
-                tmpl_file_path.stem + base.APP_CONFIG.template_dyn_ext)
+                tmpl_file_path.stem + APP_CONFIG.template_dyn_ext)
             with open(file_path, 'w') as f:
                 f.write(dyn_contents)
             logger.info("Created file: %s", file_path)
@@ -755,7 +765,7 @@ def set_cmd_args(parser: argparse.ArgumentParser) -> None:
         required=True)
     parser.add_argument(
         '-o', '--out',
-        help=f"Out path of templates and json data. Default: '{base.APP_CONFIG.uno_base_dir}'",
+        help=f"Out path of templates and json data. Default: '{APP_CONFIG.uno_base_dir}'",
         type=str,
         dest='write_path',
         default=None,
