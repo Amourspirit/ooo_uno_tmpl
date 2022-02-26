@@ -1,9 +1,7 @@
 # coding: utf-8
+"""Singleton Class Log helper for parsers"""
+
 import logging
-from typing import Union
-from ...logger import log_handle
-# region Logger
-logger: logging.Logger = None
 
 class Log:
     """Singleton Class Log helper for parsers"""
