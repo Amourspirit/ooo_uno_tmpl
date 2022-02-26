@@ -17,11 +17,6 @@ from .common.util import Util as Util, str_clean
 from .web.response_obj import ResponseObj
 # endregion imports
 
-# region Exceptions
-class RequiredError(Exception):
-    """Error for required"""
-# endregion Exceptions
-
 # region Writer/parser base
 class WriteBase(object):
     def __init__(self, **kwargs):

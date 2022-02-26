@@ -16,9 +16,11 @@ from typing import List, Tuple, Union
 from pathlib import Path
 from ...logger.log_handle import get_logger
 from verr import Version
-from ...parser import __version__, JSON_ID, base
+from ..common.regx import pattern_http
+from ..common import log_load
+from ...parser import __version__, JSON_ID
 from ...parser.json_parser import mod
-from ...utilities import util
+from ...utilities import util as mutil
 # endregion imports
 
 # region Logger
@@ -26,9 +28,9 @@ logger = None
 
 
 def _set_loggers(l: Union[logging.Logger, None]):
-    global logger, base
+    global logger
     logger = l
-    base.logger = l
+    log_load.set_logger(l)
 
 
 _set_loggers(None)
@@ -49,7 +51,7 @@ class ParserLinks:
     def _load_json(self):
         j_p = Path(self._json_path)
         if not j_p.is_absolute():
-            j_p = Path(Path(util.get_root()), j_p)
+            j_p = Path(Path(mutil.get_root()), j_p)
         if not j_p.exists():
             msg = f"Unable to find json file: '{self._json_path}'"
             logger.error(msg)
@@ -99,7 +101,7 @@ class ParserLinks:
         data: List[dict] = self._json_data['data']
         result: List[urldata] = []
         # add root url so module_links.json is written in uno_obj folder.
-        m = base.pattern_http.match(url_root)
+        m = pattern_http.match(url_root)
         if not m:
             url_root = url_base + '/' + url_root
         result.append(urldata(name='star', href=url_root))
@@ -107,7 +109,7 @@ class ParserLinks:
         for itm in data:
             name = itm['name']
             href = itm['href']
-            m = base.pattern_http.match(href)
+            m = pattern_http.match(href)
             if not m:
                 href = url_base + '/' + href
             result.append(urldata(name=name, href=href))
@@ -206,7 +208,7 @@ def parse(**kwargs):
         log_file (str, optional): Log File
     """
     global logger
-    json_file = str(Path(util.get_root(), 'resources', 'star.json'))
+    json_file = str(Path(mutil.get_root(), 'resources', 'star.json'))
     _log_file = 'linkproc.log' if kwargs.get(
         'log_file', None) is None else str(kwargs.get('log_file'))
     _verbose = bool(kwargs.get('verbose', False))
@@ -230,7 +232,7 @@ def parse(**kwargs):
 
 
 def set_cmd_args(parser: argparse.ArgumentParser) -> None:
-    json_file = str(Path(util.get_root(), 'resources', 'star.json'))
+    json_file = str(Path(mutil.get_root(), 'resources', 'star.json'))
     parser.add_argument(
         '-f', '--json-file',
         help="Source Json file. Default 'resources/star.json'",

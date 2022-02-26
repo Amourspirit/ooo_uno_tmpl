@@ -10,7 +10,8 @@ import logging
 from typing import Callable, Dict, Union
 from pathlib import Path
 from verr import Version
-from ...parser import base, service
+from ..exception.required_error import RequiredError
+from ...parser import service
 from ...parser.json_parser import base_parser as bp
 from ...logger.log_handle import get_logger
 
@@ -88,7 +89,7 @@ def _get_parsed_kwargs(**kwargs) -> Dict[str, str]:
     for k in required:
         if not k in result:
             # k is missing from kwargs
-            raise base.RequiredError(f"Missing required arg {k}.")
+            raise RequiredError(f"Missing required arg {k}.")
     return result
 
 

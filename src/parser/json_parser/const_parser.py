@@ -16,9 +16,11 @@ from typing import List, Tuple, Union
 from pathlib import Path
 from kwhelp.decorator import RequireArgs
 from verr import Version
+from ..common.regx import pattern_http
+from ..common import log_load
 from ...logger.log_handle import get_logger
-from ...parser import __version__, JSON_ID, base, const
-from ...utilities import util
+from ...parser import __version__, JSON_ID, const
+from ...utilities import util as mutil
 
 # endregion imports
 
@@ -27,9 +29,9 @@ logger = None
 
 
 def _set_loggers(l: Union[logging.Logger, None]):
-    global logger, base
+    global logger
     logger = l
-    base.logger = l
+    log_load.set_logger(l)
 
 
 _set_loggers(None)
@@ -42,7 +44,7 @@ class ParserConst:
     def __init__(self, json_path: Union[str, Path]) -> None:
         self._json_path = json_path
         self._json_data: dict = None
-        self._app_root = Path(util.get_root())
+        self._app_root = Path(mutil.get_root())
         self._cache = {}
         self._load_json()
 
@@ -101,7 +103,7 @@ class ParserConst:
         for itm in enum_links:
             name = itm['name']
             href = itm['href']
-            m = base.pattern_http.match(href)
+            m = pattern_http.match(href)
             if not m:
                 href = url_base + '/' + href
             result.append(urldata(name=name, href=href))
