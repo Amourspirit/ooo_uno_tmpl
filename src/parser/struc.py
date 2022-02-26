@@ -14,6 +14,15 @@ from pathlib import Path
 import textwrap
 import xerox  # requires xclip - sudo apt-get install xclip
 from . import base, __version__, JSON_ID
+from .api.api_namespace import ApiNamespace
+from .api.api_data import APIData
+from .common.config import APP_CONFIG
+from .common.util import Util
+from .dataclass.summary_info import SummaryInfo
+from .rules.name.i_rules_name import IRulesName
+from .rules.name.rules_name import RulesName
+from .rules.name.rule_name_no_generics import RuleNameNoGenerics
+from .web.soup_obj import SoupObj
 from ..logger.log_handle import get_logger
 from ..utilities import util
 # endregion Imports
@@ -53,10 +62,10 @@ class DataItem:
 # region API
 
 
-class ApiNs(base.ApiNamespace):
+class ApiNs(ApiNamespace):
     """Get the Name object for the interface"""
 
-    def __init__(self, soup: base.SoupObj):
+    def __init__(self, soup: SoupObj):
         super().__init__(soup)
         self._namespace_str = None
         self._namespace = None
@@ -75,10 +84,10 @@ class ApiNs(base.ApiNamespace):
         return self._namespace_str
 
 
-class ApiData(base.APIData):
+class ApiData(APIData):
     # region constructor
-    @TypeCheck((str, base.SoupObj), bool, bool, bool, ftype=DecFuncEnum.METHOD)
-    def __init__(self, url_soup: Union[str, base.SoupObj], allow_cache: bool, long_names: bool = False, remove_parent_inherited: bool = True):
+    @TypeCheck((str, SoupObj), bool, bool, bool, ftype=DecFuncEnum.METHOD)
+    def __init__(self, url_soup: Union[str, SoupObj], allow_cache: bool, long_names: bool = False, remove_parent_inherited: bool = True):
         super().__init__(
             url_soup=url_soup,
             allow_cache=allow_cache,
@@ -88,20 +97,20 @@ class ApiData(base.APIData):
 
         self._ns: ApiNs = None
 
-        self._name_rules_engine = base.RulesName()
+        self._name_rules_engine = RulesName()
         self._set_name_rules()
     # endregion constructor
 
     # region Name Rules
     def _set_name_rules(self) -> None:
-        self._name_rules_engine.register_rule(base.RuleNameNoGenerics)
+        self._name_rules_engine.register_rule(RuleNameNoGenerics)
 
-    def _get_name_rules_engine(self) -> Union[base.IRulesName, None]:
+    def _get_name_rules_engine(self) -> Union[IRulesName, None]:
         """
         Gets Name Rules Engine. Overrides parent class
 
         Returns:
-            base.IRulesName: base.RulesName() instance
+            IRulesName: RulesName() instance
         """
         return self._name_rules_engine
     # endregion Name Rules
@@ -214,7 +223,7 @@ class Parser(base.ParserBase):
         if key in self._cache:
             return self._cache[key]
         items = self._get_data_items()
-        str_lst = base.Util.get_formated_dict_list_str(
+        str_lst = Util.get_formated_dict_list_str(
             obj=items, indent=indent)
         self._cache[key] = str_lst
         return self._cache[key]
@@ -232,7 +241,7 @@ class Parser(base.ParserBase):
             self._cache[key].extend(p_data['properties'])
         return self._cache[key]
 
-    def _get_summary_data(self, si_lst: List[base.SummaryInfo], key: str) -> dict:
+    def _get_summary_data(self, si_lst: List[SummaryInfo], key: str) -> dict:
         attribs = {}
         for i, si in enumerate(si_lst):
             if logger.level <= logging.DEBUG:
@@ -297,7 +306,7 @@ class Parser(base.ParserBase):
             if len(self._imports) > 0:
                 info = self.get_info()
                 ns = info['namespace']
-                self._imports = base.Util.get_clean_imports(
+                self._imports = Util.get_clean_imports(
                     ns=ns, imports=self._imports)
             self._cache[key] = True
         return self._imports
@@ -446,8 +455,8 @@ class StructWriter(base.WriteBase):
         json_dict = {
             "id": JSON_ID,
             "version": __version__,
-            # "timestamp": str(base.Util.get_timestamp_utc()),
-            "libre_office_ver": base.APP_CONFIG.libre_office_ver,
+            # "timestamp": str(Util.get_timestamp_utc()),
+            "libre_office_ver": APP_CONFIG.libre_office_ver,
             "type": "struct",
             "name": p_dict['name'],
             "namespace": p_dict['namespace'],
@@ -459,7 +468,7 @@ class StructWriter(base.WriteBase):
             },
             "data": p_dict
         }
-        str_jsn = base.Util.get_formated_dict_list_str(obj=json_dict, indent=2)
+        str_jsn = Util.get_formated_dict_list_str(obj=json_dict, indent=2)
         self._json_str = str_jsn
         return self._json_str
 
@@ -470,9 +479,9 @@ class StructWriter(base.WriteBase):
             return self._cache[key]
         lst = []
         if self._parser.long_names:
-            rel_fn = base.Util.get_rel_import_long
+            rel_fn = Util.get_rel_import_long
         else:
-            rel_fn = base.Util.get_rel_import
+            rel_fn = Util.get_rel_import
         lst_im = list(self._p_imports)
         # sort for consistency in json
         lst_im.sort()
@@ -487,9 +496,9 @@ class StructWriter(base.WriteBase):
             return self._cache[key]
         lst = []
         if self._parser.long_names:
-            rel_fn = base.Util.get_rel_import_long
+            rel_fn = Util.get_rel_import_long
         else:
-            rel_fn = base.Util.get_rel_import
+            rel_fn = Util.get_rel_import
         lst_im = list(self._p_imports_typing)
         # sort for consistency in json
         lst_im.sort()
@@ -509,7 +518,7 @@ class StructWriter(base.WriteBase):
         lst = list(self._p_imports)
         lst.sort()
         for im in lst:
-            results[im] = base.Util.get_rel_import_long_name(
+            results[im] = Util.get_rel_import_long_name(
                 im, ns=self._p_namespace)
         self._cache[key] = results
         return self._cache[key]
@@ -566,12 +575,12 @@ class StructWriter(base.WriteBase):
         if self._write_template_long is False:
             return
         self._template = self._template.replace(
-            '{libre_office_ver}', base.APP_CONFIG.libre_office_ver)
+            '{libre_office_ver}', APP_CONFIG.libre_office_ver)
         self._template = self._template.replace(
             '{dynamic_struct}', str(self._dynamic_struct))
         self._template = self._template.replace('{sort}', str(self._sort))
         self._template = self._template.replace(
-            '{extends_map}', base.Util.get_formated_dict_list_str(self._get_imports_map()))
+            '{extends_map}', Util.get_formated_dict_list_str(self._get_imports_map()))
 
         self._template = self._template.replace('{name}', self._p_name)
         self._template = self._template.replace('{ns}', str(self._p_namespace))
@@ -587,20 +596,20 @@ class StructWriter(base.WriteBase):
         self._template = self._template.replace(
             '{include_desc}', str(self._include_desc))
         self._template = self._template.replace(
-            '{inherits}', base.Util.get_string_list(lines=self._p_extends))
+            '{inherits}', Util.get_string_list(lines=self._p_extends))
         self._template = self._template.replace(
             '{imports}', "[]")
         self._template = self._template.replace(
             '{from_imports}',
-            base.Util.get_formated_dict_list_str(self._get_from_imports())
+            Util.get_formated_dict_list_str(self._get_from_imports())
         )
         self._template = self._template.replace(
             '{from_imports_typing}',
-            base.Util.get_formated_dict_list_str(
+            Util.get_formated_dict_list_str(
                 self._get_from_imports_typing())
         )
         if len(self._p_desc) > 0:
-            desc = base.Util.get_formated_dict_list_str(self._p_desc, indent=4)
+            desc = Util.get_formated_dict_list_str(self._p_desc, indent=4)
         else:
             desc = "[]"
         self._template = self._template.replace('{desc}', desc)
@@ -624,7 +633,7 @@ class StructWriter(base.WriteBase):
         with open(dyn_path, 'r') as t_file:
             dyn_contents = t_file.read()
 
-        dyn_out_file = self._file_full_path.stem + base.APP_CONFIG.template_dyn_ext
+        dyn_out_file = self._file_full_path.stem + APP_CONFIG.template_dyn_ext
         write_path = self._file_full_path.parent / dyn_out_file
         with open(write_path, 'w') as out_file:
             out_file.write(dyn_contents)
@@ -640,7 +649,7 @@ class StructWriter(base.WriteBase):
 
     def _set_info(self):
         def get_extends(lst: List[str]) -> List[str]:
-            return [base.Util.get_last_part(s) for s in lst]
+            return [Util.get_last_part(s) for s in lst]
         data = self._parser.get_info()
         self._p_name = data['name']
         self._p_desc = data['desc']
@@ -653,11 +662,11 @@ class StructWriter(base.WriteBase):
         self._p_imports.update(data['imports'])
         self._p_imports.update(data['extends'])
         self._p_imports_typing.update(self._parser.imports)
-        self._p_imports = base.Util.get_clean_imports(
+        self._p_imports = Util.get_clean_imports(
             ns=self._p_namespace,
             imports=self._p_imports
         )
-        self._p_imports_typing = base.Util.get_clean_imports(
+        self._p_imports_typing = Util.get_clean_imports(
             ns=self._p_namespace,
             imports=self._p_imports_typing
         )
@@ -698,7 +707,7 @@ class StructWriter(base.WriteBase):
         if self._write_path:
             write_path = self._write_path
         else:
-            write_path = base.APP_CONFIG.uno_base_dir
+            write_path = APP_CONFIG.uno_base_dir
         uno_obj_path = Path(util.get_root(), write_path)
         name_parts = self._p_fullname.split('.')
         # ignore com, sun, star
@@ -712,8 +721,8 @@ class StructWriter(base.WriteBase):
                 logger.error(e, exc_info=True)
                 raise e
 
-        path_parts[index] = base.Util.get_clean_filename(
-            path_parts[index]) + base.APP_CONFIG.template_struct_ext
+        path_parts[index] = Util.get_clean_filename(
+            path_parts[index]) + APP_CONFIG.template_struct_ext
         obj_path = uno_obj_path.joinpath(*path_parts)
         self._mkdirp(obj_path.parent)
         self._cache[key] = obj_path
@@ -796,7 +805,7 @@ def parse(**kwargs) -> Union[str, None]:
     _print_json = bool(kwargs.get('print_json', False))
     _write_json = bool(kwargs.get('write_json', bool))
     _long_names = bool(kwargs.get(
-        'long_names', base.APP_CONFIG.use_long_import_names))
+        'long_names', APP_CONFIG.use_long_import_names))
     _json_out = bool(kwargs.get('json_out', False))
     _log_file = kwargs.get('log_file', None)
     _verbose = bool(kwargs.get('verbose', False))
@@ -819,7 +828,7 @@ def parse(**kwargs) -> Union[str, None]:
         sort=_sort,
         cache=_cache,
         long_names=_long_names,
-        remove_parent_inherited=base.APP_CONFIG.remove_parent_inherited
+        remove_parent_inherited=APP_CONFIG.remove_parent_inherited
     )
     w = StructWriter(
         parser=p,
@@ -871,7 +880,7 @@ def set_cmd_args(parser: argparse.ArgumentParser) -> None:
         required=True)
     parser.add_argument(
         '-o', '--out',
-        help=f"Out path of templates and json data. Default: '{base.APP_CONFIG.uno_base_dir}'",
+        help=f"Out path of templates and json data. Default: '{APP_CONFIG.uno_base_dir}'",
         type=str,
         dest='write_path',
         default=None,
@@ -909,9 +918,9 @@ def set_cmd_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
         '-l', '--long-names',
         help='Toggels default value of config. Short Names such as XInterface will be generated instead of XInterface_8f010a43 or vice versa',
-        action='store_false' if base.APP_CONFIG.use_long_import_names else 'store_true',
+        action='store_false' if APP_CONFIG.use_long_import_names else 'store_true',
         dest='long_names',
-        default=base.APP_CONFIG.use_long_import_names)
+        default=APP_CONFIG.use_long_import_names)
     parser.add_argument(
         '-c', '--clipboard',
         help='Copy to clipboard',
