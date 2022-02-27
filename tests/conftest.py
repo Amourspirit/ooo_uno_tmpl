@@ -13,8 +13,10 @@ def test_log():
     return log
 
 @pytest.fixture(scope="session")
-def scrtch_uno_path() -> Path:
-    return Path('scratch') / 'uno_obj'
+def fixture_path(app_root: Path) -> Path:
+    return app_root / 'tests' / 'fixture'
 
 
-
+@pytest.fixture(scope="session")
+def fixture_json_path(fixture_path: Path) -> Path:
+    return fixture_path / 'json'
