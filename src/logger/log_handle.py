@@ -98,7 +98,7 @@ def get_file_handler(log_file: Union[str, Path, None] = None):
     return LOG_FILE_HANDLER
 
 
-def get_logger(logger_name, **kwargs):
+def get_logger(logger_name: str, **kwargs):
     """
     Gets a logger
 

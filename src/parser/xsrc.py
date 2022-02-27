@@ -16,9 +16,20 @@ from typing import Dict, List, Set, Union
 from kwhelp.decorator import AcceptedTypes, DecFuncEnum, RequireArgs, TypeCheck, TypeCheckKw
 from pathlib import Path
 from . import base, __version__, JSON_ID
+from .api.api_data import APIData
+from .api.api_detail_block import ApiDetailBlock
+from .api.api_desc_detail import ApiDescDetail
+from .api.api_proto_block import ApiProtoBlock
+from .api.api_namespace import ApiNamespace
+from .common.config import APP_CONFIG
+from .common import log_load
+from .common import known
+from .common.util import Util
+from .dataclass.summary_info import SummaryInfo
+from .dataclass.import_info import ImportInfo
+from .web.soup_obj import SoupObj
 from ..logger.log_handle import get_logger
-from ..utilities import util
-# from .base import SummaryInfo, Util
+from ..utilities import util as mutil
 # endregion Imports
 
 # region Logger
@@ -27,8 +38,9 @@ logger = None
 
 def _set_loggers(l: Union[logging.Logger, None]):
     global logger
-    logger = l
-    base._set_loggers(l)
+    log = log_load.Log()
+    log.logger = l
+    logger = log.logger
 
 
 _set_loggers(None)
@@ -59,10 +71,10 @@ re_comment_start_pattern = re.compile(r"(?:(\/\*)|(?:\*)\s)")
 # region API Interface classes
 
 
-class ApiNs(base.ApiNamespace):
+class ApiNs(ApiNamespace):
     """Get the Name object for the interface"""
 
-    def __init__(self, soup: base.SoupObj):
+    def __init__(self, soup: SoupObj):
         super().__init__(soup)
         self._namespace_str = None
         self._namespace = None
@@ -81,10 +93,10 @@ class ApiNs(base.ApiNamespace):
         return self._namespace_str
 
 
-class ApiInterfaceData(base.APIData):
+class ApiInterfaceData(APIData):
     # region Constructor
-    @TypeCheck((str, base.SoupObj), bool, bool, bool, ftype=DecFuncEnum.METHOD)
-    def __init__(self, url_soup: Union[str, base.SoupObj], allow_cache: bool, long_names: bool = False, remove_parent_inherited=True):
+    @TypeCheck((str, SoupObj), bool, bool, bool, ftype=DecFuncEnum.METHOD)
+    def __init__(self, url_soup: Union[str, SoupObj], allow_cache: bool, long_names: bool = False, remove_parent_inherited=True):
         super().__init__(url_soup=url_soup, allow_cache=allow_cache,
                          long_names=long_names, remove_parent_inherited=remove_parent_inherited)
         self._si_key = 'summeries'
@@ -98,7 +110,7 @@ class ApiInterfaceData(base.APIData):
 
     # region Methods
     @AcceptedTypes(str, ftype=DecFuncEnum.METHOD)
-    def get_detail_block(self, a_id: str) -> base.ApiDetailBlock:
+    def get_detail_block(self, a_id: str) -> ApiDetailBlock:
         """
         Gets detail block of a function.
         Gets the 
@@ -117,7 +129,7 @@ class ApiInterfaceData(base.APIData):
         return result
 
     @AcceptedTypes(str, ftype=DecFuncEnum.METHOD)
-    def get_proto_block(self, a_id: str) -> base.ApiProtoBlock:
+    def get_proto_block(self, a_id: str) -> ApiProtoBlock:
         """Gets the block for a method information"""
         key = f"get_proto_block_{a_id}"
         if key in self._cache:
@@ -127,7 +139,7 @@ class ApiInterfaceData(base.APIData):
         return self._cache[key]
 
     @AcceptedTypes(str, ftype=DecFuncEnum.METHOD)
-    def get_desc_detail(self, a_id: str) -> base.ApiDescDetail:
+    def get_desc_detail(self, a_id: str) -> ApiDescDetail:
         """Gets Description obj for method or property"""
         key = f"get_desc_detail_{a_id}"
         if key in self._cache:
@@ -136,7 +148,7 @@ class ApiInterfaceData(base.APIData):
         return self._cache[key]
 
     @AcceptedTypes(str, ftype=DecFuncEnum.METHOD)
-    def get_import_info_method(self, a_id: str) -> base.ImportInfo:
+    def get_import_info_method(self, a_id: str) -> ImportInfo:
         """
         Gets imports for method params and return type
 
@@ -144,7 +156,7 @@ class ApiInterfaceData(base.APIData):
             si_id (str): Function summary Info
 
         Returns:
-            base.ImportInfo: Import info
+            ImportInfo: Import info
         """
         key = 'get_import_info_method_' + a_id
         if key in self._cache:
@@ -157,7 +169,7 @@ class ApiInterfaceData(base.APIData):
     # region Properties
 
     @property
-    def ns(self) -> base.ApiNamespace:
+    def ns(self) -> ApiNamespace:
         """Gets the interface Description object"""
         if self._ns is None:
             self._ns = ApiNs(
@@ -235,7 +247,7 @@ class Parser(base.ParserBase):
         ex = []
         for el in self._api_data.inherited.get_obj():
             ex.append(el.fullns)
-        # ex_s = base.Util.get_clean_imports(ns=ns.namespace_str, imports=ex)
+        # ex_s = Util.get_clean_imports(ns=ns.namespace_str, imports=ex)
         ni = self._api_data.name.get_obj()
         result = {
             # 'name': ni.name,
@@ -259,7 +271,7 @@ class Parser(base.ParserBase):
         if key in self._cache:
             return self._cache[key]
         attribs = self._get_data_items()
-        str_lst = base.Util.get_formated_dict_list_str(obj=attribs, indent=4)
+        str_lst = Util.get_formated_dict_list_str(obj=attribs, indent=4)
         self._cache[key] = str_lst
         return self._cache[key]
 
@@ -331,7 +343,7 @@ class Parser(base.ParserBase):
                 attribs['methods'] = newlist
         return attribs
 
-    def _get_summary_data(self, si_lst: List[base.SummaryInfo], key: str) -> dict:
+    def _get_summary_data(self, si_lst: List[SummaryInfo], key: str) -> dict:
         attribs = {}
         for i, si in enumerate(si_lst):
             if logger.level <= logging.DEBUG:
@@ -401,7 +413,7 @@ class Parser(base.ParserBase):
             if len(self._imports) > 0:
                 info = self.get_info()
                 ns = info['namespace']
-                self._imports = base.Util.get_clean_imports(
+                self._imports = Util.get_clean_imports(
                     ns=ns, imports=self._imports)
             self._cache[key] = True
         return self._imports
@@ -548,7 +560,7 @@ class Writer(base.WriteBase):
             return self._json_str
         if self._allow_known_json:
             full_ns = self._parser.get_full_name()
-            known_json = base.get_known_json(full_ns=full_ns)
+            known_json = known.get_known_json(full_ns=full_ns)
             if known_json:
                 self._json_str = known_json
                 return self._json_str
@@ -566,8 +578,8 @@ class Writer(base.WriteBase):
         json_dict = {
             "id": JSON_ID,
             "version": __version__,
-            # "timestamp": str(base.Util.get_timestamp_utc()),
-            "libre_office_ver": base.APP_CONFIG.libre_office_ver,
+            # "timestamp": str(Util.get_timestamp_utc()),
+            "libre_office_ver": APP_CONFIG.libre_office_ver,
             "name": p_dict['name'],
             "type": self._get_json_type(),
             "namespace": p_dict['namespace'],
@@ -577,7 +589,7 @@ class Writer(base.WriteBase):
             },
             "data": p_dict
         }
-        str_jsn = base.Util.get_formated_dict_list_str(obj=json_dict, indent=2)
+        str_jsn = Util.get_formated_dict_list_str(obj=json_dict, indent=2)
         self._json_str = str_jsn
         return self._json_str
 
@@ -598,7 +610,7 @@ class Writer(base.WriteBase):
             # sort for consistency in json
             lst_im.sort()
             for ns in lst_im:
-                ims.append(base.Util.get_full_import(
+                ims.append(Util.get_full_import(
                     ns=self._p_namespace, name=ns))
             return ims
 
@@ -608,7 +620,7 @@ class Writer(base.WriteBase):
             # sort for consistency in json
             lst_im.sort()
             for ns in lst_im:
-                ims.append(base.Util.get_full_import(
+                ims.append(Util.get_full_import(
                     ns=self._p_namespace, name=ns))
             return ims
         result = {
@@ -624,9 +636,9 @@ class Writer(base.WriteBase):
             return self._cache[key]
         lst = []
         if self._parser.long_names:
-            rel_fn = base.Util.get_rel_import_long
+            rel_fn = Util.get_rel_import_long
         else:
-            rel_fn = base.Util.get_rel_import
+            rel_fn = Util.get_rel_import
         lst_im = list(self._p_imports)
         # sort for consistency in json
         lst_im.sort()
@@ -643,9 +655,9 @@ class Writer(base.WriteBase):
             return self._cache[key]
         lst = []
         if self._parser.long_names:
-            rel_fn = base.Util.get_rel_import_long
+            rel_fn = Util.get_rel_import_long
         else:
-            rel_fn = base.Util.get_rel_import
+            rel_fn = Util.get_rel_import
         lst_im = list(self._p_imports_typing)
         # sort for consistency in json
         lst_im.sort()
@@ -667,7 +679,7 @@ class Writer(base.WriteBase):
         lst = list(self._p_imports)
         lst.sort()
         for im in lst:
-            results[im] = base.Util.get_rel_import_long_name(
+            results[im] = Util.get_rel_import_long_name(
                 im, ns=self._p_namespace)
         self._cache[key] = results
         return self._cache[key]
@@ -767,9 +779,9 @@ class Writer(base.WriteBase):
         self._template = self._template.replace(
             '{allow_db}', str(self._allow_db))
         self._template = self._template.replace(
-            '{extends_map}', base.Util.get_formated_dict_list_str(self._get_imports_map()))
+            '{extends_map}', Util.get_formated_dict_list_str(self._get_imports_map()))
         self._template = self._template.replace(
-            '{libre_office_ver}', base.APP_CONFIG.libre_office_ver)
+            '{libre_office_ver}', APP_CONFIG.libre_office_ver)
         self._template = self._template.replace(
             '{quote}',
             str(set(self._get_quote_flat())))
@@ -782,20 +794,20 @@ class Writer(base.WriteBase):
         self._template = self._template.replace(
             '{include_desc}', str(self._include_desc))
         self._template = self._template.replace(
-            '{inherits}', base.Util.get_string_list(lines=self._p_extends))
+            '{inherits}', Util.get_string_list(lines=self._p_extends))
         self._template = self._template.replace(
             '{imports}', "[]")
         self._template = self._template.replace(
             '{from_imports}',
-            base.Util.get_formated_dict_list_str(self._get_from_imports())
+            Util.get_formated_dict_list_str(self._get_from_imports())
         )
         self._template = self._template.replace(
             '{from_imports_typing}',
-            base.Util.get_formated_dict_list_str(
+            Util.get_formated_dict_list_str(
                 self._get_from_imports_typing())
         )
         if len(self._p_desc) > 0:
-            desc = base.Util.get_formated_dict_list_str(self._p_desc, indent=4)
+            desc = Util.get_formated_dict_list_str(self._p_desc, indent=4)
         else:
             desc = "[]"
         self._template = self._template.replace('{desc}', desc)
@@ -827,11 +839,11 @@ class Writer(base.WriteBase):
                 continue
             self._p_imports.add(el.fullns)
         self._p_imports_typing.update(self._parser.imports)
-        self._p_imports = base.Util.get_clean_imports(
+        self._p_imports = Util.get_clean_imports(
             ns=self._p_namespace,
             imports=self._p_imports
         )
-        self._p_imports_typing = base.Util.get_clean_imports(
+        self._p_imports_typing = Util.get_clean_imports(
             ns=self._p_namespace,
             imports=self._p_imports_typing
         )
@@ -865,7 +877,7 @@ class Writer(base.WriteBase):
 
     def _get_template_ext(self) -> str:
         """Gets Template extension. Can be overriden"""
-        return base.APP_CONFIG.template_interface_ext
+        return APP_CONFIG.template_interface_ext
 
     def _get_uno_obj_path(self) -> Path:
         key = '_get_uno_obj_path'
@@ -881,8 +893,8 @@ class Writer(base.WriteBase):
         if self._write_path:
             write_path = self._write_path
         else:
-            write_path = base.APP_CONFIG.uno_base_dir
-        uno_obj_path = Path(util.get_root(), write_path)
+            write_path = APP_CONFIG.uno_base_dir
+        uno_obj_path = Path(mutil.get_root(), write_path)
         name_parts: List[str] = self._p_namespace.split('.')
         # ignore com, sun, star
         path_parts = name_parts[3:]
@@ -905,7 +917,7 @@ class Writer(base.WriteBase):
         with open(dyn_path, 'r') as t_file:
             dyn_contents = t_file.read()
 
-        dyn_out_file = self._file_full_path.stem + base.APP_CONFIG.template_dyn_ext
+        dyn_out_file = self._file_full_path.stem + APP_CONFIG.template_dyn_ext
         write_path = self._file_full_path.parent / dyn_out_file
         with open(write_path, 'w') as out_file:
             out_file.write(dyn_contents)
@@ -973,9 +985,9 @@ class Processer:
         self._verbose = bool(kwargs.get('verbose', False))
         self._include_desc = bool(kwargs.get('include_desc', True))
         self._long_names = bool(kwargs.get(
-            'long_names', base.APP_CONFIG.use_long_import_names))
+            'long_names', APP_CONFIG.use_long_import_names))
         self._remove_parent_inherited = bool(
-            kwargs.get('remove_parent_inherited', base.APP_CONFIG.remove_parent_inherited))
+            kwargs.get('remove_parent_inherited', APP_CONFIG.remove_parent_inherited))
         self._allow_know_json = bool(kwargs.get('allow_known_json', True))
         self._write_path: Union[str, None] = kwargs.get('write_path', None)
 
@@ -1078,7 +1090,7 @@ def parse(**kwargs) -> Union[str, None]:
     _write_json = bool(kwargs.get('write_json', bool))
     _include_desc = bool(kwargs.get('include_desc', True))
     _long_names = bool(kwargs.get(
-        'long_names', base.APP_CONFIG.use_long_import_names))
+        'long_names', APP_CONFIG.use_long_import_names))
     _allow_know_json = bool(kwargs.get('allow_known_json', True))
     _log_file = kwargs.get('log_file', None)
     _verbose = bool(kwargs.get('verbose', False))
@@ -1150,7 +1162,7 @@ def set_cmd_args(parser: argparse.ArgumentParser) -> None:
         required=True)
     parser.add_argument(
         '-o', '--out',
-        help=f"Out path of templates and json data. Default: '{base.APP_CONFIG.uno_base_dir}'",
+        help=f"Out path of templates and json data. Default: '{APP_CONFIG.uno_base_dir}'",
         type=str,
         dest='write_path',
         default=None,
@@ -1164,9 +1176,9 @@ def set_cmd_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
         '-l', '--long-names',
         help='Toggels default value of config. Short Names such as XInterface will be generated instead of XInterface_8f010a43 or vice versa',
-        action='store_false' if base.APP_CONFIG.use_long_import_names else 'store_true',
+        action='store_false' if APP_CONFIG.use_long_import_names else 'store_true',
         dest='long_names',
-        default=base.APP_CONFIG.use_long_import_names)
+        default=APP_CONFIG.use_long_import_names)
     parser.add_argument(
         '-s', '--no-sort',
         help='No sorting of results',

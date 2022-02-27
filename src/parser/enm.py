@@ -13,16 +13,25 @@ from kwhelp.decorator import DecFuncEnum, TypeCheckKw
 from pathlib import Path
 import xerox  # requires xclip - sudo apt-get install xclip
 from . import base, __version__, JSON_ID
+from .web.url_obj import UrlObj
+from .web.block_obj import BlockObj
+from .web.soup_obj import SoupObj
+from .web.tag_str_obj import TagsStrObj
+from .common.constants import URL_SPLIT
+from .common.config import APP_CONFIG
+from .common import log_load
+from .common.util import Util
 from ..logger.log_handle import get_logger
-from ..utilities import util
+from ..utilities import util as mutil
 
 logger = None
 
 
 def _set_loggers(l: Union[logging.Logger, None]):
     global logger, base
-    logger = l
-    base.logger = l
+    log = log_load.Log()
+    log.logger = l
+    logger = log.logger
 
 
 _set_loggers(None)
@@ -40,7 +49,7 @@ class EnumDataItem:
         return self.name < other.name
 
 
-class EnumUrl(base.UrlObj):
+class EnumUrl(UrlObj):
     """Gets Url data for enum"""
 
     def get_split_ns(self) -> List[str]:
@@ -50,7 +59,7 @@ class EnumUrl(base.UrlObj):
         result = []
         try:
             ns_part = self._page_link.split('.')[0].lower()
-            s = ns_part.replace(base.URL_SPLIT, '.').lstrip('.')
+            s = ns_part.replace(URL_SPLIT, '.').lstrip('.')
 
             # in some cases such as generics the name can have _3_01 and or _01_4 in the last part of the name
             # best guess _3 is < and _4 is > and _01 is space.
@@ -66,12 +75,12 @@ class EnumUrl(base.UrlObj):
         return result
 
 
-class EnumBlock(base.BlockObj):
+class EnumBlock(BlockObj):
     """
     Get Enum Block. The block contains all the details of the enum
     """
 
-    def __init__(self, soup: base.SoupObj):
+    def __init__(self, soup: SoupObj):
         super().__init__(soup=soup)
         self._obj_data = False
 
@@ -173,8 +182,8 @@ class EnumName:
         _block_obj = self._block.get_obj()
         text = _block_obj.find(self._el, class_=_cls, attrs={
                                "href": self._urlobj.page_link}).text.replace("::", '.')
-        text = base.Util.get_clean_ns(input=text, ltrim=True)
-        text = base.Util.get_last_part(input=text)
+        text = Util.get_clean_ns(input=text, ltrim=True)
+        text = Util.get_last_part(input=text)
         return text
 
 
@@ -195,7 +204,7 @@ class EnumDesc:
             _block_obj = self._block.get_obj()
             tag = _block_obj.find(self._el, class_=self._cls)
             lines_found: ResultSet = tag.select(f'{self._el}.{self._cls} > p')
-            p_obj = base.TagsStrObj(tags=lines_found)
+            p_obj = TagsStrObj(tags=lines_found)
             desc = p_obj.get_data()
             if not desc:
                 e_obj = EnumName(block=self._block)
@@ -261,7 +270,7 @@ class EnumItems:
         tag = row.find('td', class_='fieldname')
         name: str = tag.text.strip()
         p_lines = row.select('td.fielddoc > p')
-        t_obj = base.TagsStrObj(tags=p_lines)
+        t_obj = TagsStrObj(tags=p_lines)
         di = EnumDataItem(
             name=name,
             value=name,
@@ -275,7 +284,7 @@ class ParserEnum(base.ParserBase):
         super().__init__(**kwargs)
         self._data = None
         self._data_formated = None
-        self._soup = base.SoupObj(url=self.url, allow_cache=self.allow_cache)
+        self._soup = SoupObj(url=self.url, allow_cache=self.allow_cache)
         self._block = None
         self._data_formated = None
         self._data_items = None
@@ -313,7 +322,7 @@ class ParserEnum(base.ParserBase):
             d_obj = EnumDesc(block=block)
             name = n_obj.get_data()
             desc = d_obj.get_data()
-            ns = base.UrlObj(self.url, has_name=False)
+            ns = UrlObj(self.url, has_name=False)
             result = {
                 "name": name,
                 "desc": desc,
@@ -339,7 +348,7 @@ class ParserEnum(base.ParserBase):
         di: List[dict] = self._get_data_items()
         for itm in di:
             result[itm['name']] = itm['desc']
-        s = base.Util.get_formated_dict_list_str(result)
+        s = Util.get_formated_dict_list_str(result)
         self._data_formated = s
         return self._data_formated
 
@@ -471,8 +480,8 @@ class EnumWriter(base.WriteBase):
         json_dict = {
             "id": JSON_ID,
             "version": __version__,
-            # "timestamp": str(base.Util.get_timestamp_utc()),
-            "libre_office_ver": base.APP_CONFIG.libre_office_ver,
+            # "timestamp": str(Util.get_timestamp_utc()),
+            "libre_office_ver": APP_CONFIG.libre_office_ver,
             "name": p_dict['name'],
             "type": "enum",
             "namespace": p_dict['namespace'],
@@ -482,7 +491,7 @@ class EnumWriter(base.WriteBase):
             },
             "data": p_dict
         }
-        str_jsn = base.Util.get_formated_dict_list_str(obj=json_dict, indent=2)
+        str_jsn = Util.get_formated_dict_list_str(obj=json_dict, indent=2)
         self._json_str = str_jsn
         return self._json_str
 
@@ -499,7 +508,7 @@ class EnumWriter(base.WriteBase):
         with open(dyn_path, 'r') as t_file:
             dyn_contents = t_file.read()
 
-        dyn_out_file = self._file_full_path.stem + base.APP_CONFIG.template_dyn_ext
+        dyn_out_file = self._file_full_path.stem + APP_CONFIG.template_dyn_ext
         write_path = self._file_full_path.parent / dyn_out_file
         with open(write_path, 'w') as out_file:
             out_file.write(dyn_contents)
@@ -517,14 +526,14 @@ class EnumWriter(base.WriteBase):
         if self._write_template_long is False:
             return
         self._template = self._template.replace(
-            '{libre_office_ver}', base.APP_CONFIG.libre_office_ver)
+            '{libre_office_ver}', APP_CONFIG.libre_office_ver)
         self._template = self._template.replace('{sort}', str(self._sort))
         self._template = self._template.replace(
             '{allow_db}', str(self._allow_db))
         self._template = self._template.replace('{ns}', str(self._p_namespace))
         self._template = self._template.replace('{name}', self._p_name)
         self._template = self._template.replace('{link}', self._p_url)
-        str_json_desc = base.Util.get_formated_dict_list_str(self._p_desc)
+        str_json_desc = Util.get_formated_dict_list_str(self._p_desc)
         self._template = self._template.replace('{quote}', 'set()')
         self._template = self._template.replace('{typings}', 'set()')
         self._template = self._template.replace('{desc}', str_json_desc)
@@ -554,12 +563,12 @@ class EnumWriter(base.WriteBase):
         if self._write_path:
             write_path = self._write_path
         else:
-            write_path = base.APP_CONFIG.uno_base_dir
-        uno_obj_path = Path(util.get_root(), write_path)
+            write_path = APP_CONFIG.uno_base_dir
+        uno_obj_path = Path(mutil.get_root(), write_path)
         name_parts: List[str] = self._p_namespace.split('.')
         # ignore com, sun, star
         path_parts = name_parts[3:]
-        path_parts.append(self._p_name + base.APP_CONFIG.template_enum_ext)
+        path_parts.append(self._p_name + APP_CONFIG.template_enum_ext)
         obj_path = uno_obj_path.joinpath(*path_parts)
         self._mkdirp(obj_path.parent)
         self._cache[key] = obj_path
@@ -694,7 +703,7 @@ def set_cmd_args(parser: argparse.ArgumentParser) -> None:
         required=True)
     parser.add_argument(
         '-o', '--out',
-        help=f"Out path of templates and json data. Default: '{base.APP_CONFIG.uno_base_dir}'",
+        help=f"Out path of templates and json data. Default: '{APP_CONFIG.uno_base_dir}'",
         type=str,
         dest='write_path',
         default=None,

@@ -8,7 +8,8 @@ import sys
 import logging
 from pathlib import Path
 from typing import Union
-from . import base, xsrc
+from . import xsrc
+from .common.config import APP_CONFIG
 from ..logger.log_handle import get_logger
 
 logger = None
@@ -17,7 +18,6 @@ logger = None
 def _set_loggers(l: Union[logging.Logger, None]):
     global logger
     logger = l
-    base._set_loggers(l)
     xsrc._set_loggers(l)
 
 
@@ -33,7 +33,7 @@ class Writer(xsrc.Writer):
         return "singleton"
 
     def _get_template_ext(self) -> str:
-        return base.APP_CONFIG.template_singleton_ext
+        return APP_CONFIG.template_singleton_ext
 
     def _get_template_dyn(self) -> Union[str, None]:
         return 'singleton_dyn.tmpl'

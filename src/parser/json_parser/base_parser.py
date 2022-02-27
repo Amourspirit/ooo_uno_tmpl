@@ -17,8 +17,11 @@ from pathlib import Path
 from verr import Version
 from abc import ABC, abstractmethod, abstractproperty
 from kwhelp.decorator import RequireArgs
+from ..common import log_load
+from ..common.config import APP_CONFIG
+from ..common.regx import pattern_http
 from ...logger.log_handle import get_logger
-from ...parser import __version__, JSON_ID, base
+from ...parser import __version__, JSON_ID
 from ...utilities import util
 
 # endregion imports
@@ -29,8 +32,9 @@ logger = None
 
 def _set_loggers(l: Union[logging.Logger, None]):
     global logger
-    logger = l
-    base._set_loggers(l)
+    log = log_load.Log()
+    log.logger = l
+    logger = log.logger
 
 
 _set_loggers(None)
@@ -156,7 +160,7 @@ class Parser(IParser):
         for itm in links:
             name = itm['name']
             href = itm['href']
-            m = base.pattern_http.match(href)
+            m = pattern_http.match(href)
             if not m:
                 href = url_base + '/' + href
             result.append(urldata(name=name, href=href))
@@ -349,7 +353,7 @@ def set_cmd_args(parser: argparse.ArgumentParser) -> None:
         default=True)
     parser.add_argument(
         '-o', '--out',
-        help=f"Out path of templates and json data. Default: '{base.APP_CONFIG.uno_base_dir}'",
+        help=f"Out path of templates and json data. Default: '{APP_CONFIG.uno_base_dir}'",
         type=str,
         dest='write_path',
         default=None,

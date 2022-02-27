@@ -16,6 +16,8 @@ from typing import List, Tuple, Union
 from pathlib import Path
 from kwhelp.decorator import RequireArgs
 from verr import Version
+from ..common.regx import pattern_http
+from ..common import log_load
 from ...parser import base, typedef, __version__, JSON_ID
 from ...logger.log_handle import get_logger
 from ...utilities import util
@@ -27,8 +29,9 @@ logger = None
 
 def _set_loggers(l: Union[logging.Logger, None]):
     global logger
-    logger = l
-    base.logger = l
+    log = log_load.Log()
+    log.logger = l
+    logger = log.logger
 
 
 _set_loggers(None)
@@ -100,7 +103,7 @@ class ParserTypeDef:
         for itm in enum_links:
             name = itm['name']
             href = itm['href']
-            m = base.pattern_http.match(href)
+            m = pattern_http.match(href)
             if not m:
                 href = url_base + '/' + href
             result.append(urldata(name=name, href=href))
