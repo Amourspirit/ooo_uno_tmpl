@@ -22,7 +22,7 @@ from .web.block_obj import BlockObj
 from .web.soup_obj import SoupObj
 from .web.url_obj import UrlObj
 from ..logger.log_handle import get_logger
-from ..utilities import util
+from ..utilities import util as mutil
 # endregion Imports
 
 # region Logging
@@ -256,7 +256,7 @@ class WriteStar:
         key = '_get_path'
         if key in self._cache:
             return self._cache[key]
-        dir_path = Path(util.get_root(), self._dir_name)
+        dir_path = Path(mutil.get_root(), self._dir_name)
         Util.mkdirp(dir_path)
         self._cache[key] = dir_path.joinpath(self._file_name)
         return self._cache[key]

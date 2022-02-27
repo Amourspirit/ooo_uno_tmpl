@@ -25,7 +25,7 @@ from .rules.name.rules_name import RulesName
 from .rules.name.rule_name_no_generics import RuleNameNoGenerics
 from .web.soup_obj import SoupObj
 from ..logger.log_handle import get_logger
-from ..utilities import util
+from ..utilities import util as mutil
 # endregion Imports
 
 # region Logger
@@ -710,7 +710,7 @@ class StructWriter(base.WriteBase):
             write_path = self._write_path
         else:
             write_path = APP_CONFIG.uno_base_dir
-        uno_obj_path = Path(util.get_root(), write_path)
+        uno_obj_path = Path(mutil.get_root(), write_path)
         name_parts = self._p_fullname.split('.')
         # ignore com, sun, star
         path_parts = name_parts[3:]
