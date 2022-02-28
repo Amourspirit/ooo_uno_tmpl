@@ -13,6 +13,9 @@ class ArgDirection(str, Enum):
     IN = "in"
     OUT = "out"
 
+    def __str__(self) -> str:
+        return self.value
+
 @dataclass
 class MethodArg:
     name: str
@@ -25,7 +28,7 @@ class Method(BaseModel):
     returns: str
     desc: List[str]
     args: List[MethodArg]
-    raises: MethodRaises
+    raises: List[MethodRaises]
    
     @pydantic.validator('name')
     def validate_method_name(cls, value: str) -> str:

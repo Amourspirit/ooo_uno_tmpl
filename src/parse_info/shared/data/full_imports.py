@@ -1,9 +1,9 @@
 # coding: utf-8
-from typing import Tuple
-from pydantic.dataclasses import dataclass
+from typing import List
+from dataclasses import dataclass
 
 
 @dataclass
 class FullImports:
-    general: Tuple[str]
-    typing: Tuple[str]
+    general: List[str]
+    typing: List[str]

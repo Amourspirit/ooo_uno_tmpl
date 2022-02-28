@@ -1,5 +1,5 @@
 # coding: utf-8
-from typing import List
+from typing import List, Optional
 import pydantic
 from pydantic import BaseModel
 
@@ -7,19 +7,13 @@ class Prop(BaseModel):
     name: str
     returns: str
     desc: List[str]
+    raises_get: Optional[str]
+    raises_set: Optional[str]
 
-    # @pydantic.validator('name')
-    # def validate_namespace(cls, value: str) -> str:
-    #     s = value.strip()
-    #     if len(s) > 0:
-    #         return s
-    #     raise ValueError(
-    #         f"root/data/item/method/name must not be null or empty string")
+    @pydantic.validator('name', 'returns')
+    def validate_str_len(cls, value: str) -> str:
+        s = value.strip()
+        if len(s) > 0:
+            return s
+        raise ValueError("must not be null or empty string")
 
-    # @pydantic.validator('returns')
-    # def validate_namespace(cls, value: str) -> str:
-    #     s = value.strip()
-    #     if len(s) > 0:
-    #         return s
-    #     raise ValueError(
-    #         f"root/data/item/method/returns must not be null or empty string")
