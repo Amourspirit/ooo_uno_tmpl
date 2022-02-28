@@ -17,7 +17,7 @@ def fixture_read_only_access(fixture_json_path: Path) -> Path:
 
 
 def test_open_root(fixture_uno_control_combo_box_model):
-    from src.parse_info.ooo_service.ooo_service import OooService
+    from src.parse_info.service.ooo_service import OooService
     from src.parse_info.shared.ooo_type import OooType
     from src.parse_info.shared.data.from_import import FromImport
     from src.parse_info.shared.data.properties.prop import Prop
@@ -75,7 +75,7 @@ def test_open_root(fixture_uno_control_combo_box_model):
 
 
 def test_read_only_access(fixture_read_only_access):
-    from src.parse_info.ooo_service.ooo_service import OooService
+    from src.parse_info.service.ooo_service import OooService
     from src.parse_info.shared.ooo_type import OooType
     from src.parse_info.shared.data.from_import import FromImport
     from src.parse_info.shared.data.methods.method import Method
@@ -134,14 +134,14 @@ def test_read_only_access(fixture_read_only_access):
     assert str(arg.direction) == 'in'
 
 def test_service_writer_args():
-    from src.parse_info.ooo_service.writer_args import WriterArgs
+    from src.parse_info.shared.args.writer_args import WriterArgs
     data = {"include_desc": True}
     args = WriterArgs(**data)
     assert args.include_desc == True
 
 
 def test_service_parser_args():
-    from src.parse_info.ooo_service.parser_args import ParserArgs
+    from src.parse_info.shared.args.parser_args import ParserArgs
     data = {
         "sort": True,
         "long_names": True,

@@ -1,9 +1,9 @@
 # coding: utf-8
 from typing import List
 from .items.data_items import DataItems
-from ...shared.data.shared_data import BaseData
-from ...shared.data.full_imports import FullImports
-from ...shared.data.from_import import FromImport
+from .shared_data import BaseData
+from .full_imports import FullImports
+from .from_import import FromImport
 
 
 class Data(BaseData):
