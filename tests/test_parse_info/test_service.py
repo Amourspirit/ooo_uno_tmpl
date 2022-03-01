@@ -5,7 +5,6 @@ if __name__ == "__main__":
     pytest.main([__file__])
 
 
-
 @pytest.fixture(scope="session")
 def fixture_uno_control_combo_box_model(fixture_json_path: Path) -> Path:
     return fixture_json_path / 'service' / 'UnoControlComboBoxModel.json'
@@ -64,6 +63,7 @@ def test_open_root(fixture_uno_control_combo_box_model):
     assert len(srv.data.desc) == 5
     assert srv.data.desc[0] == "specifies the standard model of a UnoControlComboBox."
     assert srv.data.items.properties is not None
+    assert srv.data.items.types is None
     assert srv.data.items.methods is None
     assert len(srv.data.items.properties) == 23
     p: Prop = srv.data.items.properties[0]
@@ -119,6 +119,7 @@ def test_read_only_access(fixture_read_only_access):
     assert len(srv.data.desc) == 7
     assert srv.data.desc[0] == "Provides easy read-only access to the complete configuration."
     assert srv.data.items.properties is None
+    assert srv.data.items.types is None
     assert srv.data.items.methods is not None
     assert len(srv.data.items.methods) == 1
     m: Method = srv.data.items.methods[0]
@@ -133,6 +134,7 @@ def test_read_only_access(fixture_read_only_access):
     assert arg.direction == 'in'
     assert str(arg.direction) == 'in'
 
+
 def test_service_writer_args():
     from src.parse_info.shared.args.writer_args import WriterArgs
     data = {"include_desc": True}
@@ -145,8 +147,8 @@ def test_service_parser_args():
     data = {
         "sort": True,
         "long_names": True,
-        "remove_parent_inherited" : True
-        }
+        "remove_parent_inherited": True
+    }
     args = ParserArgs(**data)
     assert args.sort == True
     assert args.long_names == True

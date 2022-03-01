@@ -15,6 +15,12 @@ def fixture_xinterface(fixture_json_path: Path) -> Path:
 def fixture_xstyle_settings(fixture_json_path: Path) -> Path:
     return fixture_json_path / 'interface' / 'XStyleSettings.json'
 
+
+@pytest.fixture(scope="session")
+def fixture_xanimate(fixture_json_path: Path) -> Path:
+    return fixture_json_path / 'interface' / 'XAnimate.json'
+
+
 def test_open_root(fixture_xinterface):
     from src.parse_info.interface.ooo_interface import OooInterface
     from src.parse_info.shared.ooo_type import OooType
@@ -113,6 +119,7 @@ def test_xstyle_settings(fixture_xstyle_settings):
     assert len(obj.data.desc) == 5
     assert obj.data.desc[0] == "provides access to certain style settings within an OpenOffice.org component, such as a window, or within OpenOffice.org as a whole."
     assert obj.data.items.properties is not None
+    assert obj.data.items.types is None
     assert obj.data.items.methods is not None
     assert len(obj.data.items.properties) == 53
     p: Prop = obj.data.items.properties[0]
@@ -134,3 +141,66 @@ def test_xstyle_settings(fixture_xstyle_settings):
     assert arg.direction == ArgDirection.IN
     assert arg.direction == 'in'
     assert str(arg.direction) == 'in'
+
+
+def test_x_animate(fixture_xanimate):
+    from src.parse_info.service.ooo_service import OooService
+    from src.parse_info.shared.ooo_type import OooType
+    from src.parse_info.shared.data.from_import import FromImport
+    from src.parse_info.shared.data.properties.prop import Prop
+    from src.parse_info.shared.data.types.types import Tipe
+    from src.parse_info.shared.data.methods.method import ArgDirection
+
+    with open(fixture_xanimate, 'r') as f:
+        f_json = json.load(f)
+    obj = OooService(**f_json)
+    assert obj is not None
+    assert obj.id == 'uno-ooo-parser'
+    assert obj.version == "0.1.21"
+    assert obj.libre_office_ver == "7.2"
+    assert obj.name == "XAnimate"
+    assert obj.type == OooType.INTERFACE
+    assert obj.type == "interface"
+    assert str(obj.type) == "interface"
+    assert obj.namespace == "com.sun.star.animations"
+    assert obj.parser_args.sort == True
+    assert obj.parser_args.long_names == True
+    assert obj.parser_args.remove_parent_inherited == True
+    assert obj.writer_args.include_desc == True
+    assert obj.data.allow_db == True
+    assert obj.data.requires_typing == True
+    assert obj.data.name == "XAnimate"
+    assert obj.data.namespace == "com.sun.star.animations"
+    assert obj.data.url == "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1animations_1_1XAnimate.html"
+    assert len(obj.data.from_imports) == 2
+    frm: FromImport = obj.data.from_imports[0]
+    assert frm.frm == ".time_filter_pair"
+    assert frm.imp == "TimeFilterPair"
+    assert frm.az == "TimeFilterPair_1d250ebc"
+    assert len(obj.data.from_imports_typing) == 0
+    assert obj.data.extends_map["com.sun.star.animations.TimeFilterPair"] == "TimeFilterPair_1d250ebc"
+    assert obj.data.extends_map["com.sun.star.animations.XAnimationNode"] == "XAnimationNode_1cf10eb9"
+    assert len(obj.data.quote) == 0
+    assert len(obj.data.typings) == 3
+    assert obj.data.typings[0] == "typing.Tuple[TimeFilterPair_1d250ebc, ...]"
+    assert len(obj.data.full_imports.general) == 2
+    assert len(obj.data.full_imports.typing) == 0
+    assert len(obj.data.imports) == 0
+    assert len(obj.data.extends) == 1
+    assert obj.data.extends[0] == "com.sun.star.animations.XAnimationNode"
+    assert len(obj.data.desc) == 1
+    assert obj.data.desc[0] == "Interface for generic animation."
+    assert obj.data.items.properties is not None
+    assert obj.data.items.methods is None
+    p: Prop =obj.data.items.properties[0]
+    assert p.name == "Accumulate"
+    assert p.returns == "bool"
+    assert p.raises_get == ""
+    assert p.raises_set == ""
+    assert p.desc[0] == "Controls whether or not the animation is cumulative."
+    t: Tipe = obj.data.items.types[0]
+    assert t.name == "KeyTimes"
+    assert t.returns == "typing.Tuple[float, ...]"
+    assert len(t.desc) == 0
+    assert t.raises_get == ""
+    assert t.raises_set == ""
