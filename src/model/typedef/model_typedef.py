@@ -5,7 +5,7 @@ from .args.writer_args import WriterArgs
 from .data import Data
 
 
-class OooTypedef(OooClass):
+class ModelTypedef(OooClass):
     parser_args: ParserArgs
     writer_args: WriterArgs
     data: Data

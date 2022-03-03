@@ -12,12 +12,12 @@ def fixture_the_introspection(fixture_json_path: Path) -> Path:
 
 
 def test_the_introspection(fixture_the_introspection):
-    from src.parse_info.singleton.ooo_singleton import OooSingleton
-    from src.parse_info.shared.ooo_type import OooType
+    from src.model.singleton.model_singleton import ModelSingleton
+    from src.model.shared.ooo_type import OooType
 
     with open(fixture_the_introspection, 'r') as f:
         f_json = json.load(f)
-    obj = OooSingleton(**f_json)
+    obj = ModelSingleton(**f_json)
     assert obj is not None
     assert obj.id == 'uno-ooo-parser'
     assert obj.version == "0.1.21"

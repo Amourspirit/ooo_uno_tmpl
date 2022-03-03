@@ -6,7 +6,7 @@ from ..shared.data.ooo_data import Data
 
 
 
-class OooInterface(OooClass):
+class ModelException(OooClass):
     parser_args: ParserArgs
     writer_args: WriterArgs
     data: Data

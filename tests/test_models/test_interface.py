@@ -22,14 +22,14 @@ def fixture_xanimate(fixture_json_path: Path) -> Path:
 
 
 def test_open_root(fixture_xinterface):
-    from src.parse_info.interface.ooo_interface import OooInterface
-    from src.parse_info.shared.ooo_type import OooType
-    from src.parse_info.shared.data.methods.method import ArgDirection
-    from src.parse_info.shared.data.methods.method import Method
+    from src.model.interface.model_interface import ModelInterface
+    from src.model.shared.ooo_type import OooType
+    from src.model.shared.data.methods.method import ArgDirection
+    from src.model.shared.data.methods.method import Method
 
     with open(fixture_xinterface, 'r') as f:
         f_json = json.load(f)
-    obj = OooInterface(**f_json)
+    obj = ModelInterface(**f_json)
     assert obj is not None
     assert obj.id == 'uno-ooo-parser'
     assert obj.version == "0.1.21"
@@ -75,16 +75,16 @@ def test_open_root(fixture_xinterface):
 
 
 def test_xstyle_settings(fixture_xstyle_settings):
-    from src.parse_info.interface.ooo_interface import OooInterface
-    from src.parse_info.shared.ooo_type import OooType
-    from src.parse_info.shared.data.from_import import FromImport
-    from src.parse_info.shared.data.methods.method import Method
-    from src.parse_info.shared.data.properties.prop import Prop
-    from src.parse_info.shared.data.methods.method import ArgDirection
+    from src.model.interface.model_interface import ModelInterface
+    from src.model.shared.ooo_type import OooType
+    from src.model.shared.data.from_import import FromImport
+    from src.model.shared.data.methods.method import Method
+    from src.model.shared.data.properties.prop import Prop
+    from src.model.shared.data.methods.method import ArgDirection
 
     with open(fixture_xstyle_settings, 'r') as f:
         f_json = json.load(f)
-    obj = OooInterface(**f_json)
+    obj = ModelInterface(**f_json)
     assert obj is not None
     assert obj.id == 'uno-ooo-parser'
     assert obj.version == "0.1.21"
@@ -144,16 +144,15 @@ def test_xstyle_settings(fixture_xstyle_settings):
 
 
 def test_x_animate(fixture_xanimate):
-    from src.parse_info.service.ooo_service import OooService
-    from src.parse_info.shared.ooo_type import OooType
-    from src.parse_info.shared.data.from_import import FromImport
-    from src.parse_info.shared.data.properties.prop import Prop
-    from src.parse_info.shared.data.types.types import Tipe
-    from src.parse_info.shared.data.methods.method import ArgDirection
+    from src.model.interface.model_interface import ModelInterface
+    from src.model.shared.ooo_type import OooType
+    from src.model.shared.data.from_import import FromImport
+    from src.model.shared.data.properties.prop import Prop
+    from src.model.shared.data.types.types import Tipe
 
     with open(fixture_xanimate, 'r') as f:
         f_json = json.load(f)
-    obj = OooService(**f_json)
+    obj = ModelInterface(**f_json)
     assert obj is not None
     assert obj.id == 'uno-ooo-parser'
     assert obj.version == "0.1.21"

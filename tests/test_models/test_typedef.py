@@ -11,12 +11,12 @@ def fixture_property_values(fixture_json_path: Path) -> Path:
 
 
 def test_property_values(fixture_property_values):
-    from src.parse_info.typedef.ooo_typedef import OooTypedef
-    from src.parse_info.shared.ooo_type import OooType
+    from src.model.typedef.model_typedef import ModelTypedef
+    from src.model.shared.ooo_type import OooType
 
     with open(fixture_property_values, 'r') as f:
         f_json = json.load(f)
-    obj = OooTypedef(**f_json)
+    obj = ModelTypedef(**f_json)
     assert obj is not None
     assert obj.id == 'uno-ooo-parser'
     assert obj.version == "0.1.21"

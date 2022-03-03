@@ -5,7 +5,8 @@ from ..shared.args.writer_args import WriterArgs
 from ..shared.data.ooo_data import Data
 
 
-class OooService(OooClass):
+
+class ModelInterface(OooClass):
     parser_args: ParserArgs
     writer_args: WriterArgs
     data: Data

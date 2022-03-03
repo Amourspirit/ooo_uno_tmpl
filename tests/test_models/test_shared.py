@@ -7,7 +7,7 @@ if __name__ == "__main__":
 
 
 def test_method_arg():
-    from src.parse_info.shared.data.methods.method import ArgDirection
+    from src.model.shared.data.methods.method import ArgDirection
     d = ArgDirection.IN
     assert str(d) == 'in'
     d = ArgDirection('in')
@@ -17,15 +17,15 @@ def test_method_arg():
     assert str(d) == 'out'
 
 def test_method_raises():
-    from src.parse_info.shared.data.methods.raises import MethodRaises
+    from src.model.shared.data.methods.raises import MethodRaises
     raises = MethodRaises("long_error", "short_error")
     assert raises.long == "long_error"
     assert raises.short == "short_error"
     
 
 def test_method():
-    from src.parse_info.shared.data.methods.method import Method
-    from src.parse_info.shared.data.methods.method import ArgDirection
+    from src.model.shared.data.methods.method import Method
+    from src.model.shared.data.methods.method import ArgDirection
     data = {
         "name": "createWithModel",
         "returns": "None",
@@ -51,7 +51,7 @@ def test_method():
     assert str(arg.direction) == 'in'
 
 def test_prop():
-    from src.parse_info.shared.data.properties.prop import Prop
+    from src.model.shared.data.properties.prop import Prop
     data = {
         "name": "Xray",
         "returns": "Yray",
@@ -85,7 +85,7 @@ def test_prop():
         )
 
 def test_from_import():
-    from src.parse_info.shared.data.from_import import FromImport
+    from src.model.shared.data.from_import import FromImport
     data = {
         "frm": "..uno",
         "imp": "XInterface",
@@ -111,7 +111,7 @@ def test_from_import():
 
 
 def test_base_data():
-    from src.parse_info.shared.data.shared_data import BaseData
+    from src.model.shared.data.shared_data import BaseData
     data = {
         "name": "AnimateColor",
         "namespace": "com.sun.star.animations",
@@ -149,8 +149,8 @@ def test_base_data():
         _ = BaseData(**data4)
 
 def test_ooo_class():
-    from src.parse_info.shared.ooo_class import OooClass
-    from src.parse_info.shared.ooo_type import OooType
+    from src.model.shared.ooo_class import OooClass
+    from src.model.shared.ooo_type import OooType
     from verr import Version
     data = {
         "id": "uno-ooo-parser",
