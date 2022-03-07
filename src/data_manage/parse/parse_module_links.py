@@ -191,7 +191,7 @@ class ParseModuleLinks:
             ))
 
     def _read_classes_service(self, ns: str, links: ModelModuleLinks) -> None:
-        if not hasattr(links.data.classes, "service"):
+        if links.data.classes.service is None:
             return None
         for itm in links.data.classes.service:
             self._module_details.append(ModuleDetail(
@@ -203,7 +203,7 @@ class ParseModuleLinks:
             ))
 
     def _read_classes_struct(self, ns: str, links: ModelModuleLinks) -> None:
-        if not hasattr(links.data.classes, "struct"):
+        if links.data.classes.struct is None:
             return None
         for itm in links.data.classes.struct:
             self._module_details.append(ModuleDetail(
@@ -215,7 +215,7 @@ class ParseModuleLinks:
             ))
 
     def _read_classes_ex(self, ns: str, links: ModelModuleLinks) -> None:
-        if not hasattr(links.data.classes, "exception"):
+        if links.data.classes.exception is None:
             return None
         for itm in links.data.classes.exception:
             self._module_details.append(ModuleDetail(
@@ -227,9 +227,8 @@ class ParseModuleLinks:
             ))
 
     def _read_classes_interface(self, ns: str, links: ModelModuleLinks) -> None:
-        if not hasattr(links.data.classes, "interface"):
+        if links.data.classes.interface is None:
             return None
-
         for itm in links.data.classes.interface:
             self._module_details.append(ModuleDetail(
                 id_namespace=f"{ns}.{itm.name}",
@@ -240,7 +239,7 @@ class ParseModuleLinks:
             ))
 
     def _read_classes_singleton(self, ns: str, links: ModelModuleLinks) -> None:
-        if not hasattr(links.data.classes, "singleton"):
+        if links.data.classes.singleton is None:
             return None
         for itm in links.data.classes.singleton:
             self._module_details.append(ModuleDetail(
