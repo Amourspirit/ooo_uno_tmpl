@@ -5,7 +5,8 @@ from pydantic import BaseModel
 
 
 class LinkDataClass(BaseModel):
-    service: Optional[List[LinkItem]]
-    struct: Optional[List[LinkItem]]
     exception: Optional[List[LinkItem]]
     interface: Optional[List[LinkItem]]
+    service: Optional[List[LinkItem]]
+    singleton: Optional[List[LinkItem]]
+    struct: Optional[List[LinkItem]]
