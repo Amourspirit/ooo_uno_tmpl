@@ -14,7 +14,8 @@ from ..db_class.tbl_component import TblComponent
 from ..db_class.tbl_component_extend import TblComponentExtend
 from ..db_class.tbl_component_full_import import TblComponentFullImport
 from ..db_class.db_connect import DbConnect
-
+from ...model.shared.ooo_class import OooClass
+from ...model.shared.ooo_type import OooType
 
 class ParseModuleJson:
     def __init__(self, config: AppConfig) -> None:
@@ -67,17 +68,23 @@ class ParseModuleJson:
 
     def _read_main(self, json_data: dict, file: str) -> None:
         rel = Path(file).relative_to(self._json_data_dir)
-        ns = json_data['namespace']
-        name = json_data['name']
+        o_class = OooClass(**json_data)
+        ns = o_class.namespace
+        name = o_class.name
+        # ns = json_data['namespace']
+        # name = json_data['name']
         full_ns = f"{ns}.{name}"
         map_name = name + '_' + RelInfo.get_shortened(full_ns)
         c = Component(
             id_component=full_ns,
             name=name,
             namespace=ns,
-            type=json_data['type'],
-            version=json_data['version'],
-            lo_ver=json_data['libre_office_ver'],
+            # type=json_data['type'],
+            type=str(o_class.type),
+            # version=json_data['version'],
+            version = o_class.version,
+            # lo_ver=json_data['libre_office_ver'],
+            lo_ver=o_class.libre_office_ver,
             file=str(rel),
             c_name=RelInfo.camel_to_snake(name),
             map_name=map_name

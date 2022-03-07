@@ -9,6 +9,7 @@ class OooType(str, Enum):
     SERVICE = "service"
     STRUCT = "struct"
     TYPEDEF = "typedef"
+    MODULE_LINKS = "module_links"
     
     def __str__(self) -> str:
         return self.value
