@@ -255,7 +255,7 @@ class ParseModuleLinks:
     # region Validation
     def _validite_json(self, file: str, links: ModelModuleLinks):
         if links.ver < self._min_ver:
-            _msg = f"{self.__class__.__name__}._validite_json()  Version fail Expect a min version of '{self._min_ver}', got '{data.ver}'. File: {file}"
+            _msg = f"{self.__class__.__name__}._validite_json()  Version fail Expect a min version of '{self._min_ver}', got '{links.ver}'. File: {file}"
             raise Exception(_msg)
 
     # endregion Validation

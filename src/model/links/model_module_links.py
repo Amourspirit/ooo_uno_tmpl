@@ -2,7 +2,7 @@
 import verr
 from pydantic import BaseModel, validator
 from .link_data import LinkData
-
+from ..shared.ooo_type import OooType
 
 class ModelModuleLinks(BaseModel):
     id: str
@@ -10,7 +10,7 @@ class ModelModuleLinks(BaseModel):
     namespace: str
     version: str
     libre_office_ver: str
-    type: str
+    type: OooType
     url_base: str
     data: LinkData
     
