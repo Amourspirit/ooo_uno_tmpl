@@ -242,7 +242,7 @@ from src.data_manage.controller.module_links_controler import ModuleLinksControl
 from src.data_manage.controller.star_ns_controller import StarNsControler
 from src.logger.log_handle import get_logger
 from src.parser import const as url_parser_const, enm as url_parser_enum, ex as url_parser_ex, xsrc as url_parser_interface, service as url_parser_service, singleton as url_parser_singleton, struc as url_parser_struct, typedef as url_parser_typedef, star as json_parser_star
-from src.cfg.config import AppConfig, read_config_default
+from src.cfg.config import AppConfig
 from src.parser.json_parser import linkproc
 from src.runners.touch_files import TouchFiles
 from src.runners.compile.base_compile import BaseCompile
@@ -256,6 +256,7 @@ from src.runners.compile.compile_struct_links import CompileStructLinks
 from src.runners.compile.compile_typedef_links import CompileTypeDefLinks
 from src.runners.make import Make
 from src.runners.data_class import CompileLinkArgs
+from src.utilities import util as mutil
 # endregion Imports
 
 
@@ -311,8 +312,8 @@ def _main():
     # ns = 'com.sun.star.form.DataAwareControlModel'
     # ns = 'com.sun.star.text.TextRange'
     # args = 'data db-json -n com.sun.star.form.control.GridControl'
-    url = 'https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XDevice.html'
-    args = 'url-parse interface -t -j -u '
+    url = 'https://api.libreoffice.org/docs/idl/ref/exceptioncom_1_1sun_1_1star_1_1configuration_1_1backend_1_1BackendSetupException.html'
+    args = 'url-parse exception -s -t -u '
     # args = 'link-json mod-links -r -j -a --data'
     args += url
     sys.argv.extend(args.split())
@@ -1426,10 +1427,10 @@ def _args_process_cmd(args: argparse.Namespace, config: AppConfig) -> None:
 def main():
     global logger
     # region Config
-    config = read_config_default()
+    os.environ['project_root'] = str(Path(__file__).parent)
+    config = mutil.get_app_cfg()
     os.environ['config_cache_dir'] = config.cache_dir
     os.environ['config_cache_duration'] = str(config.cache_duration)
-    os.environ['project_root'] = str(Path(__file__).parent)
     os.environ['config_resource_dir'] = config.resource_dir
     os.environ['config_db_mod_info'] = config.db_mod_info
     os.environ['config_uno_obj_dir'] = config.uno_obj_dir

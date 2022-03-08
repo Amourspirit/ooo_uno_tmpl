@@ -379,11 +379,11 @@ class Parser(base.ParserBase):
         si_lst = self._api_data.property_summaries.get_obj()
         key = 'properties'
         import_info = self._api_data.get_import_info_property()
-        if len(import_info.imports) == 0:
-            return {}
-        if import_info.requires_typing:
-            self._requires_typing = True
-        self._imports.update(import_info.imports)
+        if len(import_info.imports) > 0:
+            # return {}
+            if import_info.requires_typing:
+                self._requires_typing = True
+            self._imports.update(import_info.imports)
         return self._get_summary_data(si_lst=si_lst, key=key)
 
     def _get_types_data(self):
@@ -391,11 +391,11 @@ class Parser(base.ParserBase):
         si_lst = self._api_data.types_summaries.get_obj()
         key = 'types'
         import_info = self._api_data.get_import_info_type()
-        if len(import_info.imports) == 0:
-            return {}
-        if import_info.requires_typing:
-            self._requires_typing = True
-        self._imports.update(import_info.imports)
+        if len(import_info.imports) > 0:
+            # return {}
+            if import_info.requires_typing:
+                self._requires_typing = True
+            self._imports.update(import_info.imports)
         return self._get_summary_data(si_lst=si_lst, key=key)
 
     # endregion get data
