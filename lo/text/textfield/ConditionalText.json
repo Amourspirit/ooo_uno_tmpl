@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.22",
   "libre_office_ver": "7.2",
   "name": "ConditionalText",
   "type": "service",
@@ -45,6 +45,58 @@
       "specifies service of a conditional text field."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1text_1_1textfield_1_1ConditionalText.html",
-    "items": {}
+    "items": {
+      "properties": [
+        {
+          "name": "Condition",
+          "returns": "str",
+          "desc": [
+            "contains the condition."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CurrentPresentation",
+          "returns": "str",
+          "desc": [
+            "contains the current content of the text field.",
+            "",
+            "This property is especially useful for import/export purposes."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FalseContent",
+          "returns": "str",
+          "desc": [
+            "contains the text that is displayed if the condition evaluates to FALSE."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsConditionTrue",
+          "returns": "bool",
+          "desc": [
+            "contains the result of the last evaluation of the condition.",
+            "",
+            "This property has to be read/written in file export/import to save and restore the result without initiation of a new evaluation."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TrueContent",
+          "returns": "str",
+          "desc": [
+            "contains the text that is displayed if the condition evaluates to TRUE."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

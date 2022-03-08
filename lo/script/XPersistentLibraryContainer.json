@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.22",
   "libre_office_ver": "7.2",
   "name": "XPersistentLibraryContainer",
   "type": "interface",
@@ -73,6 +73,30 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": []
+        }
+      ],
+      "properties": [
+        {
+          "name": "ContainerLocationName",
+          "returns": "str",
+          "desc": [
+            "denotes the name of the sub location where the container elements are actually stored."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RootLocation",
+          "returns": "object",
+          "desc": [
+            "denotes the root location associated with the container.",
+            "",
+            "The type of this location - it might be a folder in a file system, a storage, or anything else - is not specified here, but in derived interfaces or services implementing XPersistentLibraryContainer.",
+            "",
+            "All operations of the library container take place in a location below the root location, the so-called container location, whose name is exposed as ContainerLocationName."
+          ],
+          "raises_get": "",
+          "raises_set": ""
         }
       ]
     }

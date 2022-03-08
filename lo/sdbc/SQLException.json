@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.22",
   "libre_office_ver": "7.2",
   "name": "SQLException",
   "type": "exception",
@@ -47,6 +47,42 @@
       "Each com.sun.star.sdbc.SQLException provides several kinds of information:"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/exceptioncom_1_1sun_1_1star_1_1sdbc_1_1SQLException.html",
-    "items": {}
+    "items": {
+      "properties": [
+        {
+          "name": "SQLState",
+          "returns": "str",
+          "desc": [
+            "returns a string, which uses the XOPEN SQLState conventions.",
+            "",
+            "The values of the SQLState string are described in the XOPEN SQL spec."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ErrorCode",
+          "returns": "int",
+          "desc": [
+            "returns an integer error code that is specific to each vendor.",
+            "",
+            "Normally this will be the actual error code returned by the underlying database."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "NextException",
+          "returns": "object",
+          "desc": [
+            "returns a chain to the next Exception.",
+            "",
+            "This can be used to provide additional error information."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

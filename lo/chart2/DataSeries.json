@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.22",
   "libre_office_ver": "7.2",
   "name": "DataSeries",
   "type": "service",
@@ -97,6 +97,44 @@
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1chart2_1_1DataSeries.html",
     "items": {
+      "types": [
+        {
+          "name": "AttributedDataPoints",
+          "returns": "typing.Tuple[int, ...]",
+          "desc": [
+            "This service will be used to render this data series.",
+            "",
+            "This service name can be used to determine which DataSeries are of the same type.",
+            "",
+            "The result of the DataSeries.DataSequenceRoles depends on the renderer service set here.",
+            "",
+            "a sequence of indexes denoting which data points have set properties that differ from the default.",
+            "",
+            "The default values are determined by the properties set at the DataPointProperties of the data series.",
+            "",
+            "If the sequence is empty, that means that all data points look alike. They are formatted using the property values set in the data series.",
+            "",
+            "The indexes in this sequence match the indexes used by the XIndexContainer.",
+            "",
+            "This property is especially useful for large data series with only some formatted data points, because you do not have to iterate over all elements."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "DeletedLegendEntries",
+          "returns": "typing.Tuple[int, ...]",
+          "desc": [
+            "A sequence of indexes denoting which data points shouldn't be shown in the legend.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 7.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ],
       "properties": [
         {
           "name": "AttachedAxisIndex",

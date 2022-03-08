@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.22",
   "libre_office_ver": "7.2",
   "name": "ContentResultSet",
   "type": "service",
@@ -103,6 +103,44 @@
       "It can be understand as a table containing a row for each child. The table columns may contain values of properties of the children."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1ucb_1_1ContentResultSet.html",
-    "items": {}
+    "items": {
+      "properties": [
+        {
+          "name": "CursorTravelMode",
+          "returns": "int",
+          "desc": [
+            "controls the travel mode of the result set cursor.",
+            "",
+            "There are two possible travel modes:",
+            "",
+            "The following pseudo-code illustrates the usage of a non-blocking cursor:",
+            "",
+            "If this property is not supported, the implementation needs to provide a blocking cursor.",
+            "",
+            "The implementation initially needs to set the value of this property to CursorTravelMode.BLOCKING."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsRowCountFinal",
+          "returns": "bool",
+          "desc": [
+            "indicates that all rows of the result set have been obtained."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RowCount",
+          "returns": "int",
+          "desc": [
+            "contains the number of rows obtained (so far) from the data source."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

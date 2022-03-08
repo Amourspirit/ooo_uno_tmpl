@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.22",
   "libre_office_ver": "7.2",
   "name": "ListBox",
   "type": "service",
@@ -46,7 +46,7 @@
       "typing.Tuple[int, ...]",
       "typing.Tuple[str, ...]"
     ],
-    "requires_typing": false,
+    "requires_typing": true,
     "full_imports": {
       "general": [
         "com.sun.star.awt.UnoControlListBoxModel",
@@ -67,6 +67,29 @@
       "specifies a model for a control which allows to choose in a list of alternative values."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1form_1_1component_1_1ListBox.html",
-    "items": {}
+    "items": {
+      "types": [
+        {
+          "name": "DefaultSelection",
+          "returns": "typing.Tuple[int, ...]",
+          "desc": [
+            "contains the indexes of entries of the listbox, which should selected by default.",
+            "",
+            "This selection is used initially or for a reset."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ListSource",
+          "returns": "typing.Tuple[str, ...]",
+          "desc": [
+            "contains the values associated to the strings to be displayed (which are specified by com.sun.star.awt.UnoControlListBoxModel.StringItemList)"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }
