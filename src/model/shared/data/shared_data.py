@@ -14,3 +14,7 @@ class BaseData(BaseModel):
     _str_null_empty = validator('name','url', allow_reuse=True)(validators.str_null_empty)
     _namespace_validate = validator('namespace', allow_reuse=True)(
         validators.namespace)
+    
+    @property
+    def full_name(self) -> str:
+        return self.namespace + '.' + self.name

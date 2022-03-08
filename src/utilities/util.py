@@ -3,9 +3,21 @@ import os
 import sys
 import __main__
 from pathlib import Path
+from ..cfg import config
 
 _APP_ROOT = None
 _OS_PATH_SET = False
+_APP_CFG = None
+
+RESERVER_WORDS = {
+    'and', 'as', 'assert', 'break', 'class',
+    'continue', 'def', 'del', 'elif', 'else',
+    'except', 'False', 'finally', 'for',
+    'from', 'global', 'if', 'import', 'in',
+    'is', 'lambda', 'None', 'nonlocal',
+    'not', 'or', 'pass', 'raise', 'return',
+    'True', 'try', 'while', 'with', 'yield'
+}
 
 def get_root() -> str:
     """
@@ -30,3 +42,12 @@ def set_os_root_path() -> None:
         if not _app_root in sys.path:
             sys.path.insert(0, _app_root)
     _OS_PATH_SET = True
+
+def get_app_cfg() -> config.AppConfig:
+    """
+    Get App Config. config is cached
+    """
+    global _APP_CFG
+    if _APP_CFG is None:
+        _APP_CFG = config.read_config_default()
+    return _APP_CFG
