@@ -1,25 +1,72 @@
 # coding: utf-8
 import uno
 from pathlib import Path
-from typing import List, Tuple, Union, Any
+from typing import List, Tuple, Union, Any, overload
 import json
+
+from rel import mod_rel as RelInfo
+
+from .class_arg import ClassArg
+from .models_base import ModelsBase
+from ..model.shared.data.from_import import FromImport
 from ..model.shared.data.properties.prop import Prop
 from ..model.ex.model_ex import ModelException
 from ..utilities import util
-from .class_arg import ClassArg
-from .models_base import ModelsBase
 from ..data_manage.db_class.qry_component import QryComponent
 from ..data_manage.db_class.db_connect import DbConnect
 
-class ModelExceptions(ModelsBase):
-    def __init__(self, json_data_file: str) -> None:
+
+class ModelsException(ModelsBase):
+    @overload
+    def __init__(self, json_data: str) -> None:
+        """
+        Constructor
+
+        Args:
+            json_data (str): relative or absoulete path to json file.
+        """
+
+    @overload
+    def __init__(self, json_data: dict) -> None:
+        """
+        Constructor
+
+        Args:
+            json_data (dict): Json data as dictionary.
+        """
+
+    @overload
+    def __init__(self, json_data: ModelException) -> None:
+        """
+        Constructor
+
+        Args:
+            json_data (ModelException): Exception Model.
+        """
+
+    def __init__(self, json_data: Union[str, dict, ModelException]) -> None:
         super().__init__()
         self._config = util.get_app_cfg()
-        j_file = self._get_json_path(json_file=json_data_file)
+        if isinstance(json_data, str):
+            self._init_str(json_data)
+        elif isinstance(json_data, dict):
+            self._init_dict(json_data)
+        elif isinstance(json_data, ModelException):
+            self._init(json_data)
+
+    def _init_str(self, json_file: str) -> None:
+        j_file = self._get_json_path(json_file=json_file)
         with open(j_file) as file:
             json_data: dict = json.load(file)
-        self._model = ModelException(**json_data)
-        self._parents: List[ModelExceptions] = []
+        self._init_dict(json_data)
+
+    def _init_dict(self, dct: dict) -> None:
+        model = ModelException(**dct)
+        self._init(model)
+
+    def _init(self, mod: ModelException) -> None:
+        self._model = mod
+        self._parents: List[ModelsException] = []
         self._cache = {}
         self._uno_instance: Any = False
         self._conn = DbConnect(self._config)
@@ -43,7 +90,7 @@ class ModelExceptions(ModelsBase):
             if ns == 'Exception':
                 break
             p = self._get_path_from_ns(ns)
-            mod = ModelExceptions(json_data_file=str(p))
+            mod = ModelsException(json_data=str(p))
             self._parents.append(mod)
 
     def get_properties_all(self) -> List[dict]:
@@ -63,7 +110,7 @@ class ModelExceptions(ModelsBase):
     def get_sorted_names(self) -> List[Tuple[str, int]]:
         """
         Gets a list of tuple. (<name>, <index>)
-        
+
         if instance sort is true then sorting is applied.
 
         Returns:
@@ -103,7 +150,7 @@ class ModelExceptions(ModelsBase):
                 type=tipe,
                 default=self.get_attrib_default(prop=prop, uno_none=uno_none),
                 component=qry.get_component_by_map_name(map_name=tipe)
-                ))
+            ))
         self._cache[key] = results
         return self._cache[key]
 
@@ -122,14 +169,44 @@ class ModelExceptions(ModelsBase):
         key = 'get_parents_class_args'
         if key in self._cache:
             return self._cache[key]
-        
+
         self._cache[key] = self._get_parents_class_args(uno_none=uno_none)
         return self._cache[key]
 
     def is_parents(self) -> bool:
         """Gets if instance as Parents"""
         return len(self._parents) > 0
+
+    def _get_model_full_imports(self):
+        imp = set()
+        imp.update(self._model.data.full_imports.general)
+        imp.update(self._model.data.full_imports.typing)
+        return imp
     
+    def get_full_imports(self) -> List[FromImport]:
+        def get_rel(ns: str) -> FromImport:
+            info = RelInfo.get_rel_import_long(
+                in_str=ns,
+                ns=self._model.namespace
+            )
+            return FromImport(
+                frm=info.frm,
+                imp=info.imp,
+                az=info.as_
+            )
+        result = [*self._model.data.from_imports]
+        pargs = self.get_parents_class_args(uno_none=False)
+        if len(pargs) == 0:
+            return result
+        m_imports = self._get_model_full_imports()
+        for arg in pargs:
+            if not arg.component is None:
+                # if there is an arg component then it may need an import
+                if not arg.component.id_component in m_imports:
+                    # this import is not currently part of any imports
+                    result.append(get_rel(arg.component.id_component))
+        return result
+
     def get_attrib_default(self, prop: Prop, uno_none: bool = False) -> str:
         name = prop.name
         returns = prop.returns
@@ -173,15 +250,16 @@ class ModelExceptions(ModelsBase):
         """
         if self._uno_instance is False:
             try:
-                self._uno_instance = uno.createUnoStruct(self.model.data.full_name)
+                self._uno_instance = uno.createUnoStruct(
+                    self.model.data.full_name)
             except Exception as e:
                 self._uno_instance = None
         return self._uno_instance
 
     @property
-    def parents(self) -> 'List[ModelExceptions]':
+    def parents(self) -> 'List[ModelsException]':
         return self._parents
-    
+
     @property
     def model(self) -> ModelException:
         return self._model

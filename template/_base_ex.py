@@ -3,6 +3,9 @@ import uno
 from typing import Any, Dict, List, Tuple, Union
 from _base_json import BaseJson
 from verr import Version
+from oootmpl.template_helper.models_exception import ModelsException
+
+
 class BaseEx(BaseJson):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -11,21 +14,27 @@ class BaseEx(BaseJson):
         self._is_parent = None
         self._cache = {}
 
-
     def _hydrate_data(self, json_data: dict):
-        self._validate_data(json_data)
+        self._models = ModelsException(json_data=json_data)
+        # self._validate_data(json_data)
         data: Dict[str, object] = json_data['data']
+
         def set_data(_key: str, a_name=None):
             attr_name = _key if not a_name else a_name
             val = data.get(_key, None)
             if not val is None:
                 setattr(self, attr_name, val)
-
-        set_data('name')
-        set_data('namespace')
-        set_data('allow_db')
-        set_data('desc')
-        set_data('url', 'link')
+        mdata = self._models.model.data
+        self.name = self.get_safe_word(mdata.name)
+        # set_data('name')
+        # set_data('namespace')
+        self.namespace = mdata.namespace
+        # set_data('allow_db')
+        self.allow_db = mdata.allow_db
+        # set_data('desc')
+        self.desc = mdata.desc
+        # set_data('url', 'link')
+        self.link = mdata.url
         setattr(self, 'inherits', data.get('extends', []))
         set_data('imports')
         # get lo ver if it exist. Defaut to False
@@ -34,10 +43,13 @@ class BaseEx(BaseJson):
         self.include_desc = bool(
             json_data['writer_args'].get('include_desc', True))
         self.attribs = self._get_attribs(json_data=json_data, sort=sort)
-        setattr(self, 'requires_typing', data.get('requires_typing', False))
-        setattr(self, 'from_imports', [])
+        # setattr(self, 'requires_typing', data.get('requires_typing', False))
+        self.requires_typing = mdata.requires_typing
+        self.from_imports = [x.as_tuple()
+                             for x in self._models.get_full_imports()]
+        # setattr(self, 'from_imports', [])
         setattr(self, 'from_imports_typing', [])
-        set_data('from_imports')
+        # set_data('from_imports')
         set_data('from_imports_typing')
         # self.requires_typing = False if len(
         #     self.from_imports_typing) == 0 else True
@@ -48,7 +60,7 @@ class BaseEx(BaseJson):
         extends_map = data.get('extends_map', None)
         if extends_map:
             self.extends_map.update(extends_map)
-        self.fullname = f"{self.namespace}.{self.get_safe_word(self.name)}"
+        self.fullname = f"{self.namespace}.{self.name}"
 
     def _get_attribs(self, json_data: dict, sort: bool) -> dict:
         items: dict = json_data['data'].get('items', {})
@@ -229,7 +241,7 @@ class BaseEx(BaseJson):
         i = 0
         for tpl in sorted_names:
             if i > 0:
-               c_str += ', '
+                c_str += ', '
             index = tpl[1]
             itm: dict = d_lst[index]
             c_str += "'" + self.get_safe_word(itm['name']) + "'"
@@ -238,7 +250,7 @@ class BaseEx(BaseJson):
             c_str += ','  # add so tuple is not mistaken as brackets
         return c_str
 
-    def get_constructor_args_str(self, include_value: bool = True, include_type: bool = True, uno_none:bool =True) -> str:
+    def get_constructor_args_str(self, include_value: bool = True, include_type: bool = True, uno_none: bool = True) -> str:
         sorted_names = self.get_sorted_names()
         d_lst = self.get_properties_all()
 
@@ -246,13 +258,13 @@ class BaseEx(BaseJson):
         i = 0
         for tpl in sorted_names:
             if i > 0:
-               c_str += ', '
+                c_str += ', '
             index = tpl[1]
             itm: dict = d_lst[index]
             # is_q = self.is_q_type(itm['returns'])
             # if is_q:
             #     str_type = self.get_q_wrapped(str_type)
-            
+
             c_str += self.get_safe_word(itm['name'])
             if include_type:
                 c_str += f": typing.Optional[{itm['returns']}]"
@@ -270,7 +282,8 @@ class BaseEx(BaseJson):
                 return "def __init__(self, **kwargs) -> None:"
             return "def __init__(self) -> None:"
         self._linfo("Constructor Args — True")
-        names = self.get_constructor_args_str(include_value=True, include_type=True)
+        names = self.get_constructor_args_str(
+            include_value=True, include_type=True)
         if self.is_parent:
             return f"def __init__(self, {names}, **kwargs) -> None:"
         return f"def __init__(self, {names}) -> None:"
@@ -285,7 +298,7 @@ class BaseEx(BaseJson):
 
     def get_class_inherits(self, class_name: str, imports: Union[str, List[str]]) -> str:
         # override to make default Exception
-        result = super().get_class_inherits(class_name=class_name,imports=imports)
+        result = super().get_class_inherits(class_name=class_name, imports=imports)
         if result == 'object':
             return 'Exception'
         return result
@@ -305,7 +318,7 @@ class BaseEx(BaseJson):
         ext = super().get_class_inherits(safe_name, self.inherits)
         return ext != 'object'
 
-    def get_attrib_default(self, prop:dict, uno_none: bool = False) -> str:
+    def get_attrib_default(self, prop: dict, uno_none: bool = False) -> str:
         name = prop['name']
         returns = prop['returns']
         if self.uno_instance is None:
