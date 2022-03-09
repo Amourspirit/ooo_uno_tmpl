@@ -107,16 +107,24 @@ class ModelExceptions(ModelsBase):
         self._cache[key] = results
         return self._cache[key]
 
-    def get_parents_class_args(self, uno_none: bool = True) -> List[ClassArg]:
+    def _get_parents_class_args(self, uno_none: bool = True) -> List[ClassArg]:
         results = []
         if self.is_parents is False:
             return results
         for parent in self._parents:
             results.extend(parent.get_class_args(uno_none=uno_none))
             # results.extend(parent.get_parents_class_args(uno_none=uno_none))
-            results = parent.get_parents_class_args(
+            results = parent._get_parents_class_args(
                 uno_none=uno_none) + results
         return results
+
+    def get_parents_class_args(self, uno_none: bool = True) -> List[ClassArg]:
+        key = 'get_parents_class_args'
+        if key in self._cache:
+            return self._cache[key]
+        
+        self._cache[key] = self._get_parents_class_args(uno_none=uno_none)
+        return self._cache[key]
 
     def is_parents(self) -> bool:
         """Gets if instance as Parents"""

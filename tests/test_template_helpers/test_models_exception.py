@@ -53,6 +53,13 @@ def test_authentication_failed_exception(root_path):
     assert parg.name == "BackendException"
     assert parg.type == "object"
     assert parg.default == "None"
+    # test cache
+    parent_args = mod.get_parents_class_args()
+    assert len(parent_args) == 3
+    parg = parent_args[0]
+    assert parg.name == "Message"
+    assert parg.default == ""
+    assert parg.type == "str"
     
 
 
