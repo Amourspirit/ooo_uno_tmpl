@@ -46,6 +46,43 @@ class QryComponent(BaseSql):
 
         return result
 
+    def get_component_by_map_name(self, map_name: str) -> Union[Component, None]:
+        """
+        Gets component instance for a given map_name
+
+        Args:
+            map_name (str): map_name used for match.
+
+        Returns:
+            Union[Component, None]: Component instance if ``map_name`` is a match; Otherwise, ``None``
+        """
+        qry_str = """SELECT component.id_component, component.name, component.namespace as ns,
+            component.type, component.version, component.lo_ver, component.file, component.c_name,
+            component.map_name, module_detail.sort as sort
+            FROM component
+            LEFT JOIN module_detail ON module_detail.id_namespace = component.id_component
+            WHERE component.map_name like :mapped_name
+            Limit 1;"""
+        args = {"mapped_name": map_name}
+        result: Component = None
+        with SqlCtx(self.conn_str) as db:
+            db.cursor.execute(qry_str, args)
+            for row in db.cursor:
+                result = Component(
+                    id_component=row['id_component'],
+                    name=row['name'],
+                    namespace=row['ns'],
+                    type=row['type'],
+                    version=row['version'],
+                    lo_ver=row['lo_ver'],
+                    file=row['file'],
+                    c_name=row['c_name'],
+                    map_name=row['map_name'],
+                    sort=row['sort']
+                )
+
+        return result
+
     def get_components(self, search_str: str) -> List[Component]:
         """
         Gets component instances for a given namespace

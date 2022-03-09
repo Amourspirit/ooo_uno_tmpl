@@ -1,14 +1,15 @@
 # coding: utf-8
 import uno
 from pathlib import Path
-from typing import List, Tuple, Union
+from typing import List, Tuple, Union, Any
 import json
 from ..model.shared.data.properties.prop import Prop
 from ..model.ex.model_ex import ModelException
 from ..utilities import util
 from .class_arg import ClassArg
 from .models_base import ModelsBase
-
+from ..data_manage.db_class.qry_component import QryComponent
+from ..data_manage.db_class.db_connect import DbConnect
 
 class ModelExceptions(ModelsBase):
     def __init__(self, json_data_file: str) -> None:
@@ -20,7 +21,8 @@ class ModelExceptions(ModelsBase):
         self._model = ModelException(**json_data)
         self._parents: List[ModelExceptions] = []
         self._cache = {}
-        self._uno_instance = None
+        self._uno_instance: Any = False
+        self._conn = DbConnect(self._config)
         self._set_parents()
 
     def _get_json_path(self, json_file) -> Path:
@@ -90,6 +92,7 @@ class ModelExceptions(ModelsBase):
         sorted_names = self.get_sorted_names()
         d_lst = self.get_properties_all()
         results: List[ClassArg] = []
+        qry = QryComponent(self._conn.connection_str)
         for _, index in sorted_names:
             itm: dict = d_lst[index]
             name = self.get_safe_word(itm['name'])
@@ -98,7 +101,9 @@ class ModelExceptions(ModelsBase):
             results.append(ClassArg(
                 name=name,
                 type=tipe,
-                default=self.get_attrib_default(prop=prop, uno_none=uno_none)))
+                default=self.get_attrib_default(prop=prop, uno_none=uno_none),
+                component=qry.get_component_by_map_name(map_name=tipe)
+                ))
         self._cache[key] = results
         return self._cache[key]
 
@@ -108,7 +113,9 @@ class ModelExceptions(ModelsBase):
             return results
         for parent in self._parents:
             results.extend(parent.get_class_args(uno_none=uno_none))
-            results.extend(parent.get_parents_class_args(uno_none=uno_none))
+            # results.extend(parent.get_parents_class_args(uno_none=uno_none))
+            results = parent.get_parents_class_args(
+                uno_none=uno_none) + results
         return results
 
     def is_parents(self) -> bool:
@@ -118,6 +125,10 @@ class ModelExceptions(ModelsBase):
     def get_attrib_default(self, prop: Prop, uno_none: bool = False) -> str:
         name = prop.name
         returns = prop.returns
+        if self.uno_instance is None:
+            if uno_none is True:
+                return 'UNO_NONE'
+            return 'None'
         result = getattr(self.uno_instance, name, None)
         if isinstance(result, str):
             return result
@@ -141,8 +152,22 @@ class ModelExceptions(ModelsBase):
 
     @property
     def uno_instance(self):
-        if self._uno_instance is None:
-            self._uno_instance = uno.createUnoStruct(self.model.data.full_name)
+        """
+        Get a uno instance of current uno exception being processed
+
+        Returns:
+            Any: return uno instance if it can be created; Otherwise, ``None``
+
+        Note:
+            not all exceptions/struct are available in all version.
+            ReadOnlyOpenRequest: https://tinyurl.com/ycu8u8wu
+            is a 7.2 version
+        """
+        if self._uno_instance is False:
+            try:
+                self._uno_instance = uno.createUnoStruct(self.model.data.full_name)
+            except Exception as e:
+                self._uno_instance = None
         return self._uno_instance
 
     @property
