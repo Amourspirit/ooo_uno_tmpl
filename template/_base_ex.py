@@ -1,13 +1,13 @@
 # coding: utf-8
 import uno
-from typing import Dict, List, Tuple, Union
+from typing import Any, Dict, List, Tuple, Union
 from _base_json import BaseJson
 from verr import Version
 class BaseEx(BaseJson):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._sorted_key_index = None
-        self._uno_instance = None
+        self._uno_instance: Any = False
         self._is_parent = None
         self._cache = {}
 
@@ -308,6 +308,10 @@ class BaseEx(BaseJson):
     def get_attrib_default(self, prop:dict, uno_none: bool = False) -> str:
         name = prop['name']
         returns = prop['returns']
+        if self.uno_instance is None:
+            if uno_none is True:
+                return 'UNO_NONE'
+            return 'None'
         result = getattr(self.uno_instance, name, None)
         if isinstance(result, str):
             return f"'{result}'"
@@ -330,9 +334,23 @@ class BaseEx(BaseJson):
         return str(result)
 
     @property
-    def uno_instance(self):
-        if self._uno_instance is None:
-            self._uno_instance = uno.createUnoStruct(self.fullname)
+    def uno_instance(self) -> Any:
+        """
+        Get a uno instance of current uno exception being processed
+
+        Returns:
+            Any: return uno instance if it can be created; Otherwise, ``None``
+
+        Note:
+            not all exceptions/struct are available in all version.
+            ReadOnlyOpenRequest: https://tinyurl.com/ycu8u8wu
+            is a 7.2 version
+        """
+        if self._uno_instance is False:
+            try:
+                self._uno_instance = uno.createUnoStruct(self.fullname)
+            except Exception as e:
+                self._uno_instance = None
         return self._uno_instance
 
     @property
