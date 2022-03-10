@@ -133,12 +133,15 @@ class ModelsException(ModelsBase):
             return self._cache[key]
         sorted = []
         sort = self._model.parser_args.sort
+        i = 0
         if not self._model.data.items.types is None:
-            for i, t in enumerate(self._model.data.items.types):
+            for t in self._model.data.items.types:
                 sorted.append((t.name, i))
+                i += 1
         if not self._model.data.items.properties is None:
-            for i, p in enumerate(self._model.data.items.properties):
+            for p in self._model.data.items.properties:
                 sorted.append((p.name, i))
+                i += 1
         if sort:
             sorted.sort()
         self._cache[key] = sorted

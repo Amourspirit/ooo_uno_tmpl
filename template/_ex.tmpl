@@ -117,9 +117,9 @@ class ${safe_name}($self.get_class_inherits($safe_name, $inherits))$self.get_cla
     #end for
         }
     #for $arg in $args_all
-        #if $arg.type == "UNO_NONE"
-            if kargs["$arg.name"] is UNO_NONE:
-                kargs["$arg.name"] = $arg.default
+        #if $arg.default == "UNO_NONE"
+        if kargs["$arg.name"] is UNO_NONE:
+            kargs["$arg.name"] = None
         #end if
     #end for
     ## #if $self.has_uno_extends()

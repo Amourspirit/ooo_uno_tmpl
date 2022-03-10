@@ -285,10 +285,25 @@ class BaseEx(BaseJson):
             c_str += ','  # add so tuple is not mistaken as brackets
         return c_str
 
+    
+    
+    def get_nt_names_all_str(self) -> str:
+        args = self._models.get_class_args_all()
+        c_str = ''
+        i = 0
+        for arg in args:
+            if i > 0:
+                c_str += ', '
+            c_str += "'" + arg.name + "'"
+            i += 1
+        if i == 1:
+            c_str += ','  # add so tuple is not mistaken as brackets
+        return c_str
+
     def get_class_args_all(self, uno_none: bool = True):
         # returns list of ClassArg
         return self._models.get_class_args_all(uno_none=uno_none)
-    
+
     def get_class_args_inst(self, uno_none: bool = True):
         return self._models.get_class_args(uno_none=uno_none)
 
@@ -447,3 +462,7 @@ class BaseEx(BaseJson):
             self._linfo(
                 f"parent — {self._is_parent}")
         return self._is_parent
+
+    @property
+    def models(self) -> ModelsException:
+        return self._models
