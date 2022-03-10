@@ -4,6 +4,7 @@ from typing import Dict, Set, Tuple, List, Union
 from _base_json import BaseJson
 from verr import Version
 from _base_tmpl import SqlComponent
+from oootmpl.template_helper.models_struct import ModelsStruct
 
 class BaseStruct(BaseJson):
     def __init__(self, *args, **kwargs):
@@ -15,7 +16,8 @@ class BaseStruct(BaseJson):
         self._cache = {}
 
     def _hydrate_data(self, json_data: dict):
-        self._validate_data(json_data)
+        self._models = ModelsStruct(json_data=json_data)
+        # self._validate_data(json_data)
         data: Dict[str, object] = json_data['data']
 
         def set_data(_key: str, a_name=None):
@@ -23,12 +25,17 @@ class BaseStruct(BaseJson):
             val = data.get(_key, None)
             if not val is None:
                 setattr(self, attr_name, val)
-        # validation ensures min version of 0.1.1
-        set_data('name')
-        set_data('namespace')
-        set_data('allow_db')
-        set_data('desc')
-        set_data('url', 'link')
+        mdata = self._models.model.data
+        self.name = self.get_safe_word(mdata.name)
+        self.namespace = mdata.namespace
+        self.allow_db = mdata.allow_db
+        self.desc = mdata.desc
+        self.link = mdata.url
+        # set_data('name')
+        # set_data('namespace')
+        # set_data('allow_db')
+        # set_data('desc')
+        # set_data('url', 'link')
         setattr(self, 'inherits', data.get('extends', []))
         set_data('imports')
         set_data('from_imports')

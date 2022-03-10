@@ -10,13 +10,13 @@ from .class_arg import ClassArg
 from .models_base import ModelsBase
 from ..model.shared.data.from_import import FromImport
 from ..model.shared.data.properties.prop import Prop
-from ..model.ex.model_ex import ModelException
+from ..model.struct.model_struct import ModelStruct
 from ..utilities import util
 from ..data_manage.db_class.qry_component import QryComponent
 from ..data_manage.db_class.db_connect import DbConnect
 
 
-class ModelsException(ModelsBase):
+class ModelsStruct(ModelsBase):
     # region Constructor
     @overload
     def __init__(self, json_data: str) -> None:
@@ -37,7 +37,7 @@ class ModelsException(ModelsBase):
         """
 
     @overload
-    def __init__(self, json_data: ModelException) -> None:
+    def __init__(self, json_data: ModelStruct) -> None:
         """
         Constructor
 
@@ -45,14 +45,14 @@ class ModelsException(ModelsBase):
             json_data (ModelException): Exception Model.
         """
 
-    def __init__(self, json_data: Union[str, dict, ModelException]) -> None:
+    def __init__(self, json_data: Union[str, dict, ModelStruct]) -> None:
         super().__init__()
         self._config = util.get_app_cfg()
         if isinstance(json_data, str):
             self._init_str(json_data)
         elif isinstance(json_data, dict):
             self._init_dict(json_data)
-        elif isinstance(json_data, ModelException):
+        elif isinstance(json_data, ModelStruct):
             self._init(json_data)
 
     def _init_str(self, json_file: str) -> None:
@@ -62,51 +62,18 @@ class ModelsException(ModelsBase):
         self._init_dict(json_data)
 
     def _init_dict(self, dct: dict) -> None:
-        model = ModelException(**dct)
+        model = ModelStruct(**dct)
         self._init(model)
 
-    def _init(self, mod: ModelException) -> None:
+    def _init(self, mod: ModelStruct) -> None:
         self._model = mod
-        self._parents: List[ModelsException] = []
+        self._parents: List[ModelsStruct] = []
         self._cache = {}
         self._uno_instance: Any = False
         self._conn = DbConnect(self._config)
         self._set_parents()
-
     # endregion Constructor
-
-    def _set_parents(self) -> None:
-        for ns in self._model.data.extends:
-            # root uno exception inherits from python Exception
-            if ns == 'Exception':
-                break
-            p = self._get_path_from_ns(ns)
-            mod = ModelsException(json_data=str(p))
-            self._parents.append(mod)
-
-    def get_properties_all(self) -> List[dict]:
-        """
-        Gets combined args for types, and properties as dict.
-
-        Returns:
-            List[dict]: dictionary of types and args
-
-        Note:
-            This method is internaly cached.
-        """
-        key = 'get_properties_all'
-        if key in self._cache:
-            return self._cache[key]
-        results: List[dict] = []
-        if not self._model.data.items.types is None:
-            for t in self._model.data.items.types:
-                results.append(t.dict())
-        if not self._model.data.items.properties is None:
-            for p in self._model.data.items.properties:
-                results.append(p.dict())
-        self._cache[key] = results
-        return self._cache[key]
-
+    
     def get_sorted_names(self) -> List[Tuple[str, int]]:
         """
         Gets a list of tuple. (<name>, <index>)
@@ -124,15 +91,8 @@ class ModelsException(ModelsBase):
             return self._cache[key]
         sorted = []
         sort = self._model.parser_args.sort
-        i = 0
-        if not self._model.data.items.types is None:
-            for t in self._model.data.items.types:
-                sorted.append((t.name, i))
-                i += 1
-        if not self._model.data.items.properties is None:
-            for p in self._model.data.items.properties:
-                sorted.append((p.name, i))
-                i += 1
+        for i, itm in enumerate(self._model.data.items):
+            sorted.append((itm.name, i))
         if sort:
             sorted.sort()
         self._cache[key] = sorted
@@ -163,8 +123,13 @@ class ModelsException(ModelsBase):
         for _, index in sorted_names:
             itm: dict = d_lst[index]
             name = self.get_safe_word(itm['name'])
-            tipe = itm['returns']
-            prop = Prop(**itm)
+            tipe = itm['type']
+            prop = Prop(
+                name=itm['name'],
+                returns=itm['type'],
+                origtype=itm['origtype'],
+                desc=itm['desc']
+            )
             results.append(ClassArg(
                 name=name,
                 type=tipe,
@@ -234,45 +199,6 @@ class ModelsException(ModelsBase):
             return True
         return False
 
-    def _get_model_full_imports(self):
-        imp = set()
-        imp.update(self._model.data.full_imports.general)
-        imp.update(self._model.data.full_imports.typing)
-        return imp
-
-    def get_full_imports(self) -> List[FromImport]:
-        """
-        Get full import for current model plus all parent models.
-
-        I a parent model constructor arg needs an import then this method detects
-        it and adds it to the list if it is not already included.
-
-        Returns:
-            List[FromImport]: List of form imports
-        """
-        def get_rel(ns: str) -> FromImport:
-            info = RelInfo.get_rel_import_long(
-                in_str=ns,
-                ns=self._model.namespace
-            )
-            return FromImport(
-                frm=info.frm,
-                imp=info.imp,
-                az=info.as_
-            )
-        result = [*self._model.data.from_imports]
-        pargs = self.get_parents_class_args(uno_none=False)
-        if len(pargs) == 0:
-            return result
-        m_imports = self._get_model_full_imports()
-        for arg in pargs:
-            if not arg.component is None:
-                # if there is an arg component then it may need an import
-                if not arg.component.id_component in m_imports:
-                    # this import is not currently part of any imports
-                    result.append(get_rel(arg.component.id_component))
-        return result
-
     @property
     def uno_instance(self):
         """
@@ -290,14 +216,14 @@ class ModelsException(ModelsBase):
             try:
                 self._uno_instance = uno.createUnoStruct(
                     self.model.data.full_name)
-            except Exception as e:
+            except Exception:
                 self._uno_instance = None
         return self._uno_instance
 
     @property
-    def parents(self) -> 'List[ModelsException]':
+    def parents(self) -> 'List[ModelsStruct]':
         return self._parents
 
     @property
-    def model(self) -> ModelException:
+    def model(self) -> ModelStruct:
         return self._model

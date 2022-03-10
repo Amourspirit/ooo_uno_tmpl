@@ -26,14 +26,9 @@ class BaseEx(BaseJson):
                 setattr(self, attr_name, val)
         mdata = self._models.model.data
         self.name = self.get_safe_word(mdata.name)
-        # set_data('name')
-        # set_data('namespace')
         self.namespace = mdata.namespace
-        # set_data('allow_db')
         self.allow_db = mdata.allow_db
-        # set_data('desc')
         self.desc = mdata.desc
-        # set_data('url', 'link')
         self.link = mdata.url
         setattr(self, 'inherits', data.get('extends', []))
         set_data('imports')
@@ -43,19 +38,14 @@ class BaseEx(BaseJson):
         self.include_desc = bool(
             json_data['writer_args'].get('include_desc', True))
         self.attribs = self._get_attribs(json_data=json_data, sort=sort)
-        # setattr(self, 'requires_typing', data.get('requires_typing', False))
         self.requires_typing = mdata.requires_typing
         if self.requires_typing is False:
             if self._models.is_args():
                 self.requires_typing = True
         self.from_imports = [x.as_tuple()
                              for x in self._models.get_full_imports()]
-        # setattr(self, 'from_imports', [])
         setattr(self, 'from_imports_typing', [])
-        # set_data('from_imports')
         set_data('from_imports_typing')
-        # self.requires_typing = False if len(
-        #     self.from_imports_typing) == 0 else True
         quote: List[str] = data.get('quote', [])
         self.quote.update(quote)
         typings: List[str] = data.get('typings', [])
