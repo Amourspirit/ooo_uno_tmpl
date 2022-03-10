@@ -62,13 +62,15 @@ class PythonType(object):
         imports: Optional[str] = None,
         is_py_type: bool = True,
         children: Optional[List['PythonType']] = None,
-        realtype: str = 'object'
+        realtype: str = 'object',
+        origtype: Optional[str] = None
     ) -> None:
         self._type = type
         self._requires_typing = requires_typing
         self._imports = imports
         self._is_py_type = is_py_type
         self._realtype = realtype
+        self._origtype = origtype
         if children is None:
             self._children = []
         else:
@@ -151,6 +153,14 @@ class PythonType(object):
     def realtype(self, value: str):
         self._default_check()
         self._realtype = value
+    
+    @property
+    def origtype(self) -> Union[str, None]:
+        return self._origtype
+    
+    @origtype.setter
+    def origtype(self, value: Union[str, None]) -> None:
+        self._origtype = value
     # endregion Properties
 
     # region Methods
@@ -568,7 +578,8 @@ class RuleComType(BaseRule):
             requires_typing=False,
             imports=s_type,
             is_py_type=False,
-            realtype=s
+            realtype=s,
+            origtype=in_type
         )
 
 

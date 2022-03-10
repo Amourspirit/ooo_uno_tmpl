@@ -6,6 +6,7 @@ from pydantic import BaseModel
 class Tipe(BaseModel):
     name: str
     returns: str
+    origtype: Optional[str]
     desc: List[str]
     raises_get: Optional[str]
     raises_set: Optional[str]

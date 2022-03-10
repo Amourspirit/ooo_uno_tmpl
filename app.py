@@ -312,8 +312,9 @@ def _main():
     # ns = 'com.sun.star.form.DataAwareControlModel'
     # ns = 'com.sun.star.text.TextRange'
     # args = 'data db-json -n com.sun.star.form.control.GridControl'
-    url = 'https://api.libreoffice.org/docs/idl/ref/exceptioncom_1_1sun_1_1star_1_1configuration_1_1backend_1_1BackendSetupException.html'
-    args = 'url-parse exception -s -t -u '
+    # url = 'https://api.libreoffice.org/docs/idl/ref/exceptioncom_1_1sun_1_1star_1_1document_1_1FilterOptionsRequest.html'
+    url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1beans_1_1GetPropertyTolerantResult.html'
+    args = 'url-parse struct -t -j -u '
     # args = 'link-json mod-links -r -j -a --data'
     args += url
     sys.argv.extend(args.split())
@@ -1613,6 +1614,6 @@ def main():
 
 if __name__ == '__main__':
     # _touch()
-        main()
+    main()
 
 # endregion Main
