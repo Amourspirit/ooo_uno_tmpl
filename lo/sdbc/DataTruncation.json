@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.22",
   "libre_office_ver": "7.2",
   "name": "DataTruncation",
   "type": "exception",
@@ -47,6 +47,58 @@
       "The SQL state for a DataTruncation is 01004."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/exceptioncom_1_1sun_1_1star_1_1sdbc_1_1DataTruncation.html",
-    "items": {}
+    "items": {
+      "properties": [
+        {
+          "name": "Index",
+          "returns": "int",
+          "desc": [
+            "is the index of the parameter or column value."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsParameter",
+          "returns": "bool",
+          "desc": [
+            "is TRUE if a parameter value is truncated."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "DuringRead",
+          "returns": "bool",
+          "desc": [
+            "is TRUE if a read was truncated."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "DataSize",
+          "returns": "int",
+          "desc": [
+            "contains the number of bytes of data that should have been transferred.",
+            "",
+            "This number may be approximate if data conversions were being performed. The value may be -1 if the size is unknown."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TransferSize",
+          "returns": "int",
+          "desc": [
+            "contains the number of bytes of data actually transferred.",
+            "",
+            "The value may be -1 if the size is unknown."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

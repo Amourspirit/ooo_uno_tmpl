@@ -31,6 +31,10 @@ $self.load_data()#slurp
 #set $is_method = 'methods' in $attribs
 #set $is_properties = len($properties) > 0
 #set $sorted = $self.get_sorted_names()
+#set $is_local_args = $self.is_inst_args()
+#set $is_non_local_args = $self.is_parent_args()
+#set $args_all = $self.get_class_args_all()
+#set $args_local = $self.get_class_args_inst()
 ##set $is_types = 'types' in $attribs
 ##set $abc_imports = $self.get_abstract_imports([$is_method],[$is_properties, $is_types])
 #set $abc_imports = []
@@ -98,35 +102,52 @@ class ${safe_name}($self.get_class_inherits($safe_name, $inherits))$self.get_cla
         Constructor
 
         Keyword Arguments:
-#for $i, $tpl in enumerate($sorted)
-#set $index = tpl[1]
-#set $itm = $properties[$index]
-#set $itm_name = $self.get_safe_word($itm['name'])
-#set $itm_type = $itm['returns'].removeprefix('typing.')
-#set $itm_type = re.sub(re_underscore_hex, '', $itm_type, 1)
-            $itm_name ($itm_type, optional): $itm_name value.
+#for $arg in $args_all
+#set $arg_type = re.sub(re_underscore_hex, '', $arg.type, 1)
+            $arg.name ($arg_type, optional): $arg.name value.
 #end for
-
-            Other ``*args`` and ``**kwargs`` are passed to parent class.
         """
-#if $self.has_uno_extends()
-        super().__init__(**kwargs)
-
+#if $self.has_uno_extends() is False
+        super().__init__()
 #end if
-#for $i, $tpl in enumerate($sorted)
-#set $index = tpl[1]
-#set $itm = $properties[$index]
-#set $itm_name = $self.get_safe_word($itm.name)
-#set $attrib_default = $self.get_attrib_default($itm, True)
-    #if attrib_default == 'UNO_NONE'
-        if $itm_name is UNO_NONE:
-            self._$self.camel_to_snake($itm_name) = $self.get_attrib_default($itm)
-        else:
-            self._$self.camel_to_snake($itm_name) = $itm_name
-    #else
-        self._$self.camel_to_snake($itm_name) = $itm_name
-    #end if
-#end for
+#if $self.is_args()
+        kargs = {
+    #for $arg in $args_all
+            "$arg.name": $arg.name,
+    #end for
+        }
+    #for $arg in $args_all
+        #if $arg.default == "UNO_NONE"
+        if kargs["$arg.name"] is UNO_NONE:
+            kargs["$arg.name"] = None
+        #end if
+    #end for
+    ## #if $self.has_uno_extends()
+        self._init(**kargs)
+
+    def _init(self, **kwargs) -> None:
+        #if $is_local_args
+            #for $arg in $args_local
+        self._$self.camel_to_snake($arg.name) = kwargs["$arg.name"]
+            #end for
+        #end if
+        #if $is_non_local_args
+            #if $is_local_args
+        inst_keys = ($self.get_nt_names_str())
+        kargs = kwargs.copy()
+        for key in inst_keys:
+            del kargs[key]
+        super()._init(**kargs)
+            #else
+        super()._init(**kwargs)
+            #end if
+        #else
+            #if $self.has_uno_extends()
+        super()._init({})
+            #end if
+        #end if
+    ## #end if
+#end if
 
 #if $is_method
 #set $methods = $attribs['methods']

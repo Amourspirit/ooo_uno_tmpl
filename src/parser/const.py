@@ -34,6 +34,7 @@ from .web.block_obj import BlockObj
 from .common.config import APP_CONFIG
 from .common import log_load
 from ..logger.log_handle import get_logger
+from .enumerations.value_type import ValTypeEnum
 from ..utilities import util as mutil
 # endregion Imports
 
@@ -74,24 +75,6 @@ class DataItem:
 # endregion DataClass
 
 # region Rule Engine
-
-
-class ValTypeEnum(IntEnum):
-    STRING = auto()
-    INTEGER = auto()
-    FLOAT = auto()
-    CONST = auto()
-    """Const is a another value in the same constant class"""
-    CONST_PLUS_INT = auto()
-    """Const is a another value in the same constant class with a + int value"""
-    CONST_MINUS_INT = auto()
-    """Const is a another value in the same constant class with a - int value"""
-    IMPORT = auto()
-    """Value is a import"""
-
-    def __str__(self) -> str:
-        return self._name_
-
 
 @dataclass
 class Val:

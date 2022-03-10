@@ -7,32 +7,22 @@ from pathlib import Path
 from typing import List, Dict
 from rel import mod_rel as RelInfo
 from ...cfg.config import AppConfig
+from ...model.shared.ooo_class import OooClass
+from ...utilities import util
 from ..data_class.extend import Extend
 from ..data_class.component import Component
 from ..data_class.full_import import FullImport
-from ..db_class.tbl_component import TblComponent
-from ..db_class.tbl_component_extend import TblComponentExtend
-from ..db_class.tbl_component_full_import import TblComponentFullImport
-from ..db_class.db_connect import DbConnect
+from .db_module_json import DbModuleJson
 
 
 class ParseModuleJson:
     def __init__(self, config: AppConfig) -> None:
         self._app_config = config
-        self._components: List[Component] = []
-        self._extends: List[Extend] = []
-        self._full_imports: List[FullImport] = []
         self._min_ver = verr.Version.parse(config.min_json_data_ver)
         self._valid_types = tuple(self._app_config.component_types)
-        conn = DbConnect(self._app_config)
-        self._db_cnn = conn.connection_str
-        self._root_dir = conn.root_dir
-        self._component_tbl = TblComponent(connect_str=self._db_cnn)
-        self._extend_tbl = TblComponentExtend(connect_str=self._db_cnn)
-        self._full_import_tbl = TblComponentFullImport(
-            connect_str=self._db_cnn)
-        self._json_data_dir: Path = self._root_dir.joinpath(
-            self._app_config.data_dir)
+        self._json_data_dir: Path = Path(
+            util.get_root(), self._app_config.data_dir)
+        self._db = DbModuleJson(config=self._app_config)
 
     def get_module_json_files(self) -> List[str]:
         def filter_fn(name) -> bool:
@@ -47,7 +37,7 @@ class ParseModuleJson:
         return files
 
     def _write_all(self) -> None:
-        self._components.clear()
+        self._db.components.clear()
         m_files = self.get_module_json_files()
         for j_file in m_files:
             with open(j_file, 'r') as file:
@@ -55,9 +45,7 @@ class ParseModuleJson:
             self._validite_json(file=file, data=j_data)
             self._read(json_data=j_data, file=j_file)
 
-        self._component_tbl.insert(data=self._components)
-        self._extend_tbl.insert(data=self._extends)
-        self._full_import_tbl.insert(data=self._full_imports)
+        self._db._write_all()
 
     def update_all_details(self) -> None:
         self._write_all()
@@ -67,24 +55,30 @@ class ParseModuleJson:
 
     def _read_main(self, json_data: dict, file: str) -> None:
         rel = Path(file).relative_to(self._json_data_dir)
-        ns = json_data['namespace']
-        name = json_data['name']
+        o_class = OooClass(**json_data)
+        ns = o_class.namespace
+        name = o_class.name
+        # ns = json_data['namespace']
+        # name = json_data['name']
         full_ns = f"{ns}.{name}"
         map_name = name + '_' + RelInfo.get_shortened(full_ns)
         c = Component(
             id_component=full_ns,
             name=name,
             namespace=ns,
-            type=json_data['type'],
-            version=json_data['version'],
-            lo_ver=json_data['libre_office_ver'],
+            # type=json_data['type'],
+            type=str(o_class.type),
+            # version=json_data['version'],
+            version=o_class.version,
+            # lo_ver=json_data['libre_office_ver'],
+            lo_ver=o_class.libre_office_ver,
             file=str(rel),
             c_name=RelInfo.camel_to_snake(name),
             map_name=map_name
         )
         self._read_extends(json_data=json_data, comp=c)
         self._read_full_imports(json_data=json_data, comp=c)
-        self._components.append(c)
+        self._db.components.append(c)
 
     def _read_extends(self, json_data: dict, comp: Component) -> None:
         j_extends: List[str] = json_data['data'].get('extends', [])
@@ -94,7 +88,7 @@ class ParseModuleJson:
             map_name = j_extends_map.get(ext, None)
             key = comp.id_component + ext
             id_ = hashlib.md5(key.encode('utf-8')).hexdigest()
-            self._extends.append(
+            self._db.extends.append(
                 Extend(id_extend=id_, namespace=ext, map_name=map_name, fk_component_id=comp.id_component))
 
     def _read_full_imports(self, json_data: dict, comp: Component) -> None:
@@ -107,7 +101,7 @@ class ParseModuleJson:
         type_lst: List[str] = j_imports.get('typing', [])
         for ns in gen_lst:
             id_ = get_id(ns)
-            self._full_imports.append(FullImport(
+            self._db.full_imports.append(FullImport(
                 id_full_import=id_,
                 namespace=ns,
                 requires_typing=False,
@@ -115,7 +109,7 @@ class ParseModuleJson:
             ))
         for ns in type_lst:
             id_ = get_id(ns)
-            self._full_imports.append(FullImport(
+            self._db.full_imports.append(FullImport(
                 id_full_import=id_,
                 namespace=ns,
                 requires_typing=True,
