@@ -20,7 +20,7 @@ def test_the_introspection(fixture_the_introspection):
     obj = ModelSingleton(**f_json)
     assert obj is not None
     assert obj.id == 'uno-ooo-parser'
-    assert obj.version == "0.1.21"
+    assert obj.version == "0.1.23"
     assert obj.libre_office_ver == "7.2"
     assert obj.name == "theIntrospection"
     assert obj.type == OooType.SINGLETON

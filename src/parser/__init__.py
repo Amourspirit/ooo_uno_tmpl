@@ -1,2 +1,2 @@
-__version__ = "0.1.22   "
+__version__ = "0.1.23"
 JSON_ID = "uno-ooo-parser"

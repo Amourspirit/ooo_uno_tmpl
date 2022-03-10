@@ -257,7 +257,8 @@ class Parser(base.ParserBase):
             attrib = {
                 "name": si.name,
                 "type": si.p_type.type,
-                "lines": self._api_data.get_desc_detail(si.id).get_obj()
+                "origtype": si.p_type.origtype,
+                "desc": self._api_data.get_desc_detail(si.id).get_obj()
             }
             attribs[key].append(attrib)
             if si.p_type.requires_typing:

@@ -357,6 +357,7 @@ class Parser(base.ParserBase):
             attrib = {
                 "name": si.name,
                 "returns": si.p_type.type,
+                "origtype": si.p_type.origtype,
                 "desc": self._api_data.get_desc_detail(si.id).get_obj(),
                 "raises_get": '',
                 "raises_set": ''

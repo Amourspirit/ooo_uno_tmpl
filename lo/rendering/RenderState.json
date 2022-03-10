@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.22",
+  "version": "0.1.23",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "RenderState",
@@ -63,7 +63,8 @@
       {
         "name": "DeviceColor",
         "type": "typing.Tuple[ColorComponent_e4c0e78, ...]",
-        "lines": [
+        "origtype": null,
+        "desc": [
           "The device color associated with this render operation.",
           "",
           "Note that this need not be RGB here, but depends on the active device color space."
@@ -72,7 +73,8 @@
       {
         "name": "AffineTransform",
         "type": "AffineMatrix2D_ff040da8",
-        "lines": [
+        "origtype": "com.sun.star.geometry.AffineMatrix2D",
+        "desc": [
           "The affine transform associated with this render operation.",
           "",
           "This is used to transform coordinates of canvas primitives from user space to view space (from which they are subsequently transformed to device space by the view transform)."
@@ -81,7 +83,8 @@
       {
         "name": "Clip",
         "type": "XPolyPolygon2D_e1b0e20",
-        "lines": [
+        "origtype": "com.sun.star.rendering.XPolyPolygon2D",
+        "desc": [
           "The clipping area associated with this render operation.",
           "",
           "This clipping is interpreted in the user coordinate system, i.e. subject to the render state transform followed by the view transform before mapped to device coordinate space.",
@@ -92,7 +95,8 @@
       {
         "name": "CompositeOperation",
         "type": "int",
-        "lines": [
+        "origtype": null,
+        "desc": [
           "The composition mode associated with this render operation.",
           "",
           "The composite mode determines in which way the primitive and possibly existing background is combined. The permissible values must be one out of the CompositeOperation constants."

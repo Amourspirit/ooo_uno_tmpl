@@ -32,7 +32,7 @@ def test_open_root(fixture_xinterface):
     obj = ModelInterface(**f_json)
     assert obj is not None
     assert obj.id == 'uno-ooo-parser'
-    assert obj.version == "0.1.21"
+    assert obj.version == "0.1.23"
     assert obj.libre_office_ver == "7.2"
     assert obj.name == "XInterface"
     assert obj.type == OooType.INTERFACE
@@ -87,7 +87,7 @@ def test_xstyle_settings(fixture_xstyle_settings):
     obj = ModelInterface(**f_json)
     assert obj is not None
     assert obj.id == 'uno-ooo-parser'
-    assert obj.version == "0.1.21"
+    assert obj.version == "0.1.23"
     assert obj.libre_office_ver == "7.2"
     assert obj.name == "XStyleSettings"
     assert obj.type == OooType.INTERFACE
@@ -127,6 +127,7 @@ def test_xstyle_settings(fixture_xstyle_settings):
     assert p.returns == 'Color_68e908c5'
     assert p.raises_get == ""
     assert p.raises_set == ""
+    assert p.origtype == "com.sun.star.util.Color"
     assert p.desc[0] == "specifies the color of the border of active windows"
     assert len(obj.data.items.methods) == 2
     m: Method = obj.data.items.methods[0]
@@ -155,7 +156,7 @@ def test_x_animate(fixture_xanimate):
     obj = ModelInterface(**f_json)
     assert obj is not None
     assert obj.id == 'uno-ooo-parser'
-    assert obj.version == "0.1.21"
+    assert obj.version == "0.1.23"
     assert obj.libre_office_ver == "7.2"
     assert obj.name == "XAnimate"
     assert obj.type == OooType.INTERFACE
@@ -171,19 +172,18 @@ def test_x_animate(fixture_xanimate):
     assert obj.data.name == "XAnimate"
     assert obj.data.namespace == "com.sun.star.animations"
     assert obj.data.url == "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1animations_1_1XAnimate.html"
-    assert len(obj.data.from_imports) == 2
+    assert len(obj.data.from_imports) == 1
     frm: FromImport = obj.data.from_imports[0]
-    assert frm.frm == ".time_filter_pair"
-    assert frm.imp == "TimeFilterPair"
-    assert frm.az == "TimeFilterPair_1d250ebc"
-    assert len(obj.data.from_imports_typing) == 0
-    assert obj.data.extends_map["com.sun.star.animations.TimeFilterPair"] == "TimeFilterPair_1d250ebc"
+    assert frm.frm == ".x_animation_node"
+    assert frm.imp == "XAnimationNode"
+    assert frm.az == "XAnimationNode_1cf10eb9"
+    assert len(obj.data.from_imports_typing) == 1
     assert obj.data.extends_map["com.sun.star.animations.XAnimationNode"] == "XAnimationNode_1cf10eb9"
-    assert len(obj.data.quote) == 0
+    assert len(obj.data.quote) == 3
     assert len(obj.data.typings) == 3
     assert obj.data.typings[0] == "typing.Tuple[TimeFilterPair_1d250ebc, ...]"
-    assert len(obj.data.full_imports.general) == 2
-    assert len(obj.data.full_imports.typing) == 0
+    assert len(obj.data.full_imports.general) == 1
+    assert len(obj.data.full_imports.typing) == 1
     assert len(obj.data.imports) == 0
     assert len(obj.data.extends) == 1
     assert obj.data.extends[0] == "com.sun.star.animations.XAnimationNode"
@@ -196,10 +196,12 @@ def test_x_animate(fixture_xanimate):
     assert p.returns == "bool"
     assert p.raises_get == ""
     assert p.raises_set == ""
+    assert p.origtype is None
     assert p.desc[0] == "Controls whether or not the animation is cumulative."
     t: Tipe = obj.data.items.types[0]
     assert t.name == "KeyTimes"
     assert t.returns == "typing.Tuple[float, ...]"
+    assert t.origtype is None
     assert len(t.desc) == 0
     assert t.raises_get == ""
     assert t.raises_set == ""

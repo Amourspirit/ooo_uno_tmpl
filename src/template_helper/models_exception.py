@@ -178,7 +178,7 @@ class ModelsException(ModelsBase):
                 name=name,
                 type=tipe,
                 default=self.get_attrib_default(name=prop.name, returns=prop.returns, uno_none=uno_none),
-                component=qry.get_component_by_map_name(map_name=tipe)
+                component=None if prop.origtype is None else qry.get_component(full_ns=prop.origtype)
             ))
         self._cache[key] = results
         return self._cache[key]

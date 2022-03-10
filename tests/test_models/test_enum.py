@@ -19,7 +19,7 @@ def test_adjustment_type(fixture_adjustment_type):
     obj = ModelEnum(**f_json)
     assert obj is not None
     assert obj.id == 'uno-ooo-parser'
-    assert obj.version == "0.1.21"
+    assert obj.version == "0.1.23"
     assert obj.libre_office_ver == "7.2"
     assert obj.name == "AdjustmentType"
     assert obj.type == OooType.ENUM
