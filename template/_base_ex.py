@@ -30,11 +30,10 @@ class BaseEx(BaseJson):
         self.allow_db = mdata.allow_db
         self.desc = mdata.desc
         self.link = mdata.url
+        self.libre_office_ver == self._models.model.libre_office_ver
         setattr(self, 'inherits', data.get('extends', []))
         set_data('imports')
-        # get lo ver if it exist. Defaut to False
-        self.libre_office_ver = json_data.get('libre_office_ver', False)
-        sort = bool(json_data['parser_args'].get('sort', False))
+        sort = self._models.model.parser_args.sort
         self.include_desc = bool(
             json_data['writer_args'].get('include_desc', True))
         self.attribs = self._get_attribs(json_data=json_data, sort=sort)
@@ -401,8 +400,6 @@ class BaseEx(BaseJson):
             is a 7.2 version
         """
         if self.uno_instance is None:
-            if uno_none is True:
-                return 'UNO_NONE'
             return 'None'
         result = getattr(self.uno_instance, name, None)
         if isinstance(result, str):
@@ -442,6 +439,8 @@ class BaseEx(BaseJson):
             try:
                 self._uno_instance = uno.createUnoStruct(self.fullname)
             except Exception as e:
+                self._lwarn(
+                    f"{self.fullname} Error: {e}")
                 self._uno_instance = None
         return self._uno_instance
 

@@ -1,7 +1,7 @@
 # coding: utf-8
 import uno
-from pathlib import Path
 from typing import List, Tuple, Union, Any, overload
+from dataclasses import asdict
 import json
 
 from rel import mod_rel as RelInfo
@@ -73,13 +73,34 @@ class ModelsStruct(ModelsBase):
         self._conn = DbConnect(self._config)
         self._set_parents()
     # endregion Constructor
-    
+
     def _set_parents(self) -> None:
         for ns in self._model.data.extends:
             p = self._get_path_from_ns(ns)
             mod = ModelsStruct(json_data=str(p))
             self._parents.append(mod)
-    
+
+    def get_properties_all(self) -> List[dict]:
+        """
+        Gets combined args for types, and properties as dict.
+
+        Returns:
+            List[dict]: dictionary of types and args
+
+        Note:
+            This method is internaly cached.
+        """
+        key = 'get_properties_all'
+        if key in self._cache:
+            return self._cache[key]
+        results: List[dict] = []
+
+        for itm in self._model.data.items:
+            results.append(asdict(itm))
+
+        self._cache[key] = results
+        return self._cache[key]
+
     def get_sorted_names(self) -> List[Tuple[str, int]]:
         """
         Gets a list of tuple. (<name>, <index>)
@@ -184,6 +205,45 @@ class ModelsStruct(ModelsBase):
         pargs = self.get_parents_class_args(uno_none=uno_none)
         cargs = self.get_class_args(uno_none=uno_none)
         return pargs + cargs
+
+    def _get_model_full_imports(self):
+        imp = set()
+        imp.update(self._model.data.full_imports.general)
+        imp.update(self._model.data.full_imports.typing)
+        return imp
+
+    def get_full_imports(self) -> List[FromImport]:
+        """
+        Get full import for current model plus all parent models.
+
+        I a parent model constructor arg needs an import then this method detects
+        it and adds it to the list if it is not already included.
+
+        Returns:
+            List[FromImport]: List of form imports
+        """
+        def get_rel(ns: str) -> FromImport:
+            info = RelInfo.get_rel_import_long(
+                in_str=ns,
+                ns=self._model.namespace
+            )
+            return FromImport(
+                frm=info.frm,
+                imp=info.imp,
+                az=info.as_
+            )
+        result = [*self._model.data.from_imports]
+        pargs = self.get_parents_class_args(uno_none=False)
+        if len(pargs) == 0:
+            return result
+        m_imports = self._get_model_full_imports()
+        for arg in pargs:
+            if not arg.component is None:
+                # if there is an arg component then it may need an import
+                if not arg.component.id_component in m_imports:
+                    # this import is not currently part of any imports
+                    result.append(get_rel(arg.component.id_component))
+        return result
 
     def is_parents(self) -> bool:
         """Gets if instance as Parents"""

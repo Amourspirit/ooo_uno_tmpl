@@ -31,6 +31,7 @@ class BaseStruct(BaseJson):
         self.allow_db = mdata.allow_db
         self.desc = mdata.desc
         self.link = mdata.url
+        self.libre_office_ver == self._models.model.libre_office_ver
         # set_data('name')
         # set_data('namespace')
         # set_data('allow_db')
@@ -38,17 +39,20 @@ class BaseStruct(BaseJson):
         # set_data('url', 'link')
         setattr(self, 'inherits', data.get('extends', []))
         set_data('imports')
-        set_data('from_imports')
+        # set_data('from_imports')
+        self.from_imports = [x.as_tuple()
+                             for x in self._models.get_full_imports()]
         set_data('from_imports_typing')
-        # get lo ver if it exist. Defaut to False
-        self.libre_office_ver = json_data.get('libre_office_ver', False)
         quote: List[str] = data.get('quote', [])
         self.quote.update(quote)
         typings: List[str] = data.get('typings', [])
         self.typings.update(typings)
 
-        self.requires_typing = data.get('requires_typing', False)
-        self.sort = bool(json_data['parser_args'].get('sort', False))
+        self.requires_typing = mdata.requires_typing
+        if self.requires_typing is False:
+            if self._models.is_args():
+                self.requires_typing = True
+        self.sort = self._models.model.parser_args.sort
         self.include_desc = bool(
             json_data['writer_args'].get('include_desc', True))
         self.attribs = self._get_attribs(json_data=json_data, sort=self.sort)
@@ -118,6 +122,19 @@ class BaseStruct(BaseJson):
             c_str += ','  # add so tuple is not mistaken as brackets
         return c_str
 
+    def get_nt_names_all_str(self) -> str:
+        args = self._models.get_class_args_all()
+        c_str = ''
+        i = 0
+        for arg in args:
+            if i > 0:
+                c_str += ', '
+            c_str += "'" + arg.name + "'"
+            i += 1
+        if i == 1:
+            c_str += ','  # add so tuple is not mistaken as brackets
+        return c_str
+
     def get_attrib_for_prop(self, index: int) -> Dict[str, object]:
         d_lst: List[Dict[str, object]] = getattr(self, 'attribs', [])
         _ = self.get_sorted_names()
@@ -153,52 +170,88 @@ class BaseStruct(BaseJson):
         ext = super().get_class_inherits(safe_name, self.inherits)
         return ext != 'object'
 
-    def get_constructor_args_str(self, include_value: bool = True, include_type: bool = True,  uno_none: bool = True) -> str:
-        sorted_names = self.get_sorted_names()
-        d_lst: List[dict] = getattr(self, 'attribs', [])
+    def get_class_args_all(self, uno_none: bool = True):
+        # returns list of ClassArg
+        return self._models.get_class_args_all(uno_none=uno_none)
 
-        c_str = ''
-        i = 0
-        for tpl in sorted_names:
-            if i > 0:
-               c_str += ', '
-            index = tpl[1]
-            itm: dict = d_lst[index]
-            # is_q = self.is_q_type(itm['type'])
-            # if is_q:
-            #     str_type = self.get_q_wrapped(str_type)
-            c_str += self.get_safe_word(itm['name'])
+    def get_class_args_inst(self, uno_none: bool = True):
+        return self._models.get_class_args(uno_none=uno_none)
+
+    def _get_class_args(self, include_value: bool = True, include_type: bool = True, uno_none: bool = True):
+        args = self._models.get_class_args(uno_none=uno_none)
+        results: List[str] = []
+        for arg in args:
+            s = arg.name
             if include_type:
-                # c_str += f": typing.Optional[{itm['type']}]"
-                c_str += f": {itm['type']}"
+                s += f": typing.Optional[{arg.type}]"
             if include_value:
-                c_str += " = " + \
-                    self.get_attrib_default(prop=itm, uno_none=uno_none)
-            i += 1
-        return c_str
+                s += " = " + \
+                    self.get_attrib_default(
+                        name=arg.name, returns=arg.type, uno_none=uno_none)
+            results.append(s)
+        return results
+
+    def _get_parent_class_args(self, include_value: bool = True, include_type: bool = True, uno_none: bool = True):
+        args = self._models.get_parents_class_args(uno_none=uno_none)
+        results: List[str] = []
+        for arg in args:
+            s = arg.name
+            if include_type:
+                s += f": typing.Optional[{arg.type}]"
+            if include_value:
+                s += " = " + \
+                    self.get_attrib_default(
+                        name=arg.name, returns=arg.type, uno_none=uno_none)
+            results.append(s)
+        return results
+
+    def get_constructor_args_str(self, include_value: bool = True, include_type: bool = True, uno_none: bool = True) -> str:
+        pargs = self._get_parent_class_args(
+            include_value=include_value,
+            include_type=include_type,
+            uno_none=uno_none)
+        cargs = self._get_class_args(
+            include_value=include_value,
+            include_type=include_type,
+            uno_none=uno_none)
+        args = pargs + cargs
+        if len(args) == 0:
+            return ""
+        return ", ".join(args)
 
     def get_constructor(self) -> str:
-        default = "def __init__(self, **kwargs) -> None:"
-        sorted_names = self.get_sorted_names()
-        if len(sorted_names) == 0:
-            self._linfo("Constructor Args — False: No args found")
-            return default
-        if self.uno_instance is None:
-            # could be a generic such as com.sun.star.beans.Pair
-            self._linfo("Constructor Args — False: Not a uno instance")
-            # return default
-        else:
-            self._linfo("Constructor Args — True")
-        names = self.get_constructor_args_str()
-        if self.is_parent:
-            return f"def __init__(self, {names}, **kwargs) -> None:"
+        if not self._models.is_args():
+            # this will alomost never happen
+            self._linfo("Constructor Args — False")
+            return "def __init__(self) -> None:"
+        self._linfo("Constructor Args — True")
+        names = self.get_constructor_args_str(
+            include_value=True, include_type=True)
+        # if self.is_parent:
+        #     return f"def __init__(self, {names}, **kwargs) -> None:"
         return f"def __init__(self, {names}) -> None:"
 
-    def get_attrib_default(self, prop: dict, uno_none: bool = False) -> str:
+    def get_attrib_default(self, name:str, returns:str, uno_none: bool = False) -> str:
+        """
+        Get defatul attribute value from uno
+
+        Args:
+            name (str): Name of property to get attrib for.
+            returns (str): property returns type
+            uno_none (bool, optional): If ``True`` replaces ``None`` with ``UNO_NONE`` where needed; Otherwise uses ``None``. Defaults to False.
+
+        Returns:
+            str: attribute default value as string.
+
+        Note:
+            If current exception/struct is not in the installled uno version then
+            all unknow value are either ``None`` or ``UNO_NONE``
+
+            For instance ReadOnlyOpenRequest: https://tinyurl.com/ycu8u8wu
+            is a 7.2 version
+        """
         if self.uno_instance is None:
             return 'None'
-        name = prop['name']
-        returns = prop['type']
         key = f"get_attrib_default_{name}_{returns},_{uno_none}"
         if key in self._cache:
             return self._cache[key]
@@ -278,10 +331,52 @@ class BaseStruct(BaseJson):
         el: str = imp[-1:][0]
         # self._linfo(str(el))
         return el in c_types
-        
+
+    def is_args(self) -> bool:
+        """
+        Gets if there is any args for current instance or its parent classes.
+
+        Returns:
+            bool: ``True`` if instance or parent classes have constructor args;
+            Otherwise ``False``.
+        """
+        return self._models.is_args()
+
+    def is_inst_args(self) -> bool:
+        """
+        Gets if there is any args for current instance only.
+
+        Returns:
+            bool: ``True`` if instance has constructor args;
+            Otherwise ``False``.
+        """
+        args = self._models.get_class_args()
+        return len(args) > 0
+
+    def is_parent_args(self) -> bool:
+        """
+        Gets if there is any args for parents only.
+
+        Returns:
+            bool: ``True`` if any partent has constructor args;
+            Otherwise ``False``.
+        """
+        args = self._models.get_parents_class_args()
+        return len(args) > 0
 
     @property
     def uno_instance(self) -> Union[object, None]:
+        """
+        Get a uno instance of current uno exception being processed
+
+        Returns:
+            Any: return uno instance if it can be created; Otherwise, ``None``
+
+        Note:
+            not all exceptions/struct are available in all version.
+            ReadOnlyOpenRequest: https://tinyurl.com/ycu8u8wu
+            is a 7.2 version
+        """
         if self._uno_instance is False:
             try:
                 self._uno_instance = uno.createUnoStruct(self.fullname)
