@@ -19,7 +19,7 @@ def test_adjustment_event(fixture_adjustment_event):
     obj = ModelStruct(**f_json)
     assert obj is not None
     assert obj.id == 'uno-ooo-parser'
-    assert obj.version == "0.1.21"
+    assert obj.version == "0.1.23"
     assert obj.libre_office_ver == "7.2"
     assert obj.name == "AdjustmentEvent"
     assert obj.type == OooType.STRUCT
@@ -55,10 +55,15 @@ def test_adjustment_event(fixture_adjustment_event):
     assert obj.data.extends[0] == "com.sun.star.lang.EventObject"
     assert len(obj.data.desc) == 1
     assert obj.data.desc[0] == "adjustment event emitted by adjustable objects."
-    assert obj.data.items.properties is not None
-    p = obj.data.items.properties[0]
-    assert p.name == "Value"
-    assert p.returns == "int"
-    assert p.desc[0] == "contains the current value in the adjustment event."
-    assert obj.data.items.types is None
-    assert obj.data.items.methods is None
+    assert len(obj.data.items) == 2
+    itm = obj.data.items[0]
+    assert itm.name == "Value"
+    assert itm.type == "int"
+    assert itm.origtype is None
+    assert itm.desc[0] == "contains the current value in the adjustment event."
+    itm = obj.data.items[1]
+    assert itm.name == "Type"
+    assert itm.type == "AdjustmentType_bd050c15"
+    assert itm.origtype == "com.sun.star.awt.AdjustmentType"
+    assert itm.desc[0] == "contains the type of the adjustment event."
+    

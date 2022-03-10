@@ -26,7 +26,7 @@ def test_open_root(fixture_uno_control_combo_box_model):
     srv = ModelService(**f_json)
     assert srv is not None
     assert srv.id == 'uno-ooo-parser'
-    assert srv.version == "0.1.21"
+    assert srv.version == "0.1.23"
     assert srv.libre_office_ver == "7.2"
     assert srv.name == "UnoControlComboBoxModel"
     assert srv.type == OooType.SERVICE
@@ -63,14 +63,26 @@ def test_open_root(fixture_uno_control_combo_box_model):
     assert len(srv.data.desc) == 5
     assert srv.data.desc[0] == "specifies the standard model of a UnoControlComboBox."
     assert srv.data.items.properties is not None
-    assert srv.data.items.types is None
+    assert srv.data.items.types is not None
     assert srv.data.items.methods is None
     assert len(srv.data.items.properties) == 23
+    assert len(srv.data.items.types) == 2
+    t = srv.data.items.types[0]
+    assert t.name == "StringItemList"
+    assert t.returns == "typing.Tuple[str, ...]"
+    assert t.origtype is None
+    assert len(t.desc) == 1
     p: Prop = srv.data.items.properties[0]
     assert p.name == "Align"
     assert p.returns == 'int'
+    assert p.origtype is None
     assert p.raises_get == ""
     assert p.raises_set == ""
+    assert len(p.desc) == 1
+    p: Prop = srv.data.items.properties[2]
+    assert p.name == "BackgroundColor"
+    assert p.returns == 'Color_68e908c5'
+    assert p.origtype == "com.sun.star.util.Color"
     assert len(p.desc) == 1
 
 
@@ -86,7 +98,7 @@ def test_read_only_access(fixture_read_only_access):
     srv = ModelService(**f_json)
     assert srv is not None
     assert srv.id == 'uno-ooo-parser'
-    assert srv.version == "0.1.21"
+    assert srv.version == "0.1.23"
     assert srv.libre_office_ver == "7.2"
     assert srv.name == "ReadOnlyAccess"
     assert srv.type == OooType.SERVICE

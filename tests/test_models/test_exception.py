@@ -22,13 +22,13 @@ def test_exception(fixture_exception):
     obj = ModelException(**f_json)
     assert obj is not None
     assert obj.id == 'uno-ooo-parser'
-    assert obj.version == "0.1.21"
+    assert obj.version == "0.1.23"
     assert obj.libre_office_ver == "7.2"
     assert obj.name == "Exception"
     assert obj.type == OooType.EXCEPTION
     assert obj.type == "exception"
     assert obj.namespace == "com.sun.star.uno"
-    assert obj.parser_args.sort == True
+    assert obj.parser_args.sort == False
     assert obj.parser_args.long_names == True
     assert obj.parser_args.remove_parent_inherited == True
     assert obj.writer_args.include_desc == True
@@ -57,8 +57,16 @@ def test_exception(fixture_exception):
     assert obj.data.desc[0] == "the base of all UNO exceptions"
     assert obj.data.items.properties is not None
     p = obj.data.items.properties[0]
+    assert p.name == "Message"
+    assert p.returns == "str"
+    assert p.origtype is None
+    assert len(p.desc) == 3
+    assert p.raises_get == ""
+    assert p.raises_set == ""
+    p = obj.data.items.properties[1]
     assert p.name == "Context"
     assert p.returns == "XInterface_8f010a43"
+    assert p.origtype == "com.sun.star.uno.XInterface"
     assert len(p.desc) == 3
     assert p.raises_get == ""
     assert p.raises_set == ""

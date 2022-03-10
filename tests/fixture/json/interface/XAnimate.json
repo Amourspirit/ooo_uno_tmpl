@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.23",
   "libre_office_ver": "7.2",
   "name": "XAnimate",
   "type": "interface",
@@ -17,22 +17,26 @@
     "allow_db": true,
     "from_imports": [
       [
-        ".time_filter_pair",
-        "TimeFilterPair",
-        "TimeFilterPair_1d250ebc"
-      ],
-      [
         ".x_animation_node",
         "XAnimationNode",
         "XAnimationNode_1cf10eb9"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".time_filter_pair",
+        "TimeFilterPair",
+        "TimeFilterPair_1d250ebc"
+      ]
+    ],
     "extends_map": {
-      "com.sun.star.animations.TimeFilterPair": "TimeFilterPair_1d250ebc",
       "com.sun.star.animations.XAnimationNode": "XAnimationNode_1cf10eb9"
     },
-    "quote": [],
+    "quote": [
+      "typing.Tuple[TimeFilterPair_1d250ebc, ...]",
+      "typing.Tuple[float, ...]",
+      "typing.Tuple[object, ...]"
+    ],
     "typings": [
       "typing.Tuple[TimeFilterPair_1d250ebc, ...]",
       "typing.Tuple[float, ...]",
@@ -41,10 +45,11 @@
     "requires_typing": true,
     "full_imports": {
       "general": [
-        "com.sun.star.animations.TimeFilterPair",
         "com.sun.star.animations.XAnimationNode"
       ],
-      "typing": []
+      "typing": [
+        "com.sun.star.animations.TimeFilterPair"
+      ]
     },
     "name": "XAnimate",
     "imports": [],
@@ -57,10 +62,10 @@
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1animations_1_1XAnimate.html",
     "items": {
-      "types": [
-        {
+      "types": [{
           "name": "KeyTimes",
           "returns": "typing.Tuple[float, ...]",
+          "origtype": null,
           "desc": [],
           "raises_get": "",
           "raises_set": ""
@@ -68,6 +73,7 @@
         {
           "name": "TimeFilter",
           "returns": "typing.Tuple[TimeFilterPair_1d250ebc, ...]",
+          "origtype": null,
           "desc": [
             "todo: timeFilter=\\\"0,0; 0.14,0.36; 0.43,0.73; 0.71,0.91; 1.0,1.0\\\" ?"
           ],
@@ -77,6 +83,7 @@
         {
           "name": "Values",
           "returns": "typing.Tuple[object, ...]",
+          "origtype": null,
           "desc": [
             "A sequence of one or more values, each of which must be a legal value for the specified attribute."
           ],
@@ -84,10 +91,10 @@
           "raises_set": ""
         }
       ],
-      "properties": [
-        {
+      "properties": [{
           "name": "Accumulate",
           "returns": "bool",
+          "origtype": null,
           "desc": [
             "Controls whether or not the animation is cumulative."
           ],
@@ -97,6 +104,7 @@
         {
           "name": "Additive",
           "returns": "int",
+          "origtype": null,
           "desc": [
             "Controls whether or not the animation is additive."
           ],
@@ -106,6 +114,7 @@
         {
           "name": "AttributeName",
           "returns": "str",
+          "origtype": null,
           "desc": [
             "Specifies the target attribute."
           ],
@@ -115,6 +124,7 @@
         {
           "name": "By",
           "returns": "object",
+          "origtype": null,
           "desc": [
             "Specifies a relative offset value for the animation.",
             "",
@@ -126,6 +136,7 @@
         {
           "name": "CalcMode",
           "returns": "int",
+          "origtype": null,
           "desc": [
             "Specifies the interpolation mode for the animation.",
             "",
@@ -137,6 +148,7 @@
         {
           "name": "Formula",
           "returns": "str",
+          "origtype": null,
           "desc": [
             "if this string is set, its contents will be parsed as a formula.",
             "",
@@ -148,6 +160,7 @@
         {
           "name": "From",
           "returns": "object",
+          "origtype": null,
           "desc": [
             "Specifies the starting value of the animation.",
             "",
@@ -159,6 +172,7 @@
         {
           "name": "SubItem",
           "returns": "int",
+          "origtype": null,
           "desc": [
             "This attribute specifies an optional subitem from the target element that should be animated.",
             "",
@@ -171,6 +185,7 @@
         {
           "name": "Target",
           "returns": "object",
+          "origtype": null,
           "desc": [
             "This attribute specifies the target element to be animated.",
             "",
@@ -182,6 +197,7 @@
         {
           "name": "To",
           "returns": "object",
+          "origtype": null,
           "desc": [
             "Specifies the ending value of the animation.",
             "",
@@ -193,6 +209,7 @@
         {
           "name": "ValueType",
           "returns": "int",
+          "origtype": null,
           "desc": [],
           "raises_get": "",
           "raises_set": ""

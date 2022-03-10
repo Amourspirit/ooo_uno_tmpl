@@ -1,8 +1,8 @@
 # coding: utf-8
 from typing import List, Dict
 from ...shared.data.shared_data import BaseData
-from ...shared.data.items.data_items import DataItems
 from ...shared.data.from_import import FromImport
+from .data_item import DataItem
 
 class Data(BaseData):
     quote: List[str]
@@ -16,7 +16,7 @@ class Data(BaseData):
     desc: List[str]
     typings: List[str]
     requires_typing: bool
-    items: DataItems
+    items: List[DataItem]
     
     @property
     def fullname(self) -> str:

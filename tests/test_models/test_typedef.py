@@ -19,7 +19,7 @@ def test_property_values(fixture_property_values):
     obj = ModelTypedef(**f_json)
     assert obj is not None
     assert obj.id == 'uno-ooo-parser'
-    assert obj.version == "0.1.21"
+    assert obj.version == "0.1.23"
     assert obj.libre_office_ver == "7.2"
     assert obj.name == "PropertyValues"
     assert obj.type == OooType.TYPEDEF
