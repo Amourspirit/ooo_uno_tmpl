@@ -45,6 +45,9 @@ class BaseEx(BaseJson):
         self.attribs = self._get_attribs(json_data=json_data, sort=sort)
         # setattr(self, 'requires_typing', data.get('requires_typing', False))
         self.requires_typing = mdata.requires_typing
+        if self.requires_typing is False:
+            if self._models.is_args():
+                self.requires_typing = True
         self.from_imports = [x.as_tuple()
                              for x in self._models.get_full_imports()]
         # setattr(self, 'from_imports', [])
@@ -198,6 +201,38 @@ class BaseEx(BaseJson):
         result += ':'
         return result
 
+    def is_args(self) -> bool:
+        """
+        Gets if there is any args for current instance or its parent classes.
+
+        Returns:
+            bool: ``True`` if instance or parent classes have constructor args;
+            Otherwise ``False``.
+        """
+        return self._models.is_args()
+    
+    def is_inst_args(self) -> bool:
+        """
+        Gets if there is any args for current instance only.
+
+        Returns:
+            bool: ``True`` if instance has constructor args;
+            Otherwise ``False``.
+        """
+        args = self._models.get_class_args()
+        return len(args) > 0
+    
+    def is_parent_args(self) -> bool:
+        """
+        Gets if there is any args for parents only.
+
+        Returns:
+            bool: ``True`` if any partent has constructor args;
+            Otherwise ``False``.
+        """
+        args = self._models.get_parents_class_args()
+        return len(args) > 0
+
     def _is_properties(self) -> bool:
         key = 'properties'
         if not key in self.attribs:
@@ -250,42 +285,65 @@ class BaseEx(BaseJson):
             c_str += ','  # add so tuple is not mistaken as brackets
         return c_str
 
-    def get_constructor_args_str(self, include_value: bool = True, include_type: bool = True, uno_none: bool = True) -> str:
-        sorted_names = self.get_sorted_names()
-        d_lst = self.get_properties_all()
+    def get_class_args_all(self, uno_none: bool = True):
+        # returns list of ClassArg
+        return self._models.get_class_args_all(uno_none=uno_none)
+    
+    def get_class_args_inst(self, uno_none: bool = True):
+        return self._models.get_class_args(uno_none=uno_none)
 
-        c_str = ''
-        i = 0
-        for tpl in sorted_names:
-            if i > 0:
-                c_str += ', '
-            index = tpl[1]
-            itm: dict = d_lst[index]
-            # is_q = self.is_q_type(itm['returns'])
-            # if is_q:
-            #     str_type = self.get_q_wrapped(str_type)
-
-            c_str += self.get_safe_word(itm['name'])
+    def _get_class_args(self, include_value: bool = True, include_type: bool = True, uno_none: bool = True):
+        args = self._models.get_class_args(uno_none=uno_none)
+        results: List[str] = []
+        for arg in args:
+            s = arg.name
             if include_type:
-                c_str += f": typing.Optional[{itm['returns']}]"
+                s += f": typing.Optional[{arg.type}]"
             if include_value:
-                c_str += " = " + \
-                    self.get_attrib_default(prop=itm, uno_none=uno_none)
-            i += 1
-        return c_str
+                s += " = " + \
+                    self.get_attrib_default(
+                        name=arg.name, returns=arg.type, uno_none=uno_none)
+            results.append(s)
+        return results
+    
+    def _get_parent_class_args(self, include_value: bool = True, include_type: bool = True, uno_none: bool = True):
+        args = self._models.get_parents_class_args(uno_none=uno_none)
+        results: List[str] = []
+        for arg in args:
+            s = arg.name
+            if include_type:
+                s += f": typing.Optional[{arg.type}]"
+            if include_value:
+                s += " = " + \
+                    self.get_attrib_default(
+                        name=arg.name, returns=arg.type, uno_none=uno_none)
+            results.append(s)
+        return results
+
+    def get_constructor_args_str(self, include_value: bool = True, include_type: bool = True, uno_none: bool = True) -> str:
+        pargs = self._get_parent_class_args(
+            include_value=include_value,
+            include_type=include_type,
+            uno_none=uno_none)
+        cargs = self._get_class_args(
+            include_value=include_value,
+            include_type=include_type,
+            uno_none=uno_none)
+        args = pargs + cargs
+        if len(args) == 0:
+            return ""
+        return ", ".join(args)
 
     def get_constructor(self) -> str:
-        sorted_names = self.get_sorted_names()
-        if len(sorted_names) == 0:
+        if not self._models.is_args():
+            # this will alomost never happen
             self._linfo("Constructor Args — False")
-            if self.is_parent:
-                return "def __init__(self, **kwargs) -> None:"
             return "def __init__(self) -> None:"
         self._linfo("Constructor Args — True")
         names = self.get_constructor_args_str(
             include_value=True, include_type=True)
-        if self.is_parent:
-            return f"def __init__(self, {names}, **kwargs) -> None:"
+        # if self.is_parent:
+        #     return f"def __init__(self, {names}, **kwargs) -> None:"
         return f"def __init__(self, {names}) -> None:"
 
     def get_class_inherits_from_db(self, default: str = 'Exception') -> str:
@@ -318,9 +376,25 @@ class BaseEx(BaseJson):
         ext = super().get_class_inherits(safe_name, self.inherits)
         return ext != 'object'
 
-    def get_attrib_default(self, prop: dict, uno_none: bool = False) -> str:
-        name = prop['name']
-        returns = prop['returns']
+    def get_attrib_default(self, name: str, returns: str, uno_none: bool = False) -> str:
+        """
+        Get defatul attribute value from uno
+
+        Args:
+            name (str): Name of property to get attrib for.
+            returns (str): property returns type
+            uno_none (bool, optional): If ``True`` replaces ``None`` with ``UNO_NONE`` where needed; Otherwise uses ``None``. Defaults to False.
+
+        Returns:
+            str: attribute default value as string.
+
+        Note:
+            If current exception/struct is not in the installled uno version then
+            all unknow value are either ``None`` or ``UNO_NONE``
+
+            For instance ReadOnlyOpenRequest: https://tinyurl.com/ycu8u8wu
+            is a 7.2 version
+        """
         if self.uno_instance is None:
             if uno_none is True:
                 return 'UNO_NONE'

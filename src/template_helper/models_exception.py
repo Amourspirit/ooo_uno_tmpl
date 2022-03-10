@@ -94,6 +94,15 @@ class ModelsException(ModelsBase):
             self._parents.append(mod)
 
     def get_properties_all(self) -> List[dict]:
+        """
+        Gets combined args for types, and properties as dict.
+
+        Returns:
+            List[dict]: dictionary of types and args
+        
+        Note:
+            This method is internaly cached.
+        """
         key = 'get_properties_all'
         if key in self._cache:
             return self._cache[key]
@@ -115,6 +124,9 @@ class ModelsException(ModelsBase):
 
         Returns:
             List[Tuple[str, int]]: List of tuple
+
+        Note:
+            This method is internaly cached.
         """
         key = "get_sorted_names"
         if key in self._cache:
@@ -133,7 +145,21 @@ class ModelsException(ModelsBase):
         return self._cache[key]
 
     def get_class_args(self, uno_none: bool = True) -> List[ClassArg]:
-        key = 'get_class_args'
+        """
+        Get args for current instance's model.
+        
+        This is the current instance constructor args.
+
+        Args:
+            uno_none (bool, optional): Determines if ``UNO_NONE`` is used. Defaults to True.
+
+        Returns:
+            List[ClassArg]: List of args.
+
+        Note:
+            This method is internaly cached.
+        """
+        key = 'get_class_args_' + str(uno_none)
         if key in self._cache:
             return self._cache[key]
         sorted_names = self.get_sorted_names()
@@ -148,7 +174,7 @@ class ModelsException(ModelsBase):
             results.append(ClassArg(
                 name=name,
                 type=tipe,
-                default=self.get_attrib_default(prop=prop, uno_none=uno_none),
+                default=self.get_attrib_default(name=prop.name, returns=prop.returns, uno_none=uno_none),
                 component=qry.get_component_by_map_name(map_name=tipe)
             ))
         self._cache[key] = results
@@ -166,16 +192,51 @@ class ModelsException(ModelsBase):
         return results
 
     def get_parents_class_args(self, uno_none: bool = True) -> List[ClassArg]:
-        key = 'get_parents_class_args'
+        """
+        Gets parent Class args.
+        
+        Gets the args of parent constructor excluding this instance's model args
+
+        Args:
+            uno_none (bool, optional): Determines if ``UNO_NONE`` is used. Defaults to True.
+
+        Returns:
+            List[ClassArg]: List or args
+
+        Note:
+            This method is internaly cached.
+        """
+        key = 'get_parents_class_args_' + str(uno_none)
         if key in self._cache:
             return self._cache[key]
 
         self._cache[key] = self._get_parents_class_args(uno_none=uno_none)
         return self._cache[key]
 
+    def get_class_args_all(self, uno_none: bool = True) -> List[ClassArg]:
+        pargs = self.get_parents_class_args()
+        cargs = self.get_class_args()
+        return pargs + cargs
+
     def is_parents(self) -> bool:
         """Gets if instance as Parents"""
         return len(self._parents) > 0
+    
+    def is_args(self) -> bool:
+        """
+        Gets if there is any args for current instance or its parent classes.
+
+        Returns:
+            bool: ``True`` if instance or parent classes have constructor args;
+            Otherwise ``False``.
+        """
+        cargs = self.get_class_args()
+        if len(cargs) > 0:
+            return True
+        pargs = self.get_parents_class_args()
+        if len(pargs) > 0:
+            return True
+        return False
 
     def _get_model_full_imports(self):
         imp = set()
@@ -184,6 +245,15 @@ class ModelsException(ModelsBase):
         return imp
     
     def get_full_imports(self) -> List[FromImport]:
+        """
+        Get full import for current model plus all parent models.
+        
+        I a parent model constructor arg needs an import then this method detects
+        it and adds it to the list if it is not already included.
+
+        Returns:
+            List[FromImport]: List of form imports
+        """
         def get_rel(ns: str) -> FromImport:
             info = RelInfo.get_rel_import_long(
                 in_str=ns,
@@ -207,9 +277,25 @@ class ModelsException(ModelsBase):
                     result.append(get_rel(arg.component.id_component))
         return result
 
-    def get_attrib_default(self, prop: Prop, uno_none: bool = False) -> str:
-        name = prop.name
-        returns = prop.returns
+    def get_attrib_default(self, name: str, returns: str, uno_none: bool = False) -> str:
+        """
+        Get defatul attribute value from uno
+
+        Args:
+            name (str): Name of property to get attrib for.
+            returns (str): property returns type
+            uno_none (bool, optional): If ``True`` replaces ``None`` with ``UNO_NONE`` where needed; Otherwise uses ``None``. Defaults to False.
+
+        Returns:
+            str: attribute default value as string.
+
+        Note:
+            If current exception/struct is not in the installled uno version then
+            all unknow value are either ``None`` or ``UNO_NONE``
+            
+            For instance ReadOnlyOpenRequest: https://tinyurl.com/ycu8u8wu
+            is a 7.2 version
+        """
         if self.uno_instance is None:
             if uno_none is True:
                 return 'UNO_NONE'

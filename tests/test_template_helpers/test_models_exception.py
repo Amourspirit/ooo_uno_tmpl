@@ -15,6 +15,7 @@ def test_exception(root_path):
     assert arg.name == "Message"
     assert arg.default == ""
     assert arg.type == "str"
+    
 
 
 def test_deployment_exception(root_path):
@@ -26,7 +27,8 @@ def test_deployment_exception(root_path):
     assert len(args) == 0
     parent_args = mod.get_parents_class_args()
     assert len(parent_args) > 0
-    
+    args = mod.get_class_args()
+    assert len(args) == 0
 
 def test_authentication_failed_exception(root_path):
     from src.template_helper.models_exception import ModelsException
