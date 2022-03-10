@@ -55,6 +55,8 @@ def test_adjustment_event(fixture_adjustment_event):
     assert obj.data.extends[0] == "com.sun.star.lang.EventObject"
     assert len(obj.data.desc) == 1
     assert obj.data.desc[0] == "adjustment event emitted by adjustable objects."
+    assert obj.data.full_imports.general[0] == "com.sun.star.lang.EventObject"
+    assert obj.data.full_imports.typing[0] == "com.sun.star.awt.AdjustmentType"
     assert len(obj.data.items) == 2
     itm = obj.data.items[0]
     assert itm.name == "Value"

@@ -74,6 +74,12 @@ class ModelsStruct(ModelsBase):
         self._set_parents()
     # endregion Constructor
     
+    def _set_parents(self) -> None:
+        for ns in self._model.data.extends:
+            p = self._get_path_from_ns(ns)
+            mod = ModelsStruct(json_data=str(p))
+            self._parents.append(mod)
+    
     def get_sorted_names(self) -> List[Tuple[str, int]]:
         """
         Gets a list of tuple. (<name>, <index>)
