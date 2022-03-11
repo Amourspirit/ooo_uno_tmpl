@@ -10,6 +10,10 @@ def fixture_adjustment_event(fixture_json_path: Path) -> Path:
     return fixture_json_path / 'struct' / 'AdjustmentEvent.json'
 
 
+@pytest.fixture(scope="session")
+def fixture_open_command_argument2(fixture_json_path: Path) -> Path:
+    return fixture_json_path / 'struct' / 'OpenCommandArgument2.json'
+
 def test_adjustment_event(fixture_adjustment_event):
     from src.model.struct.model_struct import ModelStruct
     from src.model.shared.ooo_type import OooType
@@ -69,3 +73,37 @@ def test_adjustment_event(fixture_adjustment_event):
     assert itm.origtype == "com.sun.star.awt.AdjustmentType"
     assert itm.desc[0] == "contains the type of the adjustment event."
     
+
+def test_open_command_argument2(fixture_open_command_argument2):
+    from src.model.struct.model_struct import ModelStruct
+    from src.model.shared.ooo_type import OooType
+
+    with open(fixture_open_command_argument2, 'r') as f:
+        f_json = json.load(f)
+    obj = ModelStruct(**f_json)
+    assert obj is not None
+    assert obj.id == 'uno-ooo-parser'
+    assert obj.version == "0.1.23"
+    assert obj.libre_office_ver == "7.2"
+    assert obj.name == "OpenCommandArgument2"
+    assert obj.type == OooType.STRUCT
+    assert obj.type == "struct"
+    assert obj.namespace == "com.sun.star.ucb"
+    assert obj.parser_args.sort == False
+    assert obj.parser_args.long_names == True
+    assert obj.parser_args.remove_parent_inherited == True
+    assert obj.writer_args.sort == True
+    assert obj.writer_args.dynamic_struct == True
+    assert obj.writer_args.include_desc == True
+    assert obj.data.allow_db == True
+    assert obj.data.requires_typing == True
+    assert obj.data.name == "OpenCommandArgument2"
+    assert obj.data.namespace == "com.sun.star.ucb"
+    assert obj.data.url == "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1ucb_1_1OpenCommandArgument2.html"
+    assert len(obj.data.from_imports) == 1
+    assert len(obj.data.from_imports_typing) == 1
+    assert len(obj.data.extends_map) == 1
+    assert len(obj.data.quote) == 1
+    assert len(obj.data.typings) == 1
+    assert len(obj.data.imports) == 0
+    assert len(obj.data.extends) == 1

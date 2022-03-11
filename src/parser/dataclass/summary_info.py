@@ -12,8 +12,8 @@ class SummaryInfo:
     """Type from page summary"""
     p_type: PythonType
     """Python Type obtaind usually from Util.get_python_type()"""
-    extra_data: object = None
-    """Extra data that can be set in rules or otherwise"""
+    # extra_data: object = None
+    # """Extra data that can be set in rules or otherwise"""
 
     def __lt__(self, other: object):
         if not isinstance(other, SummaryInfo):
