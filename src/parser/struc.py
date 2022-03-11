@@ -258,6 +258,7 @@ class Parser(base.ParserBase):
                 "name": si.name,
                 "type": si.p_type.type,
                 "origtype": si.p_type.origtype,
+                "origin": si.p_type.origin,
                 "desc": self._api_data.get_desc_detail(si.id).get_obj()
             }
             attribs[key].append(attrib)

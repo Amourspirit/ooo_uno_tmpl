@@ -292,7 +292,7 @@ class Parser(base.ParserBase):
         self._cache[key] = attribs
         return self._cache[key]
 
-    def _get_methods_data(self):
+    def _get_methods_data(self) -> dict:
         attribs = {}
         si_lst = self._api_data.func_summaries.get_obj()
         for i, si in enumerate(si_lst):
@@ -326,6 +326,7 @@ class Parser(base.ParserBase):
             attrib = {
                 "name": si.name,
                 "returns": si.p_type.type,
+                "returns_origin": si.p_type.origin,
                 "desc": self._api_data.get_desc_detail(si.id).get_obj(),
                 "raises": self._api_data.get_method_ex(si.id).get_obj() or []
             }
@@ -333,7 +334,7 @@ class Parser(base.ParserBase):
                 if logger.level <= logging.DEBUG:
                     logger.debug(
                         f"{self.__class__.__name__}._get_methods_data() {si.name} param, Name: {pi.name}, Type: {pi.type}, Direction: {pi.direction}")
-                args.append((pi.name, pi.type, pi.direction))
+                args.append((pi.name, pi.type, pi.direction, pi.p_type.origin))
             attrib['args'] = args
             attribs['methods'].append(attrib)
 
@@ -358,6 +359,7 @@ class Parser(base.ParserBase):
                 "name": si.name,
                 "returns": si.p_type.type,
                 "origtype": si.p_type.origtype,
+                "origin": si.p_type.origin,
                 "desc": self._api_data.get_desc_detail(si.id).get_obj(),
                 "raises_get": '',
                 "raises_set": ''
