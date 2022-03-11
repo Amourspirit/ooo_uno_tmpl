@@ -1,35 +1,19 @@
 # coding: utf-8
-from typing import List
-import pydantic
 from pydantic import BaseModel
-from enum import Enum
+import pydantic
+from typing import List, Optional
 from .raises import MethodRaises
-from pydantic.fields import Field, PrivateAttr
-from dataclasses import dataclass
-# from dataclasses import dataclass
-
-
-class ArgDirection(str, Enum):
-    IN = "in"
-    OUT = "out"
-
-    def __str__(self) -> str:
-        return self.value
-
-@dataclass
-class MethodArg:
-    name: str
-    type: str
-    direction: ArgDirection
+from .method_arg import MethodArg
 
 
 class Method(BaseModel):
     name: str
     returns: str
+    returns_origin: Optional[str]
     desc: List[str]
     args: List[MethodArg]
     raises: List[MethodRaises]
-   
+
     @pydantic.validator('name')
     def validate_method_name(cls, value: str) -> str:
         s = value.strip()

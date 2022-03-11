@@ -26,13 +26,13 @@ def test_open_root(fixture_uno_control_combo_box_model):
     srv = ModelService(**f_json)
     assert srv is not None
     assert srv.id == 'uno-ooo-parser'
-    assert srv.version == "0.1.23"
+    assert srv.version == "0.1.24"
     assert srv.libre_office_ver == "7.2"
     assert srv.name == "UnoControlComboBoxModel"
     assert srv.type == OooType.SERVICE
     assert srv.type == "service"
     assert srv.namespace == "com.sun.star.awt"
-    assert srv.parser_args.sort == True
+    assert srv.parser_args.sort == False
     assert srv.parser_args.long_names == True
     assert srv.parser_args.remove_parent_inherited == True
     assert srv.writer_args.include_desc == True
@@ -75,6 +75,7 @@ def test_open_root(fixture_uno_control_combo_box_model):
     p: Prop = srv.data.items.properties[0]
     assert p.name == "Align"
     assert p.returns == 'int'
+    assert p.origin == 'short'
     assert p.origtype is None
     assert p.raises_get == ""
     assert p.raises_set == ""
@@ -82,8 +83,14 @@ def test_open_root(fixture_uno_control_combo_box_model):
     p: Prop = srv.data.items.properties[2]
     assert p.name == "BackgroundColor"
     assert p.returns == 'Color_68e908c5'
+    assert p.origin == "com.sun.star.util.Color"
     assert p.origtype == "com.sun.star.util.Color"
     assert len(p.desc) == 1
+    t = srv.data.items.types[0]
+    assert t.name == "StringItemList"
+    assert t.returns == "typing.Tuple[str, ...]"
+    assert t.origin == "sequence< string >"
+    assert t.origtype is None
 
 
 def test_read_only_access(fixture_read_only_access):
@@ -91,21 +98,21 @@ def test_read_only_access(fixture_read_only_access):
     from src.model.shared.ooo_type import OooType
     from src.model.shared.data.from_import import FromImport
     from src.model.shared.data.methods.method import Method
-    from src.model.shared.data.methods.method import ArgDirection
+    from src.model.shared.data.methods.method_arg import ArgDirection
 
     with open(fixture_read_only_access, 'r') as f:
         f_json = json.load(f)
     srv = ModelService(**f_json)
     assert srv is not None
     assert srv.id == 'uno-ooo-parser'
-    assert srv.version == "0.1.23"
+    assert srv.version == "0.1.24"
     assert srv.libre_office_ver == "7.2"
     assert srv.name == "ReadOnlyAccess"
     assert srv.type == OooType.SERVICE
     assert srv.type == "service"
     assert str(srv.type) == "service"
     assert srv.namespace == "com.sun.star.configuration"
-    assert srv.parser_args.sort == True
+    assert srv.parser_args.sort == False
     assert srv.parser_args.long_names == True
     assert srv.parser_args.remove_parent_inherited == True
     assert srv.writer_args.include_desc == True
@@ -137,11 +144,13 @@ def test_read_only_access(fixture_read_only_access):
     m: Method = srv.data.items.methods[0]
     assert m.name == "create"
     assert m.returns == "None"
+    assert m.returns_origin is None
     assert len(m.raises) == 0
     assert len(m.args) == 1
     arg = m.args[0]
     assert arg.name == "locale"
     assert arg.type == "str"
+    assert arg.origin == 'string'
     assert arg.direction == ArgDirection.IN
     assert arg.direction == 'in'
     assert str(arg.direction) == 'in'

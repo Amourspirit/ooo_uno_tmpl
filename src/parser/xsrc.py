@@ -5,6 +5,7 @@ Process a link to a page that contains an interface
 """
 
 # region Imports
+from kwhelp.decorator import AcceptedTypes, DecFuncEnum, RequireArgs, TypeCheck, TypeCheckKw
 import os
 import sys
 import argparse
@@ -13,7 +14,7 @@ import textwrap
 import xerox  # requires xclip - sudo apt-get install xclip
 import re
 from typing import Dict, List, Set, Union
-from kwhelp.decorator import AcceptedTypes, DecFuncEnum, RequireArgs, TypeCheck, TypeCheckKw
+from dataclasses import asdict
 from pathlib import Path
 from . import base, __version__, JSON_ID
 from .api.api_data import APIData
@@ -30,6 +31,7 @@ from .dataclass.import_info import ImportInfo
 from .web.soup_obj import SoupObj
 from ..logger.log_handle import get_logger
 from ..utilities import util as mutil
+from ..model.shared.data.methods.method_arg import MethodArg, ArgDirection
 # endregion Imports
 
 # region Logger
@@ -334,7 +336,13 @@ class Parser(base.ParserBase):
                 if logger.level <= logging.DEBUG:
                     logger.debug(
                         f"{self.__class__.__name__}._get_methods_data() {si.name} param, Name: {pi.name}, Type: {pi.type}, Direction: {pi.direction}")
-                args.append((pi.name, pi.type, pi.direction, pi.p_type.origin))
+                meth = MethodArg(
+                    name=pi.name,
+                    type=pi.type,
+                    direction=ArgDirection(pi.direction),
+                    origin=pi.p_type.origin
+                )
+                args.append(asdict(meth))
             attrib['args'] = args
             attribs['methods'].append(attrib)
 

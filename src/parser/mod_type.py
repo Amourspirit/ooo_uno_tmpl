@@ -504,12 +504,13 @@ class RuleNone(ITypeRule):
         return in_type == ''
 
     def get_python_type(self, in_type: str) -> PythonType:
+        # set origin to None for empty string
         return PythonType(
             type="None",
             requires_typing=False,
             is_py_type=True,
             realtype=None,
-            origin=in_type
+            origin=None
         )
 
 

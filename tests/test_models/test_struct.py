@@ -23,7 +23,7 @@ def test_adjustment_event(fixture_adjustment_event):
     obj = ModelStruct(**f_json)
     assert obj is not None
     assert obj.id == 'uno-ooo-parser'
-    assert obj.version == "0.1.23"
+    assert obj.version == "0.1.24"
     assert obj.libre_office_ver == "7.2"
     assert obj.name == "AdjustmentEvent"
     assert obj.type == OooType.STRUCT
@@ -65,11 +65,13 @@ def test_adjustment_event(fixture_adjustment_event):
     itm = obj.data.items[0]
     assert itm.name == "Value"
     assert itm.type == "int"
+    assert itm.origin == "long"
     assert itm.origtype is None
     assert itm.desc[0] == "contains the current value in the adjustment event."
     itm = obj.data.items[1]
     assert itm.name == "Type"
     assert itm.type == "AdjustmentType_bd050c15"
+    assert itm.origin == "com.sun.star.awt.AdjustmentType"
     assert itm.origtype == "com.sun.star.awt.AdjustmentType"
     assert itm.desc[0] == "contains the type of the adjustment event."
     
@@ -83,7 +85,7 @@ def test_open_command_argument2(fixture_open_command_argument2):
     obj = ModelStruct(**f_json)
     assert obj is not None
     assert obj.id == 'uno-ooo-parser'
-    assert obj.version == "0.1.23"
+    assert obj.version == "0.1.24"
     assert obj.libre_office_ver == "7.2"
     assert obj.name == "OpenCommandArgument2"
     assert obj.type == OooType.STRUCT
@@ -107,3 +109,8 @@ def test_open_command_argument2(fixture_open_command_argument2):
     assert len(obj.data.typings) == 1
     assert len(obj.data.imports) == 0
     assert len(obj.data.extends) == 1
+    itm = obj.data.items[0]
+    assert itm.name == "SortingInfo"
+    assert itm.type == "typing.Tuple[NumberedSortingInfo_fd0e0de6, ...]"
+    assert itm.origtype is None
+    assert itm.origin == "sequence< com.sun.star.ucb.NumberedSortingInfo >"

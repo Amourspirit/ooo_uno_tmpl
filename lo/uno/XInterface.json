@@ -1,12 +1,12 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XInterface",
   "type": "interface",
   "namespace": "com.sun.star.uno",
   "parser_args": {
-    "sort": true,
+    "sort": false,
     "long_names": true,
     "remove_parent_inherited": true
   },
@@ -46,23 +46,9 @@
     "items": {
       "methods": [
         {
-          "name": "acquire",
-          "returns": "None",
-          "desc": [
-            "increases the reference counter by one.",
-            "",
-            "When you have called acquire() on the UNO object, it is often said, that you have a reference or a hard reference to the object.",
-            "",
-            "It is only allowed to invoke a method on a UNO object, when you keep a hard reference to it.",
-            "",
-            "Every call to acquire must be followed by a corresponding call to release some time later, which may eventually lead to the destruction of the object."
-          ],
-          "raises": [],
-          "args": []
-        },
-        {
           "name": "queryInterface",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "queries for a new interface to an existing UNO object.",
             "",
@@ -86,16 +72,34 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aType",
-              "object",
-              "in"
-            ]
+            {
+              "name": "aType",
+              "type": "object",
+              "direction": "in",
+              "origin": "type"
+            }
           ]
+        },
+        {
+          "name": "acquire",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "increases the reference counter by one.",
+            "",
+            "When you have called acquire() on the UNO object, it is often said, that you have a reference or a hard reference to the object.",
+            "",
+            "It is only allowed to invoke a method on a UNO object, when you keep a hard reference to it.",
+            "",
+            "Every call to acquire must be followed by a corresponding call to release some time later, which may eventually lead to the destruction of the object."
+          ],
+          "raises": [],
+          "args": []
         },
         {
           "name": "release",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "decreases the reference counter by one.",
             "",

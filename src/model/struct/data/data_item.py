@@ -7,4 +7,5 @@ class DataItem:
     name: str
     type: str
     desc: List[str]
+    origin: Union[str, None]
     origtype: Union[str, None]
