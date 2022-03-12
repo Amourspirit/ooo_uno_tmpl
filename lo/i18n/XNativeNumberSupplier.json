@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XNativeNumberSupplier",
   "type": "interface",
@@ -71,81 +71,93 @@
         {
           "name": "convertFromXmlAttributes",
           "returns": "int",
+          "returns_origin": "short",
           "desc": [
             "Convert XML attributes to a NatNum value."
           ],
           "raises": [],
           "args": [
-            [
-              "aAttr",
-              "NativeNumberXmlAttributes_5e4f1070",
-              "in"
-            ]
+            {
+              "name": "aAttr",
+              "type": "NativeNumberXmlAttributes_5e4f1070",
+              "direction": "in",
+              "origin": "com.sun.star.i18n.NativeNumberXmlAttributes"
+            }
           ]
         },
         {
           "name": "convertToXmlAttributes",
           "returns": "NativeNumberXmlAttributes_5e4f1070",
+          "returns_origin": "com.sun.star.i18n.NativeNumberXmlAttributes",
           "desc": [
             "Convert a specific NatNum/Locale combination to attributes used in the XML file format."
           ],
           "raises": [],
           "args": [
-            [
-              "aLocale",
-              "Locale_70d308fa",
-              "in"
-            ],
-            [
-              "nNativeNumberMode",
-              "int",
-              "in"
-            ]
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "nNativeNumberMode",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "getNativeNumberString",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Returns native number string for given number string."
           ],
           "raises": [],
           "args": [
-            [
-              "aNumberString",
-              "str",
-              "in"
-            ],
-            [
-              "aLocale",
-              "Locale_70d308fa",
-              "in"
-            ],
-            [
-              "nNativeNumberMode",
-              "int",
-              "in"
-            ]
+            {
+              "name": "aNumberString",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "nNativeNumberMode",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "isValidNatNum",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Check if the NatNum is valid for the given locale."
           ],
           "raises": [],
           "args": [
-            [
-              "aLocale",
-              "Locale_70d308fa",
-              "in"
-            ],
-            [
-              "nNativeNumberMode",
-              "int",
-              "in"
-            ]
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "nNativeNumberMode",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         }
       ]

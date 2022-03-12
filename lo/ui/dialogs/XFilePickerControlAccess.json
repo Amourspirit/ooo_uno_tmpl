@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XFilePickerControlAccess",
   "type": "interface",
@@ -52,6 +52,7 @@
         {
           "name": "enableControl",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Enables or disables a control.",
             "",
@@ -61,56 +62,64 @@
           ],
           "raises": [],
           "args": [
-            [
-              "ControlId",
-              "int",
-              "in"
-            ],
-            [
-              "bEnable",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "ControlId",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "bEnable",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "getLabel",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Returns the label of the specified element."
           ],
           "raises": [],
           "args": [
-            [
-              "aControlId",
-              "int",
-              "in"
-            ]
+            {
+              "name": "aControlId",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "getValue",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "Get the value of an additional element within a FilePicker."
           ],
           "raises": [],
           "args": [
-            [
-              "aControlId",
-              "int",
-              "in"
-            ],
-            [
-              "aControlAction",
-              "int",
-              "in"
-            ]
+            {
+              "name": "aControlId",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "aControlAction",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "setLabel",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Set the label of the specified element.",
             "",
@@ -118,41 +127,47 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aControlId",
-              "int",
-              "in"
-            ],
-            [
-              "aLabel",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aControlId",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "aLabel",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "setValue",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Set the value of an additional element within a FilePicker."
           ],
           "raises": [],
           "args": [
-            [
-              "ControlId",
-              "int",
-              "in"
-            ],
-            [
-              "aControlAction",
-              "int",
-              "in"
-            ],
-            [
-              "aValue",
-              "object",
-              "in"
-            ]
+            {
+              "name": "ControlId",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "aControlAction",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "aValue",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         }
       ]

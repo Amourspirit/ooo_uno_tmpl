@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XVisualObject",
   "type": "interface",
@@ -67,6 +67,7 @@
         {
           "name": "getMapUnit",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "retrieves map mode the object communicates in."
           ],
@@ -74,16 +75,18 @@
             "com.sun.star.uno.Exception"
           ],
           "args": [
-            [
-              "nAspect",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nAspect",
+              "type": "int",
+              "direction": "in",
+              "origin": "hyper"
+            }
           ]
         },
         {
           "name": "getPreferredVisualRepresentation",
           "returns": "VisualRepresentation_2a2b0f4c",
+          "returns_origin": "com.sun.star.embed.VisualRepresentation",
           "desc": [
             "retrieves visual representation of the object in preferable format.",
             "",
@@ -95,16 +98,18 @@
             "com.sun.star.uno.Exception"
           ],
           "args": [
-            [
-              "nAspect",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nAspect",
+              "type": "int",
+              "direction": "in",
+              "origin": "hyper"
+            }
           ]
         },
         {
           "name": "getVisualAreaSize",
           "returns": "Size_576707ef",
+          "returns_origin": "com.sun.star.awt.Size",
           "desc": [
             "gets the size of object's visual area.",
             "",
@@ -116,16 +121,18 @@
             "com.sun.star.uno.Exception"
           ],
           "args": [
-            [
-              "nAspect",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nAspect",
+              "type": "int",
+              "direction": "in",
+              "origin": "hyper"
+            }
           ]
         },
         {
           "name": "setVisualAreaSize",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the size of object's visual area.",
             "",
@@ -139,16 +146,18 @@
             "com.sun.star.uno.Exception"
           ],
           "args": [
-            [
-              "nAspect",
-              "int",
-              "in"
-            ],
-            [
-              "aSize",
-              "Size_576707ef",
-              "in"
-            ]
+            {
+              "name": "nAspect",
+              "type": "int",
+              "direction": "in",
+              "origin": "hyper"
+            },
+            {
+              "name": "aSize",
+              "type": "Size_576707ef",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Size"
+            }
           ]
         }
       ]

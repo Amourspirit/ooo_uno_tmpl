@@ -22,7 +22,7 @@ def test_exception(fixture_exception):
     obj = ModelException(**f_json)
     assert obj is not None
     assert obj.id == 'uno-ooo-parser'
-    assert obj.version == "0.1.23"
+    assert obj.version == "0.1.24"
     assert obj.libre_office_ver == "7.2"
     assert obj.name == "Exception"
     assert obj.type == OooType.EXCEPTION
@@ -59,6 +59,7 @@ def test_exception(fixture_exception):
     p = obj.data.items.properties[0]
     assert p.name == "Message"
     assert p.returns == "str"
+    assert p.origin == "string"
     assert p.origtype is None
     assert len(p.desc) == 3
     assert p.raises_get == ""
@@ -66,6 +67,7 @@ def test_exception(fixture_exception):
     p = obj.data.items.properties[1]
     assert p.name == "Context"
     assert p.returns == "XInterface_8f010a43"
+    assert p.origin == "com.sun.star.uno.XInterface"
     assert p.origtype == "com.sun.star.uno.XInterface"
     assert len(p.desc) == 3
     assert p.raises_get == ""

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XColorScaleEntry",
   "type": "interface",
@@ -46,6 +46,7 @@
         {
           "name": "getColor",
           "returns": "Color_68e908c5",
+          "returns_origin": "com.sun.star.util.Color",
           "desc": [],
           "raises": [],
           "args": []
@@ -53,6 +54,7 @@
         {
           "name": "getFormula",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [],
           "raises": [],
           "args": []
@@ -60,6 +62,7 @@
         {
           "name": "getType",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "See com.sun.star.sheet.ColorScaleEntryType for possible values."
           ],
@@ -69,42 +72,48 @@
         {
           "name": "setColor",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "Color",
-              "Color_68e908c5",
-              "in"
-            ]
+            {
+              "name": "Color",
+              "type": "Color_68e908c5",
+              "direction": "in",
+              "origin": "com.sun.star.util.Color"
+            }
           ]
         },
         {
           "name": "setFormula",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "Formula",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Formula",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "setType",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "See com.sun.star.sheet.ColorScaleEntryType for possible values."
           ],
           "raises": [],
           "args": [
-            [
-              "Type",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Type",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

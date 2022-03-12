@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSlidePreviewCache",
   "type": "interface",
@@ -87,21 +87,24 @@
         {
           "name": "addPreviewCreationNotifyListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Register a listener that is called when a preview has been created asynchronously."
           ],
           "raises": [],
           "args": [
-            [
-              "xListener",
-              "XSlidePreviewCacheListener_af761239",
-              "in"
-            ]
+            {
+              "name": "xListener",
+              "type": "XSlidePreviewCacheListener_af761239",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.XSlidePreviewCacheListener"
+            }
           ]
         },
         {
           "name": "getSlidePreview",
           "returns": "XBitmap_b1b70b7b",
+          "returns_origin": "com.sun.star.rendering.XBitmap",
           "desc": [
             "Return a preview for the given slide index.",
             "",
@@ -113,21 +116,24 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "nSlideIndex",
-              "int",
-              "in"
-            ],
-            [
-              "xCanvas",
-              "XCanvas_b19b0b7a",
-              "in"
-            ]
+            {
+              "name": "nSlideIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "xCanvas",
+              "type": "XCanvas_b19b0b7a",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.XCanvas"
+            }
           ]
         },
         {
           "name": "pause",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Stop the asynchronous creation of previews temporarily.",
             "",
@@ -139,21 +145,24 @@
         {
           "name": "removePreviewCreationNotifyListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Remove a previously registered listener for preview creations."
           ],
           "raises": [],
           "args": [
-            [
-              "xListener",
-              "XSlidePreviewCacheListener_af761239",
-              "in"
-            ]
+            {
+              "name": "xListener",
+              "type": "XSlidePreviewCacheListener_af761239",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.XSlidePreviewCacheListener"
+            }
           ]
         },
         {
           "name": "resume",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Resume the asynchronous creation of slide previews."
           ],
@@ -163,6 +172,7 @@
         {
           "name": "setDocumentSlides",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Set the set of slides for which the cache will provide the previews.",
             "",
@@ -170,36 +180,41 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xSlides",
-              "XIndexAccess_f0910d6d",
-              "in"
-            ],
-            [
-              "xDocument",
-              "XInterface_8f010a43",
-              "in"
-            ]
+            {
+              "name": "xSlides",
+              "type": "XIndexAccess_f0910d6d",
+              "direction": "in",
+              "origin": "com.sun.star.container.XIndexAccess"
+            },
+            {
+              "name": "xDocument",
+              "type": "XInterface_8f010a43",
+              "direction": "in",
+              "origin": "com.sun.star.uno.XInterface"
+            }
           ]
         },
         {
           "name": "setPreviewSize",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Define the size of the previews that are managed by the called cache."
           ],
           "raises": [],
           "args": [
-            [
-              "aSize",
-              "IntegerSize2D_f2690d53",
-              "in"
-            ]
+            {
+              "name": "aSize",
+              "type": "IntegerSize2D_f2690d53",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.IntegerSize2D"
+            }
           ]
         },
         {
           "name": "setVisibleRange",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Define which slides are currently visible on the screen and which are not.",
             "",
@@ -207,16 +222,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "nFirstVisibleSlideIndex",
-              "int",
-              "in"
-            ],
-            [
-              "nLastVisibleSlideIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nFirstVisibleSlideIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nLastVisibleSlideIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

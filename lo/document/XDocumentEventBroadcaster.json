@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDocumentEventBroadcaster",
   "type": "interface",
@@ -61,21 +61,24 @@
         {
           "name": "addDocumentEventListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "registers a listener which is notified about document events"
           ],
           "raises": [],
           "args": [
-            [
-              "Listener",
-              "XDocumentEventListener_7db01146",
-              "in"
-            ]
+            {
+              "name": "Listener",
+              "type": "XDocumentEventListener_7db01146",
+              "direction": "in",
+              "origin": "com.sun.star.document.XDocumentEventListener"
+            }
           ]
         },
         {
           "name": "notifyDocumentEvent",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "causes the broadcaster to notify all registered listeners of the given event",
             "",
@@ -90,36 +93,41 @@
             "com.sun.star.lang.NoSupportException"
           ],
           "args": [
-            [
-              "EventName",
-              "str",
-              "in"
-            ],
-            [
-              "ViewController",
-              "XController2_bbcf0bc1",
-              "in"
-            ],
-            [
-              "Supplement",
-              "object",
-              "in"
-            ]
+            {
+              "name": "EventName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "ViewController",
+              "type": "XController2_bbcf0bc1",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XController2"
+            },
+            {
+              "name": "Supplement",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         },
         {
           "name": "removeDocumentEventListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "revokes a listener which has previously been registered to be notified about document events."
           ],
           "raises": [],
           "args": [
-            [
-              "Listener",
-              "XDocumentEventListener_7db01146",
-              "in"
-            ]
+            {
+              "name": "Listener",
+              "type": "XDocumentEventListener_7db01146",
+              "direction": "in",
+              "origin": "com.sun.star.document.XDocumentEventListener"
+            }
           ]
         }
       ]

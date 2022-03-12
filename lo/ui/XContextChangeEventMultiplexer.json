@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XContextChangeEventMultiplexer",
   "type": "interface",
@@ -74,6 +74,7 @@
         {
           "name": "addContextChangeEventListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Add an event listener that is called only when events are broadcast for the specified event focus.",
             "",
@@ -87,41 +88,47 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "xListener",
-              "XContextChangeEventListener_678510b1",
-              "in"
-            ],
-            [
-              "xEventFocus",
-              "XInterface_8f010a43",
-              "in"
-            ]
+            {
+              "name": "xListener",
+              "type": "XContextChangeEventListener_678510b1",
+              "direction": "in",
+              "origin": "com.sun.star.ui.XContextChangeEventListener"
+            },
+            {
+              "name": "xEventFocus",
+              "type": "XInterface_8f010a43",
+              "direction": "in",
+              "origin": "com.sun.star.uno.XInterface"
+            }
           ]
         },
         {
           "name": "broadcastContextChangeEvent",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Call all event listeners that were added for the specified event focus."
           ],
           "raises": [],
           "args": [
-            [
-              "aEvent",
-              "ContextChangeEventObject_37b70f6a",
-              "in"
-            ],
-            [
-              "xEventFocus",
-              "XInterface_8f010a43",
-              "in"
-            ]
+            {
+              "name": "aEvent",
+              "type": "ContextChangeEventObject_37b70f6a",
+              "direction": "in",
+              "origin": "com.sun.star.ui.ContextChangeEventObject"
+            },
+            {
+              "name": "xEventFocus",
+              "type": "XInterface_8f010a43",
+              "direction": "in",
+              "origin": "com.sun.star.uno.XInterface"
+            }
           ]
         },
         {
           "name": "removeAllContextChangeEventListeners",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Remove an event listener for all event foci.",
             "",
@@ -131,16 +138,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "xListener",
-              "XContextChangeEventListener_678510b1",
-              "in"
-            ]
+            {
+              "name": "xListener",
+              "type": "XContextChangeEventListener_678510b1",
+              "direction": "in",
+              "origin": "com.sun.star.ui.XContextChangeEventListener"
+            }
           ]
         },
         {
           "name": "removeContextChangeEventListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Remove an event listener for the specified event focus.",
             "",
@@ -152,16 +161,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "xListener",
-              "XContextChangeEventListener_678510b1",
-              "in"
-            ],
-            [
-              "xEventFocus",
-              "XInterface_8f010a43",
-              "in"
-            ]
+            {
+              "name": "xListener",
+              "type": "XContextChangeEventListener_678510b1",
+              "direction": "in",
+              "origin": "com.sun.star.ui.XContextChangeEventListener"
+            },
+            {
+              "name": "xEventFocus",
+              "type": "XInterface_8f010a43",
+              "direction": "in",
+              "origin": "com.sun.star.uno.XInterface"
+            }
           ]
         }
       ]

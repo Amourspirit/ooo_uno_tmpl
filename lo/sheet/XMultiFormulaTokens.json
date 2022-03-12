@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XMultiFormulaTokens",
   "type": "interface",
@@ -52,6 +52,7 @@
         {
           "name": "getCount",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "returns the number of formulas allowed in this formula token set."
           ],
@@ -61,6 +62,7 @@
         {
           "name": "getTokens",
           "returns": "typing.Tuple[FormulaToken_bd1c0bf8, ...]",
+          "returns_origin": "sequence< FormulaToken >",
           "desc": [
             "returns the formula at specified index as sequence of tokens."
           ],
@@ -68,16 +70,18 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "setTokens",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the formula at specified index as sequence of tokens."
           ],
@@ -85,16 +89,18 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nIndex",
-              "int",
-              "in"
-            ],
-            [
-              "aTokens",
-              "typing.Tuple[FormulaToken_bd1c0bf8, ...]",
-              "in"
-            ]
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aTokens",
+              "type": "typing.Tuple[FormulaToken_bd1c0bf8, ...]",
+              "direction": "in",
+              "origin": "sequence< FormulaToken >"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XContentProviderManager",
   "type": "interface",
@@ -69,41 +69,47 @@
         {
           "name": "deregisterContentProvider",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "deregisters a content provider."
           ],
           "raises": [],
           "args": [
-            [
-              "Provider",
-              "XContentProvider_d4150cc0",
-              "in"
-            ],
-            [
-              "Scheme",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Provider",
+              "type": "XContentProvider_d4150cc0",
+              "direction": "in",
+              "origin": "com.sun.star.ucb.XContentProvider"
+            },
+            {
+              "name": "Scheme",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "queryContentProvider",
           "returns": "XContentProvider_d4150cc0",
+          "returns_origin": "com.sun.star.ucb.XContentProvider",
           "desc": [
             "returns the currently active content provider for a content identifier."
           ],
           "raises": [],
           "args": [
-            [
-              "Identifier",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Identifier",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "queryContentProviders",
           "returns": "typing.Tuple[ContentProviderInfo_fd9c0df4, ...]",
+          "returns_origin": "sequence< com.sun.star.ucb.ContentProviderInfo >",
           "desc": [
             "returns a list of information on all registered content providers."
           ],
@@ -113,6 +119,7 @@
         {
           "name": "registerContentProvider",
           "returns": "XContentProvider_d4150cc0",
+          "returns_origin": "com.sun.star.ucb.XContentProvider",
           "desc": [
             "registers a content provider for a specific URL template.",
             "",
@@ -128,21 +135,24 @@
             "com.sun.star.ucb.DuplicateProviderException"
           ],
           "args": [
-            [
-              "Provider",
-              "XContentProvider_d4150cc0",
-              "in"
-            ],
-            [
-              "Scheme",
-              "str",
-              "in"
-            ],
-            [
-              "ReplaceExisting",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "Provider",
+              "type": "XContentProvider_d4150cc0",
+              "direction": "in",
+              "origin": "com.sun.star.ucb.XContentProvider"
+            },
+            {
+              "name": "Scheme",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "ReplaceExisting",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XRemoteContentProviderDistributor",
   "type": "interface",
@@ -50,6 +50,7 @@
         {
           "name": "connectToRemoteAcceptor",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Offer the local content broker to a remote content provider acceptor.",
             "",
@@ -61,21 +62,24 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "Url",
-              "str",
-              "in"
-            ],
-            [
-              "Identifier",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Url",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Identifier",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "disconnectFromAll",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Undo the offering of the local content broker to all remote content provider acceptors."
           ],
@@ -85,16 +89,18 @@
         {
           "name": "disconnectFromRemoteAcceptor",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Undo the offering of the local content broker to a specific remote content provider acceptor."
           ],
           "raises": [],
           "args": [
-            [
-              "Url",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Url",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDesktop",
   "type": "interface",
@@ -83,21 +83,24 @@
         {
           "name": "addTerminateListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "registers an event listener to the desktop, which is called when the desktop is queried to terminate, and when it really terminates."
           ],
           "raises": [],
           "args": [
-            [
-              "Listener",
-              "XTerminateListener_b760e5a",
-              "in"
-            ]
+            {
+              "name": "Listener",
+              "type": "XTerminateListener_b760e5a",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XTerminateListener"
+            }
           ]
         },
         {
           "name": "getComponents",
           "returns": "XEnumerationAccess_4bac0ffc",
+          "returns_origin": "com.sun.star.container.XEnumerationAccess",
           "desc": [
             "provides read access to collection of all currently loaded components inside the frame tree",
             "",
@@ -109,6 +112,7 @@
         {
           "name": "getCurrentComponent",
           "returns": "XComponent_98dc0ab5",
+          "returns_origin": "com.sun.star.lang.XComponent",
           "desc": [
             "provides read access to the component inside the tree which has the UI focus",
             "",
@@ -120,6 +124,7 @@
         {
           "name": "getCurrentFrame",
           "returns": "XFrame_7a570956",
+          "returns_origin": "com.sun.star.frame.XFrame",
           "desc": [
             "provides read access to the frame which contains the current component"
           ],
@@ -129,21 +134,24 @@
         {
           "name": "removeTerminateListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "unregisters an event listener for termination events."
           ],
           "raises": [],
           "args": [
-            [
-              "Listener",
-              "XTerminateListener_b760e5a",
-              "in"
-            ]
+            {
+              "name": "Listener",
+              "type": "XTerminateListener_b760e5a",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XTerminateListener"
+            }
           ]
         },
         {
           "name": "terminate",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "tries to terminate the desktop.",
             "",

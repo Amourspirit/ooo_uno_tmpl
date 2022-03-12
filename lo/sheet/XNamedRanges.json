@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XNamedRanges",
   "type": "interface",
@@ -74,6 +74,7 @@
         {
           "name": "addNewByName",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "adds a new named range to the collection.",
             "",
@@ -83,31 +84,36 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ],
-            [
-              "aContent",
-              "str",
-              "in"
-            ],
-            [
-              "aPosition",
-              "CellAddress_ae5f0b56",
-              "in"
-            ],
-            [
-              "nType",
-              "int",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aContent",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aPosition",
+              "type": "CellAddress_ae5f0b56",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellAddress"
+            },
+            {
+              "name": "nType",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "addNewFromTitles",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "creates named cell ranges from titles in a cell range.",
             "",
@@ -117,21 +123,24 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aSource",
-              "CellRangeAddress_ec450d43",
-              "in"
-            ],
-            [
-              "aBorder",
-              "Border_7b2c097f",
-              "in"
-            ]
+            {
+              "name": "aSource",
+              "type": "CellRangeAddress_ec450d43",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellRangeAddress"
+            },
+            {
+              "name": "aBorder",
+              "type": "Border_7b2c097f",
+              "direction": "in",
+              "origin": "com.sun.star.sheet.Border"
+            }
           ]
         },
         {
           "name": "outputList",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "writes a list of all named ranges into the document.",
             "",
@@ -139,26 +148,29 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aOutputPosition",
-              "CellAddress_ae5f0b56",
-              "in"
-            ]
+            {
+              "name": "aOutputPosition",
+              "type": "CellAddress_ae5f0b56",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellAddress"
+            }
           ]
         },
         {
           "name": "removeByName",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes a named range from the collection."
           ],
           "raises": [],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

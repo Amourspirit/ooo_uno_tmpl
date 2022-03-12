@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XAutoTextGroup",
   "type": "interface",
@@ -70,6 +70,7 @@
         {
           "name": "getTitles",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [
             "returns the titles of all autotext entries.",
             "",
@@ -81,6 +82,7 @@
         {
           "name": "insertNewByName",
           "returns": "XAutoTextEntry_c96f0c75",
+          "returns_origin": "com.sun.star.text.XAutoTextEntry",
           "desc": [
             "creates a new AutoTextEntry entry."
           ],
@@ -88,26 +90,30 @@
             "com.sun.star.container.ElementExistException"
           ],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ],
-            [
-              "aTitle",
-              "str",
-              "in"
-            ],
-            [
-              "xTextRange",
-              "XTextRange_9a910ab7",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aTitle",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "xTextRange",
+              "type": "XTextRange_9a910ab7",
+              "direction": "in",
+              "origin": "com.sun.star.text.XTextRange"
+            }
           ]
         },
         {
           "name": "removeByName",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes the specified autotext entry."
           ],
@@ -115,16 +121,18 @@
             "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
-            [
-              "aEntryName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aEntryName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "renameByName",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "renames an entry in the autotext group.",
             "",
@@ -136,21 +144,24 @@
             "com.sun.star.io.IOException"
           ],
           "args": [
-            [
-              "aElementName",
-              "str",
-              "in"
-            ],
-            [
-              "aNewElementName",
-              "str",
-              "in"
-            ],
-            [
-              "aNewElementTitle",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aElementName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aNewElementName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aNewElementTitle",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDocumentMetadataAccess",
   "type": "interface",
@@ -116,6 +116,7 @@
         {
           "name": "addContentOrStylesFile",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "add a content or styles file to the manifest.",
             "",
@@ -126,16 +127,18 @@
             "com.sun.star.container.ElementExistException"
           ],
           "args": [
-            [
-              "FileName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "FileName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "addMetadataFile",
           "returns": "XURI_5682078c",
+          "returns_origin": "com.sun.star.rdf.XURI",
           "desc": [
             "add a metadata file to the manifest.",
             "",
@@ -146,36 +149,41 @@
             "com.sun.star.container.ElementExistException"
           ],
           "args": [
-            [
-              "FileName",
-              "str",
-              "in"
-            ],
-            [
-              "Types",
-              "typing.Tuple[XURI_5682078c, ...]",
-              "in"
-            ]
+            {
+              "name": "FileName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Types",
+              "type": "typing.Tuple[XURI_5682078c, ...]",
+              "direction": "in",
+              "origin": "sequence< XURI >"
+            }
           ]
         },
         {
           "name": "getElementByMetadataReference",
           "returns": "XMetadatable_a3000af0",
+          "returns_origin": "com.sun.star.rdf.XMetadatable",
           "desc": [
             "get the unique ODF element with the given metadata reference."
           ],
           "raises": [],
           "args": [
-            [
-              "MetadataReference",
-              "StringPair_a4bc0b14",
-              "in"
-            ]
+            {
+              "name": "MetadataReference",
+              "type": "StringPair_a4bc0b14",
+              "direction": "in",
+              "origin": "com.sun.star.beans.StringPair"
+            }
           ]
         },
         {
           "name": "getElementByURI",
           "returns": "XMetadatable_a3000af0",
+          "returns_origin": "com.sun.star.rdf.XMetadatable",
           "desc": [
             "get the ODF element that corresponds to a URI."
           ],
@@ -183,16 +191,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "URI",
-              "XURI_5682078c",
-              "in"
-            ]
+            {
+              "name": "URI",
+              "type": "XURI_5682078c",
+              "direction": "in",
+              "origin": "com.sun.star.rdf.XURI"
+            }
           ]
         },
         {
           "name": "getMetadataGraphsWithType",
           "returns": "typing.Tuple[XURI_5682078c, ...]",
+          "returns_origin": "sequence< XURI >",
           "desc": [
             "get the names of all metadata files with a given type."
           ],
@@ -200,16 +210,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "Type",
-              "XURI_5682078c",
-              "in"
-            ]
+            {
+              "name": "Type",
+              "type": "XURI_5682078c",
+              "direction": "in",
+              "origin": "com.sun.star.rdf.XURI"
+            }
           ]
         },
         {
           "name": "importMetadataFile",
           "returns": "XURI_5682078c",
+          "returns_origin": "com.sun.star.rdf.XURI",
           "desc": [
             "import a metadata file into the document repository, and add it to the manifest.",
             "",
@@ -223,36 +235,42 @@
             "com.sun.star.io.IOException"
           ],
           "args": [
-            [
-              "Format",
-              "int",
-              "in"
-            ],
-            [
-              "InStream",
-              "XInputStream_98d40ab4",
-              "in"
-            ],
-            [
-              "FileName",
-              "str",
-              "in"
-            ],
-            [
-              "BaseURI",
-              "XURI_5682078c",
-              "in"
-            ],
-            [
-              "Types",
-              "typing.Tuple[XURI_5682078c, ...]",
-              "in"
-            ]
+            {
+              "name": "Format",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "InStream",
+              "type": "XInputStream_98d40ab4",
+              "direction": "in",
+              "origin": "com.sun.star.io.XInputStream"
+            },
+            {
+              "name": "FileName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "BaseURI",
+              "type": "XURI_5682078c",
+              "direction": "in",
+              "origin": "com.sun.star.rdf.XURI"
+            },
+            {
+              "name": "Types",
+              "type": "typing.Tuple[XURI_5682078c, ...]",
+              "direction": "in",
+              "origin": "sequence< XURI >"
+            }
           ]
         },
         {
           "name": "loadMetadataFromMedium",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "loads document metadata from a medium.",
             "",
@@ -263,16 +281,18 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "Medium",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ]
+            {
+              "name": "Medium",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            }
           ]
         },
         {
           "name": "loadMetadataFromStorage",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "initialize document metadata from a storage.",
             "",
@@ -289,26 +309,30 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "Storage",
-              "XStorage_8e460a32",
-              "in"
-            ],
-            [
-              "BaseURI",
-              "XURI_5682078c",
-              "in"
-            ],
-            [
-              "InteractionHandler",
-              "XInteractionHandler_bf80e51",
-              "in"
-            ]
+            {
+              "name": "Storage",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            },
+            {
+              "name": "BaseURI",
+              "type": "XURI_5682078c",
+              "direction": "in",
+              "origin": "com.sun.star.rdf.XURI"
+            },
+            {
+              "name": "InteractionHandler",
+              "type": "XInteractionHandler_bf80e51",
+              "direction": "in",
+              "origin": "com.sun.star.task.XInteractionHandler"
+            }
           ]
         },
         {
           "name": "removeContentOrStylesFile",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "remove a content or styles file from the manifest.",
             "",
@@ -319,16 +343,18 @@
             "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
-            [
-              "FileName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "FileName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "removeMetadataFile",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "remove a metadata file from the manifest and the repository.",
             "",
@@ -339,16 +365,18 @@
             "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
-            [
-              "GraphName",
-              "XURI_5682078c",
-              "in"
-            ]
+            {
+              "name": "GraphName",
+              "type": "XURI_5682078c",
+              "direction": "in",
+              "origin": "com.sun.star.rdf.XURI"
+            }
           ]
         },
         {
           "name": "storeMetadataToMedium",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "stores document metadata to a medium."
           ],
@@ -357,16 +385,18 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "Medium",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ]
+            {
+              "name": "Medium",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            }
           ]
         },
         {
           "name": "storeMetadataToStorage",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "store document metadata to a storage.",
             "",
@@ -379,11 +409,12 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "Storage",
-              "XStorage_8e460a32",
-              "in"
-            ]
+            {
+              "name": "Storage",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            }
           ]
         }
       ]

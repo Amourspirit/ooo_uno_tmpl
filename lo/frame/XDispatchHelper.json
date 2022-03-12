@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDispatchHelper",
   "type": "interface",
@@ -73,6 +73,7 @@
         {
           "name": "executeDispatch",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "executes the dispatch.",
             "",
@@ -80,31 +81,36 @@
           ],
           "raises": [],
           "args": [
-            [
-              "DispatchProvider",
-              "XDispatchProvider_fc690de6",
-              "in"
-            ],
-            [
-              "URL",
-              "str",
-              "in"
-            ],
-            [
-              "TargetFrameName",
-              "str",
-              "in"
-            ],
-            [
-              "SearchFlags",
-              "int",
-              "in"
-            ],
-            [
-              "Arguments",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ]
+            {
+              "name": "DispatchProvider",
+              "type": "XDispatchProvider_fc690de6",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XDispatchProvider"
+            },
+            {
+              "name": "URL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "TargetFrameName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "SearchFlags",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "Arguments",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XPackageManagerFactory",
   "type": "interface",
@@ -58,6 +58,7 @@
         {
           "name": "getPackageManager",
           "returns": "XPackageManager_2bc50f08",
+          "returns_origin": "com.sun.star.deployment.XPackageManager",
           "desc": [
             "Method to create (or reusing and already existing) XPackageManager object to add or remove UNO packages persistently.",
             "",
@@ -69,11 +70,12 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "context",
-              "str",
-              "in"
-            ]
+            {
+              "name": "context",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XGridPeer",
   "type": "interface",
@@ -68,6 +68,7 @@
         {
           "name": "getColumns",
           "returns": "XIndexContainer_1c040ebe",
+          "returns_origin": "com.sun.star.container.XIndexContainer",
           "desc": [
             "retrieves the currently used column definitions of the peer."
           ],
@@ -77,16 +78,18 @@
         {
           "name": "setColumns",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the column definition for the peer."
           ],
           "raises": [],
           "args": [
-            [
-              "aColumns",
-              "XIndexContainer_1c040ebe",
-              "in"
-            ]
+            {
+              "name": "aColumns",
+              "type": "XIndexContainer_1c040ebe",
+              "direction": "in",
+              "origin": "com.sun.star.container.XIndexContainer"
+            }
           ]
         }
       ]

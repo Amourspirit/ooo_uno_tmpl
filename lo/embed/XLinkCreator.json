@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XLinkCreator",
   "type": "interface",
@@ -72,6 +72,7 @@
         {
           "name": "createInstanceLink",
           "returns": "XInterface_8f010a43",
+          "returns_origin": "com.sun.star.uno.XInterface",
           "desc": [
             "creates a new object based on com.sun.star.document.MediaDescriptor and initializes it as a link.",
             "",
@@ -83,26 +84,30 @@
             "com.sun.star.uno.Exception"
           ],
           "args": [
-            [
-              "xStorage",
-              "XStorage_8e460a32",
-              "in"
-            ],
-            [
-              "sEntryName",
-              "str",
-              "in"
-            ],
-            [
-              "aArgs",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ],
-            [
-              "aObjectArgs",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ]
+            {
+              "name": "xStorage",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            },
+            {
+              "name": "sEntryName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aArgs",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< .com.sun.star.beans.PropertyValue >"
+            },
+            {
+              "name": "aObjectArgs",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< .com.sun.star.beans.PropertyValue >"
+            }
           ]
         }
       ]

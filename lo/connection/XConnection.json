@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XConnection",
   "type": "interface",
@@ -56,6 +56,7 @@
         {
           "name": "close",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Immediately terminates any ongoing read or write calls.",
             "",
@@ -69,6 +70,7 @@
         {
           "name": "flush",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Empties all internal buffers."
           ],
@@ -80,6 +82,7 @@
         {
           "name": "getDescription",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "A unique string describing the connection.",
             "",
@@ -91,6 +94,7 @@
         {
           "name": "read",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "reads a requested number of bytes from the connection.",
             "",
@@ -102,21 +106,24 @@
             "com.sun.star.io.IOException"
           ],
           "args": [
-            [
-              "aReadBytes",
-              "typing.Tuple[int, ...]",
-              "out"
-            ],
-            [
-              "nBytesToRead",
-              "int",
-              "in"
-            ]
+            {
+              "name": "aReadBytes",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "out",
+              "origin": "sequence< byte >"
+            },
+            {
+              "name": "nBytesToRead",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "write",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "writes the given bytesequence to the stream.",
             "",
@@ -126,11 +133,12 @@
             "com.sun.star.io.IOException"
           ],
           "args": [
-            [
-              "aData",
-              "typing.Tuple[int, ...]",
-              "in"
-            ]
+            {
+              "name": "aData",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "in",
+              "origin": "sequence< byte >"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XCharacterClassification",
   "type": "interface",
@@ -67,121 +67,140 @@
         {
           "name": "getCharacterDirection",
           "returns": "int",
+          "returns_origin": "short",
           "desc": [
             "Get DirectionProperty of character at position nPos."
           ],
           "raises": [],
           "args": [
-            [
-              "aText",
-              "str",
-              "in"
-            ],
-            [
-              "nPos",
-              "int",
-              "in"
-            ]
+            {
+              "name": "aText",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nPos",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getCharacterType",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "Get KCharacterType of character at position nPos."
           ],
           "raises": [],
           "args": [
-            [
-              "aText",
-              "str",
-              "in"
-            ],
-            [
-              "nPos",
-              "int",
-              "in"
-            ],
-            [
-              "aLocale",
-              "Locale_70d308fa",
-              "in"
-            ]
+            {
+              "name": "aText",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nPos",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
           ]
         },
         {
           "name": "getScript",
           "returns": "int",
+          "returns_origin": "short",
           "desc": [
             "Get UnicodeScript of character at position nPos."
           ],
           "raises": [],
           "args": [
-            [
-              "aText",
-              "str",
-              "in"
-            ],
-            [
-              "nPos",
-              "int",
-              "in"
-            ]
+            {
+              "name": "aText",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nPos",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getStringType",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "Get accumulated KCharacterTypes of string starting at position nPos of length nCount code points."
           ],
           "raises": [],
           "args": [
-            [
-              "aText",
-              "str",
-              "in"
-            ],
-            [
-              "nPos",
-              "int",
-              "in"
-            ],
-            [
-              "nCount",
-              "int",
-              "in"
-            ],
-            [
-              "aLocale",
-              "Locale_70d308fa",
-              "in"
-            ]
+            {
+              "name": "aText",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nPos",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nCount",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
           ]
         },
         {
           "name": "getType",
           "returns": "int",
+          "returns_origin": "short",
           "desc": [
             "Get UnicodeType of character at position nPos."
           ],
           "raises": [],
           "args": [
-            [
-              "aText",
-              "str",
-              "in"
-            ],
-            [
-              "nPos",
-              "int",
-              "in"
-            ]
+            {
+              "name": "aText",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nPos",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "parseAnyToken",
           "returns": "ParseResult_9ea00ac2",
+          "returns_origin": "com.sun.star.i18n.ParseResult",
           "desc": [
             "Parse a string for a token starting at position nPos.",
             "",
@@ -191,46 +210,54 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aText",
-              "str",
-              "in"
-            ],
-            [
-              "nPos",
-              "int",
-              "in"
-            ],
-            [
-              "aLocale",
-              "Locale_70d308fa",
-              "in"
-            ],
-            [
-              "nStartCharFlags",
-              "int",
-              "in"
-            ],
-            [
-              "aUserDefinedCharactersStart",
-              "str",
-              "in"
-            ],
-            [
-              "nContCharFlags",
-              "int",
-              "in"
-            ],
-            [
-              "aUserDefinedCharactersCont",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aText",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nPos",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "nStartCharFlags",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aUserDefinedCharactersStart",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nContCharFlags",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aUserDefinedCharactersCont",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "parsePredefinedToken",
           "returns": "ParseResult_9ea00ac2",
+          "returns_origin": "com.sun.star.i18n.ParseResult",
           "desc": [
             "Parse a string for a token of type nTokenType starting at position nPos.",
             "",
@@ -238,136 +265,159 @@
           ],
           "raises": [],
           "args": [
-            [
-              "nTokenType",
-              "int",
-              "in"
-            ],
-            [
-              "aText",
-              "str",
-              "in"
-            ],
-            [
-              "nPos",
-              "int",
-              "in"
-            ],
-            [
-              "aLocale",
-              "Locale_70d308fa",
-              "in"
-            ],
-            [
-              "nStartCharFlags",
-              "int",
-              "in"
-            ],
-            [
-              "aUserDefinedCharactersStart",
-              "str",
-              "in"
-            ],
-            [
-              "nContCharFlags",
-              "int",
-              "in"
-            ],
-            [
-              "aUserDefinedCharactersCont",
-              "str",
-              "in"
-            ]
+            {
+              "name": "nTokenType",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aText",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nPos",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "nStartCharFlags",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aUserDefinedCharactersStart",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nContCharFlags",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aUserDefinedCharactersCont",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "toLower",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Convert upper case alpha to lower case alpha, starting at position nPos for nCount code points."
           ],
           "raises": [],
           "args": [
-            [
-              "aText",
-              "str",
-              "in"
-            ],
-            [
-              "nPos",
-              "int",
-              "in"
-            ],
-            [
-              "nCount",
-              "int",
-              "in"
-            ],
-            [
-              "aLocale",
-              "Locale_70d308fa",
-              "in"
-            ]
+            {
+              "name": "aText",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nPos",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nCount",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
           ]
         },
         {
           "name": "toTitle",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Convert to title case, starting at position nPos for nCount code points."
           ],
           "raises": [],
           "args": [
-            [
-              "aText",
-              "str",
-              "in"
-            ],
-            [
-              "nPos",
-              "int",
-              "in"
-            ],
-            [
-              "nCount",
-              "int",
-              "in"
-            ],
-            [
-              "aLocale",
-              "Locale_70d308fa",
-              "in"
-            ]
+            {
+              "name": "aText",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nPos",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nCount",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
           ]
         },
         {
           "name": "toUpper",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Convert lower case alpha to upper case alpha, starting at position nPos for nCount code points."
           ],
           "raises": [],
           "args": [
-            [
-              "aText",
-              "str",
-              "in"
-            ],
-            [
-              "nPos",
-              "int",
-              "in"
-            ],
-            [
-              "nCount",
-              "int",
-              "in"
-            ],
-            [
-              "aLocale",
-              "Locale_70d308fa",
-              "in"
-            ]
+            {
+              "name": "aText",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nPos",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nCount",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
           ]
         }
       ]

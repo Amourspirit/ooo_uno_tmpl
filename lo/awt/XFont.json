@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XFont",
   "type": "interface",
@@ -74,41 +74,47 @@
         {
           "name": "getCharWidth",
           "returns": "int",
+          "returns_origin": "short",
           "desc": [
             "returns the width of the specified character."
           ],
           "raises": [],
           "args": [
-            [
-              "c",
-              "str",
-              "in"
-            ]
+            {
+              "name": "c",
+              "type": "str",
+              "direction": "in",
+              "origin": "char"
+            }
           ]
         },
         {
           "name": "getCharWidths",
           "returns": "typing.Tuple[int, ...]",
+          "returns_origin": "sequence< short >",
           "desc": [
             "returns the widths of the specified characters."
           ],
           "raises": [],
           "args": [
-            [
-              "nFirst",
-              "str",
-              "in"
-            ],
-            [
-              "nLast",
-              "str",
-              "in"
-            ]
+            {
+              "name": "nFirst",
+              "type": "str",
+              "direction": "in",
+              "origin": "char"
+            },
+            {
+              "name": "nLast",
+              "type": "str",
+              "direction": "in",
+              "origin": "char"
+            }
           ]
         },
         {
           "name": "getFontDescriptor",
           "returns": "FontDescriptor_bc110c0a",
+          "returns_origin": "com.sun.star.awt.FontDescriptor",
           "desc": [
             "returns the description of the font.",
             "",
@@ -120,6 +126,7 @@
         {
           "name": "getFontMetric",
           "returns": "SimpleFontMetric_d53c0cb9",
+          "returns_origin": "com.sun.star.awt.SimpleFontMetric",
           "desc": [
             "returns additional information about the font."
           ],
@@ -129,61 +136,70 @@
         {
           "name": "getKernPairs",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "queries the kerning pair table."
           ],
           "raises": [],
           "args": [
-            [
-              "Chars1",
-              "typing.Tuple[str, ...]",
-              "out"
-            ],
-            [
-              "Chars2",
-              "typing.Tuple[str, ...]",
-              "out"
-            ],
-            [
-              "Kerns",
-              "typing.Tuple[int, ...]",
-              "out"
-            ]
+            {
+              "name": "Chars1",
+              "type": "typing.Tuple[str, ...]",
+              "direction": "out",
+              "origin": "sequence< char >"
+            },
+            {
+              "name": "Chars2",
+              "type": "typing.Tuple[str, ...]",
+              "direction": "out",
+              "origin": "sequence< char >"
+            },
+            {
+              "name": "Kerns",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "out",
+              "origin": "sequence< short >"
+            }
           ]
         },
         {
           "name": "getStringWidth",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "returns the string width."
           ],
           "raises": [],
           "args": [
-            [
-              "str",
-              "str",
-              "in"
-            ]
+            {
+              "name": "str",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getStringWidthArray",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "returns the string and the character widths."
           ],
           "raises": [],
           "args": [
-            [
-              "str",
-              "str",
-              "in"
-            ],
-            [
-              "aDXArray",
-              "typing.Tuple[int, ...]",
-              "out"
-            ]
+            {
+              "name": "str",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aDXArray",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "out",
+              "origin": "sequence< long >"
+            }
           ]
         }
       ]

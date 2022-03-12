@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDispatchRecorder",
   "type": "interface",
@@ -82,6 +82,7 @@
         {
           "name": "endRecording",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "stops the recording process",
             "",
@@ -93,6 +94,7 @@
         {
           "name": "getRecordedMacro",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the recorded source code",
             "",
@@ -104,26 +106,30 @@
         {
           "name": "recordDispatch",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "records a single dispatch call identified by its command URL"
           ],
           "raises": [],
           "args": [
-            [
-              "URL",
-              "URL_57ad07b9",
-              "in"
-            ],
-            [
-              "Arguments",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ]
+            {
+              "name": "URL",
+              "type": "URL_57ad07b9",
+              "direction": "in",
+              "origin": "com.sun.star.util.URL"
+            },
+            {
+              "name": "Arguments",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            }
           ]
         },
         {
           "name": "recordDispatchAsComment",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "records a single dispatch call identified by its command URL, but comments it out",
             "",
@@ -131,31 +137,35 @@
           ],
           "raises": [],
           "args": [
-            [
-              "URL",
-              "URL_57ad07b9",
-              "in"
-            ],
-            [
-              "Arguments",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ]
+            {
+              "name": "URL",
+              "type": "URL_57ad07b9",
+              "direction": "in",
+              "origin": "com.sun.star.util.URL"
+            },
+            {
+              "name": "Arguments",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            }
           ]
         },
         {
           "name": "startRecording",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "initializes the recorder by passing the frame for which all macro statements shall be recorded"
           ],
           "raises": [],
           "args": [
-            [
-              "Frame",
-              "XFrame_7a570956",
-              "in"
-            ]
+            {
+              "name": "Frame",
+              "type": "XFrame_7a570956",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XFrame"
+            }
           ]
         }
       ]

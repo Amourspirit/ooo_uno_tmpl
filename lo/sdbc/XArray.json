@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XArray",
   "type": "interface",
@@ -72,6 +72,7 @@
         {
           "name": "getArray",
           "returns": "typing.Tuple[object, ...]",
+          "returns_origin": "sequence< any >",
           "desc": [
             "retrieves the contents of the SQL array designated by this Array object, using the specified typeMap for type map customizations.",
             "",
@@ -81,16 +82,18 @@
             "SQLException"
           ],
           "args": [
-            [
-              "typeMap",
-              "XNameAccess_e2ab0cf6",
-              "in"
-            ]
+            {
+              "name": "typeMap",
+              "type": "XNameAccess_e2ab0cf6",
+              "direction": "in",
+              "origin": "com.sun.star.container.XNameAccess"
+            }
           ]
         },
         {
           "name": "getArrayAtIndex",
           "returns": "typing.Tuple[object, ...]",
+          "returns_origin": "sequence< any >",
           "desc": [
             "returns an array containing a slice of the SQL array, beginning with the specified index and containing up to count successive elements of the SQL array."
           ],
@@ -98,26 +101,30 @@
             "SQLException"
           ],
           "args": [
-            [
-              "index",
-              "int",
-              "in"
-            ],
-            [
-              "count",
-              "int",
-              "in"
-            ],
-            [
-              "typeMap",
-              "XNameAccess_e2ab0cf6",
-              "in"
-            ]
+            {
+              "name": "index",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "count",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "typeMap",
+              "type": "XNameAccess_e2ab0cf6",
+              "direction": "in",
+              "origin": "com.sun.star.container.XNameAccess"
+            }
           ]
         },
         {
           "name": "getBaseType",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "returns the SDBC type of the elements in the array designated by this Array object."
           ],
@@ -129,6 +136,7 @@
         {
           "name": "getBaseTypeName",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the SQL type name of the elements in the array designated by this Array object.",
             "",
@@ -142,6 +150,7 @@
         {
           "name": "getResultSet",
           "returns": "XResultSet_98e30aa7",
+          "returns_origin": "com.sun.star.sdbc.XResultSet",
           "desc": [
             "returns a result set that contains the elements of the array designated by this Array object and uses the given typeMap to map the array elements.",
             "",
@@ -153,16 +162,18 @@
             "SQLException"
           ],
           "args": [
-            [
-              "typeMap",
-              "XNameAccess_e2ab0cf6",
-              "in"
-            ]
+            {
+              "name": "typeMap",
+              "type": "XNameAccess_e2ab0cf6",
+              "direction": "in",
+              "origin": "com.sun.star.container.XNameAccess"
+            }
           ]
         },
         {
           "name": "getResultSetAtIndex",
           "returns": "XResultSet_98e30aa7",
+          "returns_origin": "com.sun.star.sdbc.XResultSet",
           "desc": [
             "returns a result set holding the elements of the subarray that starts at index index and contains up to count successive elements.",
             "",
@@ -174,21 +185,24 @@
             "SQLException"
           ],
           "args": [
-            [
-              "index",
-              "int",
-              "in"
-            ],
-            [
-              "count",
-              "int",
-              "in"
-            ],
-            [
-              "typeMap",
-              "XNameAccess_e2ab0cf6",
-              "in"
-            ]
+            {
+              "name": "index",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "count",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "typeMap",
+              "type": "XNameAccess_e2ab0cf6",
+              "direction": "in",
+              "origin": "com.sun.star.container.XNameAccess"
+            }
           ]
         }
       ]

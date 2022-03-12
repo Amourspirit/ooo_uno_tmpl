@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDropTarget",
   "type": "interface",
@@ -62,6 +62,7 @@
         {
           "name": "addDropTargetListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Add a DropTargetListener.",
             "",
@@ -69,16 +70,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "dtl",
-              "XDropTargetListener_d62c1305",
-              "in"
-            ]
+            {
+              "name": "dtl",
+              "type": "XDropTargetListener_d62c1305",
+              "direction": "in",
+              "origin": "com.sun.star.datatransfer.dnd.XDropTargetListener"
+            }
           ]
         },
         {
           "name": "getDefaultActions",
           "returns": "int",
+          "returns_origin": "byte",
           "desc": [
             "Determine the actions supported by a drop target.",
             "",
@@ -90,6 +93,7 @@
         {
           "name": "isActive",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Indicates either a drop target object is active or not."
           ],
@@ -99,21 +103,24 @@
         {
           "name": "removeDropTargetListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Remove a drop target listener."
           ],
           "raises": [],
           "args": [
-            [
-              "dtl",
-              "XDropTargetListener_d62c1305",
-              "in"
-            ]
+            {
+              "name": "dtl",
+              "type": "XDropTargetListener_d62c1305",
+              "direction": "in",
+              "origin": "com.sun.star.datatransfer.dnd.XDropTargetListener"
+            }
           ]
         },
         {
           "name": "setActive",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Sets the drop target object active or inactive.",
             "",
@@ -121,16 +128,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "active",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "active",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "setDefaultActions",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Sets the default acceptable actions for this drop target.",
             "",
@@ -140,11 +149,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "actions",
-              "int",
-              "in"
-            ]
+            {
+              "name": "actions",
+              "type": "int",
+              "direction": "in",
+              "origin": "byte"
+            }
           ]
         }
       ]

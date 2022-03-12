@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XPointer",
   "type": "interface",
@@ -50,6 +50,7 @@
         {
           "name": "getType",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "returns the currently set SystemPointer of this mouse pointer."
           ],
@@ -59,16 +60,18 @@
         {
           "name": "setType",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "selects a SystemPointer for this mouse pointer."
           ],
           "raises": [],
           "args": [
-            [
-              "nType",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nType",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

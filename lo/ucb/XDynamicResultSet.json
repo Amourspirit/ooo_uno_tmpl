@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDynamicResultSet",
   "type": "interface",
@@ -84,6 +84,7 @@
         {
           "name": "connectToCache",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Connects this to a CachedDynamicResultSet for optimized remote data transport.",
             "",
@@ -97,16 +98,18 @@
             "com.sun.star.ucb.ServiceNotFoundException"
           ],
           "args": [
-            [
-              "Cache",
-              "XDynamicResultSet",
-              "in"
-            ]
+            {
+              "name": "Cache",
+              "type": "XDynamicResultSet",
+              "direction": "in",
+              "origin": "com.sun.star.ucb.XDynamicResultSet"
+            }
           ]
         },
         {
           "name": "getCapabilities",
           "returns": "int",
+          "returns_origin": "short",
           "desc": [
             "Using this method you can get information, whether the offered ContentResultSets are sorted or filtered etc correctly as demanded during the creation of the XDynamicResultSet."
           ],
@@ -116,6 +119,7 @@
         {
           "name": "getStaticResultSet",
           "returns": "XResultSet_98e30aa7",
+          "returns_origin": "com.sun.star.sdbc.XResultSet",
           "desc": [
             "Call this, if you don't care about any changes."
           ],
@@ -127,6 +131,7 @@
         {
           "name": "setListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Call this, if you want to get notifications about changes.",
             "",
@@ -136,11 +141,12 @@
             "com.sun.star.ucb.ListenerAlreadySetException"
           ],
           "args": [
-            [
-              "Listener",
-              "XDynamicResultSetListener_56e41050",
-              "in"
-            ]
+            {
+              "name": "Listener",
+              "type": "XDynamicResultSetListener_56e41050",
+              "direction": "in",
+              "origin": "com.sun.star.ucb.XDynamicResultSetListener"
+            }
           ]
         }
       ]

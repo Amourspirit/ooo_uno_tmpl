@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSheetCellCursor",
   "type": "interface",
@@ -50,6 +50,7 @@
         {
           "name": "collapseToCurrentArray",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "collapses the cursor into the range of the array formula to which it is currently pointing.",
             "",
@@ -61,6 +62,7 @@
         {
           "name": "collapseToCurrentRegion",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "expands the cursor into the region containing the cells to which it currently points.",
             "",
@@ -72,6 +74,7 @@
         {
           "name": "collapseToMergedArea",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "expands the cursor to merged cell ranges.",
             "",
@@ -83,6 +86,7 @@
         {
           "name": "collapseToSize",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "changes the size of a cursor range.",
             "",
@@ -90,21 +94,24 @@
           ],
           "raises": [],
           "args": [
-            [
-              "nColumns",
-              "int",
-              "in"
-            ],
-            [
-              "nRows",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nColumns",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nRows",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "expandToEntireColumns",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "expands the cursor to include the entire columns of the cells to which it is currently pointing."
           ],
@@ -114,6 +121,7 @@
         {
           "name": "expandToEntireRows",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "expands the cursor to include the entire rows of the cells to which it is currently pointing."
           ],

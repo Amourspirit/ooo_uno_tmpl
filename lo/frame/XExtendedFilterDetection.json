@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XExtendedFilterDetection",
   "type": "interface",
@@ -66,21 +66,24 @@
         {
           "name": "detect",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "use com.sun.star.document.XExtendedFilterDetection.detect() instead of this"
           ],
           "raises": [],
           "args": [
-            [
-              "URL",
-              "str",
-              "in"
-            ],
-            [
-              "Argumentlist",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ]
+            {
+              "name": "URL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Argumentlist",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            }
           ]
         }
       ]

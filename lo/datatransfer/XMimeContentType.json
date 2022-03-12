@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XMimeContentType",
   "type": "interface",
@@ -56,6 +56,7 @@
         {
           "name": "getFullMediaType",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "To get the full media/submedia type of the MIME content-type."
           ],
@@ -65,6 +66,7 @@
         {
           "name": "getMediaSubtype",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "To get the media subtype of the MIME content-type."
           ],
@@ -74,6 +76,7 @@
         {
           "name": "getMediaType",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "To get the media type of the MIME content-type."
           ],
@@ -83,6 +86,7 @@
         {
           "name": "getParameterValue",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "To get the value of a specified parameter."
           ],
@@ -90,16 +94,18 @@
             "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getParameters",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [
             "To get a list of parameters that the MIME content-type contains."
           ],
@@ -109,6 +115,7 @@
         {
           "name": "hasParameter",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "To query if a specific parameter is supported.",
             "",
@@ -116,11 +123,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

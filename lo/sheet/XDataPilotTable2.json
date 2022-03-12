@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDataPilotTable2",
   "type": "interface",
@@ -83,21 +83,24 @@
         {
           "name": "getDrillDownData",
           "returns": "typing.Tuple[typing.Tuple[object, ...], ...]",
+          "returns_origin": "sequence< sequence< any > >",
           "desc": [
             "When the address of a cell within the result area is given, XDataPilotTable2.getDrillDownData() returns its drill-down output table that includes only those rows that contribute to the value of that cell."
           ],
           "raises": [],
           "args": [
-            [
-              "aAddr",
-              "CellAddress_ae5f0b56",
-              "in"
-            ]
+            {
+              "name": "aAddr",
+              "type": "CellAddress_ae5f0b56",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellAddress"
+            }
           ]
         },
         {
           "name": "getOutputRangeByType",
           "returns": "CellRangeAddress_ec450d43",
+          "returns_origin": "com.sun.star.table.CellRangeAddress",
           "desc": [
             "This method returns a different output range of a DataPilot table per specified output range type."
           ],
@@ -105,16 +108,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "nType",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nType",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getPositionData",
           "returns": "DataPilotTablePositionData_8a0c115a",
+          "returns_origin": "com.sun.star.sheet.DataPilotTablePositionData",
           "desc": [
             "Given a cell address, it returns the information about that cell.",
             "",
@@ -122,16 +127,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aAddr",
-              "CellAddress_ae5f0b56",
-              "in"
-            ]
+            {
+              "name": "aAddr",
+              "type": "CellAddress_ae5f0b56",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellAddress"
+            }
           ]
         },
         {
           "name": "insertDrillDownSheet",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "This method inserts a new sheet to display the drill-down data for a specified result cell. A drill-down data for a result cell consists of a subset of rows from the original data source that contribute to the value displayed in that cell.",
             "",
@@ -139,11 +146,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aAddr",
-              "CellAddress_ae5f0b56",
-              "in"
-            ]
+            {
+              "name": "aAddr",
+              "type": "CellAddress_ae5f0b56",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellAddress"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XHalfFloatBitmap",
   "type": "interface",
@@ -79,6 +79,7 @@
         {
           "name": "setData",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Set raw data of a bitmap.",
             "",
@@ -89,26 +90,30 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "data",
-              "typing.Tuple[int, ...]",
-              "in"
-            ],
-            [
-              "bitmapLayout",
-              "FloatingPointBitmapLayout_c66812df",
-              "in"
-            ],
-            [
-              "rect",
-              "IntegerRectangle2D_3c5c0f4d",
-              "in"
-            ]
+            {
+              "name": "data",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "in",
+              "origin": "sequence< short >"
+            },
+            {
+              "name": "bitmapLayout",
+              "type": "FloatingPointBitmapLayout_c66812df",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.FloatingPointBitmapLayout"
+            },
+            {
+              "name": "rect",
+              "type": "IntegerRectangle2D_3c5c0f4d",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.IntegerRectangle2D"
+            }
           ]
         },
         {
           "name": "setPixel",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Set a single pixel of the bitmap with the given color value.",
             "",
@@ -119,21 +124,24 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "color",
-              "typing.Tuple[int, ...]",
-              "in"
-            ],
-            [
-              "bitmapLayout",
-              "FloatingPointBitmapLayout_c66812df",
-              "in"
-            ],
-            [
-              "pos",
-              "IntegerPoint2D_8f0dc2",
-              "in"
-            ]
+            {
+              "name": "color",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "in",
+              "origin": "sequence< short >"
+            },
+            {
+              "name": "bitmapLayout",
+              "type": "FloatingPointBitmapLayout_c66812df",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.FloatingPointBitmapLayout"
+            },
+            {
+              "name": "pos",
+              "type": "IntegerPoint2D_8f0dc2",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.IntegerPoint2D"
+            }
           ]
         }
       ]

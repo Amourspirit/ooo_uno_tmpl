@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSlideRenderer",
   "type": "interface",
@@ -76,26 +76,30 @@
         {
           "name": "calculatePreviewSize",
           "returns": "Size_576707ef",
+          "returns_origin": "com.sun.star.awt.Size",
           "desc": [
             "Return a size that has the given aspect ratio and shares either the width or the height with the given maximum size."
           ],
           "raises": [],
           "args": [
-            [
-              "nSlideAspectRatio",
-              "float",
-              "in"
-            ],
-            [
-              "aMaximumPreviewPixelSize",
-              "Size_576707ef",
-              "in"
-            ]
+            {
+              "name": "nSlideAspectRatio",
+              "type": "float",
+              "direction": "in",
+              "origin": "double"
+            },
+            {
+              "name": "aMaximumPreviewPixelSize",
+              "type": "Size_576707ef",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Size"
+            }
           ]
         },
         {
           "name": "createPreview",
           "returns": "XBitmap_70cd0909",
+          "returns_origin": "com.sun.star.awt.XBitmap",
           "desc": [
             "Create a preview for the given slide that has the same aspect ratio as the page and is as large as possible but not larger than the specified size.",
             "",
@@ -103,51 +107,59 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xSlide",
-              "XDrawPage_b07a0b57",
-              "in"
-            ],
-            [
-              "aMaximumPreviewPixelSize",
-              "Size_576707ef",
-              "in"
-            ],
-            [
-              "nSuperSampleFactor",
-              "int",
-              "in"
-            ]
+            {
+              "name": "xSlide",
+              "type": "XDrawPage_b07a0b57",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.XDrawPage"
+            },
+            {
+              "name": "aMaximumPreviewPixelSize",
+              "type": "Size_576707ef",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Size"
+            },
+            {
+              "name": "nSuperSampleFactor",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "createPreviewForCanvas",
           "returns": "XBitmap_b1b70b7b",
+          "returns_origin": "com.sun.star.rendering.XBitmap",
           "desc": [
             "Exactly the same functionality as createPreview(), only a different return type: com.sun.star.rendering.XBitmap instead of com.sun.star.awt.XBitmap."
           ],
           "raises": [],
           "args": [
-            [
-              "xSlide",
-              "XDrawPage_b07a0b57",
-              "in"
-            ],
-            [
-              "aMaximumPreviewPixelSize",
-              "Size_576707ef",
-              "in"
-            ],
-            [
-              "nSuperSampleFactor",
-              "int",
-              "in"
-            ],
-            [
-              "xCanvas",
-              "XCanvas_b19b0b7a",
-              "in"
-            ]
+            {
+              "name": "xSlide",
+              "type": "XDrawPage_b07a0b57",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.XDrawPage"
+            },
+            {
+              "name": "aMaximumPreviewPixelSize",
+              "type": "Size_576707ef",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Size"
+            },
+            {
+              "name": "nSuperSampleFactor",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "xCanvas",
+              "type": "XCanvas_b19b0b7a",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.XCanvas"
+            }
           ]
         }
       ]

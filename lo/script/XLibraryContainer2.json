@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XLibraryContainer2",
   "type": "interface",
@@ -50,6 +50,7 @@
         {
           "name": "getLibraryLinkURL",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the location of the library link target.",
             "",
@@ -62,16 +63,18 @@
             "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
-            [
-              "Name",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "isLibraryLink",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "returns true if the accessed library item is a link, e.g., created by createLibraryLink, otherwise false."
           ],
@@ -79,16 +82,18 @@
             "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
-            [
-              "Name",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "isLibraryReadOnly",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "returns true if the accessed library item (library or library link) is read only.",
             "",
@@ -98,16 +103,18 @@
             "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
-            [
-              "Name",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "renameLibrary",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "renames the library item with the specified name.",
             "",
@@ -118,21 +125,24 @@
             "com.sun.star.container.ElementExistException"
           ],
           "args": [
-            [
-              "Name",
-              "str",
-              "in"
-            ],
-            [
-              "NewName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "NewName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "setLibraryReadOnly",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Sets the accessed library item (library or library link) to read only according to the flag bReadOnly (true means read only)"
           ],
@@ -140,16 +150,18 @@
             "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
-            [
-              "Name",
-              "str",
-              "in"
-            ],
-            [
-              "bReadOnly",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "Name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "bReadOnly",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XPivotTableDataProvider",
   "type": "interface",
@@ -73,6 +73,7 @@
         {
           "name": "createDataSequenceOfCategories",
           "returns": "XDataSequence_11f00e1f",
+          "returns_origin": "com.sun.star.chart2.data.XDataSequence",
           "desc": [
             "creates a single data sequence of categories."
           ],
@@ -82,36 +83,41 @@
         {
           "name": "createDataSequenceOfLabelsByIndex",
           "returns": "XDataSequence_11f00e1f",
+          "returns_origin": "com.sun.star.chart2.data.XDataSequence",
           "desc": [
             "creates a single data sequence of label(s) for the given data series index."
           ],
           "raises": [],
           "args": [
-            [
-              "nIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "createDataSequenceOfValuesByIndex",
           "returns": "XDataSequence_11f00e1f",
+          "returns_origin": "com.sun.star.chart2.data.XDataSequence",
           "desc": [
             "creates a single data sequence of values for the given data series index."
           ],
           "raises": [],
           "args": [
-            [
-              "nIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getColumnFields",
           "returns": "typing.Tuple[PivotTableFieldEntry_81a11104, ...]",
+          "returns_origin": "sequence< com.sun.star.chart2.data.PivotTableFieldEntry >",
           "desc": [
             "names of column fields from the associated pivot table"
           ],
@@ -121,6 +127,7 @@
         {
           "name": "getDataFields",
           "returns": "typing.Tuple[PivotTableFieldEntry_81a11104, ...]",
+          "returns_origin": "sequence< com.sun.star.chart2.data.PivotTableFieldEntry >",
           "desc": [
             "names of data fields from the associated pivot table"
           ],
@@ -130,21 +137,24 @@
         {
           "name": "getFieldOutputDescription",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "field output description: either \\\"- all -\\\", \\\"- multiple -\\\", or specific value"
           ],
           "raises": [],
           "args": [
-            [
-              "nDimensionIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nDimensionIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getPageFields",
           "returns": "typing.Tuple[PivotTableFieldEntry_81a11104, ...]",
+          "returns_origin": "sequence< com.sun.star.chart2.data.PivotTableFieldEntry >",
           "desc": [
             "names of page fields from the associated pivot table"
           ],
@@ -154,6 +164,7 @@
         {
           "name": "getPivotTableName",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "get the associated pivot table name"
           ],
@@ -163,6 +174,7 @@
         {
           "name": "getRowFields",
           "returns": "typing.Tuple[PivotTableFieldEntry_81a11104, ...]",
+          "returns_origin": "sequence< com.sun.star.chart2.data.PivotTableFieldEntry >",
           "desc": [
             "names of row fields from the associated pivot table"
           ],
@@ -172,6 +184,7 @@
         {
           "name": "hasPivotTable",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "check if the associated pivot table exists"
           ],
@@ -181,16 +194,18 @@
         {
           "name": "setPivotTableName",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "set the associated pivot table name"
           ],
           "raises": [],
           "args": [
-            [
-              "sPivotTableName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "sPivotTableName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

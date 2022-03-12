@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDictionaryList",
   "type": "interface",
@@ -86,6 +86,7 @@
         {
           "name": "addDictionary",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "adds a dictionary to the list.",
             "",
@@ -93,16 +94,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xDictionary",
-              "XDictionary_fea70de3",
-              "in"
-            ]
+            {
+              "name": "xDictionary",
+              "type": "XDictionary_fea70de3",
+              "direction": "in",
+              "origin": "com.sun.star.linguistic2.XDictionary"
+            }
           ]
         },
         {
           "name": "addDictionaryListEventListener",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "adds an entry to the list of dictionary-list event listeners.",
             "",
@@ -110,21 +113,24 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xListener",
-              "XDictionaryListEventListener_279814c7",
-              "in"
-            ],
-            [
-              "bReceiveVerbose",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "xListener",
+              "type": "XDictionaryListEventListener_279814c7",
+              "direction": "in",
+              "origin": "com.sun.star.linguistic2.XDictionaryListEventListener"
+            },
+            {
+              "name": "bReceiveVerbose",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "beginCollectEvents",
           "returns": "int",
+          "returns_origin": "short",
           "desc": [
             "increases request level for event buffering by one.",
             "",
@@ -136,36 +142,42 @@
         {
           "name": "createDictionary",
           "returns": "XDictionary_fea70de3",
+          "returns_origin": "com.sun.star.linguistic2.XDictionary",
           "desc": [
             "creates a new dictionary."
           ],
           "raises": [],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ],
-            [
-              "aLocale",
-              "Locale_70d308fa",
-              "in"
-            ],
-            [
-              "eDicType",
-              "DictionaryType_2ba50f2d",
-              "in"
-            ],
-            [
-              "aURL",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "eDicType",
+              "type": "DictionaryType_2ba50f2d",
+              "direction": "in",
+              "origin": "com.sun.star.linguistic2.DictionaryType"
+            },
+            {
+              "name": "aURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "endCollectEvents",
           "returns": "int",
+          "returns_origin": "short",
           "desc": [
             "flushes the event buffer and decreases the request level for event buffering by one.",
             "",
@@ -177,6 +189,7 @@
         {
           "name": "flushEvents",
           "returns": "int",
+          "returns_origin": "short",
           "desc": [
             "notifies the listeners of all buffered events and then clears that buffer."
           ],
@@ -186,6 +199,7 @@
         {
           "name": "getCount",
           "returns": "int",
+          "returns_origin": "short",
           "desc": [],
           "raises": [],
           "args": []
@@ -193,6 +207,7 @@
         {
           "name": "getDictionaries",
           "returns": "typing.Tuple[XDictionary_fea70de3, ...]",
+          "returns_origin": "sequence< com.sun.star.linguistic2.XDictionary >",
           "desc": [],
           "raises": [],
           "args": []
@@ -200,21 +215,24 @@
         {
           "name": "getDictionaryByName",
           "returns": "XDictionary_fea70de3",
+          "returns_origin": "com.sun.star.linguistic2.XDictionary",
           "desc": [
             "searches the list for a dictionary with a given name."
           ],
           "raises": [],
           "args": [
-            [
-              "aDictionaryName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aDictionaryName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "removeDictionary",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "removes a single dictionary from the list.",
             "",
@@ -222,26 +240,29 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xDictionary",
-              "XDictionary_fea70de3",
-              "in"
-            ]
+            {
+              "name": "xDictionary",
+              "type": "XDictionary_fea70de3",
+              "direction": "in",
+              "origin": "com.sun.star.linguistic2.XDictionary"
+            }
           ]
         },
         {
           "name": "removeDictionaryListEventListener",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "removes an entry from the list of dictionary-list event listeners."
           ],
           "raises": [],
           "args": [
-            [
-              "xListener",
-              "XDictionaryListEventListener_279814c7",
-              "in"
-            ]
+            {
+              "name": "xListener",
+              "type": "XDictionaryListEventListener_279814c7",
+              "direction": "in",
+              "origin": "com.sun.star.linguistic2.XDictionaryListEventListener"
+            }
           ]
         }
       ]

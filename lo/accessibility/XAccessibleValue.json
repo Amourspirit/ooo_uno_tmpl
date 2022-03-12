@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XAccessibleValue",
   "type": "interface",
@@ -56,6 +56,7 @@
         {
           "name": "getCurrentValue",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "Returns the value of this object as a number.",
             "",
@@ -67,6 +68,7 @@
         {
           "name": "getMaximumValue",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "Returns the maximal value that can be represented by this object.",
             "",
@@ -78,6 +80,7 @@
         {
           "name": "getMinimumValue",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "Returns the minimal value that can be represented by this object.",
             "",
@@ -89,6 +92,7 @@
         {
           "name": "setCurrentValue",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Sets the value of this object to the given number.",
             "",
@@ -96,11 +100,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aNumber",
-              "object",
-              "in"
-            ]
+            {
+              "name": "aNumber",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         }
       ]

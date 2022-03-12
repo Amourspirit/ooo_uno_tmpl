@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XGraphics2",
   "type": "interface",
@@ -71,6 +71,7 @@
         {
           "name": "clear",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "clears the given rectangle on the device",
             "",
@@ -80,16 +81,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aRect",
-              "Rectangle_84b109e9",
-              "in"
-            ]
+            {
+              "name": "aRect",
+              "type": "Rectangle_84b109e9",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Rectangle"
+            }
           ]
         },
         {
           "name": "drawImage",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "draws a com.sun.star.graphic.XGraphic in the output device.",
             "",
@@ -101,36 +104,42 @@
           ],
           "raises": [],
           "args": [
-            [
-              "nX",
-              "int",
-              "in"
-            ],
-            [
-              "nY",
-              "int",
-              "in"
-            ],
-            [
-              "nWidth",
-              "int",
-              "in"
-            ],
-            [
-              "nHeight",
-              "int",
-              "in"
-            ],
-            [
-              "nStyle",
-              "int",
-              "in"
-            ],
-            [
-              "aGraphic",
-              "XGraphic_a4da0afc",
-              "in"
-            ]
+            {
+              "name": "nX",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nY",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nWidth",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nHeight",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nStyle",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "aGraphic",
+              "type": "XGraphic_a4da0afc",
+              "direction": "in",
+              "origin": "com.sun.star.graphic.XGraphic"
+            }
           ]
         }
       ]

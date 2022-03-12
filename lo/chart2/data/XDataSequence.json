@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDataSequence",
   "type": "interface",
@@ -67,6 +67,7 @@
         {
           "name": "generateLabel",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [
             "creates a label that describes the origin of this data sequence.",
             "",
@@ -88,16 +89,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "eLabelOrigin",
-              "LabelOrigin_f66b0d5c",
-              "in"
-            ]
+            {
+              "name": "eLabelOrigin",
+              "type": "LabelOrigin_f66b0d5c",
+              "direction": "in",
+              "origin": "com.sun.star.chart2.data.LabelOrigin"
+            }
           ]
         },
         {
           "name": "getData",
           "returns": "typing.Tuple[object, ...]",
+          "returns_origin": "sequence< any >",
           "desc": [
             "retrieves the data stored in this component."
           ],
@@ -107,6 +110,7 @@
         {
           "name": "getNumberFormatKeyByIndex",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "returns a number format key for the value at the given index in the data sequence.",
             "",
@@ -120,16 +124,18 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getSourceRangeRepresentation",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the (UI) range representation string used by this XDataSequence."
           ],

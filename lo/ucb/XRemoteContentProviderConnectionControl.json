@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XRemoteContentProviderConnectionControl",
   "type": "interface",
@@ -63,6 +63,7 @@
         {
           "name": "enableConnectionControl",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Enable connection control, using as a token some object implemented on the remote content provider acceptor's side.",
             "",
@@ -70,16 +71,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Acceptor",
-              "XRemoteContentProviderAcceptor_af1b125d",
-              "in"
-            ],
-            [
-              "Token",
-              "XInterface_8f010a43",
-              "in"
-            ]
+            {
+              "name": "Acceptor",
+              "type": "XRemoteContentProviderAcceptor_af1b125d",
+              "direction": "in",
+              "origin": "com.sun.star.ucb.XRemoteContentProviderAcceptor"
+            },
+            {
+              "name": "Token",
+              "type": "XInterface_8f010a43",
+              "direction": "in",
+              "origin": "com.sun.star.uno.XInterface"
+            }
           ]
         }
       ]

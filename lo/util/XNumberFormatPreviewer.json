@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XNumberFormatPreviewer",
   "type": "interface",
@@ -67,6 +67,7 @@
         {
           "name": "convertNumberToPreviewString",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "formats a value using a format string, without inserting a number format into the list."
           ],
@@ -74,31 +75,36 @@
             "com.sun.star.util.MalformedNumberFormatException"
           ],
           "args": [
-            [
-              "aFormat",
-              "str",
-              "in"
-            ],
-            [
-              "fValue",
-              "float",
-              "in"
-            ],
-            [
-              "nLocale",
-              "Locale_70d308fa",
-              "in"
-            ],
-            [
-              "bAllowEnglish",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "aFormat",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "fValue",
+              "type": "float",
+              "direction": "in",
+              "origin": "double"
+            },
+            {
+              "name": "nLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "bAllowEnglish",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "queryPreviewColorForNumber",
           "returns": "Color_68e908c5",
+          "returns_origin": "com.sun.star.util.Color",
           "desc": [
             "returns the color which is to be used for a number."
           ],
@@ -106,31 +112,36 @@
             "com.sun.star.util.MalformedNumberFormatException"
           ],
           "args": [
-            [
-              "aFormat",
-              "str",
-              "in"
-            ],
-            [
-              "fValue",
-              "float",
-              "in"
-            ],
-            [
-              "nLocale",
-              "Locale_70d308fa",
-              "in"
-            ],
-            [
-              "bAllowEnglish",
-              "bool",
-              "in"
-            ],
-            [
-              "aDefaultColor",
-              "Color_68e908c5",
-              "in"
-            ]
+            {
+              "name": "aFormat",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "fValue",
+              "type": "float",
+              "direction": "in",
+              "origin": "double"
+            },
+            {
+              "name": "nLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "bAllowEnglish",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            },
+            {
+              "name": "aDefaultColor",
+              "type": "Color_68e908c5",
+              "direction": "in",
+              "origin": "com.sun.star.util.Color"
+            }
           ]
         }
       ]

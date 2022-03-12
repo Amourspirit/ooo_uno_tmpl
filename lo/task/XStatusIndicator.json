@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XStatusIndicator",
   "type": "interface",
@@ -52,6 +52,7 @@
         {
           "name": "end",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "stop the progress",
             "",
@@ -63,6 +64,7 @@
         {
           "name": "reset",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "clear progress value and description",
             "",
@@ -74,6 +76,7 @@
         {
           "name": "setText",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "update progress description",
             "",
@@ -81,16 +84,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Text",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Text",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "setValue",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "update progress value",
             "",
@@ -98,16 +103,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Value",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Value",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "start",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "initialize and start the progress",
             "",
@@ -115,16 +122,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Text",
-              "str",
-              "in"
-            ],
-            [
-              "Range",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Text",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Range",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

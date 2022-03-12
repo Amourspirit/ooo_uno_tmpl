@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDockableWindowListener",
   "type": "interface",
@@ -88,21 +88,24 @@
         {
           "name": "closed",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "is invoked when the window was actively closed"
           ],
           "raises": [],
           "args": [
-            [
-              "e",
-              "EventObject_a3d70b03",
-              "in"
-            ]
+            {
+              "name": "e",
+              "type": "EventObject_a3d70b03",
+              "direction": "in",
+              "origin": "com.sun.star.lang.EventObject"
+            }
           ]
         },
         {
           "name": "docking",
           "returns": "DockingData_98da0a8d",
+          "returns_origin": "com.sun.star.awt.DockingData",
           "desc": [
             "is invoked during the docking procedure when the window has been moved.",
             "",
@@ -112,16 +115,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "e",
-              "DockingEvent_a4210b15",
-              "in"
-            ]
+            {
+              "name": "e",
+              "type": "DockingEvent_a4210b15",
+              "direction": "in",
+              "origin": "com.sun.star.awt.DockingEvent"
+            }
           ]
         },
         {
           "name": "endDocking",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "is invoked when the docking procedure ends.",
             "",
@@ -129,31 +134,35 @@
           ],
           "raises": [],
           "args": [
-            [
-              "e",
-              "EndDockingEvent_c6400c2c",
-              "in"
-            ]
+            {
+              "name": "e",
+              "type": "EndDockingEvent_c6400c2c",
+              "direction": "in",
+              "origin": "com.sun.star.awt.EndDockingEvent"
+            }
           ]
         },
         {
           "name": "endPopupMode",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "is invoked when the window currently is in pop-up mode and wants to be undocked or closed"
           ],
           "raises": [],
           "args": [
-            [
-              "e",
-              "EndPopupModeEvent_e0bd0d06",
-              "in"
-            ]
+            {
+              "name": "e",
+              "type": "EndPopupModeEvent_e0bd0d06",
+              "direction": "in",
+              "origin": "com.sun.star.awt.EndPopupModeEvent"
+            }
           ]
         },
         {
           "name": "prepareToggleFloatingMode",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "is invoked when the floating mode is about to be changed between floating and docked or vice versa",
             "",
@@ -161,41 +170,46 @@
           ],
           "raises": [],
           "args": [
-            [
-              "e",
-              "EventObject_a3d70b03",
-              "in"
-            ]
+            {
+              "name": "e",
+              "type": "EventObject_a3d70b03",
+              "direction": "in",
+              "origin": "com.sun.star.lang.EventObject"
+            }
           ]
         },
         {
           "name": "startDocking",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "is invoked when the docking procedure starts."
           ],
           "raises": [],
           "args": [
-            [
-              "e",
-              "DockingEvent_a4210b15",
-              "in"
-            ]
+            {
+              "name": "e",
+              "type": "DockingEvent_a4210b15",
+              "direction": "in",
+              "origin": "com.sun.star.awt.DockingEvent"
+            }
           ]
         },
         {
           "name": "toggleFloatingMode",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "is invoked when the floating mode is changed between floating and docked or vice versa"
           ],
           "raises": [],
           "args": [
-            [
-              "e",
-              "EventObject_a3d70b03",
-              "in"
-            ]
+            {
+              "name": "e",
+              "type": "EventObject_a3d70b03",
+              "direction": "in",
+              "origin": "com.sun.star.lang.EventObject"
+            }
           ]
         }
       ]

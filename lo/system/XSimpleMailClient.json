@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSimpleMailClient",
   "type": "interface",
@@ -60,6 +60,7 @@
         {
           "name": "createSimpleMailMessage",
           "returns": "XSimpleMailMessage_1d420eb7",
+          "returns_origin": "com.sun.star.system.XSimpleMailMessage",
           "desc": [
             "Create a simple mail message object that implements the interface XSimpleMailMessage."
           ],
@@ -69,6 +70,7 @@
         {
           "name": "sendSimpleMailMessage",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Sends a given simple mail message object that implements the interface XSimpleMailMessage.",
             "",
@@ -79,16 +81,18 @@
             "com.sun.star.uno.Exception"
           ],
           "args": [
-            [
-              "xSimpleMailMessage",
-              "XSimpleMailMessage_1d420eb7",
-              "in"
-            ],
-            [
-              "aFlag",
-              "int",
-              "in"
-            ]
+            {
+              "name": "xSimpleMailMessage",
+              "type": "XSimpleMailMessage_1d420eb7",
+              "direction": "in",
+              "origin": "com.sun.star.system.XSimpleMailMessage"
+            },
+            {
+              "name": "aFlag",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

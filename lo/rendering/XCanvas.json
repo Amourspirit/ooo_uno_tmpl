@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XCanvas",
   "type": "interface",
@@ -198,6 +198,7 @@
         {
           "name": "clear",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Clear the whole canvas area.",
             "",
@@ -209,6 +210,7 @@
         {
           "name": "createFont",
           "returns": "XCanvasFont_e3380d11",
+          "returns_origin": "com.sun.star.rendering.XCanvasFont",
           "desc": [
             "Create a suitable font for the specified font description."
           ],
@@ -216,26 +218,30 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aFontRequest",
-              "FontRequest_e4890d46",
-              "in"
-            ],
-            [
-              "aExtraFontProperties",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ],
-            [
-              "aFontMatrix",
-              "Matrix2D_b26c0b5f",
-              "in"
-            ]
+            {
+              "name": "aFontRequest",
+              "type": "FontRequest_e4890d46",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.FontRequest"
+            },
+            {
+              "name": "aExtraFontProperties",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< .com.sun.star.beans.PropertyValue >"
+            },
+            {
+              "name": "aFontMatrix",
+              "type": "Matrix2D_b26c0b5f",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.Matrix2D"
+            }
           ]
         },
         {
           "name": "drawBezier",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Draw a cubic Bezier curve in device resolution width (i.e.",
             "",
@@ -245,31 +251,36 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aBezierSegment",
-              "RealBezierSegment2D_4a970fa2",
-              "in"
-            ],
-            [
-              "aEndPoint",
-              "RealPoint2D_d6e70c78",
-              "in"
-            ],
-            [
-              "aViewState",
-              "ViewState_cab30c62",
-              "in"
-            ],
-            [
-              "aRenderState",
-              "RenderState_e4490d27",
-              "in"
-            ]
+            {
+              "name": "aBezierSegment",
+              "type": "RealBezierSegment2D_4a970fa2",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.RealBezierSegment2D"
+            },
+            {
+              "name": "aEndPoint",
+              "type": "RealPoint2D_d6e70c78",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.RealPoint2D"
+            },
+            {
+              "name": "aViewState",
+              "type": "ViewState_cab30c62",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.ViewState"
+            },
+            {
+              "name": "aRenderState",
+              "type": "RenderState_e4490d27",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.RenderState"
+            }
           ]
         },
         {
           "name": "drawBitmap",
           "returns": "XCachedPrimitive_29890f0f",
+          "returns_origin": "com.sun.star.rendering.XCachedPrimitive",
           "desc": [
             "Render the given bitmap.",
             "",
@@ -280,26 +291,30 @@
             "VolatileContentDestroyedException"
           ],
           "args": [
-            [
-              "xBitmap",
-              "XBitmap_b1b70b7b",
-              "in"
-            ],
-            [
-              "aViewState",
-              "ViewState_cab30c62",
-              "in"
-            ],
-            [
-              "aRenderState",
-              "RenderState_e4490d27",
-              "in"
-            ]
+            {
+              "name": "xBitmap",
+              "type": "XBitmap_b1b70b7b",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.XBitmap"
+            },
+            {
+              "name": "aViewState",
+              "type": "ViewState_cab30c62",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.ViewState"
+            },
+            {
+              "name": "aRenderState",
+              "type": "RenderState_e4490d27",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.RenderState"
+            }
           ]
         },
         {
           "name": "drawBitmapModulated",
           "returns": "XCachedPrimitive_29890f0f",
+          "returns_origin": "com.sun.star.rendering.XCachedPrimitive",
           "desc": [
             "Render the given bitmap, with a global color modulation.",
             "",
@@ -310,26 +325,30 @@
             "VolatileContentDestroyedException"
           ],
           "args": [
-            [
-              "xBitmap",
-              "XBitmap_b1b70b7b",
-              "in"
-            ],
-            [
-              "aViewState",
-              "ViewState_cab30c62",
-              "in"
-            ],
-            [
-              "aRenderState",
-              "RenderState_e4490d27",
-              "in"
-            ]
+            {
+              "name": "xBitmap",
+              "type": "XBitmap_b1b70b7b",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.XBitmap"
+            },
+            {
+              "name": "aViewState",
+              "type": "ViewState_cab30c62",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.ViewState"
+            },
+            {
+              "name": "aRenderState",
+              "type": "RenderState_e4490d27",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.RenderState"
+            }
           ]
         },
         {
           "name": "drawLine",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Draw a line in device resolution width (i.e.",
             "",
@@ -339,31 +358,36 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aStartPoint",
-              "RealPoint2D_d6e70c78",
-              "in"
-            ],
-            [
-              "aEndPoint",
-              "RealPoint2D_d6e70c78",
-              "in"
-            ],
-            [
-              "aViewState",
-              "ViewState_cab30c62",
-              "in"
-            ],
-            [
-              "aRenderState",
-              "RenderState_e4490d27",
-              "in"
-            ]
+            {
+              "name": "aStartPoint",
+              "type": "RealPoint2D_d6e70c78",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.RealPoint2D"
+            },
+            {
+              "name": "aEndPoint",
+              "type": "RealPoint2D_d6e70c78",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.RealPoint2D"
+            },
+            {
+              "name": "aViewState",
+              "type": "ViewState_cab30c62",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.ViewState"
+            },
+            {
+              "name": "aRenderState",
+              "type": "RenderState_e4490d27",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.RenderState"
+            }
           ]
         },
         {
           "name": "drawPoint",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Draw a point in device resolution on the device."
           ],
@@ -371,26 +395,30 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aPoint",
-              "RealPoint2D_d6e70c78",
-              "in"
-            ],
-            [
-              "aViewState",
-              "ViewState_cab30c62",
-              "in"
-            ],
-            [
-              "aRenderState",
-              "RenderState_e4490d27",
-              "in"
-            ]
+            {
+              "name": "aPoint",
+              "type": "RealPoint2D_d6e70c78",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.RealPoint2D"
+            },
+            {
+              "name": "aViewState",
+              "type": "ViewState_cab30c62",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.ViewState"
+            },
+            {
+              "name": "aRenderState",
+              "type": "RenderState_e4490d27",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.RenderState"
+            }
           ]
         },
         {
           "name": "drawPolyPolygon",
           "returns": "XCachedPrimitive_29890f0f",
+          "returns_origin": "com.sun.star.rendering.XCachedPrimitive",
           "desc": [
             "Draw a poly-polygon in device resolution line width (i.e.",
             "",
@@ -400,26 +428,30 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "xPolyPolygon",
-              "XPolyPolygon2D_e1b0e20",
-              "in"
-            ],
-            [
-              "aViewState",
-              "ViewState_cab30c62",
-              "in"
-            ],
-            [
-              "aRenderState",
-              "RenderState_e4490d27",
-              "in"
-            ]
+            {
+              "name": "xPolyPolygon",
+              "type": "XPolyPolygon2D_e1b0e20",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.XPolyPolygon2D"
+            },
+            {
+              "name": "aViewState",
+              "type": "ViewState_cab30c62",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.ViewState"
+            },
+            {
+              "name": "aRenderState",
+              "type": "RenderState_e4490d27",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.RenderState"
+            }
           ]
         },
         {
           "name": "drawText",
           "returns": "XCachedPrimitive_29890f0f",
+          "returns_origin": "com.sun.star.rendering.XCachedPrimitive",
           "desc": [
             "Draw the text given by the substring of the specified string with the given font.",
             "",
@@ -429,36 +461,42 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aText",
-              "StringContext_d50e22",
-              "in"
-            ],
-            [
-              "xFont",
-              "XCanvasFont_e3380d11",
-              "in"
-            ],
-            [
-              "aViewState",
-              "ViewState_cab30c62",
-              "in"
-            ],
-            [
-              "aRenderState",
-              "RenderState_e4490d27",
-              "in"
-            ],
-            [
-              "nTextDirection",
-              "int",
-              "in"
-            ]
+            {
+              "name": "aText",
+              "type": "StringContext_d50e22",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.StringContext"
+            },
+            {
+              "name": "xFont",
+              "type": "XCanvasFont_e3380d11",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.XCanvasFont"
+            },
+            {
+              "name": "aViewState",
+              "type": "ViewState_cab30c62",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.ViewState"
+            },
+            {
+              "name": "aRenderState",
+              "type": "RenderState_e4490d27",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.RenderState"
+            },
+            {
+              "name": "nTextDirection",
+              "type": "int",
+              "direction": "in",
+              "origin": "byte"
+            }
           ]
         },
         {
           "name": "drawTextLayout",
           "returns": "XCachedPrimitive_29890f0f",
+          "returns_origin": "com.sun.star.rendering.XCachedPrimitive",
           "desc": [
             "Draw the formatted text given by the text layout.",
             "",
@@ -468,26 +506,30 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "xLayoutetText",
-              "XTextLayout_e44a0d41",
-              "in"
-            ],
-            [
-              "aViewState",
-              "ViewState_cab30c62",
-              "in"
-            ],
-            [
-              "aRenderState",
-              "RenderState_e4490d27",
-              "in"
-            ]
+            {
+              "name": "xLayoutetText",
+              "type": "XTextLayout_e44a0d41",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.XTextLayout"
+            },
+            {
+              "name": "aViewState",
+              "type": "ViewState_cab30c62",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.ViewState"
+            },
+            {
+              "name": "aRenderState",
+              "type": "RenderState_e4490d27",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.RenderState"
+            }
           ]
         },
         {
           "name": "fillPolyPolygon",
           "returns": "XCachedPrimitive_29890f0f",
+          "returns_origin": "com.sun.star.rendering.XCachedPrimitive",
           "desc": [
             "Fill the given poly-polygon.",
             "",
@@ -497,26 +539,30 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "xPolyPolygon",
-              "XPolyPolygon2D_e1b0e20",
-              "in"
-            ],
-            [
-              "aViewState",
-              "ViewState_cab30c62",
-              "in"
-            ],
-            [
-              "aRenderState",
-              "RenderState_e4490d27",
-              "in"
-            ]
+            {
+              "name": "xPolyPolygon",
+              "type": "XPolyPolygon2D_e1b0e20",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.XPolyPolygon2D"
+            },
+            {
+              "name": "aViewState",
+              "type": "ViewState_cab30c62",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.ViewState"
+            },
+            {
+              "name": "aRenderState",
+              "type": "RenderState_e4490d27",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.RenderState"
+            }
           ]
         },
         {
           "name": "fillTextureMappedPolyPolygon",
           "returns": "XCachedPrimitive_29890f0f",
+          "returns_origin": "com.sun.star.rendering.XCachedPrimitive",
           "desc": [
             "Fill the given poly-polygon with a mapped texture.",
             "",
@@ -527,36 +573,42 @@
             "VolatileContentDestroyedException"
           ],
           "args": [
-            [
-              "xPolyPolygon",
-              "XPolyPolygon2D_e1b0e20",
-              "in"
-            ],
-            [
-              "aViewState",
-              "ViewState_cab30c62",
-              "in"
-            ],
-            [
-              "aRenderState",
-              "RenderState_e4490d27",
-              "in"
-            ],
-            [
-              "xTextures",
-              "typing.Tuple[Texture_b2e70bb7, ...]",
-              "in"
-            ],
-            [
-              "xMapping",
-              "XMapping2D_ca1e0c0e",
-              "in"
-            ]
+            {
+              "name": "xPolyPolygon",
+              "type": "XPolyPolygon2D_e1b0e20",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.XPolyPolygon2D"
+            },
+            {
+              "name": "aViewState",
+              "type": "ViewState_cab30c62",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.ViewState"
+            },
+            {
+              "name": "aRenderState",
+              "type": "RenderState_e4490d27",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.RenderState"
+            },
+            {
+              "name": "xTextures",
+              "type": "typing.Tuple[Texture_b2e70bb7, ...]",
+              "direction": "in",
+              "origin": "sequence< Texture >"
+            },
+            {
+              "name": "xMapping",
+              "type": "XMapping2D_ca1e0c0e",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.XMapping2D"
+            }
           ]
         },
         {
           "name": "fillTexturedPolyPolygon",
           "returns": "XCachedPrimitive_29890f0f",
+          "returns_origin": "com.sun.star.rendering.XCachedPrimitive",
           "desc": [
             "Fill the given poly-polygon with a texture.",
             "",
@@ -567,31 +619,36 @@
             "VolatileContentDestroyedException"
           ],
           "args": [
-            [
-              "xPolyPolygon",
-              "XPolyPolygon2D_e1b0e20",
-              "in"
-            ],
-            [
-              "aViewState",
-              "ViewState_cab30c62",
-              "in"
-            ],
-            [
-              "aRenderState",
-              "RenderState_e4490d27",
-              "in"
-            ],
-            [
-              "xTextures",
-              "typing.Tuple[Texture_b2e70bb7, ...]",
-              "in"
-            ]
+            {
+              "name": "xPolyPolygon",
+              "type": "XPolyPolygon2D_e1b0e20",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.XPolyPolygon2D"
+            },
+            {
+              "name": "aViewState",
+              "type": "ViewState_cab30c62",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.ViewState"
+            },
+            {
+              "name": "aRenderState",
+              "type": "RenderState_e4490d27",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.RenderState"
+            },
+            {
+              "name": "xTextures",
+              "type": "typing.Tuple[Texture_b2e70bb7, ...]",
+              "direction": "in",
+              "origin": "sequence< Texture >"
+            }
           ]
         },
         {
           "name": "getDevice",
           "returns": "XGraphicDevice_ca80e2c",
+          "returns_origin": "com.sun.star.rendering.XGraphicDevice",
           "desc": [
             "Request the associated graphic device for this canvas.",
             "",
@@ -603,6 +660,7 @@
         {
           "name": "queryAvailableFonts",
           "returns": "typing.Tuple[FontInfo_bded0be9, ...]",
+          "returns_origin": "sequence< FontInfo >",
           "desc": [
             "Query font information, specific to this canvas."
           ],
@@ -610,21 +668,24 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aFilter",
-              "FontInfo_bded0be9",
-              "in"
-            ],
-            [
-              "aFontProperties",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ]
+            {
+              "name": "aFilter",
+              "type": "FontInfo_bded0be9",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.FontInfo"
+            },
+            {
+              "name": "aFontProperties",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< .com.sun.star.beans.PropertyValue >"
+            }
           ]
         },
         {
           "name": "queryStrokeShapes",
           "returns": "XPolyPolygon2D_e1b0e20",
+          "returns_origin": "com.sun.star.rendering.XPolyPolygon2D",
           "desc": [
             "Query the polygonal representation of the stroke outlines, as it would be generated by the strokePolyPolygon methods.",
             "",
@@ -634,31 +695,36 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "xPolyPolygon",
-              "XPolyPolygon2D_e1b0e20",
-              "in"
-            ],
-            [
-              "aViewState",
-              "ViewState_cab30c62",
-              "in"
-            ],
-            [
-              "aRenderState",
-              "RenderState_e4490d27",
-              "in"
-            ],
-            [
-              "aStrokeAttributes",
-              "StrokeAttributes_2dd10f65",
-              "in"
-            ]
+            {
+              "name": "xPolyPolygon",
+              "type": "XPolyPolygon2D_e1b0e20",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.XPolyPolygon2D"
+            },
+            {
+              "name": "aViewState",
+              "type": "ViewState_cab30c62",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.ViewState"
+            },
+            {
+              "name": "aRenderState",
+              "type": "RenderState_e4490d27",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.RenderState"
+            },
+            {
+              "name": "aStrokeAttributes",
+              "type": "StrokeAttributes_2dd10f65",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.StrokeAttributes"
+            }
           ]
         },
         {
           "name": "strokePolyPolygon",
           "returns": "XCachedPrimitive_29890f0f",
+          "returns_origin": "com.sun.star.rendering.XCachedPrimitive",
           "desc": [
             "Stroke each polygon of the provided poly-polygon with the specified stroke attributes.",
             "",
@@ -668,31 +734,36 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "xPolyPolygon",
-              "XPolyPolygon2D_e1b0e20",
-              "in"
-            ],
-            [
-              "aViewState",
-              "ViewState_cab30c62",
-              "in"
-            ],
-            [
-              "aRenderState",
-              "RenderState_e4490d27",
-              "in"
-            ],
-            [
-              "aStrokeAttributes",
-              "StrokeAttributes_2dd10f65",
-              "in"
-            ]
+            {
+              "name": "xPolyPolygon",
+              "type": "XPolyPolygon2D_e1b0e20",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.XPolyPolygon2D"
+            },
+            {
+              "name": "aViewState",
+              "type": "ViewState_cab30c62",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.ViewState"
+            },
+            {
+              "name": "aRenderState",
+              "type": "RenderState_e4490d27",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.RenderState"
+            },
+            {
+              "name": "aStrokeAttributes",
+              "type": "StrokeAttributes_2dd10f65",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.StrokeAttributes"
+            }
           ]
         },
         {
           "name": "strokeTextureMappedPolyPolygon",
           "returns": "XCachedPrimitive_29890f0f",
+          "returns_origin": "com.sun.star.rendering.XCachedPrimitive",
           "desc": [
             "Stroke each polygon of the provided poly-polygon with the specified stroke attributes, fill the stroked outline with the specified texture graphics, map the texture to the outline via the specified texture mapping.",
             "",
@@ -703,41 +774,48 @@
             "VolatileContentDestroyedException"
           ],
           "args": [
-            [
-              "xPolyPolygon",
-              "XPolyPolygon2D_e1b0e20",
-              "in"
-            ],
-            [
-              "aViewState",
-              "ViewState_cab30c62",
-              "in"
-            ],
-            [
-              "aRenderState",
-              "RenderState_e4490d27",
-              "in"
-            ],
-            [
-              "aTextures",
-              "typing.Tuple[Texture_b2e70bb7, ...]",
-              "in"
-            ],
-            [
-              "xMapping",
-              "XMapping2D_ca1e0c0e",
-              "in"
-            ],
-            [
-              "aStrokeAttributes",
-              "StrokeAttributes_2dd10f65",
-              "in"
-            ]
+            {
+              "name": "xPolyPolygon",
+              "type": "XPolyPolygon2D_e1b0e20",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.XPolyPolygon2D"
+            },
+            {
+              "name": "aViewState",
+              "type": "ViewState_cab30c62",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.ViewState"
+            },
+            {
+              "name": "aRenderState",
+              "type": "RenderState_e4490d27",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.RenderState"
+            },
+            {
+              "name": "aTextures",
+              "type": "typing.Tuple[Texture_b2e70bb7, ...]",
+              "direction": "in",
+              "origin": "sequence< Texture >"
+            },
+            {
+              "name": "xMapping",
+              "type": "XMapping2D_ca1e0c0e",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.XMapping2D"
+            },
+            {
+              "name": "aStrokeAttributes",
+              "type": "StrokeAttributes_2dd10f65",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.StrokeAttributes"
+            }
           ]
         },
         {
           "name": "strokeTexturedPolyPolygon",
           "returns": "XCachedPrimitive_29890f0f",
+          "returns_origin": "com.sun.star.rendering.XCachedPrimitive",
           "desc": [
             "Stroke each polygon of the provided poly-polygon with the specified stroke attributes, fill the stroked outline with the specified texture graphics.",
             "",
@@ -748,31 +826,36 @@
             "VolatileContentDestroyedException"
           ],
           "args": [
-            [
-              "xPolyPolygon",
-              "XPolyPolygon2D_e1b0e20",
-              "in"
-            ],
-            [
-              "aViewState",
-              "ViewState_cab30c62",
-              "in"
-            ],
-            [
-              "aRenderState",
-              "RenderState_e4490d27",
-              "in"
-            ],
-            [
-              "aTextures",
-              "typing.Tuple[Texture_b2e70bb7, ...]",
-              "in"
-            ],
-            [
-              "aStrokeAttributes",
-              "StrokeAttributes_2dd10f65",
-              "in"
-            ]
+            {
+              "name": "xPolyPolygon",
+              "type": "XPolyPolygon2D_e1b0e20",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.XPolyPolygon2D"
+            },
+            {
+              "name": "aViewState",
+              "type": "ViewState_cab30c62",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.ViewState"
+            },
+            {
+              "name": "aRenderState",
+              "type": "RenderState_e4490d27",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.RenderState"
+            },
+            {
+              "name": "aTextures",
+              "type": "typing.Tuple[Texture_b2e70bb7, ...]",
+              "direction": "in",
+              "origin": "sequence< Texture >"
+            },
+            {
+              "name": "aStrokeAttributes",
+              "type": "StrokeAttributes_2dd10f65",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.StrokeAttributes"
+            }
           ]
         }
       ]

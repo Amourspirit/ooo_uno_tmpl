@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XObjectNames",
   "type": "interface",
@@ -51,6 +51,7 @@
         {
           "name": "checkNameForCreate",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "checks whether a given name is allowed for a to-be-created table or query in the database.",
             "",
@@ -60,21 +61,24 @@
             "com.sun.star.sdbc.SQLException"
           ],
           "args": [
-            [
-              "CommandType",
-              "int",
-              "in"
-            ],
-            [
-              "Name",
-              "str",
-              "in"
-            ]
+            {
+              "name": "CommandType",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "Name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "convertToSQLName",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "converts the given object name to a name which is valid in the database.",
             "",
@@ -82,16 +86,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Name",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "isNameUsed",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "checks whether a given name is used as table respectively query name in the database.",
             "",
@@ -104,21 +110,24 @@
             "com.sun.star.sdbc.SQLException"
           ],
           "args": [
-            [
-              "CommandType",
-              "int",
-              "in"
-            ],
-            [
-              "Name",
-              "str",
-              "in"
-            ]
+            {
+              "name": "CommandType",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "Name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "isNameValid",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "checks whether a given name is valid as table or query name",
             "",
@@ -130,21 +139,24 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "CommandType",
-              "int",
-              "in"
-            ],
-            [
-              "Name",
-              "str",
-              "in"
-            ]
+            {
+              "name": "CommandType",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "Name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "suggestName",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "suggests a (unique) table or query name",
             "",
@@ -159,16 +171,18 @@
             "com.sun.star.sdbc.SQLException"
           ],
           "args": [
-            [
-              "CommandType",
-              "int",
-              "in"
-            ],
-            [
-              "BaseName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "CommandType",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "BaseName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

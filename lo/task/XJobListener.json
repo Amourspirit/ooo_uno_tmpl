@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XJobListener",
   "type": "interface",
@@ -60,21 +60,24 @@
         {
           "name": "jobFinished",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "indicates that the job is done"
           ],
           "raises": [],
           "args": [
-            [
-              "Job",
-              "XAsyncJob_8eb50a2c",
-              "in"
-            ],
-            [
-              "Result",
-              "object",
-              "in"
-            ]
+            {
+              "name": "Job",
+              "type": "XAsyncJob_8eb50a2c",
+              "direction": "in",
+              "origin": "com.sun.star.task.XAsyncJob"
+            },
+            {
+              "name": "Result",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XObjectInspectorUI",
   "type": "interface",
@@ -63,6 +63,7 @@
         {
           "name": "enablePropertyUI",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "enables or disables all components belonging to the UI representation of a property",
             "",
@@ -70,21 +71,24 @@
           ],
           "raises": [],
           "args": [
-            [
-              "PropertyName",
-              "str",
-              "in"
-            ],
-            [
-              "Enable",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "PropertyName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Enable",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "enablePropertyUIElements",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "enables or disables the single elements which can be part of the UI representation of a property",
             "",
@@ -92,56 +96,64 @@
           ],
           "raises": [],
           "args": [
-            [
-              "PropertyName",
-              "str",
-              "in"
-            ],
-            [
-              "Elements",
-              "int",
-              "in"
-            ],
-            [
-              "Enable",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "PropertyName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Elements",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "Enable",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "getPropertyControl",
           "returns": "XPropertyControl_3f260fe2",
+          "returns_origin": "com.sun.star.inspection.XPropertyControl",
           "desc": [
             "retrieves the control currently used to display a given property"
           ],
           "raises": [],
           "args": [
-            [
-              "PropertyName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "PropertyName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "hidePropertyUI",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "hides the UI for a given property"
           ],
           "raises": [],
           "args": [
-            [
-              "PropertyName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "PropertyName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "rebuildPropertyUI",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "completely rebuilds the UI for the given property.",
             "",
@@ -153,16 +165,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "PropertyName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "PropertyName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "registerControlObserver",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "registers an observer for all property controls",
             "",
@@ -174,16 +188,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Observer",
-              "XPropertyControlObserver_cc6d132a",
-              "in"
-            ]
+            {
+              "name": "Observer",
+              "type": "XPropertyControlObserver_cc6d132a",
+              "direction": "in",
+              "origin": "com.sun.star.inspection.XPropertyControlObserver"
+            }
           ]
         },
         {
           "name": "revokeControlObserver",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "revokes a previously registered control observer",
             "",
@@ -193,16 +209,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Observer",
-              "XPropertyControlObserver_cc6d132a",
-              "in"
-            ]
+            {
+              "name": "Observer",
+              "type": "XPropertyControlObserver_cc6d132a",
+              "direction": "in",
+              "origin": "com.sun.star.inspection.XPropertyControlObserver"
+            }
           ]
         },
         {
           "name": "setHelpSectionText",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the text of the help section, if the object inspector contains one.",
             "",
@@ -214,46 +232,52 @@
             "com.sun.star.lang.NoSupportException"
           ],
           "args": [
-            [
-              "HelpText",
-              "str",
-              "in"
-            ]
+            {
+              "name": "HelpText",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "showCategory",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "shows or hides all properties belonging to a given category"
           ],
           "raises": [],
           "args": [
-            [
-              "Category",
-              "str",
-              "in"
-            ],
-            [
-              "Show",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "Category",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Show",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "showPropertyUI",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "shows the UI for a given property"
           ],
           "raises": [],
           "args": [
-            [
-              "PropertyName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "PropertyName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

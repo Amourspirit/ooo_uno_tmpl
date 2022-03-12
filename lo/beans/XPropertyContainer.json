@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XPropertyContainer",
   "type": "interface",
@@ -52,6 +52,7 @@
         {
           "name": "addProperty",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "adds a property to the object."
           ],
@@ -61,26 +62,30 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "Name",
-              "str",
-              "in"
-            ],
-            [
-              "Attributes",
-              "int",
-              "in"
-            ],
-            [
-              "DefaultValue",
-              "object",
-              "in"
-            ]
+            {
+              "name": "Name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Attributes",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "DefaultValue",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         },
         {
           "name": "removeProperty",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes a property from the object."
           ],
@@ -89,11 +94,12 @@
             "com.sun.star.beans.NotRemoveableException"
           ],
           "args": [
-            [
-              "Name",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

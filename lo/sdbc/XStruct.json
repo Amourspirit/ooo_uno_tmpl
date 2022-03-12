@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XStruct",
   "type": "interface",
@@ -65,6 +65,7 @@
         {
           "name": "getAttributes",
           "returns": "typing.Tuple[object, ...]",
+          "returns_origin": "sequence< any >",
           "desc": [
             "produces the ordered values of the attributes of the SQL structured type that this Struct object represents.",
             "",
@@ -74,16 +75,18 @@
             "SQLException"
           ],
           "args": [
-            [
-              "typeMap",
-              "XNameAccess_e2ab0cf6",
-              "in"
-            ]
+            {
+              "name": "typeMap",
+              "type": "XNameAccess_e2ab0cf6",
+              "direction": "in",
+              "origin": "com.sun.star.container.XNameAccess"
+            }
           ]
         },
         {
           "name": "getSQLTypeName",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "retrieves the SQL type name of the SQL structured type that this Struct object represents."
           ],

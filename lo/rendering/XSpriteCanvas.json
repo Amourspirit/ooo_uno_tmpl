@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSpriteCanvas",
   "type": "interface",
@@ -97,6 +97,7 @@
         {
           "name": "createClonedSprite",
           "returns": "XSprite_b2470b95",
+          "returns_origin": "com.sun.star.rendering.XSprite",
           "desc": [
             "Create a cloned version of an already existing sprite object.",
             "",
@@ -106,16 +107,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "original",
-              "XSprite_b2470b95",
-              "in"
-            ]
+            {
+              "name": "original",
+              "type": "XSprite_b2470b95",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.XSprite"
+            }
           ]
         },
         {
           "name": "createCustomSprite",
           "returns": "XCustomSprite_3a0e10",
+          "returns_origin": "com.sun.star.rendering.XCustomSprite",
           "desc": [
             "Create a custom, user-handles-it-all sprite object.",
             "",
@@ -125,16 +128,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "spriteSize",
-              "RealSize2D_ca1a0c09",
-              "in"
-            ]
+            {
+              "name": "spriteSize",
+              "type": "RealSize2D_ca1a0c09",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.RealSize2D"
+            }
           ]
         },
         {
           "name": "createSpriteFromAnimation",
           "returns": "XAnimatedSprite_1bc70eb8",
+          "returns_origin": "com.sun.star.rendering.XAnimatedSprite",
           "desc": [
             "Create a sprite object from the specified animation sequence.",
             "",
@@ -144,16 +149,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "animation",
-              "XAnimation_d6910cbe",
-              "in"
-            ]
+            {
+              "name": "animation",
+              "type": "XAnimation_d6910cbe",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.XAnimation"
+            }
           ]
         },
         {
           "name": "createSpriteFromBitmaps",
           "returns": "XAnimatedSprite_1bc70eb8",
+          "returns_origin": "com.sun.star.rendering.XAnimatedSprite",
           "desc": [
             "Create a sprite object from the specified animation sequence.",
             "",
@@ -164,21 +171,24 @@
             "VolatileContentDestroyedException"
           ],
           "args": [
-            [
-              "animationBitmaps",
-              "typing.Tuple[XBitmap_b1b70b7b, ...]",
-              "in"
-            ],
-            [
-              "interpolationMode",
-              "int",
-              "in"
-            ]
+            {
+              "name": "animationBitmaps",
+              "type": "typing.Tuple[XBitmap_b1b70b7b, ...]",
+              "direction": "in",
+              "origin": "sequence< XBitmap >"
+            },
+            {
+              "name": "interpolationMode",
+              "type": "int",
+              "direction": "in",
+              "origin": "byte"
+            }
           ]
         },
         {
           "name": "updateScreen",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Tells the sprite canvas to now update the screen representation.",
             "",
@@ -188,11 +198,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "bUpdateAll",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "bUpdateAll",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         }
       ]

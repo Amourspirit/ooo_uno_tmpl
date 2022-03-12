@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XUrlContainer",
   "type": "interface",
@@ -60,66 +60,75 @@
         {
           "name": "addUrl",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Add a URL to the container."
           ],
           "raises": [],
           "args": [
-            [
-              "Url",
-              "str",
-              "in"
-            ],
-            [
-              "MakePersistent",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "Url",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "MakePersistent",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "findUrl",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Lookup a URL in the container."
           ],
           "raises": [],
           "args": [
-            [
-              "Url",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Url",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getUrls",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [
             "Get all URLs."
           ],
           "raises": [],
           "args": [
-            [
-              "OnlyPersistent",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "OnlyPersistent",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "removeUrl",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Remove a URL from the container."
           ],
           "raises": [],
           "args": [
-            [
-              "Url",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Url",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

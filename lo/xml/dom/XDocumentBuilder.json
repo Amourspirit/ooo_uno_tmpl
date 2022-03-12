@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDocumentBuilder",
   "type": "interface",
@@ -88,6 +88,7 @@
         {
           "name": "getDOMImplementation",
           "returns": "XDOMImplementation_22320ec5",
+          "returns_origin": "com.sun.star.xml.dom.XDOMImplementation",
           "desc": [
             "Obtain an instance of a DOMImplementation object."
           ],
@@ -97,6 +98,7 @@
         {
           "name": "isNamespaceAware",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Indicates whether or not this parser is configured to understand namespaces."
           ],
@@ -106,6 +108,7 @@
         {
           "name": "isValidating",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Indicates whether or not this parser is configured to validate XML documents."
           ],
@@ -115,6 +118,7 @@
         {
           "name": "newDocument",
           "returns": "XDocument_aebc0b5e",
+          "returns_origin": "com.sun.star.xml.dom.XDocument",
           "desc": [
             "Obtain a new instance of a DOM Document object to build a DOM tree with."
           ],
@@ -124,6 +128,7 @@
         {
           "name": "parse",
           "returns": "XDocument_aebc0b5e",
+          "returns_origin": "com.sun.star.xml.dom.XDocument",
           "desc": [
             "Parse the content of the given InputStream as an XML document and return a new DOM Document object."
           ],
@@ -132,16 +137,18 @@
             "com.sun.star.io.IOException"
           ],
           "args": [
-            [
-              "is",
-              "XInputStream_98d40ab4",
-              "in"
-            ]
+            {
+              "name": "is",
+              "type": "XInputStream_98d40ab4",
+              "direction": "in",
+              "origin": "com.sun.star.io.XInputStream"
+            }
           ]
         },
         {
           "name": "parseURI",
           "returns": "XDocument_aebc0b5e",
+          "returns_origin": "com.sun.star.xml.dom.XDocument",
           "desc": [
             "Parse the content of the given URI as an XML document and return a new DOM Document object."
           ],
@@ -150,41 +157,46 @@
             "com.sun.star.io.IOException"
           ],
           "args": [
-            [
-              "uri",
-              "str",
-              "in"
-            ]
+            {
+              "name": "uri",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "setEntityResolver",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Specify the EntityResolver to be used to resolve entities present in the XML document to be parsed."
           ],
           "raises": [],
           "args": [
-            [
-              "er",
-              "XEntityResolver_fcf10dfa",
-              "in"
-            ]
+            {
+              "name": "er",
+              "type": "XEntityResolver_fcf10dfa",
+              "direction": "in",
+              "origin": "com.sun.star.xml.sax.XEntityResolver"
+            }
           ]
         },
         {
           "name": "setErrorHandler",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Specify the ErrorHandler to be used to report errors present in the XML document to be parsed."
           ],
           "raises": [],
           "args": [
-            [
-              "eh",
-              "XErrorHandler_e0860cf3",
-              "in"
-            ]
+            {
+              "name": "eh",
+              "type": "XErrorHandler_e0860cf3",
+              "direction": "in",
+              "origin": "com.sun.star.xml.sax.XErrorHandler"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XLibraryContainerExport",
   "type": "interface",
@@ -60,6 +60,7 @@
         {
           "name": "exportLibrary",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Exports a library specified by Name to the location specified by the passed URL string.",
             "",
@@ -72,21 +73,24 @@
             "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
-            [
-              "Name",
-              "str",
-              "in"
-            ],
-            [
-              "URL",
-              "str",
-              "in"
-            ],
-            [
-              "Handler",
-              "XInteractionHandler_bf80e51",
-              "in"
-            ]
+            {
+              "name": "Name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "URL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Handler",
+              "type": "XInteractionHandler_bf80e51",
+              "direction": "in",
+              "origin": "com.sun.star.task.XInteractionHandler"
+            }
           ]
         }
       ]

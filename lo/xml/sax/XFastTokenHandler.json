@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XFastTokenHandler",
   "type": "interface",
@@ -58,31 +58,35 @@
         {
           "name": "getTokenFromUTF8",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "returns an integer token for the given string"
           ],
           "raises": [],
           "args": [
-            [
-              "Identifier",
-              "typing.Tuple[int, ...]",
-              "in"
-            ]
+            {
+              "name": "Identifier",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "in",
+              "origin": "sequence< byte >"
+            }
           ]
         },
         {
           "name": "getUTF8Identifier",
           "returns": "typing.Tuple[int, ...]",
+          "returns_origin": "sequence< byte >",
           "desc": [
             "returns an identifier for the given integer token as a byte sequence encoded in UTF-8."
           ],
           "raises": [],
           "args": [
-            [
-              "Token",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Token",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSimpleRegistry",
   "type": "interface",
@@ -62,6 +62,7 @@
         {
           "name": "close",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "disconnects the registry from the data-source."
           ],
@@ -73,6 +74,7 @@
         {
           "name": "destroy",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "destroys the registry and the data source."
           ],
@@ -84,6 +86,7 @@
         {
           "name": "getRootKey",
           "returns": "XRegistryKey_e61a0d5b",
+          "returns_origin": "com.sun.star.registry.XRegistryKey",
           "desc": [],
           "raises": [
             "com.sun.star.registry.InvalidRegistryException"
@@ -93,6 +96,7 @@
         {
           "name": "getURL",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the URL of the current data source of the registry."
           ],
@@ -102,6 +106,7 @@
         {
           "name": "isReadOnly",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "checks if the registry is readonly."
           ],
@@ -113,6 +118,7 @@
         {
           "name": "isValid",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "checks if the registry points to a valid data-source."
           ],
@@ -122,6 +128,7 @@
         {
           "name": "mergeKey",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "DEPRECATED: this method lacks a registry key (better than a URL).",
             "",
@@ -134,21 +141,24 @@
             "com.sun.star.registry.MergeConflictException"
           ],
           "args": [
-            [
-              "aKeyName",
-              "str",
-              "in"
-            ],
-            [
-              "aUrl",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aKeyName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aUrl",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "open",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "connects the registry to a persistent data source represented by a URL.",
             "",
@@ -158,21 +168,24 @@
             "com.sun.star.registry.InvalidRegistryException"
           ],
           "args": [
-            [
-              "rURL",
-              "str",
-              "in"
-            ],
-            [
-              "bReadOnly",
-              "bool",
-              "in"
-            ],
-            [
-              "bCreate",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "rURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "bReadOnly",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            },
+            {
+              "name": "bCreate",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         }
       ]

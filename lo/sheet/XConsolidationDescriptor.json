@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XConsolidationDescriptor",
   "type": "interface",
@@ -80,6 +80,7 @@
         {
           "name": "getFunction",
           "returns": "GeneralFunction_e2280d25",
+          "returns_origin": "com.sun.star.sheet.GeneralFunction",
           "desc": [
             "returns the function by which the ranges are consolidated."
           ],
@@ -89,6 +90,7 @@
         {
           "name": "getInsertLinks",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "returns, whether links to the original data are inserted in the output area or not."
           ],
@@ -98,6 +100,7 @@
         {
           "name": "getSources",
           "returns": "typing.Tuple[CellRangeAddress_ec450d43, ...]",
+          "returns_origin": "sequence< com.sun.star.table.CellRangeAddress >",
           "desc": [
             "returns the cell ranges which are consolidated."
           ],
@@ -107,6 +110,7 @@
         {
           "name": "getStartOutputPosition",
           "returns": "CellAddress_ae5f0b56",
+          "returns_origin": "com.sun.star.table.CellAddress",
           "desc": [
             "returns the position of the top left cell of the cell range where the consolidated data are copied."
           ],
@@ -116,6 +120,7 @@
         {
           "name": "getUseColumnHeaders",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "returns, whether column headers from the cell ranges are used to find matching data or not."
           ],
@@ -125,6 +130,7 @@
         {
           "name": "getUseRowHeaders",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "returns, whether row headers from the cell ranges are used to find matching data or not."
           ],
@@ -134,91 +140,103 @@
         {
           "name": "setFunction",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the function by which the ranges are consolidated."
           ],
           "raises": [],
           "args": [
-            [
-              "nFunction",
-              "GeneralFunction_e2280d25",
-              "in"
-            ]
+            {
+              "name": "nFunction",
+              "type": "GeneralFunction_e2280d25",
+              "direction": "in",
+              "origin": "com.sun.star.sheet.GeneralFunction"
+            }
           ]
         },
         {
           "name": "setInsertLinks",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "specifies if links to the original data are inserted in the output area."
           ],
           "raises": [],
           "args": [
-            [
-              "bInsertLinks",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "bInsertLinks",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "setSources",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the cell ranges which are consolidated."
           ],
           "raises": [],
           "args": [
-            [
-              "aSources",
-              "typing.Tuple[CellRangeAddress_ec450d43, ...]",
-              "in"
-            ]
+            {
+              "name": "aSources",
+              "type": "typing.Tuple[CellRangeAddress_ec450d43, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.table.CellRangeAddress >"
+            }
           ]
         },
         {
           "name": "setStartOutputPosition",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the position of the top left cell of the cell range where the consolidated data are copied."
           ],
           "raises": [],
           "args": [
-            [
-              "aStartOutputPosition",
-              "CellAddress_ae5f0b56",
-              "in"
-            ]
+            {
+              "name": "aStartOutputPosition",
+              "type": "CellAddress_ae5f0b56",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellAddress"
+            }
           ]
         },
         {
           "name": "setUseColumnHeaders",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "specifies if column headers from the cell ranges are used to find matching data."
           ],
           "raises": [],
           "args": [
-            [
-              "bUseColumnHeaders",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "bUseColumnHeaders",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "setUseRowHeaders",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "specifies if row headers from the cell ranges are used to find matching data."
           ],
           "raises": [],
           "args": [
-            [
-              "bUseRowHeaders",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "bUseRowHeaders",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         }
       ]

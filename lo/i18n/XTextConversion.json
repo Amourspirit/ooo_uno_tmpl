@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XTextConversion",
   "type": "interface",
@@ -71,6 +71,7 @@
         {
           "name": "getConversion",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Method to search dictionaries for the conversion candidate, if there are multiple candidates, it will return first one.",
             "",
@@ -81,41 +82,48 @@
             "com.sun.star.lang.NoSupportException"
           ],
           "args": [
-            [
-              "aText",
-              "str",
-              "in"
-            ],
-            [
-              "nStartPos",
-              "int",
-              "in"
-            ],
-            [
-              "nLength",
-              "int",
-              "in"
-            ],
-            [
-              "Locale",
-              "Locale_70d308fa",
-              "in"
-            ],
-            [
-              "nTextConversionType",
-              "int",
-              "in"
-            ],
-            [
-              "nTextConversionOptions",
-              "int",
-              "in"
-            ]
+            {
+              "name": "aText",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nStartPos",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nLength",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "Locale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "nTextConversionType",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "nTextConversionOptions",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getConversions",
           "returns": "TextConversionResult_12d10e92",
+          "returns_origin": "com.sun.star.i18n.TextConversionResult",
           "desc": [
             "Method to search dictionaries for the conversion candidates."
           ],
@@ -124,41 +132,48 @@
             "com.sun.star.lang.NoSupportException"
           ],
           "args": [
-            [
-              "aText",
-              "str",
-              "in"
-            ],
-            [
-              "nStartPos",
-              "int",
-              "in"
-            ],
-            [
-              "nLength",
-              "int",
-              "in"
-            ],
-            [
-              "Locale",
-              "Locale_70d308fa",
-              "in"
-            ],
-            [
-              "nTextConversionType",
-              "int",
-              "in"
-            ],
-            [
-              "nTextConversionOptions",
-              "int",
-              "in"
-            ]
+            {
+              "name": "aText",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nStartPos",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nLength",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "Locale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "nTextConversionType",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "nTextConversionOptions",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "interactiveConversion",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Method to query if the conversion type should be interactive or non-interactive mode."
           ],
@@ -167,21 +182,24 @@
             "com.sun.star.lang.NoSupportException"
           ],
           "args": [
-            [
-              "Locale",
-              "Locale_70d308fa",
-              "in"
-            ],
-            [
-              "nTextConversionType",
-              "int",
-              "in"
-            ],
-            [
-              "nTextConversionOptions",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Locale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "nTextConversionType",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "nTextConversionOptions",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XPageCursor",
   "type": "interface",
@@ -50,6 +50,7 @@
         {
           "name": "getPage",
           "returns": "int",
+          "returns_origin": "short",
           "desc": [],
           "raises": [],
           "args": []
@@ -57,6 +58,7 @@
         {
           "name": "jumpToEndOfPage",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "moves the cursor to the end of the current page."
           ],
@@ -66,6 +68,7 @@
         {
           "name": "jumpToFirstPage",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "moves the cursor to the first page."
           ],
@@ -75,6 +78,7 @@
         {
           "name": "jumpToLastPage",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "moves the cursor to the last page."
           ],
@@ -84,6 +88,7 @@
         {
           "name": "jumpToNextPage",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "moves the cursor to the next page."
           ],
@@ -93,21 +98,24 @@
         {
           "name": "jumpToPage",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "moves the cursor to the specified page."
           ],
           "raises": [],
           "args": [
-            [
-              "nPage",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nPage",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "jumpToPreviousPage",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "moves the cursor to the previous page."
           ],
@@ -117,6 +125,7 @@
         {
           "name": "jumpToStartOfPage",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "moves the cursor to the start of the current page."
           ],

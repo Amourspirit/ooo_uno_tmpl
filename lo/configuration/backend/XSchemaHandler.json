@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSchemaHandler",
   "type": "interface",
@@ -64,6 +64,7 @@
         {
           "name": "addInstance",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification that the current group has a child node that is an instance of a specified template.",
             "",
@@ -74,21 +75,24 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ],
-            [
-              "aTemplate",
-              "TemplateIdentifier_2aaa14b5",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aTemplate",
+              "type": "TemplateIdentifier_2aaa14b5",
+              "direction": "in",
+              "origin": "com.sun.star.configuration.backend.TemplateIdentifier"
+            }
           ]
         },
         {
           "name": "addItemType",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification that the current set can contain items that are instances of a specified template.",
             "",
@@ -99,16 +103,18 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "aItemType",
-              "TemplateIdentifier_2aaa14b5",
-              "in"
-            ]
+            {
+              "name": "aItemType",
+              "type": "TemplateIdentifier_2aaa14b5",
+              "direction": "in",
+              "origin": "com.sun.star.configuration.backend.TemplateIdentifier"
+            }
           ]
         },
         {
           "name": "addProperty",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification that a property is added to the current node.",
             "",
@@ -123,26 +129,30 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ],
-            [
-              "aAttributes",
-              "int",
-              "in"
-            ],
-            [
-              "aType",
-              "object",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aAttributes",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "aType",
+              "type": "object",
+              "direction": "in",
+              "origin": "type"
+            }
           ]
         },
         {
           "name": "addPropertyWithDefault",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification that a property having a default value is added to the current node.",
             "",
@@ -157,26 +167,30 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ],
-            [
-              "aAttributes",
-              "int",
-              "in"
-            ],
-            [
-              "aDefaultValue",
-              "object",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aAttributes",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "aDefaultValue",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         },
         {
           "name": "endComponent",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification that a component description is complete.",
             "",
@@ -193,6 +207,7 @@
         {
           "name": "endNode",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification that a node description is complete.",
             "",
@@ -209,6 +224,7 @@
         {
           "name": "endSchema",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification that the current schema description is complete.",
             "",
@@ -225,6 +241,7 @@
         {
           "name": "endTemplate",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification that a template description is complete.",
             "",
@@ -241,6 +258,7 @@
         {
           "name": "importComponent",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification that the schema depends on templates from a different component.",
             "",
@@ -251,16 +269,18 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "startComponent",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification that a component description is started.",
             "",
@@ -273,16 +293,18 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "startGroup",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification that a group description is started.",
             "",
@@ -299,21 +321,24 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ],
-            [
-              "aAttributes",
-              "int",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aAttributes",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "startGroupTemplate",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification that a template description is started for a group.",
             "",
@@ -330,21 +355,24 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "aTemplate",
-              "TemplateIdentifier_2aaa14b5",
-              "in"
-            ],
-            [
-              "aAttributes",
-              "int",
-              "in"
-            ]
+            {
+              "name": "aTemplate",
+              "type": "TemplateIdentifier_2aaa14b5",
+              "direction": "in",
+              "origin": "com.sun.star.configuration.backend.TemplateIdentifier"
+            },
+            {
+              "name": "aAttributes",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "startSchema",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification that a schema description is started.",
             "",
@@ -359,6 +387,7 @@
         {
           "name": "startSet",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification that a set description is started.",
             "",
@@ -375,26 +404,30 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ],
-            [
-              "aAttributes",
-              "int",
-              "in"
-            ],
-            [
-              "aItemType",
-              "TemplateIdentifier_2aaa14b5",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aAttributes",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "aItemType",
+              "type": "TemplateIdentifier_2aaa14b5",
+              "direction": "in",
+              "origin": "com.sun.star.configuration.backend.TemplateIdentifier"
+            }
           ]
         },
         {
           "name": "startSetTemplate",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification that a template description is started for a set.",
             "",
@@ -411,21 +444,24 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "aTemplate",
-              "TemplateIdentifier_2aaa14b5",
-              "in"
-            ],
-            [
-              "aAttributes",
-              "int",
-              "in"
-            ],
-            [
-              "aItemType",
-              "TemplateIdentifier_2aaa14b5",
-              "in"
-            ]
+            {
+              "name": "aTemplate",
+              "type": "TemplateIdentifier_2aaa14b5",
+              "direction": "in",
+              "origin": "com.sun.star.configuration.backend.TemplateIdentifier"
+            },
+            {
+              "name": "aAttributes",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "aItemType",
+              "type": "TemplateIdentifier_2aaa14b5",
+              "direction": "in",
+              "origin": "com.sun.star.configuration.backend.TemplateIdentifier"
+            }
           ]
         }
       ]

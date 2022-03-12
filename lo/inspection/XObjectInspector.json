@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XObjectInspector",
   "type": "interface",
@@ -88,6 +88,7 @@
         {
           "name": "inspect",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "inspects a new collection of one or more objects.",
             "",
@@ -99,11 +100,12 @@
             "com.sun.star.util.VetoException"
           ],
           "args": [
-            [
-              "Objects",
-              "typing.Tuple[XInterface_8f010a43, ...]",
-              "in"
-            ]
+            {
+              "name": "Objects",
+              "type": "typing.Tuple[XInterface_8f010a43, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.uno.XInterface >"
+            }
           ]
         }
       ],
@@ -112,6 +114,7 @@
           "name": "InspectorModel",
           "returns": "XObjectInspectorModel_9077119b",
           "origtype": "com.sun.star.inspection.XObjectInspectorModel",
+          "origin": "com.sun.star.inspection.XObjectInspectorModel",
           "desc": [
             "provides access to the current model of the inspector",
             "",
@@ -128,6 +131,7 @@
           "name": "InspectorUI",
           "returns": "XObjectInspectorUI_5ccd1048",
           "origtype": "com.sun.star.inspection.XObjectInspectorUI",
+          "origin": "com.sun.star.inspection.XObjectInspectorUI",
           "desc": [
             "provides access to the user interface of the object inspector.",
             "",

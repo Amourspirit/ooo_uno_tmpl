@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSortedDynamicResultSetFactory",
   "type": "interface",
@@ -76,26 +76,30 @@
         {
           "name": "createSortedDynamicResultSet",
           "returns": "XDynamicResultSet_e0360d0a",
+          "returns_origin": "com.sun.star.ucb.XDynamicResultSet",
           "desc": [
             "creates a sorted XDynamicResultSet depending on internal data, an (unsorted) XDynamicResultSet and the sorting info."
           ],
           "raises": [],
           "args": [
-            [
-              "Source",
-              "XDynamicResultSet_e0360d0a",
-              "in"
-            ],
-            [
-              "Info",
-              "typing.Tuple[NumberedSortingInfo_fd0e0de6, ...]",
-              "in"
-            ],
-            [
-              "CompareFactory",
-              "XAnyCompareFactory_ec090d61",
-              "in"
-            ]
+            {
+              "name": "Source",
+              "type": "XDynamicResultSet_e0360d0a",
+              "direction": "in",
+              "origin": "com.sun.star.ucb.XDynamicResultSet"
+            },
+            {
+              "name": "Info",
+              "type": "typing.Tuple[NumberedSortingInfo_fd0e0de6, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.ucb.NumberedSortingInfo >"
+            },
+            {
+              "name": "CompareFactory",
+              "type": "XAnyCompareFactory_ec090d61",
+              "direction": "in",
+              "origin": "com.sun.star.ucb.XAnyCompareFactory"
+            }
           ]
         }
       ]

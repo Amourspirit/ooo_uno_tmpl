@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XConditionalFormats",
   "type": "interface",
@@ -67,21 +67,24 @@
         {
           "name": "createByRange",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "adds a conditional format to the existing list returns the id of the inserted conditional format"
           ],
           "raises": [],
           "args": [
-            [
-              "range",
-              "XSheetCellRanges_edef0d52",
-              "in"
-            ]
+            {
+              "name": "range",
+              "type": "XSheetCellRanges_edef0d52",
+              "direction": "in",
+              "origin": "com.sun.star.sheet.XSheetCellRanges"
+            }
           ]
         },
         {
           "name": "getConditionalFormats",
           "returns": "typing.Tuple[XConditionalFormat_be90e56, ...]",
+          "returns_origin": "sequence< XConditionalFormat >",
           "desc": [],
           "raises": [],
           "args": []
@@ -89,6 +92,7 @@
         {
           "name": "getLength",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [],
           "raises": [],
           "args": []
@@ -96,14 +100,16 @@
         {
           "name": "removeByID",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "ID",
-              "int",
-              "in"
-            ]
+            {
+              "name": "ID",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

@@ -24,7 +24,7 @@ def fixture_xanimate(fixture_json_path: Path) -> Path:
 def test_open_root(fixture_xinterface):
     from src.model.interface.model_interface import ModelInterface
     from src.model.shared.ooo_type import OooType
-    from src.model.shared.data.methods.method import ArgDirection
+    from src.model.shared.data.methods.method_arg import ArgDirection
     from src.model.shared.data.methods.method import Method
 
     with open(fixture_xinterface, 'r') as f:
@@ -32,13 +32,13 @@ def test_open_root(fixture_xinterface):
     obj = ModelInterface(**f_json)
     assert obj is not None
     assert obj.id == 'uno-ooo-parser'
-    assert obj.version == "0.1.23"
+    assert obj.version == "0.1.24"
     assert obj.libre_office_ver == "7.2"
     assert obj.name == "XInterface"
     assert obj.type == OooType.INTERFACE
     assert obj.type == "interface"
     assert obj.namespace == "com.sun.star.uno"
-    assert obj.parser_args.sort == True
+    assert obj.parser_args.sort == False
     assert obj.parser_args.long_names == True
     assert obj.parser_args.remove_parent_inherited == True
     assert obj.writer_args.include_desc == True
@@ -61,7 +61,7 @@ def test_open_root(fixture_xinterface):
     assert obj.data.items.properties is None
     assert obj.data.items.methods is not None
     assert len(obj.data.items.methods) == 3
-    m: Method = obj.data.items.methods[1]
+    m: Method = obj.data.items.methods[0]
     assert m.name == "queryInterface"
     assert m.returns == "object"
     assert len(m.raises) == 0
@@ -69,6 +69,7 @@ def test_open_root(fixture_xinterface):
     arg = m.args[0]
     assert arg.name == "aType"
     assert arg.type == "object"
+    assert arg.origin == "type"
     assert arg.direction == ArgDirection.IN
     assert arg.direction == 'in'
     assert str(arg.direction) == 'in'
@@ -80,21 +81,21 @@ def test_xstyle_settings(fixture_xstyle_settings):
     from src.model.shared.data.from_import import FromImport
     from src.model.shared.data.methods.method import Method
     from src.model.shared.data.properties.prop import Prop
-    from src.model.shared.data.methods.method import ArgDirection
+    from src.model.shared.data.methods.method_arg import ArgDirection
 
     with open(fixture_xstyle_settings, 'r') as f:
         f_json = json.load(f)
     obj = ModelInterface(**f_json)
     assert obj is not None
     assert obj.id == 'uno-ooo-parser'
-    assert obj.version == "0.1.23"
+    assert obj.version == "0.1.24"
     assert obj.libre_office_ver == "7.2"
     assert obj.name == "XStyleSettings"
     assert obj.type == OooType.INTERFACE
     assert obj.type == "interface"
     assert str(obj.type) == "interface"
     assert obj.namespace == "com.sun.star.awt"
-    assert obj.parser_args.sort == True
+    assert obj.parser_args.sort == False
     assert obj.parser_args.long_names == True
     assert obj.parser_args.remove_parent_inherited == True
     assert obj.writer_args.include_desc == True
@@ -125,6 +126,8 @@ def test_xstyle_settings(fixture_xstyle_settings):
     p: Prop = obj.data.items.properties[0]
     assert p.name == "ActiveBorderColor"
     assert p.returns == 'Color_68e908c5'
+    assert p.origin == "com.sun.star.util.Color"
+    assert p.origtype == "com.sun.star.util.Color"
     assert p.raises_get == ""
     assert p.raises_set == ""
     assert p.origtype == "com.sun.star.util.Color"
@@ -133,12 +136,14 @@ def test_xstyle_settings(fixture_xstyle_settings):
     m: Method = obj.data.items.methods[0]
     assert m.name == "addStyleChangeListener"
     assert m.returns == "None"
+    assert m.returns_origin == "void"
     assert m.desc[0] == "registers a listener to be notified when the style settings change"
     assert len(m.raises) == 0
     assert len(m.args) == 1
     arg = m.args[0]
     assert arg.name == "Listener"
     assert arg.type == "XStyleChangeListener_ad50e49"
+    assert arg.origin == "com.sun.star.awt.XStyleChangeListener"
     assert arg.direction == ArgDirection.IN
     assert arg.direction == 'in'
     assert str(arg.direction) == 'in'
@@ -156,14 +161,14 @@ def test_x_animate(fixture_xanimate):
     obj = ModelInterface(**f_json)
     assert obj is not None
     assert obj.id == 'uno-ooo-parser'
-    assert obj.version == "0.1.23"
+    assert obj.version == "0.1.24"
     assert obj.libre_office_ver == "7.2"
     assert obj.name == "XAnimate"
     assert obj.type == OooType.INTERFACE
     assert obj.type == "interface"
     assert str(obj.type) == "interface"
     assert obj.namespace == "com.sun.star.animations"
-    assert obj.parser_args.sort == True
+    assert obj.parser_args.sort == False
     assert obj.parser_args.long_names == True
     assert obj.parser_args.remove_parent_inherited == True
     assert obj.writer_args.include_desc == True
@@ -191,16 +196,19 @@ def test_x_animate(fixture_xanimate):
     assert obj.data.desc[0] == "Interface for generic animation."
     assert obj.data.items.properties is not None
     assert obj.data.items.methods is None
-    p: Prop =obj.data.items.properties[0]
+    p: Prop =obj.data.items.properties[5]
     assert p.name == "Accumulate"
     assert p.returns == "bool"
+    assert p.origtype is None
+    assert p.origin == "boolean"
     assert p.raises_get == ""
     assert p.raises_set == ""
     assert p.origtype is None
     assert p.desc[0] == "Controls whether or not the animation is cumulative."
-    t: Tipe = obj.data.items.types[0]
+    t: Tipe = obj.data.items.types[1]
     assert t.name == "KeyTimes"
     assert t.returns == "typing.Tuple[float, ...]"
+    assert t.origin == "sequence< double >"
     assert t.origtype is None
     assert len(t.desc) == 0
     assert t.raises_get == ""

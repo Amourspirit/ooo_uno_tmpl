@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XHierarchicalStorageAccess2",
   "type": "interface",
@@ -69,6 +69,7 @@
         {
           "name": "openEncryptedStreamByHierarchicalName",
           "returns": "XExtendedStorageStream_46750fcf",
+          "returns_origin": "com.sun.star.embed.XExtendedStorageStream",
           "desc": [
             "allows to get access to a child encrypted stream with encryption data using hierarchical path.",
             "",
@@ -86,21 +87,24 @@
             "com.sun.star.embed.StorageWrappedTargetException"
           ],
           "args": [
-            [
-              "sStreamName",
-              "str",
-              "in"
-            ],
-            [
-              "nOpenMode",
-              "int",
-              "in"
-            ],
-            [
-              "aEncryptionData",
-              "typing.Tuple[NamedValue_a37a0af3, ...]",
-              "in"
-            ]
+            {
+              "name": "sStreamName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nOpenMode",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aEncryptionData",
+              "type": "typing.Tuple[NamedValue_a37a0af3, ...]",
+              "direction": "in",
+              "origin": "sequence< .com.sun.star.beans.NamedValue >"
+            }
           ]
         }
       ]

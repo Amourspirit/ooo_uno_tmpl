@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDigestContext",
   "type": "interface",
@@ -60,6 +60,7 @@
         {
           "name": "finalizeDigestAndDispose",
           "returns": "typing.Tuple[int, ...]",
+          "returns_origin": "sequence< byte >",
           "desc": [
             "finalizes digest and disposes context."
           ],
@@ -71,6 +72,7 @@
         {
           "name": "updateDigest",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "update the digest with the given data."
           ],
@@ -78,11 +80,12 @@
             "com.sun.star.lang.DisposedException"
           ],
           "args": [
-            [
-              "aData",
-              "typing.Tuple[int, ...]",
-              "in"
-            ]
+            {
+              "name": "aData",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "in",
+              "origin": "sequence< byte >"
+            }
           ]
         }
       ]

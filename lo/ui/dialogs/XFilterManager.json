@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XFilterManager",
   "type": "interface",
@@ -50,6 +50,7 @@
         {
           "name": "appendFilter",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Adds a filter identified by a title."
           ],
@@ -57,21 +58,24 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aTitle",
-              "str",
-              "in"
-            ],
-            [
-              "aFilter",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aTitle",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aFilter",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getCurrentFilter",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Returns the currently selected filter."
           ],
@@ -81,6 +85,7 @@
         {
           "name": "setCurrentFilter",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Sets the current filter."
           ],
@@ -88,11 +93,12 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aTitle",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aTitle",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

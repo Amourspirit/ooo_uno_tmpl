@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XTolerantMultiPropertySet",
   "type": "interface",
@@ -86,6 +86,7 @@
         {
           "name": "getDirectPropertyValuesTolerant",
           "returns": "typing.Tuple[GetDirectPropertyTolerantResult_e91c13b9, ...]",
+          "returns_origin": "sequence< com.sun.star.beans.GetDirectPropertyTolerantResult >",
           "desc": [
             "retrieve only those values of the specified properties which are direct values.",
             "",
@@ -95,16 +96,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aPropertyNames",
-              "typing.Tuple[str, ...]",
-              "in"
-            ]
+            {
+              "name": "aPropertyNames",
+              "type": "typing.Tuple[str, ...]",
+              "direction": "in",
+              "origin": "sequence< string >"
+            }
           ]
         },
         {
           "name": "getPropertyValuesTolerant",
           "returns": "typing.Tuple[GetPropertyTolerantResult_7c4e115e, ...]",
+          "returns_origin": "sequence< com.sun.star.beans.GetPropertyTolerantResult >",
           "desc": [
             "retrieve the values of the specified properties",
             "",
@@ -114,16 +117,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aPropertyNames",
-              "typing.Tuple[str, ...]",
-              "in"
-            ]
+            {
+              "name": "aPropertyNames",
+              "type": "typing.Tuple[str, ...]",
+              "direction": "in",
+              "origin": "sequence< string >"
+            }
           ]
         },
         {
           "name": "setPropertyValuesTolerant",
           "returns": "typing.Tuple[SetPropertyTolerantFailed_7cbd1130, ...]",
+          "returns_origin": "sequence< com.sun.star.beans.SetPropertyTolerantFailed >",
           "desc": [
             "sets the values to the properties with the specified names.",
             "",
@@ -135,16 +140,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aPropertyNames",
-              "typing.Tuple[str, ...]",
-              "in"
-            ],
-            [
-              "aValues",
-              "typing.Tuple[object, ...]",
-              "in"
-            ]
+            {
+              "name": "aPropertyNames",
+              "type": "typing.Tuple[str, ...]",
+              "direction": "in",
+              "origin": "sequence< string >"
+            },
+            {
+              "name": "aValues",
+              "type": "typing.Tuple[object, ...]",
+              "direction": "in",
+              "origin": "sequence< any >"
+            }
           ]
         }
       ]

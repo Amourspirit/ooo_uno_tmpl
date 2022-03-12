@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XUndoManager",
   "type": "interface",
@@ -94,6 +94,7 @@
         {
           "name": "addUndoAction",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "adds the given undo action to the undo stack.",
             "",
@@ -107,31 +108,35 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "iAction",
-              "XUndoAction_d6580cb3",
-              "in"
-            ]
+            {
+              "name": "iAction",
+              "type": "XUndoAction_d6580cb3",
+              "direction": "in",
+              "origin": "com.sun.star.document.XUndoAction"
+            }
           ]
         },
         {
           "name": "addUndoManagerListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "adds a listener to be notified of changes in the Undo/Redo stacks."
           ],
           "raises": [],
           "args": [
-            [
-              "iListener",
-              "XUndoManagerListener_5a3b1056",
-              "in"
-            ]
+            {
+              "name": "iListener",
+              "type": "XUndoManagerListener_5a3b1056",
+              "direction": "in",
+              "origin": "com.sun.star.document.XUndoManagerListener"
+            }
           ]
         },
         {
           "name": "clear",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "clears the undo and the redo stack.",
             "",
@@ -145,6 +150,7 @@
         {
           "name": "clearRedo",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "clears the redo stack.",
             "",
@@ -158,6 +164,7 @@
         {
           "name": "enterHiddenUndoContext",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "enters a new undo context, creating a hidden undo action.",
             "",
@@ -177,6 +184,7 @@
         {
           "name": "enterUndoContext",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "enters a new undo context.",
             "",
@@ -188,16 +196,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "iTitle",
-              "str",
-              "in"
-            ]
+            {
+              "name": "iTitle",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getAllRedoActionTitles",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [
             "returns the titles of all actions currently on the Redo stack, from top to bottom"
           ],
@@ -207,6 +217,7 @@
         {
           "name": "getAllUndoActionTitles",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [
             "returns the titles of all actions currently on the undo stack, from top to bottom"
           ],
@@ -216,6 +227,7 @@
         {
           "name": "getCurrentRedoActionTitle",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the title of the top-most action on the Redo stack"
           ],
@@ -227,6 +239,7 @@
         {
           "name": "getCurrentUndoActionTitle",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the title of the top-most action on the undo stack"
           ],
@@ -238,6 +251,7 @@
         {
           "name": "isRedoPossible",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "determines whether redo() can reasonably be expected to succeed."
           ],
@@ -247,6 +261,7 @@
         {
           "name": "isUndoPossible",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "determines whether undo() can reasonably be expected to succeed."
           ],
@@ -256,6 +271,7 @@
         {
           "name": "leaveUndoContext",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "leaves the undo context previously opened via enterUndoContext() respectively enterHiddenUndoContext().",
             "",
@@ -271,6 +287,7 @@
         {
           "name": "redo",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "replays the action on the document which has most recently been undone",
             "",
@@ -286,21 +303,24 @@
         {
           "name": "removeUndoManagerListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes a previously added listener"
           ],
           "raises": [],
           "args": [
-            [
-              "iListener",
-              "XUndoManagerListener_5a3b1056",
-              "in"
-            ]
+            {
+              "name": "iListener",
+              "type": "XUndoManagerListener_5a3b1056",
+              "direction": "in",
+              "origin": "com.sun.star.document.XUndoManagerListener"
+            }
           ]
         },
         {
           "name": "reset",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "resets the Undo manager",
             "",
@@ -314,6 +334,7 @@
         {
           "name": "undo",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "reverts the most recent action on the document.",
             "",

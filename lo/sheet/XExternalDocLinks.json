@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XExternalDocLinks",
   "type": "interface",
@@ -80,6 +80,7 @@
         {
           "name": "addDocLink",
           "returns": "XExternalDocLink_ef5c0d60",
+          "returns_origin": "com.sun.star.sheet.XExternalDocLink",
           "desc": [
             "This method adds a new external document link by its URL, and returns its instance.",
             "",
@@ -87,11 +88,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aDocName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aDocName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

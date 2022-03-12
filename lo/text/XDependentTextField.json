@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDependentTextField",
   "type": "interface",
@@ -60,6 +60,7 @@
         {
           "name": "attachTextFieldMaster",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "method must be called to attach the TextFieldMaster to this TextField.",
             "",
@@ -71,16 +72,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "xFieldMaster",
-              "XPropertySet_bc180bfa",
-              "in"
-            ]
+            {
+              "name": "xFieldMaster",
+              "type": "XPropertySet_bc180bfa",
+              "direction": "in",
+              "origin": "com.sun.star.beans.XPropertySet"
+            }
           ]
         },
         {
           "name": "getTextFieldMaster",
           "returns": "XPropertySet_bc180bfa",
+          "returns_origin": "com.sun.star.beans.XPropertySet",
           "desc": [],
           "raises": [],
           "args": []

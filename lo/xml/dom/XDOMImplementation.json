@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDOMImplementation",
   "type": "interface",
@@ -65,6 +65,7 @@
         {
           "name": "createDocument",
           "returns": "XDocument_aebc0b5e",
+          "returns_origin": "com.sun.star.xml.dom.XDocument",
           "desc": [
             "Creates a DOM Document object of the specified type with its document element.",
             "",
@@ -74,26 +75,30 @@
             "DOMException"
           ],
           "args": [
-            [
-              "namespaceURI",
-              "str",
-              "in"
-            ],
-            [
-              "qualifiedName",
-              "str",
-              "in"
-            ],
-            [
-              "doctype",
-              "XDocumentType_e0340d00",
-              "in"
-            ]
+            {
+              "name": "namespaceURI",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "qualifiedName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "doctype",
+              "type": "XDocumentType_e0340d00",
+              "direction": "in",
+              "origin": "com.sun.star.xml.dom.XDocumentType"
+            }
           ]
         },
         {
           "name": "createDocumentType",
           "returns": "XDocumentType_e0340d00",
+          "returns_origin": "com.sun.star.xml.dom.XDocumentType",
           "desc": [
             "Creates an empty DocumentType node.",
             "",
@@ -103,41 +108,47 @@
             "DOMException"
           ],
           "args": [
-            [
-              "qualifiedName",
-              "str",
-              "in"
-            ],
-            [
-              "publicId",
-              "str",
-              "in"
-            ],
-            [
-              "systemId",
-              "str",
-              "in"
-            ]
+            {
+              "name": "qualifiedName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "publicId",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "systemId",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "hasFeature",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Test if the DOM implementation implements a specific feature."
           ],
           "raises": [],
           "args": [
-            [
-              "feature",
-              "str",
-              "in"
-            ],
-            [
-              "ver",
-              "str",
-              "in"
-            ]
+            {
+              "name": "feature",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "ver",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

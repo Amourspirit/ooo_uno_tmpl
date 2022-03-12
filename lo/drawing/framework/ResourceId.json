@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "ResourceId",
   "type": "service",
@@ -54,6 +54,7 @@
         {
           "name": "create",
           "returns": "None",
+          "returns_origin": null,
           "desc": [
             "Create a resource id that has no anchor.",
             "",
@@ -61,16 +62,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "sResourceURL",
-              "str",
-              "in"
-            ]
+            {
+              "name": "sResourceURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "createEmpty",
           "returns": "None",
+          "returns_origin": null,
           "desc": [
             "Create an empty resource id.",
             "",
@@ -82,6 +85,7 @@
         {
           "name": "createWithAnchor",
           "returns": "None",
+          "returns_origin": null,
           "desc": [
             "Create a resource id for an anchor that is given as XResourceId object.",
             "",
@@ -89,21 +93,24 @@
           ],
           "raises": [],
           "args": [
-            [
-              "sResourceURL",
-              "str",
-              "in"
-            ],
-            [
-              "xAnchor",
-              "XResourceId_5be3103d",
-              "in"
-            ]
+            {
+              "name": "sResourceURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "xAnchor",
+              "type": "XResourceId_5be3103d",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.framework.XResourceId"
+            }
           ]
         },
         {
           "name": "createWithAnchorURL",
           "returns": "None",
+          "returns_origin": null,
           "desc": [
             "Create a resource id for a resource that is bound to an anchor that can be specified by a single URL.",
             "",
@@ -111,16 +118,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "sResourceURL",
-              "str",
-              "in"
-            ],
-            [
-              "sAnchorURL",
-              "str",
-              "in"
-            ]
+            {
+              "name": "sResourceURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "sAnchorURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

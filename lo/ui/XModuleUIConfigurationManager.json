@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XModuleUIConfigurationManager",
   "type": "interface",
@@ -66,6 +66,7 @@
         {
           "name": "getDefaultSettings",
           "returns": "XIndexAccess_f0910d6d",
+          "returns_origin": "com.sun.star.container.XIndexAccess",
           "desc": [
             "retrieves the settings from the default layer of the user interface configuration manager if it has a default layer."
           ],
@@ -74,16 +75,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "ResourceURL",
-              "str",
-              "in"
-            ]
+            {
+              "name": "ResourceURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "isDefaultSettings",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "determine if the settings of a user interface element is part of the default layer of the user interface configuration manager."
           ],
@@ -91,11 +94,12 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "ResourceURL",
-              "str",
-              "in"
-            ]
+            {
+              "name": "ResourceURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

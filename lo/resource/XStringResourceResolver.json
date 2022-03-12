@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XStringResourceResolver",
   "type": "interface",
@@ -69,6 +69,7 @@
         {
           "name": "getCurrentLocale",
           "returns": "Locale_70d308fa",
+          "returns_origin": "com.sun.star.lang.Locale",
           "desc": [
             "Returns the current locale specified in the accessed resource.",
             "",
@@ -80,6 +81,7 @@
         {
           "name": "getDefaultLocale",
           "returns": "Locale_70d308fa",
+          "returns_origin": "com.sun.star.lang.Locale",
           "desc": [
             "Returns the default locale of the accessed resource.",
             "",
@@ -91,6 +93,7 @@
         {
           "name": "getLocales",
           "returns": "typing.Tuple[Locale_70d308fa, ...]",
+          "returns_origin": "sequence< com.sun.star.lang.Locale >",
           "desc": [
             "Returns a sequence of all supported locales."
           ],
@@ -100,6 +103,7 @@
         {
           "name": "getResourceIDs",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [
             "Returns a sequence of all valid Resource IDs for the current locale."
           ],
@@ -109,6 +113,7 @@
         {
           "name": "getResourceIDsForLocale",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [
             "Returns a sequence of all valid Resource IDs for a specific locale.",
             "",
@@ -116,31 +121,35 @@
           ],
           "raises": [],
           "args": [
-            [
-              "locale",
-              "Locale_70d308fa",
-              "in"
-            ]
+            {
+              "name": "locale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
           ]
         },
         {
           "name": "hasEntryForId",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Checks if the resource contains an entry for the given ResourceID and current locale."
           ],
           "raises": [],
           "args": [
-            [
-              "ResourceID",
-              "str",
-              "in"
-            ]
+            {
+              "name": "ResourceID",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "hasEntryForIdAndLocale",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Checks if the resource contains an entry for the given ResourceID and locale.",
             "",
@@ -148,21 +157,24 @@
           ],
           "raises": [],
           "args": [
-            [
-              "ResourceID",
-              "str",
-              "in"
-            ],
-            [
-              "locale",
-              "Locale_70d308fa",
-              "in"
-            ]
+            {
+              "name": "ResourceID",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "locale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
           ]
         },
         {
           "name": "resolveString",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Resolves the passed ResourceID for the current locale.",
             "",
@@ -172,16 +184,18 @@
             "com.sun.star.resource.MissingResourceException"
           ],
           "args": [
-            [
-              "ResourceID",
-              "str",
-              "in"
-            ]
+            {
+              "name": "ResourceID",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "resolveStringForLocale",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Resolves the passed ResourceID for a specific locale.",
             "",
@@ -191,16 +205,18 @@
             "com.sun.star.resource.MissingResourceException"
           ],
           "args": [
-            [
-              "ResourceID",
-              "str",
-              "in"
-            ],
-            [
-              "locale",
-              "Locale_70d308fa",
-              "in"
-            ]
+            {
+              "name": "ResourceID",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "locale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
           ]
         }
       ]

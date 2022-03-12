@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XCellRangesAccess",
   "type": "interface",
@@ -70,6 +70,7 @@
         {
           "name": "getCellByPosition",
           "returns": "XCell_70d408e8",
+          "returns_origin": "com.sun.star.table.XCell",
           "desc": [
             "Returns a single cell within the range."
           ],
@@ -77,26 +78,30 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nColumn",
-              "int",
-              "in"
-            ],
-            [
-              "nRow",
-              "int",
-              "in"
-            ],
-            [
-              "nSheet",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nColumn",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nRow",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nSheet",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getCellRangeByPosition",
           "returns": "XCellRange_a2f70ad5",
+          "returns_origin": "com.sun.star.table.XCellRange",
           "desc": [
             "Returns a sub-range of cells within the range."
           ],
@@ -104,36 +109,42 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nLeft",
-              "int",
-              "in"
-            ],
-            [
-              "nTop",
-              "int",
-              "in"
-            ],
-            [
-              "nRight",
-              "int",
-              "in"
-            ],
-            [
-              "nBottom",
-              "int",
-              "in"
-            ],
-            [
-              "nSheet",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nLeft",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nTop",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nRight",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nBottom",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nSheet",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getCellRangesByName",
           "returns": "typing.Tuple[XCellRange_a2f70ad5, ...]",
+          "returns_origin": "sequence< com.sun.star.table.XCellRange >",
           "desc": [
             "Returns a sub-range of cells within the range.",
             "",
@@ -143,11 +154,12 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aRange",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aRange",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

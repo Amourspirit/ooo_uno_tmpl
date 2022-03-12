@@ -8,7 +8,7 @@ from typing import Optional
 class ParamInfo:
     direction: str = ''
     name: str = ''
-    type: str = ''
+    type: str = '',
     p_type: Optional[PythonType] = None
 
     def __lt__(self, other: object):

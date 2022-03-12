@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDragSource",
   "type": "interface",
@@ -76,6 +76,7 @@
         {
           "name": "getDefaultCursor",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "To get the default cursor for a specified drag action.",
             "",
@@ -85,16 +86,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "dragAction",
-              "int",
-              "in"
-            ]
+            {
+              "name": "dragAction",
+              "type": "int",
+              "direction": "in",
+              "origin": "byte"
+            }
           ]
         },
         {
           "name": "isDragImageSupported",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "In order to query if drag image support is available."
           ],
@@ -104,6 +107,7 @@
         {
           "name": "startDrag",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Starts the drag operation.",
             "",
@@ -111,36 +115,42 @@
           ],
           "raises": [],
           "args": [
-            [
-              "trigger",
-              "DragGestureEvent_9e7211ca",
-              "in"
-            ],
-            [
-              "sourceActions",
-              "int",
-              "in"
-            ],
-            [
-              "cursor",
-              "int",
-              "in"
-            ],
-            [
-              "image",
-              "int",
-              "in"
-            ],
-            [
-              "trans",
-              "XTransferable_2d800f38",
-              "in"
-            ],
-            [
-              "listener",
-              "XDragSourceListener_d56f12f8",
-              "in"
-            ]
+            {
+              "name": "trigger",
+              "type": "DragGestureEvent_9e7211ca",
+              "direction": "in",
+              "origin": "com.sun.star.datatransfer.dnd.DragGestureEvent"
+            },
+            {
+              "name": "sourceActions",
+              "type": "int",
+              "direction": "in",
+              "origin": "byte"
+            },
+            {
+              "name": "cursor",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "image",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "trans",
+              "type": "XTransferable_2d800f38",
+              "direction": "in",
+              "origin": "com.sun.star.datatransfer.XTransferable"
+            },
+            {
+              "name": "listener",
+              "type": "XDragSourceListener_d56f12f8",
+              "direction": "in",
+              "origin": "com.sun.star.datatransfer.dnd.XDragSourceListener"
+            }
           ]
         }
       ]

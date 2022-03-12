@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XPropertySetRegistry",
   "type": "interface",
@@ -60,36 +60,41 @@
         {
           "name": "openPropertySet",
           "returns": "XPersistentPropertySet_2b0c0f5c",
+          "returns_origin": "com.sun.star.ucb.XPersistentPropertySet",
           "desc": [
             "creates a new or opens an existing property set in the registry."
           ],
           "raises": [],
           "args": [
-            [
-              "key",
-              "str",
-              "in"
-            ],
-            [
-              "create",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "key",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "create",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "removePropertySet",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes a property set from the registry."
           ],
           "raises": [],
           "args": [
-            [
-              "key",
-              "str",
-              "in"
-            ]
+            {
+              "name": "key",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

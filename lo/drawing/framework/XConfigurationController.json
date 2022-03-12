@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XConfigurationController",
   "type": "interface",
@@ -105,6 +105,7 @@
         {
           "name": "getCurrentConfiguration",
           "returns": "XConfiguration_8f0511a0",
+          "returns_origin": "com.sun.star.drawing.framework.XConfiguration",
           "desc": [
             "Return a copy of the current configuration.",
             "",
@@ -116,6 +117,7 @@
         {
           "name": "getRequestedConfiguration",
           "returns": "XConfiguration_8f0511a0",
+          "returns_origin": "com.sun.star.drawing.framework.XConfiguration",
           "desc": [
             "Return a copy of the requested configuration.",
             "",
@@ -127,21 +129,24 @@
         {
           "name": "getResource",
           "returns": "XResource_3bcd0f90",
+          "returns_origin": "com.sun.star.drawing.framework.XResource",
           "desc": [
             "Return the active resource specified by the given resource id."
           ],
           "raises": [],
           "args": [
-            [
-              "xResourceId",
-              "XResourceId_5be3103d",
-              "in"
-            ]
+            {
+              "name": "xResourceId",
+              "type": "XResourceId_5be3103d",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.framework.XResourceId"
+            }
           ]
         },
         {
           "name": "lock",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Lock the processing of configuration change requests.",
             "",
@@ -155,6 +160,7 @@
         {
           "name": "requestResourceActivation",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Request the activation of a resource.",
             "",
@@ -166,21 +172,24 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xResourceId",
-              "XResourceId_5be3103d",
-              "in"
-            ],
-            [
-              "eMode",
-              "ResourceActivationMode_2b5e14cf",
-              "in"
-            ]
+            {
+              "name": "xResourceId",
+              "type": "XResourceId_5be3103d",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.framework.XResourceId"
+            },
+            {
+              "name": "eMode",
+              "type": "ResourceActivationMode_2b5e14cf",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.framework.ResourceActivationMode"
+            }
           ]
         },
         {
           "name": "requestResourceDeactivation",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Request the deactivation of a resource.",
             "",
@@ -190,16 +199,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xResourceId",
-              "XResourceId_5be3103d",
-              "in"
-            ]
+            {
+              "name": "xResourceId",
+              "type": "XResourceId_5be3103d",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.framework.XResourceId"
+            }
           ]
         },
         {
           "name": "restoreConfiguration",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Replace the requested configuration with the given configuration and schedule an update of the current configuration.",
             "",
@@ -211,16 +222,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xConfiguration",
-              "XConfiguration_8f0511a0",
-              "in"
-            ]
+            {
+              "name": "xConfiguration",
+              "type": "XConfiguration_8f0511a0",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.framework.XConfiguration"
+            }
           ]
         },
         {
           "name": "unlock",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Unlock the processing of configuration change requests.",
             "",
@@ -232,6 +245,7 @@
         {
           "name": "update",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Explicitly request an update of the current configuration.",
             "",

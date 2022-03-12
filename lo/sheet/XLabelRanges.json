@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XLabelRanges",
   "type": "interface",
@@ -60,36 +60,41 @@
         {
           "name": "addNew",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "adds a new label range to the collection."
           ],
           "raises": [],
           "args": [
-            [
-              "aLabelArea",
-              "CellRangeAddress_ec450d43",
-              "in"
-            ],
-            [
-              "aDataArea",
-              "CellRangeAddress_ec450d43",
-              "in"
-            ]
+            {
+              "name": "aLabelArea",
+              "type": "CellRangeAddress_ec450d43",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellRangeAddress"
+            },
+            {
+              "name": "aDataArea",
+              "type": "CellRangeAddress_ec450d43",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellRangeAddress"
+            }
           ]
         },
         {
           "name": "removeByIndex",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes a label range from the collection."
           ],
           "raises": [],
           "args": [
-            [
-              "nIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

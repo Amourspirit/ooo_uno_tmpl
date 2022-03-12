@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XCompressedDocumentHandler",
   "type": "interface",
@@ -66,21 +66,24 @@
         {
           "name": "compressedCharacters",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [],
           "raises": [
             "com.sun.star.xml.sax.SAXException"
           ],
           "args": [
-            [
-              "aChars",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aChars",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "compressedEndDocument",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [],
           "raises": [
             "com.sun.star.xml.sax.SAXException"
@@ -90,86 +93,99 @@
         {
           "name": "compressedEndElement",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [],
           "raises": [
             "com.sun.star.xml.sax.SAXException"
           ],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "compressedIgnorableWhitespace",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [],
           "raises": [
             "com.sun.star.xml.sax.SAXException"
           ],
           "args": [
-            [
-              "aWhitespaces",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aWhitespaces",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "compressedProcessingInstruction",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [],
           "raises": [
             "com.sun.star.xml.sax.SAXException"
           ],
           "args": [
-            [
-              "aTarget",
-              "str",
-              "in"
-            ],
-            [
-              "aData",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aTarget",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aData",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "compressedSetDocumentLocator",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [],
           "raises": [
             "com.sun.star.xml.sax.SAXException"
           ],
           "args": [
-            [
-              "columnNumber",
-              "int",
-              "in"
-            ],
-            [
-              "lineNumber",
-              "int",
-              "in"
-            ],
-            [
-              "publicId",
-              "str",
-              "in"
-            ],
-            [
-              "systemId",
-              "str",
-              "in"
-            ]
+            {
+              "name": "columnNumber",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "lineNumber",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "publicId",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "systemId",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "compressedStartDocument",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [],
           "raises": [
             "com.sun.star.xml.sax.SAXException"
@@ -179,21 +195,24 @@
         {
           "name": "compressedStartElement",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [],
           "raises": [
             "com.sun.star.xml.sax.SAXException"
           ],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ],
-            [
-              "aAttributes",
-              "typing.Tuple[XMLAttribute_df0f0cdb, ...]",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aAttributes",
+              "type": "typing.Tuple[XMLAttribute_df0f0cdb, ...]",
+              "direction": "in",
+              "origin": "sequence< XMLAttribute >"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XLinguServiceManager",
   "type": "interface",
@@ -97,6 +97,7 @@
         {
           "name": "addLinguServiceManagerListener",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "adds a listener to the list of event listeners.",
             "",
@@ -104,54 +105,62 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xListener",
-              "XEventListener_c7230c4a",
-              "in"
-            ]
+            {
+              "name": "xListener",
+              "type": "XEventListener_c7230c4a",
+              "direction": "in",
+              "origin": "com.sun.star.lang.XEventListener"
+            }
           ]
         },
         {
           "name": "getAvailableServices",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "aServiceName",
-              "str",
-              "in"
-            ],
-            [
-              "aLocale",
-              "Locale_70d308fa",
-              "in"
-            ]
+            {
+              "name": "aServiceName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
           ]
         },
         {
           "name": "getConfiguredServices",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [
             "queries the list of service implementations to be used for a given service and language."
           ],
           "raises": [],
           "args": [
-            [
-              "aServiceName",
-              "str",
-              "in"
-            ],
-            [
-              "aLocale",
-              "Locale_70d308fa",
-              "in"
-            ]
+            {
+              "name": "aServiceName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
           ]
         },
         {
           "name": "getHyphenator",
           "returns": "XHyphenator_ff4e0def",
+          "returns_origin": "com.sun.star.linguistic2.XHyphenator",
           "desc": [],
           "raises": [],
           "args": []
@@ -159,6 +168,7 @@
         {
           "name": "getSpellChecker",
           "returns": "XSpellChecker_1af30e82",
+          "returns_origin": "com.sun.star.linguistic2.XSpellChecker",
           "desc": [],
           "raises": [],
           "args": []
@@ -166,6 +176,7 @@
         {
           "name": "getThesaurus",
           "returns": "XThesaurus_f1790d91",
+          "returns_origin": "com.sun.star.linguistic2.XThesaurus",
           "desc": [],
           "raises": [],
           "args": []
@@ -173,41 +184,47 @@
         {
           "name": "removeLinguServiceManagerListener",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "removes a listener from the list of event listeners."
           ],
           "raises": [],
           "args": [
-            [
-              "xListener",
-              "XEventListener_c7230c4a",
-              "in"
-            ]
+            {
+              "name": "xListener",
+              "type": "XEventListener_c7230c4a",
+              "direction": "in",
+              "origin": "com.sun.star.lang.XEventListener"
+            }
           ]
         },
         {
           "name": "setConfiguredServices",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the list of service implementations to be used for a given service and language."
           ],
           "raises": [],
           "args": [
-            [
-              "aServiceName",
-              "str",
-              "in"
-            ],
-            [
-              "aLocale",
-              "Locale_70d308fa",
-              "in"
-            ],
-            [
-              "aServiceImplNames",
-              "typing.Tuple[str, ...]",
-              "in"
-            ]
+            {
+              "name": "aServiceName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "aServiceImplNames",
+              "type": "typing.Tuple[str, ...]",
+              "direction": "in",
+              "origin": "sequence< string >"
+            }
           ]
         }
       ]

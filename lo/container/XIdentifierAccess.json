@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XIdentifierAccess",
   "type": "interface",
@@ -54,22 +54,25 @@
         {
           "name": "getByIdentifier",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [],
           "raises": [
             "com.sun.star.container.NoSuchElementException",
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "Identifier",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Identifier",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getIdentifiers",
           "returns": "typing.Tuple[int, ...]",
+          "returns_origin": "sequence< long >",
           "desc": [
             "The order of the identifiers is not specified."
           ],

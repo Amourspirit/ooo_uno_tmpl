@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XAnyDescriptionAccess",
   "type": "interface",
@@ -62,6 +62,7 @@
         {
           "name": "getAnyColumnDescriptions",
           "returns": "typing.Tuple[typing.Tuple[object, ...], ...]",
+          "returns_origin": "sequence< sequence< any > >",
           "desc": [
             "retrieves the descriptions for all columns."
           ],
@@ -71,6 +72,7 @@
         {
           "name": "getAnyRowDescriptions",
           "returns": "typing.Tuple[typing.Tuple[object, ...], ...]",
+          "returns_origin": "sequence< sequence< any > >",
           "desc": [
             "retrieves the descriptions for all rows."
           ],
@@ -80,31 +82,35 @@
         {
           "name": "setAnyColumnDescriptions",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the descriptions for all columns."
           ],
           "raises": [],
           "args": [
-            [
-              "rColumnDescriptions",
-              "typing.Tuple[typing.Tuple[object, ...], ...]",
-              "in"
-            ]
+            {
+              "name": "rColumnDescriptions",
+              "type": "typing.Tuple[typing.Tuple[object, ...], ...]",
+              "direction": "in",
+              "origin": "sequence< sequence< any > >"
+            }
           ]
         },
         {
           "name": "setAnyRowDescriptions",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the descriptions for all rows."
           ],
           "raises": [],
           "args": [
-            [
-              "rRowDescriptions",
-              "typing.Tuple[typing.Tuple[object, ...], ...]",
-              "in"
-            ]
+            {
+              "name": "rRowDescriptions",
+              "type": "typing.Tuple[typing.Tuple[object, ...], ...]",
+              "direction": "in",
+              "origin": "sequence< sequence< any > >"
+            }
           ]
         }
       ]

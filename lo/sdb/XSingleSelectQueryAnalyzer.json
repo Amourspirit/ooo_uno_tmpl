@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSingleSelectQueryAnalyzer",
   "type": "interface",
@@ -75,6 +75,7 @@
         {
           "name": "getFilter",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the used filter.",
             "",
@@ -86,6 +87,7 @@
         {
           "name": "getGroup",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the currently used GROUP BY.",
             "",
@@ -97,6 +99,7 @@
         {
           "name": "getGroupColumns",
           "returns": "XIndexAccess_f0910d6d",
+          "returns_origin": "com.sun.star.container.XIndexAccess",
           "desc": [
             "returns the currently used group.",
             "",
@@ -108,6 +111,7 @@
         {
           "name": "getHavingClause",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the used HAVING filter.",
             "",
@@ -119,6 +123,7 @@
         {
           "name": "getOrder",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the currently used sort order.",
             "",
@@ -130,6 +135,7 @@
         {
           "name": "getOrderColumns",
           "returns": "XIndexAccess_f0910d6d",
+          "returns_origin": "com.sun.star.container.XIndexAccess",
           "desc": [
             "returns the currently used sort order.",
             "",
@@ -141,6 +147,7 @@
         {
           "name": "getQuery",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the query."
           ],
@@ -150,6 +157,7 @@
         {
           "name": "getQueryWithSubstitution",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the query previously set at the analyzer, with all application-level features being substituted by their database-level counterparts.",
             "",
@@ -171,6 +179,7 @@
         {
           "name": "getStructuredFilter",
           "returns": "typing.Tuple[typing.Tuple[PropertyValue_c9610c73, ...], ...]",
+          "returns_origin": "sequence< sequence< com.sun.star.beans.PropertyValue > >",
           "desc": [
             "returns the currently used filter.",
             "",
@@ -182,6 +191,7 @@
         {
           "name": "getStructuredHavingClause",
           "returns": "typing.Tuple[typing.Tuple[PropertyValue_c9610c73, ...], ...]",
+          "returns_origin": "sequence< sequence< com.sun.star.beans.PropertyValue > >",
           "desc": [
             "returns the currently used HAVING filter.",
             "",
@@ -193,6 +203,7 @@
         {
           "name": "setCommand",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets a new query for the composer, which may be expanded by filters, group by, having and sort criteria.",
             "",
@@ -204,21 +215,24 @@
             "com.sun.star.sdbc.SQLException"
           ],
           "args": [
-            [
-              "Command",
-              "str",
-              "in"
-            ],
-            [
-              "CommandType",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Command",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "CommandType",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "setQuery",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets a new query for the composer, which may be expanded by filters, group by, having and sort criteria."
           ],
@@ -226,11 +240,12 @@
             "com.sun.star.sdbc.SQLException"
           ],
           "args": [
-            [
-              "command",
-              "str",
-              "in"
-            ]
+            {
+              "name": "command",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

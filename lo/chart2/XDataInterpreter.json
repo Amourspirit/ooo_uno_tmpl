@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDataInterpreter",
   "type": "interface",
@@ -84,6 +84,7 @@
         {
           "name": "getChartTypeSpecificData",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "Get chart information that is specific to a particular chart type, by key.",
             "",
@@ -91,16 +92,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "sKey",
-              "str",
-              "in"
-            ]
+            {
+              "name": "sKey",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "interpretDataSource",
           "returns": "InterpretedData_ed4f0d4c",
+          "returns_origin": "com.sun.star.chart2.InterpretedData",
           "desc": [
             "Interprets the given data.",
             "",
@@ -108,41 +111,47 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xSource",
-              "XDataSource_f6340d57",
-              "in"
-            ],
-            [
-              "aArguments",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ],
-            [
-              "aSeriesToReUse",
-              "typing.Tuple[XDataSeries_b8150b89, ...]",
-              "in"
-            ]
+            {
+              "name": "xSource",
+              "type": "XDataSource_f6340d57",
+              "direction": "in",
+              "origin": "com.sun.star.chart2.data.XDataSource"
+            },
+            {
+              "name": "aArguments",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            },
+            {
+              "name": "aSeriesToReUse",
+              "type": "typing.Tuple[XDataSeries_b8150b89, ...]",
+              "direction": "in",
+              "origin": "sequence< XDataSeries >"
+            }
           ]
         },
         {
           "name": "isDataCompatible",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "parses the given data and states, if a reinterpretDataSeries() call can be done without data loss."
           ],
           "raises": [],
           "args": [
-            [
-              "aInterpretedData",
-              "InterpretedData_ed4f0d4c",
-              "in"
-            ]
+            {
+              "name": "aInterpretedData",
+              "type": "InterpretedData_ed4f0d4c",
+              "direction": "in",
+              "origin": "com.sun.star.chart2.InterpretedData"
+            }
           ]
         },
         {
           "name": "mergeInterpretedData",
           "returns": "XDataSource_f6340d57",
+          "returns_origin": "com.sun.star.chart2.data.XDataSource",
           "desc": [
             "Try to reverse the operation done in interpretDataSource().",
             "",
@@ -150,26 +159,29 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aInterpretedData",
-              "InterpretedData_ed4f0d4c",
-              "in"
-            ]
+            {
+              "name": "aInterpretedData",
+              "type": "InterpretedData_ed4f0d4c",
+              "direction": "in",
+              "origin": "com.sun.star.chart2.InterpretedData"
+            }
           ]
         },
         {
           "name": "reinterpretDataSeries",
           "returns": "InterpretedData_ed4f0d4c",
+          "returns_origin": "com.sun.star.chart2.InterpretedData",
           "desc": [
             "Re-interprets the data given in aInterpretedData while keeping the number of data series and the categories."
           ],
           "raises": [],
           "args": [
-            [
-              "aInterpretedData",
-              "InterpretedData_ed4f0d4c",
-              "in"
-            ]
+            {
+              "name": "aInterpretedData",
+              "type": "InterpretedData_ed4f0d4c",
+              "direction": "in",
+              "origin": "com.sun.star.chart2.InterpretedData"
+            }
           ]
         }
       ]

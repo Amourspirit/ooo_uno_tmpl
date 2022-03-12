@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "ModuleUIConfigurationManager",
   "type": "service",
@@ -56,6 +56,7 @@
         {
           "name": "createDefault",
           "returns": "None",
+          "returns_origin": null,
           "desc": [
             "provides a function to initialize a module user interface configuration manager instance.",
             "",
@@ -69,16 +70,18 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "ModuleShortName",
-              "str",
-              "in"
-            ],
-            [
-              "ModuleIdentifier",
-              "str",
-              "in"
-            ]
+            {
+              "name": "ModuleShortName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "ModuleIdentifier",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

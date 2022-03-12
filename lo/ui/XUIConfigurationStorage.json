@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XUIConfigurationStorage",
   "type": "interface",
@@ -64,6 +64,7 @@
         {
           "name": "hasStorage",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "checks if an instance has already a storage to load/store its data."
           ],
@@ -73,6 +74,7 @@
         {
           "name": "setStorage",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "connects a storage to the user interface configuration manager which is used on subsequent calls of load() and store().",
             "",
@@ -80,11 +82,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Storage",
-              "XStorage_8e460a32",
-              "in"
-            ]
+            {
+              "name": "Storage",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            }
           ]
         }
       ]

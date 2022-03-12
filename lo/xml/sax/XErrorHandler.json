@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XErrorHandler",
   "type": "interface",
@@ -54,6 +54,7 @@
         {
           "name": "error",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification of a recoverable error."
           ],
@@ -61,16 +62,18 @@
             "com.sun.star.xml.sax.SAXException"
           ],
           "args": [
-            [
-              "aSAXParseException",
-              "object",
-              "in"
-            ]
+            {
+              "name": "aSAXParseException",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         },
         {
           "name": "fatalError",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification of a non-recoverable error."
           ],
@@ -78,16 +81,18 @@
             "com.sun.star.xml.sax.SAXException"
           ],
           "args": [
-            [
-              "aSAXParseException",
-              "object",
-              "in"
-            ]
+            {
+              "name": "aSAXParseException",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         },
         {
           "name": "warning",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification of a warning."
           ],
@@ -95,11 +100,12 @@
             "com.sun.star.xml.sax.SAXException"
           ],
           "args": [
-            [
-              "aSAXParseException",
-              "object",
-              "in"
-            ]
+            {
+              "name": "aSAXParseException",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         }
       ]

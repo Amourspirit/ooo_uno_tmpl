@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSlideShowListener",
   "type": "interface",
@@ -54,21 +54,24 @@
         {
           "name": "hyperLinkClicked",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Notifies that a hyperlink has been clicked."
           ],
           "raises": [],
           "args": [
-            [
-              "hyperLink",
-              "str",
-              "in"
-            ]
+            {
+              "name": "hyperLink",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "paused",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Notify that the slide show is paused."
           ],
@@ -78,6 +81,7 @@
         {
           "name": "resumed",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Notify that the slide show is resumed from a paused state."
           ],
@@ -87,6 +91,7 @@
         {
           "name": "slideAnimationsEnded",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Notify that the last animation from the main sequence of the current slide has ended."
           ],
@@ -96,6 +101,7 @@
         {
           "name": "slideEnded",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Notify that the current slide has ended, e.g.",
             "",
@@ -103,16 +109,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "reverse",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "reverse",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "slideTransitionEnded",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Notify that the slide transition of the current slide ended."
           ],
@@ -122,6 +130,7 @@
         {
           "name": "slideTransitionStarted",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Notify that a new slide starts to become visible."
           ],

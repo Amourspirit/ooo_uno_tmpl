@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XExtendedDocumentHandler",
   "type": "interface",
@@ -52,6 +52,7 @@
         {
           "name": "allowLineBreak",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "informs a writer that it is allowable to insert a line break and indentation before the next XDocumentHandler-call."
           ],
@@ -63,6 +64,7 @@
         {
           "name": "comment",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification about a comment in the XML-source."
           ],
@@ -70,16 +72,18 @@
             "com.sun.star.xml.sax.SAXException"
           ],
           "args": [
-            [
-              "sComment",
-              "str",
-              "in"
-            ]
+            {
+              "name": "sComment",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "endCDATA",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "informs about the end of a CDATA-Section.",
             "",
@@ -93,6 +97,7 @@
         {
           "name": "startCDATA",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification about the start of a CDATA section in the XML-source.",
             "",
@@ -106,6 +111,7 @@
         {
           "name": "unknown",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "notifies that any characters that cannot be handled by other callback methods are announced through this method."
           ],
@@ -113,11 +119,12 @@
             "com.sun.star.xml.sax.SAXException"
           ],
           "args": [
-            [
-              "sString",
-              "str",
-              "in"
-            ]
+            {
+              "name": "sString",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

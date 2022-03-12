@@ -63,7 +63,8 @@ class PythonType(object):
         is_py_type: bool = True,
         children: Optional[List['PythonType']] = None,
         realtype: str = 'object',
-        origtype: Optional[str] = None
+        origtype: Optional[str] = None,
+        origin: Optional[str] = None
     ) -> None:
         self._type = type
         self._requires_typing = requires_typing
@@ -71,6 +72,7 @@ class PythonType(object):
         self._is_py_type = is_py_type
         self._realtype = realtype
         self._origtype = origtype
+        self._origin = origin
         if children is None:
             self._children = []
         else:
@@ -161,6 +163,14 @@ class PythonType(object):
     @origtype.setter
     def origtype(self, value: Union[str, None]) -> None:
         self._origtype = value
+    
+    @property
+    def origin(self) -> Union[str, None]:
+        return self._origin
+
+    @origin.setter
+    def origin(self, value: Union[str, None]) -> None:
+        self._origin = value
     # endregion Properties
 
     # region Methods
@@ -494,11 +504,13 @@ class RuleNone(ITypeRule):
         return in_type == ''
 
     def get_python_type(self, in_type: str) -> PythonType:
+        # set origin to None for empty string
         return PythonType(
             type="None",
             requires_typing=False,
             is_py_type=True,
-            realtype=None
+            realtype=None,
+            origin=None
         )
 
 
@@ -515,7 +527,8 @@ class RulePrimative(ITypeRule):
             type=s,
             requires_typing=False,
             is_py_type=True,
-            realtype=s
+            realtype=s,
+            origin=in_type
         )
 
 
@@ -532,7 +545,8 @@ class RuleKnownPrimative(ITypeRule):
             type=s,
             requires_typing=False,
             is_py_type=True,
-            realtype=s
+            realtype=s,
+            origin=in_type
         )
 
 
@@ -579,7 +593,8 @@ class RuleComType(BaseRule):
             imports=s_type,
             is_py_type=False,
             realtype=s,
-            origtype=in_type
+            origtype=in_type,
+            origin=in_type
         )
 
 
@@ -598,7 +613,8 @@ class RuleKnownItterType(BaseRule):
             type=s,
             requires_typing=False,
             is_py_type=True,
-            realtype=s
+            realtype=s,
+            origin=in_type
         )
 
 
@@ -678,7 +694,8 @@ class RuleSeqLikePrimative(BaseRule):
             type=w,
             requires_typing=True,
             is_py_type=p_type.is_py_type,
-            realtype=realtype
+            realtype=realtype,
+            origin=in_type
         )
         result.children.append(p_type)
         return result
@@ -807,7 +824,8 @@ class RuleSeqLikeNonPrim(BaseRule):
             requires_typing=True,
             is_py_type=is_py_type,
             children=[child],
-            realtype=realtype
+            realtype=realtype,
+            origin=in_type
         )
         if not is_py_type:
             p_type.imports = inner_str
@@ -901,7 +919,8 @@ class RuleSeqLikePair(BaseRule):
             type=w,
             requires_typing=True,
             is_py_type=p_inner.is_py_type,
-            realtype=realtype
+            realtype=realtype,
+            origin=in_type
         )
         p_type.children.append(p_inner)
         return p_type
@@ -962,7 +981,9 @@ class RuleTuple2Like(BaseRule):
             p_type = PythonType(
                 type=TYPE_MAP_KNOWN_ITTER[s_type],
                 requires_typing=True,
-                is_py_type=True
+                is_py_type=True,
+                origtype=None,
+                origin=None
             )
         else:
             p_type = self._get_ptype(s_type)
@@ -977,7 +998,7 @@ class RuleTuple2Like(BaseRule):
             realtype = 'tuple'
             f_str = f"typing.Tuple[{p_type_one.type}, {p_type_two.type}]"
         r_type = PythonType(type=f_str, realtype=realtype,
-                            requires_typing=True)
+                            requires_typing=True, origin=in_type)
         # r_type will be of type from TYPE_MAP_PY_WRAPPER or tuple
         # eithor way r_type will not have import but children may
         # r_type.imports = p_type.imports

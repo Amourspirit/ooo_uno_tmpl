@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XVBAEventProcessor",
   "type": "interface",
@@ -42,6 +42,7 @@
         {
           "name": "hasVbaEventHandler",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Returns whether a VBA event handler exists."
           ],
@@ -49,21 +50,24 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "nEventId",
-              "int",
-              "in"
-            ],
-            [
-              "aArgs",
-              "typing.Tuple[object, ...]",
-              "in"
-            ]
+            {
+              "name": "nEventId",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aArgs",
+              "type": "typing.Tuple[object, ...]",
+              "direction": "in",
+              "origin": "sequence< any >"
+            }
           ]
         },
         {
           "name": "processVbaEvent",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Executes a VBA event handler."
           ],
@@ -72,16 +76,18 @@
             "com.sun.star.util.VetoException"
           ],
           "args": [
-            [
-              "nEventId",
-              "int",
-              "in"
-            ],
-            [
-              "aArgs",
-              "typing.Tuple[object, ...]",
-              "in"
-            ]
+            {
+              "name": "nEventId",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aArgs",
+              "type": "typing.Tuple[object, ...]",
+              "direction": "in",
+              "origin": "sequence< any >"
+            }
           ]
         }
       ]

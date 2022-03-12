@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XIdlArray",
   "type": "interface",
@@ -52,6 +52,7 @@
         {
           "name": "get",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "Returns element at given index."
           ],
@@ -60,21 +61,24 @@
             "com.sun.star.lang.ArrayIndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "aArray",
-              "object",
-              "in"
-            ],
-            [
-              "nIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "aArray",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            },
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getLen",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "Returns the length of the given sequence."
           ],
@@ -82,16 +86,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "array",
-              "object",
-              "in"
-            ]
+            {
+              "name": "array",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         },
         {
           "name": "realloc",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Reallocates the length of the sequence instance."
           ],
@@ -99,21 +105,24 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "array",
-              "object",
-              "in"
-            ],
-            [
-              "length",
-              "int",
-              "in"
-            ]
+            {
+              "name": "array",
+              "type": "object",
+              "direction": "in",
+              "origin": null
+            },
+            {
+              "name": "length",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "set",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Sets a new value at given index."
           ],
@@ -122,21 +131,24 @@
             "com.sun.star.lang.ArrayIndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "aArray",
-              "object",
-              "in"
-            ],
-            [
-              "nIndex",
-              "int",
-              "in"
-            ],
-            [
-              "aNewValue",
-              "object",
-              "in"
-            ]
+            {
+              "name": "aArray",
+              "type": "object",
+              "direction": "in",
+              "origin": null
+            },
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aNewValue",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         }
       ]

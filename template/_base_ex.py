@@ -15,54 +15,36 @@ class BaseEx(BaseJson):
         self._cache = {}
 
     def _hydrate_data(self, json_data: dict):
-        self._models = ModelsException(json_data=json_data)
+        try:
+            self._models = ModelsException(json_data=json_data)
+        except Exception as e:
+            msg = f"Error occured in exception {json_data['namespace']}.{json_data['name']}"
+            self._lerr(f"{msg}\n{e}")
+            raise Exception(msg) from e
         # self._validate_data(json_data)
-        data: Dict[str, object] = json_data['data']
-
-        def set_data(_key: str, a_name=None):
-            attr_name = _key if not a_name else a_name
-            val = data.get(_key, None)
-            if not val is None:
-                setattr(self, attr_name, val)
         mdata = self._models.model.data
         self.name = self.get_safe_word(mdata.name)
-        # set_data('name')
-        # set_data('namespace')
         self.namespace = mdata.namespace
-        # set_data('allow_db')
         self.allow_db = mdata.allow_db
-        # set_data('desc')
         self.desc = mdata.desc
-        # set_data('url', 'link')
         self.link = mdata.url
-        setattr(self, 'inherits', data.get('extends', []))
-        set_data('imports')
-        # get lo ver if it exist. Defaut to False
-        self.libre_office_ver = json_data.get('libre_office_ver', False)
-        sort = bool(json_data['parser_args'].get('sort', False))
-        self.include_desc = bool(
-            json_data['writer_args'].get('include_desc', True))
+        self.libre_office_ver = self._models.model.libre_office_ver
+        self.include_desc = self._models.model.writer_args.include_desc
+        self.inherits = mdata.extends
+        self.imports = mdata.imports
+        sort = self._models.model.parser_args.sort
         self.attribs = self._get_attribs(json_data=json_data, sort=sort)
-        # setattr(self, 'requires_typing', data.get('requires_typing', False))
         self.requires_typing = mdata.requires_typing
         if self.requires_typing is False:
             if self._models.is_args():
                 self.requires_typing = True
+        self.extends_map.update(mdata.extends_map)
         self.from_imports = [x.as_tuple()
                              for x in self._models.get_full_imports()]
-        # setattr(self, 'from_imports', [])
-        setattr(self, 'from_imports_typing', [])
-        # set_data('from_imports')
-        set_data('from_imports_typing')
-        # self.requires_typing = False if len(
-        #     self.from_imports_typing) == 0 else True
-        quote: List[str] = data.get('quote', [])
-        self.quote.update(quote)
-        typings: List[str] = data.get('typings', [])
-        self.typings.update(typings)
-        extends_map = data.get('extends_map', None)
-        if extends_map:
-            self.extends_map.update(extends_map)
+        self.from_imports_typing = [x.as_tuple()
+                                    for x in mdata.from_imports_typing]
+        self.quote.update(mdata.quote)
+        self.typings.update(mdata.typings)
         self.fullname = f"{self.namespace}.{self.name}"
 
     def _get_attribs(self, json_data: dict, sort: bool) -> dict:
@@ -411,8 +393,6 @@ class BaseEx(BaseJson):
             is a 7.2 version
         """
         if self.uno_instance is None:
-            if uno_none is True:
-                return 'UNO_NONE'
             return 'None'
         result = getattr(self.uno_instance, name, None)
         if isinstance(result, str):
@@ -452,6 +432,8 @@ class BaseEx(BaseJson):
             try:
                 self._uno_instance = uno.createUnoStruct(self.fullname)
             except Exception as e:
+                self._lwarn(
+                    f"{self.fullname} Error: {e}")
                 self._uno_instance = None
         return self._uno_instance
 

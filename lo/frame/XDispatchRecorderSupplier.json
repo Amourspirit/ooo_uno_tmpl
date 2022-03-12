@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDispatchRecorderSupplier",
   "type": "interface",
@@ -89,6 +89,7 @@
         {
           "name": "dispatchAndRecord",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "dispatch given URL and record it if recording is enabled",
             "",
@@ -96,26 +97,30 @@
           ],
           "raises": [],
           "args": [
-            [
-              "URL",
-              "URL_57ad07b9",
-              "in"
-            ],
-            [
-              "Arguments",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ],
-            [
-              "Dispatcher",
-              "XDispatch_98ff0a9b",
-              "in"
-            ]
+            {
+              "name": "URL",
+              "type": "URL_57ad07b9",
+              "direction": "in",
+              "origin": "com.sun.star.util.URL"
+            },
+            {
+              "name": "Arguments",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            },
+            {
+              "name": "Dispatcher",
+              "type": "XDispatch_98ff0a9b",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XDispatch"
+            }
           ]
         },
         {
           "name": "getDispatchRecorder",
           "returns": "XDispatchRecorder_fbd70dd1",
+          "returns_origin": "com.sun.star.frame.XDispatchRecorder",
           "desc": [
             "provides access on the recorder of this supplier",
             "",
@@ -127,6 +132,7 @@
         {
           "name": "setDispatchRecorder",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "set a dispatch recorder on this supplier",
             "",
@@ -134,11 +140,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Recorder",
-              "XDispatchRecorder_fbd70dd1",
-              "in"
-            ]
+            {
+              "name": "Recorder",
+              "type": "XDispatchRecorder_fbd70dd1",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XDispatchRecorder"
+            }
           ]
         }
       ]

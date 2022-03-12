@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XTransientDocumentsDocumentContentFactory",
   "type": "interface",
@@ -71,6 +71,7 @@
         {
           "name": "createDocumentContent",
           "returns": "XContent_79db0975",
+          "returns_origin": "com.sun.star.ucb.XContent",
           "desc": [
             "creates a com.sun.star.ucb.TransientDocumentsDocumentContent based on a given com.sun.star.document.OfficeDocument."
           ],
@@ -78,11 +79,12 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "Model",
-              "XModel_7a6e095c",
-              "in"
-            ]
+            {
+              "name": "Model",
+              "type": "XModel_7a6e095c",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XModel"
+            }
           ]
         }
       ]

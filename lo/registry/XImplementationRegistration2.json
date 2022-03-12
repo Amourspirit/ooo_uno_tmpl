@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XImplementationRegistration2",
   "type": "interface",
@@ -66,6 +66,7 @@
         {
           "name": "registerImplementationWithLocation",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "registers a component which provides one or more implementations."
           ],
@@ -73,26 +74,30 @@
             "com.sun.star.registry.CannotRegisterImplementationException"
           ],
           "args": [
-            [
-              "aImplementationLoader",
-              "str",
-              "in"
-            ],
-            [
-              "aLocation",
-              "str",
-              "in"
-            ],
-            [
-              "aRegisteredLocation",
-              "str",
-              "in"
-            ],
-            [
-              "xReg",
-              "XSimpleRegistry_10150e9c",
-              "in"
-            ]
+            {
+              "name": "aImplementationLoader",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aLocation",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aRegisteredLocation",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "xReg",
+              "type": "XSimpleRegistry_10150e9c",
+              "direction": "in",
+              "origin": "com.sun.star.registry.XSimpleRegistry"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XNativeNumberSupplier2",
   "type": "interface",
@@ -64,31 +64,36 @@
         {
           "name": "getNativeNumberStringParams",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Returns native number string for given number string, using NatNum params."
           ],
           "raises": [],
           "args": [
-            [
-              "NumberString",
-              "str",
-              "in"
-            ],
-            [
-              "Locale",
-              "Locale_70d308fa",
-              "in"
-            ],
-            [
-              "NativeNumberMode",
-              "int",
-              "in"
-            ],
-            [
-              "NativeNumberParameters",
-              "str",
-              "in"
-            ]
+            {
+              "name": "NumberString",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Locale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "NativeNumberMode",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "NativeNumberParameters",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

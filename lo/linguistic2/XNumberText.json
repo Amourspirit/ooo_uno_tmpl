@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XNumberText",
   "type": "interface",
@@ -57,6 +57,7 @@
         {
           "name": "getAvailableLanguages",
           "returns": "typing.Tuple[Locale_70d308fa, ...]",
+          "returns_origin": "sequence< com.sun.star.lang.Locale >",
           "desc": [
             "returns a list of all supported languages."
           ],
@@ -66,6 +67,7 @@
         {
           "name": "getNumberText",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "spell out numbers and money amounts",
             "",
@@ -77,16 +79,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aText",
-              "str",
-              "in"
-            ],
-            [
-              "aLocale",
-              "Locale_70d308fa",
-              "in"
-            ]
+            {
+              "name": "aText",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
           ]
         }
       ]

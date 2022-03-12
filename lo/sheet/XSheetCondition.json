@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSheetCondition",
   "type": "interface",
@@ -67,6 +67,7 @@
         {
           "name": "getFormula1",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns either the comparison value, which is used in the condition, or the first value if two values are needed for the operator."
           ],
@@ -76,6 +77,7 @@
         {
           "name": "getFormula2",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "if two values are needed for the operator, this method returns the second one."
           ],
@@ -85,6 +87,7 @@
         {
           "name": "getOperator",
           "returns": "ConditionOperator_fec90e14",
+          "returns_origin": "com.sun.star.sheet.ConditionOperator",
           "desc": [
             "returns the operator in the condition."
           ],
@@ -94,6 +97,7 @@
         {
           "name": "getSourcePosition",
           "returns": "CellAddress_ae5f0b56",
+          "returns_origin": "com.sun.star.table.CellAddress",
           "desc": [
             "returns the position in the document which is used as a base for relative references in the formulas."
           ],
@@ -103,61 +107,69 @@
         {
           "name": "setFormula1",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets either the comparison value, which is used in the condition, or the first value if two values are needed for the operator."
           ],
           "raises": [],
           "args": [
-            [
-              "aFormula1",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aFormula1",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "setFormula2",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "if two values are needed for the operator, this method sets the second one."
           ],
           "raises": [],
           "args": [
-            [
-              "aFormula2",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aFormula2",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "setOperator",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the operator in the condition."
           ],
           "raises": [],
           "args": [
-            [
-              "nOperator",
-              "ConditionOperator_fec90e14",
-              "in"
-            ]
+            {
+              "name": "nOperator",
+              "type": "ConditionOperator_fec90e14",
+              "direction": "in",
+              "origin": "com.sun.star.sheet.ConditionOperator"
+            }
           ]
         },
         {
           "name": "setSourcePosition",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the position in the document which is used as a base for relative references in the formulas."
           ],
           "raises": [],
           "args": [
-            [
-              "aSourcePosition",
-              "CellAddress_ae5f0b56",
-              "in"
-            ]
+            {
+              "name": "aSourcePosition",
+              "type": "CellAddress_ae5f0b56",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellAddress"
+            }
           ]
         }
       ]

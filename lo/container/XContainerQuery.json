@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XContainerQuery",
   "type": "interface",
@@ -71,6 +71,7 @@
         {
           "name": "createSubSetEnumerationByProperties",
           "returns": "XEnumeration_f2180daa",
+          "returns_origin": "com.sun.star.container.XEnumeration",
           "desc": [
             "creates a sub set of container items which supports searched properties as minimum",
             "",
@@ -78,16 +79,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Properties",
-              "typing.Tuple[NamedValue_a37a0af3, ...]",
-              "in"
-            ]
+            {
+              "name": "Properties",
+              "type": "typing.Tuple[NamedValue_a37a0af3, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.NamedValue >"
+            }
           ]
         },
         {
           "name": "createSubSetEnumerationByQuery",
           "returns": "XEnumeration_f2180daa",
+          "returns_origin": "com.sun.star.container.XEnumeration",
           "desc": [
             "creates a sub set of container items which match given query command",
             "",
@@ -95,11 +98,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Query",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Query",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

@@ -1,11 +1,11 @@
 # coding: utf-8
 from dataclasses import dataclass
 from typing import Union
-from ..data_manage.data_class.component import Component
+from ..parser.mod_type import PythonType
 
 @dataclass
 class ClassArg:
     name: str
     type: str
     default: str
-    component: Union[Component, None]
+    p_type: Union[PythonType, None]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XEmbeddedObject",
   "type": "interface",
@@ -111,6 +111,7 @@
         {
           "name": "changeState",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "changes the state of the object to the requested one."
           ],
@@ -120,16 +121,18 @@
             "com.sun.star.uno.Exception"
           ],
           "args": [
-            [
-              "nNewState",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nNewState",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "doVerb",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "lets object perform an action referenced by nVerbID."
           ],
@@ -140,16 +143,18 @@
             "com.sun.star.uno.Exception"
           ],
           "args": [
-            [
-              "nVerbID",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nVerbID",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getClientSite",
           "returns": "XEmbeddedClient_ddea0cc6",
+          "returns_origin": "com.sun.star.embed.XEmbeddedClient",
           "desc": [
             "provides access to the internal link to the container client."
           ],
@@ -161,6 +166,7 @@
         {
           "name": "getCurrentState",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "returns the current state of the object."
           ],
@@ -172,6 +178,7 @@
         {
           "name": "getReachableStates",
           "returns": "typing.Tuple[int, ...]",
+          "returns_origin": "sequence< long >",
           "desc": [
             "returns supported states for the object."
           ],
@@ -184,6 +191,7 @@
         {
           "name": "getStatus",
           "returns": "int",
+          "returns_origin": "hyper",
           "desc": [
             "retrieves the status of the object."
           ],
@@ -191,16 +199,18 @@
             "com.sun.star.embed.WrongStateException"
           ],
           "args": [
-            [
-              "nAspect",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nAspect",
+              "type": "int",
+              "direction": "in",
+              "origin": "hyper"
+            }
           ]
         },
         {
           "name": "getSupportedVerbs",
           "returns": "typing.Tuple[VerbDescriptor_d3680cb3, ...]",
+          "returns_origin": "sequence< VerbDescriptor >",
           "desc": [
             "returns supported verbs for the object."
           ],
@@ -213,6 +223,7 @@
         {
           "name": "setClientSite",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets a connection to the container's client."
           ],
@@ -220,31 +231,35 @@
             "com.sun.star.embed.WrongStateException"
           ],
           "args": [
-            [
-              "xClient",
-              "XEmbeddedClient_ddea0cc6",
-              "in"
-            ]
+            {
+              "name": "xClient",
+              "type": "XEmbeddedClient_ddea0cc6",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XEmbeddedClient"
+            }
           ]
         },
         {
           "name": "setContainerName",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "provides object with the name of container document."
           ],
           "raises": [],
           "args": [
-            [
-              "sName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "sName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "setUpdateMode",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "specifies how often the object's representation should be updated."
           ],
@@ -252,16 +267,18 @@
             "com.sun.star.embed.WrongStateException"
           ],
           "args": [
-            [
-              "nMode",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nMode",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "update",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "updates object's representations."
           ],

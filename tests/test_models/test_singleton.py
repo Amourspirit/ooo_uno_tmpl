@@ -20,13 +20,13 @@ def test_the_introspection(fixture_the_introspection):
     obj = ModelSingleton(**f_json)
     assert obj is not None
     assert obj.id == 'uno-ooo-parser'
-    assert obj.version == "0.1.23"
+    assert obj.version == "0.1.24"
     assert obj.libre_office_ver == "7.2"
     assert obj.name == "theIntrospection"
     assert obj.type == OooType.SINGLETON
     assert obj.type == "singleton"
     assert obj.namespace == "com.sun.star.beans"
-    assert obj.parser_args.sort == True
+    assert obj.parser_args.sort == False
     assert obj.parser_args.long_names == True
     assert obj.parser_args.remove_parent_inherited == True
     assert obj.writer_args.include_desc == True

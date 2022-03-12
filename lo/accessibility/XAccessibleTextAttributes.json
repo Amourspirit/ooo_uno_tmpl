@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XAccessibleTextAttributes",
   "type": "interface",
@@ -56,6 +56,7 @@
         {
           "name": "getDefaultAttributes",
           "returns": "typing.Tuple[PropertyValue_c9610c73, ...]",
+          "returns_origin": "sequence<.com.sun.star.beans.PropertyValue >",
           "desc": [
             "Get the default attribute set for the text.",
             "",
@@ -67,16 +68,18 @@
             "com.sun.star.beans.UnknownPropertyException"
           ],
           "args": [
-            [
-              "RequestedAttributes",
-              "typing.Tuple[str, ...]",
-              "in"
-            ]
+            {
+              "name": "RequestedAttributes",
+              "type": "typing.Tuple[str, ...]",
+              "direction": "in",
+              "origin": "sequence< string >"
+            }
           ]
         },
         {
           "name": "getRunAttributes",
           "returns": "typing.Tuple[PropertyValue_c9610c73, ...]",
+          "returns_origin": "sequence<.com.sun.star.beans.PropertyValue >",
           "desc": [
             "Get the run attribute set for the specified position.",
             "",
@@ -89,16 +92,18 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "Index",
-              "int",
-              "in"
-            ],
-            [
-              "RequestedAttributes",
-              "typing.Tuple[str, ...]",
-              "in"
-            ]
+            {
+              "name": "Index",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "RequestedAttributes",
+              "type": "typing.Tuple[str, ...]",
+              "direction": "in",
+              "origin": "sequence< string >"
+            }
           ]
         }
       ]

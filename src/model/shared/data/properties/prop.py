@@ -6,6 +6,7 @@ from pydantic import BaseModel
 class Prop(BaseModel):
     name: str
     returns: str
+    origin: Optional[str]
     origtype: Optional[str]
     desc: List[str]
     raises_get: Optional[str]

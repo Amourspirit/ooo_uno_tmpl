@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XLoadable",
   "type": "interface",
@@ -68,6 +68,7 @@
         {
           "name": "initNew",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "creates a component from scratch"
           ],
@@ -81,6 +82,7 @@
         {
           "name": "load",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "loads a component from a URL"
           ],
@@ -90,11 +92,12 @@
             "com.sun.star.uno.Exception"
           ],
           "args": [
-            [
-              "lArguments",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ]
+            {
+              "name": "lArguments",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            }
           ]
         }
       ]

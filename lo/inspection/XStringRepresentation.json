@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XStringRepresentation",
   "type": "interface",
@@ -38,6 +38,7 @@
         {
           "name": "convertToControlValue",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "converts a into a string."
           ],
@@ -45,16 +46,18 @@
             "com.sun.star.uno.Exception"
           ],
           "args": [
-            [
-              "PropertyValue",
-              "object",
-              "in"
-            ]
+            {
+              "name": "PropertyValue",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         },
         {
           "name": "convertToPropertyValue",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "converts a string into an any with the type defined by the target type."
           ],
@@ -62,16 +65,18 @@
             "com.sun.star.uno.Exception"
           ],
           "args": [
-            [
-              "ControlValue",
-              "str",
-              "in"
-            ],
-            [
-              "ControlValueType",
-              "object",
-              "in"
-            ]
+            {
+              "name": "ControlValue",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "ControlValueType",
+              "type": "object",
+              "direction": "in",
+              "origin": "type"
+            }
           ]
         }
       ]

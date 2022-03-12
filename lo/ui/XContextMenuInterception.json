@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XContextMenuInterception",
   "type": "interface",
@@ -60,21 +60,24 @@
         {
           "name": "registerContextMenuInterceptor",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "registers an XContextMenuInterceptor, which will become the first interceptor in the chain of registered interceptors."
           ],
           "raises": [],
           "args": [
-            [
-              "Interceptor",
-              "XContextMenuInterceptor_295c0f47",
-              "in"
-            ]
+            {
+              "name": "Interceptor",
+              "type": "XContextMenuInterceptor_295c0f47",
+              "direction": "in",
+              "origin": "com.sun.star.ui.XContextMenuInterceptor"
+            }
           ]
         },
         {
           "name": "releaseContextMenuInterceptor",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes an XContextMenuInterceptor which was previously registered using XContextMenuInterception.registerContextMenuInterceptor().",
             "",
@@ -82,11 +85,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Interceptor",
-              "XContextMenuInterceptor_295c0f47",
-              "in"
-            ]
+            {
+              "name": "Interceptor",
+              "type": "XContextMenuInterceptor_295c0f47",
+              "direction": "in",
+              "origin": "com.sun.star.ui.XContextMenuInterceptor"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XPatternField",
   "type": "interface",
@@ -50,26 +50,30 @@
         {
           "name": "getMasks",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "returns the currently set pattern mask."
           ],
           "raises": [],
           "args": [
-            [
-              "EditMask",
-              "str",
-              "out"
-            ],
-            [
-              "LiteralMask",
-              "str",
-              "out"
-            ]
+            {
+              "name": "EditMask",
+              "type": "str",
+              "direction": "out",
+              "origin": "string"
+            },
+            {
+              "name": "LiteralMask",
+              "type": "str",
+              "direction": "out",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getString",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the currently set string value of the pattern field."
           ],
@@ -79,6 +83,7 @@
         {
           "name": "isStrictFormat",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "returns whether the format is currently checked during user input."
           ],
@@ -88,51 +93,58 @@
         {
           "name": "setMasks",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the pattern mask."
           ],
           "raises": [],
           "args": [
-            [
-              "EditMask",
-              "str",
-              "in"
-            ],
-            [
-              "LiteralMask",
-              "str",
-              "in"
-            ]
+            {
+              "name": "EditMask",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "LiteralMask",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "setStrictFormat",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "determines if the format is checked during user input."
           ],
           "raises": [],
           "args": [
-            [
-              "bStrict",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "bStrict",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "setString",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the string value of the pattern field."
           ],
           "raises": [],
           "args": [
-            [
-              "Str",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Str",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

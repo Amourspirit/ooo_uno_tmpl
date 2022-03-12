@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XMergeableCellRange",
   "type": "interface",
@@ -50,6 +50,7 @@
         {
           "name": "isMergeable",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [],
           "raises": [],
           "args": []
@@ -57,6 +58,7 @@
         {
           "name": "merge",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "merges the area specified by this range."
           ],
@@ -68,6 +70,7 @@
         {
           "name": "split",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "splits the cells in this range.",
             "",
@@ -78,16 +81,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "Columns",
-              "int",
-              "in"
-            ],
-            [
-              "Rows",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Columns",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "Rows",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

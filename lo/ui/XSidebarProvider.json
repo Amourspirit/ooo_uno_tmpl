@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSidebarProvider",
   "type": "interface",
@@ -78,6 +78,7 @@
         {
           "name": "getDecks",
           "returns": "XDecks_5e8b0828",
+          "returns_origin": "com.sun.star.ui.XDecks",
           "desc": [],
           "raises": [],
           "args": []
@@ -85,6 +86,7 @@
         {
           "name": "getFrame",
           "returns": "XFrame_7a570956",
+          "returns_origin": "com.sun.star.frame.XFrame",
           "desc": [
             "Get the XFrame owner."
           ],
@@ -94,6 +96,7 @@
         {
           "name": "getSidebar",
           "returns": "XSidebar_704a08f8",
+          "returns_origin": "com.sun.star.ui.XSidebar",
           "desc": [
             "Returns the sidebar object."
           ],
@@ -103,6 +106,7 @@
         {
           "name": "isVisible",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Is the sidebar visible."
           ],
@@ -112,31 +116,35 @@
         {
           "name": "setVisible",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Display the sidebar."
           ],
           "raises": [],
           "args": [
-            [
-              "bVisible",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "bVisible",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "showDecks",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Decks container visibility."
           ],
           "raises": [],
           "args": [
-            [
-              "bVisible",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "bVisible",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         }
       ]

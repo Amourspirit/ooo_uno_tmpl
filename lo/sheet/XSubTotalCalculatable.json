@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSubTotalCalculatable",
   "type": "interface",
@@ -62,41 +62,47 @@
         {
           "name": "applySubTotals",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "creates subtotals using the settings of the passed descriptor."
           ],
           "raises": [],
           "args": [
-            [
-              "xDescriptor",
-              "XSubTotalDescriptor_19fd0ec6",
-              "in"
-            ],
-            [
-              "bReplace",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "xDescriptor",
+              "type": "XSubTotalDescriptor_19fd0ec6",
+              "direction": "in",
+              "origin": "com.sun.star.sheet.XSubTotalDescriptor"
+            },
+            {
+              "name": "bReplace",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "createSubTotalDescriptor",
           "returns": "XSubTotalDescriptor_19fd0ec6",
+          "returns_origin": "com.sun.star.sheet.XSubTotalDescriptor",
           "desc": [
             "creates a subtotal descriptor."
           ],
           "raises": [],
           "args": [
-            [
-              "bEmpty",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "bEmpty",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "removeSubTotals",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes the subtotals from the current object."
           ],

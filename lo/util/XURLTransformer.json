@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XURLTransformer",
   "type": "interface",
@@ -60,21 +60,24 @@
         {
           "name": "assemble",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "assembles the parts of the URL specified by aURL and stores it into URL.Complete"
           ],
           "raises": [],
           "args": [
-            [
-              "aURL",
-              "object",
-              "in"
-            ]
+            {
+              "name": "aURL",
+              "type": "object",
+              "direction": "in",
+              "origin": null
+            }
           ]
         },
         {
           "name": "getPresentation",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns a representation of the URL for UI purposes only",
             "",
@@ -82,21 +85,24 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aURL",
-              "URL_57ad07b9",
-              "in"
-            ],
-            [
-              "bWithPassword",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "aURL",
+              "type": "URL_57ad07b9",
+              "direction": "in",
+              "origin": "com.sun.star.util.URL"
+            },
+            {
+              "name": "bWithPassword",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "parseSmart",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "parses the string in URL.Complete, which may contain a syntactically complete URL or is specified by the provided protocol",
             "",
@@ -104,21 +110,24 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aURL",
-              "object",
-              "in"
-            ],
-            [
-              "sSmartProtocol",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aURL",
+              "type": "object",
+              "direction": "in",
+              "origin": null
+            },
+            {
+              "name": "sSmartProtocol",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "parseStrict",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "parses the string in URL.Complete which should contain a syntactically complete URL.",
             "",
@@ -126,11 +135,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aURL",
-              "object",
-              "in"
-            ]
+            {
+              "name": "aURL",
+              "type": "object",
+              "direction": "in",
+              "origin": null
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XTabControllerModel",
   "type": "interface",
@@ -62,6 +62,7 @@
         {
           "name": "getControlModels",
           "returns": "typing.Tuple[XControlModel_affc0b7e, ...]",
+          "returns_origin": "sequence< com.sun.star.awt.XControlModel >",
           "desc": [
             "returns the control models."
           ],
@@ -71,51 +72,59 @@
         {
           "name": "getGroup",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "returns a control model group."
           ],
           "raises": [],
           "args": [
-            [
-              "nGroup",
-              "int",
-              "in"
-            ],
-            [
-              "Group",
-              "typing.Tuple[XControlModel_affc0b7e, ...]",
-              "out"
-            ],
-            [
-              "Name",
-              "str",
-              "out"
-            ]
+            {
+              "name": "nGroup",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "Group",
+              "type": "typing.Tuple[XControlModel_affc0b7e, ...]",
+              "direction": "out",
+              "origin": "sequence< com.sun.star.awt.XControlModel >"
+            },
+            {
+              "name": "Name",
+              "type": "str",
+              "direction": "out",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getGroupByName",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "returns a control model group by name."
           ],
           "raises": [],
           "args": [
-            [
-              "Name",
-              "str",
-              "in"
-            ],
-            [
-              "Group",
-              "typing.Tuple[XControlModel_affc0b7e, ...]",
-              "out"
-            ]
+            {
+              "name": "Name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Group",
+              "type": "typing.Tuple[XControlModel_affc0b7e, ...]",
+              "direction": "out",
+              "origin": "sequence< com.sun.star.awt.XControlModel >"
+            }
           ]
         },
         {
           "name": "getGroupControl",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "returns whether the control models are grouped together."
           ],
@@ -125,6 +134,7 @@
         {
           "name": "getGroupCount",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "returns the number of control model groups."
           ],
@@ -134,51 +144,58 @@
         {
           "name": "setControlModels",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the control models."
           ],
           "raises": [],
           "args": [
-            [
-              "Controls",
-              "typing.Tuple[XControlModel_affc0b7e, ...]",
-              "in"
-            ]
+            {
+              "name": "Controls",
+              "type": "typing.Tuple[XControlModel_affc0b7e, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.awt.XControlModel >"
+            }
           ]
         },
         {
           "name": "setGroup",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets a control model group."
           ],
           "raises": [],
           "args": [
-            [
-              "Group",
-              "typing.Tuple[XControlModel_affc0b7e, ...]",
-              "in"
-            ],
-            [
-              "GroupName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Group",
+              "type": "typing.Tuple[XControlModel_affc0b7e, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.awt.XControlModel >"
+            },
+            {
+              "name": "GroupName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "setGroupControl",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "determines if the control models are grouped together."
           ],
           "raises": [],
           "args": [
-            [
-              "GroupControl",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "GroupControl",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         }
       ]

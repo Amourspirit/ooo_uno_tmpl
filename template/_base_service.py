@@ -1,8 +1,8 @@
 # coding: utf-8
-import json
+from verr import Version
 from typing import Dict, Tuple, List
 from _base_json import BaseJson
-from verr import Version
+from oootmpl.model.service.model_service import ModelService
 
 
 class BaseService(BaseJson):
@@ -10,57 +10,34 @@ class BaseService(BaseJson):
         super().__init__(*args, **kwargs)
 
     def _hydrate_data(self, json_data: dict):
-        self._validate_data(json_data)
-        data: Dict[str, object] = json_data['data']
+        try:
+            self._model = ModelService(**json_data)
+        except Exception as e:
+            msg = f"Error occured in service {json_data['namespace']}.{json_data['name']}"
+            self._lerr(f"{msg}\n{e}")
+            raise Exception(msg) from e
+        # self._validate_data(json_data)
+        mdata = self._model.data
+        self.name = self.get_safe_word(mdata.name)
+        self.namespace = mdata.namespace
+        self.allow_db = mdata.allow_db
+        self.desc = mdata.desc
+        self.link = mdata.url
+        self.libre_office_ver = self._model.libre_office_ver
+        self.include_desc = self._model.writer_args.include_desc
+        self.requires_typing = mdata.requires_typing
+        self.inherits = mdata.extends
+        self.imports = mdata.imports
+        self.extends_map.update(mdata.extends_map)
 
-        def set_data(_key: str, a_name=None):
-            attr_name = _key if not a_name else a_name
-            val = data.get(_key, None)
-            if not val is None:
-                setattr(self, attr_name, val)
-
-        set_data('name')
-        set_data('namespace')
-        set_data('allow_db')
-        set_data('desc')
-        set_data('url', 'link')
-        setattr(self, 'inherits', data.get('extends', []))
-        set_data('imports')
-        # get lo ver if it exist. Defaut to False
-        self.libre_office_ver = json_data.get('libre_office_ver', False)
-        sort = bool(json_data['parser_args'].get('sort', False))
+        sort = self._model.parser_args.sort
         self.attribs = self._get_attribs(json_data=json_data, sort=sort)
-        setattr(self, 'requires_typing', data.get('requires_typing', False))
-        extends_map = data.get('extends_map', None)
-        if extends_map:
-            self.extends_map.update(extends_map)
-        ver_0_1_1 = Version(0, 1, 1)
-        if self.json_version == ver_0_1_1:
-            self._load_0_1_1(json_data=json_data)
-        else:
-            setattr(self, 'from_imports', [])
-            setattr(self, 'from_imports_typing', [])
-            set_data('from_imports')
-            set_data('from_imports_typing')
-            # self.requires_typing = False if len(
-            #     self.from_imports_typing) == 0 else True
-            quote: List[str] = data.get('quote', [])
-            self.quote.update(quote)
-            typings: List[str] = data.get('typings', [])
-            self.typings.update(typings)
-
-    def _load_0_1_1(self, json_data: dict):
-        def set_j_data(_key: str):
-            val = json_data.get(_key, None)
-            if val:
-                setattr(self, _key, val)
-        set_j_data('from_imports')
-        set_j_data('from_imports_typing')
-        from_imports_typing = json_data.get('from_imports_typing', [])
-        if len(from_imports_typing) == 0:
-            setattr(self, 'requires_typing', False)
-        else:
-            setattr(self, 'requires_typing', True)
+        self.from_imports = [x.as_tuple()
+                             for x in mdata.from_imports]
+        self.from_imports_typing = [x.as_tuple()
+                                    for x in mdata.from_imports_typing]
+        self.quote.update(mdata.quote)
+        self.typings.update(mdata.typings)
 
     def _get_attribs(self, json_data: dict, sort: bool) -> dict:
         items: dict = json_data['data']['items']
@@ -100,10 +77,10 @@ class BaseService(BaseJson):
             raise Exception(
                 "Invalid Data: Expected version to be at least '{min_ver}' got {ver}")
 
-    def _get_formated_arg(self, arg: Tuple[str]) -> str:
-        return f"{self.get_safe_word(arg[0])}: {self.get_q_type(arg[1])}"
+    def _get_formated_arg(self, arg: Dict[str, str]) -> str:
+        return f"{self.get_safe_word(arg['name'])}: {self.get_q_type(arg['type'])}"
 
-    def get_args(self, args: List[Tuple[str]]) -> str:
+    def get_args(self, args: List[Dict[str, str]]) -> str:
         result = ''
         for i, arg in enumerate(args):
             if i > 0:
@@ -115,9 +92,9 @@ class BaseService(BaseJson):
         args: list = meth['args']
         results: List[str] = []
         for arg in args:
-            if len(arg) >= 3:
-                if self.is_out_arg(arg[2]):  # dir in or out
-                    results.append(arg[0])  # arg name, index 1 is type
+            direction = arg['direction']
+            if self.is_out_arg(direction):
+                results.append(arg['name'])
         return results
 
     def _get_raises_list(self, d: dict, key: str) -> List[Tuple[str, str]]:

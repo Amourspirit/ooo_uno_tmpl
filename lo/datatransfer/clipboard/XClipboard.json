@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XClipboard",
   "type": "interface",
@@ -65,6 +65,7 @@
         {
           "name": "getContents",
           "returns": "XTransferable_2d800f38",
+          "returns_origin": "com.sun.star.datatransfer.XTransferable",
           "desc": [
             "To get the current content of the clipboard."
           ],
@@ -74,6 +75,7 @@
         {
           "name": "getName",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "To get the name of the clipboard instance.",
             "",
@@ -85,6 +87,7 @@
         {
           "name": "setContents",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Sets the current contents of the clipboard to the specified transferable object and registers the specified clipboard owner as the owner of the new contents.",
             "",
@@ -96,16 +99,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xTrans",
-              "XTransferable_2d800f38",
-              "in"
-            ],
-            [
-              "xClipboardOwner",
-              "XClipboardOwner_8713d8",
-              "in"
-            ]
+            {
+              "name": "xTrans",
+              "type": "XTransferable_2d800f38",
+              "direction": "in",
+              "origin": "com.sun.star.datatransfer.XTransferable"
+            },
+            {
+              "name": "xClipboardOwner",
+              "type": "XClipboardOwner_8713d8",
+              "direction": "in",
+              "origin": "com.sun.star.datatransfer.clipboard.XClipboardOwner"
+            }
           ]
         }
       ]

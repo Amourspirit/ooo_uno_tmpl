@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XRowLocate",
   "type": "interface",
@@ -52,6 +52,7 @@
         {
           "name": "compareBookmarks",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "compares two bookmarks and returns an indication of their relative values.",
             "",
@@ -62,21 +63,24 @@
             "com.sun.star.sdbc.SQLException"
           ],
           "args": [
-            [
-              "first",
-              "object",
-              "in"
-            ],
-            [
-              "second",
-              "object",
-              "in"
-            ]
+            {
+              "name": "first",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            },
+            {
+              "name": "second",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         },
         {
           "name": "getBookmark",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "returns the bookmark of the current row of a result set."
           ],
@@ -88,6 +92,7 @@
         {
           "name": "hasOrderedBookmarks",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "determines whether the bookmarks of a result set are ordered or not."
           ],
@@ -99,6 +104,7 @@
         {
           "name": "hashBookmark",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "returns the hash value for a specified bookmark."
           ],
@@ -106,16 +112,18 @@
             "com.sun.star.sdbc.SQLException"
           ],
           "args": [
-            [
-              "bookmark",
-              "object",
-              "in"
-            ]
+            {
+              "name": "bookmark",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         },
         {
           "name": "moveRelativeToBookmark",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "moves the cursor a relative number of rows, either positive or negative starting at a given bookmark position.",
             "",
@@ -126,21 +134,24 @@
             "com.sun.star.sdbc.SQLException"
           ],
           "args": [
-            [
-              "bookmark",
-              "object",
-              "in"
-            ],
-            [
-              "rows",
-              "int",
-              "in"
-            ]
+            {
+              "name": "bookmark",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            },
+            {
+              "name": "rows",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "moveToBookmark",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "moves the cursor to the row identified by a valid bookmark.",
             "",
@@ -151,11 +162,12 @@
             "com.sun.star.sdbc.SQLException"
           ],
           "args": [
-            [
-              "bookmark",
-              "object",
-              "in"
-            ]
+            {
+              "name": "bookmark",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         }
       ]

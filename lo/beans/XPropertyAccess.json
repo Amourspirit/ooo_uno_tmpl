@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XPropertyAccess",
   "type": "interface",
@@ -66,6 +66,7 @@
         {
           "name": "getPropertyValues",
           "returns": "typing.Tuple[PropertyValue_c9610c73, ...]",
+          "returns_origin": "sequence< com.sun.star.beans.PropertyValue >",
           "desc": [],
           "raises": [],
           "args": []
@@ -73,6 +74,7 @@
         {
           "name": "setPropertyValues",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the values of given properties.",
             "",
@@ -85,11 +87,12 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "aProps",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ]
+            {
+              "name": "aProps",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            }
           ]
         }
       ]

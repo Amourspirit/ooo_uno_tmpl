@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XLayerImporter",
   "type": "interface",
@@ -71,6 +71,7 @@
         {
           "name": "getTargetBackend",
           "returns": "XBackend_6ce81076",
+          "returns_origin": "com.sun.star.configuration.backend.XBackend",
           "desc": [
             "gets the target backend for importing."
           ],
@@ -80,6 +81,7 @@
         {
           "name": "importLayer",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Imports the layer given into the backend.",
             "",
@@ -92,16 +94,18 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "aLayer",
-              "XLayer_4cd50fcb",
-              "in"
-            ]
+            {
+              "name": "aLayer",
+              "type": "XLayer_4cd50fcb",
+              "direction": "in",
+              "origin": "com.sun.star.configuration.backend.XLayer"
+            }
           ]
         },
         {
           "name": "importLayerForEntity",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Imports the layer given into the backend for a given entity.",
             "",
@@ -114,21 +118,24 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "aLayer",
-              "XLayer_4cd50fcb",
-              "in"
-            ],
-            [
-              "aEntity",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aLayer",
+              "type": "XLayer_4cd50fcb",
+              "direction": "in",
+              "origin": "com.sun.star.configuration.backend.XLayer"
+            },
+            {
+              "name": "aEntity",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "setTargetBackend",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the target backend for importing."
           ],
@@ -136,11 +143,12 @@
             "com.sun.star.lang.NullPointerException"
           ],
           "args": [
-            [
-              "aBackend",
-              "XBackend_6ce81076",
-              "in"
-            ]
+            {
+              "name": "aBackend",
+              "type": "XBackend_6ce81076",
+              "direction": "in",
+              "origin": "com.sun.star.configuration.backend.XBackend"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XRepository",
   "type": "interface",
@@ -115,6 +115,7 @@
         {
           "name": "createBlankNode",
           "returns": "XBlankNode_8cf40a0a",
+          "returns_origin": "com.sun.star.rdf.XBlankNode",
           "desc": [
             "creates a fresh unique blank node."
           ],
@@ -124,6 +125,7 @@
         {
           "name": "createGraph",
           "returns": "XNamedGraph_97680a73",
+          "returns_origin": "com.sun.star.rdf.XNamedGraph",
           "desc": [
             "creates a graph with the given name.",
             "",
@@ -135,16 +137,18 @@
             "RepositoryException"
           ],
           "args": [
-            [
-              "GraphName",
-              "XURI_5682078c",
-              "in"
-            ]
+            {
+              "name": "GraphName",
+              "type": "XURI_5682078c",
+              "direction": "in",
+              "origin": "com.sun.star.rdf.XURI"
+            }
           ]
         },
         {
           "name": "destroyGraph",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "destroys the graph with the given name, and removes it from the repository.",
             "",
@@ -156,16 +160,18 @@
             "RepositoryException"
           ],
           "args": [
-            [
-              "GraphName",
-              "XURI_5682078c",
-              "in"
-            ]
+            {
+              "name": "GraphName",
+              "type": "XURI_5682078c",
+              "direction": "in",
+              "origin": "com.sun.star.rdf.XURI"
+            }
           ]
         },
         {
           "name": "exportGraph",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "exports a named graph from the repository.",
             "",
@@ -179,31 +185,36 @@
             "com.sun.star.io.IOException"
           ],
           "args": [
-            [
-              "Format",
-              "int",
-              "in"
-            ],
-            [
-              "OutStream",
-              "XOutputStream_a4e00b35",
-              "in"
-            ],
-            [
-              "GraphName",
-              "XURI_5682078c",
-              "in"
-            ],
-            [
-              "BaseURI",
-              "XURI_5682078c",
-              "in"
-            ]
+            {
+              "name": "Format",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "OutStream",
+              "type": "XOutputStream_a4e00b35",
+              "direction": "in",
+              "origin": "com.sun.star.io.XOutputStream"
+            },
+            {
+              "name": "GraphName",
+              "type": "XURI_5682078c",
+              "direction": "in",
+              "origin": "com.sun.star.rdf.XURI"
+            },
+            {
+              "name": "BaseURI",
+              "type": "XURI_5682078c",
+              "direction": "in",
+              "origin": "com.sun.star.rdf.XURI"
+            }
           ]
         },
         {
           "name": "getGraph",
           "returns": "XNamedGraph_97680a73",
+          "returns_origin": "com.sun.star.rdf.XNamedGraph",
           "desc": [
             "gets a graph by its name."
           ],
@@ -212,16 +223,18 @@
             "RepositoryException"
           ],
           "args": [
-            [
-              "GraphName",
-              "XURI_5682078c",
-              "in"
-            ]
+            {
+              "name": "GraphName",
+              "type": "XURI_5682078c",
+              "direction": "in",
+              "origin": "com.sun.star.rdf.XURI"
+            }
           ]
         },
         {
           "name": "getGraphNames",
           "returns": "typing.Tuple[XURI_5682078c, ...]",
+          "returns_origin": "sequence< XURI >",
           "desc": [
             "gets the names of all the graphs in the repository."
           ],
@@ -233,6 +246,7 @@
         {
           "name": "getStatements",
           "returns": "XEnumeration_f2180daa",
+          "returns_origin": "com.sun.star.container.XEnumeration",
           "desc": [
             "gets matching RDF statements from the repository.",
             "",
@@ -242,26 +256,30 @@
             "RepositoryException"
           ],
           "args": [
-            [
-              "Subject",
-              "XResource_842709e4",
-              "in"
-            ],
-            [
-              "Predicate",
-              "XURI_5682078c",
-              "in"
-            ],
-            [
-              "Object",
-              "XNode_5ee40822",
-              "in"
-            ]
+            {
+              "name": "Subject",
+              "type": "XResource_842709e4",
+              "direction": "in",
+              "origin": "com.sun.star.rdf.XResource"
+            },
+            {
+              "name": "Predicate",
+              "type": "XURI_5682078c",
+              "direction": "in",
+              "origin": "com.sun.star.rdf.XURI"
+            },
+            {
+              "name": "Object",
+              "type": "XNode_5ee40822",
+              "direction": "in",
+              "origin": "com.sun.star.rdf.XNode"
+            }
           ]
         },
         {
           "name": "importGraph",
           "returns": "XNamedGraph_97680a73",
+          "returns_origin": "com.sun.star.rdf.XNamedGraph",
           "desc": [
             "imports a named graph into the repository.",
             "",
@@ -276,31 +294,36 @@
             "com.sun.star.io.IOException"
           ],
           "args": [
-            [
-              "Format",
-              "int",
-              "in"
-            ],
-            [
-              "InStream",
-              "XInputStream_98d40ab4",
-              "in"
-            ],
-            [
-              "GraphName",
-              "XURI_5682078c",
-              "in"
-            ],
-            [
-              "BaseURI",
-              "XURI_5682078c",
-              "in"
-            ]
+            {
+              "name": "Format",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "InStream",
+              "type": "XInputStream_98d40ab4",
+              "direction": "in",
+              "origin": "com.sun.star.io.XInputStream"
+            },
+            {
+              "name": "GraphName",
+              "type": "XURI_5682078c",
+              "direction": "in",
+              "origin": "com.sun.star.rdf.XURI"
+            },
+            {
+              "name": "BaseURI",
+              "type": "XURI_5682078c",
+              "direction": "in",
+              "origin": "com.sun.star.rdf.XURI"
+            }
           ]
         },
         {
           "name": "queryAsk",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "executes a SPARQL \\\"ASK\\\" query.",
             "",
@@ -311,16 +334,18 @@
             "RepositoryException"
           ],
           "args": [
-            [
-              "Query",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Query",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "queryConstruct",
           "returns": "XEnumeration_f2180daa",
+          "returns_origin": "com.sun.star.container.XEnumeration",
           "desc": [
             "executes a SPARQL \\\"CONSTRUCT\\\" query.",
             "",
@@ -331,16 +356,18 @@
             "RepositoryException"
           ],
           "args": [
-            [
-              "Query",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Query",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "querySelect",
           "returns": "XQuerySelectResult_eebb0d91",
+          "returns_origin": "com.sun.star.rdf.XQuerySelectResult",
           "desc": [
             "executes a SPARQL \\\"SELECT\\\" query.",
             "",
@@ -351,11 +378,12 @@
             "RepositoryException"
           ],
           "args": [
-            [
-              "Query",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Query",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

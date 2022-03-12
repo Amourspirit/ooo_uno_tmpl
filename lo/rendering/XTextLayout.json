@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XTextLayout",
   "type": "interface",
@@ -119,6 +119,7 @@
         {
           "name": "applyLogicalAdvancements",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Apply explicit advancements for every character in the layout string.",
             "",
@@ -128,16 +129,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aAdvancements",
-              "typing.Tuple[float, ...]",
-              "in"
-            ]
+            {
+              "name": "aAdvancements",
+              "type": "typing.Tuple[float, ...]",
+              "direction": "in",
+              "origin": "sequence< double >"
+            }
           ]
         },
         {
           "name": "combinedJustify",
           "returns": "float",
+          "returns_origin": "double",
           "desc": [
             "Justify a number of text layouts to the given size.",
             "",
@@ -147,21 +150,24 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aNextLayouts",
-              "typing.Tuple[XTextLayout, ...]",
-              "in"
-            ],
-            [
-              "nSize",
-              "float",
-              "in"
-            ]
+            {
+              "name": "aNextLayouts",
+              "type": "typing.Tuple[XTextLayout, ...]",
+              "direction": "in",
+              "origin": "sequence< XTextLayout >"
+            },
+            {
+              "name": "nSize",
+              "type": "float",
+              "direction": "in",
+              "origin": "double"
+            }
           ]
         },
         {
           "name": "getBaselineOffset",
           "returns": "float",
+          "returns_origin": "double",
           "desc": [
             "This method yields the baseline offset.",
             "",
@@ -173,6 +179,7 @@
         {
           "name": "getCaret",
           "returns": "Caret_9b480ab5",
+          "returns_origin": "com.sun.star.rendering.Caret",
           "desc": [
             "This method converts an insertion index to a caret.",
             "",
@@ -182,21 +189,24 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nInsertionIndex",
-              "int",
-              "in"
-            ],
-            [
-              "bExcludeLigatures",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "nInsertionIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "bExcludeLigatures",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "getFont",
           "returns": "XCanvasFont_e3380d11",
+          "returns_origin": "com.sun.star.rendering.XCanvasFont",
           "desc": [
             "Request the associated font for this layout."
           ],
@@ -206,6 +216,7 @@
         {
           "name": "getMainTextDirection",
           "returns": "int",
+          "returns_origin": "byte",
           "desc": [
             "This method returns the main writing direction.",
             "",
@@ -217,6 +228,7 @@
         {
           "name": "getNextInsertionIndex",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "This method calculates a new insertion index.",
             "",
@@ -226,26 +238,30 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nStartIndex",
-              "int",
-              "in"
-            ],
-            [
-              "nCaretAdvancement",
-              "int",
-              "in"
-            ],
-            [
-              "bExcludeLigatures",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "nStartIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nCaretAdvancement",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "bExcludeLigatures",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "getText",
           "returns": "StringContext_d50e22",
+          "returns_origin": "com.sun.star.rendering.StringContext",
           "desc": [
             "Request the text this layout contains."
           ],
@@ -255,6 +271,7 @@
         {
           "name": "getTextHit",
           "returns": "TextHit_b25d0b90",
+          "returns_origin": "com.sun.star.rendering.TextHit",
           "desc": [
             "This method determines the hit position in the text.",
             "",
@@ -262,16 +279,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aHitPoint",
-              "RealPoint2D_d6e70c78",
-              "in"
-            ]
+            {
+              "name": "aHitPoint",
+              "type": "RealPoint2D_d6e70c78",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.RealPoint2D"
+            }
           ]
         },
         {
           "name": "justify",
           "returns": "float",
+          "returns_origin": "double",
           "desc": [
             "Justify the text to the given size.",
             "",
@@ -281,16 +300,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "nSize",
-              "float",
-              "in"
-            ]
+            {
+              "name": "nSize",
+              "type": "float",
+              "direction": "in",
+              "origin": "double"
+            }
           ]
         },
         {
           "name": "queryInkMeasures",
           "returns": "typing.Tuple[RealRectangle2D_d9b0e03, ...]",
+          "returns_origin": "sequence<.com.sun.star.geometry.RealRectangle2D >",
           "desc": [
             "Query the ink bounding boxes for every glyph in the layouted text.",
             "",
@@ -302,6 +323,7 @@
         {
           "name": "queryLogicalAdvancements",
           "returns": "typing.Tuple[float, ...]",
+          "returns_origin": "sequence< double >",
           "desc": [
             "Query the advancements for every character in the input string.",
             "",
@@ -317,6 +339,7 @@
         {
           "name": "queryLogicalHighlighting",
           "returns": "XPolyPolygon2D_e1b0e20",
+          "returns_origin": "com.sun.star.rendering.XPolyPolygon2D",
           "desc": [
             "This method generates a highlight polygon.",
             "",
@@ -326,21 +349,24 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nStartIndex",
-              "int",
-              "in"
-            ],
-            [
-              "nEndIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nStartIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nEndIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "queryMeasures",
           "returns": "typing.Tuple[RealRectangle2D_d9b0e03, ...]",
+          "returns_origin": "sequence<.com.sun.star.geometry.RealRectangle2D >",
           "desc": [
             "Query the logical bounding boxes of every character in the given text string.",
             "",
@@ -352,6 +378,7 @@
         {
           "name": "queryTextBounds",
           "returns": "RealRectangle2D_d9b0e03",
+          "returns_origin": "com.sun.star.geometry.RealRectangle2D",
           "desc": [
             "Query the overall bounding box of the text.",
             "",
@@ -363,6 +390,7 @@
         {
           "name": "queryTextShapes",
           "returns": "typing.Tuple[XPolyPolygon2D_e1b0e20, ...]",
+          "returns_origin": "sequence< XPolyPolygon2D >",
           "desc": [
             "Extract the polygonal shapes of the layouted text.",
             "",
@@ -374,6 +402,7 @@
         {
           "name": "queryVisualHighlighting",
           "returns": "XPolyPolygon2D_e1b0e20",
+          "returns_origin": "com.sun.star.rendering.XPolyPolygon2D",
           "desc": [
             "This method generates a highlight polygon.",
             "",
@@ -383,16 +412,18 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nStartIndex",
-              "int",
-              "in"
-            ],
-            [
-              "nEndIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nStartIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nEndIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

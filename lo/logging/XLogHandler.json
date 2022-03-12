@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XLogHandler",
   "type": "interface",
@@ -71,6 +71,7 @@
         {
           "name": "flush",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "flushes all buffered output of the handler",
             "",
@@ -82,16 +83,18 @@
         {
           "name": "publish",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "publish the given log record at the handler's output channel."
           ],
           "raises": [],
           "args": [
-            [
-              "Record",
-              "LogRecord_b0c20b70",
-              "in"
-            ]
+            {
+              "name": "Record",
+              "type": "LogRecord_b0c20b70",
+              "direction": "in",
+              "origin": "com.sun.star.logging.LogRecord"
+            }
           ]
         }
       ],
@@ -100,6 +103,7 @@
           "name": "Encoding",
           "returns": "str",
           "origtype": null,
+          "origin": "string",
           "desc": [
             "specifies MIME charset name for the encoding to be used by this handler",
             "",
@@ -112,6 +116,7 @@
           "name": "Formatter",
           "returns": "XLogFormatter_e23d0d1d",
           "origtype": "com.sun.star.logging.XLogFormatter",
+          "origin": "com.sun.star.logging.XLogFormatter",
           "desc": [
             "specifies the formatter to be used by this handler."
           ],
@@ -122,6 +127,7 @@
           "name": "Level",
           "returns": "int",
           "origtype": null,
+          "origin": "long",
           "desc": [
             "specifies the log level of this handler",
             "",

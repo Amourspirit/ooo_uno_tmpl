@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XPackageRegistry",
   "type": "interface",
@@ -68,6 +68,7 @@
         {
           "name": "bindPackage",
           "returns": "XPackage_cb1f0c4d",
+          "returns_origin": "com.sun.star.deployment.XPackage",
           "desc": [
             "binds a package URL to a XPackage handle.",
             "",
@@ -88,36 +89,42 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "url",
-              "str",
-              "in"
-            ],
-            [
-              "mediaType",
-              "str",
-              "in"
-            ],
-            [
-              "removed",
-              "bool",
-              "in"
-            ],
-            [
-              "identifier",
-              "str",
-              "in"
-            ],
-            [
-              "xCmdEnv",
-              "XCommandEnvironment_fb330dee",
-              "in"
-            ]
+            {
+              "name": "url",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "mediaType",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "removed",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            },
+            {
+              "name": "identifier",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "xCmdEnv",
+              "type": "XCommandEnvironment_fb330dee",
+              "direction": "in",
+              "origin": "com.sun.star.ucb.XCommandEnvironment"
+            }
           ]
         },
         {
           "name": "getSupportedPackageTypes",
           "returns": "typing.Tuple[XPackageTypeInfo_3bc70f7b, ...]",
+          "returns_origin": "sequence< XPackageTypeInfo >",
           "desc": [
             "gets the supported XPackageTypeInfos."
           ],
@@ -127,22 +134,25 @@
         {
           "name": "packageRemoved",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [],
           "raises": [
             "DeploymentException",
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "url",
-              "str",
-              "in"
-            ],
-            [
-              "mediaType",
-              "str",
-              "in"
-            ]
+            {
+              "name": "url",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "mediaType",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

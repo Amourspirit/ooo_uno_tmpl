@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XScriptListener",
   "type": "interface",
@@ -60,6 +60,7 @@
         {
           "name": "approveFiring",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "gets called when a \\\"vetoable event\\\" occurs at the object."
           ],
@@ -67,16 +68,18 @@
             "com.sun.star.reflection.InvocationTargetException"
           ],
           "args": [
-            [
-              "aEvent",
-              "ScriptEvent_be710c14",
-              "in"
-            ]
+            {
+              "name": "aEvent",
+              "type": "ScriptEvent_be710c14",
+              "direction": "in",
+              "origin": "com.sun.star.script.ScriptEvent"
+            }
           ]
         },
         {
           "name": "firing",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "gets called when an event takes place.",
             "",
@@ -84,11 +87,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aEvent",
-              "ScriptEvent_be710c14",
-              "in"
-            ]
+            {
+              "name": "aEvent",
+              "type": "ScriptEvent_be710c14",
+              "direction": "in",
+              "origin": "com.sun.star.script.ScriptEvent"
+            }
           ]
         }
       ]

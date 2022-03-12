@@ -7,7 +7,7 @@ if __name__ == "__main__":
 
 
 def test_method_arg():
-    from src.model.shared.data.methods.method import ArgDirection
+    from src.model.shared.data.methods.method_arg import ArgDirection
     d = ArgDirection.IN
     assert str(d) == 'in'
     d = ArgDirection('in')
@@ -25,18 +25,19 @@ def test_method_raises():
 
 def test_method():
     from src.model.shared.data.methods.method import Method
-    from src.model.shared.data.methods.method import ArgDirection
+    from src.model.shared.data.methods.method_arg import ArgDirection
     data = {
         "name": "createWithModel",
         "returns": "None",
         "desc": [],
         "raises": [],
         "args": [
-        [
-            "Model",
-            "XModel_7a6e095c",
-            "in"
-        ]
+        {
+            "name": "Model",
+            "type": "XModel_7a6e095c",
+            "direction": "in",
+            "origin": "com.sun.star.uno.XModel"
+        }
         ]
     }
     meth = Method(**data)
@@ -46,6 +47,7 @@ def test_method():
     arg = meth.args[0]
     assert arg.name== "Model"
     assert arg.type == "XModel_7a6e095c"
+    assert arg.origin == "com.sun.star.uno.XModel"
     assert arg.direction == ArgDirection.IN
     assert arg.direction == 'in'
     assert str(arg.direction) == 'in'

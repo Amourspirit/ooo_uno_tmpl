@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XAccessibleMultiLineText",
   "type": "interface",
@@ -66,6 +66,7 @@
         {
           "name": "getLineNumberAtIndex",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "Returns the line number at the specified index.",
             "",
@@ -75,16 +76,18 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getNumberOfLineWithCaret",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "Returns the number of the line in which the caret is located.",
             "",
@@ -98,6 +101,7 @@
         {
           "name": "getTextAtLineNumber",
           "returns": "TextSegment_1e5b0ee8",
+          "returns_origin": "com.sun.star.accessibility.TextSegment",
           "desc": [
             "Returns the text of the specified line.",
             "",
@@ -109,16 +113,18 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nLineNo",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nLineNo",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getTextAtLineWithCaret",
           "returns": "TextSegment_1e5b0ee8",
+          "returns_origin": "com.sun.star.accessibility.TextSegment",
           "desc": [
             "Returns the text of the line in which the caret is located.",
             "",

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XExecutableDialog",
   "type": "interface",
@@ -50,6 +50,7 @@
         {
           "name": "execute",
           "returns": "int",
+          "returns_origin": "short",
           "desc": [
             "Executes (shows) the dialog."
           ],
@@ -59,16 +60,18 @@
         {
           "name": "setTitle",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Sets the title of the dialog."
           ],
           "raises": [],
           "args": [
-            [
-              "aTitle",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aTitle",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

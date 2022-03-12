@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XMultiServiceFactory",
   "type": "interface",
@@ -57,6 +57,7 @@
         {
           "name": "createInstance",
           "returns": "XInterface_8f010a43",
+          "returns_origin": "com.sun.star.uno.XInterface",
           "desc": [
             "Creates an instance classified by the specified name."
           ],
@@ -64,16 +65,18 @@
             "com.sun.star.uno.Exception"
           ],
           "args": [
-            [
-              "aServiceSpecifier",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aServiceSpecifier",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "createInstanceWithArguments",
           "returns": "XInterface_8f010a43",
+          "returns_origin": "com.sun.star.uno.XInterface",
           "desc": [
             "Creates an instance classified by the specified name and passes the arguments to that instance."
           ],
@@ -81,21 +84,24 @@
             "com.sun.star.uno.Exception"
           ],
           "args": [
-            [
-              "ServiceSpecifier",
-              "str",
-              "in"
-            ],
-            [
-              "Arguments",
-              "typing.Tuple[object, ...]",
-              "in"
-            ]
+            {
+              "name": "ServiceSpecifier",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Arguments",
+              "type": "typing.Tuple[object, ...]",
+              "direction": "in",
+              "origin": "sequence< any >"
+            }
           ]
         },
         {
           "name": "getAvailableServiceNames",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [
             "Provides the available names of the factory to be used to create instances."
           ],

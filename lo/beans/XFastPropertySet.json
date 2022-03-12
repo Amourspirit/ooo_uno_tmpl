@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XFastPropertySet",
   "type": "interface",
@@ -52,22 +52,25 @@
         {
           "name": "getFastPropertyValue",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [],
           "raises": [
             "com.sun.star.beans.UnknownPropertyException",
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "nHandle",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nHandle",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "setFastPropertyValue",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the value to the property with the specified name."
           ],
@@ -78,16 +81,18 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "nHandle",
-              "int",
-              "in"
-            ],
-            [
-              "aValue",
-              "object",
-              "in"
-            ]
+            {
+              "name": "nHandle",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aValue",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         }
       ]

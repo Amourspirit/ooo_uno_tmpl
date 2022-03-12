@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XUIElementFactoryRegistration",
   "type": "interface",
@@ -79,6 +79,7 @@
         {
           "name": "deregisterFactory",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "function to remove a previously defined user interface element factory.",
             "",
@@ -88,46 +89,53 @@
             "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
-            [
-              "aType",
-              "str",
-              "in"
-            ],
-            [
-              "aName",
-              "str",
-              "in"
-            ],
-            [
-              "ModuleIdentifier",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aType",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "ModuleIdentifier",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getFactory",
           "returns": "XUIElementFactory_d0280c7e",
+          "returns_origin": "com.sun.star.ui.XUIElementFactory",
           "desc": [
             "function to retrieve a previously registered user interface element factory."
           ],
           "raises": [],
           "args": [
-            [
-              "ResourceURL",
-              "str",
-              "in"
-            ],
-            [
-              "ModuleIdentifier",
-              "str",
-              "in"
-            ]
+            {
+              "name": "ResourceURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "ModuleIdentifier",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getRegisteredFactories",
           "returns": "typing.Tuple[typing.Tuple[PropertyValue_c9610c73, ...], ...]",
+          "returns_origin": "sequence< sequence< com.sun.star.beans.PropertyValue > >",
           "desc": [
             "function to retrieve a list of all registered user interface element factories",
             "",
@@ -139,6 +147,7 @@
         {
           "name": "registerFactory",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "function to register a user interface element factory."
           ],
@@ -146,26 +155,30 @@
             "com.sun.star.container.ElementExistException"
           ],
           "args": [
-            [
-              "aType",
-              "str",
-              "in"
-            ],
-            [
-              "aName",
-              "str",
-              "in"
-            ],
-            [
-              "aModuleIdentifier",
-              "str",
-              "in"
-            ],
-            [
-              "aFactoryImplementationName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aType",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aModuleIdentifier",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aFactoryImplementationName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

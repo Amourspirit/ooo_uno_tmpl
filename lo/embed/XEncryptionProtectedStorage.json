@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XEncryptionProtectedStorage",
   "type": "interface",
@@ -68,6 +68,7 @@
         {
           "name": "getEncryptionAlgorithms",
           "returns": "typing.Tuple[NamedValue_a37a0af3, ...]",
+          "returns_origin": "sequence< .com.sun.star.beans.NamedValue >",
           "desc": [
             "allows to get the encryption algorithms of the object."
           ],
@@ -77,6 +78,7 @@
         {
           "name": "setEncryptionAlgorithms",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "allows to set the encryption algorithms for the object.",
             "",
@@ -88,16 +90,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aAlgorithms",
-              "typing.Tuple[NamedValue_a37a0af3, ...]",
-              "in"
-            ]
+            {
+              "name": "aAlgorithms",
+              "type": "typing.Tuple[NamedValue_a37a0af3, ...]",
+              "direction": "in",
+              "origin": "sequence< .com.sun.star.beans.NamedValue >"
+            }
           ]
         },
         {
           "name": "setGpgProperties",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "set OpenPGP-specific encryption properties",
             "",
@@ -113,11 +117,12 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aProps",
-              "typing.Tuple[typing.Tuple[NamedValue_a37a0af3, ...], ...]",
-              "in"
-            ]
+            {
+              "name": "aProps",
+              "type": "typing.Tuple[typing.Tuple[NamedValue_a37a0af3, ...], ...]",
+              "direction": "in",
+              "origin": "sequence< sequence< .com.sun.star.beans.NamedValue > >"
+            }
           ]
         }
       ]

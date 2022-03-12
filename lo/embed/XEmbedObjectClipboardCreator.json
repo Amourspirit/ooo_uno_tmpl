@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XEmbedObjectClipboardCreator",
   "type": "interface",
@@ -78,6 +78,7 @@
         {
           "name": "createInstanceInitFromClipboard",
           "returns": "InsertedObjectInfo_a0e0e26",
+          "returns_origin": "com.sun.star.embed.InsertedObjectInfo",
           "desc": [
             "creates a new object and initializes it from the system clipboard.",
             "",
@@ -91,21 +92,24 @@
             "com.sun.star.uno.Exception"
           ],
           "args": [
-            [
-              "xStorage",
-              "XStorage_8e460a32",
-              "in"
-            ],
-            [
-              "sEntryName",
-              "str",
-              "in"
-            ],
-            [
-              "aObjectArgs",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ]
+            {
+              "name": "xStorage",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            },
+            {
+              "name": "sEntryName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aObjectArgs",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< .com.sun.star.beans.PropertyValue >"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XChartTypeTemplate",
   "type": "interface",
@@ -97,6 +97,7 @@
         {
           "name": "applyStyle",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Applies a chart-type specific style (e.g.",
             "",
@@ -104,31 +105,36 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xSeries",
-              "XDataSeries_b8150b89",
-              "in"
-            ],
-            [
-              "nChartTypeGroupIndex",
-              "int",
-              "in"
-            ],
-            [
-              "nSeriesIndex",
-              "int",
-              "in"
-            ],
-            [
-              "nSeriesCount",
-              "int",
-              "in"
-            ]
+            {
+              "name": "xSeries",
+              "type": "XDataSeries_b8150b89",
+              "direction": "in",
+              "origin": "com.sun.star.chart2.XDataSeries"
+            },
+            {
+              "name": "nChartTypeGroupIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nSeriesIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nSeriesCount",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "changeDiagram",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Analyses the given diagram and reinterprets its DataSeries and Categories and creates a new diagram based on these series.",
             "",
@@ -136,16 +142,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xDiagram",
-              "XDiagram_96fe0a59",
-              "in"
-            ]
+            {
+              "name": "xDiagram",
+              "type": "XDiagram_96fe0a59",
+              "direction": "in",
+              "origin": "com.sun.star.chart2.XDiagram"
+            }
           ]
         },
         {
           "name": "changeDiagramData",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Changes the given diagram xDiagram by using the new data given in xDataSource.",
             "",
@@ -157,26 +165,30 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xDiagram",
-              "XDiagram_96fe0a59",
-              "in"
-            ],
-            [
-              "xDataSource",
-              "XDataSource_f6340d57",
-              "in"
-            ],
-            [
-              "aArguments",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ]
+            {
+              "name": "xDiagram",
+              "type": "XDiagram_96fe0a59",
+              "direction": "in",
+              "origin": "com.sun.star.chart2.XDiagram"
+            },
+            {
+              "name": "xDataSource",
+              "type": "XDataSource_f6340d57",
+              "direction": "in",
+              "origin": "com.sun.star.chart2.data.XDataSource"
+            },
+            {
+              "name": "aArguments",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            }
           ]
         },
         {
           "name": "createDiagramByDataSource",
           "returns": "XDiagram_96fe0a59",
+          "returns_origin": "com.sun.star.chart2.XDiagram",
           "desc": [
             "Creates a new diagram based upon the given data .",
             "",
@@ -184,36 +196,41 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xDataSource",
-              "XDataSource_f6340d57",
-              "in"
-            ],
-            [
-              "aArguments",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ]
+            {
+              "name": "xDataSource",
+              "type": "XDataSource_f6340d57",
+              "direction": "in",
+              "origin": "com.sun.star.chart2.data.XDataSource"
+            },
+            {
+              "name": "aArguments",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            }
           ]
         },
         {
           "name": "getChartTypeForNewSeries",
           "returns": "XChartType_ad200b38",
+          "returns_origin": "com.sun.star.chart2.XChartType",
           "desc": [
             "Provides a chart type object that can be used to create new series."
           ],
           "raises": [],
           "args": [
-            [
-              "aFormerlyUsedChartTypes",
-              "typing.Tuple[XChartType_ad200b38, ...]",
-              "in"
-            ]
+            {
+              "name": "aFormerlyUsedChartTypes",
+              "type": "typing.Tuple[XChartType_ad200b38, ...]",
+              "direction": "in",
+              "origin": "sequence< XChartType >"
+            }
           ]
         },
         {
           "name": "getDataInterpreter",
           "returns": "XDataInterpreter_f84f0db2",
+          "returns_origin": "com.sun.star.chart2.XDataInterpreter",
           "desc": [],
           "raises": [],
           "args": []
@@ -221,6 +238,7 @@
         {
           "name": "matchesTemplate",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "States whether the given diagram could have been created by the template.",
             "",
@@ -230,21 +248,24 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xDiagram",
-              "XDiagram_96fe0a59",
-              "in"
-            ],
-            [
-              "bAdaptProperties",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "xDiagram",
+              "type": "XDiagram_96fe0a59",
+              "direction": "in",
+              "origin": "com.sun.star.chart2.XDiagram"
+            },
+            {
+              "name": "bAdaptProperties",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "resetStyles",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Resets all styles that were changed from the default at any object in the chart and have not been later modified.",
             "",
@@ -254,16 +275,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xDiagram",
-              "XDiagram_96fe0a59",
-              "in"
-            ]
+            {
+              "name": "xDiagram",
+              "type": "XDiagram_96fe0a59",
+              "direction": "in",
+              "origin": "com.sun.star.chart2.XDiagram"
+            }
           ]
         },
         {
           "name": "supportsCategories",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [],
           "raises": [],
           "args": []

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XBridgeSupplier2",
   "type": "interface",
@@ -64,6 +64,7 @@
         {
           "name": "createBridge",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "creates a bridge to provide an object of one object model with another."
           ],
@@ -71,26 +72,30 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aModelDepObject",
-              "object",
-              "in"
-            ],
-            [
-              "aProcessId",
-              "typing.Tuple[int, ...]",
-              "in"
-            ],
-            [
-              "nSourceModelType",
-              "int",
-              "in"
-            ],
-            [
-              "nDestModelType",
-              "int",
-              "in"
-            ]
+            {
+              "name": "aModelDepObject",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            },
+            {
+              "name": "aProcessId",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "in",
+              "origin": "sequence< byte >"
+            },
+            {
+              "name": "nSourceModelType",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "nDestModelType",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         }
       ]

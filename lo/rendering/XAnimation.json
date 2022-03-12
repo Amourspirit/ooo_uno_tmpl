@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XAnimation",
   "type": "interface",
@@ -80,6 +80,7 @@
         {
           "name": "getAnimationAttributes",
           "returns": "AnimationAttributes_5c8f108d",
+          "returns_origin": "com.sun.star.rendering.AnimationAttributes",
           "desc": [
             "Request the attribute information for this animation.",
             "",
@@ -91,6 +92,7 @@
         {
           "name": "render",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Render the animation content at time t into the specified canvas.",
             "",
@@ -102,21 +104,24 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "canvas",
-              "XCanvas_b19b0b7a",
-              "in"
-            ],
-            [
-              "viewState",
-              "ViewState_cab30c62",
-              "in"
-            ],
-            [
-              "t",
-              "float",
-              "in"
-            ]
+            {
+              "name": "canvas",
+              "type": "XCanvas_b19b0b7a",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.XCanvas"
+            },
+            {
+              "name": "viewState",
+              "type": "ViewState_cab30c62",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.ViewState"
+            },
+            {
+              "name": "t",
+              "type": "float",
+              "direction": "in",
+              "origin": "double"
+            }
           ]
         }
       ]

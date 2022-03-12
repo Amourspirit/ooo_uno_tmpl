@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XImplicitIDContainer",
   "type": "interface",
@@ -50,21 +50,24 @@
         {
           "name": "addWithImplicitID",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "adds a new object to the container and generates an implicit (unique) ID for this object."
           ],
           "raises": [],
           "args": [
-            [
-              "aElement",
-              "object",
-              "in"
-            ]
+            {
+              "name": "aElement",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         },
         {
           "name": "removeByImplicitID",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes an object from the container which is specified by an implicit (unique) identifier."
           ],
@@ -72,11 +75,12 @@
             "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
-            [
-              "ID",
-              "str",
-              "in"
-            ]
+            {
+              "name": "ID",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

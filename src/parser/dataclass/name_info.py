@@ -9,8 +9,8 @@ class NameInfo:
     "Name to use in code gen"
     orig_name: str
     """Origin name found from html"""
-    extra_data: Optional[object] = None
-    """Extra data that can be set in rules or otherwise"""
+    # extra_data: Optional[object] = None
+    # """Extra data that can be set in rules or otherwise"""
 
     def __lt__(self, other: object):
         if not isinstance(other, NameInfo):

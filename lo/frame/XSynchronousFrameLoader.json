@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSynchronousFrameLoader",
   "type": "interface",
@@ -71,6 +71,7 @@
         {
           "name": "cancel",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "cancels the loading process.",
             "",
@@ -82,21 +83,24 @@
         {
           "name": "load",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "starts the loading of the specified resource into the specified Frame."
           ],
           "raises": [],
           "args": [
-            [
-              "Descriptor",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ],
-            [
-              "Frame",
-              "XFrame_7a570956",
-              "in"
-            ]
+            {
+              "name": "Descriptor",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            },
+            {
+              "name": "Frame",
+              "type": "XFrame_7a570956",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XFrame"
+            }
           ]
         }
       ]

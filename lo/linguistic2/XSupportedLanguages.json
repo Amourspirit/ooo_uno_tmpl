@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSupportedLanguages",
   "type": "interface",
@@ -57,6 +57,7 @@
         {
           "name": "getLanguages",
           "returns": "typing.Tuple[int, ...]",
+          "returns_origin": "sequence< short >",
           "desc": [],
           "raises": [],
           "args": []
@@ -64,14 +65,16 @@
         {
           "name": "hasLanguage",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "nLanguage",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nLanguage",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         }
       ]

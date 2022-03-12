@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XPersist",
   "type": "interface",
@@ -50,6 +50,7 @@
         {
           "name": "read",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "reads all the persistent data of the object from the URL."
           ],
@@ -57,16 +58,18 @@
             "com.sun.star.io.IOException"
           ],
           "args": [
-            [
-              "URL",
-              "str",
-              "in"
-            ]
+            {
+              "name": "URL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "write",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "writes all the persistent data of the object to the URL."
           ],
@@ -74,11 +77,12 @@
             "com.sun.star.io.IOException"
           ],
           "args": [
-            [
-              "URL",
-              "str",
-              "in"
-            ]
+            {
+              "name": "URL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

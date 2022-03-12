@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDropTargetDropContext",
   "type": "interface",
@@ -54,6 +54,7 @@
         {
           "name": "acceptDrop",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Accept the Drop.",
             "",
@@ -61,16 +62,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "dragOperation",
-              "int",
-              "in"
-            ]
+            {
+              "name": "dragOperation",
+              "type": "int",
+              "direction": "in",
+              "origin": "byte"
+            }
           ]
         },
         {
           "name": "dropComplete",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Signals that the drop is completed and if it was successful or not.",
             "",
@@ -78,16 +81,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "success",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "success",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "rejectDrop",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Reject the drop as a result of examining the available com.sun.star.datatransfer.DataFlavor types received in the XDropTargetListener.dragEnter() method."
           ],

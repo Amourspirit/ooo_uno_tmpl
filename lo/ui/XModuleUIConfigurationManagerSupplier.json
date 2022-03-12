@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XModuleUIConfigurationManagerSupplier",
   "type": "interface",
@@ -64,6 +64,7 @@
         {
           "name": "getUIConfigurationManager",
           "returns": "XUIConfigurationManager_24e20eef",
+          "returns_origin": "com.sun.star.ui.XUIConfigurationManager",
           "desc": [
             "returns the requested module based user interface configuration manager."
           ],
@@ -71,11 +72,12 @@
             "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
-            [
-              "ModuleIdentifier",
-              "str",
-              "in"
-            ]
+            {
+              "name": "ModuleIdentifier",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

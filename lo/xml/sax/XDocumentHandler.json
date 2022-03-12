@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDocumentHandler",
   "type": "interface",
@@ -69,6 +69,7 @@
         {
           "name": "characters",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification of character data."
           ],
@@ -76,16 +77,18 @@
             "com.sun.star.xml.sax.SAXException"
           ],
           "args": [
-            [
-              "aChars",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aChars",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "endDocument",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification of the end of a document."
           ],
@@ -97,6 +100,7 @@
         {
           "name": "endElement",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification of the end of an element."
           ],
@@ -104,16 +108,18 @@
             "com.sun.star.xml.sax.SAXException"
           ],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "ignorableWhitespace",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification of white space that can be ignored."
           ],
@@ -121,16 +127,18 @@
             "com.sun.star.xml.sax.SAXException"
           ],
           "args": [
-            [
-              "aWhitespaces",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aWhitespaces",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "processingInstruction",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification of a processing instruction."
           ],
@@ -138,21 +146,24 @@
             "com.sun.star.xml.sax.SAXException"
           ],
           "args": [
-            [
-              "aTarget",
-              "str",
-              "in"
-            ],
-            [
-              "aData",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aTarget",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aData",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "setDocumentLocator",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives an object for locating the origin of SAX document events."
           ],
@@ -160,16 +171,18 @@
             "com.sun.star.xml.sax.SAXException"
           ],
           "args": [
-            [
-              "xLocator",
-              "XLocator_a3fb0aff",
-              "in"
-            ]
+            {
+              "name": "xLocator",
+              "type": "XLocator_a3fb0aff",
+              "direction": "in",
+              "origin": "com.sun.star.xml.sax.XLocator"
+            }
           ]
         },
         {
           "name": "startDocument",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification of the beginning of a document."
           ],
@@ -181,6 +194,7 @@
         {
           "name": "startElement",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification of the beginning of an element ."
           ],
@@ -188,16 +202,18 @@
             "com.sun.star.xml.sax.SAXException"
           ],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ],
-            [
-              "xAttribs",
-              "XAttributeList_eec70d7b",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "xAttribs",
+              "type": "XAttributeList_eec70d7b",
+              "direction": "in",
+              "origin": "com.sun.star.xml.sax.XAttributeList"
+            }
           ]
         }
       ]

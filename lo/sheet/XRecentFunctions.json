@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XRecentFunctions",
   "type": "interface",
@@ -54,6 +54,7 @@
         {
           "name": "getMaxRecentFunctions",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "returns the maximum number of entries that will be stored as recently used functions."
           ],
@@ -63,6 +64,7 @@
         {
           "name": "getRecentFunctionIds",
           "returns": "typing.Tuple[int, ...]",
+          "returns_origin": "sequence< long >",
           "desc": [
             "returns a sequence of those functions that were most recently used.",
             "",
@@ -74,6 +76,7 @@
         {
           "name": "setRecentFunctionIds",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the list of those functions that were most recently used.",
             "",
@@ -81,11 +84,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aRecentFunctionIds",
-              "typing.Tuple[int, ...]",
-              "in"
-            ]
+            {
+              "name": "aRecentFunctionIds",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "in",
+              "origin": "sequence< long >"
+            }
           ]
         }
       ]

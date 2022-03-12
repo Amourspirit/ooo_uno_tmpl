@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XPackageInformationProvider",
   "type": "interface",
@@ -46,6 +46,7 @@
         {
           "name": "getExtensionList",
           "returns": "typing.Tuple[typing.Tuple[str, ...], ...]",
+          "returns_origin": "sequence< sequence< string > >",
           "desc": [
             "returns a list of all installed extension with their version."
           ],
@@ -55,31 +56,35 @@
         {
           "name": "getPackageLocation",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "get Package information for a specific extension."
           ],
           "raises": [],
           "args": [
-            [
-              "extensionId",
-              "str",
-              "in"
-            ]
+            {
+              "name": "extensionId",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "isUpdateAvailable",
           "returns": "typing.Tuple[typing.Tuple[str, ...], ...]",
+          "returns_origin": "sequence< sequence< string > >",
           "desc": [
             "check if there are updates available for an extension."
           ],
           "raises": [],
           "args": [
-            [
-              "extensionId",
-              "str",
-              "in"
-            ]
+            {
+              "name": "extensionId",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XScenario",
   "type": "interface",
@@ -62,21 +62,24 @@
         {
           "name": "addRanges",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "adds more ranges to the scenario."
           ],
           "raises": [],
           "args": [
-            [
-              "aRanges",
-              "typing.Tuple[CellRangeAddress_ec450d43, ...]",
-              "in"
-            ]
+            {
+              "name": "aRanges",
+              "type": "typing.Tuple[CellRangeAddress_ec450d43, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.table.CellRangeAddress >"
+            }
           ]
         },
         {
           "name": "apply",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "applies the scenario.",
             "",
@@ -88,6 +91,7 @@
         {
           "name": "getIsScenario",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "returns TRUE if the current object is a scenario."
           ],
@@ -97,6 +101,7 @@
         {
           "name": "getScenarioComment",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the comment for the scenario."
           ],
@@ -106,16 +111,18 @@
         {
           "name": "setScenarioComment",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets a new comment for the scenario."
           ],
           "raises": [],
           "args": [
-            [
-              "aScenarioComment",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aScenarioComment",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

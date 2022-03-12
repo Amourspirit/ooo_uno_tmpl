@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSQLData",
   "type": "interface",
@@ -69,6 +69,7 @@
         {
           "name": "getSQLTypeName",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the fully-qualified name of the SQL user-defined type that this object represents.",
             "",
@@ -82,6 +83,7 @@
         {
           "name": "readSQL",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "populates this object with data read from the database.",
             "",
@@ -95,21 +97,24 @@
             "SQLException"
           ],
           "args": [
-            [
-              "stream",
-              "XSQLInput_8c4109fc",
-              "in"
-            ],
-            [
-              "typeName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "stream",
+              "type": "XSQLInput_8c4109fc",
+              "direction": "in",
+              "origin": "com.sun.star.sdbc.XSQLInput"
+            },
+            {
+              "name": "typeName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "writeSQL",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "writes this object to the given SQL data stream.",
             "",
@@ -121,11 +126,12 @@
             "SQLException"
           ],
           "args": [
-            [
-              "stream",
-              "XSQLOutput_96fb0a7d",
-              "in"
-            ]
+            {
+              "name": "stream",
+              "type": "XSQLOutput_96fb0a7d",
+              "direction": "in",
+              "origin": "com.sun.star.sdbc.XSQLOutput"
+            }
           ]
         }
       ]

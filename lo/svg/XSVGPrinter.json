@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSVGPrinter",
   "type": "interface",
@@ -66,6 +66,7 @@
         {
           "name": "endJob",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [],
           "raises": [],
           "args": []
@@ -73,47 +74,55 @@
         {
           "name": "printPage",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "aPrintPage",
-              "typing.Tuple[int, ...]",
-              "in"
-            ]
+            {
+              "name": "aPrintPage",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "in",
+              "origin": "sequence< byte >"
+            }
           ]
         },
         {
           "name": "startJob",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "aHandler",
-              "XDocumentHandler_9b90e28",
-              "in"
-            ],
-            [
-              "aJobSetup",
-              "typing.Tuple[int, ...]",
-              "in"
-            ],
-            [
-              "aJobName",
-              "str",
-              "in"
-            ],
-            [
-              "nCopies",
-              "int",
-              "in"
-            ],
-            [
-              "bCollate",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "aHandler",
+              "type": "XDocumentHandler_9b90e28",
+              "direction": "in",
+              "origin": "com.sun.star.xml.sax.XDocumentHandler"
+            },
+            {
+              "name": "aJobSetup",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "in",
+              "origin": "sequence< byte >"
+            },
+            {
+              "name": "aJobName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nCopies",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "bCollate",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XTextInputStream",
   "type": "interface",
@@ -56,6 +56,7 @@
         {
           "name": "isEOF",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Returns the EOF status.",
             "",
@@ -71,6 +72,7 @@
         {
           "name": "readLine",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "reads text until a line break (CR, LF, or CR/LF) or EOF is found and returns it as string (without CR, LF).",
             "",
@@ -84,6 +86,7 @@
         {
           "name": "readString",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "reads text until one of the given delimiter characters or EOF is found and returns it as string (without delimiter).",
             "",
@@ -93,31 +96,35 @@
             "com.sun.star.io.IOException"
           ],
           "args": [
-            [
-              "Delimiters",
-              "typing.Tuple[str, ...]",
-              "in"
-            ],
-            [
-              "bRemoveDelimiter",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "Delimiters",
+              "type": "typing.Tuple[str, ...]",
+              "direction": "in",
+              "origin": "sequence< char >"
+            },
+            {
+              "name": "bRemoveDelimiter",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "setEncoding",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets character encoding."
           ],
           "raises": [],
           "args": [
-            [
-              "Encoding",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Encoding",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

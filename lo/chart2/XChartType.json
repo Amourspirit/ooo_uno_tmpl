@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XChartType",
   "type": "interface",
@@ -61,6 +61,7 @@
         {
           "name": "createCoordinateSystem",
           "returns": "XCoordinateSystem_7ff0e31",
+          "returns_origin": "com.sun.star.chart2.XCoordinateSystem",
           "desc": [
             "Creates a coordinate systems that fits the chart-type with its current settings and for the given dimension."
           ],
@@ -68,16 +69,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "DimensionCount",
-              "int",
-              "in"
-            ]
+            {
+              "name": "DimensionCount",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getChartType",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "A string representation of the chart type.",
             "",
@@ -89,6 +92,7 @@
         {
           "name": "getRoleOfSequenceForSeriesLabel",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Returns the role of the XLabeledDataSequence of which the label will be taken to identify the DataSeries in dialogs or the legend."
           ],
@@ -98,6 +102,7 @@
         {
           "name": "getSupportedMandatoryRoles",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [
             "Returns a sequence of roles that are understood by this chart type.",
             "",
@@ -111,6 +116,7 @@
         {
           "name": "getSupportedOptionalRoles",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [
             "Returns a sequence of roles that are understood in addition to the mandatory roles (see XChartType.getSupportedMandatoryRoles()).",
             "",
@@ -122,6 +128,7 @@
         {
           "name": "getSupportedPropertyRoles",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [
             "Returns a sequence with supported property mapping roles.",
             "",

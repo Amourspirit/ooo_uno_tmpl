@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XColumn",
   "type": "interface",
@@ -119,6 +119,7 @@
         {
           "name": "getArray",
           "returns": "XArray_708108fb",
+          "returns_origin": "com.sun.star.sdbc.XArray",
           "desc": [
             "gets a SQL ARRAY value from the current row."
           ],
@@ -130,6 +131,7 @@
         {
           "name": "getBinaryStream",
           "returns": "XInputStream_98d40ab4",
+          "returns_origin": "com.sun.star.io.XInputStream",
           "desc": [
             "gets the value of a column in the current row as a stream of uninterpreted bytes.",
             "",
@@ -145,6 +147,7 @@
         {
           "name": "getBlob",
           "returns": "XBlob_6773087b",
+          "returns_origin": "com.sun.star.sdbc.XBlob",
           "desc": [
             "gets a BLOB (Binary Large OBject) value in the current row."
           ],
@@ -156,6 +159,7 @@
         {
           "name": "getBoolean",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "gets the value of a column in the current row as boolean."
           ],
@@ -167,6 +171,7 @@
         {
           "name": "getByte",
           "returns": "int",
+          "returns_origin": "byte",
           "desc": [
             "gets the value of a column in the current row as a byte."
           ],
@@ -178,6 +183,7 @@
         {
           "name": "getBytes",
           "returns": "typing.Tuple[int, ...]",
+          "returns_origin": "sequence< byte >",
           "desc": [
             "gets the value of a column in the current row as a byte array.",
             "",
@@ -191,6 +197,7 @@
         {
           "name": "getCharacterStream",
           "returns": "XInputStream_98d40ab4",
+          "returns_origin": "com.sun.star.io.XInputStream",
           "desc": [
             "gets the value of a column in the current row as a stream of uninterpreted bytes.",
             "",
@@ -206,6 +213,7 @@
         {
           "name": "getClob",
           "returns": "XClob_6777087c",
+          "returns_origin": "com.sun.star.sdbc.XClob",
           "desc": [
             "gets a CLOB value in the current row of this ResultSet object."
           ],
@@ -217,6 +225,7 @@
         {
           "name": "getDate",
           "returns": "Date_60040844",
+          "returns_origin": "com.sun.star.util.Date",
           "desc": [
             "gets the value of a column in the current row as a date object."
           ],
@@ -228,6 +237,7 @@
         {
           "name": "getDouble",
           "returns": "float",
+          "returns_origin": "double",
           "desc": [
             "gets the value of a column in the current row as a double."
           ],
@@ -239,6 +249,7 @@
         {
           "name": "getFloat",
           "returns": "float",
+          "returns_origin": "float",
           "desc": [
             "gets the value of a column in the current row as a float."
           ],
@@ -250,6 +261,7 @@
         {
           "name": "getInt",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "gets the value of a column in the current row as a long."
           ],
@@ -261,6 +273,7 @@
         {
           "name": "getLong",
           "returns": "int",
+          "returns_origin": "hyper",
           "desc": [
             "gets the value of a column in the current row as a hyper."
           ],
@@ -272,21 +285,24 @@
         {
           "name": "getObject",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [],
           "raises": [
             "com.sun.star.sdbc.SQLException"
           ],
           "args": [
-            [
-              "typeMap",
-              "XNameAccess_e2ab0cf6",
-              "in"
-            ]
+            {
+              "name": "typeMap",
+              "type": "XNameAccess_e2ab0cf6",
+              "direction": "in",
+              "origin": "com.sun.star.container.XNameAccess"
+            }
           ]
         },
         {
           "name": "getRef",
           "returns": "XRef_5f110819",
+          "returns_origin": "com.sun.star.sdbc.XRef",
           "desc": [
             "gets a REF(<structured-type&gt) column value from the current row."
           ],
@@ -298,6 +314,7 @@
         {
           "name": "getShort",
           "returns": "int",
+          "returns_origin": "short",
           "desc": [
             "gets the value of a column in the current row as a short."
           ],
@@ -309,6 +326,7 @@
         {
           "name": "getString",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "gets the value of a column in the current row as a String."
           ],
@@ -320,6 +338,7 @@
         {
           "name": "getTime",
           "returns": "Time_604e0855",
+          "returns_origin": "com.sun.star.util.Time",
           "desc": [
             "gets the value of a column in the current row as a time object."
           ],
@@ -331,6 +350,7 @@
         {
           "name": "getTimestamp",
           "returns": "DateTime_84de09d3",
+          "returns_origin": "com.sun.star.util.DateTime",
           "desc": [
             "gets the value of a column in the current row as a datetime object."
           ],
@@ -342,6 +362,7 @@
         {
           "name": "wasNull",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "reports whether the last column read had a value of SQL NULL.",
             "",

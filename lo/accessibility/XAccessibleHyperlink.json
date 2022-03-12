@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XAccessibleHyperlink",
   "type": "interface",
@@ -58,6 +58,7 @@
         {
           "name": "getAccessibleActionAnchor",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "Returns an object that represents the link anchor, as appropriate for that link.",
             "",
@@ -67,16 +68,18 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getAccessibleActionObject",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "Returns an object that represents the link anchor, as appropriate for that link.",
             "",
@@ -86,16 +89,18 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getEndIndex",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "Returns the index at which the textual representation of the hyperlink (group) ends.",
             "",
@@ -107,6 +112,7 @@
         {
           "name": "getStartIndex",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "Returns the index at which the textual representation of the hyperlink (group) starts.",
             "",
@@ -118,6 +124,7 @@
         {
           "name": "isValid",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Returns whether the document referenced by this links is still valid.",
             "",

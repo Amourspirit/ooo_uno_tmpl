@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XTextTable",
   "type": "interface",
@@ -84,6 +84,7 @@
         {
           "name": "createCursorByCellName",
           "returns": "XTextTableCursor_e2f90d30",
+          "returns_origin": "com.sun.star.text.XTextTableCursor",
           "desc": [
             "creates a text table cursor and returns the XTextTableCursor interface.",
             "",
@@ -91,16 +92,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aCellName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aCellName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getCellByName",
           "returns": "XCell_70d408e8",
+          "returns_origin": "com.sun.star.table.XCell",
           "desc": [
             "Example: The cell in the 4th column and third row has the name \\\"D3\\\".",
             "",
@@ -110,16 +113,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aCellName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aCellName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getCellNames",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [],
           "raises": [],
           "args": []
@@ -127,6 +132,7 @@
         {
           "name": "getColumns",
           "returns": "XTableColumns_c66d0c31",
+          "returns_origin": "com.sun.star.table.XTableColumns",
           "desc": [],
           "raises": [],
           "args": []
@@ -134,6 +140,7 @@
         {
           "name": "getRows",
           "returns": "XTableRows_a37e0afb",
+          "returns_origin": "com.sun.star.table.XTableRows",
           "desc": [],
           "raises": [],
           "args": []
@@ -141,6 +148,7 @@
         {
           "name": "initialize",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "determines the numbers of rows and columns of the text table.",
             "",
@@ -148,16 +156,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "nRows",
-              "int",
-              "in"
-            ],
-            [
-              "nColumns",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nRows",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nColumns",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

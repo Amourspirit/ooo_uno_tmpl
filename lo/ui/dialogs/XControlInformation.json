@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XControlInformation",
   "type": "interface",
@@ -58,6 +58,7 @@
         {
           "name": "getSupportedControlProperties",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [
             "Returns a sequence with properties supported by the specified control."
           ],
@@ -65,16 +66,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aControlName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aControlName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getSupportedControls",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [
             "Query for the supported controls of a service instance."
           ],
@@ -84,6 +87,7 @@
         {
           "name": "isControlPropertySupported",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Returns whether control property is supported by a control."
           ],
@@ -91,31 +95,35 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aControlName",
-              "str",
-              "in"
-            ],
-            [
-              "aControlProperty",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aControlName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aControlProperty",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "isControlSupported",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Returns whether the specified control is supported or not."
           ],
           "raises": [],
           "args": [
-            [
-              "aControlName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aControlName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

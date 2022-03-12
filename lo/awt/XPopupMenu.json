@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XPopupMenu",
   "type": "interface",
@@ -81,26 +81,30 @@
         {
           "name": "checkItem",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the state of the item to be checked or unchecked."
           ],
           "raises": [],
           "args": [
-            [
-              "nItemId",
-              "int",
-              "in"
-            ],
-            [
-              "bCheck",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "nItemId",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "bCheck",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "endExecute",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "ends the execution of the PopupMenu.",
             "",
@@ -112,31 +116,36 @@
         {
           "name": "execute",
           "returns": "int",
+          "returns_origin": "short",
           "desc": [
             "executes the popup menu and returns the selected item or 0, if cancelled."
           ],
           "raises": [],
           "args": [
-            [
-              "Parent",
-              "XWindowPeer_99760ab0",
-              "in"
-            ],
-            [
-              "Position",
-              "Rectangle_84b109e9",
-              "in"
-            ],
-            [
-              "Direction",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Parent",
+              "type": "XWindowPeer_99760ab0",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XWindowPeer"
+            },
+            {
+              "name": "Position",
+              "type": "Rectangle_84b109e9",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Rectangle"
+            },
+            {
+              "name": "Direction",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "getAcceleratorKeyEvent",
           "returns": "KeyEvent_7a78097f",
+          "returns_origin": "com.sun.star.awt.KeyEvent",
           "desc": [
             "retrieves the KeyEvent for the menu item.",
             "",
@@ -144,16 +153,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "nItemId",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nItemId",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "getDefaultItem",
           "returns": "int",
+          "returns_origin": "short",
           "desc": [
             "returns the menu default item."
           ],
@@ -163,36 +174,41 @@
         {
           "name": "getItemImage",
           "returns": "XGraphic_a4da0afc",
+          "returns_origin": "com.sun.star.graphic.XGraphic",
           "desc": [
             "retrieves the image for the menu item."
           ],
           "raises": [],
           "args": [
-            [
-              "nItemId",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nItemId",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "insertSeparator",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "inserts a separator at the specified position."
           ],
           "raises": [],
           "args": [
-            [
-              "nItemPos",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nItemPos",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "isInExecute",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "queries if the PopupMenu is being.",
             "",
@@ -204,21 +220,24 @@
         {
           "name": "isItemChecked",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "returns whether the item is checked or unchecked."
           ],
           "raises": [],
           "args": [
-            [
-              "nItemId",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nItemId",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "setAcceleratorKeyEvent",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the KeyEvent for the menu item.",
             "",
@@ -226,56 +245,64 @@
           ],
           "raises": [],
           "args": [
-            [
-              "nItemId",
-              "int",
-              "in"
-            ],
-            [
-              "aKeyEvent",
-              "KeyEvent_7a78097f",
-              "in"
-            ]
+            {
+              "name": "nItemId",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "aKeyEvent",
+              "type": "KeyEvent_7a78097f",
+              "direction": "in",
+              "origin": "com.sun.star.awt.KeyEvent"
+            }
           ]
         },
         {
           "name": "setDefaultItem",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the menu default item."
           ],
           "raises": [],
           "args": [
-            [
-              "nItemId",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nItemId",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "setItemImage",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the image for the menu item."
           ],
           "raises": [],
           "args": [
-            [
-              "nItemId",
-              "int",
-              "in"
-            ],
-            [
-              "xGraphic",
-              "XGraphic_a4da0afc",
-              "in"
-            ],
-            [
-              "bScale",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "nItemId",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "xGraphic",
+              "type": "XGraphic_a4da0afc",
+              "direction": "in",
+              "origin": "com.sun.star.graphic.XGraphic"
+            },
+            {
+              "name": "bScale",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         }
       ]

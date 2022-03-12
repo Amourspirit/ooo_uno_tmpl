@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XContainerApproveListener",
   "type": "interface",
@@ -55,6 +55,7 @@
         {
           "name": "approveInsertElement",
           "returns": "XVeto_68e008bc",
+          "returns_origin": "com.sun.star.util.XVeto",
           "desc": [
             "is called for the listener to approve an insertion into the container"
           ],
@@ -62,16 +63,18 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "Event",
-              "ContainerEvent_ea50e70",
-              "in"
-            ]
+            {
+              "name": "Event",
+              "type": "ContainerEvent_ea50e70",
+              "direction": "in",
+              "origin": "com.sun.star.container.ContainerEvent"
+            }
           ]
         },
         {
           "name": "approveRemoveElement",
           "returns": "XVeto_68e008bc",
+          "returns_origin": "com.sun.star.util.XVeto",
           "desc": [
             "is called for the listener to approve a removal of an element from the container"
           ],
@@ -79,16 +82,18 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "Event",
-              "ContainerEvent_ea50e70",
-              "in"
-            ]
+            {
+              "name": "Event",
+              "type": "ContainerEvent_ea50e70",
+              "direction": "in",
+              "origin": "com.sun.star.container.ContainerEvent"
+            }
           ]
         },
         {
           "name": "approveReplaceElement",
           "returns": "XVeto_68e008bc",
+          "returns_origin": "com.sun.star.util.XVeto",
           "desc": [
             "is called for the listener to approve a replacement inside the container"
           ],
@@ -96,11 +101,12 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "Event",
-              "ContainerEvent_ea50e70",
-              "in"
-            ]
+            {
+              "name": "Event",
+              "type": "ContainerEvent_ea50e70",
+              "direction": "in",
+              "origin": "com.sun.star.container.ContainerEvent"
+            }
           ]
         }
       ]

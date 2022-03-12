@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDataPilotTables",
   "type": "interface",
@@ -69,6 +69,7 @@
         {
           "name": "createDataPilotDescriptor",
           "returns": "XDataPilotDescriptor_27650f1a",
+          "returns_origin": "com.sun.star.sheet.XDataPilotDescriptor",
           "desc": [
             "creates a data pilot descriptor.",
             "",
@@ -80,41 +81,47 @@
         {
           "name": "insertNewByName",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "creates a new data pilot table and adds it to the collection."
           ],
           "raises": [],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ],
-            [
-              "OutputAddress",
-              "CellAddress_ae5f0b56",
-              "in"
-            ],
-            [
-              "xDescriptor",
-              "XDataPilotDescriptor_27650f1a",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "OutputAddress",
+              "type": "CellAddress_ae5f0b56",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellAddress"
+            },
+            {
+              "name": "xDescriptor",
+              "type": "XDataPilotDescriptor_27650f1a",
+              "direction": "in",
+              "origin": "com.sun.star.sheet.XDataPilotDescriptor"
+            }
           ]
         },
         {
           "name": "removeByName",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "deletes a data pilot table from the collection."
           ],
           "raises": [],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

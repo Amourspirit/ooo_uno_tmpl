@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XPropertyHandler",
   "type": "interface",
@@ -119,6 +119,7 @@
         {
           "name": "actuatingPropertyChanged",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "updates the UI of dependent properties when the value of a certain actuating property changed",
             "",
@@ -128,36 +129,42 @@
             "com.sun.star.lang.NullPointerException"
           ],
           "args": [
-            [
-              "ActuatingPropertyName",
-              "str",
-              "in"
-            ],
-            [
-              "NewValue",
-              "object",
-              "in"
-            ],
-            [
-              "OldValue",
-              "object",
-              "in"
-            ],
-            [
-              "InspectorUI",
-              "XObjectInspectorUI_5ccd1048",
-              "in"
-            ],
-            [
-              "FirstTimeInit",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "ActuatingPropertyName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "NewValue",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            },
+            {
+              "name": "OldValue",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            },
+            {
+              "name": "InspectorUI",
+              "type": "XObjectInspectorUI_5ccd1048",
+              "direction": "in",
+              "origin": "com.sun.star.inspection.XObjectInspectorUI"
+            },
+            {
+              "name": "FirstTimeInit",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "addPropertyChangeListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "registers a listener for notification about property value changes",
             "",
@@ -169,16 +176,18 @@
             "com.sun.star.lang.NullPointerException"
           ],
           "args": [
-            [
-              "Listener",
-              "XPropertyChangeListener_58e4105a",
-              "in"
-            ]
+            {
+              "name": "Listener",
+              "type": "XPropertyChangeListener_58e4105a",
+              "direction": "in",
+              "origin": "com.sun.star.beans.XPropertyChangeListener"
+            }
           ]
         },
         {
           "name": "convertToControlValue",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "converts a given property value to a control-compatible value",
             "",
@@ -194,26 +203,30 @@
             "com.sun.star.beans.UnknownPropertyException"
           ],
           "args": [
-            [
-              "PropertyName",
-              "str",
-              "in"
-            ],
-            [
-              "PropertyValue",
-              "object",
-              "in"
-            ],
-            [
-              "ControlValueType",
-              "object",
-              "in"
-            ]
+            {
+              "name": "PropertyName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "PropertyValue",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            },
+            {
+              "name": "ControlValueType",
+              "type": "object",
+              "direction": "in",
+              "origin": "type"
+            }
           ]
         },
         {
           "name": "convertToPropertyValue",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "converts a given control-compatible value to a property value",
             "",
@@ -225,21 +238,24 @@
             "com.sun.star.beans.UnknownPropertyException"
           ],
           "args": [
-            [
-              "PropertyName",
-              "str",
-              "in"
-            ],
-            [
-              "ControlValue",
-              "object",
-              "in"
-            ]
+            {
+              "name": "PropertyName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "ControlValue",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         },
         {
           "name": "describePropertyLine",
           "returns": "LineDescriptor_1e460eeb",
+          "returns_origin": "com.sun.star.inspection.LineDescriptor",
           "desc": [
             "describes the UI to be used to represent the property"
           ],
@@ -248,21 +264,24 @@
             "com.sun.star.lang.NullPointerException"
           ],
           "args": [
-            [
-              "PropertyName",
-              "str",
-              "in"
-            ],
-            [
-              "ControlFactory",
-              "XPropertyControlFactory_b8ed12ba",
-              "in"
-            ]
+            {
+              "name": "PropertyName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "ControlFactory",
+              "type": "XPropertyControlFactory_b8ed12ba",
+              "direction": "in",
+              "origin": "com.sun.star.inspection.XPropertyControlFactory"
+            }
           ]
         },
         {
           "name": "getActuatingProperties",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [
             "retrieve the actuating properties which this handler is interested in",
             "",
@@ -280,6 +299,7 @@
         {
           "name": "getPropertyState",
           "returns": "PropertyState_c97b0c77",
+          "returns_origin": "com.sun.star.beans.PropertyState",
           "desc": [
             "returns the state of a property"
           ],
@@ -287,16 +307,18 @@
             "com.sun.star.beans.UnknownPropertyException"
           ],
           "args": [
-            [
-              "PropertyName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "PropertyName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getPropertyValue",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "retrieves the current value of a property"
           ],
@@ -304,16 +326,18 @@
             "com.sun.star.beans.UnknownPropertyException"
           ],
           "args": [
-            [
-              "PropertyName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "PropertyName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getSupersededProperties",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [
             "returns the properties which are to be superseded by this handler",
             "",
@@ -337,6 +361,7 @@
         {
           "name": "getSupportedProperties",
           "returns": "typing.Tuple[Property_8f4e0a76, ...]",
+          "returns_origin": "sequence< com.sun.star.beans.Property >",
           "desc": [
             "returns the properties which the handler can handle",
             "",
@@ -350,6 +375,7 @@
         {
           "name": "inspect",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "binds the property handler to a new component"
           ],
@@ -357,16 +383,18 @@
             "com.sun.star.lang.NullPointerException"
           ],
           "args": [
-            [
-              "Component",
-              "XInterface_8f010a43",
-              "in"
-            ]
+            {
+              "name": "Component",
+              "type": "XInterface_8f010a43",
+              "direction": "in",
+              "origin": "com.sun.star.uno.XInterface"
+            }
           ]
         },
         {
           "name": "isComposable",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "determines whether a given property, which the handler is responsible for, is composable.",
             "",
@@ -376,16 +404,18 @@
             "com.sun.star.beans.UnknownPropertyException"
           ],
           "args": [
-            [
-              "PropertyName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "PropertyName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "onInteractivePropertySelection",
           "returns": "InteractiveSelectionResult_f27a13e7",
+          "returns_origin": "com.sun.star.inspection.InteractiveSelectionResult",
           "desc": [
             "called when a browse button belonging to a property UI representation has been clicked",
             "",
@@ -406,46 +436,53 @@
             "com.sun.star.lang.NullPointerException"
           ],
           "args": [
-            [
-              "PropertyName",
-              "str",
-              "in"
-            ],
-            [
-              "Primary",
-              "bool",
-              "in"
-            ],
-            [
-              "outData",
-              "object",
-              "out"
-            ],
-            [
-              "InspectorUI",
-              "XObjectInspectorUI_5ccd1048",
-              "in"
-            ]
+            {
+              "name": "PropertyName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Primary",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            },
+            {
+              "name": "outData",
+              "type": "object",
+              "direction": "out",
+              "origin": "any"
+            },
+            {
+              "name": "InspectorUI",
+              "type": "XObjectInspectorUI_5ccd1048",
+              "direction": "in",
+              "origin": "com.sun.star.inspection.XObjectInspectorUI"
+            }
           ]
         },
         {
           "name": "removePropertyChangeListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "revokes a listener for notification about property value changes"
           ],
           "raises": [],
           "args": [
-            [
-              "Listener",
-              "XPropertyChangeListener_58e4105a",
-              "in"
-            ]
+            {
+              "name": "Listener",
+              "type": "XPropertyChangeListener_58e4105a",
+              "direction": "in",
+              "origin": "com.sun.star.beans.XPropertyChangeListener"
+            }
           ]
         },
         {
           "name": "setPropertyValue",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the value of a property"
           ],
@@ -454,21 +491,24 @@
             "com.sun.star.beans.PropertyVetoException"
           ],
           "args": [
-            [
-              "PropertyName",
-              "str",
-              "in"
-            ],
-            [
-              "Value",
-              "object",
-              "in"
-            ]
+            {
+              "name": "PropertyName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Value",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         },
         {
           "name": "suspend",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "suspends the handler",
             "",
@@ -480,11 +520,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Suspend",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "Suspend",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         }
       ]

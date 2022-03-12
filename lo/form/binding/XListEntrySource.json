@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XListEntrySource",
   "type": "interface",
@@ -65,6 +65,7 @@
         {
           "name": "addListEntryListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "adds a listener which will be notified about changes in the list reflected by the component."
           ],
@@ -72,16 +73,18 @@
             "com.sun.star.lang.NullPointerException"
           ],
           "args": [
-            [
-              "Listener",
-              "XListEntryListener_78de1111",
-              "in"
-            ]
+            {
+              "name": "Listener",
+              "type": "XListEntryListener_78de1111",
+              "direction": "in",
+              "origin": "com.sun.star.form.binding.XListEntryListener"
+            }
           ]
         },
         {
           "name": "getAllListEntries",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [
             "provides access to the entirety of all list entries"
           ],
@@ -91,6 +94,7 @@
         {
           "name": "getListEntry",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "provides access to a single list entry"
           ],
@@ -98,16 +102,18 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "Position",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Position",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getListEntryCount",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "retrieves the number of entries in the list"
           ],
@@ -117,6 +123,7 @@
         {
           "name": "removeListEntryListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "revokes the given listener from the list of components which will be notified about changes in the entry list."
           ],
@@ -124,11 +131,12 @@
             "com.sun.star.lang.NullPointerException"
           ],
           "args": [
-            [
-              "Listener",
-              "XListEntryListener_78de1111",
-              "in"
-            ]
+            {
+              "name": "Listener",
+              "type": "XListEntryListener_78de1111",
+              "direction": "in",
+              "origin": "com.sun.star.form.binding.XListEntryListener"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XReplaceDescriptor",
   "type": "interface",
@@ -50,6 +50,7 @@
         {
           "name": "getReplaceString",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [],
           "raises": [],
           "args": []
@@ -57,16 +58,18 @@
         {
           "name": "setReplaceString",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the string which replaces the found occurrences."
           ],
           "raises": [],
           "args": [
-            [
-              "aReplaceString",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aReplaceString",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

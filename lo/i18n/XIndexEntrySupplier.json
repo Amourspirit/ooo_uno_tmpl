@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XIndexEntrySupplier",
   "type": "interface",
@@ -61,6 +61,7 @@
         {
           "name": "getIndexCharacter",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the capital index key for sorting a table of indexes, to a given index entry, to a given com.sun.star.lang.Locale and to a given sort algorithm.",
             "",
@@ -68,26 +69,30 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aIndexEntry",
-              "str",
-              "in"
-            ],
-            [
-              "aLocale",
-              "Locale_70d308fa",
-              "in"
-            ],
-            [
-              "aSortAlgorithm",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aIndexEntry",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "aSortAlgorithm",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getIndexFollowPageWord",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the page number word of an index entry, where one page or more pages are combined to one page number entry, for a given com.sun.star.lang.Locale.",
             "",
@@ -97,16 +102,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "bMorePages",
-              "bool",
-              "in"
-            ],
-            [
-              "aLocale",
-              "Locale_70d308fa",
-              "in"
-            ]
+            {
+              "name": "bMorePages",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            },
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XPolyPolygon2D",
   "type": "interface",
@@ -72,6 +72,7 @@
         {
           "name": "addPolyPolygon",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Add the specified poly-polygon at the given position.",
             "",
@@ -81,21 +82,24 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "position",
-              "RealPoint2D_d6e70c78",
-              "in"
-            ],
-            [
-              "polyPolygon",
-              "XPolyPolygon2D",
-              "in"
-            ]
+            {
+              "name": "position",
+              "type": "RealPoint2D_d6e70c78",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.RealPoint2D"
+            },
+            {
+              "name": "polyPolygon",
+              "type": "XPolyPolygon2D",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.XPolyPolygon2D"
+            }
           ]
         },
         {
           "name": "getFillRule",
           "returns": "FillRule_bdca0be5",
+          "returns_origin": "com.sun.star.rendering.FillRule",
           "desc": [
             "Query the rule used to determine inside and outside of the poly-polygon."
           ],
@@ -105,6 +109,7 @@
         {
           "name": "getNumberOfPolygonPoints",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "Query number of points inside given polygon."
           ],
@@ -112,16 +117,18 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "polygon",
-              "int",
-              "in"
-            ]
+            {
+              "name": "polygon",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getNumberOfPolygons",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "Query number of polygons inside this poly-polygon."
           ],
@@ -131,6 +138,7 @@
         {
           "name": "isClosed",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Query whether the specified polygon outline is closed."
           ],
@@ -138,16 +146,18 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "index",
-              "int",
-              "in"
-            ]
+            {
+              "name": "index",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "setClosed",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Set the close state of the specified polygon outline.",
             "",
@@ -157,31 +167,35 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "index",
-              "int",
-              "in"
-            ],
-            [
-              "closedState",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "index",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "closedState",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "setFillRule",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Set the rule used to determine inside and outside of the poly-polygon."
           ],
           "raises": [],
           "args": [
-            [
-              "fillRule",
-              "FillRule_bdca0be5",
-              "in"
-            ]
+            {
+              "name": "fillRule",
+              "type": "FillRule_bdca0be5",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.FillRule"
+            }
           ]
         }
       ]

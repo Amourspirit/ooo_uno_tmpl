@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XChartShape",
   "type": "interface",
@@ -67,6 +67,7 @@
         {
           "name": "getPosition",
           "returns": "Point_5fb2085e",
+          "returns_origin": "com.sun.star.awt.Point",
           "desc": [
             "the method corresponds to the identical methods of the interface com.sun.star.drawing.XShape"
           ],
@@ -76,6 +77,7 @@
         {
           "name": "getPropertyValue",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "the method corresponds to the identical methods of the interface com.sun.star.beans.XPropertySet"
           ],
@@ -84,16 +86,18 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "PropertyName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "PropertyName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getShapeType",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "the method corresponds to the identical methods of the interface com.sun.star.drawing.XShape ??????????? deprecated"
           ],
@@ -103,6 +107,7 @@
         {
           "name": "getSize",
           "returns": "Size_576707ef",
+          "returns_origin": "com.sun.star.awt.Size",
           "desc": [
             "the method corresponds to the identical methods of the interface com.sun.star.drawing.XShape"
           ],
@@ -112,21 +117,24 @@
         {
           "name": "setPosition",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "the method corresponds to the identical methods of the interface com.sun.star.drawing.XShape"
           ],
           "raises": [],
           "args": [
-            [
-              "aPosition",
-              "Point_5fb2085e",
-              "in"
-            ]
+            {
+              "name": "aPosition",
+              "type": "Point_5fb2085e",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Point"
+            }
           ]
         },
         {
           "name": "setPropertyValue",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "the method corresponds to the identical methods of the interface com.sun.star.beans.XPropertySet"
           ],
@@ -137,21 +145,24 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "aPropertyName",
-              "str",
-              "in"
-            ],
-            [
-              "aValue",
-              "object",
-              "in"
-            ]
+            {
+              "name": "aPropertyName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aValue",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         },
         {
           "name": "setSize",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "the method corresponds to the identical methods of the interface com.sun.star.drawing.XShape"
           ],
@@ -159,11 +170,12 @@
             "com.sun.star.beans.PropertyVetoException"
           ],
           "args": [
-            [
-              "aSize",
-              "Size_576707ef",
-              "in"
-            ]
+            {
+              "name": "aSize",
+              "type": "Size_576707ef",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Size"
+            }
           ]
         }
       ]

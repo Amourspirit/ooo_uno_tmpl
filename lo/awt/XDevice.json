@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDevice",
   "type": "interface",
@@ -99,6 +99,7 @@
         {
           "name": "createBitmap",
           "returns": "XBitmap_70cd0909",
+          "returns_origin": "com.sun.star.awt.XBitmap",
           "desc": [
             "creates a bitmap with the current device depth.",
             "",
@@ -106,31 +107,36 @@
           ],
           "raises": [],
           "args": [
-            [
-              "nX",
-              "int",
-              "in"
-            ],
-            [
-              "nY",
-              "int",
-              "in"
-            ],
-            [
-              "nWidth",
-              "int",
-              "in"
-            ],
-            [
-              "nHeight",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nX",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nY",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nWidth",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nHeight",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "createDevice",
           "returns": "XDevice",
+          "returns_origin": "com.sun.star.awt.XDevice",
           "desc": [
             "creates a new device which is compatible with this one.",
             "",
@@ -138,21 +144,24 @@
           ],
           "raises": [],
           "args": [
-            [
-              "nWidth",
-              "int",
-              "in"
-            ],
-            [
-              "nHeight",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nWidth",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nHeight",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "createDisplayBitmap",
           "returns": "XDisplayBitmap_bb550bdf",
+          "returns_origin": "com.sun.star.awt.XDisplayBitmap",
           "desc": [
             "creates a device compatible bitmap.",
             "",
@@ -160,16 +169,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Bitmap",
-              "XBitmap_70cd0909",
-              "in"
-            ]
+            {
+              "name": "Bitmap",
+              "type": "XBitmap_70cd0909",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XBitmap"
+            }
           ]
         },
         {
           "name": "createGraphics",
           "returns": "XGraphics_842309dd",
+          "returns_origin": "com.sun.star.awt.XGraphics",
           "desc": [
             "creates a new graphics whose output operation is directed to this device."
           ],
@@ -179,21 +190,24 @@
         {
           "name": "getFont",
           "returns": "XFont_5f480843",
+          "returns_origin": "com.sun.star.awt.XFont",
           "desc": [
             "returns information about a font offered by this device."
           ],
           "raises": [],
           "args": [
-            [
-              "aDescriptor",
-              "FontDescriptor_bc110c0a",
-              "in"
-            ]
+            {
+              "name": "aDescriptor",
+              "type": "FontDescriptor_bc110c0a",
+              "direction": "in",
+              "origin": "com.sun.star.awt.FontDescriptor"
+            }
           ]
         },
         {
           "name": "getFontDescriptors",
           "returns": "typing.Tuple[FontDescriptor_bc110c0a, ...]",
+          "returns_origin": "sequence< FontDescriptor >",
           "desc": [
             "returns the list of available font descriptors."
           ],
@@ -203,6 +217,7 @@
         {
           "name": "getInfo",
           "returns": "DeviceInfo_8e370a30",
+          "returns_origin": "com.sun.star.awt.DeviceInfo",
           "desc": [
             "returns information about the device."
           ],

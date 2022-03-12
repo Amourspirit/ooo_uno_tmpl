@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSpellChecker",
   "type": "interface",
@@ -76,6 +76,7 @@
         {
           "name": "isValid",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "checks if a word is spelled correctly in a given language.",
             "",
@@ -85,26 +86,30 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aWord",
-              "str",
-              "in"
-            ],
-            [
-              "aLocale",
-              "Locale_70d308fa",
-              "in"
-            ],
-            [
-              "aProperties",
-              "PropertyValues_d6470ce6",
-              "in"
-            ]
+            {
+              "name": "aWord",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "aProperties",
+              "type": "PropertyValues_d6470ce6",
+              "direction": "in",
+              "origin": "com.sun.star.beans.PropertyValues"
+            }
           ]
         },
         {
           "name": "spell",
           "returns": "XSpellAlternatives_6ad110bf",
+          "returns_origin": "com.sun.star.linguistic2.XSpellAlternatives",
           "desc": [
             "This method checks if a word is spelled correctly in a given language.",
             "",
@@ -114,21 +119,24 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aWord",
-              "str",
-              "in"
-            ],
-            [
-              "aLocale",
-              "Locale_70d308fa",
-              "in"
-            ],
-            [
-              "aProperties",
-              "PropertyValues_d6470ce6",
-              "in"
-            ]
+            {
+              "name": "aWord",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "aProperties",
+              "type": "PropertyValues_d6470ce6",
+              "direction": "in",
+              "origin": "com.sun.star.beans.PropertyValues"
+            }
           ]
         }
       ]

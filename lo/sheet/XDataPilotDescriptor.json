@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDataPilotDescriptor",
   "type": "interface",
@@ -76,6 +76,7 @@
         {
           "name": "getColumnFields",
           "returns": "XIndexAccess_f0910d6d",
+          "returns_origin": "com.sun.star.container.XIndexAccess",
           "desc": [
             "returns the collection of the data pilot fields used as column fields."
           ],
@@ -85,6 +86,7 @@
         {
           "name": "getDataFields",
           "returns": "XIndexAccess_f0910d6d",
+          "returns_origin": "com.sun.star.container.XIndexAccess",
           "desc": [
             "returns the collection of the data pilot fields used as data fields."
           ],
@@ -94,6 +96,7 @@
         {
           "name": "getDataPilotFields",
           "returns": "XIndexAccess_f0910d6d",
+          "returns_origin": "com.sun.star.container.XIndexAccess",
           "desc": [
             "returns the collection of all the data pilot fields."
           ],
@@ -103,6 +106,7 @@
         {
           "name": "getFilterDescriptor",
           "returns": "XSheetFilterDescriptor_47cc0ff7",
+          "returns_origin": "com.sun.star.sheet.XSheetFilterDescriptor",
           "desc": [
             "returns the filter descriptor specifying which data from the source cell range are used for the data pilot table."
           ],
@@ -112,6 +116,7 @@
         {
           "name": "getHiddenFields",
           "returns": "XIndexAccess_f0910d6d",
+          "returns_origin": "com.sun.star.container.XIndexAccess",
           "desc": [
             "returns the collection of the data pilot fields not used as column, row, page, or data fields."
           ],
@@ -121,6 +126,7 @@
         {
           "name": "getPageFields",
           "returns": "XIndexAccess_f0910d6d",
+          "returns_origin": "com.sun.star.container.XIndexAccess",
           "desc": [
             "returns the collection of the data pilot fields used as page fields."
           ],
@@ -130,6 +136,7 @@
         {
           "name": "getRowFields",
           "returns": "XIndexAccess_f0910d6d",
+          "returns_origin": "com.sun.star.container.XIndexAccess",
           "desc": [
             "returns the collection of the data pilot fields used as row fields."
           ],
@@ -139,6 +146,7 @@
         {
           "name": "getSourceRange",
           "returns": "CellRangeAddress_ec450d43",
+          "returns_origin": "com.sun.star.table.CellRangeAddress",
           "desc": [
             "returns the cell range containing the data for the data pilot table."
           ],
@@ -148,6 +156,7 @@
         {
           "name": "getTag",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns an additional string stored in the data pilot table."
           ],
@@ -157,31 +166,35 @@
         {
           "name": "setSourceRange",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the cell range containing the data for the data pilot table."
           ],
           "raises": [],
           "args": [
-            [
-              "aSourceRange",
-              "CellRangeAddress_ec450d43",
-              "in"
-            ]
+            {
+              "name": "aSourceRange",
+              "type": "CellRangeAddress_ec450d43",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellRangeAddress"
+            }
           ]
         },
         {
           "name": "setTag",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets an additional string stored in the data pilot table."
           ],
           "raises": [],
           "args": [
-            [
-              "aTag",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aTag",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

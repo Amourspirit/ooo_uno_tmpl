@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XGraphicProvider",
   "type": "interface",
@@ -76,6 +76,7 @@
         {
           "name": "queryGraphic",
           "returns": "XGraphic_a4da0afc",
+          "returns_origin": "com.sun.star.graphic.XGraphic",
           "desc": [
             "Calling this method returns a XGraphic interface that holds the graphic content after loading the graphic."
           ],
@@ -85,16 +86,18 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "MediaProperties",
-              "PropertyValues_d6470ce6",
-              "in"
-            ]
+            {
+              "name": "MediaProperties",
+              "type": "PropertyValues_d6470ce6",
+              "direction": "in",
+              "origin": "com.sun.star.beans.PropertyValues"
+            }
           ]
         },
         {
           "name": "queryGraphicDescriptor",
           "returns": "XPropertySet_bc180bfa",
+          "returns_origin": "com.sun.star.beans.XPropertySet",
           "desc": [
             "Calling this method returns a com.sun.star.beans.XPropertySet interface that gives access to the properties of the unloaded graphic.",
             "",
@@ -106,16 +109,18 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "MediaProperties",
-              "PropertyValues_d6470ce6",
-              "in"
-            ]
+            {
+              "name": "MediaProperties",
+              "type": "PropertyValues_d6470ce6",
+              "direction": "in",
+              "origin": "com.sun.star.beans.PropertyValues"
+            }
           ]
         },
         {
           "name": "storeGraphic",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Store the graphic content, represented through the XGraphic interface at the specified location."
           ],
@@ -125,16 +130,18 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "Graphic",
-              "XGraphic_a4da0afc",
-              "in"
-            ],
-            [
-              "MediaProperties",
-              "PropertyValues_d6470ce6",
-              "in"
-            ]
+            {
+              "name": "Graphic",
+              "type": "XGraphic_a4da0afc",
+              "direction": "in",
+              "origin": "com.sun.star.graphic.XGraphic"
+            },
+            {
+              "name": "MediaProperties",
+              "type": "PropertyValues_d6470ce6",
+              "direction": "in",
+              "origin": "com.sun.star.beans.PropertyValues"
+            }
           ]
         }
       ]

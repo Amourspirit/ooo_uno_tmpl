@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XCalendar4",
   "type": "interface",
@@ -66,6 +66,7 @@
         {
           "name": "getLocalDateTime",
           "returns": "float",
+          "returns_origin": "double",
           "desc": [
             "Get the local date/time as an offset to the start of the calendar at 1-Jan-1970 00:00.",
             "",
@@ -79,6 +80,7 @@
         {
           "name": "loadCalendarTZ",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Load a specific calendar for the given locale with a given time zone.",
             "",
@@ -88,26 +90,30 @@
           ],
           "raises": [],
           "args": [
-            [
-              "uniqueID",
-              "str",
-              "in"
-            ],
-            [
-              "rLocale",
-              "Locale_70d308fa",
-              "in"
-            ],
-            [
-              "TimeZone",
-              "str",
-              "in"
-            ]
+            {
+              "name": "uniqueID",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "rLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "TimeZone",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "loadDefaultCalendarTZ",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Load the default calendar for the given locale with a given time zone.",
             "",
@@ -117,21 +123,24 @@
           ],
           "raises": [],
           "args": [
-            [
-              "rLocale",
-              "Locale_70d308fa",
-              "in"
-            ],
-            [
-              "TimeZone",
-              "str",
-              "in"
-            ]
+            {
+              "name": "rLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "TimeZone",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "setLocalDateTime",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Set the local date/time as an offset to the start of the calendar at 1-Jan-1970 00:00.",
             "",
@@ -141,11 +150,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "TimeInDays",
-              "float",
-              "in"
-            ]
+            {
+              "name": "TimeInDays",
+              "type": "float",
+              "direction": "in",
+              "origin": "double"
+            }
           ]
         }
       ]

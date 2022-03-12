@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XImageConsumer",
   "type": "interface",
@@ -65,6 +65,7 @@
         {
           "name": "complete",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "is called for the notification of the degree to which the image is delivered.",
             "",
@@ -72,81 +73,94 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Status",
-              "int",
-              "in"
-            ],
-            [
-              "xProducer",
-              "XImageProducer_ba930bd3",
-              "in"
-            ]
+            {
+              "name": "Status",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "xProducer",
+              "type": "XImageProducer_ba930bd3",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XImageProducer"
+            }
           ]
         },
         {
           "name": "init",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "initializes the consumer with image dimensions."
           ],
           "raises": [],
           "args": [
-            [
-              "Width",
-              "int",
-              "in"
-            ],
-            [
-              "Height",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Width",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "Height",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "setColorModel",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "changes color model for next pixels typically called once after initialization."
           ],
           "raises": [],
           "args": [
-            [
-              "BitCount",
-              "int",
-              "in"
-            ],
-            [
-              "RGBAPal",
-              "typing.Tuple[int, ...]",
-              "in"
-            ],
-            [
-              "RedMask",
-              "int",
-              "in"
-            ],
-            [
-              "GreenMask",
-              "int",
-              "in"
-            ],
-            [
-              "BlueMask",
-              "int",
-              "in"
-            ],
-            [
-              "AlphaMask",
-              "int",
-              "in"
-            ]
+            {
+              "name": "BitCount",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "RGBAPal",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "in",
+              "origin": "sequence< long >"
+            },
+            {
+              "name": "RedMask",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "GreenMask",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "BlueMask",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "AlphaMask",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "setPixelsByBytes",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "delivers a chunk of pixels as long values.",
             "",
@@ -154,46 +168,54 @@
           ],
           "raises": [],
           "args": [
-            [
-              "nX",
-              "int",
-              "in"
-            ],
-            [
-              "nY",
-              "int",
-              "in"
-            ],
-            [
-              "nWidth",
-              "int",
-              "in"
-            ],
-            [
-              "nHeight",
-              "int",
-              "in"
-            ],
-            [
-              "aProducerData",
-              "typing.Tuple[int, ...]",
-              "in"
-            ],
-            [
-              "nOffset",
-              "int",
-              "in"
-            ],
-            [
-              "nScanSize",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nX",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nY",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nWidth",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nHeight",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aProducerData",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "in",
+              "origin": "sequence< byte >"
+            },
+            {
+              "name": "nOffset",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nScanSize",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "setPixelsByLongs",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "delivers a chunk of pixels as byte values.",
             "",
@@ -201,41 +223,48 @@
           ],
           "raises": [],
           "args": [
-            [
-              "nX",
-              "int",
-              "in"
-            ],
-            [
-              "nY",
-              "int",
-              "in"
-            ],
-            [
-              "nWidth",
-              "int",
-              "in"
-            ],
-            [
-              "nHeight",
-              "int",
-              "in"
-            ],
-            [
-              "aProducerData",
-              "typing.Tuple[int, ...]",
-              "in"
-            ],
-            [
-              "nOffset",
-              "int",
-              "in"
-            ],
-            [
-              "nScanSize",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nX",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nY",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nWidth",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nHeight",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aProducerData",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "in",
+              "origin": "sequence< long >"
+            },
+            {
+              "name": "nOffset",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nScanSize",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

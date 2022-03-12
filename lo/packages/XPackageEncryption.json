@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XPackageEncryption",
   "type": "interface",
@@ -80,6 +80,7 @@
         {
           "name": "checkDataIntegrity",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Check if decryption meta data is valid.",
             "",
@@ -91,6 +92,7 @@
         {
           "name": "createEncryptionData",
           "returns": "typing.Tuple[NamedValue_a37a0af3, ...]",
+          "returns_origin": "sequence< com.sun.star.beans.NamedValue >",
           "desc": [
             "Create key-value list of encryption meta data.",
             "",
@@ -98,16 +100,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "rPassword",
-              "str",
-              "in"
-            ]
+            {
+              "name": "rPassword",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "decrypt",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Decrypt document content.",
             "",
@@ -115,21 +119,24 @@
           ],
           "raises": [],
           "args": [
-            [
-              "rxInputStream",
-              "XInputStream_98d40ab4",
-              "in"
-            ],
-            [
-              "rxOutputStream",
-              "XOutputStream_a4e00b35",
-              "out"
-            ]
+            {
+              "name": "rxInputStream",
+              "type": "XInputStream_98d40ab4",
+              "direction": "in",
+              "origin": "com.sun.star.io.XInputStream"
+            },
+            {
+              "name": "rxOutputStream",
+              "type": "XOutputStream_a4e00b35",
+              "direction": "out",
+              "origin": "com.sun.star.io.XOutputStream"
+            }
           ]
         },
         {
           "name": "encrypt",
           "returns": "typing.Tuple[NamedValue_a37a0af3, ...]",
+          "returns_origin": "sequence< com.sun.star.beans.NamedValue >",
           "desc": [
             "Encrypt given stream.",
             "",
@@ -137,46 +144,52 @@
           ],
           "raises": [],
           "args": [
-            [
-              "rxInputStream",
-              "XInputStream_98d40ab4",
-              "in"
-            ]
+            {
+              "name": "rxInputStream",
+              "type": "XInputStream_98d40ab4",
+              "direction": "in",
+              "origin": "com.sun.star.io.XInputStream"
+            }
           ]
         },
         {
           "name": "generateEncryptionKey",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Set or refresh encryption key."
           ],
           "raises": [],
           "args": [
-            [
-              "rPassword",
-              "str",
-              "in"
-            ]
+            {
+              "name": "rPassword",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "readEncryptionInfo",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Read package crypto information."
           ],
           "raises": [],
           "args": [
-            [
-              "rStreams",
-              "typing.Tuple[NamedValue_a37a0af3, ...]",
-              "in"
-            ]
+            {
+              "name": "rStreams",
+              "type": "typing.Tuple[NamedValue_a37a0af3, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.NamedValue >"
+            }
           ]
         },
         {
           "name": "setupEncryption",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Set key-value list of encryption meta data.",
             "",
@@ -184,11 +197,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "rMediaEncData",
-              "typing.Tuple[NamedValue_a37a0af3, ...]",
-              "in"
-            ]
+            {
+              "name": "rMediaEncData",
+              "type": "typing.Tuple[NamedValue_a37a0af3, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.NamedValue >"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XRegion",
   "type": "interface",
@@ -64,6 +64,7 @@
         {
           "name": "clear",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "makes this region an empty region."
           ],
@@ -73,36 +74,41 @@
         {
           "name": "excludeRectangle",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes the area of the specified rectangle from this region."
           ],
           "raises": [],
           "args": [
-            [
-              "Rect",
-              "Rectangle_84b109e9",
-              "in"
-            ]
+            {
+              "name": "Rect",
+              "type": "Rectangle_84b109e9",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Rectangle"
+            }
           ]
         },
         {
           "name": "excludeRegion",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes the area of the specified region from this region."
           ],
           "raises": [],
           "args": [
-            [
-              "Region",
-              "XRegion",
-              "in"
-            ]
+            {
+              "name": "Region",
+              "type": "XRegion",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XRegion"
+            }
           ]
         },
         {
           "name": "getBounds",
           "returns": "Rectangle_84b109e9",
+          "returns_origin": "com.sun.star.awt.Rectangle",
           "desc": [
             "returns the bounding box of the shape."
           ],
@@ -112,6 +118,7 @@
         {
           "name": "getRectangles",
           "returns": "typing.Tuple[Rectangle_84b109e9, ...]",
+          "returns_origin": "sequence< Rectangle >",
           "desc": [
             "returns all rectangles which are making up this region."
           ],
@@ -121,111 +128,126 @@
         {
           "name": "intersectRectangle",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "intersects the specified rectangle with the current region."
           ],
           "raises": [],
           "args": [
-            [
-              "Region",
-              "Rectangle_84b109e9",
-              "in"
-            ]
+            {
+              "name": "Region",
+              "type": "Rectangle_84b109e9",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Rectangle"
+            }
           ]
         },
         {
           "name": "intersectRegion",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "intersects the specified region with the current region."
           ],
           "raises": [],
           "args": [
-            [
-              "Region",
-              "XRegion",
-              "in"
-            ]
+            {
+              "name": "Region",
+              "type": "XRegion",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XRegion"
+            }
           ]
         },
         {
           "name": "move",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "moves this region by the specified horizontal and vertical delta."
           ],
           "raises": [],
           "args": [
-            [
-              "nHorzMove",
-              "int",
-              "in"
-            ],
-            [
-              "nVertMove",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nHorzMove",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nVertMove",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "unionRectangle",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "adds the specified rectangle to this region."
           ],
           "raises": [],
           "args": [
-            [
-              "Rect",
-              "Rectangle_84b109e9",
-              "in"
-            ]
+            {
+              "name": "Rect",
+              "type": "Rectangle_84b109e9",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Rectangle"
+            }
           ]
         },
         {
           "name": "unionRegion",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "adds the specified region to this region."
           ],
           "raises": [],
           "args": [
-            [
-              "Region",
-              "XRegion",
-              "in"
-            ]
+            {
+              "name": "Region",
+              "type": "XRegion",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XRegion"
+            }
           ]
         },
         {
           "name": "xOrRectangle",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "applies an exclusive-or operation with the specified rectangle to this region."
           ],
           "raises": [],
           "args": [
-            [
-              "Rect",
-              "Rectangle_84b109e9",
-              "in"
-            ]
+            {
+              "name": "Rect",
+              "type": "Rectangle_84b109e9",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Rectangle"
+            }
           ]
         },
         {
           "name": "xOrRegion",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "applies an exclusive-or operation with the specified region to this region."
           ],
           "raises": [],
           "args": [
-            [
-              "Region",
-              "XRegion",
-              "in"
-            ]
+            {
+              "name": "Region",
+              "type": "XRegion",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XRegion"
+            }
           ]
         }
       ]

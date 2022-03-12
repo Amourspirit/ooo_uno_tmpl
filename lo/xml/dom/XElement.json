@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XElement",
   "type": "interface",
@@ -65,111 +65,127 @@
         {
           "name": "getAttribute",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Retrieves an attribute value by name."
           ],
           "raises": [],
           "args": [
-            [
-              "name",
-              "str",
-              "in"
-            ]
+            {
+              "name": "name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getAttributeNS",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Retrieves an attribute value by local name and namespace URI."
           ],
           "raises": [],
           "args": [
-            [
-              "namespaceURI",
-              "str",
-              "in"
-            ],
-            [
-              "localName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "namespaceURI",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "localName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getAttributeNode",
           "returns": "XAttr_840309ba",
+          "returns_origin": "com.sun.star.xml.dom.XAttr",
           "desc": [
             "Retrieves an attribute node by name."
           ],
           "raises": [],
           "args": [
-            [
-              "name",
-              "str",
-              "in"
-            ]
+            {
+              "name": "name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getAttributeNodeNS",
           "returns": "XAttr_840309ba",
+          "returns_origin": "com.sun.star.xml.dom.XAttr",
           "desc": [
             "Retrieves an Attr node by local name and namespace URI."
           ],
           "raises": [],
           "args": [
-            [
-              "namespaceURI",
-              "str",
-              "in"
-            ],
-            [
-              "localName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "namespaceURI",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "localName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getElementsByTagName",
           "returns": "XNodeList_ae540b41",
+          "returns_origin": "com.sun.star.xml.dom.XNodeList",
           "desc": [
             "Returns a NodeList of all descendant Elements with a given tag name, in the order in which they are encountered in a preorder traversal of this Element tree."
           ],
           "raises": [],
           "args": [
-            [
-              "name",
-              "str",
-              "in"
-            ]
+            {
+              "name": "name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getElementsByTagNameNS",
           "returns": "XNodeList_ae540b41",
+          "returns_origin": "com.sun.star.xml.dom.XNodeList",
           "desc": [
             "Returns a NodeList of all the descendant Elements with a given local name and namespace URI in the order in which they are encountered in a preorder traversal of this Element tree."
           ],
           "raises": [],
           "args": [
-            [
-              "namespaceURI",
-              "str",
-              "in"
-            ],
-            [
-              "localName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "namespaceURI",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "localName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getTagName",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "The name of the element."
           ],
@@ -179,41 +195,47 @@
         {
           "name": "hasAttribute",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Returns true when an attribute with a given name is specified on this element or has a default value, false otherwise."
           ],
           "raises": [],
           "args": [
-            [
-              "name",
-              "str",
-              "in"
-            ]
+            {
+              "name": "name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "hasAttributeNS",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Returns true when an attribute with a given local name and namespace URI is specified on this element or has a default value, false otherwise."
           ],
           "raises": [],
           "args": [
-            [
-              "namespaceURI",
-              "str",
-              "in"
-            ],
-            [
-              "localName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "namespaceURI",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "localName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "removeAttribute",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Removes an attribute by name.",
             "",
@@ -223,16 +245,18 @@
             "DOMException"
           ],
           "args": [
-            [
-              "name",
-              "str",
-              "in"
-            ]
+            {
+              "name": "name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "removeAttributeNS",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Removes an attribute by local name and namespace URI.",
             "",
@@ -242,21 +266,24 @@
             "DOMException"
           ],
           "args": [
-            [
-              "namespaceURI",
-              "str",
-              "in"
-            ],
-            [
-              "localName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "namespaceURI",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "localName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "removeAttributeNode",
           "returns": "XAttr_840309ba",
+          "returns_origin": "com.sun.star.xml.dom.XAttr",
           "desc": [
             "Removes the specified attribute node.",
             "",
@@ -266,16 +293,18 @@
             "DOMException"
           ],
           "args": [
-            [
-              "oldAttr",
-              "XAttr_840309ba",
-              "in"
-            ]
+            {
+              "name": "oldAttr",
+              "type": "XAttr_840309ba",
+              "direction": "in",
+              "origin": "com.sun.star.xml.dom.XAttr"
+            }
           ]
         },
         {
           "name": "setAttribute",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Adds a new attribute.",
             "",
@@ -285,21 +314,24 @@
             "DOMException"
           ],
           "args": [
-            [
-              "name",
-              "str",
-              "in"
-            ],
-            [
-              "value",
-              "str",
-              "in"
-            ]
+            {
+              "name": "name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "value",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "setAttributeNS",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Adds a new attribute.",
             "",
@@ -309,26 +341,30 @@
             "DOMException"
           ],
           "args": [
-            [
-              "namespaceURI",
-              "str",
-              "in"
-            ],
-            [
-              "qualifiedName",
-              "str",
-              "in"
-            ],
-            [
-              "value",
-              "str",
-              "in"
-            ]
+            {
+              "name": "namespaceURI",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "qualifiedName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "value",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "setAttributeNode",
           "returns": "XAttr_840309ba",
+          "returns_origin": "com.sun.star.xml.dom.XAttr",
           "desc": [
             "Adds a new attribute node.",
             "",
@@ -338,16 +374,18 @@
             "DOMException"
           ],
           "args": [
-            [
-              "newAttr",
-              "XAttr_840309ba",
-              "in"
-            ]
+            {
+              "name": "newAttr",
+              "type": "XAttr_840309ba",
+              "direction": "in",
+              "origin": "com.sun.star.xml.dom.XAttr"
+            }
           ]
         },
         {
           "name": "setAttributeNodeNS",
           "returns": "XAttr_840309ba",
+          "returns_origin": "com.sun.star.xml.dom.XAttr",
           "desc": [
             "Adds a new attribute.",
             "",
@@ -357,11 +395,12 @@
             "DOMException"
           ],
           "args": [
-            [
-              "newAttr",
-              "XAttr_840309ba",
-              "in"
-            ]
+            {
+              "name": "newAttr",
+              "type": "XAttr_840309ba",
+              "direction": "in",
+              "origin": "com.sun.star.xml.dom.XAttr"
+            }
           ]
         }
       ]

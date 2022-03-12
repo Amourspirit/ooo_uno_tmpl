@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSlideShow",
   "type": "interface",
@@ -127,6 +127,7 @@
         {
           "name": "addShapeEventListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Add a shape event listener.",
             "",
@@ -134,21 +135,24 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xListener",
-              "XShapeEventListener_92a311b5",
-              "in"
-            ],
-            [
-              "xShape",
-              "XShape_8fd00a3d",
-              "in"
-            ]
+            {
+              "name": "xListener",
+              "type": "XShapeEventListener_92a311b5",
+              "direction": "in",
+              "origin": "com.sun.star.presentation.XShapeEventListener"
+            },
+            {
+              "name": "xShape",
+              "type": "XShape_8fd00a3d",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.XShape"
+            }
           ]
         },
         {
           "name": "addSlideShowListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Add a slide show listener.",
             "",
@@ -156,16 +160,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xListener",
-              "XSlideShowListener_81671154",
-              "in"
-            ]
+            {
+              "name": "xListener",
+              "type": "XSlideShowListener_81671154",
+              "direction": "in",
+              "origin": "com.sun.star.presentation.XSlideShowListener"
+            }
           ]
         },
         {
           "name": "addView",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Add a view to the slide show.",
             "",
@@ -173,16 +179,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xView",
-              "XSlideShowView_3eb40fa9",
-              "in"
-            ]
+            {
+              "name": "xView",
+              "type": "XSlideShowView_3eb40fa9",
+              "direction": "in",
+              "origin": "com.sun.star.presentation.XSlideShowView"
+            }
           ]
         },
         {
           "name": "displaySlide",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Jump to the given slide.",
             "",
@@ -190,31 +198,36 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xSlide",
-              "XDrawPage_b07a0b57",
-              "in"
-            ],
-            [
-              "xDrawPages",
-              "XDrawPagesSupplier_29650f1e",
-              "in"
-            ],
-            [
-              "AnimationNode",
-              "XAnimationNode_1cf10eb9",
-              "in"
-            ],
-            [
-              "aProperties",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ]
+            {
+              "name": "xSlide",
+              "type": "XDrawPage_b07a0b57",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.XDrawPage"
+            },
+            {
+              "name": "xDrawPages",
+              "type": "XDrawPagesSupplier_29650f1e",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.XDrawPagesSupplier"
+            },
+            {
+              "name": "AnimationNode",
+              "type": "XAnimationNode_1cf10eb9",
+              "direction": "in",
+              "origin": "com.sun.star.animations.XAnimationNode"
+            },
+            {
+              "name": "aProperties",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< .com.sun.star.beans.PropertyValue >"
+            }
           ]
         },
         {
           "name": "getCurrentSlide",
           "returns": "XDrawPage_b07a0b57",
+          "returns_origin": "com.sun.star.drawing.XDrawPage",
           "desc": [
             "Query the currently displayed slide."
           ],
@@ -224,6 +237,7 @@
         {
           "name": "nextEffect",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Trigger the next effect of the slide show.",
             "",
@@ -235,6 +249,7 @@
         {
           "name": "pause",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Change the pause state of the slide show.",
             "",
@@ -242,16 +257,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "bPauseShow",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "bPauseShow",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "previousEffect",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Undo the last effect in the main sequence of the slide show.",
             "",
@@ -263,56 +280,64 @@
         {
           "name": "registerUserPaintPolygons",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Register drawn polygons in presentation mode."
           ],
           "raises": [],
           "args": [
-            [
-              "xDocFactory",
-              "XMultiServiceFactory_191e0eb6",
-              "in"
-            ]
+            {
+              "name": "xDocFactory",
+              "type": "XMultiServiceFactory_191e0eb6",
+              "direction": "in",
+              "origin": "com.sun.star.lang.XMultiServiceFactory"
+            }
           ]
         },
         {
           "name": "removeShapeEventListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Revoke a previously registered shape event listener."
           ],
           "raises": [],
           "args": [
-            [
-              "xListener",
-              "XShapeEventListener_92a311b5",
-              "in"
-            ],
-            [
-              "xShape",
-              "XShape_8fd00a3d",
-              "in"
-            ]
+            {
+              "name": "xListener",
+              "type": "XShapeEventListener_92a311b5",
+              "direction": "in",
+              "origin": "com.sun.star.presentation.XShapeEventListener"
+            },
+            {
+              "name": "xShape",
+              "type": "XShape_8fd00a3d",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.XShape"
+            }
           ]
         },
         {
           "name": "removeSlideShowListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Revoke a previously registered slide show listener."
           ],
           "raises": [],
           "args": [
-            [
-              "xListener",
-              "XSlideShowListener_81671154",
-              "in"
-            ]
+            {
+              "name": "xListener",
+              "type": "XSlideShowListener_81671154",
+              "direction": "in",
+              "origin": "com.sun.star.presentation.XSlideShowListener"
+            }
           ]
         },
         {
           "name": "removeView",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Remove view from the slide show.",
             "",
@@ -320,31 +345,35 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xView",
-              "XSlideShowView_3eb40fa9",
-              "in"
-            ]
+            {
+              "name": "xView",
+              "type": "XSlideShowView_3eb40fa9",
+              "direction": "in",
+              "origin": "com.sun.star.presentation.XSlideShowView"
+            }
           ]
         },
         {
           "name": "setProperty",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Change a property of the slide show."
           ],
           "raises": [],
           "args": [
-            [
-              "aShowProperty",
-              "PropertyValue_c9610c73",
-              "in"
-            ]
+            {
+              "name": "aShowProperty",
+              "type": "PropertyValue_c9610c73",
+              "direction": "in",
+              "origin": "com.sun.star.beans.PropertyValue"
+            }
           ]
         },
         {
           "name": "setShapeCursor",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Set a special mouse cursor for a shape.",
             "",
@@ -352,21 +381,24 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xShape",
-              "XShape_8fd00a3d",
-              "in"
-            ],
-            [
-              "nPointerShape",
-              "int",
-              "in"
-            ]
+            {
+              "name": "xShape",
+              "type": "XShape_8fd00a3d",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.XShape"
+            },
+            {
+              "name": "nPointerShape",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "startShapeActivity",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Start a shape-intrinsic animation or activity.",
             "",
@@ -374,16 +406,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xShape",
-              "XShape_8fd00a3d",
-              "in"
-            ]
+            {
+              "name": "xShape",
+              "type": "XShape_8fd00a3d",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.XShape"
+            }
           ]
         },
         {
           "name": "stopShapeActivity",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Stop a shape-intrinsic animation or activity.",
             "",
@@ -391,16 +425,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xShape",
-              "XShape_8fd00a3d",
-              "in"
-            ]
+            {
+              "name": "xShape",
+              "type": "XShape_8fd00a3d",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.XShape"
+            }
           ]
         },
         {
           "name": "update",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Update the animations.",
             "",
@@ -408,11 +444,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "nNextTimeout",
-              "float",
-              "out"
-            ]
+            {
+              "name": "nNextTimeout",
+              "type": "float",
+              "direction": "out",
+              "origin": "double"
+            }
           ]
         }
       ]

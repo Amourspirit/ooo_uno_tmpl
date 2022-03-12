@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XTypeConverter",
   "type": "interface",
@@ -60,6 +60,7 @@
         {
           "name": "convertTo",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "Converts the value aFrom to the specified type xDestinationType.",
             "",
@@ -70,21 +71,24 @@
             "com.sun.star.script.CannotConvertException"
           ],
           "args": [
-            [
-              "aFrom",
-              "object",
-              "in"
-            ],
-            [
-              "xDestinationType",
-              "object",
-              "in"
-            ]
+            {
+              "name": "aFrom",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            },
+            {
+              "name": "xDestinationType",
+              "type": "object",
+              "direction": "in",
+              "origin": "type"
+            }
           ]
         },
         {
           "name": "convertToSimpleType",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "Converts the value aFrom to the specified simple type aDestinationType.",
             "",
@@ -95,16 +99,18 @@
             "com.sun.star.script.CannotConvertException"
           ],
           "args": [
-            [
-              "aFrom",
-              "object",
-              "in"
-            ],
-            [
-              "aDestinationType",
-              "TypeClass_853109f2",
-              "in"
-            ]
+            {
+              "name": "aFrom",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            },
+            {
+              "name": "aDestinationType",
+              "type": "TypeClass_853109f2",
+              "direction": "in",
+              "origin": "com.sun.star.uno.TypeClass"
+            }
           ]
         }
       ]

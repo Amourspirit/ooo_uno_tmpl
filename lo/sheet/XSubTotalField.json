@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSubTotalField",
   "type": "interface",
@@ -62,6 +62,7 @@
         {
           "name": "getGroupColumn",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "returns the column by which entries are grouped."
           ],
@@ -71,6 +72,7 @@
         {
           "name": "getSubTotalColumns",
           "returns": "typing.Tuple[SubTotalColumn_d5760cbd, ...]",
+          "returns_origin": "sequence< com.sun.star.sheet.SubTotalColumn >",
           "desc": [
             "returns the definitions of which columns should have subtotals added to them."
           ],
@@ -80,31 +82,35 @@
         {
           "name": "setGroupColumn",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the column by which entries are grouped."
           ],
           "raises": [],
           "args": [
-            [
-              "nGroupColumn",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nGroupColumn",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "setSubTotalColumns",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the definitions of which columns should have subtotals added to them."
           ],
           "raises": [],
           "args": [
-            [
-              "aSubTotalColumns",
-              "typing.Tuple[SubTotalColumn_d5760cbd, ...]",
-              "in"
-            ]
+            {
+              "name": "aSubTotalColumns",
+              "type": "typing.Tuple[SubTotalColumn_d5760cbd, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.sheet.SubTotalColumn >"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XController",
   "type": "interface",
@@ -67,36 +67,41 @@
         {
           "name": "attachFrame",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "is called to attach the controller with its managing frame."
           ],
           "raises": [],
           "args": [
-            [
-              "Frame",
-              "XFrame_7a570956",
-              "in"
-            ]
+            {
+              "name": "Frame",
+              "type": "XFrame_7a570956",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XFrame"
+            }
           ]
         },
         {
           "name": "attachModel",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "is called to attach the controller to a new model."
           ],
           "raises": [],
           "args": [
-            [
-              "Model",
-              "XModel_7a6e095c",
-              "in"
-            ]
+            {
+              "name": "Model",
+              "type": "XModel_7a6e095c",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XModel"
+            }
           ]
         },
         {
           "name": "getFrame",
           "returns": "XFrame_7a570956",
+          "returns_origin": "com.sun.star.frame.XFrame",
           "desc": [
             "provides access to owner frame of this controller"
           ],
@@ -106,6 +111,7 @@
         {
           "name": "getModel",
           "returns": "XModel_7a6e095c",
+          "returns_origin": "com.sun.star.frame.XModel",
           "desc": [
             "provides access to currently attached model"
           ],
@@ -115,6 +121,7 @@
         {
           "name": "getViewData",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "provides access to current view status"
           ],
@@ -124,31 +131,35 @@
         {
           "name": "restoreViewData",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "restores the view status using the data gotten from a previous call to XController.getViewData()."
           ],
           "raises": [],
           "args": [
-            [
-              "Data",
-              "object",
-              "in"
-            ]
+            {
+              "name": "Data",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         },
         {
           "name": "suspend",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "is called to prepare the controller for closing the view"
           ],
           "raises": [],
           "args": [
-            [
-              "Suspend",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "Suspend",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         }
       ]

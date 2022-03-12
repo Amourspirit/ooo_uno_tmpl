@@ -732,7 +732,7 @@ class Util:
             in_type (str): uno type
 
         Returns:
-            PythonType: class that contains type, requires typing and imporst info.
+            PythonType: class that contains type, requires typing and imports info.
         """
         if Util.TYPE_RULES is None:
             Util.TYPE_RULES = ModType.TypeRules()

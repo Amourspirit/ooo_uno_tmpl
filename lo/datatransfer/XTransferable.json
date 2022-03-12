@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XTransferable",
   "type": "interface",
@@ -63,6 +63,7 @@
         {
           "name": "getTransferData",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "Called by a data consumer to obtain data from the source in a specified format."
           ],
@@ -71,16 +72,18 @@
             "com.sun.star.io.IOException"
           ],
           "args": [
-            [
-              "aFlavor",
-              "DataFlavor_ffd30deb",
-              "in"
-            ]
+            {
+              "name": "aFlavor",
+              "type": "DataFlavor_ffd30deb",
+              "direction": "in",
+              "origin": "com.sun.star.datatransfer.DataFlavor"
+            }
           ]
         },
         {
           "name": "getTransferDataFlavors",
           "returns": "typing.Tuple[DataFlavor_ffd30deb, ...]",
+          "returns_origin": "sequence< DataFlavor >",
           "desc": [
             "Returns a sequence of supported DataFlavor."
           ],
@@ -90,6 +93,7 @@
         {
           "name": "isDataFlavorSupported",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Checks if the data object supports the specified data flavor.",
             "",
@@ -99,11 +103,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aFlavor",
-              "DataFlavor_ffd30deb",
-              "in"
-            ]
+            {
+              "name": "aFlavor",
+              "type": "DataFlavor_ffd30deb",
+              "direction": "in",
+              "origin": "com.sun.star.datatransfer.DataFlavor"
+            }
           ]
         }
       ]

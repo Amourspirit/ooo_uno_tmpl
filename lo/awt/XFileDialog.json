@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XFileDialog",
   "type": "interface",
@@ -58,6 +58,7 @@
         {
           "name": "getCurrentFilter",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the currently selected filter."
           ],
@@ -67,6 +68,7 @@
         {
           "name": "getPath",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the path."
           ],
@@ -76,51 +78,58 @@
         {
           "name": "setCurrentFilter",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the current filter."
           ],
           "raises": [],
           "args": [
-            [
-              "Filter",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Filter",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "setFilters",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the filters."
           ],
           "raises": [],
           "args": [
-            [
-              "rFilterNames",
-              "typing.Tuple[str, ...]",
-              "in"
-            ],
-            [
-              "rMasks",
-              "typing.Tuple[str, ...]",
-              "in"
-            ]
+            {
+              "name": "rFilterNames",
+              "type": "typing.Tuple[str, ...]",
+              "direction": "in",
+              "origin": "sequence< string >"
+            },
+            {
+              "name": "rMasks",
+              "type": "typing.Tuple[str, ...]",
+              "direction": "in",
+              "origin": "sequence< string >"
+            }
           ]
         },
         {
           "name": "setPath",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the path."
           ],
           "raises": [],
           "args": [
-            [
-              "Path",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Path",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]
