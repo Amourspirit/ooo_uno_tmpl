@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XInteractionFilterSelect",
   "type": "interface",
@@ -52,6 +52,7 @@
         {
           "name": "getFilter",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "used by detection to get selected filter"
           ],
@@ -61,6 +62,7 @@
         {
           "name": "setFilter",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "used by interaction to set selected filter",
             "",
@@ -68,11 +70,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Name",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

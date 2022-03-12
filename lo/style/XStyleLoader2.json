@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XStyleLoader2",
   "type": "interface",
@@ -73,6 +73,7 @@
         {
           "name": "loadStylesFromDocument",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "loads styles from a given document",
             "",
@@ -82,16 +83,18 @@
             "com.sun.star.io.IOException"
           ],
           "args": [
-            [
-              "aSourceComponent",
-              "XComponent_98dc0ab5",
-              "in"
-            ],
-            [
-              "aOptions",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ]
+            {
+              "name": "aSourceComponent",
+              "type": "XComponent_98dc0ab5",
+              "direction": "in",
+              "origin": "com.sun.star.lang.XComponent"
+            },
+            {
+              "name": "aOptions",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            }
           ]
         }
       ]

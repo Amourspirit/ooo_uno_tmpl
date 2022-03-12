@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XNumberFormatter",
   "type": "interface",
@@ -67,6 +67,7 @@
         {
           "name": "attachNumberFormatsSupplier",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "attaches an XNumberFormatsSupplier to this NumberFormatter.",
             "",
@@ -74,36 +75,41 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xSupplier",
-              "XNumberFormatsSupplier_3afb0fb7",
-              "in"
-            ]
+            {
+              "name": "xSupplier",
+              "type": "XNumberFormatsSupplier_3afb0fb7",
+              "direction": "in",
+              "origin": "com.sun.star.util.XNumberFormatsSupplier"
+            }
           ]
         },
         {
           "name": "convertNumberToString",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "converts a number into a string."
           ],
           "raises": [],
           "args": [
-            [
-              "nKey",
-              "int",
-              "in"
-            ],
-            [
-              "fValue",
-              "float",
-              "in"
-            ]
+            {
+              "name": "nKey",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "fValue",
+              "type": "float",
+              "direction": "in",
+              "origin": "double"
+            }
           ]
         },
         {
           "name": "convertStringToNumber",
           "returns": "float",
+          "returns_origin": "double",
           "desc": [
             "converts a string which contains a formatted number into a number.",
             "",
@@ -113,21 +119,24 @@
             "com.sun.star.util.NotNumericException"
           ],
           "args": [
-            [
-              "nKey",
-              "int",
-              "in"
-            ],
-            [
-              "aString",
-              "str",
-              "in"
-            ]
+            {
+              "name": "nKey",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aString",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "detectNumberFormat",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "detects the number format in a string which contains a formatted number."
           ],
@@ -135,41 +144,47 @@
             "com.sun.star.util.NotNumericException"
           ],
           "args": [
-            [
-              "nKey",
-              "int",
-              "in"
-            ],
-            [
-              "aString",
-              "str",
-              "in"
-            ]
+            {
+              "name": "nKey",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aString",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "formatString",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "converts a string into another string."
           ],
           "raises": [],
           "args": [
-            [
-              "nKey",
-              "int",
-              "in"
-            ],
-            [
-              "aString",
-              "str",
-              "in"
-            ]
+            {
+              "name": "nKey",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aString",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getInputString",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "converts a number into a string with the specified format.",
             "",
@@ -177,21 +192,24 @@
           ],
           "raises": [],
           "args": [
-            [
-              "nKey",
-              "int",
-              "in"
-            ],
-            [
-              "fValue",
-              "float",
-              "in"
-            ]
+            {
+              "name": "nKey",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "fValue",
+              "type": "float",
+              "direction": "in",
+              "origin": "double"
+            }
           ]
         },
         {
           "name": "getNumberFormatsSupplier",
           "returns": "XNumberFormatsSupplier_3afb0fb7",
+          "returns_origin": "com.sun.star.util.XNumberFormatsSupplier",
           "desc": [],
           "raises": [],
           "args": []
@@ -199,47 +217,55 @@
         {
           "name": "queryColorForNumber",
           "returns": "Color_68e908c5",
+          "returns_origin": "com.sun.star.util.Color",
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "nKey",
-              "int",
-              "in"
-            ],
-            [
-              "fValue",
-              "float",
-              "in"
-            ],
-            [
-              "aDefaultColor",
-              "Color_68e908c5",
-              "in"
-            ]
+            {
+              "name": "nKey",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "fValue",
+              "type": "float",
+              "direction": "in",
+              "origin": "double"
+            },
+            {
+              "name": "aDefaultColor",
+              "type": "Color_68e908c5",
+              "direction": "in",
+              "origin": "com.sun.star.util.Color"
+            }
           ]
         },
         {
           "name": "queryColorForString",
           "returns": "Color_68e908c5",
+          "returns_origin": "com.sun.star.util.Color",
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "nKey",
-              "int",
-              "in"
-            ],
-            [
-              "aString",
-              "str",
-              "in"
-            ],
-            [
-              "aDefaultColor",
-              "Color_68e908c5",
-              "in"
-            ]
+            {
+              "name": "nKey",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aString",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aDefaultColor",
+              "type": "Color_68e908c5",
+              "direction": "in",
+              "origin": "com.sun.star.util.Color"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XIconSetEntry",
   "type": "interface",
@@ -36,6 +36,7 @@
         {
           "name": "getFormula",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [],
           "raises": [],
           "args": []
@@ -43,6 +44,7 @@
         {
           "name": "getType",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "See com.sun.star.sheet.IconSetEntryType for possible values."
           ],
@@ -52,29 +54,33 @@
         {
           "name": "setFormula",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "Formula",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Formula",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "setType",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "See com.sun.star.sheet.IconSetEntryType for possible values."
           ],
           "raises": [],
           "args": [
-            [
-              "Type",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Type",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

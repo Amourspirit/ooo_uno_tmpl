@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XInvocationAdapterFactory2",
   "type": "interface",
@@ -64,21 +64,24 @@
         {
           "name": "createAdapter",
           "returns": "XInterface_8f010a43",
+          "returns_origin": "com.sun.star.uno.XInterface",
           "desc": [
             "Creates an adapter interface of given types for calling the given XInvocation interface."
           ],
           "raises": [],
           "args": [
-            [
-              "Invocation",
-              "XInvocation_be070c0f",
-              "in"
-            ],
-            [
-              "aTypes",
-              "typing.Tuple[object, ...]",
-              "in"
-            ]
+            {
+              "name": "Invocation",
+              "type": "XInvocation_be070c0f",
+              "direction": "in",
+              "origin": "com.sun.star.script.XInvocation"
+            },
+            {
+              "name": "aTypes",
+              "type": "typing.Tuple[object, ...]",
+              "direction": "in",
+              "origin": "sequence< type >"
+            }
           ]
         }
       ]

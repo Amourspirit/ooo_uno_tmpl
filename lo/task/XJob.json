@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XJob",
   "type": "interface",
@@ -64,6 +64,7 @@
         {
           "name": "execute",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "executes the job synchronously"
           ],
@@ -72,11 +73,12 @@
             "com.sun.star.uno.Exception"
           ],
           "args": [
-            [
-              "Arguments",
-              "typing.Tuple[NamedValue_a37a0af3, ...]",
-              "in"
-            ]
+            {
+              "name": "Arguments",
+              "type": "typing.Tuple[NamedValue_a37a0af3, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.NamedValue >"
+            }
           ]
         }
       ]

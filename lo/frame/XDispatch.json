@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDispatch",
   "type": "interface",
@@ -82,6 +82,7 @@
         {
           "name": "addStatusListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "registers a listener of a control for a specific URL at this object to receive status events.",
             "",
@@ -91,21 +92,24 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Control",
-              "XStatusListener_e2740d35",
-              "in"
-            ],
-            [
-              "URL",
-              "URL_57ad07b9",
-              "in"
-            ]
+            {
+              "name": "Control",
+              "type": "XStatusListener_e2740d35",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XStatusListener"
+            },
+            {
+              "name": "URL",
+              "type": "URL_57ad07b9",
+              "direction": "in",
+              "origin": "com.sun.star.util.URL"
+            }
           ]
         },
         {
           "name": "dispatch",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "dispatches (executes) a URL",
             "",
@@ -119,36 +123,41 @@
           ],
           "raises": [],
           "args": [
-            [
-              "URL",
-              "URL_57ad07b9",
-              "in"
-            ],
-            [
-              "Arguments",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ]
+            {
+              "name": "URL",
+              "type": "URL_57ad07b9",
+              "direction": "in",
+              "origin": "com.sun.star.util.URL"
+            },
+            {
+              "name": "Arguments",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            }
           ]
         },
         {
           "name": "removeStatusListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "unregisters a listener from a control."
           ],
           "raises": [],
           "args": [
-            [
-              "Control",
-              "XStatusListener_e2740d35",
-              "in"
-            ],
-            [
-              "URL",
-              "URL_57ad07b9",
-              "in"
-            ]
+            {
+              "name": "Control",
+              "type": "XStatusListener_e2740d35",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XStatusListener"
+            },
+            {
+              "name": "URL",
+              "type": "URL_57ad07b9",
+              "direction": "in",
+              "origin": "com.sun.star.util.URL"
+            }
           ]
         }
       ]

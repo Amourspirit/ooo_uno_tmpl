@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XTransliteration",
   "type": "interface",
@@ -90,6 +90,7 @@
         {
           "name": "compareString",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "Compare 2 strings as per this transliteration.",
             "",
@@ -97,21 +98,24 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aStr1",
-              "str",
-              "in"
-            ],
-            [
-              "aStr2",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aStr1",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aStr2",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "compareSubstring",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "Compare 2 substrings as per this transliteration.",
             "",
@@ -119,41 +123,48 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aStr1",
-              "str",
-              "in"
-            ],
-            [
-              "nOff1",
-              "int",
-              "in"
-            ],
-            [
-              "nLen1",
-              "int",
-              "in"
-            ],
-            [
-              "aStr2",
-              "str",
-              "in"
-            ],
-            [
-              "nOff2",
-              "int",
-              "in"
-            ],
-            [
-              "nLen2",
-              "int",
-              "in"
-            ]
+            {
+              "name": "aStr1",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nOff1",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nLen1",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aStr2",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nOff2",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nLen2",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "equals",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Match two substrings and find if they are equivalent as per this transliteration.",
             "",
@@ -167,79 +178,93 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aStr1",
-              "str",
-              "in"
-            ],
-            [
-              "nPos1",
-              "int",
-              "in"
-            ],
-            [
-              "nCount1",
-              "int",
-              "in"
-            ],
-            [
-              "rMatch1",
-              "int",
-              "out"
-            ],
-            [
-              "aStr2",
-              "str",
-              "in"
-            ],
-            [
-              "nPos2",
-              "int",
-              "in"
-            ],
-            [
-              "nCount2",
-              "int",
-              "in"
-            ],
-            [
-              "rMatch2",
-              "int",
-              "out"
-            ]
+            {
+              "name": "aStr1",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nPos1",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nCount1",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "rMatch1",
+              "type": "int",
+              "direction": "out",
+              "origin": "long"
+            },
+            {
+              "name": "aStr2",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nPos2",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nCount2",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "rMatch2",
+              "type": "int",
+              "direction": "out",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "folding",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "aInStr",
-              "str",
-              "in"
-            ],
-            [
-              "nStartPos",
-              "int",
-              "in"
-            ],
-            [
-              "nCount",
-              "int",
-              "in"
-            ],
-            [
-              "rOffset",
-              "typing.Tuple[int, ...]",
-              "out"
-            ]
+            {
+              "name": "aInStr",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nStartPos",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nCount",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "rOffset",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "out",
+              "origin": "sequence< long >"
+            }
           ]
         },
         {
           "name": "getAvailableModules",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [
             "List the available transliteration modules for a given locale.",
             "",
@@ -247,21 +272,24 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aLocale",
-              "Locale_70d308fa",
-              "in"
-            ],
-            [
-              "nType",
-              "int",
-              "in"
-            ]
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "nType",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "getName",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Unique ASCII name to identify a module.",
             "",
@@ -273,6 +301,7 @@
         {
           "name": "getType",
           "returns": "int",
+          "returns_origin": "short",
           "desc": [
             "Return the attribute(s) associated with this transliteration object, as defined in TransliterationType.",
             "",
@@ -284,26 +313,30 @@
         {
           "name": "loadModule",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Load instance of predefined module - old style method."
           ],
           "raises": [],
           "args": [
-            [
-              "eModType",
-              "TransliterationModules_32090f64",
-              "in"
-            ],
-            [
-              "aLocale",
-              "Locale_70d308fa",
-              "in"
-            ]
+            {
+              "name": "eModType",
+              "type": "TransliterationModules_32090f64",
+              "direction": "in",
+              "origin": "com.sun.star.i18n.TransliterationModules"
+            },
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
           ]
         },
         {
           "name": "loadModuleByImplName",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Load instance of UNO registered module.",
             "",
@@ -311,41 +344,47 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aImplName",
-              "str",
-              "in"
-            ],
-            [
-              "aLocale",
-              "Locale_70d308fa",
-              "in"
-            ]
+            {
+              "name": "aImplName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
           ]
         },
         {
           "name": "loadModuleNew",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Load a sequence of instances of predefined modules - supersedes method XTransliteration.loadModule()."
           ],
           "raises": [],
           "args": [
-            [
-              "aModType",
-              "typing.Tuple[TransliterationModulesNew_6260108e, ...]",
-              "in"
-            ],
-            [
-              "aLocale",
-              "Locale_70d308fa",
-              "in"
-            ]
+            {
+              "name": "aModType",
+              "type": "typing.Tuple[TransliterationModulesNew_6260108e, ...]",
+              "direction": "in",
+              "origin": "sequence< TransliterationModulesNew >"
+            },
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
           ]
         },
         {
           "name": "loadModulesByImplNames",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Load a sequence of instances of transliteration modules.",
             "",
@@ -353,21 +392,24 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aImplNameList",
-              "typing.Tuple[str, ...]",
-              "in"
-            ],
-            [
-              "aLocale",
-              "Locale_70d308fa",
-              "in"
-            ]
+            {
+              "name": "aImplNameList",
+              "type": "typing.Tuple[str, ...]",
+              "direction": "in",
+              "origin": "sequence< string >"
+            },
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
           ]
         },
         {
           "name": "transliterate",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Transliterate a substring.",
             "",
@@ -375,31 +417,36 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aInStr",
-              "str",
-              "in"
-            ],
-            [
-              "nStartPos",
-              "int",
-              "in"
-            ],
-            [
-              "nCount",
-              "int",
-              "in"
-            ],
-            [
-              "rOffset",
-              "typing.Tuple[int, ...]",
-              "out"
-            ]
+            {
+              "name": "aInStr",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nStartPos",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nCount",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "rOffset",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "out",
+              "origin": "sequence< long >"
+            }
           ]
         },
         {
           "name": "transliterateRange",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [
             "Transliterate one set of characters to another.",
             "",
@@ -411,16 +458,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aStr1",
-              "str",
-              "in"
-            ],
-            [
-              "aStr2",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aStr1",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aStr2",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

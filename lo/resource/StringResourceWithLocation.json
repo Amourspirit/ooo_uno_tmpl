@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "StringResourceWithLocation",
   "type": "service",
@@ -67,6 +67,7 @@
         {
           "name": "create",
           "returns": "None",
+          "returns_origin": null,
           "desc": [
             "is used to initialize the object on its creation."
           ],
@@ -74,36 +75,42 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "URL",
-              "str",
-              "in"
-            ],
-            [
-              "ReadOnly",
-              "bool",
-              "in"
-            ],
-            [
-              "locale",
-              "Locale_70d308fa",
-              "in"
-            ],
-            [
-              "BaseName",
-              "str",
-              "in"
-            ],
-            [
-              "Comment",
-              "str",
-              "in"
-            ],
-            [
-              "Handler",
-              "XInteractionHandler_bf80e51",
-              "in"
-            ]
+            {
+              "name": "URL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "ReadOnly",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            },
+            {
+              "name": "locale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "BaseName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Comment",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Handler",
+              "type": "XInteractionHandler_bf80e51",
+              "direction": "in",
+              "origin": "com.sun.star.task.XInteractionHandler"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XTableChart",
   "type": "interface",
@@ -62,6 +62,7 @@
         {
           "name": "getHasColumnHeaders",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "returns, whether the cells of the topmost row of the source data are interpreted as column headers."
           ],
@@ -71,6 +72,7 @@
         {
           "name": "getHasRowHeaders",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "returns, whether the cells of the leftmost column of the source data are interpreted as row headers."
           ],
@@ -80,6 +82,7 @@
         {
           "name": "getRanges",
           "returns": "typing.Tuple[CellRangeAddress_ec450d43, ...]",
+          "returns_origin": "sequence< com.sun.star.table.CellRangeAddress >",
           "desc": [
             "returns the cell ranges that contain the data for the chart."
           ],
@@ -89,46 +92,52 @@
         {
           "name": "setHasColumnHeaders",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "specifies whether the cells of the topmost row of the source data are interpreted as column headers."
           ],
           "raises": [],
           "args": [
-            [
-              "bHasColumnHeaders",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "bHasColumnHeaders",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "setHasRowHeaders",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "specifies whether the cells of the leftmost column of the source data are interpreted as row headers."
           ],
           "raises": [],
           "args": [
-            [
-              "bHasRowHeaders",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "bHasRowHeaders",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "setRanges",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the cell ranges that contain the data for the chart."
           ],
           "raises": [],
           "args": [
-            [
-              "aRanges",
-              "typing.Tuple[CellRangeAddress_ec450d43, ...]",
-              "in"
-            ]
+            {
+              "name": "aRanges",
+              "type": "typing.Tuple[CellRangeAddress_ec450d43, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.table.CellRangeAddress >"
+            }
           ]
         }
       ]

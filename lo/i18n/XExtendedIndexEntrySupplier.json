@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XExtendedIndexEntrySupplier",
   "type": "interface",
@@ -71,6 +71,7 @@
         {
           "name": "compareIndexEntry",
           "returns": "int",
+          "returns_origin": "short",
           "desc": [
             "Compares index entries.",
             "",
@@ -78,56 +79,65 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aIndexEntry1",
-              "str",
-              "in"
-            ],
-            [
-              "aPhoneticEntry1",
-              "str",
-              "in"
-            ],
-            [
-              "aLocale1",
-              "Locale_70d308fa",
-              "in"
-            ],
-            [
-              "aIndexEntry2",
-              "str",
-              "in"
-            ],
-            [
-              "aPhoneticEntry2",
-              "str",
-              "in"
-            ],
-            [
-              "aLocale2",
-              "Locale_70d308fa",
-              "in"
-            ]
+            {
+              "name": "aIndexEntry1",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aPhoneticEntry1",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aLocale1",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "aIndexEntry2",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aPhoneticEntry2",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aLocale2",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
           ]
         },
         {
           "name": "getAlgorithmList",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [
             "Returns index algorithm list for specific locale."
           ],
           "raises": [],
           "args": [
-            [
-              "aLocale",
-              "Locale_70d308fa",
-              "in"
-            ]
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
           ]
         },
         {
           "name": "getIndexKey",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Returns index key.",
             "",
@@ -135,26 +145,30 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aIndexEntry",
-              "str",
-              "in"
-            ],
-            [
-              "aPhoneticEntry",
-              "str",
-              "in"
-            ],
-            [
-              "aLocale",
-              "Locale_70d308fa",
-              "in"
-            ]
+            {
+              "name": "aIndexEntry",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aPhoneticEntry",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
           ]
         },
         {
           "name": "getLocaleList",
           "returns": "typing.Tuple[Locale_70d308fa, ...]",
+          "returns_origin": "sequence< com.sun.star.lang.Locale >",
           "desc": [
             "Returns locale list for which the IndexEntrySupplier provides service."
           ],
@@ -164,61 +178,70 @@
         {
           "name": "getPhoneticCandidate",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Returns phonetic candidate for index entry for the locale."
           ],
           "raises": [],
           "args": [
-            [
-              "aIndexEntry",
-              "str",
-              "in"
-            ],
-            [
-              "aLocale",
-              "Locale_70d308fa",
-              "in"
-            ]
+            {
+              "name": "aIndexEntry",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
           ]
         },
         {
           "name": "loadAlgorithm",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Loads index algorithm for the locale."
           ],
           "raises": [],
           "args": [
-            [
-              "aLocale",
-              "Locale_70d308fa",
-              "in"
-            ],
-            [
-              "aIndexAlgorithm",
-              "str",
-              "in"
-            ],
-            [
-              "nCollatorOptions",
-              "int",
-              "in"
-            ]
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "aIndexAlgorithm",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nCollatorOptions",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "usePhoneticEntry",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Checks if Phonetic Entry should be used for the locale."
           ],
           "raises": [],
           "args": [
-            [
-              "aLocale",
-              "Locale_70d308fa",
-              "in"
-            ]
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
           ]
         }
       ]

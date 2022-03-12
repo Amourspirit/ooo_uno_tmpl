@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XAccessibleTextSelection",
   "type": "interface",
@@ -58,31 +58,36 @@
         {
           "name": "addSelection",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [],
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "selectionIndex",
-              "int",
-              "in"
-            ],
-            [
-              "startOffset",
-              "int",
-              "in"
-            ],
-            [
-              "endOffset",
-              "int",
-              "in"
-            ]
+            {
+              "name": "selectionIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "startOffset",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "endOffset",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getSelectedPortionCount",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [],
           "raises": [],
           "args": []
@@ -90,66 +95,75 @@
         {
           "name": "getSeletedPositionEnd",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [],
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nSelectedPortionIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nSelectedPortionIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getSeletedPositionStart",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [],
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nSelectedPortionIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nSelectedPortionIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "removeSelection",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [],
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "selectionIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "selectionIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "scrollToPosition",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [],
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aPoint",
-              "Point_5fb2085e",
-              "in"
-            ],
-            [
-              "isLeftTop",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "aPoint",
+              "type": "Point_5fb2085e",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Point"
+            },
+            {
+              "name": "isLeftTop",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         }
       ]

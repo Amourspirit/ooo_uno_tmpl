@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDataImporter",
   "type": "interface",
@@ -76,6 +76,7 @@
         {
           "name": "cancel",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "cancels the import process."
           ],
@@ -85,26 +86,30 @@
         {
           "name": "importData",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "imports data for a component from an active data source."
           ],
           "raises": [],
           "args": [
-            [
-              "aActiveSource",
-              "XActiveDataSource_d1900c7f",
-              "in"
-            ],
-            [
-              "Component",
-              "XComponent_98dc0ab5",
-              "in"
-            ],
-            [
-              "aListener",
-              "XDataTransferEventListener_54d6103f",
-              "in"
-            ]
+            {
+              "name": "aActiveSource",
+              "type": "XActiveDataSource_d1900c7f",
+              "direction": "in",
+              "origin": "com.sun.star.io.XActiveDataSource"
+            },
+            {
+              "name": "Component",
+              "type": "XComponent_98dc0ab5",
+              "direction": "in",
+              "origin": "com.sun.star.lang.XComponent"
+            },
+            {
+              "name": "aListener",
+              "type": "XDataTransferEventListener_54d6103f",
+              "direction": "in",
+              "origin": "com.sun.star.io.XDataTransferEventListener"
+            }
           ]
         }
       ]

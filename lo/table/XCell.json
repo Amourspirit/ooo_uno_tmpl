@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XCell",
   "type": "interface",
@@ -60,6 +60,7 @@
         {
           "name": "getError",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "returns the error value of the cell.",
             "",
@@ -71,6 +72,7 @@
         {
           "name": "getFormula",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the formula string of a cell.",
             "",
@@ -82,6 +84,7 @@
         {
           "name": "getType",
           "returns": "CellContentType_e08c0d0d",
+          "returns_origin": "com.sun.star.table.CellContentType",
           "desc": [
             "returns the type of the cell."
           ],
@@ -91,6 +94,7 @@
         {
           "name": "getValue",
           "returns": "float",
+          "returns_origin": "double",
           "desc": [
             "returns the floating point value of the cell.",
             "",
@@ -102,6 +106,7 @@
         {
           "name": "setFormula",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets a formula into the cell.",
             "",
@@ -109,16 +114,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aFormula",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aFormula",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "setValue",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets a floating point value into the cell.",
             "",
@@ -126,11 +133,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "nValue",
-              "float",
-              "in"
-            ]
+            {
+              "name": "nValue",
+              "type": "float",
+              "direction": "in",
+              "origin": "double"
+            }
           ]
         }
       ]

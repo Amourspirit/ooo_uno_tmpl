@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XIsolatedConnection",
   "type": "interface",
@@ -73,6 +73,7 @@
         {
           "name": "getIsolatedConnection",
           "returns": "XConnection_a36a0b0c",
+          "returns_origin": "com.sun.star.sdbc.XConnection",
           "desc": [
             "attempts to establish a database connection."
           ],
@@ -80,21 +81,24 @@
             "SQLException"
           ],
           "args": [
-            [
-              "user",
-              "str",
-              "in"
-            ],
-            [
-              "password",
-              "str",
-              "in"
-            ]
+            {
+              "name": "user",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "password",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getIsolatedConnectionWithCompletion",
           "returns": "XConnection_a36a0b0c",
+          "returns_origin": "com.sun.star.sdbc.XConnection",
           "desc": [
             "attempts to establish a database connection.",
             "",
@@ -104,11 +108,12 @@
             "SQLException"
           ],
           "args": [
-            [
-              "handler",
-              "XInteractionHandler_bf80e51",
-              "in"
-            ]
+            {
+              "name": "handler",
+              "type": "XInteractionHandler_bf80e51",
+              "direction": "in",
+              "origin": "com.sun.star.task.XInteractionHandler"
+            }
           ]
         }
       ]

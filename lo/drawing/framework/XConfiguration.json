@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XConfiguration",
   "type": "interface",
@@ -74,6 +74,7 @@
         {
           "name": "addResource",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Add a resource to the configuration.",
             "",
@@ -81,16 +82,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xResourceId",
-              "XResourceId_5be3103d",
-              "in"
-            ]
+            {
+              "name": "xResourceId",
+              "type": "XResourceId_5be3103d",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.framework.XResourceId"
+            }
           ]
         },
         {
           "name": "getResources",
           "returns": "typing.Tuple[XResourceId_5be3103d, ...]",
+          "returns_origin": "sequence< XResourceId >",
           "desc": [
             "Returns the list of resources that are bound directly and/or indirectly to the given anchor.",
             "",
@@ -100,26 +103,30 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xAnchorId",
-              "XResourceId_5be3103d",
-              "in"
-            ],
-            [
-              "sTargetURLPrefix",
-              "str",
-              "in"
-            ],
-            [
-              "eSearchMode",
-              "AnchorBindingMode_c46b128b",
-              "in"
-            ]
+            {
+              "name": "xAnchorId",
+              "type": "XResourceId_5be3103d",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.framework.XResourceId"
+            },
+            {
+              "name": "sTargetURLPrefix",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "eSearchMode",
+              "type": "AnchorBindingMode_c46b128b",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.framework.AnchorBindingMode"
+            }
           ]
         },
         {
           "name": "hasResource",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Returns whether the specified resource is part of the configuration.",
             "",
@@ -127,16 +134,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xResourceId",
-              "XResourceId_5be3103d",
-              "in"
-            ]
+            {
+              "name": "xResourceId",
+              "type": "XResourceId_5be3103d",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.framework.XResourceId"
+            }
           ]
         },
         {
           "name": "removeResource",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Remove a resource from the configuration.",
             "",
@@ -144,11 +153,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xResourceId",
-              "XResourceId_5be3103d",
-              "in"
-            ]
+            {
+              "name": "xResourceId",
+              "type": "XResourceId_5be3103d",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.framework.XResourceId"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XPersistanceHolder",
   "type": "interface",
@@ -60,6 +60,7 @@
         {
           "name": "connectPersistance",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "connects the object to a persistence."
           ],
@@ -68,16 +69,18 @@
             "com.sun.star.uno.Exception"
           ],
           "args": [
-            [
-              "xStream",
-              "XStream_678908a4",
-              "in"
-            ]
+            {
+              "name": "xStream",
+              "type": "XStream_678908a4",
+              "direction": "in",
+              "origin": "com.sun.star.io.XStream"
+            }
           ]
         },
         {
           "name": "disconnectPersistence",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "disconnects the object from the persistence."
           ],

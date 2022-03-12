@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDataType",
   "type": "interface",
@@ -50,31 +50,35 @@
         {
           "name": "explainInvalid",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "TODO."
           ],
           "raises": [],
           "args": [
-            [
-              "value",
-              "str",
-              "in"
-            ]
+            {
+              "name": "value",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "validate",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "TODO."
           ],
           "raises": [],
           "args": [
-            [
-              "value",
-              "str",
-              "in"
-            ]
+            {
+              "name": "value",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ],
@@ -83,6 +87,7 @@
           "name": "IsBasic",
           "returns": "bool",
           "origtype": null,
+          "origin": "boolean",
           "desc": [
             "specifies whether the type is a basic type",
             "",
@@ -95,6 +100,7 @@
           "name": "Name",
           "returns": "str",
           "origtype": null,
+          "origin": "string",
           "desc": [
             "provides access to the name of the type"
           ],
@@ -105,6 +111,7 @@
           "name": "Pattern",
           "returns": "str",
           "origtype": null,
+          "origin": "string",
           "desc": [
             "specifies the pattern which strings conforming to this type comply to",
             "",
@@ -117,6 +124,7 @@
           "name": "TypeClass",
           "returns": "int",
           "origtype": null,
+          "origin": "short",
           "desc": [
             "class of the type"
           ],
@@ -127,6 +135,7 @@
           "name": "WhiteSpaceTreatment",
           "returns": "int",
           "origtype": null,
+          "origin": "short",
           "desc": [
             "specifies how strings of this data type are to be processed, with respect to white spaces",
             "",

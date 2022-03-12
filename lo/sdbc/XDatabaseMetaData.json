@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDatabaseMetaData",
   "type": "interface",
@@ -78,6 +78,7 @@
         {
           "name": "allProceduresAreCallable",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Can all the procedures returned by getProcedures be called by the current user?"
           ],
@@ -89,6 +90,7 @@
         {
           "name": "allTablesAreSelectable",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Can all the tables returned by getTable be SELECTed by the current user?"
           ],
@@ -100,6 +102,7 @@
         {
           "name": "dataDefinitionCausesTransactionCommit",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "does a data definition statement within a transaction force the transaction to commit?"
           ],
@@ -111,6 +114,7 @@
         {
           "name": "dataDefinitionIgnoredInTransactions",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "is a data definition statement within a transaction ignored?"
           ],
@@ -122,6 +126,7 @@
         {
           "name": "deletesAreDetected",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "indicates whether or not a visible row delete can be detected by calling com.sun.star.sdbc.XResultSet.rowDeleted().",
             "",
@@ -131,16 +136,18 @@
             "SQLException"
           ],
           "args": [
-            [
-              "setType",
-              "int",
-              "in"
-            ]
+            {
+              "name": "setType",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "doesMaxRowSizeIncludeBlobs",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Did getMaxRowSize() include LONGVARCHAR and LONGVARBINARY blobs?"
           ],
@@ -152,6 +159,7 @@
         {
           "name": "getBestRowIdentifier",
           "returns": "XResultSet_98e30aa7",
+          "returns_origin": "com.sun.star.sdbc.XResultSet",
           "desc": [
             "gets a description of a table's optimal set of columns that uniquely identifies a row.",
             "",
@@ -163,36 +171,42 @@
             "SQLException"
           ],
           "args": [
-            [
-              "catalog",
-              "object",
-              "in"
-            ],
-            [
-              "schema",
-              "str",
-              "in"
-            ],
-            [
-              "table",
-              "str",
-              "in"
-            ],
-            [
-              "scope",
-              "int",
-              "in"
-            ],
-            [
-              "nullable",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "catalog",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            },
+            {
+              "name": "schema",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "table",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "scope",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nullable",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "getCatalogSeparator",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "return the separator between catalog and table name"
           ],
@@ -204,6 +218,7 @@
         {
           "name": "getCatalogTerm",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "return the database vendor's preferred term for \\\"catalog\\\""
           ],
@@ -215,6 +230,7 @@
         {
           "name": "getCatalogs",
           "returns": "XResultSet_98e30aa7",
+          "returns_origin": "com.sun.star.sdbc.XResultSet",
           "desc": [
             "gets the catalog names available in this database.",
             "",
@@ -230,6 +246,7 @@
         {
           "name": "getColumnPrivileges",
           "returns": "XResultSet_98e30aa7",
+          "returns_origin": "com.sun.star.sdbc.XResultSet",
           "desc": [
             "gets a description of the access rights for a table's columns.",
             "",
@@ -241,31 +258,36 @@
             "SQLException"
           ],
           "args": [
-            [
-              "catalog",
-              "object",
-              "in"
-            ],
-            [
-              "schema",
-              "str",
-              "in"
-            ],
-            [
-              "table",
-              "str",
-              "in"
-            ],
-            [
-              "columnNamePattern",
-              "str",
-              "in"
-            ]
+            {
+              "name": "catalog",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            },
+            {
+              "name": "schema",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "table",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "columnNamePattern",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getColumns",
           "returns": "XResultSet_98e30aa7",
+          "returns_origin": "com.sun.star.sdbc.XResultSet",
           "desc": [
             "gets a description of table columns available in the specified catalog.",
             "",
@@ -277,31 +299,36 @@
             "SQLException"
           ],
           "args": [
-            [
-              "catalog",
-              "object",
-              "in"
-            ],
-            [
-              "schemaPattern",
-              "str",
-              "in"
-            ],
-            [
-              "tableNamePattern",
-              "str",
-              "in"
-            ],
-            [
-              "columnNamePattern",
-              "str",
-              "in"
-            ]
+            {
+              "name": "catalog",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            },
+            {
+              "name": "schemaPattern",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "tableNamePattern",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "columnNamePattern",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getConnection",
           "returns": "XConnection_a36a0b0c",
+          "returns_origin": "com.sun.star.sdbc.XConnection",
           "desc": [
             "retrieves the connection that produced this metadata object."
           ],
@@ -313,6 +340,7 @@
         {
           "name": "getCrossReference",
           "returns": "XResultSet_98e30aa7",
+          "returns_origin": "com.sun.star.sdbc.XResultSet",
           "desc": [
             "gets a description of the foreign key columns in the foreign key table that reference the primary key columns of the primary key table (describe how one table imports another's key.) This should normally return a single foreign key/primary key pair (most tables only import a foreign key from a table once.).",
             "",
@@ -324,41 +352,48 @@
             "SQLException"
           ],
           "args": [
-            [
-              "primaryCatalog",
-              "object",
-              "in"
-            ],
-            [
-              "primarySchema",
-              "str",
-              "in"
-            ],
-            [
-              "primaryTable",
-              "str",
-              "in"
-            ],
-            [
-              "foreignCatalog",
-              "object",
-              "in"
-            ],
-            [
-              "foreignSchema",
-              "str",
-              "in"
-            ],
-            [
-              "foreignTable",
-              "str",
-              "in"
-            ]
+            {
+              "name": "primaryCatalog",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            },
+            {
+              "name": "primarySchema",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "primaryTable",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "foreignCatalog",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            },
+            {
+              "name": "foreignSchema",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "foreignTable",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getDatabaseProductName",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the name of the database product."
           ],
@@ -370,6 +405,7 @@
         {
           "name": "getDatabaseProductVersion",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the version of the database product."
           ],
@@ -381,6 +417,7 @@
         {
           "name": "getDefaultTransactionIsolation",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "return the database default transaction isolation level.",
             "",
@@ -394,6 +431,7 @@
         {
           "name": "getDriverMajorVersion",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "returns the SDBC driver major version number."
           ],
@@ -403,6 +441,7 @@
         {
           "name": "getDriverMinorVersion",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "returns the SDBC driver minor version number."
           ],
@@ -412,6 +451,7 @@
         {
           "name": "getDriverName",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the name of the SDBC driver."
           ],
@@ -423,6 +463,7 @@
         {
           "name": "getDriverVersion",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the version number of the SDBC driver."
           ],
@@ -434,6 +475,7 @@
         {
           "name": "getExportedKeys",
           "returns": "XResultSet_98e30aa7",
+          "returns_origin": "com.sun.star.sdbc.XResultSet",
           "desc": [
             "gets a description of the foreign key columns that reference a table's primary key columns (the foreign keys exported by a table).",
             "",
@@ -445,26 +487,30 @@
             "SQLException"
           ],
           "args": [
-            [
-              "catalog",
-              "object",
-              "in"
-            ],
-            [
-              "schema",
-              "str",
-              "in"
-            ],
-            [
-              "table",
-              "str",
-              "in"
-            ]
+            {
+              "name": "catalog",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            },
+            {
+              "name": "schema",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "table",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getExtraNameCharacters",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "gets all the \\\"extra\\\" characters that can be used in unquoted identifier names (those beyond a-z, A-Z, 0-9 and _)."
           ],
@@ -476,6 +522,7 @@
         {
           "name": "getIdentifierQuoteString",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "What's the string used to quote SQL identifiers? This returns a space \\\" \\\" if identifier quoting is not supported."
           ],
@@ -487,6 +534,7 @@
         {
           "name": "getImportedKeys",
           "returns": "XResultSet_98e30aa7",
+          "returns_origin": "com.sun.star.sdbc.XResultSet",
           "desc": [
             "gets a description of the primary key columns that are referenced by a table's foreign key columns (the primary keys imported by a table).",
             "",
@@ -498,26 +546,30 @@
             "SQLException"
           ],
           "args": [
-            [
-              "catalog",
-              "object",
-              "in"
-            ],
-            [
-              "schema",
-              "str",
-              "in"
-            ],
-            [
-              "table",
-              "str",
-              "in"
-            ]
+            {
+              "name": "catalog",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            },
+            {
+              "name": "schema",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "table",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getIndexInfo",
           "returns": "XResultSet_98e30aa7",
+          "returns_origin": "com.sun.star.sdbc.XResultSet",
           "desc": [
             "gets a description of a table's indices and statistics.",
             "",
@@ -529,36 +581,42 @@
             "SQLException"
           ],
           "args": [
-            [
-              "catalog",
-              "object",
-              "in"
-            ],
-            [
-              "schema",
-              "str",
-              "in"
-            ],
-            [
-              "table",
-              "str",
-              "in"
-            ],
-            [
-              "unique",
-              "bool",
-              "in"
-            ],
-            [
-              "approximate",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "catalog",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            },
+            {
+              "name": "schema",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "table",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "unique",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            },
+            {
+              "name": "approximate",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "getMaxBinaryLiteralLength",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "return the maximal number of hex characters in an inline binary literal"
           ],
@@ -570,6 +628,7 @@
         {
           "name": "getMaxCatalogNameLength",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "return the maximum length of a catalog name"
           ],
@@ -581,6 +640,7 @@
         {
           "name": "getMaxCharLiteralLength",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "return the max length for a character literal"
           ],
@@ -592,6 +652,7 @@
         {
           "name": "getMaxColumnNameLength",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "return the limit on column name length"
           ],
@@ -603,6 +664,7 @@
         {
           "name": "getMaxColumnsInGroupBy",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "return the maximum number of columns in a \\\"GROUP BY\\\" clause"
           ],
@@ -614,6 +676,7 @@
         {
           "name": "getMaxColumnsInIndex",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "return the maximum number of columns allowed in an index"
           ],
@@ -625,6 +688,7 @@
         {
           "name": "getMaxColumnsInOrderBy",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "return the maximum number of columns in an \\\"ORDER BY\\\" clause"
           ],
@@ -636,6 +700,7 @@
         {
           "name": "getMaxColumnsInSelect",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "return the maximum number of columns in a \\\"SELECT\\\" list"
           ],
@@ -647,6 +712,7 @@
         {
           "name": "getMaxColumnsInTable",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "return the maximum number of columns in a table"
           ],
@@ -658,6 +724,7 @@
         {
           "name": "getMaxConnections",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "return the number of active connections at a time to this database."
           ],
@@ -669,6 +736,7 @@
         {
           "name": "getMaxCursorNameLength",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "return the maximum cursor name length"
           ],
@@ -680,6 +748,7 @@
         {
           "name": "getMaxIndexLength",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "return the maximum length of an index (in bytes)"
           ],
@@ -691,6 +760,7 @@
         {
           "name": "getMaxProcedureNameLength",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "return the maximum length of a procedure name"
           ],
@@ -702,6 +772,7 @@
         {
           "name": "getMaxRowSize",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "return the maximum length of a single row."
           ],
@@ -713,6 +784,7 @@
         {
           "name": "getMaxSchemaNameLength",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "return the maximum length allowed for a schema name"
           ],
@@ -724,6 +796,7 @@
         {
           "name": "getMaxStatementLength",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "return the maximum length of a SQL statement"
           ],
@@ -735,6 +808,7 @@
         {
           "name": "getMaxStatements",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "return the maximal number of open active statements at one time to this database"
           ],
@@ -746,6 +820,7 @@
         {
           "name": "getMaxTableNameLength",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "return the maximum length of a table name"
           ],
@@ -757,6 +832,7 @@
         {
           "name": "getMaxTablesInSelect",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "return the maximum number of tables in a SELECT statement"
           ],
@@ -768,6 +844,7 @@
         {
           "name": "getMaxUserNameLength",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "return the maximum length of a user name"
           ],
@@ -779,6 +856,7 @@
         {
           "name": "getNumericFunctions",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "gets a comma-separated list of math functions.",
             "",
@@ -792,6 +870,7 @@
         {
           "name": "getPrimaryKeys",
           "returns": "XResultSet_98e30aa7",
+          "returns_origin": "com.sun.star.sdbc.XResultSet",
           "desc": [
             "gets a description of a table's primary key columns.",
             "",
@@ -803,26 +882,30 @@
             "SQLException"
           ],
           "args": [
-            [
-              "catalog",
-              "object",
-              "in"
-            ],
-            [
-              "schema",
-              "str",
-              "in"
-            ],
-            [
-              "table",
-              "str",
-              "in"
-            ]
+            {
+              "name": "catalog",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            },
+            {
+              "name": "schema",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "table",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getProcedureColumns",
           "returns": "XResultSet_98e30aa7",
+          "returns_origin": "com.sun.star.sdbc.XResultSet",
           "desc": [
             "gets a description of a catalog's stored procedure parameters and result columns.",
             "",
@@ -836,31 +919,36 @@
             "SQLException"
           ],
           "args": [
-            [
-              "catalog",
-              "object",
-              "in"
-            ],
-            [
-              "schemaPattern",
-              "str",
-              "in"
-            ],
-            [
-              "procedureNamePattern",
-              "str",
-              "in"
-            ],
-            [
-              "columnNamePattern",
-              "str",
-              "in"
-            ]
+            {
+              "name": "catalog",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            },
+            {
+              "name": "schemaPattern",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "procedureNamePattern",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "columnNamePattern",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getProcedureTerm",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "return the database vendor's preferred term for \\\"procedure\\\""
           ],
@@ -872,6 +960,7 @@
         {
           "name": "getProcedures",
           "returns": "XResultSet_98e30aa7",
+          "returns_origin": "com.sun.star.sdbc.XResultSet",
           "desc": [
             "Gets a description of the stored procedures available in a catalog.",
             "",
@@ -883,26 +972,30 @@
             "SQLException"
           ],
           "args": [
-            [
-              "catalog",
-              "object",
-              "in"
-            ],
-            [
-              "schemaPattern",
-              "str",
-              "in"
-            ],
-            [
-              "procedureNamePattern",
-              "str",
-              "in"
-            ]
+            {
+              "name": "catalog",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            },
+            {
+              "name": "schemaPattern",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "procedureNamePattern",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getSQLKeywords",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "gets a comma-separated list of all a database's SQL keywords that are NOT also SQL92 keywords."
           ],
@@ -914,6 +1007,7 @@
         {
           "name": "getSchemaTerm",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "return the database vendor's preferred term for \\\"schema\\\""
           ],
@@ -925,6 +1019,7 @@
         {
           "name": "getSchemas",
           "returns": "XResultSet_98e30aa7",
+          "returns_origin": "com.sun.star.sdbc.XResultSet",
           "desc": [
             "Gets the schema names available in this database.",
             "",
@@ -940,6 +1035,7 @@
         {
           "name": "getSearchStringEscape",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "gets the string that can be used to escape wildcard characters.",
             "",
@@ -957,6 +1053,7 @@
         {
           "name": "getStringFunctions",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "gets a comma-separated list of string functions.",
             "",
@@ -970,6 +1067,7 @@
         {
           "name": "getSystemFunctions",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "gets a comma-separated list of system functions.",
             "",
@@ -983,6 +1081,7 @@
         {
           "name": "getTablePrivileges",
           "returns": "XResultSet_98e30aa7",
+          "returns_origin": "com.sun.star.sdbc.XResultSet",
           "desc": [
             "gets a description of the access rights for each table available in a catalog.",
             "",
@@ -996,26 +1095,30 @@
             "SQLException"
           ],
           "args": [
-            [
-              "catalog",
-              "object",
-              "in"
-            ],
-            [
-              "schemaPattern",
-              "str",
-              "in"
-            ],
-            [
-              "tableNamePattern",
-              "str",
-              "in"
-            ]
+            {
+              "name": "catalog",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            },
+            {
+              "name": "schemaPattern",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "tableNamePattern",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getTableTypes",
           "returns": "XResultSet_98e30aa7",
+          "returns_origin": "com.sun.star.sdbc.XResultSet",
           "desc": [
             "gets the table types available in this database.",
             "",
@@ -1031,6 +1134,7 @@
         {
           "name": "getTables",
           "returns": "XResultSet_98e30aa7",
+          "returns_origin": "com.sun.star.sdbc.XResultSet",
           "desc": [
             "gets a description of tables available in a catalog.",
             "",
@@ -1044,31 +1148,36 @@
             "SQLException"
           ],
           "args": [
-            [
-              "catalog",
-              "object",
-              "in"
-            ],
-            [
-              "schemaPattern",
-              "str",
-              "in"
-            ],
-            [
-              "tableNamePattern",
-              "str",
-              "in"
-            ],
-            [
-              "types",
-              "typing.Tuple[str, ...]",
-              "in"
-            ]
+            {
+              "name": "catalog",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            },
+            {
+              "name": "schemaPattern",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "tableNamePattern",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "types",
+              "type": "typing.Tuple[str, ...]",
+              "direction": "in",
+              "origin": "sequence< string >"
+            }
           ]
         },
         {
           "name": "getTimeDateFunctions",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "gets a comma-separated list of time and date functions."
           ],
@@ -1080,6 +1189,7 @@
         {
           "name": "getTypeInfo",
           "returns": "XResultSet_98e30aa7",
+          "returns_origin": "com.sun.star.sdbc.XResultSet",
           "desc": [
             "gets a description of all the standard SQL types supported by this database.",
             "",
@@ -1095,6 +1205,7 @@
         {
           "name": "getUDTs",
           "returns": "XResultSet_98e30aa7",
+          "returns_origin": "com.sun.star.sdbc.XResultSet",
           "desc": [
             "Gets a description of the user-defined types defined in a particular schema.",
             "",
@@ -1110,31 +1221,36 @@
             "SQLException"
           ],
           "args": [
-            [
-              "catalog",
-              "object",
-              "in"
-            ],
-            [
-              "schemaPattern",
-              "str",
-              "in"
-            ],
-            [
-              "typeNamePattern",
-              "str",
-              "in"
-            ],
-            [
-              "types",
-              "typing.Tuple[int, ...]",
-              "in"
-            ]
+            {
+              "name": "catalog",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            },
+            {
+              "name": "schemaPattern",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "typeNamePattern",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "types",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "in",
+              "origin": "sequence< long >"
+            }
           ]
         },
         {
           "name": "getURL",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the URL for the database connection"
           ],
@@ -1146,6 +1262,7 @@
         {
           "name": "getUserName",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the user name from this database connection."
           ],
@@ -1157,6 +1274,7 @@
         {
           "name": "getVersionColumns",
           "returns": "XResultSet_98e30aa7",
+          "returns_origin": "com.sun.star.sdbc.XResultSet",
           "desc": [
             "gets a description of a table's columns that are automatically updated when any value in a row is updated.",
             "",
@@ -1168,26 +1286,30 @@
             "SQLException"
           ],
           "args": [
-            [
-              "catalog",
-              "object",
-              "in"
-            ],
-            [
-              "schema",
-              "str",
-              "in"
-            ],
-            [
-              "table",
-              "str",
-              "in"
-            ]
+            {
+              "name": "catalog",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            },
+            {
+              "name": "schema",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "table",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "insertsAreDetected",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "indicates whether or not a visible row insert can be detected by calling com.sun.star.sdbc.XResultSet.rowInserted().",
             "",
@@ -1197,16 +1319,18 @@
             "SQLException"
           ],
           "args": [
-            [
-              "setType",
-              "int",
-              "in"
-            ]
+            {
+              "name": "setType",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "isCatalogAtStart",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Does a catalog appear at the start of a qualified table name? (Otherwise it appears at the end)"
           ],
@@ -1218,6 +1342,7 @@
         {
           "name": "isReadOnly",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "checks if the database in read-only mode."
           ],
@@ -1229,6 +1354,7 @@
         {
           "name": "nullPlusNonNullIsNull",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "are concatenations between NULL and non-NULL values NULL?"
           ],
@@ -1240,6 +1366,7 @@
         {
           "name": "nullsAreSortedAtEnd",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Are NULL values sorted at the end, regardless of sort order?"
           ],
@@ -1251,6 +1378,7 @@
         {
           "name": "nullsAreSortedAtStart",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Are NULL values sorted at the start regardless of sort order?"
           ],
@@ -1262,6 +1390,7 @@
         {
           "name": "nullsAreSortedHigh",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Are NULL values sorted high?"
           ],
@@ -1273,6 +1402,7 @@
         {
           "name": "nullsAreSortedLow",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Are NULL values sorted low?"
           ],
@@ -1284,6 +1414,7 @@
         {
           "name": "othersDeletesAreVisible",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "indicates whether deletes made by others are visible."
           ],
@@ -1291,16 +1422,18 @@
             "SQLException"
           ],
           "args": [
-            [
-              "setType",
-              "int",
-              "in"
-            ]
+            {
+              "name": "setType",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "othersInsertsAreVisible",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "indicates whether inserts made by others are visible."
           ],
@@ -1308,16 +1441,18 @@
             "SQLException"
           ],
           "args": [
-            [
-              "setType",
-              "int",
-              "in"
-            ]
+            {
+              "name": "setType",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "othersUpdatesAreVisible",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "indicates whether updates made by others are visible."
           ],
@@ -1325,16 +1460,18 @@
             "SQLException"
           ],
           "args": [
-            [
-              "setType",
-              "int",
-              "in"
-            ]
+            {
+              "name": "setType",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "ownDeletesAreVisible",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "indicates whether a result set's own deletes are visible."
           ],
@@ -1342,16 +1479,18 @@
             "SQLException"
           ],
           "args": [
-            [
-              "setType",
-              "int",
-              "in"
-            ]
+            {
+              "name": "setType",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "ownInsertsAreVisible",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "indicates whether a result set's own inserts are visible."
           ],
@@ -1359,16 +1498,18 @@
             "SQLException"
           ],
           "args": [
-            [
-              "setType",
-              "int",
-              "in"
-            ]
+            {
+              "name": "setType",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "ownUpdatesAreVisible",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "indicates whether a result set's own updates are visible."
           ],
@@ -1376,16 +1517,18 @@
             "SQLException"
           ],
           "args": [
-            [
-              "setType",
-              "int",
-              "in"
-            ]
+            {
+              "name": "setType",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "storesLowerCaseIdentifiers",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Does the database treat mixed case unquoted SQL identifiers as case insensitive and store them in lower case?"
           ],
@@ -1397,6 +1540,7 @@
         {
           "name": "storesLowerCaseQuotedIdentifiers",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Does the database treat mixed case quoted SQL identifiers as case insensitive and store them in lower case?"
           ],
@@ -1408,6 +1552,7 @@
         {
           "name": "storesMixedCaseIdentifiers",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Does the database treat mixed case unquoted SQL identifiers as case insensitive and store them in mixed case?"
           ],
@@ -1419,6 +1564,7 @@
         {
           "name": "storesMixedCaseQuotedIdentifiers",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Does the database treat mixed case quoted SQL identifiers as case insensitive and store them in mixed case?"
           ],
@@ -1430,6 +1576,7 @@
         {
           "name": "storesUpperCaseIdentifiers",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Does the database treat mixed case unquoted SQL identifiers as case insensitive and store them in upper case?"
           ],
@@ -1441,6 +1588,7 @@
         {
           "name": "storesUpperCaseQuotedIdentifiers",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Does the database treat mixed case quoted SQL identifiers as case insensitive and store them in upper case?"
           ],
@@ -1452,6 +1600,7 @@
         {
           "name": "supportsANSI92EntryLevelSQL",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [],
           "raises": [
             "SQLException"
@@ -1461,6 +1610,7 @@
         {
           "name": "supportsANSI92FullSQL",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [],
           "raises": [
             "SQLException"
@@ -1470,6 +1620,7 @@
         {
           "name": "supportsANSI92IntermediateSQL",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [],
           "raises": [
             "SQLException"
@@ -1479,6 +1630,7 @@
         {
           "name": "supportsAlterTableWithAddColumn",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "support the Database \\\"ALTER TABLE\\\" with add column?"
           ],
@@ -1490,6 +1642,7 @@
         {
           "name": "supportsAlterTableWithDropColumn",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "support the Database \\\"ALTER TABLE\\\" with drop column?"
           ],
@@ -1501,6 +1654,7 @@
         {
           "name": "supportsBatchUpdates",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "indicates whether the driver supports batch updates."
           ],
@@ -1512,6 +1666,7 @@
         {
           "name": "supportsCatalogsInDataManipulation",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Can a catalog name be used in a data manipulation statement?"
           ],
@@ -1523,6 +1678,7 @@
         {
           "name": "supportsCatalogsInIndexDefinitions",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Can a catalog name be used in an index definition statement?"
           ],
@@ -1534,6 +1690,7 @@
         {
           "name": "supportsCatalogsInPrivilegeDefinitions",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Can a catalog name be used in a privilege definition statement?"
           ],
@@ -1545,6 +1702,7 @@
         {
           "name": "supportsCatalogsInProcedureCalls",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Can a catalog name be used in a procedure call statement?"
           ],
@@ -1556,6 +1714,7 @@
         {
           "name": "supportsCatalogsInTableDefinitions",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Can a catalog name be used in a table definition statement?"
           ],
@@ -1567,6 +1726,7 @@
         {
           "name": "supportsColumnAliasing",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "support the Database column aliasing?",
             "",
@@ -1580,6 +1740,7 @@
         {
           "name": "supportsConvert",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "TRUE , if the Database supports the CONVERT between the given SQL types otherwise FALSE."
           ],
@@ -1587,21 +1748,24 @@
             "SQLException"
           ],
           "args": [
-            [
-              "fromType",
-              "int",
-              "in"
-            ],
-            [
-              "toType",
-              "int",
-              "in"
-            ]
+            {
+              "name": "fromType",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "toType",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "supportsCoreSQLGrammar",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "TRUE, if the database supports ODBC Core SQL grammar, otherwise FALSE."
           ],
@@ -1613,6 +1777,7 @@
         {
           "name": "supportsCorrelatedSubqueries",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Are correlated subqueries supported?"
           ],
@@ -1624,6 +1789,7 @@
         {
           "name": "supportsDataDefinitionAndDataManipulationTransactions",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "support the Database both data definition and data manipulation statements within a transaction?"
           ],
@@ -1635,6 +1801,7 @@
         {
           "name": "supportsDataManipulationTransactionsOnly",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "are only data manipulation statements within a transaction supported?"
           ],
@@ -1646,6 +1813,7 @@
         {
           "name": "supportsDifferentTableCorrelationNames",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "If table correlation names are supported, are they restricted to be different from the names of the tables?"
           ],
@@ -1657,6 +1825,7 @@
         {
           "name": "supportsExpressionsInOrderBy",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Are expressions in \\\"ORDER BY\\\" lists supported?"
           ],
@@ -1668,6 +1837,7 @@
         {
           "name": "supportsExtendedSQLGrammar",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [],
           "raises": [
             "SQLException"
@@ -1677,6 +1847,7 @@
         {
           "name": "supportsFullOuterJoins",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [],
           "raises": [
             "SQLException"
@@ -1686,6 +1857,7 @@
         {
           "name": "supportsGroupBy",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Is some form of \\\"GROUP BY\\\" clause supported?"
           ],
@@ -1697,6 +1869,7 @@
         {
           "name": "supportsGroupByBeyondSelect",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Can a \\\"GROUP BY\\\" clause add columns not in the SELECT provided it specifies all the columns in the SELECT?"
           ],
@@ -1708,6 +1881,7 @@
         {
           "name": "supportsGroupByUnrelated",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Can a \\\"GROUP BY\\\" clause use columns not in the SELECT?"
           ],
@@ -1719,6 +1893,7 @@
         {
           "name": "supportsIntegrityEnhancementFacility",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "returns TRUE, if the Database supports SQL Integrity Enhancement Facility, otherwise FALSE."
           ],
@@ -1730,6 +1905,7 @@
         {
           "name": "supportsLikeEscapeClause",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Is the escape character in \\\"LIKE\\\" clauses supported?"
           ],
@@ -1741,6 +1917,7 @@
         {
           "name": "supportsLimitedOuterJoins",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [],
           "raises": [
             "SQLException"
@@ -1750,6 +1927,7 @@
         {
           "name": "supportsMinimumSQLGrammar",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "TRUE, if the database supports ODBC Minimum SQL grammar, otherwise FALSE."
           ],
@@ -1761,6 +1939,7 @@
         {
           "name": "supportsMixedCaseIdentifiers",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "use the database \\\"mixed case unquoted SQL identifiers\\\" case sensitive."
           ],
@@ -1772,6 +1951,7 @@
         {
           "name": "supportsMixedCaseQuotedIdentifiers",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Does the database treat mixed case quoted SQL identifiers as case sensitive and as a result store them in mixed case?"
           ],
@@ -1783,6 +1963,7 @@
         {
           "name": "supportsMultipleResultSets",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Are multiple XResultSets from a single execute supported?"
           ],
@@ -1794,6 +1975,7 @@
         {
           "name": "supportsMultipleTransactions",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Can we have multiple transactions open at once (on different connections)?"
           ],
@@ -1805,6 +1987,7 @@
         {
           "name": "supportsNonNullableColumns",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Can columns be defined as non-nullable?"
           ],
@@ -1816,6 +1999,7 @@
         {
           "name": "supportsOpenCursorsAcrossCommit",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Can cursors remain open across commits?"
           ],
@@ -1827,6 +2011,7 @@
         {
           "name": "supportsOpenCursorsAcrossRollback",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Can cursors remain open across rollbacks?"
           ],
@@ -1838,6 +2023,7 @@
         {
           "name": "supportsOpenStatementsAcrossCommit",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Can statements remain open across commits?"
           ],
@@ -1849,6 +2035,7 @@
         {
           "name": "supportsOpenStatementsAcrossRollback",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Can statements remain open across rollbacks?"
           ],
@@ -1860,6 +2047,7 @@
         {
           "name": "supportsOrderByUnrelated",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Can an \\\"ORDER BY\\\" clause use columns not in the SELECT statement?"
           ],
@@ -1871,6 +2059,7 @@
         {
           "name": "supportsOuterJoins",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [],
           "raises": [
             "SQLException"
@@ -1880,6 +2069,7 @@
         {
           "name": "supportsPositionedDelete",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Is positioned DELETE supported?"
           ],
@@ -1891,6 +2081,7 @@
         {
           "name": "supportsPositionedUpdate",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Is positioned UPDATE supported?"
           ],
@@ -1902,6 +2093,7 @@
         {
           "name": "supportsResultSetConcurrency",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Does the database support the concurrency type in combination with the given result set type?"
           ],
@@ -1909,21 +2101,24 @@
             "SQLException"
           ],
           "args": [
-            [
-              "setType",
-              "int",
-              "in"
-            ],
-            [
-              "concurrency",
-              "int",
-              "in"
-            ]
+            {
+              "name": "setType",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "concurrency",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "supportsResultSetType",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Does the database support the given result set type?"
           ],
@@ -1931,16 +2126,18 @@
             "SQLException"
           ],
           "args": [
-            [
-              "setType",
-              "int",
-              "in"
-            ]
+            {
+              "name": "setType",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "supportsSchemasInDataManipulation",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Can a schema name be used in a data manipulation statement?"
           ],
@@ -1952,6 +2149,7 @@
         {
           "name": "supportsSchemasInIndexDefinitions",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Can a schema name be used in an index definition statement?"
           ],
@@ -1963,6 +2161,7 @@
         {
           "name": "supportsSchemasInPrivilegeDefinitions",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Can a schema name be used in a privilege definition statement?"
           ],
@@ -1974,6 +2173,7 @@
         {
           "name": "supportsSchemasInProcedureCalls",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Can a schema name be used in a procedure call statement?"
           ],
@@ -1985,6 +2185,7 @@
         {
           "name": "supportsSchemasInTableDefinitions",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Can a schema name be used in a table definition statement?"
           ],
@@ -1996,6 +2197,7 @@
         {
           "name": "supportsSelectForUpdate",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Is SELECT for UPDATE supported?"
           ],
@@ -2007,6 +2209,7 @@
         {
           "name": "supportsStoredProcedures",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Are stored procedure calls using the stored procedure escape syntax supported?"
           ],
@@ -2018,6 +2221,7 @@
         {
           "name": "supportsSubqueriesInComparisons",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Are subqueries in comparison expressions supported?"
           ],
@@ -2029,6 +2233,7 @@
         {
           "name": "supportsSubqueriesInExists",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Are subqueries in \\\"exists\\\" expressions supported?"
           ],
@@ -2040,6 +2245,7 @@
         {
           "name": "supportsSubqueriesInIns",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Are subqueries in \\\"in\\\" statements supported?"
           ],
@@ -2051,6 +2257,7 @@
         {
           "name": "supportsSubqueriesInQuantifieds",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Are subqueries in quantified expressions supported?"
           ],
@@ -2062,6 +2269,7 @@
         {
           "name": "supportsTableCorrelationNames",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Are table correlation names supported?"
           ],
@@ -2073,6 +2281,7 @@
         {
           "name": "supportsTransactionIsolationLevel",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Does this database support the given transaction isolation level?"
           ],
@@ -2080,16 +2289,18 @@
             "SQLException"
           ],
           "args": [
-            [
-              "level",
-              "int",
-              "in"
-            ]
+            {
+              "name": "level",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "supportsTransactions",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "support the Database transactions? If not, invoking the method com.sun.star.sdbc.XConnection.commit() is a noop and the isolation level is TransactionIsolation_NONE."
           ],
@@ -2101,6 +2312,7 @@
         {
           "name": "supportsTypeConversion",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "TRUE , if the Database supports the CONVERT function between SQL types, otherwise FALSE."
           ],
@@ -2112,6 +2324,7 @@
         {
           "name": "supportsUnion",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Is SQL UNION supported?"
           ],
@@ -2123,6 +2336,7 @@
         {
           "name": "supportsUnionAll",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Is SQL UNION ALL supported?"
           ],
@@ -2134,6 +2348,7 @@
         {
           "name": "updatesAreDetected",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "indicates whether or not a visible row update can be detected by calling the method XResultSet.rowUpdated."
           ],
@@ -2141,16 +2356,18 @@
             "SQLException"
           ],
           "args": [
-            [
-              "setType",
-              "int",
-              "in"
-            ]
+            {
+              "name": "setType",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "usesLocalFilePerTable",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "use the database one local file to save for each table."
           ],
@@ -2162,6 +2379,7 @@
         {
           "name": "usesLocalFiles",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "use the database local files to save the tables."
           ],

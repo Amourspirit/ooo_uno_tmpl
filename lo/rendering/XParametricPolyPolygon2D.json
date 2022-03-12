@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XParametricPolyPolygon2D",
   "type": "interface",
@@ -85,6 +85,7 @@
         {
           "name": "getColor",
           "returns": "typing.Tuple[ColorComponent_e4c0e78, ...]",
+          "returns_origin": "sequence< ColorComponent >",
           "desc": [
             "Query the color value for the polygonal area at the specified parameter value."
           ],
@@ -92,16 +93,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "t",
-              "float",
-              "in"
-            ]
+            {
+              "name": "t",
+              "type": "float",
+              "direction": "in",
+              "origin": "double"
+            }
           ]
         },
         {
           "name": "getColorSpace",
           "returns": "XColorSpace_e3940d09",
+          "returns_origin": "com.sun.star.rendering.XColorSpace",
           "desc": [
             "Query the color space employed by this object."
           ],
@@ -111,6 +114,7 @@
         {
           "name": "getOutline",
           "returns": "XPolyPolygon2D_e1b0e20",
+          "returns_origin": "com.sun.star.rendering.XPolyPolygon2D",
           "desc": [
             "Query the polygonal outline at the specified value.",
             "",
@@ -120,16 +124,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "t",
-              "float",
-              "in"
-            ]
+            {
+              "name": "t",
+              "type": "float",
+              "direction": "in",
+              "origin": "double"
+            }
           ]
         },
         {
           "name": "getPointColor",
           "returns": "typing.Tuple[ColorComponent_e4c0e78, ...]",
+          "returns_origin": "sequence< ColorComponent >",
           "desc": [
             "Query the color for a dedicated point in the plane."
           ],
@@ -137,11 +143,12 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "point",
-              "RealPoint2D_d6e70c78",
-              "in"
-            ]
+            {
+              "name": "point",
+              "type": "RealPoint2D_d6e70c78",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.RealPoint2D"
+            }
           ]
         }
       ]

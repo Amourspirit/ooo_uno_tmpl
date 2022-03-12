@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDynamicResultSetListener",
   "type": "interface",
@@ -60,6 +60,7 @@
         {
           "name": "notify",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "A method used to propagate changes of a result set.",
             "",
@@ -73,11 +74,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Changes",
-              "ListEvent_83fa09e0",
-              "in"
-            ]
+            {
+              "name": "Changes",
+              "type": "ListEvent_83fa09e0",
+              "direction": "in",
+              "origin": "com.sun.star.ucb.ListEvent"
+            }
           ]
         }
       ]

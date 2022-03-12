@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XCloseListener",
   "type": "interface",
@@ -64,6 +64,7 @@
         {
           "name": "notifyClosing",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "is called when the listened object is closed really",
             "",
@@ -73,16 +74,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Source",
-              "EventObject_a3d70b03",
-              "in"
-            ]
+            {
+              "name": "Source",
+              "type": "EventObject_a3d70b03",
+              "direction": "in",
+              "origin": "com.sun.star.lang.EventObject"
+            }
           ]
         },
         {
           "name": "queryClosing",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "is called when somewhere tries to close listened object",
             "",
@@ -96,16 +99,18 @@
             "CloseVetoException"
           ],
           "args": [
-            [
-              "Source",
-              "EventObject_a3d70b03",
-              "in"
-            ],
-            [
-              "GetsOwnership",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "Source",
+              "type": "EventObject_a3d70b03",
+              "direction": "in",
+              "origin": "com.sun.star.lang.EventObject"
+            },
+            {
+              "name": "GetsOwnership",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         }
       ]

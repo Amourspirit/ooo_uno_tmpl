@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDataSeriesContainer",
   "type": "interface",
@@ -61,6 +61,7 @@
         {
           "name": "addDataSeries",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "add a data series to the data series container"
           ],
@@ -68,16 +69,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aDataSeries",
-              "XDataSeries_b8150b89",
-              "in"
-            ]
+            {
+              "name": "aDataSeries",
+              "type": "XDataSeries_b8150b89",
+              "direction": "in",
+              "origin": "com.sun.star.chart2.XDataSeries"
+            }
           ]
         },
         {
           "name": "getDataSeries",
           "returns": "typing.Tuple[XDataSeries_b8150b89, ...]",
+          "returns_origin": "sequence< XDataSeries >",
           "desc": [
             "retrieve all data series"
           ],
@@ -87,6 +90,7 @@
         {
           "name": "removeDataSeries",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes one data series from the data series container."
           ],
@@ -94,16 +98,18 @@
             "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
-            [
-              "aDataSeries",
-              "XDataSeries_b8150b89",
-              "in"
-            ]
+            {
+              "name": "aDataSeries",
+              "type": "XDataSeries_b8150b89",
+              "direction": "in",
+              "origin": "com.sun.star.chart2.XDataSeries"
+            }
           ]
         },
         {
           "name": "setDataSeries",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "set all data series"
           ],
@@ -111,11 +117,12 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aDataSeries",
-              "typing.Tuple[XDataSeries_b8150b89, ...]",
-              "in"
-            ]
+            {
+              "name": "aDataSeries",
+              "type": "typing.Tuple[XDataSeries_b8150b89, ...]",
+              "direction": "in",
+              "origin": "sequence< XDataSeries >"
+            }
           ]
         }
       ]

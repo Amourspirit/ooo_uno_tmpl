@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XNamingService",
   "type": "interface",
@@ -52,6 +52,7 @@
         {
           "name": "getRegisteredObject",
           "returns": "XInterface_8f010a43",
+          "returns_origin": "com.sun.star.uno.XInterface",
           "desc": [
             "provides a previous registered object."
           ],
@@ -59,16 +60,18 @@
             "Exception"
           ],
           "args": [
-            [
-              "Name",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "registerObject",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "registers one object under the specified name.",
             "",
@@ -78,21 +81,24 @@
             "Exception"
           ],
           "args": [
-            [
-              "Name",
-              "str",
-              "in"
-            ],
-            [
-              "Object",
-              "XInterface_8f010a43",
-              "in"
-            ]
+            {
+              "name": "Name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Object",
+              "type": "XInterface_8f010a43",
+              "direction": "in",
+              "origin": "com.sun.star.uno.XInterface"
+            }
           ]
         },
         {
           "name": "revokeObject",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "revokes the registration of an object.",
             "",
@@ -102,11 +108,12 @@
             "Exception"
           ],
           "args": [
-            [
-              "Name",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

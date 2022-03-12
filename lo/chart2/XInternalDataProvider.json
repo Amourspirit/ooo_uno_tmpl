@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XInternalDataProvider",
   "type": "interface",
@@ -67,6 +67,7 @@
         {
           "name": "appendSequence",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "same as insertSequence with nAfterIndex being the largest current index of the data, i.e.",
             "",
@@ -78,6 +79,7 @@
         {
           "name": "deleteComplexCategoryLevel",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "deletes an additional sequence for categories at nLevel>=1; categories at level 0 are always present and cannot be deleted",
             "",
@@ -87,68 +89,78 @@
           ],
           "raises": [],
           "args": [
-            [
-              "nLevel",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nLevel",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "deleteDataPointForAllSequences",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "nAtIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nAtIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "deleteSequence",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "nAtIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nAtIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getDataByRangeRepresentation",
           "returns": "typing.Tuple[object, ...]",
+          "returns_origin": "sequence< any >",
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "aRange",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aRange",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "hasDataByRangeRepresentation",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "aRange",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aRange",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "insertComplexCategoryLevel",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "insert an additional sequence for categories nLevel>=1; categories at level 0 are always present and cannot be inserted or deleted",
             "",
@@ -158,42 +170,48 @@
           ],
           "raises": [],
           "args": [
-            [
-              "nLevel",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nLevel",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "insertDataPointForAllSequences",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "nAfterIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nAfterIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "insertSequence",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "nAfterIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nAfterIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "registerDataSequenceForChanges",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "If range representations of data sequences change due to internal structural changes, they must be registered at the data provider.",
             "",
@@ -201,42 +219,48 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xSeq",
-              "XDataSequence_11f00e1f",
-              "in"
-            ]
+            {
+              "name": "xSeq",
+              "type": "XDataSequence_11f00e1f",
+              "direction": "in",
+              "origin": "com.sun.star.chart2.data.XDataSequence"
+            }
           ]
         },
         {
           "name": "setDataByRangeRepresentation",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "aRange",
-              "str",
-              "in"
-            ],
-            [
-              "aNewData",
-              "typing.Tuple[object, ...]",
-              "in"
-            ]
+            {
+              "name": "aRange",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aNewData",
+              "type": "typing.Tuple[object, ...]",
+              "direction": "in",
+              "origin": "sequence< any >"
+            }
           ]
         },
         {
           "name": "swapDataPointWithNextOneForAllSequences",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "nAtIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nAtIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

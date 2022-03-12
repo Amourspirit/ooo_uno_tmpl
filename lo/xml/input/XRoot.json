@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XRoot",
   "type": "interface",
@@ -81,6 +81,7 @@
         {
           "name": "endDocument",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Receives notification of the end of a document."
           ],
@@ -92,6 +93,7 @@
         {
           "name": "processingInstruction",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Receives notification of a processing instruction."
           ],
@@ -99,21 +101,24 @@
             "com.sun.star.xml.sax.SAXException"
           ],
           "args": [
-            [
-              "target",
-              "str",
-              "in"
-            ],
-            [
-              "data",
-              "str",
-              "in"
-            ]
+            {
+              "name": "target",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "data",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "setDocumentLocator",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Receives an object for locating the origin of SAX document events."
           ],
@@ -121,16 +126,18 @@
             "com.sun.star.xml.sax.SAXException"
           ],
           "args": [
-            [
-              "locator",
-              "XLocator_a3fb0aff",
-              "in"
-            ]
+            {
+              "name": "locator",
+              "type": "XLocator_a3fb0aff",
+              "direction": "in",
+              "origin": "com.sun.star.xml.sax.XLocator"
+            }
           ]
         },
         {
           "name": "startDocument",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Receives notification of the beginning of a document."
           ],
@@ -138,16 +145,18 @@
             "com.sun.star.xml.sax.SAXException"
           ],
           "args": [
-            [
-              "xMapping",
-              "XNamespaceMapping_38700f68",
-              "in"
-            ]
+            {
+              "name": "xMapping",
+              "type": "XNamespaceMapping_38700f68",
+              "direction": "in",
+              "origin": "com.sun.star.xml.input.XNamespaceMapping"
+            }
           ]
         },
         {
           "name": "startRootElement",
           "returns": "XElement_bc5b0bd9",
+          "returns_origin": "com.sun.star.xml.input.XElement",
           "desc": [
             "Called upon root element."
           ],
@@ -155,21 +164,24 @@
             "com.sun.star.xml.sax.SAXException"
           ],
           "args": [
-            [
-              "uid",
-              "int",
-              "in"
-            ],
-            [
-              "localName",
-              "str",
-              "in"
-            ],
-            [
-              "xAttributes",
-              "XAttributes_e31a0d36",
-              "in"
-            ]
+            {
+              "name": "uid",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "localName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "xAttributes",
+              "type": "XAttributes_e31a0d36",
+              "direction": "in",
+              "origin": "com.sun.star.xml.input.XAttributes"
+            }
           ]
         }
       ]

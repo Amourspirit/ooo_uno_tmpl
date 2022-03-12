@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XMailMessage",
   "type": "interface",
@@ -76,6 +76,7 @@
         {
           "name": "addAttachment",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Add a file attachment to a mail message.",
             "",
@@ -83,16 +84,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aMailAttachment",
-              "MailAttachment_c6770c37",
-              "in"
-            ]
+            {
+              "name": "aMailAttachment",
+              "type": "MailAttachment_c6770c37",
+              "direction": "in",
+              "origin": "com.sun.star.mail.MailAttachment"
+            }
           ]
         },
         {
           "name": "addBccRecipient",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Add a BCC recipients e-mail address to the list of recipients of this mail message.",
             "",
@@ -100,16 +103,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "sRecipientAddress",
-              "str",
-              "in"
-            ]
+            {
+              "name": "sRecipientAddress",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "addCcRecipient",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Add a Cc recipients e-mail address to the list of recipients of this mail message.",
             "",
@@ -117,16 +122,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "sRecipientAddress",
-              "str",
-              "in"
-            ]
+            {
+              "name": "sRecipientAddress",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "addRecipient",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Add a recipients e-mail address to the list of recipients of this mail message.",
             "",
@@ -134,16 +141,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "sRecipientAddress",
-              "str",
-              "in"
-            ]
+            {
+              "name": "sRecipientAddress",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getAttachments",
           "returns": "typing.Tuple[MailAttachment_c6770c37, ...]",
+          "returns_origin": "sequence< MailAttachment >",
           "desc": [
             "Return a sequence of MailAttachment's that will be attached to this mail message."
           ],
@@ -153,6 +162,7 @@
         {
           "name": "getBccRecipients",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [
             "Return a sequence of the e-mail addresses of all the BCC recipients of this mail message."
           ],
@@ -162,6 +172,7 @@
         {
           "name": "getCcRecipients",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [
             "Return a sequence of the e-mail addresses of all the Cc recipients of this mail message."
           ],
@@ -171,6 +182,7 @@
         {
           "name": "getRecipients",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [
             "Return a sequence of the e-mail addresses of all recipients of this mail message."
           ],
@@ -183,6 +195,7 @@
           "name": "Body",
           "returns": "XTransferable_2d800f38",
           "origtype": "com.sun.star.datatransfer.XTransferable",
+          "origin": "com.sun.star.datatransfer.XTransferable",
           "desc": [
             "The body of the mail message.",
             "",
@@ -195,6 +208,7 @@
           "name": "ReplyToAddress",
           "returns": "str",
           "origtype": null,
+          "origin": "string",
           "desc": [
             "The e-mail address where replies on this mail message should be sent to.",
             "",
@@ -207,6 +221,7 @@
           "name": "SenderAddress",
           "returns": "str",
           "origtype": null,
+          "origin": "string",
           "desc": [
             "The e-mail address of the sender of this mail message.",
             "",
@@ -219,6 +234,7 @@
           "name": "SenderName",
           "returns": "str",
           "origtype": null,
+          "origin": "string",
           "desc": [
             "The display name of the sender of this mail message."
           ],
@@ -229,6 +245,7 @@
           "name": "Subject",
           "returns": "str",
           "origtype": null,
+          "origin": "string",
           "desc": [
             "The subject of a mail message."
           ],

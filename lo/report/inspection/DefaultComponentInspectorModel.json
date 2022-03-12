@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "DefaultComponentInspectorModel",
   "type": "service",
@@ -56,6 +56,7 @@
         {
           "name": "createDefault",
           "returns": "None",
+          "returns_origin": null,
           "desc": [
             "creates a default DefaultComponentInspectorModel, providing factories for all handlers listed above.",
             "",
@@ -69,6 +70,7 @@
         {
           "name": "createWithHelpSection",
           "returns": "None",
+          "returns_origin": null,
           "desc": [
             "creates a default DefaultComponentInspectorModel, providing factories for all handlers listed above, and describing an ObjectInspector which has a help section.",
             "",
@@ -80,16 +82,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "minHelpTextLines",
-              "int",
-              "in"
-            ],
-            [
-              "maxHelpTextLines",
-              "int",
-              "in"
-            ]
+            {
+              "name": "minHelpTextLines",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "maxHelpTextLines",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "StringResourceWithStorage",
   "type": "service",
@@ -67,6 +67,7 @@
         {
           "name": "create",
           "returns": "None",
+          "returns_origin": null,
           "desc": [
             "is used to initialize the object on its creation."
           ],
@@ -74,31 +75,36 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "Storage",
-              "XStorage_8e460a32",
-              "in"
-            ],
-            [
-              "ReadOnly",
-              "bool",
-              "in"
-            ],
-            [
-              "locale",
-              "Locale_70d308fa",
-              "in"
-            ],
-            [
-              "BaseName",
-              "str",
-              "in"
-            ],
-            [
-              "Comment",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Storage",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            },
+            {
+              "name": "ReadOnly",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            },
+            {
+              "name": "locale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "BaseName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Comment",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

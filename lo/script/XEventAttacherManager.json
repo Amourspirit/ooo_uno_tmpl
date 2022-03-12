@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XEventAttacherManager",
   "type": "interface",
@@ -71,6 +71,7 @@
         {
           "name": "addScriptListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "adds an XScriptListener that will be notified when an event takes place.",
             "",
@@ -82,16 +83,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "xListener",
-              "XScriptListener_f20b0db0",
-              "in"
-            ]
+            {
+              "name": "xListener",
+              "type": "XScriptListener_f20b0db0",
+              "direction": "in",
+              "origin": "com.sun.star.script.XScriptListener"
+            }
           ]
         },
         {
           "name": "attach",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "attaches all the ScriptEvents which are registered for the given index to the given object.",
             "",
@@ -102,26 +105,30 @@
             "com.sun.star.lang.ServiceNotRegisteredException"
           ],
           "args": [
-            [
-              "nIndex",
-              "int",
-              "in"
-            ],
-            [
-              "xObject",
-              "XInterface_8f010a43",
-              "in"
-            ],
-            [
-              "aHelper",
-              "object",
-              "in"
-            ]
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "xObject",
+              "type": "XInterface_8f010a43",
+              "direction": "in",
+              "origin": "com.sun.star.uno.XInterface"
+            },
+            {
+              "name": "aHelper",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         },
         {
           "name": "detach",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "detaches all the ScriptEvents from the given object which are registered at this object for the given index.",
             "",
@@ -131,36 +138,41 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "nIndex",
-              "int",
-              "in"
-            ],
-            [
-              "xObject",
-              "XInterface_8f010a43",
-              "in"
-            ]
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "xObject",
+              "type": "XInterface_8f010a43",
+              "direction": "in",
+              "origin": "com.sun.star.uno.XInterface"
+            }
           ]
         },
         {
           "name": "getScriptEvents",
           "returns": "typing.Tuple[ScriptEventDescriptor_4cef1033, ...]",
+          "returns_origin": "sequence< com.sun.star.script.ScriptEventDescriptor >",
           "desc": [],
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "Index",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Index",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "insertEntry",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "creates an empty entry at the given position.",
             "",
@@ -170,16 +182,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "nIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "registerScriptEvent",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "registers one event for an object identified by its index.",
             "",
@@ -191,21 +205,24 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "nIndex",
-              "int",
-              "in"
-            ],
-            [
-              "aScriptEvent",
-              "ScriptEventDescriptor_4cef1033",
-              "in"
-            ]
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aScriptEvent",
+              "type": "ScriptEventDescriptor_4cef1033",
+              "direction": "in",
+              "origin": "com.sun.star.script.ScriptEventDescriptor"
+            }
           ]
         },
         {
           "name": "registerScriptEvents",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "registers several events for an object identified by its index.",
             "",
@@ -219,21 +236,24 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "nIndex",
-              "int",
-              "in"
-            ],
-            [
-              "aScriptEvents",
-              "typing.Tuple[ScriptEventDescriptor_4cef1033, ...]",
-              "in"
-            ]
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aScriptEvents",
+              "type": "typing.Tuple[ScriptEventDescriptor_4cef1033, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.script.ScriptEventDescriptor >"
+            }
           ]
         },
         {
           "name": "removeEntry",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes the entry at the given position.",
             "",
@@ -243,16 +263,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "nIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "removeScriptListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes a XScriptListener from the listener list.",
             "",
@@ -264,16 +286,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "Listener",
-              "XScriptListener_f20b0db0",
-              "in"
-            ]
+            {
+              "name": "Listener",
+              "type": "XScriptListener_f20b0db0",
+              "direction": "in",
+              "origin": "com.sun.star.script.XScriptListener"
+            }
           ]
         },
         {
           "name": "revokeScriptEvent",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "revokes the registration of an event.",
             "",
@@ -285,31 +309,36 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "nIndex",
-              "int",
-              "in"
-            ],
-            [
-              "aListenerType",
-              "str",
-              "in"
-            ],
-            [
-              "aEventMethod",
-              "str",
-              "in"
-            ],
-            [
-              "aRemoveListenerParam",
-              "str",
-              "in"
-            ]
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aListenerType",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aEventMethod",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aRemoveListenerParam",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "revokeScriptEvents",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "revokes all events which are registered for the given index.",
             "",
@@ -319,11 +348,12 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "nIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

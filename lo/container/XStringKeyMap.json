@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XStringKeyMap",
   "type": "interface",
@@ -42,6 +42,7 @@
         {
           "name": "getKeyByIndex",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "obtains the key of an element by index."
           ],
@@ -49,16 +50,18 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getValue",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "reads data from the map."
           ],
@@ -66,16 +69,18 @@
             "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
-            [
-              "aKey",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aKey",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getValueByIndex",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "obtains the value of an element by index."
           ],
@@ -83,31 +88,35 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "hasValue",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "checks for element existence."
           ],
           "raises": [],
           "args": [
-            [
-              "aKey",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aKey",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "insertValue",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "writes data to the map."
           ],
@@ -116,16 +125,18 @@
             "com.sun.star.container.ElementExistException"
           ],
           "args": [
-            [
-              "aKey",
-              "str",
-              "in"
-            ],
-            [
-              "aValue",
-              "object",
-              "in"
-            ]
+            {
+              "name": "aKey",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aValue",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         }
       ],
@@ -134,6 +145,7 @@
           "name": "Count",
           "returns": "int",
           "origtype": null,
+          "origin": "long",
           "desc": [
             "the number of elements in the map."
           ],

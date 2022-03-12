@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XMutableGridDataModel",
   "type": "interface",
@@ -67,41 +67,47 @@
         {
           "name": "addGridDataListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "registers listener to be notified of data changes in the model"
           ],
           "raises": [],
           "args": [
-            [
-              "Listener",
-              "XGridDataListener_23f10ec6",
-              "in"
-            ]
+            {
+              "name": "Listener",
+              "type": "XGridDataListener_23f10ec6",
+              "direction": "in",
+              "origin": "com.sun.star.awt.grid.XGridDataListener"
+            }
           ]
         },
         {
           "name": "addRow",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "appends a row to the model."
           ],
           "raises": [],
           "args": [
-            [
-              "Heading",
-              "object",
-              "in"
-            ],
-            [
-              "Data",
-              "typing.Tuple[object, ...]",
-              "in"
-            ]
+            {
+              "name": "Heading",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            },
+            {
+              "name": "Data",
+              "type": "typing.Tuple[object, ...]",
+              "direction": "in",
+              "origin": "sequence< any >"
+            }
           ]
         },
         {
           "name": "addRows",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "appends multiple rows of data to the model."
           ],
@@ -109,21 +115,24 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "Headings",
-              "typing.Tuple[object, ...]",
-              "in"
-            ],
-            [
-              "Data",
-              "typing.Tuple[typing.Tuple[object, ...], ...]",
-              "in"
-            ]
+            {
+              "name": "Headings",
+              "type": "typing.Tuple[object, ...]",
+              "direction": "in",
+              "origin": "sequence< any >"
+            },
+            {
+              "name": "Data",
+              "type": "typing.Tuple[typing.Tuple[object, ...], ...]",
+              "direction": "in",
+              "origin": "sequence< sequence< any > >"
+            }
           ]
         },
         {
           "name": "insertRow",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "inserts a row into the set of data rows"
           ],
@@ -131,26 +140,30 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "Index",
-              "int",
-              "in"
-            ],
-            [
-              "Heading",
-              "object",
-              "in"
-            ],
-            [
-              "Data",
-              "typing.Tuple[object, ...]",
-              "in"
-            ]
+            {
+              "name": "Index",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "Heading",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            },
+            {
+              "name": "Data",
+              "type": "typing.Tuple[object, ...]",
+              "direction": "in",
+              "origin": "sequence< any >"
+            }
           ]
         },
         {
           "name": "insertRows",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "inserts multiple rows of data into the model."
           ],
@@ -159,26 +172,30 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "Index",
-              "int",
-              "in"
-            ],
-            [
-              "Headings",
-              "typing.Tuple[object, ...]",
-              "in"
-            ],
-            [
-              "Data",
-              "typing.Tuple[typing.Tuple[object, ...], ...]",
-              "in"
-            ]
+            {
+              "name": "Index",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "Headings",
+              "type": "typing.Tuple[object, ...]",
+              "direction": "in",
+              "origin": "sequence< any >"
+            },
+            {
+              "name": "Data",
+              "type": "typing.Tuple[typing.Tuple[object, ...], ...]",
+              "direction": "in",
+              "origin": "sequence< sequence< any > >"
+            }
           ]
         },
         {
           "name": "removeAllRows",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Removes all rows from the model."
           ],
@@ -188,21 +205,24 @@
         {
           "name": "removeGridDataListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "revokes a listener which was previously registered via addGridDataListener()"
           ],
           "raises": [],
           "args": [
-            [
-              "Listener",
-              "XGridDataListener_23f10ec6",
-              "in"
-            ]
+            {
+              "name": "Listener",
+              "type": "XGridDataListener_23f10ec6",
+              "direction": "in",
+              "origin": "com.sun.star.awt.grid.XGridDataListener"
+            }
           ]
         },
         {
           "name": "removeRow",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes a row of data from the model"
           ],
@@ -210,16 +230,18 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "RowIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "RowIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "updateCellData",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "updates the content of the given cell"
           ],
@@ -227,26 +249,30 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "ColumnIndex",
-              "int",
-              "in"
-            ],
-            [
-              "RowIndex",
-              "int",
-              "in"
-            ],
-            [
-              "Value",
-              "object",
-              "in"
-            ]
+            {
+              "name": "ColumnIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "RowIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "Value",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         },
         {
           "name": "updateCellToolTip",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "updates the tooltip to be displayed for a given cell"
           ],
@@ -254,26 +280,30 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "ColumnIndex",
-              "int",
-              "in"
-            ],
-            [
-              "RowIndex",
-              "int",
-              "in"
-            ],
-            [
-              "Value",
-              "object",
-              "in"
-            ]
+            {
+              "name": "ColumnIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "RowIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "Value",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         },
         {
           "name": "updateRowData",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "updates the content of a given row.",
             "",
@@ -284,26 +314,30 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "ColumnIndexes",
-              "typing.Tuple[int, ...]",
-              "in"
-            ],
-            [
-              "RowIndex",
-              "int",
-              "in"
-            ],
-            [
-              "Values",
-              "typing.Tuple[object, ...]",
-              "in"
-            ]
+            {
+              "name": "ColumnIndexes",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "in",
+              "origin": "sequence< long >"
+            },
+            {
+              "name": "RowIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "Values",
+              "type": "typing.Tuple[object, ...]",
+              "direction": "in",
+              "origin": "sequence< any >"
+            }
           ]
         },
         {
           "name": "updateRowHeading",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets a new title for a given row."
           ],
@@ -311,21 +345,24 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "RowIndex",
-              "int",
-              "in"
-            ],
-            [
-              "Heading",
-              "object",
-              "in"
-            ]
+            {
+              "name": "RowIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "Heading",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         },
         {
           "name": "updateRowToolTip",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "updates the tooltip for all cells of a given row",
             "",
@@ -335,16 +372,18 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "RowIndex",
-              "int",
-              "in"
-            ],
-            [
-              "Value",
-              "object",
-              "in"
-            ]
+            {
+              "name": "RowIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "Value",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         }
       ]

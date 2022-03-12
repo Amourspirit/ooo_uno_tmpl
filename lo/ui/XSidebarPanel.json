@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSidebarPanel",
   "type": "interface",
@@ -48,6 +48,7 @@
         {
           "name": "getHeightForWidth",
           "returns": "LayoutSize_84cd09ff",
+          "returns_origin": "com.sun.star.ui.LayoutSize",
           "desc": [
             "For a given width of the container the layouter asks every ui element for its optimal height.",
             "",
@@ -57,16 +58,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "nWidth",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nWidth",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getMinimalWidth",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "Minimal possible width of this panel in pixels.",
             "",

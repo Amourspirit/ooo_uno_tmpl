@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XCmisDocument",
   "type": "interface",
@@ -70,6 +70,7 @@
         {
           "name": "canCancelCheckOut",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [],
           "raises": [],
           "args": []
@@ -77,6 +78,7 @@
         {
           "name": "canCheckIn",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [],
           "raises": [],
           "args": []
@@ -84,6 +86,7 @@
         {
           "name": "canCheckOut",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [],
           "raises": [],
           "args": []
@@ -91,6 +94,7 @@
         {
           "name": "cancelCheckOut",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Cancel checked out document, this will discard all changes since check-out."
           ],
@@ -100,26 +104,30 @@
         {
           "name": "checkIn",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Creates a new version of the document from the private working copy."
           ],
           "raises": [],
           "args": [
-            [
-              "isMajor",
-              "bool",
-              "in"
-            ],
-            [
-              "comment",
-              "str",
-              "in"
-            ]
+            {
+              "name": "isMajor",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            },
+            {
+              "name": "comment",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "checkOut",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Check out the document into a private working copy on the server, and update the loaded document to reflect this change."
           ],
@@ -129,6 +137,7 @@
         {
           "name": "getAllVersions",
           "returns": "typing.Tuple[CmisVersion_d71c0cd9, ...]",
+          "returns_origin": "sequence< com.sun.star.document.CmisVersion >",
           "desc": [],
           "raises": [],
           "args": []
@@ -136,6 +145,7 @@
         {
           "name": "isVersionable",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Tells whether a document can support versioning or not."
           ],
@@ -145,14 +155,16 @@
         {
           "name": "updateCmisProperties",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "cmisProperties",
-              "typing.Tuple[CmisProperty_e47d0d58, ...]",
-              "in"
-            ]
+            {
+              "name": "cmisProperties",
+              "type": "typing.Tuple[CmisProperty_e47d0d58, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.document.CmisProperty >"
+            }
           ]
         }
       ],
@@ -161,6 +173,7 @@
           "name": "CmisProperties",
           "returns": "typing.Tuple[CmisProperty_e47d0d58, ...]",
           "origtype": null,
+          "origin": "sequence< com.sun.star.document.CmisProperty >",
           "desc": [
             "Contains the properties values named after their CMIS ID."
           ],

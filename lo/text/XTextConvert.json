@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XTextConvert",
   "type": "interface",
@@ -88,6 +88,7 @@
         {
           "name": "convertToTable",
           "returns": "XTextTable_9a810ab2",
+          "returns_origin": "com.sun.star.text.XTextTable",
           "desc": [
             "converts the paragraphs marked in TableRanges into a table.",
             "",
@@ -98,31 +99,36 @@
             "com.sun.star.beans.UnknownPropertyException"
           ],
           "args": [
-            [
-              "TableRanges",
-              "typing.Tuple[object, ...]",
-              "in"
-            ],
-            [
-              "CellProperties",
-              "typing.Tuple[typing.Tuple[PropertyValues_d6470ce6, ...], ...]",
-              "in"
-            ],
-            [
-              "RowProperties",
-              "typing.Tuple[PropertyValues_d6470ce6, ...]",
-              "in"
-            ],
-            [
-              "TableProperties",
-              "PropertyValues_d6470ce6",
-              "in"
-            ]
+            {
+              "name": "TableRanges",
+              "type": "typing.Tuple[object, ...]",
+              "direction": "in",
+              "origin": "sequence< sequence< sequence< com.sun.star.text.XTextRange > > >"
+            },
+            {
+              "name": "CellProperties",
+              "type": "typing.Tuple[typing.Tuple[PropertyValues_d6470ce6, ...], ...]",
+              "direction": "in",
+              "origin": "sequence< sequence< com.sun.star.beans.PropertyValues > >"
+            },
+            {
+              "name": "RowProperties",
+              "type": "typing.Tuple[PropertyValues_d6470ce6, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValues >"
+            },
+            {
+              "name": "TableProperties",
+              "type": "PropertyValues_d6470ce6",
+              "direction": "in",
+              "origin": "com.sun.star.beans.PropertyValues"
+            }
           ]
         },
         {
           "name": "convertToTextFrame",
           "returns": "XTextContent_b16e0ba5",
+          "returns_origin": "com.sun.star.text.XTextContent",
           "desc": [
             "moves the paragraphs from Start to End into a text frame."
           ],
@@ -132,21 +138,24 @@
             "com.sun.star.beans.PropertyVetoException"
           ],
           "args": [
-            [
-              "Start",
-              "XTextRange_9a910ab7",
-              "in"
-            ],
-            [
-              "End",
-              "XTextRange_9a910ab7",
-              "in"
-            ],
-            [
-              "FrameProperties",
-              "PropertyValues_d6470ce6",
-              "in"
-            ]
+            {
+              "name": "Start",
+              "type": "XTextRange_9a910ab7",
+              "direction": "in",
+              "origin": "com.sun.star.text.XTextRange"
+            },
+            {
+              "name": "End",
+              "type": "XTextRange_9a910ab7",
+              "direction": "in",
+              "origin": "com.sun.star.text.XTextRange"
+            },
+            {
+              "name": "FrameProperties",
+              "type": "PropertyValues_d6470ce6",
+              "direction": "in",
+              "origin": "com.sun.star.beans.PropertyValues"
+            }
           ]
         }
       ]

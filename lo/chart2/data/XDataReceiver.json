@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDataReceiver",
   "type": "interface",
@@ -102,6 +102,7 @@
         {
           "name": "attachDataProvider",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "attaches a component that provides data for the document.",
             "",
@@ -109,16 +110,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xProvider",
-              "XDataProvider_122f0e31",
-              "in"
-            ]
+            {
+              "name": "xProvider",
+              "type": "XDataProvider_122f0e31",
+              "direction": "in",
+              "origin": "com.sun.star.chart2.data.XDataProvider"
+            }
           ]
         },
         {
           "name": "attachNumberFormatsSupplier",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "attaches an XNumberFormatsSupplier to this XDataReceiver.",
             "",
@@ -126,16 +129,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xSupplier",
-              "XNumberFormatsSupplier_3afb0fb7",
-              "in"
-            ]
+            {
+              "name": "xSupplier",
+              "type": "XNumberFormatsSupplier_3afb0fb7",
+              "direction": "in",
+              "origin": "com.sun.star.util.XNumberFormatsSupplier"
+            }
           ]
         },
         {
           "name": "getPopupRequest",
           "returns": "XRequestCallback_d4ac0ca2",
+          "returns_origin": "com.sun.star.awt.XRequestCallback",
           "desc": [
             "A callback object to execute a foreign popup menu window.",
             "",
@@ -149,6 +154,7 @@
         {
           "name": "getRangeHighlighter",
           "returns": "XRangeHighlighter_4e810fc8",
+          "returns_origin": "com.sun.star.chart2.data.XRangeHighlighter",
           "desc": [
             "Returns a component at which a view representing the data of the attached data provider may listen for highlighting the data ranges used by the currently selected objects in the data receiver component.",
             "",
@@ -162,6 +168,7 @@
         {
           "name": "getUsedData",
           "returns": "XDataSource_f6340d57",
+          "returns_origin": "com.sun.star.chart2.data.XDataSource",
           "desc": [
             "Returns the data requested by the most recently attached data provider, that is still used."
           ],
@@ -171,6 +178,7 @@
         {
           "name": "getUsedRangeRepresentations",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [
             "returns a list of all range strings for which data has been requested by the most recently attached data provider, and which is still used.",
             "",
@@ -182,16 +190,18 @@
         {
           "name": "setArguments",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [],
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aArguments",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ]
+            {
+              "name": "aArguments",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            }
           ]
         }
       ]

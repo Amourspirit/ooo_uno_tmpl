@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XFilePicker",
   "type": "interface",
@@ -54,6 +54,7 @@
         {
           "name": "getDisplayDirectory",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Returns the directory that the file dialog is currently showing or was last showing before closing the dialog with Ok.",
             "",
@@ -65,6 +66,7 @@
         {
           "name": "getFiles",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [
             "Returns a sequence of the selected files including path information in URL format, conforming to Rfc1738.",
             "",
@@ -84,6 +86,7 @@
         {
           "name": "setDefaultName",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Sets the default string that appears in the file name box of a FilePicker.",
             "",
@@ -91,16 +94,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "setDisplayDirectory",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Sets the directory that the file dialog initially displays."
           ],
@@ -108,16 +113,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aDirectory",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aDirectory",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "setMultiSelectionMode",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Enable/disable multi-selection mode.",
             "",
@@ -129,11 +136,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "bMode",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "bMode",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XElement",
   "type": "interface",
@@ -61,6 +61,7 @@
         {
           "name": "characters",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Called upon retrieval of characters."
           ],
@@ -68,16 +69,18 @@
             "com.sun.star.xml.sax.SAXException"
           ],
           "args": [
-            [
-              "chars",
-              "str",
-              "in"
-            ]
+            {
+              "name": "chars",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "endElement",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Receives notification of element closing."
           ],
@@ -89,6 +92,7 @@
         {
           "name": "getAttributes",
           "returns": "XAttributes_e31a0d36",
+          "returns_origin": "com.sun.star.xml.input.XAttributes",
           "desc": [
             "Gets the attributes of this element."
           ],
@@ -98,6 +102,7 @@
         {
           "name": "getLocalName",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Gets the local name of this element."
           ],
@@ -107,6 +112,7 @@
         {
           "name": "getParent",
           "returns": "XElement",
+          "returns_origin": "com.sun.star.xml.input.XElement",
           "desc": [
             "Gets the parent context."
           ],
@@ -116,6 +122,7 @@
         {
           "name": "getUid",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "Gets the namespace uid of this element."
           ],
@@ -125,6 +132,7 @@
         {
           "name": "ignorableWhitespace",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Receives notification of white space that can be ignored."
           ],
@@ -132,16 +140,18 @@
             "com.sun.star.xml.sax.SAXException"
           ],
           "args": [
-            [
-              "whitespace",
-              "str",
-              "in"
-            ]
+            {
+              "name": "whitespace",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "processingInstruction",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Receives notification of a processing instruction."
           ],
@@ -149,21 +159,24 @@
             "com.sun.star.xml.sax.SAXException"
           ],
           "args": [
-            [
-              "target",
-              "str",
-              "in"
-            ],
-            [
-              "data",
-              "str",
-              "in"
-            ]
+            {
+              "name": "target",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "data",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "startChildElement",
           "returns": "XElement",
+          "returns_origin": "com.sun.star.xml.input.XElement",
           "desc": [
             "Called upon each occurring child element."
           ],
@@ -171,21 +184,24 @@
             "com.sun.star.xml.sax.SAXException"
           ],
           "args": [
-            [
-              "uid",
-              "int",
-              "in"
-            ],
-            [
-              "localName",
-              "str",
-              "in"
-            ],
-            [
-              "xAttributes",
-              "XAttributes_e31a0d36",
-              "in"
-            ]
+            {
+              "name": "uid",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "localName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "xAttributes",
+              "type": "XAttributes_e31a0d36",
+              "direction": "in",
+              "origin": "com.sun.star.xml.input.XAttributes"
+            }
           ]
         }
       ]

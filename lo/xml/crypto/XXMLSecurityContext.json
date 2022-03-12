@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XXMLSecurityContext",
   "type": "interface",
@@ -62,6 +62,7 @@
         {
           "name": "addSecurityEnvironment",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "Add personal security environment , and return the index of the added environment."
           ],
@@ -69,16 +70,18 @@
             "com.sun.star.security.SecurityInfrastructureException"
           ],
           "args": [
-            [
-              "aSecurityEnvironment",
-              "XSecurityEnvironment_7ead116d",
-              "in"
-            ]
+            {
+              "name": "aSecurityEnvironment",
+              "type": "XSecurityEnvironment_7ead116d",
+              "direction": "in",
+              "origin": "com.sun.star.xml.crypto.XSecurityEnvironment"
+            }
           ]
         },
         {
           "name": "getDefaultSecurityEnvironmentIndex",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "Get the ID of the internal security environment."
           ],
@@ -88,6 +91,7 @@
         {
           "name": "getSecurityEnvironment",
           "returns": "XSecurityEnvironment_7ead116d",
+          "returns_origin": "com.sun.star.xml.crypto.XSecurityEnvironment",
           "desc": [
             "An handy method to get the first personal security environment.",
             "",
@@ -99,21 +103,24 @@
         {
           "name": "getSecurityEnvironmentByIndex",
           "returns": "XSecurityEnvironment_7ead116d",
+          "returns_origin": "com.sun.star.xml.crypto.XSecurityEnvironment",
           "desc": [
             "Get personal security environment."
           ],
           "raises": [],
           "args": [
-            [
-              "index",
-              "int",
-              "in"
-            ]
+            {
+              "name": "index",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getSecurityEnvironmentNumber",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "Get the number of security environments."
           ],
@@ -123,16 +130,18 @@
         {
           "name": "setDefaultSecurityEnvironmentIndex",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "set the ID of the internal security environment"
           ],
           "raises": [],
           "args": [
-            [
-              "index",
-              "int",
-              "in"
-            ]
+            {
+              "name": "index",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

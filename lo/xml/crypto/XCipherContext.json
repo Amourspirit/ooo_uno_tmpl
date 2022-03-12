@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XCipherContext",
   "type": "interface",
@@ -60,6 +60,7 @@
         {
           "name": "convertWithCipherContext",
           "returns": "typing.Tuple[int, ...]",
+          "returns_origin": "sequence< byte >",
           "desc": [
             "encrypts/decrypts the data using the cipher.",
             "",
@@ -72,16 +73,18 @@
             "com.sun.star.lang.DisposedException"
           ],
           "args": [
-            [
-              "aData",
-              "typing.Tuple[int, ...]",
-              "in"
-            ]
+            {
+              "name": "aData",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "in",
+              "origin": "sequence< byte >"
+            }
           ]
         },
         {
           "name": "finalizeCipherContextAndDispose",
           "returns": "typing.Tuple[int, ...]",
+          "returns_origin": "sequence< byte >",
           "desc": [
             "finalizes cipher and disposes context."
           ],

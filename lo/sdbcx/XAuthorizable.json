@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XAuthorizable",
   "type": "interface",
@@ -50,6 +50,7 @@
         {
           "name": "getGrantablePrivileges",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "retrieves the permissions for a specific object, which could be granted to other users and groups."
           ],
@@ -57,21 +58,24 @@
             "com.sun.star.sdbc.SQLException"
           ],
           "args": [
-            [
-              "objName",
-              "str",
-              "in"
-            ],
-            [
-              "objType",
-              "int",
-              "in"
-            ]
+            {
+              "name": "objName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "objType",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getPrivileges",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "retrieves the permissions for a specific object."
           ],
@@ -79,21 +83,24 @@
             "com.sun.star.sdbc.SQLException"
           ],
           "args": [
-            [
-              "objName",
-              "str",
-              "in"
-            ],
-            [
-              "objType",
-              "int",
-              "in"
-            ]
+            {
+              "name": "objName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "objType",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "grantPrivileges",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "adds additional permissions for a specific object."
           ],
@@ -101,26 +108,30 @@
             "com.sun.star.sdbc.SQLException"
           ],
           "args": [
-            [
-              "objName",
-              "str",
-              "in"
-            ],
-            [
-              "objType",
-              "int",
-              "in"
-            ],
-            [
-              "objPrivileges",
-              "int",
-              "in"
-            ]
+            {
+              "name": "objName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "objType",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "objPrivileges",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "revokePrivileges",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes permissions for a specific object from a group or user."
           ],
@@ -128,21 +139,24 @@
             "com.sun.star.sdbc.SQLException"
           ],
           "args": [
-            [
-              "objName",
-              "str",
-              "in"
-            ],
-            [
-              "objType",
-              "int",
-              "in"
-            ],
-            [
-              "objPrivileges",
-              "int",
-              "in"
-            ]
+            {
+              "name": "objName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "objType",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "objPrivileges",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

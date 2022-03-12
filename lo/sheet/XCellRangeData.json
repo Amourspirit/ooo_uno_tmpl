@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XCellRangeData",
   "type": "interface",
@@ -56,6 +56,7 @@
         {
           "name": "getDataArray",
           "returns": "typing.Tuple[typing.Tuple[object, ...], ...]",
+          "returns_origin": "sequence< sequence< any > >",
           "desc": [
             "gets an array from the contents of the cell range.",
             "",
@@ -67,6 +68,7 @@
         {
           "name": "setDataArray",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "fills the cell range with values from an array.",
             "",
@@ -74,11 +76,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aArray",
-              "typing.Tuple[typing.Tuple[object, ...], ...]",
-              "in"
-            ]
+            {
+              "name": "aArray",
+              "type": "typing.Tuple[typing.Tuple[object, ...], ...]",
+              "direction": "in",
+              "origin": "sequence< sequence< any > >"
+            }
           ]
         }
       ]

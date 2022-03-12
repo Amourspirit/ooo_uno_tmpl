@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDockingAreaAcceptor",
   "type": "interface",
@@ -73,6 +73,7 @@
         {
           "name": "getContainerWindow",
           "returns": "XWindow_713b0924",
+          "returns_origin": "com.sun.star.awt.XWindow",
           "desc": [
             "provide the container window where the layout manager can request border space for docking windows.",
             "",
@@ -84,6 +85,7 @@
         {
           "name": "requestDockingAreaSpace",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "method to ask an implementation if the provided space for docking windows is available or not.",
             "",
@@ -91,16 +93,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "RequestedSpace",
-              "Rectangle_84b109e9",
-              "in"
-            ]
+            {
+              "name": "RequestedSpace",
+              "type": "Rectangle_84b109e9",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Rectangle"
+            }
           ]
         },
         {
           "name": "setDockingAreaSpace",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "method to brief an implementation that we need new border space.",
             "",
@@ -108,11 +112,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "BorderSpace",
-              "Rectangle_84b109e9",
-              "in"
-            ]
+            {
+              "name": "BorderSpace",
+              "type": "Rectangle_84b109e9",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Rectangle"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XControlShape",
   "type": "interface",
@@ -60,6 +60,7 @@
         {
           "name": "getControl",
           "returns": "XControlModel_affc0b7e",
+          "returns_origin": "com.sun.star.awt.XControlModel",
           "desc": [
             "returns the control model of this Shape."
           ],
@@ -69,16 +70,18 @@
         {
           "name": "setControl",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the control model for this Shape."
           ],
           "raises": [],
           "args": [
-            [
-              "xControl",
-              "XControlModel_affc0b7e",
-              "in"
-            ]
+            {
+              "name": "xControl",
+              "type": "XControlModel_affc0b7e",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XControlModel"
+            }
           ]
         }
       ]

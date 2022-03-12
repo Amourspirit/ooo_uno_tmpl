@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XMetricField",
   "type": "interface",
@@ -50,21 +50,24 @@
         {
           "name": "getCorrectedValue",
           "returns": "int",
+          "returns_origin": "hyper",
           "desc": [
             "returns the corrected value which is displayed in the metric field."
           ],
           "raises": [],
           "args": [
-            [
-              "FieldUnit",
-              "int",
-              "in"
-            ]
+            {
+              "name": "FieldUnit",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "getDecimalDigits",
           "returns": "int",
+          "returns_origin": "short",
           "desc": [
             "returns the currently set number of decimals."
           ],
@@ -74,66 +77,75 @@
         {
           "name": "getFirst",
           "returns": "int",
+          "returns_origin": "hyper",
           "desc": [
             "returns the currently set first value which is set on POS1 key."
           ],
           "raises": [],
           "args": [
-            [
-              "FieldUnit",
-              "int",
-              "in"
-            ]
+            {
+              "name": "FieldUnit",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "getLast",
           "returns": "int",
+          "returns_origin": "hyper",
           "desc": [
             "returns the currently set last value which is set on END key."
           ],
           "raises": [],
           "args": [
-            [
-              "FieldUnit",
-              "int",
-              "in"
-            ]
+            {
+              "name": "FieldUnit",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "getMax",
           "returns": "int",
+          "returns_origin": "hyper",
           "desc": [
             "returns the currently set maximum value that can be entered by the user."
           ],
           "raises": [],
           "args": [
-            [
-              "FieldUnit",
-              "int",
-              "in"
-            ]
+            {
+              "name": "FieldUnit",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "getMin",
           "returns": "int",
+          "returns_origin": "hyper",
           "desc": [
             "returns the currently set minimum value that can be entered by the user."
           ],
           "raises": [],
           "args": [
-            [
-              "FieldUnit",
-              "int",
-              "in"
-            ]
+            {
+              "name": "FieldUnit",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "getSpinSize",
           "returns": "int",
+          "returns_origin": "hyper",
           "desc": [
             "returns the currently set increment value for the spin button."
           ],
@@ -143,21 +155,24 @@
         {
           "name": "getValue",
           "returns": "int",
+          "returns_origin": "hyper",
           "desc": [
             "returns the value which is currently displayed in the metric field."
           ],
           "raises": [],
           "args": [
-            [
-              "FieldUnit",
-              "int",
-              "in"
-            ]
+            {
+              "name": "FieldUnit",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "isStrictFormat",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "returns whether the format is currently checked during user input."
           ],
@@ -167,166 +182,190 @@
         {
           "name": "setDecimalDigits",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the number of decimals."
           ],
           "raises": [],
           "args": [
-            [
-              "nDigits",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nDigits",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "setFirst",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the first value to be set on POS1 key."
           ],
           "raises": [],
           "args": [
-            [
-              "Value",
-              "int",
-              "in"
-            ],
-            [
-              "FieldUnit",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Value",
+              "type": "int",
+              "direction": "in",
+              "origin": "hyper"
+            },
+            {
+              "name": "FieldUnit",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "setLast",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the last value to be set on END key."
           ],
           "raises": [],
           "args": [
-            [
-              "Value",
-              "int",
-              "in"
-            ],
-            [
-              "FieldUnit",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Value",
+              "type": "int",
+              "direction": "in",
+              "origin": "hyper"
+            },
+            {
+              "name": "FieldUnit",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "setMax",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the maximum value that can be entered by the user."
           ],
           "raises": [],
           "args": [
-            [
-              "Value",
-              "int",
-              "in"
-            ],
-            [
-              "FieldUnit",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Value",
+              "type": "int",
+              "direction": "in",
+              "origin": "hyper"
+            },
+            {
+              "name": "FieldUnit",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "setMin",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the minimum value that can be entered by the user."
           ],
           "raises": [],
           "args": [
-            [
-              "Value",
-              "int",
-              "in"
-            ],
-            [
-              "FieldUnit",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Value",
+              "type": "int",
+              "direction": "in",
+              "origin": "hyper"
+            },
+            {
+              "name": "FieldUnit",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "setSpinSize",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the increment value for the spin button."
           ],
           "raises": [],
           "args": [
-            [
-              "Value",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Value",
+              "type": "int",
+              "direction": "in",
+              "origin": "hyper"
+            }
           ]
         },
         {
           "name": "setStrictFormat",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "determines if the format is checked during user input."
           ],
           "raises": [],
           "args": [
-            [
-              "bStrict",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "bStrict",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "setUserValue",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the user value which is displayed in the metric field."
           ],
           "raises": [],
           "args": [
-            [
-              "Value",
-              "int",
-              "in"
-            ],
-            [
-              "FieldUnit",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Value",
+              "type": "int",
+              "direction": "in",
+              "origin": "hyper"
+            },
+            {
+              "name": "FieldUnit",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "setValue",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the value which is displayed in the metric field."
           ],
           "raises": [],
           "args": [
-            [
-              "Value",
-              "int",
-              "in"
-            ],
-            [
-              "FieldUnit",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Value",
+              "type": "int",
+              "direction": "in",
+              "origin": "hyper"
+            },
+            {
+              "name": "FieldUnit",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         }
       ]

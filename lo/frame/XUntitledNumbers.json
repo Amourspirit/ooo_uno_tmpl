@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XUntitledNumbers",
   "type": "interface",
@@ -52,6 +52,7 @@
         {
           "name": "getUntitledPrefix",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the localized string value to be used for untitled objects in combination with the leased number.",
             "",
@@ -63,6 +64,7 @@
         {
           "name": "leaseNumber",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "callee has to lease a number before he can use it within in its own title.",
             "",
@@ -72,16 +74,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "xComponent",
-              "XInterface_8f010a43",
-              "in"
-            ]
+            {
+              "name": "xComponent",
+              "type": "XInterface_8f010a43",
+              "direction": "in",
+              "origin": "com.sun.star.uno.XInterface"
+            }
           ]
         },
         {
           "name": "releaseNumber",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "has to be used to mark those numbers as \\\"free for using\\\".",
             "",
@@ -93,16 +97,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "nNumber",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nNumber",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "releaseNumberForComponent",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "does the same then releaseNumber () but it searches the corresponding number for the specified component and deregister it."
           ],
@@ -110,11 +116,12 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "xComponent",
-              "XInterface_8f010a43",
-              "in"
-            ]
+            {
+              "name": "xComponent",
+              "type": "XInterface_8f010a43",
+              "direction": "in",
+              "origin": "com.sun.star.uno.XInterface"
+            }
           ]
         }
       ]

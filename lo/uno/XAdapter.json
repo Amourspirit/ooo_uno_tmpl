@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XAdapter",
   "type": "interface",
@@ -63,6 +63,7 @@
         {
           "name": "addReference",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "adds a reference to the adapter.",
             "",
@@ -70,16 +71,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xRef",
-              "XReference_8ecb0a41",
-              "in"
-            ]
+            {
+              "name": "xRef",
+              "type": "XReference_8ecb0a41",
+              "direction": "in",
+              "origin": "com.sun.star.uno.XReference"
+            }
           ]
         },
         {
           "name": "queryAdapted",
           "returns": "XInterface_8f010a43",
+          "returns_origin": "com.sun.star.uno.XInterface",
           "desc": [
             "queries the adapted object if it is alive."
           ],
@@ -89,16 +92,18 @@
         {
           "name": "removeReference",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes a reference from the adapter."
           ],
           "raises": [],
           "args": [
-            [
-              "xRef",
-              "XReference_8ecb0a41",
-              "in"
-            ]
+            {
+              "name": "xRef",
+              "type": "XReference_8ecb0a41",
+              "direction": "in",
+              "origin": "com.sun.star.uno.XReference"
+            }
           ]
         }
       ]

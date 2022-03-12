@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XChartData",
   "type": "interface",
@@ -60,6 +60,7 @@
         {
           "name": "addChartDataChangeEventListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "allows a component supporting the XChartDataChangeEventListener interface to register as listener.",
             "",
@@ -67,16 +68,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aListener",
-              "XChartDataChangeEventListener_bb19126c",
-              "in"
-            ]
+            {
+              "name": "aListener",
+              "type": "XChartDataChangeEventListener_bb19126c",
+              "direction": "in",
+              "origin": "com.sun.star.chart.XChartDataChangeEventListener"
+            }
           ]
         },
         {
           "name": "getNotANumber",
           "returns": "float",
+          "returns_origin": "double",
           "desc": [
             "In IEEE arithmetic format it is one of the NaN values, so there are no conflicts with existing numeric values."
           ],
@@ -86,6 +89,7 @@
         {
           "name": "isNotANumber",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "checks whether the value given is equal to the indicator value for a missing value.",
             "",
@@ -95,26 +99,29 @@
           ],
           "raises": [],
           "args": [
-            [
-              "nNumber",
-              "float",
-              "in"
-            ]
+            {
+              "name": "nNumber",
+              "type": "float",
+              "direction": "in",
+              "origin": "double"
+            }
           ]
         },
         {
           "name": "removeChartDataChangeEventListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes a previously registered listener."
           ],
           "raises": [],
           "args": [
-            [
-              "aListener",
-              "XChartDataChangeEventListener_bb19126c",
-              "in"
-            ]
+            {
+              "name": "aListener",
+              "type": "XChartDataChangeEventListener_bb19126c",
+              "direction": "in",
+              "origin": "com.sun.star.chart.XChartDataChangeEventListener"
+            }
           ]
         }
       ]

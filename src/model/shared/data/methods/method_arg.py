@@ -1,4 +1,5 @@
 # coding: utf-8
+from typing import Union
 from dataclasses import dataclass
 from enum import Enum
 
@@ -16,4 +17,4 @@ class MethodArg:
     name: str
     type: str
     direction: ArgDirection
-    origin: str
+    origin: Union[str, None]

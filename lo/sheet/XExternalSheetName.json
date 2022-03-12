@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XExternalSheetName",
   "type": "interface",
@@ -56,6 +56,7 @@
         {
           "name": "setExternalName",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets an external name at the sheet.",
             "",
@@ -65,16 +66,18 @@
             "com.sun.star.container.ElementExistException"
           ],
           "args": [
-            [
-              "aUrl",
-              "str",
-              "in"
-            ],
-            [
-              "aSheetName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aUrl",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aSheetName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

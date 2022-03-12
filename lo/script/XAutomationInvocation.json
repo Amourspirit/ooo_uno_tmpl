@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XAutomationInvocation",
   "type": "interface",
@@ -54,6 +54,7 @@
         {
           "name": "invokeGetProperty",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [],
           "raises": [
             "com.sun.star.lang.IllegalArgumentException",
@@ -61,31 +62,36 @@
             "com.sun.star.reflection.InvocationTargetException"
           ],
           "args": [
-            [
-              "aFunctionName",
-              "str",
-              "in"
-            ],
-            [
-              "aParams",
-              "typing.Tuple[object, ...]",
-              "in"
-            ],
-            [
-              "aOutParamIndex",
-              "typing.Tuple[int, ...]",
-              "out"
-            ],
-            [
-              "aOutParam",
-              "typing.Tuple[object, ...]",
-              "out"
-            ]
+            {
+              "name": "aFunctionName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aParams",
+              "type": "typing.Tuple[object, ...]",
+              "direction": "in",
+              "origin": "sequence< any >"
+            },
+            {
+              "name": "aOutParamIndex",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "out",
+              "origin": "sequence< short >"
+            },
+            {
+              "name": "aOutParam",
+              "type": "typing.Tuple[object, ...]",
+              "direction": "out",
+              "origin": "sequence< any >"
+            }
           ]
         },
         {
           "name": "invokePutProperty",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [],
           "raises": [
             "com.sun.star.lang.IllegalArgumentException",
@@ -93,26 +99,30 @@
             "com.sun.star.reflection.InvocationTargetException"
           ],
           "args": [
-            [
-              "aFunctionName",
-              "str",
-              "in"
-            ],
-            [
-              "aParams",
-              "typing.Tuple[object, ...]",
-              "in"
-            ],
-            [
-              "aOutParamIndex",
-              "typing.Tuple[int, ...]",
-              "out"
-            ],
-            [
-              "aOutParam",
-              "typing.Tuple[object, ...]",
-              "out"
-            ]
+            {
+              "name": "aFunctionName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aParams",
+              "type": "typing.Tuple[object, ...]",
+              "direction": "in",
+              "origin": "sequence< any >"
+            },
+            {
+              "name": "aOutParamIndex",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "out",
+              "origin": "sequence< short >"
+            },
+            {
+              "name": "aOutParam",
+              "type": "typing.Tuple[object, ...]",
+              "direction": "out",
+              "origin": "sequence< any >"
+            }
           ]
         }
       ]

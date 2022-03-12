@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XContentCreator",
   "type": "interface",
@@ -78,21 +78,24 @@
         {
           "name": "createNewContent",
           "returns": "XContent_79db0975",
+          "returns_origin": "com.sun.star.ucb.XContent",
           "desc": [
             "creates a new content of given type."
           ],
           "raises": [],
           "args": [
-            [
-              "Info",
-              "ContentInfo_98f60aa9",
-              "in"
-            ]
+            {
+              "name": "Info",
+              "type": "ContentInfo_98f60aa9",
+              "direction": "in",
+              "origin": "com.sun.star.ucb.ContentInfo"
+            }
           ]
         },
         {
           "name": "queryCreatableContentsInfo",
           "returns": "typing.Tuple[ContentInfo_98f60aa9, ...]",
+          "returns_origin": "sequence< com.sun.star.ucb.ContentInfo >",
           "desc": [
             "returns a list with information about the creatable contents."
           ],

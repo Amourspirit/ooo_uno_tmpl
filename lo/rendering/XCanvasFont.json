@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XCanvasFont",
   "type": "interface",
@@ -94,6 +94,7 @@
         {
           "name": "createTextLayout",
           "returns": "XTextLayout_e44a0d41",
+          "returns_origin": "com.sun.star.rendering.XTextLayout",
           "desc": [
             "Create a text layout interface.",
             "",
@@ -101,26 +102,30 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aText",
-              "StringContext_d50e22",
-              "in"
-            ],
-            [
-              "nDirection",
-              "int",
-              "in"
-            ],
-            [
-              "nRandomSeed",
-              "int",
-              "in"
-            ]
+            {
+              "name": "aText",
+              "type": "StringContext_d50e22",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.StringContext"
+            },
+            {
+              "name": "nDirection",
+              "type": "int",
+              "direction": "in",
+              "origin": "byte"
+            },
+            {
+              "name": "nRandomSeed",
+              "type": "int",
+              "direction": "in",
+              "origin": "hyper"
+            }
           ]
         },
         {
           "name": "getAvailableSizes",
           "returns": "typing.Tuple[float, ...]",
+          "returns_origin": "sequence< double >",
           "desc": [
             "Query the list of available font sizes.",
             "",
@@ -132,6 +137,7 @@
         {
           "name": "getExtraFontProperties",
           "returns": "typing.Tuple[PropertyValue_c9610c73, ...]",
+          "returns_origin": "sequence< .com.sun.star.beans.PropertyValue >",
           "desc": [
             "Query the list of additional font properties."
           ],
@@ -141,6 +147,7 @@
         {
           "name": "getFontMetrics",
           "returns": "FontMetrics_e4540d34",
+          "returns_origin": "com.sun.star.rendering.FontMetrics",
           "desc": [
             "Query metric information about the font, that is generic to all its glyphs.",
             "",
@@ -152,6 +159,7 @@
         {
           "name": "getFontRequest",
           "returns": "FontRequest_e4890d46",
+          "returns_origin": "com.sun.star.rendering.FontRequest",
           "desc": [
             "Query the FontRequest that was used to generate this object."
           ],

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XColorSpace",
   "type": "interface",
@@ -81,6 +81,7 @@
         {
           "name": "convertColorSpace",
           "returns": "typing.Tuple[ColorComponent_e4c0e78, ...]",
+          "returns_origin": "sequence< ColorComponent >",
           "desc": [
             "Convert to color of another color space."
           ],
@@ -88,21 +89,24 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "deviceColor",
-              "typing.Tuple[ColorComponent_e4c0e78, ...]",
-              "in"
-            ],
-            [
-              "targetColorSpace",
-              "XColorSpace",
-              "in"
-            ]
+            {
+              "name": "deviceColor",
+              "type": "typing.Tuple[ColorComponent_e4c0e78, ...]",
+              "direction": "in",
+              "origin": "sequence< ColorComponent >"
+            },
+            {
+              "name": "targetColorSpace",
+              "type": "XColorSpace",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.XColorSpace"
+            }
           ]
         },
         {
           "name": "convertFromARGB",
           "returns": "typing.Tuple[ColorComponent_e4c0e78, ...]",
+          "returns_origin": "sequence< ColorComponent >",
           "desc": [
             "Convert sRGB color with linear alpha into this color space.",
             "",
@@ -112,16 +116,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "rgbColor",
-              "typing.Tuple[ARGBColor_c6ee0be1, ...]",
-              "in"
-            ]
+            {
+              "name": "rgbColor",
+              "type": "typing.Tuple[ARGBColor_c6ee0be1, ...]",
+              "direction": "in",
+              "origin": "sequence< ARGBColor >"
+            }
           ]
         },
         {
           "name": "convertFromPARGB",
           "returns": "typing.Tuple[ColorComponent_e4c0e78, ...]",
+          "returns_origin": "sequence< ColorComponent >",
           "desc": [
             "Convert premultiplied sRGB color with linear alpha into this color space.",
             "",
@@ -131,16 +137,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "rgbColor",
-              "typing.Tuple[ARGBColor_c6ee0be1, ...]",
-              "in"
-            ]
+            {
+              "name": "rgbColor",
+              "type": "typing.Tuple[ARGBColor_c6ee0be1, ...]",
+              "direction": "in",
+              "origin": "sequence< ARGBColor >"
+            }
           ]
         },
         {
           "name": "convertFromRGB",
           "returns": "typing.Tuple[ColorComponent_e4c0e78, ...]",
+          "returns_origin": "sequence< ColorComponent >",
           "desc": [
             "Convert sRGB color to a representation in this color space.",
             "",
@@ -150,16 +158,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "rgbColor",
-              "typing.Tuple[RGBColor_bbdf0ba0, ...]",
-              "in"
-            ]
+            {
+              "name": "rgbColor",
+              "type": "typing.Tuple[RGBColor_bbdf0ba0, ...]",
+              "direction": "in",
+              "origin": "sequence< RGBColor >"
+            }
           ]
         },
         {
           "name": "convertToARGB",
           "returns": "typing.Tuple[ARGBColor_c6ee0be1, ...]",
+          "returns_origin": "sequence< ARGBColor >",
           "desc": [
             "Convert color value in this color space to sRGB color values, with linear alpha.",
             "",
@@ -169,16 +179,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "deviceColor",
-              "typing.Tuple[ColorComponent_e4c0e78, ...]",
-              "in"
-            ]
+            {
+              "name": "deviceColor",
+              "type": "typing.Tuple[ColorComponent_e4c0e78, ...]",
+              "direction": "in",
+              "origin": "sequence< ColorComponent >"
+            }
           ]
         },
         {
           "name": "convertToPARGB",
           "returns": "typing.Tuple[ARGBColor_c6ee0be1, ...]",
+          "returns_origin": "sequence< ARGBColor >",
           "desc": [
             "Convert color value in this color space to premultiplied sRGB color values, with linear alpha.",
             "",
@@ -188,16 +200,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "deviceColor",
-              "typing.Tuple[ColorComponent_e4c0e78, ...]",
-              "in"
-            ]
+            {
+              "name": "deviceColor",
+              "type": "typing.Tuple[ColorComponent_e4c0e78, ...]",
+              "direction": "in",
+              "origin": "sequence< ColorComponent >"
+            }
           ]
         },
         {
           "name": "convertToRGB",
           "returns": "typing.Tuple[RGBColor_bbdf0ba0, ...]",
+          "returns_origin": "sequence< RGBColor >",
           "desc": [
             "Convert color value in this color space to sRGB color values.",
             "",
@@ -207,16 +221,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "deviceColor",
-              "typing.Tuple[ColorComponent_e4c0e78, ...]",
-              "in"
-            ]
+            {
+              "name": "deviceColor",
+              "type": "typing.Tuple[ColorComponent_e4c0e78, ...]",
+              "direction": "in",
+              "origin": "sequence< ColorComponent >"
+            }
           ]
         },
         {
           "name": "getComponentTags",
           "returns": "typing.Tuple[int, ...]",
+          "returns_origin": "sequence< byte >",
           "desc": [
             "Query the kind for each color component.",
             "",
@@ -230,6 +246,7 @@
         {
           "name": "getProperties",
           "returns": "typing.Tuple[PropertyValue_c9610c73, ...]",
+          "returns_origin": "sequence< .com.sun.star.beans.PropertyValue >",
           "desc": [
             "Query various optional properties from the color space.",
             "",
@@ -241,6 +258,7 @@
         {
           "name": "getRenderingIntent",
           "returns": "int",
+          "returns_origin": "byte",
           "desc": [
             "Query rendering intent of this color space."
           ],
@@ -250,6 +268,7 @@
         {
           "name": "getType",
           "returns": "int",
+          "returns_origin": "byte",
           "desc": [
             "Query type of this color space."
           ],

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XCertificateCreator",
   "type": "interface",
@@ -67,26 +67,30 @@
         {
           "name": "addDERCertificateToTheDatabase",
           "returns": "XCertificate_e55b0d3b",
+          "returns_origin": "com.sun.star.security.XCertificate",
           "desc": [
             "Adds a certificate to the certificate database with the trust provided by the trust string."
           ],
           "raises": [],
           "args": [
-            [
-              "aDerCertificate",
-              "typing.Tuple[int, ...]",
-              "in"
-            ],
-            [
-              "aTrustString",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aDerCertificate",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "in",
+              "origin": "sequence< byte >"
+            },
+            {
+              "name": "aTrustString",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "createDERCertificateWithPrivateKey",
           "returns": "XCertificate_e55b0d3b",
+          "returns_origin": "com.sun.star.security.XCertificate",
           "desc": [
             "Create certificate from raw DER encoded certificate and associate the private key with the certificate."
           ],
@@ -94,16 +98,18 @@
             "com.sun.star.uno.SecurityException"
           ],
           "args": [
-            [
-              "aDerCertificate",
-              "typing.Tuple[int, ...]",
-              "in"
-            ],
-            [
-              "aPrivateKey",
-              "typing.Tuple[int, ...]",
-              "in"
-            ]
+            {
+              "name": "aDerCertificate",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "in",
+              "origin": "sequence< byte >"
+            },
+            {
+              "name": "aPrivateKey",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "in",
+              "origin": "sequence< byte >"
+            }
           ]
         }
       ]

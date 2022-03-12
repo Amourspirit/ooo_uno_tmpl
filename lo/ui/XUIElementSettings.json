@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XUIElementSettings",
   "type": "interface",
@@ -64,21 +64,24 @@
         {
           "name": "getSettings",
           "returns": "XIndexAccess_f0910d6d",
+          "returns_origin": "com.sun.star.container.XIndexAccess",
           "desc": [
             "provides a UIElementSettings instance that provides access to the structure of user interface element if the user interface element type supports it."
           ],
           "raises": [],
           "args": [
-            [
-              "bWriteable",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "bWriteable",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "setSettings",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "set changes to the structure of the user interface element.",
             "",
@@ -86,16 +89,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "UISettings",
-              "XIndexAccess_f0910d6d",
-              "in"
-            ]
+            {
+              "name": "UISettings",
+              "type": "XIndexAccess_f0910d6d",
+              "direction": "in",
+              "origin": "com.sun.star.container.XIndexAccess"
+            }
           ]
         },
         {
           "name": "updateSettings",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "forces the user interface element to retrieve new settings from its configuration source.",
             "",

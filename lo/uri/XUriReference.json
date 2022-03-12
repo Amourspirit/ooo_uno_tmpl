@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XUriReference",
   "type": "interface",
@@ -58,6 +58,7 @@
         {
           "name": "clearFragment",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "clears the fragment part of this URI reference."
           ],
@@ -67,6 +68,7 @@
         {
           "name": "getAuthority",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the authority part of this URI reference."
           ],
@@ -76,6 +78,7 @@
         {
           "name": "getFragment",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the fragment part of this URI reference."
           ],
@@ -85,6 +88,7 @@
         {
           "name": "getPath",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the path part of this URI reference."
           ],
@@ -94,21 +98,24 @@
         {
           "name": "getPathSegment",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns a given path segment of this URI reference."
           ],
           "raises": [],
           "args": [
-            [
-              "index",
-              "int",
-              "in"
-            ]
+            {
+              "name": "index",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getPathSegmentCount",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "returns the number of path segments of this URI reference.",
             "",
@@ -120,6 +127,7 @@
         {
           "name": "getQuery",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the query part of this URI reference."
           ],
@@ -129,6 +137,7 @@
         {
           "name": "getScheme",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the scheme part of this (absolute) URI reference."
           ],
@@ -138,6 +147,7 @@
         {
           "name": "getSchemeSpecificPart",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the scheme-specific part of this URI reference.",
             "",
@@ -149,6 +159,7 @@
         {
           "name": "getUriReference",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the textual representation of the complete URI reference."
           ],
@@ -158,6 +169,7 @@
         {
           "name": "hasAuthority",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "returns whether this URI reference has an authority part."
           ],
@@ -167,6 +179,7 @@
         {
           "name": "hasFragment",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "returns whether this URI reference has a fragment part."
           ],
@@ -176,6 +189,7 @@
         {
           "name": "hasQuery",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "returns whether this URI reference has a query part."
           ],
@@ -185,6 +199,7 @@
         {
           "name": "hasRelativePath",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "returns whether this URI reference has a relative path."
           ],
@@ -194,6 +209,7 @@
         {
           "name": "isAbsolute",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "returns whether this URI reference is absolute or relative.",
             "",
@@ -205,6 +221,7 @@
         {
           "name": "isHierarchical",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "returns whether this URI reference is hierarchical or opaque, in the sense of RFC&nbsp2396.",
             "",
@@ -216,16 +233,18 @@
         {
           "name": "setFragment",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the fragment part of this URI reference."
           ],
           "raises": [],
           "args": [
-            [
-              "fragment",
-              "str",
-              "in"
-            ]
+            {
+              "name": "fragment",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

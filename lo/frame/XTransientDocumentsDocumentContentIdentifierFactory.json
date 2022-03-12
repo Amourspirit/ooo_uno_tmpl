@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XTransientDocumentsDocumentContentIdentifierFactory",
   "type": "interface",
@@ -71,6 +71,7 @@
         {
           "name": "createDocumentContentIdentifier",
           "returns": "XContentIdentifier_edc90d78",
+          "returns_origin": "com.sun.star.ucb.XContentIdentifier",
           "desc": [
             "creates a com.sun.star.ucb.XContentIdentifier based on a given com.sun.star.document.OfficeDocument."
           ],
@@ -78,11 +79,12 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "Model",
-              "XModel_7a6e095c",
-              "in"
-            ]
+            {
+              "name": "Model",
+              "type": "XModel_7a6e095c",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XModel"
+            }
           ]
         }
       ]

@@ -26,8 +26,8 @@ def test_adjustment_event(root_path):
     args = mod.get_class_args()
     assert len(args) > 0
     arg = args[0]
-    assert arg.name == "SortingInfo"
-    assert arg.default == "UNO_NONE"
-    assert arg.type == "typing.Tuple[NumberedSortingInfo_fd0e0de6, ...]"
+    assert arg.name == "Value"
+    assert arg.default == "0"
+    assert arg.type == "int"
     fi = mod.get_full_imports()
     assert len(fi) > 0

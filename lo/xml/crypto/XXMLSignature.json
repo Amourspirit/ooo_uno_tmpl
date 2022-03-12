@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XXMLSignature",
   "type": "interface",
@@ -82,6 +82,7 @@
         {
           "name": "generate",
           "returns": "XXMLSignatureTemplate_89fe115f",
+          "returns_origin": "com.sun.star.xml.crypto.XXMLSignatureTemplate",
           "desc": [
             "Perform signature in the environment of signature template and context."
           ],
@@ -90,21 +91,24 @@
             "com.sun.star.uno.SecurityException"
           ],
           "args": [
-            [
-              "aTemplate",
-              "XXMLSignatureTemplate_89fe115f",
-              "in"
-            ],
-            [
-              "aEnvironment",
-              "XSecurityEnvironment_7ead116d",
-              "in"
-            ]
+            {
+              "name": "aTemplate",
+              "type": "XXMLSignatureTemplate_89fe115f",
+              "direction": "in",
+              "origin": "com.sun.star.xml.crypto.XXMLSignatureTemplate"
+            },
+            {
+              "name": "aEnvironment",
+              "type": "XSecurityEnvironment_7ead116d",
+              "direction": "in",
+              "origin": "com.sun.star.xml.crypto.XSecurityEnvironment"
+            }
           ]
         },
         {
           "name": "validate",
           "returns": "XXMLSignatureTemplate_89fe115f",
+          "returns_origin": "com.sun.star.xml.crypto.XXMLSignatureTemplate",
           "desc": [
             "Perform validation in the environment of signature template and context."
           ],
@@ -113,16 +117,18 @@
             "com.sun.star.uno.SecurityException"
           ],
           "args": [
-            [
-              "aTemplate",
-              "XXMLSignatureTemplate_89fe115f",
-              "in"
-            ],
-            [
-              "aContext",
-              "XXMLSecurityContext_681010ae",
-              "in"
-            ]
+            {
+              "name": "aTemplate",
+              "type": "XXMLSignatureTemplate_89fe115f",
+              "direction": "in",
+              "origin": "com.sun.star.xml.crypto.XXMLSignatureTemplate"
+            },
+            {
+              "name": "aContext",
+              "type": "XXMLSecurityContext_681010ae",
+              "direction": "in",
+              "origin": "com.sun.star.xml.crypto.XXMLSecurityContext"
+            }
           ]
         }
       ]

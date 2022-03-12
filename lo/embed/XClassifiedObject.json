@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XClassifiedObject",
   "type": "interface",
@@ -54,6 +54,7 @@
         {
           "name": "getClassID",
           "returns": "typing.Tuple[int, ...]",
+          "returns_origin": "sequence< byte >",
           "desc": [
             "retrieves class ID of the object."
           ],
@@ -63,6 +64,7 @@
         {
           "name": "getClassName",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "retrieves symbolic name for the object type to be used in UI."
           ],
@@ -72,6 +74,7 @@
         {
           "name": "setClassInfo",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the class ID and symbolic name to an object."
           ],
@@ -79,16 +82,18 @@
             "com.sun.star.lang.NoSupportException"
           ],
           "args": [
-            [
-              "aClassID",
-              "typing.Tuple[int, ...]",
-              "in"
-            ],
-            [
-              "sClassName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aClassID",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "in",
+              "origin": "sequence< byte >"
+            },
+            {
+              "name": "sClassName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

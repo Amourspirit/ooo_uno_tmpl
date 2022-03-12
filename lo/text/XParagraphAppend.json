@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XParagraphAppend",
   "type": "interface",
@@ -71,6 +71,7 @@
         {
           "name": "finishParagraph",
           "returns": "XTextRange_9a910ab7",
+          "returns_origin": "com.sun.star.text.XTextRange",
           "desc": [
             "appends a new and empty paragraph at the end of the text.",
             "",
@@ -81,16 +82,18 @@
             "com.sun.star.beans.UnknownPropertyException"
           ],
           "args": [
-            [
-              "CharacterAndParagraphProperties",
-              "PropertyValues_d6470ce6",
-              "in"
-            ]
+            {
+              "name": "CharacterAndParagraphProperties",
+              "type": "PropertyValues_d6470ce6",
+              "direction": "in",
+              "origin": "com.sun.star.beans.PropertyValues"
+            }
           ]
         },
         {
           "name": "finishParagraphInsert",
           "returns": "XTextRange_9a910ab7",
+          "returns_origin": "com.sun.star.text.XTextRange",
           "desc": [
             "inserts a new and empty paragraph to the text at a given position.",
             "",
@@ -105,16 +108,18 @@
             "com.sun.star.beans.UnknownPropertyException"
           ],
           "args": [
-            [
-              "CharacterAndParagraphProperties",
-              "PropertyValues_d6470ce6",
-              "in"
-            ],
-            [
-              "TextRange",
-              "XTextRange_9a910ab7",
-              "in"
-            ]
+            {
+              "name": "CharacterAndParagraphProperties",
+              "type": "PropertyValues_d6470ce6",
+              "direction": "in",
+              "origin": "com.sun.star.beans.PropertyValues"
+            },
+            {
+              "name": "TextRange",
+              "type": "XTextRange_9a910ab7",
+              "direction": "in",
+              "origin": "com.sun.star.text.XTextRange"
+            }
           ]
         }
       ]

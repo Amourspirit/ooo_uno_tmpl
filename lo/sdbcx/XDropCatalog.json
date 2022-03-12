@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDropCatalog",
   "type": "interface",
@@ -64,6 +64,7 @@
         {
           "name": "dropCatalog",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "drops a catalog identified by its name."
           ],
@@ -72,16 +73,18 @@
             "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
-            [
-              "catalogName",
-              "str",
-              "in"
-            ],
-            [
-              "info",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ]
+            {
+              "name": "catalogName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "info",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            }
           ]
         }
       ]

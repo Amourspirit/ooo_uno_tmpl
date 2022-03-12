@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XMessageBoxFactory",
   "type": "interface",
@@ -74,6 +74,7 @@
         {
           "name": "createMessageBox",
           "returns": "XMessageBox_98e00a9a",
+          "returns_origin": "com.sun.star.awt.XMessageBox",
           "desc": [
             "creates a message box.",
             "",
@@ -85,31 +86,36 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aParent",
-              "XWindowPeer_99760ab0",
-              "in"
-            ],
-            [
-              "eType",
-              "MessageBoxType_bbcc0be4",
-              "in"
-            ],
-            [
-              "nButtons",
-              "int",
-              "in"
-            ],
-            [
-              "sTitle",
-              "str",
-              "in"
-            ],
-            [
-              "sMessage",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aParent",
+              "type": "XWindowPeer_99760ab0",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XWindowPeer"
+            },
+            {
+              "name": "eType",
+              "type": "MessageBoxType_bbcc0be4",
+              "direction": "in",
+              "origin": "com.sun.star.awt.MessageBoxType"
+            },
+            {
+              "name": "nButtons",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "sTitle",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "sMessage",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

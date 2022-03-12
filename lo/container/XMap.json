@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XMap",
   "type": "interface",
@@ -54,6 +54,7 @@
         {
           "name": "clear",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "clears the map, removing all key-value pairs from it."
           ],
@@ -65,6 +66,7 @@
         {
           "name": "containsKey",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "determines whether a mapping for he given key exists in the map"
           ],
@@ -73,16 +75,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "Key",
-              "object",
-              "in"
-            ]
+            {
+              "name": "Key",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         },
         {
           "name": "containsValue",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "determines whether the map contains a mapping to a given value."
           ],
@@ -91,16 +95,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "Value",
-              "object",
-              "in"
-            ]
+            {
+              "name": "Value",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         },
         {
           "name": "get",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "gets the value to which a given key maps."
           ],
@@ -110,16 +116,18 @@
             "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
-            [
-              "Key",
-              "object",
-              "in"
-            ]
+            {
+              "name": "Key",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         },
         {
           "name": "put",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "associates a given key with a given value",
             "",
@@ -131,21 +139,24 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "Key",
-              "object",
-              "in"
-            ],
-            [
-              "Value",
-              "object",
-              "in"
-            ]
+            {
+              "name": "Key",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            },
+            {
+              "name": "Value",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         },
         {
           "name": "remove",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "removes a key-value mapping, given by key, from the map."
           ],
@@ -156,11 +167,12 @@
             "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
-            [
-              "Key",
-              "object",
-              "in"
-            ]
+            {
+              "name": "Key",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         }
       ],
@@ -169,6 +181,7 @@
           "name": "KeyType",
           "returns": "object",
           "origtype": null,
+          "origin": "type",
           "desc": [
             "denotes the type of the keys in the map.",
             "",
@@ -181,6 +194,7 @@
           "name": "ValueType",
           "returns": "object",
           "origtype": null,
+          "origin": "type",
           "desc": [
             "denotes the type of the values in the map.",
             "",

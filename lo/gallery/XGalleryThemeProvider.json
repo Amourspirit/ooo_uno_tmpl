@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XGalleryThemeProvider",
   "type": "interface",
@@ -64,6 +64,7 @@
         {
           "name": "insertNewByName",
           "returns": "XGalleryTheme_e28e0d13",
+          "returns_origin": "com.sun.star.gallery.XGalleryTheme",
           "desc": [
             "creates a new Gallery theme and adds it to the collection."
           ],
@@ -71,16 +72,18 @@
             "com.sun.star.container.ElementExistException"
           ],
           "args": [
-            [
-              "ThemeName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "ThemeName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "removeByName",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "deletes a Gallery theme from the collection."
           ],
@@ -88,11 +91,12 @@
             "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
-            [
-              "ThemeName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "ThemeName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

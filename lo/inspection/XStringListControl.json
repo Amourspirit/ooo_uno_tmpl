@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XStringListControl",
   "type": "interface",
@@ -60,21 +60,24 @@
         {
           "name": "appendListEntry",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "appends a new entry to the end of the list"
           ],
           "raises": [],
           "args": [
-            [
-              "NewEntry",
-              "str",
-              "in"
-            ]
+            {
+              "name": "NewEntry",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "clearList",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "clears the whole list"
           ],
@@ -84,6 +87,7 @@
         {
           "name": "getListEntries",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [
             "gets all list entries"
           ],
@@ -93,16 +97,18 @@
         {
           "name": "prependListEntry",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "prepends a new entry to the beginning of the list"
           ],
           "raises": [],
           "args": [
-            [
-              "NewEntry",
-              "str",
-              "in"
-            ]
+            {
+              "name": "NewEntry",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

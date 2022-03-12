@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XCommandInfo",
   "type": "interface",
@@ -63,6 +63,7 @@
         {
           "name": "getCommandInfoByHandle",
           "returns": "CommandInfo_98490a8d",
+          "returns_origin": "com.sun.star.ucb.CommandInfo",
           "desc": [
             "returns information for a specific command."
           ],
@@ -70,16 +71,18 @@
             "com.sun.star.ucb.UnsupportedCommandException"
           ],
           "args": [
-            [
-              "Handle",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Handle",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getCommandInfoByName",
           "returns": "CommandInfo_98490a8d",
+          "returns_origin": "com.sun.star.ucb.CommandInfo",
           "desc": [
             "returns information for a specific command."
           ],
@@ -87,16 +90,18 @@
             "com.sun.star.ucb.UnsupportedCommandException"
           ],
           "args": [
-            [
-              "Name",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getCommands",
           "returns": "typing.Tuple[CommandInfo_98490a8d, ...]",
+          "returns_origin": "sequence< com.sun.star.ucb.CommandInfo >",
           "desc": [
             "obtains information for all supported commands."
           ],
@@ -106,31 +111,35 @@
         {
           "name": "hasCommandByHandle",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "checks whether a specific command is supported."
           ],
           "raises": [],
           "args": [
-            [
-              "Handle",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Handle",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "hasCommandByName",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "checks whether a command specific is supported."
           ],
           "raises": [],
           "args": [
-            [
-              "Name",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XRangeHighlighter",
   "type": "interface",
@@ -67,21 +67,24 @@
         {
           "name": "addSelectionChangeListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "registers an event listener, which is called when the selection is changed and affects different source ranges"
           ],
           "raises": [],
           "args": [
-            [
-              "xListener",
-              "XSelectionChangeListener_58bf104d",
-              "in"
-            ]
+            {
+              "name": "xListener",
+              "type": "XSelectionChangeListener_58bf104d",
+              "direction": "in",
+              "origin": "com.sun.star.view.XSelectionChangeListener"
+            }
           ]
         },
         {
           "name": "getSelectedRanges",
           "returns": "typing.Tuple[HighlightedRange_403d0f62, ...]",
+          "returns_origin": "sequence< HighlightedRange >",
           "desc": [
             "Returns a list of ranges that are used by objects that are currently selected."
           ],
@@ -91,16 +94,18 @@
         {
           "name": "removeSelectionChangeListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "unregisters an event listener which was registered with XRangeHighlighter.addSelectionChangeListener() before."
           ],
           "raises": [],
           "args": [
-            [
-              "xListener",
-              "XSelectionChangeListener_58bf104d",
-              "in"
-            ]
+            {
+              "name": "xListener",
+              "type": "XSelectionChangeListener_58bf104d",
+              "direction": "in",
+              "origin": "com.sun.star.view.XSelectionChangeListener"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XImplicitIDReplace",
   "type": "interface",
@@ -50,6 +50,7 @@
         {
           "name": "replaceByUniqueID",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "replaces the content which is specified by its implicit (unique) ID with a new content."
           ],
@@ -57,16 +58,18 @@
             "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
-            [
-              "ID",
-              "str",
-              "in"
-            ],
-            [
-              "aNewElement",
-              "object",
-              "in"
-            ]
+            {
+              "name": "ID",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aNewElement",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         }
       ]

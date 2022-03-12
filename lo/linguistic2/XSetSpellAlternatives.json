@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSetSpellAlternatives",
   "type": "interface",
@@ -60,6 +60,7 @@
         {
           "name": "setAlternatives",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "set the list of suggestions to be returned.",
             "",
@@ -69,16 +70,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aAlternatives",
-              "typing.Tuple[str, ...]",
-              "in"
-            ]
+            {
+              "name": "aAlternatives",
+              "type": "typing.Tuple[str, ...]",
+              "direction": "in",
+              "origin": "sequence< string >"
+            }
           ]
         },
         {
           "name": "setFailureType",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "set the type of error found.",
             "",
@@ -88,11 +91,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "nFailureType",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nFailureType",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         }
       ]

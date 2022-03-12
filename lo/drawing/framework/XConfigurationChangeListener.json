@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XConfigurationChangeListener",
   "type": "interface",
@@ -60,6 +60,7 @@
         {
           "name": "notifyConfigurationChange",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "The exact time of when a listener is called (before the change takes place, during the change, or when the change has been made) depends on the change event.",
             "",
@@ -67,11 +68,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aEvent",
-              "ConfigurationChangeEvent_55151590",
-              "in"
-            ]
+            {
+              "name": "aEvent",
+              "type": "ConfigurationChangeEvent_55151590",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.framework.ConfigurationChangeEvent"
+            }
           ]
         }
       ]

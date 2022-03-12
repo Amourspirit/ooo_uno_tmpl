@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XFunctionDescription",
   "type": "interface",
@@ -71,6 +71,7 @@
         {
           "name": "createFormula",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [],
           "raises": [
             "com.sun.star.lang.DisposedException",
@@ -78,11 +79,12 @@
             "com.sun.star.uno.Exception"
           ],
           "args": [
-            [
-              "arguments",
-              "typing.Tuple[str, ...]",
-              "in"
-            ]
+            {
+              "name": "arguments",
+              "type": "typing.Tuple[str, ...]",
+              "direction": "in",
+              "origin": "sequence< string >"
+            }
           ]
         }
       ],
@@ -91,6 +93,7 @@
           "name": "Arguments",
           "returns": "typing.Tuple[FunctionArgument_f1080daa, ...]",
           "origtype": null,
+          "origin": "sequence< com.sun.star.sheet.FunctionArgument >",
           "desc": [
             "returns a sequence of localized descriptions of the function's arguments (in the order specified by the function)."
           ],
@@ -103,6 +106,7 @@
           "name": "Category",
           "returns": "XFunctionCategory_59e21055",
           "origtype": "com.sun.star.report.meta.XFunctionCategory",
+          "origin": "com.sun.star.report.meta.XFunctionCategory",
           "desc": [
             "specifies the category number."
           ],
@@ -113,6 +117,7 @@
           "name": "Description",
           "returns": "str",
           "origtype": null,
+          "origin": "string",
           "desc": [
             "returns a localized description of the function."
           ],
@@ -123,6 +128,7 @@
           "name": "Name",
           "returns": "str",
           "origtype": null,
+          "origin": "string",
           "desc": [
             "returns the localized function's name."
           ],
@@ -133,6 +139,7 @@
           "name": "Signature",
           "returns": "str",
           "origtype": null,
+          "origin": "string",
           "desc": [
             "returns the signature of the function."
           ],

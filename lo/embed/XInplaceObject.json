@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XInplaceObject",
   "type": "interface",
@@ -69,6 +69,7 @@
         {
           "name": "enableModeless",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "enables or disables modeless dialogs of the object.",
             "",
@@ -79,16 +80,18 @@
             "com.sun.star.uno.Exception"
           ],
           "args": [
-            [
-              "bEnable",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "bEnable",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "setObjectRectangles",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the visible part of the inplace object.",
             "",
@@ -101,21 +104,24 @@
             "com.sun.star.uno.Exception"
           ],
           "args": [
-            [
-              "aPosRect",
-              "Rectangle_84b109e9",
-              "in"
-            ],
-            [
-              "aClipRect",
-              "Rectangle_84b109e9",
-              "in"
-            ]
+            {
+              "name": "aPosRect",
+              "type": "Rectangle_84b109e9",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Rectangle"
+            },
+            {
+              "name": "aClipRect",
+              "type": "Rectangle_84b109e9",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Rectangle"
+            }
           ]
         },
         {
           "name": "translateAccelerators",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "provides accelerator table the container wants to use during inplace editing."
           ],
@@ -123,11 +129,12 @@
             "com.sun.star.embed.WrongStateException"
           ],
           "args": [
-            [
-              "aKeys",
-              "typing.Tuple[KeyEvent_7a78097f, ...]",
-              "in"
-            ]
+            {
+              "name": "aKeys",
+              "type": "typing.Tuple[KeyEvent_7a78097f, ...]",
+              "direction": "in",
+              "origin": "sequence< .com.sun.star.awt.KeyEvent >"
+            }
           ]
         }
       ]

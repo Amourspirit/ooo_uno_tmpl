@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XStyle",
   "type": "interface",
@@ -50,6 +50,7 @@
         {
           "name": "getParentStyle",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [],
           "raises": [],
           "args": []
@@ -57,6 +58,7 @@
         {
           "name": "isInUse",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [],
           "raises": [],
           "args": []
@@ -64,6 +66,7 @@
         {
           "name": "isUserDefined",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "identifies a style as defined by the user."
           ],
@@ -73,6 +76,7 @@
         {
           "name": "setParentStyle",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the name of the parent style."
           ],
@@ -80,11 +84,12 @@
             "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
-            [
-              "aParentStyle",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aParentStyle",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

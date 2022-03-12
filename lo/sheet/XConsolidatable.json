@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XConsolidatable",
   "type": "interface",
@@ -66,31 +66,35 @@
         {
           "name": "consolidate",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "consolidates data from several cell ranges, using the settings in the passed descriptor."
           ],
           "raises": [],
           "args": [
-            [
-              "xDescriptor",
-              "XConsolidationDescriptor_6b7610ee",
-              "in"
-            ]
+            {
+              "name": "xDescriptor",
+              "type": "XConsolidationDescriptor_6b7610ee",
+              "direction": "in",
+              "origin": "com.sun.star.sheet.XConsolidationDescriptor"
+            }
           ]
         },
         {
           "name": "createConsolidationDescriptor",
           "returns": "XConsolidationDescriptor_6b7610ee",
+          "returns_origin": "com.sun.star.sheet.XConsolidationDescriptor",
           "desc": [
             "creates a consolidation descriptor."
           ],
           "raises": [],
           "args": [
-            [
-              "bEmpty",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "bEmpty",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         }
       ]

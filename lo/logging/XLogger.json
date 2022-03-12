@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XLogger",
   "type": "interface",
@@ -54,6 +54,7 @@
         {
           "name": "addLogHandler",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "adds the given handler to the list of handlers.",
             "",
@@ -63,16 +64,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "LogHandler",
-              "XLogHandler_c7f80c27",
-              "in"
-            ]
+            {
+              "name": "LogHandler",
+              "type": "XLogHandler_c7f80c27",
+              "direction": "in",
+              "origin": "com.sun.star.logging.XLogHandler"
+            }
           ]
         },
         {
           "name": "isLoggable",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "determines whether logger instance would produce any output for the given level.",
             "",
@@ -80,76 +83,87 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Level",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Level",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "log",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "logs a given message"
           ],
           "raises": [],
           "args": [
-            [
-              "Level",
-              "int",
-              "in"
-            ],
-            [
-              "Message",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Level",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "Message",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "logp",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "logs a given message, detailing the source class and method at which the logged event occurred."
           ],
           "raises": [],
           "args": [
-            [
-              "Level",
-              "int",
-              "in"
-            ],
-            [
-              "SourceClass",
-              "str",
-              "in"
-            ],
-            [
-              "SourceMethod",
-              "str",
-              "in"
-            ],
-            [
-              "Message",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Level",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "SourceClass",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "SourceMethod",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Message",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "removeLogHandler",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes the given handler from the list of handlers."
           ],
           "raises": [],
           "args": [
-            [
-              "LogHandler",
-              "XLogHandler_c7f80c27",
-              "in"
-            ]
+            {
+              "name": "LogHandler",
+              "type": "XLogHandler_c7f80c27",
+              "direction": "in",
+              "origin": "com.sun.star.logging.XLogHandler"
+            }
           ]
         }
       ],
@@ -158,6 +172,7 @@
           "name": "Level",
           "returns": "int",
           "origtype": null,
+          "origin": "long",
           "desc": [
             "specifies which log events are logged or ignored."
           ],
@@ -168,6 +183,7 @@
           "name": "Name",
           "returns": "str",
           "origtype": null,
+          "origin": "string",
           "desc": [
             "denotes the name of the logger."
           ],

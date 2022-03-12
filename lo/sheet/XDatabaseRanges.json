@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDatabaseRanges",
   "type": "interface",
@@ -60,36 +60,41 @@
         {
           "name": "addNewByName",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "adds a new database range to the collection."
           ],
           "raises": [],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ],
-            [
-              "aRange",
-              "CellRangeAddress_ec450d43",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aRange",
+              "type": "CellRangeAddress_ec450d43",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellRangeAddress"
+            }
           ]
         },
         {
           "name": "removeByName",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes a database range from the collection."
           ],
           "raises": [],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSimpleTabController",
   "type": "interface",
@@ -69,6 +69,7 @@
         {
           "name": "activateTab",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "activate the specified tab.",
             "",
@@ -78,31 +79,35 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "ID",
-              "int",
-              "in"
-            ]
+            {
+              "name": "ID",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "addTabListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "register listener for inserting/removing tabs and changing their properties."
           ],
           "raises": [],
           "args": [
-            [
-              "Listener",
-              "XTabListener_a36e0b09",
-              "in"
-            ]
+            {
+              "name": "Listener",
+              "type": "XTabListener_a36e0b09",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XTabListener"
+            }
           ]
         },
         {
           "name": "getActiveTabID",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "return the unique ID of the current active tab."
           ],
@@ -112,6 +117,7 @@
         {
           "name": "getTabProps",
           "returns": "typing.Tuple[NamedValue_a37a0af3, ...]",
+          "returns_origin": "sequence< com.sun.star.beans.NamedValue >",
           "desc": [
             "retrieve the set of properties for the specified tab."
           ],
@@ -119,16 +125,18 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "ID",
-              "int",
-              "in"
-            ]
+            {
+              "name": "ID",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "insertTab",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "create a new tab and return a unique ID, which can be used further to address this tab by using other methods of this interface."
           ],
@@ -138,6 +146,7 @@
         {
           "name": "removeTab",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "remove a tab with the given ID."
           ],
@@ -145,31 +154,35 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "ID",
-              "int",
-              "in"
-            ]
+            {
+              "name": "ID",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "removeTabListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "unregister listener for inserting/removing tabs and changing their properties."
           ],
           "raises": [],
           "args": [
-            [
-              "Listener",
-              "XTabListener_a36e0b09",
-              "in"
-            ]
+            {
+              "name": "Listener",
+              "type": "XTabListener_a36e0b09",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XTabListener"
+            }
           ]
         },
         {
           "name": "setTabProps",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "change some properties of the specified tab."
           ],
@@ -177,16 +190,18 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "ID",
-              "int",
-              "in"
-            ],
-            [
-              "Properties",
-              "typing.Tuple[NamedValue_a37a0af3, ...]",
-              "in"
-            ]
+            {
+              "name": "ID",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "Properties",
+              "type": "typing.Tuple[NamedValue_a37a0af3, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.NamedValue >"
+            }
           ]
         }
       ]

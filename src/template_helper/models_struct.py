@@ -1,6 +1,6 @@
 # coding: utf-8
 import uno
-from typing import List, Tuple, Union, Any, overload
+from typing import List, Set, Tuple, Union, Any, overload
 from dataclasses import asdict
 import json
 
@@ -12,8 +12,7 @@ from ..model.shared.data.from_import import FromImport
 from ..model.shared.data.properties.prop import Prop
 from ..model.struct.model_struct import ModelStruct
 from ..utilities import util
-from ..data_manage.db_class.qry_component import QryComponent
-from ..data_manage.db_class.db_connect import DbConnect
+from ..parser import mod_type
 
 
 class ModelsStruct(ModelsBase):
@@ -47,7 +46,6 @@ class ModelsStruct(ModelsBase):
 
     def __init__(self, json_data: Union[str, dict, ModelStruct]) -> None:
         super().__init__()
-        self._config = util.get_app_cfg()
         if isinstance(json_data, str):
             self._init_str(json_data)
         elif isinstance(json_data, dict):
@@ -68,9 +66,6 @@ class ModelsStruct(ModelsBase):
     def _init(self, mod: ModelStruct) -> None:
         self._model = mod
         self._parents: List[ModelsStruct] = []
-        self._cache = {}
-        self._uno_instance: Any = False
-        self._conn = DbConnect(self._config)
         self._set_parents()
     # endregion Constructor
 
@@ -146,7 +141,6 @@ class ModelsStruct(ModelsBase):
         sorted_names = self.get_sorted_names()
         d_lst = self.get_properties_all()
         results: List[ClassArg] = []
-        qry = QryComponent(self._conn.connection_str)
         for _, index in sorted_names:
             itm: dict = d_lst[index]
             name = self.get_safe_word(itm['name'])
@@ -154,6 +148,7 @@ class ModelsStruct(ModelsBase):
             prop = Prop(
                 name=itm['name'],
                 returns=itm['type'],
+                origin=itm['origin'],
                 origtype=itm['origtype'],
                 desc=itm['desc']
             )
@@ -162,8 +157,7 @@ class ModelsStruct(ModelsBase):
                 type=tipe,
                 default=self.get_attrib_default(
                     name=prop.name, returns=prop.returns, uno_none=uno_none),
-                component=None if prop.origtype is None else qry.get_component(
-                    full_ns=prop.origtype)
+                p_type=self.get_python_type(prop.origin)
             ))
         self._cache[key] = results
         return self._cache[key]
@@ -206,7 +200,7 @@ class ModelsStruct(ModelsBase):
         cargs = self.get_class_args(uno_none=uno_none)
         return pargs + cargs
 
-    def _get_model_full_imports(self):
+    def _get_model_full_imports(self) -> Set[str]:
         imp = set()
         imp.update(self._model.data.full_imports.general)
         imp.update(self._model.data.full_imports.typing)
@@ -238,11 +232,12 @@ class ModelsStruct(ModelsBase):
             return result
         m_imports = self._get_model_full_imports()
         for arg in pargs:
-            if not arg.component is None:
-                # if there is an arg component then it may need an import
-                if not arg.component.id_component in m_imports:
-                    # this import is not currently part of any imports
-                    result.append(get_rel(arg.component.id_component))
+            if not arg.p_type is None:
+                imports = arg.p_type.get_all_imports(ns=self._model.namespace)
+                for imp in imports:
+                    if not imp in m_imports:
+                        # this import is not currently part of any imports
+                        result.append(get_rel(imp))
         return result
 
     def is_parents(self) -> bool:
@@ -265,26 +260,17 @@ class ModelsStruct(ModelsBase):
             return True
         return False
 
-    @property
-    def uno_instance(self):
-        """
-        Get a uno instance of current uno exception being processed
 
-        Returns:
-            Any: return uno instance if it can be created; Otherwise, ``None``
+        # region Abstract Implementions
+    def get_name(self) -> str:
+        return self._model.name
 
-        Note:
-            not all exceptions/struct are available in all version.
-            ReadOnlyOpenRequest: https://tinyurl.com/ycu8u8wu
-            is a 7.2 version
-        """
-        if self._uno_instance is False:
-            try:
-                self._uno_instance = uno.createUnoStruct(
-                    self.model.data.full_name)
-            except Exception:
-                self._uno_instance = None
-        return self._uno_instance
+    def get_namespace(self) -> str:
+        return self._model.namespace
+
+    def get_long_names(self) -> bool:
+        return self._model.parser_args.long_names
+    # endregion Abstract Implementions
 
     @property
     def parents(self) -> 'List[ModelsStruct]':

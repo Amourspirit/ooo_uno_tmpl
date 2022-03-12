@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSimpleText",
   "type": "interface",
@@ -63,6 +63,7 @@
         {
           "name": "createTextCursor",
           "returns": "XTextCursor_a60c0b48",
+          "returns_origin": "com.sun.star.text.XTextCursor",
           "desc": [],
           "raises": [],
           "args": []
@@ -70,21 +71,24 @@
         {
           "name": "createTextCursorByRange",
           "returns": "XTextCursor_a60c0b48",
+          "returns_origin": "com.sun.star.text.XTextCursor",
           "desc": [
             "The initial position is set to aTextPosition."
           ],
           "raises": [],
           "args": [
-            [
-              "aTextPosition",
-              "XTextRange_9a910ab7",
-              "in"
-            ]
+            {
+              "name": "aTextPosition",
+              "type": "XTextRange_9a910ab7",
+              "direction": "in",
+              "origin": "com.sun.star.text.XTextRange"
+            }
           ]
         },
         {
           "name": "insertControlCharacter",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "inserts a control character (like a paragraph break or a hard space) into the text."
           ],
@@ -92,26 +96,30 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "xRange",
-              "XTextRange_9a910ab7",
-              "in"
-            ],
-            [
-              "nControlCharacter",
-              "int",
-              "in"
-            ],
-            [
-              "bAbsorb",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "xRange",
+              "type": "XTextRange_9a910ab7",
+              "direction": "in",
+              "origin": "com.sun.star.text.XTextRange"
+            },
+            {
+              "name": "nControlCharacter",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "bAbsorb",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "insertString",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "inserts a string of characters into the text.",
             "",
@@ -121,21 +129,24 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xRange",
-              "XTextRange_9a910ab7",
-              "in"
-            ],
-            [
-              "aString",
-              "str",
-              "in"
-            ],
-            [
-              "bAbsorb",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "xRange",
+              "type": "XTextRange_9a910ab7",
+              "direction": "in",
+              "origin": "com.sun.star.text.XTextRange"
+            },
+            {
+              "name": "aString",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "bAbsorb",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         }
       ]

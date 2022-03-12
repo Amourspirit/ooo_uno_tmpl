@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XRemoteContentProviderAcceptor",
   "type": "interface",
@@ -70,6 +70,7 @@
         {
           "name": "addRemoteContentProvider",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Add a remote content provider.",
             "",
@@ -77,41 +78,47 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Identifier",
-              "str",
-              "in"
-            ],
-            [
-              "Factory",
-              "XMultiServiceFactory_191e0eb6",
-              "in"
-            ],
-            [
-              "Templates",
-              "typing.Tuple[str, ...]",
-              "in"
-            ],
-            [
-              "DoneListener",
-              "XRemoteContentProviderDoneListener_fc7413f8",
-              "in"
-            ]
+            {
+              "name": "Identifier",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Factory",
+              "type": "XMultiServiceFactory_191e0eb6",
+              "direction": "in",
+              "origin": "com.sun.star.lang.XMultiServiceFactory"
+            },
+            {
+              "name": "Templates",
+              "type": "typing.Tuple[str, ...]",
+              "direction": "in",
+              "origin": "sequence< string >"
+            },
+            {
+              "name": "DoneListener",
+              "type": "XRemoteContentProviderDoneListener_fc7413f8",
+              "direction": "in",
+              "origin": "com.sun.star.ucb.XRemoteContentProviderDoneListener"
+            }
           ]
         },
         {
           "name": "removeRemoteContentProvider",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Remove a remote content provider."
           ],
           "raises": [],
           "args": [
-            [
-              "Identifier",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Identifier",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

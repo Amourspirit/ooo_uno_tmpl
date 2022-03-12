@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XImageManager",
   "type": "interface",
@@ -90,21 +90,24 @@
         {
           "name": "getAllImageNames",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [
             "retrieves the list of command URLs which have images associated."
           ],
           "raises": [],
           "args": [
-            [
-              "nImageType",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nImageType",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "getImages",
           "returns": "typing.Tuple[XGraphic_a4da0afc, ...]",
+          "returns_origin": "sequence< .com.sun.star.graphic.XGraphic >",
           "desc": [
             "retrieves the associated images of command URLs."
           ],
@@ -112,21 +115,24 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "nImageType",
-              "int",
-              "in"
-            ],
-            [
-              "aCommandURLSequence",
-              "typing.Tuple[str, ...]",
-              "in"
-            ]
+            {
+              "name": "nImageType",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "aCommandURLSequence",
+              "type": "typing.Tuple[str, ...]",
+              "direction": "in",
+              "origin": "sequence< string >"
+            }
           ]
         },
         {
           "name": "hasImage",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "determines if a command URL has an associated image."
           ],
@@ -134,21 +140,24 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "nImageType",
-              "int",
-              "in"
-            ],
-            [
-              "CommandURL",
-              "str",
-              "in"
-            ]
+            {
+              "name": "nImageType",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "CommandURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "insertImages",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "inserts new image/command associations to an image manager.",
             "",
@@ -160,26 +169,30 @@
             "com.sun.star.lang.IllegalAccessException"
           ],
           "args": [
-            [
-              "nImageType",
-              "int",
-              "in"
-            ],
-            [
-              "aCommandURLSequence",
-              "typing.Tuple[str, ...]",
-              "in"
-            ],
-            [
-              "aGraphicSequence",
-              "typing.Tuple[XGraphic_a4da0afc, ...]",
-              "in"
-            ]
+            {
+              "name": "nImageType",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "aCommandURLSequence",
+              "type": "typing.Tuple[str, ...]",
+              "direction": "in",
+              "origin": "sequence< string >"
+            },
+            {
+              "name": "aGraphicSequence",
+              "type": "typing.Tuple[XGraphic_a4da0afc, ...]",
+              "direction": "in",
+              "origin": "sequence< .com.sun.star.graphic.XGraphic >"
+            }
           ]
         },
         {
           "name": "removeImages",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes associated images to a command URL.",
             "",
@@ -190,21 +203,24 @@
             "com.sun.star.lang.IllegalAccessException"
           ],
           "args": [
-            [
-              "nImageType",
-              "int",
-              "in"
-            ],
-            [
-              "CommandURLs",
-              "typing.Tuple[str, ...]",
-              "in"
-            ]
+            {
+              "name": "nImageType",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "CommandURLs",
+              "type": "typing.Tuple[str, ...]",
+              "direction": "in",
+              "origin": "sequence< string >"
+            }
           ]
         },
         {
           "name": "replaceImages",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "replaces the associated images of command URLs.",
             "",
@@ -215,26 +231,30 @@
             "com.sun.star.lang.IllegalAccessException"
           ],
           "args": [
-            [
-              "nImageType",
-              "int",
-              "in"
-            ],
-            [
-              "aCommandURLSequence",
-              "typing.Tuple[str, ...]",
-              "in"
-            ],
-            [
-              "aGraphicsSequence",
-              "typing.Tuple[XGraphic_a4da0afc, ...]",
-              "in"
-            ]
+            {
+              "name": "nImageType",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "aCommandURLSequence",
+              "type": "typing.Tuple[str, ...]",
+              "direction": "in",
+              "origin": "sequence< string >"
+            },
+            {
+              "name": "aGraphicsSequence",
+              "type": "typing.Tuple[XGraphic_a4da0afc, ...]",
+              "direction": "in",
+              "origin": "sequence< .com.sun.star.graphic.XGraphic >"
+            }
           ]
         },
         {
           "name": "reset",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "resets the image manager to default data.",
             "",

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XEntityResolver",
   "type": "interface",
@@ -62,21 +62,24 @@
         {
           "name": "resolveEntity",
           "returns": "InputSource_c88c0c54",
+          "returns_origin": "com.sun.star.xml.sax.InputSource",
           "desc": [
             "If aInputStream is a valid reference to an input stream, the parser uses this InputSource. Otherwise the parser seeks for the entity using its default behavior."
           ],
           "raises": [],
           "args": [
-            [
-              "sPublicId",
-              "str",
-              "in"
-            ],
-            [
-              "sSystemId",
-              "str",
-              "in"
-            ]
+            {
+              "name": "sPublicId",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "sSystemId",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

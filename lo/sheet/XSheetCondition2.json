@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSheetCondition2",
   "type": "interface",
@@ -50,6 +50,7 @@
         {
           "name": "getConditionOperator",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "returns the operator in the condition (new interface)."
           ],
@@ -59,16 +60,18 @@
         {
           "name": "setConditionOperator",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the operator in the condition (new interface)."
           ],
           "raises": [],
           "args": [
-            [
-              "nOperator",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nOperator",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

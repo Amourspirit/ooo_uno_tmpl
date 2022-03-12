@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XThesaurus",
   "type": "interface",
@@ -78,6 +78,7 @@
         {
           "name": "queryMeanings",
           "returns": "typing.Tuple[XMeaning_d65e0c8c, ...]",
+          "returns_origin": "sequence< com.sun.star.linguistic2.XMeaning >",
           "desc": [
             "If the language is not supported, an com.sun.star.lang.IllegalArgumentException exception is raised."
           ],
@@ -85,21 +86,24 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aTerm",
-              "str",
-              "in"
-            ],
-            [
-              "aLocale",
-              "Locale_70d308fa",
-              "in"
-            ],
-            [
-              "aProperties",
-              "PropertyValues_d6470ce6",
-              "in"
-            ]
+            {
+              "name": "aTerm",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "aProperties",
+              "type": "PropertyValues_d6470ce6",
+              "direction": "in",
+              "origin": "com.sun.star.beans.PropertyValues"
+            }
           ]
         }
       ]

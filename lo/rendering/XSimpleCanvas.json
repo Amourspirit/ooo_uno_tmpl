@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSimpleCanvas",
   "type": "interface",
@@ -148,116 +148,133 @@
         {
           "name": "drawBitmap",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Draws the bitmap on the canvas."
           ],
           "raises": [],
           "args": [
-            [
-              "xBitmap",
-              "XBitmap_b1b70b7b",
-              "in"
-            ],
-            [
-              "aLeftTop",
-              "RealPoint2D_d6e70c78",
-              "in"
-            ]
+            {
+              "name": "xBitmap",
+              "type": "XBitmap_b1b70b7b",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.XBitmap"
+            },
+            {
+              "name": "aLeftTop",
+              "type": "RealPoint2D_d6e70c78",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.RealPoint2D"
+            }
           ]
         },
         {
           "name": "drawLine",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Draws a line on the canvas."
           ],
           "raises": [],
           "args": [
-            [
-              "aStartPoint",
-              "RealPoint2D_d6e70c78",
-              "in"
-            ],
-            [
-              "aEndPoint",
-              "RealPoint2D_d6e70c78",
-              "in"
-            ]
+            {
+              "name": "aStartPoint",
+              "type": "RealPoint2D_d6e70c78",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.RealPoint2D"
+            },
+            {
+              "name": "aEndPoint",
+              "type": "RealPoint2D_d6e70c78",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.RealPoint2D"
+            }
           ]
         },
         {
           "name": "drawPixel",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Sets a single pixel on the canvas."
           ],
           "raises": [],
           "args": [
-            [
-              "aPoint",
-              "RealPoint2D_d6e70c78",
-              "in"
-            ]
+            {
+              "name": "aPoint",
+              "type": "RealPoint2D_d6e70c78",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.RealPoint2D"
+            }
           ]
         },
         {
           "name": "drawPolyPolygon",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Draws a poly-polygon on the canvas."
           ],
           "raises": [],
           "args": [
-            [
-              "xPolyPolygon",
-              "XPolyPolygon2D_e1b0e20",
-              "in"
-            ]
+            {
+              "name": "xPolyPolygon",
+              "type": "XPolyPolygon2D_e1b0e20",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.XPolyPolygon2D"
+            }
           ]
         },
         {
           "name": "drawRect",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Draws a rectangle on the canvas."
           ],
           "raises": [],
           "args": [
-            [
-              "aRect",
-              "RealRectangle2D_d9b0e03",
-              "in"
-            ]
+            {
+              "name": "aRect",
+              "type": "RealRectangle2D_d9b0e03",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.RealRectangle2D"
+            }
           ]
         },
         {
           "name": "drawText",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Draws text on the canvas."
           ],
           "raises": [],
           "args": [
-            [
-              "aText",
-              "StringContext_d50e22",
-              "in"
-            ],
-            [
-              "aOutPos",
-              "RealPoint2D_d6e70c78",
-              "in"
-            ],
-            [
-              "nTextDirection",
-              "int",
-              "in"
-            ]
+            {
+              "name": "aText",
+              "type": "StringContext_d50e22",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.StringContext"
+            },
+            {
+              "name": "aOutPos",
+              "type": "RealPoint2D_d6e70c78",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.RealPoint2D"
+            },
+            {
+              "name": "nTextDirection",
+              "type": "int",
+              "direction": "in",
+              "origin": "byte"
+            }
           ]
         },
         {
           "name": "getCanvas",
           "returns": "XCanvas_b19b0b7a",
+          "returns_origin": "com.sun.star.rendering.XCanvas",
           "desc": [
             "Query the underlying XCanvas."
           ],
@@ -267,6 +284,7 @@
         {
           "name": "getCurrentClipRect",
           "returns": "RealRectangle2D_d9b0e03",
+          "returns_origin": "com.sun.star.geometry.RealRectangle2D",
           "desc": [
             "Retrieve current clip rect."
           ],
@@ -276,6 +294,7 @@
         {
           "name": "getCurrentFillColor",
           "returns": "Color_68e908c5",
+          "returns_origin": "com.sun.star.util.Color",
           "desc": [
             "Retrieve color currently used for fills."
           ],
@@ -285,6 +304,7 @@
         {
           "name": "getCurrentFont",
           "returns": "XCanvasFont_e3380d11",
+          "returns_origin": "com.sun.star.rendering.XCanvasFont",
           "desc": [
             "Retrieve currently selected font."
           ],
@@ -294,6 +314,7 @@
         {
           "name": "getCurrentPenColor",
           "returns": "Color_68e908c5",
+          "returns_origin": "com.sun.star.util.Color",
           "desc": [
             "Retrieve color currently used for lines."
           ],
@@ -303,21 +324,24 @@
         {
           "name": "getCurrentRenderState",
           "returns": "RenderState_e4490d27",
+          "returns_origin": "com.sun.star.rendering.RenderState",
           "desc": [
             "Retrieve render state."
           ],
           "raises": [],
           "args": [
-            [
-              "bUseFillColor",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "bUseFillColor",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "getCurrentTransformation",
           "returns": "AffineMatrix2D_ff040da8",
+          "returns_origin": "com.sun.star.geometry.AffineMatrix2D",
           "desc": [
             "Retrieve current transformation matrix."
           ],
@@ -327,6 +351,7 @@
         {
           "name": "getCurrentViewState",
           "returns": "ViewState_cab30c62",
+          "returns_origin": "com.sun.star.rendering.ViewState",
           "desc": [
             "Retrieve view state."
           ],
@@ -336,6 +361,7 @@
         {
           "name": "getDevice",
           "returns": "XGraphicDevice_ca80e2c",
+          "returns_origin": "com.sun.star.rendering.XGraphicDevice",
           "desc": [
             "Request the associated graphic device for this canvas.",
             "",
@@ -347,6 +373,7 @@
         {
           "name": "getFontMetrics",
           "returns": "FontMetrics_e4540d34",
+          "returns_origin": "com.sun.star.rendering.FontMetrics",
           "desc": [
             "Request the font metrics of the current font."
           ],
@@ -356,6 +383,7 @@
         {
           "name": "selectFont",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Select a font.",
             "",
@@ -363,31 +391,36 @@
           ],
           "raises": [],
           "args": [
-            [
-              "sFontName",
-              "str",
-              "in"
-            ],
-            [
-              "size",
-              "float",
-              "in"
-            ],
-            [
-              "bold",
-              "bool",
-              "in"
-            ],
-            [
-              "italic",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "sFontName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "size",
+              "type": "float",
+              "direction": "in",
+              "origin": "double"
+            },
+            {
+              "name": "bold",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            },
+            {
+              "name": "italic",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "setFillColor",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Sets the fill color.",
             "",
@@ -395,16 +428,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "nsRgbaColor",
-              "Color_68e908c5",
-              "in"
-            ]
+            {
+              "name": "nsRgbaColor",
+              "type": "Color_68e908c5",
+              "direction": "in",
+              "origin": "com.sun.star.util.Color"
+            }
           ]
         },
         {
           "name": "setPenColor",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Sets the color used by line and text operations.",
             "",
@@ -412,41 +447,46 @@
           ],
           "raises": [],
           "args": [
-            [
-              "nsRgbaColor",
-              "Color_68e908c5",
-              "in"
-            ]
+            {
+              "name": "nsRgbaColor",
+              "type": "Color_68e908c5",
+              "direction": "in",
+              "origin": "com.sun.star.util.Color"
+            }
           ]
         },
         {
           "name": "setRectClip",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Sets the clip to the specified rectangle."
           ],
           "raises": [],
           "args": [
-            [
-              "aRect",
-              "RealRectangle2D_d9b0e03",
-              "in"
-            ]
+            {
+              "name": "aRect",
+              "type": "RealRectangle2D_d9b0e03",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.RealRectangle2D"
+            }
           ]
         },
         {
           "name": "setTransformation",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Set the current transform matrix."
           ],
           "raises": [],
           "args": [
-            [
-              "aTransform",
-              "AffineMatrix2D_ff040da8",
-              "in"
-            ]
+            {
+              "name": "aTransform",
+              "type": "AffineMatrix2D_ff040da8",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.AffineMatrix2D"
+            }
           ]
         }
       ]

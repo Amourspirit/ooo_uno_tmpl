@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XLayerHandler",
   "type": "interface",
@@ -64,6 +64,7 @@
         {
           "name": "addOrReplaceNode",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification that a new item is started.",
             "",
@@ -82,21 +83,24 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ],
-            [
-              "aAttributes",
-              "int",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aAttributes",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "addOrReplaceNodeFromTemplate",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification that a new item based on a particular template is started.",
             "",
@@ -113,26 +117,30 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ],
-            [
-              "aTemplate",
-              "TemplateIdentifier_2aaa14b5",
-              "in"
-            ],
-            [
-              "aAttributes",
-              "int",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aTemplate",
+              "type": "TemplateIdentifier_2aaa14b5",
+              "direction": "in",
+              "origin": "com.sun.star.configuration.backend.TemplateIdentifier"
+            },
+            {
+              "name": "aAttributes",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "addProperty",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification that a property having a VOID value is added to the current node.",
             "",
@@ -149,26 +157,30 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ],
-            [
-              "aAttributes",
-              "int",
-              "in"
-            ],
-            [
-              "aType",
-              "object",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aAttributes",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "aType",
+              "type": "object",
+              "direction": "in",
+              "origin": "type"
+            }
           ]
         },
         {
           "name": "addPropertyWithValue",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification that a property having a non-VOID value is added to the current node.",
             "",
@@ -187,26 +199,30 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ],
-            [
-              "aAttributes",
-              "int",
-              "in"
-            ],
-            [
-              "aValue",
-              "object",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aAttributes",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "aValue",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         },
         {
           "name": "dropNode",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification that a node is dropped from a set.",
             "",
@@ -219,16 +235,18 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "endLayer",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification that a layer description is complete.",
             "",
@@ -245,6 +263,7 @@
         {
           "name": "endNode",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification that a node description is complete.",
             "",
@@ -261,6 +280,7 @@
         {
           "name": "endProperty",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification that a property description is complete.",
             "",
@@ -277,6 +297,7 @@
         {
           "name": "overrideNode",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification that a description of a node override is started.",
             "",
@@ -293,26 +314,30 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ],
-            [
-              "aAttributes",
-              "int",
-              "in"
-            ],
-            [
-              "bClear",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aAttributes",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "bClear",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "overrideProperty",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification that an existing property is modified.",
             "",
@@ -333,31 +358,36 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ],
-            [
-              "aAttributes",
-              "int",
-              "in"
-            ],
-            [
-              "aType",
-              "object",
-              "in"
-            ],
-            [
-              "bClear",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aAttributes",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "aType",
+              "type": "object",
+              "direction": "in",
+              "origin": "type"
+            },
+            {
+              "name": "bClear",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "setPropertyValue",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification that the value of the current property is overridden.",
             "",
@@ -372,16 +402,18 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "aValue",
-              "object",
-              "in"
-            ]
+            {
+              "name": "aValue",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         },
         {
           "name": "setPropertyValueForLocale",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification that the value of the current localized property is overridden for a specific locale .",
             "",
@@ -394,21 +426,24 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "aValue",
-              "object",
-              "in"
-            ],
-            [
-              "aLocale",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aValue",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            },
+            {
+              "name": "aLocale",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "startLayer",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification that a layer description is started for a component.",
             "",

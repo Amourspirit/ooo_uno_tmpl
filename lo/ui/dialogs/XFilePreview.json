@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XFilePreview",
   "type": "interface",
@@ -63,6 +63,7 @@
         {
           "name": "getAvailableHeight",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "The method returns the available height of the preview window even if the window is invisible or could not be created.",
             "",
@@ -74,6 +75,7 @@
         {
           "name": "getAvailableWidth",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "The method returns the available width of the preview window even if the window is invisible or could not be created.",
             "",
@@ -85,6 +87,7 @@
         {
           "name": "getShowState",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Returns the current show state of the preview.",
             "",
@@ -96,6 +99,7 @@
         {
           "name": "getSupportedImageFormats",
           "returns": "typing.Tuple[int, ...]",
+          "returns_origin": "sequence< short >",
           "desc": [
             "The method returns all image formats that the preview supports."
           ],
@@ -105,6 +109,7 @@
         {
           "name": "getTargetColorDepth",
           "returns": "Color_68e908c5",
+          "returns_origin": "com.sun.star.util.Color",
           "desc": [
             "The method returns the supported color depth of the target device."
           ],
@@ -114,6 +119,7 @@
         {
           "name": "setImage",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Sets a new image.",
             "",
@@ -123,21 +129,24 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aImageFormat",
-              "int",
-              "in"
-            ],
-            [
-              "aImage",
-              "object",
-              "in"
-            ]
+            {
+              "name": "aImageFormat",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "aImage",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         },
         {
           "name": "setShowState",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Optionally sets the current show state of the preview.",
             "",
@@ -149,11 +158,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "bShowState",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "bShowState",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         }
       ]

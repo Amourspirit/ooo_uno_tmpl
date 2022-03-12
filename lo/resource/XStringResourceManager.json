@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XStringResourceManager",
   "type": "interface",
@@ -64,6 +64,7 @@
         {
           "name": "getUniqueNumericId",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "Provides a numeric id that is unique within all Resource IDs used in the string table.",
             "",
@@ -83,6 +84,7 @@
         {
           "name": "isReadOnly",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Returns the resource's read only state."
           ],
@@ -92,6 +94,7 @@
         {
           "name": "newLocale",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Creates a new locale.",
             "",
@@ -103,16 +106,18 @@
             "com.sun.star.lang.NoSupportException"
           ],
           "args": [
-            [
-              "locale",
-              "Locale_70d308fa",
-              "in"
-            ]
+            {
+              "name": "locale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
           ]
         },
         {
           "name": "removeId",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Removes a Resource ID including the corresponding string for the current locale."
           ],
@@ -121,16 +126,18 @@
             "com.sun.star.lang.NoSupportException"
           ],
           "args": [
-            [
-              "ResourceID",
-              "str",
-              "in"
-            ]
+            {
+              "name": "ResourceID",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "removeIdForLocale",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Removes a Resource ID including the corresponding string for s specific locale."
           ],
@@ -139,21 +146,24 @@
             "com.sun.star.lang.NoSupportException"
           ],
           "args": [
-            [
-              "ResourceID",
-              "str",
-              "in"
-            ],
-            [
-              "locale",
-              "Locale_70d308fa",
-              "in"
-            ]
+            {
+              "name": "ResourceID",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "locale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
           ]
         },
         {
           "name": "removeLocale",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Removes a locale completely including the corresponding strings for each locale."
           ],
@@ -162,16 +172,18 @@
             "com.sun.star.lang.NoSupportException"
           ],
           "args": [
-            [
-              "locale",
-              "Locale_70d308fa",
-              "in"
-            ]
+            {
+              "name": "locale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
           ]
         },
         {
           "name": "setCurrentLocale",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Sets the locale to be used.",
             "",
@@ -185,21 +197,24 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "Locale",
-              "Locale_70d308fa",
-              "in"
-            ],
-            [
-              "FindClosestMatch",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "Locale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "FindClosestMatch",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "setDefaultLocale",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Sets the default locale to be used."
           ],
@@ -208,16 +223,18 @@
             "com.sun.star.lang.NoSupportException"
           ],
           "args": [
-            [
-              "Locale",
-              "Locale_70d308fa",
-              "in"
-            ]
+            {
+              "name": "Locale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
           ]
         },
         {
           "name": "setString",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Associates a String to a Resource ID for the current locale.",
             "",
@@ -227,21 +244,24 @@
             "com.sun.star.lang.NoSupportException"
           ],
           "args": [
-            [
-              "ResourceID",
-              "str",
-              "in"
-            ],
-            [
-              "Str",
-              "str",
-              "in"
-            ]
+            {
+              "name": "ResourceID",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Str",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "setStringForLocale",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Associates a String to a Resource ID for a specific locale.",
             "",
@@ -253,21 +273,24 @@
             "com.sun.star.lang.NoSupportException"
           ],
           "args": [
-            [
-              "ResourceID",
-              "str",
-              "in"
-            ],
-            [
-              "Str",
-              "str",
-              "in"
-            ],
-            [
-              "locale",
-              "Locale_70d308fa",
-              "in"
-            ]
+            {
+              "name": "ResourceID",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Str",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "locale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
           ]
         }
       ]

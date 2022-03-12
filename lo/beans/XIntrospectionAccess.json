@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XIntrospectionAccess",
   "type": "interface",
@@ -81,6 +81,7 @@
         {
           "name": "getMethod",
           "returns": "XIdlMethod_e3740d05",
+          "returns_origin": "com.sun.star.reflection.XIdlMethod",
           "desc": [
             "returns information about a method if a method with the demanded name exists and if it accords to one of the demanded MethodConcepts.",
             "",
@@ -90,51 +91,58 @@
             "com.sun.star.lang.NoSuchMethodException"
           ],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ],
-            [
-              "nMethodConcepts",
-              "int",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nMethodConcepts",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getMethods",
           "returns": "typing.Tuple[XIdlMethod_e3740d05, ...]",
+          "returns_origin": "sequence< com.sun.star.reflection.XIdlMethod >",
           "desc": [
             "returns a sequence of methods of the introspected object."
           ],
           "raises": [],
           "args": [
-            [
-              "nMethodConcepts",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nMethodConcepts",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getProperties",
           "returns": "typing.Tuple[Property_8f4e0a76, ...]",
+          "returns_origin": "sequence< com.sun.star.beans.Property >",
           "desc": [
             "returns a sequence of properties of the introspected object"
           ],
           "raises": [],
           "args": [
-            [
-              "nPropertyConcepts",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nPropertyConcepts",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getProperty",
           "returns": "Property_8f4e0a76",
+          "returns_origin": "com.sun.star.beans.Property",
           "desc": [
             "returns information about a property if a property with the demanded name exists and if it accords to one of the demanded PropertyConcepts.",
             "",
@@ -144,21 +152,24 @@
             "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ],
-            [
-              "nPropertyConcepts",
-              "int",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nPropertyConcepts",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getSuppliedMethodConcepts",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "returns information about which method concepts described in the MethodConcept constants group are supported by this XIntrospectionAccess implementation.",
             "",
@@ -170,6 +181,7 @@
         {
           "name": "getSuppliedPropertyConcepts",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "returns information about which property concepts described in the PropertyConcept constants group are supported by this XIntrospectionAccess implementation.",
             "",
@@ -181,6 +193,7 @@
         {
           "name": "getSupportedListeners",
           "returns": "typing.Tuple[object, ...]",
+          "returns_origin": "sequence< type >",
           "desc": [
             "returns the listener types supported by the introspected object.",
             "",
@@ -192,46 +205,53 @@
         {
           "name": "hasMethod",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "allows to ask if a method with the demanded name exists and if it accords to one of the demanded MethodConcept."
           ],
           "raises": [],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ],
-            [
-              "nMethodConcepts",
-              "int",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nMethodConcepts",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "hasProperty",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "allows to ask if a property with the demanded name exists and if it accords to one of the demanded PropertyConcept."
           ],
           "raises": [],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ],
-            [
-              "nPropertyConcepts",
-              "int",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nPropertyConcepts",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "queryAdapter",
           "returns": "XInterface_8f010a43",
+          "returns_origin": "com.sun.star.uno.XInterface",
           "desc": [
             "creates an adapter that implements an interface with the specified type.",
             "",
@@ -251,11 +271,12 @@
             "com.sun.star.beans.IllegalTypeException"
           ],
           "args": [
-            [
-              "aInterfaceType",
-              "object",
-              "in"
-            ]
+            {
+              "name": "aInterfaceType",
+              "type": "object",
+              "direction": "in",
+              "origin": "type"
+            }
           ]
         }
       ]

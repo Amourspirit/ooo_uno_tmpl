@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XCellRangeMovement",
   "type": "interface",
@@ -81,6 +81,7 @@
         {
           "name": "copyRange",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "copies a cell range to another position in the document.",
             "",
@@ -88,21 +89,24 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aDestination",
-              "CellAddress_ae5f0b56",
-              "in"
-            ],
-            [
-              "aSource",
-              "CellRangeAddress_ec450d43",
-              "in"
-            ]
+            {
+              "name": "aDestination",
+              "type": "CellAddress_ae5f0b56",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellAddress"
+            },
+            {
+              "name": "aSource",
+              "type": "CellRangeAddress_ec450d43",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellRangeAddress"
+            }
           ]
         },
         {
           "name": "insertCells",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "inserts cells, moving other cells down or right.",
             "",
@@ -110,21 +114,24 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aRange",
-              "CellRangeAddress_ec450d43",
-              "in"
-            ],
-            [
-              "nMode",
-              "CellInsertMode_d47d0c9b",
-              "in"
-            ]
+            {
+              "name": "aRange",
+              "type": "CellRangeAddress_ec450d43",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellRangeAddress"
+            },
+            {
+              "name": "nMode",
+              "type": "CellInsertMode_d47d0c9b",
+              "direction": "in",
+              "origin": "com.sun.star.sheet.CellInsertMode"
+            }
           ]
         },
         {
           "name": "moveRange",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "moves a cell range to another position in the document.",
             "",
@@ -132,36 +139,41 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aDestination",
-              "CellAddress_ae5f0b56",
-              "in"
-            ],
-            [
-              "aSource",
-              "CellRangeAddress_ec450d43",
-              "in"
-            ]
+            {
+              "name": "aDestination",
+              "type": "CellAddress_ae5f0b56",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellAddress"
+            },
+            {
+              "name": "aSource",
+              "type": "CellRangeAddress_ec450d43",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellRangeAddress"
+            }
           ]
         },
         {
           "name": "removeRange",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "deletes cells, moving other cells up or left."
           ],
           "raises": [],
           "args": [
-            [
-              "aRange",
-              "CellRangeAddress_ec450d43",
-              "in"
-            ],
-            [
-              "nMode",
-              "CellDeleteMode_d3830c79",
-              "in"
-            ]
+            {
+              "name": "aRange",
+              "type": "CellRangeAddress_ec450d43",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellRangeAddress"
+            },
+            {
+              "name": "nMode",
+              "type": "CellDeleteMode_d3830c79",
+              "direction": "in",
+              "origin": "com.sun.star.sheet.CellDeleteMode"
+            }
           ]
         }
       ]

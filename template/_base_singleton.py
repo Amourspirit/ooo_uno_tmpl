@@ -2,49 +2,41 @@
 from typing import Dict, Tuple, List
 from _base_json import BaseJson
 from verr import Version
-
+from oootmpl.model.singleton.model_singleton import ModelSingleton
 
 class BaseSingleton(BaseJson):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
     def _hydrate_data(self, json_data: dict):
-        self._validate_data(json_data)
-        data: Dict[str, object] = json_data['data']
+        try:
+            self._model = ModelSingleton(**json_data)
+        except Exception as e:
+            msg = f"Error occured in singleton {json_data['namespace']}.{json_data['name']}"
+            self._lerr(f"{msg}\n{e}")
+            raise Exception(msg) from e
+        # self._validate_data(json_data)
+        mdata = self._model.data
+        self.name = self.get_safe_word(mdata.name)
+        self.namespace = mdata.namespace
+        self.allow_db = mdata.allow_db
+        self.desc = mdata.desc
+        self.link = mdata.url
+        self.libre_office_ver = self._model.libre_office_ver
+        self.include_desc = self._model.writer_args.include_desc
+        self.requires_typing = mdata.requires_typing
+        self.inherits = mdata.extends
+        self.imports = mdata.imports
+        self.extends_map.update(mdata.extends_map)
 
-        def set_data(_key: str, a_name=None):
-            attr_name = _key if not a_name else a_name
-            val = data.get(_key, None)
-            if not val is None:
-                setattr(self, attr_name, val)
-    
-        set_data('name')
-        set_data('namespace')
-        set_data('allow_db')
-        set_data('desc')
-        set_data('url', 'link')
-        setattr(self, 'inherits', data.get('extends', []))
-        set_data('imports')
-        # get lo ver if it exist. Defaut to False
-        self.libre_office_ver = json_data.get('libre_office_ver', False)
-        sort = bool(json_data['parser_args'].get('sort', False))
-        self.include_desc = bool(
-            json_data['writer_args'].get('include_desc', True))
+        sort = self._model.parser_args.sort
         self.attribs = self._get_attribs(json_data=json_data, sort=sort)
-        setattr(self, 'requires_typing', data.get('requires_typing', False))
-        setattr(self, 'from_imports', [])
-        setattr(self, 'from_imports_typing', [])
-        set_data('from_imports')
-        set_data('from_imports_typing')
-        # self.requires_typing = False if len(
-        #     self.from_imports_typing) == 0 else True
-        quote: List[str] = data.get('quote', [])
-        self.quote.update(quote)
-        typings: List[str] = data.get('typings', [])
-        self.typings.update(typings)
-        extends_map = data.get('extends_map', None)
-        if extends_map:
-            self.extends_map.update(extends_map)
+        self.from_imports = [x.as_tuple()
+                             for x in mdata.from_imports]
+        self.from_imports_typing = [x.as_tuple()
+                                    for x in mdata.from_imports_typing]
+        self.quote.update(mdata.quote)
+        self.typings.update(mdata.typings)
 
     def _get_attribs(self, json_data: dict, sort: bool) -> dict:
         items: dict = json_data['data'].get('items', {})

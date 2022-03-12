@@ -6,7 +6,7 @@
   "type": "interface",
   "namespace": "com.sun.star.awt",
   "parser_args": {
-    "sort": false,
+    "sort": true,
     "long_names": true,
     "remove_parent_inherited": true
   },
@@ -97,78 +97,6 @@
     "items": {
       "methods": [
         {
-          "name": "createGraphics",
-          "returns": "XGraphics_842309dd",
-          "returns_origin": "com.sun.star.awt.XGraphics",
-          "desc": [
-            "creates a new graphics whose output operation is directed to this device."
-          ],
-          "raises": [],
-          "args": []
-        },
-        {
-          "name": "createDevice",
-          "returns": "XDevice",
-          "returns_origin": "com.sun.star.awt.XDevice",
-          "desc": [
-            "creates a new device which is compatible with this one.",
-            "",
-            "If the device does not support the GETBITS device capability, this method returns NULL."
-          ],
-          "raises": [],
-          "args": [
-            {
-              "name": "nWidth",
-              "type": "int",
-              "direction": "in",
-              "origin": "long"
-            },
-            {
-              "name": "nHeight",
-              "type": "int",
-              "direction": "in",
-              "origin": "long"
-            }
-          ]
-        },
-        {
-          "name": "getInfo",
-          "returns": "DeviceInfo_8e370a30",
-          "returns_origin": "com.sun.star.awt.DeviceInfo",
-          "desc": [
-            "returns information about the device."
-          ],
-          "raises": [],
-          "args": []
-        },
-        {
-          "name": "getFontDescriptors",
-          "returns": "typing.Tuple[FontDescriptor_bc110c0a, ...]",
-          "returns_origin": "sequence< FontDescriptor >",
-          "desc": [
-            "returns the list of available font descriptors."
-          ],
-          "raises": [],
-          "args": []
-        },
-        {
-          "name": "getFont",
-          "returns": "XFont_5f480843",
-          "returns_origin": "com.sun.star.awt.XFont",
-          "desc": [
-            "returns information about a font offered by this device."
-          ],
-          "raises": [],
-          "args": [
-            {
-              "name": "aDescriptor",
-              "type": "FontDescriptor_bc110c0a",
-              "direction": "in",
-              "origin": "com.sun.star.awt.FontDescriptor"
-            }
-          ]
-        },
-        {
           "name": "createBitmap",
           "returns": "XBitmap_70cd0909",
           "returns_origin": "com.sun.star.awt.XBitmap",
@@ -206,6 +134,31 @@
           ]
         },
         {
+          "name": "createDevice",
+          "returns": "XDevice",
+          "returns_origin": "com.sun.star.awt.XDevice",
+          "desc": [
+            "creates a new device which is compatible with this one.",
+            "",
+            "If the device does not support the GETBITS device capability, this method returns NULL."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "nWidth",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nHeight",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
           "name": "createDisplayBitmap",
           "returns": "XDisplayBitmap_bb550bdf",
           "returns_origin": "com.sun.star.awt.XDisplayBitmap",
@@ -223,6 +176,53 @@
               "origin": "com.sun.star.awt.XBitmap"
             }
           ]
+        },
+        {
+          "name": "createGraphics",
+          "returns": "XGraphics_842309dd",
+          "returns_origin": "com.sun.star.awt.XGraphics",
+          "desc": [
+            "creates a new graphics whose output operation is directed to this device."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getFont",
+          "returns": "XFont_5f480843",
+          "returns_origin": "com.sun.star.awt.XFont",
+          "desc": [
+            "returns information about a font offered by this device."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aDescriptor",
+              "type": "FontDescriptor_bc110c0a",
+              "direction": "in",
+              "origin": "com.sun.star.awt.FontDescriptor"
+            }
+          ]
+        },
+        {
+          "name": "getFontDescriptors",
+          "returns": "typing.Tuple[FontDescriptor_bc110c0a, ...]",
+          "returns_origin": "sequence< FontDescriptor >",
+          "desc": [
+            "returns the list of available font descriptors."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getInfo",
+          "returns": "DeviceInfo_8e370a30",
+          "returns_origin": "com.sun.star.awt.DeviceInfo",
+          "desc": [
+            "returns information about the device."
+          ],
+          "raises": [],
+          "args": []
         }
       ]
     }

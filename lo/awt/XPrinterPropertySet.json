@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XPrinterPropertySet",
   "type": "interface",
@@ -58,6 +58,7 @@
         {
           "name": "getBinarySetup",
           "returns": "typing.Tuple[int, ...]",
+          "returns_origin": "sequence< byte >",
           "desc": [
             "returns a binary encoded version of the printer setup."
           ],
@@ -67,6 +68,7 @@
         {
           "name": "getFormDescriptions",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [
             "returns descriptions of all available printer forms."
           ],
@@ -76,6 +78,7 @@
         {
           "name": "selectForm",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the form that should be used.",
             "",
@@ -86,16 +89,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aFormDescription",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aFormDescription",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "setBinarySetup",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the data specific to the printer driver.",
             "",
@@ -106,16 +111,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "data",
-              "typing.Tuple[int, ...]",
-              "in"
-            ]
+            {
+              "name": "data",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "in",
+              "origin": "sequence< byte >"
+            }
           ]
         },
         {
           "name": "setHorizontal",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the orientation."
           ],
@@ -124,11 +131,12 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "bHorizontal",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "bHorizontal",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         }
       ]

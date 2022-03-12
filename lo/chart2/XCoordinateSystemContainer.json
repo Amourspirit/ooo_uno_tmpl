@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XCoordinateSystemContainer",
   "type": "interface",
@@ -61,6 +61,7 @@
         {
           "name": "addCoordinateSystem",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "add a coordinate system to the coordinate system container"
           ],
@@ -68,16 +69,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aCoordSys",
-              "XCoordinateSystem_7ff0e31",
-              "in"
-            ]
+            {
+              "name": "aCoordSys",
+              "type": "XCoordinateSystem_7ff0e31",
+              "direction": "in",
+              "origin": "com.sun.star.chart2.XCoordinateSystem"
+            }
           ]
         },
         {
           "name": "getCoordinateSystems",
           "returns": "typing.Tuple[XCoordinateSystem_7ff0e31, ...]",
+          "returns_origin": "sequence< XCoordinateSystem >",
           "desc": [
             "retrieve all coordinate systems"
           ],
@@ -87,6 +90,7 @@
         {
           "name": "removeCoordinateSystem",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes one coordinate system from the coordinate system container."
           ],
@@ -94,16 +98,18 @@
             "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
-            [
-              "aCoordSys",
-              "XCoordinateSystem_7ff0e31",
-              "in"
-            ]
+            {
+              "name": "aCoordSys",
+              "type": "XCoordinateSystem_7ff0e31",
+              "direction": "in",
+              "origin": "com.sun.star.chart2.XCoordinateSystem"
+            }
           ]
         },
         {
           "name": "setCoordinateSystems",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "set all coordinate systems"
           ],
@@ -111,11 +117,12 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aCoordinateSystems",
-              "typing.Tuple[XCoordinateSystem_7ff0e31, ...]",
-              "in"
-            ]
+            {
+              "name": "aCoordinateSystems",
+              "type": "typing.Tuple[XCoordinateSystem_7ff0e31, ...]",
+              "direction": "in",
+              "origin": "sequence< XCoordinateSystem >"
+            }
           ]
         }
       ]

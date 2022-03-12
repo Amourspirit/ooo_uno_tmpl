@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XConversionPropertyType",
   "type": "interface",
@@ -56,6 +56,7 @@
         {
           "name": "getPropertyType",
           "returns": "int",
+          "returns_origin": "short",
           "desc": [
             "returns the property type for the specified entry.",
             "",
@@ -65,21 +66,24 @@
             "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
-            [
-              "aLeftText",
-              "str",
-              "in"
-            ],
-            [
-              "aRightText",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aLeftText",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aRightText",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "setPropertyType",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the property type for the specified entry.",
             "",
@@ -90,21 +94,24 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aLeftText",
-              "str",
-              "in"
-            ],
-            [
-              "aRightText",
-              "str",
-              "in"
-            ],
-            [
-              "nPropertyType",
-              "int",
-              "in"
-            ]
+            {
+              "name": "aLeftText",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aRightText",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nPropertyType",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         }
       ]

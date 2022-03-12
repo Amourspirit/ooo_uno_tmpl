@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XRegressionCurveContainer",
   "type": "interface",
@@ -61,6 +61,7 @@
         {
           "name": "addRegressionCurve",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "add a regression curve to the container"
           ],
@@ -68,16 +69,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aRegressionCurve",
-              "XRegressionCurve_fa3c0dca",
-              "in"
-            ]
+            {
+              "name": "aRegressionCurve",
+              "type": "XRegressionCurve_fa3c0dca",
+              "direction": "in",
+              "origin": "com.sun.star.chart2.XRegressionCurve"
+            }
           ]
         },
         {
           "name": "getRegressionCurves",
           "returns": "typing.Tuple[XRegressionCurve_fa3c0dca, ...]",
+          "returns_origin": "sequence< XRegressionCurve >",
           "desc": [
             "retrieve all regression curves"
           ],
@@ -87,6 +90,7 @@
         {
           "name": "removeRegressionCurve",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes one regression curve from the container."
           ],
@@ -94,16 +98,18 @@
             "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
-            [
-              "aRegressionCurve",
-              "XRegressionCurve_fa3c0dca",
-              "in"
-            ]
+            {
+              "name": "aRegressionCurve",
+              "type": "XRegressionCurve_fa3c0dca",
+              "direction": "in",
+              "origin": "com.sun.star.chart2.XRegressionCurve"
+            }
           ]
         },
         {
           "name": "setRegressionCurves",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "set all regression curves"
           ],
@@ -111,11 +117,12 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aRegressionCurves",
-              "typing.Tuple[XRegressionCurve_fa3c0dca, ...]",
-              "in"
-            ]
+            {
+              "name": "aRegressionCurves",
+              "type": "typing.Tuple[XRegressionCurve_fa3c0dca, ...]",
+              "direction": "in",
+              "origin": "sequence< XRegressionCurve >"
+            }
           ]
         }
       ]

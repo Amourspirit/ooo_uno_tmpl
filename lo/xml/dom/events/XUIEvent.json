@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XUIEvent",
   "type": "interface",
@@ -58,6 +58,7 @@
         {
           "name": "getDetail",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [],
           "raises": [],
           "args": []
@@ -65,6 +66,7 @@
         {
           "name": "getView",
           "returns": "XAbstractView_35f90f4a",
+          "returns_origin": "com.sun.star.xml.dom.views.XAbstractView",
           "desc": [],
           "raises": [],
           "args": []
@@ -72,34 +74,40 @@
         {
           "name": "initUIEvent",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "typeArg",
-              "str",
-              "in"
-            ],
-            [
-              "canBubbleArg",
-              "bool",
-              "in"
-            ],
-            [
-              "cancelableArg",
-              "bool",
-              "in"
-            ],
-            [
-              "viewArg",
-              "XAbstractView_35f90f4a",
-              "in"
-            ],
-            [
-              "detailArg",
-              "int",
-              "in"
-            ]
+            {
+              "name": "typeArg",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "canBubbleArg",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            },
+            {
+              "name": "cancelableArg",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            },
+            {
+              "name": "viewArg",
+              "type": "XAbstractView_35f90f4a",
+              "direction": "in",
+              "origin": "com.sun.star.xml.dom.views.XAbstractView"
+            },
+            {
+              "name": "detailArg",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

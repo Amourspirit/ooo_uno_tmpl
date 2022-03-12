@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XTable",
   "type": "interface",
@@ -99,6 +99,7 @@
         {
           "name": "createCursor",
           "returns": "XCellCursor_ae900b66",
+          "returns_origin": "com.sun.star.table.XCellCursor",
           "desc": [
             "creates a cell cursor including the whole table"
           ],
@@ -108,6 +109,7 @@
         {
           "name": "createCursorByRange",
           "returns": "XCellCursor_ae900b66",
+          "returns_origin": "com.sun.star.table.XCellCursor",
           "desc": [
             "creates a cell cursor to travel in the given range context."
           ],
@@ -115,11 +117,12 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "Range",
-              "XCellRange_a2f70ad5",
-              "in"
-            ]
+            {
+              "name": "Range",
+              "type": "XCellRange_a2f70ad5",
+              "direction": "in",
+              "origin": "com.sun.star.table.XCellRange"
+            }
           ]
         }
       ],
@@ -128,6 +131,7 @@
           "name": "ColumnCount",
           "returns": "int",
           "origtype": null,
+          "origin": "long",
           "desc": [
             "stores the current column count of this table"
           ],
@@ -138,6 +142,7 @@
           "name": "RowCount",
           "returns": "int",
           "origtype": null,
+          "origin": "long",
           "desc": [
             "stores the current row count of this table"
           ],

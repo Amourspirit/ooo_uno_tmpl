@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XActiveDataSink",
   "type": "interface",
@@ -62,6 +62,7 @@
         {
           "name": "getInputStream",
           "returns": "XInputStream_98d40ab4",
+          "returns_origin": "com.sun.star.io.XInputStream",
           "desc": [],
           "raises": [],
           "args": []
@@ -69,6 +70,7 @@
         {
           "name": "setInputStream",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "plugs the input stream.",
             "",
@@ -76,11 +78,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aStream",
-              "XInputStream_98d40ab4",
-              "in"
-            ]
+            {
+              "name": "aStream",
+              "type": "XInputStream_98d40ab4",
+              "direction": "in",
+              "origin": "com.sun.star.io.XInputStream"
+            }
           ]
         }
       ]

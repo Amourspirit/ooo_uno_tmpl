@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XTextComponent",
   "type": "interface",
@@ -67,21 +67,24 @@
         {
           "name": "addTextListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "registers a text event listener."
           ],
           "raises": [],
           "args": [
-            [
-              "l",
-              "XTextListener_b04d0b97",
-              "in"
-            ]
+            {
+              "name": "l",
+              "type": "XTextListener_b04d0b97",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XTextListener"
+            }
           ]
         },
         {
           "name": "getMaxTextLen",
           "returns": "int",
+          "returns_origin": "short",
           "desc": [
             "returns the currently set maximum text length."
           ],
@@ -91,6 +94,7 @@
         {
           "name": "getSelectedText",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the currently selected text."
           ],
@@ -100,6 +104,7 @@
         {
           "name": "getSelection",
           "returns": "Selection_84d609fa",
+          "returns_origin": "com.sun.star.awt.Selection",
           "desc": [
             "returns the current user selection."
           ],
@@ -109,6 +114,7 @@
         {
           "name": "getText",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the text of the component."
           ],
@@ -118,26 +124,30 @@
         {
           "name": "insertText",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "inserts text at the specified position."
           ],
           "raises": [],
           "args": [
-            [
-              "Sel",
-              "Selection_84d609fa",
-              "in"
-            ],
-            [
-              "Text",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Sel",
+              "type": "Selection_84d609fa",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Selection"
+            },
+            {
+              "name": "Text",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "isEditable",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "returns if the text is editable by the user."
           ],
@@ -147,76 +157,86 @@
         {
           "name": "removeTextListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "unregisters a text event listener."
           ],
           "raises": [],
           "args": [
-            [
-              "l",
-              "XTextListener_b04d0b97",
-              "in"
-            ]
+            {
+              "name": "l",
+              "type": "XTextListener_b04d0b97",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XTextListener"
+            }
           ]
         },
         {
           "name": "setEditable",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "makes the text editable for the user or read-only."
           ],
           "raises": [],
           "args": [
-            [
-              "bEditable",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "bEditable",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "setMaxTextLen",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the maximum text length."
           ],
           "raises": [],
           "args": [
-            [
-              "nLen",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nLen",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "setSelection",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the user selection."
           ],
           "raises": [],
           "args": [
-            [
-              "aSelection",
-              "Selection_84d609fa",
-              "in"
-            ]
+            {
+              "name": "aSelection",
+              "type": "Selection_84d609fa",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Selection"
+            }
           ]
         },
         {
           "name": "setText",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the text of the component."
           ],
           "raises": [],
           "args": [
-            [
-              "aText",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aText",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

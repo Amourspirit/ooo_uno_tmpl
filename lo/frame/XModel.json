@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XModel",
   "type": "interface",
@@ -82,26 +82,30 @@
         {
           "name": "attachResource",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "informs a model about its resource description."
           ],
           "raises": [],
           "args": [
-            [
-              "URL",
-              "str",
-              "in"
-            ],
-            [
-              "Arguments",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ]
+            {
+              "name": "URL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Arguments",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            }
           ]
         },
         {
           "name": "connectController",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "is called whenever a new controller is created for this model.",
             "",
@@ -109,16 +113,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Controller",
-              "XController_b00e0b8f",
-              "in"
-            ]
+            {
+              "name": "Controller",
+              "type": "XController_b00e0b8f",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XController"
+            }
           ]
         },
         {
           "name": "disconnectController",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "is called whenever an existing controller should be deregistered at this model.",
             "",
@@ -126,16 +132,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Controller",
-              "XController_b00e0b8f",
-              "in"
-            ]
+            {
+              "name": "Controller",
+              "type": "XController_b00e0b8f",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XController"
+            }
           ]
         },
         {
           "name": "getArgs",
           "returns": "typing.Tuple[PropertyValue_c9610c73, ...]",
+          "returns_origin": "sequence< com.sun.star.beans.PropertyValue >",
           "desc": [
             "provides read access on currently representation of the com.sun.star.document.MediaDescriptor of this model which describes the model and its state"
           ],
@@ -145,6 +153,7 @@
         {
           "name": "getCurrentController",
           "returns": "XController_b00e0b8f",
+          "returns_origin": "com.sun.star.frame.XController",
           "desc": [
             "provides access to the controller which currently controls this model"
           ],
@@ -154,6 +163,7 @@
         {
           "name": "getCurrentSelection",
           "returns": "XInterface_8f010a43",
+          "returns_origin": "com.sun.star.uno.XInterface",
           "desc": [
             "provides read access on current selection on controller"
           ],
@@ -163,6 +173,7 @@
         {
           "name": "getURL",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "provides information about the location of this model"
           ],
@@ -172,6 +183,7 @@
         {
           "name": "hasControllersLocked",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "determines if there is at least one lock remaining.",
             "",
@@ -183,6 +195,7 @@
         {
           "name": "lockControllers",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "suspends some notifications to the controllers which are used for display updates.",
             "",
@@ -194,6 +207,7 @@
         {
           "name": "setCurrentController",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets a registered controller as the current controller."
           ],
@@ -201,16 +215,18 @@
             "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
-            [
-              "Controller",
-              "XController_b00e0b8f",
-              "in"
-            ]
+            {
+              "name": "Controller",
+              "type": "XController_b00e0b8f",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XController"
+            }
           ]
         },
         {
           "name": "unlockControllers",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "resumes the notifications which were suspended by XModel.lockControllers().",
             "",

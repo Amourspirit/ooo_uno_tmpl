@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XScaling",
   "type": "interface",
@@ -50,6 +50,7 @@
         {
           "name": "doScaling",
           "returns": "float",
+          "returns_origin": "double",
           "desc": [
             "Given a numeric value, return the scaled value that conforms to a predefined scaling rule.",
             "",
@@ -57,16 +58,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "value",
-              "float",
-              "in"
-            ]
+            {
+              "name": "value",
+              "type": "float",
+              "direction": "in",
+              "origin": "double"
+            }
           ]
         },
         {
           "name": "getInverseScaling",
           "returns": "XScaling",
+          "returns_origin": "com.sun.star.chart2.XScaling",
           "desc": [
             "Get an interface object that conforms to a scaling rule that is the reverse of the original scaling rule."
           ],

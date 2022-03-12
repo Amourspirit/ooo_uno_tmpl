@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XTransferableSupplier",
   "type": "interface",
@@ -46,6 +46,7 @@
         {
           "name": "getTransferable",
           "returns": "XTransferable_2d800f38",
+          "returns_origin": "com.sun.star.datatransfer.XTransferable",
           "desc": [
             "To get access to a transferable representation of a selected part of an object."
           ],
@@ -55,6 +56,7 @@
         {
           "name": "insertTransferable",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Hands over a transferable object that shall be inserted.",
             "",
@@ -64,11 +66,12 @@
             "UnsupportedFlavorException"
           ],
           "args": [
-            [
-              "xTrans",
-              "XTransferable_2d800f38",
-              "in"
-            ]
+            {
+              "name": "xTrans",
+              "type": "XTransferable_2d800f38",
+              "direction": "in",
+              "origin": "com.sun.star.datatransfer.XTransferable"
+            }
           ]
         }
       ]

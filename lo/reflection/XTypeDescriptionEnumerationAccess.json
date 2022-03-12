@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XTypeDescriptionEnumerationAccess",
   "type": "interface",
@@ -80,6 +80,7 @@
         {
           "name": "createTypeDescriptionEnumeration",
           "returns": "XTypeDescriptionEnumeration_33e1438",
+          "returns_origin": "com.sun.star.reflection.XTypeDescriptionEnumeration",
           "desc": [
             "Creates an enumeration for type descriptions.",
             "",
@@ -94,21 +95,24 @@
             "InvalidTypeNameException"
           ],
           "args": [
-            [
-              "moduleName",
-              "str",
-              "in"
-            ],
-            [
-              "types",
-              "typing.Tuple[TypeClass_853109f2, ...]",
-              "in"
-            ],
-            [
-              "depth",
-              "TypeDescriptionSearchDepth_ef6a13a4",
-              "in"
-            ]
+            {
+              "name": "moduleName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "types",
+              "type": "typing.Tuple[TypeClass_853109f2, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.uno.TypeClass >"
+            },
+            {
+              "name": "depth",
+              "type": "TypeDescriptionSearchDepth_ef6a13a4",
+              "direction": "in",
+              "origin": "com.sun.star.reflection.TypeDescriptionSearchDepth"
+            }
           ]
         }
       ]

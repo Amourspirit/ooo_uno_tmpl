@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDecryptionResultListener",
   "type": "interface",
@@ -62,21 +62,24 @@
         {
           "name": "decrypted",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Notifies the decryption result."
           ],
           "raises": [],
           "args": [
-            [
-              "securityId",
-              "int",
-              "in"
-            ],
-            [
-              "decryptionResult",
-              "SecurityOperationStatus_b66e12b5",
-              "in"
-            ]
+            {
+              "name": "securityId",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "decryptionResult",
+              "type": "SecurityOperationStatus_b66e12b5",
+              "direction": "in",
+              "origin": "com.sun.star.xml.crypto.SecurityOperationStatus"
+            }
           ]
         }
       ]

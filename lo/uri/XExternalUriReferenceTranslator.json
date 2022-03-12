@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XExternalUriReferenceTranslator",
   "type": "interface",
@@ -46,31 +46,35 @@
         {
           "name": "translateToExternal",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the external counterpart of an internal URI reference."
           ],
           "raises": [],
           "args": [
-            [
-              "internalUriReference",
-              "str",
-              "in"
-            ]
+            {
+              "name": "internalUriReference",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "translateToInternal",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the internal counterpart of an external URI reference."
           ],
           "raises": [],
           "args": [
-            [
-              "externalUriReference",
-              "str",
-              "in"
-            ]
+            {
+              "name": "externalUriReference",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

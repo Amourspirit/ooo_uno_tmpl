@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XScannerManager",
   "type": "interface",
@@ -82,6 +82,7 @@
         {
           "name": "configureScanner",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "produce some kind of User Interface to let the user have a preview, configure the scan area, etc., it returns FALSE if user cancelled this process"
           ],
@@ -89,16 +90,18 @@
             "com.sun.star.scanner.ScannerException"
           ],
           "args": [
-            [
-              "scannerContext",
-              "object",
-              "in"
-            ]
+            {
+              "name": "scannerContext",
+              "type": "object",
+              "direction": "in",
+              "origin": null
+            }
           ]
         },
         {
           "name": "getAvailableScanners",
           "returns": "typing.Tuple[ScannerContext_f0c60da1, ...]",
+          "returns_origin": "sequence< com.sun.star.scanner.ScannerContext >",
           "desc": [
             "returns all available scanner devices"
           ],
@@ -108,6 +111,7 @@
         {
           "name": "getBitmap",
           "returns": "XBitmap_70cd0909",
+          "returns_origin": "com.sun.star.awt.XBitmap",
           "desc": [
             "get the image after completion of scan"
           ],
@@ -115,16 +119,18 @@
             "com.sun.star.scanner.ScannerException"
           ],
           "args": [
-            [
-              "scannerContext",
-              "ScannerContext_f0c60da1",
-              "in"
-            ]
+            {
+              "name": "scannerContext",
+              "type": "ScannerContext_f0c60da1",
+              "direction": "in",
+              "origin": "com.sun.star.scanner.ScannerContext"
+            }
           ]
         },
         {
           "name": "getError",
           "returns": "ScanError_b0d90b81",
+          "returns_origin": "com.sun.star.scanner.ScanError",
           "desc": [
             "get the state of scanning after completion of scan"
           ],
@@ -132,16 +138,18 @@
             "com.sun.star.scanner.ScannerException"
           ],
           "args": [
-            [
-              "scannerContext",
-              "ScannerContext_f0c60da1",
-              "in"
-            ]
+            {
+              "name": "scannerContext",
+              "type": "ScannerContext_f0c60da1",
+              "direction": "in",
+              "origin": "com.sun.star.scanner.ScannerContext"
+            }
           ]
         },
         {
           "name": "startScan",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "start the scanning process listener will be called when scan is complete the EventObject of the disposing call will contain the ScannerManager if the scan was successful, an empty interface otherwise"
           ],
@@ -149,16 +157,18 @@
             "com.sun.star.scanner.ScannerException"
           ],
           "args": [
-            [
-              "scannerContext",
-              "ScannerContext_f0c60da1",
-              "in"
-            ],
-            [
-              "listener",
-              "XEventListener_c7230c4a",
-              "in"
-            ]
+            {
+              "name": "scannerContext",
+              "type": "ScannerContext_f0c60da1",
+              "direction": "in",
+              "origin": "com.sun.star.scanner.ScannerContext"
+            },
+            {
+              "name": "listener",
+              "type": "XEventListener_c7230c4a",
+              "direction": "in",
+              "origin": "com.sun.star.lang.XEventListener"
+            }
           ]
         }
       ]

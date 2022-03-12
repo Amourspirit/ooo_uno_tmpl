@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XRename",
   "type": "interface",
@@ -52,6 +52,7 @@
         {
           "name": "rename",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "is intended to alter the name of an object."
           ],
@@ -60,11 +61,12 @@
             "com.sun.star.container.ElementExistException"
           ],
           "args": [
-            [
-              "newName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "newName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

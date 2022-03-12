@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDDELinks",
   "type": "interface",
@@ -71,6 +71,7 @@
         {
           "name": "addDDELink",
           "returns": "XDDELink_8cc609d4",
+          "returns_origin": "com.sun.star.sheet.XDDELink",
           "desc": [
             "adds a DDE link to the spreadsheet without updating it.",
             "",
@@ -78,26 +79,30 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aApplication",
-              "str",
-              "in"
-            ],
-            [
-              "aTopic",
-              "str",
-              "in"
-            ],
-            [
-              "aItem",
-              "str",
-              "in"
-            ],
-            [
-              "nMode",
-              "DDELinkMode_ac830b01",
-              "in"
-            ]
+            {
+              "name": "aApplication",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aTopic",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aItem",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nMode",
+              "type": "DDELinkMode_ac830b01",
+              "direction": "in",
+              "origin": "com.sun.star.sheet.DDELinkMode"
+            }
           ]
         }
       ]

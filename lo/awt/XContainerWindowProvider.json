@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XContainerWindowProvider",
   "type": "interface",
@@ -68,6 +68,7 @@
         {
           "name": "createContainerWindow",
           "returns": "XWindow_713b0924",
+          "returns_origin": "com.sun.star.awt.XWindow",
           "desc": [
             "creates a window for the given URL",
             "",
@@ -91,26 +92,30 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "URL",
-              "str",
-              "in"
-            ],
-            [
-              "WindowType",
-              "str",
-              "in"
-            ],
-            [
-              "xParent",
-              "XWindowPeer_99760ab0",
-              "in"
-            ],
-            [
-              "xHandler",
-              "XInterface_8f010a43",
-              "in"
-            ]
+            {
+              "name": "URL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "WindowType",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "xParent",
+              "type": "XWindowPeer_99760ab0",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XWindowPeer"
+            },
+            {
+              "name": "xHandler",
+              "type": "XInterface_8f010a43",
+              "direction": "in",
+              "origin": "com.sun.star.uno.XInterface"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XUpdateInformationProvider",
   "type": "interface",
@@ -70,6 +70,7 @@
         {
           "name": "cancel",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "interrupts a getUpdateInformation call and let's it return immediately."
           ],
@@ -79,6 +80,7 @@
         {
           "name": "getUpdateInformation",
           "returns": "typing.Tuple[XElement_a33d0ae9, ...]",
+          "returns_origin": "sequence< com.sun.star.xml.dom.XElement >",
           "desc": [
             "get update information for a specific extension or all available information from a repository."
           ],
@@ -86,21 +88,24 @@
             "com.sun.star.uno.Exception"
           ],
           "args": [
-            [
-              "repositories",
-              "typing.Tuple[str, ...]",
-              "in"
-            ],
-            [
-              "extensionId",
-              "str",
-              "in"
-            ]
+            {
+              "name": "repositories",
+              "type": "typing.Tuple[str, ...]",
+              "direction": "in",
+              "origin": "sequence< string >"
+            },
+            {
+              "name": "extensionId",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getUpdateInformationEnumeration",
           "returns": "XEnumeration_f2180daa",
+          "returns_origin": "com.sun.star.container.XEnumeration",
           "desc": [
             "get update information for a specific extension or all available information from a repository."
           ],
@@ -108,21 +113,24 @@
             "com.sun.star.uno.Exception"
           ],
           "args": [
-            [
-              "repositories",
-              "typing.Tuple[str, ...]",
-              "in"
-            ],
-            [
-              "extensionId",
-              "str",
-              "in"
-            ]
+            {
+              "name": "repositories",
+              "type": "typing.Tuple[str, ...]",
+              "direction": "in",
+              "origin": "sequence< string >"
+            },
+            {
+              "name": "extensionId",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "setInteractionHandler",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Sets an interaction handler to be used for further operations.",
             "",
@@ -130,11 +138,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "handler",
-              "XInteractionHandler_bf80e51",
-              "in"
-            ]
+            {
+              "name": "handler",
+              "type": "XInteractionHandler_bf80e51",
+              "direction": "in",
+              "origin": "com.sun.star.task.XInteractionHandler"
+            }
           ]
         }
       ]

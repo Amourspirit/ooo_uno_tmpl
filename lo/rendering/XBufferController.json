@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XBufferController",
   "type": "interface",
@@ -56,6 +56,7 @@
         {
           "name": "createBuffers",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "Create the given number of background buffers.",
             "",
@@ -65,16 +66,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "nBuffers",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nBuffers",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "destroyBuffers",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Destroy all buffers generated via this object."
           ],
@@ -84,6 +87,7 @@
         {
           "name": "showBuffer",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Switch the display to show the specified buffer.",
             "",
@@ -93,16 +97,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "bUpdateAll",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "bUpdateAll",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "switchBuffer",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Schedule the display of the specified buffer.",
             "",
@@ -112,11 +118,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "bUpdateAll",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "bUpdateAll",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         }
       ]

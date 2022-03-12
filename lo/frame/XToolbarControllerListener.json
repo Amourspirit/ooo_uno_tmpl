@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XToolbarControllerListener",
   "type": "interface",
@@ -54,6 +54,7 @@
         {
           "name": "functionSelected",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "gets called to notify a controller that a toolbar function has been selected.",
             "",
@@ -61,16 +62,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aToolbarRes",
-              "str",
-              "in"
-            ],
-            [
-              "aCommand",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aToolbarRes",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aCommand",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

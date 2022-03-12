@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDrillDownDataSupplier",
   "type": "interface",
@@ -70,16 +70,18 @@
         {
           "name": "getDrillDownData",
           "returns": "typing.Tuple[typing.Tuple[object, ...], ...]",
+          "returns_origin": "sequence< sequence< any > >",
           "desc": [
             "This method returns filtered subset of the original source data based on a given set of filtering criteria."
           ],
           "raises": [],
           "args": [
-            [
-              "aFilters",
-              "typing.Tuple[DataPilotFieldFilter_271e0eed, ...]",
-              "in"
-            ]
+            {
+              "name": "aFilters",
+              "type": "typing.Tuple[DataPilotFieldFilter_271e0eed, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.sheet.DataPilotFieldFilter >"
+            }
           ]
         }
       ]

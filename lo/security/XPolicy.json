@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XPolicy",
   "type": "interface",
@@ -58,6 +58,7 @@
         {
           "name": "getDefaultPermissions",
           "returns": "typing.Tuple[object, ...]",
+          "returns_origin": "sequence< any >",
           "desc": [
             "Gets the default permissions granted to all users."
           ],
@@ -67,21 +68,24 @@
         {
           "name": "getPermissions",
           "returns": "typing.Tuple[object, ...]",
+          "returns_origin": "sequence< any >",
           "desc": [
             "Gets the permissions of the specified user excluding the default permissions granted to all users."
           ],
           "raises": [],
           "args": [
-            [
-              "userId",
-              "str",
-              "in"
-            ]
+            {
+              "name": "userId",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "refresh",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Refreshes the policy configuration."
           ],

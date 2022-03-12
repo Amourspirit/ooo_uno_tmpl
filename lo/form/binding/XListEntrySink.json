@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XListEntrySink",
   "type": "interface",
@@ -60,6 +60,7 @@
         {
           "name": "getListEntrySource",
           "returns": "XListEntrySource_576b103c",
+          "returns_origin": "com.sun.star.form.binding.XListEntrySource",
           "desc": [
             "retrieves the current source for the list entries of the component."
           ],
@@ -69,6 +70,7 @@
         {
           "name": "setListEntrySource",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the new source for the list entries of the component",
             "",
@@ -76,11 +78,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Source",
-              "XListEntrySource_576b103c",
-              "in"
-            ]
+            {
+              "name": "Source",
+              "type": "XListEntrySource_576b103c",
+              "direction": "in",
+              "origin": "com.sun.star.form.binding.XListEntrySource"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XFormulaQuery",
   "type": "interface",
@@ -62,6 +62,7 @@
         {
           "name": "queryDependents",
           "returns": "XSheetCellRanges_edef0d52",
+          "returns_origin": "com.sun.star.sheet.XSheetCellRanges",
           "desc": [
             "queries all dependent formula cells.",
             "",
@@ -69,16 +70,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "bRecursive",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "bRecursive",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "queryPrecedents",
           "returns": "XSheetCellRanges_edef0d52",
+          "returns_origin": "com.sun.star.sheet.XSheetCellRanges",
           "desc": [
             "queries all precedent cells.",
             "",
@@ -86,11 +89,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "bRecursive",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "bRecursive",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         }
       ]

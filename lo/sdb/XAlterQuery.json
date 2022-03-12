@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XAlterQuery",
   "type": "interface",
@@ -50,6 +50,7 @@
         {
           "name": "alterCommand",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "is intended to alter the command of a query object."
           ],
@@ -57,16 +58,18 @@
             "com.sun.star.sdbc.SQLException"
           ],
           "args": [
-            [
-              "command",
-              "str",
-              "in"
-            ],
-            [
-              "useEscapeProcessing",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "command",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "useEscapeProcessing",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         }
       ]

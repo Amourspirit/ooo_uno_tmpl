@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XFastContextHandler",
   "type": "interface",
@@ -61,6 +61,7 @@
         {
           "name": "characters",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification of character data."
           ],
@@ -68,16 +69,18 @@
             "com.sun.star.xml.sax.SAXException"
           ],
           "args": [
-            [
-              "aChars",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aChars",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "createFastChildContext",
           "returns": "XFastContextHandler",
+          "returns_origin": "com.sun.star.xml.sax.XFastContextHandler",
           "desc": [
             "receives notification of the beginning of a known child element.",
             "",
@@ -87,21 +90,24 @@
             "com.sun.star.xml.sax.SAXException"
           ],
           "args": [
-            [
-              "Element",
-              "int",
-              "in"
-            ],
-            [
-              "Attribs",
-              "XFastAttributeList_274d0f09",
-              "in"
-            ]
+            {
+              "name": "Element",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "Attribs",
+              "type": "XFastAttributeList_274d0f09",
+              "direction": "in",
+              "origin": "com.sun.star.xml.sax.XFastAttributeList"
+            }
           ]
         },
         {
           "name": "createUnknownChildContext",
           "returns": "XFastContextHandler",
+          "returns_origin": "com.sun.star.xml.sax.XFastContextHandler",
           "desc": [
             "receives notification of the beginning of an unknown child element ."
           ],
@@ -109,26 +115,30 @@
             "com.sun.star.xml.sax.SAXException"
           ],
           "args": [
-            [
-              "Namespace",
-              "str",
-              "in"
-            ],
-            [
-              "Name",
-              "str",
-              "in"
-            ],
-            [
-              "Attribs",
-              "XFastAttributeList_274d0f09",
-              "in"
-            ]
+            {
+              "name": "Namespace",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Attribs",
+              "type": "XFastAttributeList_274d0f09",
+              "direction": "in",
+              "origin": "com.sun.star.xml.sax.XFastAttributeList"
+            }
           ]
         },
         {
           "name": "endFastElement",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification of the end of a known element."
           ],
@@ -136,16 +146,18 @@
             "com.sun.star.xml.sax.SAXException"
           ],
           "args": [
-            [
-              "Element",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Element",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "endUnknownElement",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification of the end of a known element."
           ],
@@ -153,21 +165,24 @@
             "com.sun.star.xml.sax.SAXException"
           ],
           "args": [
-            [
-              "Namespace",
-              "str",
-              "in"
-            ],
-            [
-              "Name",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Namespace",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "startFastElement",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification of the beginning of an element .",
             "",
@@ -177,21 +192,24 @@
             "com.sun.star.xml.sax.SAXException"
           ],
           "args": [
-            [
-              "Element",
-              "int",
-              "in"
-            ],
-            [
-              "Attribs",
-              "XFastAttributeList_274d0f09",
-              "in"
-            ]
+            {
+              "name": "Element",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "Attribs",
+              "type": "XFastAttributeList_274d0f09",
+              "direction": "in",
+              "origin": "com.sun.star.xml.sax.XFastAttributeList"
+            }
           ]
         },
         {
           "name": "startUnknownElement",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification of the beginning of an unknown element ."
           ],
@@ -199,21 +217,24 @@
             "com.sun.star.xml.sax.SAXException"
           ],
           "args": [
-            [
-              "Namespace",
-              "str",
-              "in"
-            ],
-            [
-              "Name",
-              "str",
-              "in"
-            ],
-            [
-              "Attribs",
-              "XFastAttributeList_274d0f09",
-              "in"
-            ]
+            {
+              "name": "Namespace",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Attribs",
+              "type": "XFastAttributeList_274d0f09",
+              "direction": "in",
+              "origin": "com.sun.star.xml.sax.XFastAttributeList"
+            }
           ]
         }
       ]

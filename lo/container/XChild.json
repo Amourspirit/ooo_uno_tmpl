@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XChild",
   "type": "interface",
@@ -54,6 +54,7 @@
         {
           "name": "getParent",
           "returns": "XInterface_8f010a43",
+          "returns_origin": "com.sun.star.uno.XInterface",
           "desc": [
             "grants access to the object containing this content."
           ],
@@ -63,6 +64,7 @@
         {
           "name": "setParent",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the parent to this object."
           ],
@@ -70,11 +72,12 @@
             "com.sun.star.lang.NoSupportException"
           ],
           "args": [
-            [
-              "Parent",
-              "XInterface_8f010a43",
-              "in"
-            ]
+            {
+              "name": "Parent",
+              "type": "XInterface_8f010a43",
+              "direction": "in",
+              "origin": "com.sun.star.uno.XInterface"
+            }
           ]
         }
       ]

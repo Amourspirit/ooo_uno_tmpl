@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDataProvider",
   "type": "interface",
@@ -83,6 +83,7 @@
         {
           "name": "createDataSequenceByRangeRepresentation",
           "returns": "XDataSequence_11f00e1f",
+          "returns_origin": "com.sun.star.chart2.data.XDataSequence",
           "desc": [
             "creates a single data sequence for the given data range."
           ],
@@ -90,16 +91,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aRangeRepresentation",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aRangeRepresentation",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "createDataSequenceByRangeRepresentationPossible",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "If TRUE is returned, a call to createDataSequenceByRangeRepresentation with the same argument must return a valid XDataSequence object.",
             "",
@@ -107,36 +110,41 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aRangeRepresentation",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aRangeRepresentation",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "createDataSequenceByValueArray",
           "returns": "XDataSequence_11f00e1f",
+          "returns_origin": "com.sun.star.chart2.data.XDataSequence",
           "desc": [],
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aRole",
-              "str",
-              "in"
-            ],
-            [
-              "aValueArray",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aRole",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aValueArray",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "createDataSource",
           "returns": "XDataSource_f6340d57",
+          "returns_origin": "com.sun.star.chart2.data.XDataSource",
           "desc": [
             "Creates a data source object that matches the given range representation string.",
             "",
@@ -148,16 +156,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aArguments",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ]
+            {
+              "name": "aArguments",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            }
           ]
         },
         {
           "name": "createDataSourcePossible",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "If TRUE is returned, a call to createDataSource with the same arguments must return a valid XDataSequence object.",
             "",
@@ -165,16 +175,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aArguments",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ]
+            {
+              "name": "aArguments",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            }
           ]
         },
         {
           "name": "detectArguments",
           "returns": "typing.Tuple[PropertyValue_c9610c73, ...]",
+          "returns_origin": "sequence< com.sun.star.beans.PropertyValue >",
           "desc": [
             "Tries to find out with what parameters the passed DataSource most probably was created.",
             "",
@@ -184,16 +196,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xDataSource",
-              "XDataSource_f6340d57",
-              "in"
-            ]
+            {
+              "name": "xDataSource",
+              "type": "XDataSource_f6340d57",
+              "direction": "in",
+              "origin": "com.sun.star.chart2.data.XDataSource"
+            }
           ]
         },
         {
           "name": "getRangeSelection",
           "returns": "XRangeSelection_e1310d0c",
+          "returns_origin": "com.sun.star.sheet.XRangeSelection",
           "desc": [
             "Returns a component that is able to change a given range representation to another one.",
             "",

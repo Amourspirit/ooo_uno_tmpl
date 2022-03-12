@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XAlterTable",
   "type": "interface",
@@ -60,6 +60,7 @@
         {
           "name": "alterColumnByIndex",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "is intended to alter an existing column identified by its position.",
             "",
@@ -70,21 +71,24 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "index",
-              "int",
-              "in"
-            ],
-            [
-              "descriptor",
-              "XPropertySet_bc180bfa",
-              "in"
-            ]
+            {
+              "name": "index",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "descriptor",
+              "type": "XPropertySet_bc180bfa",
+              "direction": "in",
+              "origin": "com.sun.star.beans.XPropertySet"
+            }
           ]
         },
         {
           "name": "alterColumnByName",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "is intended to alter an existing column identified by its name.",
             "",
@@ -95,16 +99,18 @@
             "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
-            [
-              "colName",
-              "str",
-              "in"
-            ],
-            [
-              "descriptor",
-              "XPropertySet_bc180bfa",
-              "in"
-            ]
+            {
+              "name": "colName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "descriptor",
+              "type": "XPropertySet_bc180bfa",
+              "direction": "in",
+              "origin": "com.sun.star.beans.XPropertySet"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XNameContainer",
   "type": "interface",
@@ -50,6 +50,7 @@
         {
           "name": "insertByName",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "inserts the given element at the specified name."
           ],
@@ -59,21 +60,24 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ],
-            [
-              "aElement",
-              "object",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aElement",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         },
         {
           "name": "removeByName",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes the element with the specified name."
           ],
@@ -82,11 +86,12 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "Name",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

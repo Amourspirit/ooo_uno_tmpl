@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XFileIdentifierConverter",
   "type": "interface",
@@ -50,6 +50,7 @@
         {
           "name": "getFileProviderLocality",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "Get information about the \\\"locality\\\" of a file content provider.",
             "",
@@ -57,46 +58,52 @@
           ],
           "raises": [],
           "args": [
-            [
-              "BaseURL",
-              "str",
-              "in"
-            ]
+            {
+              "name": "BaseURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getFileURLFromSystemPath",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "converts a file path in system dependent notation to a (file) URL."
           ],
           "raises": [],
           "args": [
-            [
-              "BaseURL",
-              "str",
-              "in"
-            ],
-            [
-              "SystemPath",
-              "str",
-              "in"
-            ]
+            {
+              "name": "BaseURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "SystemPath",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getSystemPathFromFileURL",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "converts a (file) URL to a file path in system dependent notation."
           ],
           "raises": [],
           "args": [
-            [
-              "URL",
-              "str",
-              "in"
-            ]
+            {
+              "name": "URL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

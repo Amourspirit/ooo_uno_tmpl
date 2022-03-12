@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XNumberingTypeInfo",
   "type": "interface",
@@ -56,36 +56,41 @@
         {
           "name": "getNumberingIdentifier",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the corresponding identifier to a numbering type."
           ],
           "raises": [],
           "args": [
-            [
-              "NumberingType",
-              "int",
-              "in"
-            ]
+            {
+              "name": "NumberingType",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "getNumberingType",
           "returns": "int",
+          "returns_origin": "short",
           "desc": [
             "returns the corresponding numbering type to an identifier."
           ],
           "raises": [],
           "args": [
-            [
-              "NumberingIdentifier",
-              "str",
-              "in"
-            ]
+            {
+              "name": "NumberingIdentifier",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getSupportedNumberingTypes",
           "returns": "typing.Tuple[int, ...]",
+          "returns_origin": "sequence< short >",
           "desc": [
             "returns the numbering type values that are supported by the component."
           ],
@@ -95,16 +100,18 @@
         {
           "name": "hasNumberingType",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "determines whether an identifier is supported."
           ],
           "raises": [],
           "args": [
-            [
-              "NumberingIdentifier",
-              "str",
-              "in"
-            ]
+            {
+              "name": "NumberingIdentifier",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

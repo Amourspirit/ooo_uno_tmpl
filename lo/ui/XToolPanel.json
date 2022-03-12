@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XToolPanel",
   "type": "interface",
@@ -55,16 +55,18 @@
         {
           "name": "createAccessible",
           "returns": "XAccessible_1cbc0eb6",
+          "returns_origin": "com.sun.star.accessibility.XAccessible",
           "desc": [
             "creates the root of the Accessibility object tree for the tool panel"
           ],
           "raises": [],
           "args": [
-            [
-              "ParentAccessible",
-              "XAccessible_1cbc0eb6",
-              "in"
-            ]
+            {
+              "name": "ParentAccessible",
+              "type": "XAccessible_1cbc0eb6",
+              "direction": "in",
+              "origin": "com.sun.star.accessibility.XAccessible"
+            }
           ]
         }
       ],
@@ -73,6 +75,7 @@
           "name": "Window",
           "returns": "XWindow_713b0924",
           "origtype": "com.sun.star.awt.XWindow",
+          "origin": "com.sun.star.awt.XWindow",
           "desc": [
             "provides access to the tool panel's main window.",
             "",

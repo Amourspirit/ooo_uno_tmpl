@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XAsyncJob",
   "type": "interface",
@@ -71,6 +71,7 @@
         {
           "name": "executeAsync",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "executes the job asynchronously"
           ],
@@ -78,16 +79,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "Arguments",
-              "typing.Tuple[NamedValue_a37a0af3, ...]",
-              "in"
-            ],
-            [
-              "Listener",
-              "XJobListener_af600b74",
-              "in"
-            ]
+            {
+              "name": "Arguments",
+              "type": "typing.Tuple[NamedValue_a37a0af3, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.NamedValue >"
+            },
+            {
+              "name": "Listener",
+              "type": "XJobListener_af600b74",
+              "direction": "in",
+              "origin": "com.sun.star.task.XJobListener"
+            }
           ]
         }
       ]

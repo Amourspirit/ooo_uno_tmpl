@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XCustomShapeHandle",
   "type": "interface",
@@ -60,6 +60,7 @@
         {
           "name": "getPosition",
           "returns": "Point_5fb2085e",
+          "returns_origin": "com.sun.star.awt.Point",
           "desc": [
             "is getting the actual handle position"
           ],
@@ -69,16 +70,18 @@
         {
           "name": "setControllerPosition",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "is setting a new position for the handle"
           ],
           "raises": [],
           "args": [
-            [
-              "aPoint",
-              "Point_5fb2085e",
-              "in"
-            ]
+            {
+              "name": "aPoint",
+              "type": "Point_5fb2085e",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Point"
+            }
           ]
         }
       ]

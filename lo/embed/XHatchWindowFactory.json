@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XHatchWindowFactory",
   "type": "interface",
@@ -81,6 +81,7 @@
         {
           "name": "createHatchWindowInstance",
           "returns": "XHatchWindow_b9aa0bbd",
+          "returns_origin": "com.sun.star.embed.XHatchWindow",
           "desc": [
             "creates a new hatch window instance."
           ],
@@ -88,21 +89,24 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "xParent",
-              "XWindowPeer_99760ab0",
-              "in"
-            ],
-            [
-              "aBounds",
-              "Rectangle_84b109e9",
-              "in"
-            ],
-            [
-              "aSize",
-              "Size_576707ef",
-              "in"
-            ]
+            {
+              "name": "xParent",
+              "type": "XWindowPeer_99760ab0",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XWindowPeer"
+            },
+            {
+              "name": "aBounds",
+              "type": "Rectangle_84b109e9",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Rectangle"
+            },
+            {
+              "name": "aSize",
+              "type": "Size_576707ef",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Size"
+            }
           ]
         }
       ]

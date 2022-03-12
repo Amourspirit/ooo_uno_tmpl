@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XStateChangeListener",
   "type": "interface",
@@ -60,6 +60,7 @@
         {
           "name": "changingState",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "is called just before the object changes state.",
             "",
@@ -69,46 +70,53 @@
             "com.sun.star.embed.WrongStateException"
           ],
           "args": [
-            [
-              "aEvent",
-              "EventObject_a3d70b03",
-              "in"
-            ],
-            [
-              "nOldState",
-              "int",
-              "in"
-            ],
-            [
-              "nNewState",
-              "int",
-              "in"
-            ]
+            {
+              "name": "aEvent",
+              "type": "EventObject_a3d70b03",
+              "direction": "in",
+              "origin": "com.sun.star.lang.EventObject"
+            },
+            {
+              "name": "nOldState",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nNewState",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "stateChanged",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "is called after the object has changed state."
           ],
           "raises": [],
           "args": [
-            [
-              "aEvent",
-              "EventObject_a3d70b03",
-              "in"
-            ],
-            [
-              "nOldState",
-              "int",
-              "in"
-            ],
-            [
-              "nNewState",
-              "int",
-              "in"
-            ]
+            {
+              "name": "aEvent",
+              "type": "EventObject_a3d70b03",
+              "direction": "in",
+              "origin": "com.sun.star.lang.EventObject"
+            },
+            {
+              "name": "nOldState",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nNewState",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

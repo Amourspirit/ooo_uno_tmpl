@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XAccessibleRelationSet",
   "type": "interface",
@@ -66,21 +66,24 @@
         {
           "name": "containsRelation",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Tests whether the relation set contains a relation matching the specified key."
           ],
           "raises": [],
           "args": [
-            [
-              "aRelationType",
-              "int",
-              "in"
-            ]
+            {
+              "name": "aRelationType",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "getRelation",
           "returns": "AccessibleRelation_8f8b119c",
+          "returns_origin": "com.sun.star.accessibility.AccessibleRelation",
           "desc": [
             "Returns the relation of this relation set that is specified by the given index."
           ],
@@ -88,31 +91,35 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getRelationByType",
           "returns": "AccessibleRelation_8f8b119c",
+          "returns_origin": "com.sun.star.accessibility.AccessibleRelation",
           "desc": [
             "Retrieve and return the relation with the given relation type."
           ],
           "raises": [],
           "args": [
-            [
-              "aRelationType",
-              "int",
-              "in"
-            ]
+            {
+              "name": "aRelationType",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "getRelationCount",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "Returns the number of relations in this relation set."
           ],

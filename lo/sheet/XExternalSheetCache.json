@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XExternalSheetCache",
   "type": "interface",
@@ -46,6 +46,7 @@
         {
           "name": "getAllColumns",
           "returns": "typing.Tuple[int, ...]",
+          "returns_origin": "sequence< long >",
           "desc": [
             "Given a row number, this method returns a list of all columns numbers that store cached cell values in that row.",
             "",
@@ -55,16 +56,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "nRow",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nRow",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getAllRows",
           "returns": "typing.Tuple[int, ...]",
+          "returns_origin": "sequence< long >",
           "desc": [
             "It returns a list of all row numbers where a cached cell or cells exist.",
             "",
@@ -76,6 +79,7 @@
         {
           "name": "getCellValue",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "It retrieves a cached value from a specified cell position.",
             "",
@@ -85,21 +89,24 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "nColumn",
-              "int",
-              "in"
-            ],
-            [
-              "nRow",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nColumn",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nRow",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "setCellValue",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "It sets a cached value for a specified cell position.",
             "",
@@ -109,21 +116,24 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "nColumn",
-              "int",
-              "in"
-            ],
-            [
-              "nRow",
-              "int",
-              "in"
-            ],
-            [
-              "aValue",
-              "object",
-              "in"
-            ]
+            {
+              "name": "nColumn",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nRow",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aValue",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         }
       ],
@@ -132,6 +142,7 @@
           "name": "TokenIndex",
           "returns": "int",
           "origtype": null,
+          "origin": "long",
           "desc": [
             "Index corresponding to this instance of an external sheet cache for usage in formula tokens.",
             "",

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "DocumentScriptLibraryContainer",
   "type": "service",
@@ -64,6 +64,7 @@
         {
           "name": "create",
           "returns": "None",
+          "returns_origin": null,
           "desc": [
             "creates an instance of the DocumentScriptLibraryContainer, belonging to a document",
             "",
@@ -75,24 +76,27 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "Document",
-              "XStorageBasedDocument_6b1310b2",
-              "in"
-            ]
+            {
+              "name": "Document",
+              "type": "XStorageBasedDocument_6b1310b2",
+              "direction": "in",
+              "origin": "com.sun.star.document.XStorageBasedDocument"
+            }
           ]
         },
         {
           "name": "createWithURL",
           "returns": "None",
+          "returns_origin": null,
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "URL",
-              "str",
-              "in"
-            ]
+            {
+              "name": "URL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

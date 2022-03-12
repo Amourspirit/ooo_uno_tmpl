@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XCharacterData",
   "type": "interface",
@@ -48,6 +48,7 @@
         {
           "name": "appendData",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Append the string to the end of the character data of the node.",
             "",
@@ -57,16 +58,18 @@
             "DOMException"
           ],
           "args": [
-            [
-              "arg",
-              "str",
-              "in"
-            ]
+            {
+              "name": "arg",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "deleteData",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Remove a range of 16-bit units from the node.",
             "",
@@ -76,21 +79,24 @@
             "DOMException"
           ],
           "args": [
-            [
-              "offset",
-              "int",
-              "in"
-            ],
-            [
-              "count",
-              "int",
-              "in"
-            ]
+            {
+              "name": "offset",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "count",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getData",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Return the character data of the node that implements this interface.",
             "",
@@ -104,6 +110,7 @@
         {
           "name": "getLength",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "The number of 16-bit units that are available through data and the substringData method below."
           ],
@@ -113,6 +120,7 @@
         {
           "name": "insertData",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Insert a string at the specified 16-bit unit offset.",
             "",
@@ -122,21 +130,24 @@
             "DOMException"
           ],
           "args": [
-            [
-              "offset",
-              "int",
-              "in"
-            ],
-            [
-              "arg",
-              "str",
-              "in"
-            ]
+            {
+              "name": "offset",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "arg",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "replaceData",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Replace the characters starting at the specified 16-bit unit offset with the specified string.",
             "",
@@ -146,26 +157,30 @@
             "DOMException"
           ],
           "args": [
-            [
-              "offset",
-              "int",
-              "in"
-            ],
-            [
-              "count",
-              "int",
-              "in"
-            ],
-            [
-              "arg",
-              "str",
-              "in"
-            ]
+            {
+              "name": "offset",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "count",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "arg",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "setData",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Set the character data of the node that implements this interface.",
             "",
@@ -175,16 +190,18 @@
             "DOMException"
           ],
           "args": [
-            [
-              "data",
-              "str",
-              "in"
-            ]
+            {
+              "name": "data",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "subStringData",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Extracts a range of data from the node.",
             "",
@@ -194,16 +211,18 @@
             "DOMException"
           ],
           "args": [
-            [
-              "offset",
-              "int",
-              "in"
-            ],
-            [
-              "count",
-              "int",
-              "in"
-            ]
+            {
+              "name": "offset",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "count",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDialog",
   "type": "interface",
@@ -50,6 +50,7 @@
         {
           "name": "endExecute",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "hides the dialog and then causes XDialog.execute() to return."
           ],
@@ -59,6 +60,7 @@
         {
           "name": "execute",
           "returns": "int",
+          "returns_origin": "short",
           "desc": [
             "shows the dialog."
           ],
@@ -68,6 +70,7 @@
         {
           "name": "getTitle",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "gets the title of the dialog."
           ],
@@ -77,16 +80,18 @@
         {
           "name": "setTitle",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the title of the dialog."
           ],
           "raises": [],
           "args": [
-            [
-              "Title",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Title",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSystemDependentMenuPeer",
   "type": "interface",
@@ -54,6 +54,7 @@
         {
           "name": "getMenuHandle",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "returns a system-specific window handle.",
             "",
@@ -63,16 +64,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "ProcessId",
-              "typing.Tuple[int, ...]",
-              "in"
-            ],
-            [
-              "SystemType",
-              "int",
-              "in"
-            ]
+            {
+              "name": "ProcessId",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "in",
+              "origin": "sequence< byte >"
+            },
+            {
+              "name": "SystemType",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         }
       ]

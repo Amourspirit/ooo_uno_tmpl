@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XPropertyControlFactory",
   "type": "interface",
@@ -52,6 +52,7 @@
         {
           "name": "createPropertyControl",
           "returns": "XPropertyControl_3f260fe2",
+          "returns_origin": "com.sun.star.inspection.XPropertyControl",
           "desc": [
             "creates a XPropertyControl",
             "",
@@ -65,16 +66,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "ControlType",
-              "int",
-              "in"
-            ],
-            [
-              "CreateReadOnly",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "ControlType",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "CreateReadOnly",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         }
       ]

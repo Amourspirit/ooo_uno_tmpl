@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XJobManager",
   "type": "interface",
@@ -60,6 +60,7 @@
         {
           "name": "cancelAllJobs",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "cancel all registered jobs."
           ],
@@ -69,31 +70,35 @@
         {
           "name": "registerJob",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "registers a cancelable job."
           ],
           "raises": [],
           "args": [
-            [
-              "Job",
-              "XCancellable_afc30b64",
-              "in"
-            ]
+            {
+              "name": "Job",
+              "type": "XCancellable_afc30b64",
+              "direction": "in",
+              "origin": "com.sun.star.util.XCancellable"
+            }
           ]
         },
         {
           "name": "releaseJob",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "deregisters a cancelable jobs."
           ],
           "raises": [],
           "args": [
-            [
-              "Job",
-              "XCancellable_afc30b64",
-              "in"
-            ]
+            {
+              "name": "Job",
+              "type": "XCancellable_afc30b64",
+              "direction": "in",
+              "origin": "com.sun.star.util.XCancellable"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XImplementationLoader",
   "type": "interface",
@@ -61,6 +61,7 @@
         {
           "name": "activate",
           "returns": "XInterface_8f010a43",
+          "returns_origin": "com.sun.star.uno.XInterface",
           "desc": [
             "activates a concrete implementation within a component.",
             "",
@@ -70,31 +71,36 @@
             "com.sun.star.loader.CannotActivateFactoryException"
           ],
           "args": [
-            [
-              "implementationName",
-              "str",
-              "in"
-            ],
-            [
-              "implementationLoaderUrl",
-              "str",
-              "in"
-            ],
-            [
-              "locationUrl",
-              "str",
-              "in"
-            ],
-            [
-              "xKey",
-              "XRegistryKey_e61a0d5b",
-              "in"
-            ]
+            {
+              "name": "implementationName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "implementationLoaderUrl",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "locationUrl",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "xKey",
+              "type": "XRegistryKey_e61a0d5b",
+              "direction": "in",
+              "origin": "com.sun.star.registry.XRegistryKey"
+            }
           ]
         },
         {
           "name": "writeRegistryInfo",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "writes a list of all implementations hosted by this component into a registry key.",
             "",
@@ -106,21 +112,24 @@
             "com.sun.star.registry.CannotRegisterImplementationException"
           ],
           "args": [
-            [
-              "xKey",
-              "XRegistryKey_e61a0d5b",
-              "in"
-            ],
-            [
-              "implementationLoaderUrl",
-              "str",
-              "in"
-            ],
-            [
-              "locationUrl",
-              "str",
-              "in"
-            ]
+            {
+              "name": "xKey",
+              "type": "XRegistryKey_e61a0d5b",
+              "direction": "in",
+              "origin": "com.sun.star.registry.XRegistryKey"
+            },
+            {
+              "name": "implementationLoaderUrl",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "locationUrl",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

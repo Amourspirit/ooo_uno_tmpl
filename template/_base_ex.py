@@ -15,43 +15,36 @@ class BaseEx(BaseJson):
         self._cache = {}
 
     def _hydrate_data(self, json_data: dict):
-        self._models = ModelsException(json_data=json_data)
+        try:
+            self._models = ModelsException(json_data=json_data)
+        except Exception as e:
+            msg = f"Error occured in exception {json_data['namespace']}.{json_data['name']}"
+            self._lerr(f"{msg}\n{e}")
+            raise Exception(msg) from e
         # self._validate_data(json_data)
-        data: Dict[str, object] = json_data['data']
-
-        def set_data(_key: str, a_name=None):
-            attr_name = _key if not a_name else a_name
-            val = data.get(_key, None)
-            if not val is None:
-                setattr(self, attr_name, val)
         mdata = self._models.model.data
         self.name = self.get_safe_word(mdata.name)
         self.namespace = mdata.namespace
         self.allow_db = mdata.allow_db
         self.desc = mdata.desc
         self.link = mdata.url
-        self.libre_office_ver == self._models.model.libre_office_ver
-        setattr(self, 'inherits', data.get('extends', []))
-        set_data('imports')
+        self.libre_office_ver = self._models.model.libre_office_ver
+        self.include_desc = self._models.model.writer_args.include_desc
+        self.inherits = mdata.extends
+        self.imports = mdata.imports
         sort = self._models.model.parser_args.sort
-        self.include_desc = bool(
-            json_data['writer_args'].get('include_desc', True))
         self.attribs = self._get_attribs(json_data=json_data, sort=sort)
         self.requires_typing = mdata.requires_typing
         if self.requires_typing is False:
             if self._models.is_args():
                 self.requires_typing = True
+        self.extends_map.update(mdata.extends_map)
         self.from_imports = [x.as_tuple()
                              for x in self._models.get_full_imports()]
-        setattr(self, 'from_imports_typing', [])
-        set_data('from_imports_typing')
-        quote: List[str] = data.get('quote', [])
-        self.quote.update(quote)
-        typings: List[str] = data.get('typings', [])
-        self.typings.update(typings)
-        extends_map = data.get('extends_map', None)
-        if extends_map:
-            self.extends_map.update(extends_map)
+        self.from_imports_typing = [x.as_tuple()
+                                    for x in mdata.from_imports_typing]
+        self.quote.update(mdata.quote)
+        self.typings.update(mdata.typings)
         self.fullname = f"{self.namespace}.{self.name}"
 
     def _get_attribs(self, json_data: dict, sort: bool) -> dict:

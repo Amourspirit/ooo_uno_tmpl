@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XStorage",
   "type": "interface",
@@ -69,6 +69,7 @@
         {
           "name": "cloneEncryptedStreamElement",
           "returns": "XStream_678908a4",
+          "returns_origin": "com.sun.star.io.XStream",
           "desc": [
             "allows to get readonly copy of a child encrypted stream with password.",
             "",
@@ -87,21 +88,24 @@
             "com.sun.star.embed.StorageWrappedTargetException"
           ],
           "args": [
-            [
-              "sStreamName",
-              "str",
-              "in"
-            ],
-            [
-              "sPassword",
-              "str",
-              "in"
-            ]
+            {
+              "name": "sStreamName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "sPassword",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "cloneStreamElement",
           "returns": "XStream_678908a4",
+          "returns_origin": "com.sun.star.io.XStream",
           "desc": [
             "allows to get readonly copy of a child stream of the storage.",
             "",
@@ -115,16 +119,18 @@
             "com.sun.star.embed.StorageWrappedTargetException"
           ],
           "args": [
-            [
-              "sStreamName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "sStreamName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "copyElementTo",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "allows to copy an entry from one storage to another.",
             "",
@@ -139,26 +145,30 @@
             "com.sun.star.embed.StorageWrappedTargetException"
           ],
           "args": [
-            [
-              "sElementName",
-              "str",
-              "in"
-            ],
-            [
-              "xDest",
-              "XStorage",
-              "in"
-            ],
-            [
-              "sNewName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "sElementName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "xDest",
+              "type": "XStorage",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            },
+            {
+              "name": "sNewName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "copyLastCommitTo",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "allows to get copy of this storage at the state of its last commit.",
             "",
@@ -171,16 +181,18 @@
             "com.sun.star.embed.StorageWrappedTargetException"
           ],
           "args": [
-            [
-              "xTargetStorage",
-              "XStorage",
-              "in"
-            ]
+            {
+              "name": "xTargetStorage",
+              "type": "XStorage",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            }
           ]
         },
         {
           "name": "copyStorageElementLastCommitTo",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "allows to get copy of a child storage at the state of its last commit.",
             "",
@@ -193,21 +205,24 @@
             "com.sun.star.embed.StorageWrappedTargetException"
           ],
           "args": [
-            [
-              "sStorName",
-              "str",
-              "in"
-            ],
-            [
-              "xTargetStorage",
-              "XStorage",
-              "in"
-            ]
+            {
+              "name": "sStorName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "xTargetStorage",
+              "type": "XStorage",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            }
           ]
         },
         {
           "name": "copyToStorage",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "allows to copy current storage to another one",
             "",
@@ -220,16 +235,18 @@
             "com.sun.star.embed.StorageWrappedTargetException"
           ],
           "args": [
-            [
-              "xDest",
-              "XStorage",
-              "in"
-            ]
+            {
+              "name": "xDest",
+              "type": "XStorage",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            }
           ]
         },
         {
           "name": "isStorageElement",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "allows to check if an element is a child storage with specified name.",
             "",
@@ -241,16 +258,18 @@
             "com.sun.star.embed.InvalidStorageException"
           ],
           "args": [
-            [
-              "sElementName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "sElementName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "isStreamElement",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "allows to check if an element is a child stream with specified name.",
             "",
@@ -262,16 +281,18 @@
             "com.sun.star.embed.InvalidStorageException"
           ],
           "args": [
-            [
-              "sElementName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "sElementName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "moveElementTo",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "allows to move an entry from one storage to another.",
             "",
@@ -286,26 +307,30 @@
             "com.sun.star.embed.StorageWrappedTargetException"
           ],
           "args": [
-            [
-              "sElementName",
-              "str",
-              "in"
-            ],
-            [
-              "xDest",
-              "XStorage",
-              "in"
-            ],
-            [
-              "sNewName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "sElementName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "xDest",
+              "type": "XStorage",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            },
+            {
+              "name": "sNewName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "openEncryptedStreamElement",
           "returns": "XStream_678908a4",
+          "returns_origin": "com.sun.star.io.XStream",
           "desc": [
             "allows to get access to a child encrypted stream with password.",
             "",
@@ -322,26 +347,30 @@
             "com.sun.star.embed.StorageWrappedTargetException"
           ],
           "args": [
-            [
-              "sStreamName",
-              "str",
-              "in"
-            ],
-            [
-              "nOpenMode",
-              "int",
-              "in"
-            ],
-            [
-              "sPassword",
-              "str",
-              "in"
-            ]
+            {
+              "name": "sStreamName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nOpenMode",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "sPassword",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "openStorageElement",
           "returns": "XStorage",
+          "returns_origin": "com.sun.star.embed.XStorage",
           "desc": [
             "allows to get access to a child storage.",
             "",
@@ -354,21 +383,24 @@
             "com.sun.star.embed.StorageWrappedTargetException"
           ],
           "args": [
-            [
-              "sStorName",
-              "str",
-              "in"
-            ],
-            [
-              "nOpenMode",
-              "int",
-              "in"
-            ]
+            {
+              "name": "sStorName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nOpenMode",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "openStreamElement",
           "returns": "XStream_678908a4",
+          "returns_origin": "com.sun.star.io.XStream",
           "desc": [
             "allows to get access to a child stream of the storage.",
             "",
@@ -382,21 +414,24 @@
             "com.sun.star.embed.StorageWrappedTargetException"
           ],
           "args": [
-            [
-              "sStreamName",
-              "str",
-              "in"
-            ],
-            [
-              "nOpenMode",
-              "int",
-              "in"
-            ]
+            {
+              "name": "sStreamName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nOpenMode",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "removeElement",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes an element from a storage."
           ],
@@ -408,16 +443,18 @@
             "com.sun.star.embed.StorageWrappedTargetException"
           ],
           "args": [
-            [
-              "sElementName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "sElementName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "renameElement",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "renames an element in a storage."
           ],
@@ -430,16 +467,18 @@
             "com.sun.star.embed.StorageWrappedTargetException"
           ],
           "args": [
-            [
-              "sElementName",
-              "str",
-              "in"
-            ],
-            [
-              "sNewName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "sElementName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "sNewName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

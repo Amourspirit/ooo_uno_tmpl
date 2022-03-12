@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XFormField",
   "type": "interface",
@@ -63,6 +63,7 @@
         {
           "name": "getFieldType",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [],
           "raises": [],
           "args": []
@@ -70,6 +71,7 @@
         {
           "name": "getParameters",
           "returns": "XNameContainer_cb90e47",
+          "returns_origin": "com.sun.star.container.XNameContainer",
           "desc": [],
           "raises": [],
           "args": []
@@ -77,14 +79,16 @@
         {
           "name": "setFieldType",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "fieldType",
-              "str",
-              "in"
-            ]
+            {
+              "name": "fieldType",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSvgParser",
   "type": "interface",
@@ -68,26 +68,30 @@
         {
           "name": "getDecomposition",
           "returns": "typing.Tuple[XPrimitive2D_d5730c6d, ...]",
+          "returns_origin": "sequence< XPrimitive2D >",
           "desc": [
             "Retrieve decomposed list of simpler primitives."
           ],
           "raises": [],
           "args": [
-            [
-              "xSvgStream",
-              "object",
-              "in"
-            ],
-            [
-              "aAbsolutePath",
-              "str",
-              "in"
-            ]
+            {
+              "name": "xSvgStream",
+              "type": "object",
+              "direction": "in",
+              "origin": null
+            },
+            {
+              "name": "aAbsolutePath",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getDrawCommands",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "Get the \\\"draw command\\\" graph that is created from the SVG content.",
             "",
@@ -97,16 +101,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xSvgStream",
-              "object",
-              "in"
-            ],
-            [
-              "aAbsolutePath",
-              "str",
-              "in"
-            ]
+            {
+              "name": "xSvgStream",
+              "type": "object",
+              "direction": "in",
+              "origin": null
+            },
+            {
+              "name": "aAbsolutePath",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

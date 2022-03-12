@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XStyleSupplier",
   "type": "interface",
@@ -58,6 +58,7 @@
         {
           "name": "getStyle",
           "returns": "XStyle_7c7f09a2",
+          "returns_origin": "com.sun.star.style.XStyle",
           "desc": [
             "get the currently set style."
           ],
@@ -67,16 +68,18 @@
         {
           "name": "setStyle",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [],
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "xStyle",
-              "XStyle_7c7f09a2",
-              "in"
-            ]
+            {
+              "name": "xStyle",
+              "type": "XStyle_7c7f09a2",
+              "direction": "in",
+              "origin": "com.sun.star.style.XStyle"
+            }
           ]
         }
       ]

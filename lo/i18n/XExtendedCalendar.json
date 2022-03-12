@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XExtendedCalendar",
   "type": "interface",
@@ -56,6 +56,7 @@
         {
           "name": "getDisplayString",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Returns a string (number or name to display) matching the given code constant.",
             "",
@@ -63,16 +64,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "nCalendarDisplayCode",
-              "int",
-              "in"
-            ],
-            [
-              "nNativeNumberMode",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nCalendarDisplayCode",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nNativeNumberMode",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         }
       ]

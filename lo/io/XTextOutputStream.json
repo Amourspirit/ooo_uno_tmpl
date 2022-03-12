@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XTextOutputStream",
   "type": "interface",
@@ -52,21 +52,24 @@
         {
           "name": "setEncoding",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets character encoding."
           ],
           "raises": [],
           "args": [
-            [
-              "Encoding",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Encoding",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "writeString",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "writes a string to the stream using the encoding defined by setEncoding().",
             "",
@@ -76,11 +79,12 @@
             "com.sun.star.io.IOException"
           ],
           "args": [
-            [
-              "aString",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aString",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

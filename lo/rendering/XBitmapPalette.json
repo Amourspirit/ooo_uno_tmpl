@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XBitmapPalette",
   "type": "interface",
@@ -73,6 +73,7 @@
         {
           "name": "getColorSpace",
           "returns": "XColorSpace_e3940d09",
+          "returns_origin": "com.sun.star.rendering.XColorSpace",
           "desc": [
             "Query associated color space."
           ],
@@ -82,6 +83,7 @@
         {
           "name": "getIndex",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Request the color for the given palette entry."
           ],
@@ -89,21 +91,24 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "entry",
-              "typing.Tuple[ColorComponent_e4c0e78, ...]",
-              "out"
-            ],
-            [
-              "nIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "entry",
+              "type": "typing.Tuple[ColorComponent_e4c0e78, ...]",
+              "direction": "out",
+              "origin": "sequence< ColorComponent >"
+            },
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getNumberOfEntries",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "Request the number of palette entries available."
           ],
@@ -113,6 +118,7 @@
         {
           "name": "setIndex",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Set the color for the given palette entry."
           ],
@@ -121,21 +127,24 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "color",
-              "typing.Tuple[ColorComponent_e4c0e78, ...]",
-              "in"
-            ],
-            [
-              "transparency",
-              "bool",
-              "in"
-            ],
-            [
-              "nIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "color",
+              "type": "typing.Tuple[ColorComponent_e4c0e78, ...]",
+              "direction": "in",
+              "origin": "sequence< ColorComponent >"
+            },
+            {
+              "name": "transparency",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            },
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XLibraryAccess",
   "type": "interface",
@@ -62,51 +62,58 @@
         {
           "name": "getFunctionCode",
           "returns": "typing.Tuple[int, ...]",
+          "returns_origin": "sequence< byte >",
           "desc": [
             "Get the compiled code of a function."
           ],
           "raises": [],
           "args": [
-            [
-              "FunctionName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "FunctionName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getFunctionSource",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "get the source code of a function."
           ],
           "raises": [],
           "args": [
-            [
-              "aFunctionName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aFunctionName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getModuleCode",
           "returns": "typing.Tuple[int, ...]",
+          "returns_origin": "sequence< byte >",
           "desc": [
             "Get the whole compiled code of a module."
           ],
           "raises": [],
           "args": [
-            [
-              "aModuleName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aModuleName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getModuleNames",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [
             "Return all module names which contain code.",
             "",
@@ -118,46 +125,52 @@
         {
           "name": "getModuleSource",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "get the source code of a module."
           ],
           "raises": [],
           "args": [
-            [
-              "aModulName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aModulName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "isFunction",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "returns TRUE, if the function is accessible through this library; otherwise it returns FALSE."
           ],
           "raises": [],
           "args": [
-            [
-              "aFunctionName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aFunctionName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "isValidPath",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "returns TRUE if a fully qualified function name begins with this name."
           ],
           "raises": [],
           "args": [
-            [
-              "aPathName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aPathName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

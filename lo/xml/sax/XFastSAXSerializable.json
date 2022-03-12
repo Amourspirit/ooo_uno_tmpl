@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XFastSAXSerializable",
   "type": "interface",
@@ -70,6 +70,7 @@
         {
           "name": "fastSerialize",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "serializes an object (e.g.",
             "",
@@ -81,26 +82,30 @@
             "com.sun.star.xml.sax.SAXException"
           ],
           "args": [
-            [
-              "handler",
-              "XFastDocumentHandler_454c0fb6",
-              "in"
-            ],
-            [
-              "tokenHandler",
-              "XFastTokenHandler_17510e78",
-              "in"
-            ],
-            [
-              "namespaces",
-              "typing.Tuple[StringPair_a4bc0b14, ...]",
-              "in"
-            ],
-            [
-              "registerNamespaces",
-              "typing.Tuple[typing.Tuple[str, int], ...]",
-              "in"
-            ]
+            {
+              "name": "handler",
+              "type": "XFastDocumentHandler_454c0fb6",
+              "direction": "in",
+              "origin": "com.sun.star.xml.sax.XFastDocumentHandler"
+            },
+            {
+              "name": "tokenHandler",
+              "type": "XFastTokenHandler_17510e78",
+              "direction": "in",
+              "origin": "com.sun.star.xml.sax.XFastTokenHandler"
+            },
+            {
+              "name": "namespaces",
+              "type": "typing.Tuple[StringPair_a4bc0b14, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.StringPair >"
+            },
+            {
+              "name": "registerNamespaces",
+              "type": "typing.Tuple[typing.Tuple[str, int], ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.Pair< string, long > >"
+            }
           ]
         }
       ]

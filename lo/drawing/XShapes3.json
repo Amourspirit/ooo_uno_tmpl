@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XShapes3",
   "type": "interface",
@@ -46,6 +46,7 @@
         {
           "name": "sort",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Sort shapes according to given sort order, for perf reason just rearrange and don't broadcast.",
             "",
@@ -57,11 +58,12 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "sortOrder",
-              "typing.Tuple[int, ...]",
-              "in"
-            ]
+            {
+              "name": "sortOrder",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "in",
+              "origin": "sequence< long >"
+            }
           ]
         }
       ]

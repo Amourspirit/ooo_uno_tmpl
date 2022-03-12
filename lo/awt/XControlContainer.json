@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XControlContainer",
   "type": "interface",
@@ -63,41 +63,47 @@
         {
           "name": "addControl",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "adds the given control with the specified name to the container."
           ],
           "raises": [],
           "args": [
-            [
-              "Name",
-              "str",
-              "in"
-            ],
-            [
-              "Control",
-              "XControl_7a9c098d",
-              "in"
-            ]
+            {
+              "name": "Name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Control",
+              "type": "XControl_7a9c098d",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XControl"
+            }
           ]
         },
         {
           "name": "getControl",
           "returns": "XControl_7a9c098d",
+          "returns_origin": "com.sun.star.awt.XControl",
           "desc": [
             "returns the control with the specified name."
           ],
           "raises": [],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getControls",
           "returns": "typing.Tuple[XControl_7a9c098d, ...]",
+          "returns_origin": "sequence< com.sun.star.awt.XControl >",
           "desc": [
             "returns all controls."
           ],
@@ -107,31 +113,35 @@
         {
           "name": "removeControl",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes the given control from the container."
           ],
           "raises": [],
           "args": [
-            [
-              "Control",
-              "XControl_7a9c098d",
-              "in"
-            ]
+            {
+              "name": "Control",
+              "type": "XControl_7a9c098d",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XControl"
+            }
           ]
         },
         {
           "name": "setStatusText",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the status text in the status bar of the container."
           ],
           "raises": [],
           "args": [
-            [
-              "StatusText",
-              "str",
-              "in"
-            ]
+            {
+              "name": "StatusText",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XMultipleOperation",
   "type": "interface",
@@ -74,6 +74,7 @@
         {
           "name": "setTableOperation",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "creates a table of formulas (a \\\"Multiple Operations Table\\\").",
             "",
@@ -81,26 +82,30 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aFormulaRange",
-              "CellRangeAddress_ec450d43",
-              "in"
-            ],
-            [
-              "nMode",
-              "TableOperationMode_b970e3f",
-              "in"
-            ],
-            [
-              "aColumnCell",
-              "CellAddress_ae5f0b56",
-              "in"
-            ],
-            [
-              "aRowCell",
-              "CellAddress_ae5f0b56",
-              "in"
-            ]
+            {
+              "name": "aFormulaRange",
+              "type": "CellRangeAddress_ec450d43",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellRangeAddress"
+            },
+            {
+              "name": "nMode",
+              "type": "TableOperationMode_b970e3f",
+              "direction": "in",
+              "origin": "com.sun.star.sheet.TableOperationMode"
+            },
+            {
+              "name": "aColumnCell",
+              "type": "CellAddress_ae5f0b56",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellAddress"
+            },
+            {
+              "name": "aRowCell",
+              "type": "CellAddress_ae5f0b56",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellAddress"
+            }
           ]
         }
       ]

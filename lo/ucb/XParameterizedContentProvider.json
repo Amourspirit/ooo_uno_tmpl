@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XParameterizedContentProvider",
   "type": "interface",
@@ -60,6 +60,7 @@
         {
           "name": "deregisterInstance",
           "returns": "XContentProvider_d4150cc0",
+          "returns_origin": "com.sun.star.ucb.XContentProvider",
           "desc": [
             "Deregisters a content provider."
           ],
@@ -67,21 +68,24 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "Template",
-              "str",
-              "in"
-            ],
-            [
-              "Arguments",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Template",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Arguments",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "registerInstance",
           "returns": "XContentProvider_d4150cc0",
+          "returns_origin": "com.sun.star.ucb.XContentProvider",
           "desc": [
             "Register a content provider on a URL template and supplementary arguments."
           ],
@@ -89,21 +93,24 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "Template",
-              "str",
-              "in"
-            ],
-            [
-              "Arguments",
-              "str",
-              "in"
-            ],
-            [
-              "ReplaceExisting",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "Template",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Arguments",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "ReplaceExisting",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XPanel",
   "type": "interface",
@@ -52,6 +52,7 @@
         {
           "name": "collapse",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Collapse the panel to only show its title bar."
           ],
@@ -61,21 +62,24 @@
         {
           "name": "expand",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Expand and display the panel."
           ],
           "raises": [],
           "args": [
-            [
-              "bCollapseOther",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "bCollapseOther",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "getDialog",
           "returns": "XWindow_713b0924",
+          "returns_origin": "com.sun.star.awt.XWindow",
           "desc": [
             "Get the panel dialog element."
           ],
@@ -85,6 +89,7 @@
         {
           "name": "getId",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "The panel identifier."
           ],
@@ -94,6 +99,7 @@
         {
           "name": "getOrderIndex",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "Get the ordering index of the panel in the deck."
           ],
@@ -103,6 +109,7 @@
         {
           "name": "getTitle",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Get the panel title string."
           ],
@@ -112,6 +119,7 @@
         {
           "name": "isExpanded",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Is the panel expanded."
           ],
@@ -121,6 +129,7 @@
         {
           "name": "moveDown",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Move the panel one step down in the deck."
           ],
@@ -130,6 +139,7 @@
         {
           "name": "moveFirst",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Move panel as first item of the deck."
           ],
@@ -139,6 +149,7 @@
         {
           "name": "moveLast",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Move panel as last item of the deck."
           ],
@@ -148,6 +159,7 @@
         {
           "name": "moveUp",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Move panel one step up in the deck."
           ],
@@ -157,31 +169,35 @@
         {
           "name": "setOrderIndex",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Set the ordering index of the panel in the deck."
           ],
           "raises": [],
           "args": [
-            [
-              "newOrderIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "newOrderIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "setTitle",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Set the panel title string."
           ],
           "raises": [],
           "args": [
-            [
-              "newTitle",
-              "str",
-              "in"
-            ]
+            {
+              "name": "newTitle",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

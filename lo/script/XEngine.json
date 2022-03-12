@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XEngine",
   "type": "interface",
@@ -75,6 +75,7 @@
         {
           "name": "addEngineListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "adds an engine listener.",
             "",
@@ -82,16 +83,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Listener",
-              "XEngineListener_f0b70d91",
-              "in"
-            ]
+            {
+              "name": "Listener",
+              "type": "XEngineListener_f0b70d91",
+              "direction": "in",
+              "origin": "com.sun.star.script.XEngineListener"
+            }
           ]
         },
         {
           "name": "cancel",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "terminates the execution of the running script.",
             "",
@@ -103,31 +106,36 @@
         {
           "name": "compile",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "compiles a script module in the scope of the root object."
           ],
           "raises": [],
           "args": [
-            [
-              "ModuleName",
-              "str",
-              "in"
-            ],
-            [
-              "Script",
-              "str",
-              "in"
-            ],
-            [
-              "CreateDebugInfo",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "ModuleName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Script",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "CreateDebugInfo",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "getRoot",
           "returns": "XInterface_8f010a43",
+          "returns_origin": "com.sun.star.uno.XInterface",
           "desc": [
             "gets an interface to the object which is the scripting root."
           ],
@@ -137,6 +145,7 @@
         {
           "name": "removeEngineListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes an engine listener.",
             "",
@@ -144,16 +153,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Listener",
-              "XEngineListener_f0b70d91",
-              "in"
-            ]
+            {
+              "name": "Listener",
+              "type": "XEngineListener_f0b70d91",
+              "direction": "in",
+              "origin": "com.sun.star.script.XEngineListener"
+            }
           ]
         },
         {
           "name": "run",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "runs a script specified by a string.",
             "",
@@ -161,26 +172,30 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aScript",
-              "str",
-              "in"
-            ],
-            [
-              "xThis",
-              "XInterface_8f010a43",
-              "in"
-            ],
-            [
-              "aArgs",
-              "typing.Tuple[object, ...]",
-              "in"
-            ]
+            {
+              "name": "aScript",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "xThis",
+              "type": "XInterface_8f010a43",
+              "direction": "in",
+              "origin": "com.sun.star.uno.XInterface"
+            },
+            {
+              "name": "aArgs",
+              "type": "typing.Tuple[object, ...]",
+              "direction": "in",
+              "origin": "sequence< any >"
+            }
           ]
         },
         {
           "name": "runAsync",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "runs the script specified by a string and makes callbacks.",
             "",
@@ -188,46 +203,53 @@
           ],
           "raises": [],
           "args": [
-            [
-              "acript",
-              "str",
-              "in"
-            ],
-            [
-              "xThis",
-              "XInterface_8f010a43",
-              "in"
-            ],
-            [
-              "args",
-              "typing.Tuple[object, ...]",
-              "in"
-            ],
-            [
-              "xCallback",
-              "XEngineListener_f0b70d91",
-              "in"
-            ]
+            {
+              "name": "acript",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "xThis",
+              "type": "XInterface_8f010a43",
+              "direction": "in",
+              "origin": "com.sun.star.uno.XInterface"
+            },
+            {
+              "name": "args",
+              "type": "typing.Tuple[object, ...]",
+              "direction": "in",
+              "origin": "sequence< any >"
+            },
+            {
+              "name": "xCallback",
+              "type": "XEngineListener_f0b70d91",
+              "direction": "in",
+              "origin": "com.sun.star.script.XEngineListener"
+            }
           ]
         },
         {
           "name": "setLibraryAccess",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets an access object to get external functions."
           ],
           "raises": [],
           "args": [
-            [
-              "Library",
-              "XLibraryAccess_e32a0d1c",
-              "in"
-            ]
+            {
+              "name": "Library",
+              "type": "XLibraryAccess_e32a0d1c",
+              "direction": "in",
+              "origin": "com.sun.star.script.XLibraryAccess"
+            }
           ]
         },
         {
           "name": "setRoot",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets an interface to an object as a scripting root.",
             "",
@@ -235,11 +257,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xRoot",
-              "XInterface_8f010a43",
-              "in"
-            ]
+            {
+              "name": "xRoot",
+              "type": "XInterface_8f010a43",
+              "direction": "in",
+              "origin": "com.sun.star.uno.XInterface"
+            }
           ]
         }
       ]

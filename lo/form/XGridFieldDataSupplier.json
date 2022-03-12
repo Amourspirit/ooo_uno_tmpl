@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XGridFieldDataSupplier",
   "type": "interface",
@@ -64,6 +64,7 @@
         {
           "name": "queryFieldData",
           "returns": "typing.Tuple[object, ...]",
+          "returns_origin": "sequence< any >",
           "desc": [
             "retrieves the actual column data for the given row",
             "",
@@ -71,21 +72,24 @@
           ],
           "raises": [],
           "args": [
-            [
-              "nRow",
-              "int",
-              "in"
-            ],
-            [
-              "xType",
-              "object",
-              "in"
-            ]
+            {
+              "name": "nRow",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "xType",
+              "type": "object",
+              "direction": "in",
+              "origin": "type"
+            }
           ]
         },
         {
           "name": "queryFieldDataType",
           "returns": "typing.Tuple[bool, ...]",
+          "returns_origin": "sequence< boolean >",
           "desc": [
             "checks whether or not the content of the grid's columns can be retrieved in the requested format.",
             "",
@@ -94,11 +98,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xType",
-              "object",
-              "in"
-            ]
+            {
+              "name": "xType",
+              "type": "object",
+              "direction": "in",
+              "origin": "type"
+            }
           ]
         }
       ]

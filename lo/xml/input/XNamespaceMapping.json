@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XNamespaceMapping",
   "type": "interface",
@@ -50,21 +50,24 @@
         {
           "name": "getUidByUri",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "Creates a unique ordinal passing an XML namespace URI."
           ],
           "raises": [],
           "args": [
-            [
-              "uri",
-              "str",
-              "in"
-            ]
+            {
+              "name": "uri",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getUriByUid",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Gets the corresponding XML namespace URI passing a uid (created using getUidByUri())."
           ],
@@ -72,11 +75,12 @@
             "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
-            [
-              "uid",
-              "int",
-              "in"
-            ]
+            {
+              "name": "uid",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

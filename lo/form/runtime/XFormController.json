@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XFormController",
   "type": "interface",
@@ -216,21 +216,24 @@
         {
           "name": "addActivateListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "adds the specified listener to receive notifications whenever the activation state of the controller changes."
           ],
           "raises": [],
           "args": [
-            [
-              "Listener",
-              "XFormControllerListener_49ba1012",
-              "in"
-            ]
+            {
+              "name": "Listener",
+              "type": "XFormControllerListener_49ba1012",
+              "direction": "in",
+              "origin": "com.sun.star.form.XFormControllerListener"
+            }
           ]
         },
         {
           "name": "addChildController",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "adds a controller to the list of child controllers"
           ],
@@ -238,26 +241,29 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "ChildController",
-              "XFormController",
-              "in"
-            ]
+            {
+              "name": "ChildController",
+              "type": "XFormController",
+              "direction": "in",
+              "origin": "com.sun.star.form.runtime.XFormController"
+            }
           ]
         },
         {
           "name": "removeActivateListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes the specified listener from the list of components to receive notifications whenever the activation state of the controller changes."
           ],
           "raises": [],
           "args": [
-            [
-              "Listener",
-              "XFormControllerListener_49ba1012",
-              "in"
-            ]
+            {
+              "name": "Listener",
+              "type": "XFormControllerListener_49ba1012",
+              "direction": "in",
+              "origin": "com.sun.star.form.XFormControllerListener"
+            }
           ]
         }
       ],
@@ -266,6 +272,7 @@
           "name": "Context",
           "returns": "XFormControllerContext_c54112e3",
           "origtype": "com.sun.star.form.runtime.XFormControllerContext",
+          "origin": "com.sun.star.form.runtime.XFormControllerContext",
           "desc": [
             "allows to delegate certain tasks to the context of the form controller"
           ],
@@ -276,6 +283,7 @@
           "name": "CurrentControl",
           "returns": "XControl_7a9c098d",
           "origtype": "com.sun.star.awt.XControl",
+          "origin": "com.sun.star.awt.XControl",
           "desc": [
             "provides access to the currently active control"
           ],
@@ -286,6 +294,7 @@
           "name": "FormOperations",
           "returns": "XFormOperations_4a450ffe",
           "origtype": "com.sun.star.form.runtime.XFormOperations",
+          "origin": "com.sun.star.form.runtime.XFormOperations",
           "desc": [
             "denotes the instance which is used to implement operations on the form which the controller works for.",
             "",
@@ -298,6 +307,7 @@
           "name": "InteractionHandler",
           "returns": "XInteractionHandler_bf80e51",
           "origtype": "com.sun.star.task.XInteractionHandler",
+          "origin": "com.sun.star.task.XInteractionHandler",
           "desc": [
             "used (if not NULL) for user interactions triggered by the form controller."
           ],

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XIdlMethod",
   "type": "interface",
@@ -78,6 +78,7 @@
         {
           "name": "getExceptionTypes",
           "returns": "typing.Tuple[XIdlClass_d63a0c9a, ...]",
+          "returns_origin": "sequence< com.sun.star.reflection.XIdlClass >",
           "desc": [
             "Returns the declared exceptions types of the reflected method."
           ],
@@ -87,6 +88,7 @@
         {
           "name": "getMode",
           "returns": "MethodMode_e4910d19",
+          "returns_origin": "com.sun.star.reflection.MethodMode",
           "desc": [
             "Returns the method mode in which calls are run, i.e.",
             "",
@@ -98,6 +100,7 @@
         {
           "name": "getParameterInfos",
           "returns": "typing.Tuple[ParamInfo_d7210cb0, ...]",
+          "returns_origin": "sequence< ParamInfo >",
           "desc": [
             "Returns formal parameter information of the reflected method in order of IDL declaration.",
             "",
@@ -109,6 +112,7 @@
         {
           "name": "getParameterTypes",
           "returns": "typing.Tuple[XIdlClass_d63a0c9a, ...]",
+          "returns_origin": "sequence< XIdlClass >",
           "desc": [
             "Returns the formal parameter types of the reflected method in order of IDL declaration."
           ],
@@ -118,6 +122,7 @@
         {
           "name": "getReturnType",
           "returns": "XIdlClass_d63a0c9a",
+          "returns_origin": "com.sun.star.reflection.XIdlClass",
           "desc": [
             "Returns the return type of the reflected method."
           ],
@@ -127,6 +132,7 @@
         {
           "name": "invoke",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "Invokes the reflected method on a given object with the given parameters.",
             "",
@@ -137,16 +143,18 @@
             "com.sun.star.reflection.InvocationTargetException"
           ],
           "args": [
-            [
-              "obj",
-              "object",
-              "in"
-            ],
-            [
-              "args",
-              "object",
-              "in"
-            ]
+            {
+              "name": "obj",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            },
+            {
+              "name": "args",
+              "type": "object",
+              "direction": "in",
+              "origin": null
+            }
           ]
         }
       ]

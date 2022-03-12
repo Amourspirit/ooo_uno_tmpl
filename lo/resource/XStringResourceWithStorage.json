@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XStringResourceWithStorage",
   "type": "interface",
@@ -60,6 +60,7 @@
         {
           "name": "setStorage",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Associates a storage to the StringResourceWithStorage instance which is used on subsequent calls of store().",
             "",
@@ -69,16 +70,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "Storage",
-              "XStorage_8e460a32",
-              "in"
-            ]
+            {
+              "name": "Storage",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            }
           ]
         },
         {
           "name": "storeAsStorage",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Stores all string table data to a storage and associates this storage to this instance as if setStorage() was called with this storage.",
             "",
@@ -90,11 +93,12 @@
             "com.sun.star.uno.Exception"
           ],
           "args": [
-            [
-              "Storage",
-              "XStorage_8e460a32",
-              "in"
-            ]
+            {
+              "name": "Storage",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            }
           ]
         }
       ]

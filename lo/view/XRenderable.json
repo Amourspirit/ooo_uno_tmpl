@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XRenderable",
   "type": "interface",
@@ -66,6 +66,7 @@
         {
           "name": "getRenderer",
           "returns": "typing.Tuple[PropertyValue_c9610c73, ...]",
+          "returns_origin": "sequence< com.sun.star.beans.PropertyValue >",
           "desc": [
             "returns the specific renderer properties based on the given selection.",
             "",
@@ -75,26 +76,30 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "nRenderer",
-              "int",
-              "in"
-            ],
-            [
-              "aSelection",
-              "object",
-              "in"
-            ],
-            [
-              "xOptions",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ]
+            {
+              "name": "nRenderer",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aSelection",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            },
+            {
+              "name": "xOptions",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            }
           ]
         },
         {
           "name": "getRendererCount",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "If a selection is given, the count has to be calculated based on this selection. The other methods of this interface will rely on this value if called.",
             "",
@@ -104,21 +109,24 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aSelection",
-              "object",
-              "in"
-            ],
-            [
-              "xOptions",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ]
+            {
+              "name": "aSelection",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            },
+            {
+              "name": "xOptions",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            }
           ]
         },
         {
           "name": "render",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "renders the object.",
             "",
@@ -130,21 +138,24 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "nRenderer",
-              "int",
-              "in"
-            ],
-            [
-              "aSelection",
-              "object",
-              "in"
-            ],
-            [
-              "xOptions",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ]
+            {
+              "name": "nRenderer",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aSelection",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            },
+            {
+              "name": "xOptions",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            }
           ]
         }
       ]

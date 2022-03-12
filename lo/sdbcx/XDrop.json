@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDrop",
   "type": "interface",
@@ -50,6 +50,7 @@
         {
           "name": "dropByIndex",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "drops an object of the related container identified by its position."
           ],
@@ -58,16 +59,18 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "index",
-              "int",
-              "in"
-            ]
+            {
+              "name": "index",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "dropByName",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "drops an object of the related container identified by its name."
           ],
@@ -76,11 +79,12 @@
             "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
-            [
-              "elementName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "elementName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

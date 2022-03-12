@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XUIElementFactory",
   "type": "interface",
@@ -77,6 +77,7 @@
         {
           "name": "createUIElement",
           "returns": "XUIElement_820509a6",
+          "returns_origin": "com.sun.star.ui.XUIElement",
           "desc": [
             "creates a new instances of a specific user interface element.",
             "",
@@ -87,16 +88,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "ResourceURL",
-              "str",
-              "in"
-            ],
-            [
-              "Args",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ]
+            {
+              "name": "ResourceURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Args",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            }
           ]
         }
       ]

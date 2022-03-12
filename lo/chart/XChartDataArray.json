@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XChartDataArray",
   "type": "interface",
@@ -60,6 +60,7 @@
         {
           "name": "getColumnDescriptions",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [
             "retrieves the description texts for all columns."
           ],
@@ -69,6 +70,7 @@
         {
           "name": "getData",
           "returns": "typing.Tuple[typing.Tuple[float, ...], ...]",
+          "returns_origin": "sequence< sequence< double > >",
           "desc": [
             "retrieves the numerical data as a nested sequence of values."
           ],
@@ -78,6 +80,7 @@
         {
           "name": "getRowDescriptions",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [
             "retrieves the description texts for all rows."
           ],
@@ -87,46 +90,52 @@
         {
           "name": "setColumnDescriptions",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the description texts for all columns."
           ],
           "raises": [],
           "args": [
-            [
-              "aColumnDescriptions",
-              "typing.Tuple[str, ...]",
-              "in"
-            ]
+            {
+              "name": "aColumnDescriptions",
+              "type": "typing.Tuple[str, ...]",
+              "direction": "in",
+              "origin": "sequence< string >"
+            }
           ]
         },
         {
           "name": "setData",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the chart data as an array of numbers."
           ],
           "raises": [],
           "args": [
-            [
-              "aData",
-              "typing.Tuple[typing.Tuple[float, ...], ...]",
-              "in"
-            ]
+            {
+              "name": "aData",
+              "type": "typing.Tuple[typing.Tuple[float, ...], ...]",
+              "direction": "in",
+              "origin": "sequence< sequence< double > >"
+            }
           ]
         },
         {
           "name": "setRowDescriptions",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the description texts for all rows."
           ],
           "raises": [],
           "args": [
-            [
-              "aRowDescriptions",
-              "typing.Tuple[str, ...]",
-              "in"
-            ]
+            {
+              "name": "aRowDescriptions",
+              "type": "typing.Tuple[str, ...]",
+              "direction": "in",
+              "origin": "sequence< string >"
+            }
           ]
         }
       ]

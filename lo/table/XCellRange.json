@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XCellRange",
   "type": "interface",
@@ -61,6 +61,7 @@
         {
           "name": "getCellByPosition",
           "returns": "XCell_70d408e8",
+          "returns_origin": "com.sun.star.table.XCell",
           "desc": [
             "Returns a single cell within the range."
           ],
@@ -68,21 +69,24 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nColumn",
-              "int",
-              "in"
-            ],
-            [
-              "nRow",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nColumn",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nRow",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getCellRangeByName",
           "returns": "XCellRange",
+          "returns_origin": "com.sun.star.table.XCellRange",
           "desc": [
             "Returns a sub-range of cells within the range.",
             "",
@@ -90,16 +94,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aRange",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aRange",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getCellRangeByPosition",
           "returns": "XCellRange",
+          "returns_origin": "com.sun.star.table.XCellRange",
           "desc": [
             "Returns a sub-range of cells within the range."
           ],
@@ -107,26 +113,30 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nLeft",
-              "int",
-              "in"
-            ],
-            [
-              "nTop",
-              "int",
-              "in"
-            ],
-            [
-              "nRight",
-              "int",
-              "in"
-            ],
-            [
-              "nBottom",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nLeft",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nTop",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nRight",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nBottom",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

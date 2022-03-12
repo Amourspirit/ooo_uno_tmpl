@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XWindowPeer",
   "type": "interface",
@@ -81,6 +81,7 @@
         {
           "name": "getToolkit",
           "returns": "XToolkit_7adf0992",
+          "returns_origin": "com.sun.star.awt.XToolkit",
           "desc": [
             "returns the toolkit which created this object."
           ],
@@ -90,66 +91,75 @@
         {
           "name": "invalidate",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "invalidates the whole window with the specified InvalidateStyle."
           ],
           "raises": [],
           "args": [
-            [
-              "Flags",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Flags",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "invalidateRect",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "invalidates a rectangular area of the window with the specified InvalidateStyle."
           ],
           "raises": [],
           "args": [
-            [
-              "Rect",
-              "Rectangle_84b109e9",
-              "in"
-            ],
-            [
-              "Flags",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Rect",
+              "type": "Rectangle_84b109e9",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Rectangle"
+            },
+            {
+              "name": "Flags",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "setBackground",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the background color."
           ],
           "raises": [],
           "args": [
-            [
-              "Color",
-              "Color_68e908c5",
-              "in"
-            ]
+            {
+              "name": "Color",
+              "type": "Color_68e908c5",
+              "direction": "in",
+              "origin": "com.sun.star.util.Color"
+            }
           ]
         },
         {
           "name": "setPointer",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the mouse pointer."
           ],
           "raises": [],
           "args": [
-            [
-              "Pointer",
-              "XPointer_7abe098d",
-              "in"
-            ]
+            {
+              "name": "Pointer",
+              "type": "XPointer_7abe098d",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XPointer"
+            }
           ]
         }
       ]

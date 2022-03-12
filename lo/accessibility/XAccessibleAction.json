@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XAccessibleAction",
   "type": "interface",
@@ -66,6 +66,7 @@
         {
           "name": "doAccessibleAction",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Perform the specified Action on the object."
           ],
@@ -73,16 +74,18 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getAccessibleActionCount",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "Returns the number of accessible actions available in this object.",
             "",
@@ -94,6 +97,7 @@
         {
           "name": "getAccessibleActionDescription",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Returns a description of the specified action of the object."
           ],
@@ -101,16 +105,18 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getAccessibleActionKeyBinding",
           "returns": "XAccessibleKeyBinding_c493129a",
+          "returns_origin": "com.sun.star.accessibility.XAccessibleKeyBinding",
           "desc": [
             "Returns a key binding object, if there is one, associated with the specified action.",
             "",
@@ -120,11 +126,12 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

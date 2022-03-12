@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDigestContextSupplier",
   "type": "interface",
@@ -73,6 +73,7 @@
         {
           "name": "getDigestContext",
           "returns": "XDigestContext_1b2b0ec5",
+          "returns_origin": "com.sun.star.xml.crypto.XDigestContext",
           "desc": [
             "returns an object that allows to generate the specified digest."
           ],
@@ -80,16 +81,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "nDigestID",
-              "int",
-              "in"
-            ],
-            [
-              "aParams",
-              "typing.Tuple[NamedValue_a37a0af3, ...]",
-              "in"
-            ]
+            {
+              "name": "nDigestID",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aParams",
+              "type": "typing.Tuple[NamedValue_a37a0af3, ...]",
+              "direction": "in",
+              "origin": "sequence< .com.sun.star.beans.NamedValue >"
+            }
           ]
         }
       ]

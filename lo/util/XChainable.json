@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XChainable",
   "type": "interface",
@@ -52,6 +52,7 @@
         {
           "name": "getPredecessor",
           "returns": "XChainable",
+          "returns_origin": "com.sun.star.util.XChainable",
           "desc": [],
           "raises": [],
           "args": []
@@ -59,6 +60,7 @@
         {
           "name": "getSuccessor",
           "returns": "XChainable",
+          "returns_origin": "com.sun.star.util.XChainable",
           "desc": [],
           "raises": [],
           "args": []
@@ -66,21 +68,24 @@
         {
           "name": "isChainable",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "checks if the specified object can be linked to this."
           ],
           "raises": [],
           "args": [
-            [
-              "xChainable",
-              "XChainable",
-              "in"
-            ]
+            {
+              "name": "xChainable",
+              "type": "XChainable",
+              "direction": "in",
+              "origin": "com.sun.star.util.XChainable"
+            }
           ]
         },
         {
           "name": "setSuccessor",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "connects the specified object to this object as the successor in a chain.",
             "",
@@ -90,11 +95,12 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "xChainable",
-              "XChainable",
-              "in"
-            ]
+            {
+              "name": "xChainable",
+              "type": "XChainable",
+              "direction": "in",
+              "origin": "com.sun.star.util.XChainable"
+            }
           ]
         }
       ]

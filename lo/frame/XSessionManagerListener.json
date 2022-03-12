@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSessionManagerListener",
   "type": "interface",
@@ -48,21 +48,24 @@
         {
           "name": "approveInteraction",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "approveInteraction is called when an outstanding interaction request was processed by the session manager"
           ],
           "raises": [],
           "args": [
-            [
-              "bInteractionGranted",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "bInteractionGranted",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "doRestore",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "returns true, if a session was restored"
           ],
@@ -72,6 +75,7 @@
         {
           "name": "doSave",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "doSave gets called when a save event was issued by the session manager the listener should do what is necessary to restore the current state of the application",
             "",
@@ -83,21 +87,24 @@
           ],
           "raises": [],
           "args": [
-            [
-              "bShutdown",
-              "bool",
-              "in"
-            ],
-            [
-              "bCancelable",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "bShutdown",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            },
+            {
+              "name": "bCancelable",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "shutdownCanceled",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "shutdownCanceled is called when a shutdown was canceled by the user The listener can cancel his saving operations.",
             "",

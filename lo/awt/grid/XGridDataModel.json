@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XGridDataModel",
   "type": "interface",
@@ -68,6 +68,7 @@
         {
           "name": "getCellData",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "retrieves the data for a given cell"
           ],
@@ -75,21 +76,24 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "Column",
-              "int",
-              "in"
-            ],
-            [
-              "RowIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Column",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "RowIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getCellToolTip",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "retrieves the tool tip to be displayed when the mouse hovers over a given cell",
             "",
@@ -101,21 +105,24 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "Column",
-              "int",
-              "in"
-            ],
-            [
-              "RowIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Column",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "RowIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getRowData",
           "returns": "typing.Tuple[object, ...]",
+          "returns_origin": "sequence< any >",
           "desc": [
             "retrieves the data for a complete row",
             "",
@@ -125,16 +132,18 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "RowIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "RowIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getRowHeading",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "retrieves the heading of a given row",
             "",
@@ -146,11 +155,12 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "RowIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "RowIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ],
@@ -159,6 +169,7 @@
           "name": "ColumnCount",
           "returns": "int",
           "origtype": null,
+          "origin": "long",
           "desc": [
             "denotes the number of columns for which the model can provide data"
           ],
@@ -169,6 +180,7 @@
           "name": "RowCount",
           "returns": "int",
           "origtype": null,
+          "origin": "long",
           "desc": [
             "denotes the number of rows for which the model can provide data"
           ],

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XHalfFloatReadOnlyBitmap",
   "type": "interface",
@@ -83,6 +83,7 @@
         {
           "name": "getData",
           "returns": "typing.Tuple[int, ...]",
+          "returns_origin": "sequence< short >",
           "desc": [
             "Query the raw data of this bitmap.",
             "",
@@ -93,16 +94,18 @@
             "VolatileContentDestroyedException"
           ],
           "args": [
-            [
-              "rect",
-              "IntegerRectangle2D_3c5c0f4d",
-              "in"
-            ]
+            {
+              "name": "rect",
+              "type": "IntegerRectangle2D_3c5c0f4d",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.IntegerRectangle2D"
+            }
           ]
         },
         {
           "name": "getMemoryLayout",
           "returns": "FloatingPointBitmapLayout_c66812df",
+          "returns_origin": "com.sun.star.rendering.FloatingPointBitmapLayout",
           "desc": [
             "Query the memory layout for this bitmap."
           ],
@@ -112,6 +115,7 @@
         {
           "name": "getPixel",
           "returns": "typing.Tuple[int, ...]",
+          "returns_origin": "sequence< short >",
           "desc": [
             "Get a single pixel of the bitmap, returning its color value."
           ],
@@ -120,11 +124,12 @@
             "VolatileContentDestroyedException"
           ],
           "args": [
-            [
-              "pos",
-              "IntegerPoint2D_8f0dc2",
-              "in"
-            ]
+            {
+              "name": "pos",
+              "type": "IntegerPoint2D_8f0dc2",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.IntegerPoint2D"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XAccessibleComponent",
   "type": "interface",
@@ -100,6 +100,7 @@
         {
           "name": "containsPoint",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Tests whether the specified point lies within this object's bounds.",
             "",
@@ -107,16 +108,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Point",
-              "Point_5fb2085e",
-              "in"
-            ]
+            {
+              "name": "Point",
+              "type": "Point_5fb2085e",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Point"
+            }
           ]
         },
         {
           "name": "getAccessibleAtPoint",
           "returns": "XAccessible_1cbc0eb6",
+          "returns_origin": "com.sun.star.accessibility.XAccessible",
           "desc": [
             "Returns the Accessible child that is rendered under the given point.",
             "",
@@ -124,16 +127,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Point",
-              "Point_5fb2085e",
-              "in"
-            ]
+            {
+              "name": "Point",
+              "type": "Point_5fb2085e",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Point"
+            }
           ]
         },
         {
           "name": "getBackground",
           "returns": "Color_68e908c5",
+          "returns_origin": "com.sun.star.util.Color",
           "desc": [
             "Returns the background color of this object."
           ],
@@ -143,6 +148,7 @@
         {
           "name": "getBounds",
           "returns": "Rectangle_84b109e9",
+          "returns_origin": "com.sun.star.awt.Rectangle",
           "desc": [
             "Returns the bounding box of this object.",
             "",
@@ -154,6 +160,7 @@
         {
           "name": "getForeground",
           "returns": "Color_68e908c5",
+          "returns_origin": "com.sun.star.util.Color",
           "desc": [
             "Returns the foreground color of this object."
           ],
@@ -163,6 +170,7 @@
         {
           "name": "getLocation",
           "returns": "Point_5fb2085e",
+          "returns_origin": "com.sun.star.awt.Point",
           "desc": [
             "Returns the location of the upper left corner of the object's bounding box relative to the parent.",
             "",
@@ -174,6 +182,7 @@
         {
           "name": "getLocationOnScreen",
           "returns": "Point_5fb2085e",
+          "returns_origin": "com.sun.star.awt.Point",
           "desc": [
             "Returns the location of the upper left corner of the object's bounding box in screen coordinates.",
             "",
@@ -185,6 +194,7 @@
         {
           "name": "getSize",
           "returns": "Size_576707ef",
+          "returns_origin": "com.sun.star.awt.Size",
           "desc": [
             "Returns the size of this object's bounding box."
           ],
@@ -194,6 +204,7 @@
         {
           "name": "grabFocus",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Grabs the focus to this object.",
             "",

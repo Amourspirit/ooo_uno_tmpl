@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XLogFormatter",
   "type": "interface",
@@ -52,6 +52,7 @@
         {
           "name": "format",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "formats the given log record for output",
             "",
@@ -59,16 +60,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Record",
-              "LogRecord_b0c20b70",
-              "in"
-            ]
+            {
+              "name": "Record",
+              "type": "LogRecord_b0c20b70",
+              "direction": "in",
+              "origin": "com.sun.star.logging.LogRecord"
+            }
           ]
         },
         {
           "name": "getHead",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the header string for the log",
             "",
@@ -82,6 +85,7 @@
         {
           "name": "getTail",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the footer string for the log",
             "",

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XAccessibleHypertext",
   "type": "interface",
@@ -66,6 +66,7 @@
         {
           "name": "getHyperLink",
           "returns": "XAccessibleHyperlink_b34c126c",
+          "returns_origin": "com.sun.star.accessibility.XAccessibleHyperlink",
           "desc": [
             "Return the specified link.",
             "",
@@ -75,16 +76,18 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nLinkIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nLinkIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getHyperLinkCount",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "Returns the number of links and link groups contained within this hypertext document."
           ],
@@ -94,6 +97,7 @@
         {
           "name": "getHyperLinkIndex",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "Returns the index of the hyperlink that is associated with this character index.",
             "",
@@ -103,11 +107,12 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nCharIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nCharIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

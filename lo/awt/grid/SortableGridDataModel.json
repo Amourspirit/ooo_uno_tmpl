@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "SortableGridDataModel",
   "type": "service",
@@ -79,6 +79,7 @@
         {
           "name": "create",
           "returns": "None",
+          "returns_origin": null,
           "desc": [
             "creates a new instance of the SortableGridDataModel",
             "",
@@ -88,16 +89,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "DelegatorModel",
-              "XMutableGridDataModel_6387103b",
-              "in"
-            ]
+            {
+              "name": "DelegatorModel",
+              "type": "XMutableGridDataModel_6387103b",
+              "direction": "in",
+              "origin": "com.sun.star.awt.grid.XMutableGridDataModel"
+            }
           ]
         },
         {
           "name": "createWithCollator",
           "returns": "None",
+          "returns_origin": null,
           "desc": [
             "creates a new instance of the ScortableDefaultGridDataModel, passing a collator to be used for string comparison."
           ],
@@ -105,16 +108,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "DelegatorModel",
-              "XMutableGridDataModel_6387103b",
-              "in"
-            ],
-            [
-              "Collator",
-              "XCollator_892a09e0",
-              "in"
-            ]
+            {
+              "name": "DelegatorModel",
+              "type": "XMutableGridDataModel_6387103b",
+              "direction": "in",
+              "origin": "com.sun.star.awt.grid.XMutableGridDataModel"
+            },
+            {
+              "name": "Collator",
+              "type": "XCollator_892a09e0",
+              "direction": "in",
+              "origin": "com.sun.star.i18n.XCollator"
+            }
           ]
         }
       ]

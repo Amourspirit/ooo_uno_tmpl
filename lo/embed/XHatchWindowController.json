@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XHatchWindowController",
   "type": "interface",
@@ -62,6 +62,7 @@
         {
           "name": "activated",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [],
           "raises": [],
           "args": []
@@ -69,21 +70,24 @@
         {
           "name": "calcAdjustedRectangle",
           "returns": "Rectangle_84b109e9",
+          "returns_origin": "com.sun.star.awt.Rectangle",
           "desc": [
             "returns the closest valid rectangle to the provided one."
           ],
           "raises": [],
           "args": [
-            [
-              "aRect",
-              "Rectangle_84b109e9",
-              "in"
-            ]
+            {
+              "name": "aRect",
+              "type": "Rectangle_84b109e9",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Rectangle"
+            }
           ]
         },
         {
           "name": "deactivated",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [],
           "raises": [],
           "args": []
@@ -91,16 +95,18 @@
         {
           "name": "requestPositioning",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "requests window owner to resize/move the window."
           ],
           "raises": [],
           "args": [
-            [
-              "aRect",
-              "Rectangle_84b109e9",
-              "in"
-            ]
+            {
+              "name": "aRect",
+              "type": "Rectangle_84b109e9",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Rectangle"
+            }
           ]
         }
       ]

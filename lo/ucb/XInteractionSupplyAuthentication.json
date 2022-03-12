@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XInteractionSupplyAuthentication",
   "type": "interface",
@@ -65,6 +65,7 @@
         {
           "name": "canSetAccount",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Specifies if an \\\"account\\\" value can be handed back."
           ],
@@ -74,6 +75,7 @@
         {
           "name": "canSetPassword",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Specifies if a \\\"password\\\" value can be handed back."
           ],
@@ -83,6 +85,7 @@
         {
           "name": "canSetRealm",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Specifies if a new \\\"realm\\\" value can be handed back."
           ],
@@ -92,6 +95,7 @@
         {
           "name": "canSetUserName",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Specifies if a \\\"user name\\\" value can be handed back."
           ],
@@ -101,36 +105,41 @@
         {
           "name": "getRememberAccountModes",
           "returns": "typing.Tuple[RememberAuthentication_28a80f31, ...]",
+          "returns_origin": "sequence< com.sun.star.ucb.RememberAuthentication >",
           "desc": [
             "Specifies the available modes of how long to remember the account."
           ],
           "raises": [],
           "args": [
-            [
-              "Default",
-              "RememberAuthentication_28a80f31",
-              "out"
-            ]
+            {
+              "name": "Default",
+              "type": "RememberAuthentication_28a80f31",
+              "direction": "out",
+              "origin": "com.sun.star.ucb.RememberAuthentication"
+            }
           ]
         },
         {
           "name": "getRememberPasswordModes",
           "returns": "typing.Tuple[RememberAuthentication_28a80f31, ...]",
+          "returns_origin": "sequence< com.sun.star.ucb.RememberAuthentication >",
           "desc": [
             "Specifies the available modes of how long to remember the password."
           ],
           "raises": [],
           "args": [
-            [
-              "Default",
-              "RememberAuthentication_28a80f31",
-              "out"
-            ]
+            {
+              "name": "Default",
+              "type": "RememberAuthentication_28a80f31",
+              "direction": "out",
+              "origin": "com.sun.star.ucb.RememberAuthentication"
+            }
           ]
         },
         {
           "name": "setAccount",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Set a new \\\"account\\\" value to hand back.",
             "",
@@ -138,16 +147,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Account",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Account",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "setPassword",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Set a new \\\"password\\\" value to hand back.",
             "",
@@ -155,16 +166,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Password",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Password",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "setRealm",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Set a new \\\"realm\\\" value to hand back.",
             "",
@@ -172,16 +185,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Realm",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Realm",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "setRememberAccount",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Set a new mode of how long to remember the account.",
             "",
@@ -189,16 +204,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Remember",
-              "RememberAuthentication_28a80f31",
-              "in"
-            ]
+            {
+              "name": "Remember",
+              "type": "RememberAuthentication_28a80f31",
+              "direction": "in",
+              "origin": "com.sun.star.ucb.RememberAuthentication"
+            }
           ]
         },
         {
           "name": "setRememberPassword",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Set a new mode of how long to remember the password.",
             "",
@@ -206,16 +223,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Remember",
-              "RememberAuthentication_28a80f31",
-              "in"
-            ]
+            {
+              "name": "Remember",
+              "type": "RememberAuthentication_28a80f31",
+              "direction": "in",
+              "origin": "com.sun.star.ucb.RememberAuthentication"
+            }
           ]
         },
         {
           "name": "setUserName",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Set a new \\\"user name\\\" value to hand back.",
             "",
@@ -223,11 +242,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "UserName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "UserName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

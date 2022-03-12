@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "ScriptURIHelper",
   "type": "service",
@@ -50,6 +50,7 @@
         {
           "name": "create",
           "returns": "None",
+          "returns_origin": null,
           "desc": [
             "create a new ScriptURIHelper"
           ],
@@ -57,16 +58,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "language",
-              "str",
-              "in"
-            ],
-            [
-              "location",
-              "str",
-              "in"
-            ]
+            {
+              "name": "language",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "location",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

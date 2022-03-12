@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XEmbedPersist",
   "type": "interface",
@@ -71,6 +71,7 @@
         {
           "name": "getEntryName",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "allows to retrieve the current object entry name."
           ],
@@ -82,6 +83,7 @@
         {
           "name": "hasEntry",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "allows to detect if the object has entry."
           ],
@@ -93,6 +95,7 @@
         {
           "name": "saveCompleted",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "specifies whether the object should use an old storage or a new one after \\\"save as\\\" operation."
           ],
@@ -101,16 +104,18 @@
             "com.sun.star.uno.Exception"
           ],
           "args": [
-            [
-              "bUseNew",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "bUseNew",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "setPersistentEntry",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "provides object with a parent storage and a name for object's entry.",
             "",
@@ -127,36 +132,42 @@
             "com.sun.star.uno.Exception"
           ],
           "args": [
-            [
-              "xStorage",
-              "XStorage_8e460a32",
-              "in"
-            ],
-            [
-              "sEntName",
-              "str",
-              "in"
-            ],
-            [
-              "nEntryConnectionMode",
-              "int",
-              "in"
-            ],
-            [
-              "aMediaArgs",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ],
-            [
-              "aObjectArgs",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ]
+            {
+              "name": "xStorage",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            },
+            {
+              "name": "sEntName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nEntryConnectionMode",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aMediaArgs",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< .com.sun.star.beans.PropertyValue >"
+            },
+            {
+              "name": "aObjectArgs",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< .com.sun.star.beans.PropertyValue >"
+            }
           ]
         },
         {
           "name": "storeAsEntry",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "lets the object store itself to an entry in destination storage and prepare to use the new entry for own persistence.",
             "",
@@ -169,31 +180,36 @@
             "com.sun.star.uno.Exception"
           ],
           "args": [
-            [
-              "xStorage",
-              "XStorage_8e460a32",
-              "in"
-            ],
-            [
-              "sEntName",
-              "str",
-              "in"
-            ],
-            [
-              "aMediaArgs",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ],
-            [
-              "aObjectArgs",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ]
+            {
+              "name": "xStorage",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            },
+            {
+              "name": "sEntName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aMediaArgs",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< .com.sun.star.beans.PropertyValue >"
+            },
+            {
+              "name": "aObjectArgs",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< .com.sun.star.beans.PropertyValue >"
+            }
           ]
         },
         {
           "name": "storeToEntry",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "lets the object store itself to an entry in destination storage, the own persistence entry is not changed."
           ],
@@ -204,26 +220,30 @@
             "com.sun.star.uno.Exception"
           ],
           "args": [
-            [
-              "xStorage",
-              "XStorage_8e460a32",
-              "in"
-            ],
-            [
-              "sEntName",
-              "str",
-              "in"
-            ],
-            [
-              "aMediaArgs",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ],
-            [
-              "aObjectArgs",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ]
+            {
+              "name": "xStorage",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            },
+            {
+              "name": "sEntName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aMediaArgs",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< .com.sun.star.beans.PropertyValue >"
+            },
+            {
+              "name": "aObjectArgs",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< .com.sun.star.beans.PropertyValue >"
+            }
           ]
         }
       ]

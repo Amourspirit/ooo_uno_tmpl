@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSpreadsheet",
   "type": "interface",
@@ -61,6 +61,7 @@
         {
           "name": "createCursor",
           "returns": "XSheetCellCursor_ee400d70",
+          "returns_origin": "com.sun.star.sheet.XSheetCellCursor",
           "desc": [
             "creates a cell cursor including the whole spreadsheet."
           ],
@@ -70,16 +71,18 @@
         {
           "name": "createCursorByRange",
           "returns": "XSheetCellCursor_ee400d70",
+          "returns_origin": "com.sun.star.sheet.XSheetCellCursor",
           "desc": [
             "creates a cell cursor to travel in the given range context."
           ],
           "raises": [],
           "args": [
-            [
-              "aRange",
-              "XSheetCellRange_e09d0cdf",
-              "in"
-            ]
+            {
+              "name": "aRange",
+              "type": "XSheetCellRange_e09d0cdf",
+              "direction": "in",
+              "origin": "com.sun.star.sheet.XSheetCellRange"
+            }
           ]
         }
       ]

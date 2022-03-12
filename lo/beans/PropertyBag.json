@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "PropertyBag",
   "type": "service",
@@ -56,6 +56,7 @@
         {
           "name": "createDefault",
           "returns": "None",
+          "returns_origin": null,
           "desc": [],
           "raises": [],
           "args": []
@@ -63,24 +64,28 @@
         {
           "name": "createWithTypes",
           "returns": "None",
+          "returns_origin": null,
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "AllowedTypes",
-              "typing.Tuple[object, ...]",
-              "in"
-            ],
-            [
-              "AllowEmptyPropertyName",
-              "bool",
-              "in"
-            ],
-            [
-              "AutomaticAddition",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "AllowedTypes",
+              "type": "typing.Tuple[object, ...]",
+              "direction": "in",
+              "origin": "sequence< type >"
+            },
+            {
+              "name": "AllowEmptyPropertyName",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            },
+            {
+              "name": "AutomaticAddition",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         }
       ]

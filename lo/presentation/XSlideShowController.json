@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSlideShowController",
   "type": "interface",
@@ -66,6 +66,7 @@
         {
           "name": "activate",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "activates the user interface of this slide show."
           ],
@@ -75,21 +76,24 @@
         {
           "name": "addSlideShowListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "adds a listener that receives events while the slide show is running."
           ],
           "raises": [],
           "args": [
-            [
-              "Listener",
-              "XSlideShowListener_81671154",
-              "in"
-            ]
+            {
+              "name": "Listener",
+              "type": "XSlideShowListener_81671154",
+              "direction": "in",
+              "origin": "com.sun.star.presentation.XSlideShowListener"
+            }
           ]
         },
         {
           "name": "blankScreen",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "pauses the slide show and blanks the screen in the given color.",
             "",
@@ -97,16 +101,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Color",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Color",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "deactivate",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "can be called to deactivate the user interface of this slide show.",
             "",
@@ -118,6 +124,7 @@
         {
           "name": "getCurrentSlide",
           "returns": "XDrawPage_b07a0b57",
+          "returns_origin": "com.sun.star.drawing.XDrawPage",
           "desc": [
             "returns slide that is currently displayed"
           ],
@@ -127,6 +134,7 @@
         {
           "name": "getCurrentSlideIndex",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "returns the index of the current slide."
           ],
@@ -136,6 +144,7 @@
         {
           "name": "getNextSlideIndex",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "the index for the slide that is displayed next."
           ],
@@ -145,6 +154,7 @@
         {
           "name": "getSlideByIndex",
           "returns": "XDrawPage_b07a0b57",
+          "returns_origin": "com.sun.star.drawing.XDrawPage",
           "desc": [
             "gives access to the slides that will be shown in this slide show.",
             "",
@@ -154,16 +164,18 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "Index",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Index",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getSlideCount",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [],
           "raises": [],
           "args": []
@@ -171,6 +183,7 @@
         {
           "name": "getSlideShow",
           "returns": "XSlideShow_2a80e0e",
+          "returns_origin": "com.sun.star.presentation.XSlideShow",
           "desc": [
             "returns the actual XSlideShow instance that runs the slide show.",
             "",
@@ -182,21 +195,24 @@
         {
           "name": "gotoBookmark",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "goto the given textual bookmark"
           ],
           "raises": [],
           "args": [
-            [
-              "Bookmark",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Bookmark",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "gotoFirstSlide",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "goto and display first slide"
           ],
@@ -206,6 +222,7 @@
         {
           "name": "gotoLastSlide",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "goto and display last slide.",
             "",
@@ -217,6 +234,7 @@
         {
           "name": "gotoNextEffect",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "start next effects that wait on a generic trigger.",
             "",
@@ -228,6 +246,7 @@
         {
           "name": "gotoNextSlide",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "goto and display next slide.",
             "",
@@ -239,6 +258,7 @@
         {
           "name": "gotoPreviousEffect",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "undo the last effects that were triggered by a generic trigger.",
             "",
@@ -250,6 +270,7 @@
         {
           "name": "gotoPreviousSlide",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "goto and display previous slide.",
             "",
@@ -261,6 +282,7 @@
         {
           "name": "gotoSlide",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "jumps to the given slide.",
             "",
@@ -270,31 +292,35 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "Page",
-              "XDrawPage_b07a0b57",
-              "in"
-            ]
+            {
+              "name": "Page",
+              "type": "XDrawPage_b07a0b57",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.XDrawPage"
+            }
           ]
         },
         {
           "name": "gotoSlideIndex",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "jumps to the slide at the given index."
           ],
           "raises": [],
           "args": [
-            [
-              "Index",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Index",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "isActive",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "determines if the slide show is active."
           ],
@@ -304,6 +330,7 @@
         {
           "name": "isEndless",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "returns TRUE if the slide show was started to run endlessly."
           ],
@@ -313,6 +340,7 @@
         {
           "name": "isFullScreen",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Returns TRUE if the slide show was started in full-screen mode."
           ],
@@ -322,6 +350,7 @@
         {
           "name": "isPaused",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "returns TRUE if the slide show is currently paused."
           ],
@@ -331,6 +360,7 @@
         {
           "name": "isRunning",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "returns true if the slide show is still running.",
             "",
@@ -342,6 +372,7 @@
         {
           "name": "pause",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "pauses the slide show.",
             "",
@@ -355,21 +386,24 @@
         {
           "name": "removeSlideShowListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes a listener."
           ],
           "raises": [],
           "args": [
-            [
-              "Listener",
-              "XSlideShowListener_81671154",
-              "in"
-            ]
+            {
+              "name": "Listener",
+              "type": "XSlideShowListener_81671154",
+              "direction": "in",
+              "origin": "com.sun.star.presentation.XSlideShowListener"
+            }
           ]
         },
         {
           "name": "resume",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "resumes a paused slide show."
           ],
@@ -379,6 +413,7 @@
         {
           "name": "setEraseAllInk",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "This method clears ink drawing from the slideshow being played.",
             "",
@@ -388,16 +423,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "EraseAllInk",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "EraseAllInk",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "stopSound",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "stop all currently played sounds"
           ],
@@ -410,6 +447,7 @@
           "name": "AlwaysOnTop",
           "returns": "bool",
           "origtype": null,
+          "origin": "boolean",
           "desc": [
             "If this attribute is set to TRUE, the window of the slide show is always on top of all other windows."
           ],
@@ -420,6 +458,7 @@
           "name": "MouseVisible",
           "returns": "bool",
           "origtype": null,
+          "origin": "boolean",
           "desc": [
             "If this attribute is TRUE, the mouse is visible during the slide show."
           ],
@@ -430,6 +469,7 @@
           "name": "PenColor",
           "returns": "int",
           "origtype": null,
+          "origin": "long",
           "desc": [
             "This attribute changes the color of the pen."
           ],
@@ -440,6 +480,7 @@
           "name": "PenWidth",
           "returns": "float",
           "origtype": null,
+          "origin": "double",
           "desc": [
             "This attribute changes the width of the pen.",
             "",
@@ -454,6 +495,7 @@
           "name": "UsePen",
           "returns": "bool",
           "origtype": null,
+          "origin": "boolean",
           "desc": [
             "If this is TRUE, a pen is shown during presentation.",
             "",

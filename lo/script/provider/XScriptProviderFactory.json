@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XScriptProviderFactory",
   "type": "interface",
@@ -60,6 +60,7 @@
         {
           "name": "createScriptProvider",
           "returns": "XScriptProvider_8004114e",
+          "returns_origin": "com.sun.star.script.provider.XScriptProvider",
           "desc": [
             "a factory method for the creation of XScriptProviders implementations."
           ],
@@ -67,11 +68,12 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "Context",
-              "object",
-              "in"
-            ]
+            {
+              "name": "Context",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         }
       ]

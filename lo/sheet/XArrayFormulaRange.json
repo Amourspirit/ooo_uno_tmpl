@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XArrayFormulaRange",
   "type": "interface",
@@ -50,6 +50,7 @@
         {
           "name": "getArrayFormula",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the array formula of the range or an empty string, if the range does not contain an array formula."
           ],
@@ -59,16 +60,18 @@
         {
           "name": "setArrayFormula",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "applies the array formula to the entire cell range."
           ],
           "raises": [],
           "args": [
-            [
-              "aFormula",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aFormula",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

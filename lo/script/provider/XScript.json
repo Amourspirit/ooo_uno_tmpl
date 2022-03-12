@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XScript",
   "type": "interface",
@@ -56,6 +56,7 @@
         {
           "name": "invoke",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "invoke the script or function represented by the implementing object",
             "",
@@ -70,21 +71,24 @@
             "com.sun.star.reflection.InvocationTargetException"
           ],
           "args": [
-            [
-              "aParams",
-              "typing.Tuple[object, ...]",
-              "in"
-            ],
-            [
-              "aOutParamIndex",
-              "typing.Tuple[int, ...]",
-              "out"
-            ],
-            [
-              "aOutParam",
-              "typing.Tuple[object, ...]",
-              "out"
-            ]
+            {
+              "name": "aParams",
+              "type": "typing.Tuple[object, ...]",
+              "direction": "in",
+              "origin": "sequence< any >"
+            },
+            {
+              "name": "aOutParamIndex",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "out",
+              "origin": "sequence< short >"
+            },
+            {
+              "name": "aOutParam",
+              "type": "typing.Tuple[object, ...]",
+              "direction": "out",
+              "origin": "sequence< any >"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XCellCursor",
   "type": "interface",
@@ -50,6 +50,7 @@
         {
           "name": "gotoEnd",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "points the cursor to a single cell which is the end of a contiguous series of (filled) cells."
           ],
@@ -59,6 +60,7 @@
         {
           "name": "gotoNext",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "points the cursor to the next unprotected cell.",
             "",
@@ -70,26 +72,30 @@
         {
           "name": "gotoOffset",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "moves the origin of the cursor relative to the current position."
           ],
           "raises": [],
           "args": [
-            [
-              "nColumnOffset",
-              "int",
-              "in"
-            ],
-            [
-              "nRowOffset",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nColumnOffset",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nRowOffset",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "gotoPrevious",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "points the cursor to the previous unprotected cell.",
             "",
@@ -101,6 +107,7 @@
         {
           "name": "gotoStart",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "points the cursor to a single cell which is the beginning of a contiguous series of (filled) cells."
           ],

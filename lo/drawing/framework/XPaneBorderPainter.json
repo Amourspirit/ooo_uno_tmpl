@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XPaneBorderPainter",
   "type": "interface",
@@ -71,6 +71,7 @@
         {
           "name": "addBorder",
           "returns": "Rectangle_84b109e9",
+          "returns_origin": "com.sun.star.awt.Rectangle",
           "desc": [
             "Enlarge the given rectangle by the size of the specified part of the border.",
             "",
@@ -78,26 +79,30 @@
           ],
           "raises": [],
           "args": [
-            [
-              "sPaneBorderStyleName",
-              "str",
-              "in"
-            ],
-            [
-              "aRectangle",
-              "Rectangle_84b109e9",
-              "in"
-            ],
-            [
-              "eBorderType",
-              "BorderType_4b7f0ff0",
-              "in"
-            ]
+            {
+              "name": "sPaneBorderStyleName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aRectangle",
+              "type": "Rectangle_84b109e9",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Rectangle"
+            },
+            {
+              "name": "eBorderType",
+              "type": "BorderType_4b7f0ff0",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.framework.BorderType"
+            }
           ]
         },
         {
           "name": "getCalloutOffset",
           "returns": "Point_5fb2085e",
+          "returns_origin": "com.sun.star.awt.Point",
           "desc": [
             "Return the offset of a call out anchor with respect to the outer border.",
             "",
@@ -105,51 +110,59 @@
           ],
           "raises": [],
           "args": [
-            [
-              "sPaneBorderStyleName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "sPaneBorderStyleName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "paintBorder",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Paint the border around a pane."
           ],
           "raises": [],
           "args": [
-            [
-              "sPaneBorderStyleName",
-              "str",
-              "in"
-            ],
-            [
-              "xCanvas",
-              "XCanvas_b19b0b7a",
-              "in"
-            ],
-            [
-              "aOuterBorderRectangle",
-              "Rectangle_84b109e9",
-              "in"
-            ],
-            [
-              "aRepaintArea",
-              "Rectangle_84b109e9",
-              "in"
-            ],
-            [
-              "sTitle",
-              "str",
-              "in"
-            ]
+            {
+              "name": "sPaneBorderStyleName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "xCanvas",
+              "type": "XCanvas_b19b0b7a",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.XCanvas"
+            },
+            {
+              "name": "aOuterBorderRectangle",
+              "type": "Rectangle_84b109e9",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Rectangle"
+            },
+            {
+              "name": "aRepaintArea",
+              "type": "Rectangle_84b109e9",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Rectangle"
+            },
+            {
+              "name": "sTitle",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "paintBorderWithCallout",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Paint the border around a pane where the border includes a call out that is anchored at the given point.",
             "",
@@ -157,41 +170,48 @@
           ],
           "raises": [],
           "args": [
-            [
-              "sPaneBorderStyleName",
-              "str",
-              "in"
-            ],
-            [
-              "xCanvas",
-              "XCanvas_b19b0b7a",
-              "in"
-            ],
-            [
-              "aOuterBorderRectangle",
-              "Rectangle_84b109e9",
-              "in"
-            ],
-            [
-              "aRepaintArea",
-              "Rectangle_84b109e9",
-              "in"
-            ],
-            [
-              "sTitle",
-              "str",
-              "in"
-            ],
-            [
-              "aCalloutAnchor",
-              "Point_5fb2085e",
-              "in"
-            ]
+            {
+              "name": "sPaneBorderStyleName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "xCanvas",
+              "type": "XCanvas_b19b0b7a",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.XCanvas"
+            },
+            {
+              "name": "aOuterBorderRectangle",
+              "type": "Rectangle_84b109e9",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Rectangle"
+            },
+            {
+              "name": "aRepaintArea",
+              "type": "Rectangle_84b109e9",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Rectangle"
+            },
+            {
+              "name": "sTitle",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aCalloutAnchor",
+              "type": "Point_5fb2085e",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Point"
+            }
           ]
         },
         {
           "name": "removeBorder",
           "returns": "Rectangle_84b109e9",
+          "returns_origin": "com.sun.star.awt.Rectangle",
           "desc": [
             "Shrink the given rectangle by the size of the specified part of the border.",
             "",
@@ -199,21 +219,24 @@
           ],
           "raises": [],
           "args": [
-            [
-              "sPaneBorderStyleName",
-              "str",
-              "in"
-            ],
-            [
-              "aRectangle",
-              "Rectangle_84b109e9",
-              "in"
-            ],
-            [
-              "eBorderType",
-              "BorderType_4b7f0ff0",
-              "in"
-            ]
+            {
+              "name": "sPaneBorderStyleName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aRectangle",
+              "type": "Rectangle_84b109e9",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Rectangle"
+            },
+            {
+              "name": "eBorderType",
+              "type": "BorderType_4b7f0ff0",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.framework.BorderType"
+            }
           ]
         }
       ]

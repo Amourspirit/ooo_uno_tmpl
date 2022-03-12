@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XObjectInspectorModel",
   "type": "interface",
@@ -56,6 +56,7 @@
         {
           "name": "describeCategories",
           "returns": "typing.Tuple[PropertyCategoryDescriptor_f4691406, ...]",
+          "returns_origin": "sequence< PropertyCategoryDescriptor >",
           "desc": [
             "describes the property categories used by the property handlers.",
             "",
@@ -68,6 +69,7 @@
         {
           "name": "getPropertyOrderIndex",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "retrieves an index in a global property ordering, for a given property name",
             "",
@@ -80,11 +82,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "PropertyName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "PropertyName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ],
@@ -93,6 +96,7 @@
           "name": "HandlerFactories",
           "returns": "typing.Tuple[object, ...]",
           "origtype": null,
+          "origin": "sequence< any >",
           "desc": [
             "describes a set of factories for creating XPropertyHandlers",
             "",
@@ -111,6 +115,7 @@
           "name": "HasHelpSection",
           "returns": "bool",
           "origtype": null,
+          "origin": "boolean",
           "desc": [
             "indicates that the object inspector should have a help section.",
             "",
@@ -128,6 +133,7 @@
           "name": "IsReadOnly",
           "returns": "bool",
           "origtype": null,
+          "origin": "boolean",
           "desc": [
             "determines whether the object inspector's UI should be read-only.",
             "",
@@ -142,6 +148,7 @@
           "name": "MaxHelpTextLines",
           "returns": "int",
           "origtype": null,
+          "origin": "long",
           "desc": [
             "denotes the maximum number of lines of text to be reserved for the help section.",
             "",
@@ -160,6 +167,7 @@
           "name": "MinHelpTextLines",
           "returns": "int",
           "origtype": null,
+          "origin": "long",
           "desc": [
             "denotes the minimum number of lines of text to be reserved for the help section.",
             "",

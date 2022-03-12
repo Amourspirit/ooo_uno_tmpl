@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XTabController",
   "type": "interface",
@@ -76,6 +76,7 @@
         {
           "name": "activateFirst",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the focus to the first control that can be reached with the TAB key."
           ],
@@ -85,6 +86,7 @@
         {
           "name": "activateLast",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the focus to the last control that can be reached with the TAB key."
           ],
@@ -94,6 +96,7 @@
         {
           "name": "activateTabOrder",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "activates tab order."
           ],
@@ -103,6 +106,7 @@
         {
           "name": "autoTabOrder",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "enables automatic tab order."
           ],
@@ -112,6 +116,7 @@
         {
           "name": "getContainer",
           "returns": "XControlContainer_e22d0d30",
+          "returns_origin": "com.sun.star.awt.XControlContainer",
           "desc": [
             "returns the control container."
           ],
@@ -121,6 +126,7 @@
         {
           "name": "getControls",
           "returns": "typing.Tuple[XControl_7a9c098d, ...]",
+          "returns_origin": "sequence< com.sun.star.awt.XControl >",
           "desc": [
             "returns all controls of the control container."
           ],
@@ -130,6 +136,7 @@
         {
           "name": "getModel",
           "returns": "XTabControllerModel_fbef0dd8",
+          "returns_origin": "com.sun.star.awt.XTabControllerModel",
           "desc": [
             "returns the tab controller model."
           ],
@@ -139,31 +146,35 @@
         {
           "name": "setContainer",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "set the control container."
           ],
           "raises": [],
           "args": [
-            [
-              "Container",
-              "XControlContainer_e22d0d30",
-              "in"
-            ]
+            {
+              "name": "Container",
+              "type": "XControlContainer_e22d0d30",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XControlContainer"
+            }
           ]
         },
         {
           "name": "setModel",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the tab controller model."
           ],
           "raises": [],
           "args": [
-            [
-              "Model",
-              "XTabControllerModel_fbef0dd8",
-              "in"
-            ]
+            {
+              "name": "Model",
+              "type": "XTabControllerModel_fbef0dd8",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XTabControllerModel"
+            }
           ]
         }
       ]

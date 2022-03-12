@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XPrintAreas",
   "type": "interface",
@@ -63,6 +63,7 @@
         {
           "name": "getPrintAreas",
           "returns": "typing.Tuple[CellRangeAddress_ec450d43, ...]",
+          "returns_origin": "sequence< com.sun.star.table.CellRangeAddress >",
           "desc": [
             "returns a sequence containing all print areas of the sheet."
           ],
@@ -72,6 +73,7 @@
         {
           "name": "getPrintTitleColumns",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "returns, whether the title columns are repeated on all subsequent print pages to the right."
           ],
@@ -81,6 +83,7 @@
         {
           "name": "getPrintTitleRows",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "returns, whether the title rows are repeated on all subsequent print pages to the bottom."
           ],
@@ -90,6 +93,7 @@
         {
           "name": "getTitleColumns",
           "returns": "CellRangeAddress_ec450d43",
+          "returns_origin": "com.sun.star.table.CellRangeAddress",
           "desc": [
             "returns the range that is specified as title columns range.",
             "",
@@ -101,6 +105,7 @@
         {
           "name": "getTitleRows",
           "returns": "CellRangeAddress_ec450d43",
+          "returns_origin": "com.sun.star.table.CellRangeAddress",
           "desc": [
             "returns the range that is specified as title rows range.",
             "",
@@ -112,6 +117,7 @@
         {
           "name": "setPrintAreas",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the print areas of the sheet.",
             "",
@@ -119,46 +125,52 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aPrintAreas",
-              "typing.Tuple[CellRangeAddress_ec450d43, ...]",
-              "in"
-            ]
+            {
+              "name": "aPrintAreas",
+              "type": "typing.Tuple[CellRangeAddress_ec450d43, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.table.CellRangeAddress >"
+            }
           ]
         },
         {
           "name": "setPrintTitleColumns",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "specifies whether the title columns are repeated on all subsequent print pages to the right."
           ],
           "raises": [],
           "args": [
-            [
-              "bPrintTitleColumns",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "bPrintTitleColumns",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "setPrintTitleRows",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "specifies whether the title rows are repeated on all subsequent print pages to the bottom."
           ],
           "raises": [],
           "args": [
-            [
-              "bPrintTitleRows",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "bPrintTitleRows",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "setTitleColumns",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "specifies a range of columns as title columns range.",
             "",
@@ -168,16 +180,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aTitleColumns",
-              "CellRangeAddress_ec450d43",
-              "in"
-            ]
+            {
+              "name": "aTitleColumns",
+              "type": "CellRangeAddress_ec450d43",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellRangeAddress"
+            }
           ]
         },
         {
           "name": "setTitleRows",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "specifies a range of rows as title rows range.",
             "",
@@ -187,11 +201,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aTitleRows",
-              "CellRangeAddress_ec450d43",
-              "in"
-            ]
+            {
+              "name": "aTitleRows",
+              "type": "CellRangeAddress_ec450d43",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellRangeAddress"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XIdentifierReplace",
   "type": "interface",
@@ -50,6 +50,7 @@
         {
           "name": "replaceByIdentifer",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "replaces the element with the specified identifier."
           ],
@@ -59,16 +60,18 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "Identifier",
-              "int",
-              "in"
-            ],
-            [
-              "aElement",
-              "object",
-              "in"
-            ]
+            {
+              "name": "Identifier",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aElement",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         }
       ]

@@ -16,7 +16,12 @@ class BaseStruct(BaseJson):
         self._cache = {}
 
     def _hydrate_data(self, json_data: dict):
-        self._models = ModelsStruct(json_data=json_data)
+        try:
+            self._models = ModelsStruct(json_data=json_data)
+        except Exception as e:
+            msg = f"Error occured in struct {json_data['namespace']}.{json_data['name']}"
+            self._lerr(f"{msg}\n{e}")
+            raise Exception(msg) from e
         # self._validate_data(json_data)
         data: Dict[str, object] = json_data['data']
 
@@ -31,7 +36,7 @@ class BaseStruct(BaseJson):
         self.allow_db = mdata.allow_db
         self.desc = mdata.desc
         self.link = mdata.url
-        self.libre_office_ver == self._models.model.libre_office_ver
+        self.libre_office_ver = self._models.model.libre_office_ver
         # set_data('name')
         # set_data('namespace')
         # set_data('allow_db')

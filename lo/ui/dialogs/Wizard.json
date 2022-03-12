@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "Wizard",
   "type": "service",
@@ -69,6 +69,7 @@
         {
           "name": "createMultiplePathsWizard",
           "returns": "None",
+          "returns_origin": null,
           "desc": [
             "creates a wizard with a multiple possible execution paths"
           ],
@@ -76,21 +77,24 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "PageIds",
-              "typing.Tuple[typing.Tuple[int, ...], ...]",
-              "in"
-            ],
-            [
-              "Controller",
-              "XWizardController_469d0fe4",
-              "in"
-            ]
+            {
+              "name": "PageIds",
+              "type": "typing.Tuple[typing.Tuple[int, ...], ...]",
+              "direction": "in",
+              "origin": "sequence< sequence< short > >"
+            },
+            {
+              "name": "Controller",
+              "type": "XWizardController_469d0fe4",
+              "direction": "in",
+              "origin": "com.sun.star.ui.dialogs.XWizardController"
+            }
           ]
         },
         {
           "name": "createSinglePathWizard",
           "returns": "None",
+          "returns_origin": null,
           "desc": [
             "creates a wizard with a single execution path"
           ],
@@ -98,16 +102,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "PageIds",
-              "typing.Tuple[int, ...]",
-              "in"
-            ],
-            [
-              "Controller",
-              "XWizardController_469d0fe4",
-              "in"
-            ]
+            {
+              "name": "PageIds",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "in",
+              "origin": "sequence< short >"
+            },
+            {
+              "name": "Controller",
+              "type": "XWizardController_469d0fe4",
+              "direction": "in",
+              "origin": "com.sun.star.ui.dialogs.XWizardController"
+            }
           ]
         }
       ]
