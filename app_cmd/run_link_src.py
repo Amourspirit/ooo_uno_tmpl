@@ -14,13 +14,13 @@ import argparse
 def set_cmd_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
         '-a', '--add',
-        help='create link from src ...site_packages/oootmp',
+        help='create link from src ...site_packages/oootmpl',
         action='store_true',
         dest='add_link',
         default=True)
     parser.add_argument(
         '-r', '--remove',
-        help='Remove link from src to ...site_packages/oootmp',
+        help='Remove link from src to ...site_packages/oootmpl',
         action='store_true',
         dest='remove_link',
         default=False)

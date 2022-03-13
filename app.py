@@ -43,8 +43,8 @@ Make Command:
     make processes all template and json file in 'lo' directory recursivly.
     make compiles any templates that have not yet been compiled.
     make takes care of generating inplace *.py and *.dynpy files in lo sub directories
-    make takes care of writing to build/lo and build/dyn directories and sub directories
-    make writes the output python file for each template out to 'build'
+    make takes care of writing to ooobuild/lo and ooobuild/dyn directories and sub directories
+    make writes the output python file for each template out to 'ooobuild'
         directory keeping the same directory structure.
     make by default will only compile templates that have been
         updated since compile was last run.
@@ -112,13 +112,13 @@ Type of Templates:
     There are currently two types of templates outputed into lo dir, *.tmpl and *.dyn.
     
     *.tmpl templates files are converted into corresonding *.py files and are written into
-    build/lo sub directories
+    ooobuild/lo sub directories
     
-    *.dyn template files are converted into corresonding *.py files and are written into
-    build/dyn sub directories
+    *.dyn template files are converted into corresonding *.dynpy files and are written into
+    ooobuild/dyn sub directories
     
     By default *.tmpl and *.dyn files are just stubs that don't contain any acutal data.
-    The template files read from corresponging json files and converts data into py files.
+    The template files read from corresponging json files and converts data into actual LibreOffice classes as py files.
 
 
 Touch Files:
@@ -141,6 +141,14 @@ Touch Files:
     Touch can be used to reset cached data created by compile as well.
     To update all cached data in the tmp sub dir run:
         $ python -m app touch --cache-files
+        
+        Note on cached files:
+            Because cached files are stored in system temp dir the cached files will be deleted on reboot.
+            If you need to restore after reboot then it is recommened to keep a zip file of the cached dir.
+            The name of the dir in the system tmp dir is determined by the cache_dir option in config.json, Default is ooo_uno_tmpl.
+            After reboot copy you zip file into system tmp dir and extract it.
+            Next run the above touch command to reset the date of the cached files.
+            If the entire api is cached then expect the cache dir to contain over 7500 files.
 
 
 url-links:
@@ -166,13 +174,13 @@ Modifying Templates:
 
 
 Output Other Namespaces:
-    The make command outputs build/lo and build/dyn namesapce and files.
+    The make command outputs ooobuild/lo and ooobuild/dyn namesapce and files.
     There are two other namesapces that are also requilred (csslo and cssdyn).
     
-    Outputing build/csslo:
+    Outputing ooobuild/csslo:
         $ python -m app data star --css-lo
     
-    Outputing bulid/cssdyn:
+    Outputing ooobulid/cssdyn:
         $ python -m app data star --css-dyn
 
 
@@ -180,37 +188,37 @@ Regeneration of Database:
     'resources/mod_info.sqlite' database is required for templates to build.
     Database must exist before make command line option is invoked.
     
-    Database is built from various json files that are generated in 'data' directory.
-    1. Write all module_links.json into data directory.
+    Database is built from various json files that are generated in 'ooodata' directory.
+    1. Write all module_links.json into ooodata directory.
         This is done by running the following on the command line.
         python app.py link-json mod-links --data --all --recursive --write-json
         The --data flag instructs to write into data directory.
-    2. Write all component json files into data directory.
+    2. Write all component json files into ooodata directory.
         This is done by running the following on the command line.
         python app.py compile batch --data --all
-        The --data flag instructs to write into data directory.
+        The --data flag instructs app to write into ooodata directory.
     3. Created database if it does not exist.
         This is done by running the following on the command line.
         python app.py data init --init-db
         If database is already existing this comamnd has no effect.
-    4. Update database with 'data/**/*.json' files.
+    4. Update database with 'ooodata/**/*.json' files.
         This is done by running the following on the command line.
         python app.py data update --write-all
-        Command reads 'data' folder and add/updates database.
+        Command reads 'ooodata' folder and add/updates database.
         Any preexisting data in the database will be updated.
 
 
 Other Notes:
-    The underlying parsers that convert html into json and template are located in 
-    the parser directory.
+    App Configuration:
+        The config.json for app is located in src/cfg/config.json
     
     Other Config:
-        parsers/config directory contains special configuration files.
+        src/parsers/config directory contains special configuration files.
         
         known_extends.json:
-            This file contains overrides for the extends of matching comonents.
+            This file contains overrides for the extends of matching components.
             If a match is found in this file then the resulting output of json
-            data parser will contain extends for the found match.
+            data of the parser will contain extends for the found match.
 
             There is a special use case as seen com.sun.star.uno.Exception.
                 When extend ends in ._ it will be treated as a python extend.
@@ -225,6 +233,9 @@ Other Notes:
             Note when parsers that participate have an option to ignore known_json.json.
             This option is used by app.py when writing data into data dir.
             The data dir is used to create/update database.
+    
+    The underlying parsers that convert html into json and template are located in 
+    the src/parser directory.
 """
 
 # region Imports
