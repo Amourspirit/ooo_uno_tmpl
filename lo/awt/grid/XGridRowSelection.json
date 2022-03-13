@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XGridRowSelection",
   "type": "interface",
@@ -55,21 +55,24 @@
         {
           "name": "addSelectionListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Adds a listener for the GridSelectionEvent posted after the grid changes."
           ],
           "raises": [],
           "args": [
-            [
-              "listener",
-              "XGridSelectionListener_759e10f2",
-              "in"
-            ]
+            {
+              "name": "listener",
+              "type": "XGridSelectionListener_759e10f2",
+              "direction": "in",
+              "origin": "com.sun.star.awt.grid.XGridSelectionListener"
+            }
           ]
         },
         {
           "name": "deselectAllRows",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Deselects all selected rows."
           ],
@@ -79,6 +82,7 @@
         {
           "name": "deselectRow",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes the selection for a given row"
           ],
@@ -86,16 +90,18 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "RowIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "RowIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getSelectedRows",
           "returns": "typing.Tuple[int, ...]",
+          "returns_origin": "sequence< long >",
           "desc": [
             "Returns the indices of all selected rows."
           ],
@@ -105,6 +111,7 @@
         {
           "name": "hasSelectedRows",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Returns whether rows are selected."
           ],
@@ -114,36 +121,41 @@
         {
           "name": "isRowSelected",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Returns whether a specific row is selected."
           ],
           "raises": [],
           "args": [
-            [
-              "RowIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "RowIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "removeSelectionListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Removes a listener previously added with addSelectionListener()."
           ],
           "raises": [],
           "args": [
-            [
-              "listener",
-              "XGridSelectionListener_759e10f2",
-              "in"
-            ]
+            {
+              "name": "listener",
+              "type": "XGridSelectionListener_759e10f2",
+              "direction": "in",
+              "origin": "com.sun.star.awt.grid.XGridSelectionListener"
+            }
           ]
         },
         {
           "name": "selectAllRows",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Selects all rows."
           ],
@@ -153,6 +165,7 @@
         {
           "name": "selectRow",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "selects a given row"
           ],
@@ -160,11 +173,12 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "RowIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "RowIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

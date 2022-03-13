@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSolverDescription",
   "type": "interface",
@@ -50,17 +50,43 @@
         {
           "name": "getPropertyDescription",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns a short description for a property in the component's com.sun.star.beans.XPropertySet interface."
           ],
           "raises": [],
           "args": [
-            [
-              "aPropertyName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aPropertyName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
+        }
+      ],
+      "properties": [
+        {
+          "name": "ComponentDescription",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "A user-visible name of the component."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "StatusDescription",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "After calling solve, a message describing the status (explaining why no solution was found)."
+          ],
+          "raises_get": "",
+          "raises_set": ""
         }
       ]
     }

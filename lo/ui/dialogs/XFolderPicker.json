@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XFolderPicker",
   "type": "interface",
@@ -50,6 +50,7 @@
         {
           "name": "getDirectory",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Returns the selected directory as url conforming to Rfc1738."
           ],
@@ -59,6 +60,7 @@
         {
           "name": "getDisplayDirectory",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Returns the root directory that the FolderPicker is showing.",
             "",
@@ -70,6 +72,7 @@
         {
           "name": "setDescription",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "The implementation may optionally show the given text as a description for the user within the dialog, e.g.",
             "",
@@ -77,16 +80,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aDescription",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aDescription",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "setDisplayDirectory",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Sets the root directory that the FolderPicker should display.",
             "",
@@ -96,11 +101,12 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aDirectory",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aDirectory",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

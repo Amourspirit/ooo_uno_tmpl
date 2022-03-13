@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XConversionDictionary",
   "type": "interface",
@@ -78,6 +78,7 @@
         {
           "name": "addEntry",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "is used to add a conversion pair to the dictionary."
           ],
@@ -86,21 +87,24 @@
             "com.sun.star.container.ElementExistException"
           ],
           "args": [
-            [
-              "aLeftText",
-              "str",
-              "in"
-            ],
-            [
-              "aRightText",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aLeftText",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aRightText",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "clear",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes all entries from the dictionary."
           ],
@@ -110,19 +114,22 @@
         {
           "name": "getConversionEntries",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "eDirection",
-              "ConversionDirection_7dfe113c",
-              "in"
-            ]
+            {
+              "name": "eDirection",
+              "type": "ConversionDirection_7dfe113c",
+              "direction": "in",
+              "origin": "com.sun.star.linguistic2.ConversionDirection"
+            }
           ]
         },
         {
           "name": "getConversionType",
           "returns": "int",
+          "returns_origin": "short",
           "desc": [],
           "raises": [],
           "args": []
@@ -130,6 +137,7 @@
         {
           "name": "getConversions",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [
             "searches for entries or conversions that match the given text.",
             "",
@@ -139,36 +147,42 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aText",
-              "str",
-              "in"
-            ],
-            [
-              "nStartPos",
-              "int",
-              "in"
-            ],
-            [
-              "nLength",
-              "int",
-              "in"
-            ],
-            [
-              "eDirection",
-              "ConversionDirection_7dfe113c",
-              "in"
-            ],
-            [
-              "nTextConversionOptions",
-              "int",
-              "in"
-            ]
+            {
+              "name": "aText",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nStartPos",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nLength",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "eDirection",
+              "type": "ConversionDirection_7dfe113c",
+              "direction": "in",
+              "origin": "com.sun.star.linguistic2.ConversionDirection"
+            },
+            {
+              "name": "nTextConversionOptions",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getLocale",
           "returns": "Locale_70d308fa",
+          "returns_origin": "com.sun.star.lang.Locale",
           "desc": [],
           "raises": [],
           "args": []
@@ -176,21 +190,24 @@
         {
           "name": "getMaxCharCount",
           "returns": "int",
+          "returns_origin": "short",
           "desc": [
             "returns the maximum number of characters used as left or right text in entries."
           ],
           "raises": [],
           "args": [
-            [
-              "eDirection",
-              "ConversionDirection_7dfe113c",
-              "in"
-            ]
+            {
+              "name": "eDirection",
+              "type": "ConversionDirection_7dfe113c",
+              "direction": "in",
+              "origin": "com.sun.star.linguistic2.ConversionDirection"
+            }
           ]
         },
         {
           "name": "getName",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [],
           "raises": [],
           "args": []
@@ -198,6 +215,7 @@
         {
           "name": "isActive",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [],
           "raises": [],
           "args": []
@@ -205,6 +223,7 @@
         {
           "name": "removeEntry",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes a conversion pair from the dictionary."
           ],
@@ -212,31 +231,35 @@
             "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
-            [
-              "aLeftText",
-              "str",
-              "in"
-            ],
-            [
-              "aRightText",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aLeftText",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aRightText",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "setActive",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "specifies whether the dictionary should be used or not ."
           ],
           "raises": [],
           "args": [
-            [
-              "bActivate",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "bActivate",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         }
       ]

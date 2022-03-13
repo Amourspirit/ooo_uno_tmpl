@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XServiceInfo",
   "type": "interface",
@@ -54,6 +54,7 @@
         {
           "name": "getImplementationName",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Provides the implementation name of the service implementation."
           ],
@@ -63,6 +64,7 @@
         {
           "name": "getSupportedServiceNames",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [
             "Provides the supported service names of the implementation, including also indirect service names."
           ],
@@ -72,6 +74,7 @@
         {
           "name": "supportsService",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Tests whether the specified service is supported, i.e.",
             "",
@@ -79,11 +82,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "ServiceName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "ServiceName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

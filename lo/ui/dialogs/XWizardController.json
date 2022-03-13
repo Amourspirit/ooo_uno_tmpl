@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XWizardController",
   "type": "interface",
@@ -59,6 +59,7 @@
         {
           "name": "canAdvance",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [],
           "raises": [],
           "args": []
@@ -66,6 +67,7 @@
         {
           "name": "confirmFinish",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "called when the wizard is about to be finished.",
             "",
@@ -77,6 +79,7 @@
         {
           "name": "createPage",
           "returns": "XWizardPage_ed7c0d3d",
+          "returns_origin": "com.sun.star.ui.dialogs.XWizardPage",
           "desc": [
             "creates a page",
             "",
@@ -84,21 +87,24 @@
           ],
           "raises": [],
           "args": [
-            [
-              "ParentWindow",
-              "XWindow_713b0924",
-              "in"
-            ],
-            [
-              "PageId",
-              "int",
-              "in"
-            ]
+            {
+              "name": "ParentWindow",
+              "type": "XWindow_713b0924",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XWindow"
+            },
+            {
+              "name": "PageId",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "getPageTitle",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "provides the title of a page given by ID",
             "",
@@ -106,41 +112,46 @@
           ],
           "raises": [],
           "args": [
-            [
-              "PageId",
-              "int",
-              "in"
-            ]
+            {
+              "name": "PageId",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "onActivatePage",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "called when a new page in the wizard is being activated"
           ],
           "raises": [],
           "args": [
-            [
-              "PageId",
-              "int",
-              "in"
-            ]
+            {
+              "name": "PageId",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "onDeactivatePage",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "called when a page in the wizard is being deactivated"
           ],
           "raises": [],
           "args": [
-            [
-              "PageId",
-              "int",
-              "in"
-            ]
+            {
+              "name": "PageId",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         }
       ]

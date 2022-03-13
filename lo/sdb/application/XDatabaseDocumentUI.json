@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDatabaseDocumentUI",
   "type": "interface",
@@ -88,6 +88,7 @@
         {
           "name": "closeSubComponents",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "closes all sub components of the database document.",
             "",
@@ -107,6 +108,7 @@
         {
           "name": "connect",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "lets the application connect to the database",
             "",
@@ -122,6 +124,7 @@
         {
           "name": "createComponent",
           "returns": "XComponent_98dc0ab5",
+          "returns_origin": "com.sun.star.lang.XComponent",
           "desc": [
             "creates a new sub component of the given type"
           ],
@@ -130,21 +133,24 @@
             "com.sun.star.sdbc.SQLException"
           ],
           "args": [
-            [
-              "ObjectType",
-              "int",
-              "in"
-            ],
-            [
-              "DocumentDefinition",
-              "XComponent_98dc0ab5",
-              "out"
-            ]
+            {
+              "name": "ObjectType",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "DocumentDefinition",
+              "type": "XComponent_98dc0ab5",
+              "direction": "out",
+              "origin": "com.sun.star.lang.XComponent"
+            }
           ]
         },
         {
           "name": "createComponentWithArguments",
           "returns": "XComponent_98dc0ab5",
+          "returns_origin": "com.sun.star.lang.XComponent",
           "desc": [
             "creates a new sub component of the given type",
             "",
@@ -156,26 +162,30 @@
             "com.sun.star.sdbc.SQLException"
           ],
           "args": [
-            [
-              "ObjectType",
-              "int",
-              "in"
-            ],
-            [
-              "Arguments",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ],
-            [
-              "DocumentDefinition",
-              "XComponent_98dc0ab5",
-              "out"
-            ]
+            {
+              "name": "ObjectType",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "Arguments",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< .com.sun.star.beans.PropertyValue >"
+            },
+            {
+              "name": "DocumentDefinition",
+              "type": "XComponent_98dc0ab5",
+              "direction": "out",
+              "origin": "com.sun.star.lang.XComponent"
+            }
           ]
         },
         {
           "name": "identifySubComponent",
           "returns": "typing.Tuple[int, str]",
+          "returns_origin": "com.sun.star.beans.Pair< long, string >",
           "desc": [
             "identifies the given sub component"
           ],
@@ -183,16 +193,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "SubComponent",
-              "XComponent_98dc0ab5",
-              "in"
-            ]
+            {
+              "name": "SubComponent",
+              "type": "XComponent_98dc0ab5",
+              "direction": "in",
+              "origin": "com.sun.star.lang.XComponent"
+            }
           ]
         },
         {
           "name": "isConnected",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "determines whether the application is currently connected to the database"
           ],
@@ -202,6 +214,7 @@
         {
           "name": "loadComponent",
           "returns": "XComponent_98dc0ab5",
+          "returns_origin": "com.sun.star.lang.XComponent",
           "desc": [
             "loads the given sub component of the database document",
             "",
@@ -221,26 +234,30 @@
             "com.sun.star.sdbc.SQLException"
           ],
           "args": [
-            [
-              "ObjectType",
-              "int",
-              "in"
-            ],
-            [
-              "ObjectName",
-              "str",
-              "in"
-            ],
-            [
-              "ForEditing",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "ObjectType",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "ObjectName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "ForEditing",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "loadComponentWithArguments",
           "returns": "XComponent_98dc0ab5",
+          "returns_origin": "com.sun.star.lang.XComponent",
           "desc": [
             "loads the given sub component of the database document",
             "",
@@ -254,26 +271,30 @@
             "com.sun.star.sdbc.SQLException"
           ],
           "args": [
-            [
-              "ObjectType",
-              "int",
-              "in"
-            ],
-            [
-              "ObjectName",
-              "str",
-              "in"
-            ],
-            [
-              "ForEditing",
-              "bool",
-              "in"
-            ],
-            [
-              "Arguments",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ]
+            {
+              "name": "ObjectType",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "ObjectName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "ForEditing",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            },
+            {
+              "name": "Arguments",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< .com.sun.star.beans.PropertyValue >"
+            }
           ]
         }
       ],
@@ -281,6 +302,8 @@
         {
           "name": "SubComponents",
           "returns": "typing.Tuple[XComponent_98dc0ab5, ...]",
+          "origtype": null,
+          "origin": "sequence< .com.sun.star.lang.XComponent >",
           "desc": [
             "contains all sub components of the database document",
             "",
@@ -300,6 +323,8 @@
         {
           "name": "ActiveConnection",
           "returns": "XConnection_a36a0b0c",
+          "origtype": "com.sun.star.sdbc.XConnection",
+          "origin": "com.sun.star.sdbc.XConnection",
           "desc": [
             "provides access to the current connection of the application",
             "",
@@ -311,6 +336,8 @@
         {
           "name": "ApplicationMainWindow",
           "returns": "XWindow_713b0924",
+          "origtype": "com.sun.star.awt.XWindow",
+          "origin": "com.sun.star.awt.XWindow",
           "desc": [
             "provides access to the application's main window",
             "",
@@ -322,6 +349,8 @@
         {
           "name": "DataSource",
           "returns": "XDataSource_a2990ae7",
+          "origtype": "com.sun.star.sdbc.XDataSource",
+          "origin": "com.sun.star.sdbc.XDataSource",
           "desc": [
             "provides access to the data source belong to the database document"
           ],

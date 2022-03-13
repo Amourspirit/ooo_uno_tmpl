@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XBlob",
   "type": "interface",
@@ -70,6 +70,7 @@
         {
           "name": "getBinaryStream",
           "returns": "XInputStream_98d40ab4",
+          "returns_origin": "com.sun.star.io.XInputStream",
           "desc": [
             "retrieves the  BLOB  designated by this Blob instance as a stream."
           ],
@@ -81,6 +82,7 @@
         {
           "name": "getBytes",
           "returns": "typing.Tuple[int, ...]",
+          "returns_origin": "sequence< byte >",
           "desc": [
             "returns as an array of bytes part or all of the  BLOB  value that this Blob object designates.",
             "",
@@ -90,21 +92,24 @@
             "SQLException"
           ],
           "args": [
-            [
-              "pos",
-              "int",
-              "in"
-            ],
-            [
-              "length",
-              "int",
-              "in"
-            ]
+            {
+              "name": "pos",
+              "type": "int",
+              "direction": "in",
+              "origin": "hyper"
+            },
+            {
+              "name": "length",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "length",
           "returns": "int",
+          "returns_origin": "hyper",
           "desc": [
             "returns the number of bytes in the  BLOB  value designated by this Blob object."
           ],
@@ -116,6 +121,7 @@
         {
           "name": "position",
           "returns": "int",
+          "returns_origin": "hyper",
           "desc": [
             "determines the byte position at which the specified byte pattern begins within the  BLOB  value that this Blob object represents.",
             "",
@@ -125,21 +131,24 @@
             "SQLException"
           ],
           "args": [
-            [
-              "pattern",
-              "typing.Tuple[int, ...]",
-              "in"
-            ],
-            [
-              "start",
-              "int",
-              "in"
-            ]
+            {
+              "name": "pattern",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "in",
+              "origin": "sequence< byte >"
+            },
+            {
+              "name": "start",
+              "type": "int",
+              "direction": "in",
+              "origin": "hyper"
+            }
           ]
         },
         {
           "name": "positionOfBlob",
           "returns": "int",
+          "returns_origin": "hyper",
           "desc": [
             "determines the byte position in the  BLOB  value designated by this Blob object at which pattern begins.",
             "",
@@ -149,16 +158,18 @@
             "SQLException"
           ],
           "args": [
-            [
-              "pattern",
-              "XBlob",
-              "in"
-            ],
-            [
-              "start",
-              "int",
-              "in"
-            ]
+            {
+              "name": "pattern",
+              "type": "XBlob",
+              "direction": "in",
+              "origin": "com.sun.star.sdbc.XBlob"
+            },
+            {
+              "name": "start",
+              "type": "int",
+              "direction": "in",
+              "origin": "hyper"
+            }
           ]
         }
       ]

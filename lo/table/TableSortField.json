@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "TableSortField",
@@ -39,6 +39,13 @@
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.lang.Locale",
+        "com.sun.star.table.TableSortFieldType"
+      ]
+    },
     "fullname": "com.sun.star.table.TableSortField",
     "desc": [
       "describes how to sort a single field (row/column) in a tables sort descriptor.",
@@ -53,28 +60,36 @@
       {
         "name": "Field",
         "type": "int",
-        "lines": [
+        "origtype": null,
+        "origin": "long",
+        "desc": [
           "index of the row or column in the table to be sorted; 0-based."
         ]
       },
       {
         "name": "IsAscending",
         "type": "bool",
-        "lines": [
+        "origtype": null,
+        "origin": "boolean",
+        "desc": [
           "TRUE if data are sorted in ascending order, FALSE if in descending order."
         ]
       },
       {
         "name": "IsCaseSensitive",
         "type": "bool",
-        "lines": [
+        "origtype": null,
+        "origin": "boolean",
+        "desc": [
           "specifies if the case of letters is important when comparing entries."
         ]
       },
       {
         "name": "FieldType",
         "type": "TableSortFieldType_9a50e26",
-        "lines": [
+        "origtype": "com.sun.star.table.TableSortFieldType",
+        "origin": "com.sun.star.table.TableSortFieldType",
+        "desc": [
           "type of contents in the field.",
           "",
           "If the value is com.sun.star.table.TableSortFieldType.AUTOMATIC the algorithm used for sorting is application specific. Especially it may or may not use the values given by \\\"CollatorLocale\\\" and \\\"CollatorAlgorithm\\\"."
@@ -83,7 +98,9 @@
       {
         "name": "CollatorLocale",
         "type": "Locale_70d308fa",
-        "lines": [
+        "origtype": "com.sun.star.lang.Locale",
+        "origin": "com.sun.star.lang.Locale",
+        "desc": [
           "the locale used by the collator when comparing/sorting text.",
           "",
           "This property will not be used when the \\\"FieldType\\\" is com.sun.star.table.TableSortFieldType.NUMERIC"
@@ -92,7 +109,9 @@
       {
         "name": "CollatorAlgorithm",
         "type": "str",
-        "lines": [
+        "origtype": null,
+        "origin": "string",
+        "desc": [
           "the algorithm used by the collator when comparing/sorting text.",
           "",
           "This property will not be used when the \\\"FieldType\\\" is com.sun.star.table.TableSortFieldType.NUMERIC"

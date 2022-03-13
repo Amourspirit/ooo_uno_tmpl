@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XStorageBasedLibraryContainer",
   "type": "interface",
@@ -66,6 +66,7 @@
         {
           "name": "storeLibrariesToStorage",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "stores the libraries to a storage other than the current container storage",
             "",
@@ -76,11 +77,12 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "RootStorage",
-              "XStorage_8e460a32",
-              "in"
-            ]
+            {
+              "name": "RootStorage",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            }
           ]
         }
       ],
@@ -88,6 +90,8 @@
         {
           "name": "RootStorage",
           "returns": "XStorage_8e460a32",
+          "origtype": "com.sun.star.embed.XStorage",
+          "origin": "com.sun.star.embed.XStorage",
           "desc": [
             "denotes the root storage associated with the container.",
             "",

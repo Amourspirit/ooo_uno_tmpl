@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XConfigurationControllerBroadcaster",
   "type": "interface",
@@ -57,6 +57,7 @@
         {
           "name": "addConfigurationChangeListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Add a new listener for configuration changes.",
             "",
@@ -64,51 +65,58 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xListener",
-              "XConfigurationChangeListener_adee172c",
-              "in"
-            ],
-            [
-              "sEventType",
-              "str",
-              "in"
-            ],
-            [
-              "aUserData",
-              "object",
-              "in"
-            ]
+            {
+              "name": "xListener",
+              "type": "XConfigurationChangeListener_adee172c",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.framework.XConfigurationChangeListener"
+            },
+            {
+              "name": "sEventType",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aUserData",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         },
         {
           "name": "notifyEvent",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "With this method other objects can send events to all the registered listeners."
           ],
           "raises": [],
           "args": [
-            [
-              "aEvent",
-              "ConfigurationChangeEvent_55151590",
-              "in"
-            ]
+            {
+              "name": "aEvent",
+              "type": "ConfigurationChangeEvent_55151590",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.framework.ConfigurationChangeEvent"
+            }
           ]
         },
         {
           "name": "removeConfigurationChangeListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Remove a listener for configuration changes."
           ],
           "raises": [],
           "args": [
-            [
-              "xListener",
-              "XConfigurationChangeListener_adee172c",
-              "in"
-            ]
+            {
+              "name": "xListener",
+              "type": "XConfigurationChangeListener_adee172c",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.framework.XConfigurationChangeListener"
+            }
           ]
         }
       ]

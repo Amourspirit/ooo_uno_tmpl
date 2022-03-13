@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSheetPastable",
   "type": "interface",
@@ -85,21 +85,24 @@
         {
           "name": "paste",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "pastes the contents of the clipboard at the specified position on the sheet."
           ],
           "raises": [],
           "args": [
-            [
-              "aDestination",
-              "CellAddress_ae5f0b56",
-              "in"
-            ]
+            {
+              "name": "aDestination",
+              "type": "CellAddress_ae5f0b56",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellAddress"
+            }
           ]
         },
         {
           "name": "pasteCellRange",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "pastes clipboard data from a cell range into another cell range.",
             "",
@@ -107,61 +110,71 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aDestination",
-              "CellRangeAddress_ec450d43",
-              "in"
-            ],
-            [
-              "nOperation",
-              "PasteOperation_d5de0ccf",
-              "in"
-            ],
-            [
-              "nContents",
-              "int",
-              "in"
-            ],
-            [
-              "bSkipEmpty",
-              "bool",
-              "in"
-            ],
-            [
-              "bTranspose",
-              "bool",
-              "in"
-            ],
-            [
-              "bAsLink",
-              "bool",
-              "in"
-            ],
-            [
-              "nInsert",
-              "CellInsertMode_d47d0c9b",
-              "in"
-            ]
+            {
+              "name": "aDestination",
+              "type": "CellRangeAddress_ec450d43",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellRangeAddress"
+            },
+            {
+              "name": "nOperation",
+              "type": "PasteOperation_d5de0ccf",
+              "direction": "in",
+              "origin": "com.sun.star.sheet.PasteOperation"
+            },
+            {
+              "name": "nContents",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "bSkipEmpty",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            },
+            {
+              "name": "bTranspose",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            },
+            {
+              "name": "bAsLink",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            },
+            {
+              "name": "nInsert",
+              "type": "CellInsertMode_d47d0c9b",
+              "direction": "in",
+              "origin": "com.sun.star.sheet.CellInsertMode"
+            }
           ]
         },
         {
           "name": "pasteFormat",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "pastes the contents of the clipboard at the specified position on the sheet, using the specified format."
           ],
           "raises": [],
           "args": [
-            [
-              "aDestination",
-              "CellAddress_ae5f0b56",
-              "in"
-            ],
-            [
-              "aFormat",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aDestination",
+              "type": "CellAddress_ae5f0b56",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellAddress"
+            },
+            {
+              "name": "aFormat",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

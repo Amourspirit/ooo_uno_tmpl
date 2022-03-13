@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDatabaseRange",
   "type": "interface",
@@ -83,6 +83,7 @@
         {
           "name": "getDataArea",
           "returns": "CellRangeAddress_ec450d43",
+          "returns_origin": "com.sun.star.table.CellRangeAddress",
           "desc": [
             "returns the data area of the database range in the spreadsheet document."
           ],
@@ -92,6 +93,7 @@
         {
           "name": "getFilterDescriptor",
           "returns": "XSheetFilterDescriptor_47cc0ff7",
+          "returns_origin": "com.sun.star.sheet.XSheetFilterDescriptor",
           "desc": [
             "returns the filter descriptor stored with the database range.",
             "",
@@ -103,6 +105,7 @@
         {
           "name": "getImportDescriptor",
           "returns": "typing.Tuple[PropertyValue_c9610c73, ...]",
+          "returns_origin": "sequence< com.sun.star.beans.PropertyValue >",
           "desc": [
             "returns the database import descriptor stored with this database range."
           ],
@@ -112,6 +115,7 @@
         {
           "name": "getSortDescriptor",
           "returns": "typing.Tuple[PropertyValue_c9610c73, ...]",
+          "returns_origin": "sequence< com.sun.star.beans.PropertyValue >",
           "desc": [
             "returns the sort descriptor stored with the database range."
           ],
@@ -121,6 +125,7 @@
         {
           "name": "getSubTotalDescriptor",
           "returns": "XSubTotalDescriptor_19fd0ec6",
+          "returns_origin": "com.sun.star.sheet.XSubTotalDescriptor",
           "desc": [
             "returns the subtotal descriptor stored with the database range.",
             "",
@@ -132,6 +137,7 @@
         {
           "name": "refresh",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "executes the stored import, filter, sorting, and subtotals descriptors again."
           ],
@@ -141,16 +147,18 @@
         {
           "name": "setDataArea",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the data area of the database range."
           ],
           "raises": [],
           "args": [
-            [
-              "aDataArea",
-              "CellRangeAddress_ec450d43",
-              "in"
-            ]
+            {
+              "name": "aDataArea",
+              "type": "CellRangeAddress_ec450d43",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellRangeAddress"
+            }
           ]
         }
       ]

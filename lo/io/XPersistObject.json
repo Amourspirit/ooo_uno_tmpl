@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XPersistObject",
   "type": "interface",
@@ -75,6 +75,7 @@
         {
           "name": "getServiceName",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "gives the service name of the object",
             "",
@@ -86,6 +87,7 @@
         {
           "name": "read",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "reads all the persistent data of the object from the stream.",
             "",
@@ -97,16 +99,18 @@
             "com.sun.star.io.IOException"
           ],
           "args": [
-            [
-              "InStream",
-              "XObjectInputStream_dfb60d0b",
-              "in"
-            ]
+            {
+              "name": "InStream",
+              "type": "XObjectInputStream_dfb60d0b",
+              "direction": "in",
+              "origin": "com.sun.star.io.XObjectInputStream"
+            }
           ]
         },
         {
           "name": "write",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "writes all the persistent data of the object to the stream.",
             "",
@@ -116,11 +120,12 @@
             "com.sun.star.io.IOException"
           ],
           "args": [
-            [
-              "OutStream",
-              "XObjectOutputStream_ee190d8c",
-              "in"
-            ]
+            {
+              "name": "OutStream",
+              "type": "XObjectOutputStream_ee190d8c",
+              "direction": "in",
+              "origin": "com.sun.star.io.XObjectOutputStream"
+            }
           ]
         }
       ]

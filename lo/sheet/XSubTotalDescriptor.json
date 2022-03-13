@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSubTotalDescriptor",
   "type": "interface",
@@ -62,26 +62,30 @@
         {
           "name": "addNew",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "adds a subtotal field definition to the descriptor."
           ],
           "raises": [],
           "args": [
-            [
-              "aSubTotalColumns",
-              "typing.Tuple[SubTotalColumn_d5760cbd, ...]",
-              "in"
-            ],
-            [
-              "nGroupColumn",
-              "int",
-              "in"
-            ]
+            {
+              "name": "aSubTotalColumns",
+              "type": "typing.Tuple[SubTotalColumn_d5760cbd, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.sheet.SubTotalColumn >"
+            },
+            {
+              "name": "nGroupColumn",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "clear",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes all subtotal field definitions from the descriptor."
           ],

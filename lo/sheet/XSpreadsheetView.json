@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSpreadsheetView",
   "type": "interface",
@@ -62,6 +62,7 @@
         {
           "name": "getActiveSheet",
           "returns": "XSpreadsheet_bc910bf1",
+          "returns_origin": "com.sun.star.sheet.XSpreadsheet",
           "desc": [
             "returns the sheet that is shown in the view."
           ],
@@ -71,16 +72,18 @@
         {
           "name": "setActiveSheet",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the sheet that is shown in the view."
           ],
           "raises": [],
           "args": [
-            [
-              "xActiveSheet",
-              "XSpreadsheet_bc910bf1",
-              "in"
-            ]
+            {
+              "name": "xActiveSheet",
+              "type": "XSpreadsheet_bc910bf1",
+              "direction": "in",
+              "origin": "com.sun.star.sheet.XSpreadsheet"
+            }
           ]
         }
       ]

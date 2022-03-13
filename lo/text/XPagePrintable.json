@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XPagePrintable",
   "type": "interface",
@@ -62,6 +62,7 @@
         {
           "name": "getPagePrintSettings",
           "returns": "typing.Tuple[PropertyValue_c9610c73, ...]",
+          "returns_origin": "sequence< com.sun.star.beans.PropertyValue >",
           "desc": [
             "These settings contains:"
           ],
@@ -71,6 +72,7 @@
         {
           "name": "printPages",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "prints the pages according to the PagePrintSettings."
           ],
@@ -78,26 +80,29 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "xOptions",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ]
+            {
+              "name": "xOptions",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            }
           ]
         },
         {
           "name": "setPagePrintSettings",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "adjusts the settings of the page printing."
           ],
           "raises": [],
           "args": [
-            [
-              "aSettings",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ]
+            {
+              "name": "aSettings",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            }
           ]
         }
       ]

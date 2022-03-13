@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XUser",
   "type": "interface",
@@ -50,6 +50,7 @@
         {
           "name": "changePassword",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "allows modifying a user password."
           ],
@@ -57,16 +58,18 @@
             "com.sun.star.sdbc.SQLException"
           ],
           "args": [
-            [
-              "oldPassword",
-              "str",
-              "in"
-            ],
-            [
-              "newPassword",
-              "str",
-              "in"
-            ]
+            {
+              "name": "oldPassword",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "newPassword",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

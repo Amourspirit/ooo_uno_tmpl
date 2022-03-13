@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XBitmap",
   "type": "interface",
@@ -74,6 +74,7 @@
         {
           "name": "getScaledBitmap",
           "returns": "XBitmap",
+          "returns_origin": "com.sun.star.rendering.XBitmap",
           "desc": [
             "Query a scaled copy of the original bitmap."
           ],
@@ -82,21 +83,24 @@
             "VolatileContentDestroyedException"
           ],
           "args": [
-            [
-              "newSize",
-              "RealSize2D_ca1a0c09",
-              "in"
-            ],
-            [
-              "beFast",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "newSize",
+              "type": "RealSize2D_ca1a0c09",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.RealSize2D"
+            },
+            {
+              "name": "beFast",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "getSize",
           "returns": "IntegerSize2D_f2690d53",
+          "returns_origin": "com.sun.star.geometry.IntegerSize2D",
           "desc": [
             "Query the size of the bitmap.",
             "",
@@ -108,6 +112,7 @@
         {
           "name": "hasAlpha",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Query transparency status of the bitmap.",
             "",

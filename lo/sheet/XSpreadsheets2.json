@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSpreadsheets2",
   "type": "interface",
@@ -64,6 +64,7 @@
         {
           "name": "importSheet",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "copies a sheet from a source document.",
             "",
@@ -76,21 +77,24 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "srcDoc",
-              "XSpreadsheetDocument_2a1f0f30",
-              "in"
-            ],
-            [
-              "srcName",
-              "str",
-              "in"
-            ],
-            [
-              "nDestPosition",
-              "int",
-              "in"
-            ]
+            {
+              "name": "srcDoc",
+              "type": "XSpreadsheetDocument_2a1f0f30",
+              "direction": "in",
+              "origin": "com.sun.star.sheet.XSpreadsheetDocument"
+            },
+            {
+              "name": "srcName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nDestPosition",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

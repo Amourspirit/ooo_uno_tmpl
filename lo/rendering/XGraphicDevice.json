@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XGraphicDevice",
   "type": "interface",
@@ -137,6 +137,7 @@
         {
           "name": "createCompatibleAlphaBitmap",
           "returns": "XBitmap_b1b70b7b",
+          "returns_origin": "com.sun.star.rendering.XBitmap",
           "desc": [
             "Create a bitmap with alpha channel whose memory layout and sample model is compatible to the graphic device."
           ],
@@ -144,31 +145,35 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "size",
-              "IntegerSize2D_f2690d53",
-              "in"
-            ]
+            {
+              "name": "size",
+              "type": "IntegerSize2D_f2690d53",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.IntegerSize2D"
+            }
           ]
         },
         {
           "name": "createCompatibleBezierPolyPolygon",
           "returns": "XBezierPolyPolygon2D_6ba01081",
+          "returns_origin": "com.sun.star.rendering.XBezierPolyPolygon2D",
           "desc": [
             "Create a Bezier poly-polygon which can internally use device-optimized representations already."
           ],
           "raises": [],
           "args": [
-            [
-              "points",
-              "typing.Tuple[typing.Tuple[RealBezierSegment2D_4a970fa2, ...], ...]",
-              "in"
-            ]
+            {
+              "name": "points",
+              "type": "typing.Tuple[typing.Tuple[RealBezierSegment2D_4a970fa2, ...], ...]",
+              "direction": "in",
+              "origin": "sequence< sequence< .com.sun.star.geometry.RealBezierSegment2D > >"
+            }
           ]
         },
         {
           "name": "createCompatibleBitmap",
           "returns": "XBitmap_b1b70b7b",
+          "returns_origin": "com.sun.star.rendering.XBitmap",
           "desc": [
             "Create a bitmap whose memory layout and sample model is compatible to the graphic device."
           ],
@@ -176,31 +181,35 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "size",
-              "IntegerSize2D_f2690d53",
-              "in"
-            ]
+            {
+              "name": "size",
+              "type": "IntegerSize2D_f2690d53",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.IntegerSize2D"
+            }
           ]
         },
         {
           "name": "createCompatibleLinePolyPolygon",
           "returns": "XLinePolyPolygon2D_4a270fa8",
+          "returns_origin": "com.sun.star.rendering.XLinePolyPolygon2D",
           "desc": [
             "Create a line poly-polygon which can internally use device-optimized representations already."
           ],
           "raises": [],
           "args": [
-            [
-              "points",
-              "typing.Tuple[typing.Tuple[RealPoint2D_d6e70c78, ...], ...]",
-              "in"
-            ]
+            {
+              "name": "points",
+              "type": "typing.Tuple[typing.Tuple[RealPoint2D_d6e70c78, ...], ...]",
+              "direction": "in",
+              "origin": "sequence< sequence< .com.sun.star.geometry.RealPoint2D > >"
+            }
           ]
         },
         {
           "name": "createVolatileAlphaBitmap",
           "returns": "XVolatileBitmap_1ca40ebb",
+          "returns_origin": "com.sun.star.rendering.XVolatileBitmap",
           "desc": [
             "Create a volatile bitmap with alpha channel that is usable with this graphic device.",
             "",
@@ -210,16 +219,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "size",
-              "IntegerSize2D_f2690d53",
-              "in"
-            ]
+            {
+              "name": "size",
+              "type": "IntegerSize2D_f2690d53",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.IntegerSize2D"
+            }
           ]
         },
         {
           "name": "createVolatileBitmap",
           "returns": "XVolatileBitmap_1ca40ebb",
+          "returns_origin": "com.sun.star.rendering.XVolatileBitmap",
           "desc": [
             "Create a volatile bitmap that is usable with this graphic device.",
             "",
@@ -229,16 +240,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "size",
-              "IntegerSize2D_f2690d53",
-              "in"
-            ]
+            {
+              "name": "size",
+              "type": "IntegerSize2D_f2690d53",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.IntegerSize2D"
+            }
           ]
         },
         {
           "name": "enterFullScreenMode",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Enter or leave the fullscreen mode, if possible.",
             "",
@@ -246,16 +259,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "bEnter",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "bEnter",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "getBufferController",
           "returns": "XBufferController_3a970f9c",
+          "returns_origin": "com.sun.star.rendering.XBufferController",
           "desc": [
             "Query the controller for multi buffering functionality on this graphic device.",
             "",
@@ -267,6 +282,7 @@
         {
           "name": "getDeviceColorSpace",
           "returns": "XColorSpace_e3940d09",
+          "returns_origin": "com.sun.star.rendering.XColorSpace",
           "desc": [
             "Query the color space interface for this graphic device.",
             "",
@@ -278,6 +294,7 @@
         {
           "name": "getParametricPolyPolygonFactory",
           "returns": "XMultiServiceFactory_191e0eb6",
+          "returns_origin": "com.sun.star.lang.XMultiServiceFactory",
           "desc": [
             "Get a reference to this device's parametric polygon factory.",
             "",
@@ -289,6 +306,7 @@
         {
           "name": "getPhysicalResolution",
           "returns": "RealSize2D_ca1a0c09",
+          "returns_origin": "com.sun.star.geometry.RealSize2D",
           "desc": [
             "Query the physical resolution of the device in pixel per millimeter.",
             "",
@@ -300,6 +318,7 @@
         {
           "name": "getPhysicalSize",
           "returns": "RealSize2D_ca1a0c09",
+          "returns_origin": "com.sun.star.geometry.RealSize2D",
           "desc": [
             "Query the physical dimensions of the device in millimeter.",
             "",
@@ -311,6 +330,7 @@
         {
           "name": "hasFullScreenMode",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Tells whether this graphic device has a full screen mode, i.e.",
             "",

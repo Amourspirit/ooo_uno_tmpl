@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XViewFreezable",
   "type": "interface",
@@ -50,6 +50,7 @@
         {
           "name": "freezeAtPosition",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "freezes panes with the specified number of columns and rows.",
             "",
@@ -57,21 +58,24 @@
           ],
           "raises": [],
           "args": [
-            [
-              "nColumns",
-              "int",
-              "in"
-            ],
-            [
-              "nRows",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nColumns",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nRows",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "hasFrozenPanes",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "returns TRUE if the view has frozen panes.",
             "",

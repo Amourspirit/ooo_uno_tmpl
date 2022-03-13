@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSeekable",
   "type": "interface",
@@ -52,6 +52,7 @@
         {
           "name": "getLength",
           "returns": "int",
+          "returns_origin": "hyper",
           "desc": [
             "returns the length of the stream."
           ],
@@ -63,6 +64,7 @@
         {
           "name": "getPosition",
           "returns": "int",
+          "returns_origin": "hyper",
           "desc": [
             "returns the current offset of the stream."
           ],
@@ -74,6 +76,7 @@
         {
           "name": "seek",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "changes the seek pointer to a new location relative to the beginning of the stream.",
             "",
@@ -84,11 +87,12 @@
             "com.sun.star.io.IOException"
           ],
           "args": [
-            [
-              "location",
-              "int",
-              "in"
-            ]
+            {
+              "name": "location",
+              "type": "int",
+              "direction": "in",
+              "origin": "hyper"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XMultiLayerStratum",
   "type": "interface",
@@ -78,6 +78,7 @@
         {
           "name": "getLayer",
           "returns": "XLayer_4cd50fcb",
+          "returns_origin": "com.sun.star.configuration.backend.XLayer",
           "desc": [
             "retrieves a layer associated to a layer id, if newer than indicated.",
             "",
@@ -94,21 +95,24 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aLayerId",
-              "str",
-              "in"
-            ],
-            [
-              "aTimestamp",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aLayerId",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aTimestamp",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getLayers",
           "returns": "typing.Tuple[XLayer_4cd50fcb, ...]",
+          "returns_origin": "sequence< XLayer >",
           "desc": [
             "retrieves the layers associated to a series of layer ids, if newer than indicated.",
             "",
@@ -129,21 +133,24 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aLayerIds",
-              "typing.Tuple[str, ...]",
-              "in"
-            ],
-            [
-              "aTimestamp",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aLayerIds",
+              "type": "typing.Tuple[str, ...]",
+              "direction": "in",
+              "origin": "sequence< string >"
+            },
+            {
+              "name": "aTimestamp",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getMultipleLayers",
           "returns": "typing.Tuple[XLayer_4cd50fcb, ...]",
+          "returns_origin": "sequence< XLayer >",
           "desc": [
             "retrieves the layers associated to a series of layer ids, if newer than indicated for each layer.",
             "",
@@ -166,21 +173,24 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aLayerIds",
-              "typing.Tuple[str, ...]",
-              "in"
-            ],
-            [
-              "aTimestamps",
-              "typing.Tuple[str, ...]",
-              "in"
-            ]
+            {
+              "name": "aLayerIds",
+              "type": "typing.Tuple[str, ...]",
+              "direction": "in",
+              "origin": "sequence< string >"
+            },
+            {
+              "name": "aTimestamps",
+              "type": "typing.Tuple[str, ...]",
+              "direction": "in",
+              "origin": "sequence< string >"
+            }
           ]
         },
         {
           "name": "getUpdatableLayer",
           "returns": "XUpdatableLayer_ec97135d",
+          "returns_origin": "com.sun.star.configuration.backend.XUpdatableLayer",
           "desc": [
             "retrieves a writable representation of the layer associated to a layer id.",
             "",
@@ -192,16 +202,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aLayerId",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aLayerId",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getUpdateLayerId",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "identifies the layer which should be modified to update data of a component on behalf of an entity.",
             "",
@@ -213,21 +225,24 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aComponent",
-              "str",
-              "in"
-            ],
-            [
-              "aEntity",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aComponent",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aEntity",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "listLayerIds",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [
             "identifies the layers within this stratum which should be read and merged to determine data of a component for an entity",
             "",
@@ -238,16 +253,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aComponent",
-              "str",
-              "in"
-            ],
-            [
-              "aEntity",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aComponent",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aEntity",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

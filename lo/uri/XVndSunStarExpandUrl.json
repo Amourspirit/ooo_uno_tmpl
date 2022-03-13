@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XVndSunStarExpandUrl",
   "type": "interface",
@@ -56,6 +56,7 @@
         {
           "name": "expand",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the expanded content of this URL."
           ],
@@ -63,11 +64,12 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "expander",
-              "XMacroExpander_c8360c47",
-              "in"
-            ]
+            {
+              "name": "expander",
+              "type": "XMacroExpander_c8360c47",
+              "direction": "in",
+              "origin": "com.sun.star.util.XMacroExpander"
+            }
           ]
         }
       ]

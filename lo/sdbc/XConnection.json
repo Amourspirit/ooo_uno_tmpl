@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XConnection",
   "type": "interface",
@@ -85,6 +85,7 @@
         {
           "name": "commit",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "makes all changes made since the previous commit/rollback permanent and releases any database locks currently held by the Connection.",
             "",
@@ -98,6 +99,7 @@
         {
           "name": "createStatement",
           "returns": "XStatement_98e90ab1",
+          "returns_origin": "com.sun.star.sdbc.XStatement",
           "desc": [
             "creates a new com.sun.star.sdbc.Statement object for sending SQL statements to the database.",
             "",
@@ -115,6 +117,7 @@
         {
           "name": "getAutoCommit",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "gets the current auto-commit state."
           ],
@@ -126,6 +129,7 @@
         {
           "name": "getCatalog",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the Connection's current catalog name."
           ],
@@ -137,6 +141,7 @@
         {
           "name": "getMetaData",
           "returns": "XDatabaseMetaData_eafd0d12",
+          "returns_origin": "com.sun.star.sdbc.XDatabaseMetaData",
           "desc": [
             "gets the metadata regarding this connection's database.",
             "",
@@ -150,6 +155,7 @@
         {
           "name": "getTransactionIsolation",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "gets this Connection's current transaction isolation level."
           ],
@@ -161,6 +167,7 @@
         {
           "name": "getTypeMap",
           "returns": "XNameAccess_e2ab0cf6",
+          "returns_origin": "com.sun.star.container.XNameAccess",
           "desc": [
             "gets the type map object associated with this connection.",
             "",
@@ -176,6 +183,7 @@
         {
           "name": "isClosed",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "tests to see if a connection is closed.",
             "",
@@ -189,6 +197,7 @@
         {
           "name": "isReadOnly",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "tests to see if the connection is in read-only mode."
           ],
@@ -200,6 +209,7 @@
         {
           "name": "nativeSQL",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "converts the given SQL statement into the system's native SQL grammar.",
             "",
@@ -209,16 +219,18 @@
             "SQLException"
           ],
           "args": [
-            [
-              "sql",
-              "str",
-              "in"
-            ]
+            {
+              "name": "sql",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "prepareCall",
           "returns": "XPreparedStatement_fbc80de4",
+          "returns_origin": "com.sun.star.sdbc.XPreparedStatement",
           "desc": [
             "creates a com.sun.star.sdbc.CallableStatement object for calling database stored procedures.",
             "",
@@ -231,16 +243,18 @@
             "SQLException"
           ],
           "args": [
-            [
-              "sql",
-              "str",
-              "in"
-            ]
+            {
+              "name": "sql",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "prepareStatement",
           "returns": "XPreparedStatement_fbc80de4",
+          "returns_origin": "com.sun.star.sdbc.XPreparedStatement",
           "desc": [
             "creates a com.sun.star.sdbc.PreparedStatement object for sending parameterized SQL statements to the database.",
             "",
@@ -256,16 +270,18 @@
             "SQLException"
           ],
           "args": [
-            [
-              "sql",
-              "str",
-              "in"
-            ]
+            {
+              "name": "sql",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "rollback",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "drops all changes made since the previous commit/rollback and releases any database locks currently held by this Connection.",
             "",
@@ -279,6 +295,7 @@
         {
           "name": "setAutoCommit",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets this connection's auto-commit mode.",
             "",
@@ -290,16 +307,18 @@
             "SQLException"
           ],
           "args": [
-            [
-              "autoCommit",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "autoCommit",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "setCatalog",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets a catalog name in order to select a subspace of this Connection's database in which to work.",
             "",
@@ -309,16 +328,18 @@
             "SQLException"
           ],
           "args": [
-            [
-              "catalog",
-              "str",
-              "in"
-            ]
+            {
+              "name": "catalog",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "setReadOnly",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "puts this connection in read-only mode as a hint to enable database optimizations.",
             "",
@@ -328,16 +349,18 @@
             "SQLException"
           ],
           "args": [
-            [
-              "readOnly",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "readOnly",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "setTransactionIsolation",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "attempts to change the transaction isolation level to the one given.",
             "",
@@ -349,16 +372,18 @@
             "SQLException"
           ],
           "args": [
-            [
-              "level",
-              "int",
-              "in"
-            ]
+            {
+              "name": "level",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "setTypeMap",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "installs the given type map as the type map for this connection.",
             "",
@@ -370,11 +395,12 @@
             "SQLException"
           ],
           "args": [
-            [
-              "typeMap",
-              "XNameAccess_e2ab0cf6",
-              "in"
-            ]
+            {
+              "name": "typeMap",
+              "type": "XNameAccess_e2ab0cf6",
+              "direction": "in",
+              "origin": "com.sun.star.container.XNameAccess"
+            }
           ]
         }
       ]

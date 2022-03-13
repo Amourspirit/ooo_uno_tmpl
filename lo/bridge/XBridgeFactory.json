@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XBridgeFactory",
   "type": "interface",
@@ -77,6 +77,7 @@
         {
           "name": "createBridge",
           "returns": "XBridge_8e4e0a1a",
+          "returns_origin": "com.sun.star.bridge.XBridge",
           "desc": [
             "tries to create a UNO interprocess bridge.",
             "",
@@ -87,31 +88,36 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "sName",
-              "str",
-              "in"
-            ],
-            [
-              "sProtocol",
-              "str",
-              "in"
-            ],
-            [
-              "aConnection",
-              "XConnection_f2320da0",
-              "in"
-            ],
-            [
-              "anInstanceProvider",
-              "XInstanceProvider_b090e4d",
-              "in"
-            ]
+            {
+              "name": "sName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "sProtocol",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aConnection",
+              "type": "XConnection_f2320da0",
+              "direction": "in",
+              "origin": "com.sun.star.connection.XConnection"
+            },
+            {
+              "name": "anInstanceProvider",
+              "type": "XInstanceProvider_b090e4d",
+              "direction": "in",
+              "origin": "com.sun.star.bridge.XInstanceProvider"
+            }
           ]
         },
         {
           "name": "getBridge",
           "returns": "XBridge_8e4e0a1a",
+          "returns_origin": "com.sun.star.bridge.XBridge",
           "desc": [
             "tries to get a bridge by this name.",
             "",
@@ -119,16 +125,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "sName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "sName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getExistingBridges",
           "returns": "typing.Tuple[XBridge_8e4e0a1a, ...]",
+          "returns_origin": "sequence< XBridge >",
           "desc": [
             "returns the sequence of all named and unnamed UNO interprocess bridges that are instantiated at the time the call is made."
           ],

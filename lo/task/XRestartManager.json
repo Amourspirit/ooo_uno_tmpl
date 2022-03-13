@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XRestartManager",
   "type": "interface",
@@ -64,6 +64,7 @@
         {
           "name": "isRestartRequested",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "allows to get info whether the restart has been requested and provide the initialization status.",
             "",
@@ -73,16 +74,18 @@
             "com.sun.star.uno.Exception"
           ],
           "args": [
-            [
-              "bInitialized",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "bInitialized",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "requestRestart",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "let the office restart asynchronously"
           ],
@@ -90,11 +93,12 @@
             "com.sun.star.uno.Exception"
           ],
           "args": [
-            [
-              "xInteractionHandler",
-              "XInteractionHandler_bf80e51",
-              "in"
-            ]
+            {
+              "name": "xInteractionHandler",
+              "type": "XInteractionHandler_bf80e51",
+              "direction": "in",
+              "origin": "com.sun.star.task.XInteractionHandler"
+            }
           ]
         }
       ]

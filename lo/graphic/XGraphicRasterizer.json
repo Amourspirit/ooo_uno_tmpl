@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XGraphicRasterizer",
   "type": "interface",
@@ -81,6 +81,7 @@
         {
           "name": "initializeData",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Initializing the rasterizer.",
             "",
@@ -98,31 +99,36 @@
           ],
           "raises": [],
           "args": [
-            [
-              "DataStream",
-              "XInputStream_98d40ab4",
-              "in"
-            ],
-            [
-              "DPIX",
-              "int",
-              "in"
-            ],
-            [
-              "DPIY",
-              "int",
-              "in"
-            ],
-            [
-              "DefaultSizePixel",
-              "Size_576707ef",
-              "out"
-            ]
+            {
+              "name": "DataStream",
+              "type": "XInputStream_98d40ab4",
+              "direction": "in",
+              "origin": "com.sun.star.io.XInputStream"
+            },
+            {
+              "name": "DPIX",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "DPIY",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "DefaultSizePixel",
+              "type": "Size_576707ef",
+              "direction": "out",
+              "origin": "com.sun.star.awt.Size"
+            }
           ]
         },
         {
           "name": "rasterize",
           "returns": "XGraphic_a4da0afc",
+          "returns_origin": "com.sun.star.graphic.XGraphic",
           "desc": [
             "Rasterizing the initialized data into a XGraphic container.",
             "",
@@ -132,36 +138,42 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Width",
-              "int",
-              "in"
-            ],
-            [
-              "Height",
-              "int",
-              "in"
-            ],
-            [
-              "RotateAngle",
-              "float",
-              "in"
-            ],
-            [
-              "ShearAngleX",
-              "float",
-              "in"
-            ],
-            [
-              "ShearAngleY",
-              "float",
-              "in"
-            ],
-            [
-              "RasterizeProperties",
-              "PropertyValues_d6470ce6",
-              "in"
-            ]
+            {
+              "name": "Width",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "Height",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "RotateAngle",
+              "type": "float",
+              "direction": "in",
+              "origin": "double"
+            },
+            {
+              "name": "ShearAngleX",
+              "type": "float",
+              "direction": "in",
+              "origin": "double"
+            },
+            {
+              "name": "ShearAngleY",
+              "type": "float",
+              "direction": "in",
+              "origin": "double"
+            },
+            {
+              "name": "RasterizeProperties",
+              "type": "PropertyValues_d6470ce6",
+              "direction": "in",
+              "origin": "com.sun.star.beans.PropertyValues"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XLibraryContainer",
   "type": "interface",
@@ -61,6 +61,7 @@
         {
           "name": "createLibrary",
           "returns": "XNameContainer_cb90e47",
+          "returns_origin": "com.sun.star.container.XNameContainer",
           "desc": [
             "Creates a new library."
           ],
@@ -69,16 +70,18 @@
             "com.sun.star.container.ElementExistException"
           ],
           "args": [
-            [
-              "Name",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "createLibraryLink",
           "returns": "XNameAccess_e2ab0cf6",
+          "returns_origin": "com.sun.star.container.XNameAccess",
           "desc": [
             "Creates a link to an \\\"external\\\" library that then can be accessed using this library manager.",
             "",
@@ -89,26 +92,30 @@
             "com.sun.star.container.ElementExistException"
           ],
           "args": [
-            [
-              "Name",
-              "str",
-              "in"
-            ],
-            [
-              "StorageURL",
-              "str",
-              "in"
-            ],
-            [
-              "ReadOnly",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "Name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "StorageURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "ReadOnly",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "isLibraryLoaded",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "returns true if the accessed library is already loaded from the storage, otherwise false."
           ],
@@ -116,16 +123,18 @@
             "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
-            [
-              "Name",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "loadLibrary",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Causes the accessed library to be loaded from its storage if it hasn't already been loaded."
           ],
@@ -134,16 +143,18 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "Name",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "removeLibrary",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes the library item with the specified name.",
             "",
@@ -154,11 +165,12 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "Name",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

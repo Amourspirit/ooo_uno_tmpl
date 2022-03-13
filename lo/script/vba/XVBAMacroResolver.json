@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XVBAMacroResolver",
   "type": "interface",
@@ -38,6 +38,7 @@
         {
           "name": "resolveScriptURLtoVBAMacro",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Returns the VBA macro name for a macro with the passed script URL."
           ],
@@ -45,16 +46,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aScriptURL",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aScriptURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "resolveVBAMacroToScriptURL",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Returns the script URL representing the passed VBA macro name."
           ],
@@ -62,11 +65,12 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aVBAMacroName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aVBAMacroName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

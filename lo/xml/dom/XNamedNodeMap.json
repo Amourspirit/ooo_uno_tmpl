@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XNamedNodeMap",
   "type": "interface",
@@ -58,6 +58,7 @@
         {
           "name": "getLength",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "The number of nodes in this map."
           ],
@@ -67,56 +68,64 @@
         {
           "name": "getNamedItem",
           "returns": "XNode_83fb09a5",
+          "returns_origin": "com.sun.star.xml.dom.XNode",
           "desc": [
             "Retrieves a node specified by local name."
           ],
           "raises": [],
           "args": [
-            [
-              "name",
-              "str",
-              "in"
-            ]
+            {
+              "name": "name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getNamedItemNS",
           "returns": "XNode_83fb09a5",
+          "returns_origin": "com.sun.star.xml.dom.XNode",
           "desc": [
             "Retrieves a node specified by local name and namespace URI."
           ],
           "raises": [],
           "args": [
-            [
-              "namespaceURI",
-              "str",
-              "in"
-            ],
-            [
-              "localName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "namespaceURI",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "localName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "item",
           "returns": "XNode_83fb09a5",
+          "returns_origin": "com.sun.star.xml.dom.XNode",
           "desc": [
             "Returns a node specified by index."
           ],
           "raises": [],
           "args": [
-            [
-              "index",
-              "int",
-              "in"
-            ]
+            {
+              "name": "index",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "removeNamedItem",
           "returns": "XNode_83fb09a5",
+          "returns_origin": "com.sun.star.xml.dom.XNode",
           "desc": [
             "Removes a node specified by name.",
             "",
@@ -126,16 +135,18 @@
             "DOMException"
           ],
           "args": [
-            [
-              "name",
-              "str",
-              "in"
-            ]
+            {
+              "name": "name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "removeNamedItemNS",
           "returns": "XNode_83fb09a5",
+          "returns_origin": "com.sun.star.xml.dom.XNode",
           "desc": [
             "Removes a node specified by local name and namespace URI.",
             "",
@@ -145,21 +156,24 @@
             "DOMException"
           ],
           "args": [
-            [
-              "namespaceURI",
-              "str",
-              "in"
-            ],
-            [
-              "localName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "namespaceURI",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "localName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "setNamedItem",
           "returns": "XNode_83fb09a5",
+          "returns_origin": "com.sun.star.xml.dom.XNode",
           "desc": [
             "Adds a node using its nodeName attribute.",
             "",
@@ -169,16 +183,18 @@
             "DOMException"
           ],
           "args": [
-            [
-              "arg",
-              "XNode_83fb09a5",
-              "in"
-            ]
+            {
+              "name": "arg",
+              "type": "XNode_83fb09a5",
+              "direction": "in",
+              "origin": "com.sun.star.xml.dom.XNode"
+            }
           ]
         },
         {
           "name": "setNamedItemNS",
           "returns": "XNode_83fb09a5",
+          "returns_origin": "com.sun.star.xml.dom.XNode",
           "desc": [
             "Adds a node using its namespaceURI and localName.",
             "",
@@ -188,11 +204,12 @@
             "DOMException"
           ],
           "args": [
-            [
-              "arg",
-              "XNode_83fb09a5",
-              "in"
-            ]
+            {
+              "name": "arg",
+              "type": "XNode_83fb09a5",
+              "direction": "in",
+              "origin": "com.sun.star.xml.dom.XNode"
+            }
           ]
         }
       ]

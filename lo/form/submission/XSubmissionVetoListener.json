@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSubmissionVetoListener",
   "type": "interface",
@@ -60,6 +60,7 @@
         {
           "name": "submitting",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "is invoked when a component, at which the listener has been registered, is about to submit its data."
           ],
@@ -67,11 +68,12 @@
             "com.sun.star.util.VetoException"
           ],
           "args": [
-            [
-              "event",
-              "EventObject_a3d70b03",
-              "in"
-            ]
+            {
+              "name": "event",
+              "type": "EventObject_a3d70b03",
+              "direction": "in",
+              "origin": "com.sun.star.lang.EventObject"
+            }
           ]
         }
       ]

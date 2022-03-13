@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XBackend",
   "type": "interface",
@@ -77,6 +77,7 @@
         {
           "name": "getOwnUpdateHandler",
           "returns": "XUpdateHandler_d8f512ef",
+          "returns_origin": "com.sun.star.configuration.backend.XUpdateHandler",
           "desc": [
             "creates an update handler for the owner entity layer for a component."
           ],
@@ -86,16 +87,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aComponent",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aComponent",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getUpdateHandler",
           "returns": "XUpdateHandler_d8f512ef",
+          "returns_origin": "com.sun.star.configuration.backend.XUpdateHandler",
           "desc": [
             "creates an update handler on an entity's layer for a component."
           ],
@@ -105,21 +108,24 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aComponent",
-              "str",
-              "in"
-            ],
-            [
-              "aEntity",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aComponent",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aEntity",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "listLayers",
           "returns": "typing.Tuple[XLayer_4cd50fcb, ...]",
+          "returns_origin": "sequence< XLayer >",
           "desc": [
             "retrieves the layers associated to an entity for a component."
           ],
@@ -128,21 +134,24 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aComponent",
-              "str",
-              "in"
-            ],
-            [
-              "aEntity",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aComponent",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aEntity",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "listOwnLayers",
           "returns": "typing.Tuple[XLayer_4cd50fcb, ...]",
+          "returns_origin": "sequence< XLayer >",
           "desc": [
             "retrieves the layers associated to the owner entity for a component."
           ],
@@ -151,11 +160,12 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aComponent",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aComponent",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

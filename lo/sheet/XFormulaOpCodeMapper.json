@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XFormulaOpCodeMapper",
   "type": "interface",
@@ -60,6 +60,7 @@
         {
           "name": "getAvailableMappings",
           "returns": "typing.Tuple[FormulaOpCodeMapEntry_37da0f61, ...]",
+          "returns_origin": "sequence< FormulaOpCodeMapEntry >",
           "desc": [
             "returns a sequence of map entries for all available elements of a given formula language.",
             "",
@@ -69,21 +70,24 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "Language",
-              "int",
-              "in"
-            ],
-            [
-              "Groups",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Language",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "Groups",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getMappings",
           "returns": "typing.Tuple[FormulaToken_bd1c0bf8, ...]",
+          "returns_origin": "sequence< FormulaToken >",
           "desc": [
             "returns a sequence of tokens matching the input sequence of strings in order.",
             "",
@@ -99,17 +103,47 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "Names",
-              "typing.Tuple[str, ...]",
-              "in"
-            ],
-            [
-              "Language",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Names",
+              "type": "typing.Tuple[str, ...]",
+              "direction": "in",
+              "origin": "sequence< string >"
+            },
+            {
+              "name": "Language",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
+        }
+      ],
+      "properties": [
+        {
+          "name": "OpCodeExternal",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "OpCode value used for external Add-In functions.",
+            "",
+            "Needed to be able to identify which of the function names map to an Add-In implementation where this OpCode is used in the returned mapping and the programmatic name is available as additional information."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "OpCodeUnknown",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "OpCode value used for unknown functions.",
+            "",
+            "Used to identify which of the function names queried with getMappings() are unknown to the implementation."
+          ],
+          "raises_get": "",
+          "raises_set": ""
         }
       ]
     }

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XUpdateHandler",
   "type": "interface",
@@ -64,6 +64,7 @@
         {
           "name": "addOrReplaceNode",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification that a node is started as a new item.",
             "",
@@ -82,21 +83,24 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ],
-            [
-              "aAttributes",
-              "int",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aAttributes",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "addOrReplaceNodeFromTemplate",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification that a node is started as a new item based on a particular template.",
             "",
@@ -113,26 +117,30 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ],
-            [
-              "aAttributes",
-              "int",
-              "in"
-            ],
-            [
-              "aTemplate",
-              "TemplateIdentifier_2aaa14b5",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aAttributes",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "aTemplate",
+              "type": "TemplateIdentifier_2aaa14b5",
+              "direction": "in",
+              "origin": "com.sun.star.configuration.backend.TemplateIdentifier"
+            }
           ]
         },
         {
           "name": "addOrReplaceProperty",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification that a property having a value of VOID is added to the current node.",
             "",
@@ -149,26 +157,30 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ],
-            [
-              "aAttributes",
-              "int",
-              "in"
-            ],
-            [
-              "aType",
-              "object",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aAttributes",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "aType",
+              "type": "object",
+              "direction": "in",
+              "origin": "type"
+            }
           ]
         },
         {
           "name": "addOrReplacePropertyWithValue",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification that a property having a non-NULL value is added to the current node.",
             "",
@@ -187,26 +199,30 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ],
-            [
-              "aAttributes",
-              "int",
-              "in"
-            ],
-            [
-              "aValue",
-              "object",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aAttributes",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "aValue",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         },
         {
           "name": "endNode",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification that a node modification is complete.",
             "",
@@ -223,6 +239,7 @@
         {
           "name": "endProperty",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification that a property modification is complete.",
             "",
@@ -239,6 +256,7 @@
         {
           "name": "endUpdate",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification that the current update description is complete.",
             "",
@@ -256,6 +274,7 @@
         {
           "name": "modifyNode",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification that a modification of a node is started.",
             "",
@@ -274,31 +293,36 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ],
-            [
-              "aAttributes",
-              "int",
-              "in"
-            ],
-            [
-              "aAttributeMask",
-              "int",
-              "in"
-            ],
-            [
-              "bReset",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aAttributes",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "aAttributeMask",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "bReset",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "modifyProperty",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification that modification of an existing property is started.",
             "",
@@ -321,31 +345,36 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ],
-            [
-              "aAttributes",
-              "int",
-              "in"
-            ],
-            [
-              "aAttributeMask",
-              "int",
-              "in"
-            ],
-            [
-              "aType",
-              "object",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aAttributes",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "aAttributeMask",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "aType",
+              "type": "object",
+              "direction": "in",
+              "origin": "type"
+            }
           ]
         },
         {
           "name": "removeNode",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification that an item is to be dropped from a set.",
             "",
@@ -358,16 +387,18 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "removeProperty",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification that a property is dropped from the current node.",
             "",
@@ -380,16 +411,18 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "resetProperty",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification that a property is reset to its default state.",
             "",
@@ -400,16 +433,18 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "resetPropertyValue",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification that the value of the current property should be reset to its default.",
             "",
@@ -424,6 +459,7 @@
         {
           "name": "resetPropertyValueForLocale",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification that the value of the current property for a specific locale should be reset to its default.",
             "",
@@ -434,16 +470,18 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "aLocale",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aLocale",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "setPropertyValue",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification about a change to the value of the current property.",
             "",
@@ -456,16 +494,18 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "aValue",
-              "object",
-              "in"
-            ]
+            {
+              "name": "aValue",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         },
         {
           "name": "setPropertyValueForLocale",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification about a change to the value of the current property for a specific locale.",
             "",
@@ -478,21 +518,24 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "aValue",
-              "object",
-              "in"
-            ],
-            [
-              "aLocale",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aValue",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            },
+            {
+              "name": "aLocale",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "startUpdate",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "receives notification that an update or description is started.",
             "",

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XEncryptionResultBroadcaster",
   "type": "interface",
@@ -62,6 +62,7 @@
         {
           "name": "addEncryptionResultListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Adds a new encryption result listener.",
             "",
@@ -71,16 +72,18 @@
             "com.sun.star.uno.Exception"
           ],
           "args": [
-            [
-              "listener",
-              "XEncryptionResultListener_290f14ea",
-              "in"
-            ]
+            {
+              "name": "listener",
+              "type": "XEncryptionResultListener_290f14ea",
+              "direction": "in",
+              "origin": "com.sun.star.xml.crypto.sax.XEncryptionResultListener"
+            }
           ]
         },
         {
           "name": "removeEncryptionResultListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Removes an encryption result listener.",
             "",
@@ -88,11 +91,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "listener",
-              "XEncryptionResultListener_290f14ea",
-              "in"
-            ]
+            {
+              "name": "listener",
+              "type": "XEncryptionResultListener_290f14ea",
+              "direction": "in",
+              "origin": "com.sun.star.xml.crypto.sax.XEncryptionResultListener"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XStarBasicAccess",
   "type": "interface",
@@ -67,6 +67,7 @@
         {
           "name": "addDialog",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Adds an old style basic dialog (SI controls) to an existing (e.g., created by createLibrary) library.",
             "",
@@ -76,26 +77,30 @@
             "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
-            [
-              "LibraryName",
-              "str",
-              "in"
-            ],
-            [
-              "DialogName",
-              "str",
-              "in"
-            ],
-            [
-              "Data",
-              "typing.Tuple[int, ...]",
-              "in"
-            ]
+            {
+              "name": "LibraryName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "DialogName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Data",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "in",
+              "origin": "sequence< byte >"
+            }
           ]
         },
         {
           "name": "addModule",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Adds a module to an existing (e.g., created by createLibrary) library.",
             "",
@@ -105,31 +110,36 @@
             "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
-            [
-              "LibraryName",
-              "str",
-              "in"
-            ],
-            [
-              "ModuleName",
-              "str",
-              "in"
-            ],
-            [
-              "Language",
-              "str",
-              "in"
-            ],
-            [
-              "Source",
-              "str",
-              "in"
-            ]
+            {
+              "name": "LibraryName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "ModuleName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Language",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Source",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "createLibrary",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Creates an empty library.",
             "",
@@ -139,31 +149,36 @@
             "com.sun.star.container.ElementExistException"
           ],
           "args": [
-            [
-              "LibName",
-              "str",
-              "in"
-            ],
-            [
-              "Password",
-              "str",
-              "in"
-            ],
-            [
-              "ExternalSourceURL",
-              "str",
-              "in"
-            ],
-            [
-              "LinkTargetURL",
-              "str",
-              "in"
-            ]
+            {
+              "name": "LibName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Password",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "ExternalSourceURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "LinkTargetURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getLibraryContainer",
           "returns": "XNameContainer_cb90e47",
+          "returns_origin": "com.sun.star.container.XNameContainer",
           "desc": [
             "returns the library container giving access to the libraries stored in a document or basic library file."
           ],

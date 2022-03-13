@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDataSeries",
   "type": "interface",
@@ -60,21 +60,24 @@
         {
           "name": "getDataPointByIndex",
           "returns": "XPropertySet_bc180bfa",
+          "returns_origin": "com.sun.star.beans.XPropertySet",
           "desc": [],
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "resetAllDataPoints",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "all data point formatting are cleared"
           ],
@@ -84,16 +87,18 @@
         {
           "name": "resetDataPoint",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "the formatting of the specified data point is cleared"
           ],
           "raises": [],
           "args": [
-            [
-              "nIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

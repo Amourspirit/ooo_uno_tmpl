@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XCertificate",
   "type": "interface",
@@ -85,21 +85,24 @@
         {
           "name": "findCertificateExtension",
           "returns": "XCertificateExtension_6ead10f8",
+          "returns_origin": "com.sun.star.security.XCertificateExtension",
           "desc": [
             "Find an extension with an object identifier."
           ],
           "raises": [],
           "args": [
-            [
-              "oid",
-              "typing.Tuple[int, ...]",
-              "in"
-            ]
+            {
+              "name": "oid",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "in",
+              "origin": "sequence< byte >"
+            }
           ]
         },
         {
           "name": "getCertificateUsage",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "get the certificate usage.",
             "",
@@ -113,6 +116,8 @@
         {
           "name": "Encoded",
           "returns": "typing.Tuple[int, ...]",
+          "origtype": null,
+          "origin": "sequence< byte >",
           "desc": [
             "the DER encoded form of the certificate"
           ],
@@ -122,6 +127,8 @@
         {
           "name": "Extensions",
           "returns": "typing.Tuple[XCertificateExtension_6ead10f8, ...]",
+          "origtype": null,
+          "origin": "sequence< XCertificateExtension >",
           "desc": [
             "all extensions of a certificate."
           ],
@@ -131,6 +138,8 @@
         {
           "name": "IssuerUniqueID",
           "returns": "typing.Tuple[int, ...]",
+          "origtype": null,
+          "origin": "sequence< byte >",
           "desc": [
             "the issuer unique ID attribute of the certificate."
           ],
@@ -140,6 +149,8 @@
         {
           "name": "MD5Thumbprint",
           "returns": "typing.Tuple[int, ...]",
+          "origtype": null,
+          "origin": "sequence< byte >",
           "desc": [
             "the MD5 thumbprint"
           ],
@@ -149,6 +160,8 @@
         {
           "name": "SHA1Thumbprint",
           "returns": "typing.Tuple[int, ...]",
+          "origtype": null,
+          "origin": "sequence< byte >",
           "desc": [
             "the SHA-1 thumbprint"
           ],
@@ -158,6 +171,8 @@
         {
           "name": "SerialNumber",
           "returns": "typing.Tuple[int, ...]",
+          "origtype": null,
+          "origin": "sequence< byte >",
           "desc": [
             "the serial number attribute of the certificate."
           ],
@@ -167,6 +182,8 @@
         {
           "name": "SubjectPublicKeyValue",
           "returns": "typing.Tuple[int, ...]",
+          "origtype": null,
+          "origin": "sequence< byte >",
           "desc": [
             "the value of the subject public key"
           ],
@@ -176,6 +193,8 @@
         {
           "name": "SubjectUniqueID",
           "returns": "typing.Tuple[int, ...]",
+          "origtype": null,
+          "origin": "sequence< byte >",
           "desc": [
             "the subject unique ID attribute of the certificate."
           ],
@@ -187,6 +206,8 @@
         {
           "name": "CertificateKind",
           "returns": "CertificateKind_ffd0e69",
+          "origtype": "com.sun.star.security.CertificateKind",
+          "origin": "com.sun.star.security.CertificateKind",
           "desc": [
             "the kind of certificate, X.509 or OpenPGP",
             "",
@@ -200,6 +221,8 @@
         {
           "name": "IssuerName",
           "returns": "str",
+          "origtype": null,
+          "origin": "string",
           "desc": [
             "the issuer name attribute of the certificate."
           ],
@@ -209,6 +232,8 @@
         {
           "name": "NotValidAfter",
           "returns": "DateTime_84de09d3",
+          "origtype": "com.sun.star.util.DateTime",
+          "origin": "com.sun.star.util.DateTime",
           "desc": [
             "the validity NotAfter date attribute of the certificate."
           ],
@@ -218,6 +243,8 @@
         {
           "name": "NotValidBefore",
           "returns": "DateTime_84de09d3",
+          "origtype": "com.sun.star.util.DateTime",
+          "origin": "com.sun.star.util.DateTime",
           "desc": [
             "the validity NotBefore date attribute of the certificate."
           ],
@@ -227,6 +254,8 @@
         {
           "name": "SignatureAlgorithm",
           "returns": "str",
+          "origtype": null,
+          "origin": "string",
           "desc": [
             "the signature algorithm"
           ],
@@ -236,6 +265,8 @@
         {
           "name": "SubjectName",
           "returns": "str",
+          "origtype": null,
+          "origin": "string",
           "desc": [
             "the subject name attribute of the certificate."
           ],
@@ -245,6 +276,8 @@
         {
           "name": "SubjectPublicKeyAlgorithm",
           "returns": "str",
+          "origtype": null,
+          "origin": "string",
           "desc": [
             "the algorithm of the subject public key"
           ],
@@ -254,6 +287,8 @@
         {
           "name": "Version",
           "returns": "int",
+          "origtype": null,
+          "origin": "short",
           "desc": [
             "the version number attribute of the certificate."
           ],

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSecurityEnvironment",
   "type": "interface",
@@ -69,6 +69,7 @@
         {
           "name": "buildCertificatePath",
           "returns": "typing.Tuple[XCertificate_e55b0d3b, ...]",
+          "returns_origin": "sequence< com.sun.star.security.XCertificate >",
           "desc": [
             "Build certificate path from a certain certificate."
           ],
@@ -76,16 +77,18 @@
             "com.sun.star.uno.SecurityException"
           ],
           "args": [
-            [
-              "beginCert",
-              "XCertificate_e55b0d3b",
-              "in"
-            ]
+            {
+              "name": "beginCert",
+              "type": "XCertificate_e55b0d3b",
+              "direction": "in",
+              "origin": "com.sun.star.security.XCertificate"
+            }
           ]
         },
         {
           "name": "createCertificateFromAscii",
           "returns": "XCertificate_e55b0d3b",
+          "returns_origin": "com.sun.star.security.XCertificate",
           "desc": [
             "Create certificate interface from a Base64 encoded certificate."
           ],
@@ -93,16 +96,18 @@
             "com.sun.star.uno.SecurityException"
           ],
           "args": [
-            [
-              "asciiCertificate",
-              "str",
-              "in"
-            ]
+            {
+              "name": "asciiCertificate",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "createCertificateFromRaw",
           "returns": "XCertificate_e55b0d3b",
+          "returns_origin": "com.sun.star.security.XCertificate",
           "desc": [
             "Create certificate interface from raw DER encoded certificate."
           ],
@@ -110,16 +115,18 @@
             "com.sun.star.uno.SecurityException"
           ],
           "args": [
-            [
-              "rawCertificate",
-              "typing.Tuple[int, ...]",
-              "in"
-            ]
+            {
+              "name": "rawCertificate",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "in",
+              "origin": "sequence< byte >"
+            }
           ]
         },
         {
           "name": "getAllCertificates",
           "returns": "typing.Tuple[XCertificate_e55b0d3b, ...]",
+          "returns_origin": "sequence< com.sun.star.security.XCertificate >",
           "desc": [
             "List all certificates, private (as returned by getPersonalCertificates) as well as those of other people/orgas.",
             "",
@@ -135,6 +142,7 @@
         {
           "name": "getCertificate",
           "returns": "XCertificate_e55b0d3b",
+          "returns_origin": "com.sun.star.security.XCertificate",
           "desc": [
             "Get certificate from the environment by issuer name and serial number."
           ],
@@ -142,21 +150,24 @@
             "com.sun.star.uno.SecurityException"
           ],
           "args": [
-            [
-              "issuerName",
-              "str",
-              "in"
-            ],
-            [
-              "serialNumber",
-              "typing.Tuple[int, ...]",
-              "in"
-            ]
+            {
+              "name": "issuerName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "serialNumber",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "in",
+              "origin": "sequence< byte >"
+            }
           ]
         },
         {
           "name": "getCertificateCharacters",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "Get a certificate characters.",
             "",
@@ -168,16 +179,18 @@
             "com.sun.star.uno.SecurityException"
           ],
           "args": [
-            [
-              "xCertificate",
-              "XCertificate_e55b0d3b",
-              "in"
-            ]
+            {
+              "name": "xCertificate",
+              "type": "XCertificate_e55b0d3b",
+              "direction": "in",
+              "origin": "com.sun.star.security.XCertificate"
+            }
           ]
         },
         {
           "name": "getPersonalCertificates",
           "returns": "typing.Tuple[XCertificate_e55b0d3b, ...]",
+          "returns_origin": "sequence< com.sun.star.security.XCertificate >",
           "desc": [
             "Get personal certificates from the environment."
           ],
@@ -189,6 +202,7 @@
         {
           "name": "getSecurityEnvironmentInformation",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Get the Environment detail information."
           ],
@@ -198,6 +212,7 @@
         {
           "name": "verifyCertificate",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "Verify a certificate.",
             "",
@@ -207,16 +222,18 @@
             "com.sun.star.uno.SecurityException"
           ],
           "args": [
-            [
-              "xEECertificate",
-              "XCertificate_e55b0d3b",
-              "in"
-            ],
-            [
-              "intermediateCertificates",
-              "typing.Tuple[XCertificate_e55b0d3b, ...]",
-              "in"
-            ]
+            {
+              "name": "xEECertificate",
+              "type": "XCertificate_e55b0d3b",
+              "direction": "in",
+              "origin": "com.sun.star.security.XCertificate"
+            },
+            {
+              "name": "intermediateCertificates",
+              "type": "typing.Tuple[XCertificate_e55b0d3b, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.security.XCertificate >"
+            }
           ]
         }
       ]

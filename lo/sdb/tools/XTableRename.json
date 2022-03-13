@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XTableRename",
   "type": "interface",
@@ -64,6 +64,7 @@
         {
           "name": "rename",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "rename the given table to the new name"
           ],
@@ -71,16 +72,18 @@
             "com.sun.star.sdbc.SQLException"
           ],
           "args": [
-            [
-              "table",
-              "XPropertySet_bc180bfa",
-              "in"
-            ],
-            [
-              "newName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "table",
+              "type": "XPropertySet_bc180bfa",
+              "direction": "in",
+              "origin": "com.sun.star.beans.XPropertySet"
+            },
+            {
+              "name": "newName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

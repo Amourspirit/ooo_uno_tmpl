@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XFrameLoaderQuery",
   "type": "interface",
@@ -68,6 +68,7 @@
         {
           "name": "getAvailableFilterNames",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [
             "use member com.sun.star.container.XNameAccess.getElementNames() provided by service FrameLoaderFactory instead of this"
           ],
@@ -77,36 +78,41 @@
         {
           "name": "getLoaderProperties",
           "returns": "typing.Tuple[PropertyValue_c9610c73, ...]",
+          "returns_origin": "sequence< .com.sun.star.beans.PropertyValue >",
           "desc": [
             "use member com.sun.star.container.XNameAccess.getByName() provided by service FrameLoaderFactory instead of this"
           ],
           "raises": [],
           "args": [
-            [
-              "sFilterName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "sFilterName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "searchFilter",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "use member com.sun.star.container.XContainerQuery provided by service FrameLoaderFactory instead of this"
           ],
           "raises": [],
           "args": [
-            [
-              "sURL",
-              "str",
-              "in"
-            ],
-            [
-              "seqArguments",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ]
+            {
+              "name": "sURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "seqArguments",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            }
           ]
         }
       ]

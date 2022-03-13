@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XVBAModuleInfo",
   "type": "interface",
@@ -46,35 +46,40 @@
         {
           "name": "getModuleInfo",
           "returns": "ModuleInfo_b2090b8f",
+          "returns_origin": "com.sun.star.script.ModuleInfo",
           "desc": [],
           "raises": [
             "com.sun.star.container.NoSuchElementException",
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "ModuleName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "ModuleName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "hasModuleInfo",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "ModuleName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "ModuleName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "insertModuleInfo",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [],
           "raises": [
             "com.sun.star.lang.IllegalArgumentException",
@@ -82,32 +87,36 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "ModuleName",
-              "str",
-              "in"
-            ],
-            [
-              "ModuleInfo",
-              "ModuleInfo_b2090b8f",
-              "in"
-            ]
+            {
+              "name": "ModuleName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "ModuleInfo",
+              "type": "ModuleInfo_b2090b8f",
+              "direction": "in",
+              "origin": "com.sun.star.script.ModuleInfo"
+            }
           ]
         },
         {
           "name": "removeModuleInfo",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [],
           "raises": [
             "com.sun.star.container.NoSuchElementException",
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "ModuleName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "ModuleName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

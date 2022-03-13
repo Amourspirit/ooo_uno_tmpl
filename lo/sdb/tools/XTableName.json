@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XTableName",
   "type": "interface",
@@ -59,6 +59,7 @@
         {
           "name": "getComposedName",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the composed table name, including the catalog and schema name, respecting the database's quoting requirements, plus"
           ],
@@ -66,36 +67,41 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "Type",
-              "int",
-              "in"
-            ],
-            [
-              "Quote",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "Type",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "Quote",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "setComposedName",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets a new composed table name"
           ],
           "raises": [],
           "args": [
-            [
-              "ComposedName",
-              "str",
-              "in"
-            ],
-            [
-              "Type",
-              "int",
-              "in"
-            ]
+            {
+              "name": "ComposedName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Type",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ],
@@ -103,6 +109,8 @@
         {
           "name": "CatalogName",
           "returns": "str",
+          "origtype": null,
+          "origin": "string",
           "desc": [
             "denotes the name of the catalog which the table is a part of"
           ],
@@ -112,6 +120,8 @@
         {
           "name": "NameForSelect",
           "returns": "str",
+          "origtype": null,
+          "origin": "string",
           "desc": [
             "represents the table name in a form to be used in a SELECT statement.",
             "",
@@ -123,6 +133,8 @@
         {
           "name": "SchemaName",
           "returns": "str",
+          "origtype": null,
+          "origin": "string",
           "desc": [
             "denotes the name of the schema which the table is a part of"
           ],
@@ -132,6 +144,8 @@
         {
           "name": "Table",
           "returns": "XPropertySet_bc180bfa",
+          "origtype": "com.sun.star.beans.XPropertySet",
+          "origin": "com.sun.star.beans.XPropertySet",
           "desc": [
             "is the com.sun.star.sdb.Table object specified by the current name.",
             "",
@@ -143,6 +157,8 @@
         {
           "name": "TableName",
           "returns": "str",
+          "origtype": null,
+          "origin": "string",
           "desc": [
             "denotes the mere, unqualified table name, excluding any catalog and schema."
           ],

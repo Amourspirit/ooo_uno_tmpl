@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XRangeXMLConversion",
   "type": "interface",
@@ -50,6 +50,7 @@
         {
           "name": "convertRangeFromXML",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "converts an XML-style range into the internal DataProvider's format."
           ],
@@ -57,16 +58,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aXMLRange",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aXMLRange",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "convertRangeToXML",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "converts the range to a valid XML syntax.",
             "",
@@ -76,11 +79,12 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aRangeRepresentation",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aRangeRepresentation",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

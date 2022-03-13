@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "FormOperations",
   "type": "service",
@@ -71,6 +71,7 @@
         {
           "name": "createWithForm",
           "returns": "None",
+          "returns_origin": null,
           "desc": [
             "creates a FormOperations instance which works on a com.sun.star.form.component.DataForm instance."
           ],
@@ -78,16 +79,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "Form",
-              "XForm_684408a8",
-              "in"
-            ]
+            {
+              "name": "Form",
+              "type": "XForm_684408a8",
+              "direction": "in",
+              "origin": "com.sun.star.form.XForm"
+            }
           ]
         },
         {
           "name": "createWithFormController",
           "returns": "None",
+          "returns_origin": null,
           "desc": [
             "creates a FormOperations instance which works on a com.sun.star.form.FormController instance."
           ],
@@ -95,11 +98,12 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "Controller",
-              "XFormController_4a570ffe",
-              "in"
-            ]
+            {
+              "name": "Controller",
+              "type": "XFormController_4a570ffe",
+              "direction": "in",
+              "origin": "com.sun.star.form.runtime.XFormController"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XBezierPolyPolygon2D",
   "type": "interface",
@@ -71,6 +71,7 @@
         {
           "name": "getBezierSegment",
           "returns": "RealBezierSegment2D_4a970fa2",
+          "returns_origin": "com.sun.star.geometry.RealBezierSegment2D",
           "desc": [
             "Get a single point from the poly-polygon."
           ],
@@ -78,21 +79,24 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nPolygonIndex",
-              "int",
-              "in"
-            ],
-            [
-              "nPointIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nPolygonIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nPointIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getBezierSegments",
           "returns": "typing.Tuple[typing.Tuple[RealBezierSegment2D_4a970fa2, ...], ...]",
+          "returns_origin": "sequence< sequence< .com.sun.star.geometry.RealBezierSegment2D > >",
           "desc": [
             "Query subset of this poly-polygon.",
             "",
@@ -102,31 +106,36 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nPolygonIndex",
-              "int",
-              "in"
-            ],
-            [
-              "nNumberOfPolygons",
-              "int",
-              "in"
-            ],
-            [
-              "nPointIndex",
-              "int",
-              "in"
-            ],
-            [
-              "nNumberOfPoints",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nPolygonIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nNumberOfPolygons",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nPointIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nNumberOfPoints",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "setBezierSegment",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Set a single point on the poly-polygon.",
             "",
@@ -136,26 +145,30 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "point",
-              "RealBezierSegment2D_4a970fa2",
-              "in"
-            ],
-            [
-              "nPolygonIndex",
-              "int",
-              "in"
-            ],
-            [
-              "nPointIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "point",
+              "type": "RealBezierSegment2D_4a970fa2",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.RealBezierSegment2D"
+            },
+            {
+              "name": "nPolygonIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nPointIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "setBezierSegments",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Set the specified sequence of Bezier segments to the poly-polygon.",
             "",
@@ -165,16 +178,18 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "points",
-              "typing.Tuple[typing.Tuple[RealBezierSegment2D_4a970fa2, ...], ...]",
-              "in"
-            ],
-            [
-              "nPolygonIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "points",
+              "type": "typing.Tuple[typing.Tuple[RealBezierSegment2D_4a970fa2, ...], ...]",
+              "direction": "in",
+              "origin": "sequence< sequence< .com.sun.star.geometry.RealBezierSegment2D > >"
+            },
+            {
+              "name": "nPolygonIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

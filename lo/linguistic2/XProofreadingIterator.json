@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XProofreadingIterator",
   "type": "interface",
@@ -86,6 +86,7 @@
         {
           "name": "checkSentenceAtPosition",
           "returns": "ProofreadingResult_6cc910d4",
+          "returns_origin": "com.sun.star.linguistic2.ProofreadingResult",
           "desc": [
             "start proofreading from a given position"
           ],
@@ -93,61 +94,71 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "xDocument",
-              "XInterface_8f010a43",
-              "in"
-            ],
-            [
-              "xFlatParagraph",
-              "XFlatParagraph_c8310c42",
-              "in"
-            ],
-            [
-              "aText",
-              "str",
-              "in"
-            ],
-            [
-              "aLocale",
-              "Locale_70d308fa",
-              "in"
-            ],
-            [
-              "nStartOfSentencePosition",
-              "int",
-              "in"
-            ],
-            [
-              "nSuggestedBehindEndOfSentencePosition",
-              "int",
-              "in"
-            ],
-            [
-              "nErrorPositionInParagraph",
-              "int",
-              "in"
-            ]
+            {
+              "name": "xDocument",
+              "type": "XInterface_8f010a43",
+              "direction": "in",
+              "origin": "com.sun.star.uno.XInterface"
+            },
+            {
+              "name": "xFlatParagraph",
+              "type": "XFlatParagraph_c8310c42",
+              "direction": "in",
+              "origin": "com.sun.star.text.XFlatParagraph"
+            },
+            {
+              "name": "aText",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "nStartOfSentencePosition",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nSuggestedBehindEndOfSentencePosition",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nErrorPositionInParagraph",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "isProofreading",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "checks if the given document is currently being checked"
           ],
           "raises": [],
           "args": [
-            [
-              "xDocument",
-              "XInterface_8f010a43",
-              "in"
-            ]
+            {
+              "name": "xDocument",
+              "type": "XInterface_8f010a43",
+              "direction": "in",
+              "origin": "com.sun.star.uno.XInterface"
+            }
           ]
         },
         {
           "name": "resetIgnoreRules",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "clears the list of ignored rules for each proofreader"
           ],
@@ -157,6 +168,7 @@
         {
           "name": "startProofreading",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "start proofreading and automatically process the whole text"
           ],
@@ -164,16 +176,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "xDocument",
-              "XInterface_8f010a43",
-              "in"
-            ],
-            [
-              "xIteratorProvider",
-              "XFlatParagraphIteratorProvider_c37e12d7",
-              "in"
-            ]
+            {
+              "name": "xDocument",
+              "type": "XInterface_8f010a43",
+              "direction": "in",
+              "origin": "com.sun.star.uno.XInterface"
+            },
+            {
+              "name": "xIteratorProvider",
+              "type": "XFlatParagraphIteratorProvider_c37e12d7",
+              "direction": "in",
+              "origin": "com.sun.star.text.XFlatParagraphIteratorProvider"
+            }
           ]
         }
       ]

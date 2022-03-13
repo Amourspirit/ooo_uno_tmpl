@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "ConsoleHandler",
   "type": "service",
@@ -66,6 +66,7 @@
         {
           "name": "create",
           "returns": "None",
+          "returns_origin": null,
           "desc": [
             "creates a ConsoleHandler"
           ],
@@ -75,6 +76,7 @@
         {
           "name": "createWithSettings",
           "returns": "None",
+          "returns_origin": null,
           "desc": [
             "creates an instance of the log handler, using generic settings",
             "",
@@ -84,11 +86,12 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "Settings",
-              "typing.Tuple[NamedValue_a37a0af3, ...]",
-              "in"
-            ]
+            {
+              "name": "Settings",
+              "type": "typing.Tuple[NamedValue_a37a0af3, ...]",
+              "direction": "in",
+              "origin": "sequence< .com.sun.star.beans.NamedValue >"
+            }
           ]
         }
       ]

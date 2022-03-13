@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XInterface",
   "type": "interface",
@@ -48,6 +48,7 @@
         {
           "name": "acquire",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "increases the reference counter by one.",
             "",
@@ -63,6 +64,7 @@
         {
           "name": "queryInterface",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "queries for a new interface to an existing UNO object.",
             "",
@@ -86,16 +88,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aType",
-              "object",
-              "in"
-            ]
+            {
+              "name": "aType",
+              "type": "object",
+              "direction": "in",
+              "origin": "type"
+            }
           ]
         },
         {
           "name": "release",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "decreases the reference counter by one.",
             "",

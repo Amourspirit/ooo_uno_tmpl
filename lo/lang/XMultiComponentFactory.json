@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XMultiComponentFactory",
   "type": "interface",
@@ -66,6 +66,7 @@
         {
           "name": "createInstanceWithArgumentsAndContext",
           "returns": "XInterface_8f010a43",
+          "returns_origin": "com.sun.star.uno.XInterface",
           "desc": [
             "Creates an instance of a component which supports the services specified by the factory, and initializes the new instance with the given arguments and context."
           ],
@@ -73,26 +74,30 @@
             "com.sun.star.uno.Exception"
           ],
           "args": [
-            [
-              "ServiceSpecifier",
-              "str",
-              "in"
-            ],
-            [
-              "Arguments",
-              "typing.Tuple[object, ...]",
-              "in"
-            ],
-            [
-              "Context",
-              "XComponentContext_e2e10d4a",
-              "in"
-            ]
+            {
+              "name": "ServiceSpecifier",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Arguments",
+              "type": "typing.Tuple[object, ...]",
+              "direction": "in",
+              "origin": "sequence< any >"
+            },
+            {
+              "name": "Context",
+              "type": "XComponentContext_e2e10d4a",
+              "direction": "in",
+              "origin": "com.sun.star.uno.XComponentContext"
+            }
           ]
         },
         {
           "name": "createInstanceWithContext",
           "returns": "XInterface_8f010a43",
+          "returns_origin": "com.sun.star.uno.XInterface",
           "desc": [
             "Creates an instance of a component which supports the services specified by the factory."
           ],
@@ -100,21 +105,24 @@
             "com.sun.star.uno.Exception"
           ],
           "args": [
-            [
-              "aServiceSpecifier",
-              "str",
-              "in"
-            ],
-            [
-              "Context",
-              "XComponentContext_e2e10d4a",
-              "in"
-            ]
+            {
+              "name": "aServiceSpecifier",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Context",
+              "type": "XComponentContext_e2e10d4a",
+              "direction": "in",
+              "origin": "com.sun.star.uno.XComponentContext"
+            }
           ]
         },
         {
           "name": "getAvailableServiceNames",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [
             "Gets the names of all supported services."
           ],

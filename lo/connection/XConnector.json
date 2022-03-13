@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XConnector",
   "type": "interface",
@@ -60,6 +60,7 @@
         {
           "name": "connect",
           "returns": "XConnection_f2320da0",
+          "returns_origin": "com.sun.star.connection.XConnection",
           "desc": [
             "creates a new connection interprocess connection.",
             "",
@@ -70,11 +71,12 @@
             "ConnectionSetupException"
           ],
           "args": [
-            [
-              "sConnectionDescription",
-              "str",
-              "in"
-            ]
+            {
+              "name": "sConnectionDescription",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

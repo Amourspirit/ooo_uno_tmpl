@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "UnoControlListBoxModel",
   "type": "service",
@@ -82,10 +82,53 @@
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1awt_1_1UnoControlListBoxModel.html",
     "items": {
+      "types": [
+        {
+          "name": "SelectedItems",
+          "returns": "typing.Tuple[int, ...]",
+          "origtype": null,
+          "origin": "sequence< short >",
+          "desc": [
+            "specifies the sequence of selected items, identified by the position."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "StringItemList",
+          "returns": "typing.Tuple[str, ...]",
+          "origtype": null,
+          "origin": "sequence< string >",
+          "desc": [
+            "specifies the list of items."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TypedItemList",
+          "returns": "typing.Tuple[object, ...]",
+          "origtype": null,
+          "origin": "sequence< any >",
+          "desc": [
+            "specifies the list of raw typed (not stringized) items.",
+            "",
+            "This list corresponds with the StringItemList and if given has to be of the same length, the elements' positions matching those of their string representation in StringItemList.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 5.4"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ],
       "properties": [
         {
           "name": "Align",
           "returns": "int",
+          "origtype": null,
+          "origin": "short",
           "desc": [
             "specifies the horizontal alignment of the text in the control."
           ],
@@ -95,6 +138,8 @@
         {
           "name": "BackgroundColor",
           "returns": "Color_68e908c5",
+          "origtype": "com.sun.star.util.Color",
+          "origin": "com.sun.star.util.Color",
           "desc": [
             "specifies the background color (RGB) of the control."
           ],
@@ -104,6 +149,8 @@
         {
           "name": "Border",
           "returns": "int",
+          "origtype": null,
+          "origin": "short",
           "desc": [
             "specifies the border style of the control."
           ],
@@ -113,6 +160,8 @@
         {
           "name": "BorderColor",
           "returns": "int",
+          "origtype": null,
+          "origin": "long",
           "desc": [
             "specifies the color of the border, if present",
             "",
@@ -128,6 +177,8 @@
         {
           "name": "Dropdown",
           "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
           "desc": [
             "specifies if the control has a drop down button."
           ],
@@ -137,6 +188,8 @@
         {
           "name": "Enabled",
           "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
           "desc": [
             "determines whether the control is enabled or disabled."
           ],
@@ -146,6 +199,8 @@
         {
           "name": "FontDescriptor",
           "returns": "FontDescriptor_bc110c0a",
+          "origtype": "com.sun.star.awt.FontDescriptor",
+          "origin": "com.sun.star.awt.FontDescriptor",
           "desc": [
             "specifies the font attributes of the text in the control."
           ],
@@ -155,6 +210,8 @@
         {
           "name": "FontEmphasisMark",
           "returns": "int",
+          "origtype": null,
+          "origin": "short",
           "desc": [
             "specifies the com.sun.star.text.FontEmphasis value of the text in the control."
           ],
@@ -164,6 +221,8 @@
         {
           "name": "FontRelief",
           "returns": "int",
+          "origtype": null,
+          "origin": "short",
           "desc": [
             "specifies the com.sun.star.text.FontRelief value of the text in the control."
           ],
@@ -173,6 +232,8 @@
         {
           "name": "HelpText",
           "returns": "str",
+          "origtype": null,
+          "origin": "string",
           "desc": [
             "specifies the help text of the control."
           ],
@@ -182,6 +243,8 @@
         {
           "name": "HelpURL",
           "returns": "str",
+          "origtype": null,
+          "origin": "string",
           "desc": [
             "specifies the help URL of the control."
           ],
@@ -191,6 +254,8 @@
         {
           "name": "ItemSeparatorPos",
           "returns": "int",
+          "origtype": null,
+          "origin": "short",
           "desc": [
             "specifies where an item separator - a horizontal line - is drawn.",
             "",
@@ -206,6 +271,8 @@
         {
           "name": "LineCount",
           "returns": "int",
+          "origtype": null,
+          "origin": "short",
           "desc": [
             "specifies the maximum line count displayed in the drop down box."
           ],
@@ -215,6 +282,8 @@
         {
           "name": "MouseWheelBehavior",
           "returns": "int",
+          "origtype": null,
+          "origin": "short",
           "desc": [
             "defines how the mouse wheel can be used to scroll through the control's content.",
             "",
@@ -226,6 +295,8 @@
         {
           "name": "MultiSelection",
           "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
           "desc": [
             "specifies if more than one entry can be selected."
           ],
@@ -235,6 +306,8 @@
         {
           "name": "Printable",
           "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
           "desc": [
             "specifies that the control will be printed with the document."
           ],
@@ -244,6 +317,8 @@
         {
           "name": "ReadOnly",
           "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
           "desc": [
             "specifies that the content of the control cannot be modified by the user."
           ],
@@ -253,6 +328,8 @@
         {
           "name": "Tabstop",
           "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
           "desc": [
             "specifies that the control can be reached with the TAB key."
           ],
@@ -262,6 +339,8 @@
         {
           "name": "TextColor",
           "returns": "Color_68e908c5",
+          "origtype": "com.sun.star.util.Color",
+          "origin": "com.sun.star.util.Color",
           "desc": [
             "specifies the text color (RGB) of the control."
           ],
@@ -271,6 +350,8 @@
         {
           "name": "TextLineColor",
           "returns": "Color_68e908c5",
+          "origtype": "com.sun.star.util.Color",
+          "origin": "com.sun.star.util.Color",
           "desc": [
             "specifies the text line color (RGB) of the control."
           ],
@@ -280,6 +361,8 @@
         {
           "name": "WritingMode",
           "returns": "int",
+          "origtype": null,
+          "origin": "short",
           "desc": [
             "denotes the writing mode used in the control, as specified in the com.sun.star.text.WritingMode2 constants group.",
             "",

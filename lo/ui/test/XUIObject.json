@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XUIObject",
   "type": "interface",
@@ -50,37 +50,43 @@
         {
           "name": "executeAction",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "action",
-              "str",
-              "in"
-            ],
-            [
-              "propValues",
-              "PropertyValues_d6470ce6",
-              "in"
-            ]
+            {
+              "name": "action",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "propValues",
+              "type": "PropertyValues_d6470ce6",
+              "direction": "in",
+              "origin": "com.sun.star.beans.PropertyValues"
+            }
           ]
         },
         {
           "name": "getChild",
           "returns": "XUIObject",
+          "returns_origin": "com.sun.star.ui.test.XUIObject",
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "id",
-              "str",
-              "in"
-            ]
+            {
+              "name": "id",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getChildren",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [],
           "raises": [],
           "args": []
@@ -88,6 +94,7 @@
         {
           "name": "getHierarchy",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [],
           "raises": [],
           "args": []
@@ -95,6 +102,7 @@
         {
           "name": "getState",
           "returns": "PropertyValues_d6470ce6",
+          "returns_origin": "com.sun.star.beans.PropertyValues",
           "desc": [],
           "raises": [],
           "args": []
@@ -102,6 +110,7 @@
         {
           "name": "getType",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [],
           "raises": [],
           "args": []

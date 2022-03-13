@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XAccessibleSelection",
   "type": "interface",
@@ -70,6 +70,7 @@
         {
           "name": "clearAccessibleSelection",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Clears the selection, so that no children of the object are selected."
           ],
@@ -79,6 +80,7 @@
         {
           "name": "deselectAccessibleChild",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Removes the specified child from the set of this object's selected children.",
             "",
@@ -88,16 +90,18 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nChildIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nChildIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getSelectedAccessibleChild",
           "returns": "XAccessible_1cbc0eb6",
+          "returns_origin": "com.sun.star.accessibility.XAccessible",
           "desc": [
             "Returns the specified selected Accessible child."
           ],
@@ -105,16 +109,18 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nSelectedChildIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nSelectedChildIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getSelectedAccessibleChildCount",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "Returns the number of Accessible children that are currently selected.",
             "",
@@ -126,6 +132,7 @@
         {
           "name": "isAccessibleChildSelected",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Determines if the specified child of this object is selected."
           ],
@@ -133,16 +140,18 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nChildIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nChildIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "selectAccessibleChild",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Selects the specified Accessible child of the object.",
             "",
@@ -152,16 +161,18 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nChildIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nChildIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "selectAllAccessibleChildren",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Select all children.",
             "",

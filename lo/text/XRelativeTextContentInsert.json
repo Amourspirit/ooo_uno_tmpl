@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XRelativeTextContentInsert",
   "type": "interface",
@@ -64,6 +64,7 @@
         {
           "name": "insertTextContentAfter",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "inserts text the new text content after the predecessor argument.",
             "",
@@ -73,21 +74,24 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "xNewContent",
-              "XTextContent_b16e0ba5",
-              "in"
-            ],
-            [
-              "xPredecessor",
-              "XTextContent_b16e0ba5",
-              "in"
-            ]
+            {
+              "name": "xNewContent",
+              "type": "XTextContent_b16e0ba5",
+              "direction": "in",
+              "origin": "com.sun.star.text.XTextContent"
+            },
+            {
+              "name": "xPredecessor",
+              "type": "XTextContent_b16e0ba5",
+              "direction": "in",
+              "origin": "com.sun.star.text.XTextContent"
+            }
           ]
         },
         {
           "name": "insertTextContentBefore",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "inserts text the new text content before of the successor argument.",
             "",
@@ -97,16 +101,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "xNewContent",
-              "XTextContent_b16e0ba5",
-              "in"
-            ],
-            [
-              "xSuccessor",
-              "XTextContent_b16e0ba5",
-              "in"
-            ]
+            {
+              "name": "xNewContent",
+              "type": "XTextContent_b16e0ba5",
+              "direction": "in",
+              "origin": "com.sun.star.text.XTextContent"
+            },
+            {
+              "name": "xSuccessor",
+              "type": "XTextContent_b16e0ba5",
+              "direction": "in",
+              "origin": "com.sun.star.text.XTextContent"
+            }
           ]
         }
       ]

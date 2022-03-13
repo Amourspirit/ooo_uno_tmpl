@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XPackageStructureCreator",
   "type": "interface",
@@ -60,6 +60,7 @@
         {
           "name": "convertToPackage",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "converts filesystem folder tree into a package."
           ],
@@ -67,16 +68,18 @@
             "com.sun.star.io.IOException"
           ],
           "args": [
-            [
-              "sFolderURL",
-              "str",
-              "in"
-            ],
-            [
-              "xTargetStream",
-              "XOutputStream_a4e00b35",
-              "in"
-            ]
+            {
+              "name": "sFolderURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "xTargetStream",
+              "type": "XOutputStream_a4e00b35",
+              "direction": "in",
+              "origin": "com.sun.star.io.XOutputStream"
+            }
           ]
         }
       ]

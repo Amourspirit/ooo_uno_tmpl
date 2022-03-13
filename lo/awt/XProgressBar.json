@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XProgressBar",
   "type": "interface",
@@ -60,6 +60,7 @@
         {
           "name": "getValue",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "returns the current progress value of the progress bar."
           ],
@@ -69,36 +70,41 @@
         {
           "name": "setBackgroundColor",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the background color (RGB) of the control."
           ],
           "raises": [],
           "args": [
-            [
-              "Color",
-              "Color_68e908c5",
-              "in"
-            ]
+            {
+              "name": "Color",
+              "type": "Color_68e908c5",
+              "direction": "in",
+              "origin": "com.sun.star.util.Color"
+            }
           ]
         },
         {
           "name": "setForegroundColor",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the foreground color (RGB) of the control."
           ],
           "raises": [],
           "args": [
-            [
-              "Color",
-              "Color_68e908c5",
-              "in"
-            ]
+            {
+              "name": "Color",
+              "type": "Color_68e908c5",
+              "direction": "in",
+              "origin": "com.sun.star.util.Color"
+            }
           ]
         },
         {
           "name": "setRange",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the minimum and the maximum progress value of the progress bar.",
             "",
@@ -106,31 +112,35 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Min",
-              "int",
-              "in"
-            ],
-            [
-              "Max",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Min",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "Max",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "setValue",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the progress value of the progress bar."
           ],
           "raises": [],
           "args": [
-            [
-              "Value",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Value",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

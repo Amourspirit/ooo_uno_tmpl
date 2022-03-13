@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XWizardPage",
   "type": "interface",
@@ -64,6 +64,7 @@
         {
           "name": "activatePage",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "called when the page is activated"
           ],
@@ -73,6 +74,7 @@
         {
           "name": "canAdvance",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "determines whether it is allowed to travel to a later page in the wizard",
             "",
@@ -86,6 +88,7 @@
         {
           "name": "commitPage",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "is called when the page is about to be left",
             "",
@@ -93,11 +96,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Reason",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Reason",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         }
       ],
@@ -105,6 +109,8 @@
         {
           "name": "PageId",
           "returns": "int",
+          "origtype": null,
+          "origin": "short",
           "desc": [
             "denotes the ID of the page.",
             "",
@@ -116,6 +122,8 @@
         {
           "name": "Window",
           "returns": "XWindow_713b0924",
+          "origtype": "com.sun.star.awt.XWindow",
+          "origin": "com.sun.star.awt.XWindow",
           "desc": [
             "provides read-only access to the window of the page"
           ],

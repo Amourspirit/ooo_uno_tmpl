@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XHierarchicalName",
   "type": "interface",
@@ -52,6 +52,7 @@
         {
           "name": "composeHierarchicalName",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "builds the hierarchical name of an object, given a relative name",
             "",
@@ -62,16 +63,18 @@
             "com.sun.star.lang.NoSupportException"
           ],
           "args": [
-            [
-              "aRelativeName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aRelativeName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getHierarchicalName",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [],
           "raises": [],
           "args": []

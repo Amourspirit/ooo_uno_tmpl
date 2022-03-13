@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XActiveDataStreamer",
   "type": "interface",
@@ -62,6 +62,7 @@
         {
           "name": "getStream",
           "returns": "XStream_678908a4",
+          "returns_origin": "com.sun.star.io.XStream",
           "desc": [],
           "raises": [],
           "args": []
@@ -69,6 +70,7 @@
         {
           "name": "setStream",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "plugs the input/output stream.",
             "",
@@ -76,11 +78,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aStream",
-              "XStream_678908a4",
-              "in"
-            ]
+            {
+              "name": "aStream",
+              "type": "XStream_678908a4",
+              "direction": "in",
+              "origin": "com.sun.star.io.XStream"
+            }
           ]
         }
       ]

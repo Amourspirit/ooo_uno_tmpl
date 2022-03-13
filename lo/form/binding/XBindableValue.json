@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XBindableValue",
   "type": "interface",
@@ -60,6 +60,7 @@
         {
           "name": "getValueBinding",
           "returns": "XValueBinding_271b0ed5",
+          "returns_origin": "com.sun.star.form.binding.XValueBinding",
           "desc": [
             "retrieves the external instance which currently controls the value of the component"
           ],
@@ -69,6 +70,7 @@
         {
           "name": "setValueBinding",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets an external instance which controls the value of the component",
             "",
@@ -78,11 +80,12 @@
             "IncompatibleTypesException"
           ],
           "args": [
-            [
-              "aBinding",
-              "XValueBinding_271b0ed5",
-              "in"
-            ]
+            {
+              "name": "aBinding",
+              "type": "XValueBinding_271b0ed5",
+              "direction": "in",
+              "origin": "com.sun.star.form.binding.XValueBinding"
+            }
           ]
         }
       ]

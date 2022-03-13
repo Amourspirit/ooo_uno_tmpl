@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDispatchProvider",
   "type": "interface",
@@ -78,31 +78,36 @@
         {
           "name": "queryDispatch",
           "returns": "XDispatch_98ff0a9b",
+          "returns_origin": "com.sun.star.frame.XDispatch",
           "desc": [
             "searches for an XDispatch for the specified URL within the specified target frame."
           ],
           "raises": [],
           "args": [
-            [
-              "URL",
-              "URL_57ad07b9",
-              "in"
-            ],
-            [
-              "TargetFrameName",
-              "str",
-              "in"
-            ],
-            [
-              "SearchFlags",
-              "int",
-              "in"
-            ]
+            {
+              "name": "URL",
+              "type": "URL_57ad07b9",
+              "direction": "in",
+              "origin": "com.sun.star.util.URL"
+            },
+            {
+              "name": "TargetFrameName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "SearchFlags",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "queryDispatches",
           "returns": "typing.Tuple[XDispatch_98ff0a9b, ...]",
+          "returns_origin": "sequence< XDispatch >",
           "desc": [
             "actually this method is redundant to XDispatchProvider.queryDispatch() to avoid multiple remote calls.",
             "",
@@ -110,11 +115,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Requests",
-              "typing.Tuple[DispatchDescriptor_b280e62, ...]",
-              "in"
-            ]
+            {
+              "name": "Requests",
+              "type": "typing.Tuple[DispatchDescriptor_b280e62, ...]",
+              "direction": "in",
+              "origin": "sequence< DispatchDescriptor >"
+            }
           ]
         }
       ]

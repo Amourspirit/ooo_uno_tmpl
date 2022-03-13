@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XProtocolProperties",
   "type": "interface",
@@ -66,6 +66,7 @@
         {
           "name": "commitChange",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "called to commit a protocol change.",
             "",
@@ -77,16 +78,18 @@
             "com.sun.star.bridge.InvalidProtocolChangeException"
           ],
           "args": [
-            [
-              "newValues",
-              "typing.Tuple[ProtocolProperty_ff280e2c, ...]",
-              "in"
-            ]
+            {
+              "name": "newValues",
+              "type": "typing.Tuple[ProtocolProperty_ff280e2c, ...]",
+              "direction": "in",
+              "origin": "sequence< ProtocolProperty >"
+            }
           ]
         },
         {
           "name": "getProperties",
           "returns": "typing.Tuple[ProtocolProperty_ff280e2c, ...]",
+          "returns_origin": "sequence< ProtocolProperty >",
           "desc": [
             "called to get a list of bridge internal properties.",
             "",
@@ -100,6 +103,7 @@
         {
           "name": "requestChange",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "called to initiate a protocol change.",
             "",
@@ -107,11 +111,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "nRandomNumber",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nRandomNumber",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

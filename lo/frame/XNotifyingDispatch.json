@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XNotifyingDispatch",
   "type": "interface",
@@ -76,6 +76,7 @@
         {
           "name": "dispatchWithNotification",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Do the same like XDispatch.dispatch() but notifies listener in every case.",
             "",
@@ -83,21 +84,24 @@
           ],
           "raises": [],
           "args": [
-            [
-              "URL",
-              "URL_57ad07b9",
-              "in"
-            ],
-            [
-              "Arguments",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ],
-            [
-              "Listener",
-              "XDispatchResultListener_582b1060",
-              "in"
-            ]
+            {
+              "name": "URL",
+              "type": "URL_57ad07b9",
+              "direction": "in",
+              "origin": "com.sun.star.util.URL"
+            },
+            {
+              "name": "Arguments",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            },
+            {
+              "name": "Listener",
+              "type": "XDispatchResultListener_582b1060",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XDispatchResultListener"
+            }
           ]
         }
       ]

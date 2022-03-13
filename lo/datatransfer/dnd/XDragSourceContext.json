@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDragSourceContext",
   "type": "interface",
@@ -54,6 +54,7 @@
         {
           "name": "getCurrentCursor",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "Get the identifier of the currently used cursor."
           ],
@@ -63,6 +64,7 @@
         {
           "name": "setCursor",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "This method sets the current drag cursor.",
             "",
@@ -72,31 +74,35 @@
           ],
           "raises": [],
           "args": [
-            [
-              "cursorId",
-              "int",
-              "in"
-            ]
+            {
+              "name": "cursorId",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "setImage",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "This method sets the current drag image."
           ],
           "raises": [],
           "args": [
-            [
-              "imageId",
-              "int",
-              "in"
-            ]
+            {
+              "name": "imageId",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "transferablesFlavorsChanged",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "This method notifies the context that the com.sun.star.datatransfer.DataFlavor types of the transferable object have changed."
           ],

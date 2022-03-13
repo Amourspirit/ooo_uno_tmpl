@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XCoordinateSystem",
   "type": "interface",
@@ -58,6 +58,7 @@
         {
           "name": "getAxisByDimension",
           "returns": "XAxis_796b0939",
+          "returns_origin": "com.sun.star.chart2.XAxis",
           "desc": [
             "The dimension says whether it is a x, y or z axis.",
             "",
@@ -67,21 +68,24 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nDimension",
-              "int",
-              "in"
-            ],
-            [
-              "nIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nDimension",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getCoordinateSystemType",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "identifies the type of coordinate system (e.g.",
             "",
@@ -93,6 +97,7 @@
         {
           "name": "getDimension",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "the dimension of the coordinate-system."
           ],
@@ -102,6 +107,7 @@
         {
           "name": "getMaximumAxisIndexByDimension",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "In one dimension there could be several axes to enable main and secondary axis and maybe more in future.",
             "",
@@ -111,16 +117,18 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nDimension",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nDimension",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getViewServiceName",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "return a service name from which the view component for this coordinate system can be created"
           ],
@@ -130,6 +138,7 @@
         {
           "name": "setAxisByDimension",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "The dimension says whether it is a x, y or z axis.",
             "",
@@ -139,21 +148,24 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nDimension",
-              "int",
-              "in"
-            ],
-            [
-              "xAxis",
-              "XAxis_796b0939",
-              "in"
-            ],
-            [
-              "nIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nDimension",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "xAxis",
+              "type": "XAxis_796b0939",
+              "direction": "in",
+              "origin": "com.sun.star.chart2.XAxis"
+            },
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "JDBCConnectionProperties",
   "type": "service",
@@ -72,6 +72,8 @@
         {
           "name": "SystemProperties",
           "returns": "typing.Tuple[NamedValue_a37a0af3, ...]",
+          "origtype": null,
+          "origin": "sequence< .com.sun.star.beans.NamedValue >",
           "desc": [
             "specifies a set of properties to pass to java.lang.System.setProperty before loading the system's JDBC driver."
           ],
@@ -81,6 +83,8 @@
         {
           "name": "TypeInfoSettings",
           "returns": "typing.Tuple[object, ...]",
+          "origtype": null,
+          "origin": "sequence< any >",
           "desc": [
             "specifies how the type info returned by com.sun.star.sdbc.XDatabaseMetaData.getTypeInfo() will be modified.",
             "",
@@ -88,6 +92,60 @@
             "The syntax is:",
             "",
             "COLUMN(X) defines the column which will be compared and the column which will be replaced. In the example above column 2 will be compared with the value -5. If this is true than column 6 will now return the value PRECISION."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ],
+      "properties": [
+        {
+          "name": "AutoRetrievingStatement",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "specifies the statement which should be executed when asking an \\\"INSERT\\\" statement for the XGeneratedResultSet (future concept) interface."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsAutoRetrievingEnabled",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "specifies if retrieving of auto generated values should be enabled or not.",
+            "",
+            "If TRUE than the statement will support the XGeneratedResultSet (future concept) interface, otherwise not."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "JavaDriverClass",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "which JDBC driver class should be loaded to create the connection."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "JavaDriverClassPath",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "an optional class path to locate the com.sun.star.sdbc.JDBCConnectionProperties.JavaDriverClass",
+            "",
+            "The class path is a list of zero or more internal (see the com.sun.star.uri.ExternalUriReferenceTranslator service) URI references, where any space characters (U+0020) are ignored (and, in particular, separate adjacent URI references). Any \u201cvnd.sun.star.expand\u201d URL references in the list are expanded using the com.sun.star.util.theMacroExpander singleton.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.3"
           ],
           "raises_get": "",
           "raises_set": ""

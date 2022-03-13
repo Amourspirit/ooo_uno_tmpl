@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XNamedRange",
   "type": "interface",
@@ -60,6 +60,7 @@
         {
           "name": "getContent",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the content of the named range.",
             "",
@@ -71,6 +72,7 @@
         {
           "name": "getReferencePosition",
           "returns": "CellAddress_ae5f0b56",
+          "returns_origin": "com.sun.star.table.CellAddress",
           "desc": [
             "returns the position in the document which is used as a base for relative references in the content."
           ],
@@ -80,6 +82,7 @@
         {
           "name": "getType",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "returns the type of the named range.",
             "",
@@ -91,6 +94,7 @@
         {
           "name": "setContent",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the content of the named range.",
             "",
@@ -98,41 +102,46 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aContent",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aContent",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "setReferencePosition",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the position in the document which is used as a base for relative references in the content."
           ],
           "raises": [],
           "args": [
-            [
-              "aReferencePosition",
-              "CellAddress_ae5f0b56",
-              "in"
-            ]
+            {
+              "name": "aReferencePosition",
+              "type": "CellAddress_ae5f0b56",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellAddress"
+            }
           ]
         },
         {
           "name": "setType",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the type of the named range."
           ],
           "raises": [],
           "args": [
-            [
-              "nType",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nType",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

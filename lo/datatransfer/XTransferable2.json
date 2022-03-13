@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XTransferable2",
   "type": "interface",
@@ -63,6 +63,7 @@
         {
           "name": "getTransferData2",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "This is equivalent of getTransferData of XTransferable, but takes an additional parameter that specifies the destination document type."
           ],
@@ -71,21 +72,24 @@
             "com.sun.star.io.IOException"
           ],
           "args": [
-            [
-              "aFlavor",
-              "DataFlavor_ffd30deb",
-              "in"
-            ],
-            [
-              "aDestShellID",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aFlavor",
+              "type": "DataFlavor_ffd30deb",
+              "direction": "in",
+              "origin": "com.sun.star.datatransfer.DataFlavor"
+            },
+            {
+              "name": "aDestShellID",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "isComplex",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Returns true if the selection contains embedded objects or is a large text blob.",
             "",

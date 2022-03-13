@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSheetLinkable",
   "type": "interface",
@@ -66,6 +66,7 @@
         {
           "name": "getLinkMode",
           "returns": "SheetLinkMode_c8380c2d",
+          "returns_origin": "com.sun.star.sheet.SheetLinkMode",
           "desc": [
             "returns the link mode of the spreadsheet.",
             "",
@@ -77,6 +78,7 @@
         {
           "name": "getLinkSheetName",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the sheet name of the sheet in the source document."
           ],
@@ -86,6 +88,7 @@
         {
           "name": "getLinkUrl",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the target URL of the link."
           ],
@@ -95,6 +98,7 @@
         {
           "name": "link",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "links the sheet to another sheet in another document.",
             "",
@@ -102,36 +106,42 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aUrl",
-              "str",
-              "in"
-            ],
-            [
-              "aSheetName",
-              "str",
-              "in"
-            ],
-            [
-              "aFilterName",
-              "str",
-              "in"
-            ],
-            [
-              "aFilterOptions",
-              "str",
-              "in"
-            ],
-            [
-              "nMode",
-              "SheetLinkMode_c8380c2d",
-              "in"
-            ]
+            {
+              "name": "aUrl",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aSheetName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aFilterName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aFilterOptions",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nMode",
+              "type": "SheetLinkMode_c8380c2d",
+              "direction": "in",
+              "origin": "com.sun.star.sheet.SheetLinkMode"
+            }
           ]
         },
         {
           "name": "setLinkMode",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "enables the linking of the sheet and controls whether formulas are copied.",
             "",
@@ -139,16 +149,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "nLinkMode",
-              "SheetLinkMode_c8380c2d",
-              "in"
-            ]
+            {
+              "name": "nLinkMode",
+              "type": "SheetLinkMode_c8380c2d",
+              "direction": "in",
+              "origin": "com.sun.star.sheet.SheetLinkMode"
+            }
           ]
         },
         {
           "name": "setLinkSheetName",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the name of the linked sheet in the source document.",
             "",
@@ -156,16 +168,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aLinkSheetName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aLinkSheetName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "setLinkUrl",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the target URL of the link.",
             "",
@@ -173,11 +187,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aLinkUrl",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aLinkUrl",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

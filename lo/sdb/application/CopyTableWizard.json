@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "CopyTableWizard",
   "type": "service",
@@ -71,6 +71,7 @@
         {
           "name": "create",
           "returns": "None",
+          "returns_origin": null,
           "desc": [
             "creates an executable wizard dialog, which is to guide the user through copying a table from one database to another.",
             "",
@@ -98,21 +99,24 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "Source",
-              "XPropertySet_bc180bfa",
-              "in"
-            ],
-            [
-              "Destination",
-              "XPropertySet_bc180bfa",
-              "in"
-            ]
+            {
+              "name": "Source",
+              "type": "XPropertySet_bc180bfa",
+              "direction": "in",
+              "origin": "com.sun.star.beans.XPropertySet"
+            },
+            {
+              "name": "Destination",
+              "type": "XPropertySet_bc180bfa",
+              "direction": "in",
+              "origin": "com.sun.star.beans.XPropertySet"
+            }
           ]
         },
         {
           "name": "createWithInteractionHandler",
           "returns": "None",
+          "returns_origin": null,
           "desc": [
             "creates an executable wizard dialog, which is to guide the user through copying a table from one database to another.",
             "",
@@ -126,21 +130,24 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "Source",
-              "XPropertySet_bc180bfa",
-              "in"
-            ],
-            [
-              "Destination",
-              "XPropertySet_bc180bfa",
-              "in"
-            ],
-            [
-              "InteractionHandler",
-              "XInteractionHandler_bf80e51",
-              "in"
-            ]
+            {
+              "name": "Source",
+              "type": "XPropertySet_bc180bfa",
+              "direction": "in",
+              "origin": "com.sun.star.beans.XPropertySet"
+            },
+            {
+              "name": "Destination",
+              "type": "XPropertySet_bc180bfa",
+              "direction": "in",
+              "origin": "com.sun.star.beans.XPropertySet"
+            },
+            {
+              "name": "InteractionHandler",
+              "type": "XInteractionHandler_bf80e51",
+              "direction": "in",
+              "origin": "com.sun.star.task.XInteractionHandler"
+            }
           ]
         }
       ]

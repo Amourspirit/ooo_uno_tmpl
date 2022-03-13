@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XGridColumnModel",
   "type": "interface",
@@ -85,6 +85,7 @@
         {
           "name": "addColumn",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "Adds a column to the model.",
             "",
@@ -96,16 +97,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "column",
-              "XGridColumn_d2370c74",
-              "in"
-            ]
+            {
+              "name": "column",
+              "type": "XGridColumn_d2370c74",
+              "direction": "in",
+              "origin": "com.sun.star.awt.grid.XGridColumn"
+            }
           ]
         },
         {
           "name": "createColumn",
           "returns": "XGridColumn_d2370c74",
+          "returns_origin": "com.sun.star.awt.grid.XGridColumn",
           "desc": [
             "creates a new column for use with the column model.",
             "",
@@ -117,6 +120,7 @@
         {
           "name": "getColumn",
           "returns": "XGridColumn_d2370c74",
+          "returns_origin": "com.sun.star.awt.grid.XGridColumn",
           "desc": [
             "Returns a specific column."
           ],
@@ -124,16 +128,18 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "index",
-              "int",
-              "in"
-            ]
+            {
+              "name": "index",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getColumnCount",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "Returns the number of columns."
           ],
@@ -143,6 +149,7 @@
         {
           "name": "getColumns",
           "returns": "typing.Tuple[XGridColumn_d2370c74, ...]",
+          "returns_origin": "sequence< XGridColumn >",
           "desc": [
             "Returns all columns of the model."
           ],
@@ -152,6 +159,7 @@
         {
           "name": "removeColumn",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes a column from the model",
             "",
@@ -161,16 +169,18 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "ColumnIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "ColumnIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "setDefaultColumns",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Fills the model with the given number of default columns.",
             "",
@@ -178,11 +188,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "elements",
-              "int",
-              "in"
-            ]
+            {
+              "name": "elements",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XCommonEmbedPersist",
   "type": "interface",
@@ -62,6 +62,7 @@
         {
           "name": "isReadonly",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "allows to detect if the data store is read-only."
           ],
@@ -73,6 +74,7 @@
         {
           "name": "reload",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "lets the object or the link reload itself.",
             "",
@@ -85,21 +87,24 @@
             "com.sun.star.uno.Exception"
           ],
           "args": [
-            [
-              "aMediaArgs",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ],
-            [
-              "aObjectArgs",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ]
+            {
+              "name": "aMediaArgs",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< .com.sun.star.beans.PropertyValue >"
+            },
+            {
+              "name": "aObjectArgs",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< .com.sun.star.beans.PropertyValue >"
+            }
           ]
         },
         {
           "name": "storeOwn",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "lets the object or the link store itself."
           ],

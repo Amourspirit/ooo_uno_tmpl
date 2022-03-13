@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XPropertySet",
   "type": "interface",
@@ -80,6 +80,7 @@
         {
           "name": "addPropertyChangeListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "adds an XPropertyChangeListener to the specified property.",
             "",
@@ -92,21 +93,24 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "aPropertyName",
-              "str",
-              "in"
-            ],
-            [
-              "xListener",
-              "XPropertyChangeListener_58e4105a",
-              "in"
-            ]
+            {
+              "name": "aPropertyName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "xListener",
+              "type": "XPropertyChangeListener_58e4105a",
+              "direction": "in",
+              "origin": "com.sun.star.beans.XPropertyChangeListener"
+            }
           ]
         },
         {
           "name": "addVetoableChangeListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "adds an XVetoableChangeListener to the specified property with the name PropertyName.",
             "",
@@ -117,21 +121,24 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "PropertyName",
-              "str",
-              "in"
-            ],
-            [
-              "aListener",
-              "XVetoableChangeListener_55a41027",
-              "in"
-            ]
+            {
+              "name": "PropertyName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aListener",
+              "type": "XVetoableChangeListener_55a41027",
+              "direction": "in",
+              "origin": "com.sun.star.beans.XVetoableChangeListener"
+            }
           ]
         },
         {
           "name": "getPropertySetInfo",
           "returns": "XPropertySetInfo_efa90d86",
+          "returns_origin": "com.sun.star.beans.XPropertySetInfo",
           "desc": [],
           "raises": [],
           "args": []
@@ -139,22 +146,25 @@
         {
           "name": "getPropertyValue",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [],
           "raises": [
             "com.sun.star.beans.UnknownPropertyException",
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "PropertyName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "PropertyName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "removePropertyChangeListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes an XPropertyChangeListener from the listener list.",
             "",
@@ -167,21 +177,24 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "aPropertyName",
-              "str",
-              "in"
-            ],
-            [
-              "aListener",
-              "XPropertyChangeListener_58e4105a",
-              "in"
-            ]
+            {
+              "name": "aPropertyName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aListener",
+              "type": "XPropertyChangeListener_58e4105a",
+              "direction": "in",
+              "origin": "com.sun.star.beans.XPropertyChangeListener"
+            }
           ]
         },
         {
           "name": "removeVetoableChangeListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes an XVetoableChangeListener from the listener list.",
             "",
@@ -192,21 +205,24 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "PropertyName",
-              "str",
-              "in"
-            ],
-            [
-              "aListener",
-              "XVetoableChangeListener_55a41027",
-              "in"
-            ]
+            {
+              "name": "PropertyName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aListener",
+              "type": "XVetoableChangeListener_55a41027",
+              "direction": "in",
+              "origin": "com.sun.star.beans.XVetoableChangeListener"
+            }
           ]
         },
         {
           "name": "setPropertyValue",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the value of the property with the specified name.",
             "",
@@ -219,16 +235,18 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "aPropertyName",
-              "str",
-              "in"
-            ],
-            [
-              "aValue",
-              "object",
-              "in"
-            ]
+            {
+              "name": "aPropertyName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aValue",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         }
       ]

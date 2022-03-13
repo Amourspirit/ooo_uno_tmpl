@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XTableCharts",
   "type": "interface",
@@ -69,51 +69,59 @@
         {
           "name": "addNewByName",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "creates a chart and adds it to the collection."
           ],
           "raises": [],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ],
-            [
-              "aRect",
-              "Rectangle_84b109e9",
-              "in"
-            ],
-            [
-              "aRanges",
-              "typing.Tuple[CellRangeAddress_ec450d43, ...]",
-              "in"
-            ],
-            [
-              "bColumnHeaders",
-              "bool",
-              "in"
-            ],
-            [
-              "bRowHeaders",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aRect",
+              "type": "Rectangle_84b109e9",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Rectangle"
+            },
+            {
+              "name": "aRanges",
+              "type": "typing.Tuple[CellRangeAddress_ec450d43, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.table.CellRangeAddress >"
+            },
+            {
+              "name": "bColumnHeaders",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            },
+            {
+              "name": "bRowHeaders",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "removeByName",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes a chart from the collection."
           ],
           "raises": [],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

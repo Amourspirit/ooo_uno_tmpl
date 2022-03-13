@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XEmbeddedClient",
   "type": "interface",
@@ -50,6 +50,7 @@
         {
           "name": "saveObject",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "asks client to let the object store itself."
           ],
@@ -62,6 +63,7 @@
         {
           "name": "visibilityChanged",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "An object can use this method to notify the client when the object outplace window becomes visible or invisible."
           ],
@@ -69,11 +71,12 @@
             "com.sun.star.embed.WrongStateException"
           ],
           "args": [
-            [
-              "bVisible",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "bVisible",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         }
       ]

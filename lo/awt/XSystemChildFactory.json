@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSystemChildFactory",
   "type": "interface",
@@ -63,6 +63,7 @@
         {
           "name": "createSystemChild",
           "returns": "XWindowPeer_99760ab0",
+          "returns_origin": "com.sun.star.awt.XWindowPeer",
           "desc": [
             "creates a system child window.",
             "",
@@ -76,21 +77,24 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Parent",
-              "object",
-              "in"
-            ],
-            [
-              "ProcessId",
-              "typing.Tuple[int, ...]",
-              "in"
-            ],
-            [
-              "SystemType",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Parent",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            },
+            {
+              "name": "ProcessId",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "in",
+              "origin": "sequence< byte >"
+            },
+            {
+              "name": "SystemType",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         }
       ]

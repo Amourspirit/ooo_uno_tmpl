@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDiagram",
   "type": "interface",
@@ -88,6 +88,7 @@
         {
           "name": "getDefaultColorScheme",
           "returns": "XColorScheme_c4be0bf8",
+          "returns_origin": "com.sun.star.chart2.XColorScheme",
           "desc": [
             "returns an XColorScheme that defines the default colors for data series (or data points) in the diagram."
           ],
@@ -97,6 +98,7 @@
         {
           "name": "getFloor",
           "returns": "XPropertySet_bc180bfa",
+          "returns_origin": "com.sun.star.beans.XPropertySet",
           "desc": [
             "returns the property set that determines the visual appearance of the floor if any.",
             "",
@@ -108,6 +110,7 @@
         {
           "name": "getLegend",
           "returns": "XLegend_8cce09f3",
+          "returns_origin": "com.sun.star.chart2.XLegend",
           "desc": [
             "returns the legend, which may represent data series and other information about a diagram in a separate box."
           ],
@@ -117,6 +120,7 @@
         {
           "name": "getWall",
           "returns": "XPropertySet_bc180bfa",
+          "returns_origin": "com.sun.star.beans.XPropertySet",
           "desc": [
             "returns the property set that determines the visual appearance of the wall.",
             "",
@@ -128,21 +132,24 @@
         {
           "name": "setDefaultColorScheme",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets an XColorScheme that defines the default colors for data series (or data points) in the diagram."
           ],
           "raises": [],
           "args": [
-            [
-              "xColorScheme",
-              "XColorScheme_c4be0bf8",
-              "in"
-            ]
+            {
+              "name": "xColorScheme",
+              "type": "XColorScheme_c4be0bf8",
+              "direction": "in",
+              "origin": "com.sun.star.chart2.XColorScheme"
+            }
           ]
         },
         {
           "name": "setDiagramData",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets new data to the diagram.",
             "",
@@ -150,31 +157,35 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xDataSource",
-              "XDataSource_f6340d57",
-              "in"
-            ],
-            [
-              "aArguments",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ]
+            {
+              "name": "xDataSource",
+              "type": "XDataSource_f6340d57",
+              "direction": "in",
+              "origin": "com.sun.star.chart2.data.XDataSource"
+            },
+            {
+              "name": "aArguments",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            }
           ]
         },
         {
           "name": "setLegend",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets a new legend."
           ],
           "raises": [],
           "args": [
-            [
-              "xLegend",
-              "XLegend_8cce09f3",
-              "in"
-            ]
+            {
+              "name": "xLegend",
+              "type": "XLegend_8cce09f3",
+              "direction": "in",
+              "origin": "com.sun.star.chart2.XLegend"
+            }
           ]
         }
       ]

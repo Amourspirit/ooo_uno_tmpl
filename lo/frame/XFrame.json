@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XFrame",
   "type": "interface",
@@ -84,6 +84,7 @@
         {
           "name": "activate",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "activates this frame and thus the component within.",
             "",
@@ -97,6 +98,7 @@
         {
           "name": "addFrameActionListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "registers an event listener, which will be called when certain things happen to the components within this frame or within sub-frames of this frame.",
             "",
@@ -104,16 +106,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xListener",
-              "XFrameActionListener_26250efa",
-              "in"
-            ]
+            {
+              "name": "xListener",
+              "type": "XFrameActionListener_26250efa",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XFrameActionListener"
+            }
           ]
         },
         {
           "name": "contextChanged",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "notifies the frame that the context of the controller within this frame changed (i.e.",
             "",
@@ -127,6 +131,7 @@
         {
           "name": "deactivate",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "is called by the creator frame when another sub-frame gets activated.",
             "",
@@ -138,6 +143,7 @@
         {
           "name": "findFrame",
           "returns": "XFrame",
+          "returns_origin": "com.sun.star.frame.XFrame",
           "desc": [
             "searches for a frame with the specified name.",
             "",
@@ -149,21 +155,24 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aTargetFrameName",
-              "str",
-              "in"
-            ],
-            [
-              "nSearchFlags",
-              "int",
-              "in"
-            ]
+            {
+              "name": "aTargetFrameName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nSearchFlags",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getComponentWindow",
           "returns": "XWindow_713b0924",
+          "returns_origin": "com.sun.star.awt.XWindow",
           "desc": [
             "provides access to the component window",
             "",
@@ -175,6 +184,7 @@
         {
           "name": "getContainerWindow",
           "returns": "XWindow_713b0924",
+          "returns_origin": "com.sun.star.awt.XWindow",
           "desc": [
             "provides access to the container window of the frame.",
             "",
@@ -186,6 +196,7 @@
         {
           "name": "getController",
           "returns": "XController_b00e0b8f",
+          "returns_origin": "com.sun.star.frame.XController",
           "desc": [
             "provides access to the controller",
             "",
@@ -197,6 +208,7 @@
         {
           "name": "getCreator",
           "returns": "XFramesSupplier_e12a0d1d",
+          "returns_origin": "com.sun.star.frame.XFramesSupplier",
           "desc": [
             "provides access to the creator (parent) of this frame"
           ],
@@ -206,6 +218,7 @@
         {
           "name": "getName",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "access to the name property of this frame"
           ],
@@ -215,6 +228,7 @@
         {
           "name": "initialize",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "is called to initialize the frame within a window - the container window.",
             "",
@@ -224,16 +238,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xWindow",
-              "XWindow_713b0924",
-              "in"
-            ]
+            {
+              "name": "xWindow",
+              "type": "XWindow_713b0924",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XWindow"
+            }
           ]
         },
         {
           "name": "isActive",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "determines if the frame is active."
           ],
@@ -243,6 +259,7 @@
         {
           "name": "isTop",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "determines if the frame is a top frame.",
             "",
@@ -254,21 +271,24 @@
         {
           "name": "removeFrameActionListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "unregisters an event listener"
           ],
           "raises": [],
           "args": [
-            [
-              "xListener",
-              "XFrameActionListener_26250efa",
-              "in"
-            ]
+            {
+              "name": "xListener",
+              "type": "XFrameActionListener_26250efa",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XFrameActionListener"
+            }
           ]
         },
         {
           "name": "setComponent",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "sets a new component into the frame or release an existing one from a frame.",
             "",
@@ -278,21 +298,24 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xComponentWindow",
-              "XWindow_713b0924",
-              "in"
-            ],
-            [
-              "xController",
-              "XController_b00e0b8f",
-              "in"
-            ]
+            {
+              "name": "xComponentWindow",
+              "type": "XWindow_713b0924",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XWindow"
+            },
+            {
+              "name": "xController",
+              "type": "XController_b00e0b8f",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XController"
+            }
           ]
         },
         {
           "name": "setCreator",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the frame container that created this frame.",
             "",
@@ -300,16 +323,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Creator",
-              "XFramesSupplier_e12a0d1d",
-              "in"
-            ]
+            {
+              "name": "Creator",
+              "type": "XFramesSupplier_e12a0d1d",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XFramesSupplier"
+            }
           ]
         },
         {
           "name": "setName",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the name of the frame.",
             "",
@@ -319,11 +344,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

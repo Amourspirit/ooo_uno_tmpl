@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XFastParser",
   "type": "interface",
@@ -136,6 +136,7 @@
         {
           "name": "getNamespaceURL",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Gets the namespace url string."
           ],
@@ -143,16 +144,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "prefix",
-              "str",
-              "in"
-            ]
+            {
+              "name": "prefix",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "parseStream",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "parses an XML document from a stream.",
             "",
@@ -163,16 +166,18 @@
             "com.sun.star.io.IOException"
           ],
           "args": [
-            [
-              "aInputSource",
-              "InputSource_c88c0c54",
-              "in"
-            ]
+            {
+              "name": "aInputSource",
+              "type": "InputSource_c88c0c54",
+              "direction": "in",
+              "origin": "com.sun.star.xml.sax.InputSource"
+            }
           ]
         },
         {
           "name": "registerNamespace",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "registers a known namespace url with the given integer token."
           ],
@@ -180,21 +185,24 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "NamespaceURL",
-              "str",
-              "in"
-            ],
-            [
-              "NamespaceToken",
-              "int",
-              "in"
-            ]
+            {
+              "name": "NamespaceURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "NamespaceToken",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "setCustomEntityNames",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Simulate a DTD file.",
             "",
@@ -206,31 +214,35 @@
           ],
           "raises": [],
           "args": [
-            [
-              "replacements",
-              "typing.Tuple[typing.Tuple[str, str], ...]",
-              "in"
-            ]
+            {
+              "name": "replacements",
+              "type": "typing.Tuple[typing.Tuple[str, str], ...]",
+              "direction": "in",
+              "origin": "sequence< beans.Pair< string, string > >"
+            }
           ]
         },
         {
           "name": "setEntityResolver",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "allows an application to register a DTD-Handler."
           ],
           "raises": [],
           "args": [
-            [
-              "Resolver",
-              "XEntityResolver_fcf10dfa",
-              "in"
-            ]
+            {
+              "name": "Resolver",
+              "type": "XEntityResolver_fcf10dfa",
+              "direction": "in",
+              "origin": "com.sun.star.xml.sax.XEntityResolver"
+            }
           ]
         },
         {
           "name": "setErrorHandler",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "allows an application to register an error event handler.",
             "",
@@ -238,31 +250,35 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Handler",
-              "XErrorHandler_e0860cf3",
-              "in"
-            ]
+            {
+              "name": "Handler",
+              "type": "XErrorHandler_e0860cf3",
+              "direction": "in",
+              "origin": "com.sun.star.xml.sax.XErrorHandler"
+            }
           ]
         },
         {
           "name": "setFastDocumentHandler",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Application must register a document event handler to get sax events for the parsed stream."
           ],
           "raises": [],
           "args": [
-            [
-              "Handler",
-              "XFastDocumentHandler_454c0fb6",
-              "in"
-            ]
+            {
+              "name": "Handler",
+              "type": "XFastDocumentHandler_454c0fb6",
+              "direction": "in",
+              "origin": "com.sun.star.xml.sax.XFastDocumentHandler"
+            }
           ]
         },
         {
           "name": "setLocale",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets a locale specified for localization of warnings and error messages.",
             "",
@@ -270,39 +286,44 @@
           ],
           "raises": [],
           "args": [
-            [
-              "locale",
-              "Locale_70d308fa",
-              "in"
-            ]
+            {
+              "name": "locale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
           ]
         },
         {
           "name": "setNamespaceHandler",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "Handler",
-              "XFastNamespaceHandler_549c1004",
-              "in"
-            ]
+            {
+              "name": "Handler",
+              "type": "XFastNamespaceHandler_549c1004",
+              "direction": "in",
+              "origin": "com.sun.star.xml.sax.XFastNamespaceHandler"
+            }
           ]
         },
         {
           "name": "setTokenHandler",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "must be registered to translate known XML names to integer tokens."
           ],
           "raises": [],
           "args": [
-            [
-              "Handler",
-              "XFastTokenHandler_17510e78",
-              "in"
-            ]
+            {
+              "name": "Handler",
+              "type": "XFastTokenHandler_17510e78",
+              "direction": "in",
+              "origin": "com.sun.star.xml.sax.XFastTokenHandler"
+            }
           ]
         }
       ]

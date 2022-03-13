@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XFormulaParser",
   "type": "interface",
@@ -57,41 +57,47 @@
         {
           "name": "parseFormula",
           "returns": "typing.Tuple[FormulaToken_bd1c0bf8, ...]",
+          "returns_origin": "sequence< FormulaToken >",
           "desc": [
             "parses a formula into a sequence of tokens."
           ],
           "raises": [],
           "args": [
-            [
-              "aFormula",
-              "str",
-              "in"
-            ],
-            [
-              "aReferencePos",
-              "CellAddress_ae5f0b56",
-              "in"
-            ]
+            {
+              "name": "aFormula",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aReferencePos",
+              "type": "CellAddress_ae5f0b56",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellAddress"
+            }
           ]
         },
         {
           "name": "printFormula",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "converts a formula into a string."
           ],
           "raises": [],
           "args": [
-            [
-              "aTokens",
-              "typing.Tuple[FormulaToken_bd1c0bf8, ...]",
-              "in"
-            ],
-            [
-              "aReferencePos",
-              "CellAddress_ae5f0b56",
-              "in"
-            ]
+            {
+              "name": "aTokens",
+              "type": "typing.Tuple[FormulaToken_bd1c0bf8, ...]",
+              "direction": "in",
+              "origin": "sequence< FormulaToken >"
+            },
+            {
+              "name": "aReferencePos",
+              "type": "CellAddress_ae5f0b56",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellAddress"
+            }
           ]
         }
       ]

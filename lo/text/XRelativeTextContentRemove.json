@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XRelativeTextContentRemove",
   "type": "interface",
@@ -64,6 +64,7 @@
         {
           "name": "removeTextContentAfter",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes the text content that follows the argument.",
             "",
@@ -73,16 +74,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "xPredecessor",
-              "XTextContent_b16e0ba5",
-              "in"
-            ]
+            {
+              "name": "xPredecessor",
+              "type": "XTextContent_b16e0ba5",
+              "direction": "in",
+              "origin": "com.sun.star.text.XTextContent"
+            }
           ]
         },
         {
           "name": "removeTextContentBefore",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes the text content that precedes the argument.",
             "",
@@ -92,11 +95,12 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "xSuccessor",
-              "XTextContent_b16e0ba5",
-              "in"
-            ]
+            {
+              "name": "xSuccessor",
+              "type": "XTextContent_b16e0ba5",
+              "direction": "in",
+              "origin": "com.sun.star.text.XTextContent"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XResultSet",
   "type": "interface",
@@ -56,6 +56,7 @@
         {
           "name": "absolute",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "moves the cursor to the given row number in the result set.",
             "",
@@ -71,16 +72,18 @@
             "SQLException"
           ],
           "args": [
-            [
-              "row",
-              "int",
-              "in"
-            ]
+            {
+              "name": "row",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "afterLast",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "moves the cursor to the end of the result set, just after the last row.",
             "",
@@ -94,6 +97,7 @@
         {
           "name": "beforeFirst",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "moves the cursor to the front of the result set, just before the first row.",
             "",
@@ -107,6 +111,7 @@
         {
           "name": "first",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "moves the cursor to the first row in the result set."
           ],
@@ -118,6 +123,7 @@
         {
           "name": "getRow",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "retrieves the current row number.",
             "",
@@ -131,6 +137,7 @@
         {
           "name": "getStatement",
           "returns": "XInterface_8f010a43",
+          "returns_origin": "com.sun.star.uno.XInterface",
           "desc": [
             "returns the Statement that produced this com.sun.star.sdbc.ResultSet object.",
             "",
@@ -144,6 +151,7 @@
         {
           "name": "isAfterLast",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "indicates whether the cursor is after the last row in the result set."
           ],
@@ -155,6 +163,7 @@
         {
           "name": "isBeforeFirst",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "indicates whether the cursor is before the first row in the result set."
           ],
@@ -166,6 +175,7 @@
         {
           "name": "isFirst",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "indicates whether the cursor is on the first row of the result set."
           ],
@@ -177,6 +187,7 @@
         {
           "name": "isLast",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "indicates whether the cursor is on the last row of the result set.",
             "",
@@ -190,6 +201,7 @@
         {
           "name": "last",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "moves the cursor to the last row in the result set."
           ],
@@ -201,6 +213,7 @@
         {
           "name": "next",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "moves the cursor down one row from its current position.",
             "",
@@ -216,6 +229,7 @@
         {
           "name": "previous",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "moves the cursor to the previous row in the result set.",
             "",
@@ -229,6 +243,7 @@
         {
           "name": "refreshRow",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "refreshes the current row with its most recent value in the database.",
             "",
@@ -242,6 +257,7 @@
         {
           "name": "relative",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "moves the cursor a relative number of rows, either positive or negative.",
             "",
@@ -253,16 +269,18 @@
             "SQLException"
           ],
           "args": [
-            [
-              "rows",
-              "int",
-              "in"
-            ]
+            {
+              "name": "rows",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "rowDeleted",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "indicates whether a row has been deleted.",
             "",
@@ -276,6 +294,7 @@
         {
           "name": "rowInserted",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "indicates whether the current row has had an insertion.",
             "",
@@ -289,6 +308,7 @@
         {
           "name": "rowUpdated",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "indicates whether the current row has been updated.",
             "",

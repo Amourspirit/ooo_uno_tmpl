@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDDELinkResults",
   "type": "interface",
@@ -58,6 +58,7 @@
         {
           "name": "getResults",
           "returns": "typing.Tuple[typing.Tuple[object, ...], ...]",
+          "returns_origin": "sequence< sequence< any > >",
           "desc": [
             "returns the DDE link results."
           ],
@@ -67,16 +68,18 @@
         {
           "name": "setResults",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the DDE link results."
           ],
           "raises": [],
           "args": [
-            [
-              "aResults",
-              "typing.Tuple[typing.Tuple[object, ...], ...]",
-              "in"
-            ]
+            {
+              "name": "aResults",
+              "type": "typing.Tuple[typing.Tuple[object, ...], ...]",
+              "direction": "in",
+              "origin": "sequence< sequence< any > >"
+            }
           ]
         }
       ]

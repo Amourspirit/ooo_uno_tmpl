@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSingleLayerStratum",
   "type": "interface",
@@ -73,6 +73,7 @@
         {
           "name": "getLayer",
           "returns": "XLayer_4cd50fcb",
+          "returns_origin": "com.sun.star.configuration.backend.XLayer",
           "desc": [
             "retrieves the layer data for a component, if newer than indicated.",
             "",
@@ -87,21 +88,24 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aComponent",
-              "str",
-              "in"
-            ],
-            [
-              "aTimestamp",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aComponent",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aTimestamp",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getUpdatableLayer",
           "returns": "XUpdatableLayer_ec97135d",
+          "returns_origin": "com.sun.star.configuration.backend.XUpdatableLayer",
           "desc": [
             "retrieves a writable representation of the layer for a component."
           ],
@@ -111,11 +115,12 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aComponent",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aComponent",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

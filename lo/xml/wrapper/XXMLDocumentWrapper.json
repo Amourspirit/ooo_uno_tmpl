@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XXMLDocumentWrapper",
   "type": "interface",
@@ -76,31 +76,36 @@
         {
           "name": "clearUselessData",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Clears all useless element in a branch of the DOM tree along the tree order."
           ],
           "raises": [],
           "args": [
-            [
-              "node",
-              "XXMLElementWrapper_66c0107c",
-              "in"
-            ],
-            [
-              "reservedDescendants",
-              "typing.Tuple[XXMLElementWrapper_66c0107c, ...]",
-              "in"
-            ],
-            [
-              "stopAtNode",
-              "XXMLElementWrapper_66c0107c",
-              "in"
-            ]
+            {
+              "name": "node",
+              "type": "XXMLElementWrapper_66c0107c",
+              "direction": "in",
+              "origin": "com.sun.star.xml.wrapper.XXMLElementWrapper"
+            },
+            {
+              "name": "reservedDescendants",
+              "type": "typing.Tuple[XXMLElementWrapper_66c0107c, ...]",
+              "direction": "in",
+              "origin": "sequence< XXMLElementWrapper >"
+            },
+            {
+              "name": "stopAtNode",
+              "type": "XXMLElementWrapper_66c0107c",
+              "direction": "in",
+              "origin": "com.sun.star.xml.wrapper.XXMLElementWrapper"
+            }
           ]
         },
         {
           "name": "collapse",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Collapses a tree path.",
             "",
@@ -108,16 +113,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "node",
-              "XXMLElementWrapper_66c0107c",
-              "in"
-            ]
+            {
+              "name": "node",
+              "type": "XXMLElementWrapper_66c0107c",
+              "direction": "in",
+              "origin": "com.sun.star.xml.wrapper.XXMLElementWrapper"
+            }
           ]
         },
         {
           "name": "generateSAXEvents",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Converts a part of the DOM tree into SAX events."
           ],
@@ -125,31 +132,36 @@
             "com.sun.star.xml.sax.SAXException"
           ],
           "args": [
-            [
-              "handler",
-              "XDocumentHandler_9b90e28",
-              "in"
-            ],
-            [
-              "saxEventKeeperHandler",
-              "XDocumentHandler_9b90e28",
-              "in"
-            ],
-            [
-              "startNode",
-              "XXMLElementWrapper_66c0107c",
-              "in"
-            ],
-            [
-              "endNode",
-              "XXMLElementWrapper_66c0107c",
-              "in"
-            ]
+            {
+              "name": "handler",
+              "type": "XDocumentHandler_9b90e28",
+              "direction": "in",
+              "origin": "com.sun.star.xml.sax.XDocumentHandler"
+            },
+            {
+              "name": "saxEventKeeperHandler",
+              "type": "XDocumentHandler_9b90e28",
+              "direction": "in",
+              "origin": "com.sun.star.xml.sax.XDocumentHandler"
+            },
+            {
+              "name": "startNode",
+              "type": "XXMLElementWrapper_66c0107c",
+              "direction": "in",
+              "origin": "com.sun.star.xml.wrapper.XXMLElementWrapper"
+            },
+            {
+              "name": "endNode",
+              "type": "XXMLElementWrapper_66c0107c",
+              "direction": "in",
+              "origin": "com.sun.star.xml.wrapper.XXMLElementWrapper"
+            }
           ]
         },
         {
           "name": "getCurrentElement",
           "returns": "XXMLElementWrapper_66c0107c",
+          "returns_origin": "com.sun.star.xml.wrapper.XXMLElementWrapper",
           "desc": [
             "Gets the current element."
           ],
@@ -159,21 +171,24 @@
         {
           "name": "getNodeName",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Gets the name of the element."
           ],
           "raises": [],
           "args": [
-            [
-              "node",
-              "XXMLElementWrapper_66c0107c",
-              "in"
-            ]
+            {
+              "name": "node",
+              "type": "XXMLElementWrapper_66c0107c",
+              "direction": "in",
+              "origin": "com.sun.star.xml.wrapper.XXMLElementWrapper"
+            }
           ]
         },
         {
           "name": "getTree",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Converts the whole DOM tree into a SAX event stream."
           ],
@@ -181,31 +196,35 @@
             "com.sun.star.xml.sax.SAXException"
           ],
           "args": [
-            [
-              "handler",
-              "XDocumentHandler_9b90e28",
-              "in"
-            ]
+            {
+              "name": "handler",
+              "type": "XDocumentHandler_9b90e28",
+              "direction": "in",
+              "origin": "com.sun.star.xml.sax.XDocumentHandler"
+            }
           ]
         },
         {
           "name": "isCurrent",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Checks whether an element is the current element."
           ],
           "raises": [],
           "args": [
-            [
-              "node",
-              "XXMLElementWrapper_66c0107c",
-              "in"
-            ]
+            {
+              "name": "node",
+              "type": "XXMLElementWrapper_66c0107c",
+              "direction": "in",
+              "origin": "com.sun.star.xml.wrapper.XXMLElementWrapper"
+            }
           ]
         },
         {
           "name": "isCurrentElementEmpty",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Checks whether the current element is empty."
           ],
@@ -215,21 +234,24 @@
         {
           "name": "rebuildIDLink",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Rebuild the ID attribute in the branch starting from the particular element."
           ],
           "raises": [],
           "args": [
-            [
-              "node",
-              "XXMLElementWrapper_66c0107c",
-              "in"
-            ]
+            {
+              "name": "node",
+              "type": "XXMLElementWrapper_66c0107c",
+              "direction": "in",
+              "origin": "com.sun.star.xml.wrapper.XXMLElementWrapper"
+            }
           ]
         },
         {
           "name": "removeCurrentElement",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Removes the current element.",
             "",
@@ -241,6 +263,7 @@
         {
           "name": "setCurrentElement",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Sets the current element.",
             "",
@@ -248,11 +271,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "element",
-              "XXMLElementWrapper_66c0107c",
-              "in"
-            ]
+            {
+              "name": "element",
+              "type": "XXMLElementWrapper_66c0107c",
+              "direction": "in",
+              "origin": "com.sun.star.xml.wrapper.XXMLElementWrapper"
+            }
           ]
         }
       ]

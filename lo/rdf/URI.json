@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "URI",
   "type": "service",
@@ -54,6 +54,7 @@
         {
           "name": "create",
           "returns": "None",
+          "returns_origin": null,
           "desc": [
             "creates a URI RDF node."
           ],
@@ -61,16 +62,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "Value",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Value",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "createKnown",
           "returns": "None",
+          "returns_origin": null,
           "desc": [
             "creates a URI RDF node for a well-known URI."
           ],
@@ -78,16 +81,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "Id",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Id",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "createNS",
           "returns": "None",
+          "returns_origin": null,
           "desc": [
             "creates a URI RDF node from namespace prefix and local name."
           ],
@@ -95,16 +100,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "Namespace",
-              "str",
-              "in"
-            ],
-            [
-              "LocalName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Namespace",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "LocalName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

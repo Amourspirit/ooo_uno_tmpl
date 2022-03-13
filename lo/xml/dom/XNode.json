@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XNode",
   "type": "interface",
@@ -92,6 +92,7 @@
         {
           "name": "appendChild",
           "returns": "XNode",
+          "returns_origin": "com.sun.star.xml.dom.XNode",
           "desc": [
             "Adds the node newChild to the end of the list of children of this node.",
             "",
@@ -105,31 +106,35 @@
             "DOMException"
           ],
           "args": [
-            [
-              "newChild",
-              "XNode",
-              "in"
-            ]
+            {
+              "name": "newChild",
+              "type": "XNode",
+              "direction": "in",
+              "origin": "com.sun.star.xml.dom.XNode"
+            }
           ]
         },
         {
           "name": "cloneNode",
           "returns": "XNode",
+          "returns_origin": "com.sun.star.xml.dom.XNode",
           "desc": [
             "Returns a duplicate of this node, i.e., serves as a generic copy constructor for nodes."
           ],
           "raises": [],
           "args": [
-            [
-              "deep",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "deep",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "getAttributes",
           "returns": "XNamedNodeMap_de600ca8",
+          "returns_origin": "com.sun.star.xml.dom.XNamedNodeMap",
           "desc": [
             "A NamedNodeMap containing the attributes of this node (if it is an Element) or null otherwise."
           ],
@@ -139,6 +144,7 @@
         {
           "name": "getChildNodes",
           "returns": "XNodeList_ae540b41",
+          "returns_origin": "com.sun.star.xml.dom.XNodeList",
           "desc": [
             "A NodeList that contains all children of this node."
           ],
@@ -148,6 +154,7 @@
         {
           "name": "getFirstChild",
           "returns": "XNode",
+          "returns_origin": "com.sun.star.xml.dom.XNode",
           "desc": [
             "The first child of this node."
           ],
@@ -157,6 +164,7 @@
         {
           "name": "getLastChild",
           "returns": "XNode",
+          "returns_origin": "com.sun.star.xml.dom.XNode",
           "desc": [
             "The last child of this node."
           ],
@@ -166,6 +174,7 @@
         {
           "name": "getLocalName",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Returns the local part of the qualified name of this node."
           ],
@@ -175,6 +184,7 @@
         {
           "name": "getNamespaceURI",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "The namespace URI of this node, or null if it is unspecified."
           ],
@@ -184,6 +194,7 @@
         {
           "name": "getNextSibling",
           "returns": "XNode",
+          "returns_origin": "com.sun.star.xml.dom.XNode",
           "desc": [
             "The node immediately following this node."
           ],
@@ -193,6 +204,7 @@
         {
           "name": "getNodeName",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "The name of this node, depending on its type; see the table above."
           ],
@@ -202,6 +214,7 @@
         {
           "name": "getNodeType",
           "returns": "NodeType_a3b00aef",
+          "returns_origin": "com.sun.star.xml.dom.NodeType",
           "desc": [
             "A code representing the type of the underlying object, as defined above."
           ],
@@ -211,6 +224,7 @@
         {
           "name": "getNodeValue",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "The value of this node, depending on its type; see the table above.",
             "",
@@ -224,6 +238,7 @@
         {
           "name": "getOwnerDocument",
           "returns": "XDocument_aebc0b5e",
+          "returns_origin": "com.sun.star.xml.dom.XDocument",
           "desc": [
             "The Document object associated with this node."
           ],
@@ -233,6 +248,7 @@
         {
           "name": "getParentNode",
           "returns": "XNode",
+          "returns_origin": "com.sun.star.xml.dom.XNode",
           "desc": [
             "The parent of this node."
           ],
@@ -242,6 +258,7 @@
         {
           "name": "getPrefix",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "The namespace prefix of this node, or null if it is unspecified."
           ],
@@ -251,6 +268,7 @@
         {
           "name": "getPreviousSibling",
           "returns": "XNode",
+          "returns_origin": "com.sun.star.xml.dom.XNode",
           "desc": [
             "The node immediately preceding this node."
           ],
@@ -260,6 +278,7 @@
         {
           "name": "hasAttributes",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Returns whether this node (if it is an element) has any attributes."
           ],
@@ -269,6 +288,7 @@
         {
           "name": "hasChildNodes",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Returns whether this node has any children."
           ],
@@ -278,6 +298,7 @@
         {
           "name": "insertBefore",
           "returns": "XNode",
+          "returns_origin": "com.sun.star.xml.dom.XNode",
           "desc": [
             "Inserts the node newChild before the existing child node refChild.",
             "",
@@ -293,41 +314,47 @@
             "DOMException"
           ],
           "args": [
-            [
-              "newChild",
-              "XNode",
-              "in"
-            ],
-            [
-              "refChild",
-              "XNode",
-              "in"
-            ]
+            {
+              "name": "newChild",
+              "type": "XNode",
+              "direction": "in",
+              "origin": "com.sun.star.xml.dom.XNode"
+            },
+            {
+              "name": "refChild",
+              "type": "XNode",
+              "direction": "in",
+              "origin": "com.sun.star.xml.dom.XNode"
+            }
           ]
         },
         {
           "name": "isSupported",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Tests whether the DOM implementation implements a specific feature and that feature is supported by this node."
           ],
           "raises": [],
           "args": [
-            [
-              "feature",
-              "str",
-              "in"
-            ],
-            [
-              "ver",
-              "str",
-              "in"
-            ]
+            {
+              "name": "feature",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "ver",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "normalize",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Puts all Text nodes in the full depth of the sub-tree underneath this Node, including attribute nodes, into a \\\"normal\\\" form where only structure (e.g., elements, comments, processing instructions, CDATA sections, and entity references) separates Text nodes, i.e., there are neither adjacent Text nodes nor empty Text nodes."
           ],
@@ -337,6 +364,7 @@
         {
           "name": "removeChild",
           "returns": "XNode",
+          "returns_origin": "com.sun.star.xml.dom.XNode",
           "desc": [
             "Removes the child node indicated by oldChild from the list of children, and returns it.",
             "",
@@ -348,16 +376,18 @@
             "DOMException"
           ],
           "args": [
-            [
-              "oldChild",
-              "XNode",
-              "in"
-            ]
+            {
+              "name": "oldChild",
+              "type": "XNode",
+              "direction": "in",
+              "origin": "com.sun.star.xml.dom.XNode"
+            }
           ]
         },
         {
           "name": "replaceChild",
           "returns": "XNode",
+          "returns_origin": "com.sun.star.xml.dom.XNode",
           "desc": [
             "Replaces the child node oldChild with newChild in the list of children, and returns the oldChild node.",
             "",
@@ -373,21 +403,24 @@
             "DOMException"
           ],
           "args": [
-            [
-              "newChild",
-              "XNode",
-              "in"
-            ],
-            [
-              "oldChild",
-              "XNode",
-              "in"
-            ]
+            {
+              "name": "newChild",
+              "type": "XNode",
+              "direction": "in",
+              "origin": "com.sun.star.xml.dom.XNode"
+            },
+            {
+              "name": "oldChild",
+              "type": "XNode",
+              "direction": "in",
+              "origin": "com.sun.star.xml.dom.XNode"
+            }
           ]
         },
         {
           "name": "setNodeValue",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "The value of this node, depending on its type; see the table above.",
             "",
@@ -399,16 +432,18 @@
             "DOMException"
           ],
           "args": [
-            [
-              "nodeValue",
-              "str",
-              "in"
-            ]
+            {
+              "name": "nodeValue",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "setPrefix",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "The namespace prefix of this node, or null if it is unspecified.",
             "",
@@ -422,11 +457,12 @@
             "DOMException"
           ],
           "args": [
-            [
-              "prefix",
-              "str",
-              "in"
-            ]
+            {
+              "name": "prefix",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

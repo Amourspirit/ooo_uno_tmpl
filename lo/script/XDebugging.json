@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDebugging",
   "type": "interface",
@@ -67,21 +67,24 @@
         {
           "name": "clearAllBreakPoints",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "clears all breakpoints in the module set by \\\"setBreakPoint\\\"."
           ],
           "raises": [],
           "args": [
-            [
-              "aModuleName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aModuleName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "doContinue",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "continues the program execution."
           ],
@@ -91,61 +94,70 @@
         {
           "name": "dumpVariable",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the value of the variable at the given stack position."
           ],
           "raises": [],
           "args": [
-            [
-              "aVariableName",
-              "str",
-              "in"
-            ],
-            [
-              "nCallStackPos",
-              "int",
-              "in"
-            ]
+            {
+              "name": "aVariableName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nCallStackPos",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "eval",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Evaluates an expression."
           ],
           "raises": [],
           "args": [
-            [
-              "aSourceCode",
-              "str",
-              "in"
-            ],
-            [
-              "nCallStackPos",
-              "int",
-              "in"
-            ]
+            {
+              "name": "aSourceCode",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nCallStackPos",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "getContextInformation",
           "returns": "ContextInformation_1ece0f08",
+          "returns_origin": "com.sun.star.script.ContextInformation",
           "desc": [
             "returns more detailed information about a specified stack frame."
           ],
           "raises": [],
           "args": [
-            [
-              "nCallStackPos",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nCallStackPos",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "getStackTrace",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [
             "Returns the engine's stack trace of the current execute position.",
             "",
@@ -157,76 +169,88 @@
         {
           "name": "isVariable",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "returns whether the given variable exists within the specified stack frame."
           ],
           "raises": [],
           "args": [
-            [
-              "aVariableName",
-              "str",
-              "in"
-            ],
-            [
-              "nCallStackPos",
-              "int",
-              "in"
-            ]
+            {
+              "name": "aVariableName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nCallStackPos",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "setBreakPoint",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "returns the source code line where the breakpoint was set."
           ],
           "raises": [],
           "args": [
-            [
-              "aModuleName",
-              "str",
-              "in"
-            ],
-            [
-              "nSourceCodeLine",
-              "int",
-              "in"
-            ],
-            [
-              "bOn",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "aModuleName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nSourceCodeLine",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "bOn",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "setVariable",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the value of the specified variable within the specified stack frame."
           ],
           "raises": [],
           "args": [
-            [
-              "aVariableName",
-              "str",
-              "in"
-            ],
-            [
-              "aValue",
-              "str",
-              "in"
-            ],
-            [
-              "nCallStackPos",
-              "int",
-              "in"
-            ]
+            {
+              "name": "aVariableName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aValue",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nCallStackPos",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "stepIn",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "executes the next and only the next statement.",
             "",
@@ -238,6 +262,7 @@
         {
           "name": "stepOut",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "executes the program until the next return from this stack frame."
           ],
@@ -247,6 +272,7 @@
         {
           "name": "stepOver",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "executes the next and only the next statement.",
             "",
@@ -258,6 +284,7 @@
         {
           "name": "stop",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "stops the execution of the interpreter.",
             "",

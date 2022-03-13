@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XGoalSeek",
   "type": "interface",
@@ -67,26 +67,30 @@
         {
           "name": "seekGoal",
           "returns": "GoalResult_a4ce0b23",
+          "returns_origin": "com.sun.star.sheet.GoalResult",
           "desc": [
             "calculates a value which gives a specified result in a formula."
           ],
           "raises": [],
           "args": [
-            [
-              "aFormulaPosition",
-              "CellAddress_ae5f0b56",
-              "in"
-            ],
-            [
-              "aVariablePosition",
-              "CellAddress_ae5f0b56",
-              "in"
-            ],
-            [
-              "aGoalValue",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aFormulaPosition",
+              "type": "CellAddress_ae5f0b56",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellAddress"
+            },
+            {
+              "name": "aVariablePosition",
+              "type": "CellAddress_ae5f0b56",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellAddress"
+            },
+            {
+              "name": "aGoalValue",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XUndoManagerListener",
   "type": "interface",
@@ -71,51 +71,58 @@
         {
           "name": "actionRedone",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "is called when the top-most action of the Redo stack has been re-applied."
           ],
           "raises": [],
           "args": [
-            [
-              "iEvent",
-              "UndoManagerEvent_1c2d0eba",
-              "in"
-            ]
+            {
+              "name": "iEvent",
+              "type": "UndoManagerEvent_1c2d0eba",
+              "direction": "in",
+              "origin": "com.sun.star.document.UndoManagerEvent"
+            }
           ]
         },
         {
           "name": "actionUndone",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "is called when the top-most action of the undo stack has been undone."
           ],
           "raises": [],
           "args": [
-            [
-              "iEvent",
-              "UndoManagerEvent_1c2d0eba",
-              "in"
-            ]
+            {
+              "name": "iEvent",
+              "type": "UndoManagerEvent_1c2d0eba",
+              "direction": "in",
+              "origin": "com.sun.star.document.UndoManagerEvent"
+            }
           ]
         },
         {
           "name": "allActionsCleared",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "is called when both the Undo and the Redo stack have been cleared from all Undo actions."
           ],
           "raises": [],
           "args": [
-            [
-              "iEvent",
-              "EventObject_a3d70b03",
-              "in"
-            ]
+            {
+              "name": "iEvent",
+              "type": "EventObject_a3d70b03",
+              "direction": "in",
+              "origin": "com.sun.star.lang.EventObject"
+            }
           ]
         },
         {
           "name": "cancelledContext",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "is called when an Undo context has been left, but no actions have been added within this context.",
             "",
@@ -123,16 +130,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "iEvent",
-              "UndoManagerEvent_1c2d0eba",
-              "in"
-            ]
+            {
+              "name": "iEvent",
+              "type": "UndoManagerEvent_1c2d0eba",
+              "direction": "in",
+              "origin": "com.sun.star.document.UndoManagerEvent"
+            }
           ]
         },
         {
           "name": "enteredContext",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "is called when a new Undo context has been entered.",
             "",
@@ -140,16 +149,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "iEvent",
-              "UndoManagerEvent_1c2d0eba",
-              "in"
-            ]
+            {
+              "name": "iEvent",
+              "type": "UndoManagerEvent_1c2d0eba",
+              "direction": "in",
+              "origin": "com.sun.star.document.UndoManagerEvent"
+            }
           ]
         },
         {
           "name": "enteredHiddenContext",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "is called when a new hidden Undo context has been entered.",
             "",
@@ -157,16 +168,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "iEvent",
-              "UndoManagerEvent_1c2d0eba",
-              "in"
-            ]
+            {
+              "name": "iEvent",
+              "type": "UndoManagerEvent_1c2d0eba",
+              "direction": "in",
+              "origin": "com.sun.star.document.UndoManagerEvent"
+            }
           ]
         },
         {
           "name": "leftContext",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "is called when an Undo context has been left.",
             "",
@@ -174,16 +187,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "iEvent",
-              "UndoManagerEvent_1c2d0eba",
-              "in"
-            ]
+            {
+              "name": "iEvent",
+              "type": "UndoManagerEvent_1c2d0eba",
+              "direction": "in",
+              "origin": "com.sun.star.document.UndoManagerEvent"
+            }
           ]
         },
         {
           "name": "leftHiddenContext",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "is called when a hidden Undo context has been left.",
             "",
@@ -191,46 +206,52 @@
           ],
           "raises": [],
           "args": [
-            [
-              "iEvent",
-              "UndoManagerEvent_1c2d0eba",
-              "in"
-            ]
+            {
+              "name": "iEvent",
+              "type": "UndoManagerEvent_1c2d0eba",
+              "direction": "in",
+              "origin": "com.sun.star.document.UndoManagerEvent"
+            }
           ]
         },
         {
           "name": "redoActionsCleared",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "is called when the Redo stack has been cleared."
           ],
           "raises": [],
           "args": [
-            [
-              "iEvent",
-              "EventObject_a3d70b03",
-              "in"
-            ]
+            {
+              "name": "iEvent",
+              "type": "EventObject_a3d70b03",
+              "direction": "in",
+              "origin": "com.sun.star.lang.EventObject"
+            }
           ]
         },
         {
           "name": "resetAll",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "called when the complete undo manager has been reset"
           ],
           "raises": [],
           "args": [
-            [
-              "iEvent",
-              "EventObject_a3d70b03",
-              "in"
-            ]
+            {
+              "name": "iEvent",
+              "type": "EventObject_a3d70b03",
+              "direction": "in",
+              "origin": "com.sun.star.lang.EventObject"
+            }
           ]
         },
         {
           "name": "undoActionAdded",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "is called when an undo action is added to the undo stack.",
             "",
@@ -238,11 +259,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "iEvent",
-              "UndoManagerEvent_1c2d0eba",
-              "in"
-            ]
+            {
+              "name": "iEvent",
+              "type": "UndoManagerEvent_1c2d0eba",
+              "direction": "in",
+              "origin": "com.sun.star.document.UndoManagerEvent"
+            }
           ]
         }
       ]

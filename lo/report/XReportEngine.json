@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XReportEngine",
   "type": "interface",
@@ -105,6 +105,7 @@
         {
           "name": "createDocument",
           "returns": "URL_57ad07b9",
+          "returns_origin": "com.sun.star.util.URL",
           "desc": [
             "creates a report document."
           ],
@@ -118,6 +119,7 @@
         {
           "name": "createDocumentAlive",
           "returns": "XModel_7a6e095c",
+          "returns_origin": "com.sun.star.frame.XModel",
           "desc": [
             "creates a report document.",
             "",
@@ -129,16 +131,18 @@
             "com.sun.star.uno.Exception"
           ],
           "args": [
-            [
-              "frame",
-              "XFrame_7a570956",
-              "in"
-            ]
+            {
+              "name": "frame",
+              "type": "XFrame_7a570956",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XFrame"
+            }
           ]
         },
         {
           "name": "createDocumentModel",
           "returns": "XModel_7a6e095c",
+          "returns_origin": "com.sun.star.frame.XModel",
           "desc": [
             "creates a report document."
           ],
@@ -152,6 +156,7 @@
         {
           "name": "interrupt",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "allows to interrupt the creation process of the report document."
           ],
@@ -166,6 +171,8 @@
         {
           "name": "ActiveConnection",
           "returns": "XConnection_a36a0b0c",
+          "origtype": "com.sun.star.sdbc.XConnection",
+          "origin": "com.sun.star.sdbc.XConnection",
           "desc": [
             "specifies the active connection which is used to create the resulting report."
           ],
@@ -175,6 +182,8 @@
         {
           "name": "MaxRows",
           "returns": "int",
+          "origtype": null,
+          "origin": "long",
           "desc": [
             "defines the maximum number of rows which should be fetched for the report.",
             "",
@@ -187,6 +196,8 @@
         {
           "name": "ReportDefinition",
           "returns": "XReportDefinition_ec30e81",
+          "origtype": "com.sun.star.report.XReportDefinition",
+          "origin": "com.sun.star.report.XReportDefinition",
           "desc": [
             "specifies the report definition object which is used to create the resulting report."
           ],
@@ -196,6 +207,8 @@
         {
           "name": "StatusIndicator",
           "returns": "XStatusIndicator_e2d00d34",
+          "origtype": "com.sun.star.task.XStatusIndicator",
+          "origin": "com.sun.star.task.XStatusIndicator",
           "desc": [
             "specifies the status indicator which shows the progress of the report generation process."
           ],

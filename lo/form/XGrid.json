@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XGrid",
   "type": "interface",
@@ -57,6 +57,7 @@
         {
           "name": "getCurrentColumnPosition",
           "returns": "int",
+          "returns_origin": "short",
           "desc": [
             "retrieves the current column position."
           ],
@@ -66,16 +67,18 @@
         {
           "name": "setCurrentColumnPosition",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the current column position."
           ],
           "raises": [],
           "args": [
-            [
-              "nPos",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nPos",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         }
       ]

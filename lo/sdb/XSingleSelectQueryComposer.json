@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSingleSelectQueryComposer",
   "type": "interface",
@@ -71,6 +71,7 @@
         {
           "name": "appendFilterByColumn",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "appends a new filter condition by a com.sun.star.sdb.DataColumn providing the name and the value for the filter.",
             "",
@@ -81,26 +82,30 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "column",
-              "XPropertySet_bc180bfa",
-              "in"
-            ],
-            [
-              "andCriteria",
-              "bool",
-              "in"
-            ],
-            [
-              "filterOperator",
-              "int",
-              "in"
-            ]
+            {
+              "name": "column",
+              "type": "XPropertySet_bc180bfa",
+              "direction": "in",
+              "origin": "com.sun.star.beans.XPropertySet"
+            },
+            {
+              "name": "andCriteria",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            },
+            {
+              "name": "filterOperator",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "appendGroupByColumn",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "appends an additional part to the group criteria of the select statement.",
             "",
@@ -110,16 +115,18 @@
             "com.sun.star.sdbc.SQLException"
           ],
           "args": [
-            [
-              "column",
-              "XPropertySet_bc180bfa",
-              "in"
-            ]
+            {
+              "name": "column",
+              "type": "XPropertySet_bc180bfa",
+              "direction": "in",
+              "origin": "com.sun.star.beans.XPropertySet"
+            }
           ]
         },
         {
           "name": "appendHavingClauseByColumn",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "appends a new HAVING filter condition by a com.sun.star.sdb.DataColumn providing the name and the value for the filter."
           ],
@@ -128,26 +135,30 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "column",
-              "XPropertySet_bc180bfa",
-              "in"
-            ],
-            [
-              "andCriteria",
-              "bool",
-              "in"
-            ],
-            [
-              "filterOperator",
-              "int",
-              "in"
-            ]
+            {
+              "name": "column",
+              "type": "XPropertySet_bc180bfa",
+              "direction": "in",
+              "origin": "com.sun.star.beans.XPropertySet"
+            },
+            {
+              "name": "andCriteria",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            },
+            {
+              "name": "filterOperator",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "appendOrderByColumn",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "appends an additional part to the sort order criteria of the select statement.",
             "",
@@ -157,21 +168,24 @@
             "com.sun.star.sdbc.SQLException"
           ],
           "args": [
-            [
-              "column",
-              "XPropertySet_bc180bfa",
-              "in"
-            ],
-            [
-              "ascending",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "column",
+              "type": "XPropertySet_bc180bfa",
+              "direction": "in",
+              "origin": "com.sun.star.beans.XPropertySet"
+            },
+            {
+              "name": "ascending",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "setFilter",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "makes it possible to set a filter condition for the query."
           ],
@@ -179,16 +193,18 @@
             "com.sun.star.sdbc.SQLException"
           ],
           "args": [
-            [
-              "filter",
-              "str",
-              "in"
-            ]
+            {
+              "name": "filter",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "setGroup",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "makes it possible to set a group for the query."
           ],
@@ -196,16 +212,18 @@
             "com.sun.star.sdbc.SQLException"
           ],
           "args": [
-            [
-              "group",
-              "str",
-              "in"
-            ]
+            {
+              "name": "group",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "setHavingClause",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "makes it possible to set a HAVING filter condition for the query."
           ],
@@ -213,16 +231,18 @@
             "com.sun.star.sdbc.SQLException"
           ],
           "args": [
-            [
-              "filter",
-              "str",
-              "in"
-            ]
+            {
+              "name": "filter",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "setOrder",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "makes it possible to set a sort condition for the query."
           ],
@@ -230,16 +250,18 @@
             "com.sun.star.sdbc.SQLException"
           ],
           "args": [
-            [
-              "order",
-              "str",
-              "in"
-            ]
+            {
+              "name": "order",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "setStructuredFilter",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "appends a new set of filter criteria which is split into levels."
           ],
@@ -248,16 +270,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "filter",
-              "typing.Tuple[typing.Tuple[PropertyValue_c9610c73, ...], ...]",
-              "in"
-            ]
+            {
+              "name": "filter",
+              "type": "typing.Tuple[typing.Tuple[PropertyValue_c9610c73, ...], ...]",
+              "direction": "in",
+              "origin": "sequence< sequence< com.sun.star.beans.PropertyValue > >"
+            }
           ]
         },
         {
           "name": "setStructuredHavingClause",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "appends a new set of HAVING filter criteria which is split into levels."
           ],
@@ -265,12 +289,40 @@
             "com.sun.star.sdbc.SQLException"
           ],
           "args": [
-            [
-              "filter",
-              "typing.Tuple[typing.Tuple[PropertyValue_c9610c73, ...], ...]",
-              "in"
-            ]
+            {
+              "name": "filter",
+              "type": "typing.Tuple[typing.Tuple[PropertyValue_c9610c73, ...], ...]",
+              "direction": "in",
+              "origin": "sequence< sequence< com.sun.star.beans.PropertyValue > >"
+            }
           ]
+        }
+      ],
+      "properties": [
+        {
+          "name": "ElementaryQuery",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "sets a new elementary query for the composer",
+            "",
+            "An elementary query or statement is a (single select) statement whose parts are not covered by the various set and get methods of the composer. That is, if the elementary statement contains a filter clause, a call to XSingleSelectQueryAnalyzer.getFilter() will not return you this filter. Instead, only filters which have been set using for instance setFilter() are covered by the get methods.",
+            "",
+            "The only methods which take all parts of the elementary statement into account are XSingleSelectQueryAnalyzer.getQuery() and XSingleSelectQueryAnalyzer.getQueryWithSubstitution(), which always returns the complete composed query.",
+            "",
+            "As a result, you can use the composer to build cumulative filter expressions. That is, you can set ElementaryQuery to a statement already containing filters, and then use setFilter() to append additional filters.",
+            "",
+            "The very same holds for sort orders, HAVING and GROUP BY clauses.",
+            "",
+            "There are various use cases for this. For instance, you might want to use the statement represented by a QueryDefinition, and extend it with additional filters or sort orders, while not touching the respective parts already present in QueryDefinition.Command. This can be achieved by setting the QueryDefinition.Command as ElementaryQuery of a SingleSelectQueryComposer.",
+            "",
+            "If, in such a scenario, you would be interested in the filter part of the QueryDefinition.Command, you would set it via XSingleSelectQueryAnalyzer.setQuery(), and retrieve the filter part via XSingleSelectQueryAnalyzer.getFilter().",
+            "",
+            "If you'd be interested in the composed filter, you would set the QueryDefinition.Command as ElementaryQuery, add your filter, and propagate the resulting query (XSingleSelectQueryAnalyzer.getQuery()) to an SingleSelectQueryAnalyzer instance via XSingleSelectQueryAnalyzer.setQuery()."
+          ],
+          "raises_get": "",
+          "raises_set": ""
         }
       ]
     }

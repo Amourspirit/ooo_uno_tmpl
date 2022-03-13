@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XPane2",
   "type": "interface",
@@ -50,6 +50,7 @@
         {
           "name": "getAccessible",
           "returns": "XAccessible_1cbc0eb6",
+          "returns_origin": "com.sun.star.accessibility.XAccessible",
           "desc": [
             "Return the accessibility object that is currently associated with the windows that implement the pane."
           ],
@@ -59,6 +60,7 @@
         {
           "name": "isVisible",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Return whether all windows that are used to implement the pane are visible."
           ],
@@ -68,6 +70,7 @@
         {
           "name": "setAccessible",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Set the accessibility object for the pane.",
             "",
@@ -75,16 +78,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xAccessible",
-              "XAccessible_1cbc0eb6",
-              "in"
-            ]
+            {
+              "name": "xAccessible",
+              "type": "XAccessible_1cbc0eb6",
+              "direction": "in",
+              "origin": "com.sun.star.accessibility.XAccessible"
+            }
           ]
         },
         {
           "name": "setVisible",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Hide or show the pane.",
             "",
@@ -92,11 +97,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "bIsVisible",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "bIsVisible",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XObjectInspectorModel",
   "type": "interface",
@@ -56,6 +56,7 @@
         {
           "name": "describeCategories",
           "returns": "typing.Tuple[PropertyCategoryDescriptor_f4691406, ...]",
+          "returns_origin": "sequence< PropertyCategoryDescriptor >",
           "desc": [
             "describes the property categories used by the property handlers.",
             "",
@@ -68,6 +69,7 @@
         {
           "name": "getPropertyOrderIndex",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "retrieves an index in a global property ordering, for a given property name",
             "",
@@ -80,12 +82,105 @@
           ],
           "raises": [],
           "args": [
-            [
-              "PropertyName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "PropertyName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
+        }
+      ],
+      "types": [
+        {
+          "name": "HandlerFactories",
+          "returns": "typing.Tuple[object, ...]",
+          "origtype": null,
+          "origin": "sequence< any >",
+          "desc": [
+            "describes a set of factories for creating XPropertyHandlers",
+            "",
+            "Every element of the sequence must contain information to create a XPropertyHandler instance. Two ways are currently supported:",
+            "",
+            "This attribute is usually only evaluated by the ObjectInspector instance which the model is currently bound to.",
+            "",
+            "The order of factories is important: If two property handlers declare themselves responsible for the same property, the one whose factory is listed last wins. Also, if a handler B wants to supersede a property of another handler A, A's factory must precede the factory of B."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ],
+      "properties": [
+        {
+          "name": "HasHelpSection",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "indicates that the object inspector should have a help section.",
+            "",
+            "The object inspector displays lines of property/values, optionally grouped into categories, as described by the property handlers.",
+            "Additionally, the inspector can optionally display a section dedicated to help texts. Clients could use this section to display context-sensitive help, for instance short texts explaining the currently selected property.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.2"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsReadOnly",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "determines whether the object inspector's UI should be read-only.",
+            "",
+            "In this case, the user is able to browse through all properties, but cannot change any of them.",
+            "",
+            "In a read-only object inspector, the property controls are readonly or disabled themselves, and the primary and secondary buttons of a property line are both disabled."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "MaxHelpTextLines",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "denotes the maximum number of lines of text to be reserved for the help section.",
+            "",
+            "This property is ignored by the ObjectInspector if HasHelpSection is FALSE.",
+            "",
+            "The layout of the ObjectInspector is undefined if MaxHelpTextLines is smaller than MinHelpTextLines.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.2"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "MinHelpTextLines",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "denotes the minimum number of lines of text to be reserved for the help section.",
+            "",
+            "This property is ignored by the ObjectInspector if HasHelpSection is FALSE.",
+            "",
+            "The layout of the ObjectInspector is undefined if MinHelpTextLines is larger than MaxHelpTextLines.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.2"
+          ],
+          "raises_get": "",
+          "raises_set": ""
         }
       ]
     }

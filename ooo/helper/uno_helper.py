@@ -174,6 +174,7 @@ def make_property_value(cName: Optional[str] = None, uValue: object = None, nHan
     See Also:
         `LibreOffice API - PropertyValue Struct Reference <https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1beans_1_1PropertyValue.html>`_
     """
+    # see: https://wiki.openoffice.org/wiki/Documentation/DevGuide/ProUNO/Properties
     oPropertyValue = create_uno_struct("com.sun.star.beans.PropertyValue")
 
     if cName != None:

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSSOInitiatorContext",
   "type": "interface",
@@ -60,6 +60,7 @@
         {
           "name": "init",
           "returns": "typing.Tuple[int, ...]",
+          "returns_origin": "sequence< byte >",
           "desc": [
             "initializes an SSO Token to send to the acceptor side and authenticates an SSO Token returned by the acceptor if the context supports mutual authentication.",
             "",
@@ -72,11 +73,12 @@
             "AuthenticationFailedException"
           ],
           "args": [
-            [
-              "Token",
-              "typing.Tuple[int, ...]",
-              "in"
-            ]
+            {
+              "name": "Token",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "in",
+              "origin": "sequence< byte >"
+            }
           ]
         }
       ]

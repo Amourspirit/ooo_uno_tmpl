@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDocumentRecovery",
   "type": "interface",
@@ -50,6 +50,7 @@
         {
           "name": "recoverFromFile",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "recovers the document after a previous emergency or session save.",
             "",
@@ -64,26 +65,30 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "SourceLocation",
-              "str",
-              "in"
-            ],
-            [
-              "SalvagedFile",
-              "str",
-              "in"
-            ],
-            [
-              "MediaDescriptor",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ]
+            {
+              "name": "SourceLocation",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "SalvagedFile",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "MediaDescriptor",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< .com.sun.star.beans.PropertyValue >"
+            }
           ]
         },
         {
           "name": "storeToRecoveryFile",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "does an emergency save of the document",
             "",
@@ -94,21 +99,24 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "TargetLocation",
-              "str",
-              "in"
-            ],
-            [
-              "MediaDescriptor",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ]
+            {
+              "name": "TargetLocation",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "MediaDescriptor",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< .com.sun.star.beans.PropertyValue >"
+            }
           ]
         },
         {
           "name": "wasModifiedSinceLastSave",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "determines whether the document has been modified since the last call to storeToRecoveryFile().",
             "",

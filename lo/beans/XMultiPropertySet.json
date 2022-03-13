@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XMultiPropertySet",
   "type": "interface",
@@ -72,6 +72,7 @@
         {
           "name": "addPropertiesChangeListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "adds an XPropertiesChangeListener to the specified property with the specified names.",
             "",
@@ -81,41 +82,47 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aPropertyNames",
-              "typing.Tuple[str, ...]",
-              "in"
-            ],
-            [
-              "xListener",
-              "XPropertiesChangeListener_7a7d1122",
-              "in"
-            ]
+            {
+              "name": "aPropertyNames",
+              "type": "typing.Tuple[str, ...]",
+              "direction": "in",
+              "origin": "sequence< string >"
+            },
+            {
+              "name": "xListener",
+              "type": "XPropertiesChangeListener_7a7d1122",
+              "direction": "in",
+              "origin": "com.sun.star.beans.XPropertiesChangeListener"
+            }
           ]
         },
         {
           "name": "firePropertiesChangeEvent",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "fires a sequence of PropertyChangeEvents to the specified listener."
           ],
           "raises": [],
           "args": [
-            [
-              "aPropertyNames",
-              "typing.Tuple[str, ...]",
-              "in"
-            ],
-            [
-              "xListener",
-              "XPropertiesChangeListener_7a7d1122",
-              "in"
-            ]
+            {
+              "name": "aPropertyNames",
+              "type": "typing.Tuple[str, ...]",
+              "direction": "in",
+              "origin": "sequence< string >"
+            },
+            {
+              "name": "xListener",
+              "type": "XPropertiesChangeListener_7a7d1122",
+              "direction": "in",
+              "origin": "com.sun.star.beans.XPropertiesChangeListener"
+            }
           ]
         },
         {
           "name": "getPropertySetInfo",
           "returns": "XPropertySetInfo_efa90d86",
+          "returns_origin": "com.sun.star.beans.XPropertySetInfo",
           "desc": [],
           "raises": [],
           "args": []
@@ -123,21 +130,24 @@
         {
           "name": "getPropertyValues",
           "returns": "typing.Tuple[object, ...]",
+          "returns_origin": "sequence< any >",
           "desc": [
             "The order of the values in the returned sequence will be the same as the order of the names in the argument."
           ],
           "raises": [],
           "args": [
-            [
-              "aPropertyNames",
-              "typing.Tuple[str, ...]",
-              "in"
-            ]
+            {
+              "name": "aPropertyNames",
+              "type": "typing.Tuple[str, ...]",
+              "direction": "in",
+              "origin": "sequence< string >"
+            }
           ]
         },
         {
           "name": "removePropertiesChangeListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes an XPropertiesChangeListener from the listener list.",
             "",
@@ -147,16 +157,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xListener",
-              "XPropertiesChangeListener_7a7d1122",
-              "in"
-            ]
+            {
+              "name": "xListener",
+              "type": "XPropertiesChangeListener_7a7d1122",
+              "direction": "in",
+              "origin": "com.sun.star.beans.XPropertiesChangeListener"
+            }
           ]
         },
         {
           "name": "setPropertyValues",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the values to the properties with the specified names.",
             "",
@@ -168,16 +180,18 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "aPropertyNames",
-              "typing.Tuple[str, ...]",
-              "in"
-            ],
-            [
-              "aValues",
-              "typing.Tuple[object, ...]",
-              "in"
-            ]
+            {
+              "name": "aPropertyNames",
+              "type": "typing.Tuple[str, ...]",
+              "direction": "in",
+              "origin": "sequence< string >"
+            },
+            {
+              "name": "aValues",
+              "type": "typing.Tuple[object, ...]",
+              "direction": "in",
+              "origin": "sequence< any >"
+            }
           ]
         }
       ]

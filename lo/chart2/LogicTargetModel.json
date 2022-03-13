@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "LogicTargetModel",
   "type": "service",
@@ -50,6 +50,8 @@
         {
           "name": "CoordinateSystems",
           "returns": "typing.Tuple[XPropertySet_bc180bfa, ...]",
+          "origtype": null,
+          "origin": "sequence< .com.sun.star.beans.XPropertySet >",
           "desc": [
             "not BOUND nor CONSTRAINED in terms of Listener notifications, each element in the sequence must implement the service com.sun.star.chart2.CoordinateSystem"
           ],
@@ -59,8 +61,36 @@
         {
           "name": "LogicTargetModels",
           "returns": "typing.Tuple[XPropertySet_bc180bfa, ...]",
+          "origtype": null,
+          "origin": "sequence< .com.sun.star.beans.XPropertySet >",
           "desc": [
             "MAYBEVOID, not BOUND nor CONSTRAINED in terms of Listener notifications, each element in the sequence must implement the service com.sun.star.chart2.LogicTargetModel."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ],
+      "properties": [
+        {
+          "name": "ID",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "identifies an instance of this service within one chart document."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "LegendID",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "identifies an instance of the service com.sun.star.chart2.LegendModel within one chart document.",
+            "",
+            "that instance is used to automatically calculate missing properties"
           ],
           "raises_get": "",
           "raises_set": ""

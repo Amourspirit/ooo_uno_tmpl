@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XPdfDecomposer",
   "type": "interface",
@@ -83,6 +83,7 @@
         {
           "name": "getDecomposition",
           "returns": "typing.Tuple[XPrimitive2D_d5730c6d, ...]",
+          "returns_origin": "sequence< XPrimitive2D >",
           "desc": [
             "Retrieve decomposed list - in this case a bitmap with the rendered PDF.",
             "",
@@ -90,16 +91,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xDataContainer",
-              "XBinaryDataContainer_19270ea0",
-              "in"
-            ],
-            [
-              "xDecompositionParameters",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ]
+            {
+              "name": "xDataContainer",
+              "type": "XBinaryDataContainer_19270ea0",
+              "direction": "in",
+              "origin": "com.sun.star.util.XBinaryDataContainer"
+            },
+            {
+              "name": "xDecompositionParameters",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "DocumentSignatureInformation",
@@ -39,6 +39,13 @@
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.graphic.XGraphic",
+        "com.sun.star.security.XCertificate"
+      ]
+    },
     "fullname": "com.sun.star.security.DocumentSignatureInformation",
     "desc": [
       "Status of digital signatures in a document.",
@@ -55,29 +62,39 @@
       {
         "name": "Signer",
         "type": "XCertificate_e55b0d3b",
-        "lines": []
+        "origtype": "com.sun.star.security.XCertificate",
+        "origin": "com.sun.star.security.XCertificate",
+        "desc": []
       },
       {
         "name": "SignatureDate",
         "type": "int",
-        "lines": []
+        "origtype": null,
+        "origin": "long",
+        "desc": []
       },
       {
         "name": "SignatureTime",
         "type": "int",
-        "lines": [
+        "origtype": null,
+        "origin": "long",
+        "desc": [
           "Time of day, in 100th of seconds."
         ]
       },
       {
         "name": "SignatureIsValid",
         "type": "bool",
-        "lines": []
+        "origtype": null,
+        "origin": "boolean",
+        "desc": []
       },
       {
         "name": "CertificateStatus",
         "type": "int",
-        "lines": [
+        "origtype": null,
+        "origin": "long",
+        "desc": [
           "Reflects the validity of the certificate.",
           "",
           "Contains a value from the constants of com.sun.star.security.CertificateValidity."
@@ -86,7 +103,9 @@
       {
         "name": "PartialDocumentSignature",
         "type": "bool",
-        "lines": [
+        "origtype": null,
+        "origin": "boolean",
+        "desc": [
           "Indicates what content of a document is signed.",
           "",
           "This value can be ignored when this struct is returned as part of a macro signature validation. As of OpenOffice.org 3.2 and ODF 1.2 the document signature comprises all files except the signature file itself. Signatures in OOo 2.x were only applied to the files in the root of the document, except mimetype, the Pictures and ObjectReplacements/Objects folder. That is, macros were not part of the document signature. OOo 3.0 signed everything, except mimetype and the META-INF folder.",
@@ -97,7 +116,9 @@
       {
         "name": "SignatureLineId",
         "type": "str",
-        "lines": [
+        "origtype": null,
+        "origin": "string",
+        "desc": [
           "The ID of the Signature Line.",
           "",
           "**since**",
@@ -108,7 +129,9 @@
       {
         "name": "ValidSignatureLineImage",
         "type": "XGraphic_a4da0afc",
-        "lines": [
+        "origtype": "com.sun.star.graphic.XGraphic",
+        "origin": "com.sun.star.graphic.XGraphic",
+        "desc": [
           "The Signature Line Image which is shown when the signature is valid.",
           "",
           "**since**",
@@ -119,7 +142,9 @@
       {
         "name": "InvalidSignatureLineImage",
         "type": "XGraphic_a4da0afc",
-        "lines": [
+        "origtype": "com.sun.star.graphic.XGraphic",
+        "origin": "com.sun.star.graphic.XGraphic",
+        "desc": [
           "The Signature Line Image which is shown when the signature is invalid.",
           "",
           "**since**",

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDispatchInformationProvider",
   "type": "interface",
@@ -70,21 +70,24 @@
         {
           "name": "getConfigurableDispatchInformation",
           "returns": "typing.Tuple[DispatchInformation_1a290ec9, ...]",
+          "returns_origin": "sequence< DispatchInformation >",
           "desc": [
             "returns additional information about supported commands of a given command group."
           ],
           "raises": [],
           "args": [
-            [
-              "CommandGroup",
-              "int",
-              "in"
-            ]
+            {
+              "name": "CommandGroup",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "getSupportedCommandGroups",
           "returns": "typing.Tuple[int, ...]",
+          "returns_origin": "sequence< short >",
           "desc": [
             "returns all supported command groups."
           ],

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XAreaLinks",
   "type": "interface",
@@ -60,6 +60,7 @@
         {
           "name": "insertAtPosition",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "creates an area link and adds it to the collection.",
             "",
@@ -67,46 +68,53 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aDestPos",
-              "CellAddress_ae5f0b56",
-              "in"
-            ],
-            [
-              "aFileName",
-              "str",
-              "in"
-            ],
-            [
-              "aSourceArea",
-              "str",
-              "in"
-            ],
-            [
-              "aFilter",
-              "str",
-              "in"
-            ],
-            [
-              "aFilterOptions",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aDestPos",
+              "type": "CellAddress_ae5f0b56",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellAddress"
+            },
+            {
+              "name": "aFileName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aSourceArea",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aFilter",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aFilterOptions",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "removeByIndex",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes an area link from the collection."
           ],
           "raises": [],
           "args": [
-            [
-              "nIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

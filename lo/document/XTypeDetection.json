@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XTypeDetection",
   "type": "interface",
@@ -52,6 +52,7 @@
         {
           "name": "queryTypeByDescriptor",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "make a \\\"deep\\\" detection or optional a \\\"flat\\\" detection by using a MediaDescriptor",
             "",
@@ -60,21 +61,24 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Descriptor",
-              "object",
-              "in"
-            ],
-            [
-              "AllowDeep",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "Descriptor",
+              "type": "object",
+              "direction": "in",
+              "origin": null
+            },
+            {
+              "name": "AllowDeep",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "queryTypeByURL",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "make a \\\"flat\\\" detection by using the URL of the document",
             "",
@@ -82,11 +86,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "URL",
-              "str",
-              "in"
-            ]
+            {
+              "name": "URL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

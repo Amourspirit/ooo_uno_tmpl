@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XExtensionManager",
   "type": "interface",
@@ -107,6 +107,7 @@
         {
           "name": "addExtension",
           "returns": "XPackage_cb1f0c4d",
+          "returns_origin": "com.sun.star.deployment.XPackage",
           "desc": [
             "adds an extension.",
             "",
@@ -119,36 +120,42 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "url",
-              "str",
-              "in"
-            ],
-            [
-              "properties",
-              "typing.Tuple[NamedValue_a37a0af3, ...]",
-              "in"
-            ],
-            [
-              "repository",
-              "str",
-              "in"
-            ],
-            [
-              "xAbortChannel",
-              "XAbortChannel_baca0bc4",
-              "in"
-            ],
-            [
-              "xCmdEnv",
-              "XCommandEnvironment_fb330dee",
-              "in"
-            ]
+            {
+              "name": "url",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "properties",
+              "type": "typing.Tuple[NamedValue_a37a0af3, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.NamedValue >"
+            },
+            {
+              "name": "repository",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "xAbortChannel",
+              "type": "XAbortChannel_baca0bc4",
+              "direction": "in",
+              "origin": "com.sun.star.task.XAbortChannel"
+            },
+            {
+              "name": "xCmdEnv",
+              "type": "XCommandEnvironment_fb330dee",
+              "direction": "in",
+              "origin": "com.sun.star.ucb.XCommandEnvironment"
+            }
           ]
         },
         {
           "name": "checkPrerequisitesAndEnable",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "check if all prerequisites for the extension are fulfilled and activates it, if possible."
           ],
@@ -159,26 +166,30 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "extension",
-              "XPackage_cb1f0c4d",
-              "in"
-            ],
-            [
-              "xAbortChannel",
-              "XAbortChannel_baca0bc4",
-              "in"
-            ],
-            [
-              "xCmdEnv",
-              "XCommandEnvironment_fb330dee",
-              "in"
-            ]
+            {
+              "name": "extension",
+              "type": "XPackage_cb1f0c4d",
+              "direction": "in",
+              "origin": "com.sun.star.deployment.XPackage"
+            },
+            {
+              "name": "xAbortChannel",
+              "type": "XAbortChannel_baca0bc4",
+              "direction": "in",
+              "origin": "com.sun.star.task.XAbortChannel"
+            },
+            {
+              "name": "xCmdEnv",
+              "type": "XCommandEnvironment_fb330dee",
+              "direction": "in",
+              "origin": "com.sun.star.ucb.XCommandEnvironment"
+            }
           ]
         },
         {
           "name": "createAbortChannel",
           "returns": "XAbortChannel_baca0bc4",
+          "returns_origin": "com.sun.star.task.XAbortChannel",
           "desc": [
             "creates a command channel to be used to asynchronously abort a command."
           ],
@@ -188,6 +199,7 @@
         {
           "name": "disableExtension",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "disable an extension.",
             "",
@@ -200,26 +212,30 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "extension",
-              "XPackage_cb1f0c4d",
-              "in"
-            ],
-            [
-              "xAbortChannel",
-              "XAbortChannel_baca0bc4",
-              "in"
-            ],
-            [
-              "xCmdEnv",
-              "XCommandEnvironment_fb330dee",
-              "in"
-            ]
+            {
+              "name": "extension",
+              "type": "XPackage_cb1f0c4d",
+              "direction": "in",
+              "origin": "com.sun.star.deployment.XPackage"
+            },
+            {
+              "name": "xAbortChannel",
+              "type": "XAbortChannel_baca0bc4",
+              "direction": "in",
+              "origin": "com.sun.star.task.XAbortChannel"
+            },
+            {
+              "name": "xCmdEnv",
+              "type": "XCommandEnvironment_fb330dee",
+              "direction": "in",
+              "origin": "com.sun.star.ucb.XCommandEnvironment"
+            }
           ]
         },
         {
           "name": "enableExtension",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "enable an extension.",
             "",
@@ -232,26 +248,30 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "extension",
-              "XPackage_cb1f0c4d",
-              "in"
-            ],
-            [
-              "xAbortChannel",
-              "XAbortChannel_baca0bc4",
-              "in"
-            ],
-            [
-              "xCmdEnv",
-              "XCommandEnvironment_fb330dee",
-              "in"
-            ]
+            {
+              "name": "extension",
+              "type": "XPackage_cb1f0c4d",
+              "direction": "in",
+              "origin": "com.sun.star.deployment.XPackage"
+            },
+            {
+              "name": "xAbortChannel",
+              "type": "XAbortChannel_baca0bc4",
+              "direction": "in",
+              "origin": "com.sun.star.task.XAbortChannel"
+            },
+            {
+              "name": "xCmdEnv",
+              "type": "XCommandEnvironment_fb330dee",
+              "direction": "in",
+              "origin": "com.sun.star.ucb.XCommandEnvironment"
+            }
           ]
         },
         {
           "name": "getAllExtensions",
           "returns": "typing.Tuple[typing.Tuple[XPackage_cb1f0c4d, ...], ...]",
+          "returns_origin": "sequence< sequence< XPackage > >",
           "desc": [
             "returns a sequence containing all installed extensions.",
             "",
@@ -264,21 +284,24 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "xAbortChannel",
-              "XAbortChannel_baca0bc4",
-              "in"
-            ],
-            [
-              "xCmdEnv",
-              "XCommandEnvironment_fb330dee",
-              "in"
-            ]
+            {
+              "name": "xAbortChannel",
+              "type": "XAbortChannel_baca0bc4",
+              "direction": "in",
+              "origin": "com.sun.star.task.XAbortChannel"
+            },
+            {
+              "name": "xCmdEnv",
+              "type": "XCommandEnvironment_fb330dee",
+              "direction": "in",
+              "origin": "com.sun.star.ucb.XCommandEnvironment"
+            }
           ]
         },
         {
           "name": "getDeployedExtension",
           "returns": "XPackage_cb1f0c4d",
+          "returns_origin": "com.sun.star.deployment.XPackage",
           "desc": [
             "gets an installed extensions."
           ],
@@ -288,31 +311,36 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "repository",
-              "str",
-              "in"
-            ],
-            [
-              "identifier",
-              "str",
-              "in"
-            ],
-            [
-              "fileName",
-              "str",
-              "in"
-            ],
-            [
-              "xCmdEnv",
-              "XCommandEnvironment_fb330dee",
-              "in"
-            ]
+            {
+              "name": "repository",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "identifier",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "fileName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "xCmdEnv",
+              "type": "XCommandEnvironment_fb330dee",
+              "direction": "in",
+              "origin": "com.sun.star.ucb.XCommandEnvironment"
+            }
           ]
         },
         {
           "name": "getDeployedExtensions",
           "returns": "typing.Tuple[XPackage_cb1f0c4d, ...]",
+          "returns_origin": "sequence< XPackage >",
           "desc": [
             "gets all currently installed extensions, including disabled user extensions."
           ],
@@ -323,26 +351,30 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "repository",
-              "str",
-              "in"
-            ],
-            [
-              "xAbortChannel",
-              "XAbortChannel_baca0bc4",
-              "in"
-            ],
-            [
-              "xCmdEnv",
-              "XCommandEnvironment_fb330dee",
-              "in"
-            ]
+            {
+              "name": "repository",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "xAbortChannel",
+              "type": "XAbortChannel_baca0bc4",
+              "direction": "in",
+              "origin": "com.sun.star.task.XAbortChannel"
+            },
+            {
+              "name": "xCmdEnv",
+              "type": "XCommandEnvironment_fb330dee",
+              "direction": "in",
+              "origin": "com.sun.star.ucb.XCommandEnvironment"
+            }
           ]
         },
         {
           "name": "getExtensionsWithSameIdentifier",
           "returns": "typing.Tuple[XPackage_cb1f0c4d, ...]",
+          "returns_origin": "sequence< XPackage >",
           "desc": [
             "gets all extensions with the same identifier from all repositories.",
             "",
@@ -354,26 +386,30 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "identifier",
-              "str",
-              "in"
-            ],
-            [
-              "fileName",
-              "str",
-              "in"
-            ],
-            [
-              "xCmdEnv",
-              "XCommandEnvironment_fb330dee",
-              "in"
-            ]
+            {
+              "name": "identifier",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "fileName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "xCmdEnv",
+              "type": "XCommandEnvironment_fb330dee",
+              "direction": "in",
+              "origin": "com.sun.star.ucb.XCommandEnvironment"
+            }
           ]
         },
         {
           "name": "getExtensionsWithUnacceptedLicenses",
           "returns": "typing.Tuple[XPackage_cb1f0c4d, ...]",
+          "returns_origin": "sequence< XPackage >",
           "desc": [
             "returns all extensions which are currently not in use because the user did not accept the license.",
             "",
@@ -388,21 +424,24 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "repository",
-              "str",
-              "in"
-            ],
-            [
-              "xCmdEnv",
-              "XCommandEnvironment_fb330dee",
-              "in"
-            ]
+            {
+              "name": "repository",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "xCmdEnv",
+              "type": "XCommandEnvironment_fb330dee",
+              "direction": "in",
+              "origin": "com.sun.star.ucb.XCommandEnvironment"
+            }
           ]
         },
         {
           "name": "getSupportedPackageTypes",
           "returns": "typing.Tuple[XPackageTypeInfo_3bc70f7b, ...]",
+          "returns_origin": "sequence< XPackageTypeInfo >",
           "desc": [
             "gets the supported XPackageTypeInfos."
           ],
@@ -412,21 +451,24 @@
         {
           "name": "isReadOnlyRepository",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "determines if the current user has write access to the extensions folder of the repository."
           ],
           "raises": [],
           "args": [
-            [
-              "repository",
-              "str",
-              "in"
-            ]
+            {
+              "name": "repository",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "reinstallDeployedExtensions",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Expert feature: erases the underlying registry cache and reinstalls all previously added extensions.",
             "",
@@ -441,31 +483,36 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "force",
-              "bool",
-              "in"
-            ],
-            [
-              "repository",
-              "str",
-              "in"
-            ],
-            [
-              "xAbortChannel",
-              "XAbortChannel_baca0bc4",
-              "in"
-            ],
-            [
-              "xCmdEnv",
-              "XCommandEnvironment_fb330dee",
-              "in"
-            ]
+            {
+              "name": "force",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            },
+            {
+              "name": "repository",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "xAbortChannel",
+              "type": "XAbortChannel_baca0bc4",
+              "direction": "in",
+              "origin": "com.sun.star.task.XAbortChannel"
+            },
+            {
+              "name": "xCmdEnv",
+              "type": "XCommandEnvironment_fb330dee",
+              "direction": "in",
+              "origin": "com.sun.star.ucb.XCommandEnvironment"
+            }
           ]
         },
         {
           "name": "removeExtension",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes an extension."
           ],
@@ -476,36 +523,42 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "identifier",
-              "str",
-              "in"
-            ],
-            [
-              "fileName",
-              "str",
-              "in"
-            ],
-            [
-              "repository",
-              "str",
-              "in"
-            ],
-            [
-              "xAbortChannel",
-              "XAbortChannel_baca0bc4",
-              "in"
-            ],
-            [
-              "xCmdEnv",
-              "XCommandEnvironment_fb330dee",
-              "in"
-            ]
+            {
+              "name": "identifier",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "fileName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "repository",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "xAbortChannel",
+              "type": "XAbortChannel_baca0bc4",
+              "direction": "in",
+              "origin": "com.sun.star.task.XAbortChannel"
+            },
+            {
+              "name": "xCmdEnv",
+              "type": "XCommandEnvironment_fb330dee",
+              "direction": "in",
+              "origin": "com.sun.star.ucb.XCommandEnvironment"
+            }
           ]
         },
         {
           "name": "synchronize",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "synchronizes the extension database with the contents of the extensions folder of shared and bundled extensions.",
             "",
@@ -518,16 +571,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "xAbortChannel",
-              "XAbortChannel_baca0bc4",
-              "in"
-            ],
-            [
-              "xCmdEnv",
-              "XCommandEnvironment_fb330dee",
-              "in"
-            ]
+            {
+              "name": "xAbortChannel",
+              "type": "XAbortChannel_baca0bc4",
+              "direction": "in",
+              "origin": "com.sun.star.task.XAbortChannel"
+            },
+            {
+              "name": "xCmdEnv",
+              "type": "XCommandEnvironment_fb330dee",
+              "direction": "in",
+              "origin": "com.sun.star.ucb.XCommandEnvironment"
+            }
           ]
         }
       ]

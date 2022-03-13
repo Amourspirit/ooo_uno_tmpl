@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XMultiSelectionSupplier",
   "type": "interface",
@@ -64,6 +64,7 @@
         {
           "name": "addSelection",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "adds the object or the objects represented by Selection to the selection of this XMultiSelectionSupplier.",
             "",
@@ -73,16 +74,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "Selection",
-              "object",
-              "in"
-            ]
+            {
+              "name": "Selection",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         },
         {
           "name": "clearSelection",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "clears the selection of this XMultiSelectionSupplier."
           ],
@@ -92,6 +95,7 @@
         {
           "name": "createReverseSelectionEnumeration",
           "returns": "XEnumeration_f2180daa",
+          "returns_origin": "com.sun.star.container.XEnumeration",
           "desc": [],
           "raises": [],
           "args": []
@@ -99,6 +103,7 @@
         {
           "name": "createSelectionEnumeration",
           "returns": "XEnumeration_f2180daa",
+          "returns_origin": "com.sun.star.container.XEnumeration",
           "desc": [],
           "raises": [],
           "args": []
@@ -106,6 +111,7 @@
         {
           "name": "getSelectionCount",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "returns the number of selected objects of this XMultiSelectionSupplier."
           ],
@@ -115,6 +121,7 @@
         {
           "name": "removeSelection",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "remove the object or objects represented by Selection from the selection of this XMultiSelectionSupplier.",
             "",
@@ -124,11 +131,12 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "Selection",
-              "object",
-              "in"
-            ]
+            {
+              "name": "Selection",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         }
       ]

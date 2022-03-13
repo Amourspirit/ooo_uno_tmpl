@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XListEntryTypedSource",
   "type": "interface",
@@ -60,16 +60,18 @@
         {
           "name": "getAllListEntriesTyped",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [
             "provides access to the entirety of all list entries, along with the corresponding underlying data values."
           ],
           "raises": [],
           "args": [
-            [
-              "DataValues",
-              "typing.Tuple[object, ...]",
-              "out"
-            ]
+            {
+              "name": "DataValues",
+              "type": "typing.Tuple[object, ...]",
+              "direction": "out",
+              "origin": "sequence< any >"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XPasteListener",
   "type": "interface",
@@ -66,6 +66,7 @@
         {
           "name": "notifyPasteEvent",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Notifies the listener about paste events.",
             "",
@@ -73,11 +74,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aEvent",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ]
+            {
+              "name": "aEvent",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< .com.sun.star.beans.PropertyValue >"
+            }
           ]
         }
       ]

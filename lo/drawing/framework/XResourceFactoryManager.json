@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XResourceFactoryManager",
   "type": "interface",
@@ -48,6 +48,7 @@
         {
           "name": "addResourceFactory",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Register a new resource factory for the given URL.",
             "",
@@ -55,21 +56,24 @@
           ],
           "raises": [],
           "args": [
-            [
-              "sResourceURL",
-              "str",
-              "in"
-            ],
-            [
-              "xResourceFactory",
-              "XResourceFactory_b3561268",
-              "in"
-            ]
+            {
+              "name": "sResourceURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "xResourceFactory",
+              "type": "XResourceFactory_b3561268",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.framework.XResourceFactory"
+            }
           ]
         },
         {
           "name": "getResourceFactory",
           "returns": "XResourceFactory_b3561268",
+          "returns_origin": "com.sun.star.drawing.framework.XResourceFactory",
           "desc": [
             "Return the resource factory that was previously registered for the given resource type.",
             "",
@@ -77,16 +81,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "sResourceURL",
-              "str",
-              "in"
-            ]
+            {
+              "name": "sResourceURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "removeResourceFactoryForReference",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Remove a resource factory for all resource types it has been registered for.",
             "",
@@ -94,16 +100,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xResourceFactory",
-              "XResourceFactory_b3561268",
-              "in"
-            ]
+            {
+              "name": "xResourceFactory",
+              "type": "XResourceFactory_b3561268",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.framework.XResourceFactory"
+            }
           ]
         },
         {
           "name": "removeResourceFactoryForURL",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Remove a resource factory for one type of resource.",
             "",
@@ -111,11 +119,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "sResourceURL",
-              "str",
-              "in"
-            ]
+            {
+              "name": "sResourceURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

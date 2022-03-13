@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XGraphicMapper",
   "type": "interface",
@@ -52,36 +52,41 @@
         {
           "name": "findGraphic",
           "returns": "XGraphic_a4da0afc",
+          "returns_origin": "com.sun.star.graphic.XGraphic",
           "desc": [
             "Find if we have the XGraphic for the certain key."
           ],
           "raises": [],
           "args": [
-            [
-              "Id",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Id",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "putGraphic",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Insert a new entry to map an id/key to the XGraphic."
           ],
           "raises": [],
           "args": [
-            [
-              "Id",
-              "str",
-              "in"
-            ],
-            [
-              "Graphic",
-              "XGraphic_a4da0afc",
-              "in"
-            ]
+            {
+              "name": "Id",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Graphic",
+              "type": "XGraphic_a4da0afc",
+              "direction": "in",
+              "origin": "com.sun.star.graphic.XGraphic"
+            }
           ]
         }
       ]

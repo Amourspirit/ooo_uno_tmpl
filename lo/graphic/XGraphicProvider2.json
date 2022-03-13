@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XGraphicProvider2",
   "type": "interface",
@@ -74,6 +74,7 @@
         {
           "name": "queryGraphics",
           "returns": "typing.Tuple[XGraphic_a4da0afc, ...]",
+          "returns_origin": "sequence< XGraphic >",
           "desc": [
             "Calling this method returns XGraphic interfaces that hold loaded graphics.",
             "",
@@ -87,11 +88,12 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "MediaPropertiesSeq",
-              "typing.Tuple[PropertyValues_d6470ce6, ...]",
-              "in"
-            ]
+            {
+              "name": "MediaPropertiesSeq",
+              "type": "typing.Tuple[PropertyValues_d6470ce6, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValues >"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XAnnotationAccess",
   "type": "interface",
@@ -55,6 +55,7 @@
         {
           "name": "createAndInsertAnnotation",
           "returns": "XAnnotation_bb8f0be7",
+          "returns_origin": "com.sun.star.office.XAnnotation",
           "desc": [
             "creates a new annotation and inserts it into the document content."
           ],
@@ -64,6 +65,7 @@
         {
           "name": "createAnnotationEnumeration",
           "returns": "XAnnotationEnumeration_58fe106e",
+          "returns_origin": "com.sun.star.office.XAnnotationEnumeration",
           "desc": [],
           "raises": [],
           "args": []
@@ -71,6 +73,7 @@
         {
           "name": "removeAnnotation",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes the annotation from this document content."
           ],
@@ -78,11 +81,12 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "annotation",
-              "XAnnotation_bb8f0be7",
-              "in"
-            ]
+            {
+              "name": "annotation",
+              "type": "XAnnotation_bb8f0be7",
+              "direction": "in",
+              "origin": "com.sun.star.office.XAnnotation"
+            }
           ]
         }
       ]

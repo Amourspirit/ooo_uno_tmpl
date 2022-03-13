@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XAccessibleContext",
   "type": "interface",
@@ -87,6 +87,7 @@
         {
           "name": "getAccessibleChild",
           "returns": "XAccessible_1cbc0eb6",
+          "returns_origin": "com.sun.star.accessibility.XAccessible",
           "desc": [
             "Returns the i-th child of this object.",
             "",
@@ -96,16 +97,18 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "i",
-              "int",
-              "in"
-            ]
+            {
+              "name": "i",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getAccessibleChildCount",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "Return the number of children.",
             "",
@@ -117,6 +120,7 @@
         {
           "name": "getAccessibleDescription",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Returns the object's description.",
             "",
@@ -128,6 +132,7 @@
         {
           "name": "getAccessibleIndexInParent",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "Returns the index of this object in its accessible parent.",
             "",
@@ -139,6 +144,7 @@
         {
           "name": "getAccessibleName",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Return the object's localized name.",
             "",
@@ -150,6 +156,7 @@
         {
           "name": "getAccessibleParent",
           "returns": "XAccessible_1cbc0eb6",
+          "returns_origin": "com.sun.star.accessibility.XAccessible",
           "desc": [
             "Returns the parent of this object.",
             "",
@@ -161,6 +168,7 @@
         {
           "name": "getAccessibleRelationSet",
           "returns": "XAccessibleRelationSet_d8961320",
+          "returns_origin": "com.sun.star.accessibility.XAccessibleRelationSet",
           "desc": [
             "Returns the set of relations defined for this object.",
             "",
@@ -174,6 +182,7 @@
         {
           "name": "getAccessibleRole",
           "returns": "int",
+          "returns_origin": "short",
           "desc": [
             "Returns the role of this object.",
             "",
@@ -185,6 +194,7 @@
         {
           "name": "getAccessibleStateSet",
           "returns": "XAccessibleStateSet_a08511e3",
+          "returns_origin": "com.sun.star.accessibility.XAccessibleStateSet",
           "desc": [
             "Returns the set of states that are currently active for this object.",
             "",
@@ -196,6 +206,7 @@
         {
           "name": "getLocale",
           "returns": "Locale_70d308fa",
+          "returns_origin": "com.sun.star.lang.Locale",
           "desc": [
             "Returns the locale of the component.",
             "",

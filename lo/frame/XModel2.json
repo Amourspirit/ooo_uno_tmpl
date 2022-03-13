@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XModel2",
   "type": "interface",
@@ -91,6 +91,7 @@
         {
           "name": "createDefaultViewController",
           "returns": "XController2_bbcf0bc1",
+          "returns_origin": "com.sun.star.frame.XController2",
           "desc": [
             "creates the default view instance for this model.",
             "",
@@ -101,16 +102,18 @@
             "com.sun.star.uno.Exception"
           ],
           "args": [
-            [
-              "Frame",
-              "XFrame_7a570956",
-              "in"
-            ]
+            {
+              "name": "Frame",
+              "type": "XFrame_7a570956",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XFrame"
+            }
           ]
         },
         {
           "name": "createViewController",
           "returns": "XController2_bbcf0bc1",
+          "returns_origin": "com.sun.star.frame.XController2",
           "desc": [
             "creates a new view instance classified by the specified name and arguments.",
             "",
@@ -121,26 +124,30 @@
             "com.sun.star.uno.Exception"
           ],
           "args": [
-            [
-              "ViewName",
-              "str",
-              "in"
-            ],
-            [
-              "Arguments",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ],
-            [
-              "Frame",
-              "XFrame_7a570956",
-              "in"
-            ]
+            {
+              "name": "ViewName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Arguments",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            },
+            {
+              "name": "Frame",
+              "type": "XFrame_7a570956",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XFrame"
+            }
           ]
         },
         {
           "name": "getAvailableViewControllerNames",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [
             "provides the available names of the factory to be used to create views.",
             "",
@@ -154,6 +161,7 @@
         {
           "name": "getControllers",
           "returns": "XEnumeration_f2180daa",
+          "returns_origin": "com.sun.star.container.XEnumeration",
           "desc": [
             "provides list of all currently connected controller objects.",
             "",
@@ -165,6 +173,7 @@
         {
           "name": "setArgs",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Sets com.sun.star.document.MediaDescriptor properties of the current model during runtime.",
             "",
@@ -177,11 +186,12 @@
             "com.sun.star.util.InvalidStateException"
           ],
           "args": [
-            [
-              "Arguments",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ]
+            {
+              "name": "Arguments",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            }
           ]
         }
       ]

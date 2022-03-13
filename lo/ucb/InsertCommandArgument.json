@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "InsertCommandArgument",
@@ -33,6 +33,12 @@
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.io.XInputStream"
+      ]
+    },
     "fullname": "com.sun.star.ucb.InsertCommandArgument",
     "desc": [
       "The argument for the command \\\"insert\\\"."
@@ -43,7 +49,9 @@
       {
         "name": "Data",
         "type": "XInputStream_98d40ab4",
-        "lines": [
+        "origtype": "com.sun.star.io.XInputStream",
+        "origin": "com.sun.star.io.XInputStream",
+        "desc": [
           "A stream containing document data.",
           "",
           "This member can be left blank, if no (new) document data shall be written by the implementation of the \\\"insert\\\" command."
@@ -52,7 +60,9 @@
       {
         "name": "ReplaceExisting",
         "type": "bool",
-        "lines": [
+        "origtype": null,
+        "origin": "boolean",
+        "desc": [
           "A flag indicating whether a possibly existing content (and its data) shall be overwritten.",
           "",
           "Implementations that are not able to detect whether there are previous data may ignore this parameter and will always write the new data."

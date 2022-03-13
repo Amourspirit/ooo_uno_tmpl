@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "NameClashResolveRequest",
   "type": "exception",
@@ -49,6 +49,44 @@
       "If this exception is passed to an com.sun.star.task.XInteractionHandler an XInteractionSupplyName and an XInteractionReplaceExistingData should be supplied with the com.sun.star.task.XInteractionRequest. On return the XInteractionSupplyName, if selected, will contain a new name supposed to resolve the name clash. The XInteractionReplaceExistingData will be selected if the clashing resource shall be overwritten."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/exceptioncom_1_1sun_1_1star_1_1ucb_1_1NameClashResolveRequest.html",
-    "items": {}
+    "items": {
+      "properties": [
+        {
+          "name": "TargetFolderURL",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "contains the URL of the folder that contains the clashing resource."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ClashingName",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "contains the clashing name."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ProposedNewName",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "contains a proposal for a new, non-clashing name.",
+            "",
+            "This field may be left empty if the implementation is not able to suggest a new name."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

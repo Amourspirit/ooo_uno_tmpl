@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XTreeNode",
   "type": "interface",
@@ -44,6 +44,7 @@
         {
           "name": "getChildAt",
           "returns": "XTreeNode",
+          "returns_origin": "com.sun.star.awt.tree.XTreeNode",
           "desc": [
             "Returns the child tree node at Index."
           ],
@@ -51,16 +52,18 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "Index",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Index",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getChildCount",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "Returns the number of child nodes."
           ],
@@ -70,6 +73,7 @@
         {
           "name": "getCollapsedGraphicURL",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "The URL for a graphic that is rendered to visualize collapsed non leaf nodes.",
             "",
@@ -81,6 +85,7 @@
         {
           "name": "getDisplayValue",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "If not empty, the textual representation of this any is used as the text part of this node."
           ],
@@ -90,6 +95,7 @@
         {
           "name": "getExpandedGraphicURL",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "The URL for a graphic that is rendered to visualize expanded non leaf nodes.",
             "",
@@ -101,21 +107,24 @@
         {
           "name": "getIndex",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "Returns the index of Node in this instances children."
           ],
           "raises": [],
           "args": [
-            [
-              "Node",
-              "XTreeNode",
-              "in"
-            ]
+            {
+              "name": "Node",
+              "type": "XTreeNode",
+              "direction": "in",
+              "origin": "com.sun.star.awt.tree.XTreeNode"
+            }
           ]
         },
         {
           "name": "getNodeGraphicURL",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "The URL for a graphic that is rendered before the text part of this node.",
             "",
@@ -127,6 +136,7 @@
         {
           "name": "getParent",
           "returns": "XTreeNode",
+          "returns_origin": "com.sun.star.awt.tree.XTreeNode",
           "desc": [
             "Returns the parent node of this node."
           ],
@@ -136,6 +146,7 @@
         {
           "name": "hasChildrenOnDemand",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Returns TRUE if the children of this node are created on demand.",
             "",

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDataContainer",
   "type": "interface",
@@ -60,6 +60,7 @@
         {
           "name": "getContentType",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the content type (MIME Type) of the data container."
           ],
@@ -69,6 +70,7 @@
         {
           "name": "getData",
           "returns": "typing.Tuple[int, ...]",
+          "returns_origin": "sequence< byte >",
           "desc": [
             "returns the data of the data container."
           ],
@@ -78,6 +80,7 @@
         {
           "name": "getDataURL",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Deprecated.",
             "",
@@ -89,36 +92,41 @@
         {
           "name": "setContentType",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the content type (MIME Type) of the data container."
           ],
           "raises": [],
           "args": [
-            [
-              "aType",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aType",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "setData",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the data of the data container."
           ],
           "raises": [],
           "args": [
-            [
-              "aData",
-              "typing.Tuple[int, ...]",
-              "in"
-            ]
+            {
+              "name": "aData",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "in",
+              "origin": "sequence< byte >"
+            }
           ]
         },
         {
           "name": "setDataURL",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Deprecated.",
             "",
@@ -126,11 +134,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aURL",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XExtendedTransliteration",
   "type": "interface",
@@ -56,6 +56,7 @@
         {
           "name": "transliterateChar2Char",
           "returns": "str",
+          "returns_origin": "char",
           "desc": [
             "Transliterate a character to a character.",
             "",
@@ -65,31 +66,35 @@
             "MultipleCharsOutputException"
           ],
           "args": [
-            [
-              "cChar",
-              "str",
-              "in"
-            ]
+            {
+              "name": "cChar",
+              "type": "str",
+              "direction": "in",
+              "origin": "char"
+            }
           ]
         },
         {
           "name": "transliterateChar2String",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Transliterate a character to a string."
           ],
           "raises": [],
           "args": [
-            [
-              "cChar",
-              "str",
-              "in"
-            ]
+            {
+              "name": "cChar",
+              "type": "str",
+              "direction": "in",
+              "origin": "char"
+            }
           ]
         },
         {
           "name": "transliterateString2String",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Transliterate a substring.",
             "",
@@ -97,21 +102,24 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aStr",
-              "str",
-              "in"
-            ],
-            [
-              "nStartPos",
-              "int",
-              "in"
-            ],
-            [
-              "nCount",
-              "int",
-              "in"
-            ]
+            {
+              "name": "aStr",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nStartPos",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nCount",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XTableAlteration",
   "type": "interface",
@@ -64,6 +64,7 @@
         {
           "name": "addColumn",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "creates a new object using the given descriptor and appends it to the related container.",
             "",
@@ -73,21 +74,24 @@
             "com.sun.star.sdbc.SQLException"
           ],
           "args": [
-            [
-              "table",
-              "XPropertySet_bc180bfa",
-              "in"
-            ],
-            [
-              "descriptor",
-              "XPropertySet_bc180bfa",
-              "in"
-            ]
+            {
+              "name": "table",
+              "type": "XPropertySet_bc180bfa",
+              "direction": "in",
+              "origin": "com.sun.star.beans.XPropertySet"
+            },
+            {
+              "name": "descriptor",
+              "type": "XPropertySet_bc180bfa",
+              "direction": "in",
+              "origin": "com.sun.star.beans.XPropertySet"
+            }
           ]
         },
         {
           "name": "alterColumnByName",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "alter the column defined by name"
           ],
@@ -95,26 +99,30 @@
             "com.sun.star.sdbc.SQLException"
           ],
           "args": [
-            [
-              "table",
-              "XPropertySet_bc180bfa",
-              "in"
-            ],
-            [
-              "columnName",
-              "str",
-              "in"
-            ],
-            [
-              "columnDescriptor",
-              "XPropertySet_bc180bfa",
-              "in"
-            ]
+            {
+              "name": "table",
+              "type": "XPropertySet_bc180bfa",
+              "direction": "in",
+              "origin": "com.sun.star.beans.XPropertySet"
+            },
+            {
+              "name": "columnName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "columnDescriptor",
+              "type": "XPropertySet_bc180bfa",
+              "direction": "in",
+              "origin": "com.sun.star.beans.XPropertySet"
+            }
           ]
         },
         {
           "name": "dropColumn",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "drops an object of the related container identified by its name."
           ],
@@ -122,16 +130,18 @@
             "com.sun.star.sdbc.SQLException"
           ],
           "args": [
-            [
-              "table",
-              "XPropertySet_bc180bfa",
-              "in"
-            ],
-            [
-              "columnName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "table",
+              "type": "XPropertySet_bc180bfa",
+              "direction": "in",
+              "origin": "com.sun.star.beans.XPropertySet"
+            },
+            {
+              "name": "columnName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

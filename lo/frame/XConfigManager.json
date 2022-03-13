@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XConfigManager",
   "type": "interface",
@@ -63,6 +63,7 @@
         {
           "name": "addPropertyChangeListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "add a listener to notify changes on well known variables inside the real implementation",
             "",
@@ -70,21 +71,24 @@
           ],
           "raises": [],
           "args": [
-            [
-              "KeyName",
-              "str",
-              "in"
-            ],
-            [
-              "Listener",
-              "XPropertyChangeListener_58e4105a",
-              "in"
-            ]
+            {
+              "name": "KeyName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Listener",
+              "type": "XPropertyChangeListener_58e4105a",
+              "direction": "in",
+              "origin": "com.sun.star.beans.XPropertyChangeListener"
+            }
           ]
         },
         {
           "name": "flush",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "was designed for additional functionality for interface com.sun.star.registry.XSimpleRegistry and make no sense without that"
           ],
@@ -94,26 +98,30 @@
         {
           "name": "removePropertyChangeListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "remove a registered listener"
           ],
           "raises": [],
           "args": [
-            [
-              "KeyName",
-              "str",
-              "in"
-            ],
-            [
-              "Listener",
-              "XPropertyChangeListener_58e4105a",
-              "in"
-            ]
+            {
+              "name": "KeyName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Listener",
+              "type": "XPropertyChangeListener_58e4105a",
+              "direction": "in",
+              "origin": "com.sun.star.beans.XPropertyChangeListener"
+            }
           ]
         },
         {
           "name": "substituteVariables",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "substitute variables (place holder) inside given parameter Text",
             "",
@@ -121,11 +129,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Text",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Text",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

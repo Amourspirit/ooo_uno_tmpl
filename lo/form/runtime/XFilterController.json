@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XFilterController",
   "type": "interface",
@@ -72,6 +72,7 @@
         {
           "name": "addFilterControllerListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "registers a listener to be notified of certain changes in the form based filter.",
             "",
@@ -79,16 +80,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Listener",
-              "XFilterControllerListener_381416",
-              "in"
-            ]
+            {
+              "name": "Listener",
+              "type": "XFilterControllerListener_381416",
+              "direction": "in",
+              "origin": "com.sun.star.form.runtime.XFilterControllerListener"
+            }
           ]
         },
         {
           "name": "appendEmptyDisjunctiveTerm",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "appends an empty disjunctive term to the list of terms."
           ],
@@ -98,6 +101,7 @@
         {
           "name": "getFilterComponent",
           "returns": "XControl_7a9c098d",
+          "returns_origin": "com.sun.star.awt.XControl",
           "desc": [
             "retrieves the filter component with the given index.",
             "",
@@ -107,16 +111,18 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "Component",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Component",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getPredicateExpressions",
           "returns": "typing.Tuple[typing.Tuple[str, ...], ...]",
+          "returns_origin": "sequence< sequence< string > >",
           "desc": [
             "retrieves the entirety of the predicate expressions represented by the filter controller.",
             "",
@@ -128,6 +134,7 @@
         {
           "name": "removeDisjunctiveTerm",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes a given disjunctive term"
           ],
@@ -135,31 +142,35 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "Term",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Term",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "removeFilterControllerListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "revokes a listener which was previously registered to be notified of certain changes in the form based filter."
           ],
           "raises": [],
           "args": [
-            [
-              "Listener",
-              "XFilterControllerListener_381416",
-              "in"
-            ]
+            {
+              "name": "Listener",
+              "type": "XFilterControllerListener_381416",
+              "direction": "in",
+              "origin": "com.sun.star.form.runtime.XFilterControllerListener"
+            }
           ]
         },
         {
           "name": "setPredicateExpression",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets a given predicate expression"
           ],
@@ -167,22 +178,62 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "Component",
-              "int",
-              "in"
-            ],
-            [
-              "Term",
-              "int",
-              "in"
-            ],
-            [
-              "PredicateExpression",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Component",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "Term",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "PredicateExpression",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
+        }
+      ],
+      "properties": [
+        {
+          "name": "ActiveTerm",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "denotes the active term of the filter controller."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "DisjunctiveTerms",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "is the number of disjunctive terms of the filter expression represented by the form based filter."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FilterComponents",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "is the number of filter components, or filter controls, which the filter controller is responsible for.",
+            "",
+            "This number is constant during one session of the form based filter."
+          ],
+          "raises_get": "",
+          "raises_set": ""
         }
       ]
     }

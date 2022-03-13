@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XText",
   "type": "interface",
@@ -67,6 +67,7 @@
         {
           "name": "insertTextContent",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "inserts a content, such as a text table, text frame or text field.",
             "",
@@ -76,26 +77,30 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "xRange",
-              "XTextRange_9a910ab7",
-              "in"
-            ],
-            [
-              "xContent",
-              "XTextContent_b16e0ba5",
-              "in"
-            ],
-            [
-              "bAbsorb",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "xRange",
+              "type": "XTextRange_9a910ab7",
+              "direction": "in",
+              "origin": "com.sun.star.text.XTextRange"
+            },
+            {
+              "name": "xContent",
+              "type": "XTextContent_b16e0ba5",
+              "direction": "in",
+              "origin": "com.sun.star.text.XTextContent"
+            },
+            {
+              "name": "bAbsorb",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "removeTextContent",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes the specified content from the text object."
           ],
@@ -103,11 +108,12 @@
             "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
-            [
-              "xContent",
-              "XTextContent_b16e0ba5",
-              "in"
-            ]
+            {
+              "name": "xContent",
+              "type": "XTextContent_b16e0ba5",
+              "direction": "in",
+              "origin": "com.sun.star.text.XTextContent"
+            }
           ]
         }
       ]

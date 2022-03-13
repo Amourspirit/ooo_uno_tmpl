@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDataPilotFieldGrouping",
   "type": "interface",
@@ -70,6 +70,7 @@
         {
           "name": "createDateGroup",
           "returns": "XDataPilotField_e0350cdf",
+          "returns_origin": "com.sun.star.sheet.XDataPilotField",
           "desc": [
             "Groups the members of this field by dates, according to the passed settings.",
             "",
@@ -79,16 +80,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aInfo",
-              "DataPilotFieldGroupInfo_56691020",
-              "in"
-            ]
+            {
+              "name": "aInfo",
+              "type": "DataPilotFieldGroupInfo_56691020",
+              "direction": "in",
+              "origin": "com.sun.star.sheet.DataPilotFieldGroupInfo"
+            }
           ]
         },
         {
           "name": "createNameGroup",
           "returns": "XDataPilotField_e0350cdf",
+          "returns_origin": "com.sun.star.sheet.XDataPilotField",
           "desc": [
             "Creates a new DataPilot field which contains a group containing the given DataPilot field items (members).",
             "",
@@ -100,11 +103,12 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aItems",
-              "typing.Tuple[str, ...]",
-              "in"
-            ]
+            {
+              "name": "aItems",
+              "type": "typing.Tuple[str, ...]",
+              "direction": "in",
+              "origin": "sequence< string >"
+            }
           ]
         }
       ]

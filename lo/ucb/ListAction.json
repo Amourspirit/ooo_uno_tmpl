@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "ListAction",
@@ -25,6 +25,10 @@
     "quote": [],
     "typings": [],
     "requires_typing": false,
+    "full_imports": {
+      "general": [],
+      "typing": []
+    },
     "fullname": "com.sun.star.ucb.ListAction",
     "desc": [
       "This struct contains information needed in the notifications of a XDynamicResultSet."
@@ -35,7 +39,9 @@
       {
         "name": "Position",
         "type": "int",
-        "lines": [
+        "origtype": null,
+        "origin": "long",
+        "desc": [
           "The position where something has happened (index begins with 1 as usual with JDBC ).",
           "",
           "Its value does not necessary indicate the new position in the new com.sun.star.sdbc.XResultSet, but a position while doing the changes step by step beginning with the old com.sun.star.sdbc.XResultSet."
@@ -44,14 +50,18 @@
       {
         "name": "Count",
         "type": "int",
-        "lines": [
+        "origtype": null,
+        "origin": "long",
+        "desc": [
           "The count of involved rows."
         ]
       },
       {
         "name": "ListActionType",
         "type": "int",
-        "lines": [
+        "origtype": null,
+        "origin": "long",
+        "desc": [
           "specifies the kind of modification happened to all assigned rows.",
           "",
           "The value of the other members of this struct depend on the value of this member:"
@@ -60,7 +70,9 @@
       {
         "name": "ActionInfo",
         "type": "object",
-        "lines": [
+        "origtype": null,
+        "origin": "any",
+        "desc": [
           "depending on the content of ListAction.ListActionType the ListAction.ActionInfo could contain additional information about the changes happened (see table above)."
         ]
       }

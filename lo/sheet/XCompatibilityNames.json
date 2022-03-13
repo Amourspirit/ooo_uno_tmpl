@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XCompatibilityNames",
   "type": "interface",
@@ -62,6 +62,7 @@
         {
           "name": "getCompatibilityNames",
           "returns": "typing.Tuple[LocalizedName_c89d0c39, ...]",
+          "returns_origin": "sequence< com.sun.star.sheet.LocalizedName >",
           "desc": [
             "returns the compatibility names of the specified function.",
             "",
@@ -75,11 +76,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aProgrammaticName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aProgrammaticName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

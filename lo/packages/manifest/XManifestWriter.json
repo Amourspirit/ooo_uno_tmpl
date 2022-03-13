@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XManifestWriter",
   "type": "interface",
@@ -71,21 +71,24 @@
         {
           "name": "writeManifestSequence",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Writes the supplied sequence of manifest entries to the supplied XOutputStream."
           ],
           "raises": [],
           "args": [
-            [
-              "rStream",
-              "XOutputStream_a4e00b35",
-              "in"
-            ],
-            [
-              "rSequence",
-              "typing.Tuple[typing.Tuple[PropertyValue_c9610c73, ...], ...]",
-              "in"
-            ]
+            {
+              "name": "rStream",
+              "type": "XOutputStream_a4e00b35",
+              "direction": "in",
+              "origin": "com.sun.star.io.XOutputStream"
+            },
+            {
+              "name": "rSequence",
+              "type": "typing.Tuple[typing.Tuple[PropertyValue_c9610c73, ...], ...]",
+              "direction": "in",
+              "origin": "sequence< sequence< com.sun.star.beans.PropertyValue > >"
+            }
           ]
         }
       ]

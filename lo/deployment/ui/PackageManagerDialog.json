@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "PackageManagerDialog",
   "type": "service",
@@ -64,26 +64,30 @@
         {
           "name": "create",
           "returns": "None",
+          "returns_origin": null,
           "desc": [
             "Create a GUI using the specific parent window and focus on the given context."
           ],
           "raises": [],
           "args": [
-            [
-              "xParent",
-              "XWindow_713b0924",
-              "in"
-            ],
-            [
-              "focusedContext",
-              "str",
-              "in"
-            ]
+            {
+              "name": "xParent",
+              "type": "XWindow_713b0924",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XWindow"
+            },
+            {
+              "name": "focusedContext",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "createAndInstall",
           "returns": "None",
+          "returns_origin": null,
           "desc": [
             "Create a GUI and pass the URL of the extension which shall be installed right away.",
             "",
@@ -91,16 +95,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "extensionURL",
-              "str",
-              "in"
-            ]
+            {
+              "name": "extensionURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "createDefault",
           "returns": "None",
+          "returns_origin": null,
           "desc": [
             "Create a default GUI."
           ],

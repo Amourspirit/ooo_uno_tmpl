@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XAllListenerAdapterService",
   "type": "interface",
@@ -61,6 +61,7 @@
         {
           "name": "createAllListerAdapter",
           "returns": "XInterface_8f010a43",
+          "returns_origin": "com.sun.star.uno.XInterface",
           "desc": [
             "creates a wrapper from the listener of type xListenerType to the XAllListener listener.",
             "",
@@ -68,21 +69,24 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xListenerType",
-              "object",
-              "in"
-            ],
-            [
-              "xListener",
-              "XAllListener_c91b0c54",
-              "in"
-            ],
-            [
-              "aHelper",
-              "object",
-              "in"
-            ]
+            {
+              "name": "xListenerType",
+              "type": "object",
+              "direction": "in",
+              "origin": "type"
+            },
+            {
+              "name": "xListener",
+              "type": "XAllListener_c91b0c54",
+              "direction": "in",
+              "origin": "com.sun.star.script.XAllListener"
+            },
+            {
+              "name": "aHelper",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         }
       ]

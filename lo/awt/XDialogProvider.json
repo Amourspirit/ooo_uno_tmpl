@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDialogProvider",
   "type": "interface",
@@ -60,6 +60,7 @@
         {
           "name": "createDialog",
           "returns": "XDialog_709d08fc",
+          "returns_origin": "com.sun.star.awt.XDialog",
           "desc": [
             "creates a dialog for the given URL."
           ],
@@ -67,11 +68,12 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "URL",
-              "str",
-              "in"
-            ]
+            {
+              "name": "URL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

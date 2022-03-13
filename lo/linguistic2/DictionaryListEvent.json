@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "DictionaryListEvent",
@@ -43,6 +43,14 @@
       "typing.Tuple[DictionaryEvent_3ae00f8d, ...]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.lang.EventObject"
+      ],
+      "typing": [
+        "com.sun.star.linguistic2.DictionaryEvent"
+      ]
+    },
     "fullname": "com.sun.star.linguistic2.DictionaryListEvent",
     "desc": [
       "structure representing a dictionary-list event.",
@@ -57,7 +65,9 @@
       {
         "name": "aDictionaryEvents",
         "type": "typing.Tuple[DictionaryEvent_3ae00f8d, ...]",
-        "lines": [
+        "origtype": null,
+        "origin": "sequence< com.sun.star.linguistic2.DictionaryEvent >",
+        "desc": [
           "list of accumulated dictionary events.",
           "",
           "It will be empty if all com.sun.star.linguistic2.XDictionaryListEventListener are satisfied with the condensed representation of the com.sun.star.linguistic2.DictionaryListEvent.nCondensedEvent()."
@@ -66,7 +76,9 @@
       {
         "name": "nCondensedEvent",
         "type": "int",
-        "lines": [
+        "origtype": null,
+        "origin": "short",
+        "desc": [
           "the combined type of the accumulated events.",
           "",
           "The value can be the combination of multiple com.sun.star.linguistic2.DictionaryListEventFlags by applying the logical OR to them."

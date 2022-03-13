@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "RadioButton",
   "type": "service",
@@ -65,6 +65,51 @@
       "Like in HTML, radio buttons are grouped together if and only if they have the same name (see com.sun.star.form.FormComponent.Name)."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1form_1_1component_1_1RadioButton.html",
-    "items": {}
+    "items": {
+      "properties": [
+        {
+          "name": "DefaultState",
+          "returns": "int",
+          "origtype": null,
+          "origin": "short",
+          "desc": [
+            "contains a default value for the control.",
+            "",
+            "This value is used when the control is initially displayed, and for resetting it.",
+            "",
+            "In a group of radio buttons only one button should be checked by default."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RefValue",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "contains a reference value which is used for submission in a HTML form.",
+            "",
+            "If the form the control belongs to is to be submitted (see com.sun.star.form.XSubmit), and the control is checked, this reference value is used for submission."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "UncheckedRefValue",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "specifies a value which is to be associated with the control when it's not selected.",
+            "",
+            "In various situations, the RefValue is associated with the control if and only if it is selected.",
+            "UncheckedRefValue provides an extension of this concept: If present, the value should be associated with the control when it is not selected."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

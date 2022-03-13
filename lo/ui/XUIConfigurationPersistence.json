@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XUIConfigurationPersistence",
   "type": "interface",
@@ -64,6 +64,7 @@
         {
           "name": "isModified",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "provides the current modify state of the configuration manager instance."
           ],
@@ -73,6 +74,7 @@
         {
           "name": "isReadOnly",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "provides the current read-only state of the user configuration manager.",
             "",
@@ -84,6 +86,7 @@
         {
           "name": "reload",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "reloads the configuration data from the storage and reinitialize the user interface configuration manager instance with this data.",
             "",
@@ -97,6 +100,7 @@
         {
           "name": "store",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "stores the configuration data to the storage provided by setStorage() from the storage and initialize the user interface configuration manager instance with the newly data.",
             "",
@@ -110,6 +114,7 @@
         {
           "name": "storeToStorage",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "stores the configuration data to the provided storage, ignoring the previously set storage by setStorage().",
             "",
@@ -119,11 +124,12 @@
             "com.sun.star.uno.Exception"
           ],
           "args": [
-            [
-              "Storage",
-              "XStorage_8e460a32",
-              "in"
-            ]
+            {
+              "name": "Storage",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            }
           ]
         }
       ]

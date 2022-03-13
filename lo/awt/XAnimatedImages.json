@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XAnimatedImages",
   "type": "interface",
@@ -60,6 +60,7 @@
         {
           "name": "getImageSet",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [
             "returns the URLs of the image set with the given index"
           ],
@@ -67,16 +68,18 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "iIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "iIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getImageSetCount",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "returns the number of images sets maintained by the component."
           ],
@@ -86,6 +89,7 @@
         {
           "name": "insertImageSet",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the URLs of the image set with the given index"
           ],
@@ -93,21 +97,24 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "iIndex",
-              "int",
-              "in"
-            ],
-            [
-              "iImageURLs",
-              "typing.Tuple[str, ...]",
-              "in"
-            ]
+            {
+              "name": "iIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "iImageURLs",
+              "type": "typing.Tuple[str, ...]",
+              "direction": "in",
+              "origin": "sequence< string >"
+            }
           ]
         },
         {
           "name": "removeImageSet",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes the image set with the given index"
           ],
@@ -115,16 +122,18 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "iIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "iIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "replaceImageSet",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "replaces the image set given by index with a new one"
           ],
@@ -132,17 +141,60 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "iIndex",
-              "int",
-              "in"
-            ],
-            [
-              "iImageURLs",
-              "typing.Tuple[str, ...]",
-              "in"
-            ]
+            {
+              "name": "iIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "iImageURLs",
+              "type": "typing.Tuple[str, ...]",
+              "direction": "in",
+              "origin": "sequence< string >"
+            }
           ]
+        }
+      ],
+      "properties": [
+        {
+          "name": "AutoRepeat",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "specifies whether the animation should start over with the first image of the image series when the last image has been played.",
+            "",
+            "The default value for this attribute is TRUE."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ScaleMode",
+          "returns": "int",
+          "origtype": null,
+          "origin": "short",
+          "desc": [
+            "controls the way the images are scaled up or down, when the available space is larger or smaller than what is needed for them.",
+            "",
+            "Allowed values are those from the ImageScaleMode constants group."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "StepTime",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "specifies the time in milliseconds between two animation steps.",
+            "",
+            "This is the minimum time, the actual value might be longer due to system load. The default value will be 100 ms."
+          ],
+          "raises_get": "",
+          "raises_set": ""
         }
       ]
     }

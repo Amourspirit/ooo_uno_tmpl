@@ -25,6 +25,20 @@ Virtual Environment for this project uses conda.
 
     $ conda env create --prefix ./env -f environment.yml
 
+oootmpl
+=======
+
+A link from src dir to ./env/.../site-packages/oootmpl is required.
+
+Because templates are compile by cheetah this link is neessary for templates
+to have accesss to src modules.
+
+Run the following command to create link after Virtual environment is setup.
+
+.. code::
+
+    $ python app_cmd/run_link_src.py --add
+
 UNO
 ===
 
@@ -32,7 +46,7 @@ UNO
 No uno pip
 ----------
 
-Uno is required to compile temlates of this project.
+Uno is required to compile templates of this project.
 
 As stated there is no uno pip install. However uno is required for this project.
 
@@ -41,16 +55,28 @@ uno in env
 
 There are a couple of ways to setup uno for this project after uno has been install on system.
 
+Manual
+++++++
+
 1. Copy uno file into env subfolder.
 
-.. code::
+    .. code::
 
-    $ cp '/usr/lib/python3/dist-packages/uno.py' env/lib/python3.10/site-packages/uno.py
+        $ cp '/usr/lib/python3/dist-packages/uno.py' env/lib/python3.10/site-packages/uno.py
 
 2. Link uno file into env subfolder.
 
-.. code::
+    .. code::
 
-    $ ln -s '/usr/lib/python3/dist-packages/uno.py' env/lib/python3.10/site-packages/uno.py
+        $ ln -s '/usr/lib/python3/dist-packages/uno.py' env/lib/python3.10/site-packages/uno.py
 
 Linking helps future proof incase of updates.
+
+Automatic
++++++++++
+
+Script ``app_cmd/run_uno_lnk.py`` can be used to create these links.
+
+    .. code::
+
+        $ python app_cmd/run_uno_lnk.py

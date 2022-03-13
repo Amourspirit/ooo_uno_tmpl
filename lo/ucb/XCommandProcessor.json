@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XCommandProcessor",
   "type": "interface",
@@ -67,6 +67,7 @@
         {
           "name": "abort",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "ends the command associated with the given id.",
             "",
@@ -74,16 +75,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "CommandId",
-              "int",
-              "in"
-            ]
+            {
+              "name": "CommandId",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "createCommandIdentifier",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "creates a unique identifier for a command.",
             "",
@@ -99,6 +102,7 @@
         {
           "name": "execute",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "executes a command.",
             "",
@@ -109,21 +113,24 @@
             "CommandAbortedException"
           ],
           "args": [
-            [
-              "aCommand",
-              "Command_709c0901",
-              "in"
-            ],
-            [
-              "CommandId",
-              "int",
-              "in"
-            ],
-            [
-              "Environment",
-              "XCommandEnvironment_fb330dee",
-              "in"
-            ]
+            {
+              "name": "aCommand",
+              "type": "Command_709c0901",
+              "direction": "in",
+              "origin": "com.sun.star.ucb.Command"
+            },
+            {
+              "name": "CommandId",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "Environment",
+              "type": "XCommandEnvironment_fb330dee",
+              "direction": "in",
+              "origin": "com.sun.star.ucb.XCommandEnvironment"
+            }
           ]
         }
       ]

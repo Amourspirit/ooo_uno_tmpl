@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XMarkableStream",
   "type": "interface",
@@ -50,6 +50,7 @@
         {
           "name": "createMark",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "creates a mark of the current position and returns an identifier to it."
           ],
@@ -61,6 +62,7 @@
         {
           "name": "deleteMark",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "deletes the mark that you previously created with XMarkableStream.createMark().",
             "",
@@ -71,16 +73,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "Mark",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Mark",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "jumpToFurthest",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "jumps to the furthest position of the stream.",
             "",
@@ -94,6 +98,7 @@
         {
           "name": "jumpToMark",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "jumps to a previously created mark."
           ],
@@ -102,27 +107,30 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "nMark",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nMark",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "offsetToMark",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [],
           "raises": [
             "com.sun.star.io.IOException",
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "nMark",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nMark",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

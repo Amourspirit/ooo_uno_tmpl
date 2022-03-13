@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSAXSerializable",
   "type": "interface",
@@ -61,6 +61,7 @@
         {
           "name": "serialize",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "serializes an object (e.g.",
             "",
@@ -72,16 +73,18 @@
             "com.sun.star.xml.sax.SAXException"
           ],
           "args": [
-            [
-              "handler",
-              "XDocumentHandler_9b90e28",
-              "in"
-            ],
-            [
-              "namespaces",
-              "typing.Tuple[StringPair_a4bc0b14, ...]",
-              "in"
-            ]
+            {
+              "name": "handler",
+              "type": "XDocumentHandler_9b90e28",
+              "direction": "in",
+              "origin": "com.sun.star.xml.sax.XDocumentHandler"
+            },
+            {
+              "name": "namespaces",
+              "type": "typing.Tuple[StringPair_a4bc0b14, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.StringPair >"
+            }
           ]
         }
       ]

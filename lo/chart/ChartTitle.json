@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "ChartTitle",
   "type": "service",
@@ -59,6 +59,48 @@
       "    OOo 1.1.2"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1chart_1_1ChartTitle.html",
-    "items": {}
+    "items": {
+      "properties": [
+        {
+          "name": "AutomaticPosition",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "If this property is TRUE the position is calculated by the application automatically.",
+            "",
+            "Setting this property to false will have no effect. Instead use the interface com.sun.star.drawing.XShape to set a concrete position."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "String",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "contains the text of the title.",
+            "",
+            "Note that you cannot change attributes of parts of a title, e.g., put one word in bold characters. All formatting affects the entire string."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TextRotation",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "specifies the rotation of the shape in 100th of degrees.",
+            "",
+            "Especially in three-dimensional charts, this property comes in handy if you want to align the axis titles with the axis, which are usually not vertical or horizontal in the two-dimensional projection."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

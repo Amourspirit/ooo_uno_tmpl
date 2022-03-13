@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "OrderDialog",
   "type": "service",
@@ -78,6 +78,7 @@
         {
           "name": "createDefault",
           "returns": "None",
+          "returns_origin": null,
           "desc": [],
           "raises": [],
           "args": []
@@ -85,24 +86,28 @@
         {
           "name": "createWithQuery",
           "returns": "None",
+          "returns_origin": null,
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "QueryComposer",
-              "XSingleSelectQueryComposer_66e310b9",
-              "in"
-            ],
-            [
-              "RowSet",
-              "XPropertySet_bc180bfa",
-              "in"
-            ],
-            [
-              "ParentWindow",
-              "XWindow_713b0924",
-              "in"
-            ]
+            {
+              "name": "QueryComposer",
+              "type": "XSingleSelectQueryComposer_66e310b9",
+              "direction": "in",
+              "origin": "com.sun.star.sdb.XSingleSelectQueryComposer"
+            },
+            {
+              "name": "RowSet",
+              "type": "XPropertySet_bc180bfa",
+              "direction": "in",
+              "origin": "com.sun.star.beans.XPropertySet"
+            },
+            {
+              "name": "ParentWindow",
+              "type": "XWindow_713b0924",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XWindow"
+            }
           ]
         }
       ]

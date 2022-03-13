@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XAccessibleText",
   "type": "interface",
@@ -102,6 +102,7 @@
         {
           "name": "copyText",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Copy the specified text into the clipboard.",
             "",
@@ -113,21 +114,24 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nStartIndex",
-              "int",
-              "in"
-            ],
-            [
-              "nEndIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nStartIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nEndIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getCaretPosition",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "Return the position of the caret.",
             "",
@@ -139,6 +143,7 @@
         {
           "name": "getCharacter",
           "returns": "str",
+          "returns_origin": "char",
           "desc": [
             "Return the character at the specified position.",
             "",
@@ -148,16 +153,18 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getCharacterAttributes",
           "returns": "typing.Tuple[PropertyValue_c9610c73, ...]",
+          "returns_origin": "sequence<.com.sun.star.beans.PropertyValue >",
           "desc": [
             "Get the attribute set for the specified position.",
             "",
@@ -170,21 +177,24 @@
             "com.sun.star.beans.UnknownPropertyException"
           ],
           "args": [
-            [
-              "nIndex",
-              "int",
-              "in"
-            ],
-            [
-              "aRequestedAttributes",
-              "typing.Tuple[str, ...]",
-              "in"
-            ]
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aRequestedAttributes",
+              "type": "typing.Tuple[str, ...]",
+              "direction": "in",
+              "origin": "sequence< string >"
+            }
           ]
         },
         {
           "name": "getCharacterBounds",
           "returns": "Rectangle_84b109e9",
+          "returns_origin": "com.sun.star.awt.Rectangle",
           "desc": [
             "Return the bounding box of the specified position.",
             "",
@@ -197,16 +207,18 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getCharacterCount",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "Return the number of characters in the represented text.",
             "",
@@ -218,6 +230,7 @@
         {
           "name": "getIndexAtPoint",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "Return the text position for the specified screen position.",
             "",
@@ -225,16 +238,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aPoint",
-              "Point_5fb2085e",
-              "in"
-            ]
+            {
+              "name": "aPoint",
+              "type": "Point_5fb2085e",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Point"
+            }
           ]
         },
         {
           "name": "getSelectedText",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Return the selected text.",
             "",
@@ -246,6 +261,7 @@
         {
           "name": "getSelectionEnd",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "Return the position of the end of the selection.",
             "",
@@ -257,6 +273,7 @@
         {
           "name": "getSelectionStart",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "Return the position of the start of the selection.",
             "",
@@ -268,6 +285,7 @@
         {
           "name": "getText",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Return the whole text.",
             "",
@@ -279,6 +297,7 @@
         {
           "name": "getTextAtIndex",
           "returns": "TextSegment_1e5b0ee8",
+          "returns_origin": "com.sun.star.accessibility.TextSegment",
           "desc": [
             "Get a text portion around the given position.",
             "",
@@ -289,21 +308,24 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "nIndex",
-              "int",
-              "in"
-            ],
-            [
-              "nTextType",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nTextType",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "getTextBeforeIndex",
           "returns": "TextSegment_1e5b0ee8",
+          "returns_origin": "com.sun.star.accessibility.TextSegment",
           "desc": [
             "Get a text portion before the given position.",
             "",
@@ -318,21 +340,24 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "nIndex",
-              "int",
-              "in"
-            ],
-            [
-              "nTextType",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nTextType",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "getTextBehindIndex",
           "returns": "TextSegment_1e5b0ee8",
+          "returns_origin": "com.sun.star.accessibility.TextSegment",
           "desc": [
             "Get a text portion behind the given position.",
             "",
@@ -347,21 +372,24 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "nIndex",
-              "int",
-              "in"
-            ],
-            [
-              "nTextType",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nTextType",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "getTextRange",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Return the specified text range.",
             "",
@@ -375,21 +403,24 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nStartIndex",
-              "int",
-              "in"
-            ],
-            [
-              "nEndIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nStartIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nEndIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "scrollSubstringTo",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Scroll the specified text to make it visible on screen.",
             "",
@@ -401,26 +432,30 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nStartIndex",
-              "int",
-              "in"
-            ],
-            [
-              "nEndIndex",
-              "int",
-              "in"
-            ],
-            [
-              "aScrollType",
-              "AccessibleScrollType_b426126f",
-              "in"
-            ]
+            {
+              "name": "nStartIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nEndIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aScrollType",
+              "type": "AccessibleScrollType_b426126f",
+              "direction": "in",
+              "origin": "com.sun.star.accessibility.AccessibleScrollType"
+            }
           ]
         },
         {
           "name": "setCaretPosition",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Set the position of the caret.",
             "",
@@ -434,16 +469,18 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "setSelection",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Set a new selection.",
             "",
@@ -457,16 +494,18 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nStartIndex",
-              "int",
-              "in"
-            ],
-            [
-              "nEndIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nStartIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nEndIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

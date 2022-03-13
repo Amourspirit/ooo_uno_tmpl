@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XAccessibleTable",
   "type": "interface",
@@ -74,6 +74,7 @@
         {
           "name": "getAccessibleCaption",
           "returns": "XAccessible_1cbc0eb6",
+          "returns_origin": "com.sun.star.accessibility.XAccessible",
           "desc": [
             "Returns the caption for the table."
           ],
@@ -83,6 +84,7 @@
         {
           "name": "getAccessibleCellAt",
           "returns": "XAccessible_1cbc0eb6",
+          "returns_origin": "com.sun.star.accessibility.XAccessible",
           "desc": [
             "Returns the XAccessible object at the specified row and column in the table.",
             "",
@@ -92,21 +94,24 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nRow",
-              "int",
-              "in"
-            ],
-            [
-              "nColumn",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nRow",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nColumn",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getAccessibleColumn",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "Translate the given child index into the corresponding column index."
           ],
@@ -114,16 +119,18 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nChildIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nChildIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getAccessibleColumnCount",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "Returns the number of used columns in the table.",
             "",
@@ -135,6 +142,7 @@
         {
           "name": "getAccessibleColumnDescription",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Returns the description text of the specified column in the table."
           ],
@@ -142,16 +150,18 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nColumn",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nColumn",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getAccessibleColumnExtentAt",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "Returns the number of columns occupied by the Accessible at the specified row and column in the table.",
             "",
@@ -161,21 +171,24 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nRow",
-              "int",
-              "in"
-            ],
-            [
-              "nColumn",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nRow",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nColumn",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getAccessibleColumnHeaders",
           "returns": "XAccessibleTable",
+          "returns_origin": "com.sun.star.accessibility.XAccessibleTable",
           "desc": [
             "Returns the column headers as an XAccessibleTable object.",
             "",
@@ -187,6 +200,7 @@
         {
           "name": "getAccessibleIndex",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "Returns the child index of the accessible object that spans the specified cell.",
             "",
@@ -196,21 +210,24 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nRow",
-              "int",
-              "in"
-            ],
-            [
-              "nColumn",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nRow",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nColumn",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getAccessibleRow",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "Translate the given child index into the corresponding row index."
           ],
@@ -218,16 +235,18 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nChildIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nChildIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getAccessibleRowCount",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "Returns the number of used rows in the table.",
             "",
@@ -239,6 +258,7 @@
         {
           "name": "getAccessibleRowDescription",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Returns the description text of the specified row in the table."
           ],
@@ -246,16 +266,18 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nRow",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nRow",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getAccessibleRowExtentAt",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "Returns the number of rows occupied by the Accessible at the specified row and column in the table.",
             "",
@@ -265,21 +287,24 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nRow",
-              "int",
-              "in"
-            ],
-            [
-              "nColumn",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nRow",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nColumn",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getAccessibleRowHeaders",
           "returns": "XAccessibleTable",
+          "returns_origin": "com.sun.star.accessibility.XAccessibleTable",
           "desc": [
             "Returns the row headers as an XAccessibleTable object.",
             "",
@@ -291,6 +316,7 @@
         {
           "name": "getAccessibleSummary",
           "returns": "XAccessible_1cbc0eb6",
+          "returns_origin": "com.sun.star.accessibility.XAccessible",
           "desc": [
             "Returns the summary description of the table."
           ],
@@ -300,6 +326,7 @@
         {
           "name": "getSelectedAccessibleColumns",
           "returns": "typing.Tuple[int, ...]",
+          "returns_origin": "sequence< long >",
           "desc": [
             "Returns a list of the indices of completely selected columns in a table."
           ],
@@ -309,6 +336,7 @@
         {
           "name": "getSelectedAccessibleRows",
           "returns": "typing.Tuple[int, ...]",
+          "returns_origin": "sequence< long >",
           "desc": [
             "Returns a list of the indices of completely selected rows in a table."
           ],
@@ -318,6 +346,7 @@
         {
           "name": "isAccessibleColumnSelected",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Returns a boolean value indicating whether the specified column is completely selected."
           ],
@@ -325,16 +354,18 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nColumn",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nColumn",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "isAccessibleRowSelected",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Returns a boolean value indicating whether the specified row is completely selected."
           ],
@@ -342,16 +373,18 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nRow",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nRow",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "isAccessibleSelected",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Returns a boolean value indicating whether the accessible at the specified row and column is selected."
           ],
@@ -359,16 +392,18 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nRow",
-              "int",
-              "in"
-            ],
-            [
-              "nColumn",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nRow",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nColumn",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

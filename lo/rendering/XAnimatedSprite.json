@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XAnimatedSprite",
   "type": "interface",
@@ -80,6 +80,7 @@
         {
           "name": "resetAnimation",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Reset the animation sequence to start with the first frame.",
             "",
@@ -91,6 +92,7 @@
         {
           "name": "setAll",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Changes all of the sprite's attributes at one atomic instance.",
             "",
@@ -102,36 +104,42 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aNewPos",
-              "RealPoint2D_d6e70c78",
-              "in"
-            ],
-            [
-              "aViewState",
-              "ViewState_cab30c62",
-              "in"
-            ],
-            [
-              "aRenderState",
-              "RenderState_e4490d27",
-              "in"
-            ],
-            [
-              "nAlpha",
-              "float",
-              "in"
-            ],
-            [
-              "bUpdateAnimation",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "aNewPos",
+              "type": "RealPoint2D_d6e70c78",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.RealPoint2D"
+            },
+            {
+              "name": "aViewState",
+              "type": "ViewState_cab30c62",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.ViewState"
+            },
+            {
+              "name": "aRenderState",
+              "type": "RenderState_e4490d27",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.RenderState"
+            },
+            {
+              "name": "nAlpha",
+              "type": "float",
+              "direction": "in",
+              "origin": "double"
+            },
+            {
+              "name": "bUpdateAnimation",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "setViewState",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Changes the view state in place for this sprite's animation.",
             "",
@@ -141,16 +149,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aViewState",
-              "ViewState_cab30c62",
-              "in"
-            ]
+            {
+              "name": "aViewState",
+              "type": "ViewState_cab30c62",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.ViewState"
+            }
           ]
         },
         {
           "name": "startAnimation",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Start animation sequence of this sprite.",
             "",
@@ -158,16 +168,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "nSpeed",
-              "float",
-              "in"
-            ]
+            {
+              "name": "nSpeed",
+              "type": "float",
+              "direction": "in",
+              "origin": "double"
+            }
           ]
         },
         {
           "name": "stopAnimation",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Stop the animation sequence.",
             "",
@@ -179,6 +191,7 @@
         {
           "name": "updateAnimation",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Issue an additional render call to this sprite's animation.",
             "",

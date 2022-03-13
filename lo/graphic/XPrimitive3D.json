@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XPrimitive3D",
   "type": "interface",
@@ -73,6 +73,7 @@
         {
           "name": "getDecomposition",
           "returns": "typing.Tuple[XPrimitive3D, ...]",
+          "returns_origin": "sequence< XPrimitive3D >",
           "desc": [
             "Retrieve decomposed list of simpler primitives.",
             "",
@@ -82,16 +83,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aViewParameters",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ]
+            {
+              "name": "aViewParameters",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< .com.sun.star.beans.PropertyValue >"
+            }
           ]
         },
         {
           "name": "getRange",
           "returns": "RealRectangle3D_d9d0e04",
+          "returns_origin": "com.sun.star.geometry.RealRectangle3D",
           "desc": [
             "Retrieve bound rect of primitive.",
             "",
@@ -99,11 +102,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aViewParameters",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ]
+            {
+              "name": "aViewParameters",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< .com.sun.star.beans.PropertyValue >"
+            }
           ]
         }
       ]

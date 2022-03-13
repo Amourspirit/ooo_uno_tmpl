@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSQLQueryComposer",
   "type": "interface",
@@ -71,6 +71,7 @@
         {
           "name": "appendFilterByColumn",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "appends a new filter condition by a com.sun.star.sdb.DataColumn providing the name and the value for the filter."
           ],
@@ -78,16 +79,18 @@
             "com.sun.star.sdbc.SQLException"
           ],
           "args": [
-            [
-              "column",
-              "XPropertySet_bc180bfa",
-              "in"
-            ]
+            {
+              "name": "column",
+              "type": "XPropertySet_bc180bfa",
+              "direction": "in",
+              "origin": "com.sun.star.beans.XPropertySet"
+            }
           ]
         },
         {
           "name": "appendOrderByColumn",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "appends an additional part to the sort order criteria of the select statement."
           ],
@@ -95,21 +98,24 @@
             "com.sun.star.sdbc.SQLException"
           ],
           "args": [
-            [
-              "column",
-              "XPropertySet_bc180bfa",
-              "in"
-            ],
-            [
-              "ascending",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "column",
+              "type": "XPropertySet_bc180bfa",
+              "direction": "in",
+              "origin": "com.sun.star.beans.XPropertySet"
+            },
+            {
+              "name": "ascending",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "getComposedQuery",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the query composed with filters and sort criteria."
           ],
@@ -119,6 +125,7 @@
         {
           "name": "getFilter",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the currently used filter.",
             "",
@@ -130,6 +137,7 @@
         {
           "name": "getOrder",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the currently used sort order.",
             "",
@@ -141,6 +149,7 @@
         {
           "name": "getQuery",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the query used for composing."
           ],
@@ -150,6 +159,7 @@
         {
           "name": "getStructuredFilter",
           "returns": "typing.Tuple[typing.Tuple[PropertyValue_c9610c73, ...], ...]",
+          "returns_origin": "sequence< sequence< com.sun.star.beans.PropertyValue > >",
           "desc": [
             "returns the currently used filter.",
             "",
@@ -161,6 +171,7 @@
         {
           "name": "setFilter",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "makes it possible to set a filter condition for the query."
           ],
@@ -168,16 +179,18 @@
             "com.sun.star.sdbc.SQLException"
           ],
           "args": [
-            [
-              "filter",
-              "str",
-              "in"
-            ]
+            {
+              "name": "filter",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "setOrder",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "makes it possible to set a sort condition for the query."
           ],
@@ -185,16 +198,18 @@
             "com.sun.star.sdbc.SQLException"
           ],
           "args": [
-            [
-              "order",
-              "str",
-              "in"
-            ]
+            {
+              "name": "order",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "setQuery",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets a new query for the composer, which may be expanded by filters and sort criteria."
           ],
@@ -202,11 +217,12 @@
             "com.sun.star.sdbc.SQLException"
           ],
           "args": [
-            [
-              "command",
-              "str",
-              "in"
-            ]
+            {
+              "name": "command",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

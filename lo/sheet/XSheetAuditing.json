@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSheetAuditing",
   "type": "interface",
@@ -60,6 +60,7 @@
         {
           "name": "clearArrows",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes all auditing arrows from the spreadsheet."
           ],
@@ -69,6 +70,7 @@
         {
           "name": "hideDependents",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "removes arrows for one level of dependents of a formula cell.",
             "",
@@ -76,16 +78,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aPosition",
-              "CellAddress_ae5f0b56",
-              "in"
-            ]
+            {
+              "name": "aPosition",
+              "type": "CellAddress_ae5f0b56",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellAddress"
+            }
           ]
         },
         {
           "name": "hidePrecedents",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "removes arrows for one level of precedents of a formula cell.",
             "",
@@ -93,16 +97,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aPosition",
-              "CellAddress_ae5f0b56",
-              "in"
-            ]
+            {
+              "name": "aPosition",
+              "type": "CellAddress_ae5f0b56",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellAddress"
+            }
           ]
         },
         {
           "name": "showDependents",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "draws arrows between a formula cell and its dependents.",
             "",
@@ -110,31 +116,35 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aPosition",
-              "CellAddress_ae5f0b56",
-              "in"
-            ]
+            {
+              "name": "aPosition",
+              "type": "CellAddress_ae5f0b56",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellAddress"
+            }
           ]
         },
         {
           "name": "showErrors",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "draws arrows between a formula cell containing an error and the cells causing the error."
           ],
           "raises": [],
           "args": [
-            [
-              "aPosition",
-              "CellAddress_ae5f0b56",
-              "in"
-            ]
+            {
+              "name": "aPosition",
+              "type": "CellAddress_ae5f0b56",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellAddress"
+            }
           ]
         },
         {
           "name": "showInvalid",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "marks all cells containing invalid values."
           ],
@@ -144,6 +154,7 @@
         {
           "name": "showPrecedents",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "draws arrows between a formula cell and its precedents.",
             "",
@@ -151,11 +162,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aPosition",
-              "CellAddress_ae5f0b56",
-              "in"
-            ]
+            {
+              "name": "aPosition",
+              "type": "CellAddress_ae5f0b56",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellAddress"
+            }
           ]
         }
       ]

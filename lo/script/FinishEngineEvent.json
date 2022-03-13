@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "FinishEngineEvent",
@@ -41,6 +41,14 @@
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.lang.EventObject"
+      ],
+      "typing": [
+        "com.sun.star.script.FinishReason"
+      ]
+    },
     "fullname": "com.sun.star.script.FinishEngineEvent",
     "desc": [
       "event contains the reasons and the data for the XEngineListener.finished() method.",
@@ -57,14 +65,18 @@
       {
         "name": "Finish",
         "type": "FinishReason_ca230c66",
-        "lines": [
+        "origtype": "com.sun.star.script.FinishReason",
+        "origin": "com.sun.star.script.FinishReason",
+        "desc": [
           "specifies why the script terminates."
         ]
       },
       {
         "name": "ErrorMessage",
         "type": "str",
-        "lines": [
+        "origtype": null,
+        "origin": "string",
+        "desc": [
           "error message.",
           "",
           "Only valid if Reason is RuntimeError or CompileError."
@@ -73,7 +85,9 @@
       {
         "name": "Return",
         "type": "object",
-        "lines": [
+        "origtype": null,
+        "origin": "any",
+        "desc": [
           "contains the return value.",
           "",
           "This field is only valid if FinishEngineEvent.Finish is FinishReason.OK."

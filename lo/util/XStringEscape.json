@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XStringEscape",
   "type": "interface",
@@ -58,6 +58,7 @@
         {
           "name": "escapeString",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "encodes an arbitrary string into an escaped form compatible with some naming rules."
           ],
@@ -65,16 +66,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aString",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aString",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "unescapeString",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "decodes an escaped string into the original form."
           ],
@@ -82,11 +85,12 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aEscapedString",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aEscapedString",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

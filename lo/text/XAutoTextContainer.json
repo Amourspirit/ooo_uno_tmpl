@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XAutoTextContainer",
   "type": "interface",
@@ -60,6 +60,7 @@
         {
           "name": "insertNewByName",
           "returns": "XAutoTextGroup_c9770c70",
+          "returns_origin": "com.sun.star.text.XAutoTextGroup",
           "desc": [
             "creates a new AutoText group.",
             "",
@@ -75,16 +76,18 @@
             "com.sun.star.container.ElementExistException"
           ],
           "args": [
-            [
-              "aGroupName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aGroupName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "removeByName",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "deletes the specified AutoText group."
           ],
@@ -92,11 +95,12 @@
             "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
-            [
-              "aGroupName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aGroupName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

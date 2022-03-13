@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSelectionSupplier",
   "type": "interface",
@@ -60,21 +60,24 @@
         {
           "name": "addSelectionChangeListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "registers an event listener, which is called when the selection changes."
           ],
           "raises": [],
           "args": [
-            [
-              "xListener",
-              "XSelectionChangeListener_58bf104d",
-              "in"
-            ]
+            {
+              "name": "xListener",
+              "type": "XSelectionChangeListener_58bf104d",
+              "direction": "in",
+              "origin": "com.sun.star.view.XSelectionChangeListener"
+            }
           ]
         },
         {
           "name": "getSelection",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "The selection is either specified by an object which is contained in the component to which the view belongs, or it is an interface of a collection which contains such objects."
           ],
@@ -84,21 +87,24 @@
         {
           "name": "removeSelectionChangeListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "unregisters an event listener which was registered with XSelectionSupplier.addSelectionChangeListener()."
           ],
           "raises": [],
           "args": [
-            [
-              "xListener",
-              "XSelectionChangeListener_58bf104d",
-              "in"
-            ]
+            {
+              "name": "xListener",
+              "type": "XSelectionChangeListener_58bf104d",
+              "direction": "in",
+              "origin": "com.sun.star.view.XSelectionChangeListener"
+            }
           ]
         },
         {
           "name": "select",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "selects the object represented by xSelection if it is known and selectable in this object."
           ],
@@ -106,11 +112,12 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "xSelection",
-              "object",
-              "in"
-            ]
+            {
+              "name": "xSelection",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XCertificateContainer",
   "type": "interface",
@@ -52,46 +52,53 @@
         {
           "name": "addCertificate",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Store the certificate in memory."
           ],
           "raises": [],
           "args": [
-            [
-              "url",
-              "str",
-              "in"
-            ],
-            [
-              "cert",
-              "str",
-              "in"
-            ],
-            [
-              "trust",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "url",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "cert",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "trust",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "hasCertificate",
           "returns": "CertificateContainerStatus_c9f8130a",
+          "returns_origin": "com.sun.star.security.CertificateContainerStatus",
           "desc": [
             "Check if a certificate was stored earlier before."
           ],
           "raises": [],
           "args": [
-            [
-              "url",
-              "str",
-              "in"
-            ],
-            [
-              "cert",
-              "str",
-              "in"
-            ]
+            {
+              "name": "url",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "cert",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

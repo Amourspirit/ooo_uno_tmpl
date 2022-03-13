@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XNSSInitializer",
   "type": "interface",
@@ -73,6 +73,7 @@
         {
           "name": "getNSSProfiles",
           "returns": "typing.Tuple[NSSProfile_e1f00ced, ...]",
+          "returns_origin": "sequence< NSSProfile >",
           "desc": [
             "get the current profile list",
             "",
@@ -82,6 +83,42 @@
           ],
           "raises": [],
           "args": []
+        }
+      ],
+      "properties": [
+        {
+          "name": "IsNSSinitialized",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "the state of the NSS initialization",
+            "",
+            "This attribute returns true, if the NSS library is initialized.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 7.1"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "NSSPath",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "the current path to the NSS databases",
+            "",
+            "This attribute returns the current setting, based on the user selection or automatic detection. This value can change until someone uses NSS crypto functions, because just then LibreOffice initializes the NSS library and the value stays fixed until LibreOffice is restarted!",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 7.1"
+          ],
+          "raises_get": "",
+          "raises_set": ""
         }
       ]
     }

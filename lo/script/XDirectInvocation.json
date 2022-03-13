@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDirectInvocation",
   "type": "interface",
@@ -54,6 +54,7 @@
         {
           "name": "directInvoke",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "provides access to methods and properties exposed by an object."
           ],
@@ -63,31 +64,35 @@
             "com.sun.star.reflection.InvocationTargetException"
           ],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ],
-            [
-              "aParams",
-              "typing.Tuple[object, ...]",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aParams",
+              "type": "typing.Tuple[object, ...]",
+              "direction": "in",
+              "origin": "sequence< any >"
+            }
           ]
         },
         {
           "name": "hasMember",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "returns TRUE if the method or property with the specified name exists, else FALSE."
           ],
           "raises": [],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

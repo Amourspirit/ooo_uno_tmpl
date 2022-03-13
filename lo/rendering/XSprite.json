@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSprite",
   "type": "interface",
@@ -90,6 +90,7 @@
         {
           "name": "clip",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Apply a clipping to the shape output.",
             "",
@@ -101,16 +102,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aClip",
-              "XPolyPolygon2D_e1b0e20",
-              "in"
-            ]
+            {
+              "name": "aClip",
+              "type": "XPolyPolygon2D_e1b0e20",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.XPolyPolygon2D"
+            }
           ]
         },
         {
           "name": "hide",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Make the sprite invisible.",
             "",
@@ -122,6 +125,7 @@
         {
           "name": "move",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Move sprite to the specified position.",
             "",
@@ -133,26 +137,30 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aNewPos",
-              "RealPoint2D_d6e70c78",
-              "in"
-            ],
-            [
-              "aViewState",
-              "ViewState_cab30c62",
-              "in"
-            ],
-            [
-              "aRenderState",
-              "RenderState_e4490d27",
-              "in"
-            ]
+            {
+              "name": "aNewPos",
+              "type": "RealPoint2D_d6e70c78",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.RealPoint2D"
+            },
+            {
+              "name": "aViewState",
+              "type": "ViewState_cab30c62",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.ViewState"
+            },
+            {
+              "name": "aRenderState",
+              "type": "RenderState_e4490d27",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.RenderState"
+            }
           ]
         },
         {
           "name": "setAlpha",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Set overall transparency of the sprite.",
             "",
@@ -164,16 +172,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "nAlpha",
-              "float",
-              "in"
-            ]
+            {
+              "name": "nAlpha",
+              "type": "float",
+              "direction": "in",
+              "origin": "double"
+            }
           ]
         },
         {
           "name": "setPriority",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Set sprite priority.",
             "",
@@ -181,16 +191,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "nPriority",
-              "float",
-              "in"
-            ]
+            {
+              "name": "nPriority",
+              "type": "float",
+              "direction": "in",
+              "origin": "double"
+            }
           ]
         },
         {
           "name": "show",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Make the sprite visible.",
             "",
@@ -202,6 +214,7 @@
         {
           "name": "transform",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Apply a local transformation to the sprite.",
             "",
@@ -213,11 +226,12 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aTransformation",
-              "AffineMatrix2D_ff040da8",
-              "in"
-            ]
+            {
+              "name": "aTransformation",
+              "type": "AffineMatrix2D_ff040da8",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.AffineMatrix2D"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XModifiable",
   "type": "interface",
@@ -52,6 +52,7 @@
         {
           "name": "isModified",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "The modification is always in relation to a certain state (i.e., the initial, loaded, or last stored version)."
           ],
@@ -61,6 +62,7 @@
         {
           "name": "setModified",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the status of the modified-flag from outside of the object."
           ],
@@ -68,11 +70,12 @@
             "com.sun.star.beans.PropertyVetoException"
           ],
           "args": [
-            [
-              "bModified",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "bModified",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         }
       ]

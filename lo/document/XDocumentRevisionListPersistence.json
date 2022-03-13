@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDocumentRevisionListPersistence",
   "type": "interface",
@@ -69,6 +69,7 @@
         {
           "name": "load",
           "returns": "typing.Tuple[RevisionTag_a6770b31, ...]",
+          "returns_origin": "sequence< .com.sun.star.util.RevisionTag >",
           "desc": [
             "Loads a list of available revisions from a storage.",
             "",
@@ -80,16 +81,18 @@
             "com.sun.star.uno.Exception"
           ],
           "args": [
-            [
-              "Storage",
-              "XStorage_8e460a32",
-              "in"
-            ]
+            {
+              "name": "Storage",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            }
           ]
         },
         {
           "name": "store",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Stores a list of available revisions to a storage.",
             "",
@@ -100,16 +103,18 @@
             "com.sun.star.uno.Exception"
           ],
           "args": [
-            [
-              "Storage",
-              "XStorage_8e460a32",
-              "in"
-            ],
-            [
-              "List",
-              "typing.Tuple[RevisionTag_a6770b31, ...]",
-              "in"
-            ]
+            {
+              "name": "Storage",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            },
+            {
+              "name": "List",
+              "type": "typing.Tuple[RevisionTag_a6770b31, ...]",
+              "direction": "in",
+              "origin": "sequence< .com.sun.star.util.RevisionTag >"
+            }
           ]
         }
       ]

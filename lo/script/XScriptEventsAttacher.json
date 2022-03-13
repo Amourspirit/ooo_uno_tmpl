@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XScriptEventsAttacher",
   "type": "interface",
@@ -63,6 +63,7 @@
         {
           "name": "attachEvents",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Attaches the events defined by XScriptEventsSupplier to the corresponding object implementing XScriptEventsSupplier."
           ],
@@ -73,21 +74,24 @@
             "com.sun.star.lang.ServiceNotRegisteredException"
           ],
           "args": [
-            [
-              "Objects",
-              "typing.Tuple[XInterface_8f010a43, ...]",
-              "in"
-            ],
-            [
-              "xListener",
-              "XScriptListener_f20b0db0",
-              "in"
-            ],
-            [
-              "Helper",
-              "object",
-              "in"
-            ]
+            {
+              "name": "Objects",
+              "type": "typing.Tuple[XInterface_8f010a43, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.uno.XInterface >"
+            },
+            {
+              "name": "xListener",
+              "type": "XScriptListener_f20b0db0",
+              "direction": "in",
+              "origin": "com.sun.star.script.XScriptListener"
+            },
+            {
+              "name": "Helper",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         }
       ]

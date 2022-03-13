@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XFormOperations",
   "type": "interface",
@@ -113,6 +113,7 @@
         {
           "name": "commitCurrentControl",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "commits the current control of our controller"
           ],
@@ -124,6 +125,7 @@
         {
           "name": "commitCurrentRecord",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "commits the current record of the form"
           ],
@@ -131,16 +133,18 @@
             "com.sun.star.sdbc.SQLException"
           ],
           "args": [
-            [
-              "RecordInserted",
-              "bool",
-              "out"
-            ]
+            {
+              "name": "RecordInserted",
+              "type": "bool",
+              "direction": "out",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "execute",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "executes the operation associated with the given feature"
           ],
@@ -150,16 +154,18 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "Feature",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Feature",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "executeWithArguments",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "executes the operation associated with the given feature, with passing arguments for execution"
           ],
@@ -169,21 +175,24 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "Feature",
-              "int",
-              "in"
-            ],
-            [
-              "Arguments",
-              "typing.Tuple[NamedValue_a37a0af3, ...]",
-              "in"
-            ]
+            {
+              "name": "Feature",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "Arguments",
+              "type": "typing.Tuple[NamedValue_a37a0af3, ...]",
+              "direction": "in",
+              "origin": "sequence< .com.sun.star.beans.NamedValue >"
+            }
           ]
         },
         {
           "name": "getState",
           "returns": "FeatureState_1c3f0ebb",
+          "returns_origin": "com.sun.star.form.runtime.FeatureState",
           "desc": [
             "retrieves the current state of the given feature",
             "",
@@ -191,16 +200,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Feature",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Feature",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "isEnabled",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "determines whether a feature is currently enabled.",
             "",
@@ -208,16 +219,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Feature",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Feature",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "isInsertionRow",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "determines whether the form is currently positioned on the insertion row",
             "",
@@ -231,6 +244,7 @@
         {
           "name": "isModifiedRow",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "determines whether the current row of the form is modified",
             "",
@@ -246,6 +260,8 @@
         {
           "name": "Controller",
           "returns": "XFormController_4a570ffe",
+          "origtype": "com.sun.star.form.runtime.XFormController",
+          "origin": "com.sun.star.form.runtime.XFormController",
           "desc": [
             "provides access to the form controller which the instance is operating on.",
             "",
@@ -257,6 +273,8 @@
         {
           "name": "Cursor",
           "returns": "XRowSet_7a090960",
+          "origtype": "com.sun.star.sdbc.XRowSet",
+          "origin": "com.sun.star.sdbc.XRowSet",
           "desc": [
             "provides access to the cursor of the form the instance is operating on."
           ],
@@ -266,6 +284,8 @@
         {
           "name": "FeatureInvalidation",
           "returns": "XFeatureInvalidation_9f4211f4",
+          "origtype": "com.sun.star.form.runtime.XFeatureInvalidation",
+          "origin": "com.sun.star.form.runtime.XFeatureInvalidation",
           "desc": [
             "denotes the instance which should be notified about features whose state might have changed.",
             "",
@@ -281,6 +301,8 @@
         {
           "name": "UpdateCursor",
           "returns": "XResultSetUpdate_e0fb0d0a",
+          "origtype": "com.sun.star.sdbc.XResultSetUpdate",
+          "origin": "com.sun.star.sdbc.XResultSetUpdate",
           "desc": [
             "provides access to the update cursor of the form the instance is operating on."
           ],

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XTabListener",
   "type": "interface",
@@ -62,6 +62,7 @@
         {
           "name": "activated",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "a tab was activated (e.g.",
             "",
@@ -69,76 +70,86 @@
           ],
           "raises": [],
           "args": [
-            [
-              "ID",
-              "int",
-              "in"
-            ]
+            {
+              "name": "ID",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "changed",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "a tab was changed within its properties."
           ],
           "raises": [],
           "args": [
-            [
-              "ID",
-              "int",
-              "in"
-            ],
-            [
-              "Properties",
-              "typing.Tuple[NamedValue_a37a0af3, ...]",
-              "in"
-            ]
+            {
+              "name": "ID",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "Properties",
+              "type": "typing.Tuple[NamedValue_a37a0af3, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.NamedValue >"
+            }
           ]
         },
         {
           "name": "deactivated",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "a tab was deactivated, because another tab became the new active state."
           ],
           "raises": [],
           "args": [
-            [
-              "ID",
-              "int",
-              "in"
-            ]
+            {
+              "name": "ID",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "inserted",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "a new tab was inserted."
           ],
           "raises": [],
           "args": [
-            [
-              "ID",
-              "int",
-              "in"
-            ]
+            {
+              "name": "ID",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "removed",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "a tab was removed."
           ],
           "raises": [],
           "args": [
-            [
-              "ID",
-              "int",
-              "in"
-            ]
+            {
+              "name": "ID",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

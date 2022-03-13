@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XAccessibleStateSet",
   "type": "interface",
@@ -60,36 +60,41 @@
         {
           "name": "contains",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Checks if the given state is a member of the state set of the called object."
           ],
           "raises": [],
           "args": [
-            [
-              "aState",
-              "int",
-              "in"
-            ]
+            {
+              "name": "aState",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "containsAll",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Checks if all of the given states are in the state set of the called object."
           ],
           "raises": [],
           "args": [
-            [
-              "aStateSet",
-              "typing.Tuple[int, ...]",
-              "in"
-            ]
+            {
+              "name": "aStateSet",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "in",
+              "origin": "sequence< short >"
+            }
           ]
         },
         {
           "name": "getStates",
           "returns": "typing.Tuple[int, ...]",
+          "returns_origin": "sequence< short >",
           "desc": [
             "Get all currently set states as a sequence of state ids.",
             "",
@@ -101,6 +106,7 @@
         {
           "name": "isEmpty",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Checks whether the current state set is empty."
           ],

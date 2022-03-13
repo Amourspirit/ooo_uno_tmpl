@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XIdentifierContainer",
   "type": "interface",
@@ -50,6 +50,7 @@
         {
           "name": "insert",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "inserts an element and creates a new unique identifier for it."
           ],
@@ -58,16 +59,18 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "aElement",
-              "object",
-              "in"
-            ]
+            {
+              "name": "aElement",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         },
         {
           "name": "removeByIdentifier",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes the element with the specified identifier."
           ],
@@ -76,11 +79,12 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "Identifier",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Identifier",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

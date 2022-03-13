@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XStringResourcePersistence",
   "type": "interface",
@@ -70,6 +70,7 @@
         {
           "name": "exportBinary",
           "returns": "typing.Tuple[int, ...]",
+          "returns_origin": "sequence< byte >",
           "desc": [
             "Returns a sequence of byte representing the complete string resource in a binary format.",
             "",
@@ -83,6 +84,7 @@
         {
           "name": "importBinary",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Initializes the string resource with binary data.",
             "",
@@ -98,16 +100,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "Data",
-              "typing.Tuple[int, ...]",
-              "in"
-            ]
+            {
+              "name": "Data",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "in",
+              "origin": "sequence< byte >"
+            }
           ]
         },
         {
           "name": "isModified",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "provides the current modify state of the StringResourceManager instance."
           ],
@@ -117,6 +121,7 @@
         {
           "name": "setComment",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Sets the comment stored first in each locale data file.",
             "",
@@ -124,16 +129,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Comment",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Comment",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "store",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Stores all string table data respectively all data modified since the last call to store() to the location or storage associated with the StringResourceManager.",
             "",
@@ -158,6 +165,7 @@
         {
           "name": "storeToStorage",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Stores all string table data to the provided storage.",
             "",
@@ -171,26 +179,30 @@
             "com.sun.star.uno.Exception"
           ],
           "args": [
-            [
-              "Storage",
-              "XStorage_8e460a32",
-              "in"
-            ],
-            [
-              "BaseName",
-              "str",
-              "in"
-            ],
-            [
-              "Comment",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Storage",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            },
+            {
+              "name": "BaseName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Comment",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "storeToURL",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Stores all string table data to the location specified by the passed URL string.",
             "",
@@ -202,26 +214,30 @@
             "com.sun.star.uno.Exception"
           ],
           "args": [
-            [
-              "URL",
-              "str",
-              "in"
-            ],
-            [
-              "BaseName",
-              "str",
-              "in"
-            ],
-            [
-              "Comment",
-              "str",
-              "in"
-            ],
-            [
-              "Handler",
-              "XInteractionHandler_bf80e51",
-              "in"
-            ]
+            {
+              "name": "URL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "BaseName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Comment",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Handler",
+              "type": "XInteractionHandler_bf80e51",
+              "direction": "in",
+              "origin": "com.sun.star.task.XInteractionHandler"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XXPathAPI",
   "type": "interface",
@@ -79,6 +79,7 @@
         {
           "name": "eval",
           "returns": "XXPathObject_ee270d40",
+          "returns_origin": "com.sun.star.xml.xpath.XXPathObject",
           "desc": [
             "Evaluate XPath Expression."
           ],
@@ -86,21 +87,24 @@
             "com.sun.star.xml.xpath.XPathException"
           ],
           "args": [
-            [
-              "contextNode",
-              "XNode_83fb09a5",
-              "in"
-            ],
-            [
-              "expr",
-              "str",
-              "in"
-            ]
+            {
+              "name": "contextNode",
+              "type": "XNode_83fb09a5",
+              "direction": "in",
+              "origin": "com.sun.star.xml.dom.XNode"
+            },
+            {
+              "name": "expr",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "evalNS",
           "returns": "XXPathObject_ee270d40",
+          "returns_origin": "com.sun.star.xml.xpath.XXPathObject",
           "desc": [
             "Evaluate XPath Expression."
           ],
@@ -108,70 +112,81 @@
             "com.sun.star.xml.xpath.XPathException"
           ],
           "args": [
-            [
-              "contextNode",
-              "XNode_83fb09a5",
-              "in"
-            ],
-            [
-              "expr",
-              "str",
-              "in"
-            ],
-            [
-              "namespaceNode",
-              "XNode_83fb09a5",
-              "in"
-            ]
+            {
+              "name": "contextNode",
+              "type": "XNode_83fb09a5",
+              "direction": "in",
+              "origin": "com.sun.star.xml.dom.XNode"
+            },
+            {
+              "name": "expr",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "namespaceNode",
+              "type": "XNode_83fb09a5",
+              "direction": "in",
+              "origin": "com.sun.star.xml.dom.XNode"
+            }
           ]
         },
         {
           "name": "registerExtension",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "serviceName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "serviceName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "registerExtensionInstance",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "aExtension",
-              "XXPathExtension_194c0ea6",
-              "in"
-            ]
+            {
+              "name": "aExtension",
+              "type": "XXPathExtension_194c0ea6",
+              "direction": "in",
+              "origin": "com.sun.star.xml.xpath.XXPathExtension"
+            }
           ]
         },
         {
           "name": "registerNS",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "prefix",
-              "str",
-              "in"
-            ],
-            [
-              "url",
-              "str",
-              "in"
-            ]
+            {
+              "name": "prefix",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "url",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "selectNodeList",
           "returns": "XNodeList_ae540b41",
+          "returns_origin": "com.sun.star.xml.dom.XNodeList",
           "desc": [
             "Evaluate an XPath expression to select a list of nodes."
           ],
@@ -179,21 +194,24 @@
             "com.sun.star.xml.xpath.XPathException"
           ],
           "args": [
-            [
-              "contextNode",
-              "XNode_83fb09a5",
-              "in"
-            ],
-            [
-              "expr",
-              "str",
-              "in"
-            ]
+            {
+              "name": "contextNode",
+              "type": "XNode_83fb09a5",
+              "direction": "in",
+              "origin": "com.sun.star.xml.dom.XNode"
+            },
+            {
+              "name": "expr",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "selectNodeListNS",
           "returns": "XNodeList_ae540b41",
+          "returns_origin": "com.sun.star.xml.dom.XNodeList",
           "desc": [
             "Evaluate an XPath expression to select a list of nodes."
           ],
@@ -201,26 +219,30 @@
             "com.sun.star.xml.xpath.XPathException"
           ],
           "args": [
-            [
-              "contextNode",
-              "XNode_83fb09a5",
-              "in"
-            ],
-            [
-              "expr",
-              "str",
-              "in"
-            ],
-            [
-              "namespaceNode",
-              "XNode_83fb09a5",
-              "in"
-            ]
+            {
+              "name": "contextNode",
+              "type": "XNode_83fb09a5",
+              "direction": "in",
+              "origin": "com.sun.star.xml.dom.XNode"
+            },
+            {
+              "name": "expr",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "namespaceNode",
+              "type": "XNode_83fb09a5",
+              "direction": "in",
+              "origin": "com.sun.star.xml.dom.XNode"
+            }
           ]
         },
         {
           "name": "selectSingleNode",
           "returns": "XNode_83fb09a5",
+          "returns_origin": "com.sun.star.xml.dom.XNode",
           "desc": [
             "Evaluate an XPath expression to select a single node."
           ],
@@ -228,21 +250,24 @@
             "com.sun.star.xml.xpath.XPathException"
           ],
           "args": [
-            [
-              "contextNode",
-              "XNode_83fb09a5",
-              "in"
-            ],
-            [
-              "expr",
-              "str",
-              "in"
-            ]
+            {
+              "name": "contextNode",
+              "type": "XNode_83fb09a5",
+              "direction": "in",
+              "origin": "com.sun.star.xml.dom.XNode"
+            },
+            {
+              "name": "expr",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "selectSingleNodeNS",
           "returns": "XNode_83fb09a5",
+          "returns_origin": "com.sun.star.xml.dom.XNode",
           "desc": [
             "Evaluate an XPath expression to select a single node."
           ],
@@ -250,39 +275,45 @@
             "com.sun.star.xml.xpath.XPathException"
           ],
           "args": [
-            [
-              "contextNode",
-              "XNode_83fb09a5",
-              "in"
-            ],
-            [
-              "expr",
-              "str",
-              "in"
-            ],
-            [
-              "namespaceNode",
-              "XNode_83fb09a5",
-              "in"
-            ]
+            {
+              "name": "contextNode",
+              "type": "XNode_83fb09a5",
+              "direction": "in",
+              "origin": "com.sun.star.xml.dom.XNode"
+            },
+            {
+              "name": "expr",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "namespaceNode",
+              "type": "XNode_83fb09a5",
+              "direction": "in",
+              "origin": "com.sun.star.xml.dom.XNode"
+            }
           ]
         },
         {
           "name": "unregisterNS",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "prefix",
-              "str",
-              "in"
-            ],
-            [
-              "url",
-              "str",
-              "in"
-            ]
+            {
+              "name": "prefix",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "url",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

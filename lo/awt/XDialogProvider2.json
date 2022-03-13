@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDialogProvider2",
   "type": "interface",
@@ -76,6 +76,7 @@
         {
           "name": "createDialogWithArguments",
           "returns": "XDialog_709d08fc",
+          "returns_origin": "com.sun.star.awt.XDialog",
           "desc": [
             "creates a dialog for the given URL, accepting additional creation parameters",
             "",
@@ -85,21 +86,24 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "URL",
-              "str",
-              "in"
-            ],
-            [
-              "Arguments",
-              "typing.Tuple[NamedValue_a37a0af3, ...]",
-              "in"
-            ]
+            {
+              "name": "URL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Arguments",
+              "type": "typing.Tuple[NamedValue_a37a0af3, ...]",
+              "direction": "in",
+              "origin": "sequence< .com.sun.star.beans.NamedValue >"
+            }
           ]
         },
         {
           "name": "createDialogWithHandler",
           "returns": "XDialog_709d08fc",
+          "returns_origin": "com.sun.star.awt.XDialog",
           "desc": [
             "creates a dialog for the given URL accepting an Interface used to handle dialog events.",
             "",
@@ -123,16 +127,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "URL",
-              "str",
-              "in"
-            ],
-            [
-              "xHandler",
-              "XInterface_8f010a43",
-              "in"
-            ]
+            {
+              "name": "URL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "xHandler",
+              "type": "XInterface_8f010a43",
+              "direction": "in",
+              "origin": "com.sun.star.uno.XInterface"
+            }
           ]
         }
       ]

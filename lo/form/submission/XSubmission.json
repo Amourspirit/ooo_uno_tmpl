@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSubmission",
   "type": "interface",
@@ -67,6 +67,7 @@
         {
           "name": "addSubmissionVetoListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "registers the given listener to be notified when a submission occurs"
           ],
@@ -74,16 +75,18 @@
             "com.sun.star.lang.NoSupportException"
           ],
           "args": [
-            [
-              "listener",
-              "XSubmissionVetoListener_18e1149e",
-              "in"
-            ]
+            {
+              "name": "listener",
+              "type": "XSubmissionVetoListener_18e1149e",
+              "direction": "in",
+              "origin": "com.sun.star.form.submission.XSubmissionVetoListener"
+            }
           ]
         },
         {
           "name": "removeSubmissionVetoListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "revokes a listener which has previously been registered to be notified when a submission occurs"
           ],
@@ -91,16 +94,18 @@
             "com.sun.star.lang.NoSupportException"
           ],
           "args": [
-            [
-              "listener",
-              "XSubmissionVetoListener_18e1149e",
-              "in"
-            ]
+            {
+              "name": "listener",
+              "type": "XSubmissionVetoListener_18e1149e",
+              "direction": "in",
+              "origin": "com.sun.star.form.submission.XSubmissionVetoListener"
+            }
           ]
         },
         {
           "name": "submit",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "tells the component to submit data"
           ],
@@ -113,6 +118,7 @@
         {
           "name": "submitWithInteraction",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "tells the component to submit data"
           ],
@@ -121,11 +127,12 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "aHandler",
-              "XInteractionHandler_bf80e51",
-              "in"
-            ]
+            {
+              "name": "aHandler",
+              "type": "XInteractionHandler_bf80e51",
+              "direction": "in",
+              "origin": "com.sun.star.task.XInteractionHandler"
+            }
           ]
         }
       ]

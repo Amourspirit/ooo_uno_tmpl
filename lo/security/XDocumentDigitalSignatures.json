@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDocumentDigitalSignatures",
   "type": "interface",
@@ -127,32 +127,37 @@
         {
           "name": "addAuthorToTrustedSources",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "Author",
-              "XCertificate_e55b0d3b",
-              "in"
-            ]
+            {
+              "name": "Author",
+              "type": "XCertificate_e55b0d3b",
+              "direction": "in",
+              "origin": "com.sun.star.security.XCertificate"
+            }
           ]
         },
         {
           "name": "addLocationToTrustedSources",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "Location",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Location",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "chooseCertificate",
           "returns": "XCertificate_e55b0d3b",
+          "returns_origin": "com.sun.star.security.XCertificate",
           "desc": [
             "This method shows the CertificateChooser dialog, used by document and PDF signing Shows only private certificates.",
             "",
@@ -162,16 +167,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Description",
-              "str",
-              "out"
-            ]
+            {
+              "name": "Description",
+              "type": "str",
+              "direction": "out",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "chooseCertificateWithProps",
           "returns": "XCertificate_e55b0d3b",
+          "returns_origin": "com.sun.star.security.XCertificate",
           "desc": [
             "This method shows the CertificateChooser dialog, used by document and PDF signing Shows only private certificates and returns usage string in addition to description.",
             "",
@@ -181,16 +188,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Properties",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "out"
-            ]
+            {
+              "name": "Properties",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "out",
+              "origin": "sequence<.com.sun.star.beans.PropertyValue >"
+            }
           ]
         },
         {
           "name": "chooseEncryptionCertificate",
           "returns": "typing.Tuple[XCertificate_e55b0d3b, ...]",
+          "returns_origin": "sequence< com.sun.star.security.XCertificate >",
           "desc": [
             "This method shows the CertificateChooser dialog with all certificates, private and other people's.",
             "",
@@ -206,6 +215,7 @@
         {
           "name": "chooseSigningCertificate",
           "returns": "XCertificate_e55b0d3b",
+          "returns_origin": "com.sun.star.security.XCertificate",
           "desc": [
             "This is an alias for 'chooseCertificate', shows the CertificateChooser dialog with private certificates.",
             "",
@@ -215,16 +225,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Description",
-              "str",
-              "out"
-            ]
+            {
+              "name": "Description",
+              "type": "str",
+              "direction": "out",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getDocumentContentSignatureDefaultStreamName",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "allows to get the default stream name for storing of the signature of the document content."
           ],
@@ -234,6 +246,7 @@
         {
           "name": "getPackageSignatureDefaultStreamName",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "allows to get the default stream name for storing of the signature of the package."
           ],
@@ -243,6 +256,7 @@
         {
           "name": "getScriptingContentSignatureDefaultStreamName",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "allows to get the default stream name for storing of the signature of the scripting content."
           ],
@@ -252,32 +266,37 @@
         {
           "name": "isAuthorTrusted",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "Author",
-              "XCertificate_e55b0d3b",
-              "in"
-            ]
+            {
+              "name": "Author",
+              "type": "XCertificate_e55b0d3b",
+              "direction": "in",
+              "origin": "com.sun.star.security.XCertificate"
+            }
           ]
         },
         {
           "name": "isLocationTrusted",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "Location",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Location",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "manageTrustedSources",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "manages trusted sources (Authors and paths )"
           ],
@@ -287,6 +306,7 @@
         {
           "name": "selectSigningCertificate",
           "returns": "XCertificate_e55b0d3b",
+          "returns_origin": "com.sun.star.security.XCertificate",
           "desc": [
             "This shows the certificate selection dialog and allows to only select the certificate without actually signing the document.",
             "",
@@ -296,16 +316,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Description",
-              "str",
-              "out"
-            ]
+            {
+              "name": "Description",
+              "type": "str",
+              "direction": "out",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "selectSigningCertificateWithType",
           "returns": "XCertificate_e55b0d3b",
+          "returns_origin": "com.sun.star.security.XCertificate",
           "desc": [
             "This shows the certificate selection dialog and allows to only select the certificate without actually signing the document.",
             "",
@@ -317,21 +339,24 @@
           ],
           "raises": [],
           "args": [
-            [
-              "certificateKind",
-              "CertificateKind_ffd0e69",
-              "in"
-            ],
-            [
-              "Description",
-              "str",
-              "out"
-            ]
+            {
+              "name": "certificateKind",
+              "type": "CertificateKind_ffd0e69",
+              "direction": "in",
+              "origin": "com.sun.star.security.CertificateKind"
+            },
+            {
+              "name": "Description",
+              "type": "str",
+              "direction": "out",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "setParentWindow",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Set parent window to use when showing dialogs.",
             "",
@@ -341,89 +366,102 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xParentWindow",
-              "XWindow_713b0924",
-              "in"
-            ]
+            {
+              "name": "xParentWindow",
+              "type": "XWindow_713b0924",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XWindow"
+            }
           ]
         },
         {
           "name": "showCertificate",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "Certificate",
-              "XCertificate_e55b0d3b",
-              "in"
-            ]
+            {
+              "name": "Certificate",
+              "type": "XCertificate_e55b0d3b",
+              "direction": "in",
+              "origin": "com.sun.star.security.XCertificate"
+            }
           ]
         },
         {
           "name": "showDocumentContentSignatures",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "shows the digital signatures of the document content"
           ],
           "raises": [],
           "args": [
-            [
-              "xStorage",
-              "XStorage_8e460a32",
-              "in"
-            ],
-            [
-              "xSignInStream",
-              "XInputStream_98d40ab4",
-              "in"
-            ]
+            {
+              "name": "xStorage",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            },
+            {
+              "name": "xSignInStream",
+              "type": "XInputStream_98d40ab4",
+              "direction": "in",
+              "origin": "com.sun.star.io.XInputStream"
+            }
           ]
         },
         {
           "name": "showPackageSignatures",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "shows the digital signatures of the package"
           ],
           "raises": [],
           "args": [
-            [
-              "xStorage",
-              "XStorage_8e460a32",
-              "in"
-            ],
-            [
-              "xSignInStream",
-              "XInputStream_98d40ab4",
-              "in"
-            ]
+            {
+              "name": "xStorage",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            },
+            {
+              "name": "xSignInStream",
+              "type": "XInputStream_98d40ab4",
+              "direction": "in",
+              "origin": "com.sun.star.io.XInputStream"
+            }
           ]
         },
         {
           "name": "showScriptingContentSignatures",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "shows the digital signatures of the scripting content"
           ],
           "raises": [],
           "args": [
-            [
-              "xStorage",
-              "XStorage_8e460a32",
-              "in"
-            ],
-            [
-              "xSignInStream",
-              "XInputStream_98d40ab4",
-              "in"
-            ]
+            {
+              "name": "xStorage",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            },
+            {
+              "name": "xSignInStream",
+              "type": "XInputStream_98d40ab4",
+              "direction": "in",
+              "origin": "com.sun.star.io.XInputStream"
+            }
           ]
         },
         {
           "name": "signDocumentContent",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "signs the content of the document including text and pictures.",
             "",
@@ -431,21 +469,24 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xStorage",
-              "XStorage_8e460a32",
-              "in"
-            ],
-            [
-              "xSignStream",
-              "XStream_678908a4",
-              "in"
-            ]
+            {
+              "name": "xStorage",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            },
+            {
+              "name": "xSignStream",
+              "type": "XStream_678908a4",
+              "direction": "in",
+              "origin": "com.sun.star.io.XStream"
+            }
           ]
         },
         {
           "name": "signDocumentWithCertificate",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Signs the content of the document with the provided certificate.",
             "",
@@ -455,46 +496,53 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xCertificate",
-              "XCertificate_e55b0d3b",
-              "in"
-            ],
-            [
-              "xStorage",
-              "XStorage_8e460a32",
-              "in"
-            ],
-            [
-              "xStream",
-              "XStream_678908a4",
-              "in"
-            ]
+            {
+              "name": "xCertificate",
+              "type": "XCertificate_e55b0d3b",
+              "direction": "in",
+              "origin": "com.sun.star.security.XCertificate"
+            },
+            {
+              "name": "xStorage",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            },
+            {
+              "name": "xStream",
+              "type": "XStream_678908a4",
+              "direction": "in",
+              "origin": "com.sun.star.io.XStream"
+            }
           ]
         },
         {
           "name": "signPackage",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "signs the full Package, which means everything in the storage except the content of META-INF"
           ],
           "raises": [],
           "args": [
-            [
-              "Storage",
-              "XStorage_8e460a32",
-              "in"
-            ],
-            [
-              "xSignStream",
-              "XStream_678908a4",
-              "in"
-            ]
+            {
+              "name": "Storage",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            },
+            {
+              "name": "xSignStream",
+              "type": "XStream_678908a4",
+              "direction": "in",
+              "origin": "com.sun.star.io.XStream"
+            }
           ]
         },
         {
           "name": "signPackageWithCertificate",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "signs the full Package, which means everything in the storage except the content of META-INF with the provided certificate.",
             "",
@@ -504,26 +552,30 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xCertificate",
-              "XCertificate_e55b0d3b",
-              "in"
-            ],
-            [
-              "xStorage",
-              "XStorage_8e460a32",
-              "in"
-            ],
-            [
-              "xStream",
-              "XStream_678908a4",
-              "in"
-            ]
+            {
+              "name": "xCertificate",
+              "type": "XCertificate_e55b0d3b",
+              "direction": "in",
+              "origin": "com.sun.star.security.XCertificate"
+            },
+            {
+              "name": "xStorage",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            },
+            {
+              "name": "xStream",
+              "type": "XStream_678908a4",
+              "direction": "in",
+              "origin": "com.sun.star.io.XStream"
+            }
           ]
         },
         {
           "name": "signScriptingContent",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "signs the content of the Scripting including macros and basic dialogs",
             "",
@@ -531,21 +583,24 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xStorage",
-              "XStorage_8e460a32",
-              "in"
-            ],
-            [
-              "xSignStream",
-              "XStream_678908a4",
-              "in"
-            ]
+            {
+              "name": "xStorage",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            },
+            {
+              "name": "xSignStream",
+              "type": "XStream_678908a4",
+              "direction": "in",
+              "origin": "com.sun.star.io.XStream"
+            }
           ]
         },
         {
           "name": "signScriptingContentWithCertificate",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "signs the content of the Scripting including macros and basic dialogs with the provided certificate.",
             "",
@@ -557,26 +612,30 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xCertificate",
-              "XCertificate_e55b0d3b",
-              "in"
-            ],
-            [
-              "xStorage",
-              "XStorage_8e460a32",
-              "in"
-            ],
-            [
-              "xStream",
-              "XStream_678908a4",
-              "in"
-            ]
+            {
+              "name": "xCertificate",
+              "type": "XCertificate_e55b0d3b",
+              "direction": "in",
+              "origin": "com.sun.star.security.XCertificate"
+            },
+            {
+              "name": "xStorage",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            },
+            {
+              "name": "xStream",
+              "type": "XStream_678908a4",
+              "direction": "in",
+              "origin": "com.sun.star.io.XStream"
+            }
           ]
         },
         {
           "name": "signSignatureLine",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Signs the content of the document including text and pictures using the given XCertificate.",
             "",
@@ -590,46 +649,54 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xStorage",
-              "XStorage_8e460a32",
-              "in"
-            ],
-            [
-              "xSignStream",
-              "XStream_678908a4",
-              "in"
-            ],
-            [
-              "signatureLineId",
-              "str",
-              "in"
-            ],
-            [
-              "xCertificate",
-              "XCertificate_e55b0d3b",
-              "in"
-            ],
-            [
-              "xValidGraphic",
-              "XGraphic_a4da0afc",
-              "in"
-            ],
-            [
-              "xInvalidGraphic",
-              "XGraphic_a4da0afc",
-              "in"
-            ],
-            [
-              "comment",
-              "str",
-              "in"
-            ]
+            {
+              "name": "xStorage",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            },
+            {
+              "name": "xSignStream",
+              "type": "XStream_678908a4",
+              "direction": "in",
+              "origin": "com.sun.star.io.XStream"
+            },
+            {
+              "name": "signatureLineId",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "xCertificate",
+              "type": "XCertificate_e55b0d3b",
+              "direction": "in",
+              "origin": "com.sun.star.security.XCertificate"
+            },
+            {
+              "name": "xValidGraphic",
+              "type": "XGraphic_a4da0afc",
+              "direction": "in",
+              "origin": "com.sun.star.graphic.XGraphic"
+            },
+            {
+              "name": "xInvalidGraphic",
+              "type": "XGraphic_a4da0afc",
+              "direction": "in",
+              "origin": "com.sun.star.graphic.XGraphic"
+            },
+            {
+              "name": "comment",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "verifyDocumentContentSignatures",
           "returns": "typing.Tuple[DocumentSignatureInformation_f36c13f7, ...]",
+          "returns_origin": "sequence< com.sun.star.security.DocumentSignatureInformation >",
           "desc": [
             "checks for digital signatures and their status.",
             "",
@@ -637,21 +704,24 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xStorage",
-              "XStorage_8e460a32",
-              "in"
-            ],
-            [
-              "xSignInStream",
-              "XInputStream_98d40ab4",
-              "in"
-            ]
+            {
+              "name": "xStorage",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            },
+            {
+              "name": "xSignInStream",
+              "type": "XInputStream_98d40ab4",
+              "direction": "in",
+              "origin": "com.sun.star.io.XInputStream"
+            }
           ]
         },
         {
           "name": "verifyPackageSignatures",
           "returns": "typing.Tuple[DocumentSignatureInformation_f36c13f7, ...]",
+          "returns_origin": "sequence< com.sun.star.security.DocumentSignatureInformation >",
           "desc": [
             "checks for digital signatures and their status.",
             "",
@@ -659,21 +729,24 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Storage",
-              "XStorage_8e460a32",
-              "in"
-            ],
-            [
-              "xSignInStream",
-              "XInputStream_98d40ab4",
-              "in"
-            ]
+            {
+              "name": "Storage",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            },
+            {
+              "name": "xSignInStream",
+              "type": "XInputStream_98d40ab4",
+              "direction": "in",
+              "origin": "com.sun.star.io.XInputStream"
+            }
           ]
         },
         {
           "name": "verifyScriptingContentSignatures",
           "returns": "typing.Tuple[DocumentSignatureInformation_f36c13f7, ...]",
+          "returns_origin": "sequence< com.sun.star.security.DocumentSignatureInformation >",
           "desc": [
             "checks for digital signatures and their status.",
             "",
@@ -681,16 +754,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xStorage",
-              "XStorage_8e460a32",
-              "in"
-            ],
-            [
-              "xSignInStream",
-              "XInputStream_98d40ab4",
-              "in"
-            ]
+            {
+              "name": "xStorage",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            },
+            {
+              "name": "xSignInStream",
+              "type": "XInputStream_98d40ab4",
+              "direction": "in",
+              "origin": "com.sun.star.io.XInputStream"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XConnectionPoint",
   "type": "interface",
@@ -74,6 +74,7 @@
         {
           "name": "advise",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "creates a connection between a connection point and a client's sink, where the sink implements the outgoing interface supported by this connection point.",
             "",
@@ -84,16 +85,18 @@
             "com.sun.star.lang.InvalidListenerException"
           ],
           "args": [
-            [
-              "xListener",
-              "XInterface_8f010a43",
-              "in"
-            ]
+            {
+              "name": "xListener",
+              "type": "XInterface_8f010a43",
+              "direction": "in",
+              "origin": "com.sun.star.uno.XInterface"
+            }
           ]
         },
         {
           "name": "getConnectionPointContainer",
           "returns": "XConnectionPointContainer_688110bf",
+          "returns_origin": "com.sun.star.lang.XConnectionPointContainer",
           "desc": [],
           "raises": [],
           "args": []
@@ -101,6 +104,7 @@
         {
           "name": "getConnectionType",
           "returns": "object",
+          "returns_origin": "type",
           "desc": [
             "Using the XConnectionPointContainer.getConnectionPoints() method, a client can obtain an XConnectionPoint interface. Using that interface and this method, the client can determine the type of each connection point enumerated. The type returned from this method must enable the caller to access this same connection point through XConnectionPointContainer.findConnectionPoint()."
           ],
@@ -110,6 +114,7 @@
         {
           "name": "getConnections",
           "returns": "typing.Tuple[XInterface_8f010a43, ...]",
+          "returns_origin": "sequence< com.sun.star.uno.XInterface >",
           "desc": [],
           "raises": [],
           "args": []
@@ -117,6 +122,7 @@
         {
           "name": "unadvise",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "terminates a notification previously set up with advise.",
             "",
@@ -124,11 +130,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xListener",
-              "XInterface_8f010a43",
-              "in"
-            ]
+            {
+              "name": "xListener",
+              "type": "XInterface_8f010a43",
+              "direction": "in",
+              "origin": "com.sun.star.uno.XInterface"
+            }
           ]
         }
       ]

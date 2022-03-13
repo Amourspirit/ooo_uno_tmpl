@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XCompositeLayer",
   "type": "interface",
@@ -67,6 +67,7 @@
         {
           "name": "listSubLayerIds",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [
             "Returns a list of the criteria that can be used to access the sublayers."
           ],
@@ -78,6 +79,7 @@
         {
           "name": "readSubLayerData",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Describes the content of a particular sublayer to an XLayerHandler.",
             "",
@@ -90,16 +92,18 @@
             "MalformedDataException"
           ],
           "args": [
-            [
-              "aHandler",
-              "XLayerHandler_c5d61289",
-              "in"
-            ],
-            [
-              "aSubLayerId",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aHandler",
+              "type": "XLayerHandler_c5d61289",
+              "direction": "in",
+              "origin": "com.sun.star.configuration.backend.XLayerHandler"
+            },
+            {
+              "name": "aSubLayerId",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

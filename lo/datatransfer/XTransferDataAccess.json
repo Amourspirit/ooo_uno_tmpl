@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XTransferDataAccess",
   "type": "interface",
@@ -66,6 +66,7 @@
         {
           "name": "getData",
           "returns": "typing.Tuple[object, ...]",
+          "returns_origin": "sequence< any >",
           "desc": [
             "To get all the data of a sequence of DataFlavor.",
             "",
@@ -75,16 +76,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aFlavorList",
-              "typing.Tuple[DataFlavor_ffd30deb, ...]",
-              "in"
-            ]
+            {
+              "name": "aFlavorList",
+              "type": "typing.Tuple[DataFlavor_ffd30deb, ...]",
+              "direction": "in",
+              "origin": "sequence< DataFlavor >"
+            }
           ]
         },
         {
           "name": "queryDataSize",
           "returns": "int",
+          "returns_origin": "hyper",
           "desc": [
             "To query for the summarized data size in bytes of a sequence of DataFlavor.",
             "",
@@ -92,11 +95,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aFlavorList",
-              "typing.Tuple[DataFlavor_ffd30deb, ...]",
-              "in"
-            ]
+            {
+              "name": "aFlavorList",
+              "type": "typing.Tuple[DataFlavor_ffd30deb, ...]",
+              "direction": "in",
+              "origin": "sequence< DataFlavor >"
+            }
           ]
         }
       ]

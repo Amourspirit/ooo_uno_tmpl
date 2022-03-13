@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XProfileManager",
   "type": "interface",
@@ -60,26 +60,30 @@
         {
           "name": "bootupProfile",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "attempts to init XPCOM runtime using given profile."
           ],
           "raises": [],
           "args": [
-            [
-              "product",
-              "MozillaProductType_2e210f5b",
-              "in"
-            ],
-            [
-              "profileName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "product",
+              "type": "MozillaProductType_2e210f5b",
+              "direction": "in",
+              "origin": "com.sun.star.mozilla.MozillaProductType"
+            },
+            {
+              "name": "profileName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getCurrentProduct",
           "returns": "MozillaProductType_2e210f5b",
+          "returns_origin": "com.sun.star.mozilla.MozillaProductType",
           "desc": [
             "attempts to get the current product."
           ],
@@ -89,6 +93,7 @@
         {
           "name": "getCurrentProfile",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "attempts to get the current profile name."
           ],
@@ -98,6 +103,7 @@
         {
           "name": "isCurrentProfileLocked",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "attempts to check whether the current profile locked or not"
           ],
@@ -107,26 +113,30 @@
         {
           "name": "setCurrentProfile",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "attempts to set the current used profile name for the given product."
           ],
           "raises": [],
           "args": [
-            [
-              "product",
-              "MozillaProductType_2e210f5b",
-              "in"
-            ],
-            [
-              "profileName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "product",
+              "type": "MozillaProductType_2e210f5b",
+              "direction": "in",
+              "origin": "com.sun.star.mozilla.MozillaProductType"
+            },
+            {
+              "name": "profileName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "shutdownProfile",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "attempts to shutdown the current profile."
           ],

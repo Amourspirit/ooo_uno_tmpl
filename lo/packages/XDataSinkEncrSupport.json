@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDataSinkEncrSupport",
   "type": "interface",
@@ -60,6 +60,7 @@
         {
           "name": "getDataStream",
           "returns": "XInputStream_98d40ab4",
+          "returns_origin": "com.sun.star.io.XInputStream",
           "desc": [
             "Allows to get access to the data of the PackageStream.",
             "",
@@ -75,6 +76,7 @@
         {
           "name": "getPlainRawStream",
           "returns": "XInputStream_98d40ab4",
+          "returns_origin": "com.sun.star.io.XInputStream",
           "desc": [
             "Allows to get access to the raw data of the stream as it is stored in the package."
           ],
@@ -87,6 +89,7 @@
         {
           "name": "getRawStream",
           "returns": "XInputStream_98d40ab4",
+          "returns_origin": "com.sun.star.io.XInputStream",
           "desc": [
             "Allows to get access to the data of the PackageStream as to raw stream.",
             "",
@@ -103,6 +106,7 @@
         {
           "name": "setDataStream",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Allows to set a data stream for the PackageStream.",
             "",
@@ -112,16 +116,18 @@
             "com.sun.star.io.IOException"
           ],
           "args": [
-            [
-              "aStream",
-              "XInputStream_98d40ab4",
-              "in"
-            ]
+            {
+              "name": "aStream",
+              "type": "XInputStream_98d40ab4",
+              "direction": "in",
+              "origin": "com.sun.star.io.XInputStream"
+            }
           ]
         },
         {
           "name": "setRawStream",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Allows to set raw stream for the PackageStream.",
             "",
@@ -133,11 +139,12 @@
             "com.sun.star.io.IOException"
           ],
           "args": [
-            [
-              "aStream",
-              "XInputStream_98d40ab4",
-              "in"
-            ]
+            {
+              "name": "aStream",
+              "type": "XInputStream_98d40ab4",
+              "direction": "in",
+              "origin": "com.sun.star.io.XInputStream"
+            }
           ]
         }
       ]

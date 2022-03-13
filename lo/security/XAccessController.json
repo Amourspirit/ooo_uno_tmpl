@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XAccessController",
   "type": "interface",
@@ -71,6 +71,7 @@
         {
           "name": "checkPermission",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Determines whether the access request indicated by the specified permission should be allowed or denied, based on the security policy currently in effect.",
             "",
@@ -82,16 +83,18 @@
             "AccessControlException"
           ],
           "args": [
-            [
-              "perm",
-              "object",
-              "in"
-            ]
+            {
+              "name": "perm",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         },
         {
           "name": "doPrivileged",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "Perform the specified action adding a set of permissions defined by the given XAccessControlContext.",
             "",
@@ -103,21 +106,24 @@
             "com.sun.star.uno.Exception"
           ],
           "args": [
-            [
-              "action",
-              "XAction_a72e0b36",
-              "in"
-            ],
-            [
-              "restriction",
-              "XAccessControlContext_6d6a10f0",
-              "in"
-            ]
+            {
+              "name": "action",
+              "type": "XAction_a72e0b36",
+              "direction": "in",
+              "origin": "com.sun.star.security.XAction"
+            },
+            {
+              "name": "restriction",
+              "type": "XAccessControlContext_6d6a10f0",
+              "direction": "in",
+              "origin": "com.sun.star.security.XAccessControlContext"
+            }
           ]
         },
         {
           "name": "doRestricted",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "Perform the specified action restricting permissions to the given XAccessControlContext.",
             "",
@@ -129,21 +135,24 @@
             "com.sun.star.uno.Exception"
           ],
           "args": [
-            [
-              "action",
-              "XAction_a72e0b36",
-              "in"
-            ],
-            [
-              "restriction",
-              "XAccessControlContext_6d6a10f0",
-              "in"
-            ]
+            {
+              "name": "action",
+              "type": "XAction_a72e0b36",
+              "direction": "in",
+              "origin": "com.sun.star.security.XAction"
+            },
+            {
+              "name": "restriction",
+              "type": "XAccessControlContext_6d6a10f0",
+              "direction": "in",
+              "origin": "com.sun.star.security.XAccessControlContext"
+            }
           ]
         },
         {
           "name": "getContext",
           "returns": "XAccessControlContext_6d6a10f0",
+          "returns_origin": "com.sun.star.security.XAccessControlContext",
           "desc": [
             "This method takes a \\\"snapshot\\\" of the current calling context and returns it.",
             "",

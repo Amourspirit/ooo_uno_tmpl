@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XChartTypeContainer",
   "type": "interface",
@@ -61,6 +61,7 @@
         {
           "name": "addChartType",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "add a chart type to the chart type container"
           ],
@@ -68,16 +69,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aChartType",
-              "XChartType_ad200b38",
-              "in"
-            ]
+            {
+              "name": "aChartType",
+              "type": "XChartType_ad200b38",
+              "direction": "in",
+              "origin": "com.sun.star.chart2.XChartType"
+            }
           ]
         },
         {
           "name": "getChartTypes",
           "returns": "typing.Tuple[XChartType_ad200b38, ...]",
+          "returns_origin": "sequence< XChartType >",
           "desc": [
             "retrieve all chart types"
           ],
@@ -87,6 +90,7 @@
         {
           "name": "removeChartType",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes one data series from the chart type container."
           ],
@@ -94,16 +98,18 @@
             "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
-            [
-              "aChartType",
-              "XChartType_ad200b38",
-              "in"
-            ]
+            {
+              "name": "aChartType",
+              "type": "XChartType_ad200b38",
+              "direction": "in",
+              "origin": "com.sun.star.chart2.XChartType"
+            }
           ]
         },
         {
           "name": "setChartTypes",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "set all chart types"
           ],
@@ -111,11 +117,12 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aChartTypes",
-              "typing.Tuple[XChartType_ad200b38, ...]",
-              "in"
-            ]
+            {
+              "name": "aChartTypes",
+              "type": "typing.Tuple[XChartType_ad200b38, ...]",
+              "direction": "in",
+              "origin": "sequence< XChartType >"
+            }
           ]
         }
       ]

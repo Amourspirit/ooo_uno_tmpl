@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XChartDocument",
   "type": "interface",
@@ -79,6 +79,7 @@
         {
           "name": "createDefaultChart",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Creates a default chart type for a brand-new chart object."
           ],
@@ -88,6 +89,7 @@
         {
           "name": "createInternalDataProvider",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "creates an internal com.sun.star.chart2.XDataProvider that is handled by the chart document itself.",
             "",
@@ -97,16 +99,18 @@
             "com.sun.star.util.CloseVetoException"
           ],
           "args": [
-            [
-              "bCloneExistingData",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "bCloneExistingData",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "getChartTypeManager",
           "returns": "XChartTypeManager_6330df3",
+          "returns_origin": "com.sun.star.chart2.XChartTypeManager",
           "desc": [
             "retrieves the component that is able to create different chart type templates (components of type ChartTypeTemplate)"
           ],
@@ -116,6 +120,7 @@
         {
           "name": "getDataProvider",
           "returns": "XDataProvider_122f0e31",
+          "returns_origin": "com.sun.star.chart2.data.XDataProvider",
           "desc": [
             "Returns the currently set data provider.",
             "",
@@ -127,6 +132,7 @@
         {
           "name": "getFirstDiagram",
           "returns": "XDiagram_96fe0a59",
+          "returns_origin": "com.sun.star.chart2.XDiagram",
           "desc": [
             "Notes: this is preliminary, we need an API that supports more than one diagram. The method name getDiagram exists in the css.chart API, so there is would be no way to chose either this or the other method from Basic (it would chose one or the other by random)."
           ],
@@ -136,6 +142,7 @@
         {
           "name": "getPageBackground",
           "returns": "XPropertySet_bc180bfa",
+          "returns_origin": "com.sun.star.beans.XPropertySet",
           "desc": [
             "Gives access to the page background appearance.",
             "",
@@ -147,6 +154,7 @@
         {
           "name": "hasInternalDataProvider",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "This is the case directly after createInternalDataProvider() has been called, but this is not necessary. The chart can also create an internal data provider by other means, e.g. a call to com.sun.star.frame.XModel.initNew()."
           ],
@@ -156,31 +164,35 @@
         {
           "name": "setChartTypeManager",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets a new component that is able to create different chart type templates (components of type ChartTypeTemplate)"
           ],
           "raises": [],
           "args": [
-            [
-              "xNewManager",
-              "XChartTypeManager_6330df3",
-              "in"
-            ]
+            {
+              "name": "xNewManager",
+              "type": "XChartTypeManager_6330df3",
+              "direction": "in",
+              "origin": "com.sun.star.chart2.XChartTypeManager"
+            }
           ]
         },
         {
           "name": "setFirstDiagram",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Notes: this is preliminary, we need an API that supports more than one diagram. The method name setDiagram exists in the css.chart API, so there is would be no way to chose either this or the other method from Basic (it would chose one or the other by random)."
           ],
           "raises": [],
           "args": [
-            [
-              "xDiagram",
-              "XDiagram_96fe0a59",
-              "in"
-            ]
+            {
+              "name": "xDiagram",
+              "type": "XDiagram_96fe0a59",
+              "direction": "in",
+              "origin": "com.sun.star.chart2.XDiagram"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XCellRangeFormula",
   "type": "interface",
@@ -60,6 +60,7 @@
         {
           "name": "getFormulaArray",
           "returns": "typing.Tuple[typing.Tuple[str, ...], ...]",
+          "returns_origin": "sequence< sequence< string > >",
           "desc": [
             "gets an array from the contents of the cell range.",
             "",
@@ -71,6 +72,7 @@
         {
           "name": "setFormulaArray",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "fills the cell range with values from an array.",
             "",
@@ -78,11 +80,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aArray",
-              "typing.Tuple[typing.Tuple[str, ...], ...]",
-              "in"
-            ]
+            {
+              "name": "aArray",
+              "type": "typing.Tuple[typing.Tuple[str, ...], ...]",
+              "direction": "in",
+              "origin": "sequence< sequence< string > >"
+            }
           ]
         }
       ]

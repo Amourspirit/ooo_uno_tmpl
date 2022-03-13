@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XResultSetMetaData",
   "type": "interface",
@@ -50,6 +50,7 @@
         {
           "name": "getCatalogName",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "gets a column's table's catalog name."
           ],
@@ -57,16 +58,18 @@
             "SQLException"
           ],
           "args": [
-            [
-              "column",
-              "int",
-              "in"
-            ]
+            {
+              "name": "column",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getColumnCount",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "returns the number of columns in this ResultSet."
           ],
@@ -78,6 +81,7 @@
         {
           "name": "getColumnDisplaySize",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "indicates the column's normal max width in chars."
           ],
@@ -85,16 +89,18 @@
             "SQLException"
           ],
           "args": [
-            [
-              "column",
-              "int",
-              "in"
-            ]
+            {
+              "name": "column",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getColumnLabel",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "gets the suggested column title for use in printouts and displays."
           ],
@@ -102,16 +108,18 @@
             "SQLException"
           ],
           "args": [
-            [
-              "column",
-              "int",
-              "in"
-            ]
+            {
+              "name": "column",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getColumnName",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "gets a column's name."
           ],
@@ -119,16 +127,18 @@
             "SQLException"
           ],
           "args": [
-            [
-              "column",
-              "int",
-              "in"
-            ]
+            {
+              "name": "column",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getColumnServiceName",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the fully-qualified name of the service whose instances are manufactured if the method com.sun.star.sdbc.XResultSet..getObject() is called to retrieve a value from the column."
           ],
@@ -136,16 +146,18 @@
             "SQLException"
           ],
           "args": [
-            [
-              "column",
-              "int",
-              "in"
-            ]
+            {
+              "name": "column",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getColumnType",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "retrieves a column's SQL type."
           ],
@@ -153,16 +165,18 @@
             "SQLException"
           ],
           "args": [
-            [
-              "column",
-              "int",
-              "in"
-            ]
+            {
+              "name": "column",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getColumnTypeName",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "retrieves a column's database-specific type name."
           ],
@@ -170,16 +184,18 @@
             "SQLException"
           ],
           "args": [
-            [
-              "column",
-              "int",
-              "in"
-            ]
+            {
+              "name": "column",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getPrecision",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "gets a column's number of decimal digits."
           ],
@@ -187,16 +203,18 @@
             "SQLException"
           ],
           "args": [
-            [
-              "column",
-              "int",
-              "in"
-            ]
+            {
+              "name": "column",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getScale",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "gets a column's number of digits to right of the decimal point."
           ],
@@ -204,16 +222,18 @@
             "SQLException"
           ],
           "args": [
-            [
-              "column",
-              "int",
-              "in"
-            ]
+            {
+              "name": "column",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getSchemaName",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "gets a column's table's schema."
           ],
@@ -221,16 +241,18 @@
             "SQLException"
           ],
           "args": [
-            [
-              "column",
-              "int",
-              "in"
-            ]
+            {
+              "name": "column",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getTableName",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "gets a column's table name."
           ],
@@ -238,16 +260,18 @@
             "SQLException"
           ],
           "args": [
-            [
-              "column",
-              "int",
-              "in"
-            ]
+            {
+              "name": "column",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "isAutoIncrement",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "indicates whether the column is automatically numbered, thus read-only."
           ],
@@ -255,16 +279,18 @@
             "SQLException"
           ],
           "args": [
-            [
-              "column",
-              "int",
-              "in"
-            ]
+            {
+              "name": "column",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "isCaseSensitive",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "indicates whether a column's case matters."
           ],
@@ -272,16 +298,18 @@
             "SQLException"
           ],
           "args": [
-            [
-              "column",
-              "int",
-              "in"
-            ]
+            {
+              "name": "column",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "isCurrency",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "indicates whether the column is a cash value."
           ],
@@ -289,16 +317,18 @@
             "SQLException"
           ],
           "args": [
-            [
-              "column",
-              "int",
-              "in"
-            ]
+            {
+              "name": "column",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "isDefinitelyWritable",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "indicates whether a write on the column will definitely succeed."
           ],
@@ -306,16 +336,18 @@
             "SQLException"
           ],
           "args": [
-            [
-              "column",
-              "int",
-              "in"
-            ]
+            {
+              "name": "column",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "isNullable",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "indicates the nullability of values in the designated column."
           ],
@@ -323,16 +355,18 @@
             "SQLException"
           ],
           "args": [
-            [
-              "column",
-              "int",
-              "in"
-            ]
+            {
+              "name": "column",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "isReadOnly",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "indicates whether a column is definitely not writable."
           ],
@@ -340,16 +374,18 @@
             "SQLException"
           ],
           "args": [
-            [
-              "column",
-              "int",
-              "in"
-            ]
+            {
+              "name": "column",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "isSearchable",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "indicates whether the column can be used in a where clause."
           ],
@@ -357,16 +393,18 @@
             "SQLException"
           ],
           "args": [
-            [
-              "column",
-              "int",
-              "in"
-            ]
+            {
+              "name": "column",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "isSigned",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "indicates whether values in the column are signed numbers."
           ],
@@ -374,16 +412,18 @@
             "SQLException"
           ],
           "args": [
-            [
-              "column",
-              "int",
-              "in"
-            ]
+            {
+              "name": "column",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "isWritable",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "indicates whether it is possible for a write on the column to succeed."
           ],
@@ -391,11 +431,12 @@
             "SQLException"
           ],
           "args": [
-            [
-              "column",
-              "int",
-              "in"
-            ]
+            {
+              "name": "column",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

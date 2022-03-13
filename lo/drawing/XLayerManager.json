@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XLayerManager",
   "type": "interface",
@@ -67,56 +67,64 @@
         {
           "name": "attachShapeToLayer",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "attaches a Shape to the given Layer."
           ],
           "raises": [],
           "args": [
-            [
-              "xShape",
-              "XShape_8fd00a3d",
-              "in"
-            ],
-            [
-              "xLayer",
-              "XLayer_8fd00a49",
-              "in"
-            ]
+            {
+              "name": "xShape",
+              "type": "XShape_8fd00a3d",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.XShape"
+            },
+            {
+              "name": "xLayer",
+              "type": "XLayer_8fd00a49",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.XLayer"
+            }
           ]
         },
         {
           "name": "getLayerForShape",
           "returns": "XLayer_8fd00a49",
+          "returns_origin": "com.sun.star.drawing.XLayer",
           "desc": [
             "queries the Layer that a Shape is attached to"
           ],
           "raises": [],
           "args": [
-            [
-              "xShape",
-              "XShape_8fd00a3d",
-              "in"
-            ]
+            {
+              "name": "xShape",
+              "type": "XShape_8fd00a3d",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.XShape"
+            }
           ]
         },
         {
           "name": "insertNewByIndex",
           "returns": "XLayer_8fd00a49",
+          "returns_origin": "com.sun.star.drawing.XLayer",
           "desc": [
             "creates a new Layer"
           ],
           "raises": [],
           "args": [
-            [
-              "nIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "remove",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes a Layer and all Shapes on this Layer."
           ],
@@ -124,11 +132,12 @@
             "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
-            [
-              "xLayer",
-              "XLayer_8fd00a49",
-              "in"
-            ]
+            {
+              "name": "xLayer",
+              "type": "XLayer_8fd00a49",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.XLayer"
+            }
           ]
         }
       ]

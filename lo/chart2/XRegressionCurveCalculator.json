@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XRegressionCurveCalculator",
   "type": "interface",
@@ -76,6 +76,7 @@
         {
           "name": "getCorrelationCoefficient",
           "returns": "float",
+          "returns_origin": "double",
           "desc": [
             "Returns the value of the correlation coefficient for the given regression.",
             "",
@@ -89,6 +90,7 @@
         {
           "name": "getCurveValue",
           "returns": "float",
+          "returns_origin": "double",
           "desc": [
             "calculates the value of the regression curve for x."
           ],
@@ -96,16 +98,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "x",
-              "float",
-              "in"
-            ]
+            {
+              "name": "x",
+              "type": "float",
+              "direction": "in",
+              "origin": "double"
+            }
           ]
         },
         {
           "name": "getCurveValues",
           "returns": "typing.Tuple[RealPoint2D_d6e70c78, ...]",
+          "returns_origin": "sequence< com.sun.star.geometry.RealPoint2D >",
           "desc": [
             "calculate multiple points of a regression curve at once.",
             "",
@@ -117,41 +121,48 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "min",
-              "float",
-              "in"
-            ],
-            [
-              "max",
-              "float",
-              "in"
-            ],
-            [
-              "nPointCount",
-              "int",
-              "in"
-            ],
-            [
-              "xScalingX",
-              "XScaling_97500a65",
-              "in"
-            ],
-            [
-              "xScalingY",
-              "XScaling_97500a65",
-              "in"
-            ],
-            [
-              "bMaySkipPointsInCalculation",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "min",
+              "type": "float",
+              "direction": "in",
+              "origin": "double"
+            },
+            {
+              "name": "max",
+              "type": "float",
+              "direction": "in",
+              "origin": "double"
+            },
+            {
+              "name": "nPointCount",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "xScalingX",
+              "type": "XScaling_97500a65",
+              "direction": "in",
+              "origin": "com.sun.star.chart2.XScaling"
+            },
+            {
+              "name": "xScalingY",
+              "type": "XScaling_97500a65",
+              "direction": "in",
+              "origin": "com.sun.star.chart2.XScaling"
+            },
+            {
+              "name": "bMaySkipPointsInCalculation",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "getFormattedRepresentation",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Returns a representation using the given number format for formatting all numbers contained in the formula.",
             "",
@@ -159,26 +170,30 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xNumFmtSupplier",
-              "XNumberFormatsSupplier_3afb0fb7",
-              "in"
-            ],
-            [
-              "nNumberFormatKey",
-              "int",
-              "in"
-            ],
-            [
-              "nFormulaLength",
-              "int",
-              "in"
-            ]
+            {
+              "name": "xNumFmtSupplier",
+              "type": "XNumberFormatsSupplier_3afb0fb7",
+              "direction": "in",
+              "origin": "com.sun.star.util.XNumberFormatsSupplier"
+            },
+            {
+              "name": "nNumberFormatKey",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nFormulaLength",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getRepresentation",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Retrieve a string showing the regression curve's function with calculated parameters."
           ],
@@ -188,76 +203,88 @@
         {
           "name": "recalculateRegression",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "recalculates the parameters of the internal regression curve according to the x- and y-values given."
           ],
           "raises": [],
           "args": [
-            [
-              "aXValues",
-              "typing.Tuple[float, ...]",
-              "in"
-            ],
-            [
-              "aYValues",
-              "typing.Tuple[float, ...]",
-              "in"
-            ]
+            {
+              "name": "aXValues",
+              "type": "typing.Tuple[float, ...]",
+              "direction": "in",
+              "origin": "sequence< double >"
+            },
+            {
+              "name": "aYValues",
+              "type": "typing.Tuple[float, ...]",
+              "direction": "in",
+              "origin": "sequence< double >"
+            }
           ]
         },
         {
           "name": "setRegressionProperties",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "set calculation properties for curve calculation."
           ],
           "raises": [],
           "args": [
-            [
-              "degree",
-              "int",
-              "in"
-            ],
-            [
-              "forceIntercept",
-              "bool",
-              "in"
-            ],
-            [
-              "interceptValue",
-              "float",
-              "in"
-            ],
-            [
-              "period",
-              "int",
-              "in"
-            ],
-            [
-              "movingType",
-              "int",
-              "in"
-            ]
+            {
+              "name": "degree",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "forceIntercept",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            },
+            {
+              "name": "interceptValue",
+              "type": "float",
+              "direction": "in",
+              "origin": "double"
+            },
+            {
+              "name": "period",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "movingType",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "setXYNames",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Set the names of X and Y variables of the equation to replace \\\"x\\\" and \\\"f(x)\\\" in representation."
           ],
           "raises": [],
           "args": [
-            [
-              "aXName",
-              "str",
-              "in"
-            ],
-            [
-              "aYName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aXName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aYName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

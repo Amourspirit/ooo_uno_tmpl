@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDocumentSubStorageSupplier",
   "type": "interface",
@@ -65,26 +65,30 @@
         {
           "name": "getDocumentSubStorage",
           "returns": "XStorage_8e460a32",
+          "returns_origin": "com.sun.star.embed.XStorage",
           "desc": [
             "provides the access to a substorage with specified name"
           ],
           "raises": [],
           "args": [
-            [
-              "StorageName",
-              "str",
-              "in"
-            ],
-            [
-              "nMode",
-              "int",
-              "in"
-            ]
+            {
+              "name": "StorageName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nMode",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getDocumentSubStoragesNames",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [
             "provides the list of substorages"
           ],

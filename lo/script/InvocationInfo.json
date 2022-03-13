@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "InvocationInfo",
@@ -43,6 +43,13 @@
       "typing.Tuple[object, ...]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.reflection.ParamMode",
+        "com.sun.star.script.MemberType"
+      ]
+    },
     "fullname": "com.sun.star.script.InvocationInfo",
     "desc": [
       "This struct is used to specify information about object members (methods or properties) accessed via XInvocation, such as names, types, or parameters."
@@ -53,35 +60,45 @@
       {
         "name": "aParamTypes",
         "type": "typing.Tuple[object, ...]",
-        "lines": [
+        "origtype": null,
+        "origin": "sequence< type >",
+        "desc": [
           "Types method parameters, for properties this sequence is empty."
         ]
       },
       {
         "name": "aParamModes",
         "type": "typing.Tuple[ParamMode_d7260ca9, ...]",
-        "lines": [
+        "origtype": null,
+        "origin": "sequence< com.sun.star.reflection.ParamMode >",
+        "desc": [
           "Mode of method parameters (IN, OUT, INOUT), for properties this sequence is empty."
         ]
       },
       {
         "name": "aName",
         "type": "str",
-        "lines": [
+        "origtype": null,
+        "origin": "string",
+        "desc": [
           "Name of the method or property."
         ]
       },
       {
         "name": "eMemberType",
         "type": "MemberType_b1e00b97",
-        "lines": [
+        "origtype": "com.sun.star.script.MemberType",
+        "origin": "com.sun.star.script.MemberType",
+        "desc": [
           "Kind of the member (method or property)."
         ]
       },
       {
         "name": "PropertyAttribute",
         "type": "int",
-        "lines": [
+        "origtype": null,
+        "origin": "short",
+        "desc": [
           "Only for property members: This field may contain zero or more constants of the com.sun.star.beans.PropertyAttribute constants group.",
           "",
           "It is not guaranteed that all necessary constants are set to describe the property completely, but a flag will only be set, if the corresponding charac- teristic really exists. Example: If the READONLY flag is set, the property is readonly. If it isn't set, the property nevertheless can be readonly.",
@@ -92,7 +109,9 @@
       {
         "name": "aType",
         "type": "object",
-        "lines": [
+        "origtype": null,
+        "origin": "type",
+        "desc": [
           "Type of the member, for methods the return type."
         ]
       }

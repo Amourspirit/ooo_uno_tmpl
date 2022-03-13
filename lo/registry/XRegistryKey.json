@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XRegistryKey",
   "type": "interface",
@@ -77,6 +77,7 @@
         {
           "name": "closeKey",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "closes a key in the registry."
           ],
@@ -88,6 +89,7 @@
         {
           "name": "createKey",
           "returns": "XRegistryKey",
+          "returns_origin": "com.sun.star.registry.XRegistryKey",
           "desc": [
             "creates a new key in the registry.",
             "",
@@ -97,16 +99,18 @@
             "com.sun.star.registry.InvalidRegistryException"
           ],
           "args": [
-            [
-              "aKeyName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aKeyName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "createLink",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "creates a new link in the registry."
           ],
@@ -114,21 +118,24 @@
             "com.sun.star.registry.InvalidRegistryException"
           ],
           "args": [
-            [
-              "aLinkName",
-              "str",
-              "in"
-            ],
-            [
-              "aLinkTarget",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aLinkName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aLinkTarget",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "deleteKey",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "deletes a key from the registry."
           ],
@@ -136,16 +143,18 @@
             "com.sun.star.registry.InvalidRegistryException"
           ],
           "args": [
-            [
-              "rKeyName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "rKeyName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "deleteLink",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "deletes a link from the registry."
           ],
@@ -153,16 +162,18 @@
             "com.sun.star.registry.InvalidRegistryException"
           ],
           "args": [
-            [
-              "rLinkName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "rLinkName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getAsciiListValue",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [],
           "raises": [
             "com.sun.star.registry.InvalidRegistryException",
@@ -173,6 +184,7 @@
         {
           "name": "getAsciiValue",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [],
           "raises": [
             "com.sun.star.registry.InvalidRegistryException",
@@ -183,6 +195,7 @@
         {
           "name": "getBinaryValue",
           "returns": "typing.Tuple[int, ...]",
+          "returns_origin": "sequence< byte >",
           "desc": [],
           "raises": [
             "com.sun.star.registry.InvalidRegistryException",
@@ -193,6 +206,7 @@
         {
           "name": "getKeyNames",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [],
           "raises": [
             "com.sun.star.registry.InvalidRegistryException"
@@ -202,36 +216,41 @@
         {
           "name": "getKeyType",
           "returns": "RegistryKeyType_11940ea5",
+          "returns_origin": "com.sun.star.registry.RegistryKeyType",
           "desc": [],
           "raises": [
             "com.sun.star.registry.InvalidRegistryException"
           ],
           "args": [
-            [
-              "rKeyName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "rKeyName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getLinkTarget",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [],
           "raises": [
             "com.sun.star.registry.InvalidRegistryException"
           ],
           "args": [
-            [
-              "rLinkName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "rLinkName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getLongListValue",
           "returns": "typing.Tuple[int, ...]",
+          "returns_origin": "sequence< long >",
           "desc": [],
           "raises": [
             "com.sun.star.registry.InvalidRegistryException",
@@ -242,6 +261,7 @@
         {
           "name": "getLongValue",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [],
           "raises": [
             "com.sun.star.registry.InvalidRegistryException",
@@ -252,21 +272,24 @@
         {
           "name": "getResolvedName",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [],
           "raises": [
             "com.sun.star.registry.InvalidRegistryException"
           ],
           "args": [
-            [
-              "aKeyName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aKeyName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getStringListValue",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [],
           "raises": [
             "com.sun.star.registry.InvalidRegistryException",
@@ -277,6 +300,7 @@
         {
           "name": "getStringValue",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [],
           "raises": [
             "com.sun.star.registry.InvalidRegistryException",
@@ -287,6 +311,7 @@
         {
           "name": "getValueType",
           "returns": "RegistryValueType_30390f79",
+          "returns_origin": "com.sun.star.registry.RegistryValueType",
           "desc": [],
           "raises": [
             "com.sun.star.registry.InvalidRegistryException"
@@ -296,6 +321,7 @@
         {
           "name": "isReadOnly",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "checks if the key can be overwritten."
           ],
@@ -307,6 +333,7 @@
         {
           "name": "isValid",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "checks if the key points to an open valid key in the data-source."
           ],
@@ -316,6 +343,7 @@
         {
           "name": "openKey",
           "returns": "XRegistryKey",
+          "returns_origin": "com.sun.star.registry.XRegistryKey",
           "desc": [
             "opens a sub key of the key.",
             "",
@@ -325,16 +353,18 @@
             "com.sun.star.registry.InvalidRegistryException"
           ],
           "args": [
-            [
-              "aKeyName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aKeyName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "openKeys",
           "returns": "typing.Tuple[XRegistryKey, ...]",
+          "returns_origin": "sequence< com.sun.star.registry.XRegistryKey >",
           "desc": [
             "opens all subkeys of the key.",
             "",
@@ -348,6 +378,7 @@
         {
           "name": "setAsciiListValue",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets an ASCII string list value to the key.",
             "",
@@ -357,16 +388,18 @@
             "com.sun.star.registry.InvalidRegistryException"
           ],
           "args": [
-            [
-              "seqValue",
-              "typing.Tuple[str, ...]",
-              "in"
-            ]
+            {
+              "name": "seqValue",
+              "type": "typing.Tuple[str, ...]",
+              "direction": "in",
+              "origin": "sequence< string >"
+            }
           ]
         },
         {
           "name": "setAsciiValue",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets an ASCII string value to the key.",
             "",
@@ -376,16 +409,18 @@
             "com.sun.star.registry.InvalidRegistryException"
           ],
           "args": [
-            [
-              "value",
-              "str",
-              "in"
-            ]
+            {
+              "name": "value",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "setBinaryValue",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets a binary value to the key.",
             "",
@@ -395,16 +430,18 @@
             "com.sun.star.registry.InvalidRegistryException"
           ],
           "args": [
-            [
-              "value",
-              "typing.Tuple[int, ...]",
-              "in"
-            ]
+            {
+              "name": "value",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "in",
+              "origin": "sequence< byte >"
+            }
           ]
         },
         {
           "name": "setLongListValue",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets a long list value to the key.",
             "",
@@ -414,16 +451,18 @@
             "com.sun.star.registry.InvalidRegistryException"
           ],
           "args": [
-            [
-              "seqValue",
-              "typing.Tuple[int, ...]",
-              "in"
-            ]
+            {
+              "name": "seqValue",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "in",
+              "origin": "sequence< long >"
+            }
           ]
         },
         {
           "name": "setLongValue",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets a long value to the key.",
             "",
@@ -433,16 +472,18 @@
             "com.sun.star.registry.InvalidRegistryException"
           ],
           "args": [
-            [
-              "value",
-              "int",
-              "in"
-            ]
+            {
+              "name": "value",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "setStringListValue",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets a unicode string value to the key.",
             "",
@@ -452,16 +493,18 @@
             "com.sun.star.registry.InvalidRegistryException"
           ],
           "args": [
-            [
-              "seqValue",
-              "typing.Tuple[str, ...]",
-              "in"
-            ]
+            {
+              "name": "seqValue",
+              "type": "typing.Tuple[str, ...]",
+              "direction": "in",
+              "origin": "sequence< string >"
+            }
           ]
         },
         {
           "name": "setStringValue",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets a unicode string value to the key.",
             "",
@@ -471,12 +514,28 @@
             "com.sun.star.registry.InvalidRegistryException"
           ],
           "args": [
-            [
-              "value",
-              "str",
-              "in"
-            ]
+            {
+              "name": "value",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
+        }
+      ],
+      "properties": [
+        {
+          "name": "KeyName",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "This is the key of the entry relative to its parent.",
+            "",
+            "The access path starts with the root \\\"/\\\" and all parent entry names are delimited with slashes \\\"/\\\" too, like in a UNIX (R) file system. Slashes which are part of single names are represented as hexadecimals preceded with a \\\"%\\\" like in URL syntax."
+          ],
+          "raises_get": "",
+          "raises_set": ""
         }
       ]
     }

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XGridControl",
   "type": "interface",
@@ -42,26 +42,30 @@
         {
           "name": "getColumnAtPoint",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "retrieves the column which a given point belongs to"
           ],
           "raises": [],
           "args": [
-            [
-              "X",
-              "int",
-              "in"
-            ],
-            [
-              "Y",
-              "int",
-              "in"
-            ]
+            {
+              "name": "X",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "Y",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getCurrentColumn",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "returns the column index of the currently active cell",
             "",
@@ -73,6 +77,7 @@
         {
           "name": "getCurrentRow",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "returns the row index of the currently active cell",
             "",
@@ -84,26 +89,30 @@
         {
           "name": "getRowAtPoint",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "retrieves the row which a given point belongs to"
           ],
           "raises": [],
           "args": [
-            [
-              "X",
-              "int",
-              "in"
-            ],
-            [
-              "Y",
-              "int",
-              "in"
-            ]
+            {
+              "name": "X",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "Y",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "goToCell",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "moves the cursor to the given cell"
           ],
@@ -112,16 +121,18 @@
             "com.sun.star.util.VetoException"
           ],
           "args": [
-            [
-              "ColumnIndex",
-              "int",
-              "in"
-            ],
-            [
-              "RowIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "ColumnIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "RowIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

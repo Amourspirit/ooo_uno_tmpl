@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XValueBinding",
   "type": "interface",
@@ -54,6 +54,7 @@
         {
           "name": "getSupportedValueTypes",
           "returns": "typing.Tuple[object, ...]",
+          "returns_origin": "sequence< type >",
           "desc": [
             "determines the types which are supported by this binding for value exchange"
           ],
@@ -63,6 +64,7 @@
         {
           "name": "getValue",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "retrieves the current value"
           ],
@@ -70,16 +72,18 @@
             "IncompatibleTypesException"
           ],
           "args": [
-            [
-              "aType",
-              "object",
-              "in"
-            ]
+            {
+              "name": "aType",
+              "type": "object",
+              "direction": "in",
+              "origin": "type"
+            }
           ]
         },
         {
           "name": "setValue",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the current value"
           ],
@@ -89,16 +93,18 @@
             "com.sun.star.lang.NoSupportException"
           ],
           "args": [
-            [
-              "aValue",
-              "object",
-              "in"
-            ]
+            {
+              "name": "aValue",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         },
         {
           "name": "supportsType",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "determines whether a given type is supported by this binding for value exchange",
             "",
@@ -106,11 +112,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aType",
-              "object",
-              "in"
-            ]
+            {
+              "name": "aType",
+              "type": "object",
+              "direction": "in",
+              "origin": "type"
+            }
           ]
         }
       ]

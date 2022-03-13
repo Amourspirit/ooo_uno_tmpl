@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XIdlClass",
   "type": "interface",
@@ -96,36 +96,41 @@
         {
           "name": "createObject",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "This method creates instances of the reflected type."
           ],
           "raises": [],
           "args": [
-            [
-              "obj",
-              "object",
-              "out"
-            ]
+            {
+              "name": "obj",
+              "type": "object",
+              "direction": "out",
+              "origin": "any"
+            }
           ]
         },
         {
           "name": "equals",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Tests whether two reflecting objects reflect the same type."
           ],
           "raises": [],
           "args": [
-            [
-              "Type",
-              "XIdlClass",
-              "in"
-            ]
+            {
+              "name": "Type",
+              "type": "XIdlClass",
+              "direction": "in",
+              "origin": "com.sun.star.reflection.XIdlClass"
+            }
           ]
         },
         {
           "name": "getArray",
           "returns": "XIdlArray_d65d0ca3",
+          "returns_origin": "com.sun.star.reflection.XIdlArray",
           "desc": [
             "If the reflected type is an array, then you get a XIdlArray interface to modify instances of the array type.",
             "",
@@ -137,6 +142,7 @@
         {
           "name": "getClass",
           "returns": "XIdlClass",
+          "returns_origin": "com.sun.star.reflection.XIdlClass",
           "desc": [
             "Deprecated.",
             "",
@@ -144,16 +150,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getClasses",
           "returns": "typing.Tuple[XIdlClass, ...]",
+          "returns_origin": "sequence< XIdlClass >",
           "desc": [
             "Deprecated.",
             "",
@@ -165,6 +173,7 @@
         {
           "name": "getComponentType",
           "returns": "XIdlClass",
+          "returns_origin": "com.sun.star.reflection.XIdlClass",
           "desc": [
             "If the reflected type is an array or sequence, then this method returns a XIdlClass interface reflecting the element."
           ],
@@ -174,6 +183,7 @@
         {
           "name": "getField",
           "returns": "XIdlField_d62c0c88",
+          "returns_origin": "com.sun.star.reflection.XIdlField",
           "desc": [
             "If the reflected type is an interface, struct or union, then you get a XIdlField interface reflecting the demanded field (/interface attribute) by name.",
             "",
@@ -181,16 +191,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getFields",
           "returns": "typing.Tuple[XIdlField_d62c0c88, ...]",
+          "returns_origin": "sequence< XIdlField >",
           "desc": [
             "If the reflected type is an interface, struct or union, then you get a sequence of XIdlField interfaces reflecting all fields (/interface attributes).",
             "",
@@ -203,6 +215,7 @@
         {
           "name": "getInterfaces",
           "returns": "typing.Tuple[XIdlClass, ...]",
+          "returns_origin": "sequence< XIdlClass >",
           "desc": [
             "Deprecated.",
             "",
@@ -214,6 +227,7 @@
         {
           "name": "getMethod",
           "returns": "XIdlMethod_e3740d05",
+          "returns_origin": "com.sun.star.reflection.XIdlMethod",
           "desc": [
             "If the reflected type is an interface, then you get a XIdlMethod interface reflecting the demanded method by name.",
             "",
@@ -221,16 +235,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getMethods",
           "returns": "typing.Tuple[XIdlMethod_e3740d05, ...]",
+          "returns_origin": "sequence< XIdlMethod >",
           "desc": [
             "If the reflected type is an interface, then you get a sequence of XIdlMethod interfaces reflecting all methods of the interface.",
             "",
@@ -243,6 +259,7 @@
         {
           "name": "getName",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Returns the fully-qualified name of the reflected type."
           ],
@@ -252,6 +269,7 @@
         {
           "name": "getSuperclasses",
           "returns": "typing.Tuple[XIdlClass, ...]",
+          "returns_origin": "sequence< XIdlClass >",
           "desc": [
             "If the reflected type is an interface, then the returned sequence of XIdlClass reflect the base interfaces.",
             "",
@@ -263,6 +281,7 @@
         {
           "name": "getTypeClass",
           "returns": "TypeClass_853109f2",
+          "returns_origin": "com.sun.star.uno.TypeClass",
           "desc": [
             "Returns the com.sun.star.uno.TypeClass of the reflected type."
           ],
@@ -272,6 +291,7 @@
         {
           "name": "getUik",
           "returns": "Uik_4fac0783",
+          "returns_origin": "com.sun.star.uno.Uik",
           "desc": [
             "Deprecated.",
             "",
@@ -283,16 +303,18 @@
         {
           "name": "isAssignableFrom",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Tests whether values of this reflected type are assignable from values of a second one (xType)."
           ],
           "raises": [],
           "args": [
-            [
-              "xType",
-              "XIdlClass",
-              "in"
-            ]
+            {
+              "name": "xType",
+              "type": "XIdlClass",
+              "direction": "in",
+              "origin": "com.sun.star.reflection.XIdlClass"
+            }
           ]
         }
       ]

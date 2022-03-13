@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XBackendEntities",
   "type": "interface",
@@ -54,6 +54,7 @@
         {
           "name": "getAdminEntity",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "provides the entity id of an entity for general administrative access.",
             "",
@@ -65,6 +66,7 @@
         {
           "name": "getOwnerEntity",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "provides the entity id of the owner entity of the backend.",
             "",
@@ -76,6 +78,7 @@
         {
           "name": "isEqualEntity",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "determines, if two given entity ids denote the same entity."
           ],
@@ -84,21 +87,24 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aEntity",
-              "str",
-              "in"
-            ],
-            [
-              "aOtherEntity",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aEntity",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aOtherEntity",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "supportsEntity",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "determines, if a given entity id exists in this backend."
           ],
@@ -106,11 +112,12 @@
             "BackendAccessException"
           ],
           "args": [
-            [
-              "aEntity",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aEntity",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

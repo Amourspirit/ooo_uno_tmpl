@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XViewPane",
   "type": "interface",
@@ -60,6 +60,7 @@
         {
           "name": "getFirstVisibleColumn",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "returns the first column that is visible in the pane."
           ],
@@ -69,6 +70,7 @@
         {
           "name": "getFirstVisibleRow",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "returns the first row that is visible in the pane."
           ],
@@ -78,6 +80,7 @@
         {
           "name": "getVisibleRange",
           "returns": "CellRangeAddress_ec450d43",
+          "returns_origin": "com.sun.star.table.CellRangeAddress",
           "desc": [
             "returns the address of the cell range that consists of the cells which are visible in the pane."
           ],
@@ -87,31 +90,35 @@
         {
           "name": "setFirstVisibleColumn",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the first column that is visible in the pane."
           ],
           "raises": [],
           "args": [
-            [
-              "nFirstVisibleColumn",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nFirstVisibleColumn",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "setFirstVisibleRow",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the first row that is visible in the pane."
           ],
           "raises": [],
           "args": [
-            [
-              "nFirstVisibleRow",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nFirstVisibleRow",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

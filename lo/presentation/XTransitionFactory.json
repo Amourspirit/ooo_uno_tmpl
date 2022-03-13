@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XTransitionFactory",
   "type": "interface",
@@ -80,61 +80,71 @@
         {
           "name": "createTransition",
           "returns": "XTransition_123a0ea7",
+          "returns_origin": "com.sun.star.presentation.XTransition",
           "desc": [
             "Actually create a transition for the given transition id."
           ],
           "raises": [],
           "args": [
-            [
-              "transitionType",
-              "int",
-              "in"
-            ],
-            [
-              "transitionSubType",
-              "int",
-              "in"
-            ],
-            [
-              "transitionFadeColor",
-              "int",
-              "in"
-            ],
-            [
-              "view",
-              "XSlideShowView_3eb40fa9",
-              "in"
-            ],
-            [
-              "leavingBitmap",
-              "XBitmap_b1b70b7b",
-              "in"
-            ],
-            [
-              "enteringBitmap",
-              "XBitmap_b1b70b7b",
-              "in"
-            ]
+            {
+              "name": "transitionType",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "transitionSubType",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "transitionFadeColor",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "view",
+              "type": "XSlideShowView_3eb40fa9",
+              "direction": "in",
+              "origin": "com.sun.star.presentation.XSlideShowView"
+            },
+            {
+              "name": "leavingBitmap",
+              "type": "XBitmap_b1b70b7b",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.XBitmap"
+            },
+            {
+              "name": "enteringBitmap",
+              "type": "XBitmap_b1b70b7b",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.XBitmap"
+            }
           ]
         },
         {
           "name": "hasTransition",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Checks whether this instance provides an implementation for given transition id."
           ],
           "raises": [],
           "args": [
-            [
-              "transitionType",
-              "int",
-              "in"
-            ],
-            [
-              "transitionSubType",
-              "int",
-              "in"
-            ]
+            {
+              "name": "transitionType",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "transitionSubType",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XStringSubstitution",
   "type": "interface",
@@ -56,6 +56,7 @@
         {
           "name": "getSubstituteVariableValue",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Returns the current value of a variable.",
             "",
@@ -65,16 +66,18 @@
             "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
-            [
-              "variable",
-              "str",
-              "in"
-            ]
+            {
+              "name": "variable",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "reSubstituteVariables",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Tries to replace parts of aText with variables that represents these sub strings.",
             "",
@@ -82,16 +85,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aText",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aText",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "substituteVariables",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Exchanges variables inside a given text with a substitution text defined for the variables.",
             "",
@@ -101,16 +106,18 @@
             "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
-            [
-              "aText",
-              "str",
-              "in"
-            ],
-            [
-              "bSubstRequired",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "aText",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "bSubstRequired",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         }
       ]

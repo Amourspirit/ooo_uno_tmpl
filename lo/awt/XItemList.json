@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XItemList",
   "type": "interface",
@@ -53,21 +53,24 @@
         {
           "name": "addItemListListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "registers a listener which is notified about changes in the item list."
           ],
           "raises": [],
           "args": [
-            [
-              "Listener",
-              "XItemListListener_e1020d1d",
-              "in"
-            ]
+            {
+              "name": "Listener",
+              "type": "XItemListListener_e1020d1d",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XItemListListener"
+            }
           ]
         },
         {
           "name": "getAllItems",
           "returns": "typing.Tuple[typing.Tuple[str, str], ...]",
+          "returns_origin": "sequence< .com.sun.star.beans.Pair< string, string > >",
           "desc": [
             "retrieves the texts and images of all items in the list"
           ],
@@ -77,6 +80,7 @@
         {
           "name": "getItemData",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "retrieves the implementation dependent value associated with the given list item."
           ],
@@ -84,16 +88,18 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "Position",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Position",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getItemImage",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "retrieves the URL of the image of an existing item"
           ],
@@ -101,16 +107,18 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "Position",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Position",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getItemText",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "retrieves the text of an existing item"
           ],
@@ -118,16 +126,18 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "Position",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Position",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getItemTextAndImage",
           "returns": "typing.Tuple[str, str]",
+          "returns_origin": "com.sun.star.beans.Pair< string, string >",
           "desc": [
             "retrieves both the text and the image URL of an existing item"
           ],
@@ -135,16 +145,18 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "Position",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Position",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "insertItem",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "inserts a new item into the list"
           ],
@@ -152,26 +164,30 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "Position",
-              "int",
-              "in"
-            ],
-            [
-              "ItemText",
-              "str",
-              "in"
-            ],
-            [
-              "ItemImageURL",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Position",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "ItemText",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "ItemImageURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "insertItemImage",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "inserts an item which has only an image, but no text"
           ],
@@ -179,21 +195,24 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "Position",
-              "int",
-              "in"
-            ],
-            [
-              "ItemImageURL",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Position",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "ItemImageURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "insertItemText",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "inserts an item which has only a text, but no image"
           ],
@@ -201,21 +220,24 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "Position",
-              "int",
-              "in"
-            ],
-            [
-              "ItemText",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Position",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "ItemText",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "removeAllItems",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes all items from the list"
           ],
@@ -225,6 +247,7 @@
         {
           "name": "removeItem",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes an item from the list"
           ],
@@ -232,31 +255,35 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "Position",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Position",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "removeItemListListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "revokes a listener which is notified about changes in the item list."
           ],
           "raises": [],
           "args": [
-            [
-              "Listener",
-              "XItemListListener_e1020d1d",
-              "in"
-            ]
+            {
+              "name": "Listener",
+              "type": "XItemListListener_e1020d1d",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XItemListListener"
+            }
           ]
         },
         {
           "name": "setItemData",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "associates an implementation dependent value with the given list item.",
             "",
@@ -266,21 +293,24 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "Position",
-              "int",
-              "in"
-            ],
-            [
-              "ItemData",
-              "object",
-              "in"
-            ]
+            {
+              "name": "Position",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "ItemData",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         },
         {
           "name": "setItemImage",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets a new image for an existing item"
           ],
@@ -288,21 +318,24 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "Position",
-              "int",
-              "in"
-            ],
-            [
-              "ItemImageURL",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Position",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "ItemImageURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "setItemText",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets a new text for an existing item"
           ],
@@ -310,21 +343,24 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "Position",
-              "int",
-              "in"
-            ],
-            [
-              "ItemText",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Position",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "ItemText",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "setItemTextAndImage",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets both a new position and text for an existing item"
           ],
@@ -332,22 +368,38 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "Position",
-              "int",
-              "in"
-            ],
-            [
-              "ItemText",
-              "str",
-              "in"
-            ],
-            [
-              "ItemImageURL",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Position",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "ItemText",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "ItemImageURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
+        }
+      ],
+      "properties": [
+        {
+          "name": "ItemCount",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "is the number of items in the list"
+          ],
+          "raises_get": "",
+          "raises_set": ""
         }
       ]
     }

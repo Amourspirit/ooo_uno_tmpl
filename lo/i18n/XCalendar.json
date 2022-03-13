@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XCalendar",
   "type": "interface",
@@ -82,41 +82,47 @@
         {
           "name": "addValue",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Add an amount to a field."
           ],
           "raises": [],
           "args": [
-            [
-              "nCalendarFieldIndex",
-              "int",
-              "in"
-            ],
-            [
-              "nAmount",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nCalendarFieldIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "nAmount",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getAllCalendars",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [
             "Returns all available calendars for the given locale."
           ],
           "raises": [],
           "args": [
-            [
-              "rLocale",
-              "Locale_70d308fa",
-              "in"
-            ]
+            {
+              "name": "rLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
           ]
         },
         {
           "name": "getDateTime",
           "returns": "float",
+          "returns_origin": "double",
           "desc": [
             "Get the UTC date/time as an offset to the start of the calendar at 1-Jan-1970 00:00.",
             "",
@@ -128,6 +134,7 @@
         {
           "name": "getDays",
           "returns": "typing.Tuple[CalendarItem_a86c0af1, ...]",
+          "returns_origin": "sequence< CalendarItem >",
           "desc": [
             "returns a sequence of CalendarItem describing the day names."
           ],
@@ -137,6 +144,7 @@
         {
           "name": "getDisplayName",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Returns a string (name to display) matching the given parameters.",
             "",
@@ -150,26 +158,30 @@
           ],
           "raises": [],
           "args": [
-            [
-              "nCalendarDisplayIndex",
-              "int",
-              "in"
-            ],
-            [
-              "nIdx",
-              "int",
-              "in"
-            ],
-            [
-              "nNameType",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nCalendarDisplayIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "nIdx",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "nNameType",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "getFirstDayOfWeek",
           "returns": "int",
+          "returns_origin": "short",
           "desc": [
             "returns the first day of a week, one of Weekdays values."
           ],
@@ -179,6 +191,7 @@
         {
           "name": "getLoadedCalendar",
           "returns": "Calendar_7f2d0962",
+          "returns_origin": "com.sun.star.i18n.Calendar",
           "desc": [
             "Get the currently loaded Calendar."
           ],
@@ -188,6 +201,7 @@
         {
           "name": "getMinimumNumberOfDaysForFirstWeek",
           "returns": "int",
+          "returns_origin": "short",
           "desc": [
             "returns how many days of a week must reside in the first week of a year."
           ],
@@ -197,6 +211,7 @@
         {
           "name": "getMonths",
           "returns": "typing.Tuple[CalendarItem_a86c0af1, ...]",
+          "returns_origin": "sequence< CalendarItem >",
           "desc": [
             "returns a sequence of CalendarItem describing the month names."
           ],
@@ -206,6 +221,7 @@
         {
           "name": "getNumberOfDaysInWeek",
           "returns": "int",
+          "returns_origin": "short",
           "desc": [
             "returns the number of days in a week, e.g. 7"
           ],
@@ -215,6 +231,7 @@
         {
           "name": "getNumberOfMonthsInYear",
           "returns": "int",
+          "returns_origin": "short",
           "desc": [
             "returns the number of months in a year, e.g. 12"
           ],
@@ -224,6 +241,7 @@
         {
           "name": "getUniqueID",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Returns the ID string of the loaded calendar, for example, \\\"Gregorian\\\""
           ],
@@ -233,21 +251,24 @@
         {
           "name": "getValue",
           "returns": "int",
+          "returns_origin": "short",
           "desc": [
             "Get the value of a field."
           ],
           "raises": [],
           "args": [
-            [
-              "nCalendarFieldIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nCalendarFieldIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "isValid",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Verify if the date fields set by a combination of XCalendar.setValue() calls is valid.",
             "",
@@ -259,41 +280,47 @@
         {
           "name": "loadCalendar",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Load a specific calendar for the given locale."
           ],
           "raises": [],
           "args": [
-            [
-              "uniqueID",
-              "str",
-              "in"
-            ],
-            [
-              "rLocale",
-              "Locale_70d308fa",
-              "in"
-            ]
+            {
+              "name": "uniqueID",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "rLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
           ]
         },
         {
           "name": "loadDefaultCalendar",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Load the default calendar for the given locale."
           ],
           "raises": [],
           "args": [
-            [
-              "rLocale",
-              "Locale_70d308fa",
-              "in"
-            ]
+            {
+              "name": "rLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
           ]
         },
         {
           "name": "setDateTime",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Set the UTC date/time as an offset to the start of the calendar at 1-Jan-1970 00:00.",
             "",
@@ -301,61 +328,69 @@
           ],
           "raises": [],
           "args": [
-            [
-              "nTimeInDays",
-              "float",
-              "in"
-            ]
+            {
+              "name": "nTimeInDays",
+              "type": "float",
+              "direction": "in",
+              "origin": "double"
+            }
           ]
         },
         {
           "name": "setFirstDayOfWeek",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Set the first day of a week, one of Weekdays values."
           ],
           "raises": [],
           "args": [
-            [
-              "nDay",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nDay",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "setMinimumNumberOfDaysForFirstWeek",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Set how many days of a week must reside in the first week of a year."
           ],
           "raises": [],
           "args": [
-            [
-              "nDays",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nDays",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "setValue",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Set the value of a field."
           ],
           "raises": [],
           "args": [
-            [
-              "nCalendarFieldIndex",
-              "int",
-              "in"
-            ],
-            [
-              "nValue",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nCalendarFieldIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "nValue",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         }
       ]

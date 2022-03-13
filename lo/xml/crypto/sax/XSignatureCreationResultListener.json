@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSignatureCreationResultListener",
   "type": "interface",
@@ -62,21 +62,24 @@
         {
           "name": "signatureCreated",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Notifies the signature creation result."
           ],
           "raises": [],
           "args": [
-            [
-              "securityId",
-              "int",
-              "in"
-            ],
-            [
-              "creationResult",
-              "SecurityOperationStatus_b66e12b5",
-              "in"
-            ]
+            {
+              "name": "securityId",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "creationResult",
+              "type": "SecurityOperationStatus_b66e12b5",
+              "direction": "in",
+              "origin": "com.sun.star.xml.crypto.SecurityOperationStatus"
+            }
           ]
         }
       ]

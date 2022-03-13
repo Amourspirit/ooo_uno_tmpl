@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XEncryptionProtectedSource2",
   "type": "interface",
@@ -66,6 +66,7 @@
         {
           "name": "hasEncryptionData",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "determine if an encryption data is set for this object."
           ],
@@ -75,6 +76,7 @@
         {
           "name": "setEncryptionData",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets an encryption data for the object."
           ],
@@ -82,11 +84,12 @@
             "com.sun.star.io.IOException"
           ],
           "args": [
-            [
-              "aEncryptionData",
-              "typing.Tuple[NamedValue_a37a0af3, ...]",
-              "in"
-            ]
+            {
+              "name": "aEncryptionData",
+              "type": "typing.Tuple[NamedValue_a37a0af3, ...]",
+              "direction": "in",
+              "origin": "sequence< .com.sun.star.beans.NamedValue >"
+            }
           ]
         }
       ]

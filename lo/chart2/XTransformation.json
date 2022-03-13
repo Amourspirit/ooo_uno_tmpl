@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XTransformation",
   "type": "interface",
@@ -56,6 +56,7 @@
         {
           "name": "getSourceDimension",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "the dimension of the input coordinate sequence that is to be transformed by the transform() method."
           ],
@@ -65,6 +66,7 @@
         {
           "name": "getTargetDimension",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "the dimension of the output coordinate sequence that is the result of the transform() method."
           ],
@@ -74,6 +76,7 @@
         {
           "name": "transform",
           "returns": "typing.Tuple[float, ...]",
+          "returns_origin": "sequence< double >",
           "desc": [
             "transforms the given input data tuple, given in the source coordinate system, according to the internal transformation rules, into a tuple of transformed coordinates in the destination coordinate system.",
             "",
@@ -83,11 +86,12 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aValues",
-              "typing.Tuple[float, ...]",
-              "in"
-            ]
+            {
+              "name": "aValues",
+              "type": "typing.Tuple[float, ...]",
+              "direction": "in",
+              "origin": "sequence< double >"
+            }
           ]
         }
       ]

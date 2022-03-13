@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XChartDocument",
   "type": "interface",
@@ -81,6 +81,7 @@
         {
           "name": "attachData",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "attaches data to the chart.",
             "",
@@ -94,16 +95,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xData",
-              "XChartData_a3580ade",
-              "in"
-            ]
+            {
+              "name": "xData",
+              "type": "XChartData_a3580ade",
+              "direction": "in",
+              "origin": "com.sun.star.chart.XChartData"
+            }
           ]
         },
         {
           "name": "getArea",
           "returns": "XPropertySet_bc180bfa",
+          "returns_origin": "com.sun.star.beans.XPropertySet",
           "desc": [
             "The area's extent is equal to the document size. If you want to access properties of the background area of the diagram, in which the actual data is represented, you have to change the chart wall which you get from the X3DDisplay."
           ],
@@ -113,6 +116,7 @@
         {
           "name": "getData",
           "returns": "XChartData_a3580ade",
+          "returns_origin": "com.sun.star.chart.XChartData",
           "desc": [
             "The returned object supports interface XChartDataArray which can be used to access the concrete data.",
             "",
@@ -126,6 +130,7 @@
         {
           "name": "getDiagram",
           "returns": "XDiagram_8e1e0a27",
+          "returns_origin": "com.sun.star.chart.XDiagram",
           "desc": [],
           "raises": [],
           "args": []
@@ -133,6 +138,7 @@
         {
           "name": "getLegend",
           "returns": "XShape_8fd00a3d",
+          "returns_origin": "com.sun.star.drawing.XShape",
           "desc": [],
           "raises": [],
           "args": []
@@ -140,6 +146,7 @@
         {
           "name": "getSubTitle",
           "returns": "XShape_8fd00a3d",
+          "returns_origin": "com.sun.star.drawing.XShape",
           "desc": [
             "Usually the subtitle is smaller than the main title by default. And it is most commonly placed below the main title by default."
           ],
@@ -149,6 +156,7 @@
         {
           "name": "getTitle",
           "returns": "XShape_8fd00a3d",
+          "returns_origin": "com.sun.star.drawing.XShape",
           "desc": [],
           "raises": [],
           "args": []
@@ -156,6 +164,7 @@
         {
           "name": "setDiagram",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the diagram for the chart document.",
             "",
@@ -163,11 +172,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xDiagram",
-              "XDiagram_8e1e0a27",
-              "in"
-            ]
+            {
+              "name": "xDiagram",
+              "type": "XDiagram_8e1e0a27",
+              "direction": "in",
+              "origin": "com.sun.star.chart.XDiagram"
+            }
           ]
         }
       ]

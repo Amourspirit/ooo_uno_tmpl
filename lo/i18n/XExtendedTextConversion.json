@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XExtendedTextConversion",
   "type": "interface",
@@ -69,6 +69,7 @@
         {
           "name": "getConversionWithOffset",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "The functionality of this method is same as com.sun.star.i18n.XTextConversion.getConversion(), except an additional output parameter rOffset."
           ],
@@ -77,41 +78,48 @@
             "com.sun.star.lang.NoSupportException"
           ],
           "args": [
-            [
-              "aText",
-              "str",
-              "in"
-            ],
-            [
-              "nStartPos",
-              "int",
-              "in"
-            ],
-            [
-              "nLength",
-              "int",
-              "in"
-            ],
-            [
-              "aLocale",
-              "Locale_70d308fa",
-              "in"
-            ],
-            [
-              "nTextConversionType",
-              "int",
-              "in"
-            ],
-            [
-              "nTextConversionOptions",
-              "int",
-              "in"
-            ],
-            [
-              "rOffset",
-              "typing.Tuple[int, ...]",
-              "out"
-            ]
+            {
+              "name": "aText",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nStartPos",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nLength",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "nTextConversionType",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "nTextConversionOptions",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "rOffset",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "out",
+              "origin": "sequence< long >"
+            }
           ]
         }
       ]

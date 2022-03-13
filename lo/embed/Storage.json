@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "Storage",
   "type": "service",
@@ -71,6 +71,94 @@
       "A root storage should be retrieved by using StorageFactory service. Substorages are created through XStorage interface of a parent storage."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1embed_1_1Storage.html",
-    "items": {}
+    "items": {
+      "properties": [
+        {
+          "name": "HasEncryptedEntries",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "allows to detect if the storage contains encrypted entries.",
+            "",
+            "In case it is set to TRUE the storage itself and/or a tree of substorages contain encrypted streams. Usually in case this property is supported the implementation supports XEncryptionProtectedSource interface."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "HasNonEncryptedEntries",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "allows to detect if the storage contains non-encrypted entries.",
+            "",
+            "In case it is set to TRUE the storage itself and/or a tree of substorages contains non-encrypted streams. Usually in case this property is supported the implementation supports XEncryptionProtectedSource interface."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsRoot",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "allows to detect whether the storage is a root one."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "MediaType",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "allows to get and set the media type of the storage."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "MediaTypeFallbackIsUsed",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "allows to detect whether mediatype is detected by using fallback approach.",
+            "",
+            "Can be set to true if the mediatype can not be detected in standard way, but there is a fallback solution allows to do it.",
+            "",
+            "Usually means that the document validity is questionable, although the package itself is not corrupted. The decision about document validity in this case is in application hands. It is up to user of the storage to decide whether he accepts the fallback approach for an implementation of this service, outputs a warning or an error."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RepairPackage",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "allows to detect whether storage is open in \\\"repair package\\\" mode or not."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Version",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "allows to get and set the version of the format related to the MediaType."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
   }
 }

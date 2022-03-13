@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "DocumentEvent",
@@ -41,6 +41,14 @@
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.lang.EventObject"
+      ],
+      "typing": [
+        "com.sun.star.frame.XController2"
+      ]
+    },
     "fullname": "com.sun.star.document.DocumentEvent",
     "desc": [
       "describes an event happening in an OfficeDocument",
@@ -61,7 +69,9 @@
       {
         "name": "EventName",
         "type": "str",
-        "lines": [
+        "origtype": null,
+        "origin": "string",
+        "desc": [
           "specifies the name of the event.",
           "",
           "It's the responsibility of the component supporting the XDocumentEventBroadcaster interface to specify which events it supports."
@@ -70,7 +80,9 @@
       {
         "name": "ViewController",
         "type": "XController2_bbcf0bc1",
-        "lines": [
+        "origtype": "com.sun.star.frame.XController2",
+        "origin": "com.sun.star.frame.XController2",
+        "desc": [
           "denotes the view respectively controller which the event applies to.",
           "",
           "Might be NULL if the event is not related to a concrete view of the document."
@@ -79,7 +91,9 @@
       {
         "name": "Supplement",
         "type": "object",
-        "lines": [
+        "origtype": null,
+        "origin": "any",
+        "desc": [
           "contains supplemental information about the event which is being notified",
           "",
           "The semantics of this additional information needs to be specified by the broadcaster of the event."

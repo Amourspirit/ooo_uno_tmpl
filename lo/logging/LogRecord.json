@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "LogRecord",
@@ -33,6 +33,12 @@
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.util.DateTime"
+      ]
+    },
     "fullname": "com.sun.star.logging.LogRecord",
     "desc": [
       "assembles the complete information about a to-be-logged event",
@@ -47,14 +53,18 @@
       {
         "name": "LoggerName",
         "type": "str",
-        "lines": [
+        "origtype": null,
+        "origin": "string",
+        "desc": [
           "specifies the name of the logger at which the record is logged"
         ]
       },
       {
         "name": "SourceClassName",
         "type": "str",
-        "lines": [
+        "origtype": null,
+        "origin": "string",
+        "desc": [
           "specifies the name of the class, in which the record was logged.",
           "",
           "This name might be empty, in case the caller to one of the various log methods of XLogger did not specify it."
@@ -63,7 +73,9 @@
       {
         "name": "SourceMethodName",
         "type": "str",
-        "lines": [
+        "origtype": null,
+        "origin": "string",
+        "desc": [
           "specifies the name of the method, in which the record was logged.",
           "",
           "This name might be empty, in case the caller to one of the various log methods of XLogger did not specify it."
@@ -72,21 +84,27 @@
       {
         "name": "Message",
         "type": "str",
-        "lines": [
+        "origtype": null,
+        "origin": "string",
+        "desc": [
           "specifies the to-be-logged message"
         ]
       },
       {
         "name": "LogTime",
         "type": "DateTime_84de09d3",
-        "lines": [
+        "origtype": "com.sun.star.util.DateTime",
+        "origin": "com.sun.star.util.DateTime",
+        "desc": [
           "specifies the time at which the event was logged"
         ]
       },
       {
         "name": "SequenceNumber",
         "type": "int",
-        "lines": [
+        "origtype": null,
+        "origin": "hyper",
+        "desc": [
           "specifies the number of the log event.",
           "",
           "Subsequent events get assigned increasing sequence numbers by the XLogger at which they're logged."
@@ -95,14 +113,18 @@
       {
         "name": "ThreadID",
         "type": "str",
-        "lines": [
+        "origtype": null,
+        "origin": "string",
+        "desc": [
           "specifies the ID of the thread in which the event was logged"
         ]
       },
       {
         "name": "Level",
         "type": "int",
-        "lines": [
+        "origtype": null,
+        "origin": "long",
+        "desc": [
           "specifies the level of the log event"
         ]
       }

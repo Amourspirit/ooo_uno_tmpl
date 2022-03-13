@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XPresentation2",
   "type": "interface",
@@ -81,6 +81,7 @@
         {
           "name": "getController",
           "returns": "XSlideShowController_a55c1232",
+          "returns_origin": "com.sun.star.presentation.XSlideShowController",
           "desc": [
             "if the slide show is running, this returns a controller object to control the running slide show."
           ],
@@ -90,6 +91,7 @@
         {
           "name": "isRunning",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "returns true if the slide show is currently running"
           ],
@@ -99,6 +101,7 @@
         {
           "name": "startWithArguments",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "start the slide show with the given arguments.",
             "",
@@ -106,11 +109,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Arguments",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ]
+            {
+              "name": "Arguments",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< .com.sun.star.beans.PropertyValue >"
+            }
           ]
         }
       ]

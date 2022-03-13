@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XChartShapeContainer",
   "type": "interface",
@@ -58,21 +58,24 @@
         {
           "name": "addShape",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "a renderer creates ChartShapes and adds it to this container"
           ],
           "raises": [],
           "args": [
-            [
-              "xShape",
-              "XShape_8fd00a3d",
-              "in"
-            ]
+            {
+              "name": "xShape",
+              "type": "XShape_8fd00a3d",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.XShape"
+            }
           ]
         },
         {
           "name": "getShape",
           "returns": "XShape_8fd00a3d",
+          "returns_origin": "com.sun.star.drawing.XShape",
           "desc": [],
           "raises": [],
           "args": []
@@ -80,6 +83,7 @@
         {
           "name": "removeShape",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "a renderer can remove ChartShapes from this container (e.g.",
             "",
@@ -87,11 +91,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xShape",
-              "XShape_8fd00a3d",
-              "in"
-            ]
+            {
+              "name": "xShape",
+              "type": "XShape_8fd00a3d",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.XShape"
+            }
           ]
         }
       ]

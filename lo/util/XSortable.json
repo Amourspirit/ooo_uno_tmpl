@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSortable",
   "type": "interface",
@@ -70,6 +70,7 @@
         {
           "name": "createSortDescriptor",
           "returns": "typing.Tuple[PropertyValue_c9610c73, ...]",
+          "returns_origin": "sequence< com.sun.star.beans.PropertyValue >",
           "desc": [
             "The set of properties is specific to the type of object that implements this interface. Therefore they can usually be used only for objects of that same type."
           ],
@@ -79,6 +80,7 @@
         {
           "name": "sort",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sorts the contents of the object according to the specified properties.",
             "",
@@ -86,11 +88,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xDescriptor",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ]
+            {
+              "name": "xDescriptor",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            }
           ]
         }
       ]

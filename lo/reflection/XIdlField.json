@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XIdlField",
   "type": "interface",
@@ -73,21 +73,24 @@
         {
           "name": "get",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [],
           "raises": [
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "obj",
-              "object",
-              "in"
-            ]
+            {
+              "name": "obj",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         },
         {
           "name": "getAccessMode",
           "returns": "FieldAccessMode_2a300eee",
+          "returns_origin": "com.sun.star.reflection.FieldAccessMode",
           "desc": [],
           "raises": [],
           "args": []
@@ -95,6 +98,7 @@
         {
           "name": "getType",
           "returns": "XIdlClass_d63a0c9a",
+          "returns_origin": "com.sun.star.reflection.XIdlClass",
           "desc": [],
           "raises": [],
           "args": []
@@ -102,22 +106,25 @@
         {
           "name": "set",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [],
           "raises": [
             "com.sun.star.lang.IllegalArgumentException",
             "com.sun.star.lang.IllegalAccessException"
           ],
           "args": [
-            [
-              "obj",
-              "object",
-              "in"
-            ],
-            [
-              "value",
-              "object",
-              "in"
-            ]
+            {
+              "name": "obj",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            },
+            {
+              "name": "value",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         }
       ]

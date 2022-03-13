@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XBitmapCanvas",
   "type": "interface",
@@ -81,6 +81,7 @@
         {
           "name": "copyRect",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "This method copies a rectangular area from a place of one canvas to a place on another.",
             "",
@@ -91,41 +92,48 @@
             "VolatileContentDestroyedException"
           ],
           "args": [
-            [
-              "sourceCanvas",
-              "XBitmapCanvas",
-              "in"
-            ],
-            [
-              "sourceRect",
-              "RealRectangle2D_d9b0e03",
-              "in"
-            ],
-            [
-              "sourceViewState",
-              "ViewState_cab30c62",
-              "in"
-            ],
-            [
-              "sourceRenderState",
-              "RenderState_e4490d27",
-              "in"
-            ],
-            [
-              "destRect",
-              "RealRectangle2D_d9b0e03",
-              "in"
-            ],
-            [
-              "destViewState",
-              "ViewState_cab30c62",
-              "in"
-            ],
-            [
-              "destRenderState",
-              "RenderState_e4490d27",
-              "in"
-            ]
+            {
+              "name": "sourceCanvas",
+              "type": "XBitmapCanvas",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.XBitmapCanvas"
+            },
+            {
+              "name": "sourceRect",
+              "type": "RealRectangle2D_d9b0e03",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.RealRectangle2D"
+            },
+            {
+              "name": "sourceViewState",
+              "type": "ViewState_cab30c62",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.ViewState"
+            },
+            {
+              "name": "sourceRenderState",
+              "type": "RenderState_e4490d27",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.RenderState"
+            },
+            {
+              "name": "destRect",
+              "type": "RealRectangle2D_d9b0e03",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.RealRectangle2D"
+            },
+            {
+              "name": "destViewState",
+              "type": "ViewState_cab30c62",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.ViewState"
+            },
+            {
+              "name": "destRenderState",
+              "type": "RenderState_e4490d27",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.RenderState"
+            }
           ]
         }
       ]

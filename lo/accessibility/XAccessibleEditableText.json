@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XAccessibleEditableText",
   "type": "interface",
@@ -68,6 +68,7 @@
         {
           "name": "cutText",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Copies the text range into the clipboard.",
             "",
@@ -79,21 +80,24 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nStartIndex",
-              "int",
-              "in"
-            ],
-            [
-              "nEndIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nStartIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nEndIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "deleteText",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Deletes a range of text.",
             "",
@@ -105,21 +109,24 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nStartIndex",
-              "int",
-              "in"
-            ],
-            [
-              "nEndIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nStartIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nEndIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "insertText",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Inserts text at the specified position.",
             "",
@@ -129,21 +136,24 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "sText",
-              "str",
-              "in"
-            ],
-            [
-              "nIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "sText",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "pasteText",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Pastes text from the clipboard.",
             "",
@@ -153,16 +163,18 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "replaceText",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Replaces text.",
             "",
@@ -174,26 +186,30 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nStartIndex",
-              "int",
-              "in"
-            ],
-            [
-              "nEndIndex",
-              "int",
-              "in"
-            ],
-            [
-              "sReplacement",
-              "str",
-              "in"
-            ]
+            {
+              "name": "nStartIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nEndIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "sReplacement",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "setAttributes",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Replaces the attributes of a text range by the given set of attributes.",
             "",
@@ -205,26 +221,30 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nStartIndex",
-              "int",
-              "in"
-            ],
-            [
-              "nEndIndex",
-              "int",
-              "in"
-            ],
-            [
-              "aAttributeSet",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ]
+            {
+              "name": "nStartIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nEndIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aAttributeSet",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence<.com.sun.star.beans.PropertyValue >"
+            }
           ]
         },
         {
           "name": "setText",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Replaces the whole text with the given text.",
             "",
@@ -232,11 +252,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "sText",
-              "str",
-              "in"
-            ]
+            {
+              "name": "sText",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

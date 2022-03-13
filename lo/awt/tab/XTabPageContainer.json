@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XTabPageContainer",
   "type": "interface",
@@ -59,51 +59,58 @@
         {
           "name": "addTabPageContainerListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Adds a listener for the TabPageActivedEvent posted after the tab page was activated."
           ],
           "raises": [],
           "args": [
-            [
-              "listener",
-              "XTabPageContainerListener_940d118e",
-              "in"
-            ]
+            {
+              "name": "listener",
+              "type": "XTabPageContainerListener_940d118e",
+              "direction": "in",
+              "origin": "com.sun.star.awt.tab.XTabPageContainerListener"
+            }
           ]
         },
         {
           "name": "getTabPage",
           "returns": "XTabPage_a2060aa5",
+          "returns_origin": "com.sun.star.awt.tab.XTabPage",
           "desc": [
             "Returns tab page for the given index."
           ],
           "raises": [],
           "args": [
-            [
-              "tabPageIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "tabPageIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "getTabPageByID",
           "returns": "XTabPage_a2060aa5",
+          "returns_origin": "com.sun.star.awt.tab.XTabPage",
           "desc": [
             "Returns tab page for the given ID."
           ],
           "raises": [],
           "args": [
-            [
-              "tabPageID",
-              "int",
-              "in"
-            ]
+            {
+              "name": "tabPageID",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "getTabPageCount",
           "returns": "int",
+          "returns_origin": "short",
           "desc": [
             "Returns the number of tab pages."
           ],
@@ -113,32 +120,49 @@
         {
           "name": "isTabPageActive",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Checks whether a tab page is activated."
           ],
           "raises": [],
           "args": [
-            [
-              "tabPageIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "tabPageIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "removeTabPageContainerListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Removes a listener previously added with addTabPageListener()."
           ],
           "raises": [],
           "args": [
-            [
-              "listener",
-              "XTabPageContainerListener_940d118e",
-              "in"
-            ]
+            {
+              "name": "listener",
+              "type": "XTabPageContainerListener_940d118e",
+              "direction": "in",
+              "origin": "com.sun.star.awt.tab.XTabPageContainerListener"
+            }
           ]
+        }
+      ],
+      "properties": [
+        {
+          "name": "ActiveTabPageID",
+          "returns": "int",
+          "origtype": null,
+          "origin": "short",
+          "desc": [
+            "Specifies the ID of the current active tab page."
+          ],
+          "raises_get": "",
+          "raises_set": ""
         }
       ]
     }

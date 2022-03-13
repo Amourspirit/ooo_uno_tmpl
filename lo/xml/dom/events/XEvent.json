@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XEvent",
   "type": "interface",
@@ -72,6 +72,7 @@
         {
           "name": "getBubbles",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [],
           "raises": [],
           "args": []
@@ -79,6 +80,7 @@
         {
           "name": "getCancelable",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [],
           "raises": [],
           "args": []
@@ -86,6 +88,7 @@
         {
           "name": "getCurrentTarget",
           "returns": "XEventTarget_36420f4b",
+          "returns_origin": "com.sun.star.xml.dom.events.XEventTarget",
           "desc": [],
           "raises": [],
           "args": []
@@ -93,6 +96,7 @@
         {
           "name": "getEventPhase",
           "returns": "PhaseType_a120e1d",
+          "returns_origin": "com.sun.star.xml.dom.events.PhaseType",
           "desc": [],
           "raises": [],
           "args": []
@@ -100,6 +104,7 @@
         {
           "name": "getTarget",
           "returns": "XEventTarget_36420f4b",
+          "returns_origin": "com.sun.star.xml.dom.events.XEventTarget",
           "desc": [],
           "raises": [],
           "args": []
@@ -107,6 +112,7 @@
         {
           "name": "getTimeStamp",
           "returns": "Time_604e0855",
+          "returns_origin": "com.sun.star.util.Time",
           "desc": [],
           "raises": [],
           "args": []
@@ -114,6 +120,7 @@
         {
           "name": "getType",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [],
           "raises": [],
           "args": []
@@ -121,29 +128,34 @@
         {
           "name": "initEvent",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "eventTypeArg",
-              "str",
-              "in"
-            ],
-            [
-              "canBubbleArg",
-              "bool",
-              "in"
-            ],
-            [
-              "cancelableArg",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "eventTypeArg",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "canBubbleArg",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            },
+            {
+              "name": "cancelableArg",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "preventDefault",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [],
           "raises": [],
           "args": []
@@ -151,6 +163,7 @@
         {
           "name": "stopPropagation",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [],
           "raises": [],
           "args": []

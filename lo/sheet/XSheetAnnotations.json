@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSheetAnnotations",
   "type": "interface",
@@ -60,6 +60,7 @@
         {
           "name": "insertNew",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "creates a new annotation.",
             "",
@@ -67,21 +68,24 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aPosition",
-              "CellAddress_ae5f0b56",
-              "in"
-            ],
-            [
-              "aText",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aPosition",
+              "type": "CellAddress_ae5f0b56",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellAddress"
+            },
+            {
+              "name": "aText",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "removeByIndex",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes a cell annotation from the collection.",
             "",
@@ -89,11 +93,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "nIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

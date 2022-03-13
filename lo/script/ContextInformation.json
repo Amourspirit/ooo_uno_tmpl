@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "ContextInformation",
@@ -29,6 +29,10 @@
       "typing.Tuple[str, ...]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": []
+    },
     "fullname": "com.sun.star.script.ContextInformation",
     "desc": [
       "provides information about a certain stack frame.",
@@ -43,14 +47,18 @@
       {
         "name": "LocalVariableNames",
         "type": "typing.Tuple[str, ...]",
-        "lines": [
+        "origtype": null,
+        "origin": "sequence< string >",
+        "desc": [
           "Get all names of the local variable in this context."
         ]
       },
       {
         "name": "Name",
         "type": "str",
-        "lines": [
+        "origtype": null,
+        "origin": "string",
+        "desc": [
           "Full qualified name to address the module or function associated with the context.",
           "",
           "If the module or function can't be addressed by name, e.g., in case that a runtime generated eval-module is executed, this string is empty"
@@ -59,7 +67,9 @@
       {
         "name": "SourceCode",
         "type": "str",
-        "lines": [
+        "origtype": null,
+        "origin": "string",
+        "desc": [
           "Source code of the Module, that is associated with the context.",
           "",
           "If the source can be accessed using the ModuleName or if the source is unknown (executing compiled code) this string can be empty."
@@ -68,7 +78,9 @@
       {
         "name": "StartLine",
         "type": "int",
-        "lines": [
+        "origtype": null,
+        "origin": "long",
+        "desc": [
           "contains the first line in the module's source code associated with the context.",
           "",
           "If \\\"name\\\" addresses a function, all line and column values are nevertheless given relative to the module's source. If source code is not available, this value addresses a binary position in the compiled code."
@@ -77,21 +89,27 @@
       {
         "name": "StartColumn",
         "type": "int",
-        "lines": [
+        "origtype": null,
+        "origin": "long",
+        "desc": [
           "contains the first column in the StartLine associated with the context."
         ]
       },
       {
         "name": "EndLine",
         "type": "int",
-        "lines": [
+        "origtype": null,
+        "origin": "long",
+        "desc": [
           "contains the last line in the module's source code associated with the context."
         ]
       },
       {
         "name": "EndColumn",
         "type": "int",
-        "lines": [
+        "origtype": null,
+        "origin": "long",
+        "desc": [
           "contains the first column in the EndLine that is NOT associated with the context."
         ]
       }

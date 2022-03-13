@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XVetoableChangeListener",
   "type": "interface",
@@ -62,6 +62,7 @@
         {
           "name": "vetoableChange",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "gets called when a constrained property is changed."
           ],
@@ -69,11 +70,12 @@
             "com.sun.star.beans.PropertyVetoException"
           ],
           "args": [
-            [
-              "aEvent",
-              "PropertyChangeEvent_1b180ebe",
-              "in"
-            ]
+            {
+              "name": "aEvent",
+              "type": "PropertyChangeEvent_1b180ebe",
+              "direction": "in",
+              "origin": "com.sun.star.beans.PropertyChangeEvent"
+            }
           ]
         }
       ]

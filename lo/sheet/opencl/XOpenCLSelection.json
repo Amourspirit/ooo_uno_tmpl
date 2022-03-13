@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XOpenCLSelection",
   "type": "interface",
@@ -60,6 +60,7 @@
         {
           "name": "disableAutomaticDeviceSelection",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Disables automatic OpenCL Device Selection."
           ],
@@ -69,6 +70,7 @@
         {
           "name": "disableOpcodeSubsetTest",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [],
           "raises": [],
           "args": []
@@ -76,21 +78,24 @@
         {
           "name": "enableAutomaticDeviceSelection",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Enables automatic OpenCL Device Selection."
           ],
           "raises": [],
           "args": [
-            [
-              "force",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "force",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "enableOpcodeSubsetTest",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [],
           "raises": [],
           "args": []
@@ -98,6 +103,7 @@
         {
           "name": "enableOpenCL",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Enables or disables use of OpenCL for calculations.",
             "",
@@ -105,16 +111,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "enable",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "enable",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "getDeviceID",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "returns the index of the currently selected device.",
             "",
@@ -126,6 +134,7 @@
         {
           "name": "getFormulaCellNumberLimit",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [],
           "raises": [],
           "args": []
@@ -133,6 +142,7 @@
         {
           "name": "getOpenCLPlatforms",
           "returns": "typing.Tuple[OpenCLPlatform_36540f36, ...]",
+          "returns_origin": "sequence< OpenCLPlatform >",
           "desc": [
             "lists all OpenCL devices and platforms"
           ],
@@ -142,6 +152,7 @@
         {
           "name": "getPlatformID",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "returns the index of the platform of the currently selected device.",
             "",
@@ -153,6 +164,7 @@
         {
           "name": "isOpcodeSubsetTested",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [],
           "raises": [],
           "args": []
@@ -160,6 +172,7 @@
         {
           "name": "isOpenCLEnabled",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Returns true if calculation with OpenCL is enabled (at all).",
             "",
@@ -171,6 +184,7 @@
         {
           "name": "selectOpenCLDevice",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Select the OpenCL device with the given platform and device number.",
             "",
@@ -178,29 +192,33 @@
           ],
           "raises": [],
           "args": [
-            [
-              "platform",
-              "int",
-              "in"
-            ],
-            [
-              "device",
-              "int",
-              "in"
-            ]
+            {
+              "name": "platform",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "device",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "setFormulaCellNumberLimit",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "number",
-              "int",
-              "in"
-            ]
+            {
+              "name": "number",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

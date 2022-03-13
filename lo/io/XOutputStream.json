@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XOutputStream",
   "type": "interface",
@@ -56,6 +56,7 @@
         {
           "name": "closeOutput",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "gets called to indicate that all data has been written.",
             "",
@@ -71,6 +72,7 @@
         {
           "name": "flush",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "flushes out of the stream any data that may exist in buffers.",
             "",
@@ -86,6 +88,7 @@
         {
           "name": "writeBytes",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "writes the whole sequence to the stream.",
             "",
@@ -97,11 +100,12 @@
             "com.sun.star.io.IOException"
           ],
           "args": [
-            [
-              "aData",
-              "typing.Tuple[int, ...]",
-              "in"
-            ]
+            {
+              "name": "aData",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "in",
+              "origin": "sequence< byte >"
+            }
           ]
         }
       ]

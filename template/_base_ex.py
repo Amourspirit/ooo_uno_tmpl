@@ -1,53 +1,51 @@
 # coding: utf-8
 import uno
-from typing import Dict, List, Tuple, Union
+from typing import Any, Dict, List, Tuple, Union
 from _base_json import BaseJson
 from verr import Version
+from oootmpl.template_helper.models_exception import ModelsException
+
+
 class BaseEx(BaseJson):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._sorted_key_index = None
-        self._uno_instance = None
+        self._uno_instance: Any = False
         self._is_parent = None
-
+        self._cache = {}
 
     def _hydrate_data(self, json_data: dict):
-        self._validate_data(json_data)
-        data: Dict[str, object] = json_data['data']
-        def set_data(_key: str, a_name=None):
-            attr_name = _key if not a_name else a_name
-            val = data.get(_key, None)
-            if not val is None:
-                setattr(self, attr_name, val)
-
-        set_data('name')
-        set_data('namespace')
-        set_data('allow_db')
-        set_data('desc')
-        set_data('url', 'link')
-        setattr(self, 'inherits', data.get('extends', []))
-        set_data('imports')
-        # get lo ver if it exist. Defaut to False
-        self.libre_office_ver = json_data.get('libre_office_ver', False)
-        sort = bool(json_data['parser_args'].get('sort', False))
-        self.include_desc = bool(
-            json_data['writer_args'].get('include_desc', True))
+        try:
+            self._models = ModelsException(json_data=json_data)
+        except Exception as e:
+            msg = f"Error occured in exception {json_data['namespace']}.{json_data['name']}"
+            self._lerr(f"{msg}\n{e}")
+            raise Exception(msg) from e
+        # self._validate_data(json_data)
+        mdata = self._models.model.data
+        self.name = self.get_safe_word(mdata.name)
+        self.namespace = mdata.namespace
+        self.allow_db = mdata.allow_db
+        self.desc = mdata.desc
+        self.link = mdata.url
+        self.libre_office_ver = self._models.model.libre_office_ver
+        self.include_desc = self._models.model.writer_args.include_desc
+        self.inherits = mdata.extends
+        self.imports = mdata.imports
+        sort = self._models.model.parser_args.sort
         self.attribs = self._get_attribs(json_data=json_data, sort=sort)
-        setattr(self, 'requires_typing', data.get('requires_typing', False))
-        setattr(self, 'from_imports', [])
-        setattr(self, 'from_imports_typing', [])
-        set_data('from_imports')
-        set_data('from_imports_typing')
-        # self.requires_typing = False if len(
-        #     self.from_imports_typing) == 0 else True
-        quote: List[str] = data.get('quote', [])
-        self.quote.update(quote)
-        typings: List[str] = data.get('typings', [])
-        self.typings.update(typings)
-        extends_map = data.get('extends_map', None)
-        if extends_map:
-            self.extends_map.update(extends_map)
-        self.fullname = f"{self.namespace}.{self.get_safe_word(self.name)}"
+        self.requires_typing = mdata.requires_typing
+        if self.requires_typing is False:
+            if self._models.is_args():
+                self.requires_typing = True
+        self.extends_map.update(mdata.extends_map)
+        self.from_imports = [x.as_tuple()
+                             for x in self._models.get_full_imports()]
+        self.from_imports_typing = [x.as_tuple()
+                                    for x in mdata.from_imports_typing]
+        self.quote.update(mdata.quote)
+        self.typings.update(mdata.typings)
+        self.fullname = f"{self.namespace}.{self.name}"
 
     def _get_attribs(self, json_data: dict, sort: bool) -> dict:
         items: dict = json_data['data'].get('items', {})
@@ -185,6 +183,38 @@ class BaseEx(BaseJson):
         result += ':'
         return result
 
+    def is_args(self) -> bool:
+        """
+        Gets if there is any args for current instance or its parent classes.
+
+        Returns:
+            bool: ``True`` if instance or parent classes have constructor args;
+            Otherwise ``False``.
+        """
+        return self._models.is_args()
+    
+    def is_inst_args(self) -> bool:
+        """
+        Gets if there is any args for current instance only.
+
+        Returns:
+            bool: ``True`` if instance has constructor args;
+            Otherwise ``False``.
+        """
+        args = self._models.get_class_args()
+        return len(args) > 0
+    
+    def is_parent_args(self) -> bool:
+        """
+        Gets if there is any args for parents only.
+
+        Returns:
+            bool: ``True`` if any partent has constructor args;
+            Otherwise ``False``.
+        """
+        args = self._models.get_parents_class_args()
+        return len(args) > 0
+
     def _is_properties(self) -> bool:
         key = 'properties'
         if not key in self.attribs:
@@ -228,7 +258,7 @@ class BaseEx(BaseJson):
         i = 0
         for tpl in sorted_names:
             if i > 0:
-               c_str += ', '
+                c_str += ', '
             index = tpl[1]
             itm: dict = d_lst[index]
             c_str += "'" + self.get_safe_word(itm['name']) + "'"
@@ -237,41 +267,80 @@ class BaseEx(BaseJson):
             c_str += ','  # add so tuple is not mistaken as brackets
         return c_str
 
-    def get_constructor_args_str(self, include_value: bool = True, include_type: bool = True, uno_none:bool =True) -> str:
-        sorted_names = self.get_sorted_names()
-        d_lst = self.get_properties_all()
-
+    
+    
+    def get_nt_names_all_str(self) -> str:
+        args = self._models.get_class_args_all()
         c_str = ''
         i = 0
-        for tpl in sorted_names:
+        for arg in args:
             if i > 0:
-               c_str += ', '
-            index = tpl[1]
-            itm: dict = d_lst[index]
-            # is_q = self.is_q_type(itm['returns'])
-            # if is_q:
-            #     str_type = self.get_q_wrapped(str_type)
-            
-            c_str += self.get_safe_word(itm['name'])
-            if include_type:
-                c_str += f": typing.Optional[{itm['returns']}]"
-            if include_value:
-                c_str += " = " + \
-                    self.get_attrib_default(prop=itm, uno_none=uno_none)
+                c_str += ', '
+            c_str += "'" + arg.name + "'"
             i += 1
+        if i == 1:
+            c_str += ','  # add so tuple is not mistaken as brackets
         return c_str
 
+    def get_class_args_all(self, uno_none: bool = True):
+        # returns list of ClassArg
+        return self._models.get_class_args_all(uno_none=uno_none)
+
+    def get_class_args_inst(self, uno_none: bool = True):
+        return self._models.get_class_args(uno_none=uno_none)
+
+    def _get_class_args(self, include_value: bool = True, include_type: bool = True, uno_none: bool = True):
+        args = self._models.get_class_args(uno_none=uno_none)
+        results: List[str] = []
+        for arg in args:
+            s = arg.name
+            if include_type:
+                s += f": typing.Optional[{arg.type}]"
+            if include_value:
+                s += " = " + \
+                    self.get_attrib_default(
+                        name=arg.name, returns=arg.type, uno_none=uno_none)
+            results.append(s)
+        return results
+    
+    def _get_parent_class_args(self, include_value: bool = True, include_type: bool = True, uno_none: bool = True):
+        args = self._models.get_parents_class_args(uno_none=uno_none)
+        results: List[str] = []
+        for arg in args:
+            s = arg.name
+            if include_type:
+                s += f": typing.Optional[{arg.type}]"
+            if include_value:
+                s += " = " + \
+                    self.get_attrib_default(
+                        name=arg.name, returns=arg.type, uno_none=uno_none)
+            results.append(s)
+        return results
+
+    def get_constructor_args_str(self, include_value: bool = True, include_type: bool = True, uno_none: bool = True) -> str:
+        pargs = self._get_parent_class_args(
+            include_value=include_value,
+            include_type=include_type,
+            uno_none=uno_none)
+        cargs = self._get_class_args(
+            include_value=include_value,
+            include_type=include_type,
+            uno_none=uno_none)
+        args = pargs + cargs
+        if len(args) == 0:
+            return ""
+        return ", ".join(args)
+
     def get_constructor(self) -> str:
-        sorted_names = self.get_sorted_names()
-        if len(sorted_names) == 0:
+        if not self._models.is_args():
+            # this will alomost never happen
             self._linfo("Constructor Args — False")
-            if self.is_parent:
-                return "def __init__(self, **kwargs) -> None:"
             return "def __init__(self) -> None:"
         self._linfo("Constructor Args — True")
-        names = self.get_constructor_args_str(include_value=True, include_type=True)
-        if self.is_parent:
-            return f"def __init__(self, {names}, **kwargs) -> None:"
+        names = self.get_constructor_args_str(
+            include_value=True, include_type=True)
+        # if self.is_parent:
+        #     return f"def __init__(self, {names}, **kwargs) -> None:"
         return f"def __init__(self, {names}) -> None:"
 
     def get_class_inherits_from_db(self, default: str = 'Exception') -> str:
@@ -284,7 +353,7 @@ class BaseEx(BaseJson):
 
     def get_class_inherits(self, class_name: str, imports: Union[str, List[str]]) -> str:
         # override to make default Exception
-        result = super().get_class_inherits(class_name=class_name,imports=imports)
+        result = super().get_class_inherits(class_name=class_name, imports=imports)
         if result == 'object':
             return 'Exception'
         return result
@@ -304,9 +373,27 @@ class BaseEx(BaseJson):
         ext = super().get_class_inherits(safe_name, self.inherits)
         return ext != 'object'
 
-    def get_attrib_default(self, prop:dict, uno_none: bool = False) -> str:
-        name = prop['name']
-        returns = prop['returns']
+    def get_attrib_default(self, name: str, returns: str, uno_none: bool = False) -> str:
+        """
+        Get defatul attribute value from uno
+
+        Args:
+            name (str): Name of property to get attrib for.
+            returns (str): property returns type
+            uno_none (bool, optional): If ``True`` replaces ``None`` with ``UNO_NONE`` where needed; Otherwise uses ``None``. Defaults to False.
+
+        Returns:
+            str: attribute default value as string.
+
+        Note:
+            If current exception/struct is not in the installled uno version then
+            all unknow value are either ``None`` or ``UNO_NONE``
+
+            For instance ReadOnlyOpenRequest: https://tinyurl.com/ycu8u8wu
+            is a 7.2 version
+        """
+        if self.uno_instance is None:
+            return 'None'
         result = getattr(self.uno_instance, name, None)
         if isinstance(result, str):
             return f"'{result}'"
@@ -329,9 +416,25 @@ class BaseEx(BaseJson):
         return str(result)
 
     @property
-    def uno_instance(self):
-        if self._uno_instance is None:
-            self._uno_instance = uno.createUnoStruct(self.fullname)
+    def uno_instance(self) -> Any:
+        """
+        Get a uno instance of current uno exception being processed
+
+        Returns:
+            Any: return uno instance if it can be created; Otherwise, ``None``
+
+        Note:
+            not all exceptions/struct are available in all version.
+            ReadOnlyOpenRequest: https://tinyurl.com/ycu8u8wu
+            is a 7.2 version
+        """
+        if self._uno_instance is False:
+            try:
+                self._uno_instance = uno.createUnoStruct(self.fullname)
+            except Exception as e:
+                self._lwarn(
+                    f"{self.fullname} Error: {e}")
+                self._uno_instance = None
         return self._uno_instance
 
     @property
@@ -341,3 +444,7 @@ class BaseEx(BaseJson):
             self._linfo(
                 f"parent — {self._is_parent}")
         return self._is_parent
+
+    @property
+    def models(self) -> ModelsException:
+        return self._models

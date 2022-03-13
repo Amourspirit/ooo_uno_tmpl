@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XInvocation2",
   "type": "interface",
@@ -65,6 +65,7 @@
         {
           "name": "getInfo",
           "returns": "typing.Tuple[InvocationInfo_e5270d43, ...]",
+          "returns_origin": "sequence< InvocationInfo >",
           "desc": [
             "returns information items for all methods and properties accessible via XInvocation."
           ],
@@ -74,6 +75,7 @@
         {
           "name": "getInfoForName",
           "returns": "InvocationInfo_e5270d43",
+          "returns_origin": "com.sun.star.script.InvocationInfo",
           "desc": [
             "returns information item for the method or property defined by aName"
           ],
@@ -81,21 +83,24 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ],
-            [
-              "bExact",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "bExact",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "getMemberNames",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [
             "returns the names of all methods and properties accessible via XInvocation."
           ],

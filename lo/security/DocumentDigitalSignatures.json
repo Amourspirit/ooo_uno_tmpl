@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "DocumentDigitalSignatures",
   "type": "service",
@@ -50,6 +50,7 @@
         {
           "name": "createDefault",
           "returns": "None",
+          "returns_origin": null,
           "desc": [],
           "raises": [],
           "args": []
@@ -57,32 +58,37 @@
         {
           "name": "createWithVersion",
           "returns": "None",
+          "returns_origin": null,
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "ODFVersion",
-              "str",
-              "in"
-            ]
+            {
+              "name": "ODFVersion",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "createWithVersionAndValidSignature",
           "returns": "None",
+          "returns_origin": null,
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "ODFVersion",
-              "str",
-              "in"
-            ],
-            [
-              "HasValidDocumentSignature",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "ODFVersion",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "HasValidDocumentSignature",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         }
       ]

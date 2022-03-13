@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XCopyTableListener",
   "type": "interface",
@@ -60,6 +60,7 @@
         {
           "name": "copiedRow",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "is called when a row was successfully copied.",
             "",
@@ -67,31 +68,35 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Event",
-              "CopyTableRowEvent_9be911c0",
-              "in"
-            ]
+            {
+              "name": "Event",
+              "type": "CopyTableRowEvent_9be911c0",
+              "direction": "in",
+              "origin": "com.sun.star.sdb.application.CopyTableRowEvent"
+            }
           ]
         },
         {
           "name": "copyRowError",
           "returns": "int",
+          "returns_origin": "short",
           "desc": [
             "is called when copying a row failed."
           ],
           "raises": [],
           "args": [
-            [
-              "Event",
-              "CopyTableRowEvent_9be911c0",
-              "in"
-            ]
+            {
+              "name": "Event",
+              "type": "CopyTableRowEvent_9be911c0",
+              "direction": "in",
+              "origin": "com.sun.star.sdb.application.CopyTableRowEvent"
+            }
           ]
         },
         {
           "name": "copyingRow",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "is called when a row is about to be copied.",
             "",
@@ -99,11 +104,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Event",
-              "CopyTableRowEvent_9be911c0",
-              "in"
-            ]
+            {
+              "name": "Event",
+              "type": "CopyTableRowEvent_9be911c0",
+              "direction": "in",
+              "origin": "com.sun.star.sdb.application.CopyTableRowEvent"
+            }
           ]
         }
       ]

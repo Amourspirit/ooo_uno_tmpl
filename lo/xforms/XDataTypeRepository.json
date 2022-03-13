@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDataTypeRepository",
   "type": "interface",
@@ -70,6 +70,7 @@
         {
           "name": "cloneDataType",
           "returns": "XDataType_83f209cb",
+          "returns_origin": "com.sun.star.xsd.XDataType",
           "desc": [
             "creates a clone of the given data type, and inserts it into the repository"
           ],
@@ -78,21 +79,24 @@
             "com.sun.star.container.ElementExistException"
           ],
           "args": [
-            [
-              "sourceName",
-              "str",
-              "in"
-            ],
-            [
-              "newName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "sourceName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "newName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getBasicDataType",
           "returns": "XDataType_83f209cb",
+          "returns_origin": "com.sun.star.xsd.XDataType",
           "desc": [
             "retrieves the basic type for the given type class"
           ],
@@ -100,31 +104,35 @@
             "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
-            [
-              "dataTypeClass",
-              "int",
-              "in"
-            ]
+            {
+              "name": "dataTypeClass",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "getDataType",
           "returns": "XDataType_83f209cb",
+          "returns_origin": "com.sun.star.xsd.XDataType",
           "desc": [],
           "raises": [
             "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
-            [
-              "typeName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "typeName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "revokeDataType",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes a data type given by name from the repository"
           ],
@@ -133,11 +141,12 @@
             "com.sun.star.util.VetoException"
           ],
           "args": [
-            [
-              "typeName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "typeName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

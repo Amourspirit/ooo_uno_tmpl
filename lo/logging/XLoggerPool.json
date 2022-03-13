@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XLoggerPool",
   "type": "interface",
@@ -52,6 +52,7 @@
         {
           "name": "getDefaultLogger",
           "returns": "XLogger_9a510aa7",
+          "returns_origin": "com.sun.star.logging.XLogger",
           "desc": [
             "retrieves a logger with the default name \\\"org.openoffice.logging.DefaultLogger\\\".",
             "",
@@ -63,6 +64,7 @@
         {
           "name": "getNamedLogger",
           "returns": "XLogger_9a510aa7",
+          "returns_origin": "com.sun.star.logging.XLogger",
           "desc": [
             "retrieves a logger with the given name",
             "",
@@ -72,11 +74,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Name",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

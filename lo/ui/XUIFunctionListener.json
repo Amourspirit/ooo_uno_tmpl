@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XUIFunctionListener",
   "type": "interface",
@@ -54,21 +54,24 @@
         {
           "name": "functionExecute",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "gets called to notify a component that a user interface element wants to execute a function."
           ],
           "raises": [],
           "args": [
-            [
-              "aUIElementName",
-              "str",
-              "in"
-            ],
-            [
-              "aCommand",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aUIElementName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aCommand",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

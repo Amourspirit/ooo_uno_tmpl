@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XLocale",
   "type": "interface",
@@ -65,6 +65,7 @@
         {
           "name": "create",
           "returns": "Locale_70d308fa",
+          "returns_origin": "com.sun.star.lang.Locale",
           "desc": [
             "creates a locale from language, country, and variant.",
             "",
@@ -74,46 +75,53 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aLanguage",
-              "str",
-              "in"
-            ],
-            [
-              "aCountry",
-              "str",
-              "in"
-            ],
-            [
-              "aVariant",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aLanguage",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aCountry",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aVariant",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "equals",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "A locale is deemed equal to another locale with identical language, country, and variant, and unequal to all other objects."
           ],
           "raises": [],
           "args": [
-            [
-              "l1",
-              "Locale_70d308fa",
-              "in"
-            ],
-            [
-              "l2",
-              "Locale_70d308fa",
-              "in"
-            ]
+            {
+              "name": "l1",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "l2",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
           ]
         },
         {
           "name": "getAvailableLocales",
           "returns": "typing.Tuple[Locale_70d308fa, ...]",
+          "returns_origin": "sequence< com.sun.star.lang.Locale >",
           "desc": [],
           "raises": [],
           "args": []
@@ -121,6 +129,7 @@
         {
           "name": "getDefault",
           "returns": "Locale_70d308fa",
+          "returns_origin": "com.sun.star.lang.Locale",
           "desc": [
             "the common method of getting the current default locale.",
             "",
@@ -136,160 +145,185 @@
         {
           "name": "getDisplayCountry",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "locale",
-              "Locale_70d308fa",
-              "in"
-            ],
-            [
-              "inLocale",
-              "Locale_70d308fa",
-              "in"
-            ]
+            {
+              "name": "locale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "inLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
           ]
         },
         {
           "name": "getDisplayCountry_Default",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "locale",
-              "Locale_70d308fa",
-              "in"
-            ]
+            {
+              "name": "locale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
           ]
         },
         {
           "name": "getDisplayLanguage",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "locale",
-              "Locale_70d308fa",
-              "in"
-            ],
-            [
-              "inLocale",
-              "Locale_70d308fa",
-              "in"
-            ]
+            {
+              "name": "locale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "inLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
           ]
         },
         {
           "name": "getDisplayLanguage_Default",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "locale",
-              "Locale_70d308fa",
-              "in"
-            ]
+            {
+              "name": "locale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
           ]
         },
         {
           "name": "getDisplayName",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "locale",
-              "Locale_70d308fa",
-              "in"
-            ],
-            [
-              "inLocale",
-              "Locale_70d308fa",
-              "in"
-            ]
+            {
+              "name": "locale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "inLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
           ]
         },
         {
           "name": "getDisplayName_Default",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "locale",
-              "Locale_70d308fa",
-              "in"
-            ]
+            {
+              "name": "locale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
           ]
         },
         {
           "name": "getDisplayVariant",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "locale",
-              "Locale_70d308fa",
-              "in"
-            ],
-            [
-              "inLocale",
-              "Locale_70d308fa",
-              "in"
-            ]
+            {
+              "name": "locale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "inLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
           ]
         },
         {
           "name": "getDisplayVariant_Default",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "locale",
-              "Locale_70d308fa",
-              "in"
-            ]
+            {
+              "name": "locale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
           ]
         },
         {
           "name": "getISO3Country",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [],
           "raises": [
             "com.sun.star.resource.MissingResourceException"
           ],
           "args": [
-            [
-              "locale",
-              "Locale_70d308fa",
-              "in"
-            ]
+            {
+              "name": "locale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
           ]
         },
         {
           "name": "getISO3Language",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [],
           "raises": [
             "com.sun.star.resource.MissingResourceException"
           ],
           "args": [
-            [
-              "locale",
-              "Locale_70d308fa",
-              "in"
-            ]
+            {
+              "name": "locale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
           ]
         },
         {
           "name": "getISOCountries",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [],
           "raises": [],
           "args": []
@@ -297,6 +331,7 @@
         {
           "name": "getISOLanguages",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [],
           "raises": [],
           "args": []
@@ -304,19 +339,22 @@
         {
           "name": "getLanguagesForCountry",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "country",
-              "str",
-              "in"
-            ]
+            {
+              "name": "country",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "setDefault",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the default locale for the whole environment.",
             "",
@@ -324,11 +362,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "newLocale",
-              "Locale_70d308fa",
-              "in"
-            ]
+            {
+              "name": "newLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
           ]
         }
       ]

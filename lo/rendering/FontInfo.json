@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "FontInfo",
@@ -39,6 +39,13 @@
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.rendering.Panose",
+        "com.sun.star.util.TriState"
+      ]
+    },
     "fullname": "com.sun.star.rendering.FontInfo",
     "desc": [
       "This structure provides information about a specific font.",
@@ -53,7 +60,9 @@
       {
         "name": "FontDescription",
         "type": "Panose_a6bc0b2c",
-        "lines": [
+        "origtype": "com.sun.star.rendering.Panose",
+        "origin": "com.sun.star.rendering.Panose",
+        "desc": [
           "The PANOSE font classification.",
           "",
           "TODO: Document semantics in Panose.idl"
@@ -62,7 +71,9 @@
       {
         "name": "FamilyName",
         "type": "str",
-        "lines": [
+        "origtype": null,
+        "origin": "string",
+        "desc": [
           "The name of the font family.",
           "",
           "The family name is the one normally associated to a font, such as Times New Roman, Thorndale, Andale or Arial.",
@@ -73,7 +84,9 @@
       {
         "name": "StyleName",
         "type": "str",
-        "lines": [
+        "origtype": null,
+        "origin": "string",
+        "desc": [
           "The name of the specific font style within its family.",
           "",
           "For example, oblique, italic, or narrow."
@@ -82,7 +95,9 @@
       {
         "name": "UnicodeRanges0",
         "type": "int",
-        "lines": [
+        "origtype": null,
+        "origin": "long",
+        "desc": [
           "This value specifies which Unicode ranges are supported by this font.",
           "",
           "This is to be interpreted as a split-up 128-bit value, see Adobe's OpenType specification for the specific meaning of each bit. UnicodeRanges0 contains the least significant bits, UnicodeRanges3 the most significant ones.",
@@ -93,22 +108,30 @@
       {
         "name": "UnicodeRanges1",
         "type": "int",
-        "lines": []
+        "origtype": null,
+        "origin": "long",
+        "desc": []
       },
       {
         "name": "UnicodeRanges2",
         "type": "int",
-        "lines": []
+        "origtype": null,
+        "origin": "long",
+        "desc": []
       },
       {
         "name": "UnicodeRanges3",
         "type": "int",
-        "lines": []
+        "origtype": null,
+        "origin": "long",
+        "desc": []
       },
       {
         "name": "IsSymbolFont",
         "type": "TriState_85af09f6",
-        "lines": [
+        "origtype": "com.sun.star.util.TriState",
+        "origin": "com.sun.star.util.TriState",
+        "desc": [
           "Specifies whether the font is a symbol font.",
           "",
           "If yes, text written in this symbol font does not have a specified meaning."
@@ -117,7 +140,9 @@
       {
         "name": "IsVertical",
         "type": "TriState_85af09f6",
-        "lines": [
+        "origtype": "com.sun.star.util.TriState",
+        "origin": "com.sun.star.util.TriState",
+        "desc": [
           "Set to true, if the font is usable for vertical text output.",
           "",
           "Vertical fonts have subtle differences to horizontal ones, e.g. rotated or differently shaped glyphs, or special rotated versions of normally upright glyphs (e.g. brackets)."

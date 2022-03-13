@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XColumnLocate",
   "type": "interface",
@@ -52,6 +52,7 @@
         {
           "name": "findColumn",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "maps the given ResultSet column name to its ResultSet column index.",
             "",
@@ -61,11 +62,12 @@
             "SQLException"
           ],
           "args": [
-            [
-              "columnName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "columnName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

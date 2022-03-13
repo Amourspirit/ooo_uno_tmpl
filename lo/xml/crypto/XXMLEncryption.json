@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XXMLEncryption",
   "type": "interface",
@@ -82,6 +82,7 @@
         {
           "name": "decrypt",
           "returns": "XXMLEncryptionTemplate_9c6511d8",
+          "returns_origin": "com.sun.star.xml.crypto.XXMLEncryptionTemplate",
           "desc": [
             "Perform decryption in the environment of encryption template and context."
           ],
@@ -90,21 +91,24 @@
             "com.sun.star.uno.SecurityException"
           ],
           "args": [
-            [
-              "aTemplate",
-              "XXMLEncryptionTemplate_9c6511d8",
-              "in"
-            ],
-            [
-              "aContext",
-              "XXMLSecurityContext_681010ae",
-              "in"
-            ]
+            {
+              "name": "aTemplate",
+              "type": "XXMLEncryptionTemplate_9c6511d8",
+              "direction": "in",
+              "origin": "com.sun.star.xml.crypto.XXMLEncryptionTemplate"
+            },
+            {
+              "name": "aContext",
+              "type": "XXMLSecurityContext_681010ae",
+              "direction": "in",
+              "origin": "com.sun.star.xml.crypto.XXMLSecurityContext"
+            }
           ]
         },
         {
           "name": "encrypt",
           "returns": "XXMLEncryptionTemplate_9c6511d8",
+          "returns_origin": "com.sun.star.xml.crypto.XXMLEncryptionTemplate",
           "desc": [
             "Perform encryption in the environment of encryption template and context."
           ],
@@ -113,16 +117,18 @@
             "com.sun.star.uno.SecurityException"
           ],
           "args": [
-            [
-              "aTemplate",
-              "XXMLEncryptionTemplate_9c6511d8",
-              "in"
-            ],
-            [
-              "aEnvironment",
-              "XSecurityEnvironment_7ead116d",
-              "in"
-            ]
+            {
+              "name": "aTemplate",
+              "type": "XXMLEncryptionTemplate_9c6511d8",
+              "direction": "in",
+              "origin": "com.sun.star.xml.crypto.XXMLEncryptionTemplate"
+            },
+            {
+              "name": "aEnvironment",
+              "type": "XSecurityEnvironment_7ead116d",
+              "direction": "in",
+              "origin": "com.sun.star.xml.crypto.XSecurityEnvironment"
+            }
           ]
         }
       ]

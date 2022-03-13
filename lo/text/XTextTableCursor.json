@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XTextTableCursor",
   "type": "interface",
@@ -50,6 +50,7 @@
         {
           "name": "getRangeName",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "The name is the cell name of the top left table cell of the range concatenated by \\\":\\\" with the table cell name of the bottom left table cell of the cell range. If the range consists of one table cell only then the name of that table cell is returned."
           ],
@@ -59,136 +60,156 @@
         {
           "name": "goDown",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "moves the cursor to the bottom neighbor cell."
           ],
           "raises": [],
           "args": [
-            [
-              "nCount",
-              "int",
-              "in"
-            ],
-            [
-              "bExpand",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "nCount",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "bExpand",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "goLeft",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "moves the cursor to the left neighbor."
           ],
           "raises": [],
           "args": [
-            [
-              "nCount",
-              "int",
-              "in"
-            ],
-            [
-              "bExpand",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "nCount",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "bExpand",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "goRight",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "moves the cursor to the right neighbor."
           ],
           "raises": [],
           "args": [
-            [
-              "nCount",
-              "int",
-              "in"
-            ],
-            [
-              "bExpand",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "nCount",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "bExpand",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "goUp",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "moves the cursor to the top neighbor."
           ],
           "raises": [],
           "args": [
-            [
-              "nCount",
-              "int",
-              "in"
-            ],
-            [
-              "bExpand",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "nCount",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "bExpand",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "gotoCellByName",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "moves the cursor to the cell with the specified name."
           ],
           "raises": [],
           "args": [
-            [
-              "aCellName",
-              "str",
-              "in"
-            ],
-            [
-              "bExpand",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "aCellName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "bExpand",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "gotoEnd",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "moves the cursor to the bottom right cell of the table."
           ],
           "raises": [],
           "args": [
-            [
-              "bExpand",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "bExpand",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "gotoStart",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "moves the cursor to the top left cell of the table."
           ],
           "raises": [],
           "args": [
-            [
-              "bExpand",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "bExpand",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "mergeRange",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "merges the selected range of cells."
           ],
@@ -198,21 +219,24 @@
         {
           "name": "splitRange",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "splits the range of cells."
           ],
           "raises": [],
           "args": [
-            [
-              "nCount",
-              "int",
-              "in"
-            ],
-            [
-              "bHorizontal",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "nCount",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "bHorizontal",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         }
       ]

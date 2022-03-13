@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XMultiPropertyStates",
   "type": "interface",
@@ -68,6 +68,7 @@
         {
           "name": "getPropertyDefaults",
           "returns": "typing.Tuple[object, ...]",
+          "returns_origin": "sequence< any >",
           "desc": [
             "If no default exists, is not known, or is void, then the return type at the corresponding position in the sequence returned is void."
           ],
@@ -76,16 +77,18 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "aPropertyNames",
-              "typing.Tuple[str, ...]",
-              "in"
-            ]
+            {
+              "name": "aPropertyNames",
+              "type": "typing.Tuple[str, ...]",
+              "direction": "in",
+              "origin": "sequence< string >"
+            }
           ]
         },
         {
           "name": "getPropertyStates",
           "returns": "typing.Tuple[PropertyState_c97b0c77, ...]",
+          "returns_origin": "sequence< com.sun.star.beans.PropertyState >",
           "desc": [
             "The order of the states is correlating to the order of the given property names."
           ],
@@ -93,16 +96,18 @@
             "com.sun.star.beans.UnknownPropertyException"
           ],
           "args": [
-            [
-              "aPropertyName",
-              "typing.Tuple[str, ...]",
-              "in"
-            ]
+            {
+              "name": "aPropertyName",
+              "type": "typing.Tuple[str, ...]",
+              "direction": "in",
+              "origin": "sequence< string >"
+            }
           ]
         },
         {
           "name": "setAllPropertiesToDefault",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets all properties to their default values.",
             "",
@@ -114,6 +119,7 @@
         {
           "name": "setPropertiesToDefault",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the specified properties to their default values.",
             "",
@@ -123,11 +129,12 @@
             "com.sun.star.beans.UnknownPropertyException"
           ],
           "args": [
-            [
-              "aPropertyNames",
-              "typing.Tuple[str, ...]",
-              "in"
-            ]
+            {
+              "name": "aPropertyNames",
+              "type": "typing.Tuple[str, ...]",
+              "direction": "in",
+              "origin": "sequence< string >"
+            }
           ]
         }
       ]

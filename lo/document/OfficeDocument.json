@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "OfficeDocument",
   "type": "service",
@@ -156,6 +156,8 @@
         {
           "name": "InteropGrabBag",
           "returns": "typing.Tuple[PropertyValue_c9610c73, ...]",
+          "origtype": null,
+          "origin": "sequence< com.sun.star.beans.PropertyValue >",
           "desc": [
             "Grab bag of document properties, used as a string-any map for interim interop purposes.",
             "",
@@ -164,6 +166,49 @@
             "**since**",
             "",
             "    LibreOffice 4.2"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ],
+      "properties": [
+        {
+          "name": "ApplyFormDesignMode",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "controls the initial (on-load) behavior of the form controls in the document",
+            "",
+            "If set to TRUE, upon loading the document, the form controls will be in design mode.",
+            "If set to FALSE, they will be alive, i.e. operational.",
+            "With this, you may control if your document works primarily as a form document."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "AutomaticControlFocus",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "controls the focus behavior of the form controls in the document",
+            "",
+            "If this flag is set to TRUE, any view belonging to the document should focus the first control in the document. With this, you may control if your document works primarily as a form document."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RuntimeUID",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "contains a unique id for the document",
+            "",
+            "Once calculated, the id must not change until the document has been closed. Upon closing it will not be made persistent. Thus, the document may get a different id every time it gets loaded."
           ],
           "raises_get": "",
           "raises_set": ""

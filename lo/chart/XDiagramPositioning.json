@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDiagramPositioning",
   "type": "interface",
@@ -60,6 +60,7 @@
         {
           "name": "calculateDiagramPositionExcludingAxes",
           "returns": "Rectangle_84b109e9",
+          "returns_origin": "com.sun.star.awt.Rectangle",
           "desc": [],
           "raises": [],
           "args": []
@@ -67,6 +68,7 @@
         {
           "name": "calculateDiagramPositionIncludingAxes",
           "returns": "Rectangle_84b109e9",
+          "returns_origin": "com.sun.star.awt.Rectangle",
           "desc": [],
           "raises": [],
           "args": []
@@ -74,6 +76,7 @@
         {
           "name": "calculateDiagramPositionIncludingAxesAndAxisTitles",
           "returns": "Rectangle_84b109e9",
+          "returns_origin": "com.sun.star.awt.Rectangle",
           "desc": [],
           "raises": [],
           "args": []
@@ -81,6 +84,7 @@
         {
           "name": "isAutomaticDiagramPositioning",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [],
           "raises": [],
           "args": []
@@ -88,6 +92,7 @@
         {
           "name": "isExcludingDiagramPositioning",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [],
           "raises": [],
           "args": []
@@ -95,6 +100,7 @@
         {
           "name": "setAutomaticDiagramPositioning",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "the diagram will be placed automatically"
           ],
@@ -104,36 +110,41 @@
         {
           "name": "setDiagramPositionExcludingAxes",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "place the inner diagram part excluding any axes, labels and titles"
           ],
           "raises": [],
           "args": [
-            [
-              "PositionRect",
-              "Rectangle_84b109e9",
-              "in"
-            ]
+            {
+              "name": "PositionRect",
+              "type": "Rectangle_84b109e9",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Rectangle"
+            }
           ]
         },
         {
           "name": "setDiagramPositionIncludingAxes",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "place the outer diagram part including the axes and axes labels, but excluding the axes titles."
           ],
           "raises": [],
           "args": [
-            [
-              "PositionRect",
-              "Rectangle_84b109e9",
-              "in"
-            ]
+            {
+              "name": "PositionRect",
+              "type": "Rectangle_84b109e9",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Rectangle"
+            }
           ]
         },
         {
           "name": "setDiagramPositionIncludingAxesAndAxisTitles",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "place the diagram including the axes, axes labels and axes titles.",
             "",
@@ -141,11 +152,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "PositionRect",
-              "Rectangle_84b109e9",
-              "in"
-            ]
+            {
+              "name": "PositionRect",
+              "type": "Rectangle_84b109e9",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Rectangle"
+            }
           ]
         }
       ]

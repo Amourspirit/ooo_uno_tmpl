@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XFixedText",
   "type": "interface",
@@ -50,6 +50,7 @@
         {
           "name": "getAlignment",
           "returns": "int",
+          "returns_origin": "short",
           "desc": [
             "returns the alignment of the text in the control."
           ],
@@ -59,6 +60,7 @@
         {
           "name": "getText",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the text of the control."
           ],
@@ -68,31 +70,35 @@
         {
           "name": "setAlignment",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the alignment of the text in the control."
           ],
           "raises": [],
           "args": [
-            [
-              "nAlign",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nAlign",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "setText",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the text of the control."
           ],
           "raises": [],
           "args": [
-            [
-              "Text",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Text",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

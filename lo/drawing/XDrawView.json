@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDrawView",
   "type": "interface",
@@ -60,6 +60,7 @@
         {
           "name": "getCurrentPage",
           "returns": "XDrawPage_b07a0b57",
+          "returns_origin": "com.sun.star.drawing.XDrawPage",
           "desc": [
             "returns the current page."
           ],
@@ -69,16 +70,18 @@
         {
           "name": "setCurrentPage",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "changes the current page."
           ],
           "raises": [],
           "args": [
-            [
-              "xPage",
-              "XDrawPage_b07a0b57",
-              "in"
-            ]
+            {
+              "name": "xPage",
+              "type": "XDrawPage_b07a0b57",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.XDrawPage"
+            }
           ]
         }
       ]

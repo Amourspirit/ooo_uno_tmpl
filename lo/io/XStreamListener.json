@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XStreamListener",
   "type": "interface",
@@ -50,6 +50,7 @@
         {
           "name": "closed",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "gets called when data transfer terminates normally or when data transfer is terminated from outside.",
             "",
@@ -61,6 +62,7 @@
         {
           "name": "error",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "gets called when an internal error in source or sink has occurred.",
             "",
@@ -68,16 +70,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aException",
-              "object",
-              "in"
-            ]
+            {
+              "name": "aException",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         },
         {
           "name": "started",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "gets called as soon as data transfer has started."
           ],
@@ -87,6 +91,7 @@
         {
           "name": "terminated",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "gets called when XActiveDataControl.terminate() is called."
           ],

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XFrameLoader",
   "type": "interface",
@@ -78,6 +78,7 @@
         {
           "name": "cancel",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "cancels the loading process.",
             "",
@@ -89,31 +90,36 @@
         {
           "name": "load",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "starts the loading of the specified resource into the specified Frame."
           ],
           "raises": [],
           "args": [
-            [
-              "Frame",
-              "XFrame_7a570956",
-              "in"
-            ],
-            [
-              "URL",
-              "str",
-              "in"
-            ],
-            [
-              "Arguments",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ],
-            [
-              "Listener",
-              "XLoadEventListener_9140e33",
-              "in"
-            ]
+            {
+              "name": "Frame",
+              "type": "XFrame_7a570956",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XFrame"
+            },
+            {
+              "name": "URL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Arguments",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            },
+            {
+              "name": "Listener",
+              "type": "XLoadEventListener_9140e33",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XLoadEventListener"
+            }
           ]
         }
       ]

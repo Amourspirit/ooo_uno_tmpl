@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XReferenceResolvedListener",
   "type": "interface",
@@ -52,6 +52,7 @@
         {
           "name": "referenceResolved",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Notifies an element has been collected by an element collector."
           ],
@@ -59,11 +60,12 @@
             "com.sun.star.uno.Exception"
           ],
           "args": [
-            [
-              "referenceId",
-              "int",
-              "in"
-            ]
+            {
+              "name": "referenceId",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

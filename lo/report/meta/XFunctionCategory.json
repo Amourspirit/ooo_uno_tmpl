@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XFunctionCategory",
   "type": "interface",
@@ -68,6 +68,7 @@
         {
           "name": "getFunction",
           "returns": "XFunctionDescription_8d8d119b",
+          "returns_origin": "com.sun.star.report.meta.XFunctionDescription",
           "desc": [
             "same as getByIndex."
           ],
@@ -76,12 +77,37 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "position",
-              "int",
-              "in"
-            ]
+            {
+              "name": "position",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
+        }
+      ],
+      "properties": [
+        {
+          "name": "Name",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "returns the localized category's name."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Number",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "specifies the category number."
+          ],
+          "raises_get": "",
+          "raises_set": ""
         }
       ]
     }

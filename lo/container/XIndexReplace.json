@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XIndexReplace",
   "type": "interface",
@@ -50,6 +50,7 @@
         {
           "name": "replaceByIndex",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "replaces the element at the specified index with the given element."
           ],
@@ -59,16 +60,18 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "Index",
-              "int",
-              "in"
-            ],
-            [
-              "Element",
-              "object",
-              "in"
-            ]
+            {
+              "name": "Index",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "Element",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         }
       ]

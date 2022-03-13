@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XMutableTreeDataModel",
   "type": "interface",
@@ -62,26 +62,30 @@
         {
           "name": "createNode",
           "returns": "XMutableTreeNode_17d80e6a",
+          "returns_origin": "com.sun.star.awt.tree.XMutableTreeNode",
           "desc": [
             "creates a new tree node with the given value and given settings."
           ],
           "raises": [],
           "args": [
-            [
-              "DisplayValue",
-              "object",
-              "in"
-            ],
-            [
-              "ChildrenOnDemand",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "DisplayValue",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            },
+            {
+              "name": "ChildrenOnDemand",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "setRoot",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "changes the root node of this model to RootNode."
           ],
@@ -89,11 +93,12 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "RootNode",
-              "XMutableTreeNode_17d80e6a",
-              "in"
-            ]
+            {
+              "name": "RootNode",
+              "type": "XMutableTreeNode_17d80e6a",
+              "direction": "in",
+              "origin": "com.sun.star.awt.tree.XMutableTreeNode"
+            }
           ]
         }
       ]

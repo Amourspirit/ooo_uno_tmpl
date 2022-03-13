@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XNumberFormats",
   "type": "interface",
@@ -72,6 +72,7 @@
         {
           "name": "addNew",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "adds a new number format to the list, using a format string."
           ],
@@ -79,21 +80,24 @@
             "com.sun.star.util.MalformedNumberFormatException"
           ],
           "args": [
-            [
-              "aFormat",
-              "str",
-              "in"
-            ],
-            [
-              "nLocale",
-              "Locale_70d308fa",
-              "in"
-            ]
+            {
+              "name": "aFormat",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
           ]
         },
         {
           "name": "addNewConverted",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "adds a new number format to the list, using a format string in a different locale than the desired locale of the resulting number format."
           ],
@@ -101,137 +105,159 @@
             "com.sun.star.util.MalformedNumberFormatException"
           ],
           "args": [
-            [
-              "aFormat",
-              "str",
-              "in"
-            ],
-            [
-              "nLocale",
-              "Locale_70d308fa",
-              "in"
-            ],
-            [
-              "nNewLocale",
-              "Locale_70d308fa",
-              "in"
-            ]
+            {
+              "name": "aFormat",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "nNewLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
           ]
         },
         {
           "name": "generateFormat",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "generates a format string from several parameters without creating an actual number format."
           ],
           "raises": [],
           "args": [
-            [
-              "nBaseKey",
-              "int",
-              "in"
-            ],
-            [
-              "nLocale",
-              "Locale_70d308fa",
-              "in"
-            ],
-            [
-              "bThousands",
-              "bool",
-              "in"
-            ],
-            [
-              "bRed",
-              "bool",
-              "in"
-            ],
-            [
-              "nDecimals",
-              "int",
-              "in"
-            ],
-            [
-              "nLeading",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nBaseKey",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "bThousands",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            },
+            {
+              "name": "bRed",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            },
+            {
+              "name": "nDecimals",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "nLeading",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "getByKey",
           "returns": "XPropertySet_bc180bfa",
+          "returns_origin": "com.sun.star.beans.XPropertySet",
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "nKey",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nKey",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "queryKey",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "finds a number format by its format string and returns its key."
           ],
           "raises": [],
           "args": [
-            [
-              "aFormat",
-              "str",
-              "in"
-            ],
-            [
-              "nLocale",
-              "Locale_70d308fa",
-              "in"
-            ],
-            [
-              "bScan",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "aFormat",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "bScan",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "queryKeys",
           "returns": "typing.Tuple[int, ...]",
+          "returns_origin": "sequence< long >",
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "nType",
-              "int",
-              "in"
-            ],
-            [
-              "nLocale",
-              "Locale_70d308fa",
-              "in"
-            ],
-            [
-              "bCreate",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "nType",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "nLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "bCreate",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "removeByKey",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes a number format from the list."
           ],
           "raises": [],
           "args": [
-            [
-              "nKey",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nKey",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

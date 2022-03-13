@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XExternalDocLink",
   "type": "interface",
@@ -80,6 +80,7 @@
         {
           "name": "addSheetCache",
           "returns": "XExternalSheetCache_1a420e89",
+          "returns_origin": "com.sun.star.sheet.XExternalSheetCache",
           "desc": [
             "This method adds a new sheet cache instance to the external document link for a specified sheet name. If a sheet cache instance already exists for the specified name, then the existing instance is returned.",
             "",
@@ -87,17 +88,36 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aSheetName",
-              "str",
-              "in"
-            ],
-            [
-              "DynamicCache",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "aSheetName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "DynamicCache",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
+        }
+      ],
+      "properties": [
+        {
+          "name": "TokenIndex",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "Index corresponding to the external document link.",
+            "",
+            "This index value corresponds with the external document represented by an instance of com.sun.star.sheet.ExternalDocLink. This value is stored within a formula token instance.",
+            "",
+            "Each external document cache instance has a unique index value, and this index value can be used to retrieve the corresponding external document cache from the parent com.sun.star.sheet.ExternalDocLinks instance."
+          ],
+          "raises_get": "",
+          "raises_set": ""
         }
       ]
     }

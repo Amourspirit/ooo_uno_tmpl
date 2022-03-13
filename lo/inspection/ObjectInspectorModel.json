@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "ObjectInspectorModel",
   "type": "service",
@@ -62,6 +62,7 @@
         {
           "name": "createDefault",
           "returns": "None",
+          "returns_origin": null,
           "desc": [
             "creates a default ObjectInspectorModel, whose one and only handler factory creates a GenericPropertyHandler."
           ],
@@ -71,6 +72,7 @@
         {
           "name": "createWithHandlerFactories",
           "returns": "None",
+          "returns_origin": null,
           "desc": [
             "creates a default ObjectInspectorModel, using an externally provided sequence of property handler factories."
           ],
@@ -78,16 +80,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "handlerFactories",
-              "typing.Tuple[object, ...]",
-              "in"
-            ]
+            {
+              "name": "handlerFactories",
+              "type": "typing.Tuple[object, ...]",
+              "direction": "in",
+              "origin": "sequence< any >"
+            }
           ]
         },
         {
           "name": "createWithHandlerFactoriesAndHelpSection",
           "returns": "None",
+          "returns_origin": null,
           "desc": [
             "creates a default ObjectInspectorModel, using an externally provided sequence of property handler factories, and describing an ObjectInspector which has a help section.",
             "",
@@ -99,21 +103,24 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "handlerFactories",
-              "typing.Tuple[object, ...]",
-              "in"
-            ],
-            [
-              "minHelpTextLines",
-              "int",
-              "in"
-            ],
-            [
-              "maxHelpTextLines",
-              "int",
-              "in"
-            ]
+            {
+              "name": "handlerFactories",
+              "type": "typing.Tuple[object, ...]",
+              "direction": "in",
+              "origin": "sequence< any >"
+            },
+            {
+              "name": "minHelpTextLines",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "maxHelpTextLines",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

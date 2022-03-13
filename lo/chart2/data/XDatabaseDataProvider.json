@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDatabaseDataProvider",
   "type": "interface",
@@ -107,10 +107,49 @@
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1chart2_1_1data_1_1XDatabaseDataProvider.html",
     "items": {
+      "types": [
+        {
+          "name": "DetailFields",
+          "returns": "typing.Tuple[str, ...]",
+          "origtype": null,
+          "origin": "sequence< string >",
+          "desc": [
+            "is used for subreports and contains the names of the columns of the subreport which are related to the master fields of the parent report.",
+            "",
+            "Entries in this sequence can either denote column names in the sub report, or parameter names.",
+            "For instance, you could base the report on the SQL statement SELECT * FROM invoices WHERE cust_ref = :cid, and add cid to the DetailFields property. In this case, the parameter will be filled from the corresponding master field.",
+            "Alternatively, you could simply base your report on the table invoices, and add the column name cust_ref to the DetailFields. In this case, and implicit filter clause WHERE cust_ref = :<new_param_name> will be created, and the artificial parameter will be filled from the corresponding master field.",
+            "If a string in this property denotes both a column name and a parameter name, it is undefined which way it is interpreted, but implementations of the service are required to either decide for the parameter or the column, and proceed as usual.",
+            "",
+            "The columns specified herein typically represent a part of the primary key fields or their aliases of the detail report.",
+            "",
+            "If the report is no sub report (e.g. its parent is not a report itself), this property is not evaluated."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "MasterFields",
+          "returns": "typing.Tuple[str, ...]",
+          "origtype": null,
+          "origin": "sequence< string >",
+          "desc": [
+            "is used for subreports and contains the names of columns of the parent report.",
+            "",
+            "These columns are typically the foreign key fields of the parent report. The values of these columns are used to identify the data for the subreport. Each time the parent report changes its current row, the subreport requeries it's data based on the values of the master fields.",
+            "",
+            "If the report is no sub report (e.g. its parent is not a report itself), this property is not evaluated."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ],
       "properties": [
         {
           "name": "ActiveConnection",
           "returns": "XConnection_a36a0b0c",
+          "origtype": "com.sun.star.sdbc.XConnection",
+          "origin": "com.sun.star.sdbc.XConnection",
           "desc": [
             "specifies the active connection which is used to create the resulting report."
           ],
@@ -120,6 +159,8 @@
         {
           "name": "ApplyFilter",
           "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
           "desc": [
             "indicates whether the filter should be applied or not, default is FALSE."
           ],
@@ -129,6 +170,8 @@
         {
           "name": "Command",
           "returns": "str",
+          "origtype": null,
+          "origin": "string",
           "desc": [
             "is the command which should be executed, the type of command depends on the CommandType.",
             "",
@@ -142,6 +185,8 @@
         {
           "name": "CommandType",
           "returns": "int",
+          "origtype": null,
+          "origin": "long",
           "desc": [
             "specifies the type of the command to be executed to retrieve a result set.",
             "",
@@ -155,6 +200,8 @@
         {
           "name": "DataSourceName",
           "returns": "str",
+          "origtype": null,
+          "origin": "string",
           "desc": [
             "is the name of the data source to use, this could be a named data source or the URL of a data access component."
           ],
@@ -164,6 +211,8 @@
         {
           "name": "EscapeProcessing",
           "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
           "desc": [
             "specifies if the Command should be analyzed on the client side before sending it to the database server.",
             "",
@@ -177,6 +226,8 @@
         {
           "name": "Filter",
           "returns": "str",
+          "origtype": null,
+          "origin": "string",
           "desc": [
             "specifies an additional filter to optionally use.",
             "",
@@ -192,6 +243,8 @@
         {
           "name": "GroupBy",
           "returns": "str",
+          "origtype": null,
+          "origin": "string",
           "desc": [
             "additional group by for the row set"
           ],
@@ -201,6 +254,8 @@
         {
           "name": "HavingClause",
           "returns": "str",
+          "origtype": null,
+          "origin": "string",
           "desc": [
             "additional having clause for the row set"
           ],
@@ -210,6 +265,8 @@
         {
           "name": "Order",
           "returns": "str",
+          "origtype": null,
+          "origin": "string",
           "desc": [
             "is an additional sort order definition for a row set."
           ],
@@ -219,6 +276,8 @@
         {
           "name": "RowLimit",
           "returns": "int",
+          "origtype": null,
+          "origin": "long",
           "desc": [
             "specifies the maximal count of rows which should be fetched.",
             "",

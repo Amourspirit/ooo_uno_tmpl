@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XForbiddenCharacters",
   "type": "interface",
@@ -69,6 +69,7 @@
         {
           "name": "getForbiddenCharacters",
           "returns": "ForbiddenCharacters_ce0dd5",
+          "returns_origin": "com.sun.star.i18n.ForbiddenCharacters",
           "desc": [
             "returns the forbidden characters for a given locale."
           ],
@@ -76,61 +77,69 @@
             "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
-            [
-              "aLocale",
-              "Locale_70d308fa",
-              "in"
-            ]
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
           ]
         },
         {
           "name": "hasForbiddenCharacters",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "determines if forbidden characters are set for a given locale."
           ],
           "raises": [],
           "args": [
-            [
-              "aLocale",
-              "Locale_70d308fa",
-              "in"
-            ]
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
           ]
         },
         {
           "name": "removeForbiddenCharacters",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes the setting of forbidden characters for a given locale."
           ],
           "raises": [],
           "args": [
-            [
-              "aLocale",
-              "Locale_70d308fa",
-              "in"
-            ]
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
           ]
         },
         {
           "name": "setForbiddenCharacters",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the forbidden characters for a given Locale."
           ],
           "raises": [],
           "args": [
-            [
-              "aLocale",
-              "Locale_70d308fa",
-              "in"
-            ],
-            [
-              "aForbiddenCharacters",
-              "ForbiddenCharacters_ce0dd5",
-              "in"
-            ]
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "aForbiddenCharacters",
+              "type": "ForbiddenCharacters_ce0dd5",
+              "direction": "in",
+              "origin": "com.sun.star.i18n.ForbiddenCharacters"
+            }
           ]
         }
       ]

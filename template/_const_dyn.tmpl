@@ -44,35 +44,59 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 if not TYPE_CHECKING and _DYNAMIC:
     from $namespace import $safe_name as $safe_name
+#*
+    Not sure this is the best way to accomplish adding attribues to const.
+    Class is a slots class with no dictionary, therefore adding attributes normally
+    is not an option. Also underlying uno._ConstantGroup class prevents access to any attributes
+    that is not in the _constants dictionary class.
+    This is the only solution I have come up with thus far. PM
+*#
+    if hasattr($safe_name, '_constants') and isinstance(${safe_name}._constants, dict):
+        ${safe_name}._constants['__ooo_ns__'] = '$namespace'
+        ${safe_name}._constants['__ooo_full_ns__'] = '$fullname'
+        ${safe_name}._constants['__ooo_type_name__'] = 'const'
+#*
+    Build enum dynamicallly.
+
+    Bulding enum statically can cause issues in backwards compatibility such as com.sun.star.style.NumberingType
+    contains attribs in 7x version that were not availabe in 6x version.
+*#
+    def build_enum():
+        global ${safe_name}Enum
+        ls = [f for f in dir($safe_name) if not callable(getattr($safe_name, f)) and not f.startswith('__')]
+        _dict = {}
+        for name in ls:
+            _dict[name] = getattr($safe_name, name)
+        ${safe_name}Enum = ${enum_class}('${safe_name}Enum', _dict)
+    build_enum()
 else:
     $self.get_rel_import(in_str=$uno_obj_in, ns=$uno_obj_ns) as $safe_name
 
+    class ${safe_name}Enum($enum_class):
+        """
+        Enum of Const Class $self.get_safe_word($name)
 
-class ${safe_name}Enum($enum_class):
-    """
-    Enum of Const Class $self.get_safe_word($name)
-
-    #if isinstance($desc, str)
-    $desc
-    #else
-        #for $line in $desc
-    $line
-        #end for
-    #end if
-    """
-#for $item in $attribs
-    $self.get_safe_word($item['name']) = ${safe_name}.$self.get_safe_word($item['name'])
-    #if len($item['lines']) > 0
-    """
-        #if isinstance($item['lines'], str)
-    $item['lines']
+        #if isinstance($desc, str)
+        $desc
         #else
-            #for $line in $item['lines']
-    $line
+            #for $line in $desc
+        $line
             #end for
         #end if
-    """
-    #end if
-#end for
+        """
+    #for $item in $attribs
+        $self.get_safe_word($item['name']) = ${safe_name}.$self.get_safe_word($item['name'])
+        #if len($item['lines']) > 0
+        """
+            #if isinstance($item['lines'], str)
+        $item['lines']
+            #else
+                #for $line in $item['lines']
+        $line
+                #end for
+            #end if
+        """
+        #end if
+    #end for
 
 __all__ = ['${safe_name}', '${safe_name}Enum']

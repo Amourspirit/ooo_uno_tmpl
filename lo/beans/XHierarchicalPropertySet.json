@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XHierarchicalPropertySet",
   "type": "interface",
@@ -68,6 +68,7 @@
         {
           "name": "getHierarchicalPropertySetInfo",
           "returns": "XHierarchicalPropertySetInfo_ae271245",
+          "returns_origin": "com.sun.star.beans.XHierarchicalPropertySetInfo",
           "desc": [
             "retrieve information about the hierarchy of properties"
           ],
@@ -77,6 +78,7 @@
         {
           "name": "getHierarchicalPropertyValue",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [],
           "raises": [
             "com.sun.star.beans.UnknownPropertyException",
@@ -84,16 +86,18 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "aHierarchicalPropertyName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aHierarchicalPropertyName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "setHierarchicalPropertyValue",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the value of the property with the specified nested name."
           ],
@@ -104,16 +108,18 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "aHierarchicalPropertyName",
-              "str",
-              "in"
-            ],
-            [
-              "aValue",
-              "object",
-              "in"
-            ]
+            {
+              "name": "aHierarchicalPropertyName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aValue",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         }
       ]

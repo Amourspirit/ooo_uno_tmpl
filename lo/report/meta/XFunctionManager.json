@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XFunctionManager",
   "type": "interface",
@@ -75,6 +75,7 @@
         {
           "name": "getCategory",
           "returns": "XFunctionCategory_59e21055",
+          "returns_origin": "com.sun.star.report.meta.XFunctionCategory",
           "desc": [
             "same as getByIndex."
           ],
@@ -83,16 +84,18 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "position",
-              "int",
-              "in"
-            ]
+            {
+              "name": "position",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getFunctionByName",
           "returns": "XFunctionDescription_8d8d119b",
+          "returns_origin": "com.sun.star.report.meta.XFunctionDescription",
           "desc": [
             "get the function description by name"
           ],
@@ -100,11 +103,12 @@
             "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
-            [
-              "name",
-              "str",
-              "in"
-            ]
+            {
+              "name": "name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

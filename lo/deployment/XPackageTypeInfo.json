@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XPackageTypeInfo",
   "type": "interface",
@@ -42,6 +42,7 @@
         {
           "name": "getDescription",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns a description string to describe a package type."
           ],
@@ -53,6 +54,7 @@
         {
           "name": "getFileFilter",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns a file filter string for the file picker user interface.",
             "",
@@ -64,26 +66,30 @@
         {
           "name": "getIcon",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "returns an icon for a package."
           ],
           "raises": [],
           "args": [
-            [
-              "highContrast",
-              "bool",
-              "in"
-            ],
-            [
-              "smallIcon",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "highContrast",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            },
+            {
+              "name": "smallIcon",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "getMediaType",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the media type of a package, e.g.",
             "",
@@ -95,6 +101,7 @@
         {
           "name": "getShortDescription",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns a short description string to describe a package type (one line only)."
           ],

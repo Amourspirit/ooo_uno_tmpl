@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XFramesSupplier",
   "type": "interface",
@@ -61,6 +61,7 @@
         {
           "name": "getActiveFrame",
           "returns": "XFrame_7a570956",
+          "returns_origin": "com.sun.star.frame.XFrame",
           "desc": [
             "gets the current active frame of this container (not of any other available supplier)",
             "",
@@ -72,6 +73,7 @@
         {
           "name": "getFrames",
           "returns": "XFrames_842009c9",
+          "returns_origin": "com.sun.star.frame.XFrames",
           "desc": [
             "provides access to this container and to all other XFramesSupplier which are available from this node of frame tree"
           ],
@@ -81,6 +83,7 @@
         {
           "name": "setActiveFrame",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "is called on activation of a direct sub-frame.",
             "",
@@ -92,11 +95,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Frame",
-              "XFrame_7a570956",
-              "in"
-            ]
+            {
+              "name": "Frame",
+              "type": "XFrame_7a570956",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XFrame"
+            }
           ]
         }
       ]

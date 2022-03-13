@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSearchable",
   "type": "interface",
@@ -70,6 +70,7 @@
         {
           "name": "createSearchDescriptor",
           "returns": "XSearchDescriptor_ef600d93",
+          "returns_origin": "com.sun.star.util.XSearchDescriptor",
           "desc": [
             "creates a SearchDescriptor which contains properties that specify a search in this container."
           ],
@@ -79,51 +80,58 @@
         {
           "name": "findAll",
           "returns": "XIndexAccess_f0910d6d",
+          "returns_origin": "com.sun.star.container.XIndexAccess",
           "desc": [
             "searches the contained texts for all occurrences of whatever is specified."
           ],
           "raises": [],
           "args": [
-            [
-              "xDesc",
-              "XSearchDescriptor_ef600d93",
-              "in"
-            ]
+            {
+              "name": "xDesc",
+              "type": "XSearchDescriptor_ef600d93",
+              "direction": "in",
+              "origin": "com.sun.star.util.XSearchDescriptor"
+            }
           ]
         },
         {
           "name": "findFirst",
           "returns": "XInterface_8f010a43",
+          "returns_origin": "com.sun.star.uno.XInterface",
           "desc": [
             "searches the contained texts for the next occurrence of whatever is specified."
           ],
           "raises": [],
           "args": [
-            [
-              "xDesc",
-              "XSearchDescriptor_ef600d93",
-              "in"
-            ]
+            {
+              "name": "xDesc",
+              "type": "XSearchDescriptor_ef600d93",
+              "direction": "in",
+              "origin": "com.sun.star.util.XSearchDescriptor"
+            }
           ]
         },
         {
           "name": "findNext",
           "returns": "XInterface_8f010a43",
+          "returns_origin": "com.sun.star.uno.XInterface",
           "desc": [
             "searches the contained texts for the next occurrence of whatever is specified."
           ],
           "raises": [],
           "args": [
-            [
-              "xStartAt",
-              "XInterface_8f010a43",
-              "in"
-            ],
-            [
-              "xDesc",
-              "XSearchDescriptor_ef600d93",
-              "in"
-            ]
+            {
+              "name": "xStartAt",
+              "type": "XInterface_8f010a43",
+              "direction": "in",
+              "origin": "com.sun.star.uno.XInterface"
+            },
+            {
+              "name": "xDesc",
+              "type": "XSearchDescriptor_ef600d93",
+              "direction": "in",
+              "origin": "com.sun.star.util.XSearchDescriptor"
+            }
           ]
         }
       ]

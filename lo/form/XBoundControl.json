@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XBoundControl",
   "type": "interface",
@@ -50,6 +50,7 @@
         {
           "name": "getLock",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "determines whether the input is currently locked or not."
           ],
@@ -59,16 +60,18 @@
         {
           "name": "setLock",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "is used for altering the current lock state of the component."
           ],
           "raises": [],
           "args": [
-            [
-              "bLock",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "bLock",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         }
       ]

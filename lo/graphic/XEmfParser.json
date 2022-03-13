@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XEmfParser",
   "type": "interface",
@@ -82,31 +82,36 @@
         {
           "name": "getDecomposition",
           "returns": "typing.Tuple[XPrimitive2D_d5730c6d, ...]",
+          "returns_origin": "sequence< XPrimitive2D >",
           "desc": [
             "Retrieve decomposed list of simpler primitives."
           ],
           "raises": [],
           "args": [
-            [
-              "xEmfStream",
-              "object",
-              "in"
-            ],
-            [
-              "aAbsolutePath",
-              "str",
-              "in"
-            ],
-            [
-              "Properties",
-              "PropertyValues_d6470ce6",
-              "in"
-            ]
+            {
+              "name": "xEmfStream",
+              "type": "object",
+              "direction": "in",
+              "origin": null
+            },
+            {
+              "name": "aAbsolutePath",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Properties",
+              "type": "PropertyValues_d6470ce6",
+              "direction": "in",
+              "origin": "com.sun.star.beans.PropertyValues"
+            }
           ]
         },
         {
           "name": "setSizeHint",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Sets a size hint on this object.",
             "",
@@ -116,11 +121,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Size",
-              "RealPoint2D_d6e70c78",
-              "in"
-            ]
+            {
+              "name": "Size",
+              "type": "RealPoint2D_d6e70c78",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.RealPoint2D"
+            }
           ]
         }
       ]

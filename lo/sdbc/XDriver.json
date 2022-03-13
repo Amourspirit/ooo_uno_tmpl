@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDriver",
   "type": "interface",
@@ -83,6 +83,7 @@
         {
           "name": "acceptsURL",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "returns TRUE if the driver thinks that it can open a connection to the given URL.",
             "",
@@ -92,16 +93,18 @@
             "SQLException"
           ],
           "args": [
-            [
-              "url",
-              "str",
-              "in"
-            ]
+            {
+              "name": "url",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "connect",
           "returns": "XConnection_a36a0b0c",
+          "returns_origin": "com.sun.star.sdbc.XConnection",
           "desc": [
             "attempts to make a database connection to the given URL.",
             "",
@@ -115,21 +118,24 @@
             "SQLException"
           ],
           "args": [
-            [
-              "url",
-              "str",
-              "in"
-            ],
-            [
-              "info",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ]
+            {
+              "name": "url",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "info",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            }
           ]
         },
         {
           "name": "getMajorVersion",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "gets the driver's major version number.",
             "",
@@ -141,6 +147,7 @@
         {
           "name": "getMinorVersion",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "gets the driver's minor version number.",
             "",
@@ -152,6 +159,7 @@
         {
           "name": "getPropertyInfo",
           "returns": "typing.Tuple[DriverPropertyInfo_fd970e01, ...]",
+          "returns_origin": "sequence< DriverPropertyInfo >",
           "desc": [
             "gets information about the possible properties for this driver.",
             "",
@@ -161,16 +169,18 @@
             "SQLException"
           ],
           "args": [
-            [
-              "url",
-              "str",
-              "in"
-            ],
-            [
-              "info",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ]
+            {
+              "name": "url",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "info",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            }
           ]
         }
       ]

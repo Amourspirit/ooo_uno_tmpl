@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XAggregation",
   "type": "interface",
@@ -60,6 +60,7 @@
         {
           "name": "queryAggregation",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "is similar to XInterface.queryInterface(), but it is to be processed directly without being forwarded to the delegator.",
             "",
@@ -67,26 +68,29 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aType",
-              "object",
-              "in"
-            ]
+            {
+              "name": "aType",
+              "type": "object",
+              "direction": "in",
+              "origin": "type"
+            }
           ]
         },
         {
           "name": "setDelegator",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the object to which all calls to the method XInterface.queryInterface() have to be forwarded."
           ],
           "raises": [],
           "args": [
-            [
-              "pDelegator",
-              "XInterface_8f010a43",
-              "in"
-            ]
+            {
+              "name": "pDelegator",
+              "type": "XInterface_8f010a43",
+              "direction": "in",
+              "origin": "com.sun.star.uno.XInterface"
+            }
           ]
         }
       ]

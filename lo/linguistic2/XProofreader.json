@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XProofreader",
   "type": "interface",
@@ -80,6 +80,7 @@
         {
           "name": "doProofreading",
           "returns": "ProofreadingResult_6cc910d4",
+          "returns_origin": "com.sun.star.linguistic2.ProofreadingResult",
           "desc": [
             "start checking",
             "",
@@ -89,41 +90,48 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aDocumentIdentifier",
-              "str",
-              "in"
-            ],
-            [
-              "aText",
-              "str",
-              "in"
-            ],
-            [
-              "aLocale",
-              "Locale_70d308fa",
-              "in"
-            ],
-            [
-              "nStartOfSentencePosition",
-              "int",
-              "in"
-            ],
-            [
-              "nSuggestedBehindEndOfSentencePosition",
-              "int",
-              "in"
-            ],
-            [
-              "aProperties",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ]
+            {
+              "name": "aDocumentIdentifier",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aText",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "nStartOfSentencePosition",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nSuggestedBehindEndOfSentencePosition",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aProperties",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            }
           ]
         },
         {
           "name": "ignoreRule",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "disables a specific rule for a given locale.",
             "",
@@ -133,21 +141,24 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aRuleIdentifier",
-              "str",
-              "in"
-            ],
-            [
-              "aLocale",
-              "Locale_70d308fa",
-              "in"
-            ]
+            {
+              "name": "aRuleIdentifier",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
           ]
         },
         {
           "name": "isSpellChecker",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "whether is the text checked by the spell checker"
           ],
@@ -157,6 +168,7 @@
         {
           "name": "resetIgnoreRules",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets all rules back to their default settings."
           ],

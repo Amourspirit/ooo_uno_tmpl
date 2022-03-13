@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XPrimitive2DRenderer",
   "type": "interface",
@@ -86,6 +86,7 @@
         {
           "name": "rasterize",
           "returns": "XBitmap_b1b70b7b",
+          "returns_origin": "com.sun.star.rendering.XBitmap",
           "desc": [
             "return rasterized version of given XPrimitive2D",
             "",
@@ -99,36 +100,42 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Primitive2DSequence",
-              "typing.Tuple[XPrimitive2D_d5730c6d, ...]",
-              "in"
-            ],
-            [
-              "aViewInformationSequence",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ],
-            [
-              "DPIX",
-              "int",
-              "in"
-            ],
-            [
-              "DPIY",
-              "int",
-              "in"
-            ],
-            [
-              "Range",
-              "RealRectangle2D_d9b0e03",
-              "in"
-            ],
-            [
-              "MaximumQuadraticPixels",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Primitive2DSequence",
+              "type": "typing.Tuple[XPrimitive2D_d5730c6d, ...]",
+              "direction": "in",
+              "origin": "sequence< XPrimitive2D >"
+            },
+            {
+              "name": "aViewInformationSequence",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< .com.sun.star.beans.PropertyValue >"
+            },
+            {
+              "name": "DPIX",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "DPIY",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "Range",
+              "type": "RealRectangle2D_d9b0e03",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.RealRectangle2D"
+            },
+            {
+              "name": "MaximumQuadraticPixels",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

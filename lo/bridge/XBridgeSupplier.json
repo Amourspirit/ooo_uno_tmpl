@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XBridgeSupplier",
   "type": "interface",
@@ -70,6 +70,7 @@
         {
           "name": "createBridge",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "creates a bridge to provide an object of one object model with another."
           ],
@@ -77,31 +78,36 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "modelDepObject",
-              "object",
-              "in"
-            ],
-            [
-              "MachineId",
-              "Uik_4fac0783",
-              "in"
-            ],
-            [
-              "ProcessId",
-              "int",
-              "in"
-            ],
-            [
-              "sourceModelType",
-              "int",
-              "in"
-            ],
-            [
-              "destModelType",
-              "int",
-              "in"
-            ]
+            {
+              "name": "modelDepObject",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            },
+            {
+              "name": "MachineId",
+              "type": "Uik_4fac0783",
+              "direction": "in",
+              "origin": "com.sun.star.uno.Uik"
+            },
+            {
+              "name": "ProcessId",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "sourceModelType",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "destModelType",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         }
       ]

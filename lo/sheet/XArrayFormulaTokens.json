@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XArrayFormulaTokens",
   "type": "interface",
@@ -50,6 +50,7 @@
         {
           "name": "getArrayTokens",
           "returns": "typing.Tuple[FormulaToken_bd1c0bf8, ...]",
+          "returns_origin": "sequence< FormulaToken >",
           "desc": [
             "returns the array formula as sequence of tokens."
           ],
@@ -59,16 +60,18 @@
         {
           "name": "setArrayTokens",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the array formula as sequence of tokens."
           ],
           "raises": [],
           "args": [
-            [
-              "aTokens",
-              "typing.Tuple[FormulaToken_bd1c0bf8, ...]",
-              "in"
-            ]
+            {
+              "name": "aTokens",
+              "type": "typing.Tuple[FormulaToken_bd1c0bf8, ...]",
+              "direction": "in",
+              "origin": "sequence< FormulaToken >"
+            }
           ]
         }
       ]

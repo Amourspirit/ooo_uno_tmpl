@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDataExporter",
   "type": "interface",
@@ -76,6 +76,7 @@
         {
           "name": "cancel",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "cancels the export process."
           ],
@@ -85,26 +86,30 @@
         {
           "name": "exportData",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "exports data for a component into an output stream."
           ],
           "raises": [],
           "args": [
-            [
-              "aOutputStream",
-              "XOutputStream_a4e00b35",
-              "in"
-            ],
-            [
-              "Component",
-              "XComponent_98dc0ab5",
-              "in"
-            ],
-            [
-              "aListener",
-              "XDataTransferEventListener_54d6103f",
-              "in"
-            ]
+            {
+              "name": "aOutputStream",
+              "type": "XOutputStream_a4e00b35",
+              "direction": "in",
+              "origin": "com.sun.star.io.XOutputStream"
+            },
+            {
+              "name": "Component",
+              "type": "XComponent_98dc0ab5",
+              "direction": "in",
+              "origin": "com.sun.star.lang.XComponent"
+            },
+            {
+              "name": "aListener",
+              "type": "XDataTransferEventListener_54d6103f",
+              "direction": "in",
+              "origin": "com.sun.star.io.XDataTransferEventListener"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XCertificateExtension",
   "type": "interface",
@@ -32,7 +32,7 @@
     "typings": [
       "typing.Tuple[int, ...]"
     ],
-    "requires_typing": false,
+    "requires_typing": true,
     "full_imports": {
       "general": [
         "com.sun.star.uno.XInterface"
@@ -56,11 +56,36 @@
         {
           "name": "isCritical",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Check whether it is a critical extension."
           ],
           "raises": [],
           "args": []
+        }
+      ],
+      "types": [
+        {
+          "name": "ExtensionId",
+          "returns": "typing.Tuple[int, ...]",
+          "origtype": null,
+          "origin": "sequence< byte >",
+          "desc": [
+            "Get the extension object identifier in string."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ExtensionValue",
+          "returns": "typing.Tuple[int, ...]",
+          "origtype": null,
+          "origin": "sequence< byte >",
+          "desc": [
+            "Get the extension value."
+          ],
+          "raises_get": "",
+          "raises_set": ""
         }
       ]
     }

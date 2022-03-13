@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "ContentInfo",
@@ -35,6 +35,12 @@
       "typing.Tuple[Property_8f4e0a76, ...]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.beans.Property"
+      ]
+    },
     "fullname": "com.sun.star.ucb.ContentInfo",
     "desc": [
       "A structure for information about contents."
@@ -45,7 +51,9 @@
       {
         "name": "Properties",
         "type": "typing.Tuple[Property_8f4e0a76, ...]",
-        "lines": [
+        "origtype": null,
+        "origin": "sequence< com.sun.star.beans.Property >",
+        "desc": [
           "This field contains a list with the properties which must be set at a content that was just created using XContentCreator.createNewContent() before it can be committed (by executing the command \\\"insert\\\" at the new content).",
           "",
           "If one of the properties is missing, the insert command will fail.",
@@ -58,7 +66,9 @@
       {
         "name": "Type",
         "type": "str",
-        "lines": [
+        "origtype": null,
+        "origin": "string",
+        "desc": [
           "A type identifier string for a content.",
           "",
           "This is an implementation specific string characterizing the kind of a content (e.g. \\\"application/vnd.sun.star.hierarchy-link\\\"). The value of this member should match the value returned by XContent.getContentType() of an appropriate content."
@@ -67,7 +77,9 @@
       {
         "name": "Attributes",
         "type": "int",
-        "lines": [
+        "origtype": null,
+        "origin": "long",
+        "desc": [
           "Additional attributes.",
           "",
           "These flags contain extra information on the content, like its kind (KIND_FOLDER, KIND_DOCUMENT, KIND_LINK).",

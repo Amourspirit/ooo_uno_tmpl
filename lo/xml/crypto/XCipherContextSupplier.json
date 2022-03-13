@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XCipherContextSupplier",
   "type": "interface",
@@ -75,6 +75,7 @@
         {
           "name": "getCipherContext",
           "returns": "XCipherContext_1b110ec0",
+          "returns_origin": "com.sun.star.xml.crypto.XCipherContext",
           "desc": [
             "returns an object that allows to encrypt/decrypt data."
           ],
@@ -82,31 +83,36 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "nCipherID",
-              "int",
-              "in"
-            ],
-            [
-              "aKey",
-              "typing.Tuple[int, ...]",
-              "in"
-            ],
-            [
-              "aInitializationVector",
-              "typing.Tuple[int, ...]",
-              "in"
-            ],
-            [
-              "bEncryption",
-              "bool",
-              "in"
-            ],
-            [
-              "aParams",
-              "typing.Tuple[NamedValue_a37a0af3, ...]",
-              "in"
-            ]
+            {
+              "name": "nCipherID",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aKey",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "in",
+              "origin": "sequence< byte >"
+            },
+            {
+              "name": "aInitializationVector",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "in",
+              "origin": "sequence< byte >"
+            },
+            {
+              "name": "bEncryption",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            },
+            {
+              "name": "aParams",
+              "type": "typing.Tuple[NamedValue_a37a0af3, ...]",
+              "direction": "in",
+              "origin": "sequence< .com.sun.star.beans.NamedValue >"
+            }
           ]
         }
       ]

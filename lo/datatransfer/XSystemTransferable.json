@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSystemTransferable",
   "type": "interface",
@@ -56,6 +56,7 @@
         {
           "name": "getData",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "Called by a data consumer to obtain a system specific data object from the source.",
             "",
@@ -65,11 +66,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aProcessId",
-              "typing.Tuple[int, ...]",
-              "in"
-            ]
+            {
+              "name": "aProcessId",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "in",
+              "origin": "sequence< byte >"
+            }
           ]
         }
       ]

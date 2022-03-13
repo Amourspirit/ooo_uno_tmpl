@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XIntegerReadOnlyBitmap",
   "type": "interface",
@@ -83,6 +83,7 @@
         {
           "name": "getData",
           "returns": "typing.Tuple[int, ...]",
+          "returns_origin": "sequence< byte >",
           "desc": [
             "Query the raw data of this bitmap.",
             "",
@@ -95,21 +96,24 @@
             "VolatileContentDestroyedException"
           ],
           "args": [
-            [
-              "bitmapLayout",
-              "IntegerBitmapLayout_5b94106f",
-              "out"
-            ],
-            [
-              "rect",
-              "IntegerRectangle2D_3c5c0f4d",
-              "in"
-            ]
+            {
+              "name": "bitmapLayout",
+              "type": "IntegerBitmapLayout_5b94106f",
+              "direction": "out",
+              "origin": "com.sun.star.rendering.IntegerBitmapLayout"
+            },
+            {
+              "name": "rect",
+              "type": "IntegerRectangle2D_3c5c0f4d",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.IntegerRectangle2D"
+            }
           ]
         },
         {
           "name": "getMemoryLayout",
           "returns": "IntegerBitmapLayout_5b94106f",
+          "returns_origin": "com.sun.star.rendering.IntegerBitmapLayout",
           "desc": [
             "Query the memory layout for this bitmap.",
             "",
@@ -121,6 +125,7 @@
         {
           "name": "getPixel",
           "returns": "typing.Tuple[int, ...]",
+          "returns_origin": "sequence< byte >",
           "desc": [
             "Get a single pixel of the bitmap, returning its color value.",
             "",
@@ -133,16 +138,18 @@
             "VolatileContentDestroyedException"
           ],
           "args": [
-            [
-              "bitmapLayout",
-              "IntegerBitmapLayout_5b94106f",
-              "out"
-            ],
-            [
-              "pos",
-              "IntegerPoint2D_8f0dc2",
-              "in"
-            ]
+            {
+              "name": "bitmapLayout",
+              "type": "IntegerBitmapLayout_5b94106f",
+              "direction": "out",
+              "origin": "com.sun.star.rendering.IntegerBitmapLayout"
+            },
+            {
+              "name": "pos",
+              "type": "IntegerPoint2D_8f0dc2",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.IntegerPoint2D"
+            }
           ]
         }
       ]

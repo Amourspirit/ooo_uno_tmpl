@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XMouseEvent",
   "type": "interface",
@@ -65,6 +65,7 @@
         {
           "name": "getAltKey",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [],
           "raises": [],
           "args": []
@@ -72,6 +73,7 @@
         {
           "name": "getButton",
           "returns": "int",
+          "returns_origin": "short",
           "desc": [],
           "raises": [],
           "args": []
@@ -79,6 +81,7 @@
         {
           "name": "getClientX",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [],
           "raises": [],
           "args": []
@@ -86,6 +89,7 @@
         {
           "name": "getClientY",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [],
           "raises": [],
           "args": []
@@ -93,6 +97,7 @@
         {
           "name": "getCtrlKey",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [],
           "raises": [],
           "args": []
@@ -100,6 +105,7 @@
         {
           "name": "getMetaKey",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [],
           "raises": [],
           "args": []
@@ -107,6 +113,7 @@
         {
           "name": "getRelatedTarget",
           "returns": "XEventTarget_36420f4b",
+          "returns_origin": "com.sun.star.xml.dom.events.XEventTarget",
           "desc": [],
           "raises": [],
           "args": []
@@ -114,6 +121,7 @@
         {
           "name": "getScreenX",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [],
           "raises": [],
           "args": []
@@ -121,6 +129,7 @@
         {
           "name": "getScreenY",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [],
           "raises": [],
           "args": []
@@ -128,6 +137,7 @@
         {
           "name": "getShiftKey",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [],
           "raises": [],
           "args": []
@@ -135,84 +145,100 @@
         {
           "name": "initMouseEvent",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "typeArg",
-              "str",
-              "in"
-            ],
-            [
-              "canBubbleArg",
-              "bool",
-              "in"
-            ],
-            [
-              "cancelableArg",
-              "bool",
-              "in"
-            ],
-            [
-              "viewArg",
-              "XAbstractView_35f90f4a",
-              "in"
-            ],
-            [
-              "detailArg",
-              "int",
-              "in"
-            ],
-            [
-              "screenXArg",
-              "int",
-              "in"
-            ],
-            [
-              "screenYArg",
-              "int",
-              "in"
-            ],
-            [
-              "clientXArg",
-              "int",
-              "in"
-            ],
-            [
-              "clientYArg",
-              "int",
-              "in"
-            ],
-            [
-              "ctrlKeyArg",
-              "bool",
-              "in"
-            ],
-            [
-              "altKeyArg",
-              "bool",
-              "in"
-            ],
-            [
-              "shiftKeyArg",
-              "bool",
-              "in"
-            ],
-            [
-              "metaKeyArg",
-              "bool",
-              "in"
-            ],
-            [
-              "buttonArg",
-              "int",
-              "in"
-            ],
-            [
-              "relatedTargetArg",
-              "XEventTarget_36420f4b",
-              "in"
-            ]
+            {
+              "name": "typeArg",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "canBubbleArg",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            },
+            {
+              "name": "cancelableArg",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            },
+            {
+              "name": "viewArg",
+              "type": "XAbstractView_35f90f4a",
+              "direction": "in",
+              "origin": "com.sun.star.xml.dom.views.XAbstractView"
+            },
+            {
+              "name": "detailArg",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "screenXArg",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "screenYArg",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "clientXArg",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "clientYArg",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "ctrlKeyArg",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            },
+            {
+              "name": "altKeyArg",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            },
+            {
+              "name": "shiftKeyArg",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            },
+            {
+              "name": "metaKeyArg",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            },
+            {
+              "name": "buttonArg",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "relatedTargetArg",
+              "type": "XEventTarget_36420f4b",
+              "direction": "in",
+              "origin": "com.sun.star.xml.dom.events.XEventTarget"
+            }
           ]
         }
       ]

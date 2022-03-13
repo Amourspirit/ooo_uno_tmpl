@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSingleServiceFactory",
   "type": "interface",
@@ -61,6 +61,7 @@
         {
           "name": "createInstance",
           "returns": "XInterface_8f010a43",
+          "returns_origin": "com.sun.star.uno.XInterface",
           "desc": [
             "Creates an instance of a service implementation."
           ],
@@ -72,6 +73,7 @@
         {
           "name": "createInstanceWithArguments",
           "returns": "XInterface_8f010a43",
+          "returns_origin": "com.sun.star.uno.XInterface",
           "desc": [
             "Creates an instance of a service implementation initialized with some arguments."
           ],
@@ -79,11 +81,12 @@
             "com.sun.star.uno.Exception"
           ],
           "args": [
-            [
-              "aArguments",
-              "typing.Tuple[object, ...]",
-              "in"
-            ]
+            {
+              "name": "aArguments",
+              "type": "typing.Tuple[object, ...]",
+              "direction": "in",
+              "origin": "sequence< any >"
+            }
           ]
         }
       ]

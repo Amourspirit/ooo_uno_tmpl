@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XAccessibleKeyBinding",
   "type": "interface",
@@ -70,6 +70,7 @@
         {
           "name": "getAccessibleKeyBinding",
           "returns": "typing.Tuple[KeyStroke_84cb09f5, ...]",
+          "returns_origin": "sequence<.com.sun.star.awt.KeyStroke >",
           "desc": [
             "The returned sequence of key strokes describes one method to invoke the associated action (the one from which you obtained the object at which you called this method) by pressing keys.",
             "",
@@ -79,16 +80,18 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "nIndex",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getAccessibleKeyBindingCount",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "Return the number of available key bindings."
           ],

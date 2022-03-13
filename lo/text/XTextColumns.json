@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XTextColumns",
   "type": "interface",
@@ -64,6 +64,7 @@
         {
           "name": "getColumnCount",
           "returns": "int",
+          "returns_origin": "short",
           "desc": [],
           "raises": [],
           "args": []
@@ -71,6 +72,7 @@
         {
           "name": "getColumns",
           "returns": "typing.Tuple[TextColumn_9b3f0ae0, ...]",
+          "returns_origin": "sequence< com.sun.star.text.TextColumn >",
           "desc": [
             "returns the column description of the object."
           ],
@@ -80,6 +82,7 @@
         {
           "name": "getReferenceValue",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "As described above, the width values are relative."
           ],
@@ -89,6 +92,7 @@
         {
           "name": "setColumnCount",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the number of columns.",
             "",
@@ -96,16 +100,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "nColumns",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nColumns",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "setColumns",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the descriptors of all columns.",
             "",
@@ -113,11 +119,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Columns",
-              "typing.Tuple[TextColumn_9b3f0ae0, ...]",
-              "in"
-            ]
+            {
+              "name": "Columns",
+              "type": "typing.Tuple[TextColumn_9b3f0ae0, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.text.TextColumn >"
+            }
           ]
         }
       ]

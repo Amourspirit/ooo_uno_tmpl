@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XContentEnumerationAccess",
   "type": "interface",
@@ -65,19 +65,22 @@
         {
           "name": "createContentEnumeration",
           "returns": "XEnumeration_f2180daa",
+          "returns_origin": "com.sun.star.container.XEnumeration",
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "aServiceName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aServiceName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getAvailableServiceNames",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [
             "XContentEnumerationAccess.createContentEnumeration() creates an enumeration for all the service names which are listed here. For all others it creates no enumeration."
           ],

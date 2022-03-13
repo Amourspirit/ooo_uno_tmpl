@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSimpleFileAccess3",
   "type": "interface",
@@ -54,6 +54,7 @@
         {
           "name": "isHidden",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Checks if a file is \\\"hidden\\\"."
           ],
@@ -62,16 +63,18 @@
             "com.sun.star.uno.Exception"
           ],
           "args": [
-            [
-              "FileURL",
-              "str",
-              "in"
-            ]
+            {
+              "name": "FileURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "setHidden",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Sets the \\\"hidden\\\" of a file according to the boolean parameter, if the actual process has the right to do so and the used operation system supports this operation."
           ],
@@ -80,16 +83,18 @@
             "com.sun.star.uno.Exception"
           ],
           "args": [
-            [
-              "FileURL",
-              "str",
-              "in"
-            ],
-            [
-              "bHidden",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "FileURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "bHidden",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XInstanceProvider",
   "type": "interface",
@@ -52,6 +52,7 @@
         {
           "name": "getInstance",
           "returns": "XInterface_8f010a43",
+          "returns_origin": "com.sun.star.uno.XInterface",
           "desc": [
             "gets called, when an initial object is requested from a remote process.",
             "",
@@ -61,11 +62,12 @@
             "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
-            [
-              "sInstanceName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "sInstanceName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

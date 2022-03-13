@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XOutParameters",
   "type": "interface",
@@ -52,6 +52,7 @@
         {
           "name": "registerNumericOutParameter",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "registers the OUT parameter in ordinal position parameterIndex to the SDBC type sqlType.",
             "",
@@ -63,26 +64,30 @@
             "SQLException"
           ],
           "args": [
-            [
-              "parameterIndex",
-              "int",
-              "in"
-            ],
-            [
-              "sqlType",
-              "int",
-              "in"
-            ],
-            [
-              "scale",
-              "int",
-              "in"
-            ]
+            {
+              "name": "parameterIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "sqlType",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "scale",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "registerOutParameter",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "registers the designated output parameter.",
             "",
@@ -99,21 +104,24 @@
             "SQLException"
           ],
           "args": [
-            [
-              "parameterIndex",
-              "int",
-              "in"
-            ],
-            [
-              "sqlType",
-              "int",
-              "in"
-            ],
-            [
-              "typeName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "parameterIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "sqlType",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "typeName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

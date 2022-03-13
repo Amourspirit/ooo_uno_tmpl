@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XToolkit",
   "type": "interface",
@@ -95,6 +95,7 @@
         {
           "name": "createRegion",
           "returns": "XRegion_70f30910",
+          "returns_origin": "com.sun.star.awt.XRegion",
           "desc": [
             "creates a region."
           ],
@@ -104,26 +105,30 @@
         {
           "name": "createScreenCompatibleDevice",
           "returns": "XDevice_70ba08fc",
+          "returns_origin": "com.sun.star.awt.XDevice",
           "desc": [
             "creates a virtual device that is compatible with the screen."
           ],
           "raises": [],
           "args": [
-            [
-              "Width",
-              "int",
-              "in"
-            ],
-            [
-              "Height",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Width",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "Height",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "createWindow",
           "returns": "XWindowPeer_99760ab0",
+          "returns_origin": "com.sun.star.awt.XWindowPeer",
           "desc": [
             "creates a new window using the given descriptor."
           ],
@@ -131,16 +136,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "Descriptor",
-              "WindowDescriptor_d61e0ceb",
-              "in"
-            ]
+            {
+              "name": "Descriptor",
+              "type": "WindowDescriptor_d61e0ceb",
+              "direction": "in",
+              "origin": "com.sun.star.awt.WindowDescriptor"
+            }
           ]
         },
         {
           "name": "createWindows",
           "returns": "typing.Tuple[XWindowPeer_99760ab0, ...]",
+          "returns_origin": "sequence< com.sun.star.awt.XWindowPeer >",
           "desc": [
             "returns a sequence of windows which are newly created using the given descriptors."
           ],
@@ -148,16 +155,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "Descriptors",
-              "typing.Tuple[WindowDescriptor_d61e0ceb, ...]",
-              "in"
-            ]
+            {
+              "name": "Descriptors",
+              "type": "typing.Tuple[WindowDescriptor_d61e0ceb, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.awt.WindowDescriptor >"
+            }
           ]
         },
         {
           "name": "getDesktopWindow",
           "returns": "XWindowPeer_99760ab0",
+          "returns_origin": "com.sun.star.awt.XWindowPeer",
           "desc": [
             "returns the desktop window."
           ],
@@ -167,6 +176,7 @@
         {
           "name": "getWorkArea",
           "returns": "Rectangle_84b109e9",
+          "returns_origin": "com.sun.star.awt.Rectangle",
           "desc": [
             "For LibreOffice versions < 4.1, this method just returned an empty rectangle.",
             "",

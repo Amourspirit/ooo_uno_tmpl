@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XComponent",
   "type": "interface",
@@ -64,6 +64,7 @@
         {
           "name": "addEventListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "adds an event listener to the object.",
             "",
@@ -75,16 +76,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xListener",
-              "XEventListener_c7230c4a",
-              "in"
-            ]
+            {
+              "name": "xListener",
+              "type": "XEventListener_c7230c4a",
+              "direction": "in",
+              "origin": "com.sun.star.lang.XEventListener"
+            }
           ]
         },
         {
           "name": "dispose",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "The owner of an object calls this method to explicitly free all resources kept by this object and thus break cyclic references.",
             "",
@@ -102,6 +105,7 @@
         {
           "name": "removeEventListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes an event listener from the listener list.",
             "",
@@ -113,11 +117,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aListener",
-              "XEventListener_c7230c4a",
-              "in"
-            ]
+            {
+              "name": "aListener",
+              "type": "XEventListener_c7230c4a",
+              "direction": "in",
+              "origin": "com.sun.star.lang.XEventListener"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "FloatingPointBitmapLayout",
@@ -33,6 +33,12 @@
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.rendering.XColorSpace"
+      ]
+    },
     "fullname": "com.sun.star.rendering.FloatingPointBitmapLayout",
     "desc": [
       "This structure describes the memory layout of a bitmap having floating point color channels.",
@@ -49,7 +55,9 @@
       {
         "name": "ScanLines",
         "type": "int",
-        "lines": [
+        "origtype": null,
+        "origin": "long",
+        "desc": [
           "Number of scanlines for this bitmap.",
           "",
           "This value must not be negative"
@@ -58,7 +66,9 @@
       {
         "name": "ScanLineBytes",
         "type": "int",
-        "lines": [
+        "origtype": null,
+        "origin": "long",
+        "desc": [
           "Number of data bytes per scanline.",
           "",
           "This value must not be negative"
@@ -67,7 +77,9 @@
       {
         "name": "ScanLineStride",
         "type": "int",
-        "lines": [
+        "origtype": null,
+        "origin": "long",
+        "desc": [
           "Byte offset between the start of two consecutive scanlines.",
           "",
           "This value is permitted to be negative, denoting a bitmap whose content is flipped at the x axis."
@@ -76,7 +88,9 @@
       {
         "name": "PlaneStride",
         "type": "int",
-        "lines": [
+        "origtype": null,
+        "origin": "long",
+        "desc": [
           "Byte offset between the start of two consecutive planes.",
           "",
           "This value is permitted to be negative. If this value is zero, the bitmap is assumed to be in chunky format, otherwise it is assumed to be planar. The difference between chunky and planar layout lies in the way how color channels are interleaved. For a chunky format, all channel data for a single pixel lies consecutively in memory. For a planar layout, the first channel of all pixel is stored consecutive, followed by the second channel, and so forth."
@@ -85,14 +99,18 @@
       {
         "name": "ColorSpace",
         "type": "XColorSpace_e3940d09",
-        "lines": [
+        "origtype": "com.sun.star.rendering.XColorSpace",
+        "origin": "com.sun.star.rendering.XColorSpace",
+        "desc": [
           "Color space the bitmap colors shall be interpreted within."
         ]
       },
       {
         "name": "NumComponents",
         "type": "int",
-        "lines": [
+        "origtype": null,
+        "origin": "long",
+        "desc": [
           "Number of color components per pixel.",
           "",
           "This value must not be negative"
@@ -101,7 +119,9 @@
       {
         "name": "Endianness",
         "type": "int",
-        "lines": [
+        "origtype": null,
+        "origin": "byte",
+        "desc": [
           "Endianness of the pixel values.",
           "",
           "This value must be one of the Endianness constants"
@@ -110,7 +130,9 @@
       {
         "name": "Format",
         "type": "int",
-        "lines": [
+        "origtype": null,
+        "origin": "byte",
+        "desc": [
           "Format type of this bitmap.",
           "",
           "This value must be one of the FloatingPointBitmapFormat constants."

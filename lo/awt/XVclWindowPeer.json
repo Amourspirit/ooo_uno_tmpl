@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XVclWindowPeer",
   "type": "interface",
@@ -72,81 +72,93 @@
         {
           "name": "enableClipSiblings",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "enables clipping of sibling windows."
           ],
           "raises": [],
           "args": [
-            [
-              "bClip",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "bClip",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "getProperty",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "returns the value of the property with the specified name."
           ],
           "raises": [],
           "args": [
-            [
-              "PropertyName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "PropertyName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getStyles",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "returns the font, foreground and background color for the specified type."
           ],
           "raises": [],
           "args": [
-            [
-              "nType",
-              "int",
-              "in"
-            ],
-            [
-              "Font",
-              "FontDescriptor_bc110c0a",
-              "out"
-            ],
-            [
-              "ForegroundColor",
-              "Color_68e908c5",
-              "out"
-            ],
-            [
-              "BackgroundColor",
-              "Color_68e908c5",
-              "out"
-            ]
+            {
+              "name": "nType",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "Font",
+              "type": "FontDescriptor_bc110c0a",
+              "direction": "out",
+              "origin": "com.sun.star.awt.FontDescriptor"
+            },
+            {
+              "name": "ForegroundColor",
+              "type": "Color_68e908c5",
+              "direction": "out",
+              "origin": "com.sun.star.util.Color"
+            },
+            {
+              "name": "BackgroundColor",
+              "type": "Color_68e908c5",
+              "direction": "out",
+              "origin": "com.sun.star.util.Color"
+            }
           ]
         },
         {
           "name": "isChild",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "returns TRUE if the window peer is a child, FALSE otherwise."
           ],
           "raises": [],
           "args": [
-            [
-              "Peer",
-              "XWindowPeer_99760ab0",
-              "in"
-            ]
+            {
+              "name": "Peer",
+              "type": "XWindowPeer_99760ab0",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XWindowPeer"
+            }
           ]
         },
         {
           "name": "isDesignMode",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "returns TRUE if the window peer is in design mode, FALSE otherwise."
           ],
@@ -156,66 +168,75 @@
         {
           "name": "setControlFont",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the control font."
           ],
           "raises": [],
           "args": [
-            [
-              "aFont",
-              "FontDescriptor_bc110c0a",
-              "in"
-            ]
+            {
+              "name": "aFont",
+              "type": "FontDescriptor_bc110c0a",
+              "direction": "in",
+              "origin": "com.sun.star.awt.FontDescriptor"
+            }
           ]
         },
         {
           "name": "setDesignMode",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the design mode for use in a design editor."
           ],
           "raises": [],
           "args": [
-            [
-              "bOn",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "bOn",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "setForeground",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the foreground color."
           ],
           "raises": [],
           "args": [
-            [
-              "Color",
-              "Color_68e908c5",
-              "in"
-            ]
+            {
+              "name": "Color",
+              "type": "Color_68e908c5",
+              "direction": "in",
+              "origin": "com.sun.star.util.Color"
+            }
           ]
         },
         {
           "name": "setProperty",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the value of the property with the specified name."
           ],
           "raises": [],
           "args": [
-            [
-              "PropertyName",
-              "str",
-              "in"
-            ],
-            [
-              "Value",
-              "object",
-              "in"
-            ]
+            {
+              "name": "PropertyName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Value",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         }
       ]

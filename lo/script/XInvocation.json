@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XInvocation",
   "type": "interface",
@@ -67,6 +67,7 @@
         {
           "name": "getIntrospection",
           "returns": "XIntrospectionAccess_2a050f2c",
+          "returns_origin": "com.sun.star.beans.XIntrospectionAccess",
           "desc": [
             "returns the introspection from this object or NULL if the object does not provide this information."
           ],
@@ -76,6 +77,7 @@
         {
           "name": "getValue",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "returns the value of the property with the specified name."
           ],
@@ -83,16 +85,18 @@
             "com.sun.star.beans.UnknownPropertyException"
           ],
           "args": [
-            [
-              "aPropertyName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aPropertyName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "hasMethod",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "returns TRUE if the method with the specified name exists, else FALSE.",
             "",
@@ -100,31 +104,35 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "hasProperty",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "returns TRUE if the property with the specified name exists, else FALSE."
           ],
           "raises": [],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "invoke",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "provides access to methods exposed by an object.",
             "",
@@ -136,31 +144,36 @@
             "com.sun.star.reflection.InvocationTargetException"
           ],
           "args": [
-            [
-              "aFunctionName",
-              "str",
-              "in"
-            ],
-            [
-              "aParams",
-              "typing.Tuple[object, ...]",
-              "in"
-            ],
-            [
-              "aOutParamIndex",
-              "typing.Tuple[int, ...]",
-              "out"
-            ],
-            [
-              "aOutParam",
-              "typing.Tuple[object, ...]",
-              "out"
-            ]
+            {
+              "name": "aFunctionName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aParams",
+              "type": "typing.Tuple[object, ...]",
+              "direction": "in",
+              "origin": "sequence< any >"
+            },
+            {
+              "name": "aOutParamIndex",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "out",
+              "origin": "sequence< short >"
+            },
+            {
+              "name": "aOutParam",
+              "type": "typing.Tuple[object, ...]",
+              "direction": "out",
+              "origin": "sequence< any >"
+            }
           ]
         },
         {
           "name": "setValue",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets a value to the property with the specified name.",
             "",
@@ -172,16 +185,18 @@
             "com.sun.star.reflection.InvocationTargetException"
           ],
           "args": [
-            [
-              "aPropertyName",
-              "str",
-              "in"
-            ],
-            [
-              "aValue",
-              "object",
-              "in"
-            ]
+            {
+              "name": "aPropertyName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aValue",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         }
       ]

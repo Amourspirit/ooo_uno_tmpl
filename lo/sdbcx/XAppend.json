@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XAppend",
   "type": "interface",
@@ -60,6 +60,7 @@
         {
           "name": "appendByDescriptor",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "creates a new object using the given descriptor and appends it to the related container.",
             "",
@@ -70,11 +71,12 @@
             "com.sun.star.container.ElementExistException"
           ],
           "args": [
-            [
-              "descriptor",
-              "XPropertySet_bc180bfa",
-              "in"
-            ]
+            {
+              "name": "descriptor",
+              "type": "XPropertySet_bc180bfa",
+              "direction": "in",
+              "origin": "com.sun.star.beans.XPropertySet"
+            }
           ]
         }
       ]

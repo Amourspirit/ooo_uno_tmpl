@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XProtectable",
   "type": "interface",
@@ -50,6 +50,7 @@
         {
           "name": "isProtected",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [],
           "raises": [],
           "args": []
@@ -57,21 +58,24 @@
         {
           "name": "protect",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "activates the protection."
           ],
           "raises": [],
           "args": [
-            [
-              "aPassword",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aPassword",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "unprotect",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes the protection."
           ],
@@ -79,11 +83,12 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aPassword",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aPassword",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

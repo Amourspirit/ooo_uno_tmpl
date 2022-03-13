@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XMergeable",
   "type": "interface",
@@ -50,6 +50,7 @@
         {
           "name": "getIsMerged",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [],
           "raises": [],
           "args": []
@@ -57,16 +58,18 @@
         {
           "name": "merge",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "merges/unmerges the area specified by this object."
           ],
           "raises": [],
           "args": [
-            [
-              "bMerge",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "bMerge",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         }
       ]

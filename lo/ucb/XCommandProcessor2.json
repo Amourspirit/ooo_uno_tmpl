@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XCommandProcessor2",
   "type": "interface",
@@ -50,6 +50,7 @@
         {
           "name": "releaseCommandIdentifier",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "releases a command identifier obtained through XCommandProcessor.createCommandIdentifier() when it is no longer used.",
             "",
@@ -57,11 +58,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "CommandId",
-              "int",
-              "in"
-            ]
+            {
+              "name": "CommandId",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

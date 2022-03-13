@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XValidator",
   "type": "interface",
@@ -65,6 +65,7 @@
         {
           "name": "addValidityConstraintListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "registers the given validity listener.",
             "",
@@ -76,46 +77,52 @@
             "com.sun.star.lang.NullPointerException"
           ],
           "args": [
-            [
-              "Listener",
-              "XValidityConstraintListener_69a2161e",
-              "in"
-            ]
+            {
+              "name": "Listener",
+              "type": "XValidityConstraintListener_69a2161e",
+              "direction": "in",
+              "origin": "com.sun.star.form.validation.XValidityConstraintListener"
+            }
           ]
         },
         {
           "name": "explainInvalid",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "retrieves a justification for the invalidity of the given value"
           ],
           "raises": [],
           "args": [
-            [
-              "Value",
-              "object",
-              "in"
-            ]
+            {
+              "name": "Value",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         },
         {
           "name": "isValid",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "determines whether the given value is valid"
           ],
           "raises": [],
           "args": [
-            [
-              "Value",
-              "object",
-              "in"
-            ]
+            {
+              "name": "Value",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
           ]
         },
         {
           "name": "removeValidityConstraintListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "revokes the given validity listener"
           ],
@@ -123,11 +130,12 @@
             "com.sun.star.lang.NullPointerException"
           ],
           "args": [
-            [
-              "Listener",
-              "XValidityConstraintListener_69a2161e",
-              "in"
-            ]
+            {
+              "name": "Listener",
+              "type": "XValidityConstraintListener_69a2161e",
+              "direction": "in",
+              "origin": "com.sun.star.form.validation.XValidityConstraintListener"
+            }
           ]
         }
       ]

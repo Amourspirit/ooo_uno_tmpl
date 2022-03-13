@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDocumentProperties",
   "type": "interface",
@@ -94,6 +94,7 @@
         {
           "name": "getUserDefinedProperties",
           "returns": "XPropertyContainer_c600e71",
+          "returns_origin": "com.sun.star.beans.XPropertyContainer",
           "desc": [
             "provides access to a container for user-defined properties.",
             "",
@@ -105,6 +106,7 @@
         {
           "name": "loadFromMedium",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "loads document properties from an ODF package or an OLE container.",
             "",
@@ -116,21 +118,24 @@
             "com.sun.star.io.IOException"
           ],
           "args": [
-            [
-              "URL",
-              "str",
-              "in"
-            ],
-            [
-              "Medium",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ]
+            {
+              "name": "URL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Medium",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            }
           ]
         },
         {
           "name": "loadFromStorage",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "loads document properties from an ODF package.",
             "",
@@ -145,21 +150,24 @@
             "com.sun.star.io.IOException"
           ],
           "args": [
-            [
-              "Storage",
-              "XStorage_8e460a32",
-              "in"
-            ],
-            [
-              "Medium",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ]
+            {
+              "name": "Storage",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            },
+            {
+              "name": "Medium",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            }
           ]
         },
         {
           "name": "resetUserData",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "resets all attributes that could identify the user.",
             "",
@@ -167,16 +175,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Author",
-              "str",
-              "in"
-            ]
+            {
+              "name": "Author",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "storeToMedium",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "stores document properties to an ODF package or an OLE container.",
             "",
@@ -187,21 +197,24 @@
             "com.sun.star.io.IOException"
           ],
           "args": [
-            [
-              "URL",
-              "str",
-              "in"
-            ],
-            [
-              "Medium",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ]
+            {
+              "name": "URL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Medium",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            }
           ]
         },
         {
           "name": "storeToStorage",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "stores document properties to an ODF package.",
             "",
@@ -215,16 +228,18 @@
             "com.sun.star.io.IOException"
           ],
           "args": [
-            [
-              "Storage",
-              "XStorage_8e460a32",
-              "in"
-            ],
-            [
-              "Medium",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ]
+            {
+              "name": "Storage",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            },
+            {
+              "name": "Medium",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            }
           ]
         }
       ],
@@ -232,6 +247,8 @@
         {
           "name": "DocumentStatistics",
           "returns": "typing.Tuple[NamedValue_a37a0af3, ...]",
+          "origtype": null,
+          "origin": "sequence< com.sun.star.beans.NamedValue >",
           "desc": [
             "contains some statistics about the document.",
             "",
@@ -243,6 +260,8 @@
         {
           "name": "Keywords",
           "returns": "typing.Tuple[str, ...]",
+          "origtype": null,
+          "origin": "sequence< string >",
           "desc": [
             "contains a list of keywords for the document."
           ],
@@ -254,6 +273,8 @@
         {
           "name": "Author",
           "returns": "str",
+          "origtype": null,
+          "origin": "string",
           "desc": [
             "contains the initial author of the document."
           ],
@@ -263,6 +284,8 @@
         {
           "name": "AutoloadSecs",
           "returns": "int",
+          "origtype": null,
+          "origin": "long",
           "desc": [
             "contains the number of seconds after which a specified URL is to be loaded after the document is loaded into a desktop frame.",
             "",
@@ -274,6 +297,8 @@
         {
           "name": "AutoloadURL",
           "returns": "str",
+          "origtype": null,
+          "origin": "string",
           "desc": [
             "contains the URL to load automatically at a specified time after the document is loaded into a desktop frame.",
             "",
@@ -285,6 +310,8 @@
         {
           "name": "CreationDate",
           "returns": "DateTime_84de09d3",
+          "origtype": "com.sun.star.util.DateTime",
+          "origin": "com.sun.star.util.DateTime",
           "desc": [
             "contains the date and time when the document was created."
           ],
@@ -294,6 +321,8 @@
         {
           "name": "DefaultTarget",
           "returns": "str",
+          "origtype": null,
+          "origin": "string",
           "desc": [
             "contains the name of the default frame into which links should be loaded if no target is specified.",
             "",
@@ -305,6 +334,8 @@
         {
           "name": "Description",
           "returns": "str",
+          "origtype": null,
+          "origin": "string",
           "desc": [
             "contains a multi-line comment describing the document.",
             "",
@@ -316,6 +347,8 @@
         {
           "name": "EditingCycles",
           "returns": "int",
+          "origtype": null,
+          "origin": "short",
           "desc": [
             "describes how often the document was edited and saved."
           ],
@@ -325,6 +358,8 @@
         {
           "name": "EditingDuration",
           "returns": "int",
+          "origtype": null,
+          "origin": "long",
           "desc": [
             "contains the net time of editing the document (in seconds)."
           ],
@@ -334,6 +369,8 @@
         {
           "name": "Generator",
           "returns": "str",
+          "origtype": null,
+          "origin": "string",
           "desc": [
             "identifies which application was used to create or last modify the document.",
             "",
@@ -345,6 +382,8 @@
         {
           "name": "Language",
           "returns": "Locale_70d308fa",
+          "origtype": "com.sun.star.lang.Locale",
+          "origin": "com.sun.star.lang.Locale",
           "desc": [
             "contains the default language of the document."
           ],
@@ -354,6 +393,8 @@
         {
           "name": "ModificationDate",
           "returns": "DateTime_84de09d3",
+          "origtype": "com.sun.star.util.DateTime",
+          "origin": "com.sun.star.util.DateTime",
           "desc": [
             "contains the date and time of the last time the document was stored.",
             "",
@@ -365,6 +406,8 @@
         {
           "name": "ModifiedBy",
           "returns": "str",
+          "origtype": null,
+          "origin": "string",
           "desc": [
             "contains the name of the person who most recently stored the document."
           ],
@@ -374,6 +417,8 @@
         {
           "name": "PrintDate",
           "returns": "DateTime_84de09d3",
+          "origtype": "com.sun.star.util.DateTime",
+          "origin": "com.sun.star.util.DateTime",
           "desc": [
             "contains the date and time when the document was last printed.",
             "",
@@ -385,6 +430,8 @@
         {
           "name": "PrintedBy",
           "returns": "str",
+          "origtype": null,
+          "origin": "string",
           "desc": [
             "contains the name of the person who most recently printed the document."
           ],
@@ -394,6 +441,8 @@
         {
           "name": "Subject",
           "returns": "str",
+          "origtype": null,
+          "origin": "string",
           "desc": [
             "contains the subject of the document."
           ],
@@ -403,6 +452,8 @@
         {
           "name": "TemplateDate",
           "returns": "DateTime_84de09d3",
+          "origtype": "com.sun.star.util.DateTime",
+          "origin": "com.sun.star.util.DateTime",
           "desc": [
             "contains the date and time of when the document was created or updated from the template."
           ],
@@ -412,6 +463,8 @@
         {
           "name": "TemplateName",
           "returns": "str",
+          "origtype": null,
+          "origin": "string",
           "desc": [
             "contains the name of the template from which the document was created.",
             "",
@@ -423,6 +476,8 @@
         {
           "name": "TemplateURL",
           "returns": "str",
+          "origtype": null,
+          "origin": "string",
           "desc": [
             "contains the URL of the template from which the document was created.",
             "",
@@ -434,6 +489,8 @@
         {
           "name": "Title",
           "returns": "str",
+          "origtype": null,
+          "origin": "string",
           "desc": [
             "contains the title of the document."
           ],

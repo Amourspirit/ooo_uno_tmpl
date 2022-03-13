@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "PropertyStateChangeEvent",
@@ -41,6 +41,14 @@
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.lang.EventObject"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyState"
+      ]
+    },
     "fullname": "com.sun.star.beans.PropertyStateChangeEvent",
     "desc": [
       "is delivered whenever the state of a \\\"bound\\\" property is changed.",
@@ -59,7 +67,9 @@
       {
         "name": "PropertyName",
         "type": "str",
-        "lines": [
+        "origtype": null,
+        "origin": "string",
+        "desc": [
           "specifies the name of the property which changes its value.",
           "",
           "This name identifies the property uniquely within an XPropertySet. Upper and lower case are distinguished."
@@ -68,7 +78,9 @@
       {
         "name": "PropertyHandle",
         "type": "int",
-        "lines": [
+        "origtype": null,
+        "origin": "long",
+        "desc": [
           "contains the implementation handle for the property.",
           "",
           "It may be -1 if the implementation has no handle. You can use this handle to get values from the XFastPropertySet interface."
@@ -77,14 +89,18 @@
       {
         "name": "OldValue",
         "type": "PropertyState_c97b0c77",
-        "lines": [
+        "origtype": "com.sun.star.beans.PropertyState",
+        "origin": "com.sun.star.beans.PropertyState",
+        "desc": [
           "contains the old value of the property."
         ]
       },
       {
         "name": "NewValue",
         "type": "PropertyState_c97b0c77",
-        "lines": [
+        "origtype": "com.sun.star.beans.PropertyState",
+        "origin": "com.sun.star.beans.PropertyState",
+        "desc": [
           "contains the new value of the property."
         ]
       }

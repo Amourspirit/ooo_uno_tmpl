@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XOOXMLDocumentPropertiesImporter",
   "type": "interface",
@@ -67,6 +67,7 @@
         {
           "name": "importProperties",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "allows to import the document properties from OOXML format",
             "",
@@ -80,16 +81,18 @@
             "com.sun.star.uno.Exception"
           ],
           "args": [
-            [
-              "xSource",
-              "XStorage_8e460a32",
-              "in"
-            ],
-            [
-              "xDocumentProperties",
-              "XDocumentProperties_4c31102b",
-              "in"
-            ]
+            {
+              "name": "xSource",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            },
+            {
+              "name": "xDocumentProperties",
+              "type": "XDocumentProperties_4c31102b",
+              "direction": "in",
+              "origin": "com.sun.star.document.XDocumentProperties"
+            }
           ]
         }
       ]

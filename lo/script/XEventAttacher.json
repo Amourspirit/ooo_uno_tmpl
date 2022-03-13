@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XEventAttacher",
   "type": "interface",
@@ -68,6 +68,7 @@
         {
           "name": "attachListener",
           "returns": "XEventListener_c7230c4a",
+          "returns_origin": "com.sun.star.lang.XEventListener",
           "desc": [
             "registers the given \\\"AllListener\\\" object as a listener at the given interface by creating a suitable listener adapter and calling the \\\"addListener\\\" method corresponding to the \\\"ListenerType\\\"."
           ],
@@ -78,36 +79,42 @@
             "com.sun.star.lang.ServiceNotRegisteredException"
           ],
           "args": [
-            [
-              "xTarget",
-              "XInterface_8f010a43",
-              "in"
-            ],
-            [
-              "xAllListener",
-              "XAllListener_c91b0c54",
-              "in"
-            ],
-            [
-              "aHelper",
-              "object",
-              "in"
-            ],
-            [
-              "aListenerType",
-              "str",
-              "in"
-            ],
-            [
-              "aAddListenerParam",
-              "str",
-              "in"
-            ]
+            {
+              "name": "xTarget",
+              "type": "XInterface_8f010a43",
+              "direction": "in",
+              "origin": "com.sun.star.uno.XInterface"
+            },
+            {
+              "name": "xAllListener",
+              "type": "XAllListener_c91b0c54",
+              "direction": "in",
+              "origin": "com.sun.star.script.XAllListener"
+            },
+            {
+              "name": "aHelper",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            },
+            {
+              "name": "aListenerType",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aAddListenerParam",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "attachSingleEventListener",
           "returns": "XEventListener_c7230c4a",
+          "returns_origin": "com.sun.star.lang.XEventListener",
           "desc": [
             "registers an object as a listener at the given interface by creating a suitable listener adapter and calling the method which corresponds to the listener type.",
             "",
@@ -120,41 +127,48 @@
             "com.sun.star.lang.ServiceNotRegisteredException"
           ],
           "args": [
-            [
-              "xTarget",
-              "XInterface_8f010a43",
-              "in"
-            ],
-            [
-              "xAllListener",
-              "XAllListener_c91b0c54",
-              "in"
-            ],
-            [
-              "aHelper",
-              "object",
-              "in"
-            ],
-            [
-              "aListenerType",
-              "str",
-              "in"
-            ],
-            [
-              "aAddListenerParam",
-              "str",
-              "in"
-            ],
-            [
-              "aEventMethod",
-              "str",
-              "in"
-            ]
+            {
+              "name": "xTarget",
+              "type": "XInterface_8f010a43",
+              "direction": "in",
+              "origin": "com.sun.star.uno.XInterface"
+            },
+            {
+              "name": "xAllListener",
+              "type": "XAllListener_c91b0c54",
+              "direction": "in",
+              "origin": "com.sun.star.script.XAllListener"
+            },
+            {
+              "name": "aHelper",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            },
+            {
+              "name": "aListenerType",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aAddListenerParam",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aEventMethod",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "removeListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes a listener object as a listener from the given interface.",
             "",
@@ -165,26 +179,30 @@
             "com.sun.star.beans.IntrospectionException"
           ],
           "args": [
-            [
-              "xTarget",
-              "XInterface_8f010a43",
-              "in"
-            ],
-            [
-              "aListenerType",
-              "str",
-              "in"
-            ],
-            [
-              "aRemoveListenerParam",
-              "str",
-              "in"
-            ],
-            [
-              "xToRemoveListener",
-              "XEventListener_c7230c4a",
-              "in"
-            ]
+            {
+              "name": "xTarget",
+              "type": "XInterface_8f010a43",
+              "direction": "in",
+              "origin": "com.sun.star.uno.XInterface"
+            },
+            {
+              "name": "aListenerType",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aRemoveListenerParam",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "xToRemoveListener",
+              "type": "XEventListener_c7230c4a",
+              "direction": "in",
+              "origin": "com.sun.star.lang.XEventListener"
+            }
           ]
         }
       ]

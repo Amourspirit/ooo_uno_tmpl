@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XStorageBasedDocument",
   "type": "interface",
@@ -76,21 +76,24 @@
         {
           "name": "addStorageChangeListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "allows to register a listener that will be notified when another storage is set to the document."
           ],
           "raises": [],
           "args": [
-            [
-              "xListener",
-              "XStorageChangeListener_7c7d1120",
-              "in"
-            ]
+            {
+              "name": "xListener",
+              "type": "XStorageChangeListener_7c7d1120",
+              "direction": "in",
+              "origin": "com.sun.star.document.XStorageChangeListener"
+            }
           ]
         },
         {
           "name": "getDocumentStorage",
           "returns": "XStorage_8e460a32",
+          "returns_origin": "com.sun.star.embed.XStorage",
           "desc": [
             "allows to get the storage the document is based on."
           ],
@@ -103,6 +106,7 @@
         {
           "name": "loadFromStorage",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "lets the document load itself using provided storage."
           ],
@@ -113,36 +117,41 @@
             "com.sun.star.uno.Exception"
           ],
           "args": [
-            [
-              "xStorage",
-              "XStorage_8e460a32",
-              "in"
-            ],
-            [
-              "aMediaDescriptor",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ]
+            {
+              "name": "xStorage",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            },
+            {
+              "name": "aMediaDescriptor",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< .com.sun.star.beans.PropertyValue >"
+            }
           ]
         },
         {
           "name": "removeStorageChangeListener",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "allows to deregister the listener."
           ],
           "raises": [],
           "args": [
-            [
-              "xListener",
-              "XStorageChangeListener_7c7d1120",
-              "in"
-            ]
+            {
+              "name": "xListener",
+              "type": "XStorageChangeListener_7c7d1120",
+              "direction": "in",
+              "origin": "com.sun.star.document.XStorageChangeListener"
+            }
           ]
         },
         {
           "name": "storeToStorage",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "lets the document store itself to the provided storage."
           ],
@@ -152,21 +161,24 @@
             "com.sun.star.uno.Exception"
           ],
           "args": [
-            [
-              "xStorage",
-              "XStorage_8e460a32",
-              "in"
-            ],
-            [
-              "aMediaDescriptor",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ]
+            {
+              "name": "xStorage",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            },
+            {
+              "name": "aMediaDescriptor",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< .com.sun.star.beans.PropertyValue >"
+            }
           ]
         },
         {
           "name": "switchToStorage",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "allows to switch the document to the provided storage."
           ],
@@ -176,11 +188,12 @@
             "com.sun.star.uno.Exception"
           ],
           "args": [
-            [
-              "xStorage",
-              "XStorage_8e460a32",
-              "in"
-            ]
+            {
+              "name": "xStorage",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            }
           ]
         }
       ]

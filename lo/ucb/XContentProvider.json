@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XContentProvider",
   "type": "interface",
@@ -67,26 +67,30 @@
         {
           "name": "compareContentIds",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "compares two XContentIdentifiers."
           ],
           "raises": [],
           "args": [
-            [
-              "Id1",
-              "XContentIdentifier_edc90d78",
-              "in"
-            ],
-            [
-              "Id2",
-              "XContentIdentifier_edc90d78",
-              "in"
-            ]
+            {
+              "name": "Id1",
+              "type": "XContentIdentifier_edc90d78",
+              "direction": "in",
+              "origin": "com.sun.star.ucb.XContentIdentifier"
+            },
+            {
+              "name": "Id2",
+              "type": "XContentIdentifier_edc90d78",
+              "direction": "in",
+              "origin": "com.sun.star.ucb.XContentIdentifier"
+            }
           ]
         },
         {
           "name": "queryContent",
           "returns": "XContent_79db0975",
+          "returns_origin": "com.sun.star.ucb.XContent",
           "desc": [
             "creates a new XContent instance, if the given XContentIdentifier matches a content provided by the implementation of this interface."
           ],
@@ -94,11 +98,12 @@
             "com.sun.star.ucb.IllegalIdentifierException"
           ],
           "args": [
-            [
-              "Identifier",
-              "XContentIdentifier_edc90d78",
-              "in"
-            ]
+            {
+              "name": "Identifier",
+              "type": "XContentIdentifier_edc90d78",
+              "direction": "in",
+              "origin": "com.sun.star.ucb.XContentIdentifier"
+            }
           ]
         }
       ]

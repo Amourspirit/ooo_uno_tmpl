@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XNodeList",
   "type": "interface",
@@ -58,6 +58,7 @@
         {
           "name": "getLength",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "The number of nodes in the list."
           ],
@@ -67,16 +68,18 @@
         {
           "name": "item",
           "returns": "XNode_83fb09a5",
+          "returns_origin": "com.sun.star.xml.dom.XNode",
           "desc": [
             "Returns a node specified by index in the collection."
           ],
           "raises": [],
           "args": [
-            [
-              "index",
-              "int",
-              "in"
-            ]
+            {
+              "name": "index",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

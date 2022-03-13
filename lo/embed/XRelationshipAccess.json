@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XRelationshipAccess",
   "type": "interface",
@@ -66,6 +66,7 @@
         {
           "name": "clearRelationships",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "allows to clear the set of entries."
           ],
@@ -77,6 +78,7 @@
         {
           "name": "getAllRelationships",
           "returns": "typing.Tuple[typing.Tuple[StringPair_a4bc0b14, ...], ...]",
+          "returns_origin": "sequence< sequence< .com.sun.star.beans.StringPair > >",
           "desc": [
             "retrieves the sequence containing all the entries controlled by the object."
           ],
@@ -88,6 +90,7 @@
         {
           "name": "getRelationshipByID",
           "returns": "typing.Tuple[StringPair_a4bc0b14, ...]",
+          "returns_origin": "sequence< .com.sun.star.beans.StringPair >",
           "desc": [
             "retrieves the sequence containing all the tags from the entry with specified value of \\\"ID\\\" tag."
           ],
@@ -96,16 +99,18 @@
             "com.sun.star.io.IOException"
           ],
           "args": [
-            [
-              "sID",
-              "str",
-              "in"
-            ]
+            {
+              "name": "sID",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getRelationshipsByType",
           "returns": "typing.Tuple[typing.Tuple[StringPair_a4bc0b14, ...], ...]",
+          "returns_origin": "sequence< sequence< .com.sun.star.beans.StringPair > >",
           "desc": [
             "retrieves the sequence containing all the entries which \\\"Type\\\" tag takes the specified value."
           ],
@@ -113,16 +118,18 @@
             "com.sun.star.io.IOException"
           ],
           "args": [
-            [
-              "sType",
-              "str",
-              "in"
-            ]
+            {
+              "name": "sType",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getTargetByID",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "retrieves the value of \\\"Target\\\" tag from the entry with specified \\\"ID\\\" tag.",
             "",
@@ -133,16 +140,18 @@
             "com.sun.star.io.IOException"
           ],
           "args": [
-            [
-              "sID",
-              "str",
-              "in"
-            ]
+            {
+              "name": "sID",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getTypeByID",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "retrieves the value of \\\"Type\\\" tag from the entry with specified \\\"ID\\\" tag.",
             "",
@@ -153,16 +162,18 @@
             "com.sun.star.io.IOException"
           ],
           "args": [
-            [
-              "sID",
-              "str",
-              "in"
-            ]
+            {
+              "name": "sID",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "hasByID",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "allows to detect whether there is an entry with specified value of \\\"ID\\\" tag."
           ],
@@ -170,16 +181,18 @@
             "com.sun.star.io.IOException"
           ],
           "args": [
-            [
-              "sID",
-              "str",
-              "in"
-            ]
+            {
+              "name": "sID",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "insertRelationshipByID",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "allows to insert an entry."
           ],
@@ -188,26 +201,30 @@
             "com.sun.star.io.IOException"
           ],
           "args": [
-            [
-              "sID",
-              "str",
-              "in"
-            ],
-            [
-              "aEntry",
-              "typing.Tuple[StringPair_a4bc0b14, ...]",
-              "in"
-            ],
-            [
-              "bReplace",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "sID",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aEntry",
+              "type": "typing.Tuple[StringPair_a4bc0b14, ...]",
+              "direction": "in",
+              "origin": "sequence< .com.sun.star.beans.StringPair >"
+            },
+            {
+              "name": "bReplace",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "insertRelationships",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "allows to insert a set of entries"
           ],
@@ -216,21 +233,24 @@
             "com.sun.star.io.IOException"
           ],
           "args": [
-            [
-              "aEntries",
-              "typing.Tuple[typing.Tuple[StringPair_a4bc0b14, ...], ...]",
-              "in"
-            ],
-            [
-              "bReplace",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "aEntries",
+              "type": "typing.Tuple[typing.Tuple[StringPair_a4bc0b14, ...], ...]",
+              "direction": "in",
+              "origin": "sequence< sequence< .com.sun.star.beans.StringPair > >"
+            },
+            {
+              "name": "bReplace",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "removeRelationshipByID",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "allows to remove an entry."
           ],
@@ -239,11 +259,12 @@
             "com.sun.star.io.IOException"
           ],
           "args": [
-            [
-              "sID",
-              "str",
-              "in"
-            ]
+            {
+              "name": "sID",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

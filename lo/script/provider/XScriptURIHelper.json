@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XScriptURIHelper",
   "type": "interface",
@@ -50,6 +50,7 @@
         {
           "name": "getRootStorageURI",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Obtain the root storage URI for this ScriptURIHelper.",
             "",
@@ -61,6 +62,7 @@
         {
           "name": "getScriptURI",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Obtain the Scripting Framework script URI for a specific UCB URI."
           ],
@@ -68,16 +70,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "storageURI",
-              "str",
-              "in"
-            ]
+            {
+              "name": "storageURI",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getStorageURI",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Obtain the storage URI for a specific Scripting Framework script URI."
           ],
@@ -85,11 +89,12 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "scriptURI",
-              "str",
-              "in"
-            ]
+            {
+              "name": "scriptURI",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

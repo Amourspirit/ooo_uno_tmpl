@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XGraphicStorageHandler",
   "type": "interface",
@@ -78,86 +78,98 @@
         {
           "name": "createInputStream",
           "returns": "XInputStream_98d40ab4",
+          "returns_origin": "com.sun.star.io.XInputStream",
           "desc": [
             "create an input stream from the input graphic"
           ],
           "raises": [],
           "args": [
-            [
-              "xGraphic",
-              "XGraphic_a4da0afc",
-              "in"
-            ]
+            {
+              "name": "xGraphic",
+              "type": "XGraphic_a4da0afc",
+              "direction": "in",
+              "origin": "com.sun.star.graphic.XGraphic"
+            }
           ]
         },
         {
           "name": "loadGraphic",
           "returns": "XGraphic_a4da0afc",
+          "returns_origin": "com.sun.star.graphic.XGraphic",
           "desc": [
             "load a graphic defined by the URL from the storage"
           ],
           "raises": [],
           "args": [
-            [
-              "aURL",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "loadGraphicFromOutputStream",
           "returns": "XGraphic_a4da0afc",
+          "returns_origin": "com.sun.star.graphic.XGraphic",
           "desc": [
             "load a graphic from the output stream"
           ],
           "raises": [],
           "args": [
-            [
-              "xOutputStream",
-              "XOutputStream_a4e00b35",
-              "in"
-            ]
+            {
+              "name": "xOutputStream",
+              "type": "XOutputStream_a4e00b35",
+              "direction": "in",
+              "origin": "com.sun.star.io.XOutputStream"
+            }
           ]
         },
         {
           "name": "saveGraphic",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "save the graphic to the storage and return the URL reference to its location inside the storage"
           ],
           "raises": [],
           "args": [
-            [
-              "xGraphic",
-              "XGraphic_a4da0afc",
-              "in"
-            ]
+            {
+              "name": "xGraphic",
+              "type": "XGraphic_a4da0afc",
+              "direction": "in",
+              "origin": "com.sun.star.graphic.XGraphic"
+            }
           ]
         },
         {
           "name": "saveGraphicByName",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "save the graphic to the storage with a requested name and return the URL reference to its location inside the storage and the mime type of the format that the graphic was saved to as an output parameter"
           ],
           "raises": [],
           "args": [
-            [
-              "xGraphic",
-              "XGraphic_a4da0afc",
-              "in"
-            ],
-            [
-              "savedMimeType",
-              "str",
-              "out"
-            ],
-            [
-              "aRequestedName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "xGraphic",
+              "type": "XGraphic_a4da0afc",
+              "direction": "in",
+              "origin": "com.sun.star.graphic.XGraphic"
+            },
+            {
+              "name": "savedMimeType",
+              "type": "str",
+              "direction": "out",
+              "origin": "string"
+            },
+            {
+              "name": "aRequestedName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

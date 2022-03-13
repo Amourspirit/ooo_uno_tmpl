@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XLanguageGuessing",
   "type": "interface",
@@ -57,6 +57,7 @@
         {
           "name": "disableLanguages",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "allows to explicitly discard some languages from the set of languages possibly returned.",
             "",
@@ -66,16 +67,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aLanguages",
-              "typing.Tuple[Locale_70d308fa, ...]",
-              "in"
-            ]
+            {
+              "name": "aLanguages",
+              "type": "typing.Tuple[Locale_70d308fa, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.lang.Locale >"
+            }
           ]
         },
         {
           "name": "enableLanguages",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "allows to explicitly re-enable some languages that got previously disabled.",
             "",
@@ -85,16 +88,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aLanguages",
-              "typing.Tuple[Locale_70d308fa, ...]",
-              "in"
-            ]
+            {
+              "name": "aLanguages",
+              "type": "typing.Tuple[Locale_70d308fa, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.lang.Locale >"
+            }
           ]
         },
         {
           "name": "getAvailableLanguages",
           "returns": "typing.Tuple[Locale_70d308fa, ...]",
+          "returns_origin": "sequence< com.sun.star.lang.Locale >",
           "desc": [
             "returns a list of all supported languages.",
             "",
@@ -106,6 +111,7 @@
         {
           "name": "getDisabledLanguages",
           "returns": "typing.Tuple[Locale_70d308fa, ...]",
+          "returns_origin": "sequence< com.sun.star.lang.Locale >",
           "desc": [
             "returns the list of all disabled languages"
           ],
@@ -115,6 +121,7 @@
         {
           "name": "getEnabledLanguages",
           "returns": "typing.Tuple[Locale_70d308fa, ...]",
+          "returns_origin": "sequence< com.sun.star.lang.Locale >",
           "desc": [
             "returns the list of all enabled languages"
           ],
@@ -124,6 +131,7 @@
         {
           "name": "guessPrimaryLanguage",
           "returns": "Locale_70d308fa",
+          "returns_origin": "com.sun.star.lang.Locale",
           "desc": [
             "determines the single most probable language of a sub-string.",
             "",
@@ -135,21 +143,24 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aText",
-              "str",
-              "in"
-            ],
-            [
-              "nStartPos",
-              "int",
-              "in"
-            ],
-            [
-              "nLen",
-              "int",
-              "in"
-            ]
+            {
+              "name": "aText",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nStartPos",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nLen",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

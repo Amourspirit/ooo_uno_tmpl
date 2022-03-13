@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDateCategories",
   "type": "interface",
@@ -48,6 +48,7 @@
         {
           "name": "getDateCategories",
           "returns": "typing.Tuple[float, ...]",
+          "returns_origin": "sequence< double >",
           "desc": [
             "retrieves the date values if the category x-axis id a date axis"
           ],
@@ -57,16 +58,18 @@
         {
           "name": "setDateCategories",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets dates as categories"
           ],
           "raises": [],
           "args": [
-            [
-              "rDates",
-              "typing.Tuple[float, ...]",
-              "in"
-            ]
+            {
+              "name": "rDates",
+              "type": "typing.Tuple[float, ...]",
+              "direction": "in",
+              "origin": "sequence< double >"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XReportDefinition",
   "type": "interface",
@@ -176,6 +176,7 @@
         {
           "name": "getAvailableMimeTypes",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [
             "returns a sequence of the currently supported output formats."
           ],
@@ -188,6 +189,7 @@
         {
           "name": "getEventBroadcaster",
           "returns": "XEventBroadcaster_2b120f2b",
+          "returns_origin": "com.sun.star.document.XEventBroadcaster",
           "desc": [
             "makes it possible to register listeners which are called whenever a document event occurs.",
             "",
@@ -204,6 +206,8 @@
         {
           "name": "ActiveConnection",
           "returns": "XConnection_a36a0b0c",
+          "origtype": "com.sun.star.sdbc.XConnection",
+          "origin": "com.sun.star.sdbc.XConnection",
           "desc": [
             "specifies the active connection which is used to create the resulting report."
           ],
@@ -213,6 +217,8 @@
         {
           "name": "Caption",
           "returns": "str",
+          "origtype": null,
+          "origin": "string",
           "desc": [
             "Represents the title of the report in print preview."
           ],
@@ -222,6 +228,8 @@
         {
           "name": "Command",
           "returns": "str",
+          "origtype": null,
+          "origin": "string",
           "desc": [
             "is the command which should be executed, the type of command depends on the CommandType.",
             "",
@@ -235,6 +243,8 @@
         {
           "name": "CommandType",
           "returns": "int",
+          "origtype": null,
+          "origin": "long",
           "desc": [
             "specifies the type of the command to be executed to retrieve a result set.",
             "",
@@ -248,6 +258,8 @@
         {
           "name": "DataSourceName",
           "returns": "str",
+          "origtype": null,
+          "origin": "string",
           "desc": [
             "is the name of the datasource to use, this could be a named datasource or the URL of a data access component."
           ],
@@ -257,6 +269,8 @@
         {
           "name": "Detail",
           "returns": "XSection_9b630ad1",
+          "origtype": "com.sun.star.report.XSection",
+          "origin": "com.sun.star.report.XSection",
           "desc": [
             "returns the detail section."
           ],
@@ -266,6 +280,8 @@
         {
           "name": "EscapeProcessing",
           "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
           "desc": [
             "specifies if the Command should be analyzed on the client side before sending it to the database server.",
             "",
@@ -279,6 +295,8 @@
         {
           "name": "Filter",
           "returns": "str",
+          "origtype": null,
+          "origin": "string",
           "desc": [
             "specifies an additional filter to optionally use.",
             "",
@@ -294,6 +312,8 @@
         {
           "name": "GroupKeepTogether",
           "returns": "int",
+          "origtype": null,
+          "origin": "short",
           "desc": [
             "Specifies whether groups in a multi column report are kept together."
           ],
@@ -303,6 +323,8 @@
         {
           "name": "Groups",
           "returns": "XGroups_90d00a7c",
+          "origtype": "com.sun.star.report.XGroups",
+          "origin": "com.sun.star.report.XGroups",
           "desc": [
             "Represents the groups of the report."
           ],
@@ -312,6 +334,8 @@
         {
           "name": "MimeType",
           "returns": "str",
+          "origtype": null,
+          "origin": "string",
           "desc": [
             "Represents the output format (media (mime) type) of the resulting document when executing this report."
           ],
@@ -321,6 +345,8 @@
         {
           "name": "PageFooter",
           "returns": "XSection_9b630ad1",
+          "origtype": "com.sun.star.report.XSection",
+          "origin": "com.sun.star.report.XSection",
           "desc": [
             "returns the page footer if the PageFooterOn is TRUE."
           ],
@@ -330,6 +356,8 @@
         {
           "name": "PageFooterOn",
           "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
           "desc": [
             "Defines that the page footer is on.",
             "",
@@ -341,6 +369,8 @@
         {
           "name": "PageFooterOption",
           "returns": "int",
+          "origtype": null,
+          "origin": "short",
           "desc": [
             "Represents the location of the page footer."
           ],
@@ -350,6 +380,8 @@
         {
           "name": "PageHeader",
           "returns": "XSection_9b630ad1",
+          "origtype": "com.sun.star.report.XSection",
+          "origin": "com.sun.star.report.XSection",
           "desc": [
             "returns the page header if the PageHeaderOn is TRUE."
           ],
@@ -359,6 +391,8 @@
         {
           "name": "PageHeaderOn",
           "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
           "desc": [
             "Defines that the page header is on.",
             "",
@@ -370,6 +404,8 @@
         {
           "name": "PageHeaderOption",
           "returns": "int",
+          "origtype": null,
+          "origin": "short",
           "desc": [
             "Represents the location of the page header."
           ],
@@ -379,6 +415,8 @@
         {
           "name": "ReportFooter",
           "returns": "XSection_9b630ad1",
+          "origtype": "com.sun.star.report.XSection",
+          "origin": "com.sun.star.report.XSection",
           "desc": [
             "returns the report footer if the ReportFooterOn is TRUE."
           ],
@@ -388,6 +426,8 @@
         {
           "name": "ReportFooterOn",
           "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
           "desc": [
             "Defines that the report footer is on.",
             "",
@@ -399,6 +439,8 @@
         {
           "name": "ReportHeader",
           "returns": "XSection_9b630ad1",
+          "origtype": "com.sun.star.report.XSection",
+          "origin": "com.sun.star.report.XSection",
           "desc": [
             "returns the report header if the ReportHeaderOn is TRUE."
           ],
@@ -408,6 +450,8 @@
         {
           "name": "ReportHeaderOn",
           "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
           "desc": [
             "Defines that the report header is on.",
             "",

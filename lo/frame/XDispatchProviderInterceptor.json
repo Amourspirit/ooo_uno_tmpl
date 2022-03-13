@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDispatchProviderInterceptor",
   "type": "interface",
@@ -54,6 +54,7 @@
         {
           "name": "getMasterDispatchProvider",
           "returns": "XDispatchProvider_fc690de6",
+          "returns_origin": "com.sun.star.frame.XDispatchProvider",
           "desc": [
             "access to the master XDispatchProvider of this interceptor"
           ],
@@ -63,6 +64,7 @@
         {
           "name": "getSlaveDispatchProvider",
           "returns": "XDispatchProvider_fc690de6",
+          "returns_origin": "com.sun.star.frame.XDispatchProvider",
           "desc": [
             "access to the slave XDispatchProvider of this interceptor"
           ],
@@ -72,31 +74,35 @@
         {
           "name": "setMasterDispatchProvider",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the master XDispatchProvider, which may forward calls to its XDispatchProvider.queryDispatch() to this dispatch provider."
           ],
           "raises": [],
           "args": [
-            [
-              "NewSupplier",
-              "XDispatchProvider_fc690de6",
-              "in"
-            ]
+            {
+              "name": "NewSupplier",
+              "type": "XDispatchProvider_fc690de6",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XDispatchProvider"
+            }
           ]
         },
         {
           "name": "setSlaveDispatchProvider",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the slave XDispatchProvider to which calls to XDispatchProvider.queryDispatch() can be forwarded under control of this dispatch provider."
           ],
           "raises": [],
           "args": [
-            [
-              "NewDispatchProvider",
-              "XDispatchProvider_fc690de6",
-              "in"
-            ]
+            {
+              "name": "NewDispatchProvider",
+              "type": "XDispatchProvider_fc690de6",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XDispatchProvider"
+            }
           ]
         }
       ]

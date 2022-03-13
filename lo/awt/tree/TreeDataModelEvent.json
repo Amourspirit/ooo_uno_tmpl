@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "TreeDataModelEvent",
@@ -44,6 +44,14 @@
       "typing.Tuple[XTreeNode_baaf0ba0, ...]"
     ],
     "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.lang.EventObject"
+      ],
+      "typing": [
+        "com.sun.star.awt.tree.XTreeNode"
+      ]
+    },
     "fullname": "com.sun.star.awt.tree.TreeDataModelEvent",
     "desc": [
       "An event used by a XTreeDataModel to notify changes in the data model to the XTreeControl.",
@@ -58,7 +66,9 @@
       {
         "name": "Nodes",
         "type": "typing.Tuple[XTreeNode_baaf0ba0, ...]",
-        "lines": [
+        "origtype": null,
+        "origin": "sequence< XTreeNode >",
+        "desc": [
           "contains the changed, added or removed nodes.",
           "",
           "All nodes must have ParentNode as parent."
@@ -67,7 +77,9 @@
       {
         "name": "ParentNode",
         "type": "XTreeNode_baaf0ba0",
-        "lines": [
+        "origtype": "com.sun.star.awt.tree.XTreeNode",
+        "origin": "com.sun.star.awt.tree.XTreeNode",
+        "desc": [
           "holds the parent node for changed, added or removed nodes.",
           "",
           "If this is null, Nodes must contain only the root node"

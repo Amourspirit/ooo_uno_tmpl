@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XAreaLink",
   "type": "interface",
@@ -60,6 +60,7 @@
         {
           "name": "getDestArea",
           "returns": "CellRangeAddress_ec450d43",
+          "returns_origin": "com.sun.star.table.CellRangeAddress",
           "desc": [
             "returns the position of the linked range in the destination document."
           ],
@@ -69,6 +70,7 @@
         {
           "name": "getSourceArea",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the source of the range within the source document.",
             "",
@@ -80,21 +82,24 @@
         {
           "name": "setDestArea",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the position of the linked range in the destination document."
           ],
           "raises": [],
           "args": [
-            [
-              "aDestArea",
-              "CellRangeAddress_ec450d43",
-              "in"
-            ]
+            {
+              "name": "aDestArea",
+              "type": "CellRangeAddress_ec450d43",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellRangeAddress"
+            }
           ]
         },
         {
           "name": "setSourceArea",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the source of the range within the source document.",
             "",
@@ -102,11 +107,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aSourceArea",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aSourceArea",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

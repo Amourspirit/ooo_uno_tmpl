@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XInputStream",
   "type": "interface",
@@ -56,6 +56,7 @@
         {
           "name": "available",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "states how many bytes can be read or skipped without blocking.",
             "",
@@ -70,6 +71,7 @@
         {
           "name": "closeInput",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "closes the stream.",
             "",
@@ -84,6 +86,7 @@
         {
           "name": "readBytes",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "reads the specified number of bytes in the given sequence.",
             "",
@@ -95,21 +98,24 @@
             "com.sun.star.io.IOException"
           ],
           "args": [
-            [
-              "aData",
-              "typing.Tuple[int, ...]",
-              "out"
-            ],
-            [
-              "nBytesToRead",
-              "int",
-              "in"
-            ]
+            {
+              "name": "aData",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "out",
+              "origin": "sequence< byte >"
+            },
+            {
+              "name": "nBytesToRead",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "readSomeBytes",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "reads the available number of bytes, at maximum nMaxBytesToRead.",
             "",
@@ -121,21 +127,24 @@
             "com.sun.star.io.IOException"
           ],
           "args": [
-            [
-              "aData",
-              "typing.Tuple[int, ...]",
-              "out"
-            ],
-            [
-              "nMaxBytesToRead",
-              "int",
-              "in"
-            ]
+            {
+              "name": "aData",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "out",
+              "origin": "sequence< byte >"
+            },
+            {
+              "name": "nMaxBytesToRead",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "skipBytes",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "skips the next nBytesToSkip bytes (must be positive).",
             "",
@@ -147,11 +156,12 @@
             "com.sun.star.io.IOException"
           ],
           "args": [
-            [
-              "nBytesToSkip",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nBytesToSkip",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

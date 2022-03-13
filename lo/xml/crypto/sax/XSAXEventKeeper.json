@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSAXEventKeeper",
   "type": "interface",
@@ -71,6 +71,7 @@
         {
           "name": "addBlocker",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "Adds a new blocker on the next element in the SAX event stream.",
             "",
@@ -82,6 +83,7 @@
         {
           "name": "addElementCollector",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "Adds a new element collector on the next element in the SAX event stream."
           ],
@@ -91,6 +93,7 @@
         {
           "name": "getCurrentBlockingNode",
           "returns": "XXMLElementWrapper_66c0107c",
+          "returns_origin": "com.sun.star.xml.wrapper.XXMLElementWrapper",
           "desc": [
             "Gets the element which current blocking happens.",
             "",
@@ -102,21 +105,24 @@
         {
           "name": "getElement",
           "returns": "XXMLElementWrapper_66c0107c",
+          "returns_origin": "com.sun.star.xml.wrapper.XXMLElementWrapper",
           "desc": [
             "Gets the element of an element mark."
           ],
           "raises": [],
           "args": [
-            [
-              "id",
-              "int",
-              "in"
-            ]
+            {
+              "name": "id",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "isBlocking",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Checks whether the SAX event stream is blocking."
           ],
@@ -126,6 +132,7 @@
         {
           "name": "printBufferNodeTree",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Prints information about all buffered elements."
           ],
@@ -135,36 +142,41 @@
         {
           "name": "removeBlocker",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Removes a blocker."
           ],
           "raises": [],
           "args": [
-            [
-              "id",
-              "int",
-              "in"
-            ]
+            {
+              "name": "id",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "removeElementCollector",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Removes an element collector."
           ],
           "raises": [],
           "args": [
-            [
-              "id",
-              "int",
-              "in"
-            ]
+            {
+              "name": "id",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "setElement",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Sets the element of an element mark.",
             "",
@@ -172,21 +184,24 @@
           ],
           "raises": [],
           "args": [
-            [
-              "id",
-              "int",
-              "in"
-            ],
-            [
-              "aElement",
-              "XXMLElementWrapper_66c0107c",
-              "in"
-            ]
+            {
+              "name": "id",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aElement",
+              "type": "XXMLElementWrapper_66c0107c",
+              "direction": "in",
+              "origin": "com.sun.star.xml.wrapper.XXMLElementWrapper"
+            }
           ]
         },
         {
           "name": "setNextHandler",
           "returns": "XDocumentHandler_9b90e28",
+          "returns_origin": "com.sun.star.xml.sax.XDocumentHandler",
           "desc": [
             "Sets the next document handler in the SAX chain.",
             "",
@@ -194,11 +209,12 @@
           ],
           "raises": [],
           "args": [
-            [
-              "nextHandler",
-              "XDocumentHandler_9b90e28",
-              "in"
-            ]
+            {
+              "name": "nextHandler",
+              "type": "XDocumentHandler_9b90e28",
+              "direction": "in",
+              "origin": "com.sun.star.xml.sax.XDocumentHandler"
+            }
           ]
         }
       ]

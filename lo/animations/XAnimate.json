@@ -1,12 +1,12 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XAnimate",
   "type": "interface",
   "namespace": "com.sun.star.animations",
   "parser_args": {
-    "sort": true,
+    "sort": false,
     "long_names": true,
     "remove_parent_inherited": true
   },
@@ -64,8 +64,21 @@
     "items": {
       "types": [
         {
+          "name": "Values",
+          "returns": "typing.Tuple[object, ...]",
+          "origtype": null,
+          "origin": "sequence< any >",
+          "desc": [
+            "A sequence of one or more values, each of which must be a legal value for the specified attribute."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
           "name": "KeyTimes",
           "returns": "typing.Tuple[float, ...]",
+          "origtype": null,
+          "origin": "sequence< double >",
           "desc": [],
           "raises_get": "",
           "raises_set": ""
@@ -73,17 +86,146 @@
         {
           "name": "TimeFilter",
           "returns": "typing.Tuple[TimeFilterPair_1d250ebc, ...]",
+          "origtype": null,
+          "origin": "sequence< TimeFilterPair >",
           "desc": [
             "todo: timeFilter=\\\"0,0; 0.14,0.36; 0.43,0.73; 0.71,0.91; 1.0,1.0\\\" ?"
           ],
           "raises_get": "",
           "raises_set": ""
+        }
+      ],
+      "properties": [
+        {
+          "name": "Target",
+          "returns": "object",
+          "origtype": null,
+          "origin": "any",
+          "desc": [
+            "This attribute specifies the target element to be animated.",
+            "",
+            "See documentation of used animation engine for supported targets."
+          ],
+          "raises_get": "",
+          "raises_set": ""
         },
         {
-          "name": "Values",
-          "returns": "typing.Tuple[object, ...]",
+          "name": "SubItem",
+          "returns": "int",
+          "origtype": null,
+          "origin": "short",
           "desc": [
-            "A sequence of one or more values, each of which must be a legal value for the specified attribute."
+            "This attribute specifies an optional subitem from the target element that should be animated.",
+            "",
+            "A value of zero should always be the default and animate the complete target.",
+            "See documentation of used animation engine for supported subitems."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "AttributeName",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "Specifies the target attribute."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ValueType",
+          "returns": "int",
+          "origtype": null,
+          "origin": "short",
+          "desc": [],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CalcMode",
+          "returns": "int",
+          "origtype": null,
+          "origin": "short",
+          "desc": [
+            "Specifies the interpolation mode for the animation.",
+            "",
+            "If the target attribute does not support linear interpolation (e.g. for strings), or if the values attribute has only one value, the CalcMode attribute is ignored and discrete interpolation is used."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Accumulate",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "Controls whether or not the animation is cumulative."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Additive",
+          "returns": "int",
+          "origtype": null,
+          "origin": "short",
+          "desc": [
+            "Controls whether or not the animation is additive."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "From",
+          "returns": "object",
+          "origtype": null,
+          "origin": "any",
+          "desc": [
+            "Specifies the starting value of the animation.",
+            "",
+            "Must be a legal value for the specified attribute. Ignored if the Values attribute is specified."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "To",
+          "returns": "object",
+          "origtype": null,
+          "origin": "any",
+          "desc": [
+            "Specifies the ending value of the animation.",
+            "",
+            "Must be a legal value for the specified attribute. Ignored if the Values attribute is specified."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "By",
+          "returns": "object",
+          "origtype": null,
+          "origin": "any",
+          "desc": [
+            "Specifies a relative offset value for the animation.",
+            "",
+            "Must be a legal value of a domain for which addition to the attributeType domain is defined and which yields a value in the attributeType domain. Ignored if the values attribute is specified. Ignored if the Values attribute is specified."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Formula",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "if this string is set, its contents will be parsed as a formula.",
+            "",
+            "All values are used as a parameter for this formula and the computed result will be used."
           ],
           "raises_get": "",
           "raises_set": ""

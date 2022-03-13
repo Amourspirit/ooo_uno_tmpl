@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XCachedDynamicResultSetStubFactory",
   "type": "interface",
@@ -84,6 +84,7 @@
         {
           "name": "connectToCache",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "If you have instantiated a CachedDynamicResultSet on client side already, use this to connect your given Source on server side to the TargetCache."
           ],
@@ -92,41 +93,47 @@
             "com.sun.star.ucb.AlreadyInitializedException"
           ],
           "args": [
-            [
-              "Source",
-              "XDynamicResultSet_e0360d0a",
-              "in"
-            ],
-            [
-              "TargetCache",
-              "XDynamicResultSet_e0360d0a",
-              "in"
-            ],
-            [
-              "SortingInfo",
-              "typing.Tuple[NumberedSortingInfo_fd0e0de6, ...]",
-              "in"
-            ],
-            [
-              "CompareFactory",
-              "XAnyCompareFactory_ec090d61",
-              "in"
-            ]
+            {
+              "name": "Source",
+              "type": "XDynamicResultSet_e0360d0a",
+              "direction": "in",
+              "origin": "com.sun.star.ucb.XDynamicResultSet"
+            },
+            {
+              "name": "TargetCache",
+              "type": "XDynamicResultSet_e0360d0a",
+              "direction": "in",
+              "origin": "com.sun.star.ucb.XDynamicResultSet"
+            },
+            {
+              "name": "SortingInfo",
+              "type": "typing.Tuple[NumberedSortingInfo_fd0e0de6, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.ucb.NumberedSortingInfo >"
+            },
+            {
+              "name": "CompareFactory",
+              "type": "XAnyCompareFactory_ec090d61",
+              "direction": "in",
+              "origin": "com.sun.star.ucb.XAnyCompareFactory"
+            }
           ]
         },
         {
           "name": "createCachedDynamicResultSetStub",
           "returns": "XDynamicResultSet_e0360d0a",
+          "returns_origin": "com.sun.star.ucb.XDynamicResultSet",
           "desc": [
             "creates a remote optimizes XDynamicResultSet."
           ],
           "raises": [],
           "args": [
-            [
-              "Source",
-              "XDynamicResultSet_e0360d0a",
-              "in"
-            ]
+            {
+              "name": "Source",
+              "type": "XDynamicResultSet_e0360d0a",
+              "direction": "in",
+              "origin": "com.sun.star.ucb.XDynamicResultSet"
+            }
           ]
         }
       ]

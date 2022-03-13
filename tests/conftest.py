@@ -1,11 +1,12 @@
 # coding: utf-8
 import pytest
 import logging
-import os
-import sys
 from pathlib import Path
-sys.path.append(os.path.realpath('.'))
-from logger.log_handle import get_logger
+
+
+@pytest.fixture(scope="session")
+def fixture_path(app_root: Path) -> Path:
+    return app_root / 'tests' / 'fixture'
 
 @pytest.fixture(scope='session')
 def test_log():
@@ -13,12 +14,8 @@ def test_log():
     return log
 
 @pytest.fixture(scope="session")
-def scrtch_uno_path() -> Path:
-    return Path('scratch') / 'uno_obj'
-
-@pytest.fixture(scope='session')
-def app_root() -> Path:
-    return Path(__file__).parent.parent
+def fixture_json_path(fixture_path: Path) -> Path:
+    return fixture_path / 'json'
 
 
-
+from src.logger.log_handle import get_logger

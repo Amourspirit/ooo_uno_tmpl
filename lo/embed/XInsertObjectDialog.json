@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XInsertObjectDialog",
   "type": "interface",
@@ -76,6 +76,7 @@
         {
           "name": "createInstanceByDialog",
           "returns": "InsertedObjectInfo_a0e0e26",
+          "returns_origin": "com.sun.star.embed.InsertedObjectInfo",
           "desc": [
             "creates a new object using GUI dialog.",
             "",
@@ -87,21 +88,24 @@
             "com.sun.star.uno.Exception"
           ],
           "args": [
-            [
-              "xStorage",
-              "XStorage_8e460a32",
-              "in"
-            ],
-            [
-              "sEntName",
-              "str",
-              "in"
-            ],
-            [
-              "lObjArgs",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ]
+            {
+              "name": "xStorage",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            },
+            {
+              "name": "sEntName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "lObjArgs",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< .com.sun.star.beans.PropertyValue >"
+            }
           ]
         }
       ]

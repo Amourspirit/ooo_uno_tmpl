@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XConversionDictionaryList",
   "type": "interface",
@@ -90,6 +90,7 @@
         {
           "name": "addNewDictionary",
           "returns": "XConversionDictionary_a04e1209",
+          "returns_origin": "com.sun.star.linguistic2.XConversionDictionary",
           "desc": [
             "creates a new dictionary and adds it to the dictionary list.",
             "",
@@ -100,26 +101,30 @@
             "com.sun.star.container.ElementExistException"
           ],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ],
-            [
-              "aLocale",
-              "Locale_70d308fa",
-              "in"
-            ],
-            [
-              "nConversionDictionaryType",
-              "int",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "nConversionDictionaryType",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "getDictionaryContainer",
           "returns": "XNameContainer_cb90e47",
+          "returns_origin": "com.sun.star.container.XNameContainer",
           "desc": [
             "The interface can be used to add, remove or retrieve dictionaries from the list by specifying the name of the dictionary, and (in case of inserting) the interface to the dictionary as second parameter.",
             "",
@@ -133,6 +138,7 @@
         {
           "name": "queryConversions",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [
             "searches for entries that match the given text.",
             "",
@@ -145,46 +151,54 @@
             "com.sun.star.lang.NoSupportException"
           ],
           "args": [
-            [
-              "aText",
-              "str",
-              "in"
-            ],
-            [
-              "nStartPos",
-              "int",
-              "in"
-            ],
-            [
-              "nLength",
-              "int",
-              "in"
-            ],
-            [
-              "aLocale",
-              "Locale_70d308fa",
-              "in"
-            ],
-            [
-              "nConversionDictionaryType",
-              "int",
-              "in"
-            ],
-            [
-              "eDirection",
-              "ConversionDirection_7dfe113c",
-              "in"
-            ],
-            [
-              "nTextConversionOptions",
-              "int",
-              "in"
-            ]
+            {
+              "name": "aText",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nStartPos",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nLength",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "nConversionDictionaryType",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "eDirection",
+              "type": "ConversionDirection_7dfe113c",
+              "direction": "in",
+              "origin": "com.sun.star.linguistic2.ConversionDirection"
+            },
+            {
+              "name": "nTextConversionOptions",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "queryMaxCharCount",
           "returns": "int",
+          "returns_origin": "short",
           "desc": [
             "returns the maximum number of characters used as left or right text in entries.",
             "",
@@ -194,21 +208,24 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aLocale",
-              "Locale_70d308fa",
-              "in"
-            ],
-            [
-              "nConversionDictionaryType",
-              "int",
-              "in"
-            ],
-            [
-              "eDirection",
-              "ConversionDirection_7dfe113c",
-              "in"
-            ]
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "nConversionDictionaryType",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "eDirection",
+              "type": "ConversionDirection_7dfe113c",
+              "direction": "in",
+              "origin": "com.sun.star.linguistic2.ConversionDirection"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSheetCellRangeContainer",
   "type": "interface",
@@ -63,46 +63,53 @@
         {
           "name": "addRangeAddress",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "adds the given range to the collection of cell ranges."
           ],
           "raises": [],
           "args": [
-            [
-              "aCellRangeAddress",
-              "CellRangeAddress_ec450d43",
-              "in"
-            ],
-            [
-              "bMergeRanges",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "aCellRangeAddress",
+              "type": "CellRangeAddress_ec450d43",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellRangeAddress"
+            },
+            {
+              "name": "bMergeRanges",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "addRangeAddresses",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "adds the given ranges to the collection of cell ranges."
           ],
           "raises": [],
           "args": [
-            [
-              "aCellRangeAddresses",
-              "typing.Tuple[CellRangeAddress_ec450d43, ...]",
-              "in"
-            ],
-            [
-              "bMergeRanges",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "aCellRangeAddresses",
+              "type": "typing.Tuple[CellRangeAddress_ec450d43, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.table.CellRangeAddress >"
+            },
+            {
+              "name": "bMergeRanges",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "removeRangeAddress",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes the given range from the collection of cell ranges.",
             "",
@@ -112,16 +119,18 @@
             "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
-            [
-              "aCellRangeAddress",
-              "CellRangeAddress_ec450d43",
-              "in"
-            ]
+            {
+              "name": "aCellRangeAddress",
+              "type": "CellRangeAddress_ec450d43",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellRangeAddress"
+            }
           ]
         },
         {
           "name": "removeRangeAddresses",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes the given ranges from the collection of cell ranges.",
             "",
@@ -131,11 +140,12 @@
             "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
-            [
-              "aCellRangeAddresses",
-              "typing.Tuple[CellRangeAddress_ec450d43, ...]",
-              "in"
-            ]
+            {
+              "name": "aCellRangeAddresses",
+              "type": "typing.Tuple[CellRangeAddress_ec450d43, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.table.CellRangeAddress >"
+            }
           ]
         }
       ]

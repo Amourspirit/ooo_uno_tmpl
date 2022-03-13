@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "ScaleData",
@@ -57,6 +57,16 @@
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.chart.TimeIncrement",
+        "com.sun.star.chart2.AxisOrientation",
+        "com.sun.star.chart2.IncrementData",
+        "com.sun.star.chart2.XScaling",
+        "com.sun.star.chart2.data.XLabeledDataSequence"
+      ]
+    },
     "fullname": "com.sun.star.chart2.ScaleData",
     "desc": [],
     "imports": [],
@@ -65,7 +75,9 @@
       {
         "name": "Minimum",
         "type": "object",
-        "lines": [
+        "origtype": null,
+        "origin": "any",
+        "desc": [
           "if the any contains a double value this is used as a fixed maximum.",
           "",
           "Otherwise, if the any is empty or contains an incompatible type, the maximum is automatic.",
@@ -76,7 +88,9 @@
       {
         "name": "Maximum",
         "type": "object",
-        "lines": [
+        "origtype": null,
+        "origin": "any",
+        "desc": [
           "if the any contains a double value this is used as a fixed minimum.",
           "",
           "Otherwise, if the any is empty or contains an incompatible type, the minimum is automatic.",
@@ -87,7 +101,9 @@
       {
         "name": "Origin",
         "type": "object",
-        "lines": [
+        "origtype": null,
+        "origin": "any",
+        "desc": [
           "The Origin indicates where other axes cross this axis.",
           "",
           "If the any contains a double value that value is used. Otherwise an appropriate value has to be calculated by that instances using Origin."
@@ -96,7 +112,9 @@
       {
         "name": "Orientation",
         "type": "AxisOrientation_ecba0d6d",
-        "lines": [
+        "origtype": "com.sun.star.chart2.AxisOrientation",
+        "origin": "com.sun.star.chart2.AxisOrientation",
+        "desc": [
           "Axis orientation (standard or reversed).",
           "",
           "If used at the Y axis in pie charts or doughnut charts, specifies the rotation direction of the pie. The value AxisOrientation.MATHEMATICAL rotates the pie counterclockwise, the value AxisOrientation.REVERSE rotates the pie clockwise.",
@@ -107,17 +125,23 @@
       {
         "name": "Scaling",
         "type": "XScaling_97500a65",
-        "lines": []
+        "origtype": "com.sun.star.chart2.XScaling",
+        "origin": "com.sun.star.chart2.XScaling",
+        "desc": []
       },
       {
         "name": "Categories",
         "type": "XLabeledDataSequence_7e1a10c8",
-        "lines": []
+        "origtype": "com.sun.star.chart2.data.XLabeledDataSequence",
+        "origin": "com.sun.star.chart2.data.XLabeledDataSequence",
+        "desc": []
       },
       {
         "name": "AxisType",
         "type": "int",
-        "lines": [
+        "origtype": null,
+        "origin": "long",
+        "desc": [
           "describes the type of the axis.",
           "",
           "It can be a real number axis or a category axis or something else. AxisType is one value out of the constant group AxisType."
@@ -126,28 +150,36 @@
       {
         "name": "AutoDateAxis",
         "type": "bool",
-        "lines": [
+        "origtype": null,
+        "origin": "boolean",
+        "desc": [
           "if true an AxisType CATEGORY is interpreted as DATE if the underlying data given in Categories are dates"
         ]
       },
       {
         "name": "ShiftedCategoryPosition",
         "type": "bool",
-        "lines": [
+        "origtype": null,
+        "origin": "boolean",
+        "desc": [
           "describes whether data points on category or date axis are placed between tickmarks or not if true the maximum on the scale will be expanded for one interval"
         ]
       },
       {
         "name": "IncrementData",
         "type": "IncrementData_d2000c6b",
-        "lines": [
+        "origtype": "com.sun.star.chart2.IncrementData",
+        "origin": "com.sun.star.chart2.IncrementData",
+        "desc": [
           "increment data to be used for not date-time axis"
         ]
       },
       {
         "name": "TimeIncrement",
         "type": "TimeIncrement_c7e70c4e",
-        "lines": [
+        "origtype": "com.sun.star.chart.TimeIncrement",
+        "origin": "com.sun.star.chart.TimeIncrement",
+        "desc": [
           "increment data to be used in case of date-time axis"
         ]
       }

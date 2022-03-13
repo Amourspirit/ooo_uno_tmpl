@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XInplaceClient",
   "type": "interface",
@@ -90,6 +90,7 @@
         {
           "name": "activatingInplace",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "notifies container through the client that the object is to be inplace activated."
           ],
@@ -101,6 +102,7 @@
         {
           "name": "activatingUI",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "notifies container through the client that the object is to be UI-activated."
           ],
@@ -112,6 +114,7 @@
         {
           "name": "canInplaceActivate",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "checks if the container can activate the object inplace."
           ],
@@ -121,6 +124,7 @@
         {
           "name": "changedPlacement",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "notifies the container that the position of the object is changed."
           ],
@@ -129,16 +133,18 @@
             "com.sun.star.uno.Exception"
           ],
           "args": [
-            [
-              "aPosRect",
-              "Rectangle_84b109e9",
-              "in"
-            ]
+            {
+              "name": "aPosRect",
+              "type": "Rectangle_84b109e9",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Rectangle"
+            }
           ]
         },
         {
           "name": "deactivatedInplace",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "notifies container through the client that the object is deactivated."
           ],
@@ -150,6 +156,7 @@
         {
           "name": "deactivatedUI",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "notifies container through the client that the object is UI-deactivated.",
             "",
@@ -163,6 +170,7 @@
         {
           "name": "getClipRectangle",
           "returns": "Rectangle_84b109e9",
+          "returns_origin": "com.sun.star.awt.Rectangle",
           "desc": [
             "gets the inplace object clip rectangle.",
             "",
@@ -176,6 +184,7 @@
         {
           "name": "getInplaceDispatchProvider",
           "returns": "XDispatchProvider_fc690de6",
+          "returns_origin": "com.sun.star.frame.XDispatchProvider",
           "desc": [
             "allows to retrieve the container's dispatch provider."
           ],
@@ -187,6 +196,7 @@
         {
           "name": "getLayoutManager",
           "returns": "XLayoutManager_d4510ca4",
+          "returns_origin": "com.sun.star.frame.XLayoutManager",
           "desc": [
             "allows to retrieve the com.sun.star.frame.LayoutManager of the container."
           ],
@@ -198,6 +208,7 @@
         {
           "name": "getPlacement",
           "returns": "Rectangle_84b109e9",
+          "returns_origin": "com.sun.star.awt.Rectangle",
           "desc": [
             "gets the inplace object position rectangle.",
             "",
@@ -211,6 +222,7 @@
         {
           "name": "scrollObject",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "scrolls the object."
           ],
@@ -218,16 +230,18 @@
             "com.sun.star.embed.WrongStateException"
           ],
           "args": [
-            [
-              "aOffset",
-              "Size_576707ef",
-              "in"
-            ]
+            {
+              "name": "aOffset",
+              "type": "Size_576707ef",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Size"
+            }
           ]
         },
         {
           "name": "translateAccelerators",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "provides accelerator table the object wants to use while it is inplace active."
           ],
@@ -235,11 +249,12 @@
             "com.sun.star.embed.WrongStateException"
           ],
           "args": [
-            [
-              "aKeys",
-              "typing.Tuple[KeyEvent_7a78097f, ...]",
-              "in"
-            ]
+            {
+              "name": "aKeys",
+              "type": "typing.Tuple[KeyEvent_7a78097f, ...]",
+              "direction": "in",
+              "origin": "sequence< .com.sun.star.awt.KeyEvent >"
+            }
           ]
         }
       ]

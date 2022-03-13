@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDictionary",
   "type": "interface",
@@ -86,6 +86,7 @@
         {
           "name": "add",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "is used to make an entry in the dictionary.",
             "",
@@ -95,26 +96,30 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aWord",
-              "str",
-              "in"
-            ],
-            [
-              "bIsNegative",
-              "bool",
-              "in"
-            ],
-            [
-              "aRplcText",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aWord",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "bIsNegative",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            },
+            {
+              "name": "aRplcText",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "addDictionaryEventListener",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "adds an entry to the list of dictionary event listeners.",
             "",
@@ -122,16 +127,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xListener",
-              "XDictionaryEventListener_d74c132b",
-              "in"
-            ]
+            {
+              "name": "xListener",
+              "type": "XDictionaryEventListener_d74c132b",
+              "direction": "in",
+              "origin": "com.sun.star.linguistic2.XDictionaryEventListener"
+            }
           ]
         },
         {
           "name": "addEntry",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "is used to add an entry to the dictionary.",
             "",
@@ -141,16 +148,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xDicEntry",
-              "XDictionaryEntry_49ef0ff5",
-              "in"
-            ]
+            {
+              "name": "xDicEntry",
+              "type": "XDictionaryEntry_49ef0ff5",
+              "direction": "in",
+              "origin": "com.sun.star.linguistic2.XDictionaryEntry"
+            }
           ]
         },
         {
           "name": "clear",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes all entries from the dictionary."
           ],
@@ -160,6 +169,7 @@
         {
           "name": "getCount",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [],
           "raises": [],
           "args": []
@@ -167,6 +177,7 @@
         {
           "name": "getDictionaryType",
           "returns": "DictionaryType_2ba50f2d",
+          "returns_origin": "com.sun.star.linguistic2.DictionaryType",
           "desc": [
             "returns the type of the dictionary."
           ],
@@ -176,6 +187,7 @@
         {
           "name": "getEntries",
           "returns": "typing.Tuple[XDictionaryEntry_49ef0ff5, ...]",
+          "returns_origin": "sequence< com.sun.star.linguistic2.XDictionaryEntry >",
           "desc": [
             "This function should no longer be used since with the expansion of the maximum number of allowed entries the result may become unreasonable large!"
           ],
@@ -185,21 +197,24 @@
         {
           "name": "getEntry",
           "returns": "XDictionaryEntry_49ef0ff5",
+          "returns_origin": "com.sun.star.linguistic2.XDictionaryEntry",
           "desc": [
             "searches for an entry that matches the given word."
           ],
           "raises": [],
           "args": [
-            [
-              "aWord",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aWord",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getLocale",
           "returns": "Locale_70d308fa",
+          "returns_origin": "com.sun.star.lang.Locale",
           "desc": [],
           "raises": [],
           "args": []
@@ -207,6 +222,7 @@
         {
           "name": "isActive",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [],
           "raises": [],
           "args": []
@@ -214,6 +230,7 @@
         {
           "name": "isFull",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [],
           "raises": [],
           "args": []
@@ -221,61 +238,69 @@
         {
           "name": "remove",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "removes an entry from the dictionary."
           ],
           "raises": [],
           "args": [
-            [
-              "aWord",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aWord",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "removeDictionaryEventListener",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "removes an entry from the list of dictionary event listeners."
           ],
           "raises": [],
           "args": [
-            [
-              "xListener",
-              "XDictionaryEventListener_d74c132b",
-              "in"
-            ]
+            {
+              "name": "xListener",
+              "type": "XDictionaryEventListener_d74c132b",
+              "direction": "in",
+              "origin": "com.sun.star.linguistic2.XDictionaryEventListener"
+            }
           ]
         },
         {
           "name": "setActive",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "specifies whether the dictionary should be used or not ."
           ],
           "raises": [],
           "args": [
-            [
-              "bActivate",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "bActivate",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "setLocale",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "is used to set the language of the dictionary."
           ],
           "raises": [],
           "args": [
-            [
-              "aLocale",
-              "Locale_70d308fa",
-              "in"
-            ]
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
           ]
         }
       ]

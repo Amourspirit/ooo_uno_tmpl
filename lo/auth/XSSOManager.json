@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSSOManager",
   "type": "interface",
@@ -71,6 +71,7 @@
         {
           "name": "createAcceptorContext",
           "returns": "XSSOAcceptorContext_6960e1d",
+          "returns_origin": "com.sun.star.auth.XSSOAcceptorContext",
           "desc": [
             "creates an acceptor side security context."
           ],
@@ -81,16 +82,18 @@
             "UnsupportedException"
           ],
           "args": [
-            [
-              "TargetPrincipal",
-              "str",
-              "in"
-            ]
+            {
+              "name": "TargetPrincipal",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "createInitiatorContext",
           "returns": "XSSOInitiatorContext_168c0e9f",
+          "returns_origin": "com.sun.star.auth.XSSOInitiatorContext",
           "desc": [
             "creates an initiator side security context."
           ],
@@ -101,26 +104,30 @@
             "UnsupportedException"
           ],
           "args": [
-            [
-              "SourcePrincipal",
-              "str",
-              "in"
-            ],
-            [
-              "TargetPrincipal",
-              "str",
-              "in"
-            ],
-            [
-              "TargetHost",
-              "str",
-              "in"
-            ]
+            {
+              "name": "SourcePrincipal",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "TargetPrincipal",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "TargetHost",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getMechanism",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "retrieves the mechanism name of all security contexts created using this manager."
           ],

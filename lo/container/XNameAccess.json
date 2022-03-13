@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XNameAccess",
   "type": "interface",
@@ -56,22 +56,25 @@
         {
           "name": "getByName",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [],
           "raises": [
             "com.sun.star.container.NoSuchElementException",
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getElementNames",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [
             "The order of the names is not specified."
           ],
@@ -81,16 +84,18 @@
         {
           "name": "hasByName",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "In many cases the next call is XNameAccess.getByName(). You should optimize this case."
           ],
           "raises": [],
           "args": [
-            [
-              "aName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

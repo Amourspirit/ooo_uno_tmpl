@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XExportFilter",
   "type": "interface",
@@ -70,6 +70,7 @@
         {
           "name": "exporter",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "performs the import.",
             "",
@@ -79,16 +80,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aSourceData",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ],
-            [
-              "msUserData",
-              "typing.Tuple[str, ...]",
-              "in"
-            ]
+            {
+              "name": "aSourceData",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            },
+            {
+              "name": "msUserData",
+              "type": "typing.Tuple[str, ...]",
+              "direction": "in",
+              "origin": "sequence< string >"
+            }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "CommandInfoChangeEvent",
@@ -33,6 +33,12 @@
     "quote": [],
     "typings": [],
     "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.lang.EventObject"
+      ],
+      "typing": []
+    },
     "fullname": "com.sun.star.ucb.CommandInfoChangeEvent",
     "desc": [
       "This event gets delivered whenever a XCommandInfo is changed.",
@@ -47,14 +53,18 @@
       {
         "name": "Name",
         "type": "str",
-        "lines": [
+        "origtype": null,
+        "origin": "string",
+        "desc": [
           "contains the name of the command."
         ]
       },
       {
         "name": "Handle",
         "type": "int",
-        "lines": [
+        "origtype": null,
+        "origin": "long",
+        "desc": [
           "contains the implementation handle for the command.",
           "",
           "May be -1 if the implementation has no handle."
@@ -63,7 +73,9 @@
       {
         "name": "Reason",
         "type": "int",
-        "lines": [
+        "origtype": null,
+        "origin": "long",
+        "desc": [
           "contains the reason for the event.",
           "",
           "The value can be one of the CommandInfoChange constants."

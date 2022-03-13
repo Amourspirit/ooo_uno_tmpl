@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XControl",
   "type": "interface",
@@ -92,6 +92,7 @@
         {
           "name": "createPeer",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "creates a \\\"child\\\" window on the screen.",
             "",
@@ -99,21 +100,24 @@
           ],
           "raises": [],
           "args": [
-            [
-              "Toolkit",
-              "XToolkit_7adf0992",
-              "in"
-            ],
-            [
-              "Parent",
-              "XWindowPeer_99760ab0",
-              "in"
-            ]
+            {
+              "name": "Toolkit",
+              "type": "XToolkit_7adf0992",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XToolkit"
+            },
+            {
+              "name": "Parent",
+              "type": "XWindowPeer_99760ab0",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XWindowPeer"
+            }
           ]
         },
         {
           "name": "getContext",
           "returns": "XInterface_8f010a43",
+          "returns_origin": "com.sun.star.uno.XInterface",
           "desc": [
             "gets the context of the control."
           ],
@@ -123,6 +127,7 @@
         {
           "name": "getModel",
           "returns": "XControlModel_affc0b7e",
+          "returns_origin": "com.sun.star.awt.XControlModel",
           "desc": [
             "returns the model for this control."
           ],
@@ -132,6 +137,7 @@
         {
           "name": "getPeer",
           "returns": "XWindowPeer_99760ab0",
+          "returns_origin": "com.sun.star.awt.XWindowPeer",
           "desc": [
             "returns the peer which was previously created or set."
           ],
@@ -141,6 +147,7 @@
         {
           "name": "getView",
           "returns": "XView_5f670847",
+          "returns_origin": "com.sun.star.awt.XView",
           "desc": [
             "returns the view of this control."
           ],
@@ -150,6 +157,7 @@
         {
           "name": "isDesignMode",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "returns TRUE if the control is in design mode, FALSE otherwise."
           ],
@@ -159,6 +167,7 @@
         {
           "name": "isTransparent",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "returns TRUE if the control is transparent, FALSE otherwise."
           ],
@@ -168,21 +177,24 @@
         {
           "name": "setContext",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the context of the control."
           ],
           "raises": [],
           "args": [
-            [
-              "Context",
-              "XInterface_8f010a43",
-              "in"
-            ]
+            {
+              "name": "Context",
+              "type": "XInterface_8f010a43",
+              "direction": "in",
+              "origin": "com.sun.star.uno.XInterface"
+            }
           ]
         },
         {
           "name": "setDesignMode",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "sets the design mode for use in a design editor.",
             "",
@@ -190,26 +202,29 @@
           ],
           "raises": [],
           "args": [
-            [
-              "bOn",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "bOn",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "setModel",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "sets a model for the control."
           ],
           "raises": [],
           "args": [
-            [
-              "Model",
-              "XControlModel_affc0b7e",
-              "in"
-            ]
+            {
+              "name": "Model",
+              "type": "XControlModel_affc0b7e",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XControlModel"
+            }
           ]
         }
       ]

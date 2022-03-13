@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XSheetAnnotation",
   "type": "interface",
@@ -60,6 +60,7 @@
         {
           "name": "getAuthor",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns the name of the user who last changed the annotation."
           ],
@@ -69,6 +70,7 @@
         {
           "name": "getDate",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "returns a formatted string representing the date when the annotation was last changed."
           ],
@@ -78,6 +80,7 @@
         {
           "name": "getIsVisible",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "returns, whether the annotation is permanently visible."
           ],
@@ -87,6 +90,7 @@
         {
           "name": "getPosition",
           "returns": "CellAddress_ae5f0b56",
+          "returns_origin": "com.sun.star.table.CellAddress",
           "desc": [
             "returns the position of cell in the spreadsheet document that contains this annotation."
           ],
@@ -96,16 +100,18 @@
         {
           "name": "setIsVisible",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "specifies whether the annotation is permanently visible."
           ],
           "raises": [],
           "args": [
-            [
-              "bIsVisible",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "bIsVisible",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         }
       ]

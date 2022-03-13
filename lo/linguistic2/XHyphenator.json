@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XHyphenator",
   "type": "interface",
@@ -87,6 +87,7 @@
         {
           "name": "createPossibleHyphens",
           "returns": "XPossibleHyphens_4aa50fed",
+          "returns_origin": "com.sun.star.linguistic2.XPossibleHyphens",
           "desc": [
             "returns information about all possible hyphenation positions of a word.",
             "",
@@ -96,26 +97,30 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aWord",
-              "str",
-              "in"
-            ],
-            [
-              "aLocale",
-              "Locale_70d308fa",
-              "in"
-            ],
-            [
-              "aProperties",
-              "PropertyValues_d6470ce6",
-              "in"
-            ]
+            {
+              "name": "aWord",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "aProperties",
+              "type": "PropertyValues_d6470ce6",
+              "direction": "in",
+              "origin": "com.sun.star.beans.PropertyValues"
+            }
           ]
         },
         {
           "name": "hyphenate",
           "returns": "XHyphenatedWord_3a880f73",
+          "returns_origin": "com.sun.star.linguistic2.XHyphenatedWord",
           "desc": [
             "tries to find a valid hyphenation position relative to the beginning of a word.",
             "",
@@ -129,31 +134,36 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aWord",
-              "str",
-              "in"
-            ],
-            [
-              "aLocale",
-              "Locale_70d308fa",
-              "in"
-            ],
-            [
-              "nMaxLeading",
-              "int",
-              "in"
-            ],
-            [
-              "aProperties",
-              "PropertyValues_d6470ce6",
-              "in"
-            ]
+            {
+              "name": "aWord",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "nMaxLeading",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "aProperties",
+              "type": "PropertyValues_d6470ce6",
+              "direction": "in",
+              "origin": "com.sun.star.beans.PropertyValues"
+            }
           ]
         },
         {
           "name": "queryAlternativeSpelling",
           "returns": "XHyphenatedWord_3a880f73",
+          "returns_origin": "com.sun.star.linguistic2.XHyphenatedWord",
           "desc": [
             "checks whether hyphenation at a position in a word will result in an alternative spelling or not.",
             "",
@@ -169,26 +179,30 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aWord",
-              "str",
-              "in"
-            ],
-            [
-              "aLocale",
-              "Locale_70d308fa",
-              "in"
-            ],
-            [
-              "nIndex",
-              "int",
-              "in"
-            ],
-            [
-              "aProperties",
-              "PropertyValues_d6470ce6",
-              "in"
-            ]
+            {
+              "name": "aWord",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "aProperties",
+              "type": "PropertyValues_d6470ce6",
+              "direction": "in",
+              "origin": "com.sun.star.beans.PropertyValues"
+            }
           ]
         }
       ]

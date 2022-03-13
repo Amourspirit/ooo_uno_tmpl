@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "type": "struct",
   "name": "GetPropertyTolerantResult",
@@ -33,6 +33,12 @@
     ],
     "typings": [],
     "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.beans.PropertyState"
+      ]
+    },
     "fullname": "com.sun.star.beans.GetPropertyTolerantResult",
     "desc": [
       "specifies information being retrieved about a single property."
@@ -43,14 +49,18 @@
       {
         "name": "Result",
         "type": "int",
-        "lines": [
+        "origtype": null,
+        "origin": "short",
+        "desc": [
           "specifies a success or error code for the retrieval operation."
         ]
       },
       {
         "name": "State",
         "type": "PropertyState_c97b0c77",
-        "lines": [
+        "origtype": "com.sun.star.beans.PropertyState",
+        "origin": "com.sun.star.beans.PropertyState",
+        "desc": [
           "contains the state of the property.",
           "",
           "The value is undefined if Result is not com.sun.star.beans.TolerantPropertySetResultType.SUCCESS."
@@ -59,7 +69,9 @@
       {
         "name": "Value",
         "type": "object",
-        "lines": [
+        "origtype": null,
+        "origin": "any",
+        "desc": [
           "contains the value of the property.",
           "",
           "The value is undefined if Result is not com.sun.star.beans.TolerantPropertySetResultType.SUCCESS."

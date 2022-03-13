@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XDocumentTemplates",
   "type": "interface",
@@ -69,46 +69,53 @@
         {
           "name": "addGroup",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "creates a new group"
           ],
           "raises": [],
           "args": [
-            [
-              "GroupName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "GroupName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "addTemplate",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "creates the template with the given name in the given group using the given URL"
           ],
           "raises": [],
           "args": [
-            [
-              "GroupName",
-              "str",
-              "in"
-            ],
-            [
-              "TemplateName",
-              "str",
-              "in"
-            ],
-            [
-              "SourceURL",
-              "str",
-              "in"
-            ]
+            {
+              "name": "GroupName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "TemplateName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "SourceURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "getContent",
           "returns": "XContent_79db0975",
+          "returns_origin": "com.sun.star.ucb.XContent",
           "desc": [
             "provides access to the root of internal used hierarchy",
             "",
@@ -120,111 +127,128 @@
         {
           "name": "removeGroup",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "remove an existing group"
           ],
           "raises": [],
           "args": [
-            [
-              "GroupName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "GroupName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "removeTemplate",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "remove a template from specified group"
           ],
           "raises": [],
           "args": [
-            [
-              "GroupName",
-              "str",
-              "in"
-            ],
-            [
-              "TemplateName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "GroupName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "TemplateName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "renameGroup",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "rename an existing group"
           ],
           "raises": [],
           "args": [
-            [
-              "OldGroupName",
-              "str",
-              "in"
-            ],
-            [
-              "NewGroupName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "OldGroupName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "NewGroupName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "renameTemplate",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "rename a template inside specified group"
           ],
           "raises": [],
           "args": [
-            [
-              "GroupName",
-              "str",
-              "in"
-            ],
-            [
-              "OldTemplateName",
-              "str",
-              "in"
-            ],
-            [
-              "NewTemplateName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "GroupName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "OldTemplateName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "NewTemplateName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "storeTemplate",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "creates the template with the given name in the given group using the data from the storable"
           ],
           "raises": [],
           "args": [
-            [
-              "GroupName",
-              "str",
-              "in"
-            ],
-            [
-              "TemplateName",
-              "str",
-              "in"
-            ],
-            [
-              "Storable",
-              "XStorable_998f0aa7",
-              "in"
-            ]
+            {
+              "name": "GroupName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "TemplateName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Storable",
+              "type": "XStorable_998f0aa7",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XStorable"
+            }
           ]
         },
         {
           "name": "update",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "force an update for internal structures",
             "",

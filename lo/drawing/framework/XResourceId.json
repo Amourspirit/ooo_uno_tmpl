@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XResourceId",
   "type": "interface",
@@ -65,6 +65,7 @@
         {
           "name": "clone",
           "returns": "XResourceId",
+          "returns_origin": "com.sun.star.drawing.framework.XResourceId",
           "desc": [
             "Return a copy of the called resource id.",
             "",
@@ -76,6 +77,7 @@
         {
           "name": "compareTo",
           "returns": "int",
+          "returns_origin": "short",
           "desc": [
             "Compare the called XResourceId object with the given one.",
             "",
@@ -85,16 +87,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xId",
-              "XResourceId",
-              "in"
-            ]
+            {
+              "name": "xId",
+              "type": "XResourceId",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.framework.XResourceId"
+            }
           ]
         },
         {
           "name": "getAnchor",
           "returns": "XResourceId",
+          "returns_origin": "com.sun.star.drawing.framework.XResourceId",
           "desc": [
             "Return a new XResourceId that represents the anchor resource."
           ],
@@ -104,6 +108,7 @@
         {
           "name": "getAnchorURLs",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [
             "Return the, possibly empty, list of anchor URLs.",
             "",
@@ -115,6 +120,7 @@
         {
           "name": "getFullResourceURL",
           "returns": "URL_57ad07b9",
+          "returns_origin": "com.sun.star.util.URL",
           "desc": [
             "Return a URL object of the resource URL that may contain arguments."
           ],
@@ -124,6 +130,7 @@
         {
           "name": "getResourceTypePrefix",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Return the type prefix of the resource URL.",
             "",
@@ -135,6 +142,7 @@
         {
           "name": "getResourceURL",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "Return the URL of the resource.",
             "",
@@ -146,6 +154,7 @@
         {
           "name": "hasAnchor",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Return whether there is a non-empty anchor URL.",
             "",
@@ -157,6 +166,7 @@
         {
           "name": "isBoundTo",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Return whether the anchor of the called resource id object represents the same resource as the given object.",
             "",
@@ -166,21 +176,24 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xAnchorId",
-              "XResourceId",
-              "in"
-            ],
-            [
-              "eMode",
-              "AnchorBindingMode_c46b128b",
-              "in"
-            ]
+            {
+              "name": "xAnchorId",
+              "type": "XResourceId",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.framework.XResourceId"
+            },
+            {
+              "name": "eMode",
+              "type": "AnchorBindingMode_c46b128b",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.framework.AnchorBindingMode"
+            }
           ]
         },
         {
           "name": "isBoundToURL",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Return whether the anchor of the called resource id object represents the same resource as the given anchor URL.",
             "",
@@ -188,16 +201,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "AnchorURL",
-              "str",
-              "in"
-            ],
-            [
-              "eMode",
-              "AnchorBindingMode_c46b128b",
-              "in"
-            ]
+            {
+              "name": "AnchorURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "eMode",
+              "type": "AnchorBindingMode_c46b128b",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.framework.AnchorBindingMode"
+            }
           ]
         }
       ]

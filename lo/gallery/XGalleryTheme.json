@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XGalleryTheme",
   "type": "interface",
@@ -71,6 +71,7 @@
         {
           "name": "getName",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "retrieves the name of the Gallery theme"
           ],
@@ -80,6 +81,7 @@
         {
           "name": "insertDrawingByIndex",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "inserts an item"
           ],
@@ -87,21 +89,24 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "Drawing",
-              "XComponent_98dc0ab5",
-              "in"
-            ],
-            [
-              "Index",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Drawing",
+              "type": "XComponent_98dc0ab5",
+              "direction": "in",
+              "origin": "com.sun.star.lang.XComponent"
+            },
+            {
+              "name": "Index",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "insertGraphicByIndex",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "inserts an item"
           ],
@@ -109,21 +114,24 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "Graphic",
-              "XGraphic_a4da0afc",
-              "in"
-            ],
-            [
-              "Index",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Graphic",
+              "type": "XGraphic_a4da0afc",
+              "direction": "in",
+              "origin": "com.sun.star.graphic.XGraphic"
+            },
+            {
+              "name": "Index",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "insertURLByIndex",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [
             "inserts an item"
           ],
@@ -131,21 +139,24 @@
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "URL",
-              "str",
-              "in"
-            ],
-            [
-              "Index",
-              "int",
-              "in"
-            ]
+            {
+              "name": "URL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Index",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "removeByIndex",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "deletes an item from the collection"
           ],
@@ -153,16 +164,18 @@
             "com.sun.star.lang.IndexOutOfBoundsException"
           ],
           "args": [
-            [
-              "Index",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Index",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "update",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "updates the theme",
             "",

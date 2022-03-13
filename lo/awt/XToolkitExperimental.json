@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XToolkitExperimental",
   "type": "interface",
@@ -58,6 +58,7 @@
         {
           "name": "getOpenGLBufferSwapCounter",
           "returns": "int",
+          "returns_origin": "hyper",
           "desc": [
             "Get the number of OpenGL buffer swaps."
           ],
@@ -67,6 +68,7 @@
         {
           "name": "getRecordingAndClear",
           "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
           "desc": [
             "Query time logs and clear recording.",
             "",
@@ -82,21 +84,24 @@
         {
           "name": "pause",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Pause the main thread of LibreOffice for the requested amount of time."
           ],
           "raises": [],
           "args": [
-            [
-              "nMilliseconds",
-              "int",
-              "in"
-            ]
+            {
+              "name": "nMilliseconds",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "processEventsToIdle",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Process all pending idle events."
           ],
@@ -106,21 +111,24 @@
         {
           "name": "setDeterministicScheduling",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Turn on or off deterministic scheduling (off is the default)."
           ],
           "raises": [],
           "args": [
-            [
-              "bDeterministicMode",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "bDeterministicMode",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "startRecording",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Start time logging.",
             "",
@@ -134,6 +142,7 @@
         {
           "name": "stopRecording",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Stop time logging.",
             "",

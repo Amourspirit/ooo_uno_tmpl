@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XInfobarProvider",
   "type": "interface",
@@ -68,6 +68,7 @@
         {
           "name": "appendInfobar",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Creates and displays a new Infobar."
           ],
@@ -75,41 +76,48 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "id",
-              "str",
-              "in"
-            ],
-            [
-              "primaryMessage",
-              "str",
-              "in"
-            ],
-            [
-              "secondaryMessage",
-              "str",
-              "in"
-            ],
-            [
-              "infobarType",
-              "int",
-              "in"
-            ],
-            [
-              "actionButtons",
-              "typing.Tuple[StringPair_a4bc0b14, ...]",
-              "in"
-            ],
-            [
-              "showCloseButton",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "id",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "primaryMessage",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "secondaryMessage",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "infobarType",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "actionButtons",
+              "type": "typing.Tuple[StringPair_a4bc0b14, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.StringPair >"
+            },
+            {
+              "name": "showCloseButton",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "hasInfobar",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Check if Infobar exists.",
             "",
@@ -119,16 +127,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "id",
-              "str",
-              "in"
-            ]
+            {
+              "name": "id",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "removeInfobar",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Removes an existing Infobar."
           ],
@@ -136,16 +146,18 @@
             "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
-            [
-              "id",
-              "str",
-              "in"
-            ]
+            {
+              "name": "id",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "updateInfobar",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Updates an existing Infobar.",
             "",
@@ -155,26 +167,30 @@
             "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
-            [
-              "id",
-              "str",
-              "in"
-            ],
-            [
-              "primaryMessage",
-              "str",
-              "in"
-            ],
-            [
-              "secondaryMessage",
-              "str",
-              "in"
-            ],
-            [
-              "infobarType",
-              "int",
-              "in"
-            ]
+            {
+              "name": "id",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "primaryMessage",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "secondaryMessage",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "infobarType",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         }
       ]

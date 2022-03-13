@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XConnectionPointContainer",
   "type": "interface",
@@ -66,6 +66,7 @@
         {
           "name": "advise",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "creates a connection between this object and a client's sink, where the sink implements the outgoing interface specified with ID.",
             "",
@@ -75,21 +76,24 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aType",
-              "object",
-              "in"
-            ],
-            [
-              "xListener",
-              "XInterface_8f010a43",
-              "in"
-            ]
+            {
+              "name": "aType",
+              "type": "object",
+              "direction": "in",
+              "origin": "type"
+            },
+            {
+              "name": "xListener",
+              "type": "XInterface_8f010a43",
+              "direction": "in",
+              "origin": "com.sun.star.uno.XInterface"
+            }
           ]
         },
         {
           "name": "getConnectionPointTypes",
           "returns": "typing.Tuple[object, ...]",
+          "returns_origin": "sequence< type >",
           "desc": [],
           "raises": [],
           "args": []
@@ -97,34 +101,39 @@
         {
           "name": "queryConnectionPoint",
           "returns": "XConnectionPoint_e0da0d1c",
+          "returns_origin": "com.sun.star.lang.XConnectionPoint",
           "desc": [],
           "raises": [],
           "args": [
-            [
-              "aType",
-              "object",
-              "in"
-            ]
+            {
+              "name": "aType",
+              "type": "object",
+              "direction": "in",
+              "origin": "type"
+            }
           ]
         },
         {
           "name": "unadvise",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "terminates a notification previously set up with advise at the container or at the suitable connection point."
           ],
           "raises": [],
           "args": [
-            [
-              "aType",
-              "object",
-              "in"
-            ],
-            [
-              "xListener",
-              "XInterface_8f010a43",
-              "in"
-            ]
+            {
+              "name": "aType",
+              "type": "object",
+              "direction": "in",
+              "origin": "type"
+            },
+            {
+              "name": "xListener",
+              "type": "XInterface_8f010a43",
+              "direction": "in",
+              "origin": "com.sun.star.uno.XInterface"
+            }
           ]
         }
       ]

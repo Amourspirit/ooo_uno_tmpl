@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XIndexAccess",
   "type": "interface",
@@ -52,22 +52,25 @@
         {
           "name": "getByIndex",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [],
           "raises": [
             "com.sun.star.lang.IndexOutOfBoundsException",
             "com.sun.star.lang.WrappedTargetException"
           ],
           "args": [
-            [
-              "Index",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Index",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
           ]
         },
         {
           "name": "getCount",
           "returns": "int",
+          "returns_origin": "long",
           "desc": [],
           "raises": [],
           "args": []

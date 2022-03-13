@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XIeeeFloatReadOnlyBitmap",
   "type": "interface",
@@ -83,6 +83,7 @@
         {
           "name": "getData",
           "returns": "typing.Tuple[float, ...]",
+          "returns_origin": "sequence< float >",
           "desc": [
             "Query the raw data of this bitmap.",
             "",
@@ -95,21 +96,24 @@
             "VolatileContentDestroyedException"
           ],
           "args": [
-            [
-              "bitmapLayout",
-              "FloatingPointBitmapLayout_c66812df",
-              "out"
-            ],
-            [
-              "rect",
-              "IntegerRectangle2D_3c5c0f4d",
-              "in"
-            ]
+            {
+              "name": "bitmapLayout",
+              "type": "FloatingPointBitmapLayout_c66812df",
+              "direction": "out",
+              "origin": "com.sun.star.rendering.FloatingPointBitmapLayout"
+            },
+            {
+              "name": "rect",
+              "type": "IntegerRectangle2D_3c5c0f4d",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.IntegerRectangle2D"
+            }
           ]
         },
         {
           "name": "getMemoryLayout",
           "returns": "FloatingPointBitmapLayout_c66812df",
+          "returns_origin": "com.sun.star.rendering.FloatingPointBitmapLayout",
           "desc": [
             "Query the memory layout for this bitmap.",
             "",
@@ -121,6 +125,7 @@
         {
           "name": "getPixel",
           "returns": "typing.Tuple[float, ...]",
+          "returns_origin": "sequence< float >",
           "desc": [
             "Get a single pixel of the bitmap, returning its color value.",
             "",
@@ -131,16 +136,18 @@
             "VolatileContentDestroyedException"
           ],
           "args": [
-            [
-              "bitmapLayout",
-              "FloatingPointBitmapLayout_c66812df",
-              "out"
-            ],
-            [
-              "pos",
-              "IntegerPoint2D_8f0dc2",
-              "in"
-            ]
+            {
+              "name": "bitmapLayout",
+              "type": "FloatingPointBitmapLayout_c66812df",
+              "direction": "out",
+              "origin": "com.sun.star.rendering.FloatingPointBitmapLayout"
+            },
+            {
+              "name": "pos",
+              "type": "IntegerPoint2D_8f0dc2",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.IntegerPoint2D"
+            }
           ]
         }
       ]

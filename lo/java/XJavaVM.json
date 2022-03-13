@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XJavaVM",
   "type": "interface",
@@ -58,6 +58,7 @@
         {
           "name": "getJavaVM",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "returns the address of the Java Virtual Machine.",
             "",
@@ -73,16 +74,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "processID",
-              "typing.Tuple[int, ...]",
-              "in"
-            ]
+            {
+              "name": "processID",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "in",
+              "origin": "sequence< byte >"
+            }
           ]
         },
         {
           "name": "isVMEnabled",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "Returns TRUE if the VM is enabled.",
             "",
@@ -94,6 +97,7 @@
         {
           "name": "isVMStarted",
           "returns": "bool",
+          "returns_origin": "boolean",
           "desc": [
             "returns TRUE if the VM is started successfully, otherwise FALSE."
           ],

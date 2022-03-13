@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XUnitConversion",
   "type": "interface",
@@ -71,6 +71,7 @@
         {
           "name": "convertPointToLogic",
           "returns": "Point_5fb2085e",
+          "returns_origin": "com.sun.star.awt.Point",
           "desc": [
             "converts the given Point, which is specified in pixels, into the given logical unit"
           ],
@@ -78,21 +79,24 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "Point",
-              "Point_5fb2085e",
-              "in"
-            ],
-            [
-              "TargetUnit",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Point",
+              "type": "Point_5fb2085e",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Point"
+            },
+            {
+              "name": "TargetUnit",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "convertPointToPixel",
           "returns": "Point_5fb2085e",
+          "returns_origin": "com.sun.star.awt.Point",
           "desc": [
             "converts the given Point, which is specified in the given logical unit, into pixels"
           ],
@@ -100,21 +104,24 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "Point",
-              "Point_5fb2085e",
-              "in"
-            ],
-            [
-              "SourceUnit",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Point",
+              "type": "Point_5fb2085e",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Point"
+            },
+            {
+              "name": "SourceUnit",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "convertSizeToLogic",
           "returns": "Size_576707ef",
+          "returns_origin": "com.sun.star.awt.Size",
           "desc": [
             "converts the given Size, which is specified in pixels, into the given logical unit"
           ],
@@ -122,21 +129,24 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "Size",
-              "Size_576707ef",
-              "in"
-            ],
-            [
-              "TargetUnit",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Size",
+              "type": "Size_576707ef",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Size"
+            },
+            {
+              "name": "TargetUnit",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         },
         {
           "name": "convertSizeToPixel",
           "returns": "Size_576707ef",
+          "returns_origin": "com.sun.star.awt.Size",
           "desc": [
             "converts the given Size, which is specified in the given logical unit, into pixels"
           ],
@@ -144,16 +154,18 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "Size",
-              "Size_576707ef",
-              "in"
-            ],
-            [
-              "SourceUnit",
-              "int",
-              "in"
-            ]
+            {
+              "name": "Size",
+              "type": "Size_576707ef",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Size"
+            },
+            {
+              "name": "SourceUnit",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
           ]
         }
       ]

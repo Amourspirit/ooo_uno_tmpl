@@ -15,7 +15,7 @@ from types import ModuleType
 from typing import Iterable, Tuple, List, Union, Optional
 from Cheetah.Template import Template
 from dataclasses import dataclass
-
+from oootmpl.logger.log_handle import get_logger
 
 
 # set up path for importing modules from main app
@@ -34,9 +34,10 @@ RESERVER_WORDS = {
     'is', 'lambda', 'None', 'nonlocal',
     'not', 'or', 'pass', 'raise', 'return',
     'True', 'try', 'while', 'with', 'yield'
-    }
+}
 
 # region Resource DB Related
+
 
 @dataclass
 class ExtendsInfo:
@@ -44,11 +45,12 @@ class ExtendsInfo:
     namespace: str
     sort: int
     map_name: Union[str, None]
-    
+
     def __lt__(self, other: object):
         if not isinstance(other, ExtendsInfo):
             return NotImplemented
         return self.sort < other.sort
+
 
 class DbConnect:
     def __init__(self) -> None:
@@ -115,16 +117,17 @@ class BaseSql:
         """Gets connect_str value"""
         return self._db_connect.connection_str
 
+
 class SqlExtends(BaseSql):
     def __init__(self) -> None:
         super().__init__()
-    
+
     def get_extends(self, namespace: str) -> List[ExtendsInfo]:
         results: List[ExtendsInfo] = []
         query = """SELECT extend.namespace as ns, extend.map_name as map_name FROM extend
         LEFT JOIN component on component.id_component = extend.fk_component_id
         WHERE component.id_component = :namespace"""
-        
+
         qry_sort = """SELECT module_detail.sort as sort FROM module_detail
         WHERE module_detail.id_namespace = :namespace LIMIT 1"""
         with SqlCtx(self.conn_str) as db:
@@ -174,6 +177,7 @@ class SqlComponent(BaseSql):
         return result
 # endregion Resource DB Related
 
+
 @dataclass
 class TmplConfig:
     project_root: str
@@ -185,35 +189,27 @@ class TmplConfig:
     enum_mod: str
     env: str
 
+
 class BaseTpml(Template):
-    
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._is_class_init = True
         self._is_class_data = False
         self._logger = None
         self.__cache = {}
-        get_logger = None
         if not hasattr(self, "extends_map"):
             setattr(self, 'extends_map', {})
-        self._logger: logging.Logger = None
-        try:
-            _, get_logger = self.dynamic_imp(
-                'logger', 'log_handle', 'get_logger')
-        except Exception as e:
-            # print("# Error importing logger:", e)
-            pass
 
-        if get_logger:
-            self._logger: logging.Logger = get_logger(
-                logger_name="Template — " + self.__class__.__name__,
-                add_handler_console=False
-                )
+        self._logger: logging.Logger = get_logger(
+            logger_name="Template — " + self.__class__.__name__,
+            add_handler_console=False
+        )
         self._config = self._get_config()
         self._app_root = self._config.project_root
- 
+
     def _get_config(self) -> TmplConfig:
-        
+
         project_root = os.environ['project_root']
         resource_dir = os.environ['config_resource_dir']
         uno_obj_dir = os.environ['config_uno_obj_dir']
@@ -222,7 +218,7 @@ class BaseTpml(Template):
         helper_mod = os.environ['config_helper_mod']
         enum_mod = os.environ['config_enum_mod']
         env = os.environ['config_oenv_ns']
-        
+
         return TmplConfig(
             project_root=project_root,
             resource_dir=resource_dir,
@@ -251,7 +247,7 @@ class BaseTpml(Template):
 
     def _linfo(self, msg: object, *args, **kwargs):
         self._log_to_logger(logging.INFO, msg, *args, **kwargs)
-    
+
     def _lwarn(self, msg: object, *args, **kwargs):
         self._log_to_logger(logging.WARN, msg, *args, **kwargs)
 
@@ -270,7 +266,7 @@ class BaseTpml(Template):
             str: snake case
         """
         return RelInfo.camel_to_snake(input)
-    
+
     def get_clean_name(self, input: str) -> str:
         """
         Removes all char from a string except for ``a-zA-Z0-9_``
@@ -283,7 +279,7 @@ class BaseTpml(Template):
         """
         # https://stackoverflow.com/questions/1276764/stripping-everything-but-alphanumeric-chars-from-a-string-in-python
         return py_name_pattern.sub('', input)
-    
+
     def line_gen(self, input) -> str:
         """
         Generates lines from str or list like
@@ -316,7 +312,7 @@ class BaseTpml(Template):
             return ''
         return sep.join(keys)
 
-    def lst_to_str(self, input, sep:str = ', ') -> str:
+    def lst_to_str(self, input, sep: str = ', ') -> str:
         """
         Writes list items into a str seperated by ``sep``.
         If input is ``str`` then it is returned verbatium
@@ -333,13 +329,13 @@ class BaseTpml(Template):
         if len(input) == 0:
             return ''
         return sep.join(input)
-    
+
     def is_out_arg(self, input: str) -> bool:
         """Gets if input is ``out`"""
         if not input:
             return False
         return input == 'out'
-    
+
     def get_last_part(self, input: str, sep='.') -> str:
         """
         Splits a string and returns the last part
@@ -368,13 +364,13 @@ class BaseTpml(Template):
         Returns:
             List[str]: result list
         """
-        result =[]
+        result = []
         for itm in lst:
             result.append(self.get_last_part(input=itm, sep=sep))
         return result
-    
+
     # region sorting
-    def _sort_dict(self, d:dict, reverse: bool = False) -> dict:
+    def _sort_dict(self, d: dict, reverse: bool = False) -> dict:
         """
         Sorts a dictionary by its keys
 
@@ -393,8 +389,7 @@ class BaseTpml(Template):
         for key in keys:
             result[key] = d[key]
         return result
-        
-        
+
     def _sort_dicts(self, lst: List[dict], sort_key: str) -> List[dict]:
         """
         Sort a list of Dictionaries
@@ -418,7 +413,7 @@ class BaseTpml(Template):
         return _result
 
     # endregion sorting
-    
+
     def dynamic_imp(self, package: str, mod_name: str, class_name: str) -> Tuple[ModuleType, object]:
         try:
             module = importlib.import_module(f"{package}.{mod_name}")
@@ -429,6 +424,15 @@ class BaseTpml(Template):
             raise e
 
     def get_safe_word(self, in_str: object) -> object:
+        """
+        Get safe word. If a word is a reserved python word then _ is appended.
+
+        Args:
+            in_str (object): input
+
+        Returns:
+            object: if ``in_str`` is not str then it is returned verbatium. Otheriwse returns str.
+        """
         if not isinstance(in_str, str):
             return in_str
         if in_str in RESERVER_WORDS:
@@ -461,7 +465,6 @@ class BaseTpml(Template):
         if self.is_q_type(in_type=in_type):
             return self.get_q_wrapped(in_str=in_type)
         return in_type
-    
 
     def get_timestamp_utc(self) -> str:
         """
@@ -502,7 +505,8 @@ class BaseTpml(Template):
 
         im_len = len(im_data)
         if im_len < 2:
-            raise Exception(f"{self.__class__.__name__}.get_from_import() Expected im_data param to have a min length of two!")
+            raise Exception(
+                f"{self.__class__.__name__}.get_from_import() Expected im_data param to have a min length of two!")
         im = im_data[0]  # .sdbcx.table_descriptor
         name = im_data[1]  # DataSettings
         if is_self_import(im, name):
@@ -521,7 +525,7 @@ class BaseTpml(Template):
             im = '.'.join(im_parts)
             return f"from {im} import {im_last}"
         return f"from {im} import {name}"
-            
+
     def get_class_inherits(self, class_name: str, imports: Union[str, List[str]]) -> str:
         """
         Gets class inherits taking into accout if an inherit is the same name as the class.
@@ -536,6 +540,7 @@ class BaseTpml(Template):
         def get_import(name: str) -> str:
             def is_mapped(name: str) -> bool:
                 return name in self.extends_map
+
             def get_mapped(name: str) -> bool:
                 return self.extends_map[name]
             if is_mapped(name):
@@ -559,7 +564,7 @@ class BaseTpml(Template):
                 s += ', '
             s += im
         return s
-    
+
     def get_class_inherits_from_db(self, default: str = 'object') -> str:
         """
         Gets class inherits taking into accout if an inherit is the same name as the class.
@@ -574,6 +579,7 @@ class BaseTpml(Template):
         key = 'get_class_inherits_from_db_' + default
         if key in self.__cache:
             return self.__cache[key]
+
         def get_import(extend: ExtendsInfo) -> str:
             def is_mapped() -> bool:
                 return not extend.map_name is None
@@ -584,7 +590,7 @@ class BaseTpml(Template):
                 return get_mapped()
             _name = self.get_last_part(extend.namespace)
             return _name
-        
+
         ns = f"{self.namespace}.{self.name}"
         sql_entends = SqlExtends()
         extends = sql_entends.get_extends(namespace=ns)
@@ -595,10 +601,10 @@ class BaseTpml(Template):
         if len_ent == 1:
             self.__cache[key] = get_import(extends[0])
             return self.__cache[key]
-        extends.sort() # sort, gets it sort order from database
-        
+        extends.sort()  # sort, gets it sort order from database
+
         im_lst: List[str] = []
- 
+
         for ex in extends:
             im_lst.append(get_import(ex))
         s = 'object'
@@ -631,11 +637,11 @@ class BaseTpml(Template):
         if a_prop:
             results.append('abstractproperty')
         return results
-    
-    def get_rel_import(self, in_str:str, ns:str, sep: str = '.') -> str:
+
+    def get_rel_import(self, in_str: str, ns: str, sep: str = '.') -> str:
         ri = RelInfo.get_rel_import(in_str=in_str, ns=ns, sep=sep)
         return f"from {ri.frm} import {ri.imp}"
-    
+
     def get_rel_import_long(self, in_str: str, ns: str, sep: str = '.') -> str:
         ri = RelInfo.get_rel_import_long(in_str=in_str, ns=ns, sep=sep)
         return f"from {ri.frm} import {ri.imp} as {ri.as_}"

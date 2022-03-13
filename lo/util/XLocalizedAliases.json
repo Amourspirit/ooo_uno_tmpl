@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XLocalizedAliases",
   "type": "interface",
@@ -71,6 +71,7 @@
         {
           "name": "bindAlias",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "registers an alias for a programmatic name."
           ],
@@ -78,41 +79,47 @@
             "com.sun.star.container.ElementExistException"
           ],
           "args": [
-            [
-              "programmaticName",
-              "str",
-              "in"
-            ],
-            [
-              "locale",
-              "Locale_70d308fa",
-              "in"
-            ],
-            [
-              "alias",
-              "str",
-              "in"
-            ]
+            {
+              "name": "programmaticName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "locale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "alias",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "listAliases",
           "returns": "typing.Tuple[AliasProgrammaticPair_2a930f22, ...]",
+          "returns_origin": "sequence< AliasProgrammaticPair >",
           "desc": [
             "retrieves a list of all registered aliases for a certain language."
           ],
           "raises": [],
           "args": [
-            [
-              "locale",
-              "Locale_70d308fa",
-              "in"
-            ]
+            {
+              "name": "locale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
           ]
         },
         {
           "name": "lookupAlias",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "retrieves a registered programmatic name identified by an alias."
           ],
@@ -120,21 +127,24 @@
             "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
-            [
-              "locale",
-              "Locale_70d308fa",
-              "in"
-            ],
-            [
-              "Alias",
-              "str",
-              "in"
-            ]
+            {
+              "name": "locale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "Alias",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "lookupProgrammatic",
           "returns": "str",
+          "returns_origin": "string",
           "desc": [
             "retrieves a given alias for a programmatic name."
           ],
@@ -142,21 +152,24 @@
             "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
-            [
-              "locale",
-              "Locale_70d308fa",
-              "in"
-            ],
-            [
-              "programmatic",
-              "str",
-              "in"
-            ]
+            {
+              "name": "locale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "programmatic",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "rebindAliases",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "rebinds all aliases registered to a given URL to a new one."
           ],
@@ -165,21 +178,24 @@
             "com.sun.star.container.ElementExistException"
           ],
           "args": [
-            [
-              "currentProgrammatic",
-              "str",
-              "in"
-            ],
-            [
-              "newProgrammatic",
-              "str",
-              "in"
-            ]
+            {
+              "name": "currentProgrammatic",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "newProgrammatic",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "renameAlias",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "renames an alias for a programmatic name."
           ],
@@ -188,26 +204,30 @@
             "com.sun.star.container.ElementExistException"
           ],
           "args": [
-            [
-              "locale",
-              "Locale_70d308fa",
-              "in"
-            ],
-            [
-              "oldName",
-              "str",
-              "in"
-            ],
-            [
-              "aNewName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "locale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "oldName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aNewName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "unbindAlias",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "revokes an alias for a programmatic name."
           ],
@@ -215,21 +235,24 @@
             "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
-            [
-              "locale",
-              "Locale_70d308fa",
-              "in"
-            ],
-            [
-              "alias",
-              "str",
-              "in"
-            ]
+            {
+              "name": "locale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "alias",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "unbindAliases",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "removes all aliases for a programmatic name."
           ],
@@ -237,11 +260,12 @@
             "com.sun.star.container.NoSuchElementException"
           ],
           "args": [
-            [
-              "programmaticName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "programmaticName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         }
       ]

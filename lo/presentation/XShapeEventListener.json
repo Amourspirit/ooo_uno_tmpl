@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XShapeEventListener",
   "type": "interface",
@@ -71,6 +71,7 @@
         {
           "name": "click",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Notify a clicked shape.",
             "",
@@ -78,16 +79,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "xShape",
-              "XShape_8fd00a3d",
-              "in"
-            ],
-            [
-              "aOriginalEvent",
-              "MouseEvent_8f430a5f",
-              "in"
-            ]
+            {
+              "name": "xShape",
+              "type": "XShape_8fd00a3d",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.XShape"
+            },
+            {
+              "name": "aOriginalEvent",
+              "type": "MouseEvent_8f430a5f",
+              "direction": "in",
+              "origin": "com.sun.star.awt.MouseEvent"
+            }
           ]
         }
       ]

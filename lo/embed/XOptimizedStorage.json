@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XOptimizedStorage",
   "type": "interface",
@@ -67,6 +67,7 @@
         {
           "name": "attachToURL",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "allows to switch storage persistence to the provided URL.",
             "",
@@ -79,21 +80,24 @@
             "com.sun.star.embed.StorageWrappedTargetException"
           ],
           "args": [
-            [
-              "sURL",
-              "str",
-              "in"
-            ],
-            [
-              "bReadOnly",
-              "bool",
-              "in"
-            ]
+            {
+              "name": "sURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "bReadOnly",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
           ]
         },
         {
           "name": "copyElementDirectlyTo",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "allows to copy storage element directly, not guaranteed to work."
           ],
@@ -106,26 +110,30 @@
             "com.sun.star.embed.StorageWrappedTargetException"
           ],
           "args": [
-            [
-              "sSourceName",
-              "str",
-              "in"
-            ],
-            [
-              "xTargetStorage",
-              "XOptimizedStorage",
-              "in"
-            ],
-            [
-              "sTargetName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "sSourceName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "xTargetStorage",
+              "type": "XOptimizedStorage",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XOptimizedStorage"
+            },
+            {
+              "name": "sTargetName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "copyStreamElementData",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "fills the provided stream with the last flushed version of data from the child stream of the storage."
           ],
@@ -137,21 +145,24 @@
             "com.sun.star.embed.StorageWrappedTargetException"
           ],
           "args": [
-            [
-              "sStreamName",
-              "str",
-              "in"
-            ],
-            [
-              "xTargetStream",
-              "XStream_678908a4",
-              "in"
-            ]
+            {
+              "name": "sStreamName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "xTargetStream",
+              "type": "XStream_678908a4",
+              "direction": "in",
+              "origin": "com.sun.star.io.XStream"
+            }
           ]
         },
         {
           "name": "getElementPropertyValue",
           "returns": "object",
+          "returns_origin": "any",
           "desc": [
             "allows to get property of the child element with the specified name.",
             "",
@@ -167,21 +178,24 @@
             "com.sun.star.embed.StorageWrappedTargetException"
           ],
           "args": [
-            [
-              "sElementName",
-              "str",
-              "in"
-            ],
-            [
-              "sPropertyName",
-              "str",
-              "in"
-            ]
+            {
+              "name": "sElementName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "sPropertyName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
           ]
         },
         {
           "name": "insertRawNonEncrStreamElementDirect",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "allows to insert a raw stream representing non-encrypted stream with header."
           ],
@@ -194,21 +208,24 @@
             "com.sun.star.embed.StorageWrappedTargetException"
           ],
           "args": [
-            [
-              "sStreamName",
-              "str",
-              "in"
-            ],
-            [
-              "xInStream",
-              "XInputStream_98d40ab4",
-              "in"
-            ]
+            {
+              "name": "sStreamName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "xInStream",
+              "type": "XInputStream_98d40ab4",
+              "direction": "in",
+              "origin": "com.sun.star.io.XInputStream"
+            }
           ]
         },
         {
           "name": "insertStreamElementDirect",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "allows to insert a stream to the storage directly.",
             "",
@@ -222,26 +239,30 @@
             "com.sun.star.embed.StorageWrappedTargetException"
           ],
           "args": [
-            [
-              "sStreamName",
-              "str",
-              "in"
-            ],
-            [
-              "xInStream",
-              "XInputStream_98d40ab4",
-              "in"
-            ],
-            [
-              "aProperties",
-              "typing.Tuple[PropertyValue_c9610c73, ...]",
-              "in"
-            ]
+            {
+              "name": "sStreamName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "xInStream",
+              "type": "XInputStream_98d40ab4",
+              "direction": "in",
+              "origin": "com.sun.star.io.XInputStream"
+            },
+            {
+              "name": "aProperties",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< .com.sun.star.beans.PropertyValue >"
+            }
           ]
         },
         {
           "name": "writeAndAttachToStream",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "allows to switch storage persistence to the provided stream.",
             "",
@@ -254,11 +275,12 @@
             "com.sun.star.embed.StorageWrappedTargetException"
           ],
           "args": [
-            [
-              "xStream",
-              "XStream_678908a4",
-              "in"
-            ]
+            {
+              "name": "xStream",
+              "type": "XStream_678908a4",
+              "direction": "in",
+              "origin": "com.sun.star.io.XStream"
+            }
           ]
         }
       ]

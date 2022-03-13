@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XWebDAVCommandEnvironment",
   "type": "interface",
@@ -69,6 +69,7 @@
         {
           "name": "getUserRequestHeaders",
           "returns": "typing.Tuple[StringPair_a4bc0b14, ...]",
+          "returns_origin": "sequence< com.sun.star.beans.StringPair >",
           "desc": [
             "This method gets called while assembling a WebDAV/HTTP request.",
             "",
@@ -76,16 +77,18 @@
           ],
           "raises": [],
           "args": [
-            [
-              "aURI",
-              "str",
-              "in"
-            ],
-            [
-              "eMethod",
-              "WebDAVHTTPMethod_cbd50bdc",
-              "in"
-            ]
+            {
+              "name": "aURI",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "eMethod",
+              "type": "WebDAVHTTPMethod_cbd50bdc",
+              "direction": "in",
+              "origin": "com.sun.star.ucb.WebDAVHTTPMethod"
+            }
           ]
         }
       ]

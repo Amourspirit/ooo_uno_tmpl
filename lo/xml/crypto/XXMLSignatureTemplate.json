@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.21",
+  "version": "0.1.24",
   "libre_office_ver": "7.2",
   "name": "XXMLSignatureTemplate",
   "type": "interface",
@@ -75,6 +75,7 @@
         {
           "name": "getBinding",
           "returns": "XUriBinding_f04e0d6b",
+          "returns_origin": "com.sun.star.xml.crypto.XUriBinding",
           "desc": [
             "Get the dynamic URI binding."
           ],
@@ -84,6 +85,7 @@
         {
           "name": "getTargets",
           "returns": "typing.Tuple[XXMLElementWrapper_66c0107c, ...]",
+          "returns_origin": "sequence< com.sun.star.xml.wrapper.XXMLElementWrapper >",
           "desc": [
             "Get the target XML element, i.e.",
             "",
@@ -95,6 +97,7 @@
         {
           "name": "setBinding",
           "returns": "None",
+          "returns_origin": "void",
           "desc": [
             "Set the dynamic URI binding."
           ],
@@ -102,11 +105,12 @@
             "com.sun.star.lang.IllegalArgumentException"
           ],
           "args": [
-            [
-              "aUriBinding",
-              "XUriBinding_f04e0d6b",
-              "in"
-            ]
+            {
+              "name": "aUriBinding",
+              "type": "XUriBinding_f04e0d6b",
+              "direction": "in",
+              "origin": "com.sun.star.xml.crypto.XUriBinding"
+            }
           ]
         }
       ]
