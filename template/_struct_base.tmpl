@@ -107,6 +107,14 @@ class ${safe_name}($self.get_class_inherits($name, $inherits)):
         super().__init__()
 #end if
 #if $self.is_args()
+
+        if isinstance($args_all[0].name, $safe_name):
+            oth: $safe_name = $args_all[0].name
+    #for $arg in $args_all
+            self.$arg.name = oth.$arg.name
+    #end for
+            return
+
         kargs = {
     #for $arg in $args_all
             "$arg.name": $arg.name,
