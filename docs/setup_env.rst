@@ -25,6 +25,20 @@ Virtual Environment for this project uses conda.
 
     $ conda env create --prefix ./env -f environment.yml
 
+oootmpl
+=======
+
+A link from src dir to ./env/.../site-packages/oootmpl is required.
+
+Because templates are compile by cheetah this link is neessary for templates
+to have accesss to src modules.
+
+Run the following command to create link after Virtual environment is setup.
+
+.. code::
+
+    $ python app_cmd/run_link_src.py --add
+
 UNO
 ===
 
