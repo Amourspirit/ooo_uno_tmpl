@@ -118,6 +118,8 @@ class Make(FilesBase):
                 self._log.error(e)
         if len(c_lst) == 0:
             return
+        lo_dir = self._build / self._config.uno_obj_dir
+        self._ensure_init(lo_dir)
         # run two pools. First to compile. Second to write
         with Pool(processes=self._processes) as pool:
             pool.map(self._compile_tmpl, c_lst)
@@ -165,6 +167,8 @@ class Make(FilesBase):
                 self._log.error(e)
         if len(c_lst) == 0:
             return
+        dyn_dir = self._build / self._config.dyn_dir
+        self._ensure_init(dyn_dir)
         # run two pools. First to compile. Second to write
         with Pool(processes=self._processes) as pool:
             pool.map(self._compile_dyn, c_lst)
