@@ -46,7 +46,7 @@ UNO
 No uno pip
 ----------
 
-Uno is required to compile temlates of this project.
+Uno is required to compile templates of this project.
 
 As stated there is no uno pip install. However uno is required for this project.
 

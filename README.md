@@ -12,7 +12,7 @@ For help:
 python -m app -h
 ```
 
-For Extended Help see app.py build in help.
+For Extended Help see app.py built in help.
 
 ```bash
 $ pydoc app
