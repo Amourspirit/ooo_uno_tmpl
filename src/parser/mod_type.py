@@ -191,7 +191,9 @@ class PythonType(object):
             requires_typing=self.requires_typing,
             imports=self.imports,
             is_py_type=self.is_py_type,
-            realtype=self.realtype
+            realtype=self.realtype,
+            origtype=self.origtype,
+            origin=self.origin
         )
         p_type.children.extend(self.children)
         return p_type
