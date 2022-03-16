@@ -112,6 +112,8 @@ def test_imp_const(const_data: str, monkeypatch):
     monkeypatch.setenv('ooouno_ignore_runtime', 'True')
     imc = ImportCheck()
     assert imc.load_import(const_data) == True
+    const_enum = const_data + "Enum"
+    assert imc.load_import(const_enum) == True
 
 def test_imp_ex_uno(ex_data: str, monkeypatch):
     monkeypatch.setenv('ooouno_ignore_runtime', 'False')
