@@ -47,10 +47,9 @@ def test_authentication_failed_exception(root_path):
     assert parg.name == "Context"
     assert parg.type == "XInterface_8f010a43"
     assert parg.default == "None"
-    component = parg.component
-    assert component is not None
-    assert component.id_component == "com.sun.star.uno.XInterface"
-    assert component.name == "XInterface"
+    p_type = parg.p_type
+    assert p_type is not None
+    assert p_type.origin == "com.sun.star.uno.XInterface"
     parg = parent_args[2]
     assert parg.name == "BackendException"
     assert parg.type == "object"
