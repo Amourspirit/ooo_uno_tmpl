@@ -2,9 +2,6 @@
 import pytest
 
 if __name__ == "__main__":
-    import sys
-    import os
-    # sys.path.append(os.path.realpath('..'))
     pytest.main([__file__])
 
 import src.parser.mod_type as tm
@@ -39,6 +36,8 @@ def test_rule_primative_seq():
     assert p_type.requires_typing
     assert p_type.is_py_type
     assert p_type.realtype == 'tuple'
+    assert p_type.origin == seq
+    assert p_type.origtype == None
     assert len(p_type.children) == 1
     p_child = p_type.children[0]
     assert p_child.type == 'int'
@@ -377,6 +376,8 @@ def test_rule_tup2_ns():
     assert p2.type == 'str'
     assert p2.realtype == 'str'
     assert p2.is_py_type == True
+    assert p_type.origin == seq
+    assert p_type.origtype is None
     seq = 'sequence< com.sun.star.uno.XInterface >'
     assert rule.get_is_match(seq) == False
 
@@ -509,6 +510,14 @@ def test_signed():
     assert p_type.type == "str"
     assert p_type.requires_typing == False
     assert p_type.is_py_type == True
+    assert p_type.origin == "char"
+    assert p_type.origtype is None
+    p2 = p_type.copy()
+    assert p2.type == "str"
+    assert p2.requires_typing == False
+    assert p2.is_py_type == True
+    assert p2.origin == "char"
+    assert p2.origtype is None
 
 
 def test_unsigned():
@@ -518,6 +527,8 @@ def test_unsigned():
     assert p_type.type == "int"
     assert p_type.requires_typing == False
     assert p_type.is_py_type == True
+    assert p_type.origin == "long"
+    assert p_type.origtype is None
 
 
 def test_long():
