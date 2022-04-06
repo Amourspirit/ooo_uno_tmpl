@@ -4,6 +4,7 @@ from typing import Any, Dict, List, Tuple, Union
 from _base_json import BaseJson
 from verr import Version
 from oootmpl.template_helper.models_exception import ModelsException
+from _base_json import EventArgs
 
 
 class BaseEx(BaseJson):
@@ -86,6 +87,12 @@ class BaseEx(BaseJson):
         if ver < min_ver:
             raise Exception(
                 "Invalid Data: Expected version to be at least '{min_ver}' got {ver}")
+
+    # region Events
+    def on_after_init_data(self, args: EventArgs) -> None:
+        super().on_after_init_data(args=args)
+        self.oenv = self.config.env
+    # endregion Events
 
     def _get_formated_arg(self, arg: Tuple[str]) -> str:
         return f"{self.get_safe_word(arg[0])}: {self.get_q_type(arg[1])}"
@@ -192,7 +199,7 @@ class BaseEx(BaseJson):
             Otherwise ``False``.
         """
         return self._models.is_args()
-    
+
     def is_inst_args(self) -> bool:
         """
         Gets if there is any args for current instance only.
@@ -203,7 +210,7 @@ class BaseEx(BaseJson):
         """
         args = self._models.get_class_args()
         return len(args) > 0
-    
+
     def is_parent_args(self) -> bool:
         """
         Gets if there is any args for parents only.
@@ -267,8 +274,6 @@ class BaseEx(BaseJson):
             c_str += ','  # add so tuple is not mistaken as brackets
         return c_str
 
-    
-    
     def get_nt_names_all_str(self) -> str:
         args = self._models.get_class_args_all()
         c_str = ''
@@ -302,7 +307,7 @@ class BaseEx(BaseJson):
                         name=arg.name, returns=arg.type, uno_none=uno_none)
             results.append(s)
         return results
-    
+
     def _get_parent_class_args(self, include_value: bool = True, include_type: bool = True, uno_none: bool = True):
         args = self._models.get_parents_class_args(uno_none=uno_none)
         results: List[str] = []
