@@ -36,6 +36,9 @@ class Writer(xsrc.Writer):
 
     def _get_template_dyn(self) -> Union[str, None]:
         return 'exception_dyn.tmpl'
+    
+    def _get_template_pyi(self) -> Union[str, None]:
+        return 'exception_pyi.tmpl'
 
     def _get_template_name(self) -> str:
         """
