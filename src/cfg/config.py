@@ -125,7 +125,11 @@ class AppConfig:
     template_dyn_ext: str
     """Extension for dynamic templates such as .dyn"""
     template_dyn_py_ext: str
-    """Extensiong for dynamic templates py ext sucha as .dynpy"""
+    """Extension for dynamic templates py ext sucha as .dynpy"""
+    template_pyi_ext: str
+    """Extension for pyi templates such as .tpyi"""
+    template_pyi_py_ext: str
+    """Extensiong for pyi templates py ext sucha as .pyipy"""
     component_types: List[str]
     com_sun_star_lo: List[str]
     """
