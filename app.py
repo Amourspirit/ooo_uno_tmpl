@@ -602,14 +602,15 @@ def _args_touch(parser: argparse.ArgumentParser, config: AppConfig) -> None:
         dest='typedef_all',
         default=False
     )
+    touch_help = f"touch *.py, *tmpl, *{config.template_dyn_ext}, *{config.template_dyn_py_ext}, *{config.template_pyi_ext}, *{config.template_pyi_py_ext}, files (default: %(default)s)"
     parser.add_argument(
         '-o',
         '--option',
         default='tmpl',
         const='tmpl',
         nargs='?',
-        choices=['py', 'dyn','dynpy', 'tmpl'],
-        help='touch *.py, *.dyn, *.tmpl files (default: %(default)s)')
+        choices=['py', 'dyn','dynpy', 'tmpl', 'tpyi', 'pyipy'],
+        help=touch_help)
     parser.add_argument(
         '--cache-files',
         help='Touch cached files in the system tmp dir and resets cache file expire times.',
@@ -1100,12 +1101,19 @@ def _args_action_touch(args: argparse.Namespace, config: AppConfig) -> None:
     touch_py_files = False
     touch_dyn_files = False
     touch_dyn_py_files = False
+    touch_pyi_files = False
+    touch_pyi_py_files = False
     if args.option == 'dyn':
         touch_dyn_files = True
-    if args.option == 'dynpy':
+    elif args.option == 'dynpy':
         touch_dyn_py_files = True
     elif args.option == 'py':
         touch_dyn_files = True
+    elif args.option == 'tpyi':
+        touch_pyi_files = True
+    elif args.optoin == 'pyipy':
+        touch_pyi_py_files = True
+    
         
     _log_start_action()
     
@@ -1123,6 +1131,8 @@ def _args_action_touch(args: argparse.Namespace, config: AppConfig) -> None:
         touch_py_files=touch_py_files,
         touch_dyn_files=touch_dyn_files,
         touch_dyn_py_files=touch_dyn_py_files,
+        touch_pyi_files=touch_pyi_files,
+        touch_pyi_py_files=touch_pyi_py_files,
         touch_cache_files=args.cache_files
     )
     _log_end_action()
