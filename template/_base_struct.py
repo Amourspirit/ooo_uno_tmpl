@@ -1,6 +1,6 @@
 # coding: utf-8
 import uno
-from typing import Dict, Set, Tuple, List, Union
+from typing import Dict, Optional, Set, Tuple, List, Union
 from _base_json import BaseJson
 from verr import Version
 from _base_tmpl import SqlComponent
@@ -185,7 +185,7 @@ class BaseStruct(BaseJson):
     def get_class_args_inst(self, uno_none: bool = True):
         return self._models.get_class_args(uno_none=uno_none)
 
-    def _get_class_args(self, include_value: bool = True, include_type: bool = True, uno_none: bool = True):
+    def _get_class_args(self, include_value: bool = True, include_type: bool = True, uno_none: bool = True, value: Optional[str] = None):
         args = self._models.get_class_args(uno_none=uno_none)
         results: List[str] = []
         for arg in args:
@@ -193,13 +193,16 @@ class BaseStruct(BaseJson):
             if include_type:
                 s += f": typing.Optional[{arg.type}]"
             if include_value:
-                s += " = " + \
-                    self.get_attrib_default(
-                        name=arg.name, returns=arg.type, uno_none=uno_none)
+                if value is None:
+                    s += " = " + \
+                        self.get_attrib_default(
+                            name=arg.name, returns=arg.type, uno_none=uno_none)
+                else:
+                    s += value
             results.append(s)
         return results
 
-    def _get_parent_class_args(self, include_value: bool = True, include_type: bool = True, uno_none: bool = True):
+    def _get_parent_class_args(self, include_value: bool = True, include_type: bool = True, uno_none: bool = True, value: Optional[str] = None):
         args = self._models.get_parents_class_args(uno_none=uno_none)
         results: List[str] = []
         for arg in args:
@@ -207,21 +210,26 @@ class BaseStruct(BaseJson):
             if include_type:
                 s += f": typing.Optional[{arg.type}]"
             if include_value:
-                s += " = " + \
-                    self.get_attrib_default(
-                        name=arg.name, returns=arg.type, uno_none=uno_none)
+                if value is None:
+                    s += " = " + \
+                        self.get_attrib_default(
+                            name=arg.name, returns=arg.type, uno_none=uno_none)
+                else:
+                    s += value
             results.append(s)
         return results
 
-    def get_constructor_args_str(self, include_value: bool = True, include_type: bool = True, uno_none: bool = True) -> str:
+    def get_constructor_args_str(self, include_value: bool = True, include_type: bool = True, uno_none: bool = True, value: Optional[str] = None) -> str:
         pargs = self._get_parent_class_args(
             include_value=include_value,
             include_type=include_type,
-            uno_none=uno_none)
+            uno_none=uno_none,
+            value=value)
         cargs = self._get_class_args(
             include_value=include_value,
             include_type=include_type,
-            uno_none=uno_none)
+            uno_none=uno_none,
+            value=value)
         args = pargs + cargs
         if len(args) == 0:
             return ""
@@ -401,3 +409,7 @@ class BaseStruct(BaseJson):
             self._linfo(
                 f"parent — {self._is_parent}")
         return self._is_parent
+
+    @property
+    def models(self) -> ModelsStruct:
+        return self._models
