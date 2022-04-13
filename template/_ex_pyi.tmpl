@@ -46,6 +46,7 @@ $self.load_data()#slurp
 # Namespace: $namespace
 #if $libre_office_ver:
 # Libre Office Version: $libre_office_ver
+from typing_extensions import Literal
 #end if
 #if len($properties) > 0
 from $oenv import UNO_NONE
@@ -89,14 +90,7 @@ class ${safe_name}($self.get_class_inherits($safe_name, $inherits))$self.get_cla
     """
 
 #end if
-    __ooo_ns__: str = '$namespace'
-    __ooo_full_ns__: str = '$fullname'
-    __ooo_type_name__: str = 'exception'
-    __pyunointerface__: str = '$fullname'
-    __pyunostruct__: str = '$fullname'
-
-    typeName: str = '$fullname'
-    """Literal Constant ``$fullname``"""
+    typeName: Literal['$fullname']
 
     $self.get_constructor()
         """
@@ -108,55 +102,12 @@ class ${safe_name}($self.get_class_inherits($safe_name, $inherits))$self.get_cla
             $arg.name ($arg_type, optional): $arg.name value.
 #end for
         """
-#if $self.has_uno_extends() is False
-        super().__init__()
-#end if
-#if $self.is_args()
-        kargs = {
-    #for $arg in $args_all
-            "$arg.name": $arg.name,
-    #end for
-        }
-    #for $arg in $args_all
-        #if $arg.default == "UNO_NONE"
-        if kargs["$arg.name"] is UNO_NONE:
-            kargs["$arg.name"] = None
-        #end if
-    #end for
-    ## #if $self.has_uno_extends()
-        self._init(**kargs)
-
-    def _init(self, **kwargs) -> None:
-        #if $is_local_args
-            #for $arg in $args_local
-        self._$self.camel_to_snake($arg.name) = kwargs["$arg.name"]
-            #end for
-        #end if
-        #if $is_non_local_args
-            #if $is_local_args
-        inst_keys = ($self.get_nt_names_str())
-        kargs = kwargs.copy()
-        for key in inst_keys:
-            del kargs[key]
-        super()._init(**kargs)
-            #else
-        super()._init(**kwargs)
-            #end if
-        #else
-            #if $self.has_uno_extends()
-        super()._init({})
-            #end if
-        #end if
-    ## #end if
-#end if
-
 #if $is_method
 #set $methods = $attribs['methods']
     #for $method in $methods
 #set $m_desc = $method['desc']
 #set $out_args = $self.get_out_args($method)
 #set $raises = $self.get_raises_list($method)
-    @abstractmethod
     $self.get_formated_meth($method)
         """
         #for $line in $self.line_gen($m_desc)
@@ -201,11 +152,6 @@ class ${safe_name}($self.get_class_inherits($safe_name, $inherits))$self.get_cla
     #end for
     #end if
         """
-        return self._$self.camel_to_snake($p_name)
-    
-    @${p_name}.setter
-    def ${p_name}(self, value: $property['returns']) -> None:
-        self._$self.camel_to_snake($p_name) = value
 
 #end for
 #end if

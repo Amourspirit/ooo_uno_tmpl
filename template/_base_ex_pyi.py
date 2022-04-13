@@ -1,5 +1,5 @@
 # coding: utf-8
-from typing import List
+from typing import List, Tuple
 from _base_ex import BaseEx
 from _base_json import EventArgs
 
@@ -11,6 +11,20 @@ class BaseExPyi(BaseEx):
         self.dyn = self.config.dyn_dir
         self.helper_ns = self.config.helper_ns
         self.helper_mod = self.config.helper_mod
+
+
+    def get_constructor(self) -> str:
+        # overrides BaseEx
+        if not self.models.is_args():
+            # this will alomost never happen
+            self._linfo("Constructor Args — False")
+            return "def __init__(self) -> None:"
+        self._linfo("Constructor Args — True")
+        names = self.get_constructor_args_str(
+            include_value=True, include_type=True, value = " = ...")
+        # if self.is_parent:
+        #     return f"def __init__(self, {names}, **kwargs) -> None:"
+        return f"def __init__(self, {names}) -> None:"
 
     def get_dyn_constructor_args_lst(self, add_default: bool) -> List[str]:
         key = f'get_dyn_constructor_args_lst_{add_default}'
