@@ -36,6 +36,12 @@ class AppConfig:
     
     This will usually be a subdirectory of ``builld_dir``
     """
+    pyi_dir: str
+    """
+    Pyi ouptput directory such as ``pyi``.
+    
+    This will usually be a subdirectory of ``builld_dir``
+    """
     scratch_dir: str
     """Output scratch dir such as scratch"""
     resource_dir: str

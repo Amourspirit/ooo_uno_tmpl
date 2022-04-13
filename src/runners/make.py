@@ -42,8 +42,8 @@ class Make(FilesBase):
         self._make()
         
 
-    def _ensure_init(self, path: Path):
-        init_file = Path(path, '__init__.py')
+    def _ensure_init(self, path: Path, ext: str = '.py'):
+        init_file = Path(path, f'__init__{ext}')
         if not init_file.exists():
             init_file.touch()
             self._log.info('Created File: %s', str(init_file))
@@ -79,6 +79,7 @@ class Make(FilesBase):
         self._make_tmpl()
         self._make_dyn()
         self._make_tppi()
+        self._make_pyi()
 
     # region TMPL
     def _compile_tmpl(self, w_info: d_cls.WriteInfo):
@@ -126,6 +127,55 @@ class Make(FilesBase):
         with Pool(processes=self._processes) as pool:
             pool.map(self._write_multi, c_lst)
     # endregion TMPL
+
+    # region PYI
+    def _compile_pyi(self, w_info: d_cls.WriteInfo):
+        self._log.debug('Compiling file: %s', w_info.file)
+        cmd_str = f"cheetah compile --nobackup --iext={self.config.template_pyi_ext} --oext={self.config.template_pyi_py_ext} {w_info.file}"
+        self._log.info('Running subprocess: %s', cmd_str)
+        p = subprocess.run(
+            cmd_str.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        exit_status = p.returncode
+        std_out = p.stdout.decode()
+        if std_out:
+            self._log.info("Cheetah output: %s", std_out)
+        if exit_status != 0:
+            self._log.warning("Cheeta error Outuput: %s", p.stderr.decode())
+
+    def _make_pyi(self):
+        files = self._get_template_pyi_files()
+        c_lst: List[d_cls.WriteInfo] = []
+        for file in files:
+            try:
+                if not self._is_skip_compile(tmpl_file=file, ext=self.config.template_pyi_py_ext):
+                    f_dir = Path(file).parent
+                    if not f_dir in self._processed_dirs:
+                        self._processed_dirs.add(f_dir)
+                        # self._log.debug("_make() current dir: %s", f_dir)
+                        self._create_sys_links(f_dir)
+
+                    py_file = self._get_py_pyi_path(tmpl_file=file)
+
+                    w_info = d_cls.WriteInfo(
+                        file=file,
+                        py_file=py_file,
+                        scratch_path=self._get_pyi_write_path(
+                            tmpl_file=py_file),
+                        ext= '.pyi'
+                    )
+                    c_lst.append(w_info)
+            except Exception as e:
+                self._log.error(e)
+        if len(c_lst) == 0:
+            return
+        pyi_dir = self._build / self._config.pyi_dir
+        self._ensure_init(pyi_dir, '.pyi')
+        # run two pools. First to compile. Second to write
+        with Pool(processes=self._processes) as pool:
+            pool.map(self._compile_pyi, c_lst)
+        with Pool(processes=self._processes) as pool:
+            pool.map(self._write_multi, c_lst)
+    # endregion PYI
 
     # region DYN
 
@@ -273,10 +323,24 @@ class Make(FilesBase):
         p_scratch = Path(
             p_scratch_dir, self.camel_to_snake(str(p_file.stem)) + ext)
         return p_scratch
+    
+    def _get_pyi_write_path(self, tmpl_file) -> Path:
+        p_file = Path(tmpl_file)
+        ext = '.pyi'
+        p_dir = p_file.parent
+        p_rel = p_dir.relative_to(self._root_dir)
+        parts = list(p_rel.parts)
+        parts[0] = self._config.pyi_dir  # replace uno with dyn
+        # build up to build/dyn/somepath/somefile.py
+        p_scratch_dir = Path(self._build, *parts)
+        self._mkdirp(p_scratch_dir)
+        p_scratch = Path(
+            p_scratch_dir, self.camel_to_snake(str(p_file.stem)) + ext)
+        return p_scratch
 
     def _write_multi(self, w_info: d_cls.WriteInfo):
         def ensure_init(path: Path):
-            init_file = Path(path, '__init__.py')
+            init_file = Path(path, f'__init__{w_info.ext}')
             if not init_file.exists():
                 init_file.touch()
                 self._log.info('Created File: %s', str(init_file))
