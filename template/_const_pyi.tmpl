@@ -62,11 +62,7 @@ class ${safe_name}:
 #end if
     """
 #for $item in $attribs
-    #if isinstance($item['value'], (int, float, str))
-    $self.get_safe_word($item['name']): Literal[$item['value']]
-    #else
-    $self.get_safe_word($item['name']): $self.get_q_type($item['value'])
-    #end if
+    $self.get_safe_word($item['name']): $self.get_const_type($item)
     #if len($item['lines']) > 0
     """
         #if isinstance($item['lines'], str)

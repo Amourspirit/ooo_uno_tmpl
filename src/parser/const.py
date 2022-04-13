@@ -10,7 +10,6 @@ import logging
 import argparse
 import xerox  # requires xclip - sudo apt-get install xclip
 import textwrap
-from enum import IntEnum, auto
 from typing import Dict, List, Set, Union
 from dataclasses import dataclass, field
 from bs4.element import ResultSet, Tag
