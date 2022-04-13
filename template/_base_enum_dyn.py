@@ -1,7 +1,8 @@
 # coding: utf-8
-import os
 from _base_enum import BaseEnum
 from _base_json import EventArgs
+
+
 class BaseEnumDyn(BaseEnum):
 
     def on_after_init_data(self, args: EventArgs) -> None:
