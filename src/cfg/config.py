@@ -36,9 +36,9 @@ class AppConfig:
     
     This will usually be a subdirectory of ``builld_dir``
     """
-    pyi_dir: str
+    pyi_dir: List[str]
     """
-    Pyi ouptput directory such as ``pyi``.
+    Pyi ouptput directory such as ``['star', '_pyi']``.
     
     This will usually be a subdirectory of ``builld_dir``
     """

@@ -168,7 +168,7 @@ class Make(FilesBase):
                 self._log.error(e)
         if len(c_lst) == 0:
             return
-        pyi_dir = self._build / self._config.pyi_dir
+        pyi_dir = Path(self._build , *self._config.pyi_dir)
         self._ensure_init(pyi_dir, '.pyi')
         # run two pools. First to compile. Second to write
         with Pool(processes=self._processes) as pool:
@@ -330,7 +330,7 @@ class Make(FilesBase):
         p_dir = p_file.parent
         p_rel = p_dir.relative_to(self._root_dir)
         parts = list(p_rel.parts)
-        parts[0] = self._config.pyi_dir  # replace uno with dyn
+        parts[0] = Path(*self._config.pyi_dir)  # replace uno with dyn
         # build up to build/dyn/somepath/somefile.py
         p_scratch_dir = Path(self._build, *parts)
         self._mkdirp(p_scratch_dir)
