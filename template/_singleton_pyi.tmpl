@@ -1,7 +1,6 @@
 #import typing
-#from _base_singleton import BaseSingleton
-#extends BaseSingleton
-## see: https://cheetahtemplate.org/users_guide/inheritanceEtc.html#implements
+#from _base_singleton_dyn import BaseSingletonDyn
+#extends BaseSingletonDyn
 #implements respond
 $self.init_data()#slurp
 #attr $name = ""
@@ -76,24 +75,13 @@ class ${safe_name}($self.get_class_inherits($name, $inherits)):
     """
 
 #end if
-    __ooo_ns__: str = '$namespace'
-    __ooo_full_ns__: str = '$fullname'
-    __ooo_type_name__: str = 'singleton'
-    _instance = None
-
-    def __new__(cls, *args, **kwargs):
-        # single instance only allowed
-        if cls._instance is None:
-            cls._instance = super().__new__(cls, *args, **kwargs)
-        return cls._instance
-
 #if $is_properties
 #set $properties = $attribs['properties']
 #for $property in $properties
 #set $p_name = $self.get_safe_word($property['name'])
 #set $p_return = $self.get_q_type($property['returns'])
 #set $p_desc = $property['desc']
-    @abstractproperty
+    @aproperty
     def ${p_name}(self) -> $p_return:
         """
     #for $line in $self.line_gen($p_desc)
