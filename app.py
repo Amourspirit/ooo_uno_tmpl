@@ -323,11 +323,11 @@ def _main():
     # ns = 'com.sun.star.form.DataAwareControlModel'
     # ns = 'com.sun.star.text.TextRange'
     # args = 'data db-json -n com.sun.star.form.control.GridControl'
-    url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1ucb_1_1OpenCommandArgument.html'
+    # url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1chart2_1_1SubIncrement.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1ucb_1_1OpenCommandArgument2.html'
-    args = 'url-parse struct -t -u '
-    # args = 'link-json mod-links -r -j -a --data'
-    args += url
+    # args = 'url-parse struct -t -u '
+    # args += url
+    args = 'make'
     sys.argv.extend(args.split())
     main()
 
@@ -1111,7 +1111,7 @@ def _args_action_touch(args: argparse.Namespace, config: AppConfig) -> None:
         touch_dyn_files = True
     elif args.option == 'tpyi':
         touch_pyi_files = True
-    elif args.optoin == 'pyipy':
+    elif args.option == 'pyipy':
         touch_pyi_py_files = True
     
         
