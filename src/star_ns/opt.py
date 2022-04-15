@@ -4,3 +4,4 @@ from enum import IntEnum
 class WriteNsEnum(IntEnum):
     CSS_LO = 1
     CSS_DYN = 2
+    STAR_PYI = 3

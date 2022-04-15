@@ -10,7 +10,7 @@ from ..utilities import util
 
 
 class WriteStarNs:
-    """Writes imports for all 'build/uno_obj' (paths set in config.json) files into  css... __init__.py files."""
+    """Writes imports for all 'ooobuild/lo' (paths set in config.json) files into  css... __init__.py files."""
 
     def __init__(self, config: AppConfig, data: Dict[str, Component], rel_import: bool, write_ns: WriteNsEnum, log: Optional[logging.Logger] = None) -> None:
         """
@@ -34,6 +34,9 @@ class WriteStarNs:
         elif self._write_ns == WriteNsEnum.CSS_DYN:
             self._write_root = Path(
                 self._root_dir, self._config.builld_dir, *self._config.com_sun_star_dyn)
+        elif self._write_ns == WriteNsEnum.STAR_PYI:
+            self._write_root = Path(
+                self._root_dir, self._config.builld_dir, *self._config.com_sun_star_pyi)
         else:
             raise ValueError(
                 "WriteStarNs.__init__() invalid option for write_ns")
@@ -47,12 +50,17 @@ class WriteStarNs:
         else:
             names = self._config.com_sun_star_dyn
 
+        if self._write_ns == WriteNsEnum.STAR_PYI:
+            init_file = '__init__.pyi'
+        else:
+            init_file = '__init__.py'
+
         for name in names:
             p = Path(p, name)
             if not p.is_absolute():
                 p = self._root_dir.joinpath(p)
             self._mkdirp(p)
-            init_file = Path(p, '__init__.py')
+            init_file = Path(p, init_file)
             try:
                 init_file.touch(exist_ok=False)
             except FileExistsError:
@@ -61,10 +69,14 @@ class WriteStarNs:
 
     def write(self) -> None:
         """
-        Writes imports for all 'build/lo' (paths set in config.json) files into  css... __init__.py files. 
+        Writes imports for all 'ooobuild/lo' (paths set in config.json) files into  css... __init__.py files. 
         """
         self._ensure_init_py()
         header_lines = ['# coding: utf-8']
+        if self._write_ns == WriteNsEnum.STAR_PYI:
+            init_file = '__init__.pyi'
+        else:
+            init_file = '__init__.py'
 
         with open(Path(self._root_dir, self._config.inc_lic), 'r') as f_lic:
             header_lines.extend(f_lic.read().splitlines())
@@ -77,6 +89,9 @@ class WriteStarNs:
                 if self._write_ns == WriteNsEnum.CSS_LO:
                     rel_ns_parts = [
                         f_name for f_name in self._config.com_sun_star_lo]
+                elif self._write_ns == WriteNsEnum.STAR_PYI:
+                    rel_ns_parts = [
+                        f_name for f_name in self._config.com_sun_star_pyi]
                 else:
                     rel_ns_parts = [
                         f_name for f_name in self._config.com_sun_star_dyn]
@@ -86,7 +101,7 @@ class WriteStarNs:
                 rel_ns = None
             write_path = self._write_root.joinpath(Path(*ns_parts))
             self._mkdirp(dest_dir=write_path)
-            write_path = write_path.joinpath('__init__.py')
+            write_path = write_path.joinpath(init_file)
 
             gen_star = GenerateStarNs(
                 config=self._config, c_data=c_data,

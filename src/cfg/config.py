@@ -145,6 +145,10 @@ class AppConfig:
     """
     Path Like structure that will be used for DYN namespace imports in build dir such as ['cssdyn'].
     """
+    com_sun_star_pyi: List[str]
+    """
+    Path Like structure that will be used for PYI namespace imports in build dir such as ['star'].
+    """
     inc_lic: str
     """Path to License Include File"""
     dyn_ns_import_check: bool
