@@ -36,6 +36,12 @@ class AppConfig:
     
     This will usually be a subdirectory of ``builld_dir``
     """
+    pyi_dir: List[str]
+    """
+    Pyi ouptput directory such as ``['star', '_pyi']``.
+    
+    This will usually be a subdirectory of ``builld_dir``
+    """
     scratch_dir: str
     """Output scratch dir such as scratch"""
     resource_dir: str
@@ -125,7 +131,11 @@ class AppConfig:
     template_dyn_ext: str
     """Extension for dynamic templates such as .dyn"""
     template_dyn_py_ext: str
-    """Extensiong for dynamic templates py ext sucha as .dynpy"""
+    """Extension for dynamic templates py ext sucha as .dynpy"""
+    template_pyi_ext: str
+    """Extension for pyi templates such as .tpyi"""
+    template_pyi_py_ext: str
+    """Extensiong for pyi templates py ext sucha as .pyipy"""
     component_types: List[str]
     com_sun_star_lo: List[str]
     """
@@ -134,6 +144,10 @@ class AppConfig:
     com_sun_star_dyn: List[str]
     """
     Path Like structure that will be used for DYN namespace imports in build dir such as ['cssdyn'].
+    """
+    com_sun_star_pyi: List[str]
+    """
+    Path Like structure that will be used for PYI namespace imports in build dir such as ['star'].
     """
     inc_lic: str
     """Path to License Include File"""

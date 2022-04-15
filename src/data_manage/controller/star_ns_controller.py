@@ -26,6 +26,7 @@ class StarNsControler:
         self._log: Union[logging.Logger, None] = kwargs.get('logger', None)
         self._write_lo = bool(kwargs.get('write_lo', False))
         self._write_dyn = bool(kwargs.get('write_dyn', False))
+        self._write_pyi = bool(kwargs.get('write_pyi', False))
         self._conn = DbConnect(config)
 
     def results(self) -> Any:
@@ -39,6 +40,8 @@ class StarNsControler:
             self._process_star_ns(write_ns=WriteNsEnum.CSS_LO)
         elif self._write_dyn:
             self._process_star_ns(write_ns=WriteNsEnum.CSS_DYN)
+        elif self._write_pyi:
+            self._process_star_ns(write_ns=WriteNsEnum.STAR_PYI)
         return None
 
     def _process_star_ns(self, write_ns: WriteNsEnum) -> None:

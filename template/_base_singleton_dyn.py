@@ -1,5 +1,4 @@
 # coding: utf-8
-import os
 from _base_singleton import BaseSingleton
 from _base_json import EventArgs
 

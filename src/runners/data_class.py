@@ -12,6 +12,7 @@ class WriteInfo:
     file: str
     py_file: str
     scratch_path: Path
+    ext: str = '.py'
 
 
 @dataclass

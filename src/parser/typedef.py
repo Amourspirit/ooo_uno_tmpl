@@ -403,6 +403,7 @@ class WriterTypeDef(base.WriteBase):
             if self._write_file:
                 self._write_to_file()
                 self._write_to_file_dyn()
+                self._write_to_file_pyi()
             if self._write_json:
                 self._write_to_json()
         except Exception as e:
@@ -451,6 +452,9 @@ class WriterTypeDef(base.WriteBase):
 
     def _get_template_dyn(self) -> Union[str, None]:
         return 'typedef_dyn.tmpl'
+    
+    def _get_template_pyi(self) -> Union[str, None]:
+        return 'typedef_pyi.tmpl'
 
     # region get Imports
     def _get_from_imports(self, t_def: TypeDef) -> List[List[str]]:
@@ -601,12 +605,12 @@ class WriterTypeDef(base.WriteBase):
             logger.info("Created file: %s", file_path)
 
     def _write_to_file_dyn(self):
-        dyn_name = self._get_template_dyn()
-        if dyn_name is None:
+        name = self._get_template_dyn()
+        if name is None:
             return
-        dyn_path = self._template_dir / dyn_name
-        with open(dyn_path, 'r') as t_file:
-            dyn_contents = t_file.read()
+        p = self._template_dir / name
+        with open(p, 'r') as t_file:
+            contents = t_file.read()
 
         t_defs = self._get_t_def_lst()
         for t_def in t_defs:
@@ -615,7 +619,25 @@ class WriterTypeDef(base.WriteBase):
             file_path = file_path.joinpath(
                 tmpl_file_path.stem + APP_CONFIG.template_dyn_ext)
             with open(file_path, 'w') as f:
-                f.write(dyn_contents)
+                f.write(contents)
+            logger.info("Created file: %s", file_path)
+    
+    def _write_to_file_pyi(self):
+        name = self._get_template_pyi()
+        if name is None:
+            return
+        p = self._template_dir / name
+        with open(p, 'r') as t_file:
+            contents = t_file.read()
+
+        t_defs = self._get_t_def_lst()
+        for t_def in t_defs:
+            tmpl_file_path = self._get_uno_obj_path(t_def)
+            file_path = tmpl_file_path.parent
+            file_path = file_path.joinpath(
+                tmpl_file_path.stem + APP_CONFIG.template_pyi_ext)
+            with open(file_path, 'w') as f:
+                f.write(contents)
             logger.info("Created file: %s", file_path)
 
     def _print_json_to_terminal(self):

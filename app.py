@@ -323,11 +323,11 @@ def _main():
     # ns = 'com.sun.star.form.DataAwareControlModel'
     # ns = 'com.sun.star.text.TextRange'
     # args = 'data db-json -n com.sun.star.form.control.GridControl'
-    url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1ucb_1_1OpenCommandArgument.html'
+    # url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1chart2_1_1SubIncrement.html'
     # url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1ucb_1_1OpenCommandArgument2.html'
-    args = 'url-parse struct -t -u '
-    # args = 'link-json mod-links -r -j -a --data'
-    args += url
+    # args = 'url-parse struct -t -u '
+    # args += url
+    args = 'make'
     sys.argv.extend(args.split())
     main()
 
@@ -602,14 +602,15 @@ def _args_touch(parser: argparse.ArgumentParser, config: AppConfig) -> None:
         dest='typedef_all',
         default=False
     )
+    touch_help = f"touch *.py, *tmpl, *{config.template_dyn_ext}, *{config.template_dyn_py_ext}, *{config.template_pyi_ext}, *{config.template_pyi_py_ext}, files (default: %(default)s)"
     parser.add_argument(
         '-o',
         '--option',
         default='tmpl',
         const='tmpl',
         nargs='?',
-        choices=['py', 'dyn','dynpy', 'tmpl'],
-        help='touch *.py, *.dyn, *.tmpl files (default: %(default)s)')
+        choices=['py', 'dyn','dynpy', 'tmpl', 'tpyi', 'pyipy'],
+        help=touch_help)
     parser.add_argument(
         '--cache-files',
         help='Touch cached files in the system tmp dir and resets cache file expire times.',
@@ -733,8 +734,10 @@ def _args_data_json(parser: argparse.ArgumentParser) -> None:
 
 def _args_data_star(parser: argparse.ArgumentParser, config: AppConfig) -> None:
     opt_group = parser.add_argument_group()
-    css_dir_lo = config.builld_dir + '/' + '/'.join(config.com_sun_star_lo)
-    css_dir_dyn = config.builld_dir + '/' + '/'.join(config.com_sun_star_dyn)
+    css_dir_lo = config.builld_dir + os.sep + os.sep.join(config.com_sun_star_lo)
+    css_dir_dyn = config.builld_dir + os.sep + os.sep.join(config.com_sun_star_dyn)
+    css_dir_pyi = config.builld_dir + os.sep + \
+        os.sep.join(config.com_sun_star_pyi)
     opt_group.add_argument(
         '-l', '--css-lo',
         help=f"Writes imports for all '{config.builld_dir}/{config.uno_obj_dir}' files into  {css_dir_lo}... __init__.py files.",
@@ -748,6 +751,14 @@ def _args_data_star(parser: argparse.ArgumentParser, config: AppConfig) -> None:
         help=f"Writes imports for all '{config.builld_dir}/{config.dyn_dir}' files into  {css_dir_dyn}... __init__.py files.",
         action='store_true',
         dest='write_dyn',
+        default=False,
+        required=False
+    )
+    opt_group.add_argument(
+        '-i', '--css-pyi',
+        help=f"Writes imports for all '{config.builld_dir}/{os.sep.join(config.pyi_dir)}' files into  {css_dir_pyi}... __init__.pyi files.",
+        action='store_true',
+        dest='write_pyi',
         default=False,
         required=False
     )
@@ -1100,12 +1111,19 @@ def _args_action_touch(args: argparse.Namespace, config: AppConfig) -> None:
     touch_py_files = False
     touch_dyn_files = False
     touch_dyn_py_files = False
+    touch_pyi_files = False
+    touch_pyi_py_files = False
     if args.option == 'dyn':
         touch_dyn_files = True
-    if args.option == 'dynpy':
+    elif args.option == 'dynpy':
         touch_dyn_py_files = True
     elif args.option == 'py':
         touch_dyn_files = True
+    elif args.option == 'tpyi':
+        touch_pyi_files = True
+    elif args.option == 'pyipy':
+        touch_pyi_py_files = True
+    
         
     _log_start_action()
     
@@ -1123,6 +1141,8 @@ def _args_action_touch(args: argparse.Namespace, config: AppConfig) -> None:
         touch_py_files=touch_py_files,
         touch_dyn_files=touch_dyn_files,
         touch_dyn_py_files=touch_dyn_py_files,
+        touch_pyi_files=touch_pyi_files,
+        touch_pyi_py_files=touch_pyi_py_files,
         touch_cache_files=args.cache_files
     )
     _log_end_action()
@@ -1291,7 +1311,7 @@ def _args_action_db_json(args: argparse.Namespace, config: AppConfig) -> None:
 
 
 def _args_action_db_star(args: argparse.Namespace, config: AppConfig) -> None:
-    if args.write_lo or args.write_dyn:
+    if args.write_lo or args.write_dyn or args.write_pyi:
         if not query_yes_no(f"Are you sure write all star namespace import files into {config.data_dir}?", 'no'):
             return
     qc = StarNsControler(
@@ -1299,6 +1319,7 @@ def _args_action_db_star(args: argparse.Namespace, config: AppConfig) -> None:
         logger=logger,
         write_lo=args.write_lo,
         write_dyn=args.write_dyn,
+        write_pyi=args.write_pyi,
         rel_import=args.rel_import
     )
     qc_result = qc.results()

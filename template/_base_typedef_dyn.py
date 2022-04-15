@@ -1,5 +1,4 @@
 # coding: utf-8
-import os
 from _base_typedef import BaseTypeDef
 from _base_json import EventArgs
 
