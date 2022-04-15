@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.27",
-  "libre_office_ver": "7.2",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
   "name": "XOOXMLDocumentPropertiesImporter",
   "type": "interface",
   "namespace": "com.sun.star.document",
@@ -32,6 +32,11 @@
         "..embed.x_storage",
         "XStorage",
         "XStorage_8e460a32"
+      ],
+      [
+        "..io.x_input_stream",
+        "XInputStream",
+        "XInputStream_98d40ab4"
       ]
     ],
     "extends_map": {
@@ -39,9 +44,13 @@
     },
     "quote": [
       "XDocumentProperties_4c31102b",
-      "XStorage_8e460a32"
+      "XInputStream_98d40ab4",
+      "XStorage_8e460a32",
+      "typing.Tuple[XInputStream_98d40ab4, ...]"
     ],
-    "typings": [],
+    "typings": [
+      "typing.Tuple[XInputStream_98d40ab4, ...]"
+    ],
     "requires_typing": true,
     "full_imports": {
       "general": [
@@ -49,7 +58,8 @@
       ],
       "typing": [
         "com.sun.star.document.XDocumentProperties",
-        "com.sun.star.embed.XStorage"
+        "com.sun.star.embed.XStorage",
+        "com.sun.star.io.XInputStream"
       ]
     },
     "name": "XOOXMLDocumentPropertiesImporter",
@@ -59,11 +69,84 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "allows to import the document properties from OOXML format"
+      "allows to import the document properties from OOXML format",
+      "",
+      "**since**",
+      "",
+      "    LibreOffice 7.3"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1document_1_1XOOXMLDocumentPropertiesImporter.html",
     "items": {
       "methods": [
+        {
+          "name": "getCorePropertiesStream",
+          "returns": "XInputStream_98d40ab4",
+          "returns_origin": "com.sun.star.io.XInputStream",
+          "desc": [
+            "find and get core properties stream",
+            "",
+            "(usually it is docProps\\\\core.xml)",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 7.3"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xSource",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            }
+          ]
+        },
+        {
+          "name": "getCustomPropertiesStreams",
+          "returns": "typing.Tuple[XInputStream_98d40ab4, ...]",
+          "returns_origin": "sequence< com.sun.star.io.XInputStream >",
+          "desc": [
+            "find and get custom properties streams",
+            "",
+            "(usually it is customXml*.xml)",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 7.3"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xSource",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            }
+          ]
+        },
+        {
+          "name": "getExtendedPropertiesStream",
+          "returns": "XInputStream_98d40ab4",
+          "returns_origin": "com.sun.star.io.XInputStream",
+          "desc": [
+            "find and get extended properties stream",
+            "",
+            "(usually it is docProps/app.xml)",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 7.3"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xSource",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            }
+          ]
+        },
         {
           "name": "importProperties",
           "returns": "None",

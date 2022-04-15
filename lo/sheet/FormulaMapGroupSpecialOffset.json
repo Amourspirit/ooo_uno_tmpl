@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.27",
-  "libre_office_ver": "7.2",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
   "name": "FormulaMapGroupSpecialOffset",
   "type": "const",
   "namespace": "com.sun.star.sheet",
@@ -30,7 +30,11 @@
     "desc": [
       "Constants designating the offsets within the sequence returned by XFormulaOpCodeMapper.getAvailableMappings() when called for group FormulaMapGroup.SPECIAL.",
       "",
-      "The number of constants may grow in future versions!"
+      "The number of constants may grow in future versions!",
+      "",
+      "**since**",
+      "",
+      "    LibreOffice 7.3"
     ],
     "items": [
       {
@@ -133,9 +137,7 @@
           "",
           "Whitespace characters in formulas are used for readability and do not affect the result of the formula.",
           "",
-          "The FormulaToken.Data member shall contain a positive integer value of type long specifying the number of space characters.",
-          "",
-          "Attention: This may change in next versions to support other characters than simple space characters (e.g. line feeds, horizontal tabulators, non-breakable spaces)."
+          "The FormulaToken.Data member shall contain a positive integer value of type long specifying the number of space characters."
         ]
       },
       {
@@ -173,6 +175,25 @@
         "value_type": "INTEGER",
         "value": 12,
         "lines": []
+      },
+      {
+        "name": "WHITESPACE",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 13,
+        "lines": [
+          "Formula tokens containing the op-code obtained from this offset describe whitespace characters within the string representation of a formula.",
+          "",
+          "Whitespace characters in formulas are used for readability and do not affect the result of the formula.",
+          "",
+          "The FormulaToken.Data member shall contain a string of one (repeated) whitespace character. The length of the string determines the number of repetitions.",
+          "",
+          "Allowed whitespace characters are SPACE (U+0020), CHARACTER TABULATION (U+0009), LINE FEED (U+000A), and CARRIAGE RETURN (U+000D). See also ODF v1.3 OpenFormula 5.14 Whitespace.",
+          "",
+          "**since**",
+          "",
+          "    LibreOffice 7.3"
+        ]
       }
     ]
   }
