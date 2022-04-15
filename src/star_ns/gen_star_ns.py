@@ -28,8 +28,8 @@ class GenerateStarNs:
             self._include_const_enum = True
             self._import_frm = self._config.dyn_dir
         if self._write_ns == WriteNsEnum.STAR_PYI:
-            # self._import_frm = '.'.join(self._config.pyi_dir)
-            self._import_frm = self._config.pyi_dir[-1]
+            self._import_frm = '.'.join(self._config.pyi_dir)
+            # self._import_frm = self._config.pyi_dir[-1]
         else:
             self._import_frm = self._config.uno_obj_dir
 
