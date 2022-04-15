@@ -531,6 +531,9 @@ class Writer(base.WriteBase):
 
     def _get_template_dyn(self) -> Union[str, None]:
         return 'interface_dyn.tmpl'
+    
+    def _get_template_pyi(self) -> Union[str, None]:
+        return 'interface_pyi.tmpl'
 
     def write(self) -> Union[str, None]:
         """
@@ -556,6 +559,7 @@ class Writer(base.WriteBase):
             if self._write_file:
                 self._write_to_file()
                 self._write_to_file_dyn()
+                self._write_to_file_pyi()
             if self._write_json:
                 self._write_to_json()
             if self._json_out:
@@ -921,17 +925,31 @@ class Writer(base.WriteBase):
         logger.info("Created file: %s", self._file_full_path)
 
     def _write_to_file_dyn(self):
-        dyn_name = self._get_template_dyn()
-        if dyn_name is None:
+        name = self._get_template_dyn()
+        if name is None:
             return
-        dyn_path = self._template_dir / dyn_name
-        with open(dyn_path, 'r') as t_file:
-            dyn_contents = t_file.read()
+        p = self._template_dir / name
+        with open(p, 'r') as t_file:
+            contents = t_file.read()
 
-        dyn_out_file = self._file_full_path.stem + APP_CONFIG.template_dyn_ext
-        write_path = self._file_full_path.parent / dyn_out_file
+        out_file = self._file_full_path.stem + APP_CONFIG.template_dyn_ext
+        write_path = self._file_full_path.parent / out_file
         with open(write_path, 'w') as out_file:
-            out_file.write(dyn_contents)
+            out_file.write(contents)
+        logger.info('create file: %s', write_path)
+
+    def _write_to_file_pyi(self):
+        name = self._get_template_pyi()
+        if name is None:
+            return
+        p = self._template_dir / name
+        with open(p, 'r') as t_file:
+            contents = t_file.read()
+
+        out_file = self._file_full_path.stem + APP_CONFIG.template_pyi_ext
+        write_path = self._file_full_path.parent / out_file
+        with open(write_path, 'w') as out_file:
+            out_file.write(contents)
         logger.info('create file: %s', write_path)
 
     def _write_to_json(self):

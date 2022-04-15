@@ -22,6 +22,8 @@ $self.init_data()#slurp
 #attr $from_imports = []
 #attr $from_imports_typing = []
 #attr $attribs = {}
+##  following attr will get values from Base class
+#attr $oenv = 'ooo.oenv.env_const'
 $self.load_data()#slurp
 ## main Template
 #set $re_underscore_hex = r"(_[0-9A-Fa-f]*)"
@@ -47,7 +49,7 @@ $self.load_data()#slurp
 # Libre Office Version: $libre_office_ver
 #end if
 #if len($properties) > 0
-from ooo.oenv import UNO_NONE
+from $oenv import UNO_NONE
 #end if
 #if $requires_typing or len($sorted) > 0
 import typing
@@ -208,3 +210,5 @@ class ${safe_name}($self.get_class_inherits($safe_name, $inherits))$self.get_cla
 
 #end for
 #end if
+
+__all__ = ['$safe_name']

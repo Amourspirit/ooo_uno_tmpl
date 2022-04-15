@@ -1,5 +1,4 @@
 # coding: utf-8
-import os
 from _base_service import BaseService
 from _base_json import EventArgs
 

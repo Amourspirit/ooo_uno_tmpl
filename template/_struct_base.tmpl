@@ -22,6 +22,8 @@ $self.init_data()#slurp
 #attr $typings = set()
 #attr $attribs = []
 #attr $fullname = ''
+##  following attr will get values from Base class
+#attr $oenv = 'ooo.oenv.env_const'
 $self.load_data()#slurp
 ## Main Template
 #set $re_underscore_hex = r"(_[0-9A-Fa-f]*)"
@@ -41,7 +43,7 @@ $self.load_data()#slurp
 # Libre Office Version: $libre_office_ver
 #end if
 #if len($sorted) > 0
-from ooo.oenv import UNO_NONE
+from $oenv import UNO_NONE
 #end if
 #for $imp in $imports
 import $imp

@@ -1,10 +1,12 @@
 # coding: utf-8
 import uno
-from typing import Dict, Set, Tuple, List, Union
+from typing import Dict, Optional, Set, Tuple, List, Union
 from _base_json import BaseJson
 from verr import Version
 from _base_tmpl import SqlComponent
 from oootmpl.template_helper.models_struct import ModelsStruct
+from _base_json import EventArgs
+
 
 class BaseStruct(BaseJson):
     def __init__(self, *args, **kwargs):
@@ -37,11 +39,6 @@ class BaseStruct(BaseJson):
         self.desc = mdata.desc
         self.link = mdata.url
         self.libre_office_ver = self._models.model.libre_office_ver
-        # set_data('name')
-        # set_data('namespace')
-        # set_data('allow_db')
-        # set_data('desc')
-        # set_data('url', 'link')
         setattr(self, 'inherits', data.get('extends', []))
         set_data('imports')
         # set_data('from_imports')
@@ -68,6 +65,12 @@ class BaseStruct(BaseJson):
         if extends_map:
             self.extends_map.update(extends_map)
         self.fullname = f"{self.namespace}.{self.get_safe_word(self.name)}"
+
+    # region Events
+    def on_after_init_data(self, args: EventArgs) -> None:
+        super().on_after_init_data(args=args)
+        self.oenv = self.config.env
+    # endregion Events
 
     def _get_attribs(self, json_data: dict, sort: bool) -> dict:
         items: List[dict] = json_data['data']['items']
@@ -118,7 +121,7 @@ class BaseStruct(BaseJson):
         i = 0
         for tpl in sorted:
             if i > 0:
-               c_str += ', '
+                c_str += ', '
             index = tpl[1]
             itm: Dict[str, object] = d_lst[index]
             c_str += "'" + self.get_safe_word(itm['name']) + "'"
@@ -146,7 +149,7 @@ class BaseStruct(BaseJson):
         itm: Dict[str, object] = d_lst[index]
         result = {}
         result.update(itm)
-        result['type'] = result['type'] ## self.get_q_type(result['type'])
+        result['type'] = result['type']  # self.get_q_type(result['type'])
         return result
 
     def get_class_inherits_from_db(self, default: str = 'object') -> str:
@@ -182,7 +185,7 @@ class BaseStruct(BaseJson):
     def get_class_args_inst(self, uno_none: bool = True):
         return self._models.get_class_args(uno_none=uno_none)
 
-    def _get_class_args(self, include_value: bool = True, include_type: bool = True, uno_none: bool = True):
+    def _get_class_args(self, include_value: bool = True, include_type: bool = True, uno_none: bool = True, value: Optional[str] = None):
         args = self._models.get_class_args(uno_none=uno_none)
         results: List[str] = []
         for arg in args:
@@ -190,13 +193,16 @@ class BaseStruct(BaseJson):
             if include_type:
                 s += f": typing.Optional[{arg.type}]"
             if include_value:
-                s += " = " + \
-                    self.get_attrib_default(
-                        name=arg.name, returns=arg.type, uno_none=uno_none)
+                if value is None:
+                    s += " = " + \
+                        self.get_attrib_default(
+                            name=arg.name, returns=arg.type, uno_none=uno_none)
+                else:
+                    s += value
             results.append(s)
         return results
 
-    def _get_parent_class_args(self, include_value: bool = True, include_type: bool = True, uno_none: bool = True):
+    def _get_parent_class_args(self, include_value: bool = True, include_type: bool = True, uno_none: bool = True, value: Optional[str] = None):
         args = self._models.get_parents_class_args(uno_none=uno_none)
         results: List[str] = []
         for arg in args:
@@ -204,21 +210,26 @@ class BaseStruct(BaseJson):
             if include_type:
                 s += f": typing.Optional[{arg.type}]"
             if include_value:
-                s += " = " + \
-                    self.get_attrib_default(
-                        name=arg.name, returns=arg.type, uno_none=uno_none)
+                if value is None:
+                    s += " = " + \
+                        self.get_attrib_default(
+                            name=arg.name, returns=arg.type, uno_none=uno_none)
+                else:
+                    s += value
             results.append(s)
         return results
 
-    def get_constructor_args_str(self, include_value: bool = True, include_type: bool = True, uno_none: bool = True) -> str:
+    def get_constructor_args_str(self, include_value: bool = True, include_type: bool = True, uno_none: bool = True, value: Optional[str] = None) -> str:
         pargs = self._get_parent_class_args(
             include_value=include_value,
             include_type=include_type,
-            uno_none=uno_none)
+            uno_none=uno_none,
+            value=value)
         cargs = self._get_class_args(
             include_value=include_value,
             include_type=include_type,
-            uno_none=uno_none)
+            uno_none=uno_none,
+            value=value)
         args = pargs + cargs
         if len(args) == 0:
             return ""
@@ -236,7 +247,7 @@ class BaseStruct(BaseJson):
         #     return f"def __init__(self, {names}, **kwargs) -> None:"
         return f"def __init__(self, {names}) -> None:"
 
-    def get_attrib_default(self, name:str, returns:str, uno_none: bool = False) -> str:
+    def get_attrib_default(self, name: str, returns: str, uno_none: bool = False) -> str:
         """
         Get defatul attribute value from uno
 
@@ -262,7 +273,7 @@ class BaseStruct(BaseJson):
             return self._cache[key]
         result = getattr(self.uno_instance, name, None)
         if isinstance(result, str):
-            
+
             self._cache[key] = f"'{result}'"
             return self._cache[key]
         elif isinstance(result, uno.Enum):
@@ -270,7 +281,7 @@ class BaseStruct(BaseJson):
             return self._cache[key]
         elif isinstance(result, uno.Char):
             char = ''.join(r'\u{:04X}'.format(ord(chr))
-                    for chr in result.value)
+                           for chr in result.value)
             self._cache[key] = f"'{char}'"
             return self._cache[key]
         elif isinstance(result, uno.ByteSequence):
@@ -326,7 +337,7 @@ class BaseStruct(BaseJson):
                 result.add(tipe)
         self._cache[key] = result
         return self._cache[key]
-    
+
     def is_constructor_type(self, imp: List) -> bool:
         # imp will be two or three elements
         # last element will match constructor type
@@ -398,3 +409,7 @@ class BaseStruct(BaseJson):
             self._linfo(
                 f"parent — {self._is_parent}")
         return self._is_parent
+
+    @property
+    def models(self) -> ModelsStruct:
+        return self._models

@@ -23,11 +23,14 @@ class GenerateStarNs:
         self._is_rel = rel_ns is not None
         self._rel = rel_ns
         self._write_ns = write_ns
+        self._include_const_enum = False
         if self._write_ns == WriteNsEnum.CSS_DYN:
             self._include_const_enum = True
             self._import_frm = self._config.dyn_dir
+        if self._write_ns == WriteNsEnum.STAR_PYI:
+            # self._import_frm = '.'.join(self._config.pyi_dir)
+            self._import_frm = self._config.pyi_dir[-1]
         else:
-            self._include_const_enum = False
             self._import_frm = self._config.uno_obj_dir
 
     def gen_lines(self) -> List[str]:

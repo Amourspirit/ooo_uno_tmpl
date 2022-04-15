@@ -1,12 +1,12 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.24",
+  "version": "0.1.27",
   "libre_office_ver": "7.2",
   "name": "XAnimate",
   "type": "interface",
   "namespace": "com.sun.star.animations",
   "parser_args": {
-    "sort": false,
+    "sort": true,
     "long_names": true,
     "remove_parent_inherited": true
   },
@@ -64,17 +64,6 @@
     "items": {
       "types": [
         {
-          "name": "Values",
-          "returns": "typing.Tuple[object, ...]",
-          "origtype": null,
-          "origin": "sequence< any >",
-          "desc": [
-            "A sequence of one or more values, each of which must be a legal value for the specified attribute."
-          ],
-          "raises_get": "",
-          "raises_set": ""
-        },
-        {
           "name": "KeyTimes",
           "returns": "typing.Tuple[float, ...]",
           "origtype": null,
@@ -93,69 +82,20 @@
           ],
           "raises_get": "",
           "raises_set": ""
+        },
+        {
+          "name": "Values",
+          "returns": "typing.Tuple[object, ...]",
+          "origtype": null,
+          "origin": "sequence< any >",
+          "desc": [
+            "A sequence of one or more values, each of which must be a legal value for the specified attribute."
+          ],
+          "raises_get": "",
+          "raises_set": ""
         }
       ],
       "properties": [
-        {
-          "name": "Target",
-          "returns": "object",
-          "origtype": null,
-          "origin": "any",
-          "desc": [
-            "This attribute specifies the target element to be animated.",
-            "",
-            "See documentation of used animation engine for supported targets."
-          ],
-          "raises_get": "",
-          "raises_set": ""
-        },
-        {
-          "name": "SubItem",
-          "returns": "int",
-          "origtype": null,
-          "origin": "short",
-          "desc": [
-            "This attribute specifies an optional subitem from the target element that should be animated.",
-            "",
-            "A value of zero should always be the default and animate the complete target.",
-            "See documentation of used animation engine for supported subitems."
-          ],
-          "raises_get": "",
-          "raises_set": ""
-        },
-        {
-          "name": "AttributeName",
-          "returns": "str",
-          "origtype": null,
-          "origin": "string",
-          "desc": [
-            "Specifies the target attribute."
-          ],
-          "raises_get": "",
-          "raises_set": ""
-        },
-        {
-          "name": "ValueType",
-          "returns": "int",
-          "origtype": null,
-          "origin": "short",
-          "desc": [],
-          "raises_get": "",
-          "raises_set": ""
-        },
-        {
-          "name": "CalcMode",
-          "returns": "int",
-          "origtype": null,
-          "origin": "short",
-          "desc": [
-            "Specifies the interpolation mode for the animation.",
-            "",
-            "If the target attribute does not support linear interpolation (e.g. for strings), or if the values attribute has only one value, the CalcMode attribute is ignored and discrete interpolation is used."
-          ],
-          "raises_get": "",
-          "raises_set": ""
-        },
         {
           "name": "Accumulate",
           "returns": "bool",
@@ -179,27 +119,12 @@
           "raises_set": ""
         },
         {
-          "name": "From",
-          "returns": "object",
+          "name": "AttributeName",
+          "returns": "str",
           "origtype": null,
-          "origin": "any",
+          "origin": "string",
           "desc": [
-            "Specifies the starting value of the animation.",
-            "",
-            "Must be a legal value for the specified attribute. Ignored if the Values attribute is specified."
-          ],
-          "raises_get": "",
-          "raises_set": ""
-        },
-        {
-          "name": "To",
-          "returns": "object",
-          "origtype": null,
-          "origin": "any",
-          "desc": [
-            "Specifies the ending value of the animation.",
-            "",
-            "Must be a legal value for the specified attribute. Ignored if the Values attribute is specified."
+            "Specifies the target attribute."
           ],
           "raises_get": "",
           "raises_set": ""
@@ -218,6 +143,19 @@
           "raises_set": ""
         },
         {
+          "name": "CalcMode",
+          "returns": "int",
+          "origtype": null,
+          "origin": "short",
+          "desc": [
+            "Specifies the interpolation mode for the animation.",
+            "",
+            "If the target attribute does not support linear interpolation (e.g. for strings), or if the values attribute has only one value, the CalcMode attribute is ignored and discrete interpolation is used."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
           "name": "Formula",
           "returns": "str",
           "origtype": null,
@@ -227,6 +165,68 @@
             "",
             "All values are used as a parameter for this formula and the computed result will be used."
           ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "From",
+          "returns": "object",
+          "origtype": null,
+          "origin": "any",
+          "desc": [
+            "Specifies the starting value of the animation.",
+            "",
+            "Must be a legal value for the specified attribute. Ignored if the Values attribute is specified."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SubItem",
+          "returns": "int",
+          "origtype": null,
+          "origin": "short",
+          "desc": [
+            "This attribute specifies an optional subitem from the target element that should be animated.",
+            "",
+            "A value of zero should always be the default and animate the complete target.",
+            "See documentation of used animation engine for supported subitems."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Target",
+          "returns": "object",
+          "origtype": null,
+          "origin": "any",
+          "desc": [
+            "This attribute specifies the target element to be animated.",
+            "",
+            "See documentation of used animation engine for supported targets."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "To",
+          "returns": "object",
+          "origtype": null,
+          "origin": "any",
+          "desc": [
+            "Specifies the ending value of the animation.",
+            "",
+            "Must be a legal value for the specified attribute. Ignored if the Values attribute is specified."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ValueType",
+          "returns": "int",
+          "origtype": null,
+          "origin": "short",
+          "desc": [],
           "raises_get": "",
           "raises_set": ""
         }

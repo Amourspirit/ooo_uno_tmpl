@@ -9,7 +9,6 @@ class BaseExDyn(BaseEx):
         super().on_after_init_data(args=args)
         self.uno_obj = self.config.uno_obj_dir
         self.dyn = self.config.dyn_dir
-        self.oenv = self.config.env
         self.helper_ns = self.config.helper_ns
         self.helper_mod = self.config.helper_mod
 
