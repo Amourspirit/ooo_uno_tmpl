@@ -103,7 +103,7 @@ class WriteStarNs:
             write_path = self._write_root.joinpath(Path(*ns_parts))
             self._mkdirp(dest_dir=write_path)
             if self._write_ns == WriteNsEnum.STAR_PYI:
-                write_path = write_path.joinpath(f"{c_data.name}.pyi")
+                write_path = write_path / f"{c_data.name}.pyi"
             else:
                 write_path = write_path.joinpath(init_file)
 
