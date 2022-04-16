@@ -90,6 +90,7 @@ class WriteStarNs:
                     rel_ns_parts = [
                         f_name for f_name in self._config.com_sun_star_lo]
                 elif self._write_ns == WriteNsEnum.STAR_PYI:
+                    # pyi enums need to be writtent into a seperate module that matches the name of the enu.
                     rel_ns_parts = [
                         f_name for f_name in self._config.com_sun_star_pyi]
                 else:
@@ -101,7 +102,10 @@ class WriteStarNs:
                 rel_ns = None
             write_path = self._write_root.joinpath(Path(*ns_parts))
             self._mkdirp(dest_dir=write_path)
-            write_path = write_path.joinpath(init_file)
+            if self._write_ns == WriteNsEnum.STAR_PYI:
+                write_path = write_path.joinpath(f"{c_data.name}.pyi")
+            else:
+                write_path = write_path.joinpath(init_file)
 
             gen_star = GenerateStarNs(
                 config=self._config, c_data=c_data,
