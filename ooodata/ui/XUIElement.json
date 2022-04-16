@@ -1,0 +1,113 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XUIElement",
+  "type": "interface",
+  "namespace": "com.sun.star.ui",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..frame.x_frame",
+        "XFrame",
+        "XFrame_7a570956"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XFrame_7a570956",
+      "XInterface_8f010a43"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.frame.XFrame"
+      ]
+    },
+    "name": "XUIElement",
+    "imports": [],
+    "namespace": "com.sun.star.ui",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "provides a function to retrieve a special purpose interface dependent on the user interface element type.",
+      "",
+      "The type of the interface depends on the real type of the user interface element. A menubar user interface element provides access to its com.sun.star.awt.XSystemDependentMenuBarPeer which supports to retrieve the system dependent menu handle. A floating window or a toolbar user interface element return a com.sun.star.awt.XWindow interface."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ui_1_1XUIElement.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getRealInterface",
+          "returns": "XInterface_8f010a43",
+          "returns_origin": "com.sun.star.uno.XInterface",
+          "desc": [
+            "returns an interface to get access to user interface type specific functions."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ],
+      "properties": [
+        {
+          "name": "Frame",
+          "returns": "XFrame_7a570956",
+          "origtype": "com.sun.star.frame.XFrame",
+          "origin": "com.sun.star.frame.XFrame",
+          "desc": [
+            "determines the document frame to which this element is bound to.",
+            "",
+            "The life time of a user interface element does not explicitly depend on the frame itself but on the visible component attached to the frame. It is possible to exchange the visible component of a frame and that will lead to the end of life of all user interface elements."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ResourceURL",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "a resource URL which is a unique identifier of a user interface element."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Type",
+          "returns": "int",
+          "origtype": null,
+          "origin": "short",
+          "desc": [
+            "determines the type of the user interface element."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

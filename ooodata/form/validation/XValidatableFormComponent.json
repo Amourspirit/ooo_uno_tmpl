@@ -1,0 +1,139 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XValidatableFormComponent",
+  "type": "interface",
+  "namespace": "com.sun.star.form.validation",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_validatable",
+        "XValidatable",
+        "XValidatable_49570fc6"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_form_component_validity_listener",
+        "XFormComponentValidityListener",
+        "XFormComponentValidityListener_ac141740"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.form.validation.XValidatable": "XValidatable_49570fc6"
+    },
+    "quote": [
+      "XFormComponentValidityListener_ac141740"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.form.validation.XValidatable"
+      ],
+      "typing": [
+        "com.sun.star.form.validation.XFormComponentValidityListener"
+      ]
+    },
+    "name": "XValidatableFormComponent",
+    "imports": [],
+    "namespace": "com.sun.star.form.validation",
+    "extends": [
+      "com.sun.star.form.validation.XValidatable"
+    ],
+    "desc": [
+      "is a convenience interface for accessing several aspects of a form component which supports validation.",
+      "",
+      "A validatable form component has two aspects which other parties might be interested in:",
+      "",
+      "An XValidatableFormComponent allows to easily access both of these aspects.",
+      "",
+      "Note that all of the information provided at this interface can also obtained by other means, but much more inconveniently."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1form_1_1validation_1_1XValidatableFormComponent.html",
+    "items": {
+      "methods": [
+        {
+          "name": "addFormComponentValidityListener",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "registers the given listener.",
+            "",
+            "XFormComponentValidityListeners are called whenever any of the aspects of the validatable form component (the validity flag, or the value) changed."
+          ],
+          "raises": [
+            "com.sun.star.lang.NullPointerException"
+          ],
+          "args": [
+            {
+              "name": "Listener",
+              "type": "XFormComponentValidityListener_ac141740",
+              "direction": "in",
+              "origin": "com.sun.star.form.validation.XFormComponentValidityListener"
+            }
+          ]
+        },
+        {
+          "name": "getCurrentValue",
+          "returns": "object",
+          "returns_origin": "any",
+          "desc": [
+            "retrieves the current value of the component.",
+            "",
+            "The type of the current value, as well as it's semantics, depend on the service implementing this interface.",
+            "",
+            "Again, this is a convenience method. For example, for a com.sun.star.form.component.FormattedField, calling this method is equivalent to retrieving the com.sun.star.awt.UnoControlFormattedFieldModel.EffectiveValue.",
+            "",
+            "If no validator has been set (XValidatable.setValidator()), the value returned here is defined by the service implementing this interface."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "isValid",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "determines whether the current value of the component passed the validity test at the validator.",
+            "",
+            "Calling this is equal to calling XValidator.isValid() with the current value (see getCurrentValue()) of the component, where the validator is obtained via XValidatable.getValidator().",
+            "",
+            "If no validator has been set (XValidatable.setValidator()), this method returns true."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "removeFormComponentValidityListener",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "registers the given listener."
+          ],
+          "raises": [
+            "com.sun.star.lang.NullPointerException"
+          ],
+          "args": [
+            {
+              "name": "Listener",
+              "type": "XFormComponentValidityListener_ac141740",
+              "direction": "in",
+              "origin": "com.sun.star.form.validation.XFormComponentValidityListener"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

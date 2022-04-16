@@ -1,0 +1,139 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XMarkableStream",
+  "type": "interface",
+  "namespace": "com.sun.star.io",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": []
+    },
+    "name": "XMarkableStream",
+    "imports": [],
+    "namespace": "com.sun.star.io",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "makes it possible to set and remove seekable marks to a stream."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1io_1_1XMarkableStream.html",
+    "items": {
+      "methods": [
+        {
+          "name": "createMark",
+          "returns": "int",
+          "returns_origin": "long",
+          "desc": [
+            "creates a mark of the current position and returns an identifier to it."
+          ],
+          "raises": [
+            "com.sun.star.io.IOException"
+          ],
+          "args": []
+        },
+        {
+          "name": "deleteMark",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "deletes the mark that you previously created with XMarkableStream.createMark().",
+            "",
+            "It is an error to delete a mark if other marks after this exist. In this case, for reasons of robustness, the implementation must delete this mark and all others after this mark."
+          ],
+          "raises": [
+            "com.sun.star.io.IOException",
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "Mark",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "jumpToFurthest",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "jumps to the furthest position of the stream.",
+            "",
+            "In the inputstream case, a subsequent read call returns data, that was never read or skipped over before. In the outputstream case, a subsequent write call will add new data at the end of the stream without overwriting existing data."
+          ],
+          "raises": [
+            "com.sun.star.io.IOException"
+          ],
+          "args": []
+        },
+        {
+          "name": "jumpToMark",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "jumps to a previously created mark."
+          ],
+          "raises": [
+            "com.sun.star.io.IOException",
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "nMark",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "offsetToMark",
+          "returns": "int",
+          "returns_origin": "long",
+          "desc": [],
+          "raises": [
+            "com.sun.star.io.IOException",
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "nMark",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

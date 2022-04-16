@@ -1,0 +1,168 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XSlideRenderer",
+  "type": "interface",
+  "namespace": "com.sun.star.drawing",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        "..awt.size",
+        "Size",
+        "Size_576707ef"
+      ],
+      [
+        "..awt.x_bitmap",
+        "XBitmap",
+        "XBitmap_70cd0909"
+      ],
+      [
+        ".x_draw_page",
+        "XDrawPage",
+        "XDrawPage_b07a0b57"
+      ],
+      [
+        "..rendering.x_bitmap",
+        "XBitmap",
+        "XBitmap_b1b70b7b"
+      ],
+      [
+        "..rendering.x_canvas",
+        "XCanvas",
+        "XCanvas_b19b0b7a"
+      ]
+    ],
+    "extends_map": {},
+    "quote": [
+      "Size_576707ef",
+      "XBitmap_70cd0909",
+      "XBitmap_b1b70b7b",
+      "XCanvas_b19b0b7a",
+      "XDrawPage_b07a0b57"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.awt.Size",
+        "com.sun.star.awt.XBitmap",
+        "com.sun.star.drawing.XDrawPage",
+        "com.sun.star.rendering.XBitmap",
+        "com.sun.star.rendering.XCanvas"
+      ]
+    },
+    "name": "XSlideRenderer",
+    "imports": [],
+    "namespace": "com.sun.star.drawing",
+    "extends": [],
+    "desc": [
+      "Create preview bitmaps for single slides."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1drawing_1_1XSlideRenderer.html",
+    "items": {
+      "methods": [
+        {
+          "name": "calculatePreviewSize",
+          "returns": "Size_576707ef",
+          "returns_origin": "com.sun.star.awt.Size",
+          "desc": [
+            "Return a size that has the given aspect ratio and shares either the width or the height with the given maximum size."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "nSlideAspectRatio",
+              "type": "float",
+              "direction": "in",
+              "origin": "double"
+            },
+            {
+              "name": "aMaximumPreviewPixelSize",
+              "type": "Size_576707ef",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Size"
+            }
+          ]
+        },
+        {
+          "name": "createPreview",
+          "returns": "XBitmap_70cd0909",
+          "returns_origin": "com.sun.star.awt.XBitmap",
+          "desc": [
+            "Create a preview for the given slide that has the same aspect ratio as the page and is as large as possible but not larger than the specified size.",
+            "",
+            "The reason for not using the given size directly as preview size and thus possibly changing the aspect ratio is that a) a different aspect ratio is not used often, and b) leaving the adaptation of the actual preview size (according to the aspect ratio of the slide) to the slide renderer is more convenient to the caller than having to this himself."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xSlide",
+              "type": "XDrawPage_b07a0b57",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.XDrawPage"
+            },
+            {
+              "name": "aMaximumPreviewPixelSize",
+              "type": "Size_576707ef",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Size"
+            },
+            {
+              "name": "nSuperSampleFactor",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
+          ]
+        },
+        {
+          "name": "createPreviewForCanvas",
+          "returns": "XBitmap_b1b70b7b",
+          "returns_origin": "com.sun.star.rendering.XBitmap",
+          "desc": [
+            "Exactly the same functionality as createPreview(), only a different return type: com.sun.star.rendering.XBitmap instead of com.sun.star.awt.XBitmap."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xSlide",
+              "type": "XDrawPage_b07a0b57",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.XDrawPage"
+            },
+            {
+              "name": "aMaximumPreviewPixelSize",
+              "type": "Size_576707ef",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Size"
+            },
+            {
+              "name": "nSuperSampleFactor",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "xCanvas",
+              "type": "XCanvas_b19b0b7a",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.XCanvas"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

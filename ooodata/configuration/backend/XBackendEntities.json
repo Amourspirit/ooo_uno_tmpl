@@ -1,0 +1,126 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XBackendEntities",
+  "type": "interface",
+  "namespace": "com.sun.star.configuration.backend",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "...uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": []
+    },
+    "name": "XBackendEntities",
+    "imports": [],
+    "namespace": "com.sun.star.configuration.backend",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "Provides functionality relating to common and supported entities for a configuration data backend.",
+      "",
+      "**since**",
+      "",
+      "    OOo 1.1.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1configuration_1_1backend_1_1XBackendEntities.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getAdminEntity",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "provides the entity id of an entity for general administrative access.",
+            "",
+            "The admin entity is an entity that should be used to read and manage configuration data that applies to all entities within the backend."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getOwnerEntity",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "provides the entity id of the owner entity of the backend.",
+            "",
+            "The owner entity is the default entity for the backend. For normal configuration data access the owner entity should always be used."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "isEqualEntity",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "determines, if two given entity ids denote the same entity."
+          ],
+          "raises": [
+            "BackendAccessException",
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "aEntity",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aOtherEntity",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "supportsEntity",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "determines, if a given entity id exists in this backend."
+          ],
+          "raises": [
+            "BackendAccessException"
+          ],
+          "args": [
+            {
+              "name": "aEntity",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

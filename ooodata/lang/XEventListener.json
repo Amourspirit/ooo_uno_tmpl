@@ -1,0 +1,84 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XEventListener",
+  "type": "interface",
+  "namespace": "com.sun.star.lang",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".event_object",
+        "EventObject",
+        "EventObject_a3d70b03"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "EventObject_a3d70b03"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.lang.EventObject"
+      ]
+    },
+    "name": "XEventListener",
+    "imports": [],
+    "namespace": "com.sun.star.lang",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "base interface for all event listeners interfaces."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1lang_1_1XEventListener.html",
+    "items": {
+      "methods": [
+        {
+          "name": "disposing",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "gets called when the broadcaster is about to be disposed.",
+            "",
+            "All listeners and all other objects, which reference the broadcaster should release the reference to the source. No method should be invoked anymore on this object ( including XComponent.removeEventListener() ).",
+            "",
+            "This method is called for every listener registration of derived listener interfaced, not only for registrations at XComponent."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Source",
+              "type": "EventObject_a3d70b03",
+              "direction": "in",
+              "origin": "com.sun.star.lang.EventObject"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

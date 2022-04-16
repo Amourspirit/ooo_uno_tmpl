@@ -1,0 +1,98 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XFilter",
+  "type": "interface",
+  "namespace": "com.sun.star.document",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "typing.Tuple[PropertyValue_c9610c73, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[PropertyValue_c9610c73, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValue"
+      ]
+    },
+    "name": "XFilter",
+    "imports": [],
+    "namespace": "com.sun.star.document",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "interface to filter documents",
+      "",
+      "This interface will be used by service ImportFilter or ExportFilter to support loading/saving of documents in different formats. The target/source of such filter operations must be known before filtering will be started. (see XImporter and XExporter too) Otherwise this interface can't work right."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1document_1_1XFilter.html",
+    "items": {
+      "methods": [
+        {
+          "name": "cancel",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "cancel the process."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "filter",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "filter the document.",
+            "",
+            "The given MediaDescriptor holds all necessary information about the document.",
+            "",
+            "Don't hold hard references to the descriptor items. You must copy needed information! Otherwise we couldn't destroy (for example) an existing input stream!"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aDescriptor",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

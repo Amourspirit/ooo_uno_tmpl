@@ -1,0 +1,423 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XDocumentMetadataAccess",
+  "type": "interface",
+  "namespace": "com.sun.star.rdf",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_repository_supplier",
+        "XRepositorySupplier",
+        "XRepositorySupplier_feff0e30"
+      ],
+      [
+        ".xuri",
+        "XURI",
+        "XURI_5682078c"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
+      ],
+      [
+        "..beans.string_pair",
+        "StringPair",
+        "StringPair_a4bc0b14"
+      ],
+      [
+        "..embed.x_storage",
+        "XStorage",
+        "XStorage_8e460a32"
+      ],
+      [
+        "..io.x_input_stream",
+        "XInputStream",
+        "XInputStream_98d40ab4"
+      ],
+      [
+        ".x_metadatable",
+        "XMetadatable",
+        "XMetadatable_a3000af0"
+      ],
+      [
+        "..task.x_interaction_handler",
+        "XInteractionHandler",
+        "XInteractionHandler_bf80e51"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.rdf.XRepositorySupplier": "XRepositorySupplier_feff0e30",
+      "com.sun.star.rdf.XURI": "XURI_5682078c"
+    },
+    "quote": [
+      "StringPair_a4bc0b14",
+      "XInputStream_98d40ab4",
+      "XInteractionHandler_bf80e51",
+      "XMetadatable_a3000af0",
+      "XStorage_8e460a32",
+      "XURI_5682078c",
+      "typing.Tuple[PropertyValue_c9610c73, ...]",
+      "typing.Tuple[XURI_5682078c, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[PropertyValue_c9610c73, ...]",
+      "typing.Tuple[XURI_5682078c, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.rdf.XRepositorySupplier",
+        "com.sun.star.rdf.XURI"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.beans.StringPair",
+        "com.sun.star.embed.XStorage",
+        "com.sun.star.io.XInputStream",
+        "com.sun.star.rdf.XMetadatable",
+        "com.sun.star.task.XInteractionHandler"
+      ]
+    },
+    "name": "XDocumentMetadataAccess",
+    "imports": [],
+    "namespace": "com.sun.star.rdf",
+    "extends": [
+      "com.sun.star.rdf.XURI",
+      "com.sun.star.rdf.XRepositorySupplier"
+    ],
+    "desc": [
+      "document metadata functionality related to the \\\"manifest.rdf\\\".",
+      "",
+      "This interface contains some methods that create connections between the content and the RDF metadata of an ODF document. The main idea is to make querying and manipulating the data in the metadata manifest easier.",
+      "",
+      "Note that this interface inherits from XURI: the base URI of the document is the string value of the RDF node. This is so that you can easily make RDF statements about the document.",
+      "",
+      "**since**",
+      "",
+      "    OOo 3.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1rdf_1_1XDocumentMetadataAccess.html",
+    "items": {
+      "methods": [
+        {
+          "name": "addContentOrStylesFile",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "add a content or styles file to the manifest.",
+            "",
+            "This convenience method adds the required statements declaring a content or styles file to the manifest graph."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.container.ElementExistException"
+          ],
+          "args": [
+            {
+              "name": "FileName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "addMetadataFile",
+          "returns": "XURI_5682078c",
+          "returns_origin": "com.sun.star.rdf.XURI",
+          "desc": [
+            "add a metadata file to the manifest.",
+            "",
+            "This convenience method does the following:"
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.container.ElementExistException"
+          ],
+          "args": [
+            {
+              "name": "FileName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Types",
+              "type": "typing.Tuple[XURI_5682078c, ...]",
+              "direction": "in",
+              "origin": "sequence< XURI >"
+            }
+          ]
+        },
+        {
+          "name": "getElementByMetadataReference",
+          "returns": "XMetadatable_a3000af0",
+          "returns_origin": "com.sun.star.rdf.XMetadatable",
+          "desc": [
+            "get the unique ODF element with the given metadata reference."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "MetadataReference",
+              "type": "StringPair_a4bc0b14",
+              "direction": "in",
+              "origin": "com.sun.star.beans.StringPair"
+            }
+          ]
+        },
+        {
+          "name": "getElementByURI",
+          "returns": "XMetadatable_a3000af0",
+          "returns_origin": "com.sun.star.rdf.XMetadatable",
+          "desc": [
+            "get the ODF element that corresponds to a URI."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "URI",
+              "type": "XURI_5682078c",
+              "direction": "in",
+              "origin": "com.sun.star.rdf.XURI"
+            }
+          ]
+        },
+        {
+          "name": "getMetadataGraphsWithType",
+          "returns": "typing.Tuple[XURI_5682078c, ...]",
+          "returns_origin": "sequence< XURI >",
+          "desc": [
+            "get the names of all metadata files with a given type."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "Type",
+              "type": "XURI_5682078c",
+              "direction": "in",
+              "origin": "com.sun.star.rdf.XURI"
+            }
+          ]
+        },
+        {
+          "name": "importMetadataFile",
+          "returns": "XURI_5682078c",
+          "returns_origin": "com.sun.star.rdf.XURI",
+          "desc": [
+            "import a metadata file into the document repository, and add it to the manifest.",
+            "",
+            "This convenience method does the following:"
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.datatransfer.UnsupportedFlavorException",
+            "com.sun.star.container.ElementExistException",
+            "ParseException",
+            "com.sun.star.io.IOException"
+          ],
+          "args": [
+            {
+              "name": "Format",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "InStream",
+              "type": "XInputStream_98d40ab4",
+              "direction": "in",
+              "origin": "com.sun.star.io.XInputStream"
+            },
+            {
+              "name": "FileName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "BaseURI",
+              "type": "XURI_5682078c",
+              "direction": "in",
+              "origin": "com.sun.star.rdf.XURI"
+            },
+            {
+              "name": "Types",
+              "type": "typing.Tuple[XURI_5682078c, ...]",
+              "direction": "in",
+              "origin": "sequence< XURI >"
+            }
+          ]
+        },
+        {
+          "name": "loadMetadataFromMedium",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "loads document metadata from a medium.",
+            "",
+            "If the Medium contains an InteractionHandler, it will be used for error reporting."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.WrappedTargetException"
+          ],
+          "args": [
+            {
+              "name": "Medium",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            }
+          ]
+        },
+        {
+          "name": "loadMetadataFromStorage",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "initialize document metadata from a storage.",
+            "",
+            "This method re-initializes the document metadata, loads the stream named \\\"manifest.rdf\\\" from the storage, and then loads all metadata streams mentioned in the manifest.",
+            "",
+            "Note that it is not an error if the storage does not contain a manifest. In this case, the document metadata will be default initialized.",
+            "",
+            "If an InteractionHandler argument is given, it will be used for error reporting. Otherwise, errors will be reported as exceptions.",
+            "",
+            "N.B.: when loading from an ODF package, the base URI is not the URI of the package, but the URI of the directory in the package that contains the metadata.rdf"
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.WrappedTargetException"
+          ],
+          "args": [
+            {
+              "name": "Storage",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            },
+            {
+              "name": "BaseURI",
+              "type": "XURI_5682078c",
+              "direction": "in",
+              "origin": "com.sun.star.rdf.XURI"
+            },
+            {
+              "name": "InteractionHandler",
+              "type": "XInteractionHandler_bf80e51",
+              "direction": "in",
+              "origin": "com.sun.star.task.XInteractionHandler"
+            }
+          ]
+        },
+        {
+          "name": "removeContentOrStylesFile",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "remove a content or styles file from the manifest.",
+            "",
+            "This convenience method removes the statements declaring a content or styles file from the manifest graph."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.container.NoSuchElementException"
+          ],
+          "args": [
+            {
+              "name": "FileName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "removeMetadataFile",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "remove a metadata file from the manifest and the repository.",
+            "",
+            "This convenience method does the following:"
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.container.NoSuchElementException"
+          ],
+          "args": [
+            {
+              "name": "GraphName",
+              "type": "XURI_5682078c",
+              "direction": "in",
+              "origin": "com.sun.star.rdf.XURI"
+            }
+          ]
+        },
+        {
+          "name": "storeMetadataToMedium",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "stores document metadata to a medium."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.WrappedTargetException"
+          ],
+          "args": [
+            {
+              "name": "Medium",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            }
+          ]
+        },
+        {
+          "name": "storeMetadataToStorage",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "store document metadata to a storage.",
+            "",
+            "This method stores all the graphs in the document metadata repository to the given storage.",
+            "",
+            "Note that to be stored correctly, a named graph must have a complete entry in the manifest graph."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.WrappedTargetException"
+          ],
+          "args": [
+            {
+              "name": "Storage",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

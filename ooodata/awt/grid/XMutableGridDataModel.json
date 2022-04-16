@@ -1,0 +1,392 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XMutableGridDataModel",
+  "type": "interface",
+  "namespace": "com.sun.star.awt.grid",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_grid_data_model",
+        "XGridDataModel",
+        "XGridDataModel_f8b20d71"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_grid_data_listener",
+        "XGridDataListener",
+        "XGridDataListener_23f10ec6"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.awt.grid.XGridDataModel": "XGridDataModel_f8b20d71"
+    },
+    "quote": [
+      "XGridDataListener_23f10ec6",
+      "typing.Tuple[int, ...]",
+      "typing.Tuple[object, ...]",
+      "typing.Tuple[typing.Tuple[object, ...], ...]"
+    ],
+    "typings": [
+      "typing.Tuple[int, ...]",
+      "typing.Tuple[object, ...]",
+      "typing.Tuple[typing.Tuple[object, ...], ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.awt.grid.XGridDataModel"
+      ],
+      "typing": [
+        "com.sun.star.awt.grid.XGridDataListener"
+      ]
+    },
+    "name": "XMutableGridDataModel",
+    "imports": [],
+    "namespace": "com.sun.star.awt.grid",
+    "extends": [
+      "com.sun.star.awt.grid.XGridDataModel"
+    ],
+    "desc": [
+      "allows to modify the data represented by a XGridDataModel"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1grid_1_1XMutableGridDataModel.html",
+    "items": {
+      "methods": [
+        {
+          "name": "addGridDataListener",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "registers listener to be notified of data changes in the model"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Listener",
+              "type": "XGridDataListener_23f10ec6",
+              "direction": "in",
+              "origin": "com.sun.star.awt.grid.XGridDataListener"
+            }
+          ]
+        },
+        {
+          "name": "addRow",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "appends a row to the model."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Heading",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            },
+            {
+              "name": "Data",
+              "type": "typing.Tuple[object, ...]",
+              "direction": "in",
+              "origin": "sequence< any >"
+            }
+          ]
+        },
+        {
+          "name": "addRows",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "appends multiple rows of data to the model."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "Headings",
+              "type": "typing.Tuple[object, ...]",
+              "direction": "in",
+              "origin": "sequence< any >"
+            },
+            {
+              "name": "Data",
+              "type": "typing.Tuple[typing.Tuple[object, ...], ...]",
+              "direction": "in",
+              "origin": "sequence< sequence< any > >"
+            }
+          ]
+        },
+        {
+          "name": "insertRow",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "inserts a row into the set of data rows"
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            {
+              "name": "Index",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "Heading",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            },
+            {
+              "name": "Data",
+              "type": "typing.Tuple[object, ...]",
+              "direction": "in",
+              "origin": "sequence< any >"
+            }
+          ]
+        },
+        {
+          "name": "insertRows",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "inserts multiple rows of data into the model."
+          ],
+          "raises": [
+            "",
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "Index",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "Headings",
+              "type": "typing.Tuple[object, ...]",
+              "direction": "in",
+              "origin": "sequence< any >"
+            },
+            {
+              "name": "Data",
+              "type": "typing.Tuple[typing.Tuple[object, ...], ...]",
+              "direction": "in",
+              "origin": "sequence< sequence< any > >"
+            }
+          ]
+        },
+        {
+          "name": "removeAllRows",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Removes all rows from the model."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "removeGridDataListener",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "revokes a listener which was previously registered via addGridDataListener()"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Listener",
+              "type": "XGridDataListener_23f10ec6",
+              "direction": "in",
+              "origin": "com.sun.star.awt.grid.XGridDataListener"
+            }
+          ]
+        },
+        {
+          "name": "removeRow",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "removes a row of data from the model"
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            {
+              "name": "RowIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "updateCellData",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "updates the content of the given cell"
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            {
+              "name": "ColumnIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "RowIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "Value",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
+          ]
+        },
+        {
+          "name": "updateCellToolTip",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "updates the tooltip to be displayed for a given cell"
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            {
+              "name": "ColumnIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "RowIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "Value",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
+          ]
+        },
+        {
+          "name": "updateRowData",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "updates the content of a given row.",
+            "",
+            "The change in the data model will be notified to registered listeners via XGridDataListener.dataChanged(). The GridDataEvent.FirstColumn and GridDataEvent.LastColumn will denote the smallest respectively largest column index from ColumnIndexes."
+          ],
+          "raises": [
+            "",
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "ColumnIndexes",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "in",
+              "origin": "sequence< long >"
+            },
+            {
+              "name": "RowIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "Values",
+              "type": "typing.Tuple[object, ...]",
+              "direction": "in",
+              "origin": "sequence< any >"
+            }
+          ]
+        },
+        {
+          "name": "updateRowHeading",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "sets a new title for a given row."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            {
+              "name": "RowIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "Heading",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
+          ]
+        },
+        {
+          "name": "updateRowToolTip",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "updates the tooltip for all cells of a given row",
+            "",
+            "Effectively this method is a shortcut for calling updateCellToolTip() multiple times in a row, for all cells of a given row."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            {
+              "name": "RowIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "Value",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

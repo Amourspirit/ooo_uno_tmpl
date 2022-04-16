@@ -1,0 +1,136 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XDocumentEventBroadcaster",
+  "type": "interface",
+  "namespace": "com.sun.star.document",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        ".x_document_event_listener",
+        "XDocumentEventListener",
+        "XDocumentEventListener_7db01146"
+      ],
+      [
+        "..frame.x_controller2",
+        "XController2",
+        "XController2_bbcf0bc1"
+      ]
+    ],
+    "extends_map": {},
+    "quote": [
+      "XController2_bbcf0bc1",
+      "XDocumentEventListener_7db01146"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.document.XDocumentEventListener",
+        "com.sun.star.frame.XController2"
+      ]
+    },
+    "name": "XDocumentEventBroadcaster",
+    "imports": [],
+    "namespace": "com.sun.star.document",
+    "extends": [],
+    "desc": [
+      "allows to be notified of events happening in an OfficeDocument, and to cause notification of such events.",
+      "",
+      "This interface is the successor of the XEventBroadcaster interface, which should not be used anymore.",
+      "",
+      "**since**",
+      "",
+      "    OOo 3.1"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1document_1_1XDocumentEventBroadcaster.html",
+    "items": {
+      "methods": [
+        {
+          "name": "addDocumentEventListener",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "registers a listener which is notified about document events"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Listener",
+              "type": "XDocumentEventListener_7db01146",
+              "direction": "in",
+              "origin": "com.sun.star.document.XDocumentEventListener"
+            }
+          ]
+        },
+        {
+          "name": "notifyDocumentEvent",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "causes the broadcaster to notify all registered listeners of the given event",
+            "",
+            "The method will create a DocumentEvent instance with the given parameters, and fill in the Source member (denoting the broadcaster) as appropriate.",
+            "",
+            "Whether the actual notification happens synchronously or asynchronously is up to the implementor of this method. However, implementations are encouraged to specify this, for the list of supported event types, in their service contract.",
+            "",
+            "Implementations might also decide to limit the list of allowed events (means event names) at their own discretion. Again, in this case they're encouraged to document this in their service contract."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.NoSupportException"
+          ],
+          "args": [
+            {
+              "name": "EventName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "ViewController",
+              "type": "XController2_bbcf0bc1",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XController2"
+            },
+            {
+              "name": "Supplement",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
+          ]
+        },
+        {
+          "name": "removeDocumentEventListener",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "revokes a listener which has previously been registered to be notified about document events."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Listener",
+              "type": "XDocumentEventListener_7db01146",
+              "direction": "in",
+              "origin": "com.sun.star.document.XDocumentEventListener"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

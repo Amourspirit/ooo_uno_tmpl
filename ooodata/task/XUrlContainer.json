@@ -1,0 +1,137 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XUrlContainer",
+  "type": "interface",
+  "namespace": "com.sun.star.task",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "typing.Tuple[str, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[str, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": []
+    },
+    "name": "XUrlContainer",
+    "imports": [],
+    "namespace": "com.sun.star.task",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "Allows to store and retrieve URLs.",
+      "",
+      "URLs can be stored persistently or until end of OOo session.",
+      "",
+      "**since**",
+      "",
+      "    OOo 3.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1task_1_1XUrlContainer.html",
+    "items": {
+      "methods": [
+        {
+          "name": "addUrl",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Add a URL to the container."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Url",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "MakePersistent",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
+          ]
+        },
+        {
+          "name": "findUrl",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "Lookup a URL in the container."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Url",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "getUrls",
+          "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
+          "desc": [
+            "Get all URLs."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "OnlyPersistent",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
+          ]
+        },
+        {
+          "name": "removeUrl",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Remove a URL from the container."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Url",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

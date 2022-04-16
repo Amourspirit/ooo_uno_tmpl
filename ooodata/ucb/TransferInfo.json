@@ -1,0 +1,89 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "type": "struct",
+  "name": "TransferInfo",
+  "namespace": "com.sun.star.ucb",
+  "parser_args": {
+    "sort": false,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "sort": true,
+    "dynamic_struct": true,
+    "include_desc": true
+  },
+  "data": {
+    "name": "TransferInfo",
+    "namespace": "com.sun.star.ucb",
+    "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1ucb_1_1TransferInfo.html",
+    "from_imports": [],
+    "from_imports_typing": [],
+    "extends_map": {},
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [],
+      "typing": []
+    },
+    "fullname": "com.sun.star.ucb.TransferInfo",
+    "desc": [
+      "contains information needed to transfer objects from one location to another.",
+      "",
+      "The transfer command is always called on the target folder. For a details description of the transfer command refer to the documentation of service Content."
+    ],
+    "imports": [],
+    "extends": [],
+    "items": [
+      {
+        "name": "MoveData",
+        "type": "bool",
+        "origtype": null,
+        "origin": "boolean",
+        "desc": [
+          "contains the flags describing whether the data shall be moved instead of copied."
+        ]
+      },
+      {
+        "name": "SourceURL",
+        "type": "str",
+        "origtype": null,
+        "origin": "string",
+        "desc": [
+          "contains the URL of the source of the action (e.g.",
+          "",
+          "the URL of a file to move)."
+        ]
+      },
+      {
+        "name": "NewTitle",
+        "type": "str",
+        "origtype": null,
+        "origin": "string",
+        "desc": [
+          "contains the title of the transferred object, if it is different from the original one.",
+          "",
+          "If this field is filled, for example, a file will be renamed while it is being transferred."
+        ]
+      },
+      {
+        "name": "NameClash",
+        "type": "int",
+        "origtype": null,
+        "origin": "long",
+        "desc": [
+          "describes how to act in case of title clashes while transferring the data.",
+          "",
+          "A title clash for instance occurs, if a file named \\\"foo.txt\\\" is to be transferred to a folder already containing another file named \\\"foo.txt\\\".",
+          "",
+          "The value can be one of the NameClash constants.",
+          "",
+          "Implementations that are not able to detect whether there is a clashing resource may ignore NameClash.ERROR and NameClash.RENAME always write the new data."
+        ]
+      }
+    ]
+  }
+}

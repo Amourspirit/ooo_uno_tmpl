@@ -1,0 +1,109 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XFramesSupplier",
+  "type": "interface",
+  "namespace": "com.sun.star.frame",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_frame",
+        "XFrame",
+        "XFrame_7a570956"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_frames",
+        "XFrames",
+        "XFrames_842009c9"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.frame.XFrame": "XFrame_7a570956"
+    },
+    "quote": [
+      "XFrame_7a570956",
+      "XFrames_842009c9"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.frame.XFrame"
+      ],
+      "typing": [
+        "com.sun.star.frame.XFrames"
+      ]
+    },
+    "name": "XFramesSupplier",
+    "imports": [],
+    "namespace": "com.sun.star.frame",
+    "extends": [
+      "com.sun.star.frame.XFrame"
+    ],
+    "desc": [
+      "provides access to sub frames of current one"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XFramesSupplier.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getActiveFrame",
+          "returns": "XFrame_7a570956",
+          "returns_origin": "com.sun.star.frame.XFrame",
+          "desc": [
+            "gets the current active frame of this container (not of any other available supplier)",
+            "",
+            "This may be the frame itself. The active frame is defined as the frame which contains (recursively) the window with the focus. If no window within the frame contains the focus, this method returns the last frame which had the focus. If no containing window ever had the focus, the first frame within this frame is returned."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getFrames",
+          "returns": "XFrames_842009c9",
+          "returns_origin": "com.sun.star.frame.XFrames",
+          "desc": [
+            "provides access to this container and to all other XFramesSupplier which are available from this node of frame tree"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setActiveFrame",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "is called on activation of a direct sub-frame.",
+            "",
+            "This method is only allowed to be called by a sub-frame according to XFrame.activate() or XFramesSupplier.setActiveFrame(). After this call XFramesSupplier.getActiveFrame() will return the frame specified by Frame.",
+            "",
+            "In general this method first calls the method XFramesSupplier.setActiveFrame() at the creator frame with this as the current argument. Then it broadcasts the FrameActionEvent FrameAction.FRAME_ACTIVATED.",
+            "",
+            "Note: Given parameter Frame must already exist inside the container (e.g., inserted by using XFrames.append())"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Frame",
+              "type": "XFrame_7a570956",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XFrame"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

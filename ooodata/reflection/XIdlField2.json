@@ -1,0 +1,147 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XIdlField2",
+  "type": "interface",
+  "namespace": "com.sun.star.reflection",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_idl_member",
+        "XIdlMember",
+        "XIdlMember_e3400cfc"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".field_access_mode",
+        "FieldAccessMode",
+        "FieldAccessMode_2a300eee"
+      ],
+      [
+        ".x_idl_class",
+        "XIdlClass",
+        "XIdlClass_d63a0c9a"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.reflection.XIdlMember": "XIdlMember_e3400cfc"
+    },
+    "quote": [
+      "FieldAccessMode_2a300eee",
+      "XIdlClass_d63a0c9a"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.reflection.XIdlMember"
+      ],
+      "typing": [
+        "com.sun.star.reflection.FieldAccessMode",
+        "com.sun.star.reflection.XIdlClass"
+      ]
+    },
+    "name": "XIdlField2",
+    "imports": [],
+    "namespace": "com.sun.star.reflection",
+    "extends": [
+      "com.sun.star.reflection.XIdlMember"
+    ],
+    "desc": [
+      "Reflects an IDL interface attribute, enum or compound type (i.e.",
+      "",
+      "struct/exception) member."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1reflection_1_1XIdlField2.html",
+    "items": {
+      "methods": [
+        {
+          "name": "get",
+          "returns": "object",
+          "returns_origin": "any",
+          "desc": [
+            "Gets the value of the reflected field from the given object, i.e.",
+            "",
+            "an interface, enum or compound type (struct/exception). For enums, the given object is ignored; the returned value reflects the constant enum 32-bit value.",
+            "",
+            "When setting an interface attribute raises a non com.sun.star.uno.RuntimeException, it is wrapped in a com.sun.star.lang.WrappedTargetRuntimeException."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "obj",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
+          ]
+        },
+        {
+          "name": "getAccessMode",
+          "returns": "FieldAccessMode_2a300eee",
+          "returns_origin": "com.sun.star.reflection.FieldAccessMode",
+          "desc": [
+            "Returns the access mode of the field, i.e.",
+            "",
+            "read-write, read-only or write-only (access mode \\\"const\\\" is deprecated)."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getType",
+          "returns": "XIdlClass_d63a0c9a",
+          "returns_origin": "com.sun.star.reflection.XIdlClass",
+          "desc": [
+            "Returns the type of the field."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "set",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Sets the value of the reflected field of the given object, i.e.",
+            "",
+            "an interface or compound type (struct/exception).",
+            "",
+            "When setting an interface attribute raises a non com.sun.star.uno.RuntimeException, it is wrapped in a com.sun.star.lang.WrappedTargetRuntimeException."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.IllegalAccessException"
+          ],
+          "args": [
+            {
+              "name": "obj",
+              "type": "object",
+              "direction": "in",
+              "origin": null
+            },
+            {
+              "name": "value",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

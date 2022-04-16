@@ -1,0 +1,169 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XStorable",
+  "type": "interface",
+  "namespace": "com.sun.star.frame",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "typing.Tuple[PropertyValue_c9610c73, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[PropertyValue_c9610c73, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValue"
+      ]
+    },
+    "name": "XStorable",
+    "imports": [],
+    "namespace": "com.sun.star.frame",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "offers a simple way to store a component to a URL.",
+      "",
+      "It is usually only useful for two cases:"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XStorable.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getLocation",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "After XStorable.storeAsURL() it returns the URL the object was stored to."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "hasLocation",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "The object may know the location because it was loaded from there, or because it is stored there."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "isReadonly",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "It is not possible to call XStorable.store() successfully when the data store is read-only."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "store",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "stores the data to the URL from which it was loaded.",
+            "",
+            "Only objects which know their locations can be stored."
+          ],
+          "raises": [
+            "com.sun.star.io.IOException"
+          ],
+          "args": []
+        },
+        {
+          "name": "storeAsURL",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "stores the object's persistent data to a URL and makes this URL the new location of the object.",
+            "",
+            "This is the normal behavior for UI's \\\"save-as\\\" feature.",
+            "",
+            "The change of the location makes it necessary to store the document in a format that the object can load. For this reason the implementation of XStorable.storeAsURL() will throw an exception if a pure export filter is used, it will accept only combined import/export filters. For such filters the method XStorable.storeToURL() must be used that does not change the location of the object."
+          ],
+          "raises": [
+            "com.sun.star.io.IOException"
+          ],
+          "args": [
+            {
+              "name": "sURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "lArguments",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            }
+          ]
+        },
+        {
+          "name": "storeToURL",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "stores the object's persistent data to a URL and continues to be a representation of the old URL.",
+            "",
+            "This is the normal behavior for UI's export feature.",
+            "",
+            "This method accepts all kinds of export filters, not only combined import/export filters because it implements an exporting capability, not a persistence capability."
+          ],
+          "raises": [
+            "com.sun.star.io.IOException"
+          ],
+          "args": [
+            {
+              "name": "sURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "lArguments",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

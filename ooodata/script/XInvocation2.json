@@ -1,0 +1,113 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XInvocation2",
+  "type": "interface",
+  "namespace": "com.sun.star.script",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_invocation",
+        "XInvocation",
+        "XInvocation_be070c0f"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".invocation_info",
+        "InvocationInfo",
+        "InvocationInfo_e5270d43"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.script.XInvocation": "XInvocation_be070c0f"
+    },
+    "quote": [
+      "InvocationInfo_e5270d43",
+      "typing.Tuple[InvocationInfo_e5270d43, ...]",
+      "typing.Tuple[str, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[InvocationInfo_e5270d43, ...]",
+      "typing.Tuple[str, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.script.XInvocation"
+      ],
+      "typing": [
+        "com.sun.star.script.InvocationInfo"
+      ]
+    },
+    "name": "XInvocation2",
+    "imports": [],
+    "namespace": "com.sun.star.script",
+    "extends": [
+      "com.sun.star.script.XInvocation"
+    ],
+    "desc": [
+      "Extension of XInvocation to provide additional information about the methods and properties that are accessible via XInvocation."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1script_1_1XInvocation2.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getInfo",
+          "returns": "typing.Tuple[InvocationInfo_e5270d43, ...]",
+          "returns_origin": "sequence< InvocationInfo >",
+          "desc": [
+            "returns information items for all methods and properties accessible via XInvocation."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getInfoForName",
+          "returns": "InvocationInfo_e5270d43",
+          "returns_origin": "com.sun.star.script.InvocationInfo",
+          "desc": [
+            "returns information item for the method or property defined by aName"
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "bExact",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
+          ]
+        },
+        {
+          "name": "getMemberNames",
+          "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
+          "desc": [
+            "returns the names of all methods and properties accessible via XInvocation."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

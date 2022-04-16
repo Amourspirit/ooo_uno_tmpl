@@ -1,0 +1,100 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XDispatchInformationProvider",
+  "type": "interface",
+  "namespace": "com.sun.star.frame",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".dispatch_information",
+        "DispatchInformation",
+        "DispatchInformation_1a290ec9"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "typing.Tuple[DispatchInformation_1a290ec9, ...]",
+      "typing.Tuple[int, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[DispatchInformation_1a290ec9, ...]",
+      "typing.Tuple[int, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.frame.DispatchInformation"
+      ]
+    },
+    "name": "XDispatchInformationProvider",
+    "imports": [],
+    "namespace": "com.sun.star.frame",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "provides information about supported commands",
+      "",
+      "This interface can be used to retrieve additional information about supported commands. This interface is normally used by configuration implementations to retrieve all supported commands. A dispatch information provider is normally supported by a Frame service.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.0"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XDispatchInformationProvider.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getConfigurableDispatchInformation",
+          "returns": "typing.Tuple[DispatchInformation_1a290ec9, ...]",
+          "returns_origin": "sequence< DispatchInformation >",
+          "desc": [
+            "returns additional information about supported commands of a given command group."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "CommandGroup",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
+          ]
+        },
+        {
+          "name": "getSupportedCommandGroups",
+          "returns": "typing.Tuple[int, ...]",
+          "returns_origin": "sequence< short >",
+          "desc": [
+            "returns all supported command groups."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

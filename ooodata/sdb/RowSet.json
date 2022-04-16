@@ -1,0 +1,348 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "RowSet",
+  "type": "service",
+  "namespace": "com.sun.star.sdb",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".result_set",
+        "ResultSet",
+        "ResultSet_847b09ec"
+      ],
+      [
+        ".x_completed_execution",
+        "XCompletedExecution",
+        "XCompletedExecution_fb8c0dea"
+      ],
+      [
+        ".x_parameters_supplier",
+        "XParametersSupplier",
+        "XParametersSupplier_fc7c0e01"
+      ],
+      [
+        ".x_result_set_access",
+        "XResultSetAccess",
+        "XResultSetAccess_d34d0c96"
+      ],
+      [
+        ".x_row_set_approve_broadcaster",
+        "XRowSetApproveBroadcaster",
+        "XRowSetApproveBroadcaster_56601044"
+      ],
+      [
+        "..sdbc.row_set",
+        "RowSet",
+        "RowSet_70fd0908"
+      ],
+      [
+        "..sdbc.x_result_set_update",
+        "XResultSetUpdate",
+        "XResultSetUpdate_e0fb0d0a"
+      ],
+      [
+        "..sdbcx.x_delete_rows",
+        "XDeleteRows",
+        "XDeleteRows_af5c0b72"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..sdbc.x_connection",
+        "XConnection",
+        "XConnection_a36a0b0c"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.sdb.ResultSet": "ResultSet_847b09ec",
+      "com.sun.star.sdb.XCompletedExecution": "XCompletedExecution_fb8c0dea",
+      "com.sun.star.sdb.XParametersSupplier": "XParametersSupplier_fc7c0e01",
+      "com.sun.star.sdb.XResultSetAccess": "XResultSetAccess_d34d0c96",
+      "com.sun.star.sdb.XRowSetApproveBroadcaster": "XRowSetApproveBroadcaster_56601044",
+      "com.sun.star.sdbc.RowSet": "RowSet_70fd0908",
+      "com.sun.star.sdbc.XResultSetUpdate": "XResultSetUpdate_e0fb0d0a",
+      "com.sun.star.sdbcx.XDeleteRows": "XDeleteRows_af5c0b72"
+    },
+    "quote": [
+      "XConnection_a36a0b0c"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.sdb.ResultSet",
+        "com.sun.star.sdb.XCompletedExecution",
+        "com.sun.star.sdb.XParametersSupplier",
+        "com.sun.star.sdb.XResultSetAccess",
+        "com.sun.star.sdb.XRowSetApproveBroadcaster",
+        "com.sun.star.sdbc.RowSet",
+        "com.sun.star.sdbc.XResultSetUpdate",
+        "com.sun.star.sdbcx.XDeleteRows"
+      ],
+      "typing": [
+        "com.sun.star.sdbc.XConnection"
+      ]
+    },
+    "name": "RowSet",
+    "imports": [],
+    "namespace": "com.sun.star.sdb",
+    "extends": [
+      "com.sun.star.sdbc.RowSet",
+      "com.sun.star.sdb.ResultSet",
+      "com.sun.star.sdb.XCompletedExecution",
+      "com.sun.star.sdb.XRowSetApproveBroadcaster",
+      "com.sun.star.sdbc.XResultSetUpdate",
+      "com.sun.star.sdbcx.XDeleteRows",
+      "com.sun.star.sdb.XResultSetAccess",
+      "com.sun.star.sdb.XParametersSupplier"
+    ],
+    "desc": [
+      "is a client side RowSet, which use retrieves is data based on a database table, a query or a SQL command or by a row set reader, who mustn't support SQL.",
+      "",
+      "The connection of the row set is typically a named DataSource or a DataAccess component or a previous instantiated connection.",
+      "",
+      "Depending on the com.sun.star.sdbc.ResultSetConcurrency , the RowSet caches all data or uses an optimized way for retrieving the data, such as, refetching rows by their keys or if provided, by their bookmarks.",
+      "",
+      "In addition, it provides events for RowSet navigation and RowSet modifications to approve the actions and to react on them.",
+      "",
+      "A row set is able to be operated in various ways, and additionally it notifies various changes in its state. Clients of this service can rely on a fixed order of notifications, depending on how they operate on the component.",
+      "The following describes the general order of all possible notifications which you can encounter when working with a row set:",
+      "",
+      "The following matrix shows the notifications which apply to the different operations:",
+      "",
+      "Via com.sun.star.sdbc.XResultSetUpdate.deleteRow(), you can delete the current row of a RowSet. This deleted row then doesn't vanish immediately, but is still present, and subsequent calls to com.sun.star.sdbc.XResultSet.rowDeleted() will return TRUE. The deleted row \\\"vanishes\\\" from the RowSet as soon as the cursor is moved away from it.",
+      "As a consequence, the behavior of several other methods is affected:"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1sdb_1_1RowSet.html",
+    "items": {
+      "properties": [
+        {
+          "name": "ActiveCommand",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "is the command which is currently used."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ActiveConnection",
+          "returns": "XConnection_a36a0b0c",
+          "origtype": "com.sun.star.sdbc.XConnection",
+          "origin": "com.sun.star.sdbc.XConnection",
+          "desc": [
+            "is the connection generated by a DataSource or by a URL.",
+            "",
+            "It could also be set from outside. When set from outside the RowSet is not responsible for the closing of the connection."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ApplyFilter",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "indicates whether the filter should be applied or not, default is FALSE."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Command",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "is the command which should be executed, the type of command depends on the CommandType.",
+            "",
+            "In case of a CommandType of CommandType.COMMAND, means in case the Command specifies an SQL statement, the inherited com.sun.star.sdbc.RowSet.EscapeProcessing becomes relevant:",
+            "It then can be to used to specify whether the SQL statement should be analyzed on the client side before sending it to the database server.",
+            "The default value for com.sun.star.sdbc.RowSet.EscapeProcessing is TRUE. By switching it to FALSE, you can pass backend-specific SQL statements, which are not standard SQL, to your database."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CommandType",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "is the type of the command."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "DataSourceName",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "is the name of the datasource to use, this could be a named datasource or the URL of a data access component."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Filter",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "additional filter for a row set."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "GroupBy",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "additional group by for the row set"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "HavingClause",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "additional having clause for the row set"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IgnoreResult",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "indicates whether all results should be discarded or not."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsModified",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "indicates that the current row is modified."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsNew",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "indicates that the current row is going to be inserted to the database."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsRowCountFinal",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "indicates that all rows of the row set have been counted."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Order",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "is an additional sort order definition for a row set."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Privileges",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "indicates the privileges for insert, update, and delete."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RowCount",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "contains the number of rows accessed in the data source."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "UpdateCatalogName",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "is the name of the table catalog"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "UpdateSchemaName",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "is the name of the table schema."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "UpdateTableName",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "is the name of the table which should be updated, this is usually used for queries which relate to more than one table."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

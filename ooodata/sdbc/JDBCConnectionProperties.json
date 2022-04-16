@@ -1,0 +1,156 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "JDBCConnectionProperties",
+  "type": "service",
+  "namespace": "com.sun.star.sdbc",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".connection_properties",
+        "ConnectionProperties",
+        "ConnectionProperties_1a9f0ee1"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..beans.named_value",
+        "NamedValue",
+        "NamedValue_a37a0af3"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.sdbc.ConnectionProperties": "ConnectionProperties_1a9f0ee1"
+    },
+    "quote": [
+      "typing.Tuple[NamedValue_a37a0af3, ...]",
+      "typing.Tuple[object, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[NamedValue_a37a0af3, ...]",
+      "typing.Tuple[object, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.sdbc.ConnectionProperties"
+      ],
+      "typing": [
+        "com.sun.star.beans.NamedValue"
+      ]
+    },
+    "name": "JDBCConnectionProperties",
+    "imports": [],
+    "namespace": "com.sun.star.sdbc",
+    "extends": [
+      "com.sun.star.sdbc.ConnectionProperties"
+    ],
+    "desc": [
+      "represents the properties for a JDBC connection (session) with a specific database.",
+      "",
+      "These properties can be used when calling the method com.sun.star.sdbc.XDriver.connect() or com.sun.star.sdbc.XDriverManager.getConnectionWithInfo().",
+      "",
+      "The properties for a connection contain additional information about how to connect to a database and how to control the behavior of the resulting connection should be.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.3"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1sdbc_1_1JDBCConnectionProperties.html",
+    "items": {
+      "types": [
+        {
+          "name": "SystemProperties",
+          "returns": "typing.Tuple[NamedValue_a37a0af3, ...]",
+          "origtype": null,
+          "origin": "sequence< .com.sun.star.beans.NamedValue >",
+          "desc": [
+            "specifies a set of properties to pass to java.lang.System.setProperty before loading the system's JDBC driver."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TypeInfoSettings",
+          "returns": "typing.Tuple[object, ...]",
+          "origtype": null,
+          "origin": "sequence< any >",
+          "desc": [
+            "specifies how the type info returned by com.sun.star.sdbc.XDatabaseMetaData.getTypeInfo() will be modified.",
+            "",
+            "The sequence contains an even amount of string values. Each pair describes what should be searched for and what should be replaced if found.",
+            "The syntax is:",
+            "",
+            "COLUMN(X) defines the column which will be compared and the column which will be replaced. In the example above column 2 will be compared with the value -5. If this is true than column 6 will now return the value PRECISION."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ],
+      "properties": [
+        {
+          "name": "AutoRetrievingStatement",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "specifies the statement which should be executed when asking an \\\"INSERT\\\" statement for the XGeneratedResultSet (future concept) interface."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsAutoRetrievingEnabled",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "specifies if retrieving of auto generated values should be enabled or not.",
+            "",
+            "If TRUE than the statement will support the XGeneratedResultSet (future concept) interface, otherwise not."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "JavaDriverClass",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "which JDBC driver class should be loaded to create the connection."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "JavaDriverClassPath",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "an optional class path to locate the com.sun.star.sdbc.JDBCConnectionProperties.JavaDriverClass",
+            "",
+            "The class path is a list of zero or more internal (see the com.sun.star.uri.ExternalUriReferenceTranslator service) URI references, where any space characters (U+0020) are ignored (and, in particular, separate adjacent URI references). Any \u201cvnd.sun.star.expand\u201d URL references in the list are expanded using the com.sun.star.util.theMacroExpander singleton.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.3"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

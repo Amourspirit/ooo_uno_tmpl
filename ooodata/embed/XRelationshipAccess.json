@@ -1,0 +1,273 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XRelationshipAccess",
+  "type": "interface",
+  "namespace": "com.sun.star.embed",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..beans.string_pair",
+        "StringPair",
+        "StringPair_a4bc0b14"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "typing.Tuple[StringPair_a4bc0b14, ...]",
+      "typing.Tuple[typing.Tuple[StringPair_a4bc0b14, ...], ...]"
+    ],
+    "typings": [
+      "typing.Tuple[StringPair_a4bc0b14, ...]",
+      "typing.Tuple[typing.Tuple[StringPair_a4bc0b14, ...], ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.beans.StringPair"
+      ]
+    },
+    "name": "XRelationshipAccess",
+    "imports": [],
+    "namespace": "com.sun.star.embed",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "This interface allows to get access to relationship data.",
+      "",
+      "The relationship data is organized as a set of entries. Each of entry is represented by a set of tags, where each tag has unique for this entry name and a string value. An entry must contain at least one tag named \\\"ID\\\", the value of this tag must be unique for the whole set of entries, this tag is used as a unique identifier of an entry."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1embed_1_1XRelationshipAccess.html",
+    "items": {
+      "methods": [
+        {
+          "name": "clearRelationships",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "allows to clear the set of entries."
+          ],
+          "raises": [
+            "com.sun.star.io.IOException"
+          ],
+          "args": []
+        },
+        {
+          "name": "getAllRelationships",
+          "returns": "typing.Tuple[typing.Tuple[StringPair_a4bc0b14, ...], ...]",
+          "returns_origin": "sequence< sequence< .com.sun.star.beans.StringPair > >",
+          "desc": [
+            "retrieves the sequence containing all the entries controlled by the object."
+          ],
+          "raises": [
+            "com.sun.star.io.IOException"
+          ],
+          "args": []
+        },
+        {
+          "name": "getRelationshipByID",
+          "returns": "typing.Tuple[StringPair_a4bc0b14, ...]",
+          "returns_origin": "sequence< .com.sun.star.beans.StringPair >",
+          "desc": [
+            "retrieves the sequence containing all the tags from the entry with specified value of \\\"ID\\\" tag."
+          ],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException",
+            "com.sun.star.io.IOException"
+          ],
+          "args": [
+            {
+              "name": "sID",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "getRelationshipsByType",
+          "returns": "typing.Tuple[typing.Tuple[StringPair_a4bc0b14, ...], ...]",
+          "returns_origin": "sequence< sequence< .com.sun.star.beans.StringPair > >",
+          "desc": [
+            "retrieves the sequence containing all the entries which \\\"Type\\\" tag takes the specified value."
+          ],
+          "raises": [
+            "com.sun.star.io.IOException"
+          ],
+          "args": [
+            {
+              "name": "sType",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "getTargetByID",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "retrieves the value of \\\"Target\\\" tag from the entry with specified \\\"ID\\\" tag.",
+            "",
+            "If the entry has no \\\"Target\\\" tag an empty string is returned."
+          ],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException",
+            "com.sun.star.io.IOException"
+          ],
+          "args": [
+            {
+              "name": "sID",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "getTypeByID",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "retrieves the value of \\\"Type\\\" tag from the entry with specified \\\"ID\\\" tag.",
+            "",
+            "If the entry has no \\\"Type\\\" tag an empty string is returned."
+          ],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException",
+            "com.sun.star.io.IOException"
+          ],
+          "args": [
+            {
+              "name": "sID",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "hasByID",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "allows to detect whether there is an entry with specified value of \\\"ID\\\" tag."
+          ],
+          "raises": [
+            "com.sun.star.io.IOException"
+          ],
+          "args": [
+            {
+              "name": "sID",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "insertRelationshipByID",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "allows to insert an entry."
+          ],
+          "raises": [
+            "com.sun.star.container.ElementExistException",
+            "com.sun.star.io.IOException"
+          ],
+          "args": [
+            {
+              "name": "sID",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aEntry",
+              "type": "typing.Tuple[StringPair_a4bc0b14, ...]",
+              "direction": "in",
+              "origin": "sequence< .com.sun.star.beans.StringPair >"
+            },
+            {
+              "name": "bReplace",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
+          ]
+        },
+        {
+          "name": "insertRelationships",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "allows to insert a set of entries"
+          ],
+          "raises": [
+            "com.sun.star.container.ElementExistException",
+            "com.sun.star.io.IOException"
+          ],
+          "args": [
+            {
+              "name": "aEntries",
+              "type": "typing.Tuple[typing.Tuple[StringPair_a4bc0b14, ...], ...]",
+              "direction": "in",
+              "origin": "sequence< sequence< .com.sun.star.beans.StringPair > >"
+            },
+            {
+              "name": "bReplace",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
+          ]
+        },
+        {
+          "name": "removeRelationshipByID",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "allows to remove an entry."
+          ],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException",
+            "com.sun.star.io.IOException"
+          ],
+          "args": [
+            {
+              "name": "sID",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

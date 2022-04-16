@@ -1,0 +1,132 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XAccessibleRelationSet",
+  "type": "interface",
+  "namespace": "com.sun.star.accessibility",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".accessible_relation",
+        "AccessibleRelation",
+        "AccessibleRelation_8f8b119c"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "AccessibleRelation_8f8b119c"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.accessibility.AccessibleRelation"
+      ]
+    },
+    "name": "XAccessibleRelationSet",
+    "imports": [],
+    "namespace": "com.sun.star.accessibility",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "Implement this interface to give access to an object's set of relations.",
+      "",
+      "Such relation are modeled with the AccessibleRelation structure. This interface is used for representing sets of relations between Accessible objects. Most of the convenience methods of the corresponding AccessibleRelationSet interface of the Java Accessibility API have been removed from this interface in order to clean it up. These methods are add(), addAll(), clear(), and remove(). The other methods have been renamed to achieve a greater conformance with the other accessibility interfaces.",
+      "",
+      "**since**",
+      "",
+      "    OOo 1.1.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleRelationSet.html",
+    "items": {
+      "methods": [
+        {
+          "name": "containsRelation",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "Tests whether the relation set contains a relation matching the specified key."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aRelationType",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
+          ]
+        },
+        {
+          "name": "getRelation",
+          "returns": "AccessibleRelation_8f8b119c",
+          "returns_origin": "com.sun.star.accessibility.AccessibleRelation",
+          "desc": [
+            "Returns the relation of this relation set that is specified by the given index."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "getRelationByType",
+          "returns": "AccessibleRelation_8f8b119c",
+          "returns_origin": "com.sun.star.accessibility.AccessibleRelation",
+          "desc": [
+            "Retrieve and return the relation with the given relation type."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aRelationType",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
+          ]
+        },
+        {
+          "name": "getRelationCount",
+          "returns": "int",
+          "returns_origin": "long",
+          "desc": [
+            "Returns the number of relations in this relation set."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

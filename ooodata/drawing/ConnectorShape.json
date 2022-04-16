@@ -1,0 +1,213 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "ConnectorShape",
+  "type": "service",
+  "namespace": "com.sun.star.drawing",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".connector_properties",
+        "ConnectorProperties",
+        "ConnectorProperties_3c5e0fcc"
+      ],
+      [
+        ".line_properties",
+        "LineProperties",
+        "LineProperties_f13f0da9"
+      ],
+      [
+        ".rotation_descriptor",
+        "RotationDescriptor",
+        "RotationDescriptor_2cec0f63"
+      ],
+      [
+        ".shadow_properties",
+        "ShadowProperties",
+        "ShadowProperties_e350e87"
+      ],
+      [
+        ".shape",
+        "Shape",
+        "Shape_85cc09e5"
+      ],
+      [
+        ".text",
+        "Text",
+        "Text_7c140999"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..awt.point",
+        "Point",
+        "Point_5fb2085e"
+      ],
+      [
+        ".x_shape",
+        "XShape",
+        "XShape_8fd00a3d"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.drawing.ConnectorProperties": "ConnectorProperties_3c5e0fcc",
+      "com.sun.star.drawing.LineProperties": "LineProperties_f13f0da9",
+      "com.sun.star.drawing.RotationDescriptor": "RotationDescriptor_2cec0f63",
+      "com.sun.star.drawing.ShadowProperties": "ShadowProperties_e350e87",
+      "com.sun.star.drawing.Shape": "Shape_85cc09e5",
+      "com.sun.star.drawing.Text": "Text_7c140999"
+    },
+    "quote": [
+      "Point_5fb2085e",
+      "XShape_8fd00a3d"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.drawing.ConnectorProperties",
+        "com.sun.star.drawing.LineProperties",
+        "com.sun.star.drawing.RotationDescriptor",
+        "com.sun.star.drawing.ShadowProperties",
+        "com.sun.star.drawing.Shape",
+        "com.sun.star.drawing.Text"
+      ],
+      "typing": [
+        "com.sun.star.awt.Point",
+        "com.sun.star.drawing.XShape"
+      ]
+    },
+    "name": "ConnectorShape",
+    "imports": [],
+    "namespace": "com.sun.star.drawing",
+    "extends": [
+      "com.sun.star.drawing.Shape",
+      "com.sun.star.drawing.LineProperties",
+      "com.sun.star.drawing.ConnectorProperties",
+      "com.sun.star.drawing.ShadowProperties",
+      "com.sun.star.drawing.Text",
+      "com.sun.star.drawing.RotationDescriptor"
+    ],
+    "desc": [
+      "This service is for a ConnectorShape, a specialized Shape, which can be connected to other Shapes or GluePoints."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1drawing_1_1ConnectorShape.html",
+    "items": {
+      "properties": [
+        {
+          "name": "EdgeLine1Delta",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "This property contains the distance of line 1."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "EdgeLine2Delta",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "This property contains the distance of line 2."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "EdgeLine3Delta",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "This property contains the distance of line 3."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "EndGluePointIndex",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "this is the position of the connectors end point in 100th/mm.",
+            "",
+            "For unconnected end points you can get and set the position. For connected end points you can only get the position."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "EndPosition",
+          "returns": "Point_5fb2085e",
+          "origtype": "com.sun.star.awt.Point",
+          "origin": "com.sun.star.awt.Point",
+          "desc": [
+            "this property holds the index of the gluepoint the end point of this connector is glued on."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "EndShape",
+          "returns": "XShape_8fd00a3d",
+          "origtype": "com.sun.star.drawing.XShape",
+          "origin": "com.sun.star.drawing.XShape",
+          "desc": [
+            "this property either holds the shape that the end point of this connector is connected to, or is empty when the end point of the connector is not connected to a shape."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "StartGluePointIndex",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "this property holds the index of the gluepoint the start point of this connector is glued on."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "StartPosition",
+          "returns": "Point_5fb2085e",
+          "origtype": "com.sun.star.awt.Point",
+          "origin": "com.sun.star.awt.Point",
+          "desc": [
+            "this is the position of the connectors start point in 100th/mm.",
+            "",
+            "For unconnected start points you can get and set the position. For connected start points you can only get the position."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "StartShape",
+          "returns": "XShape_8fd00a3d",
+          "origtype": "com.sun.star.drawing.XShape",
+          "origin": "com.sun.star.drawing.XShape",
+          "desc": [
+            "this property either holds the shape that the start point of this connector is connected to, or is empty when the start point of the connector is not connected to a shape."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

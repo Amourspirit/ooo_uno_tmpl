@@ -1,0 +1,121 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XRowSetApproveListener",
+  "type": "interface",
+  "namespace": "com.sun.star.sdb",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..lang.x_event_listener",
+        "XEventListener",
+        "XEventListener_c7230c4a"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..lang.event_object",
+        "EventObject",
+        "EventObject_a3d70b03"
+      ],
+      [
+        ".row_change_event",
+        "RowChangeEvent",
+        "RowChangeEvent_ba0c0bc1"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.lang.XEventListener": "XEventListener_c7230c4a"
+    },
+    "quote": [
+      "EventObject_a3d70b03",
+      "RowChangeEvent_ba0c0bc1"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.lang.XEventListener"
+      ],
+      "typing": [
+        "com.sun.star.lang.EventObject",
+        "com.sun.star.sdb.RowChangeEvent"
+      ]
+    },
+    "name": "XRowSetApproveListener",
+    "imports": [],
+    "namespace": "com.sun.star.sdb",
+    "extends": [
+      "com.sun.star.lang.XEventListener"
+    ],
+    "desc": [
+      "is used for approving the moving and changing of row set actions."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sdb_1_1XRowSetApproveListener.html",
+    "items": {
+      "methods": [
+        {
+          "name": "approveCursorMove",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "is called before a row set's cursor is moved."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "event",
+              "type": "EventObject_a3d70b03",
+              "direction": "in",
+              "origin": "com.sun.star.lang.EventObject"
+            }
+          ]
+        },
+        {
+          "name": "approveRowChange",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "is called before a row is inserted, updated, or deleted."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "event",
+              "type": "RowChangeEvent_ba0c0bc1",
+              "direction": "in",
+              "origin": "com.sun.star.sdb.RowChangeEvent"
+            }
+          ]
+        },
+        {
+          "name": "approveRowSetChange",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "is called before a row set is changed, or in other words before a row set is reexecuted."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "event",
+              "type": "EventObject_a3d70b03",
+              "direction": "in",
+              "origin": "com.sun.star.lang.EventObject"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

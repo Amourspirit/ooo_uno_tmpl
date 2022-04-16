@@ -1,0 +1,104 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XStyleLoader",
+  "type": "interface",
+  "namespace": "com.sun.star.style",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "typing.Tuple[PropertyValue_c9610c73, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[PropertyValue_c9610c73, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValue"
+      ]
+    },
+    "name": "XStyleLoader",
+    "imports": [],
+    "namespace": "com.sun.star.style",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "enables the object to import styles from documents."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1style_1_1XStyleLoader.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getStyleLoaderOptions",
+          "returns": "typing.Tuple[PropertyValue_c9610c73, ...]",
+          "returns_origin": "sequence< com.sun.star.beans.PropertyValue >",
+          "desc": [],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "loadStylesFromURL",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "loads styles from a document at the given URL.",
+            "",
+            "If OverwriteStyles is TRUE, then all styles will be loaded. Otherwise, only styles which are not already defined in this document are loaded.",
+            "",
+            "The sequence<PropertyValue> has the following, optional items:",
+            "",
+            "As the default, all supported style families are loaded and existing styles are overwritten."
+          ],
+          "raises": [
+            "com.sun.star.io.IOException"
+          ],
+          "args": [
+            {
+              "name": "URL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aOptions",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,164 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XVndSunStarScriptUrl",
+  "type": "interface",
+  "namespace": "com.sun.star.uri",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": []
+    },
+    "name": "XVndSunStarScriptUrl",
+    "imports": [],
+    "namespace": "com.sun.star.uri",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "represents absolute \u201cvnd.sun.star.script\u201d URLs.",
+      "",
+      "These URLs are of the form",
+      "vnd-sun-star-script-url = \\\"VND.SUN.STAR.SCRIPT:\\\" name [\\\"?\\\" parameter *(\\\"&\\\" parameter)]",
+      "name = 1*schar",
+      "parameter = key \\\"=\\\" value",
+      "key = 1*schar",
+      "value = *schar",
+      "schar = unreserved / escaped / \\\"$\\\" / \\\"+\\\" / \\\",\\\" / \\\":\\\" / \\\";\\\" / \\\"@\\\" / \\\"[\\\" / \\\"]\\\"",
+      "See RFC\u00a03986 RFC\u00a02234 for details.",
+      "",
+      "The names, keys, and values are arbitrary Unicode strings (non-empty Unicode strings in the case of names and keys), encoded as UTF-8 byte sequences. It is an error if any of them does not represent a valid UTF-8 byte sequence. Keys are compared for equality character-by-character, without considering case folding or normalization. There may be multiple parameters with equal keys.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.0"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1uri_1_1XVndSunStarScriptUrl.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getName",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "returns the name part of this URL."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getParameter",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "returns the value of a parameter with a given key."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "key",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "hasParameter",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "returns whether this URL has a parameter with a given key."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "key",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "setName",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "sets the name part of this URL.",
+            "",
+            "**since**",
+            "",
+            "    OOo 3.0"
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "setParameter",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "sets the value of a parameter with a given key.",
+            "",
+            "**since**",
+            "",
+            "    OOo 3.0"
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "key",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "value",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

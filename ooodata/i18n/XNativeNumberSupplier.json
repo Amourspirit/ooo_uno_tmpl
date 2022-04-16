@@ -1,0 +1,166 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XNativeNumberSupplier",
+  "type": "interface",
+  "namespace": "com.sun.star.i18n",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".native_number_xml_attributes",
+        "NativeNumberXmlAttributes",
+        "NativeNumberXmlAttributes_5e4f1070"
+      ],
+      [
+        "..lang.locale",
+        "Locale",
+        "Locale_70d308fa"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "Locale_70d308fa",
+      "NativeNumberXmlAttributes_5e4f1070"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.i18n.NativeNumberXmlAttributes",
+        "com.sun.star.lang.Locale"
+      ]
+    },
+    "name": "XNativeNumberSupplier",
+    "imports": [],
+    "namespace": "com.sun.star.i18n",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "Methods to convert between strings of ASCII Arabic digits and native numeral strings.",
+      "",
+      "**since**",
+      "",
+      "    OOo 1.1.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1i18n_1_1XNativeNumberSupplier.html",
+    "items": {
+      "methods": [
+        {
+          "name": "convertFromXmlAttributes",
+          "returns": "int",
+          "returns_origin": "short",
+          "desc": [
+            "Convert XML attributes to a NatNum value."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aAttr",
+              "type": "NativeNumberXmlAttributes_5e4f1070",
+              "direction": "in",
+              "origin": "com.sun.star.i18n.NativeNumberXmlAttributes"
+            }
+          ]
+        },
+        {
+          "name": "convertToXmlAttributes",
+          "returns": "NativeNumberXmlAttributes_5e4f1070",
+          "returns_origin": "com.sun.star.i18n.NativeNumberXmlAttributes",
+          "desc": [
+            "Convert a specific NatNum/Locale combination to attributes used in the XML file format."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "nNativeNumberMode",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
+          ]
+        },
+        {
+          "name": "getNativeNumberString",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "Returns native number string for given number string."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aNumberString",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "nNativeNumberMode",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
+          ]
+        },
+        {
+          "name": "isValidNatNum",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "Check if the NatNum is valid for the given locale."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "nNativeNumberMode",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,166 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XDragSourceListener",
+  "type": "interface",
+  "namespace": "com.sun.star.datatransfer.dnd",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "...lang.x_event_listener",
+        "XEventListener",
+        "XEventListener_c7230c4a"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".drag_source_drag_event",
+        "DragSourceDragEvent",
+        "DragSourceDragEvent_d53c12da"
+      ],
+      [
+        ".drag_source_drop_event",
+        "DragSourceDropEvent",
+        "DragSourceDropEvent_d5d412f1"
+      ],
+      [
+        ".drag_source_event",
+        "DragSourceEvent",
+        "DragSourceEvent_8ccf115c"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.lang.XEventListener": "XEventListener_c7230c4a"
+    },
+    "quote": [
+      "DragSourceDragEvent_d53c12da",
+      "DragSourceDropEvent_d5d412f1",
+      "DragSourceEvent_8ccf115c"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.lang.XEventListener"
+      ],
+      "typing": [
+        "com.sun.star.datatransfer.dnd.DragSourceDragEvent",
+        "com.sun.star.datatransfer.dnd.DragSourceDropEvent",
+        "com.sun.star.datatransfer.dnd.DragSourceEvent"
+      ]
+    },
+    "name": "XDragSourceListener",
+    "imports": [],
+    "namespace": "com.sun.star.datatransfer.dnd",
+    "extends": [
+      "com.sun.star.lang.XEventListener"
+    ],
+    "desc": [
+      "This interface must be implemented by any drag gesture recognizer implementation that a drag source supports."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1datatransfer_1_1dnd_1_1XDragSourceListener.html",
+    "items": {
+      "methods": [
+        {
+          "name": "dragDropEnd",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "This method is invoked to signify that the Drag and Drop operation is complete."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "dsde",
+              "type": "DragSourceDropEvent_d5d412f1",
+              "direction": "in",
+              "origin": "com.sun.star.datatransfer.dnd.DragSourceDropEvent"
+            }
+          ]
+        },
+        {
+          "name": "dragEnter",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Called as the hotspot enters a platform dependent drop site.",
+            "",
+            "NOTE: currently this notification can not be ensured by all implementations. Do not rely on it !"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "dsde",
+              "type": "DragSourceDragEvent_d53c12da",
+              "direction": "in",
+              "origin": "com.sun.star.datatransfer.dnd.DragSourceDragEvent"
+            }
+          ]
+        },
+        {
+          "name": "dragExit",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Called as the hotspot exits a platform dependent drop site.",
+            "",
+            "NOTE: Currently this notification can not be ensured by all implementations. Do not rely on it !"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "dse",
+              "type": "DragSourceEvent_8ccf115c",
+              "direction": "in",
+              "origin": "com.sun.star.datatransfer.dnd.DragSourceEvent"
+            }
+          ]
+        },
+        {
+          "name": "dragOver",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Called as the hotspot moves over a platform dependent drop site."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "dsde",
+              "type": "DragSourceDragEvent_d53c12da",
+              "direction": "in",
+              "origin": "com.sun.star.datatransfer.dnd.DragSourceDragEvent"
+            }
+          ]
+        },
+        {
+          "name": "dropActionChanged",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Called when the user has modified the drop gesture."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "dsde",
+              "type": "DragSourceDragEvent_d53c12da",
+              "direction": "in",
+              "origin": "com.sun.star.datatransfer.dnd.DragSourceDragEvent"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

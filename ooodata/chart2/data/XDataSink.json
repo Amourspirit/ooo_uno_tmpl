@@ -1,0 +1,94 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XDataSink",
+  "type": "interface",
+  "namespace": "com.sun.star.chart2.data",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "...uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_labeled_data_sequence",
+        "XLabeledDataSequence",
+        "XLabeledDataSequence_7e1a10c8"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "typing.Tuple[XLabeledDataSequence_7e1a10c8, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[XLabeledDataSequence_7e1a10c8, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.chart2.data.XLabeledDataSequence"
+      ]
+    },
+    "name": "XDataSink",
+    "imports": [],
+    "namespace": "com.sun.star.chart2.data",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "is a container for sequences of data.",
+      "",
+      "With this interface data can only be written to.",
+      "",
+      "If you want to be able to also read the data set here, your component must also implement XDataSource."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1chart2_1_1data_1_1XDataSink.html",
+    "items": {
+      "methods": [
+        {
+          "name": "setData",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "sets new data sequences.",
+            "",
+            "The elements set here must support the service DataSequence.",
+            "",
+            "If the data consist only of floating point numbers (double values), the instances set here should also support the service NumericalDataSequence.",
+            "",
+            "If the data consist only of strings, the instances set here should also support the service TextualDataSequence.",
+            "",
+            "If one of the derived services is supported by one element of the sequence, it should be available for all elements in the sequence."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aData",
+              "type": "typing.Tuple[XLabeledDataSequence_7e1a10c8, ...]",
+              "direction": "in",
+              "origin": "sequence< XLabeledDataSequence >"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

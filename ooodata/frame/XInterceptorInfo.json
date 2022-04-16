@@ -1,0 +1,71 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XInterceptorInfo",
+  "type": "interface",
+  "namespace": "com.sun.star.frame",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "typing.Tuple[str, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[str, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": []
+    },
+    "name": "XInterceptorInfo",
+    "imports": [],
+    "namespace": "com.sun.star.frame",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "makes it possible to get information about a registered interceptor and is used by frame interceptor mechanism to perform interception.",
+      "",
+      "Frame can call right interceptor directly without calling all of registered ones. Use it as an additional interface to XDispatchProviderInterceptor. If any interceptor in list doesn't support this interface - these mechanism will be broken and normal list of master-slave interceptor objects will be used from top to the bottom."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XInterceptorInfo.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getInterceptedURLs",
+          "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
+          "desc": [
+            "returns the URL list for interception.",
+            "",
+            "Wildcards inside the URLs are allowed to register the interceptor for URLs too, which can have optional arguments (e.g. \\\"..#..\\\" or \\\"..?..\\\")."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

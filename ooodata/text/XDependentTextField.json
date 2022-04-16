@@ -1,0 +1,94 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XDependentTextField",
+  "type": "interface",
+  "namespace": "com.sun.star.text",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_text_field",
+        "XTextField",
+        "XTextField_9a630aae"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..beans.x_property_set",
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.text.XTextField": "XTextField_9a630aae"
+    },
+    "quote": [
+      "XPropertySet_bc180bfa"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.text.XTextField"
+      ],
+      "typing": [
+        "com.sun.star.beans.XPropertySet"
+      ]
+    },
+    "name": "XDependentTextField",
+    "imports": [],
+    "namespace": "com.sun.star.text",
+    "extends": [
+      "com.sun.star.text.XTextField"
+    ],
+    "desc": [
+      "makes it possible to attach this TextField to a TextFieldMaster."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1text_1_1XDependentTextField.html",
+    "items": {
+      "methods": [
+        {
+          "name": "attachTextFieldMaster",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "method must be called to attach the TextFieldMaster to this TextField.",
+            "",
+            "A TextFieldMaster can only be assigned once.",
+            "",
+            "Example: Create and insert a user field (with a UserField):"
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "xFieldMaster",
+              "type": "XPropertySet_bc180bfa",
+              "direction": "in",
+              "origin": "com.sun.star.beans.XPropertySet"
+            }
+          ]
+        },
+        {
+          "name": "getTextFieldMaster",
+          "returns": "XPropertySet_bc180bfa",
+          "returns_origin": "com.sun.star.beans.XPropertySet",
+          "desc": [],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

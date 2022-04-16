@@ -1,0 +1,140 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XSearchable",
+  "type": "interface",
+  "namespace": "com.sun.star.util",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..container.x_index_access",
+        "XIndexAccess",
+        "XIndexAccess_f0910d6d"
+      ],
+      [
+        ".x_search_descriptor",
+        "XSearchDescriptor",
+        "XSearchDescriptor_ef600d93"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XIndexAccess_f0910d6d",
+      "XInterface_8f010a43",
+      "XSearchDescriptor_ef600d93"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.container.XIndexAccess",
+        "com.sun.star.util.XSearchDescriptor"
+      ]
+    },
+    "name": "XSearchable",
+    "imports": [],
+    "namespace": "com.sun.star.util",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "enables the object to look for specified contents of the object (in particular, for a text range which contains a specific string pattern).",
+      "",
+      "Example: in a com.sun.star.text.TextDocument: set all \\\"search for\\\" to bold using findFirst()/findNext():"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1util_1_1XSearchable.html",
+    "items": {
+      "methods": [
+        {
+          "name": "createSearchDescriptor",
+          "returns": "XSearchDescriptor_ef600d93",
+          "returns_origin": "com.sun.star.util.XSearchDescriptor",
+          "desc": [
+            "creates a SearchDescriptor which contains properties that specify a search in this container."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "findAll",
+          "returns": "XIndexAccess_f0910d6d",
+          "returns_origin": "com.sun.star.container.XIndexAccess",
+          "desc": [
+            "searches the contained texts for all occurrences of whatever is specified."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xDesc",
+              "type": "XSearchDescriptor_ef600d93",
+              "direction": "in",
+              "origin": "com.sun.star.util.XSearchDescriptor"
+            }
+          ]
+        },
+        {
+          "name": "findFirst",
+          "returns": "XInterface_8f010a43",
+          "returns_origin": "com.sun.star.uno.XInterface",
+          "desc": [
+            "searches the contained texts for the next occurrence of whatever is specified."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xDesc",
+              "type": "XSearchDescriptor_ef600d93",
+              "direction": "in",
+              "origin": "com.sun.star.util.XSearchDescriptor"
+            }
+          ]
+        },
+        {
+          "name": "findNext",
+          "returns": "XInterface_8f010a43",
+          "returns_origin": "com.sun.star.uno.XInterface",
+          "desc": [
+            "searches the contained texts for the next occurrence of whatever is specified."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xStartAt",
+              "type": "XInterface_8f010a43",
+              "direction": "in",
+              "origin": "com.sun.star.uno.XInterface"
+            },
+            {
+              "name": "xDesc",
+              "type": "XSearchDescriptor_ef600d93",
+              "direction": "in",
+              "origin": "com.sun.star.util.XSearchDescriptor"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

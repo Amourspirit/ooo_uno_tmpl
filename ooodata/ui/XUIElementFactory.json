@@ -1,0 +1,108 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XUIElementFactory",
+  "type": "interface",
+  "namespace": "com.sun.star.ui",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
+      ],
+      [
+        ".xui_element",
+        "XUIElement",
+        "XUIElement_820509a6"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XUIElement_820509a6",
+      "typing.Tuple[PropertyValue_c9610c73, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[PropertyValue_c9610c73, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.ui.XUIElement"
+      ]
+    },
+    "name": "XUIElementFactory",
+    "imports": [],
+    "namespace": "com.sun.star.ui",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "specifies a user interface element factory that can create and initialize user interface elements.",
+      "",
+      "User interface element factories must be registered at a UIElementFactoryManager service to provide access to itself.",
+      "",
+      "Currently the following user interface element types are defined:",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.0"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ui_1_1XUIElementFactory.html",
+    "items": {
+      "methods": [
+        {
+          "name": "createUIElement",
+          "returns": "XUIElement_820509a6",
+          "returns_origin": "com.sun.star.ui.XUIElement",
+          "desc": [
+            "creates a new instances of a specific user interface element.",
+            "",
+            "An implementation is responsible to initialize every newly created user interface element if the necessary properties are provided. Especially it must connect a configurable user interface element to the correct user interface configuration manager. Without this connection the configurable user interface element cannot retrieve its structure data and changes to the user interface element structure won't be persistent. It is up to the implementation to throw an com.sun.star.lang.IllegalArgumentException if it cannot create a user interface element with the provided arguments."
+          ],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException",
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "ResourceURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Args",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

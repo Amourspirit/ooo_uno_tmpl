@@ -1,0 +1,510 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XSlideShowController",
+  "type": "interface",
+  "namespace": "com.sun.star.presentation",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        "..drawing.x_draw_page",
+        "XDrawPage",
+        "XDrawPage_b07a0b57"
+      ],
+      [
+        ".x_slide_show",
+        "XSlideShow",
+        "XSlideShow_2a80e0e"
+      ],
+      [
+        ".x_slide_show_listener",
+        "XSlideShowListener",
+        "XSlideShowListener_81671154"
+      ]
+    ],
+    "extends_map": {},
+    "quote": [
+      "XDrawPage_b07a0b57",
+      "XSlideShowListener_81671154",
+      "XSlideShow_2a80e0e"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.drawing.XDrawPage",
+        "com.sun.star.presentation.XSlideShow",
+        "com.sun.star.presentation.XSlideShowListener"
+      ]
+    },
+    "name": "XSlideShowController",
+    "imports": [],
+    "namespace": "com.sun.star.presentation",
+    "extends": [],
+    "desc": [
+      "interface to control a running slide show.",
+      "",
+      "**since**",
+      "",
+      "    OOo 3.0"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1presentation_1_1XSlideShowController.html",
+    "items": {
+      "methods": [
+        {
+          "name": "activate",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "activates the user interface of this slide show."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "addSlideShowListener",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "adds a listener that receives events while the slide show is running."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Listener",
+              "type": "XSlideShowListener_81671154",
+              "direction": "in",
+              "origin": "com.sun.star.presentation.XSlideShowListener"
+            }
+          ]
+        },
+        {
+          "name": "blankScreen",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "pauses the slide show and blanks the screen in the given color.",
+            "",
+            "Change attribute Pause to false to unpause the slide show."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Color",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "deactivate",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "can be called to deactivate the user interface of this slide show.",
+            "",
+            "A deactivated"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getCurrentSlide",
+          "returns": "XDrawPage_b07a0b57",
+          "returns_origin": "com.sun.star.drawing.XDrawPage",
+          "desc": [
+            "returns slide that is currently displayed"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getCurrentSlideIndex",
+          "returns": "int",
+          "returns_origin": "long",
+          "desc": [
+            "returns the index of the current slide."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getNextSlideIndex",
+          "returns": "int",
+          "returns_origin": "long",
+          "desc": [
+            "the index for the slide that is displayed next."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getSlideByIndex",
+          "returns": "XDrawPage_b07a0b57",
+          "returns_origin": "com.sun.star.drawing.XDrawPage",
+          "desc": [
+            "gives access to the slides that will be shown in this slide show.",
+            "",
+            "Slides are returned in the order they will be displayed in the presentation which can be different than the orders of slides in the document. Not all slides must be present and each slide can be used more than once."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            {
+              "name": "Index",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "getSlideCount",
+          "returns": "int",
+          "returns_origin": "long",
+          "desc": [],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getSlideShow",
+          "returns": "XSlideShow_2a80e0e",
+          "returns_origin": "com.sun.star.presentation.XSlideShow",
+          "desc": [
+            "returns the actual XSlideShow instance that runs the slide show.",
+            "",
+            "Normally all navigation should be done using this controller and not the XSlideShow itself."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "gotoBookmark",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "goto the given textual bookmark"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Bookmark",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "gotoFirstSlide",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "goto and display first slide"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "gotoLastSlide",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "goto and display last slide.",
+            "",
+            "Remaining effects on the current slide will be skipped."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "gotoNextEffect",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "start next effects that wait on a generic trigger.",
+            "",
+            "If no generic triggers are waiting the next slide will be displayed."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "gotoNextSlide",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "goto and display next slide.",
+            "",
+            "Remaining effects on the current slide will be skipped."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "gotoPreviousEffect",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "undo the last effects that were triggered by a generic trigger.",
+            "",
+            "If there is no previous effect that can be undone then the previous slide will be displayed."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "gotoPreviousSlide",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "goto and display previous slide.",
+            "",
+            "Remaining effects on the current slide will be skipped."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "gotoSlide",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "jumps to the given slide.",
+            "",
+            "The slide can also be a slide that would normally not be shown during the current slide show."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "Page",
+              "type": "XDrawPage_b07a0b57",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.XDrawPage"
+            }
+          ]
+        },
+        {
+          "name": "gotoSlideIndex",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "jumps to the slide at the given index."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Index",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "isActive",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "determines if the slide show is active."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "isEndless",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "returns TRUE if the slide show was started to run endlessly."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "isFullScreen",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "Returns TRUE if the slide show was started in full-screen mode."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "isPaused",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "returns TRUE if the slide show is currently paused."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "isRunning",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "returns true if the slide show is still running.",
+            "",
+            "If this returns false, this component is already disposed. You can start a new slide show and get a new instance of XSlideShowController from XPresentation2"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "pause",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "pauses the slide show.",
+            "",
+            "All effects are paused.",
+            "",
+            "The slide show continues on next user input or if resume() is called."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "removeSlideShowListener",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "removes a listener."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Listener",
+              "type": "XSlideShowListener_81671154",
+              "direction": "in",
+              "origin": "com.sun.star.presentation.XSlideShowListener"
+            }
+          ]
+        },
+        {
+          "name": "resume",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "resumes a paused slide show."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setEraseAllInk",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "This method clears ink drawing from the slideshow being played.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 7.2"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "EraseAllInk",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
+          ]
+        },
+        {
+          "name": "stopSound",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "stop all currently played sounds"
+          ],
+          "raises": [],
+          "args": []
+        }
+      ],
+      "properties": [
+        {
+          "name": "AlwaysOnTop",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "If this attribute is set to TRUE, the window of the slide show is always on top of all other windows."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "MouseVisible",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "If this attribute is TRUE, the mouse is visible during the slide show."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "PenColor",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "This attribute changes the color of the pen."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "PenWidth",
+          "returns": "float",
+          "origtype": null,
+          "origin": "double",
+          "desc": [
+            "This attribute changes the width of the pen.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 4.2"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "UsePen",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "If this is TRUE, a pen is shown during presentation.",
+            "",
+            "You can draw on the presentation with this pen."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

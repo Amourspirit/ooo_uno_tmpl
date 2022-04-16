@@ -1,0 +1,190 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XGalleryTheme",
+  "type": "interface",
+  "namespace": "com.sun.star.gallery",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..container.x_index_access",
+        "XIndexAccess",
+        "XIndexAccess_f0910d6d"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..graphic.x_graphic",
+        "XGraphic",
+        "XGraphic_a4da0afc"
+      ],
+      [
+        "..lang.x_component",
+        "XComponent",
+        "XComponent_98dc0ab5"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.container.XIndexAccess": "XIndexAccess_f0910d6d"
+    },
+    "quote": [
+      "XComponent_98dc0ab5",
+      "XGraphic_a4da0afc"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.container.XIndexAccess"
+      ],
+      "typing": [
+        "com.sun.star.graphic.XGraphic",
+        "com.sun.star.lang.XComponent"
+      ]
+    },
+    "name": "XGalleryTheme",
+    "imports": [],
+    "namespace": "com.sun.star.gallery",
+    "extends": [
+      "com.sun.star.container.XIndexAccess"
+    ],
+    "desc": [
+      "provides access to the items of a Gallery themes.",
+      "",
+      "It also allows inserting and removing of single items.",
+      "",
+      "This interface extends the interface com.sun.star.container.XIndexAccess which provides access to existing Gallery items collection."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1gallery_1_1XGalleryTheme.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getName",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "retrieves the name of the Gallery theme"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "insertDrawingByIndex",
+          "returns": "int",
+          "returns_origin": "long",
+          "desc": [
+            "inserts an item"
+          ],
+          "raises": [
+            "com.sun.star.lang.WrappedTargetException"
+          ],
+          "args": [
+            {
+              "name": "Drawing",
+              "type": "XComponent_98dc0ab5",
+              "direction": "in",
+              "origin": "com.sun.star.lang.XComponent"
+            },
+            {
+              "name": "Index",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "insertGraphicByIndex",
+          "returns": "int",
+          "returns_origin": "long",
+          "desc": [
+            "inserts an item"
+          ],
+          "raises": [
+            "com.sun.star.lang.WrappedTargetException"
+          ],
+          "args": [
+            {
+              "name": "Graphic",
+              "type": "XGraphic_a4da0afc",
+              "direction": "in",
+              "origin": "com.sun.star.graphic.XGraphic"
+            },
+            {
+              "name": "Index",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "insertURLByIndex",
+          "returns": "int",
+          "returns_origin": "long",
+          "desc": [
+            "inserts an item"
+          ],
+          "raises": [
+            "com.sun.star.lang.WrappedTargetException"
+          ],
+          "args": [
+            {
+              "name": "URL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Index",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "removeByIndex",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "deletes an item from the collection"
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            {
+              "name": "Index",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "update",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "updates the theme",
+            "",
+            "This method iterates over each item of the Gallery theme and updates it accordingly. Main purpose is to automatically regenerate the thumbnails and to remove invalid items, that is items who have got a URL that has become invalid. This method also optimizes underlying data structures."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

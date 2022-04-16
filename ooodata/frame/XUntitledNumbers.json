@@ -1,0 +1,130 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XUntitledNumbers",
+  "type": "interface",
+  "namespace": "com.sun.star.frame",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XInterface_8f010a43"
+    ],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": []
+    },
+    "name": "XUntitledNumbers",
+    "imports": [],
+    "namespace": "com.sun.star.frame",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "knows all currently used and all free numbers for using with untitled but counted objects."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XUntitledNumbers.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getUntitledPrefix",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "returns the localized string value to be used for untitled objects in combination with the leased number.",
+            "",
+            "Note: Such string already contains leading spaces/tabs etc. ! The only thing which an outside code has todo then ... adding a leased number to the string."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "leaseNumber",
+          "returns": "int",
+          "returns_origin": "long",
+          "desc": [
+            "callee has to lease a number before he can use it within in its own title.",
+            "",
+            "Such number must be freed after using e.g. while the object was closed or gets another title (e.g. by saving a document to a real location on disc)."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "xComponent",
+              "type": "XInterface_8f010a43",
+              "direction": "in",
+              "origin": "com.sun.star.uno.XInterface"
+            }
+          ]
+        },
+        {
+          "name": "releaseNumber",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "has to be used to mark those numbers as \\\"free for using\\\".",
+            "",
+            "If the registered component does not use such leased number any longer it has to be released so it can be used for new components.",
+            "",
+            "Note: calling this method with an unknown (but normally valid number) has to be ignored. No exceptions - no errors."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "nNumber",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "releaseNumberForComponent",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "does the same then releaseNumber () but it searches the corresponding number for the specified component and deregister it."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "xComponent",
+              "type": "XInterface_8f010a43",
+              "direction": "in",
+              "origin": "com.sun.star.uno.XInterface"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

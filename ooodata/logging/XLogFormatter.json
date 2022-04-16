@@ -1,0 +1,100 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XLogFormatter",
+  "type": "interface",
+  "namespace": "com.sun.star.logging",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        ".log_record",
+        "LogRecord",
+        "LogRecord_b0c20b70"
+      ]
+    ],
+    "extends_map": {},
+    "quote": [
+      "LogRecord_b0c20b70"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.logging.LogRecord"
+      ]
+    },
+    "name": "XLogFormatter",
+    "imports": [],
+    "namespace": "com.sun.star.logging",
+    "extends": [],
+    "desc": [
+      "specifies the interface to be used for formatting log records",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.3"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1logging_1_1XLogFormatter.html",
+    "items": {
+      "methods": [
+        {
+          "name": "format",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "formats the given log record for output",
+            "",
+            "A XLogHandler will call this method to format a given log record. The resulting string will be emitted to the handler's output channel, without processing it any further (except possibly encoding it with the handler's Encoding)."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Record",
+              "type": "LogRecord_b0c20b70",
+              "direction": "in",
+              "origin": "com.sun.star.logging.LogRecord"
+            }
+          ]
+        },
+        {
+          "name": "getHead",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "returns the header string for the log",
+            "",
+            "This can be used to generate a header string, which by the XLogHandler is emitted to its output channel before actually logging any concrete LogRecord.",
+            "",
+            "For instance, a formatter might produce table-like plain text output, and could return a table-head string (potentially including line breaks) here."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getTail",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "returns the footer string for the log",
+            "",
+            "This can be used to generate a footer string, which by the XLogHandler is emitted to its output channel before it is finally being closed."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

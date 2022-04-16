@@ -1,0 +1,125 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XDataSource",
+  "type": "interface",
+  "namespace": "com.sun.star.sdbc",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_connection",
+        "XConnection",
+        "XConnection_a36a0b0c"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XConnection_a36a0b0c"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.sdbc.XConnection"
+      ]
+    },
+    "name": "XDataSource",
+    "imports": [],
+    "namespace": "com.sun.star.sdbc",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "is used for establishing connections via a factory which is identified by its name.",
+      "",
+      "A DataSource object is typically registered by a naming service provider."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sdbc_1_1XDataSource.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getConnection",
+          "returns": "XConnection_a36a0b0c",
+          "returns_origin": "com.sun.star.sdbc.XConnection",
+          "desc": [
+            "attempts to establish a database connection."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            {
+              "name": "user",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "password",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "getLoginTimeout",
+          "returns": "int",
+          "returns_origin": "long",
+          "desc": [
+            "gets the maximum time in seconds that this data source can wait while attempting to connect to a database.",
+            "",
+            "A value of zero means that the timeout is the default system timeout if there is one; otherwise, it means that there is no timeout. When a DataSource object is created the login timeout is initially zero."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": []
+        },
+        {
+          "name": "setLoginTimeout",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "sets the maximum time in seconds that this data source will wait while attempting to connect to a database.",
+            "",
+            "A value of zero specifies that the timeout is the default system timeout if there is one; otherwise, it specifies that there is no timeout. When a DataSource object is created the login timeout is initially zero."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            {
+              "name": "seconds",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

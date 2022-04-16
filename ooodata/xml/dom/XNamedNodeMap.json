@@ -1,0 +1,218 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XNamedNodeMap",
+  "type": "interface",
+  "namespace": "com.sun.star.xml.dom",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "...uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_node",
+        "XNode",
+        "XNode_83fb09a5"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XNode_83fb09a5"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.xml.dom.XNode"
+      ]
+    },
+    "name": "XNamedNodeMap",
+    "imports": [],
+    "namespace": "com.sun.star.xml.dom",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1xml_1_1dom_1_1XNamedNodeMap.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getLength",
+          "returns": "int",
+          "returns_origin": "long",
+          "desc": [
+            "The number of nodes in this map."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getNamedItem",
+          "returns": "XNode_83fb09a5",
+          "returns_origin": "com.sun.star.xml.dom.XNode",
+          "desc": [
+            "Retrieves a node specified by local name."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "getNamedItemNS",
+          "returns": "XNode_83fb09a5",
+          "returns_origin": "com.sun.star.xml.dom.XNode",
+          "desc": [
+            "Retrieves a node specified by local name and namespace URI."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "namespaceURI",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "localName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "item",
+          "returns": "XNode_83fb09a5",
+          "returns_origin": "com.sun.star.xml.dom.XNode",
+          "desc": [
+            "Returns a node specified by index."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "index",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "removeNamedItem",
+          "returns": "XNode_83fb09a5",
+          "returns_origin": "com.sun.star.xml.dom.XNode",
+          "desc": [
+            "Removes a node specified by name.",
+            "",
+            "Throws: DOMException - NOT_FOUND_ERR: Raised if there is no node named name in this map. NO_MODIFICATION_ALLOWED_ERR: Raised if this map is readonly."
+          ],
+          "raises": [
+            "DOMException"
+          ],
+          "args": [
+            {
+              "name": "name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "removeNamedItemNS",
+          "returns": "XNode_83fb09a5",
+          "returns_origin": "com.sun.star.xml.dom.XNode",
+          "desc": [
+            "Removes a node specified by local name and namespace URI.",
+            "",
+            "Throws: DOMException - NOT_FOUND_ERR: Raised if there is no node with the specified namespaceURI and localName in this map. NO_MODIFICATION_ALLOWED_ERR: Raised if this map is readonly."
+          ],
+          "raises": [
+            "DOMException"
+          ],
+          "args": [
+            {
+              "name": "namespaceURI",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "localName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "setNamedItem",
+          "returns": "XNode_83fb09a5",
+          "returns_origin": "com.sun.star.xml.dom.XNode",
+          "desc": [
+            "Adds a node using its nodeName attribute.",
+            "",
+            "Throws: DOMException - WRONG_DOCUMENT_ERR: Raised if arg was created from a different document than the one that created this map. NO_MODIFICATION_ALLOWED_ERR: Raised if this map is readonly. INUSE_ATTRIBUTE_ERR: Raised if arg is an Attr that is already an attribute of another Element object. The DOM user must explicitly clone Attr nodes to re-use them in other elements. HIERARCHY_REQUEST_ERR: Raised if an attempt is made to add a node doesn't belong in this NamedNodeMap. Examples would include trying to insert something other than an Attr node into an Element's map of attributes, or a non-Entity node into the DocumentType's map of Entities."
+          ],
+          "raises": [
+            "DOMException"
+          ],
+          "args": [
+            {
+              "name": "arg",
+              "type": "XNode_83fb09a5",
+              "direction": "in",
+              "origin": "com.sun.star.xml.dom.XNode"
+            }
+          ]
+        },
+        {
+          "name": "setNamedItemNS",
+          "returns": "XNode_83fb09a5",
+          "returns_origin": "com.sun.star.xml.dom.XNode",
+          "desc": [
+            "Adds a node using its namespaceURI and localName.",
+            "",
+            "Throws: DOMException - WRONG_DOCUMENT_ERR: Raised if arg was created from a different document than the one that created this map. NO_MODIFICATION_ALLOWED_ERR: Raised if this map is readonly. INUSE_ATTRIBUTE_ERR: Raised if arg is an Attr that is already an attribute of another Element object. The DOM user must explicitly clone Attr nodes to re-use them in other elements. HIERARCHY_REQUEST_ERR: Raised if an attempt is made to add a node doesn't belong in this NamedNodeMap. Examples would include trying to insert something other than an Attr node into an Element's map of attributes, or a non-Entity node into the DocumentType's map of Entities. NOT_SUPPORTED_ERR: Always thrown if the current document does not support the \\\"XML\\\" feature, since namespaces were defined by XML."
+          ],
+          "raises": [
+            "DOMException"
+          ],
+          "args": [
+            {
+              "name": "arg",
+              "type": "XNode_83fb09a5",
+              "direction": "in",
+              "origin": "com.sun.star.xml.dom.XNode"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

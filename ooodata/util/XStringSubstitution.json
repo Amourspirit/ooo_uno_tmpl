@@ -1,0 +1,126 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XStringSubstitution",
+  "type": "interface",
+  "namespace": "com.sun.star.util",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": []
+    },
+    "name": "XStringSubstitution",
+    "imports": [],
+    "namespace": "com.sun.star.util",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "A common interface for substituting string variables with other strings.",
+      "",
+      "The substitution algorithm and the syntax for a string variable are not part of this interface definition. Please look at the documentation of the implementation that must specify these parameters.",
+      "",
+      "**since**",
+      "",
+      "    OOo 1.1.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1util_1_1XStringSubstitution.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getSubstituteVariableValue",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "Returns the current value of a variable.",
+            "",
+            "The method iterates through its internal variable list and tries to find the given variable. If the variable is unknown a com.sun.star.container.NoSuchElementException is thrown."
+          ],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException"
+          ],
+          "args": [
+            {
+              "name": "variable",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "reSubstituteVariables",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "Tries to replace parts of aText with variables that represents these sub strings.",
+            "",
+            "The method iterates through its internal variable list and tries to match parts of the given string Tries to replace parts of aText with variables that represents these sub strings.If more than one variable matches the one with the longest matching sub string will be chosen."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aText",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "substituteVariables",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "Exchanges variables inside a given text with a substitution text defined for the variables.",
+            "",
+            "The method iterates through its internal variables list to match the variables in the given string. A match replaces the variable with the string defined for this variable. If no variable can be found in the string it will be returned unchanged. The behavior if a variable is found in the string but it is unknown for the implementation depends on the parameter bSubstRequired."
+          ],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException"
+          ],
+          "args": [
+            {
+              "name": "aText",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "bSubstRequired",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

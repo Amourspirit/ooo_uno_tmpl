@@ -1,0 +1,109 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XTransferDataAccess",
+  "type": "interface",
+  "namespace": "com.sun.star.datatransfer",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".data_flavor",
+        "DataFlavor",
+        "DataFlavor_ffd30deb"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "typing.Tuple[DataFlavor_ffd30deb, ...]",
+      "typing.Tuple[object, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[DataFlavor_ffd30deb, ...]",
+      "typing.Tuple[object, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.datatransfer.DataFlavor"
+      ]
+    },
+    "name": "XTransferDataAccess",
+    "imports": [],
+    "namespace": "com.sun.star.datatransfer",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "This interface provides direct access to the data in all data flavors.",
+      "",
+      "It can be used by the clipboard implementation to optimize data transport on flush operations."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1datatransfer_1_1XTransferDataAccess.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getData",
+          "returns": "typing.Tuple[object, ...]",
+          "returns_origin": "sequence< any >",
+          "desc": [
+            "To get all the data of a sequence of DataFlavor.",
+            "",
+            "An unsupported DataFlavor will be ignored.",
+            "",
+            "For unsupported DataFlavor an empty any will be returned."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aFlavorList",
+              "type": "typing.Tuple[DataFlavor_ffd30deb, ...]",
+              "direction": "in",
+              "origin": "sequence< DataFlavor >"
+            }
+          ]
+        },
+        {
+          "name": "queryDataSize",
+          "returns": "int",
+          "returns_origin": "hyper",
+          "desc": [
+            "To query for the summarized data size in bytes of a sequence of DataFlavor.",
+            "",
+            "An unsupported DataFlavor will be ignored."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aFlavorList",
+              "type": "typing.Tuple[DataFlavor_ffd30deb, ...]",
+              "direction": "in",
+              "origin": "sequence< DataFlavor >"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

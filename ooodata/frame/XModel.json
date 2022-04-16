@@ -1,0 +1,241 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XModel",
+  "type": "interface",
+  "namespace": "com.sun.star.frame",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..lang.x_component",
+        "XComponent",
+        "XComponent_98dc0ab5"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
+      ],
+      [
+        ".x_controller",
+        "XController",
+        "XController_b00e0b8f"
+      ],
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.lang.XComponent": "XComponent_98dc0ab5"
+    },
+    "quote": [
+      "XController_b00e0b8f",
+      "XInterface_8f010a43",
+      "typing.Tuple[PropertyValue_c9610c73, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[PropertyValue_c9610c73, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.lang.XComponent"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.frame.XController",
+        "com.sun.star.uno.XInterface"
+      ]
+    },
+    "name": "XModel",
+    "imports": [],
+    "namespace": "com.sun.star.frame",
+    "extends": [
+      "com.sun.star.lang.XComponent"
+    ],
+    "desc": [
+      "represents a component which is created from a URL and arguments.",
+      "",
+      "It is a representation of a resource in the sense that it was created/loaded from the resource. The arguments are passed to the loader to modify its behavior. An example for such an argument is \\\"AsTemplate\\\", which loads the resource as a template for a new document. (see com.sun.star.document.MediaDescriptor for further details)",
+      "",
+      "Models can be controlled by controller components, which are usually views of the model. (see Controller for further details)",
+      "",
+      "If there is at least one controller, there is by definition a current controller. And if that controller supports the interface com.sun.star.view.XSelectionSupplier, it has a current selection too."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XModel.html",
+    "items": {
+      "methods": [
+        {
+          "name": "attachResource",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "informs a model about its resource description."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "URL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Arguments",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            }
+          ]
+        },
+        {
+          "name": "connectController",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "is called whenever a new controller is created for this model.",
+            "",
+            "The com.sun.star.lang.XComponent interface of the controller must be used to recognize when it is deleted."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Controller",
+              "type": "XController_b00e0b8f",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XController"
+            }
+          ]
+        },
+        {
+          "name": "disconnectController",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "is called whenever an existing controller should be deregistered at this model.",
+            "",
+            "The com.sun.star.lang.XComponent interface of the controller must be used to recognize when it is deleted."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Controller",
+              "type": "XController_b00e0b8f",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XController"
+            }
+          ]
+        },
+        {
+          "name": "getArgs",
+          "returns": "typing.Tuple[PropertyValue_c9610c73, ...]",
+          "returns_origin": "sequence< com.sun.star.beans.PropertyValue >",
+          "desc": [
+            "provides read access on currently representation of the com.sun.star.document.MediaDescriptor of this model which describes the model and its state"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getCurrentController",
+          "returns": "XController_b00e0b8f",
+          "returns_origin": "com.sun.star.frame.XController",
+          "desc": [
+            "provides access to the controller which currently controls this model"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getCurrentSelection",
+          "returns": "XInterface_8f010a43",
+          "returns_origin": "com.sun.star.uno.XInterface",
+          "desc": [
+            "provides read access on current selection on controller"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getURL",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "provides information about the location of this model"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "hasControllersLocked",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "determines if there is at least one lock remaining.",
+            "",
+            "While there is at least one lock remaining, some notifications for display updates are not broadcasted to the controllers."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "lockControllers",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "suspends some notifications to the controllers which are used for display updates.",
+            "",
+            "The calls to XModel.lockControllers() and XModel.unlockControllers() may be nested and even overlapping, but they must be in pairs. While there is at least one lock remaining, some notifications for display updates are not broadcasted."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setCurrentController",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "sets a registered controller as the current controller."
+          ],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException"
+          ],
+          "args": [
+            {
+              "name": "Controller",
+              "type": "XController_b00e0b8f",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XController"
+            }
+          ]
+        },
+        {
+          "name": "unlockControllers",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "resumes the notifications which were suspended by XModel.lockControllers().",
+            "",
+            "The calls to XModel.lockControllers() and XModel.unlockControllers() may be nested and even overlapping, but they must be in pairs. While there is at least one lock remaining, some notifications for display updates are not broadcasted."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

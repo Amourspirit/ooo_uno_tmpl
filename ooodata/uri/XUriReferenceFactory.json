@@ -1,0 +1,169 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XUriReferenceFactory",
+  "type": "interface",
+  "namespace": "com.sun.star.uri",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".relative_uri_excess_parent_segments",
+        "RelativeUriExcessParentSegments",
+        "RelativeUriExcessParentSegments_c50412df"
+      ],
+      [
+        ".x_uri_reference",
+        "XUriReference",
+        "XUriReference_afc30b6f"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "RelativeUriExcessParentSegments_c50412df",
+      "XUriReference_afc30b6f"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.uri.RelativeUriExcessParentSegments",
+        "com.sun.star.uri.XUriReference"
+      ]
+    },
+    "name": "XUriReferenceFactory",
+    "imports": [],
+    "namespace": "com.sun.star.uri",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "creates URI references.",
+      "",
+      "See RFC\u00a03986 for a description of URI references and related terms.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.0"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1uri_1_1XUriReferenceFactory.html",
+    "items": {
+      "methods": [
+        {
+          "name": "makeAbsolute",
+          "returns": "XUriReference_afc30b6f",
+          "returns_origin": "com.sun.star.uri.XUriReference",
+          "desc": [
+            "resolves a relative URI reference to absolute form."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "baseUriReference",
+              "type": "XUriReference_afc30b6f",
+              "direction": "in",
+              "origin": "com.sun.star.uri.XUriReference"
+            },
+            {
+              "name": "uriReference",
+              "type": "XUriReference_afc30b6f",
+              "direction": "in",
+              "origin": "com.sun.star.uri.XUriReference"
+            },
+            {
+              "name": "processAdditionalSpecialSegments",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            },
+            {
+              "name": "excessParentSegments",
+              "type": "RelativeUriExcessParentSegments_c50412df",
+              "direction": "in",
+              "origin": "com.sun.star.uri.RelativeUriExcessParentSegments"
+            }
+          ]
+        },
+        {
+          "name": "makeRelative",
+          "returns": "XUriReference_afc30b6f",
+          "returns_origin": "com.sun.star.uri.XUriReference",
+          "desc": [
+            "changes an absolute URI reference to relative form."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "baseUriReference",
+              "type": "XUriReference_afc30b6f",
+              "direction": "in",
+              "origin": "com.sun.star.uri.XUriReference"
+            },
+            {
+              "name": "uriReference",
+              "type": "XUriReference_afc30b6f",
+              "direction": "in",
+              "origin": "com.sun.star.uri.XUriReference"
+            },
+            {
+              "name": "preferAuthorityOverRelativePath",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            },
+            {
+              "name": "preferAbsoluteOverRelativePath",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            },
+            {
+              "name": "encodeRetainedSpecialSegments",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
+          ]
+        },
+        {
+          "name": "parse",
+          "returns": "XUriReference_afc30b6f",
+          "returns_origin": "com.sun.star.uri.XUriReference",
+          "desc": [
+            "parses the textual representation of a URI reference."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "uriReference",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

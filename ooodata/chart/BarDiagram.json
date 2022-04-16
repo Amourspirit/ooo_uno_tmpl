@@ -1,0 +1,172 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "BarDiagram",
+  "type": "service",
+  "namespace": "com.sun.star.chart",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".chart_axis_x_supplier",
+        "ChartAxisXSupplier",
+        "ChartAxisXSupplier_a950e4d"
+      ],
+      [
+        ".chart_axis_z_supplier",
+        "ChartAxisZSupplier",
+        "ChartAxisZSupplier_aa70e4f"
+      ],
+      [
+        ".chart_statistics",
+        "ChartStatistics",
+        "ChartStatistics_e2190d37"
+      ],
+      [
+        ".chart_two_axis_y_supplier",
+        "ChartTwoAxisYSupplier",
+        "ChartTwoAxisYSupplier_380d0f88"
+      ],
+      [
+        ".diagram",
+        "Diagram",
+        "Diagram_844409cf"
+      ],
+      [
+        ".dim3_d_diagram",
+        "Dim3DDiagram",
+        "Dim3DDiagram_b7a60b60"
+      ],
+      [
+        ".stackable_diagram",
+        "StackableDiagram",
+        "StackableDiagram_ee760d59"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.chart.ChartAxisXSupplier": "ChartAxisXSupplier_a950e4d",
+      "com.sun.star.chart.ChartAxisZSupplier": "ChartAxisZSupplier_aa70e4f",
+      "com.sun.star.chart.ChartStatistics": "ChartStatistics_e2190d37",
+      "com.sun.star.chart.ChartTwoAxisYSupplier": "ChartTwoAxisYSupplier_380d0f88",
+      "com.sun.star.chart.Diagram": "Diagram_844409cf",
+      "com.sun.star.chart.Dim3DDiagram": "Dim3DDiagram_b7a60b60",
+      "com.sun.star.chart.StackableDiagram": "StackableDiagram_ee760d59"
+    },
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.chart.ChartAxisXSupplier",
+        "com.sun.star.chart.ChartAxisZSupplier",
+        "com.sun.star.chart.ChartStatistics",
+        "com.sun.star.chart.ChartTwoAxisYSupplier",
+        "com.sun.star.chart.Diagram",
+        "com.sun.star.chart.Dim3DDiagram",
+        "com.sun.star.chart.StackableDiagram"
+      ],
+      "typing": []
+    },
+    "name": "BarDiagram",
+    "imports": [],
+    "namespace": "com.sun.star.chart",
+    "extends": [
+      "com.sun.star.chart.Diagram",
+      "com.sun.star.chart.ChartStatistics",
+      "com.sun.star.chart.ChartAxisXSupplier",
+      "com.sun.star.chart.ChartTwoAxisYSupplier",
+      "com.sun.star.chart.ChartAxisZSupplier",
+      "com.sun.star.chart.Dim3DDiagram",
+      "com.sun.star.chart.StackableDiagram"
+    ],
+    "desc": [
+      "This is a service for bar and column diagrams."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1chart_1_1BarDiagram.html",
+    "items": {
+      "properties": [
+        {
+          "name": "Deep",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "If TRUE, determines that in a three-dimensional bar chart the bars of each series are arranged behind each other in the z-direction.",
+            "",
+            "If FALSE the arrangement of bars is like in two-dimensional bar charts."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "GroupBarsPerAxis",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "If bars of a bar or column chart are attached to different axis, this property determines how to display those.",
+            "",
+            "If TRUE, the bars are grouped together in one block for each axis, thus they are painted one group over the other.",
+            "",
+            "If FALSE, the bars are displayed side-by-side, as if they were all attached to the same axis.",
+            "",
+            "If all data series of a bar or column chart are attached to only one axis, this property has no effect."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "NumberOfLines",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "Determines how many data rows are displayed as lines rather than bars.",
+            "",
+            "If this property differs from zero the last BarDiagram.NumberOfLines data rows are shown as lines. It is currently supported by two dimensional vertical bar charts only."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "StackedBarsConnected",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "determines if, in a stacked chart, there are connecting lines between corresponding bars.",
+            "",
+            "Currently, bar charts with horizontal bars do not support this property."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Vertical",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "Determines if the bars of a chart are drawn vertically or horizontally.",
+            "",
+            "Default is vertical.",
+            "",
+            "If Vertical is FALSE you get a column chart rather than a bar chart."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

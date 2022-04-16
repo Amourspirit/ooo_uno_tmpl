@@ -1,0 +1,174 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XCoordinateSystem",
+  "type": "interface",
+  "namespace": "com.sun.star.chart2",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_axis",
+        "XAxis",
+        "XAxis_796b0939"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XAxis_796b0939"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.chart2.XAxis"
+      ]
+    },
+    "name": "XCoordinateSystem",
+    "imports": [],
+    "namespace": "com.sun.star.chart2",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1chart2_1_1XCoordinateSystem.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getAxisByDimension",
+          "returns": "XAxis_796b0939",
+          "returns_origin": "com.sun.star.chart2.XAxis",
+          "desc": [
+            "The dimension says whether it is a x, y or z axis.",
+            "",
+            "The index indicates whether it is a primary or a secondary axis or maybe more in future. Use nIndex == 0 for a primary axis. An empty Reference will be returned if the given nDimension and nIndex are in the valid range but no axis is set for those values. An IndexOutOfBoundsException will be thrown if nDimension is lower than 0 or greater than the value returned by getDimension() and/or if nIndex is lower 0 or greater than the value returned by getMaxAxisIndexByDimension(nDimension)."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            {
+              "name": "nDimension",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "getCoordinateSystemType",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "identifies the type of coordinate system (e.g.",
+            "",
+            "Cartesian, polar ...)"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getDimension",
+          "returns": "int",
+          "returns_origin": "long",
+          "desc": [
+            "the dimension of the coordinate-system."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getMaximumAxisIndexByDimension",
+          "returns": "int",
+          "returns_origin": "long",
+          "desc": [
+            "In one dimension there could be several axes to enable main and secondary axis and maybe more in future.",
+            "",
+            "This method returns the maximum index at which an axis exists for the given dimension. It is allowed that some indexes in between do not have an axis."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            {
+              "name": "nDimension",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "getViewServiceName",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "return a service name from which the view component for this coordinate system can be created"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setAxisByDimension",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "The dimension says whether it is a x, y or z axis.",
+            "",
+            "The index says whether it is a primary or a secondary axis. Use nIndex == 0 for a primary axis."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            {
+              "name": "nDimension",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "xAxis",
+              "type": "XAxis_796b0939",
+              "direction": "in",
+              "origin": "com.sun.star.chart2.XAxis"
+            },
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

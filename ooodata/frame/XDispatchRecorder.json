@@ -1,0 +1,174 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XDispatchRecorder",
+  "type": "interface",
+  "namespace": "com.sun.star.frame",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
+      ],
+      [
+        ".x_frame",
+        "XFrame",
+        "XFrame_7a570956"
+      ],
+      [
+        "..util.url",
+        "URL",
+        "URL_57ad07b9"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "URL_57ad07b9",
+      "XFrame_7a570956",
+      "typing.Tuple[PropertyValue_c9610c73, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[PropertyValue_c9610c73, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.frame.XFrame",
+        "com.sun.star.util.URL"
+      ]
+    },
+    "name": "XDispatchRecorder",
+    "imports": [],
+    "namespace": "com.sun.star.frame",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "provides recording functionality of dispatches",
+      "",
+      "With such recorder it will be possible to record requests of type XDispatch by using additional interface XRecordableDispatch. The result of that will be a a script which can be used to start the dispatch at later time again. Such recorder objects are available on a XDispatchRecorderSupplier which is provided by the Frame service.",
+      "",
+      "**since**",
+      "",
+      "    OOo 1.1.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XDispatchRecorder.html",
+    "items": {
+      "methods": [
+        {
+          "name": "endRecording",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "stops the recording process",
+            "",
+            "Must be called in pairs with XDispatchRecorder.startRecording()."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getRecordedMacro",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "returns the recorded source code",
+            "",
+            "This method must be used before endRecording() is called! Otherwise the macro will be released."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "recordDispatch",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "records a single dispatch call identified by its command URL"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "URL",
+              "type": "URL_57ad07b9",
+              "direction": "in",
+              "origin": "com.sun.star.util.URL"
+            },
+            {
+              "name": "Arguments",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            }
+          ]
+        },
+        {
+          "name": "recordDispatchAsComment",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "records a single dispatch call identified by its command URL, but comments it out",
+            "",
+            "This way calls that failed on execution can be documented."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "URL",
+              "type": "URL_57ad07b9",
+              "direction": "in",
+              "origin": "com.sun.star.util.URL"
+            },
+            {
+              "name": "Arguments",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            }
+          ]
+        },
+        {
+          "name": "startRecording",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "initializes the recorder by passing the frame for which all macro statements shall be recorded"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Frame",
+              "type": "XFrame_7a570956",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XFrame"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

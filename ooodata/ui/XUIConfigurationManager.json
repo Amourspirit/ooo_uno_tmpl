@@ -1,0 +1,296 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XUIConfigurationManager",
+  "type": "interface",
+  "namespace": "com.sun.star.ui",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
+      ],
+      [
+        "..container.x_index_access",
+        "XIndexAccess",
+        "XIndexAccess_f0910d6d"
+      ],
+      [
+        "..container.x_index_container",
+        "XIndexContainer",
+        "XIndexContainer_1c040ebe"
+      ],
+      [
+        ".x_accelerator_configuration",
+        "XAcceleratorConfiguration",
+        "XAcceleratorConfiguration_46580ffb"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XAcceleratorConfiguration_46580ffb",
+      "XIndexAccess_f0910d6d",
+      "XIndexContainer_1c040ebe",
+      "XInterface_8f010a43",
+      "typing.Tuple[typing.Tuple[PropertyValue_c9610c73, ...], ...]"
+    ],
+    "typings": [
+      "typing.Tuple[typing.Tuple[PropertyValue_c9610c73, ...], ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.container.XIndexAccess",
+        "com.sun.star.container.XIndexContainer",
+        "com.sun.star.ui.XAcceleratorConfiguration"
+      ]
+    },
+    "name": "XUIConfigurationManager",
+    "imports": [],
+    "namespace": "com.sun.star.ui",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "specifies a user interface configuration manager interface which controls the structure of all customizable user interface elements.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.0"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ui_1_1XUIConfigurationManager.html",
+    "items": {
+      "methods": [
+        {
+          "name": "createSettings",
+          "returns": "XIndexContainer_1c040ebe",
+          "returns_origin": "com.sun.star.container.XIndexContainer",
+          "desc": [
+            "creates an empty settings data container."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getEventsManager",
+          "returns": "XInterface_8f010a43",
+          "returns_origin": "com.sun.star.uno.XInterface",
+          "desc": [
+            "retrieves the events manager from the user interface configuration manager.",
+            "",
+            "Every user interface configuration manager has one events manager instance which controls the mapping of events to script URLs of a module or document."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getImageManager",
+          "returns": "XInterface_8f010a43",
+          "returns_origin": "com.sun.star.uno.XInterface",
+          "desc": [
+            "retrieves the image manager from the user interface configuration manager.",
+            "",
+            "Every user interface configuration manager has one image manager instance which controls all images of a module or document."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getSettings",
+          "returns": "XIndexAccess_f0910d6d",
+          "returns_origin": "com.sun.star.container.XIndexAccess",
+          "desc": [
+            "retrieves the settings of a user interface element."
+          ],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException",
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "ResourceURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "bWriteable",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
+          ]
+        },
+        {
+          "name": "getShortCutManager",
+          "returns": "XAcceleratorConfiguration_46580ffb",
+          "returns_origin": "com.sun.star.ui.XAcceleratorConfiguration",
+          "desc": [
+            "retrieves the keyboard short cut manager from the user interface configuration manager.",
+            "",
+            "Every user interface configuration manager has one keyboard short cut manager instance which controls all short cuts of a module or document."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getUIElementsInfo",
+          "returns": "typing.Tuple[typing.Tuple[PropertyValue_c9610c73, ...], ...]",
+          "returns_origin": "sequence< sequence< com.sun.star.beans.PropertyValue > >",
+          "desc": [
+            "retrieves information about all user interface elements within the user interface configuration manager.",
+            "",
+            "The following com.sun.star.beans.PropertyValue entries are defined inside the sequence for every user interface element."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "ElementType",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
+          ]
+        },
+        {
+          "name": "hasSettings",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "determines if the settings of a user interface element is part the user interface configuration manager."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "ResourceURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "insertSettings",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "inserts the settings of a new user interface element.",
+            "",
+            "If the settings data is already present a com.sun.star.container.ElementExistException is thrown. If the NewResourceURL is not valid or describes an unknown type a com.sun.star.lang.IllegalArgumentException is thrown. If the configuration manager is read-only a com.sun.star.lang.IllegalAccessException is thrown."
+          ],
+          "raises": [
+            "com.sun.star.container.ElementExistException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.IllegalAccessException"
+          ],
+          "args": [
+            {
+              "name": "NewResourceURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aNewData",
+              "type": "XIndexAccess_f0910d6d",
+              "direction": "in",
+              "origin": "com.sun.star.container.XIndexAccess"
+            }
+          ]
+        },
+        {
+          "name": "removeSettings",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "removes the settings of an existing user interface element.",
+            "",
+            "If the settings data cannot be found a com.sun.star.container.NoSuchElementException is thrown. If the ResourceURL is not valid or describes an unknown type a com.sun.star.lang.IllegalArgumentException is thrown. If the configuration manager is read-only a com.sun.star.lang.IllegalAccessException is thrown."
+          ],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.IllegalAccessException"
+          ],
+          "args": [
+            {
+              "name": "ResourceURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "replaceSettings",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "replaces the settings of a user interface element with new settings.",
+            "",
+            "If the settings data cannot be found a com.sun.star.container.NoSuchElementException is thrown. If the ResourceURL is not valid or describes an unknown type a com.sun.star.lang.IllegalArgumentException is thrown. If the configuration manager is read-only a com.sun.star.lang.IllegalAccessException is thrown."
+          ],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.IllegalAccessException"
+          ],
+          "args": [
+            {
+              "name": "ResourceURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aNewData",
+              "type": "XIndexAccess_f0910d6d",
+              "direction": "in",
+              "origin": "com.sun.star.container.XIndexAccess"
+            }
+          ]
+        },
+        {
+          "name": "reset",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "resets the configuration manager to the default user interface configuration data.",
+            "",
+            "This means that all user interface configuration data of the instance will be removed. A module based user interface configuration manager removes user defined elements, but set all other elements back to default. It is not possible to remove default elements from a module user interface configuration manager."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

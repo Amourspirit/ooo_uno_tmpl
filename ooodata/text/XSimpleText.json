@@ -1,0 +1,155 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XSimpleText",
+  "type": "interface",
+  "namespace": "com.sun.star.text",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_text_range",
+        "XTextRange",
+        "XTextRange_9a910ab7"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_text_cursor",
+        "XTextCursor",
+        "XTextCursor_a60c0b48"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.text.XTextRange": "XTextRange_9a910ab7"
+    },
+    "quote": [
+      "XTextCursor_a60c0b48",
+      "XTextRange_9a910ab7"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.text.XTextRange"
+      ],
+      "typing": [
+        "com.sun.star.text.XTextCursor"
+      ]
+    },
+    "name": "XSimpleText",
+    "imports": [],
+    "namespace": "com.sun.star.text",
+    "extends": [
+      "com.sun.star.text.XTextRange"
+    ],
+    "desc": [
+      "is the main interface for a distinct text unit, i.e.",
+      "",
+      "the main text of a document, the text for headers and footers or for single cells of a table."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1text_1_1XSimpleText.html",
+    "items": {
+      "methods": [
+        {
+          "name": "createTextCursor",
+          "returns": "XTextCursor_a60c0b48",
+          "returns_origin": "com.sun.star.text.XTextCursor",
+          "desc": [],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "createTextCursorByRange",
+          "returns": "XTextCursor_a60c0b48",
+          "returns_origin": "com.sun.star.text.XTextCursor",
+          "desc": [
+            "The initial position is set to aTextPosition."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aTextPosition",
+              "type": "XTextRange_9a910ab7",
+              "direction": "in",
+              "origin": "com.sun.star.text.XTextRange"
+            }
+          ]
+        },
+        {
+          "name": "insertControlCharacter",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "inserts a control character (like a paragraph break or a hard space) into the text."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "xRange",
+              "type": "XTextRange_9a910ab7",
+              "direction": "in",
+              "origin": "com.sun.star.text.XTextRange"
+            },
+            {
+              "name": "nControlCharacter",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "bAbsorb",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
+          ]
+        },
+        {
+          "name": "insertString",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "inserts a string of characters into the text.",
+            "",
+            "The string may contain the following white spaces:",
+            "",
+            "If the parameter bAbsorb() was TRUE the text range will contain the new inserted string, otherwise the range (and it's text) will remain unchanged."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xRange",
+              "type": "XTextRange_9a910ab7",
+              "direction": "in",
+              "origin": "com.sun.star.text.XTextRange"
+            },
+            {
+              "name": "aString",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "bAbsorb",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

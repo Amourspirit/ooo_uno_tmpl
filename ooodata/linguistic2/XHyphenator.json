@@ -1,0 +1,211 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XHyphenator",
+  "type": "interface",
+  "namespace": "com.sun.star.linguistic2",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_supported_locales",
+        "XSupportedLocales",
+        "XSupportedLocales_5bda1056"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..beans.property_values",
+        "PropertyValues",
+        "PropertyValues_d6470ce6"
+      ],
+      [
+        "..lang.locale",
+        "Locale",
+        "Locale_70d308fa"
+      ],
+      [
+        ".x_hyphenated_word",
+        "XHyphenatedWord",
+        "XHyphenatedWord_3a880f73"
+      ],
+      [
+        ".x_possible_hyphens",
+        "XPossibleHyphens",
+        "XPossibleHyphens_4aa50fed"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.linguistic2.XSupportedLocales": "XSupportedLocales_5bda1056"
+    },
+    "quote": [
+      "Locale_70d308fa",
+      "PropertyValues_d6470ce6",
+      "XHyphenatedWord_3a880f73",
+      "XPossibleHyphens_4aa50fed"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.linguistic2.XSupportedLocales"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValues",
+        "com.sun.star.lang.Locale",
+        "com.sun.star.linguistic2.XHyphenatedWord",
+        "com.sun.star.linguistic2.XPossibleHyphens"
+      ]
+    },
+    "name": "XHyphenator",
+    "imports": [],
+    "namespace": "com.sun.star.linguistic2",
+    "extends": [
+      "com.sun.star.linguistic2.XSupportedLocales"
+    ],
+    "desc": [
+      "provides functionality for hyphenation of single words.",
+      "",
+      "Its three main functionalities are to provide a suitable position for breaking lines within a word, query about the existence of an alternative spelling at a specific position of a word and provide a list of possible hyphenation positions within a word.",
+      "",
+      "A hyphenation position for a word with n characters is represented by a value in the range from 0 to n-2, indicating the position of the character after which the hyphenation is done. That is, it is after the first and before the last character.",
+      "",
+      "A valid hyphenation position is a hyphenation position that fulfills all the restrictions implied by the properties MinLeading, MinTrailing and MinWordLength."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1linguistic2_1_1XHyphenator.html",
+    "items": {
+      "methods": [
+        {
+          "name": "createPossibleHyphens",
+          "returns": "XPossibleHyphens_4aa50fed",
+          "returns_origin": "com.sun.star.linguistic2.XPossibleHyphens",
+          "desc": [
+            "returns information about all possible hyphenation positions of a word.",
+            "",
+            "If the language is not supported, an IllegalArgumentException exception is raised."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "aWord",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "aProperties",
+              "type": "PropertyValues_d6470ce6",
+              "direction": "in",
+              "origin": "com.sun.star.beans.PropertyValues"
+            }
+          ]
+        },
+        {
+          "name": "hyphenate",
+          "returns": "XHyphenatedWord_3a880f73",
+          "returns_origin": "com.sun.star.linguistic2.XHyphenatedWord",
+          "desc": [
+            "tries to find a valid hyphenation position relative to the beginning of a word.",
+            "",
+            "Note: Some languages, for example Arabic, are written from right to left.",
+            "",
+            "If the language is not supported, an IllegalArgumentException exception is raised.",
+            "",
+            "It has to be greater than or equal to 0."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "aWord",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "nMaxLeading",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "aProperties",
+              "type": "PropertyValues_d6470ce6",
+              "direction": "in",
+              "origin": "com.sun.star.beans.PropertyValues"
+            }
+          ]
+        },
+        {
+          "name": "queryAlternativeSpelling",
+          "returns": "XHyphenatedWord_3a880f73",
+          "returns_origin": "com.sun.star.linguistic2.XHyphenatedWord",
+          "desc": [
+            "checks whether hyphenation at a position in a word will result in an alternative spelling or not.",
+            "",
+            "An alternative spelling position is a hyphen position where, if hyphenation is done here, the writing of the word changes. Example: \\\"B&auml;cker\\\" in German pre spelling-reform becomes \\\"B&auml;kker\\\" if hyphenation is done after the \\\"c\\\".",
+            "",
+            "The hyphenation position does not need to be a valid one to be an alternative spelling position.",
+            "",
+            "If the language is not supported, an IllegalArgumentException exception is raised.",
+            "",
+            "If the length of the word is n, the value of this parameter has to be in the range from 0 to n-2."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "aWord",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "aProperties",
+              "type": "PropertyValues_d6470ce6",
+              "direction": "in",
+              "origin": "com.sun.star.beans.PropertyValues"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

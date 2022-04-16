@@ -1,0 +1,85 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XModuleManager",
+  "type": "interface",
+  "namespace": "com.sun.star.frame",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XInterface_8f010a43"
+    ],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": []
+    },
+    "name": "XModuleManager",
+    "imports": [],
+    "namespace": "com.sun.star.frame",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "can be used to identify office modules.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.0"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XModuleManager.html",
+    "items": {
+      "methods": [
+        {
+          "name": "identify",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "identifies the given module.",
+            "",
+            "This identifier can then be used at the service ModuleManager to get more information about this module.",
+            "",
+            "For identification the interface com.sun.star.lang.XServiceInfo is requested on the given module. Because all module service registrations must be unique this value can be queried and checked against the configuration.",
+            "",
+            "Since OOo 2.3.0 also the optional interface XModule will be used. If its exists it will be preferred."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "UnknownModuleException"
+          ],
+          "args": [
+            {
+              "name": "Module",
+              "type": "XInterface_8f010a43",
+              "direction": "in",
+              "origin": "com.sun.star.uno.XInterface"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,219 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XAccessibleComponent",
+  "type": "interface",
+  "namespace": "com.sun.star.accessibility",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_accessible",
+        "XAccessible",
+        "XAccessible_1cbc0eb6"
+      ],
+      [
+        "..awt.point",
+        "Point",
+        "Point_5fb2085e"
+      ],
+      [
+        "..awt.rectangle",
+        "Rectangle",
+        "Rectangle_84b109e9"
+      ],
+      [
+        "..awt.size",
+        "Size",
+        "Size_576707ef"
+      ],
+      [
+        "..util.color",
+        "Color",
+        "Color_68e908c5"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "Color_68e908c5",
+      "Point_5fb2085e",
+      "Rectangle_84b109e9",
+      "Size_576707ef",
+      "XAccessible_1cbc0eb6"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.accessibility.XAccessible",
+        "com.sun.star.awt.Point",
+        "com.sun.star.awt.Rectangle",
+        "com.sun.star.awt.Size",
+        "com.sun.star.util.Color"
+      ]
+    },
+    "name": "XAccessibleComponent",
+    "imports": [],
+    "namespace": "com.sun.star.accessibility",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "The XAccessibleComponent interface should be supported by any class that can be rendered on the screen.",
+      "",
+      "This interface provides the standard mechanism for an assistive technology to retrieve information concerning the graphical representation of an object. This interface combines methods from the Java interfaces javax.accessibility.AccessibleComponent and javax.accessibility.AccessibleExtendedComponent.",
+      "",
+      "Further information about the graphical appearance of an object can be expressed with the XAccessibleExtendedComponent interface.",
+      "",
+      "Coordinates used by the functions of this interface are specified in different coordinate systems. Their scale is the same and is equal to that of the screen coordinate system. In other words all coordinates are measured in pixel. They differ in their respective origin:",
+      "",
+      "Key bindings which are associated with an accessible component can be retrieved at the component's action. The reason for this is that key bindings are associated with actions and directly with a component. This distinction becomes important when there are more than one action. To get access to the key bindings you have to get the XAccessibleAction interface of a component, provided that it is supported, and use the XAccessibleAction.getAccessibleKeyBinding().",
+      "",
+      "**since**",
+      "",
+      "    OOo 1.1.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleComponent.html",
+    "items": {
+      "methods": [
+        {
+          "name": "containsPoint",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "Tests whether the specified point lies within this object's bounds.",
+            "",
+            "The test point's coordinates are defined relative to the coordinate system of the object. That means that when the object is an opaque rectangle then both the points (0,0) and (with-1,height-1) would yield a TRUE value."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Point",
+              "type": "Point_5fb2085e",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Point"
+            }
+          ]
+        },
+        {
+          "name": "getAccessibleAtPoint",
+          "returns": "XAccessible_1cbc0eb6",
+          "returns_origin": "com.sun.star.accessibility.XAccessible",
+          "desc": [
+            "Returns the Accessible child that is rendered under the given point.",
+            "",
+            "The test point's coordinates are defined relative to the coordinate system of the object. That means that when the object is an opaque rectangle then both the points (0,0) and (with-1,height-1) would yield a TRUE value."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Point",
+              "type": "Point_5fb2085e",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Point"
+            }
+          ]
+        },
+        {
+          "name": "getBackground",
+          "returns": "Color_68e908c5",
+          "returns_origin": "com.sun.star.util.Color",
+          "desc": [
+            "Returns the background color of this object."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getBounds",
+          "returns": "Rectangle_84b109e9",
+          "returns_origin": "com.sun.star.awt.Rectangle",
+          "desc": [
+            "Returns the bounding box of this object.",
+            "",
+            "The returned bounding box has the form of a rectangle. Its coordinates are relative to the object's parent coordinate system. Note that the two methods getLocation() and getSize() return the same information. With method getLocationOnScreen() you can get the bound box position in screen coordinates."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getForeground",
+          "returns": "Color_68e908c5",
+          "returns_origin": "com.sun.star.util.Color",
+          "desc": [
+            "Returns the foreground color of this object."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getLocation",
+          "returns": "Point_5fb2085e",
+          "returns_origin": "com.sun.star.awt.Point",
+          "desc": [
+            "Returns the location of the upper left corner of the object's bounding box relative to the parent.",
+            "",
+            "The coordinates of the bounding box are given relative to the parent's coordinate system."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getLocationOnScreen",
+          "returns": "Point_5fb2085e",
+          "returns_origin": "com.sun.star.awt.Point",
+          "desc": [
+            "Returns the location of the upper left corner of the object's bounding box in screen coordinates.",
+            "",
+            "This method returns the same point as does the method getLocation(). The difference is that the coordinates are absolute screen coordinates of the screen to which the object is rendered instead of being relative to the object's parent."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getSize",
+          "returns": "Size_576707ef",
+          "returns_origin": "com.sun.star.awt.Size",
+          "desc": [
+            "Returns the size of this object's bounding box."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "grabFocus",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Grabs the focus to this object.",
+            "",
+            "If this object can not accept the focus, i.e. isFocusTraversable() returns FALSE for this object then nothing happens. Otherwise the object will attempt to take the focus. Nothing happens if that fails, otherwise the object has the focus. This method is called requestFocus in the Java Accessibility API 1.4."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,139 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "SheetSortDescriptor2",
+  "type": "service",
+  "namespace": "com.sun.star.sheet",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..table.table_sort_descriptor2",
+        "TableSortDescriptor2",
+        "TableSortDescriptor2_27e00ef1"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..table.cell_address",
+        "CellAddress",
+        "CellAddress_ae5f0b56"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.table.TableSortDescriptor2": "TableSortDescriptor2_27e00ef1"
+    },
+    "quote": [
+      "CellAddress_ae5f0b56"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.table.TableSortDescriptor2"
+      ],
+      "typing": [
+        "com.sun.star.table.CellAddress"
+      ]
+    },
+    "name": "SheetSortDescriptor2",
+    "imports": [],
+    "namespace": "com.sun.star.sheet",
+    "extends": [
+      "com.sun.star.table.TableSortDescriptor2"
+    ],
+    "desc": [
+      "a description of how a cell range is to be sorted.",
+      "",
+      "This service extends the com.sun.star.table.TableSortDescriptor2 service with spreadsheet specific properties.",
+      "",
+      "**since**",
+      "",
+      "    OOo 1.1.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1sheet_1_1SheetSortDescriptor2.html",
+    "items": {
+      "properties": [
+        {
+          "name": "BindFormatsToContent",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "specifies if cell formats are moved with the contents they belong to."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ContainsHeader",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "specifies whether the first row or column (depending on com.sun.star.table.TableSortDescriptor.Orientation) is a header which should not be sorted."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CopyOutputData",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "specifies if the sorted data should be copied to another position in the document."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsUserListEnabled",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "specifies if a user defined sorting list is used."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "OutputPosition",
+          "returns": "CellAddress_ae5f0b56",
+          "origtype": "com.sun.star.table.CellAddress",
+          "origin": "com.sun.star.table.CellAddress",
+          "desc": [
+            "specifies the position where sorted data are to be copied.",
+            "",
+            "This property is only used, if SheetSortDescriptor.CopyOutputData is TRUE."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "UserListIndex",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "specifies which user defined sorting list is used.",
+            "",
+            "This property is only used, if SheetSortDescriptor.IsUserListEnabled is TRUE."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

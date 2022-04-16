@@ -1,0 +1,539 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "TextTable",
+  "type": "service",
+  "namespace": "com.sun.star.text",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..chart.x_chart_data_array",
+        "XChartDataArray",
+        "XChartDataArray_df4c0cdd"
+      ],
+      [
+        "..container.x_named",
+        "XNamed",
+        "XNamed_a6520b08"
+      ],
+      [
+        "..sheet.x_cell_range_data",
+        "XCellRangeData",
+        "XCellRangeData_d2e70c60"
+      ],
+      [
+        "..table.x_auto_formattable",
+        "XAutoFormattable",
+        "XAutoFormattable_ee660d72"
+      ],
+      [
+        "..table.x_cell_range",
+        "XCellRange",
+        "XCellRange_a2f70ad5"
+      ],
+      [
+        ".text_content",
+        "TextContent",
+        "TextContent_a6810b4d"
+      ],
+      [
+        ".x_text_table",
+        "XTextTable",
+        "XTextTable_9a810ab2"
+      ],
+      [
+        "..util.x_sortable",
+        "XSortable",
+        "XSortable_8ff20a5a"
+      ],
+      [
+        "..xml.user_defined_attributes_supplier",
+        "UserDefinedAttributesSupplier",
+        "UserDefinedAttributesSupplier_9fbe1222"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
+      ],
+      [
+        "..graphic.x_graphic",
+        "XGraphic",
+        "XGraphic_a4da0afc"
+      ],
+      [
+        "..style.break_type",
+        "BreakType",
+        "BreakType_9b050ac0"
+      ],
+      [
+        "..style.graphic_location",
+        "GraphicLocation",
+        "GraphicLocation_e3ef0d30"
+      ],
+      [
+        "..table.shadow_format",
+        "ShadowFormat",
+        "ShadowFormat_bb840bdf"
+      ],
+      [
+        "..table.table_border",
+        "TableBorder",
+        "TableBorder_aedf0b56"
+      ],
+      [
+        ".table_column_separator",
+        "TableColumnSeparator",
+        "TableColumnSeparator_1b630ed4"
+      ],
+      [
+        "..util.color",
+        "Color",
+        "Color_68e908c5"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.chart.XChartDataArray": "XChartDataArray_df4c0cdd",
+      "com.sun.star.container.XNamed": "XNamed_a6520b08",
+      "com.sun.star.sheet.XCellRangeData": "XCellRangeData_d2e70c60",
+      "com.sun.star.table.XAutoFormattable": "XAutoFormattable_ee660d72",
+      "com.sun.star.table.XCellRange": "XCellRange_a2f70ad5",
+      "com.sun.star.text.TextContent": "TextContent_a6810b4d",
+      "com.sun.star.text.XTextTable": "XTextTable_9a810ab2",
+      "com.sun.star.util.XSortable": "XSortable_8ff20a5a",
+      "com.sun.star.xml.UserDefinedAttributesSupplier": "UserDefinedAttributesSupplier_9fbe1222"
+    },
+    "quote": [
+      "BreakType_9b050ac0",
+      "Color_68e908c5",
+      "GraphicLocation_e3ef0d30",
+      "ShadowFormat_bb840bdf",
+      "TableBorder_aedf0b56",
+      "XGraphic_a4da0afc",
+      "typing.Tuple[PropertyValue_c9610c73, ...]",
+      "typing.Tuple[TableColumnSeparator_1b630ed4, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[PropertyValue_c9610c73, ...]",
+      "typing.Tuple[TableColumnSeparator_1b630ed4, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.chart.XChartDataArray",
+        "com.sun.star.container.XNamed",
+        "com.sun.star.sheet.XCellRangeData",
+        "com.sun.star.table.XAutoFormattable",
+        "com.sun.star.table.XCellRange",
+        "com.sun.star.text.TextContent",
+        "com.sun.star.text.XTextTable",
+        "com.sun.star.util.XSortable",
+        "com.sun.star.xml.UserDefinedAttributesSupplier"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.graphic.XGraphic",
+        "com.sun.star.style.BreakType",
+        "com.sun.star.style.GraphicLocation",
+        "com.sun.star.table.ShadowFormat",
+        "com.sun.star.table.TableBorder",
+        "com.sun.star.text.TableColumnSeparator",
+        "com.sun.star.util.Color"
+      ]
+    },
+    "name": "TextTable",
+    "imports": [],
+    "namespace": "com.sun.star.text",
+    "extends": [
+      "com.sun.star.text.TextContent",
+      "com.sun.star.xml.UserDefinedAttributesSupplier",
+      "com.sun.star.text.XTextTable",
+      "com.sun.star.container.XNamed",
+      "com.sun.star.table.XCellRange",
+      "com.sun.star.chart.XChartDataArray",
+      "com.sun.star.table.XAutoFormattable",
+      "com.sun.star.util.XSortable",
+      "com.sun.star.sheet.XCellRangeData"
+    ],
+    "desc": [
+      "is a table of text cells which is anchored to a surrounding text.",
+      "",
+      "Note: The anchor of the actual implementation for text tables does not have a position in the text. Thus that anchor can not be used for some operation like XTextContent.attach() or XText.insertTextContent() or other function that require the object to have a position in the text.",
+      "",
+      "The reason why a text table still needs an anchor is that for example tables should be insertable via XText.insertTextContent() and that interface uses a parameter of that type.",
+      "",
+      "Example: Create and insert a TextTable:",
+      "",
+      "**since**",
+      "",
+      "    LibreOffice 4.3"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1text_1_1TextTable.html",
+    "items": {
+      "types": [
+        {
+          "name": "TableColumnSeparators",
+          "returns": "typing.Tuple[TableColumnSeparator_1b630ed4, ...]",
+          "origtype": null,
+          "origin": "sequence< com.sun.star.text.TableColumnSeparator >",
+          "desc": [
+            "contains the column description of the table."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TableInteropGrabBag",
+          "returns": "typing.Tuple[PropertyValue_c9610c73, ...]",
+          "origtype": null,
+          "origin": "sequence< com.sun.star.beans.PropertyValue >",
+          "desc": [
+            "Grab bag of table properties, used as a string-any map for interim interop purposes.",
+            "",
+            "This property is intentionally not handled by the ODF filter. Any member that should be handled there should be first moved out from this grab bag to a separate property.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 4.3"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ],
+      "properties": [
+        {
+          "name": "BackColor",
+          "returns": "Color_68e908c5",
+          "origtype": "com.sun.star.util.Color",
+          "origin": "com.sun.star.util.Color",
+          "desc": [
+            "contains the color of the background."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BackGraphic",
+          "returns": "XGraphic_a4da0afc",
+          "origtype": "com.sun.star.graphic.XGraphic",
+          "origin": "com.sun.star.graphic.XGraphic",
+          "desc": [
+            "contains the graphic for the background.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 6.1"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BackGraphicFilter",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "contains the name of the file filter for the background graphic."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BackGraphicLocation",
+          "returns": "GraphicLocation_e3ef0d30",
+          "origtype": "com.sun.star.style.GraphicLocation",
+          "origin": "com.sun.star.style.GraphicLocation",
+          "desc": [
+            "determines the position of the background graphic."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BackGraphicURL",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "contains the URL for the background graphic.",
+            "",
+            "Note the new behaviour since it this was deprecated: This property can only be set and only external URLs are supported (no more vnd.sun.star.GraphicObject scheme). When an URL is set, then it will load the graphic and set the BackGraphic property."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BackTransparent",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "determines if the background color is transparent."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BottomMargin",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "determines the bottom margin."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BreakType",
+          "returns": "BreakType_9b050ac0",
+          "origtype": "com.sun.star.style.BreakType",
+          "origin": "com.sun.star.style.BreakType",
+          "desc": [
+            "determines the type of break that is applied at the beginning of the table."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ChartColumnAsLabel",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "determines if the first column of the table should be treated as axis labels when a chart is to be created."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ChartRowAsLabel",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "determines if the first row of the table should be treated as axis labels when a chart is to be created."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CollapsingBorders",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "determines whether borders of neighboring table cells are collapsed into one"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "HeaderRowCount",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "determines the number of rows of the table repeated on every new page."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "HoriOrient",
+          "returns": "int",
+          "origtype": null,
+          "origin": "short",
+          "desc": [
+            "contains the horizontal orientation."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsWidthRelative",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "determines if the value of the relative width is valid."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "KeepTogether",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "Setting this property to TRUE prevents page or column breaks between this table and the following paragraph or text table."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "LeftMargin",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "contains the left margin of the table."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "PageDescName",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "If this property is set, it creates a page break before the table and assigns the value as the name of the new page style sheet to use."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "PageNumberOffset",
+          "returns": "int",
+          "origtype": null,
+          "origin": "short",
+          "desc": [
+            "If a page break property is set at the table, this property contains the new value for the page number."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RelativeWidth",
+          "returns": "int",
+          "origtype": null,
+          "origin": "short",
+          "desc": [
+            "determines the width of the table relative to its environment."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RepeatHeadline",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "determines if the first row of the table is repeated on every new page."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RightMargin",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "contains the right margin of the table."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ShadowFormat",
+          "returns": "ShadowFormat_bb840bdf",
+          "origtype": "com.sun.star.table.ShadowFormat",
+          "origin": "com.sun.star.table.ShadowFormat",
+          "desc": [
+            "determines the type, color and size of the shadow."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Split",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "Setting this property to FALSE prevents the table from getting spread on two pages."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TableBorder",
+          "returns": "TableBorder_aedf0b56",
+          "origtype": "com.sun.star.table.TableBorder",
+          "origin": "com.sun.star.table.TableBorder",
+          "desc": [
+            "contains the description of the table borders."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TableColumnRelativeSum",
+          "returns": "int",
+          "origtype": null,
+          "origin": "short",
+          "desc": [
+            "contains the sum of the column width values used in TableColumnSeparators."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TableTemplateName",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "contains the name of table style used by the table.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 5.3"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TopMargin",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "determines the top margin."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Width",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "contains the absolute table width.",
+            "",
+            "As this is only a describing property the value of the actual table may vary depending on the environment the table is located in and the settings of LeftMargin, RightMargin and HoriOrient."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

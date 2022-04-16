@@ -1,0 +1,155 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "CustomShape",
+  "type": "service",
+  "namespace": "com.sun.star.drawing",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".fill_properties",
+        "FillProperties",
+        "FillProperties_f1200da8"
+      ],
+      [
+        ".line_properties",
+        "LineProperties",
+        "LineProperties_f13f0da9"
+      ],
+      [
+        ".rotation_descriptor",
+        "RotationDescriptor",
+        "RotationDescriptor_2cec0f63"
+      ],
+      [
+        ".shadow_properties",
+        "ShadowProperties",
+        "ShadowProperties_e350e87"
+      ],
+      [
+        ".shape",
+        "Shape",
+        "Shape_85cc09e5"
+      ],
+      [
+        ".text",
+        "Text",
+        "Text_7c140999"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.drawing.FillProperties": "FillProperties_f1200da8",
+      "com.sun.star.drawing.LineProperties": "LineProperties_f13f0da9",
+      "com.sun.star.drawing.RotationDescriptor": "RotationDescriptor_2cec0f63",
+      "com.sun.star.drawing.ShadowProperties": "ShadowProperties_e350e87",
+      "com.sun.star.drawing.Shape": "Shape_85cc09e5",
+      "com.sun.star.drawing.Text": "Text_7c140999"
+    },
+    "quote": [
+      "typing.Tuple[PropertyValue_c9610c73, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[PropertyValue_c9610c73, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.drawing.FillProperties",
+        "com.sun.star.drawing.LineProperties",
+        "com.sun.star.drawing.RotationDescriptor",
+        "com.sun.star.drawing.ShadowProperties",
+        "com.sun.star.drawing.Shape",
+        "com.sun.star.drawing.Text"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValue"
+      ]
+    },
+    "name": "CustomShape",
+    "imports": [],
+    "namespace": "com.sun.star.drawing",
+    "extends": [
+      "com.sun.star.drawing.Shape",
+      "com.sun.star.drawing.FillProperties",
+      "com.sun.star.drawing.LineProperties",
+      "com.sun.star.drawing.ShadowProperties",
+      "com.sun.star.drawing.Text",
+      "com.sun.star.drawing.RotationDescriptor"
+    ],
+    "desc": [
+      "This service is for a CustomShape."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1drawing_1_1CustomShape.html",
+    "items": {
+      "types": [
+        {
+          "name": "CustomShapeGeometry",
+          "returns": "typing.Tuple[PropertyValue_c9610c73, ...]",
+          "origtype": null,
+          "origin": "sequence<.com.sun.star.beans.PropertyValue >",
+          "desc": [
+            "This property describes the geometry of the CustomShape.",
+            "",
+            "The CustomShapeEngine that is used should be able to get on with the content of this property.",
+            "",
+            "If the CustomShapeEngine property is \\\"com.sun.star.drawing.EnhancedCustomShapeEngine\\\", then this property is containing properties as they are specified in the service com.sun.star.drawing.EnhancedCustomShapeGeometry"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ],
+      "properties": [
+        {
+          "name": "CustomShapeData",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "This property can be used to store data that the CustomShapeEngine may use for rendering."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CustomShapeEngine",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "This property contains the CustomShapeEngine service name that has to be used for rendering."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CustomShapeReplacementURL",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "This property describes the URL to a replacement graphic that could be displayed if the CustomShape engine is not available."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

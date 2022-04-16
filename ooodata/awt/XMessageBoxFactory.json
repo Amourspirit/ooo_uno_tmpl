@@ -1,0 +1,124 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XMessageBoxFactory",
+  "type": "interface",
+  "namespace": "com.sun.star.awt",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".message_box_type",
+        "MessageBoxType",
+        "MessageBoxType_bbcc0be4"
+      ],
+      [
+        ".x_message_box",
+        "XMessageBox",
+        "XMessageBox_98e00a9a"
+      ],
+      [
+        ".x_window_peer",
+        "XWindowPeer",
+        "XWindowPeer_99760ab0"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "MessageBoxType_bbcc0be4",
+      "XMessageBox_98e00a9a",
+      "XWindowPeer_99760ab0"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.awt.MessageBoxType",
+        "com.sun.star.awt.XMessageBox",
+        "com.sun.star.awt.XWindowPeer"
+      ]
+    },
+    "name": "XMessageBoxFactory",
+    "imports": [],
+    "namespace": "com.sun.star.awt",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "specifies a factory interface for creating message boxes."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XMessageBoxFactory.html",
+    "items": {
+      "methods": [
+        {
+          "name": "createMessageBox",
+          "returns": "XMessageBox_98e00a9a",
+          "returns_origin": "com.sun.star.awt.XMessageBox",
+          "desc": [
+            "creates a message box.",
+            "",
+            "This parameter must not be null.",
+            "",
+            "A combination of com.sun.star.awt.MessageBoxButtons",
+            "",
+            "A com.sun.star.awt.MessageBoxType.INFOBOX ignores this parameter, instead it uses a com.sun.star.awt.MessageBoxButtons.BUTTONS_OK."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aParent",
+              "type": "XWindowPeer_99760ab0",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XWindowPeer"
+            },
+            {
+              "name": "eType",
+              "type": "MessageBoxType_bbcc0be4",
+              "direction": "in",
+              "origin": "com.sun.star.awt.MessageBoxType"
+            },
+            {
+              "name": "nButtons",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "sTitle",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "sMessage",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

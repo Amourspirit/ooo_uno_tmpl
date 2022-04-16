@@ -1,0 +1,458 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XSlideShow",
+  "type": "interface",
+  "namespace": "com.sun.star.presentation",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..animations.x_animation_node",
+        "XAnimationNode",
+        "XAnimationNode_1cf10eb9"
+      ],
+      [
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
+      ],
+      [
+        "..drawing.x_draw_page",
+        "XDrawPage",
+        "XDrawPage_b07a0b57"
+      ],
+      [
+        "..drawing.x_draw_pages_supplier",
+        "XDrawPagesSupplier",
+        "XDrawPagesSupplier_29650f1e"
+      ],
+      [
+        "..drawing.x_shape",
+        "XShape",
+        "XShape_8fd00a3d"
+      ],
+      [
+        "..lang.x_multi_service_factory",
+        "XMultiServiceFactory",
+        "XMultiServiceFactory_191e0eb6"
+      ],
+      [
+        ".x_shape_event_listener",
+        "XShapeEventListener",
+        "XShapeEventListener_92a311b5"
+      ],
+      [
+        ".x_slide_show_listener",
+        "XSlideShowListener",
+        "XSlideShowListener_81671154"
+      ],
+      [
+        ".x_slide_show_view",
+        "XSlideShowView",
+        "XSlideShowView_3eb40fa9"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "PropertyValue_c9610c73",
+      "XAnimationNode_1cf10eb9",
+      "XDrawPage_b07a0b57",
+      "XDrawPagesSupplier_29650f1e",
+      "XMultiServiceFactory_191e0eb6",
+      "XShapeEventListener_92a311b5",
+      "XShape_8fd00a3d",
+      "XSlideShowListener_81671154",
+      "XSlideShowView_3eb40fa9",
+      "typing.Tuple[PropertyValue_c9610c73, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[PropertyValue_c9610c73, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.animations.XAnimationNode",
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.drawing.XDrawPage",
+        "com.sun.star.drawing.XDrawPagesSupplier",
+        "com.sun.star.drawing.XShape",
+        "com.sun.star.lang.XMultiServiceFactory",
+        "com.sun.star.presentation.XShapeEventListener",
+        "com.sun.star.presentation.XSlideShowListener",
+        "com.sun.star.presentation.XSlideShowView"
+      ]
+    },
+    "name": "XSlideShow",
+    "imports": [],
+    "namespace": "com.sun.star.presentation",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "Slide show interface to perform slide show presentations.",
+      "",
+      "This interface provides the necessary methods to run and control a slide show from a given set of XDrawPage slides. The slide show can be displayed simultaneously on multiple targets.",
+      "",
+      "Note: To control a running slide show inside a presentation, please use XPresentation2 and XSlideShowController.",
+      "",
+      "**since**",
+      "",
+      "    OOo 3.0"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1presentation_1_1XSlideShow.html",
+    "items": {
+      "methods": [
+        {
+          "name": "addShapeEventListener",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Add a shape event listener.",
+            "",
+            "This method adds a listener to the slide show, which will get notified when a mouse click is performed on the given shape. This can be used by clients of the slide show to trigger external actions, such as jumps to different slides."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xListener",
+              "type": "XShapeEventListener_92a311b5",
+              "direction": "in",
+              "origin": "com.sun.star.presentation.XShapeEventListener"
+            },
+            {
+              "name": "xShape",
+              "type": "XShape_8fd00a3d",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.XShape"
+            }
+          ]
+        },
+        {
+          "name": "addSlideShowListener",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Add a slide show listener.",
+            "",
+            "This method adds a listener to the slide show, which will get notified when a registered shape is clicked upon, or a new slide is about to be displayed. Note that the listeners will not be notified, when the slide change is directly requested by one of the nextSlide(), previousSlide() or displaySlide() methods."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xListener",
+              "type": "XSlideShowListener_81671154",
+              "direction": "in",
+              "origin": "com.sun.star.presentation.XSlideShowListener"
+            }
+          ]
+        },
+        {
+          "name": "addView",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "Add a view to the slide show.",
+            "",
+            "This method adds a view to the slide show. After successful completion of this method, the slide show will be visible on the added view, scaled according to the view's output area."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xView",
+              "type": "XSlideShowView_3eb40fa9",
+              "direction": "in",
+              "origin": "com.sun.star.presentation.XSlideShowView"
+            }
+          ]
+        },
+        {
+          "name": "displaySlide",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Jump to the given slide.",
+            "",
+            "This method ends all effects on the current slide, displays a possible slide transition, followed by the given slide. If the current slide is equal to the requested slide here, this method does nothing (this especially means, that any currently active effects will remain running)."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xSlide",
+              "type": "XDrawPage_b07a0b57",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.XDrawPage"
+            },
+            {
+              "name": "xDrawPages",
+              "type": "XDrawPagesSupplier_29650f1e",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.XDrawPagesSupplier"
+            },
+            {
+              "name": "AnimationNode",
+              "type": "XAnimationNode_1cf10eb9",
+              "direction": "in",
+              "origin": "com.sun.star.animations.XAnimationNode"
+            },
+            {
+              "name": "aProperties",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< .com.sun.star.beans.PropertyValue >"
+            }
+          ]
+        },
+        {
+          "name": "getCurrentSlide",
+          "returns": "XDrawPage_b07a0b57",
+          "returns_origin": "com.sun.star.drawing.XDrawPage",
+          "desc": [
+            "Query the currently displayed slide."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "nextEffect",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "Trigger the next effect of the slide show.",
+            "",
+            "This method triggers the next effect on the currently displayed slide. If there is currently no slide show running, this method does nothing. If there are no more effects on the current slide, a possible slide transition effect is issued and the next slide is displayed."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "pause",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "Change the pause state of the slide show.",
+            "",
+            "This method either pauses the slide show (all currently running effects are stopped), or starts a previously stopped show again (all paused effects start again)."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "bPauseShow",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
+          ]
+        },
+        {
+          "name": "previousEffect",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "Undo the last effect in the main sequence of the slide show.",
+            "",
+            "The current slide is displayed as if the last user-triggered effect has never been triggered. If there is no previous effect on the current slide then slideEnded(true) is called at the registered XSlideShowListener objects, which can then trigger a change to the previous slide. Note that this command is executed asynchronously. Multiple calls to update() may be necessary to complete its execution. If there is currently no slide show running, this method does nothing."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "registerUserPaintPolygons",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Register drawn polygons in presentation mode."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xDocFactory",
+              "type": "XMultiServiceFactory_191e0eb6",
+              "direction": "in",
+              "origin": "com.sun.star.lang.XMultiServiceFactory"
+            }
+          ]
+        },
+        {
+          "name": "removeShapeEventListener",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Revoke a previously registered shape event listener."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xListener",
+              "type": "XShapeEventListener_92a311b5",
+              "direction": "in",
+              "origin": "com.sun.star.presentation.XShapeEventListener"
+            },
+            {
+              "name": "xShape",
+              "type": "XShape_8fd00a3d",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.XShape"
+            }
+          ]
+        },
+        {
+          "name": "removeSlideShowListener",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Revoke a previously registered slide show listener."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xListener",
+              "type": "XSlideShowListener_81671154",
+              "direction": "in",
+              "origin": "com.sun.star.presentation.XSlideShowListener"
+            }
+          ]
+        },
+        {
+          "name": "removeView",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "Remove view from the slide show.",
+            "",
+            "This method removes the given view from the slide show. After successful completion of this method, the slide show will cease to display on this view."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xView",
+              "type": "XSlideShowView_3eb40fa9",
+              "direction": "in",
+              "origin": "com.sun.star.presentation.XSlideShowView"
+            }
+          ]
+        },
+        {
+          "name": "setProperty",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "Change a property of the slide show."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aShowProperty",
+              "type": "PropertyValue_c9610c73",
+              "direction": "in",
+              "origin": "com.sun.star.beans.PropertyValue"
+            }
+          ]
+        },
+        {
+          "name": "setShapeCursor",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Set a special mouse cursor for a shape.",
+            "",
+            "This method requests the slide show to display a special cursor, whenever the mouse is hovering over the given shape."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xShape",
+              "type": "XShape_8fd00a3d",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.XShape"
+            },
+            {
+              "name": "nPointerShape",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
+          ]
+        },
+        {
+          "name": "startShapeActivity",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "Start a shape-intrinsic animation or activity.",
+            "",
+            "This method starts an animation or activity intrinsic to the given shape. Shape-intrinsic activities are things like video playback for multimedia shapes, sounds, GIF animations and drawing layer animations (flipping between shapes in a group, or scroll text)."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xShape",
+              "type": "XShape_8fd00a3d",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.XShape"
+            }
+          ]
+        },
+        {
+          "name": "stopShapeActivity",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "Stop a shape-intrinsic animation or activity.",
+            "",
+            "This method stops an animation or activity intrinsic to the given shape. Shape-intrinsic activities are things like video playback for multimedia shapes, sounds, GIF animations and drawing layer animations (flipping between shapes in a group, or scroll text)."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xShape",
+              "type": "XShape_8fd00a3d",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.XShape"
+            }
+          ]
+        },
+        {
+          "name": "update",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "Update the animations.",
+            "",
+            "This method updates all currently active slide animations. The XSlideShow implementations do not render animations automatically, but must be called from their clients. This allows for various update mechanisms to be employed, ranging from a dedicated rendering thread, over timer-based updates, to rendering in an idle function. Either way, the client of this interface decide about the details."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "nNextTimeout",
+              "type": "float",
+              "direction": "out",
+              "origin": "double"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

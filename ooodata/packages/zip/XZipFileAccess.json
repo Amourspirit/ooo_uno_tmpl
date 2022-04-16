@@ -1,0 +1,87 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XZipFileAccess",
+  "type": "interface",
+  "namespace": "com.sun.star.packages.zip",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "...uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "...io.x_input_stream",
+        "XInputStream",
+        "XInputStream_98d40ab4"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XInputStream_98d40ab4"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.io.XInputStream"
+      ]
+    },
+    "name": "XZipFileAccess",
+    "imports": [],
+    "namespace": "com.sun.star.packages.zip",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "allows to get reading access to non-encrypted entries inside zip file."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1packages_1_1zip_1_1XZipFileAccess.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getStreamByPattern",
+          "returns": "XInputStream_98d40ab4",
+          "returns_origin": "com.sun.star.io.XInputStream",
+          "desc": [
+            "allows to get stream by specifying a pattern.",
+            "",
+            "The first stream with a name that fits to the pattern will be returned. The pattern allows to use \\\"*\\\" wildcard symbol. If the name contains \\\"*\\\" or \\\"\\\\\\\" symbols itself they must guarded with backslash \\\"\\\\\\\". The slashes have no special meaning here so they can be replaced by wildcards also."
+          ],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException",
+            "com.sun.star.io.IOException",
+            "com.sun.star.packages.WrongPasswordException",
+            "com.sun.star.packages.zip.ZipException"
+          ],
+          "args": [
+            {
+              "name": "aPattern",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

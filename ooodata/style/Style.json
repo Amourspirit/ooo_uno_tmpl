@@ -1,0 +1,218 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "Style",
+  "type": "service",
+  "namespace": "com.sun.star.style",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..beans.x_multi_property_set",
+        "XMultiPropertySet",
+        "XMultiPropertySet_fd880e05"
+      ],
+      [
+        "..beans.x_multi_property_states",
+        "XMultiPropertyStates",
+        "XMultiPropertyStates_2a3e0f4d"
+      ],
+      [
+        "..beans.x_property_set",
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
+      ],
+      [
+        ".x_style",
+        "XStyle",
+        "XStyle_7c7f09a2"
+      ],
+      [
+        "..xml.user_defined_attributes_supplier",
+        "UserDefinedAttributesSupplier",
+        "UserDefinedAttributesSupplier_9fbe1222"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..beans.named_value",
+        "NamedValue",
+        "NamedValue_a37a0af3"
+      ],
+      [
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.beans.XMultiPropertySet": "XMultiPropertySet_fd880e05",
+      "com.sun.star.beans.XMultiPropertyStates": "XMultiPropertyStates_2a3e0f4d",
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa",
+      "com.sun.star.style.XStyle": "XStyle_7c7f09a2",
+      "com.sun.star.xml.UserDefinedAttributesSupplier": "UserDefinedAttributesSupplier_9fbe1222"
+    },
+    "quote": [
+      "typing.Tuple[NamedValue_a37a0af3, ...]",
+      "typing.Tuple[PropertyValue_c9610c73, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[NamedValue_a37a0af3, ...]",
+      "typing.Tuple[PropertyValue_c9610c73, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XMultiPropertySet",
+        "com.sun.star.beans.XMultiPropertyStates",
+        "com.sun.star.beans.XPropertySet",
+        "com.sun.star.style.XStyle",
+        "com.sun.star.xml.UserDefinedAttributesSupplier"
+      ],
+      "typing": [
+        "com.sun.star.beans.NamedValue",
+        "com.sun.star.beans.PropertyValue"
+      ]
+    },
+    "name": "Style",
+    "imports": [],
+    "namespace": "com.sun.star.style",
+    "extends": [
+      "com.sun.star.xml.UserDefinedAttributesSupplier",
+      "com.sun.star.style.XStyle",
+      "com.sun.star.beans.XPropertySet",
+      "com.sun.star.beans.XMultiPropertySet",
+      "com.sun.star.beans.XMultiPropertyStates"
+    ],
+    "desc": [
+      "This service specifies a single style sheet.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.0.1"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1style_1_1Style.html",
+    "items": {
+      "types": [
+        {
+          "name": "ParaStyleConditions",
+          "returns": "typing.Tuple[NamedValue_a37a0af3, ...]",
+          "origtype": null,
+          "origin": "sequence< com.sun.star.beans.NamedValue >",
+          "desc": [
+            "defines the context and styles for conditional paragraphs.",
+            "",
+            "This property is only available if the style is a conditional paragraph style.",
+            "",
+            "The sequence consists of pairs where the name part of the pair defines the context where it should be applied and the value part is a string naming the style to be used in that context.",
+            "",
+            "Assigning an empty string to the style name will disable the conditional style for that context.",
+            "",
+            "The allowed strings (contexts) for the name part of an entry of the sequence are:",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.0.1"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "StyleInteropGrabBag",
+          "returns": "typing.Tuple[PropertyValue_c9610c73, ...]",
+          "origtype": null,
+          "origin": "sequence< com.sun.star.beans.PropertyValue >",
+          "desc": [
+            "Grab bag of style properties, used as a string-any map for interim interop purposes.",
+            "",
+            "This property is intentionally not handled by the ODF filter. Any member that should be handled there should be first moved out from this grab bag to a separate property.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 4.2"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ],
+      "properties": [
+        {
+          "name": "DisplayName",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "contains the name of the style as it is displayed in the user interface.",
+            "",
+            "The names of the styles at the API are language independent. The user interface names are localized."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FollowStyle",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "contains the name of the style that is applied to the next paragraph.",
+            "",
+            "This property is usually available at paragraph styles only."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Hidden",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "Flag indicating whether to hide the style in the UI.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 4.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsAutoUpdate",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "determines if a style is automatically updated, if the properties of an object that the style is applied to are changed.",
+            "",
+            "For example, if the style is applied to a paragraph and the properties of the paragraph are changed then the style will be updated accordingly."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsPhysical",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "determines if a style is physically created.",
+            "",
+            "Built in styles may not be created until they are needed. To prevent standard style properties from being exported, it may be useful to check if the style is created first."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

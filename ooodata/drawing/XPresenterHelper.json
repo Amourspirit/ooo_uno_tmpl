@@ -1,0 +1,297 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XPresenterHelper",
+  "type": "interface",
+  "namespace": "com.sun.star.drawing",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        "..awt.rectangle",
+        "Rectangle",
+        "Rectangle_84b109e9"
+      ],
+      [
+        "..awt.x_window",
+        "XWindow",
+        "XWindow_713b0924"
+      ],
+      [
+        "..rendering.x_bitmap",
+        "XBitmap",
+        "XBitmap_b1b70b7b"
+      ],
+      [
+        "..rendering.x_canvas",
+        "XCanvas",
+        "XCanvas_b19b0b7a"
+      ],
+      [
+        "..rendering.x_sprite_canvas",
+        "XSpriteCanvas",
+        "XSpriteCanvas_ff8b0df1"
+      ]
+    ],
+    "extends_map": {},
+    "quote": [
+      "Rectangle_84b109e9",
+      "XBitmap_b1b70b7b",
+      "XCanvas_b19b0b7a",
+      "XSpriteCanvas_ff8b0df1",
+      "XWindow_713b0924"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.awt.Rectangle",
+        "com.sun.star.awt.XWindow",
+        "com.sun.star.rendering.XBitmap",
+        "com.sun.star.rendering.XCanvas",
+        "com.sun.star.rendering.XSpriteCanvas"
+      ]
+    },
+    "name": "XPresenterHelper",
+    "imports": [],
+    "namespace": "com.sun.star.drawing",
+    "extends": [],
+    "desc": [
+      "This interface is a collection of functions that were necessary to implement larger parts of the presenter screen as extension.",
+      "",
+      "The methods of this interface give access to services that could only be implemented in the Office core, not in an extension.",
+      "",
+      "As the presenter screen is no extension any more, this hack can go again; it just needs clean-up."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1drawing_1_1XPresenterHelper.html",
+    "items": {
+      "methods": [
+        {
+          "name": "captureMouse",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Capture the mouse so that no other window will receive mouse events.",
+            "",
+            "Note that this is a potentially dangerous method. Not calling releaseMouse eventually can lead to an unresponsive application."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xWindow",
+              "type": "XWindow_713b0924",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XWindow"
+            }
+          ]
+        },
+        {
+          "name": "createCanvas",
+          "returns": "XCanvas_b19b0b7a",
+          "returns_origin": "com.sun.star.rendering.XCanvas",
+          "desc": [
+            "Create a new canvas for the given window."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xWindow",
+              "type": "XWindow_713b0924",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XWindow"
+            },
+            {
+              "name": "nRequestedCanvasFeatureList",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "sOptionalCanvasServiceName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "createSharedCanvas",
+          "returns": "XCanvas_b19b0b7a",
+          "returns_origin": "com.sun.star.rendering.XCanvas",
+          "desc": [
+            "Create a new canvas for the given window.",
+            "",
+            "The new canvas is a wrapper around the given shared canvas. The wrapper only modifies the origin in all output and clipping methods."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xUpdateCanvas",
+              "type": "XSpriteCanvas_ff8b0df1",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.XSpriteCanvas"
+            },
+            {
+              "name": "xUpdateWindow",
+              "type": "XWindow_713b0924",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XWindow"
+            },
+            {
+              "name": "xSharedCanvas",
+              "type": "XCanvas_b19b0b7a",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.XCanvas"
+            },
+            {
+              "name": "xSharedWindow",
+              "type": "XWindow_713b0924",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XWindow"
+            },
+            {
+              "name": "xWindow",
+              "type": "XWindow_713b0924",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XWindow"
+            }
+          ]
+        },
+        {
+          "name": "createWindow",
+          "returns": "XWindow_713b0924",
+          "returns_origin": "com.sun.star.awt.XWindow",
+          "desc": [
+            "Create a new window as child window of the given parent window."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xParentWindow",
+              "type": "XWindow_713b0924",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XWindow"
+            },
+            {
+              "name": "bCreateSystemChildWindow",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            },
+            {
+              "name": "bInitiallyVisible",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            },
+            {
+              "name": "bEnableChildTransparentMode",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            },
+            {
+              "name": "bEnableParentClip",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
+          ]
+        },
+        {
+          "name": "getWindowExtentsRelative",
+          "returns": "Rectangle_84b109e9",
+          "returns_origin": "com.sun.star.awt.Rectangle",
+          "desc": [
+            "Return the bounding box of the given child window relative to the direct or indirect parent window."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xChildWindow",
+              "type": "XWindow_713b0924",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XWindow"
+            },
+            {
+              "name": "xParentWindow",
+              "type": "XWindow_713b0924",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XWindow"
+            }
+          ]
+        },
+        {
+          "name": "loadBitmap",
+          "returns": "XBitmap_b1b70b7b",
+          "returns_origin": "com.sun.star.rendering.XBitmap",
+          "desc": [
+            "Load a bitmap with a given ID."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "id",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "xCanvas",
+              "type": "XCanvas_b19b0b7a",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.XCanvas"
+            }
+          ]
+        },
+        {
+          "name": "releaseMouse",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Release a previously captured mouse."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xWindow",
+              "type": "XWindow_713b0924",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XWindow"
+            }
+          ]
+        },
+        {
+          "name": "toTop",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Move the specified window to the top of its stacking order.",
+            "",
+            "As a result the window will be painted over all its overlapping siblings."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xWindow",
+              "type": "XWindow_713b0924",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XWindow"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

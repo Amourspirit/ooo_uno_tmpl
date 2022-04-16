@@ -1,0 +1,137 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XXMLSignature",
+  "type": "interface",
+  "namespace": "com.sun.star.xml.crypto",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "...uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_security_environment",
+        "XSecurityEnvironment",
+        "XSecurityEnvironment_7ead116d"
+      ],
+      [
+        ".xxml_security_context",
+        "XXMLSecurityContext",
+        "XXMLSecurityContext_681010ae"
+      ],
+      [
+        ".xxml_signature_template",
+        "XXMLSignatureTemplate",
+        "XXMLSignatureTemplate_89fe115f"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XSecurityEnvironment_7ead116d",
+      "XXMLSecurityContext_681010ae",
+      "XXMLSignatureTemplate_89fe115f"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.xml.crypto.XSecurityEnvironment",
+        "com.sun.star.xml.crypto.XXMLSecurityContext",
+        "com.sun.star.xml.crypto.XXMLSignatureTemplate"
+      ]
+    },
+    "name": "XXMLSignature",
+    "imports": [],
+    "namespace": "com.sun.star.xml.crypto",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "Interface of XML signature.",
+      "",
+      "This interface represents a XML signer or verifier.",
+      "",
+      "The signer or verifier concrete a key by retrieve signature context and signature template.",
+      "",
+      "In some cases, the signer or verifier can determine and locate the contents to be signed from the signature template by dereference the URI.",
+      "",
+      "In some cases, the contents to be signed need to be clearly pointed out by the signature template."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1xml_1_1crypto_1_1XXMLSignature.html",
+    "items": {
+      "methods": [
+        {
+          "name": "generate",
+          "returns": "XXMLSignatureTemplate_89fe115f",
+          "returns_origin": "com.sun.star.xml.crypto.XXMLSignatureTemplate",
+          "desc": [
+            "Perform signature in the environment of signature template and context."
+          ],
+          "raises": [
+            "",
+            "com.sun.star.uno.SecurityException"
+          ],
+          "args": [
+            {
+              "name": "aTemplate",
+              "type": "XXMLSignatureTemplate_89fe115f",
+              "direction": "in",
+              "origin": "com.sun.star.xml.crypto.XXMLSignatureTemplate"
+            },
+            {
+              "name": "aEnvironment",
+              "type": "XSecurityEnvironment_7ead116d",
+              "direction": "in",
+              "origin": "com.sun.star.xml.crypto.XSecurityEnvironment"
+            }
+          ]
+        },
+        {
+          "name": "validate",
+          "returns": "XXMLSignatureTemplate_89fe115f",
+          "returns_origin": "com.sun.star.xml.crypto.XXMLSignatureTemplate",
+          "desc": [
+            "Perform validation in the environment of signature template and context."
+          ],
+          "raises": [
+            "",
+            "com.sun.star.uno.SecurityException"
+          ],
+          "args": [
+            {
+              "name": "aTemplate",
+              "type": "XXMLSignatureTemplate_89fe115f",
+              "direction": "in",
+              "origin": "com.sun.star.xml.crypto.XXMLSignatureTemplate"
+            },
+            {
+              "name": "aContext",
+              "type": "XXMLSecurityContext_681010ae",
+              "direction": "in",
+              "origin": "com.sun.star.xml.crypto.XXMLSecurityContext"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,142 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XConnectionPointContainer",
+  "type": "interface",
+  "namespace": "com.sun.star.lang",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_connection_point",
+        "XConnectionPoint",
+        "XConnectionPoint_e0da0d1c"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XConnectionPoint_e0da0d1c",
+      "XInterface_8f010a43",
+      "typing.Tuple[object, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[object, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.lang.XConnectionPoint"
+      ]
+    },
+    "name": "XConnectionPointContainer",
+    "imports": [],
+    "namespace": "com.sun.star.lang",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "makes it possible to locate a specific connection point for a specified UIK and manages a sequence of connections points.",
+      "",
+      "An implementation of this interface must support the com.sun.star.uno.XWeak interface. Look at the language binding for a superclass or something else."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1lang_1_1XConnectionPointContainer.html",
+    "items": {
+      "methods": [
+        {
+          "name": "advise",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "creates a connection between this object and a client's sink, where the sink implements the outgoing interface specified with ID.",
+            "",
+            "The interface is advised under the connection point you get with queryConnectionPoint( id ).",
+            "",
+            "Use this method instead of the advise method at the connection point, only if you know that the broadcaster supports the outgoing interface, or if it does not matter that the outgoing interface is not supported."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aType",
+              "type": "object",
+              "direction": "in",
+              "origin": "type"
+            },
+            {
+              "name": "xListener",
+              "type": "XInterface_8f010a43",
+              "direction": "in",
+              "origin": "com.sun.star.uno.XInterface"
+            }
+          ]
+        },
+        {
+          "name": "getConnectionPointTypes",
+          "returns": "typing.Tuple[object, ...]",
+          "returns_origin": "sequence< type >",
+          "desc": [],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "queryConnectionPoint",
+          "returns": "XConnectionPoint_e0da0d1c",
+          "returns_origin": "com.sun.star.lang.XConnectionPoint",
+          "desc": [],
+          "raises": [],
+          "args": [
+            {
+              "name": "aType",
+              "type": "object",
+              "direction": "in",
+              "origin": "type"
+            }
+          ]
+        },
+        {
+          "name": "unadvise",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "terminates a notification previously set up with advise at the container or at the suitable connection point."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aType",
+              "type": "object",
+              "direction": "in",
+              "origin": "type"
+            },
+            {
+              "name": "xListener",
+              "type": "XInterface_8f010a43",
+              "direction": "in",
+              "origin": "com.sun.star.uno.XInterface"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

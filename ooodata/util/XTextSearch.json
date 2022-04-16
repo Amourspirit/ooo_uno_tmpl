@@ -1,0 +1,149 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XTextSearch",
+  "type": "interface",
+  "namespace": "com.sun.star.util",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".search_options",
+        "SearchOptions",
+        "SearchOptions_bd140c08"
+      ],
+      [
+        ".search_result",
+        "SearchResult",
+        "SearchResult_b1070b9b"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "SearchOptions_bd140c08",
+      "SearchResult_b1070b9b"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.util.SearchOptions",
+        "com.sun.star.util.SearchResult"
+      ]
+    },
+    "name": "XTextSearch",
+    "imports": [],
+    "namespace": "com.sun.star.util",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "enables an object to search in its content."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1util_1_1XTextSearch.html",
+    "items": {
+      "methods": [
+        {
+          "name": "searchBackward",
+          "returns": "SearchResult_b1070b9b",
+          "returns_origin": "com.sun.star.util.SearchResult",
+          "desc": [
+            "search backward in the searchStr, starts at startPos and ends by endpos.",
+            "",
+            "The endpos must be lower than the startpos, because the function searches backward! The result is returned in the SearchResult."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "searchStr",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "startPos",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "endPos",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "searchForward",
+          "returns": "SearchResult_b1070b9b",
+          "returns_origin": "com.sun.star.util.SearchResult",
+          "desc": [
+            "search forward in the searchStr, starts at startPos and ends by endpos.",
+            "",
+            "The result is returned in the SearchResult."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "searchStr",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "startPos",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "endPos",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "setOptions",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "set the options for the forward or backward search."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "options",
+              "type": "SearchOptions_bd140c08",
+              "direction": "in",
+              "origin": "com.sun.star.util.SearchOptions"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

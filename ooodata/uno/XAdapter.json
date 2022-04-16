@@ -1,0 +1,112 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XAdapter",
+  "type": "interface",
+  "namespace": "com.sun.star.uno",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_reference",
+        "XReference",
+        "XReference_8ecb0a41"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XInterface_8f010a43",
+      "XReference_8ecb0a41"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.uno.XReference"
+      ]
+    },
+    "name": "XAdapter",
+    "imports": [],
+    "namespace": "com.sun.star.uno",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "This is the server-side interface to a weak adapter.",
+      "",
+      "The implementation of XAdapter must know but not hold the adapted object, because it must not affect the lifetime of the adapted object."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1uno_1_1XAdapter.html",
+    "items": {
+      "methods": [
+        {
+          "name": "addReference",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "adds a reference to the adapter.",
+            "",
+            "All added references are called when the adapted object dies."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xRef",
+              "type": "XReference_8ecb0a41",
+              "direction": "in",
+              "origin": "com.sun.star.uno.XReference"
+            }
+          ]
+        },
+        {
+          "name": "queryAdapted",
+          "returns": "XInterface_8f010a43",
+          "returns_origin": "com.sun.star.uno.XInterface",
+          "desc": [
+            "queries the adapted object if it is alive."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "removeReference",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "removes a reference from the adapter."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xRef",
+              "type": "XReference_8ecb0a41",
+              "direction": "in",
+              "origin": "com.sun.star.uno.XReference"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,206 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XAnimatedSprite",
+  "type": "interface",
+  "namespace": "com.sun.star.rendering",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_sprite",
+        "XSprite",
+        "XSprite_b2470b95"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..geometry.real_point2_d",
+        "RealPoint2D",
+        "RealPoint2D_d6e70c78"
+      ],
+      [
+        ".render_state",
+        "RenderState",
+        "RenderState_e4490d27"
+      ],
+      [
+        ".view_state",
+        "ViewState",
+        "ViewState_cab30c62"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.rendering.XSprite": "XSprite_b2470b95"
+    },
+    "quote": [
+      "RealPoint2D_d6e70c78",
+      "RenderState_e4490d27",
+      "ViewState_cab30c62"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.rendering.XSprite"
+      ],
+      "typing": [
+        "com.sun.star.geometry.RealPoint2D",
+        "com.sun.star.rendering.RenderState",
+        "com.sun.star.rendering.ViewState"
+      ]
+    },
+    "name": "XAnimatedSprite",
+    "imports": [],
+    "namespace": "com.sun.star.rendering",
+    "extends": [
+      "com.sun.star.rendering.XSprite"
+    ],
+    "desc": [
+      "This interface can be used to control an animated sprite object.",
+      "",
+      "This interface can be used to control an animated sprite object on an XSpriteCanvas. Sprites are moving, animated objects.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.0"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1rendering_1_1XAnimatedSprite.html",
+    "items": {
+      "methods": [
+        {
+          "name": "resetAnimation",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Reset the animation sequence to start with the first frame.",
+            "",
+            "If the animation is currently running, the next frame that is drawn after this method has finished, will be the first one. Please note that if an animation is not started, the associated XSpriteCanvas does not update changed sprites automatically."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setAll",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Changes all of the sprite's attributes at one atomic instance.",
+            "",
+            "This is useful at times where one does not want multiple redraws for every state change.",
+            "",
+            "Please note that if an animation is not started, the associated XSpriteCanvas does not update changed sprites automatically, but has to be told to do so via XSpriteCanvas.updateScreen()."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "aNewPos",
+              "type": "RealPoint2D_d6e70c78",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.RealPoint2D"
+            },
+            {
+              "name": "aViewState",
+              "type": "ViewState_cab30c62",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.ViewState"
+            },
+            {
+              "name": "aRenderState",
+              "type": "RenderState_e4490d27",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.RenderState"
+            },
+            {
+              "name": "nAlpha",
+              "type": "float",
+              "direction": "in",
+              "origin": "double"
+            },
+            {
+              "name": "bUpdateAnimation",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
+          ]
+        },
+        {
+          "name": "setViewState",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Changes the view state in place for this sprite's animation.",
+            "",
+            "The state given here is used when calling the XAnimation.render() method, or when drawing the sprite's bitmaps, respectively. There's no need to call XSpriteCanvas.updateAnimation() after this method, as it automatically rerenders, if necessary. Please note that if an animation is not started, the associated XSpriteCanvas does not update changed sprites automatically, but has to be told to do so via XSpriteCanvas.updateScreen()."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "aViewState",
+              "type": "ViewState_cab30c62",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.ViewState"
+            }
+          ]
+        },
+        {
+          "name": "startAnimation",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Start animation sequence of this sprite.",
+            "",
+            "The speed of the animation is given in cycles per second (where a cycle is defined as one full animation run, i.e. the full [0,1] range of the XAnimation.render()'s t parameter, or a full sequence of sprite bitmaps drawn). Once an animation is running, the associated XSpriteCanvas handles screen updates automatically. That means, changes to position or alpha are reflected on screen automatically. Please note further that sprite visibility and animation are unrelated, i.e. a hidden sprite can have a running animation, which then displays in the middle of the animation sequence, when a show() is called later on."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "nSpeed",
+              "type": "float",
+              "direction": "in",
+              "origin": "double"
+            }
+          ]
+        },
+        {
+          "name": "stopAnimation",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Stop the animation sequence.",
+            "",
+            "A subsequent XAnimatedSprite.startAnimation() will commence the sequence at the point where it was stopped with here. Once an animation is stopped, the associated XSpriteCanvas does not update changed sprites anymore."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "updateAnimation",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Issue an additional render call to this sprite's animation.",
+            "",
+            "This method has no effect when called for a bitmap-sequence sprite. Please note that if an animation is not started, the associated XSpriteCanvas does not update changed sprites automatically, but has to be told to do so via XSpriteCanvas.updateScreen()."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

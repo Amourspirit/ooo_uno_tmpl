@@ -1,0 +1,77 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "VBAScriptEventId",
+  "type": "const",
+  "namespace": "com.sun.star.script.vba",
+  "parser_args": {
+    "sort": false,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "hex": false,
+    "flags": false,
+    "include_desc": true
+  },
+  "data": {
+    "name": "VBAScriptEventId",
+    "namespace": "com.sun.star.script.vba",
+    "url": "https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1script_1_1vba_1_1VBAScriptEventId.html",
+    "flags": false,
+    "base_class": "ConstIntBase",
+    "allow_db": true,
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "from_imports": [],
+    "from_imports_typing": [],
+    "fullname": "com.sun.star.script.vba.VBAScriptEventId",
+    "desc": [
+      "Identifies a VBA script event fired via XVBACompatibility.broadcastVBAScriptEvent(), and received by XVBAScriptListener.notifyVBAScriptEvent()."
+    ],
+    "items": [
+      {
+        "name": "SCRIPT_STARTED",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 0,
+        "lines": [
+          "This event is fired when a VBA script in the current document has been started.",
+          "",
+          "Several scripts may run simultaneously, e.g. when a running script triggers a document event that starts another script.",
+          "",
+          "The number of running scripts can be obtained via XVBACompatibility.RunningVBAScripts. The number returned there will already contain the new script notified with this event.",
+          "",
+          "The member VBAScriptEvent.ModuleName of the event object will contain the name of the code module that contains the started script."
+        ]
+      },
+      {
+        "name": "SCRIPT_STOPPED",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 1,
+        "lines": [
+          "This event is fired when a VBA script in the current document stops running.",
+          "",
+          "Several scripts may run simultaneously, e.g. when a running script triggers a document event that starts another script.",
+          "",
+          "The number of scripts still running can be obtained via XVBACompatibility.RunningVBAScripts. The number returned there will not contain the stopped script notified with this event anymore.",
+          "",
+          "The member VBAScriptEvent.ModuleName of the event object will contain the name of the code module that contains the script that has been stopped."
+        ]
+      },
+      {
+        "name": "INITIALIZE_USERFORM",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 2,
+        "lines": [
+          "This event is fired when a VBA script in the current document tries to instantiate a userform.",
+          "",
+          "The member VBAScriptEvent.ModuleName of the event object will contain the name of the userform module."
+        ]
+      }
+    ]
+  }
+}

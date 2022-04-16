@@ -1,0 +1,117 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XTransferable",
+  "type": "interface",
+  "namespace": "com.sun.star.datatransfer",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".data_flavor",
+        "DataFlavor",
+        "DataFlavor_ffd30deb"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "DataFlavor_ffd30deb",
+      "typing.Tuple[DataFlavor_ffd30deb, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[DataFlavor_ffd30deb, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.datatransfer.DataFlavor"
+      ]
+    },
+    "name": "XTransferable",
+    "imports": [],
+    "namespace": "com.sun.star.datatransfer",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "Interface to be implemented by objects used to provide data for a data transfer operation."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1datatransfer_1_1XTransferable.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getTransferData",
+          "returns": "object",
+          "returns_origin": "any",
+          "desc": [
+            "Called by a data consumer to obtain data from the source in a specified format."
+          ],
+          "raises": [
+            "UnsupportedFlavorException",
+            "com.sun.star.io.IOException"
+          ],
+          "args": [
+            {
+              "name": "aFlavor",
+              "type": "DataFlavor_ffd30deb",
+              "direction": "in",
+              "origin": "com.sun.star.datatransfer.DataFlavor"
+            }
+          ]
+        },
+        {
+          "name": "getTransferDataFlavors",
+          "returns": "typing.Tuple[DataFlavor_ffd30deb, ...]",
+          "returns_origin": "sequence< DataFlavor >",
+          "desc": [
+            "Returns a sequence of supported DataFlavor."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "isDataFlavorSupported",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "Checks if the data object supports the specified data flavor.",
+            "",
+            "A value of FALSE if the DataFlavor is unsupported by the transfer source.",
+            "",
+            "Note: This method is only for analogy with the JAVA Clipboard interface. To avoid many calls, the caller should instead use com.sun.star.datatransfer.XTransferable.getTransferDataFlavors()."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aFlavor",
+              "type": "DataFlavor_ffd30deb",
+              "direction": "in",
+              "origin": "com.sun.star.datatransfer.DataFlavor"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

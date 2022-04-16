@@ -1,0 +1,99 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XAsyncJob",
+  "type": "interface",
+  "namespace": "com.sun.star.task",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..beans.named_value",
+        "NamedValue",
+        "NamedValue_a37a0af3"
+      ],
+      [
+        ".x_job_listener",
+        "XJobListener",
+        "XJobListener_af600b74"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XJobListener_af600b74",
+      "typing.Tuple[NamedValue_a37a0af3, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[NamedValue_a37a0af3, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.beans.NamedValue",
+        "com.sun.star.task.XJobListener"
+      ]
+    },
+    "name": "XAsyncJob",
+    "imports": [],
+    "namespace": "com.sun.star.task",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "specifies a job which must be executed asynchronously",
+      "",
+      "Instead of XJob the implementation of this interface must be aware, that execution can be made real asynchronous (e.g. by using threads). Because the environment wish to have creation and using of threads under control, it's not allowed for a real job implementation to use such mechanism by itself. The outside code decide, if it's possible and how it can be made asynchronous. In some special cases it can be, that asynchronous jobs will be executed synchronously."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1task_1_1XAsyncJob.html",
+    "items": {
+      "methods": [
+        {
+          "name": "executeAsync",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "executes the job asynchronously"
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "Arguments",
+              "type": "typing.Tuple[NamedValue_a37a0af3, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.NamedValue >"
+            },
+            {
+              "name": "Listener",
+              "type": "XJobListener_af600b74",
+              "direction": "in",
+              "origin": "com.sun.star.task.XJobListener"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

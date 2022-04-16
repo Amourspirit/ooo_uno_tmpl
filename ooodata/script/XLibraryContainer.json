@@ -1,0 +1,179 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XLibraryContainer",
+  "type": "interface",
+  "namespace": "com.sun.star.script",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..container.x_name_access",
+        "XNameAccess",
+        "XNameAccess_e2ab0cf6"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..container.x_name_container",
+        "XNameContainer",
+        "XNameContainer_cb90e47"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.container.XNameAccess": "XNameAccess_e2ab0cf6"
+    },
+    "quote": [
+      "XNameAccess_e2ab0cf6",
+      "XNameContainer_cb90e47"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.container.XNameAccess"
+      ],
+      "typing": [
+        "com.sun.star.container.XNameContainer"
+      ]
+    },
+    "name": "XLibraryContainer",
+    "imports": [],
+    "namespace": "com.sun.star.script",
+    "extends": [
+      "com.sun.star.container.XNameAccess"
+    ],
+    "desc": [
+      "Provides access to a library system."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1script_1_1XLibraryContainer.html",
+    "items": {
+      "methods": [
+        {
+          "name": "createLibrary",
+          "returns": "XNameContainer_cb90e47",
+          "returns_origin": "com.sun.star.container.XNameContainer",
+          "desc": [
+            "Creates a new library."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.container.ElementExistException"
+          ],
+          "args": [
+            {
+              "name": "Name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "createLibraryLink",
+          "returns": "XNameAccess_e2ab0cf6",
+          "returns_origin": "com.sun.star.container.XNameAccess",
+          "desc": [
+            "Creates a link to an \\\"external\\\" library that then can be accessed using this library manager.",
+            "",
+            "The format of the StorageURL is a matter of the implementation. If the read only flag is set, the linked library cannot be modified. In this case, the returned interface really is only an XNameAccess. If ReadOnly is false (and the referenced storage allows write access) the returned interface also can be a com.sun.star.container.XNameContainer."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.container.ElementExistException"
+          ],
+          "args": [
+            {
+              "name": "Name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "StorageURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "ReadOnly",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
+          ]
+        },
+        {
+          "name": "isLibraryLoaded",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "returns true if the accessed library is already loaded from the storage, otherwise false."
+          ],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException"
+          ],
+          "args": [
+            {
+              "name": "Name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "loadLibrary",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Causes the accessed library to be loaded from its storage if it hasn't already been loaded."
+          ],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException",
+            "com.sun.star.lang.WrappedTargetException"
+          ],
+          "args": [
+            {
+              "name": "Name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "removeLibrary",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "removes the library item with the specified name.",
+            "",
+            "If the accessed library item is a link only the link is removed, not the target library."
+          ],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException",
+            "com.sun.star.lang.WrappedTargetException"
+          ],
+          "args": [
+            {
+              "name": "Name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

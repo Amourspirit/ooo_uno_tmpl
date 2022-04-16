@@ -1,0 +1,115 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XControlAccess",
+  "type": "interface",
+  "namespace": "com.sun.star.ui.dialogs",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "...uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": []
+    },
+    "name": "XControlAccess",
+    "imports": [],
+    "namespace": "com.sun.star.ui.dialogs",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "Generic control access interface.",
+      "",
+      "Use this interface to access user interface controls supported by the implementing service. The supported controls, control properties and the appropriate values are documented in the description of the implementing service.",
+      "",
+      "**since**",
+      "",
+      "    OOo 1.1.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ui_1_1dialogs_1_1XControlAccess.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getControlProperty",
+          "returns": "object",
+          "returns_origin": "any",
+          "desc": [
+            "Query for a control property."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "aControlName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aControlProperty",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "setControlProperty",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Change a control property."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "aControlName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aControlProperty",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aValue",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

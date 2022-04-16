@@ -1,0 +1,353 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XUndoManager",
+  "type": "interface",
+  "namespace": "com.sun.star.document",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..container.x_child",
+        "XChild",
+        "XChild_a6390b07"
+      ],
+      [
+        "..util.x_lockable",
+        "XLockable",
+        "XLockable_8f330a3b"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_undo_action",
+        "XUndoAction",
+        "XUndoAction_d6580cb3"
+      ],
+      [
+        ".x_undo_manager_listener",
+        "XUndoManagerListener",
+        "XUndoManagerListener_5a3b1056"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.container.XChild": "XChild_a6390b07",
+      "com.sun.star.util.XLockable": "XLockable_8f330a3b"
+    },
+    "quote": [
+      "XUndoAction_d6580cb3",
+      "XUndoManagerListener_5a3b1056",
+      "typing.Tuple[str, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[str, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.container.XChild",
+        "com.sun.star.util.XLockable"
+      ],
+      "typing": [
+        "com.sun.star.document.XUndoAction",
+        "com.sun.star.document.XUndoManagerListener"
+      ]
+    },
+    "name": "XUndoManager",
+    "imports": [],
+    "namespace": "com.sun.star.document",
+    "extends": [
+      "com.sun.star.util.XLockable",
+      "com.sun.star.container.XChild"
+    ],
+    "desc": [
+      "provides access to the undo/redo stacks of a document",
+      "",
+      "Changes to a document usually result in recording of information how to undo those changes, if desired. A so-called undo action records the information how to undo a single change. Undo actions are maintained in a stack, so that the changes they represent can be undo in the reverse order they have originally been applied.",
+      "",
+      "Additionally, the Undo manager manages a Redo stack: Actions which are undone are moved from the Undo to the Redo stack, so it is possible to re-apply the changes to the document.",
+      "",
+      "For collecting multiple changes in a single undo action, so-called Undo contexts are provided. When an Undo context is entered, all subsequently added Undo actions are not pushed onto the undo stack directly, but considered a sub action of the Undo context. Once the Undo context is left, a single undo action is pushed onto the undo stack, which comprises all those single Undo actions.",
+      "Undo contexts can be arbitrarily nested.",
+      "",
+      "Hidden Undo actions are those which in no observable way contribute to the undo stack. That is, any method retrieving information about the stack will behave as if the undo action does not exist. Nonetheless, calling undo() respectively redo() will include those actions.",
+      "Hidden Undo actions can be created by calling enterHiddenUndoContext(), following by leaveUndoContext().",
+      "",
+      "An Undo manager can be locked and unlocked, using the XLockable.lock() and XLockable.unlock() methods. When it is locked, then every attempt to add an undo action, or to enter or leave an Undo context, will be silently ignored.",
+      "",
+      "**since**",
+      "",
+      "    OOo 3.4"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1document_1_1XUndoManager.html",
+    "items": {
+      "methods": [
+        {
+          "name": "addUndoAction",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "adds the given undo action to the undo stack.",
+            "",
+            "The redo stack is cleared when a new action is pushed onto the undo stack.",
+            "",
+            "The Undo manager takes ownership of any actions pushed onto the undo stack. This means that if the action is finally removed from the Undo manager's control (e.g. by calling clear() resp. clearRedo()), it will be disposed, as long as it supports the com.sun.star.lang.XComponent interface.",
+            "",
+            "If the Undo manager is locked at the moment the method is called, the call will be ignored, and the undo action will immediately be disposed, if applicable."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "iAction",
+              "type": "XUndoAction_d6580cb3",
+              "direction": "in",
+              "origin": "com.sun.star.document.XUndoAction"
+            }
+          ]
+        },
+        {
+          "name": "addUndoManagerListener",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "adds a listener to be notified of changes in the Undo/Redo stacks."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "iListener",
+              "type": "XUndoManagerListener_5a3b1056",
+              "direction": "in",
+              "origin": "com.sun.star.document.XUndoManagerListener"
+            }
+          ]
+        },
+        {
+          "name": "clear",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "clears the undo and the redo stack.",
+            "",
+            "All actions will be removed from both the Undo and the Redo stack. Actions which implement the com.sun.star.lang.XComponent interface will be disposed."
+          ],
+          "raises": [
+            "com.sun.star.document.UndoContextNotClosedException"
+          ],
+          "args": []
+        },
+        {
+          "name": "clearRedo",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "clears the redo stack.",
+            "",
+            "All actions will be removed from the Redo stack. Actions which implement the com.sun.star.lang.XComponent interface will be disposed."
+          ],
+          "raises": [
+            "com.sun.star.document.UndoContextNotClosedException"
+          ],
+          "args": []
+        },
+        {
+          "name": "enterHiddenUndoContext",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "enters a new undo context, creating a hidden undo action.",
+            "",
+            "A hidden undo action does not, in any visible way, contribute to the undo stack. This means that",
+            "",
+            "A new undo action will be added to the undo stack. As long as the context is not left, every undo action added to the stack will be treated as sub action. This means it will not be directly accessible at the undo manager, not appear in any user interface, and cannot be separately undone or re-done.",
+            "",
+            "Each call to enterHiddenUndoContext must be paired by a call to leaveUndoContext(), otherwise, the document's undo stack is left in an inconsistent state.",
+            "",
+            "Undo contexts can be nested, i.e. it is legitimate to call enterUndoContext() and enterHiddenUndoContext multiple times without calling leaveUndoContext() inbetween."
+          ],
+          "raises": [
+            "EmptyUndoStackException"
+          ],
+          "args": []
+        },
+        {
+          "name": "enterUndoContext",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "enters a new undo context.",
+            "",
+            "A new undo action will be added to the undo stack, with the title given as iTitle. As long as the context is not left, every undo action added to the stack will be treated as sub action. This means it will not be directly accessible at the Undo manager, not appear in any user interface, and cannot be separately undone or re-done.",
+            "",
+            "Each call to enterUndoContext must be paired by a call to leaveUndoContext(), otherwise, the document's undo stack is left in an inconsistent state.",
+            "",
+            "Undo contexts can be nested, i.e. it is legitimate to call enterUndoContext and enterHiddenUndoContext() multiple times without calling leaveUndoContext() inbetween."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "iTitle",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "getAllRedoActionTitles",
+          "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
+          "desc": [
+            "returns the titles of all actions currently on the Redo stack, from top to bottom"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getAllUndoActionTitles",
+          "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
+          "desc": [
+            "returns the titles of all actions currently on the undo stack, from top to bottom"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getCurrentRedoActionTitle",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "returns the title of the top-most action on the Redo stack"
+          ],
+          "raises": [
+            "com.sun.star.document.EmptyUndoStackException"
+          ],
+          "args": []
+        },
+        {
+          "name": "getCurrentUndoActionTitle",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "returns the title of the top-most action on the undo stack"
+          ],
+          "raises": [
+            "com.sun.star.document.EmptyUndoStackException"
+          ],
+          "args": []
+        },
+        {
+          "name": "isRedoPossible",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "determines whether redo() can reasonably be expected to succeed."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "isUndoPossible",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "determines whether undo() can reasonably be expected to succeed."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "leaveUndoContext",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "leaves the undo context previously opened via enterUndoContext() respectively enterHiddenUndoContext().",
+            "",
+            "If no undo action has been added since the context has been opened, the context is not only left, but silently removed, and does not contribute to the undo stack at all. In this case, possible listeners will be notified via XUndoManagerListener.cancelledContext().",
+            "",
+            "Otherwise, the undo context will be closed, and added to the Undo stack; the redo stack will be cleared, and listeners will be notified via XUndoManagerListener.leftContext() resp. XUndoManagerListener.leftHiddenContext()"
+          ],
+          "raises": [
+            "com.sun.star.util.InvalidStateException"
+          ],
+          "args": []
+        },
+        {
+          "name": "redo",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "replays the action on the document which has most recently been undone",
+            "",
+            "Effectively, invoking this method will"
+          ],
+          "raises": [
+            "com.sun.star.document.EmptyUndoStackException",
+            "com.sun.star.document.UndoContextNotClosedException",
+            "com.sun.star.document.UndoFailedException"
+          ],
+          "args": []
+        },
+        {
+          "name": "removeUndoManagerListener",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "removes a previously added listener"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "iListener",
+              "type": "XUndoManagerListener_5a3b1056",
+              "direction": "in",
+              "origin": "com.sun.star.document.XUndoManagerListener"
+            }
+          ]
+        },
+        {
+          "name": "reset",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "resets the Undo manager",
+            "",
+            "In particular, this method will",
+            "",
+            "Note that possible listeners will not get notifications for the single parts of the reset, i.e. there will be no single XUndoManagerListener.allActionsCleared(), XUndoManagerListener.leftContext(), etc., notifications. Instead, listeners will be notified of the reset by calling their XUndoManagerListener.resetAll() method."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "undo",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "reverts the most recent action on the document.",
+            "",
+            "Effectively, invoking this method will"
+          ],
+          "raises": [
+            "com.sun.star.document.EmptyUndoStackException",
+            "com.sun.star.document.UndoContextNotClosedException",
+            "com.sun.star.document.UndoFailedException"
+          ],
+          "args": []
+        }
+      ]
+    }
+  }
+}

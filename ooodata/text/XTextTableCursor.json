@@ -1,0 +1,245 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XTextTableCursor",
+  "type": "interface",
+  "namespace": "com.sun.star.text",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": []
+    },
+    "name": "XTextTableCursor",
+    "imports": [],
+    "namespace": "com.sun.star.text",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "The TextTableCursor provide methods to navigate through the table structure, to merge and split cells."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1text_1_1XTextTableCursor.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getRangeName",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "The name is the cell name of the top left table cell of the range concatenated by \\\":\\\" with the table cell name of the bottom left table cell of the cell range. If the range consists of one table cell only then the name of that table cell is returned."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "goDown",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "moves the cursor to the bottom neighbor cell."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "nCount",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "bExpand",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
+          ]
+        },
+        {
+          "name": "goLeft",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "moves the cursor to the left neighbor."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "nCount",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "bExpand",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
+          ]
+        },
+        {
+          "name": "goRight",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "moves the cursor to the right neighbor."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "nCount",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "bExpand",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
+          ]
+        },
+        {
+          "name": "goUp",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "moves the cursor to the top neighbor."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "nCount",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "bExpand",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
+          ]
+        },
+        {
+          "name": "gotoCellByName",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "moves the cursor to the cell with the specified name."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aCellName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "bExpand",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
+          ]
+        },
+        {
+          "name": "gotoEnd",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "moves the cursor to the bottom right cell of the table."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "bExpand",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
+          ]
+        },
+        {
+          "name": "gotoStart",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "moves the cursor to the top left cell of the table."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "bExpand",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
+          ]
+        },
+        {
+          "name": "mergeRange",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "merges the selected range of cells."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "splitRange",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "splits the range of cells."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "nCount",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "bHorizontal",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

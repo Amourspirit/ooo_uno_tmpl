@@ -1,0 +1,421 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "FillProperties",
+  "type": "service",
+  "namespace": "com.sun.star.drawing",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        "..awt.gradient",
+        "Gradient",
+        "Gradient_7a8a0982"
+      ],
+      [
+        "..awt.x_bitmap",
+        "XBitmap",
+        "XBitmap_70cd0909"
+      ],
+      [
+        ".bitmap_mode",
+        "BitmapMode",
+        "BitmapMode_bced0bd6"
+      ],
+      [
+        ".fill_style",
+        "FillStyle",
+        "FillStyle_b1460b8c"
+      ],
+      [
+        ".hatch",
+        "Hatch",
+        "Hatch_859b09dc"
+      ],
+      [
+        ".rectangle_point",
+        "RectanglePoint",
+        "RectanglePoint_f0ff0d93"
+      ],
+      [
+        "..text.graphic_crop",
+        "GraphicCrop",
+        "GraphicCrop_a58e0b1f"
+      ],
+      [
+        "..util.color",
+        "Color",
+        "Color_68e908c5"
+      ]
+    ],
+    "extends_map": {},
+    "quote": [
+      "BitmapMode_bced0bd6",
+      "Color_68e908c5",
+      "FillStyle_b1460b8c",
+      "Gradient_7a8a0982",
+      "GraphicCrop_a58e0b1f",
+      "Hatch_859b09dc",
+      "RectanglePoint_f0ff0d93",
+      "XBitmap_70cd0909"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.awt.Gradient",
+        "com.sun.star.awt.XBitmap",
+        "com.sun.star.drawing.BitmapMode",
+        "com.sun.star.drawing.FillStyle",
+        "com.sun.star.drawing.Hatch",
+        "com.sun.star.drawing.RectanglePoint",
+        "com.sun.star.text.GraphicCrop",
+        "com.sun.star.util.Color"
+      ]
+    },
+    "name": "FillProperties",
+    "imports": [],
+    "namespace": "com.sun.star.drawing",
+    "extends": [],
+    "desc": [
+      "This is a set of properties to describe the style for rendering an area.",
+      "",
+      "**since**",
+      "",
+      "    LibreOffice 4.3"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1drawing_1_1FillProperties.html",
+    "items": {
+      "properties": [
+        {
+          "name": "FillBackground",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "if this is TRUE, the transparent background of a hatch filled area is drawn in the current background color."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FillBitmap",
+          "returns": "XBitmap_70cd0909",
+          "origtype": "com.sun.star.awt.XBitmap",
+          "origin": "com.sun.star.awt.XBitmap",
+          "desc": [
+            "If the property FillStyle is set to FillStyle.BITMAP, this is the bitmap used."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FillBitmapLogicalSize",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "specifies if the size is given in percentage or as an absolute value.",
+            "",
+            "If this is TRUE, the properties FillBitmapSizeX and FillBitmapSizeY contain the size of the tile in percent of the size of the original bitmap. If this is FALSE, the size of the tile is specified with 1/100th mm."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FillBitmapMode",
+          "returns": "BitmapMode_bced0bd6",
+          "origtype": "com.sun.star.drawing.BitmapMode",
+          "origin": "com.sun.star.drawing.BitmapMode",
+          "desc": [
+            "this enum selects how an area is filled with a single bitmap.",
+            "",
+            "This property corresponds to the properties FillBitmapStretch and FillBitmapTile.",
+            "",
+            "If set to BitmapMode.REPEAT, the property FillBitmapStretch is set to FALSE, and the property FillBitmapTile is set to TRUE.",
+            "",
+            "If set to BitmapMode.STRETCH, the property FillBitmapStretch is set to TRUE, and the property FillBitmapTile is set to FALSE.",
+            "",
+            "If set to BitmapMode.NO_REPEAT, both properties FillBitmapStretch and FillBitmapTile are set to FALSE."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FillBitmapName",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "If the property FillStyle is set to FillStyle.BITMAP, this is the name of the used fill bitmap style."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FillBitmapOffsetX",
+          "returns": "int",
+          "origtype": null,
+          "origin": "short",
+          "desc": [
+            "Every second line of tiles is moved the given percent of the width of the bitmap."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FillBitmapOffsetY",
+          "returns": "int",
+          "origtype": null,
+          "origin": "short",
+          "desc": [
+            "Every second row of tiles is moved the given percent of the height of the bitmap."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FillBitmapPositionOffsetX",
+          "returns": "int",
+          "origtype": null,
+          "origin": "short",
+          "desc": [
+            "This is the horizontal offset where the tile starts.",
+            "",
+            "It is given in percent in relation to the width of the bitmap."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FillBitmapPositionOffsetY",
+          "returns": "int",
+          "origtype": null,
+          "origin": "short",
+          "desc": [
+            "This is the vertical offset where the tile starts.",
+            "",
+            "It is given in percent in relation to the height of the bitmap."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FillBitmapRectanglePoint",
+          "returns": "RectanglePoint_f0ff0d93",
+          "origtype": "com.sun.star.drawing.RectanglePoint",
+          "origin": "com.sun.star.drawing.RectanglePoint",
+          "desc": [
+            "The RectanglePoint specifies the position inside of the bitmap to use as the top left position for rendering."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FillBitmapSizeX",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "This is the width of the tile for filling.",
+            "",
+            "Depending on the property FillBitmapLogicalSize, this is either relative or absolute."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FillBitmapSizeY",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "This is the height of the tile for filling.",
+            "",
+            "Depending on the property FillBitmapLogicalSize, this is either relative or absolute."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FillBitmapStretch",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "if set, the fill bitmap is stretched to fill the area of the shape.",
+            "",
+            "This property should not be used anymore and is included here for completeness. The FillBitmapMode property can be used instead to set all supported bitmap modes.",
+            "",
+            "If set to TRUE, the value of the FillBitmapMode property changes to BitmapMode.STRETCH. BUT: behavior is undefined, if the property FillBitmapTile is TRUE too.",
+            "",
+            "If set to FALSE, the value of the FillBitmapMode property changes to BitmapMode.REPEAT or BitmapMode.NO_REPEAT, depending on the current value of the FillBitmapTile property."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FillBitmapTile",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "if set, the fill bitmap is repeated to fill the area of the shape.",
+            "",
+            "This property should not be used anymore and is included here for completeness. The FillBitmapMode property can be used instead to set all supported bitmap modes.",
+            "",
+            "If set to TRUE, the value of the FillBitmapMode property changes to BitmapMode.REPEAT. BUT: behavior is undefined, if the property FillBitmapStretch is TRUE too.",
+            "",
+            "If set to FALSE, the value of the FillBitmapMode property changes to BitmapMode.STRETCH or BitmapMode.NO_REPEAT, depending on the current value of the FillBitmapStretch property."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FillBitmapURL",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "If the property FillStyle is set to FillStyle.BITMAP, this is a URL to the bitmap used.",
+            "",
+            "Note the new behaviour since it this was deprecated: This property can only be set and only external URLs are supported (no more vnd.sun.star.GraphicObject scheme). When a URL is set, then it will load the bitmap and set the FillBitmap property."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FillColor",
+          "returns": "Color_68e908c5",
+          "origtype": "com.sun.star.util.Color",
+          "origin": "com.sun.star.util.Color",
+          "desc": [
+            "If the property FillStyle is set to FillStyle.SOLID, this is the color used."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FillGradient",
+          "returns": "Gradient_7a8a0982",
+          "origtype": "com.sun.star.awt.Gradient",
+          "origin": "com.sun.star.awt.Gradient",
+          "desc": [
+            "If the property FillStyle is set to FillStyle.GRADIENT, this describes the gradient used."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FillGradientName",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "If the property FillStyle is set to FillStyle.GRADIENT, this is the name of the used fill gradient style."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FillHatch",
+          "returns": "Hatch_859b09dc",
+          "origtype": "com.sun.star.drawing.Hatch",
+          "origin": "com.sun.star.drawing.Hatch",
+          "desc": [
+            "If the property FillStyle is set to FillStyle.HATCH, this describes the hatch used."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FillHatchName",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "If the property FillStyle is set to FillStyle.HATCH, this is the name of the used fill hatch style."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FillStyle",
+          "returns": "FillStyle_b1460b8c",
+          "origtype": "com.sun.star.drawing.FillStyle",
+          "origin": "com.sun.star.drawing.FillStyle",
+          "desc": [
+            "This enumeration selects the style the area will be filled with."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FillTransparence",
+          "returns": "int",
+          "origtype": null,
+          "origin": "short",
+          "desc": [
+            "This is the transparence of the filled area.",
+            "",
+            "This property is only valid if the property FillStyle is set to FillStyle.SOLID."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FillTransparenceGradient",
+          "returns": "Gradient_7a8a0982",
+          "origtype": "com.sun.star.awt.Gradient",
+          "origin": "com.sun.star.awt.Gradient",
+          "desc": [
+            "This describes the transparency of the fill area as a gradient."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FillTransparenceGradientName",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "If a gradient is used for transparency, this is the name of the used transparence gradient style or it is empty.",
+            "",
+            "If you set the name of a transparence gradient style contained in the document, this style used."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "GraphicCrop",
+          "returns": "GraphicCrop_a58e0b1f",
+          "origtype": "com.sun.star.text.GraphicCrop",
+          "origin": "com.sun.star.text.GraphicCrop",
+          "desc": [
+            "contains the cropping of the object.",
+            "",
+            "If the property FillBitmapMode is set to BitmapMode.STRETCH, this is the cropping, otherwise it is empty.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 4.3"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

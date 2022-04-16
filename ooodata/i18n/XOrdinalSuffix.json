@@ -1,0 +1,97 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XOrdinalSuffix",
+  "type": "interface",
+  "namespace": "com.sun.star.i18n",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..lang.locale",
+        "Locale",
+        "Locale_70d308fa"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "Locale_70d308fa",
+      "typing.Tuple[str, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[str, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.lang.Locale"
+      ]
+    },
+    "name": "XOrdinalSuffix",
+    "imports": [],
+    "namespace": "com.sun.star.i18n",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "provides access to locale specific ordinal suffix systems.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1i18n_1_1XOrdinalSuffix.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getOrdinalSuffix",
+          "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
+          "desc": [
+            "Returns all the possible ordinal suffixes for the number.",
+            "",
+            "This method will provide \\\"<b>st</b>\\\", \\\"<b>nd</b>\\\", \\\"<b>rd</b>\\\", \\\"<b>th</b>\\\" for an English locale, depending on the provided number. In some locales like French, Italian or Spanish it ca return several suffixes for one number.",
+            "",
+            "Examples: for the number '1', the values will be st in English, but er and re in French. All these values may depend on the underlying version of ICU."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "nNumber",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

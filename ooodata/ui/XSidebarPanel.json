@@ -1,0 +1,84 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XSidebarPanel",
+  "type": "interface",
+  "namespace": "com.sun.star.ui",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        ".layout_size",
+        "LayoutSize",
+        "LayoutSize_84cd09ff"
+      ]
+    ],
+    "extends_map": {},
+    "quote": [
+      "LayoutSize_84cd09ff"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.ui.LayoutSize"
+      ]
+    },
+    "name": "XSidebarPanel",
+    "imports": [],
+    "namespace": "com.sun.star.ui",
+    "extends": [],
+    "desc": [
+      "Optional interface of sidebar panels."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ui_1_1XSidebarPanel.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getHeightForWidth",
+          "returns": "LayoutSize_84cd09ff",
+          "returns_origin": "com.sun.star.ui.LayoutSize",
+          "desc": [
+            "For a given width of the container the layouter asks every ui element for its optimal height.",
+            "",
+            "The height to which a ui element is set may differ from the returned value.",
+            "",
+            "The height is set via the XWindow interface."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "nWidth",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "getMinimalWidth",
+          "returns": "int",
+          "returns_origin": "long",
+          "desc": [
+            "Minimal possible width of this panel in pixels.",
+            "",
+            "If this value is smaller than the maximum allowed size of the Sidebar (see config option 'org.openoffice.Office.UI.Sidebar.General.MaximumWidth'), the config option will be ignored and the new maximum Sidebar width will be getMinimalWidth() + 100px."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

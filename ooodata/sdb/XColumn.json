@@ -1,0 +1,379 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XColumn",
+  "type": "interface",
+  "namespace": "com.sun.star.sdb",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..container.x_name_access",
+        "XNameAccess",
+        "XNameAccess_e2ab0cf6"
+      ],
+      [
+        "..io.x_input_stream",
+        "XInputStream",
+        "XInputStream_98d40ab4"
+      ],
+      [
+        "..sdbc.x_array",
+        "XArray",
+        "XArray_708108fb"
+      ],
+      [
+        "..sdbc.x_blob",
+        "XBlob",
+        "XBlob_6773087b"
+      ],
+      [
+        "..sdbc.x_clob",
+        "XClob",
+        "XClob_6777087c"
+      ],
+      [
+        "..sdbc.x_ref",
+        "XRef",
+        "XRef_5f110819"
+      ],
+      [
+        "..util.date",
+        "Date",
+        "Date_60040844"
+      ],
+      [
+        "..util.date_time",
+        "DateTime",
+        "DateTime_84de09d3"
+      ],
+      [
+        "..util.time",
+        "Time",
+        "Time_604e0855"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "DateTime_84de09d3",
+      "Date_60040844",
+      "Time_604e0855",
+      "XArray_708108fb",
+      "XBlob_6773087b",
+      "XClob_6777087c",
+      "XInputStream_98d40ab4",
+      "XNameAccess_e2ab0cf6",
+      "XRef_5f110819",
+      "typing.Tuple[int, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[int, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.container.XNameAccess",
+        "com.sun.star.io.XInputStream",
+        "com.sun.star.sdbc.XArray",
+        "com.sun.star.sdbc.XBlob",
+        "com.sun.star.sdbc.XClob",
+        "com.sun.star.sdbc.XRef",
+        "com.sun.star.util.Date",
+        "com.sun.star.util.DateTime",
+        "com.sun.star.util.Time"
+      ]
+    },
+    "name": "XColumn",
+    "imports": [],
+    "namespace": "com.sun.star.sdb",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "is used to access data which is collected in a row."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sdb_1_1XColumn.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getArray",
+          "returns": "XArray_708108fb",
+          "returns_origin": "com.sun.star.sdbc.XArray",
+          "desc": [
+            "gets a SQL ARRAY value from the current row."
+          ],
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
+          "args": []
+        },
+        {
+          "name": "getBinaryStream",
+          "returns": "XInputStream_98d40ab4",
+          "returns_origin": "com.sun.star.io.XInputStream",
+          "desc": [
+            "gets the value of a column in the current row as a stream of uninterpreted bytes.",
+            "",
+            "The value can then be read in chunks from the stream. This method is particularly suitable for retrieving large LONGVARBINARY or LONGVARCHAR values.",
+            "",
+            "Note: All the data in the returned stream must be read prior to getting the value of any other column. The next call to a get method implicitly closes the stream. Also, a stream may return 0 when the method com.sun.star.io.XInputStream.available() is called whether there is data available or not."
+          ],
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
+          "args": []
+        },
+        {
+          "name": "getBlob",
+          "returns": "XBlob_6773087b",
+          "returns_origin": "com.sun.star.sdbc.XBlob",
+          "desc": [
+            "gets a BLOB (Binary Large OBject) value in the current row."
+          ],
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
+          "args": []
+        },
+        {
+          "name": "getBoolean",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "gets the value of a column in the current row as boolean."
+          ],
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
+          "args": []
+        },
+        {
+          "name": "getByte",
+          "returns": "int",
+          "returns_origin": "byte",
+          "desc": [
+            "gets the value of a column in the current row as a byte."
+          ],
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
+          "args": []
+        },
+        {
+          "name": "getBytes",
+          "returns": "typing.Tuple[int, ...]",
+          "returns_origin": "sequence< byte >",
+          "desc": [
+            "gets the value of a column in the current row as a byte array.",
+            "",
+            "The bytes represent the raw values returned by the driver."
+          ],
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
+          "args": []
+        },
+        {
+          "name": "getCharacterStream",
+          "returns": "XInputStream_98d40ab4",
+          "returns_origin": "com.sun.star.io.XInputStream",
+          "desc": [
+            "gets the value of a column in the current row as a stream of uninterpreted bytes.",
+            "",
+            "The value can then be read in chunks from the stream. This method is particularly suitable for retrieving large LONGVARCHAR values.",
+            "",
+            "Note: All the data in the returned stream must be read prior to getting the value of any other column. The next call to a get method implicitly closes the stream. Also, a stream may return 0 when the method com.sun.star.io.XInputStream.available() is called whether there is data available or not."
+          ],
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
+          "args": []
+        },
+        {
+          "name": "getClob",
+          "returns": "XClob_6777087c",
+          "returns_origin": "com.sun.star.sdbc.XClob",
+          "desc": [
+            "gets a CLOB value in the current row of this ResultSet object."
+          ],
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
+          "args": []
+        },
+        {
+          "name": "getDate",
+          "returns": "Date_60040844",
+          "returns_origin": "com.sun.star.util.Date",
+          "desc": [
+            "gets the value of a column in the current row as a date object."
+          ],
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
+          "args": []
+        },
+        {
+          "name": "getDouble",
+          "returns": "float",
+          "returns_origin": "double",
+          "desc": [
+            "gets the value of a column in the current row as a double."
+          ],
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
+          "args": []
+        },
+        {
+          "name": "getFloat",
+          "returns": "float",
+          "returns_origin": "float",
+          "desc": [
+            "gets the value of a column in the current row as a float."
+          ],
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
+          "args": []
+        },
+        {
+          "name": "getInt",
+          "returns": "int",
+          "returns_origin": "long",
+          "desc": [
+            "gets the value of a column in the current row as a long."
+          ],
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
+          "args": []
+        },
+        {
+          "name": "getLong",
+          "returns": "int",
+          "returns_origin": "hyper",
+          "desc": [
+            "gets the value of a column in the current row as a hyper."
+          ],
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
+          "args": []
+        },
+        {
+          "name": "getObject",
+          "returns": "object",
+          "returns_origin": "any",
+          "desc": [],
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
+          "args": [
+            {
+              "name": "typeMap",
+              "type": "XNameAccess_e2ab0cf6",
+              "direction": "in",
+              "origin": "com.sun.star.container.XNameAccess"
+            }
+          ]
+        },
+        {
+          "name": "getRef",
+          "returns": "XRef_5f110819",
+          "returns_origin": "com.sun.star.sdbc.XRef",
+          "desc": [
+            "gets a REF(<structured-type&gt) column value from the current row."
+          ],
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
+          "args": []
+        },
+        {
+          "name": "getShort",
+          "returns": "int",
+          "returns_origin": "short",
+          "desc": [
+            "gets the value of a column in the current row as a short."
+          ],
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
+          "args": []
+        },
+        {
+          "name": "getString",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "gets the value of a column in the current row as a String."
+          ],
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
+          "args": []
+        },
+        {
+          "name": "getTime",
+          "returns": "Time_604e0855",
+          "returns_origin": "com.sun.star.util.Time",
+          "desc": [
+            "gets the value of a column in the current row as a time object."
+          ],
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
+          "args": []
+        },
+        {
+          "name": "getTimestamp",
+          "returns": "DateTime_84de09d3",
+          "returns_origin": "com.sun.star.util.DateTime",
+          "desc": [
+            "gets the value of a column in the current row as a datetime object."
+          ],
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
+          "args": []
+        },
+        {
+          "name": "wasNull",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "reports whether the last column read had a value of SQL NULL.",
+            "",
+            "Note that you must first call getXXX on a column to try to read its value and then call wasNull() to see if the value read was SQL NULL."
+          ],
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
+          "args": []
+        }
+      ]
+    }
+  }
+}

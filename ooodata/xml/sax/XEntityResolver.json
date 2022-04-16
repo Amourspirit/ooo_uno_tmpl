@@ -1,0 +1,88 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XEntityResolver",
+  "type": "interface",
+  "namespace": "com.sun.star.xml.sax",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "...uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".input_source",
+        "InputSource",
+        "InputSource_c88c0c54"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "InputSource_c88c0c54"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.xml.sax.InputSource"
+      ]
+    },
+    "name": "XEntityResolver",
+    "imports": [],
+    "namespace": "com.sun.star.xml.sax",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "makes it possible to modify the behavior of resolving external preferences.",
+      "",
+      "Usually, the parser has a default behavior of resolving external references (See documentation of the parser implementation). Use this interface to modify or reimplement this behavior."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1xml_1_1sax_1_1XEntityResolver.html",
+    "items": {
+      "methods": [
+        {
+          "name": "resolveEntity",
+          "returns": "InputSource_c88c0c54",
+          "returns_origin": "com.sun.star.xml.sax.InputSource",
+          "desc": [
+            "If aInputStream is a valid reference to an input stream, the parser uses this InputSource. Otherwise the parser seeks for the entity using its default behavior."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "sPublicId",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "sSystemId",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

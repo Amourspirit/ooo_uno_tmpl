@@ -1,0 +1,243 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "CaptionShape",
+  "type": "service",
+  "namespace": "com.sun.star.drawing",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".fill_properties",
+        "FillProperties",
+        "FillProperties_f1200da8"
+      ],
+      [
+        ".line_properties",
+        "LineProperties",
+        "LineProperties_f13f0da9"
+      ],
+      [
+        ".rotation_descriptor",
+        "RotationDescriptor",
+        "RotationDescriptor_2cec0f63"
+      ],
+      [
+        ".shadow_properties",
+        "ShadowProperties",
+        "ShadowProperties_e350e87"
+      ],
+      [
+        ".shape",
+        "Shape",
+        "Shape_85cc09e5"
+      ],
+      [
+        ".text",
+        "Text",
+        "Text_7c140999"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..awt.point",
+        "Point",
+        "Point_5fb2085e"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.drawing.FillProperties": "FillProperties_f1200da8",
+      "com.sun.star.drawing.LineProperties": "LineProperties_f13f0da9",
+      "com.sun.star.drawing.RotationDescriptor": "RotationDescriptor_2cec0f63",
+      "com.sun.star.drawing.ShadowProperties": "ShadowProperties_e350e87",
+      "com.sun.star.drawing.Shape": "Shape_85cc09e5",
+      "com.sun.star.drawing.Text": "Text_7c140999"
+    },
+    "quote": [
+      "Point_5fb2085e"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.drawing.FillProperties",
+        "com.sun.star.drawing.LineProperties",
+        "com.sun.star.drawing.RotationDescriptor",
+        "com.sun.star.drawing.ShadowProperties",
+        "com.sun.star.drawing.Shape",
+        "com.sun.star.drawing.Text"
+      ],
+      "typing": [
+        "com.sun.star.awt.Point"
+      ]
+    },
+    "name": "CaptionShape",
+    "imports": [],
+    "namespace": "com.sun.star.drawing",
+    "extends": [
+      "com.sun.star.drawing.Shape",
+      "com.sun.star.drawing.FillProperties",
+      "com.sun.star.drawing.LineProperties",
+      "com.sun.star.drawing.ShadowProperties",
+      "com.sun.star.drawing.Text",
+      "com.sun.star.drawing.RotationDescriptor"
+    ],
+    "desc": [
+      "The CaptionShape represents a rectangular drawing shape with an additional set of lines.",
+      "",
+      "It can be used as a description for a fixed point inside a drawing."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1drawing_1_1CaptionShape.html",
+    "items": {
+      "properties": [
+        {
+          "name": "CaptionAngle",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "This property specifies the escape angle of the line of a caption.",
+            "",
+            "It is only used if CaptionIsFixedAngle is set to TRUE"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CaptionEscapeAbsolute",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "This property specifies the absolute escape distance for the line of a caption."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CaptionEscapeDirection",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "This property specifies the escape direction for the line of a caption."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CaptionEscapeRelative",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "This property specifies the relative escape distance for the line of a caption."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CaptionGap",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "This property specifies the distance between the text area of the caption and the start of the line."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CaptionIsEscapeRelative",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "If this property is TRUE, the property CaptionEscapeRelative is used, else the property CaptionEscapeAbsolute is used."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CaptionIsFitLineLength",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "If this property is TRUE, the application determines the best possible length for the caption line."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CaptionIsFixedAngle",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "This property specifies if the escape angle of the line of a caption is fixed or free.",
+            "",
+            "If this is set to FALSE, the application can choose the best possible angle. If not, the value in CaptionAngle is used."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CaptionLineLength",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "This property specifies the length of the caption line."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CaptionPoint",
+          "returns": "Point_5fb2085e",
+          "origtype": "com.sun.star.awt.Point",
+          "origin": "com.sun.star.awt.Point",
+          "desc": [
+            "The caption point property specify the position of the point that is captioned.",
+            "",
+            "A set of lines are rendered from the caption area."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CaptionType",
+          "returns": "int",
+          "origtype": null,
+          "origin": "short",
+          "desc": [
+            "This property specifies the geometry of the line of a caption."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CornerRadius",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "This is the radius of the caption area corners."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,168 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XController",
+  "type": "interface",
+  "namespace": "com.sun.star.frame",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..lang.x_component",
+        "XComponent",
+        "XComponent_98dc0ab5"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_frame",
+        "XFrame",
+        "XFrame_7a570956"
+      ],
+      [
+        ".x_model",
+        "XModel",
+        "XModel_7a6e095c"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.lang.XComponent": "XComponent_98dc0ab5"
+    },
+    "quote": [
+      "XFrame_7a570956",
+      "XModel_7a6e095c"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.lang.XComponent"
+      ],
+      "typing": [
+        "com.sun.star.frame.XFrame",
+        "com.sun.star.frame.XModel"
+      ]
+    },
+    "name": "XController",
+    "imports": [],
+    "namespace": "com.sun.star.frame",
+    "extends": [
+      "com.sun.star.lang.XComponent"
+    ],
+    "desc": [
+      "With this interface, components viewed in a Frame can serve events (by supplying dispatches)."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XController.html",
+    "items": {
+      "methods": [
+        {
+          "name": "attachFrame",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "is called to attach the controller with its managing frame."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Frame",
+              "type": "XFrame_7a570956",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XFrame"
+            }
+          ]
+        },
+        {
+          "name": "attachModel",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "is called to attach the controller to a new model."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Model",
+              "type": "XModel_7a6e095c",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XModel"
+            }
+          ]
+        },
+        {
+          "name": "getFrame",
+          "returns": "XFrame_7a570956",
+          "returns_origin": "com.sun.star.frame.XFrame",
+          "desc": [
+            "provides access to owner frame of this controller"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getModel",
+          "returns": "XModel_7a6e095c",
+          "returns_origin": "com.sun.star.frame.XModel",
+          "desc": [
+            "provides access to currently attached model"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getViewData",
+          "returns": "object",
+          "returns_origin": "any",
+          "desc": [
+            "provides access to current view status"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "restoreViewData",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "restores the view status using the data gotten from a previous call to XController.getViewData()."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Data",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
+          ]
+        },
+        {
+          "name": "suspend",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "is called to prepare the controller for closing the view"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Suspend",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

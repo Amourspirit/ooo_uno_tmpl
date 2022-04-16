@@ -1,0 +1,433 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XListBox",
+  "type": "interface",
+  "namespace": "com.sun.star.awt",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_action_listener",
+        "XActionListener",
+        "XActionListener_c7560c50"
+      ],
+      [
+        ".x_item_listener",
+        "XItemListener",
+        "XItemListener_af710b81"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XActionListener_c7560c50",
+      "XItemListener_af710b81",
+      "typing.Tuple[int, ...]",
+      "typing.Tuple[str, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[int, ...]",
+      "typing.Tuple[str, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.awt.XActionListener",
+        "com.sun.star.awt.XItemListener"
+      ]
+    },
+    "name": "XListBox",
+    "imports": [],
+    "namespace": "com.sun.star.awt",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "gives access to the items of a list box and makes it possible to register item and action event listeners."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XListBox.html",
+    "items": {
+      "methods": [
+        {
+          "name": "addActionListener",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "registers a listener for action events."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "l",
+              "type": "XActionListener_c7560c50",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XActionListener"
+            }
+          ]
+        },
+        {
+          "name": "addItem",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "adds an item at the specified position."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aItem",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nPos",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
+          ]
+        },
+        {
+          "name": "addItemListener",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "registers a listener for item events."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "l",
+              "type": "XItemListener_af710b81",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XItemListener"
+            }
+          ]
+        },
+        {
+          "name": "addItems",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "adds multiple items at the specified position."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aItems",
+              "type": "typing.Tuple[str, ...]",
+              "direction": "in",
+              "origin": "sequence< string >"
+            },
+            {
+              "name": "nPos",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
+          ]
+        },
+        {
+          "name": "getDropDownLineCount",
+          "returns": "int",
+          "returns_origin": "short",
+          "desc": [
+            "returns the number of visible lines in drop down mode."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getItem",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "returns the item at the specified position."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "nPos",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
+          ]
+        },
+        {
+          "name": "getItemCount",
+          "returns": "int",
+          "returns_origin": "short",
+          "desc": [
+            "returns the number of items in the listbox."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getItems",
+          "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
+          "desc": [
+            "returns all items of the list box."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getSelectedItem",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "returns the currently selected item.",
+            "",
+            "When multiple items are selected, the first one is returned. When nothing is selected, an empty string is returned."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getSelectedItemPos",
+          "returns": "int",
+          "returns_origin": "short",
+          "desc": [
+            "returns the position of the currently selected item.",
+            "",
+            "When multiple items are selected, the position of the first one is returned. When nothing is selected, -1 is returned."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getSelectedItems",
+          "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
+          "desc": [
+            "returns all currently selected items."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getSelectedItemsPos",
+          "returns": "typing.Tuple[int, ...]",
+          "returns_origin": "sequence< short >",
+          "desc": [
+            "returns the positions of all currently selected items."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "isMutipleMode",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "returns TRUE if multiple items can be selected, FALSE if only one item can be selected."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "makeVisible",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "makes the item at the specified position visible by scrolling."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "nEntry",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
+          ]
+        },
+        {
+          "name": "removeActionListener",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "unregisters a listener for action events."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "l",
+              "type": "XActionListener_c7560c50",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XActionListener"
+            }
+          ]
+        },
+        {
+          "name": "removeItemListener",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "unregisters a listener for item events."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "l",
+              "type": "XItemListener_af710b81",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XItemListener"
+            }
+          ]
+        },
+        {
+          "name": "removeItems",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "removes a number of items at the specified position."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "nPos",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "nCount",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
+          ]
+        },
+        {
+          "name": "selectItem",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "selects/deselects the specified item."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aItem",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "bSelect",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
+          ]
+        },
+        {
+          "name": "selectItemPos",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "selects/deselects the item at the specified position."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "nPos",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "bSelect",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
+          ]
+        },
+        {
+          "name": "selectItemsPos",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "selects/deselects multiple items at the specified positions."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aPositions",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "in",
+              "origin": "sequence< short >"
+            },
+            {
+              "name": "bSelect",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
+          ]
+        },
+        {
+          "name": "setDropDownLineCount",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "sets the number of visible lines for drop down mode."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "nLines",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
+          ]
+        },
+        {
+          "name": "setMultipleMode",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "determines if only a single item or multiple items can be selected."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "bMulti",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,241 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XFilterController",
+  "type": "interface",
+  "namespace": "com.sun.star.form.runtime",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        "...awt.x_control",
+        "XControl",
+        "XControl_7a9c098d"
+      ],
+      [
+        ".x_filter_controller_listener",
+        "XFilterControllerListener",
+        "XFilterControllerListener_381416"
+      ]
+    ],
+    "extends_map": {},
+    "quote": [
+      "XControl_7a9c098d",
+      "XFilterControllerListener_381416",
+      "typing.Tuple[typing.Tuple[str, ...], ...]"
+    ],
+    "typings": [
+      "typing.Tuple[typing.Tuple[str, ...], ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.awt.XControl",
+        "com.sun.star.form.runtime.XFilterControllerListener"
+      ]
+    },
+    "name": "XFilterController",
+    "imports": [],
+    "namespace": "com.sun.star.form.runtime",
+    "extends": [],
+    "desc": [
+      "provides access to a form based filter for a database form",
+      "",
+      "In a form based filter, form controls bound to a searchable database field are replaced with a control which allows entering a search expression. This so-called predicate expression is basically a part of an SQL WHERE clause, but without the part denoting the database column. For instance, if you have a form control bound to a table column named Name, then entering the string LIKE 'Smith' effectively constitutes a SQL WHERE clause \\\"Name\\\" LIKE 'Smith'.",
+      "",
+      "In the actual document view, there are usually some relaxations to this. For instance, keywords such as LIKE might be localized, according to OpenOffice.org's UI locale. Also, for an equality criterion, the equality sign = is usually omitted. However, this interface here provides programmatic access to the form based filter, so those relaxations are not considered here.",
+      "",
+      "The filter maintained by a filter controller is, logically, a disjunctive normal form of an SQL WHERE class. That is, it is a disjunction of m terms, where each term is a conjunction of n clauses of the form <column> <predicate> <literal> or of the form <column> IS [NOT] NULL.",
+      "",
+      "n equals the number of filter controls which the filter controller is responsible for. This number doesn't change during one session of the form based filter. On the other hand, m, the number of disjunctive terms, is dynamic.",
+      "",
+      "With the above, there are potentially m * n predicate expressions (though usually only a fraction of those will actually exist). Since in a form based filter, there are only n filter controls, and each filter control displays exactly one predicate expression, this means that only a part of the complete filter can be displayed, in particular, only one disjunctive term can be displayed at a time. Thus, the filter controller knows the concept of an active term, denoted by the ActiveTerm attribute, controls which of the terms is currently displayed in the form controls.",
+      "",
+      "**since**",
+      "",
+      "    OOo 3.3"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1form_1_1runtime_1_1XFilterController.html",
+    "items": {
+      "methods": [
+        {
+          "name": "addFilterControllerListener",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "registers a listener to be notified of certain changes in the form based filter.",
+            "",
+            "Registering the same listener multiple times results in multiple notifications of the same event, and also requires multiple revocations of the listener."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Listener",
+              "type": "XFilterControllerListener_381416",
+              "direction": "in",
+              "origin": "com.sun.star.form.runtime.XFilterControllerListener"
+            }
+          ]
+        },
+        {
+          "name": "appendEmptyDisjunctiveTerm",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "appends an empty disjunctive term to the list of terms."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getFilterComponent",
+          "returns": "XControl_7a9c098d",
+          "returns_origin": "com.sun.star.awt.XControl",
+          "desc": [
+            "retrieves the filter component with the given index.",
+            "",
+            "The filter control has the same control model as the control which it stands in for. Consequently, you can use this method to obtain the database column which the filter control works on, by examining the control model's BoundField property."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            {
+              "name": "Component",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "getPredicateExpressions",
+          "returns": "typing.Tuple[typing.Tuple[str, ...], ...]",
+          "returns_origin": "sequence< sequence< string > >",
+          "desc": [
+            "retrieves the entirety of the predicate expressions represented by the filter controller.",
+            "",
+            "Each element of the returned sequence is a disjunctive term, having exactly FilterComponents elements, which denote the single predicate expressions of this term."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "removeDisjunctiveTerm",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "removes a given disjunctive term"
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            {
+              "name": "Term",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "removeFilterControllerListener",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "revokes a listener which was previously registered to be notified of certain changes in the form based filter."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Listener",
+              "type": "XFilterControllerListener_381416",
+              "direction": "in",
+              "origin": "com.sun.star.form.runtime.XFilterControllerListener"
+            }
+          ]
+        },
+        {
+          "name": "setPredicateExpression",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "sets a given predicate expression"
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            {
+              "name": "Component",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "Term",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "PredicateExpression",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        }
+      ],
+      "properties": [
+        {
+          "name": "ActiveTerm",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "denotes the active term of the filter controller."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "DisjunctiveTerms",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "is the number of disjunctive terms of the filter expression represented by the form based filter."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FilterComponents",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "is the number of filter components, or filter controls, which the filter controller is responsible for.",
+            "",
+            "This number is constant during one session of the form based filter."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

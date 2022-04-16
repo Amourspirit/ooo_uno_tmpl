@@ -1,0 +1,72 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XConfigurationChangeRequest",
+  "type": "interface",
+  "namespace": "com.sun.star.drawing.framework",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        ".x_configuration",
+        "XConfiguration",
+        "XConfiguration_8f0511a0"
+      ]
+    ],
+    "extends_map": {},
+    "quote": [
+      "XConfiguration_8f0511a0"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.drawing.framework.XConfiguration"
+      ]
+    },
+    "name": "XConfigurationChangeRequest",
+    "imports": [],
+    "namespace": "com.sun.star.drawing.framework",
+    "extends": [],
+    "desc": [
+      "A single explicit request for a configuration change.",
+      "",
+      "The requested change is committed to a configuration only when the execute() method is called. Configuration change requests are executed asynchronously. This is done to avoid reentrance problems with objects that are registered as XConfigurationChangeListener and at the same time make configuration change requests. When the requests were executed synchronously then the listeners would be notified of the changes while their request call has not yet returned.",
+      "",
+      "This interface is typically used internally by the XConfigurationController"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1drawing_1_1framework_1_1XConfigurationChangeRequest.html",
+    "items": {
+      "methods": [
+        {
+          "name": "execute",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Commit the configuration change request represented by the called object to the given configuration."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xConfiguration",
+              "type": "XConfiguration_8f0511a0",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.framework.XConfiguration"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

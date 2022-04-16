@@ -1,0 +1,109 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XRemoteContentProviderDistributor",
+  "type": "interface",
+  "namespace": "com.sun.star.ucb",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": []
+    },
+    "name": "XRemoteContentProviderDistributor",
+    "imports": [],
+    "namespace": "com.sun.star.ucb",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "Distribute a content broker to various XRemoteContentProviderAcceptors."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ucb_1_1XRemoteContentProviderDistributor.html",
+    "items": {
+      "methods": [
+        {
+          "name": "connectToRemoteAcceptor",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "Offer the local content broker to a remote content provider acceptor.",
+            "",
+            "The Uno Url is handed to the com.sun.star.bridge.UnoUrlResolver service, which is responsible for raising any of the advertised exceptions."
+          ],
+          "raises": [
+            "com.sun.star.connection.NoConnectException",
+            "com.sun.star.connection.ConnectionSetupException",
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "Url",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Identifier",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "disconnectFromAll",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Undo the offering of the local content broker to all remote content provider acceptors."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "disconnectFromRemoteAcceptor",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "Undo the offering of the local content broker to a specific remote content provider acceptor."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Url",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

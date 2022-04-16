@@ -1,0 +1,169 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XFrame2",
+  "type": "interface",
+  "namespace": "com.sun.star.frame",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_dispatch_information_provider",
+        "XDispatchInformationProvider",
+        "XDispatchInformationProvider_afb6126c"
+      ],
+      [
+        ".x_dispatch_provider",
+        "XDispatchProvider",
+        "XDispatchProvider_fc690de6"
+      ],
+      [
+        ".x_dispatch_provider_interception",
+        "XDispatchProviderInterception",
+        "XDispatchProviderInterception_c2a512da"
+      ],
+      [
+        ".x_frames_supplier",
+        "XFramesSupplier",
+        "XFramesSupplier_e12a0d1d"
+      ],
+      [
+        "..task.x_status_indicator_factory",
+        "XStatusIndicatorFactory",
+        "XStatusIndicatorFactory_49e4100c"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..container.x_name_container",
+        "XNameContainer",
+        "XNameContainer_cb90e47"
+      ],
+      [
+        ".x_dispatch_recorder_supplier",
+        "XDispatchRecorderSupplier",
+        "XDispatchRecorderSupplier_79301125"
+      ],
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.frame.XDispatchInformationProvider": "XDispatchInformationProvider_afb6126c",
+      "com.sun.star.frame.XDispatchProvider": "XDispatchProvider_fc690de6",
+      "com.sun.star.frame.XDispatchProviderInterception": "XDispatchProviderInterception_c2a512da",
+      "com.sun.star.frame.XFramesSupplier": "XFramesSupplier_e12a0d1d",
+      "com.sun.star.task.XStatusIndicatorFactory": "XStatusIndicatorFactory_49e4100c"
+    },
+    "quote": [
+      "XDispatchRecorderSupplier_79301125",
+      "XInterface_8f010a43",
+      "XNameContainer_cb90e47"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.frame.XDispatchInformationProvider",
+        "com.sun.star.frame.XDispatchProvider",
+        "com.sun.star.frame.XDispatchProviderInterception",
+        "com.sun.star.frame.XFramesSupplier",
+        "com.sun.star.task.XStatusIndicatorFactory"
+      ],
+      "typing": [
+        "com.sun.star.container.XNameContainer",
+        "com.sun.star.frame.XDispatchRecorderSupplier",
+        "com.sun.star.uno.XInterface"
+      ]
+    },
+    "name": "XFrame2",
+    "imports": [],
+    "namespace": "com.sun.star.frame",
+    "extends": [
+      "com.sun.star.frame.XDispatchProvider",
+      "com.sun.star.frame.XDispatchInformationProvider",
+      "com.sun.star.frame.XDispatchProviderInterception",
+      "com.sun.star.frame.XFramesSupplier",
+      "com.sun.star.task.XStatusIndicatorFactory"
+    ],
+    "desc": [
+      "",
+      "**since**",
+      "",
+      "    LibreOffice 4.1"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XFrame2.html",
+    "items": {
+      "properties": [
+        {
+          "name": "DispatchRecorderSupplier",
+          "returns": "XDispatchRecorderSupplier_79301125",
+          "origtype": "com.sun.star.frame.XDispatchRecorderSupplier",
+          "origin": "com.sun.star.frame.XDispatchRecorderSupplier",
+          "desc": [
+            "provides access to the dispatch recorder of the frame",
+            "",
+            "Such recorder can be used to record dispatch requests. The supplier contains a dispatch recorder and provide the functionality to use it for any dispatch object from outside which supports the interface XDispatch. A supplier is available only, if recording was enabled. That means: if someone wishes to enable recoding on a frame he must set a supplier with a recorder object inside of it. Every user of dispatches has to check then if such supplier is available at this frame property. If value of this property is NULL he must call XDispatch.dispatch() on the original dispatch object. If it's a valid value he must use the supplier by calling his method XDispatchRecorderSupplier.dispatchAndRecord() with the original dispatch object as argument.",
+            "",
+            "Note:",
+            "It's not recommended to cache an already gotten supplier. Because there exist no possibility to check for enabled/disabled recording then.",
+            "",
+            "**since**",
+            "",
+            "    OOo 1.1.2"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "LayoutManager",
+          "returns": "XInterface_8f010a43",
+          "origtype": "com.sun.star.uno.XInterface",
+          "origin": "com.sun.star.uno.XInterface",
+          "desc": [
+            "Provides access to the LayoutManager of the frame.",
+            "",
+            "This is actually of type XLayoutManager, but this API is still experimental (unpublished)."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Title",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "if possible it sets/gets the UI title on/from the frame container window",
+            "",
+            "It depends from the type of the frame container window. If it is a system task window all will be OK. Otherwise the title can't be set. Setting/getting of the pure value of this property must be possible in every case. Only showing on the UI can be fail."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "UserDefinedAttributes",
+          "returns": "XNameContainer_cb90e47",
+          "origtype": "com.sun.star.container.XNameContainer",
+          "origin": "com.sun.star.container.XNameContainer",
+          "desc": [
+            "contains user defined attributes."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

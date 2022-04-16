@@ -1,0 +1,112 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XThesaurus",
+  "type": "interface",
+  "namespace": "com.sun.star.linguistic2",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_supported_locales",
+        "XSupportedLocales",
+        "XSupportedLocales_5bda1056"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..beans.property_values",
+        "PropertyValues",
+        "PropertyValues_d6470ce6"
+      ],
+      [
+        "..lang.locale",
+        "Locale",
+        "Locale_70d308fa"
+      ],
+      [
+        ".x_meaning",
+        "XMeaning",
+        "XMeaning_d65e0c8c"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.linguistic2.XSupportedLocales": "XSupportedLocales_5bda1056"
+    },
+    "quote": [
+      "Locale_70d308fa",
+      "PropertyValues_d6470ce6",
+      "typing.Tuple[XMeaning_d65e0c8c, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[XMeaning_d65e0c8c, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.linguistic2.XSupportedLocales"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValues",
+        "com.sun.star.lang.Locale",
+        "com.sun.star.linguistic2.XMeaning"
+      ]
+    },
+    "name": "XThesaurus",
+    "imports": [],
+    "namespace": "com.sun.star.linguistic2",
+    "extends": [
+      "com.sun.star.linguistic2.XSupportedLocales"
+    ],
+    "desc": [
+      "allows for the retrieval of possible meanings for a given word and language.",
+      "",
+      "The meaning of a word is in essence a descriptive text for that word. Each meaning may have several synonyms where a synonym is a word (or small text) with the same or similar meaning."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1linguistic2_1_1XThesaurus.html",
+    "items": {
+      "methods": [
+        {
+          "name": "queryMeanings",
+          "returns": "typing.Tuple[XMeaning_d65e0c8c, ...]",
+          "returns_origin": "sequence< com.sun.star.linguistic2.XMeaning >",
+          "desc": [
+            "If the language is not supported, an com.sun.star.lang.IllegalArgumentException exception is raised."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "aTerm",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "aProperties",
+              "type": "PropertyValues_d6470ce6",
+              "direction": "in",
+              "origin": "com.sun.star.beans.PropertyValues"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

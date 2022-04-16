@@ -1,0 +1,126 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "TableSortDescriptor",
+  "type": "service",
+  "namespace": "com.sun.star.table",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..util.sort_descriptor",
+        "SortDescriptor",
+        "SortDescriptor_ca680c8d"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".table_orientation",
+        "TableOrientation",
+        "TableOrientation_ee780d84"
+      ],
+      [
+        "..util.sort_field",
+        "SortField",
+        "SortField_90080a52"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.util.SortDescriptor": "SortDescriptor_ca680c8d"
+    },
+    "quote": [
+      "TableOrientation_ee780d84",
+      "typing.Tuple[SortField_90080a52, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[SortField_90080a52, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.util.SortDescriptor"
+      ],
+      "typing": [
+        "com.sun.star.table.TableOrientation",
+        "com.sun.star.util.SortField"
+      ]
+    },
+    "name": "TableSortDescriptor",
+    "imports": [],
+    "namespace": "com.sun.star.table",
+    "extends": [
+      "com.sun.star.util.SortDescriptor"
+    ],
+    "desc": [
+      "contains properties which describe sorting of rows or columns in a table.",
+      "",
+      "It extends the general com.sun.star.util.SortDescriptor with table-specific properties.",
+      "",
+      ".. deprecated::",
+      "",
+      "    Class is deprecated."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1table_1_1TableSortDescriptor.html",
+    "items": {
+      "types": [
+        {
+          "name": "SortFields",
+          "returns": "typing.Tuple[SortField_90080a52, ...]",
+          "origtype": null,
+          "origin": "sequence< com.sun.star.util.SortField >",
+          "desc": [
+            "specifies the descriptions of the individual sort fields."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ],
+      "properties": [
+        {
+          "name": "ContainsHeader",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "specifies whether the first row or column (depending on com.sun.star.util.SortDescriptor.SortColumns) is a header which should not be sorted."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "MaxFieldCount",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "contains the maximum number of sort fields the descriptor can hold."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Orientation",
+          "returns": "TableOrientation_ee780d84",
+          "origtype": "com.sun.star.table.TableOrientation",
+          "origin": "com.sun.star.table.TableOrientation",
+          "desc": [
+            "specifies the sorting orientation (sort rows or columns).",
+            "",
+            "Some implementations may not support sorting columns."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

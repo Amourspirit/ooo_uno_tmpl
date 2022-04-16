@@ -1,0 +1,253 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XCollator",
+  "type": "interface",
+  "namespace": "com.sun.star.i18n",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..lang.locale",
+        "Locale",
+        "Locale_70d308fa"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "Locale_70d308fa",
+      "typing.Tuple[int, ...]",
+      "typing.Tuple[str, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[int, ...]",
+      "typing.Tuple[str, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.lang.Locale"
+      ]
+    },
+    "name": "XCollator",
+    "imports": [],
+    "namespace": "com.sun.star.i18n",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "provides locale-sensitive collation algorithms for string comparison."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1i18n_1_1XCollator.html",
+    "items": {
+      "methods": [
+        {
+          "name": "compareString",
+          "returns": "int",
+          "returns_origin": "long",
+          "desc": [
+            "Compare 2 strings in specific locale and algorithm."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aStr1",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aStr2",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "compareSubstring",
+          "returns": "int",
+          "returns_origin": "long",
+          "desc": [
+            "Compare 2 substrings in specific locale and algorithm."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aStr1",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nOff1",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nLen1",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aStr2",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nOff2",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nLen2",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "listCollatorAlgorithms",
+          "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
+          "desc": [
+            "List all collator algorithms for a given locale."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
+          ]
+        },
+        {
+          "name": "listCollatorOptions",
+          "returns": "typing.Tuple[int, ...]",
+          "returns_origin": "sequence< long >",
+          "desc": [
+            "List all end user collator options for a given algorithm."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aAlgorithmName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "loadCollatorAlgorithm",
+          "returns": "int",
+          "returns_origin": "long",
+          "desc": [
+            "Load a particular collator algorithm for the locale."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aAlgorithmName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "nCollatorOptions",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "loadCollatorAlgorithmWithEndUserOption",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Load a collator algorithm with options chosen by end user."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aAlgorithmName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "aCollatorOptions",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "in",
+              "origin": "sequence< long >"
+            }
+          ]
+        },
+        {
+          "name": "loadDefaultCollator",
+          "returns": "int",
+          "returns_origin": "long",
+          "desc": [
+            "Load the collator with default algorithm defined in locale data."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "nCollatorOptions",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

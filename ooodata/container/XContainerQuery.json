@@ -1,0 +1,112 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XContainerQuery",
+  "type": "interface",
+  "namespace": "com.sun.star.container",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..beans.named_value",
+        "NamedValue",
+        "NamedValue_a37a0af3"
+      ],
+      [
+        ".x_enumeration",
+        "XEnumeration",
+        "XEnumeration_f2180daa"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XEnumeration_f2180daa",
+      "typing.Tuple[NamedValue_a37a0af3, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[NamedValue_a37a0af3, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.beans.NamedValue",
+        "com.sun.star.container.XEnumeration"
+      ]
+    },
+    "name": "XContainerQuery",
+    "imports": [],
+    "namespace": "com.sun.star.container",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "supports simple query feature on a container",
+      "",
+      "This interface makes it possible to create sub sets of container items which serve specified search criterion."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1container_1_1XContainerQuery.html",
+    "items": {
+      "methods": [
+        {
+          "name": "createSubSetEnumerationByProperties",
+          "returns": "XEnumeration_f2180daa",
+          "returns_origin": "com.sun.star.container.XEnumeration",
+          "desc": [
+            "creates a sub set of container items which supports searched properties as minimum",
+            "",
+            "It's not possible to use special commands or search specific parameters here. You can match by properties only. Enumerated elements must provide queried properties as minimum. Not specified properties will not be used for searching."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Properties",
+              "type": "typing.Tuple[NamedValue_a37a0af3, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.NamedValue >"
+            }
+          ]
+        },
+        {
+          "name": "createSubSetEnumerationByQuery",
+          "returns": "XEnumeration_f2180daa",
+          "returns_origin": "com.sun.star.container.XEnumeration",
+          "desc": [
+            "creates a sub set of container items which match given query command",
+            "",
+            "Items of this sub set must match used query string. Format of query depends from real implementation. Using of \\\"param=value\\\" pairs isn't necessary. So it's possible to combine different parameters as one simple command string."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Query",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

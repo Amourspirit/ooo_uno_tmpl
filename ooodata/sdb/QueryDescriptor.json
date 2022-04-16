@@ -1,0 +1,136 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "QueryDescriptor",
+  "type": "service",
+  "namespace": "com.sun.star.sdb",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".data_settings",
+        "DataSettings",
+        "DataSettings_a3000b0c"
+      ],
+      [
+        "..sdbcx.descriptor",
+        "Descriptor",
+        "Descriptor_a5200b3b"
+      ],
+      [
+        "..sdbcx.x_columns_supplier",
+        "XColumnsSupplier",
+        "XColumnsSupplier_f0600da9"
+      ],
+      [
+        "..sdbcx.x_data_descriptor_factory",
+        "XDataDescriptorFactory",
+        "XDataDescriptorFactory_46170fe5"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.sdb.DataSettings": "DataSettings_a3000b0c",
+      "com.sun.star.sdbcx.Descriptor": "Descriptor_a5200b3b",
+      "com.sun.star.sdbcx.XColumnsSupplier": "XColumnsSupplier_f0600da9",
+      "com.sun.star.sdbcx.XDataDescriptorFactory": "XDataDescriptorFactory_46170fe5"
+    },
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.sdb.DataSettings",
+        "com.sun.star.sdbcx.Descriptor",
+        "com.sun.star.sdbcx.XColumnsSupplier",
+        "com.sun.star.sdbcx.XDataDescriptorFactory"
+      ],
+      "typing": []
+    },
+    "name": "QueryDescriptor",
+    "imports": [],
+    "namespace": "com.sun.star.sdb",
+    "extends": [
+      "com.sun.star.sdbcx.Descriptor",
+      "com.sun.star.sdbcx.XDataDescriptorFactory",
+      "com.sun.star.sdb.DataSettings",
+      "com.sun.star.sdbcx.XColumnsSupplier"
+    ],
+    "desc": [
+      "is a stored definition of a SQL \\\"Select statement\\\".",
+      "",
+      "It can be used, if there is a need to execute SQL statement more than once or if you want to format the query result fields different from the underlying table definitions."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1sdb_1_1QueryDescriptor.html",
+    "items": {
+      "properties": [
+        {
+          "name": "Command",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "is the command of the query, this is typically a select statement."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "EscapeProcessing",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "should we use escape processing for the query."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "UpdateCatalogName",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "is the name of the update table catalog."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "UpdateSchemaName",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "is the name of the update table schema."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "UpdateTableName",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "is the name of the table which should be updated.",
+            "",
+            "This is usually used for queries which relate on more than one table."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

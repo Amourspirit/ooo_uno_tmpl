@@ -1,0 +1,141 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XResultSetUpdate",
+  "type": "interface",
+  "namespace": "com.sun.star.sdbc",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": []
+    },
+    "name": "XResultSetUpdate",
+    "imports": [],
+    "namespace": "com.sun.star.sdbc",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "provides the possibility to write changes made on a result set back to database."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sdbc_1_1XResultSetUpdate.html",
+    "items": {
+      "methods": [
+        {
+          "name": "cancelRowUpdates",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "cancels the updates made to a row.",
+            "",
+            "This method may be called after calling an updateXXX method(s) and before calling com.sun.star.sdbc.XResultSetUpdate.updateRow() to rollback the updates made to a row. If no updates have been made or updateRow has already been called, then this method has no effect."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": []
+        },
+        {
+          "name": "deleteRow",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "deletes the current row from the result set and the underlying database.",
+            "",
+            "Cannot be called when on the insert row."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": []
+        },
+        {
+          "name": "insertRow",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "inserts the contents of the insert row into the result set and the database.",
+            "",
+            "Must be on the insert row when this method is called."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": []
+        },
+        {
+          "name": "moveToCurrentRow",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "moves the cursor to the remembered cursor position, usually the current row.",
+            "",
+            "This method has no effect if the cursor is not on the insert row."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": []
+        },
+        {
+          "name": "moveToInsertRow",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "moves the cursor to the insert row.",
+            "",
+            "The current cursor position is remembered while the cursor is positioned on the insert row.",
+            "",
+            "The insert row is a special row associated with an updatable result set. It is essentially a buffer where a new row may be constructed by calling the updateXXX methods prior to inserting the row into the result set.",
+            "",
+            "Only the updateXXX , getXXX , and com.sun.star.sdbc.XResultSetUpdate.insertRow() methods may be called when the cursor is on the insert row. All of the columns in a result set must be given a value each time this method is called before calling insertRow . The method updateXXX must be called before a getXXX method can be called on a column value."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": []
+        },
+        {
+          "name": "updateRow",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "updates the underlying database with the new contents of the current row.",
+            "",
+            "Cannot be called when on the insert row."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": []
+        }
+      ]
+    }
+  }
+}

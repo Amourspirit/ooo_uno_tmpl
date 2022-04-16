@@ -1,0 +1,167 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XConfiguration",
+  "type": "interface",
+  "namespace": "com.sun.star.drawing.framework",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "...util.x_cloneable",
+        "XCloneable",
+        "XCloneable_99d00aa3"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".anchor_binding_mode",
+        "AnchorBindingMode",
+        "AnchorBindingMode_c46b128b"
+      ],
+      [
+        ".x_resource_id",
+        "XResourceId",
+        "XResourceId_5be3103d"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.util.XCloneable": "XCloneable_99d00aa3"
+    },
+    "quote": [
+      "AnchorBindingMode_c46b128b",
+      "XResourceId_5be3103d",
+      "typing.Tuple[XResourceId_5be3103d, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[XResourceId_5be3103d, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.util.XCloneable"
+      ],
+      "typing": [
+        "com.sun.star.drawing.framework.AnchorBindingMode",
+        "com.sun.star.drawing.framework.XResourceId"
+      ]
+    },
+    "name": "XConfiguration",
+    "imports": [],
+    "namespace": "com.sun.star.drawing.framework",
+    "extends": [
+      "com.sun.star.util.XCloneable"
+    ],
+    "desc": [
+      "A configuration describes the resources of an application like panes, views, and tool bars and their relationships that are currently active or are requested to be activated.",
+      "",
+      "Resources are specified by ResourceId structures rather than references so that not only the current configuration but also a requested configuration can be represented.",
+      "",
+      "Direct manipulation of a configuration object is not advised with the exception of the ConfigurationController and objects that implement the XConfigurationChangeRequest interface."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1drawing_1_1framework_1_1XConfiguration.html",
+    "items": {
+      "methods": [
+        {
+          "name": "addResource",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Add a resource to the configuration.",
+            "",
+            "This method should be used only by objects that implement the XConfigurationRequest interface or by the configuration controller."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xResourceId",
+              "type": "XResourceId_5be3103d",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.framework.XResourceId"
+            }
+          ]
+        },
+        {
+          "name": "getResources",
+          "returns": "typing.Tuple[XResourceId_5be3103d, ...]",
+          "returns_origin": "sequence< XResourceId >",
+          "desc": [
+            "Returns the list of resources that are bound directly and/or indirectly to the given anchor.",
+            "",
+            "A URL filter can reduce the set of returned resource ids.",
+            "",
+            "Use an empty string to prevent filtering out resource ids."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xAnchorId",
+              "type": "XResourceId_5be3103d",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.framework.XResourceId"
+            },
+            {
+              "name": "sTargetURLPrefix",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "eSearchMode",
+              "type": "AnchorBindingMode_c46b128b",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.framework.AnchorBindingMode"
+            }
+          ]
+        },
+        {
+          "name": "hasResource",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "Returns whether the specified resource is part of the configuration.",
+            "",
+            "This is independent of whether the resource does really exist and is active, i.e. has a visible representation in the GUI."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xResourceId",
+              "type": "XResourceId_5be3103d",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.framework.XResourceId"
+            }
+          ]
+        },
+        {
+          "name": "removeResource",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Remove a resource from the configuration.",
+            "",
+            "This method should be used only by objects that implement the XConfigurationRequest interface or by the configuration controller."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xResourceId",
+              "type": "XResourceId_5be3103d",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.framework.XResourceId"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

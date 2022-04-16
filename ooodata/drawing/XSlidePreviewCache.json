@@ -1,0 +1,242 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XSlidePreviewCache",
+  "type": "interface",
+  "namespace": "com.sun.star.drawing",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        "..container.x_index_access",
+        "XIndexAccess",
+        "XIndexAccess_f0910d6d"
+      ],
+      [
+        ".x_slide_preview_cache_listener",
+        "XSlidePreviewCacheListener",
+        "XSlidePreviewCacheListener_af761239"
+      ],
+      [
+        "..geometry.integer_size2_d",
+        "IntegerSize2D",
+        "IntegerSize2D_f2690d53"
+      ],
+      [
+        "..rendering.x_bitmap",
+        "XBitmap",
+        "XBitmap_b1b70b7b"
+      ],
+      [
+        "..rendering.x_canvas",
+        "XCanvas",
+        "XCanvas_b19b0b7a"
+      ],
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "extends_map": {},
+    "quote": [
+      "IntegerSize2D_f2690d53",
+      "XBitmap_b1b70b7b",
+      "XCanvas_b19b0b7a",
+      "XIndexAccess_f0910d6d",
+      "XInterface_8f010a43",
+      "XSlidePreviewCacheListener_af761239"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.container.XIndexAccess",
+        "com.sun.star.drawing.XSlidePreviewCacheListener",
+        "com.sun.star.geometry.IntegerSize2D",
+        "com.sun.star.rendering.XBitmap",
+        "com.sun.star.rendering.XCanvas",
+        "com.sun.star.uno.XInterface"
+      ]
+    },
+    "name": "XSlidePreviewCache",
+    "imports": [],
+    "namespace": "com.sun.star.drawing",
+    "extends": [],
+    "desc": [
+      "A cache of preview bitmaps for the slides of one Impress or Draw document in one size.",
+      "",
+      "There may be more than one cache for one document. These are internally connected and for missing previews one cache may take it from another cache and scale it to the desired size. When a preview is not present then it is created asynchronously. On creation all registered listeners are notified.",
+      "",
+      "Slides are referenced via their index in an XIndexAccess container in order to allow multiple references to a single slide (custom presentations)."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1drawing_1_1XSlidePreviewCache.html",
+    "items": {
+      "methods": [
+        {
+          "name": "addPreviewCreationNotifyListener",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Register a listener that is called when a preview has been created asynchronously."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xListener",
+              "type": "XSlidePreviewCacheListener_af761239",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.XSlidePreviewCacheListener"
+            }
+          ]
+        },
+        {
+          "name": "getSlidePreview",
+          "returns": "XBitmap_b1b70b7b",
+          "returns_origin": "com.sun.star.rendering.XBitmap",
+          "desc": [
+            "Return a preview for the given slide index.",
+            "",
+            "The returned bitmap may be the requested preview, a preview of the preview, i.e. a scaled up or down version, or an empty reference when the preview is not yet present.",
+            "",
+            "This call may lead to the asynchronous creation of the requested preview. In that case all registered listeners are notified when the preview has been created."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "nSlideIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "xCanvas",
+              "type": "XCanvas_b19b0b7a",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.XCanvas"
+            }
+          ]
+        },
+        {
+          "name": "pause",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Stop the asynchronous creation of previews temporarily.",
+            "",
+            "Call resume() to restart it."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "removePreviewCreationNotifyListener",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Remove a previously registered listener for preview creations."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xListener",
+              "type": "XSlidePreviewCacheListener_af761239",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.XSlidePreviewCacheListener"
+            }
+          ]
+        },
+        {
+          "name": "resume",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Resume the asynchronous creation of slide previews."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setDocumentSlides",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Set the set of slides for which the cache will provide the previews.",
+            "",
+            "All slides in the given XIndexAccess are required to come from the given model."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xSlides",
+              "type": "XIndexAccess_f0910d6d",
+              "direction": "in",
+              "origin": "com.sun.star.container.XIndexAccess"
+            },
+            {
+              "name": "xDocument",
+              "type": "XInterface_8f010a43",
+              "direction": "in",
+              "origin": "com.sun.star.uno.XInterface"
+            }
+          ]
+        },
+        {
+          "name": "setPreviewSize",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Define the size of the previews that are managed by the called cache."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aSize",
+              "type": "IntegerSize2D_f2690d53",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.IntegerSize2D"
+            }
+          ]
+        },
+        {
+          "name": "setVisibleRange",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Define which slides are currently visible on the screen and which are not.",
+            "",
+            "This information is used for give preview creation for visible slides a higher priority than for those slides that are not visible."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "nFirstVisibleSlideIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nLastVisibleSlideIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

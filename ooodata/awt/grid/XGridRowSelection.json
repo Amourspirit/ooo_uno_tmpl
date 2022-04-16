@@ -1,0 +1,187 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XGridRowSelection",
+  "type": "interface",
+  "namespace": "com.sun.star.awt.grid",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        ".x_grid_selection_listener",
+        "XGridSelectionListener",
+        "XGridSelectionListener_759e10f2"
+      ]
+    ],
+    "extends_map": {},
+    "quote": [
+      "XGridSelectionListener_759e10f2",
+      "typing.Tuple[int, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[int, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.awt.grid.XGridSelectionListener"
+      ]
+    },
+    "name": "XGridRowSelection",
+    "imports": [],
+    "namespace": "com.sun.star.awt.grid",
+    "extends": [],
+    "desc": [
+      "This interfaces provides access to the selection of row for UnoControlGrid.",
+      "",
+      "**since**",
+      "",
+      "    LibreOffice 3.4"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1grid_1_1XGridRowSelection.html",
+    "items": {
+      "methods": [
+        {
+          "name": "addSelectionListener",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Adds a listener for the GridSelectionEvent posted after the grid changes."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "listener",
+              "type": "XGridSelectionListener_759e10f2",
+              "direction": "in",
+              "origin": "com.sun.star.awt.grid.XGridSelectionListener"
+            }
+          ]
+        },
+        {
+          "name": "deselectAllRows",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Deselects all selected rows."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "deselectRow",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "removes the selection for a given row"
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            {
+              "name": "RowIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "getSelectedRows",
+          "returns": "typing.Tuple[int, ...]",
+          "returns_origin": "sequence< long >",
+          "desc": [
+            "Returns the indices of all selected rows."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "hasSelectedRows",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "Returns whether rows are selected."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "isRowSelected",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "Returns whether a specific row is selected."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "RowIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "removeSelectionListener",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Removes a listener previously added with addSelectionListener()."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "listener",
+              "type": "XGridSelectionListener_759e10f2",
+              "direction": "in",
+              "origin": "com.sun.star.awt.grid.XGridSelectionListener"
+            }
+          ]
+        },
+        {
+          "name": "selectAllRows",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Selects all rows."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "selectRow",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "selects a given row"
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            {
+              "name": "RowIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

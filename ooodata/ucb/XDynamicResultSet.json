@@ -1,0 +1,155 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XDynamicResultSet",
+  "type": "interface",
+  "namespace": "com.sun.star.ucb",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..lang.x_component",
+        "XComponent",
+        "XComponent_98dc0ab5"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..sdbc.x_result_set",
+        "XResultSet",
+        "XResultSet_98e30aa7"
+      ],
+      [
+        ".x_dynamic_result_set_listener",
+        "XDynamicResultSetListener",
+        "XDynamicResultSetListener_56e41050"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.lang.XComponent": "XComponent_98dc0ab5"
+    },
+    "quote": [
+      "XDynamicResultSet",
+      "XDynamicResultSetListener_56e41050",
+      "XResultSet_98e30aa7"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.lang.XComponent"
+      ],
+      "typing": [
+        "com.sun.star.sdbc.XResultSet",
+        "com.sun.star.ucb.XDynamicResultSetListener"
+      ]
+    },
+    "name": "XDynamicResultSet",
+    "imports": [],
+    "namespace": "com.sun.star.ucb",
+    "extends": [
+      "com.sun.star.lang.XComponent"
+    ],
+    "desc": [
+      "Provides read access to a ContentResultSet.",
+      "",
+      "You can either get a simple static ContentResultSet or you can listen to change-notifications and then swap from the old to a new ContentResultSet.",
+      "",
+      "The following describes the dynamic use:",
+      "",
+      "XDynamicResultSet provides the possibility to get notifications about changes on a ContentResultSet and have an listener-controlled update from one version to the next version. Two ContentResultSet implementations were given to the listener in the first notification as interface com.sun.star.sdbc.XResultSet.",
+      "",
+      "To get notifications the listener has to be of type XDynamicResultSetListener.",
+      "",
+      "After registration you will get notifications for events of type ListEvent.",
+      "",
+      "The calling of XDynamicResultSetListener.notify() has to happen in an own thread, because it could take a longer time and any actions ??? until the listener returns the call. So don't block the notify-causing action.",
+      "",
+      "While one notify-call is going on:",
+      "",
+      "After the listener has returned the notify-call:"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ucb_1_1XDynamicResultSet.html",
+    "items": {
+      "methods": [
+        {
+          "name": "connectToCache",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Connects this to a CachedDynamicResultSet for optimized remote data transport.",
+            "",
+            "This method creates a CachedDynamicResultSetStub and sets it as Source to the given cache.",
+            "",
+            "After this method has returned you can and have to use the given result set cache for further access."
+          ],
+          "raises": [
+            "",
+            "",
+            "com.sun.star.ucb.ServiceNotFoundException"
+          ],
+          "args": [
+            {
+              "name": "Cache",
+              "type": "XDynamicResultSet",
+              "direction": "in",
+              "origin": "com.sun.star.ucb.XDynamicResultSet"
+            }
+          ]
+        },
+        {
+          "name": "getCapabilities",
+          "returns": "int",
+          "returns_origin": "short",
+          "desc": [
+            "Using this method you can get information, whether the offered ContentResultSets are sorted or filtered etc correctly as demanded during the creation of the XDynamicResultSet."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getStaticResultSet",
+          "returns": "XResultSet_98e30aa7",
+          "returns_origin": "com.sun.star.sdbc.XResultSet",
+          "desc": [
+            "Call this, if you don't care about any changes."
+          ],
+          "raises": [
+            "com.sun.star.ucb.ListenerAlreadySetException"
+          ],
+          "args": []
+        },
+        {
+          "name": "setListener",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Call this, if you want to get notifications about changes.",
+            "",
+            "The implementor has to call com.sun.star.lang.XComponent.addEventListener() in this method, so that we can call com.sun.star.lang.XEventListener.disposing() at the listener"
+          ],
+          "raises": [
+            "com.sun.star.ucb.ListenerAlreadySetException"
+          ],
+          "args": [
+            {
+              "name": "Listener",
+              "type": "XDynamicResultSetListener_56e41050",
+              "direction": "in",
+              "origin": "com.sun.star.ucb.XDynamicResultSetListener"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

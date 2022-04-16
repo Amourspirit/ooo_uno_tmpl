@@ -1,0 +1,124 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XLinkageSupport",
+  "type": "interface",
+  "namespace": "com.sun.star.embed",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_common_embed_persist",
+        "XCommonEmbedPersist",
+        "XCommonEmbedPersist_16930e8d"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_storage",
+        "XStorage",
+        "XStorage_8e460a32"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.embed.XCommonEmbedPersist": "XCommonEmbedPersist_16930e8d"
+    },
+    "quote": [
+      "XStorage_8e460a32"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.embed.XCommonEmbedPersist"
+      ],
+      "typing": [
+        "com.sun.star.embed.XStorage"
+      ]
+    },
+    "name": "XLinkageSupport",
+    "imports": [],
+    "namespace": "com.sun.star.embed",
+    "extends": [
+      "com.sun.star.embed.XCommonEmbedPersist"
+    ],
+    "desc": [
+      "specifies an additional implementation for linked embedded object support."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1embed_1_1XLinkageSupport.html",
+    "items": {
+      "methods": [
+        {
+          "name": "breakLink",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "breaks the link and provides the object with a parent storage and a name for object's entry",
+            "",
+            "This method can be used only for links implementations that implement the whole set of embedded object interfaces. Usually the sets of interfaces are the same for links and objects. An example of exception from this are OOo links that do not implement XEmbedPersist interface. For such cases the method will throw an exception.",
+            "",
+            "The link will be broken and the linked object will become a normal embedded object.",
+            "",
+            "An entry with the specified name should be created or opened inside provided storage. This entry will be used for the object persistence. If the entry exists already all its contents will be ignored."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.embed.WrongStateException",
+            "com.sun.star.io.IOException",
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            {
+              "name": "xStorage",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            },
+            {
+              "name": "sEntryName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "getLinkURL",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "returns the URL of the link object."
+          ],
+          "raises": [
+            "com.sun.star.embed.WrongStateException",
+            "com.sun.star.uno.Exception"
+          ],
+          "args": []
+        },
+        {
+          "name": "isLink",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "allows to detect whether the object is a linked one.",
+            "",
+            "Most of embedded objects will not support this interface, but some of them can do it, to allow conversion from link to object. After the conversion the object does not change, so interface set stays the same, but the object is not a link any more."
+          ],
+          "raises": [
+            "com.sun.star.embed.WrongStateException"
+          ],
+          "args": []
+        }
+      ]
+    }
+  }
+}

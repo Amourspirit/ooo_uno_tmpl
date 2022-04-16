@@ -1,0 +1,100 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XScriptEventsAttacher",
+  "type": "interface",
+  "namespace": "com.sun.star.script",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_script_listener",
+        "XScriptListener",
+        "XScriptListener_f20b0db0"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XScriptListener_f20b0db0",
+      "typing.Tuple[XInterface_8f010a43, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[XInterface_8f010a43, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.script.XScriptListener"
+      ]
+    },
+    "name": "XScriptEventsAttacher",
+    "imports": [],
+    "namespace": "com.sun.star.script",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "This interface can be used to attach script events to a number of objects that give access to the definition of events that should be attached to them, e.g., by supporting XEventsSupplier."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1script_1_1XScriptEventsAttacher.html",
+    "items": {
+      "methods": [
+        {
+          "name": "attachEvents",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Attaches the events defined by XScriptEventsSupplier to the corresponding object implementing XScriptEventsSupplier."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.beans.IntrospectionException",
+            "com.sun.star.script.CannotCreateAdapterException",
+            "com.sun.star.lang.ServiceNotRegisteredException"
+          ],
+          "args": [
+            {
+              "name": "Objects",
+              "type": "typing.Tuple[XInterface_8f010a43, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.uno.XInterface >"
+            },
+            {
+              "name": "xListener",
+              "type": "XScriptListener_f20b0db0",
+              "direction": "in",
+              "origin": "com.sun.star.script.XScriptListener"
+            },
+            {
+              "name": "Helper",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

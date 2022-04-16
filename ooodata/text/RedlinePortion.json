@@ -1,0 +1,186 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "RedlinePortion",
+  "type": "service",
+  "namespace": "com.sun.star.text",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".text_portion",
+        "TextPortion",
+        "TextPortion_a6f80b5d"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..beans.property_values",
+        "PropertyValues",
+        "PropertyValues_d6470ce6"
+      ],
+      [
+        ".x_text",
+        "XText",
+        "XText_690408ca"
+      ],
+      [
+        "..util.date_time",
+        "DateTime",
+        "DateTime_84de09d3"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.text.TextPortion": "TextPortion_a6f80b5d"
+    },
+    "quote": [
+      "DateTime_84de09d3",
+      "PropertyValues_d6470ce6",
+      "XText_690408ca"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.text.TextPortion"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValues",
+        "com.sun.star.text.XText",
+        "com.sun.star.util.DateTime"
+      ]
+    },
+    "name": "RedlinePortion",
+    "imports": [],
+    "namespace": "com.sun.star.text",
+    "extends": [
+      "com.sun.star.text.TextPortion"
+    ],
+    "desc": [
+      "A RedlinePortion is a TextPortion that marks a change that has been recorded by the change tracking."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1text_1_1RedlinePortion.html",
+    "items": {
+      "properties": [
+        {
+          "name": "IsInHeaderFooter",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "determines whether the portion is member of a header or footer text."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "MergeLastPara",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "determines whether the last paragraph of a redline text has to be merged with a possible following text content (i.e.",
+            "",
+            "a text table)"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RedlineAuthor",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "contains the name of the author of the change."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RedlineComment",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "contains a comment for the change."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RedlineDateTime",
+          "returns": "DateTime_84de09d3",
+          "origtype": "com.sun.star.util.DateTime",
+          "origin": "com.sun.star.util.DateTime",
+          "desc": [
+            "contains the date and time of the change."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RedlineIdentifier",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "contains a unique identifier for the redline.",
+            "",
+            "This is necessary for file export filters to able to recognize redline portions that point to the same redline."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RedlineSuccessorData",
+          "returns": "PropertyValues_d6470ce6",
+          "origtype": "com.sun.star.beans.PropertyValues",
+          "origin": "com.sun.star.beans.PropertyValues",
+          "desc": [
+            "contains the data of a second level redline data",
+            "",
+            "The elements of the sequence are:"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RedlineText",
+          "returns": "XText_690408ca",
+          "origtype": "com.sun.star.text.XText",
+          "origin": "com.sun.star.text.XText",
+          "desc": [
+            "provides access to the text of the redline.",
+            "",
+            "This interface is only provided if the change is not visible. The visibility depends on the redline display options that are set at the documents property set (RedlineDisplayType)."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RedlineType",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "contains the type of the change",
+            "",
+            "Valid type names are:"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

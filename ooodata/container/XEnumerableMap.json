@@ -1,0 +1,132 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XEnumerableMap",
+  "type": "interface",
+  "namespace": "com.sun.star.container",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_map",
+        "XMap",
+        "XMap_90a60a41"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_enumeration",
+        "XEnumeration",
+        "XEnumeration_f2180daa"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.container.XMap": "XMap_90a60a41"
+    },
+    "quote": [
+      "XEnumeration_f2180daa"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.container.XMap"
+      ],
+      "typing": [
+        "com.sun.star.container.XEnumeration"
+      ]
+    },
+    "name": "XEnumerableMap",
+    "imports": [],
+    "namespace": "com.sun.star.container",
+    "extends": [
+      "com.sun.star.container.XMap"
+    ],
+    "desc": [
+      "extends XMap with enumeration capabilities.",
+      "",
+      "No assumption should be made about the ordering of the elements returned by the various enumerators. In particular, you cannot assume the elements are returned in the same order as they were inserted. Also, you should not expect the XMap implementation to make use of a possibly existing strict ordering defined on the domain of all possible key values.",
+      "",
+      "You can create enumerators for the keys of the map, its values, and its key-value pairs.",
+      "",
+      "In all cases, you can create an isolated enumerator, which works on a copy of the map's content. Such an iterator is not affected by changes done to the map after creation of the enumerator.",
+      "",
+      "On the contrary, an enumerator which is non-isolated works directly on the map data. This is less expensive than an isolated enumerator, but means that changes to the map while an enumeration is running potentially invalidate your enumerator. The concrete behavior in this case is undefined, it's up to the service implementing the XEnumerableMap interface to specify it in more detail.",
+      "",
+      "Implementations of this interface might decide to support only isolated enumerators, or only non-isolated enumerators. Again, it's up to the service to specify this. Requesting an enumerator type which is not supported will generally result in a com.sun.star.lang.NoSupportException being thrown."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1container_1_1XEnumerableMap.html",
+    "items": {
+      "methods": [
+        {
+          "name": "createElementEnumeration",
+          "returns": "XEnumeration_f2180daa",
+          "returns_origin": "com.sun.star.container.XEnumeration",
+          "desc": [
+            "creates an enumerator for the key-value pairs of the map",
+            "",
+            "The elements returned by the enumerator are instances of com.sun.star.beans.Pair, holding the key-value-pairs which are part of the map."
+          ],
+          "raises": [
+            "com.sun.star.lang.NoSupportException"
+          ],
+          "args": [
+            {
+              "name": "Isolated",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
+          ]
+        },
+        {
+          "name": "createKeyEnumeration",
+          "returns": "XEnumeration_f2180daa",
+          "returns_origin": "com.sun.star.container.XEnumeration",
+          "desc": [
+            "creates an enumerator for the keys of the map"
+          ],
+          "raises": [
+            "com.sun.star.lang.NoSupportException"
+          ],
+          "args": [
+            {
+              "name": "Isolated",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
+          ]
+        },
+        {
+          "name": "createValueEnumeration",
+          "returns": "XEnumeration_f2180daa",
+          "returns_origin": "com.sun.star.container.XEnumeration",
+          "desc": [
+            "creates an enumerator for the values of the map"
+          ],
+          "raises": [
+            "com.sun.star.lang.NoSupportException"
+          ],
+          "args": [
+            {
+              "name": "Isolated",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

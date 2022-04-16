@@ -1,0 +1,133 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XExtendedDocumentHandler",
+  "type": "interface",
+  "namespace": "com.sun.star.xml.sax",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_document_handler",
+        "XDocumentHandler",
+        "XDocumentHandler_9b90e28"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.xml.sax.XDocumentHandler": "XDocumentHandler_9b90e28"
+    },
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.xml.sax.XDocumentHandler"
+      ],
+      "typing": []
+    },
+    "name": "XExtendedDocumentHandler",
+    "imports": [],
+    "namespace": "com.sun.star.xml.sax",
+    "extends": [
+      "com.sun.star.xml.sax.XDocumentHandler"
+    ],
+    "desc": [
+      "this interface does not conform to the SAX-standard.",
+      "",
+      "Note: Whether or not every callback is supported is dependent on the parser implementation."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1xml_1_1sax_1_1XExtendedDocumentHandler.html",
+    "items": {
+      "methods": [
+        {
+          "name": "allowLineBreak",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "informs a writer that it is allowable to insert a line break and indentation before the next XDocumentHandler-call."
+          ],
+          "raises": [
+            "com.sun.star.xml.sax.SAXException"
+          ],
+          "args": []
+        },
+        {
+          "name": "comment",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "receives notification about a comment in the XML-source."
+          ],
+          "raises": [
+            "com.sun.star.xml.sax.SAXException"
+          ],
+          "args": [
+            {
+              "name": "sComment",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "endCDATA",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "informs about the end of a CDATA-Section.",
+            "",
+            "Note that startCDATA/endCDATA MUST NOT enclose any startElement/endElement-call!"
+          ],
+          "raises": [
+            "com.sun.star.xml.sax.SAXException"
+          ],
+          "args": []
+        },
+        {
+          "name": "startCDATA",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "receives notification about the start of a CDATA section in the XML-source.",
+            "",
+            "Any string coming in via character handler may include chars, that would otherwise be interpreted as markup."
+          ],
+          "raises": [
+            "com.sun.star.xml.sax.SAXException"
+          ],
+          "args": []
+        },
+        {
+          "name": "unknown",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "notifies that any characters that cannot be handled by other callback methods are announced through this method."
+          ],
+          "raises": [
+            "com.sun.star.xml.sax.SAXException"
+          ],
+          "args": [
+            {
+              "name": "sString",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

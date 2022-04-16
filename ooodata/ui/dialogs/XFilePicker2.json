@@ -1,0 +1,77 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XFilePicker2",
+  "type": "interface",
+  "namespace": "com.sun.star.ui.dialogs",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_file_picker",
+        "XFilePicker",
+        "XFilePicker_ec3e0d2d"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.ui.dialogs.XFilePicker": "XFilePicker_ec3e0d2d"
+    },
+    "quote": [
+      "typing.Tuple[str, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[str, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.ui.dialogs.XFilePicker"
+      ],
+      "typing": []
+    },
+    "name": "XFilePicker2",
+    "imports": [],
+    "namespace": "com.sun.star.ui.dialogs",
+    "extends": [
+      "com.sun.star.ui.dialogs.XFilePicker"
+    ],
+    "desc": [
+      "extends file picker interface to workaround some design problems."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ui_1_1dialogs_1_1XFilePicker2.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getSelectedFiles",
+          "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
+          "desc": [
+            "Returns a sequence of the selected files including path information in URL format, conforming to Rfc1738.",
+            "",
+            "If the user closed the dialog with cancel an empty sequence will be returned.",
+            "",
+            "If the user closed the dialog with OK a list of all selected files will be returned.",
+            "",
+            "Instead to the method getFiles() of base interface XFilePicker the new method return full qualified URLs for every selected file.",
+            "",
+            "A list of all selected file as complete URLs.",
+            "",
+            "Notes for the implementation of a FileSave dialog:If there exists a checkbox \\\"Automatic File Extension\\\" which is checked and a valid filter is currently selected the dialog may automatically add an extension to the selected file name(s)."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

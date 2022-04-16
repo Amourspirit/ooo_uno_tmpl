@@ -1,0 +1,164 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XRenderable",
+  "type": "interface",
+  "namespace": "com.sun.star.view",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "typing.Tuple[PropertyValue_c9610c73, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[PropertyValue_c9610c73, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValue"
+      ]
+    },
+    "name": "XRenderable",
+    "imports": [],
+    "namespace": "com.sun.star.view",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "represents something that can be rendered.",
+      "",
+      "**since**",
+      "",
+      "    OOo 1.1.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1view_1_1XRenderable.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getRenderer",
+          "returns": "typing.Tuple[PropertyValue_c9610c73, ...]",
+          "returns_origin": "sequence< com.sun.star.beans.PropertyValue >",
+          "desc": [
+            "returns the specific renderer properties based on the given selection.",
+            "",
+            "If the selection contains a valid XModel interface, it is assumed that the whole document should be rendered. If the selection is empty, nothing should be rendered."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "nRenderer",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aSelection",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            },
+            {
+              "name": "xOptions",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            }
+          ]
+        },
+        {
+          "name": "getRendererCount",
+          "returns": "int",
+          "returns_origin": "long",
+          "desc": [
+            "If a selection is given, the count has to be calculated based on this selection. The other methods of this interface will rely on this value if called.",
+            "",
+            "If the selection contains a valid XModel interface, it is assumed that the whole document should be rendered. If the selection is empty, nothing should be rendered."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "aSelection",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            },
+            {
+              "name": "xOptions",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            }
+          ]
+        },
+        {
+          "name": "render",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "renders the object.",
+            "",
+            "renders the object with the specific renderer based on the given selection.",
+            "",
+            "If the selection contains a valid XModel interface, it is assumed that the whole document should be rendered. If the selection is empty, nothing should be rendered."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "nRenderer",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aSelection",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            },
+            {
+              "name": "xOptions",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

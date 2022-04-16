@@ -1,0 +1,129 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XSingleLayerStratum",
+  "type": "interface",
+  "namespace": "com.sun.star.configuration.backend",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "...uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_layer",
+        "XLayer",
+        "XLayer_4cd50fcb"
+      ],
+      [
+        ".x_updatable_layer",
+        "XUpdatableLayer",
+        "XUpdatableLayer_ec97135d"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XLayer_4cd50fcb",
+      "XUpdatableLayer_ec97135d"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.configuration.backend.XLayer",
+        "com.sun.star.configuration.backend.XUpdatableLayer"
+      ]
+    },
+    "name": "XSingleLayerStratum",
+    "imports": [],
+    "namespace": "com.sun.star.configuration.backend",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "Handles access to a stratum consisting of a single layer in a configuration data repository.",
+      "",
+      "The interface provides timestamp-checking capabilities for efficient caching.",
+      "",
+      "**since**",
+      "",
+      "    OOo 1.1.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1configuration_1_1backend_1_1XSingleLayerStratum.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getLayer",
+          "returns": "XLayer_4cd50fcb",
+          "returns_origin": "com.sun.star.configuration.backend.XLayer",
+          "desc": [
+            "retrieves the layer data for a component, if newer than indicated.",
+            "",
+            "A timestamp can be provided, which is used to indicate a point in time. The layer should be returned only if is modified since that time.",
+            "",
+            "An empty timestamp indicates, that the layer should be retrieved irrespective of its modification time.",
+            "",
+            "The format and meaning of a timestamp depends on the implementation. Timestamps can be obtained using com.sun.star.util.XTimeStamped.getTimestamp()."
+          ],
+          "raises": [
+            "BackendAccessException",
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "aComponent",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aTimestamp",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "getUpdatableLayer",
+          "returns": "XUpdatableLayer_ec97135d",
+          "returns_origin": "com.sun.star.configuration.backend.XUpdatableLayer",
+          "desc": [
+            "retrieves a writable representation of the layer for a component."
+          ],
+          "raises": [
+            "BackendAccessException",
+            "com.sun.star.lang.NoSupportException",
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "aComponent",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

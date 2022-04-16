@@ -1,0 +1,113 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "FileHandler",
+  "type": "service",
+  "namespace": "com.sun.star.logging",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_log_handler",
+        "XLogHandler",
+        "XLogHandler_c7f80c27"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..beans.named_value",
+        "NamedValue",
+        "NamedValue_a37a0af3"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.logging.XLogHandler": "XLogHandler_c7f80c27"
+    },
+    "quote": [
+      "typing.Tuple[NamedValue_a37a0af3, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[NamedValue_a37a0af3, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.logging.XLogHandler"
+      ],
+      "typing": [
+        "com.sun.star.beans.NamedValue"
+      ]
+    },
+    "name": "FileHandler",
+    "imports": [],
+    "namespace": "com.sun.star.logging",
+    "extends": [
+      "com.sun.star.logging.XLogHandler"
+    ],
+    "desc": [
+      "specifies a component implementing a log handler whose output channel is a file.",
+      "",
+      "The handler will use the Encoding attribute of XLogHandler to determine how to encode strings before actually writing them to the output file.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.3"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1logging_1_1FileHandler.html",
+    "items": {
+      "methods": [
+        {
+          "name": "create",
+          "returns": "None",
+          "returns_origin": null,
+          "desc": [
+            "creates a log handler whose output is directed to a file given by URL."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "FileURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "createWithSettings",
+          "returns": "None",
+          "returns_origin": null,
+          "desc": [
+            "creates an instance of the log handler, using generic settings",
+            "",
+            "The following settings are recognized and supported:",
+            "",
+            "Additionally, a setting name FileURL is recognized. It must be of type string, and denotes the file URL to which the handler's output should be directed.",
+            "",
+            "At least the URL argument must be present in the settings."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "Settings",
+              "type": "typing.Tuple[NamedValue_a37a0af3, ...]",
+              "direction": "in",
+              "origin": "sequence< .com.sun.star.beans.NamedValue >"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

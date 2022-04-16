@@ -1,0 +1,92 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XViewDataSupplier",
+  "type": "interface",
+  "namespace": "com.sun.star.document",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..container.x_index_access",
+        "XIndexAccess",
+        "XIndexAccess_f0910d6d"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XIndexAccess_f0910d6d"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.container.XIndexAccess"
+      ]
+    },
+    "name": "XViewDataSupplier",
+    "imports": [],
+    "namespace": "com.sun.star.document",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "gives access to some properties describing all open views to a document",
+      "",
+      "Each view is described by a sequence< .com.sun.star.beans.PropertyValue >. Through this interface the state of all open views can be retrieved and restored later. These states can also be made persistent so that a document loader can create all views of the correct types and restore their state to the state when the document was saved."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1document_1_1XViewDataSupplier.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getViewData",
+          "returns": "XIndexAccess_f0910d6d",
+          "returns_origin": "com.sun.star.container.XIndexAccess",
+          "desc": [
+            "retrieve information about currently opened view to restore it later"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setViewData",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "restore all views which will be represented by given data argument"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Data",
+              "type": "XIndexAccess_f0910d6d",
+              "direction": "in",
+              "origin": "com.sun.star.container.XIndexAccess"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

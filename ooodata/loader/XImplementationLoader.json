@@ -1,0 +1,138 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XImplementationLoader",
+  "type": "interface",
+  "namespace": "com.sun.star.loader",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..registry.x_registry_key",
+        "XRegistryKey",
+        "XRegistryKey_e61a0d5b"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XInterface_8f010a43",
+      "XRegistryKey_e61a0d5b"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.registry.XRegistryKey"
+      ]
+    },
+    "name": "XImplementationLoader",
+    "imports": [],
+    "namespace": "com.sun.star.loader",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "handles activation (loading) of a UNO component."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1loader_1_1XImplementationLoader.html",
+    "items": {
+      "methods": [
+        {
+          "name": "activate",
+          "returns": "XInterface_8f010a43",
+          "returns_origin": "com.sun.star.uno.XInterface",
+          "desc": [
+            "activates a concrete implementation within a component.",
+            "",
+            "Special loaders may define their own protocol (for instance an executable loader may need more than only one file url)."
+          ],
+          "raises": [
+            "com.sun.star.loader.CannotActivateFactoryException"
+          ],
+          "args": [
+            {
+              "name": "implementationName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "implementationLoaderUrl",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "locationUrl",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "xKey",
+              "type": "XRegistryKey_e61a0d5b",
+              "direction": "in",
+              "origin": "com.sun.star.registry.XRegistryKey"
+            }
+          ]
+        },
+        {
+          "name": "writeRegistryInfo",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "writes a list of all implementations hosted by this component into a registry key.",
+            "",
+            "This method is called during registering a component.",
+            "",
+            "Special loaders may define their own protocol (for instance an executable loader may need more than only one file url)."
+          ],
+          "raises": [
+            "com.sun.star.registry.CannotRegisterImplementationException"
+          ],
+          "args": [
+            {
+              "name": "xKey",
+              "type": "XRegistryKey_e61a0d5b",
+              "direction": "in",
+              "origin": "com.sun.star.registry.XRegistryKey"
+            },
+            {
+              "name": "implementationLoaderUrl",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "locationUrl",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

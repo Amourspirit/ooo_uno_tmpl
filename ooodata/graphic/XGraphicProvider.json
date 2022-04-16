@@ -1,0 +1,150 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XGraphicProvider",
+  "type": "interface",
+  "namespace": "com.sun.star.graphic",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..beans.property_values",
+        "PropertyValues",
+        "PropertyValues_d6470ce6"
+      ],
+      [
+        "..beans.x_property_set",
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
+      ],
+      [
+        ".x_graphic",
+        "XGraphic",
+        "XGraphic_a4da0afc"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "PropertyValues_d6470ce6",
+      "XGraphic_a4da0afc",
+      "XPropertySet_bc180bfa"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValues",
+        "com.sun.star.beans.XPropertySet",
+        "com.sun.star.graphic.XGraphic"
+      ]
+    },
+    "name": "XGraphicProvider",
+    "imports": [],
+    "namespace": "com.sun.star.graphic",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "This interface acts as the main interface to handle graphic content.",
+      "",
+      "It is used to load graphics, store graphics and to get information about unloaded graphics"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1graphic_1_1XGraphicProvider.html",
+    "items": {
+      "methods": [
+        {
+          "name": "queryGraphic",
+          "returns": "XGraphic_a4da0afc",
+          "returns_origin": "com.sun.star.graphic.XGraphic",
+          "desc": [
+            "Calling this method returns a XGraphic interface that holds the graphic content after loading the graphic."
+          ],
+          "raises": [
+            "com.sun.star.io.IOException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.WrappedTargetException"
+          ],
+          "args": [
+            {
+              "name": "MediaProperties",
+              "type": "PropertyValues_d6470ce6",
+              "direction": "in",
+              "origin": "com.sun.star.beans.PropertyValues"
+            }
+          ]
+        },
+        {
+          "name": "queryGraphicDescriptor",
+          "returns": "XPropertySet_bc180bfa",
+          "returns_origin": "com.sun.star.beans.XPropertySet",
+          "desc": [
+            "Calling this method returns a com.sun.star.beans.XPropertySet interface that gives access to the properties of the unloaded graphic.",
+            "",
+            "In most cases, this method will be used to query the mime type of the graphic and, in the case of pixel graphics, the resulting size after loading"
+          ],
+          "raises": [
+            "com.sun.star.io.IOException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.WrappedTargetException"
+          ],
+          "args": [
+            {
+              "name": "MediaProperties",
+              "type": "PropertyValues_d6470ce6",
+              "direction": "in",
+              "origin": "com.sun.star.beans.PropertyValues"
+            }
+          ]
+        },
+        {
+          "name": "storeGraphic",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Store the graphic content, represented through the XGraphic interface at the specified location."
+          ],
+          "raises": [
+            "com.sun.star.io.IOException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.WrappedTargetException"
+          ],
+          "args": [
+            {
+              "name": "Graphic",
+              "type": "XGraphic_a4da0afc",
+              "direction": "in",
+              "origin": "com.sun.star.graphic.XGraphic"
+            },
+            {
+              "name": "MediaProperties",
+              "type": "PropertyValues_d6470ce6",
+              "direction": "in",
+              "origin": "com.sun.star.beans.PropertyValues"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

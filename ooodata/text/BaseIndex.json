@@ -1,0 +1,395 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "BaseIndex",
+  "type": "service",
+  "namespace": "com.sun.star.text",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_document_index",
+        "XDocumentIndex",
+        "XDocumentIndex_c9330c5c"
+      ],
+      [
+        "..util.x_refreshable",
+        "XRefreshable",
+        "XRefreshable_b0d60b81"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..container.x_index_replace",
+        "XIndexReplace",
+        "XIndexReplace_feed0dd7"
+      ],
+      [
+        "..graphic.x_graphic",
+        "XGraphic",
+        "XGraphic_a4da0afc"
+      ],
+      [
+        "..style.graphic_location",
+        "GraphicLocation",
+        "GraphicLocation_e3ef0d30"
+      ],
+      [
+        ".x_text_columns",
+        "XTextColumns",
+        "XTextColumns_b17f0bab"
+      ],
+      [
+        ".x_text_section",
+        "XTextSection",
+        "XTextSection_b1730b9f"
+      ],
+      [
+        "..util.color",
+        "Color",
+        "Color_68e908c5"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.text.XDocumentIndex": "XDocumentIndex_c9330c5c",
+      "com.sun.star.util.XRefreshable": "XRefreshable_b0d60b81"
+    },
+    "quote": [
+      "Color_68e908c5",
+      "GraphicLocation_e3ef0d30",
+      "XGraphic_a4da0afc",
+      "XIndexReplace_feed0dd7",
+      "XTextColumns_b17f0bab",
+      "XTextSection_b1730b9f"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.text.XDocumentIndex",
+        "com.sun.star.util.XRefreshable"
+      ],
+      "typing": [
+        "com.sun.star.container.XIndexReplace",
+        "com.sun.star.graphic.XGraphic",
+        "com.sun.star.style.GraphicLocation",
+        "com.sun.star.text.XTextColumns",
+        "com.sun.star.text.XTextSection",
+        "com.sun.star.util.Color"
+      ]
+    },
+    "name": "BaseIndex",
+    "imports": [],
+    "namespace": "com.sun.star.text",
+    "extends": [
+      "com.sun.star.text.XDocumentIndex",
+      "com.sun.star.util.XRefreshable"
+    ],
+    "desc": [
+      "specifies the basic service of different indexes within a document.",
+      "",
+      "**since**",
+      "",
+      "    LibreOffice 4.0"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1text_1_1BaseIndex.html",
+    "items": {
+      "properties": [
+        {
+          "name": "BackColor",
+          "returns": "Color_68e908c5",
+          "origtype": "com.sun.star.util.Color",
+          "origin": "com.sun.star.util.Color",
+          "desc": [
+            "specifies the color of the background."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BackGraphic",
+          "returns": "XGraphic_a4da0afc",
+          "origtype": "com.sun.star.graphic.XGraphic",
+          "origin": "com.sun.star.graphic.XGraphic",
+          "desc": [
+            "contains the graphic object that is displayed as background graphic.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 6.1"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BackGraphicFilter",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "contains the name of the filter of the graphic file that is displayed as background graphic"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BackGraphicLocation",
+          "returns": "GraphicLocation_e3ef0d30",
+          "origtype": "com.sun.star.style.GraphicLocation",
+          "origin": "com.sun.star.style.GraphicLocation",
+          "desc": [
+            "determines the position of the background graphic."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BackGraphicURL",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "contains the URL of a graphic file that is displayed as background graphic",
+            "",
+            "Note the new behaviour since it this was deprecated: This property can only be set and only external URLs are supported (no more vnd.sun.star.GraphicObject scheme). When an URL is set, then it will load the graphic and set the BackGraphic property."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BackTransparent",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "If TRUE, the background color value in \\\"BackColor\\\" is not visible."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ContentSection",
+          "returns": "XTextSection_b1730b9f",
+          "origtype": "com.sun.star.text.XTextSection",
+          "origin": "com.sun.star.text.XTextSection",
+          "desc": [
+            "the text section containing the content of the index"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CreateFromChapter",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "determines if the content of the document index is created from the complete document content or from the current chapter only.",
+            "",
+            "It is not available in the bibliography"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "HeaderSection",
+          "returns": "XTextSection_b1730b9f",
+          "origtype": "com.sun.star.text.XTextSection",
+          "origin": "com.sun.star.text.XTextSection",
+          "desc": [
+            "the text section containing the header of the index"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsProtected",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "determines if the index is protected."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "LevelFormat",
+          "returns": "XIndexReplace_feed0dd7",
+          "origtype": "com.sun.star.container.XIndexReplace",
+          "origin": "com.sun.star.container.XIndexReplace",
+          "desc": [
+            "returns the interface of the level format of the index.",
+            "",
+            "The description of the format of the levels depends on the type of the document index."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParaStyleHeading",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "contains the name of the paragraph style that is applied to the heading."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParaStyleLevel1",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "contains the name of the paragraph style that is applied to the 1st level."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParaStyleLevel10",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "contains the name of the paragraph style that is applied to the 10th level."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParaStyleLevel2",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "contains the name of the paragraph style that is applied to the 2nd level."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParaStyleLevel3",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "contains the name of the paragraph style that is applied to the 3rd level."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParaStyleLevel4",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "contains the name of the paragraph style that is applied to the 4th level."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParaStyleLevel5",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "contains the name of the paragraph style that is applied to the 5th level."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParaStyleLevel6",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "contains the name of the paragraph style that is applied to the 6th level."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParaStyleLevel7",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "contains the name of the paragraph style that is applied to the 7th level."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParaStyleLevel8",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "contains the name of the paragraph style that is applied to the 8th level."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParaStyleLevel9",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "contains the name of the paragraph style that is applied to the 9th level."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParaStyleSeparator",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "contains the name of the paragraph style that is applied to the separator level."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TextColumns",
+          "returns": "XTextColumns_b17f0bab",
+          "origtype": "com.sun.star.text.XTextColumns",
+          "origin": "com.sun.star.text.XTextColumns",
+          "desc": [
+            "contains the column interface."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Title",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "contains the title of the index."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

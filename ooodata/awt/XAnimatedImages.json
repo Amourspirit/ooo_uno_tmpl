@@ -1,0 +1,202 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XAnimatedImages",
+  "type": "interface",
+  "namespace": "com.sun.star.awt",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..container.x_container",
+        "XContainer",
+        "XContainer_d6fb0cc6"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.container.XContainer": "XContainer_d6fb0cc6"
+    },
+    "quote": [
+      "typing.Tuple[str, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[str, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.container.XContainer"
+      ],
+      "typing": []
+    },
+    "name": "XAnimatedImages",
+    "imports": [],
+    "namespace": "com.sun.star.awt",
+    "extends": [
+      "com.sun.star.container.XContainer"
+    ],
+    "desc": [
+      "allows administrating a set of images, to be displayed as animated seres.",
+      "",
+      "Components implementing this interface maintain a variable number of image sets. Components displaying those images will choose the best-fitting image set depending on the available space, and possibly other restrictions.",
+      "",
+      "**since**",
+      "",
+      "    OOo 3.4"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XAnimatedImages.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getImageSet",
+          "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
+          "desc": [
+            "returns the URLs of the image set with the given index"
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            {
+              "name": "iIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "getImageSetCount",
+          "returns": "int",
+          "returns_origin": "long",
+          "desc": [
+            "returns the number of images sets maintained by the component."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "insertImageSet",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "sets the URLs of the image set with the given index"
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            {
+              "name": "iIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "iImageURLs",
+              "type": "typing.Tuple[str, ...]",
+              "direction": "in",
+              "origin": "sequence< string >"
+            }
+          ]
+        },
+        {
+          "name": "removeImageSet",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "removes the image set with the given index"
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            {
+              "name": "iIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "replaceImageSet",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "replaces the image set given by index with a new one"
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            {
+              "name": "iIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "iImageURLs",
+              "type": "typing.Tuple[str, ...]",
+              "direction": "in",
+              "origin": "sequence< string >"
+            }
+          ]
+        }
+      ],
+      "properties": [
+        {
+          "name": "AutoRepeat",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "specifies whether the animation should start over with the first image of the image series when the last image has been played.",
+            "",
+            "The default value for this attribute is TRUE."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ScaleMode",
+          "returns": "int",
+          "origtype": null,
+          "origin": "short",
+          "desc": [
+            "controls the way the images are scaled up or down, when the available space is larger or smaller than what is needed for them.",
+            "",
+            "Allowed values are those from the ImageScaleMode constants group."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "StepTime",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "specifies the time in milliseconds between two animation steps.",
+            "",
+            "This is the minimum time, the actual value might be longer due to system load. The default value will be 100 ms."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

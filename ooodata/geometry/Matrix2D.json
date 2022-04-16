@@ -1,0 +1,93 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "type": "struct",
+  "name": "Matrix2D",
+  "namespace": "com.sun.star.geometry",
+  "parser_args": {
+    "sort": false,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "sort": true,
+    "dynamic_struct": true,
+    "include_desc": true
+  },
+  "data": {
+    "name": "Matrix2D",
+    "namespace": "com.sun.star.geometry",
+    "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1geometry_1_1Matrix2D.html",
+    "from_imports": [],
+    "from_imports_typing": [],
+    "extends_map": {},
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [],
+      "typing": []
+    },
+    "fullname": "com.sun.star.geometry.Matrix2D",
+    "desc": [
+      "This structure defines a 2 by 2 matrix.",
+      "",
+      "This constitutes a linear mapping of a point in 2D to another point in 2D.",
+      "",
+      "The matrix defined by this structure constitutes a linear mapping of a point in 2D to another point in 2D. In contrast to the com.sun.star.geometry.AffineMatrix2D, this matrix does not include any translational components.",
+      "",
+      "A linear mapping, as performed by this matrix, can be written out as follows, where xs and ys are the source, and xd and yd the corresponding result coordinates:",
+      "",
+      "xd = m00*xs + m01*ys; yd = m10*xs + m11*ys;",
+      "",
+      "Thus, in common matrix language, with M being the Matrix2D and vs=[xs,ys]^T, vd=[xd,yd]^T two 2D vectors, the linear mapping is written as vd=M*vs. Concatenation of transformations amounts to multiplication of matrices, i.e. a scaling, given by S, followed by a rotation, given by R, is expressed as vd=R*(S*vs) in the above notation. Since matrix multiplication is associative, this can be shortened to vd=(R*S)*vs=M'*vs. Therefore, a set of consecutive transformations can be accumulated into a single Matrix2D, by multiplying the current transformation with the additional transformation from the left.",
+      "",
+      "Due to this transformational approach, all geometry data types are points in abstract integer or real coordinate spaces, without any physical dimensions attached to them. This physical measurement units are typically only added when using these data types to render something onto a physical output device, like a screen or a printer. Then, the total transformation matrix and the device resolution determine the actual measurement unit.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.0"
+    ],
+    "imports": [],
+    "extends": [],
+    "items": [
+      {
+        "name": "m00",
+        "type": "float",
+        "origtype": null,
+        "origin": "double",
+        "desc": [
+          "The top, left matrix entry."
+        ]
+      },
+      {
+        "name": "m01",
+        "type": "float",
+        "origtype": null,
+        "origin": "double",
+        "desc": [
+          "The top, right matrix entry."
+        ]
+      },
+      {
+        "name": "m10",
+        "type": "float",
+        "origtype": null,
+        "origin": "double",
+        "desc": [
+          "The bottom, left matrix entry."
+        ]
+      },
+      {
+        "name": "m11",
+        "type": "float",
+        "origtype": null,
+        "origin": "double",
+        "desc": [
+          "The bottom, right matrix entry."
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,263 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XInplaceClient",
+  "type": "interface",
+  "namespace": "com.sun.star.embed",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..awt.key_event",
+        "KeyEvent",
+        "KeyEvent_7a78097f"
+      ],
+      [
+        "..awt.rectangle",
+        "Rectangle",
+        "Rectangle_84b109e9"
+      ],
+      [
+        "..awt.size",
+        "Size",
+        "Size_576707ef"
+      ],
+      [
+        "..frame.x_dispatch_provider",
+        "XDispatchProvider",
+        "XDispatchProvider_fc690de6"
+      ],
+      [
+        "..frame.x_layout_manager",
+        "XLayoutManager",
+        "XLayoutManager_d4510ca4"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "Rectangle_84b109e9",
+      "Size_576707ef",
+      "XDispatchProvider_fc690de6",
+      "XLayoutManager_d4510ca4",
+      "typing.Tuple[KeyEvent_7a78097f, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[KeyEvent_7a78097f, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.awt.KeyEvent",
+        "com.sun.star.awt.Rectangle",
+        "com.sun.star.awt.Size",
+        "com.sun.star.frame.XDispatchProvider",
+        "com.sun.star.frame.XLayoutManager"
+      ]
+    },
+    "name": "XInplaceClient",
+    "imports": [],
+    "namespace": "com.sun.star.embed",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "represents common functionality for inplace clients."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1embed_1_1XInplaceClient.html",
+    "items": {
+      "methods": [
+        {
+          "name": "activatingInplace",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "notifies container through the client that the object is to be inplace activated."
+          ],
+          "raises": [
+            "com.sun.star.embed.WrongStateException"
+          ],
+          "args": []
+        },
+        {
+          "name": "activatingUI",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "notifies container through the client that the object is to be UI-activated."
+          ],
+          "raises": [
+            "com.sun.star.embed.WrongStateException"
+          ],
+          "args": []
+        },
+        {
+          "name": "canInplaceActivate",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "checks if the container can activate the object inplace."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "changedPlacement",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "notifies the container that the position of the object is changed."
+          ],
+          "raises": [
+            "com.sun.star.embed.WrongStateException",
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            {
+              "name": "aPosRect",
+              "type": "Rectangle_84b109e9",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Rectangle"
+            }
+          ]
+        },
+        {
+          "name": "deactivatedInplace",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "notifies container through the client that the object is deactivated."
+          ],
+          "raises": [
+            "com.sun.star.embed.WrongStateException"
+          ],
+          "args": []
+        },
+        {
+          "name": "deactivatedUI",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "notifies container through the client that the object is UI-deactivated.",
+            "",
+            "After this notification the container can restore its own UI and take focus."
+          ],
+          "raises": [
+            "com.sun.star.embed.WrongStateException"
+          ],
+          "args": []
+        },
+        {
+          "name": "getClipRectangle",
+          "returns": "Rectangle_84b109e9",
+          "returns_origin": "com.sun.star.awt.Rectangle",
+          "desc": [
+            "gets the inplace object clip rectangle.",
+            "",
+            "The rectangle is provided in object's parent window coordinates in pixels. The intersection of position and clip rectangles specifies the visible part of the object."
+          ],
+          "raises": [
+            "com.sun.star.embed.WrongStateException"
+          ],
+          "args": []
+        },
+        {
+          "name": "getInplaceDispatchProvider",
+          "returns": "XDispatchProvider_fc690de6",
+          "returns_origin": "com.sun.star.frame.XDispatchProvider",
+          "desc": [
+            "allows to retrieve the container's dispatch provider."
+          ],
+          "raises": [
+            "com.sun.star.embed.WrongStateException"
+          ],
+          "args": []
+        },
+        {
+          "name": "getLayoutManager",
+          "returns": "XLayoutManager_d4510ca4",
+          "returns_origin": "com.sun.star.frame.XLayoutManager",
+          "desc": [
+            "allows to retrieve the com.sun.star.frame.LayoutManager of the container."
+          ],
+          "raises": [
+            "com.sun.star.embed.WrongStateException"
+          ],
+          "args": []
+        },
+        {
+          "name": "getPlacement",
+          "returns": "Rectangle_84b109e9",
+          "returns_origin": "com.sun.star.awt.Rectangle",
+          "desc": [
+            "gets the inplace object position rectangle.",
+            "",
+            "The rectangle is provided in object's parent window coordinates in pixels. The intersection of position and clip rectangles specifies the visible part of the object. In case the position window has a size that is bigger than object's size, the object should either scale or deactivate."
+          ],
+          "raises": [
+            "com.sun.star.embed.WrongStateException"
+          ],
+          "args": []
+        },
+        {
+          "name": "scrollObject",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "scrolls the object."
+          ],
+          "raises": [
+            "com.sun.star.embed.WrongStateException"
+          ],
+          "args": [
+            {
+              "name": "aOffset",
+              "type": "Size_576707ef",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Size"
+            }
+          ]
+        },
+        {
+          "name": "translateAccelerators",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "provides accelerator table the object wants to use while it is inplace active."
+          ],
+          "raises": [
+            "com.sun.star.embed.WrongStateException"
+          ],
+          "args": [
+            {
+              "name": "aKeys",
+              "type": "typing.Tuple[KeyEvent_7a78097f, ...]",
+              "direction": "in",
+              "origin": "sequence< .com.sun.star.awt.KeyEvent >"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

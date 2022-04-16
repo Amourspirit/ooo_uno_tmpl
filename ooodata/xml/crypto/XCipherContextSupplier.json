@@ -1,0 +1,121 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XCipherContextSupplier",
+  "type": "interface",
+  "namespace": "com.sun.star.xml.crypto",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "...uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "...beans.named_value",
+        "NamedValue",
+        "NamedValue_a37a0af3"
+      ],
+      [
+        ".x_cipher_context",
+        "XCipherContext",
+        "XCipherContext_1b110ec0"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XCipherContext_1b110ec0",
+      "typing.Tuple[NamedValue_a37a0af3, ...]",
+      "typing.Tuple[int, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[NamedValue_a37a0af3, ...]",
+      "typing.Tuple[int, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.beans.NamedValue",
+        "com.sun.star.xml.crypto.XCipherContext"
+      ]
+    },
+    "name": "XCipherContextSupplier",
+    "imports": [],
+    "namespace": "com.sun.star.xml.crypto",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "This interface allows to get an object that allows to encrypt/decrypt data using the specified algorithm.",
+      "",
+      "**since**",
+      "",
+      "    OOo 3.4"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1xml_1_1crypto_1_1XCipherContextSupplier.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getCipherContext",
+          "returns": "XCipherContext_1b110ec0",
+          "returns_origin": "com.sun.star.xml.crypto.XCipherContext",
+          "desc": [
+            "returns an object that allows to encrypt/decrypt data."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "nCipherID",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aKey",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "in",
+              "origin": "sequence< byte >"
+            },
+            {
+              "name": "aInitializationVector",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "in",
+              "origin": "sequence< byte >"
+            },
+            {
+              "name": "bEncryption",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            },
+            {
+              "name": "aParams",
+              "type": "typing.Tuple[NamedValue_a37a0af3, ...]",
+              "direction": "in",
+              "origin": "sequence< .com.sun.star.beans.NamedValue >"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

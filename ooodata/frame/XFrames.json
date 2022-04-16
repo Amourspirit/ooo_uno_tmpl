@@ -1,0 +1,121 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XFrames",
+  "type": "interface",
+  "namespace": "com.sun.star.frame",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..container.x_index_access",
+        "XIndexAccess",
+        "XIndexAccess_f0910d6d"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_frame",
+        "XFrame",
+        "XFrame_7a570956"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.container.XIndexAccess": "XIndexAccess_f0910d6d"
+    },
+    "quote": [
+      "XFrame_7a570956",
+      "typing.Tuple[XFrame_7a570956, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[XFrame_7a570956, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.container.XIndexAccess"
+      ],
+      "typing": [
+        "com.sun.star.frame.XFrame"
+      ]
+    },
+    "name": "XFrames",
+    "imports": [],
+    "namespace": "com.sun.star.frame",
+    "extends": [
+      "com.sun.star.container.XIndexAccess"
+    ],
+    "desc": [
+      "manages and creates frames.",
+      "",
+      "Frames may contain other frames (by implementing an XFrames interface) and may be contained in other frames."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XFrames.html",
+    "items": {
+      "methods": [
+        {
+          "name": "append",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "appends the specified Frame to the list of sub-frames."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xFrame",
+              "type": "XFrame_7a570956",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XFrame"
+            }
+          ]
+        },
+        {
+          "name": "queryFrames",
+          "returns": "typing.Tuple[XFrame_7a570956, ...]",
+          "returns_origin": "sequence< XFrame >",
+          "desc": [
+            "provides access to the list of all currently existing frames inside this container and her sub frames"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "nSearchFlags",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "remove",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "removes the frame from its container.",
+            "",
+            "Note:"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xFrame",
+              "type": "XFrame_7a570956",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XFrame"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

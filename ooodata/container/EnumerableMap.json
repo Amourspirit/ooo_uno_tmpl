@@ -1,0 +1,122 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "EnumerableMap",
+  "type": "service",
+  "namespace": "com.sun.star.container",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_enumerable_map",
+        "XEnumerableMap",
+        "XEnumerableMap_dc50e41"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.container.XEnumerableMap": "XEnumerableMap_dc50e41"
+    },
+    "quote": [
+      "typing.Tuple[typing.Tuple[object, object], ...]"
+    ],
+    "typings": [
+      "typing.Tuple[typing.Tuple[object, object], ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.container.XEnumerableMap"
+      ],
+      "typing": []
+    },
+    "name": "EnumerableMap",
+    "imports": [],
+    "namespace": "com.sun.star.container",
+    "extends": [
+      "com.sun.star.container.XEnumerableMap"
+    ],
+    "desc": [
+      "provides a default XEnumerableMap implementation",
+      "",
+      "For the keys put into the map using XMap.put() or createImmutable(), the following rules apply:",
+      "",
+      "For the values put into the map using XMap.put() or createImmutable(), the following rules apply:",
+      "",
+      "The factory methods of the XEnumerableMap interface support both isolated and non-isolated enumerators. The latter one will be automatically disposed when the map changes after enumerator creation, so every attempt to use them will result in a com.sun.star.lang.DisposedException being thrown."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1container_1_1EnumerableMap.html",
+    "items": {
+      "methods": [
+        {
+          "name": "create",
+          "returns": "None",
+          "returns_origin": null,
+          "desc": [
+            "creates an instance mapping from the given key type to the given value type"
+          ],
+          "raises": [
+            "com.sun.star.beans.IllegalTypeException"
+          ],
+          "args": [
+            {
+              "name": "KeyType",
+              "type": "object",
+              "direction": "in",
+              "origin": "type"
+            },
+            {
+              "name": "ValueType",
+              "type": "object",
+              "direction": "in",
+              "origin": "type"
+            }
+          ]
+        },
+        {
+          "name": "createImmutable",
+          "returns": "None",
+          "returns_origin": null,
+          "desc": [
+            "creates an instance mapping from the given key type to the given value type",
+            "",
+            "The resulting map is immutable, so later alter operations on it will fail with a com.sun.star.lang.NoSupportException."
+          ],
+          "raises": [
+            "com.sun.star.beans.IllegalTypeException",
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "KeyType",
+              "type": "object",
+              "direction": "in",
+              "origin": "type"
+            },
+            {
+              "name": "ValueType",
+              "type": "object",
+              "direction": "in",
+              "origin": "type"
+            },
+            {
+              "name": "Values",
+              "type": "typing.Tuple[typing.Tuple[object, object], ...]",
+              "direction": "in",
+              "origin": "sequence< .com.sun.star.beans.Pair< any, any > >"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

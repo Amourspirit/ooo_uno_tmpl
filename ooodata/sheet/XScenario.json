@@ -1,0 +1,131 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XScenario",
+  "type": "interface",
+  "namespace": "com.sun.star.sheet",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..table.cell_range_address",
+        "CellRangeAddress",
+        "CellRangeAddress_ec450d43"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "typing.Tuple[CellRangeAddress_ec450d43, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[CellRangeAddress_ec450d43, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.table.CellRangeAddress"
+      ]
+    },
+    "name": "XScenario",
+    "imports": [],
+    "namespace": "com.sun.star.sheet",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "provides access to the settings of a scenario sheet."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sheet_1_1XScenario.html",
+    "items": {
+      "methods": [
+        {
+          "name": "addRanges",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "adds more ranges to the scenario."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aRanges",
+              "type": "typing.Tuple[CellRangeAddress_ec450d43, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.table.CellRangeAddress >"
+            }
+          ]
+        },
+        {
+          "name": "apply",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "applies the scenario.",
+            "",
+            "The contents of the scenario ranges are copied into the first non-scenario sheet which is in front of the sheet containing the scenario by itself."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getIsScenario",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "returns TRUE if the current object is a scenario."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getScenarioComment",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "returns the comment for the scenario."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setScenarioComment",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "sets a new comment for the scenario."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aScenarioComment",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

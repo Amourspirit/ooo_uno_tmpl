@@ -1,0 +1,135 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XMultiComponentFactory",
+  "type": "interface",
+  "namespace": "com.sun.star.lang",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..uno.x_component_context",
+        "XComponentContext",
+        "XComponentContext_e2e10d4a"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XComponentContext_e2e10d4a",
+      "XInterface_8f010a43",
+      "typing.Tuple[object, ...]",
+      "typing.Tuple[str, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[object, ...]",
+      "typing.Tuple[str, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.uno.XComponentContext"
+      ]
+    },
+    "name": "XMultiComponentFactory",
+    "imports": [],
+    "namespace": "com.sun.star.lang",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "Factory interface for creating component instances giving a context from which to retrieve deployment values."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1lang_1_1XMultiComponentFactory.html",
+    "items": {
+      "methods": [
+        {
+          "name": "createInstanceWithArgumentsAndContext",
+          "returns": "XInterface_8f010a43",
+          "returns_origin": "com.sun.star.uno.XInterface",
+          "desc": [
+            "Creates an instance of a component which supports the services specified by the factory, and initializes the new instance with the given arguments and context."
+          ],
+          "raises": [
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            {
+              "name": "ServiceSpecifier",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Arguments",
+              "type": "typing.Tuple[object, ...]",
+              "direction": "in",
+              "origin": "sequence< any >"
+            },
+            {
+              "name": "Context",
+              "type": "XComponentContext_e2e10d4a",
+              "direction": "in",
+              "origin": "com.sun.star.uno.XComponentContext"
+            }
+          ]
+        },
+        {
+          "name": "createInstanceWithContext",
+          "returns": "XInterface_8f010a43",
+          "returns_origin": "com.sun.star.uno.XInterface",
+          "desc": [
+            "Creates an instance of a component which supports the services specified by the factory."
+          ],
+          "raises": [
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            {
+              "name": "aServiceSpecifier",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Context",
+              "type": "XComponentContext_e2e10d4a",
+              "direction": "in",
+              "origin": "com.sun.star.uno.XComponentContext"
+            }
+          ]
+        },
+        {
+          "name": "getAvailableServiceNames",
+          "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
+          "desc": [
+            "Gets the names of all supported services."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

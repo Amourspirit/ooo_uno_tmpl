@@ -1,0 +1,109 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XTreeEditListener",
+  "type": "interface",
+  "namespace": "com.sun.star.awt.tree",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "...lang.x_event_listener",
+        "XEventListener",
+        "XEventListener_c7230c4a"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_tree_node",
+        "XTreeNode",
+        "XTreeNode_baaf0ba0"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.lang.XEventListener": "XEventListener_c7230c4a"
+    },
+    "quote": [
+      "XTreeNode_baaf0ba0"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.lang.XEventListener"
+      ],
+      "typing": [
+        "com.sun.star.awt.tree.XTreeNode"
+      ]
+    },
+    "name": "XTreeEditListener",
+    "imports": [],
+    "namespace": "com.sun.star.awt.tree",
+    "extends": [
+      "com.sun.star.lang.XEventListener"
+    ],
+    "desc": [
+      "You can implement this interface and register with XTreeControl.addTreeEditListener() to get notifications when editing of a node starts and ends.",
+      "",
+      "You have to set the TreeControlModel.Editable property to TRUE before a tree supports editing."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1tree_1_1XTreeEditListener.html",
+    "items": {
+      "methods": [
+        {
+          "name": "nodeEdited",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "This method is called from the TreeControl implementation when editing of Node is finished and was not canceled.",
+            "",
+            "Implementations that register a XTreeEditListener must update the display value at the Node."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Node",
+              "type": "XTreeNode_baaf0ba0",
+              "direction": "in",
+              "origin": "com.sun.star.awt.tree.XTreeNode"
+            },
+            {
+              "name": "NewText",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "nodeEditing",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "This method is called from the TreeControl implementation when editing of Node is requested by calling XTreeControl.startEditingAtNode()."
+          ],
+          "raises": [
+            "com.sun.star.util.VetoException"
+          ],
+          "args": [
+            {
+              "name": "Node",
+              "type": "XTreeNode_baaf0ba0",
+              "direction": "in",
+              "origin": "com.sun.star.awt.tree.XTreeNode"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

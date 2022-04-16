@@ -1,0 +1,152 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "ContentResultSet",
+  "type": "service",
+  "namespace": "com.sun.star.ucb",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..beans.x_property_set",
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
+      ],
+      [
+        "..lang.x_component",
+        "XComponent",
+        "XComponent_98dc0ab5"
+      ],
+      [
+        "..sdbc.result_set",
+        "ResultSet",
+        "ResultSet_8ecf0a4f"
+      ],
+      [
+        "..sdbc.x_closeable",
+        "XCloseable",
+        "XCloseable_98290a86"
+      ],
+      [
+        "..sdbc.x_result_set",
+        "XResultSet",
+        "XResultSet_98e30aa7"
+      ],
+      [
+        "..sdbc.x_result_set_meta_data_supplier",
+        "XResultSetMetaDataSupplier",
+        "XResultSetMetaDataSupplier_777010fc"
+      ],
+      [
+        "..sdbc.x_row",
+        "XRow",
+        "XRow_5f360834"
+      ],
+      [
+        ".x_content_access",
+        "XContentAccess",
+        "XContentAccess_ba220bc7"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa",
+      "com.sun.star.lang.XComponent": "XComponent_98dc0ab5",
+      "com.sun.star.sdbc.ResultSet": "ResultSet_8ecf0a4f",
+      "com.sun.star.sdbc.XCloseable": "XCloseable_98290a86",
+      "com.sun.star.sdbc.XResultSet": "XResultSet_98e30aa7",
+      "com.sun.star.sdbc.XResultSetMetaDataSupplier": "XResultSetMetaDataSupplier_777010fc",
+      "com.sun.star.sdbc.XRow": "XRow_5f360834",
+      "com.sun.star.ucb.XContentAccess": "XContentAccess_ba220bc7"
+    },
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XPropertySet",
+        "com.sun.star.lang.XComponent",
+        "com.sun.star.sdbc.ResultSet",
+        "com.sun.star.sdbc.XCloseable",
+        "com.sun.star.sdbc.XResultSet",
+        "com.sun.star.sdbc.XResultSetMetaDataSupplier",
+        "com.sun.star.sdbc.XRow",
+        "com.sun.star.ucb.XContentAccess"
+      ],
+      "typing": []
+    },
+    "name": "ContentResultSet",
+    "imports": [],
+    "namespace": "com.sun.star.ucb",
+    "extends": [
+      "com.sun.star.lang.XComponent",
+      "com.sun.star.sdbc.XResultSetMetaDataSupplier",
+      "com.sun.star.sdbc.XResultSet",
+      "com.sun.star.sdbc.XRow",
+      "com.sun.star.sdbc.XCloseable",
+      "com.sun.star.beans.XPropertySet",
+      "com.sun.star.ucb.XContentAccess",
+      "com.sun.star.sdbc.ResultSet"
+    ],
+    "desc": [
+      "provides access to the children of a folder content.",
+      "",
+      "It can be understand as a table containing a row for each child. The table columns may contain values of properties of the children."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1ucb_1_1ContentResultSet.html",
+    "items": {
+      "properties": [
+        {
+          "name": "CursorTravelMode",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "controls the travel mode of the result set cursor.",
+            "",
+            "There are two possible travel modes:",
+            "",
+            "The following pseudo-code illustrates the usage of a non-blocking cursor:",
+            "",
+            "If this property is not supported, the implementation needs to provide a blocking cursor.",
+            "",
+            "The implementation initially needs to set the value of this property to CursorTravelMode.BLOCKING."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsRowCountFinal",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "indicates that all rows of the result set have been obtained."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RowCount",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "contains the number of rows obtained (so far) from the data source."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

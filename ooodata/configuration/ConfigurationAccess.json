@@ -1,0 +1,100 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "ConfigurationAccess",
+  "type": "service",
+  "namespace": "com.sun.star.configuration",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".access_root_element",
+        "AccessRootElement",
+        "AccessRootElement_7fef1140"
+      ],
+      [
+        ".group_access",
+        "GroupAccess",
+        "GroupAccess_1f8f0edf"
+      ],
+      [
+        ".group_element",
+        "GroupElement",
+        "GroupElement_2f2a0f57"
+      ],
+      [
+        ".set_access",
+        "SetAccess",
+        "SetAccess_1ae0dfe"
+      ],
+      [
+        ".set_element",
+        "SetElement",
+        "SetElement_10680e76"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.configuration.AccessRootElement": "AccessRootElement_7fef1140",
+      "com.sun.star.configuration.GroupAccess": "GroupAccess_1f8f0edf",
+      "com.sun.star.configuration.GroupElement": "GroupElement_2f2a0f57",
+      "com.sun.star.configuration.SetAccess": "SetAccess_1ae0dfe",
+      "com.sun.star.configuration.SetElement": "SetElement_10680e76"
+    },
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.configuration.AccessRootElement",
+        "com.sun.star.configuration.GroupAccess",
+        "com.sun.star.configuration.GroupElement",
+        "com.sun.star.configuration.SetAccess",
+        "com.sun.star.configuration.SetElement"
+      ],
+      "typing": []
+    },
+    "name": "ConfigurationAccess",
+    "imports": [],
+    "namespace": "com.sun.star.configuration",
+    "extends": [
+      "com.sun.star.configuration.SetAccess",
+      "com.sun.star.configuration.GroupAccess",
+      "com.sun.star.configuration.AccessRootElement",
+      "com.sun.star.configuration.SetElement",
+      "com.sun.star.configuration.GroupElement"
+    ],
+    "desc": [
+      "provides read access to a fragment of the configuration hierarchy.",
+      "",
+      "Values that are direct or indirect descendants of a root element can be retrieved and, if themselves objects, navigated. Other interfaces provide access to information about this element and its context. Changes to values in the hierarchy can be monitored by event listeners.",
+      "",
+      "Descendants of this service also implement this service.",
+      "",
+      "Ultimately the configuration holds values. These values are organized into a hierarchy using structural elements. The structure is defined in advance in a schema. Necessary information from the schema is stored in the configuration repository itself and is accessible through an implementation of this service.",
+      "",
+      "Two different kinds of structural elements are used in the configuration hierarchy:",
+      "",
+      "Objects in the configuration hierarchy, for example, implementations of this service, can thus be classified in the following ways:",
+      "",
+      "Several types of simple values can be used in the configuration. In addition to the basic (scalar) types, sequences of the basic types are supported. The basic types are:",
+      "",
+      "Within templates an additional type any can occur. When such a template is used to create a new SetElement, the type of the element is initially reported as any (having no value). When the value of such an element is first set, it will assume the type used.",
+      "",
+      "If the schema marks a value as nullable (which is indicated by attribute com.sun.star.beans.PropertyAttribute.MAYBEVOID ), its contents may be NULL.",
+      "",
+      "The configuration should support explicit access to default values (implementing com.sun.star.beans.XPropertyState and com.sun.star.beans.XPropertyWithState)."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1configuration_1_1ConfigurationAccess.html",
+    "items": {}
+  }
+}

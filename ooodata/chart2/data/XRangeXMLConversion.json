@@ -1,0 +1,93 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XRangeXMLConversion",
+  "type": "interface",
+  "namespace": "com.sun.star.chart2.data",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "...uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": []
+    },
+    "name": "XRangeXMLConversion",
+    "imports": [],
+    "namespace": "com.sun.star.chart2.data",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "An application that provides data for a chart must implement this interface."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1chart2_1_1data_1_1XRangeXMLConversion.html",
+    "items": {
+      "methods": [
+        {
+          "name": "convertRangeFromXML",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "converts an XML-style range into the internal DataProvider's format."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "aXMLRange",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "convertRangeToXML",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "converts the range to a valid XML syntax.",
+            "",
+            "For example spreadsheet ranges consisting of more than one consecutive region are usually separated by a semicolon whereas in XML you separate multiple regions by a space."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "aRangeRepresentation",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

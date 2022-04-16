@@ -1,0 +1,191 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XStarBasicAccess",
+  "type": "interface",
+  "namespace": "com.sun.star.script",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..container.x_name_container",
+        "XNameContainer",
+        "XNameContainer_cb90e47"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XNameContainer_cb90e47",
+      "typing.Tuple[int, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[int, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.container.XNameContainer"
+      ]
+    },
+    "name": "XStarBasicAccess",
+    "imports": [],
+    "namespace": "com.sun.star.script",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "Interface representing a library and provides access to its modules.",
+      "",
+      ".. deprecated::",
+      "",
+      "    Class is deprecated."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1script_1_1XStarBasicAccess.html",
+    "items": {
+      "methods": [
+        {
+          "name": "addDialog",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Adds an old style basic dialog (SI controls) to an existing (e.g., created by createLibrary) library.",
+            "",
+            "By using this method together with createLibrary the caller does not have to implement XStarBasicLibraryInfo and XStarBasicDialogInfo"
+          ],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException"
+          ],
+          "args": [
+            {
+              "name": "LibraryName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "DialogName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Data",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "in",
+              "origin": "sequence< byte >"
+            }
+          ]
+        },
+        {
+          "name": "addModule",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Adds a module to an existing (e.g., created by createLibrary) library.",
+            "",
+            "By using this method together with createLibrary the caller does not have to implement XStarBasicLibraryInfo and XModuleInfo."
+          ],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException"
+          ],
+          "args": [
+            {
+              "name": "LibraryName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "ModuleName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Language",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Source",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "createLibrary",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Creates an empty library.",
+            "",
+            "This method can be called alternatively to accessing directly the NameContainer returned by getLibraryContainer. By using this method together with addModule and addStarBasicDialog the caller does not have to implement XStarBasicLibraryInfo, XModuleInfo, and XStarBasicDialogInfo"
+          ],
+          "raises": [
+            "com.sun.star.container.ElementExistException"
+          ],
+          "args": [
+            {
+              "name": "LibName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Password",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "ExternalSourceURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "LinkTargetURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "getLibraryContainer",
+          "returns": "XNameContainer_cb90e47",
+          "returns_origin": "com.sun.star.container.XNameContainer",
+          "desc": [
+            "returns the library container giving access to the libraries stored in a document or basic library file."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

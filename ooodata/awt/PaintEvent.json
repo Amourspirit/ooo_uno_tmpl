@@ -1,0 +1,85 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "type": "struct",
+  "name": "PaintEvent",
+  "namespace": "com.sun.star.awt",
+  "parser_args": {
+    "sort": false,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "sort": true,
+    "dynamic_struct": true,
+    "include_desc": true
+  },
+  "data": {
+    "name": "PaintEvent",
+    "namespace": "com.sun.star.awt",
+    "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1awt_1_1PaintEvent.html",
+    "from_imports": [
+      [
+        "..lang.event_object",
+        "EventObject",
+        "EventObject_a3d70b03"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".rectangle",
+        "Rectangle",
+        "Rectangle_84b109e9"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.lang.EventObject": "EventObject_a3d70b03"
+    },
+    "quote": [
+      "Rectangle_84b109e9"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.lang.EventObject"
+      ],
+      "typing": [
+        "com.sun.star.awt.Rectangle"
+      ]
+    },
+    "fullname": "com.sun.star.awt.PaintEvent",
+    "desc": [
+      "specifies the paint event for a component.",
+      "",
+      "This event is a special type which is used to ensure that paint/update method calls are serialized along with the other events delivered from the event queue."
+    ],
+    "imports": [],
+    "extends": [
+      "com.sun.star.lang.EventObject"
+    ],
+    "items": [
+      {
+        "name": "UpdateRect",
+        "type": "Rectangle_84b109e9",
+        "origtype": "com.sun.star.awt.Rectangle",
+        "origin": "com.sun.star.awt.Rectangle",
+        "desc": [
+          "contains the rectangle area which needs to be repainted."
+        ]
+      },
+      {
+        "name": "Count",
+        "type": "int",
+        "origtype": null,
+        "origin": "short",
+        "desc": [
+          "contains the number of paint events that follows this event if it is a multiple PaintEvent.",
+          "",
+          "You can collect the PaintEvent until Count is zero."
+        ]
+      }
+    ]
+  }
+}

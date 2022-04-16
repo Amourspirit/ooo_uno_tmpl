@@ -1,0 +1,135 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XTransactionListener",
+  "type": "interface",
+  "namespace": "com.sun.star.embed",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..lang.x_event_listener",
+        "XEventListener",
+        "XEventListener_c7230c4a"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..lang.event_object",
+        "EventObject",
+        "EventObject_a3d70b03"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.lang.XEventListener": "XEventListener_c7230c4a"
+    },
+    "quote": [
+      "EventObject_a3d70b03"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.lang.XEventListener"
+      ],
+      "typing": [
+        "com.sun.star.lang.EventObject"
+      ]
+    },
+    "name": "XTransactionListener",
+    "imports": [],
+    "namespace": "com.sun.star.embed",
+    "extends": [
+      "com.sun.star.lang.XEventListener"
+    ],
+    "desc": [
+      "makes it possible to receive events when a transacted object is committed or reverted."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1embed_1_1XTransactionListener.html",
+    "items": {
+      "methods": [
+        {
+          "name": "commited",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "is called after the object is committed."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aEvent",
+              "type": "EventObject_a3d70b03",
+              "direction": "in",
+              "origin": "com.sun.star.lang.EventObject"
+            }
+          ]
+        },
+        {
+          "name": "preCommit",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "is called just before the object is committed."
+          ],
+          "raises": [
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            {
+              "name": "aEvent",
+              "type": "EventObject_a3d70b03",
+              "direction": "in",
+              "origin": "com.sun.star.lang.EventObject"
+            }
+          ]
+        },
+        {
+          "name": "preRevert",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "is called just before the object is reverted."
+          ],
+          "raises": [
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            {
+              "name": "aEvent",
+              "type": "EventObject_a3d70b03",
+              "direction": "in",
+              "origin": "com.sun.star.lang.EventObject"
+            }
+          ]
+        },
+        {
+          "name": "reverted",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "is called after the object is reverted."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aEvent",
+              "type": "EventObject_a3d70b03",
+              "direction": "in",
+              "origin": "com.sun.star.lang.EventObject"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

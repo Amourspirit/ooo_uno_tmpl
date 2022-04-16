@@ -1,0 +1,76 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XColumnLocate",
+  "type": "interface",
+  "namespace": "com.sun.star.sdbc",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": []
+    },
+    "name": "XColumnLocate",
+    "imports": [],
+    "namespace": "com.sun.star.sdbc",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "provides the possibility to find columns by their name.",
+      "",
+      "When several columns have the same name, then the value of the first matching column will be returned. The column name option is designed to be used when column names are used in the SQL query. For columns that are NOT explicitly named in the query, it is best to use column numbers. If column names are used, there is no way for the programmer to guarantee that they actually refer to the intended columns."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sdbc_1_1XColumnLocate.html",
+    "items": {
+      "methods": [
+        {
+          "name": "findColumn",
+          "returns": "int",
+          "returns_origin": "long",
+          "desc": [
+            "maps the given ResultSet column name to its ResultSet column index.",
+            "",
+            "The specification before LibreOffice 4.2 left unspecified what should happen for an invalid column name. As a result some drivers written against the older specification may return a special invalid value, such as a negative number, zero, or a number greater than the number of columns."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            {
+              "name": "columnName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

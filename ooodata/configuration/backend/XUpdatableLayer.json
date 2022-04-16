@@ -1,0 +1,82 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XUpdatableLayer",
+  "type": "interface",
+  "namespace": "com.sun.star.configuration.backend",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_layer",
+        "XLayer",
+        "XLayer_4cd50fcb"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.configuration.backend.XLayer": "XLayer_4cd50fcb"
+    },
+    "quote": [
+      "XLayer_4cd50fcb"
+    ],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.configuration.backend.XLayer"
+      ],
+      "typing": []
+    },
+    "name": "XUpdatableLayer",
+    "imports": [],
+    "namespace": "com.sun.star.configuration.backend",
+    "extends": [
+      "com.sun.star.configuration.backend.XLayer"
+    ],
+    "desc": [
+      "Provides access to a read-write layer of configuration data for a given component and entity.",
+      "",
+      "**since**",
+      "",
+      "    OOo 1.1.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1configuration_1_1backend_1_1XUpdatableLayer.html",
+    "items": {
+      "methods": [
+        {
+          "name": "replaceWith",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Replaces the current layer with the layer given as input parameter.",
+            "",
+            "After the replacement has been performed, reading the layer will return the new content. Some implementations may not support this, so after an update XLayer.readData() may fail."
+          ],
+          "raises": [
+            "com.sun.star.lang.NullPointerException",
+            "com.sun.star.lang.WrappedTargetException",
+            "MalformedDataException"
+          ],
+          "args": [
+            {
+              "name": "aNewLayer",
+              "type": "XLayer_4cd50fcb",
+              "direction": "in",
+              "origin": "com.sun.star.configuration.backend.XLayer"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

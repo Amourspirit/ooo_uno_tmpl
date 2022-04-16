@@ -1,0 +1,122 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XNamingService",
+  "type": "interface",
+  "namespace": "com.sun.star.uno",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XInterface_8f010a43"
+    ],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": []
+    },
+    "name": "XNamingService",
+    "imports": [],
+    "namespace": "com.sun.star.uno",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "allows to insert, remove and access named objects."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1uno_1_1XNamingService.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getRegisteredObject",
+          "returns": "XInterface_8f010a43",
+          "returns_origin": "com.sun.star.uno.XInterface",
+          "desc": [
+            "provides a previous registered object."
+          ],
+          "raises": [
+            "Exception"
+          ],
+          "args": [
+            {
+              "name": "Name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "registerObject",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "registers one object under the specified name.",
+            "",
+            "If any object is registered before, then this object is revoked automatically."
+          ],
+          "raises": [
+            "Exception"
+          ],
+          "args": [
+            {
+              "name": "Name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Object",
+              "type": "XInterface_8f010a43",
+              "direction": "in",
+              "origin": "com.sun.star.uno.XInterface"
+            }
+          ]
+        },
+        {
+          "name": "revokeObject",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "revokes the registration of an object.",
+            "",
+            "If the object was not previously registered, then this call does nothing."
+          ],
+          "raises": [
+            "Exception"
+          ],
+          "args": [
+            {
+              "name": "Name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

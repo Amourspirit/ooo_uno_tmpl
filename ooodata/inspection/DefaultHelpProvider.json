@@ -1,0 +1,84 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "DefaultHelpProvider",
+  "type": "service",
+  "namespace": "com.sun.star.inspection",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_object_inspector_ui",
+        "XObjectInspectorUI",
+        "XObjectInspectorUI_5ccd1048"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XObjectInspectorUI_5ccd1048"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.inspection.XObjectInspectorUI"
+      ]
+    },
+    "name": "DefaultHelpProvider",
+    "imports": [],
+    "namespace": "com.sun.star.inspection",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "implements a component which can default-fill the help section of an ObjectInspector.",
+      "",
+      "The component registers a XPropertyControlObserver at an XObjectInspectoryUI interface. Whenever it then is notified of a XPropertyControl getting the focus, it will try to deduce the extended help text of this control's window, and set this help text at the object inspector's help section."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1inspection_1_1DefaultHelpProvider.html",
+    "items": {
+      "methods": [
+        {
+          "name": "create",
+          "returns": "None",
+          "returns_origin": null,
+          "desc": [
+            "creates a help provider instance"
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "InspectorUI",
+              "type": "XObjectInspectorUI_5ccd1048",
+              "direction": "in",
+              "origin": "com.sun.star.inspection.XObjectInspectorUI"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

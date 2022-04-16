@@ -1,0 +1,100 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XTypeDetection",
+  "type": "interface",
+  "namespace": "com.sun.star.document",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": []
+    },
+    "name": "XTypeDetection",
+    "imports": [],
+    "namespace": "com.sun.star.document",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "support \\\"flat\\\" and \\\"deep\\\" type detection of a given document",
+      "",
+      "A \\\"flat\\\" detection means specifying the document format by using the URL and some configuration data only. That will perform but produce may invalid results if e.g., the extension of the document is wrong. A \\\"deep\\\" detection means looking into the document stream to be right which format it supports. Of course that includes a \\\"flat\\\" detection before. The combination of both ones should produce stable results every time."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1document_1_1XTypeDetection.html",
+    "items": {
+      "methods": [
+        {
+          "name": "queryTypeByDescriptor",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "make a \\\"deep\\\" detection or optional a \\\"flat\\\" detection by using a MediaDescriptor",
+            "",
+            "Instead of XTypeDetection.queryTypeByURL() this function use a MediaDescriptor to specify the document for detection. Such descriptor hold different information about the document. He will be passed to any part of made detection process and every part can change it to actualize it. The property MediaDescriptor.URL should be set on this descriptor as minimum. It specifies the location of the document. If this parameter is missing another one is required: MediaDescriptor.InputStream. This can be useful to prevent operation against multiple opening of the stream and perform the operation. If this stream isn't already included the detection will open it (if allowed!) and add it to the descriptor so it will be available for all following parts. A combination of both parameters can be useful to perform the operation and make results more stable; but only one of them is required. Of course its possible to specify more document properties (e.g. MediaDescriptor.ReadOnly).",
+            "As an additional feature it's possible to suppress \\\"deep\\\" detection by using argument AllowDeep."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Descriptor",
+              "type": "object",
+              "direction": "in",
+              "origin": null
+            },
+            {
+              "name": "AllowDeep",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
+          ]
+        },
+        {
+          "name": "queryTypeByURL",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "make a \\\"flat\\\" detection by using the URL of the document",
+            "",
+            "It use given URL in combination with the internal configuration of well known types only to specify the format of given document."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "URL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,145 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XCellRange",
+  "type": "interface",
+  "namespace": "com.sun.star.table",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_cell",
+        "XCell",
+        "XCell_70d408e8"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XCellRange",
+      "XCell_70d408e8"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.table.XCell"
+      ]
+    },
+    "name": "XCellRange",
+    "imports": [],
+    "namespace": "com.sun.star.table",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "provides access to the cells or to sub-ranges of a cell range."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1table_1_1XCellRange.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getCellByPosition",
+          "returns": "XCell_70d408e8",
+          "returns_origin": "com.sun.star.table.XCell",
+          "desc": [
+            "Returns a single cell within the range."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            {
+              "name": "nColumn",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nRow",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "getCellRangeByName",
+          "returns": "XCellRange",
+          "returns_origin": "com.sun.star.table.XCellRange",
+          "desc": [
+            "Returns a sub-range of cells within the range.",
+            "",
+            "The sub-range is specified by its name. The format of the range name is dependent of the context of the table. In spreadsheets valid names may be \\\"A1:C5\\\" or \\\"$B$2\\\" or even defined names for cell ranges such as \\\"MySpecialCell\\\"."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aRange",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "getCellRangeByPosition",
+          "returns": "XCellRange",
+          "returns_origin": "com.sun.star.table.XCellRange",
+          "desc": [
+            "Returns a sub-range of cells within the range."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            {
+              "name": "nLeft",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nTop",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nRight",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nBottom",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

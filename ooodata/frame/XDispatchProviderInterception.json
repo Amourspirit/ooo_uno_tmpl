@@ -1,0 +1,101 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XDispatchProviderInterception",
+  "type": "interface",
+  "namespace": "com.sun.star.frame",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_dispatch_provider_interceptor",
+        "XDispatchProviderInterceptor",
+        "XDispatchProviderInterceptor_afda1275"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XDispatchProviderInterceptor_afda1275"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.frame.XDispatchProviderInterceptor"
+      ]
+    },
+    "name": "XDispatchProviderInterception",
+    "imports": [],
+    "namespace": "com.sun.star.frame",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "makes it possible to register an XDispatchProvider which intercepts all requests of XDispatch to this instance.",
+      "",
+      "Note: Nobody can guarantee order of used interceptor objects if more than ones exist. Later registered ones will be used at first. But it's possible to increase the chance for that by providing the optional interface XInterceptorInfo."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XDispatchProviderInterception.html",
+    "items": {
+      "methods": [
+        {
+          "name": "registerDispatchProviderInterceptor",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "registers an XDispatchProviderInterceptor, which will become the first interceptor in the chain of registered interceptors."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Interceptor",
+              "type": "XDispatchProviderInterceptor_afda1275",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XDispatchProviderInterceptor"
+            }
+          ]
+        },
+        {
+          "name": "releaseDispatchProviderInterceptor",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "removes an XDispatchProviderInterceptor which was previously registered",
+            "",
+            "The order of removals is arbitrary. It is not necessary to remove the last registered interceptor first."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Interceptor",
+              "type": "XDispatchProviderInterceptor_afda1275",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XDispatchProviderInterceptor"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

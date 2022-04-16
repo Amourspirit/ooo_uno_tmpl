@@ -1,0 +1,233 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XControl",
+  "type": "interface",
+  "namespace": "com.sun.star.awt",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..lang.x_component",
+        "XComponent",
+        "XComponent_98dc0ab5"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_control_model",
+        "XControlModel",
+        "XControlModel_affc0b7e"
+      ],
+      [
+        ".x_toolkit",
+        "XToolkit",
+        "XToolkit_7adf0992"
+      ],
+      [
+        ".x_view",
+        "XView",
+        "XView_5f670847"
+      ],
+      [
+        ".x_window_peer",
+        "XWindowPeer",
+        "XWindowPeer_99760ab0"
+      ],
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.lang.XComponent": "XComponent_98dc0ab5"
+    },
+    "quote": [
+      "XControlModel_affc0b7e",
+      "XInterface_8f010a43",
+      "XToolkit_7adf0992",
+      "XView_5f670847",
+      "XWindowPeer_99760ab0"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.lang.XComponent"
+      ],
+      "typing": [
+        "com.sun.star.awt.XControlModel",
+        "com.sun.star.awt.XToolkit",
+        "com.sun.star.awt.XView",
+        "com.sun.star.awt.XWindowPeer",
+        "com.sun.star.uno.XInterface"
+      ]
+    },
+    "name": "XControl",
+    "imports": [],
+    "namespace": "com.sun.star.awt",
+    "extends": [
+      "com.sun.star.lang.XComponent"
+    ],
+    "desc": [
+      "identifies a control.",
+      "",
+      "Implementations of this interface are abstract windows. The main reason to instantiate this implementation is to show the window on the screen. Before the window appears on the screen, the XControl.createPeer() method must be called.",
+      "",
+      "If the implementation of the control does not distinguish between model, view and controller, it must allow to set a new XGraphics in the view, so that the control can be printed."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XControl.html",
+    "items": {
+      "methods": [
+        {
+          "name": "createPeer",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "creates a \\\"child\\\" window on the screen.",
+            "",
+            "If the parent is NULL, then the desktop window of the toolkit is the parent."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Toolkit",
+              "type": "XToolkit_7adf0992",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XToolkit"
+            },
+            {
+              "name": "Parent",
+              "type": "XWindowPeer_99760ab0",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XWindowPeer"
+            }
+          ]
+        },
+        {
+          "name": "getContext",
+          "returns": "XInterface_8f010a43",
+          "returns_origin": "com.sun.star.uno.XInterface",
+          "desc": [
+            "gets the context of the control."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getModel",
+          "returns": "XControlModel_affc0b7e",
+          "returns_origin": "com.sun.star.awt.XControlModel",
+          "desc": [
+            "returns the model for this control."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getPeer",
+          "returns": "XWindowPeer_99760ab0",
+          "returns_origin": "com.sun.star.awt.XWindowPeer",
+          "desc": [
+            "returns the peer which was previously created or set."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getView",
+          "returns": "XView_5f670847",
+          "returns_origin": "com.sun.star.awt.XView",
+          "desc": [
+            "returns the view of this control."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "isDesignMode",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "returns TRUE if the control is in design mode, FALSE otherwise."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "isTransparent",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "returns TRUE if the control is transparent, FALSE otherwise."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setContext",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "sets the context of the control."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Context",
+              "type": "XInterface_8f010a43",
+              "direction": "in",
+              "origin": "com.sun.star.uno.XInterface"
+            }
+          ]
+        },
+        {
+          "name": "setDesignMode",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "sets the design mode for use in a design editor.",
+            "",
+            "Normally the control will be painted directly without a peer."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "bOn",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
+          ]
+        },
+        {
+          "name": "setModel",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "sets a model for the control."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Model",
+              "type": "XControlModel_affc0b7e",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XControlModel"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,152 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XUpdateInformationProvider",
+  "type": "interface",
+  "namespace": "com.sun.star.deployment",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        "..container.x_enumeration",
+        "XEnumeration",
+        "XEnumeration_f2180daa"
+      ],
+      [
+        "..task.x_interaction_handler",
+        "XInteractionHandler",
+        "XInteractionHandler_bf80e51"
+      ],
+      [
+        "..xml.dom.x_element",
+        "XElement",
+        "XElement_a33d0ae9"
+      ]
+    ],
+    "extends_map": {},
+    "quote": [
+      "XEnumeration_f2180daa",
+      "XInteractionHandler_bf80e51",
+      "typing.Tuple[XElement_a33d0ae9, ...]",
+      "typing.Tuple[str, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[XElement_a33d0ae9, ...]",
+      "typing.Tuple[str, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.container.XEnumeration",
+        "com.sun.star.task.XInteractionHandler",
+        "com.sun.star.xml.dom.XElement"
+      ]
+    },
+    "name": "XUpdateInformationProvider",
+    "imports": [],
+    "namespace": "com.sun.star.deployment",
+    "extends": [],
+    "desc": [
+      "Objects implementing this interface provide access to the xml root of one or more update information files for a given set of URLs.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1deployment_1_1XUpdateInformationProvider.html",
+    "items": {
+      "methods": [
+        {
+          "name": "cancel",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "interrupts a getUpdateInformation call and let's it return immediately."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getUpdateInformation",
+          "returns": "typing.Tuple[XElement_a33d0ae9, ...]",
+          "returns_origin": "sequence< com.sun.star.xml.dom.XElement >",
+          "desc": [
+            "get update information for a specific extension or all available information from a repository."
+          ],
+          "raises": [
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            {
+              "name": "repositories",
+              "type": "typing.Tuple[str, ...]",
+              "direction": "in",
+              "origin": "sequence< string >"
+            },
+            {
+              "name": "extensionId",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "getUpdateInformationEnumeration",
+          "returns": "XEnumeration_f2180daa",
+          "returns_origin": "com.sun.star.container.XEnumeration",
+          "desc": [
+            "get update information for a specific extension or all available information from a repository."
+          ],
+          "raises": [
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            {
+              "name": "repositories",
+              "type": "typing.Tuple[str, ...]",
+              "direction": "in",
+              "origin": "sequence< string >"
+            },
+            {
+              "name": "extensionId",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "setInteractionHandler",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Sets an interaction handler to be used for further operations.",
+            "",
+            "A default interaction handler is available as service com.sun.star.task.InteractionHandler. The documentation of this service also contains further information about the interaction handler concept."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "handler",
+              "type": "XInteractionHandler_bf80e51",
+              "direction": "in",
+              "origin": "com.sun.star.task.XInteractionHandler"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

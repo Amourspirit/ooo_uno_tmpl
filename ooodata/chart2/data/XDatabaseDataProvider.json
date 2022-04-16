@@ -1,0 +1,292 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XDatabaseDataProvider",
+  "type": "interface",
+  "namespace": "com.sun.star.chart2.data",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "...beans.x_property_set",
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
+      ],
+      [
+        ".x_data_provider",
+        "XDataProvider",
+        "XDataProvider_122f0e31"
+      ],
+      [
+        ".x_range_xml_conversion",
+        "XRangeXMLConversion",
+        "XRangeXMLConversion_6cef1070"
+      ],
+      [
+        "...lang.x_component",
+        "XComponent",
+        "XComponent_98dc0ab5"
+      ],
+      [
+        "...lang.x_initialization",
+        "XInitialization",
+        "XInitialization_d46c0cca"
+      ],
+      [
+        "...sdbc.x_parameters",
+        "XParameters",
+        "XParameters_a36c0b10"
+      ],
+      [
+        "...sdbc.x_row_set",
+        "XRowSet",
+        "XRowSet_7a090960"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "...sdbc.x_connection",
+        "XConnection",
+        "XConnection_a36a0b0c"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa",
+      "com.sun.star.chart2.data.XDataProvider": "XDataProvider_122f0e31",
+      "com.sun.star.chart2.data.XRangeXMLConversion": "XRangeXMLConversion_6cef1070",
+      "com.sun.star.lang.XComponent": "XComponent_98dc0ab5",
+      "com.sun.star.lang.XInitialization": "XInitialization_d46c0cca",
+      "com.sun.star.sdbc.XParameters": "XParameters_a36c0b10",
+      "com.sun.star.sdbc.XRowSet": "XRowSet_7a090960"
+    },
+    "quote": [
+      "XConnection_a36a0b0c",
+      "typing.Tuple[str, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[str, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XPropertySet",
+        "com.sun.star.chart2.data.XDataProvider",
+        "com.sun.star.chart2.data.XRangeXMLConversion",
+        "com.sun.star.lang.XComponent",
+        "com.sun.star.lang.XInitialization",
+        "com.sun.star.sdbc.XParameters",
+        "com.sun.star.sdbc.XRowSet"
+      ],
+      "typing": [
+        "com.sun.star.sdbc.XConnection"
+      ]
+    },
+    "name": "XDatabaseDataProvider",
+    "imports": [],
+    "namespace": "com.sun.star.chart2.data",
+    "extends": [
+      "com.sun.star.chart2.data.XDataProvider",
+      "com.sun.star.chart2.data.XRangeXMLConversion",
+      "com.sun.star.lang.XInitialization",
+      "com.sun.star.lang.XComponent",
+      "com.sun.star.beans.XPropertySet",
+      "com.sun.star.sdbc.XParameters",
+      "com.sun.star.sdbc.XRowSet"
+    ],
+    "desc": [
+      "identifies a XDataProvider for result sets."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1chart2_1_1data_1_1XDatabaseDataProvider.html",
+    "items": {
+      "types": [
+        {
+          "name": "DetailFields",
+          "returns": "typing.Tuple[str, ...]",
+          "origtype": null,
+          "origin": "sequence< string >",
+          "desc": [
+            "is used for subreports and contains the names of the columns of the subreport which are related to the master fields of the parent report.",
+            "",
+            "Entries in this sequence can either denote column names in the sub report, or parameter names.",
+            "For instance, you could base the report on the SQL statement SELECT * FROM invoices WHERE cust_ref = :cid, and add cid to the DetailFields property. In this case, the parameter will be filled from the corresponding master field.",
+            "Alternatively, you could simply base your report on the table invoices, and add the column name cust_ref to the DetailFields. In this case, and implicit filter clause WHERE cust_ref = :<new_param_name> will be created, and the artificial parameter will be filled from the corresponding master field.",
+            "If a string in this property denotes both a column name and a parameter name, it is undefined which way it is interpreted, but implementations of the service are required to either decide for the parameter or the column, and proceed as usual.",
+            "",
+            "The columns specified herein typically represent a part of the primary key fields or their aliases of the detail report.",
+            "",
+            "If the report is no sub report (e.g. its parent is not a report itself), this property is not evaluated."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "MasterFields",
+          "returns": "typing.Tuple[str, ...]",
+          "origtype": null,
+          "origin": "sequence< string >",
+          "desc": [
+            "is used for subreports and contains the names of columns of the parent report.",
+            "",
+            "These columns are typically the foreign key fields of the parent report. The values of these columns are used to identify the data for the subreport. Each time the parent report changes its current row, the subreport requeries it's data based on the values of the master fields.",
+            "",
+            "If the report is no sub report (e.g. its parent is not a report itself), this property is not evaluated."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ],
+      "properties": [
+        {
+          "name": "ActiveConnection",
+          "returns": "XConnection_a36a0b0c",
+          "origtype": "com.sun.star.sdbc.XConnection",
+          "origin": "com.sun.star.sdbc.XConnection",
+          "desc": [
+            "specifies the active connection which is used to create the resulting report."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ApplyFilter",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "indicates whether the filter should be applied or not, default is FALSE."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Command",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "is the command which should be executed, the type of command depends on the CommandType.",
+            "",
+            "In case of a CommandType of CommandType.COMMAND, means in case the Command specifies an SQL statement, the inherited com.sun.star.sdbc.RowSet.EscapeProcessing becomes relevant:",
+            "It then can be to used to specify whether the SQL statement should be analyzed on the client side before sending it to the database server.",
+            "The default value for com.sun.star.sdbc.RowSet.EscapeProcessing is TRUE. By switching it to FALSE, you can pass backend-specific SQL statements, which are not standard SQL, to your database."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CommandType",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "specifies the type of the command to be executed to retrieve a result set.",
+            "",
+            "Command needs to be interpreted depending on the value of this property.",
+            "",
+            "This property is only meaningful together with the Command property, thus either both or none of them are present."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "DataSourceName",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "is the name of the data source to use, this could be a named data source or the URL of a data access component."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "EscapeProcessing",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "specifies if the Command should be analyzed on the client side before sending it to the database server.",
+            "",
+            "The default value of this property is TRUE. By switching it to FALSE, you can pass backend-specific SQL statements, which are not standard SQL, to your database.",
+            "",
+            "This property is usually present together with the Command and CommandType properties, and is evaluated if and only if CommandType equals CommandType.COMMAND."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Filter",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "specifies an additional filter to optionally use.",
+            "",
+            "The Filter string has to form a SQL WHERE-clause, without the WHERE-string itself.",
+            "",
+            "If a DataSourceName, Command and CommandType are specified, a RowSet can be created with this information. If the results provided by the row set are to be additionally filtered, the Filter property can be used.",
+            "",
+            "Note that the Filter property does not make sense if a resultSet has been specified in the DataAccessDescriptor."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "GroupBy",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "additional group by for the row set"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "HavingClause",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "additional having clause for the row set"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Order",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "is an additional sort order definition for a row set."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RowLimit",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "specifies the maximal count of rows which should be fetched.",
+            "",
+            "A value of zero implies that no limit exists."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

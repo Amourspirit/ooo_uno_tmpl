@@ -1,0 +1,192 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XLinePolyPolygon2D",
+  "type": "interface",
+  "namespace": "com.sun.star.rendering",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_poly_polygon2_d",
+        "XPolyPolygon2D",
+        "XPolyPolygon2D_e1b0e20"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..geometry.real_point2_d",
+        "RealPoint2D",
+        "RealPoint2D_d6e70c78"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.rendering.XPolyPolygon2D": "XPolyPolygon2D_e1b0e20"
+    },
+    "quote": [
+      "RealPoint2D_d6e70c78",
+      "typing.Tuple[typing.Tuple[RealPoint2D_d6e70c78, ...], ...]"
+    ],
+    "typings": [
+      "typing.Tuple[typing.Tuple[RealPoint2D_d6e70c78, ...], ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.rendering.XPolyPolygon2D"
+      ],
+      "typing": [
+        "com.sun.star.geometry.RealPoint2D"
+      ]
+    },
+    "name": "XLinePolyPolygon2D",
+    "imports": [],
+    "namespace": "com.sun.star.rendering",
+    "extends": [
+      "com.sun.star.rendering.XPolyPolygon2D"
+    ],
+    "desc": [
+      "Specialized interface for a 2D poly-polygon containing only straight line segments.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.0"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1rendering_1_1XLinePolyPolygon2D.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getPoint",
+          "returns": "RealPoint2D_d6e70c78",
+          "returns_origin": "com.sun.star.geometry.RealPoint2D",
+          "desc": [
+            "Get a single point from the poly-polygon."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            {
+              "name": "nPolygonIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nPointIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "getPoints",
+          "returns": "typing.Tuple[typing.Tuple[RealPoint2D_d6e70c78, ...], ...]",
+          "returns_origin": "sequence< sequence< .com.sun.star.geometry.RealPoint2D > >",
+          "desc": [
+            "Query subset of this poly-polygon, starting at the given polygon and the given point within that polygon, and containing the specified number of polygons and points in the last polygon."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            {
+              "name": "nPolygonIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nNumberOfPolygons",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nPointIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nNumberOfPoints",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "setPoint",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Set a single point on the poly-polygon.",
+            "",
+            "The remaining points of the poly-polygon will not be changed by this method."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            {
+              "name": "point",
+              "type": "RealPoint2D_d6e70c78",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.RealPoint2D"
+            },
+            {
+              "name": "nPolygonIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nPointIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "setPoints",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Set the specified sequence of points to the poly-polygon.",
+            "",
+            "This method can either set the whole poly-polygon to the new data, or insert the points at the given index"
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            {
+              "name": "points",
+              "type": "typing.Tuple[typing.Tuple[RealPoint2D_d6e70c78, ...], ...]",
+              "direction": "in",
+              "origin": "sequence< sequence< .com.sun.star.geometry.RealPoint2D > >"
+            },
+            {
+              "name": "nPolygonIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

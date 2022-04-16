@@ -1,0 +1,309 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XDictionary",
+  "type": "interface",
+  "namespace": "com.sun.star.linguistic2",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..container.x_named",
+        "XNamed",
+        "XNamed_a6520b08"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..lang.locale",
+        "Locale",
+        "Locale_70d308fa"
+      ],
+      [
+        ".dictionary_type",
+        "DictionaryType",
+        "DictionaryType_2ba50f2d"
+      ],
+      [
+        ".x_dictionary_entry",
+        "XDictionaryEntry",
+        "XDictionaryEntry_49ef0ff5"
+      ],
+      [
+        ".x_dictionary_event_listener",
+        "XDictionaryEventListener",
+        "XDictionaryEventListener_d74c132b"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.container.XNamed": "XNamed_a6520b08"
+    },
+    "quote": [
+      "DictionaryType_2ba50f2d",
+      "Locale_70d308fa",
+      "XDictionaryEntry_49ef0ff5",
+      "XDictionaryEventListener_d74c132b",
+      "typing.Tuple[XDictionaryEntry_49ef0ff5, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[XDictionaryEntry_49ef0ff5, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.container.XNamed"
+      ],
+      "typing": [
+        "com.sun.star.lang.Locale",
+        "com.sun.star.linguistic2.DictionaryType",
+        "com.sun.star.linguistic2.XDictionaryEntry",
+        "com.sun.star.linguistic2.XDictionaryEventListener"
+      ]
+    },
+    "name": "XDictionary",
+    "imports": [],
+    "namespace": "com.sun.star.linguistic2",
+    "extends": [
+      "com.sun.star.container.XNamed"
+    ],
+    "desc": [
+      "This interfaces enables the object to access personal dictionaries.",
+      "",
+      "Personal dictionaries are used to supply additional information for spell checking and hyphenation (see com.sun.star.linguistic2.XDictionaryEntry). Only active dictionaries with an appropriate language are used for that purpose. The entries of an active, positive dictionary are words that are required to be recognized as correct during the spell checking process. Additionally, they will be used for hyphenation. Entries of a negative dictionary are required to be recognized as negative words, for example, words that should not be used, during SPELLCHECK. An entry in a negative dictionary may supply a proposal for a word to be used instead of the one being used."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1linguistic2_1_1XDictionary.html",
+    "items": {
+      "methods": [
+        {
+          "name": "add",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "is used to make an entry in the dictionary.",
+            "",
+            "If an entry already exists, the dictionary remains unchanged and FALSE will be returned.",
+            "",
+            "In positive dictionaries only positive entries can be made, and in negative ones only negative entries."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aWord",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "bIsNegative",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            },
+            {
+              "name": "aRplcText",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "addDictionaryEventListener",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "adds an entry to the list of dictionary event listeners.",
+            "",
+            "On dictionary events, each entry in the listener list will be notified via a call to com.sun.star.linguistic2.XDictionaryEventListener.processDictionaryEvent()."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xListener",
+              "type": "XDictionaryEventListener_d74c132b",
+              "direction": "in",
+              "origin": "com.sun.star.linguistic2.XDictionaryEventListener"
+            }
+          ]
+        },
+        {
+          "name": "addEntry",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "is used to add an entry to the dictionary.",
+            "",
+            "If an entry already exists, the dictionary remains unchanged and FALSE will be returned.",
+            "",
+            "In positive dictionaries only positive entries can be made, and in negative ones only negative entries."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xDicEntry",
+              "type": "XDictionaryEntry_49ef0ff5",
+              "direction": "in",
+              "origin": "com.sun.star.linguistic2.XDictionaryEntry"
+            }
+          ]
+        },
+        {
+          "name": "clear",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "removes all entries from the dictionary."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getCount",
+          "returns": "int",
+          "returns_origin": "long",
+          "desc": [],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getDictionaryType",
+          "returns": "DictionaryType_2ba50f2d",
+          "returns_origin": "com.sun.star.linguistic2.DictionaryType",
+          "desc": [
+            "returns the type of the dictionary."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getEntries",
+          "returns": "typing.Tuple[XDictionaryEntry_49ef0ff5, ...]",
+          "returns_origin": "sequence< com.sun.star.linguistic2.XDictionaryEntry >",
+          "desc": [
+            "This function should no longer be used since with the expansion of the maximum number of allowed entries the result may become unreasonable large!"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getEntry",
+          "returns": "XDictionaryEntry_49ef0ff5",
+          "returns_origin": "com.sun.star.linguistic2.XDictionaryEntry",
+          "desc": [
+            "searches for an entry that matches the given word."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aWord",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "getLocale",
+          "returns": "Locale_70d308fa",
+          "returns_origin": "com.sun.star.lang.Locale",
+          "desc": [],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "isActive",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "isFull",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "remove",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "removes an entry from the dictionary."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aWord",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "removeDictionaryEventListener",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "removes an entry from the list of dictionary event listeners."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xListener",
+              "type": "XDictionaryEventListener_d74c132b",
+              "direction": "in",
+              "origin": "com.sun.star.linguistic2.XDictionaryEventListener"
+            }
+          ]
+        },
+        {
+          "name": "setActive",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "specifies whether the dictionary should be used or not ."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "bActivate",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
+          ]
+        },
+        {
+          "name": "setLocale",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "is used to set the language of the dictionary."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

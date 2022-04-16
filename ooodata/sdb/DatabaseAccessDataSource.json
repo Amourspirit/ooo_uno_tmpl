@@ -1,0 +1,107 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "DatabaseAccessDataSource",
+  "type": "service",
+  "namespace": "com.sun.star.sdb",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..beans.x_property_set",
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
+      ],
+      [
+        ".x_completed_connection",
+        "XCompletedConnection",
+        "XCompletedConnection_98a0e46"
+      ],
+      [
+        "..sdbc.x_data_source",
+        "XDataSource",
+        "XDataSource_a2990ae7"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..ucb.remember_authentication",
+        "RememberAuthentication",
+        "RememberAuthentication_28a80f31"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa",
+      "com.sun.star.sdb.XCompletedConnection": "XCompletedConnection_98a0e46",
+      "com.sun.star.sdbc.XDataSource": "XDataSource_a2990ae7"
+    },
+    "quote": [
+      "RememberAuthentication_28a80f31"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XPropertySet",
+        "com.sun.star.sdb.XCompletedConnection",
+        "com.sun.star.sdbc.XDataSource"
+      ],
+      "typing": [
+        "com.sun.star.ucb.RememberAuthentication"
+      ]
+    },
+    "name": "DatabaseAccessDataSource",
+    "imports": [],
+    "namespace": "com.sun.star.sdb",
+    "extends": [
+      "com.sun.star.beans.XPropertySet",
+      "com.sun.star.sdbc.XDataSource",
+      "com.sun.star.sdb.XCompletedConnection"
+    ],
+    "desc": [
+      "is a factory to create data access beans.",
+      "",
+      "Data access beans are shared among components, so if an already existing bean is requested, the existing one is returned.",
+      "",
+      ".. deprecated::",
+      "",
+      "    Class is deprecated."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1sdb_1_1DatabaseAccessDataSource.html",
+    "items": {
+      "properties": [
+        {
+          "name": "PasswordMode",
+          "returns": "RememberAuthentication_28a80f31",
+          "origtype": "com.sun.star.ucb.RememberAuthentication",
+          "origin": "com.sun.star.ucb.RememberAuthentication",
+          "desc": [
+            "determines the password handling."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "URL",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "locates the database access bean."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

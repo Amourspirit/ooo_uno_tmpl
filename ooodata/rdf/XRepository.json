@@ -1,0 +1,392 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XRepository",
+  "type": "interface",
+  "namespace": "com.sun.star.rdf",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        "..container.x_enumeration",
+        "XEnumeration",
+        "XEnumeration_f2180daa"
+      ],
+      [
+        "..io.x_input_stream",
+        "XInputStream",
+        "XInputStream_98d40ab4"
+      ],
+      [
+        "..io.x_output_stream",
+        "XOutputStream",
+        "XOutputStream_a4e00b35"
+      ],
+      [
+        ".x_blank_node",
+        "XBlankNode",
+        "XBlankNode_8cf40a0a"
+      ],
+      [
+        ".x_named_graph",
+        "XNamedGraph",
+        "XNamedGraph_97680a73"
+      ],
+      [
+        ".x_node",
+        "XNode",
+        "XNode_5ee40822"
+      ],
+      [
+        ".x_query_select_result",
+        "XQuerySelectResult",
+        "XQuerySelectResult_eebb0d91"
+      ],
+      [
+        ".x_resource",
+        "XResource",
+        "XResource_842709e4"
+      ],
+      [
+        ".xuri",
+        "XURI",
+        "XURI_5682078c"
+      ]
+    ],
+    "extends_map": {},
+    "quote": [
+      "XBlankNode_8cf40a0a",
+      "XEnumeration_f2180daa",
+      "XInputStream_98d40ab4",
+      "XNamedGraph_97680a73",
+      "XNode_5ee40822",
+      "XOutputStream_a4e00b35",
+      "XQuerySelectResult_eebb0d91",
+      "XResource_842709e4",
+      "XURI_5682078c",
+      "typing.Tuple[XURI_5682078c, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[XURI_5682078c, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.container.XEnumeration",
+        "com.sun.star.io.XInputStream",
+        "com.sun.star.io.XOutputStream",
+        "com.sun.star.rdf.XBlankNode",
+        "com.sun.star.rdf.XNamedGraph",
+        "com.sun.star.rdf.XNode",
+        "com.sun.star.rdf.XQuerySelectResult",
+        "com.sun.star.rdf.XResource",
+        "com.sun.star.rdf.XURI"
+      ]
+    },
+    "name": "XRepository",
+    "imports": [],
+    "namespace": "com.sun.star.rdf",
+    "extends": [],
+    "desc": [
+      "provides access to a set of named RDF graphs.",
+      "",
+      "A repository for storing information according to the data model of the Resource Description Framework. This interface may be used e.g. for repositories that correspond to a loaded ODF document, or for repositories that are backed by some kind of database.",
+      "",
+      "The RDF triples are stored as a set of named RDF graphs. Importing and exporting files in the RDF/XML format is supported. Support for other file formats is optional. Support for querying the repository with the SPARQL query language is provided.",
+      "",
+      "**since**",
+      "",
+      "    OOo 3.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1rdf_1_1XRepository.html",
+    "items": {
+      "methods": [
+        {
+          "name": "createBlankNode",
+          "returns": "XBlankNode_8cf40a0a",
+          "returns_origin": "com.sun.star.rdf.XBlankNode",
+          "desc": [
+            "creates a fresh unique blank node."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "createGraph",
+          "returns": "XNamedGraph_97680a73",
+          "returns_origin": "com.sun.star.rdf.XNamedGraph",
+          "desc": [
+            "creates a graph with the given name.",
+            "",
+            "The name must be unique within the repository."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.container.ElementExistException",
+            "RepositoryException"
+          ],
+          "args": [
+            {
+              "name": "GraphName",
+              "type": "XURI_5682078c",
+              "direction": "in",
+              "origin": "com.sun.star.rdf.XURI"
+            }
+          ]
+        },
+        {
+          "name": "destroyGraph",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "destroys the graph with the given name, and removes it from the repository.",
+            "",
+            "This invalidates any instances of XNamedGraph for the argument."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.container.NoSuchElementException",
+            "RepositoryException"
+          ],
+          "args": [
+            {
+              "name": "GraphName",
+              "type": "XURI_5682078c",
+              "direction": "in",
+              "origin": "com.sun.star.rdf.XURI"
+            }
+          ]
+        },
+        {
+          "name": "exportGraph",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "exports a named graph from the repository.",
+            "",
+            "Implementations must support RDF/XML format. Support for other RDF formats is optional. If the format is not supported by the implementation, an com.sun.star.datatransfer.UnsupportedFlavorException is raised."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.datatransfer.UnsupportedFlavorException",
+            "com.sun.star.container.NoSuchElementException",
+            "RepositoryException",
+            "com.sun.star.io.IOException"
+          ],
+          "args": [
+            {
+              "name": "Format",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "OutStream",
+              "type": "XOutputStream_a4e00b35",
+              "direction": "in",
+              "origin": "com.sun.star.io.XOutputStream"
+            },
+            {
+              "name": "GraphName",
+              "type": "XURI_5682078c",
+              "direction": "in",
+              "origin": "com.sun.star.rdf.XURI"
+            },
+            {
+              "name": "BaseURI",
+              "type": "XURI_5682078c",
+              "direction": "in",
+              "origin": "com.sun.star.rdf.XURI"
+            }
+          ]
+        },
+        {
+          "name": "getGraph",
+          "returns": "XNamedGraph_97680a73",
+          "returns_origin": "com.sun.star.rdf.XNamedGraph",
+          "desc": [
+            "gets a graph by its name."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "RepositoryException"
+          ],
+          "args": [
+            {
+              "name": "GraphName",
+              "type": "XURI_5682078c",
+              "direction": "in",
+              "origin": "com.sun.star.rdf.XURI"
+            }
+          ]
+        },
+        {
+          "name": "getGraphNames",
+          "returns": "typing.Tuple[XURI_5682078c, ...]",
+          "returns_origin": "sequence< XURI >",
+          "desc": [
+            "gets the names of all the graphs in the repository."
+          ],
+          "raises": [
+            "RepositoryException"
+          ],
+          "args": []
+        },
+        {
+          "name": "getStatements",
+          "returns": "XEnumeration_f2180daa",
+          "returns_origin": "com.sun.star.container.XEnumeration",
+          "desc": [
+            "gets matching RDF statements from the repository.",
+            "",
+            "Any parameter may be NULL, which acts as a wildcard. For example, to get all statements about myURI: getStatements(myURI, null, null)"
+          ],
+          "raises": [
+            "RepositoryException"
+          ],
+          "args": [
+            {
+              "name": "Subject",
+              "type": "XResource_842709e4",
+              "direction": "in",
+              "origin": "com.sun.star.rdf.XResource"
+            },
+            {
+              "name": "Predicate",
+              "type": "XURI_5682078c",
+              "direction": "in",
+              "origin": "com.sun.star.rdf.XURI"
+            },
+            {
+              "name": "Object",
+              "type": "XNode_5ee40822",
+              "direction": "in",
+              "origin": "com.sun.star.rdf.XNode"
+            }
+          ]
+        },
+        {
+          "name": "importGraph",
+          "returns": "XNamedGraph_97680a73",
+          "returns_origin": "com.sun.star.rdf.XNamedGraph",
+          "desc": [
+            "imports a named graph into the repository.",
+            "",
+            "Implementations must support RDF/XML format. Support for other RDF formats is optional. If the format is not supported by the implementation, an com.sun.star.datatransfer.UnsupportedFlavorException is raised. If the format requires use of a BaseURI, but none is given, an com.sun.star.lang.IllegalArgumentException is raised."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.datatransfer.UnsupportedFlavorException",
+            "com.sun.star.container.ElementExistException",
+            "ParseException",
+            "RepositoryException",
+            "com.sun.star.io.IOException"
+          ],
+          "args": [
+            {
+              "name": "Format",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "InStream",
+              "type": "XInputStream_98d40ab4",
+              "direction": "in",
+              "origin": "com.sun.star.io.XInputStream"
+            },
+            {
+              "name": "GraphName",
+              "type": "XURI_5682078c",
+              "direction": "in",
+              "origin": "com.sun.star.rdf.XURI"
+            },
+            {
+              "name": "BaseURI",
+              "type": "XURI_5682078c",
+              "direction": "in",
+              "origin": "com.sun.star.rdf.XURI"
+            }
+          ]
+        },
+        {
+          "name": "queryAsk",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "executes a SPARQL \\\"ASK\\\" query.",
+            "",
+            "This method runs a SPARQL query that computes a boolean, i.e., a query beginning with \\\"ASK\\\"."
+          ],
+          "raises": [
+            "QueryException",
+            "RepositoryException"
+          ],
+          "args": [
+            {
+              "name": "Query",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "queryConstruct",
+          "returns": "XEnumeration_f2180daa",
+          "returns_origin": "com.sun.star.container.XEnumeration",
+          "desc": [
+            "executes a SPARQL \\\"CONSTRUCT\\\" query.",
+            "",
+            "This method runs a SPARQL query that constructs a result graph, i.e., a query beginning with \\\"CONSTRUCT\\\"."
+          ],
+          "raises": [
+            "QueryException",
+            "RepositoryException"
+          ],
+          "args": [
+            {
+              "name": "Query",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "querySelect",
+          "returns": "XQuerySelectResult_eebb0d91",
+          "returns_origin": "com.sun.star.rdf.XQuerySelectResult",
+          "desc": [
+            "executes a SPARQL \\\"SELECT\\\" query.",
+            "",
+            "This method runs a SPARQL query that returns a list of variable bindings, i.e., a query beginning with \\\"SELECT\\\". The result is basically a (rectangular) table with labeled columns, where individual cells may be NULL."
+          ],
+          "raises": [
+            "QueryException",
+            "RepositoryException"
+          ],
+          "args": [
+            {
+              "name": "Query",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

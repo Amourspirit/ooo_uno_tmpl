@@ -1,0 +1,106 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XFormulaParser",
+  "type": "interface",
+  "namespace": "com.sun.star.sheet",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        ".formula_token",
+        "FormulaToken",
+        "FormulaToken_bd1c0bf8"
+      ],
+      [
+        "..table.cell_address",
+        "CellAddress",
+        "CellAddress_ae5f0b56"
+      ]
+    ],
+    "extends_map": {},
+    "quote": [
+      "CellAddress_ae5f0b56",
+      "typing.Tuple[FormulaToken_bd1c0bf8, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[FormulaToken_bd1c0bf8, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.sheet.FormulaToken",
+        "com.sun.star.table.CellAddress"
+      ]
+    },
+    "name": "XFormulaParser",
+    "imports": [],
+    "namespace": "com.sun.star.sheet",
+    "extends": [],
+    "desc": [
+      "converts between text and token representations of formulas."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sheet_1_1XFormulaParser.html",
+    "items": {
+      "methods": [
+        {
+          "name": "parseFormula",
+          "returns": "typing.Tuple[FormulaToken_bd1c0bf8, ...]",
+          "returns_origin": "sequence< FormulaToken >",
+          "desc": [
+            "parses a formula into a sequence of tokens."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aFormula",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aReferencePos",
+              "type": "CellAddress_ae5f0b56",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellAddress"
+            }
+          ]
+        },
+        {
+          "name": "printFormula",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "converts a formula into a string."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aTokens",
+              "type": "typing.Tuple[FormulaToken_bd1c0bf8, ...]",
+              "direction": "in",
+              "origin": "sequence< FormulaToken >"
+            },
+            {
+              "name": "aReferencePos",
+              "type": "CellAddress_ae5f0b56",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellAddress"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

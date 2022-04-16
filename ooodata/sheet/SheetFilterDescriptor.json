@@ -1,0 +1,197 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "SheetFilterDescriptor",
+  "type": "service",
+  "namespace": "com.sun.star.sheet",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..beans.x_property_set",
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
+      ],
+      [
+        ".x_sheet_filter_descriptor",
+        "XSheetFilterDescriptor",
+        "XSheetFilterDescriptor_47cc0ff7"
+      ],
+      [
+        ".x_sheet_filter_descriptor2",
+        "XSheetFilterDescriptor2",
+        "XSheetFilterDescriptor2_57f51029"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..table.cell_address",
+        "CellAddress",
+        "CellAddress_ae5f0b56"
+      ],
+      [
+        "..table.table_orientation",
+        "TableOrientation",
+        "TableOrientation_ee780d84"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa",
+      "com.sun.star.sheet.XSheetFilterDescriptor": "XSheetFilterDescriptor_47cc0ff7",
+      "com.sun.star.sheet.XSheetFilterDescriptor2": "XSheetFilterDescriptor2_57f51029"
+    },
+    "quote": [
+      "CellAddress_ae5f0b56",
+      "TableOrientation_ee780d84"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XPropertySet",
+        "com.sun.star.sheet.XSheetFilterDescriptor",
+        "com.sun.star.sheet.XSheetFilterDescriptor2"
+      ],
+      "typing": [
+        "com.sun.star.table.CellAddress",
+        "com.sun.star.table.TableOrientation"
+      ]
+    },
+    "name": "SheetFilterDescriptor",
+    "imports": [],
+    "namespace": "com.sun.star.sheet",
+    "extends": [
+      "com.sun.star.sheet.XSheetFilterDescriptor",
+      "com.sun.star.sheet.XSheetFilterDescriptor2",
+      "com.sun.star.beans.XPropertySet"
+    ],
+    "desc": [
+      "represents a description of how a cell range is to be filtered.",
+      "",
+      "The descriptor contains properties and a collection of filter conditions (filter fields) which control the behavior of a filter operation.",
+      "",
+      "**since**",
+      "",
+      "    OOo 3.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1sheet_1_1SheetFilterDescriptor.html",
+    "items": {
+      "properties": [
+        {
+          "name": "ContainsHeader",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "specifies if the first row (or column) contains headers which should not be filtered."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CopyOutputData",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "specifies if the filtered data should be copied to another position in the document."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsCaseSensitive",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "specifies if the case of letters is important when comparing entries."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "MaxFieldCount",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "returns the maximum number of filter fields in the descriptor.",
+            "",
+            "This read-only property indicates the maximum count of fields the current implementation supports."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Orientation",
+          "returns": "TableOrientation_ee780d84",
+          "origtype": "com.sun.star.table.TableOrientation",
+          "origin": "com.sun.star.table.TableOrientation",
+          "desc": [
+            "specifies if columns or rows are filtered."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "OutputPosition",
+          "returns": "CellAddress_ae5f0b56",
+          "origtype": "com.sun.star.table.CellAddress",
+          "origin": "com.sun.star.table.CellAddress",
+          "desc": [
+            "specifies the position where filtered data are to be copied.",
+            "",
+            "This is only used if SheetFilterDescriptor.CopyOutputData is TRUE."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SaveOutputPosition",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "specifies if the SheetFilterDescriptor.OutputPosition position is saved for future calls.",
+            "",
+            "This is only used if SheetFilterDescriptor.CopyOutputData is TRUE."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SkipDuplicates",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "specifies if duplicate entries are left out of the result."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "UseRegularExpressions",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "specifies if the TableFilterField.StringValue strings are interpreted as regular expressions."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

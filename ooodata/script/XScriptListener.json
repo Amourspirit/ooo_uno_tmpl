@@ -1,0 +1,101 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XScriptListener",
+  "type": "interface",
+  "namespace": "com.sun.star.script",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..lang.x_event_listener",
+        "XEventListener",
+        "XEventListener_c7230c4a"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".script_event",
+        "ScriptEvent",
+        "ScriptEvent_be710c14"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.lang.XEventListener": "XEventListener_c7230c4a"
+    },
+    "quote": [
+      "ScriptEvent_be710c14"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.lang.XEventListener"
+      ],
+      "typing": [
+        "com.sun.star.script.ScriptEvent"
+      ]
+    },
+    "name": "XScriptListener",
+    "imports": [],
+    "namespace": "com.sun.star.script",
+    "extends": [
+      "com.sun.star.lang.XEventListener"
+    ],
+    "desc": [
+      "makes it possible to receive ScriptEvents."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1script_1_1XScriptListener.html",
+    "items": {
+      "methods": [
+        {
+          "name": "approveFiring",
+          "returns": "object",
+          "returns_origin": "any",
+          "desc": [
+            "gets called when a \\\"vetoable event\\\" occurs at the object."
+          ],
+          "raises": [
+            "com.sun.star.reflection.InvocationTargetException"
+          ],
+          "args": [
+            {
+              "name": "aEvent",
+              "type": "ScriptEvent_be710c14",
+              "direction": "in",
+              "origin": "com.sun.star.script.ScriptEvent"
+            }
+          ]
+        },
+        {
+          "name": "firing",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "gets called when an event takes place.",
+            "",
+            "For that a ScriptEventDescriptor is registered at and attached to an object by an XEventAttacherManager."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aEvent",
+              "type": "ScriptEvent_be710c14",
+              "direction": "in",
+              "origin": "com.sun.star.script.ScriptEvent"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

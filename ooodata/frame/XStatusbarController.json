@@ -1,0 +1,270 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XStatusbarController",
+  "type": "interface",
+  "namespace": "com.sun.star.frame",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_status_listener",
+        "XStatusListener",
+        "XStatusListener_e2740d35"
+      ],
+      [
+        "..lang.x_component",
+        "XComponent",
+        "XComponent_98dc0ab5"
+      ],
+      [
+        "..lang.x_initialization",
+        "XInitialization",
+        "XInitialization_d46c0cca"
+      ],
+      [
+        "..util.x_updatable",
+        "XUpdatable",
+        "XUpdatable_9a420ab0"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..awt.mouse_event",
+        "MouseEvent",
+        "MouseEvent_8f430a5f"
+      ],
+      [
+        "..awt.point",
+        "Point",
+        "Point_5fb2085e"
+      ],
+      [
+        "..awt.rectangle",
+        "Rectangle",
+        "Rectangle_84b109e9"
+      ],
+      [
+        "..awt.x_graphics",
+        "XGraphics",
+        "XGraphics_842309dd"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.frame.XStatusListener": "XStatusListener_e2740d35",
+      "com.sun.star.lang.XComponent": "XComponent_98dc0ab5",
+      "com.sun.star.lang.XInitialization": "XInitialization_d46c0cca",
+      "com.sun.star.util.XUpdatable": "XUpdatable_9a420ab0"
+    },
+    "quote": [
+      "MouseEvent_8f430a5f",
+      "Point_5fb2085e",
+      "Rectangle_84b109e9",
+      "XGraphics_842309dd"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.frame.XStatusListener",
+        "com.sun.star.lang.XComponent",
+        "com.sun.star.lang.XInitialization",
+        "com.sun.star.util.XUpdatable"
+      ],
+      "typing": [
+        "com.sun.star.awt.MouseEvent",
+        "com.sun.star.awt.Point",
+        "com.sun.star.awt.Rectangle",
+        "com.sun.star.awt.XGraphics"
+      ]
+    },
+    "name": "XStatusbarController",
+    "imports": [],
+    "namespace": "com.sun.star.frame",
+    "extends": [
+      "com.sun.star.lang.XComponent",
+      "com.sun.star.lang.XInitialization",
+      "com.sun.star.frame.XStatusListener",
+      "com.sun.star.util.XUpdatable"
+    ],
+    "desc": [
+      "interface to be implemented by a component offering a more complex user interface to users within a status bar.",
+      "",
+      "A generic status bar field is represented as a simple text field. A status bar controller can be added to a Statusbar and provide information or functions with a more sophisticated user interface.",
+      "A typical example for status bar controller is a zoom chooser. It shows the current zoom and provides general zoom levels on a pop-up menu that can be activated by a mouse action for context menus.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.0"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XStatusbarController.html",
+    "items": {
+      "methods": [
+        {
+          "name": "click",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "is called by a status bar if the user clicked with mouse into the field of the corresponding control."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aPos",
+              "type": "Point_5fb2085e",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Point"
+            }
+          ]
+        },
+        {
+          "name": "command",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "is called by a status bar if a command event is available for a controller."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aPos",
+              "type": "Point_5fb2085e",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Point"
+            },
+            {
+              "name": "nCommand",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "bMouseEvent",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            },
+            {
+              "name": "aData",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
+          ]
+        },
+        {
+          "name": "doubleClick",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "is called by a status bar if the user double-clicked with mouse into the field of the corresponding control."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aPos",
+              "type": "Point_5fb2085e",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Point"
+            }
+          ]
+        },
+        {
+          "name": "mouseButtonDown",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "is called by a status bar if the mouse position is within the controller and a mouse button has been pressed.",
+            "",
+            "If the controller has captured the mouse input this function is also called when the mouse position is not within the controller."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aMouseEvent",
+              "type": "MouseEvent_8f430a5f",
+              "direction": "in",
+              "origin": "com.sun.star.awt.MouseEvent"
+            }
+          ]
+        },
+        {
+          "name": "mouseButtonUp",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "is called by a status bar if the mouse position is within the controller and a mouse button has been released.",
+            "",
+            "If the controller has captured the mouse input this function is also called when the mouse position is not within the controller."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aMouseEvent",
+              "type": "MouseEvent_8f430a5f",
+              "direction": "in",
+              "origin": "com.sun.star.awt.MouseEvent"
+            }
+          ]
+        },
+        {
+          "name": "mouseMove",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "is called by a status bar if the mouse position is within the controller and a mouse has been moved.",
+            "",
+            "If the controller has captured the mouse input this function is also called when the mouse position is not within the controller."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aMouseEvent",
+              "type": "MouseEvent_8f430a5f",
+              "direction": "in",
+              "origin": "com.sun.star.awt.MouseEvent"
+            }
+          ]
+        },
+        {
+          "name": "paint",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "is called by a status bar if the controller has to update the visual representation."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xGraphics",
+              "type": "XGraphics_842309dd",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XGraphics"
+            },
+            {
+              "name": "OutputRectangle",
+              "type": "Rectangle_84b109e9",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Rectangle"
+            },
+            {
+              "name": "nStyle",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,221 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XReportEngine",
+  "type": "interface",
+  "namespace": "com.sun.star.report",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..beans.x_property_set",
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
+      ],
+      [
+        "..lang.x_component",
+        "XComponent",
+        "XComponent_98dc0ab5"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..frame.x_frame",
+        "XFrame",
+        "XFrame_7a570956"
+      ],
+      [
+        "..frame.x_model",
+        "XModel",
+        "XModel_7a6e095c"
+      ],
+      [
+        ".x_report_definition",
+        "XReportDefinition",
+        "XReportDefinition_ec30e81"
+      ],
+      [
+        "..sdbc.x_connection",
+        "XConnection",
+        "XConnection_a36a0b0c"
+      ],
+      [
+        "..task.x_status_indicator",
+        "XStatusIndicator",
+        "XStatusIndicator_e2d00d34"
+      ],
+      [
+        "..util.url",
+        "URL",
+        "URL_57ad07b9"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa",
+      "com.sun.star.lang.XComponent": "XComponent_98dc0ab5"
+    },
+    "quote": [
+      "URL_57ad07b9",
+      "XConnection_a36a0b0c",
+      "XFrame_7a570956",
+      "XModel_7a6e095c",
+      "XReportDefinition_ec30e81",
+      "XStatusIndicator_e2d00d34"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XPropertySet",
+        "com.sun.star.lang.XComponent"
+      ],
+      "typing": [
+        "com.sun.star.frame.XFrame",
+        "com.sun.star.frame.XModel",
+        "com.sun.star.report.XReportDefinition",
+        "com.sun.star.sdbc.XConnection",
+        "com.sun.star.task.XStatusIndicator",
+        "com.sun.star.util.URL"
+      ]
+    },
+    "name": "XReportEngine",
+    "imports": [],
+    "namespace": "com.sun.star.report",
+    "extends": [
+      "com.sun.star.lang.XComponent",
+      "com.sun.star.beans.XPropertySet"
+    ],
+    "desc": [
+      "identifies a XReportEngine which allows the creation of OpenDocument files.",
+      "",
+      "The following events are supported by the report engine. OnPageStarted Is fired when a new page started. OnReportStarted Is fired when a new report started. OnGroupStarted Is fired when a new group started. OnGroupEnded Is fired when the group ended. OnReportEnded Is fired when the report ended. OnPageEnded Is fired when the page ended."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1report_1_1XReportEngine.html",
+    "items": {
+      "methods": [
+        {
+          "name": "createDocument",
+          "returns": "URL_57ad07b9",
+          "returns_origin": "com.sun.star.util.URL",
+          "desc": [
+            "creates a report document."
+          ],
+          "raises": [
+            "com.sun.star.lang.DisposedException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.uno.Exception"
+          ],
+          "args": []
+        },
+        {
+          "name": "createDocumentAlive",
+          "returns": "XModel_7a6e095c",
+          "returns_origin": "com.sun.star.frame.XModel",
+          "desc": [
+            "creates a report document.",
+            "",
+            "OJ: Has to be discussed if this method is useful."
+          ],
+          "raises": [
+            "com.sun.star.lang.DisposedException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            {
+              "name": "frame",
+              "type": "XFrame_7a570956",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XFrame"
+            }
+          ]
+        },
+        {
+          "name": "createDocumentModel",
+          "returns": "XModel_7a6e095c",
+          "returns_origin": "com.sun.star.frame.XModel",
+          "desc": [
+            "creates a report document."
+          ],
+          "raises": [
+            "com.sun.star.lang.DisposedException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.uno.Exception"
+          ],
+          "args": []
+        },
+        {
+          "name": "interrupt",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "allows to interrupt the creation process of the report document."
+          ],
+          "raises": [
+            "com.sun.star.lang.DisposedException",
+            "com.sun.star.uno.Exception"
+          ],
+          "args": []
+        }
+      ],
+      "properties": [
+        {
+          "name": "ActiveConnection",
+          "returns": "XConnection_a36a0b0c",
+          "origtype": "com.sun.star.sdbc.XConnection",
+          "origin": "com.sun.star.sdbc.XConnection",
+          "desc": [
+            "specifies the active connection which is used to create the resulting report."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "MaxRows",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "defines the maximum number of rows which should be fetched for the report.",
+            "",
+            "If the limit is exceeded, the excess rows are silently dropped.",
+            "There is no limitation, if set to zero."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ReportDefinition",
+          "returns": "XReportDefinition_ec30e81",
+          "origtype": "com.sun.star.report.XReportDefinition",
+          "origin": "com.sun.star.report.XReportDefinition",
+          "desc": [
+            "specifies the report definition object which is used to create the resulting report."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "StatusIndicator",
+          "returns": "XStatusIndicator_e2d00d34",
+          "origtype": "com.sun.star.task.XStatusIndicator",
+          "origin": "com.sun.star.task.XStatusIndicator",
+          "desc": [
+            "specifies the status indicator which shows the progress of the report generation process."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

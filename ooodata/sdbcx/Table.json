@@ -1,0 +1,166 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "Table",
+  "type": "service",
+  "namespace": "com.sun.star.sdbcx",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..beans.x_property_set",
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
+      ],
+      [
+        ".x_alter_table",
+        "XAlterTable",
+        "XAlterTable_af4d0b54"
+      ],
+      [
+        ".x_columns_supplier",
+        "XColumnsSupplier",
+        "XColumnsSupplier_f0600da9"
+      ],
+      [
+        ".x_data_descriptor_factory",
+        "XDataDescriptorFactory",
+        "XDataDescriptorFactory_46170fe5"
+      ],
+      [
+        ".x_indexes_supplier",
+        "XIndexesSupplier",
+        "XIndexesSupplier_efa30d98"
+      ],
+      [
+        ".x_keys_supplier",
+        "XKeysSupplier",
+        "XKeysSupplier_c8a70c64"
+      ],
+      [
+        ".x_rename",
+        "XRename",
+        "XRename_848c09cc"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa",
+      "com.sun.star.sdbcx.XAlterTable": "XAlterTable_af4d0b54",
+      "com.sun.star.sdbcx.XColumnsSupplier": "XColumnsSupplier_f0600da9",
+      "com.sun.star.sdbcx.XDataDescriptorFactory": "XDataDescriptorFactory_46170fe5",
+      "com.sun.star.sdbcx.XIndexesSupplier": "XIndexesSupplier_efa30d98",
+      "com.sun.star.sdbcx.XKeysSupplier": "XKeysSupplier_c8a70c64",
+      "com.sun.star.sdbcx.XRename": "XRename_848c09cc"
+    },
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XPropertySet",
+        "com.sun.star.sdbcx.XAlterTable",
+        "com.sun.star.sdbcx.XColumnsSupplier",
+        "com.sun.star.sdbcx.XDataDescriptorFactory",
+        "com.sun.star.sdbcx.XIndexesSupplier",
+        "com.sun.star.sdbcx.XKeysSupplier",
+        "com.sun.star.sdbcx.XRename"
+      ],
+      "typing": []
+    },
+    "name": "Table",
+    "imports": [],
+    "namespace": "com.sun.star.sdbcx",
+    "extends": [
+      "com.sun.star.sdbcx.XDataDescriptorFactory",
+      "com.sun.star.sdbcx.XColumnsSupplier",
+      "com.sun.star.sdbcx.XIndexesSupplier",
+      "com.sun.star.sdbcx.XKeysSupplier",
+      "com.sun.star.sdbcx.XRename",
+      "com.sun.star.sdbcx.XAlterTable",
+      "com.sun.star.beans.XPropertySet"
+    ],
+    "desc": [
+      "used to specify a table in a database.",
+      "",
+      "A table is described by its name and one or more columns.",
+      "",
+      "In addition, it may contain indexes to improve the performance in the retrieval of the table's data and keys, and to define semantic rules for the table.",
+      "",
+      "Note:  All properties and columns of a table could by modified before it is appended to a database. In that case, the service is in fact a descriptor. On existing tables, a user might alter columns, add or delete columns, indexes, and keys depending on the capabilities of the database and on the user's privileges."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1sdbcx_1_1Table.html",
+    "items": {
+      "properties": [
+        {
+          "name": "CatalogName",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "is the name of the table catalog."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Description",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "supplies a comment on the table.",
+            "",
+            "Could be empty, if not supported by the driver."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Name",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "is the name of the table."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SchemaName",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "is the name of the table schema."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Type",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "indicates the type of the table like (TABLE, VIEW, SYSTEM TABLE).",
+            "",
+            "Could be empty, if not supported by the driver."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

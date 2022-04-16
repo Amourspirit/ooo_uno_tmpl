@@ -1,0 +1,150 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XXMLSecurityContext",
+  "type": "interface",
+  "namespace": "com.sun.star.xml.crypto",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "...uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_security_environment",
+        "XSecurityEnvironment",
+        "XSecurityEnvironment_7ead116d"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XSecurityEnvironment_7ead116d"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.xml.crypto.XSecurityEnvironment"
+      ]
+    },
+    "name": "XXMLSecurityContext",
+    "imports": [],
+    "namespace": "com.sun.star.xml.crypto",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "Interface of XML security context.",
+      "",
+      "This interface specifies a certain signature context. By signature context, the signer or verifier retrieves key specification."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1xml_1_1crypto_1_1XXMLSecurityContext.html",
+    "items": {
+      "methods": [
+        {
+          "name": "addSecurityEnvironment",
+          "returns": "int",
+          "returns_origin": "long",
+          "desc": [
+            "Add personal security environment , and return the index of the added environment."
+          ],
+          "raises": [
+            "com.sun.star.security.SecurityInfrastructureException"
+          ],
+          "args": [
+            {
+              "name": "aSecurityEnvironment",
+              "type": "XSecurityEnvironment_7ead116d",
+              "direction": "in",
+              "origin": "com.sun.star.xml.crypto.XSecurityEnvironment"
+            }
+          ]
+        },
+        {
+          "name": "getDefaultSecurityEnvironmentIndex",
+          "returns": "int",
+          "returns_origin": "long",
+          "desc": [
+            "Get the ID of the internal security environment."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getSecurityEnvironment",
+          "returns": "XSecurityEnvironment_7ead116d",
+          "returns_origin": "com.sun.star.xml.crypto.XSecurityEnvironment",
+          "desc": [
+            "An handy method to get the first personal security environment.",
+            "",
+            "In XMLSec/NSS, the first personal security environment should be the \\\"internal slot\\\""
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getSecurityEnvironmentByIndex",
+          "returns": "XSecurityEnvironment_7ead116d",
+          "returns_origin": "com.sun.star.xml.crypto.XSecurityEnvironment",
+          "desc": [
+            "Get personal security environment."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "index",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "getSecurityEnvironmentNumber",
+          "returns": "int",
+          "returns_origin": "long",
+          "desc": [
+            "Get the number of security environments."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setDefaultSecurityEnvironmentIndex",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "set the ID of the internal security environment"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "index",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

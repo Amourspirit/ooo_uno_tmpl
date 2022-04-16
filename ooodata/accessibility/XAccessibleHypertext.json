@@ -1,0 +1,121 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "XAccessibleHypertext",
+  "type": "interface",
+  "namespace": "com.sun.star.accessibility",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_accessible_text",
+        "XAccessibleText",
+        "XAccessibleText_5b77105b"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_accessible_hyperlink",
+        "XAccessibleHyperlink",
+        "XAccessibleHyperlink_b34c126c"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.accessibility.XAccessibleText": "XAccessibleText_5b77105b"
+    },
+    "quote": [
+      "XAccessibleHyperlink_b34c126c"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.accessibility.XAccessibleText"
+      ],
+      "typing": [
+        "com.sun.star.accessibility.XAccessibleHyperlink"
+      ]
+    },
+    "name": "XAccessibleHypertext",
+    "imports": [],
+    "namespace": "com.sun.star.accessibility",
+    "extends": [
+      "com.sun.star.accessibility.XAccessibleText"
+    ],
+    "desc": [
+      "Implement this interface to expose the hypertext structure of a document.",
+      "",
+      "The XAccessibleHypertext interface is the main interface to expose hyperlinks in a document, typically a text document, that are used to reference other (parts of) documents. For supporting the XAccessibleHypertext.getLinkIndex() method of this interface and other character related methods of the XAccessibleHyperlink interface, it is necessary to also support the XAccessibleText interface.",
+      "",
+      "**since**",
+      "",
+      "    OOo 1.1.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleHypertext.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getHyperLink",
+          "returns": "XAccessibleHyperlink_b34c126c",
+          "returns_origin": "com.sun.star.accessibility.XAccessibleHyperlink",
+          "desc": [
+            "Return the specified link.",
+            "",
+            "The returned XAccessibleHyperlink object encapsulates the hyperlink and provides several kinds of information describing it."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            {
+              "name": "nLinkIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "getHyperLinkCount",
+          "returns": "int",
+          "returns_origin": "long",
+          "desc": [
+            "Returns the number of links and link groups contained within this hypertext document."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getHyperLinkIndex",
+          "returns": "int",
+          "returns_origin": "long",
+          "desc": [
+            "Returns the index of the hyperlink that is associated with this character index.",
+            "",
+            "In a HTML document this is the case when a <a href> tag spans (includes) the given character index."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            {
+              "name": "nCharIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

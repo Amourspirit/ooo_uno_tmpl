@@ -1,0 +1,355 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.2.0",
+  "libre_office_ver": "7.3",
+  "name": "GenericTextDocument",
+  "type": "service",
+  "namespace": "com.sun.star.text",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..beans.x_property_set",
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
+      ],
+      [
+        "..document.office_document",
+        "OfficeDocument",
+        "OfficeDocument_fecd0df2"
+      ],
+      [
+        "..lang.x_multi_service_factory",
+        "XMultiServiceFactory",
+        "XMultiServiceFactory_191e0eb6"
+      ],
+      [
+        "..style.x_style_families_supplier",
+        "XStyleFamiliesSupplier",
+        "XStyleFamiliesSupplier_4c5a1020"
+      ],
+      [
+        ".x_bookmarks_supplier",
+        "XBookmarksSupplier",
+        "XBookmarksSupplier_ffa50e22"
+      ],
+      [
+        ".x_chapter_numbering_supplier",
+        "XChapterNumberingSupplier",
+        "XChapterNumberingSupplier_6bb310e7"
+      ],
+      [
+        ".x_document_indexes_supplier",
+        "XDocumentIndexesSupplier",
+        "XDocumentIndexesSupplier_5b991088"
+      ],
+      [
+        ".x_endnotes_supplier",
+        "XEndnotesSupplier",
+        "XEndnotesSupplier_f19c0db9"
+      ],
+      [
+        ".x_footnotes_supplier",
+        "XFootnotesSupplier",
+        "XFootnotesSupplier_1050e3a"
+      ],
+      [
+        ".x_page_printable",
+        "XPagePrintable",
+        "XPagePrintable_c8670c43"
+      ],
+      [
+        ".x_reference_marks_supplier",
+        "XReferenceMarksSupplier",
+        "XReferenceMarksSupplier_49d81006"
+      ],
+      [
+        ".x_text_document",
+        "XTextDocument",
+        "XTextDocument_bd4b0c09"
+      ],
+      [
+        ".x_text_embedded_objects_supplier",
+        "XTextEmbeddedObjectsSupplier",
+        "XTextEmbeddedObjectsSupplier_9dd211f2"
+      ],
+      [
+        ".x_text_fields_supplier",
+        "XTextFieldsSupplier",
+        "XTextFieldsSupplier_d5d0e75"
+      ],
+      [
+        ".x_text_frames_supplier",
+        "XTextFramesSupplier",
+        "XTextFramesSupplier_db70e7c"
+      ],
+      [
+        ".x_text_graphic_objects_supplier",
+        "XTextGraphicObjectsSupplier",
+        "XTextGraphicObjectsSupplier_8df111a6"
+      ],
+      [
+        ".x_text_sections_supplier",
+        "XTextSectionsSupplier",
+        "XTextSectionsSupplier_2ce60f66"
+      ],
+      [
+        ".x_text_tables_supplier",
+        "XTextTablesSupplier",
+        "XTextTablesSupplier_d9f0e79"
+      ],
+      [
+        "..tiledrendering.x_tiled_renderable",
+        "XTiledRenderable",
+        "XTiledRenderable_7efc1116"
+      ],
+      [
+        "..util.x_number_formats_supplier",
+        "XNumberFormatsSupplier",
+        "XNumberFormatsSupplier_3afb0fb7"
+      ],
+      [
+        "..util.x_refreshable",
+        "XRefreshable",
+        "XRefreshable_b0d60b81"
+      ],
+      [
+        "..util.x_replaceable",
+        "XReplaceable",
+        "XReplaceable_b0750b6e"
+      ],
+      [
+        "..util.x_searchable",
+        "XSearchable",
+        "XSearchable_a4e80b08"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..lang.locale",
+        "Locale",
+        "Locale_70d308fa"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa",
+      "com.sun.star.document.OfficeDocument": "OfficeDocument_fecd0df2",
+      "com.sun.star.lang.XMultiServiceFactory": "XMultiServiceFactory_191e0eb6",
+      "com.sun.star.style.XStyleFamiliesSupplier": "XStyleFamiliesSupplier_4c5a1020",
+      "com.sun.star.text.XBookmarksSupplier": "XBookmarksSupplier_ffa50e22",
+      "com.sun.star.text.XChapterNumberingSupplier": "XChapterNumberingSupplier_6bb310e7",
+      "com.sun.star.text.XDocumentIndexesSupplier": "XDocumentIndexesSupplier_5b991088",
+      "com.sun.star.text.XEndnotesSupplier": "XEndnotesSupplier_f19c0db9",
+      "com.sun.star.text.XFootnotesSupplier": "XFootnotesSupplier_1050e3a",
+      "com.sun.star.text.XPagePrintable": "XPagePrintable_c8670c43",
+      "com.sun.star.text.XReferenceMarksSupplier": "XReferenceMarksSupplier_49d81006",
+      "com.sun.star.text.XTextDocument": "XTextDocument_bd4b0c09",
+      "com.sun.star.text.XTextEmbeddedObjectsSupplier": "XTextEmbeddedObjectsSupplier_9dd211f2",
+      "com.sun.star.text.XTextFieldsSupplier": "XTextFieldsSupplier_d5d0e75",
+      "com.sun.star.text.XTextFramesSupplier": "XTextFramesSupplier_db70e7c",
+      "com.sun.star.text.XTextGraphicObjectsSupplier": "XTextGraphicObjectsSupplier_8df111a6",
+      "com.sun.star.text.XTextSectionsSupplier": "XTextSectionsSupplier_2ce60f66",
+      "com.sun.star.text.XTextTablesSupplier": "XTextTablesSupplier_d9f0e79",
+      "com.sun.star.tiledrendering.XTiledRenderable": "XTiledRenderable_7efc1116",
+      "com.sun.star.util.XNumberFormatsSupplier": "XNumberFormatsSupplier_3afb0fb7",
+      "com.sun.star.util.XRefreshable": "XRefreshable_b0d60b81",
+      "com.sun.star.util.XReplaceable": "XReplaceable_b0750b6e",
+      "com.sun.star.util.XSearchable": "XSearchable_a4e80b08"
+    },
+    "quote": [
+      "Locale_70d308fa"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XPropertySet",
+        "com.sun.star.document.OfficeDocument",
+        "com.sun.star.lang.XMultiServiceFactory",
+        "com.sun.star.style.XStyleFamiliesSupplier",
+        "com.sun.star.text.XBookmarksSupplier",
+        "com.sun.star.text.XChapterNumberingSupplier",
+        "com.sun.star.text.XDocumentIndexesSupplier",
+        "com.sun.star.text.XEndnotesSupplier",
+        "com.sun.star.text.XFootnotesSupplier",
+        "com.sun.star.text.XPagePrintable",
+        "com.sun.star.text.XReferenceMarksSupplier",
+        "com.sun.star.text.XTextDocument",
+        "com.sun.star.text.XTextEmbeddedObjectsSupplier",
+        "com.sun.star.text.XTextFieldsSupplier",
+        "com.sun.star.text.XTextFramesSupplier",
+        "com.sun.star.text.XTextGraphicObjectsSupplier",
+        "com.sun.star.text.XTextSectionsSupplier",
+        "com.sun.star.text.XTextTablesSupplier",
+        "com.sun.star.tiledrendering.XTiledRenderable",
+        "com.sun.star.util.XNumberFormatsSupplier",
+        "com.sun.star.util.XRefreshable",
+        "com.sun.star.util.XReplaceable",
+        "com.sun.star.util.XSearchable"
+      ],
+      "typing": [
+        "com.sun.star.lang.Locale"
+      ]
+    },
+    "name": "GenericTextDocument",
+    "imports": [],
+    "namespace": "com.sun.star.text",
+    "extends": [
+      "com.sun.star.document.OfficeDocument",
+      "com.sun.star.lang.XMultiServiceFactory",
+      "com.sun.star.text.XTextDocument",
+      "com.sun.star.util.XSearchable",
+      "com.sun.star.util.XRefreshable",
+      "com.sun.star.tiledrendering.XTiledRenderable",
+      "com.sun.star.text.XFootnotesSupplier",
+      "com.sun.star.text.XEndnotesSupplier",
+      "com.sun.star.util.XReplaceable",
+      "com.sun.star.text.XPagePrintable",
+      "com.sun.star.text.XReferenceMarksSupplier",
+      "com.sun.star.text.XChapterNumberingSupplier",
+      "com.sun.star.beans.XPropertySet",
+      "com.sun.star.text.XTextGraphicObjectsSupplier",
+      "com.sun.star.text.XTextEmbeddedObjectsSupplier",
+      "com.sun.star.text.XTextTablesSupplier",
+      "com.sun.star.style.XStyleFamiliesSupplier",
+      "com.sun.star.text.XBookmarksSupplier",
+      "com.sun.star.text.XDocumentIndexesSupplier",
+      "com.sun.star.text.XTextFieldsSupplier",
+      "com.sun.star.text.XTextFramesSupplier",
+      "com.sun.star.text.XTextSectionsSupplier",
+      "com.sun.star.util.XNumberFormatsSupplier"
+    ],
+    "desc": [
+      "A text document is a model component which contains text structured by paragraphs.",
+      "",
+      "Each paragraph and each portion of text can be fitted with some attributes (technically properties).",
+      "",
+      "It's declared as generic text document, because its function is needed by different derived services (TextDocument/WebDocument/GlobalDocument).",
+      "",
+      "In addition, all text objects can be searched.",
+      "",
+      "**since**",
+      "",
+      "    OOo 1.1.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1text_1_1GenericTextDocument.html",
+    "items": {
+      "properties": [
+        {
+          "name": "CharLocale",
+          "returns": "Locale_70d308fa",
+          "origtype": "com.sun.star.lang.Locale",
+          "origin": "com.sun.star.lang.Locale",
+          "desc": [
+            "contains the identifier of the default locale of the document."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharacterCount",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "contains the count of all characters in the document."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IndexAutoMarkFileURL",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "specifies the concordance file taken into account when creating an index.",
+            "",
+            "When no concordance file should be used the string is empty. Used for text documents only.",
+            "",
+            "**since**",
+            "",
+            "    OOo 1.1.2"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParagraphCount",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "contains the count of all paragraphs in the document."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RecordChanges",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "specifies if change recording is active.",
+            "",
+            "**since**",
+            "",
+            "    OOo 1.1.2"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TwoDigitYear",
+          "returns": "int",
+          "origtype": null,
+          "origin": "short",
+          "desc": [
+            "specifies the first 4 digit year to be used when years are given in 2 digits.",
+            "",
+            "Example: if set to 1930 Oct-12-29 will be interpreted as Oct-12-2029 Oct-12-30 will be interpreted as Oct-12-1930 Oct-12-02 will be interpreted as Oct-12-2002",
+            "",
+            "**since**",
+            "",
+            "    OOo 1.1.2"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "WordCount",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "contains the count of all words in the document."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "WordSeparator",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "contains a string that consists of characters that mark the separation of words in counting the words in a document.",
+            "",
+            "I.e. slash and backslash. Whitespace (tab stop, space, paragraph break, line break) always separate words."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}
