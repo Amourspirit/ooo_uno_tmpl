@@ -14,7 +14,7 @@ Requirements:
 Getting Started:
 
     This project already has data compiled of the entire LO API.
-    The file are compiled as *.JSON files, *.tmpl files and *.dyn files in project root directorty 'lo'.
+    The file are compiled as *.JSON files, *.tmplm *.dyn, *.tpyi files in project root directorty 'lo'.
 
     API file generation groups api into the following categories:
         const:      Constant classes
@@ -33,16 +33,16 @@ Make Command:
     make does not require any arguments by default.
     running 'python -m app make' will build all templates that require building.
     
-        *.tmpl files and *.dyn files that do not have corresponding *.py and *.dynpy files respectivally
+        *.tmpl, *.dyn and *.tpyi files that do not have corresponding *.py, *.dynpy and *.pyipy files respectivally
         are included in make.
         
-        *.tmpl files and *.dyn that have a newer modification date then corresponding *.py and *.dynpy
+        *.tmpl, *.dyn and *.tpyi files that have a newer modification date then corresponding *.py, *.dynpy and *.pyipy
         files respectivally are included in make.
 
-    running 'python app.py make -h' will show help for make.
+    '$ python -m app make -h' will show help for make.
     make processes all template and json file in 'lo' directory recursivly.
     make compiles any templates that have not yet been compiled.
-    make takes care of generating inplace *.py and *.dynpy files in lo sub directories
+    make takes care of generating inplace *.py, *.dynpy and *.pyipy files in lo sub directories
     make takes care of writing to ooobuild/lo and ooobuild/dyn directories and sub directories
     make writes the output python file for each template out to 'ooobuild'
         directory keeping the same directory structure.
@@ -79,18 +79,22 @@ Sequence of Build:
     module_links.json files are written into every sub directory of 'lo'.
     module_links.json files can regenerated using link-json mod-links
         command line options.
+        For instance: $ python -m app link-json mod-links --recursive --write-json --all
+        Writes a module_links.json files recursivly into the lo dir. Each dir represents a namespace of the LO API>
 
 
 Compile Templates:
     Note:
-        Before Compile is run database must be up to date. See Regeneration of Database.
+        Before Compile is run database must be up to date.
+        If a new version of LO API is being compiled then database will need to be regenerated.
+        See Regeneration of Database.
         By default database does not need to be created/updated unless underlying
         template json data changes.
         
-        By default all links are already compiled and the resulting *.json, *.tmpl, *.dyn
+        By default all links are already compiled and the resulting *.json, *.tmpl, *.dyn, *.tpyi
         files are located in the lo dir.
     
-    Compiling reads module_links.json files to get url's of components.
+    Compiling reads `module_links.json` files to get url's of components.
     Compiling then request url and parses html and converts in to template and json data
     that are written out to lo dir.
     Compiling all essentially parsers over 4300 urls.
@@ -109,7 +113,7 @@ Compile Templates:
 
 
 Type of Templates:
-    There are currently two types of templates outputed into lo dir, *.tmpl and *.dyn.
+    There are currently three types of templates outputed into lo dir, *.tmpl, *.dyn and *.tpyi.
     
     *.tmpl templates files are converted into corresonding *.py files and are written into
     ooobuild/lo sub directories
@@ -117,7 +121,10 @@ Type of Templates:
     *.dyn template files are converted into corresonding *.dynpy files and are written into
     ooobuild/dyn sub directories
     
-    By default *.tmpl and *.dyn files are just stubs that don't contain any acutal data.
+    *.tpyi template files are converted into corresonding *.pyipy files and are written into
+    ooobuild/star/_pyi sub directories
+    
+    By default *.tmpl *.dyn, *.tpyi files are just stubs that don't contain any acutal data.
     The template files read from corresponging json files and converts data into actual LibreOffice classes as py files.
 
 
@@ -128,10 +135,12 @@ Touch Files:
         Essentially the underlying data will not change unless the LO api has changed.
     
     Touching files can be used to force make to include or exclude making of files.
-        If tmpl files are touched then make will rebuild any tmpl file when run again.
-        If dyn files are touched then make will rebuild any dyn file when run again.
-        If py files are touched then make will exclude any corrsponding tmpl template files.
-        If dynpy files are touched then make will exclude any corrsponding dyn template files.
+        If tmpl files are touched then make will rebuild any *.tmpl file when run again.
+        If dyn files are touched then make will rebuild any *.dyn file when run again.
+        If tpyi files are touched then make will rebuild any *.tpyi file when run again.
+        If py files are touched then make will exclude any corrsponding *.tmpl template files.
+        If dynpy files are touched then make will exclude any corrsponding *.dyn template files.
+        If pyipy files are touched then make will exclude any corrsponding *.pyipy template files.
 
     Example:
         The following commands force make to rebuild all enum tmpl files:
@@ -139,7 +148,7 @@ Touch Files:
             $ python -m app make
     
     Touch can be used to reset cached data created by compile as well.
-    To update all cached data in the tmp sub dir run:
+    To update all cached data in the system tmp sub dir run:
         $ python -m app touch --cache-files
         
         Note on cached files:
@@ -174,15 +183,19 @@ Modifying Templates:
 
 
 Output Other Namespaces:
-    The make command outputs ooobuild/lo and ooobuild/dyn namesapce and files.
-    There are two other namesapces that are also requilred (csslo and cssdyn).
+    The make command outputs ooobuild/lo, ooobuild/dyn and ooobuild/star namesapce and files.
     
     Outputing ooobuild/csslo:
         $ python -m app data star --css-lo
     
     Outputing ooobulid/cssdyn:
         $ python -m app data star --css-dyn
+    
+    Outputing ooobulid/star:
+        $ python -m app data star --css-pyi
 
+    Note:
+        Other Namespaces requires resources/mod_info.sqlite' database.
 
 Regeneration of Database:
     'resources/mod_info.sqlite' database is required for templates to build.
@@ -191,7 +204,7 @@ Regeneration of Database:
     Database is built from various json files that are generated in 'ooodata' directory.
     1. Write all module_links.json into ooodata directory.
         This is done by running the following on the command line.
-        python app.py link-json mod-links --data --all --recursive --write-json
+        $ python app.py link-json mod-links --data --all --recursive --write-json
         The --data flag instructs to write into data directory.
     2. Write all component json files into ooodata directory.
         This is done by running the following on the command line.
@@ -211,6 +224,9 @@ Regeneration of Database:
 Other Notes:
     App Configuration:
         The config.json for app is located in src/cfg/config.json
+    
+    App Version:
+        App version is set in src/parser/__init__py
     
     Other Config:
         src/parsers/config directory contains special configuration files.
@@ -236,6 +252,54 @@ Other Notes:
     
     The underlying parsers that convert html into json and template are located in 
     the src/parser directory.
+
+Regeneration of a new LO API version.
+    When a new version of the LO API is published it may have removed or added classes.
+    For this reason new version must be generated from a clean slate.
+
+    Cleaning before regeneration:
+        Remove database.
+            delete 'resources/mod_info.sqlite'
+        Remove entire contents of ooobuild dir.
+        Remvoe entire contents of ooodata dir.
+        Remove entire contents of lo dir.
+        Make sure cache_dir (set in config) is removed from system tmp dir.
+            Defaults to "ooo_uno_tmpl"
+            EG: $ rm -rf /tmp/ooo_uno_tmpl
+
+    Regeneration steps:
+        1. Set config to new version of LO API.
+            config.json is found in src/cfg/
+            config property is libre_office_ver
+        2. Clean as shown in previous step.
+        3. Generate generate module_links.json into ooodata.
+            $ python app.py link-json mod-links --data --all --recursive --write-json
+        4. Generate generate json ooodata.
+            $ python -m app compile batch --all --data
+            This will parse the entire LO API:
+                Cache will be created in system tmp dir.
+                Json data will be written into ooodata and sub directories.
+                each json file represents a class.
+        5. Generate database.
+            $ python -m app data init --init-db
+        6. Write data into database.
+            $ python -m app data update --write-all
+            This command read the json data in ooodata and writes data into database.
+        7. Generate all module_link.json file into lo dir.
+            $ python -m app link-json mod-links --recursive --write-json --all
+            This creates a module_link.json file for each module in lo dir.
+        8. Write all templates and template json data into lo dir.
+            $ python -m app compile batch --all
+        8. Generate python output.
+            $ python -m app make
+            This will generate all the python file from template in the lo dir.
+            The output will is written into ooobuild dir.
+        9. Generate csslo namespace and python files.
+            $ python -m app data star --css-lo
+        10. Generate cssdyn namesapce and python files.
+            $ python -m app data star --css-dyn
+        11. Generate star sub namespaces and python files.
+            $ python -m app data star --css-pyi
 """
 
 # region Imports
@@ -659,12 +723,12 @@ def _args_make(parser: argparse.ArgumentParser) -> None:
         action='store_true',
         dest='force_compile',
         default=False)
-    parser.add_argument(
-        '-c', '--clean-scratch',
-        help='Wipes all files in scratch',
-        action='store_true',
-        dest='clean_scratch',
-        default=False)
+    # parser.add_argument(
+    #     '-c', '--clean-scratch',
+    #     help='Wipes all files in scratch',
+    #     action='store_true',
+    #     dest='clean_scratch',
+    #     default=False)
     parser.add_argument(
         '-p', '--processes',
         help='Number of Process to us for make.',
@@ -995,7 +1059,7 @@ def _args_action_make(args: argparse.Namespace, config: AppConfig) -> None:
     _log_start_action()
     try:
         _ = Make(config=config,log=logger, force_compile=args.force_compile,
-                 clean=args.clean_scratch, processes=args.processes)
+                 clean=False, processes=args.processes)
     except Exception as e:
         logger.error(e)
     _log_end_action()
