@@ -73,7 +73,7 @@ from .._pyi.awt.font_emphasis_mark import FontEmphasisMark as FontEmphasisMark
 from .._pyi.awt.font_family import FontFamily as FontFamily
 from .._pyi.awt.font_pitch import FontPitch as FontPitch
 from .._pyi.awt.font_relief import FontRelief as FontRelief
-from .._pyi.awt.font_slant import FontSlant as FontSlant
+# from .._pyi.awt import font_slant as FontSlant
 from .._pyi.awt.font_strikeout import FontStrikeout as FontStrikeout
 from .._pyi.awt.font_type import FontType as FontType
 from .._pyi.awt.font_underline import FontUnderline as FontUnderline
