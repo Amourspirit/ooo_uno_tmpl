@@ -26,20 +26,16 @@ Enum
 See Also:
     `API RememberAuthentication <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1ucb.html#a7b9847f348fd7f6a0fc461f821c08173>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-NO: 'UnoEnum'
+NO: object
 """
 Do not remember the authentication data (use it once and immediately forget about it).
 """
-PERSISTENT: 'UnoEnum'
+PERSISTENT: object
 """
 Remember the authentication data \"forever\".
 """
-SESSION: 'UnoEnum'
+SESSION: object
 """
 Remember the authentication data, but only until the end of the current session.
 """

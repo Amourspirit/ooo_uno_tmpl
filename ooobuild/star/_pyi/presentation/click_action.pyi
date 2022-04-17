@@ -26,40 +26,36 @@ Enum
 See Also:
     `API ClickAction <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1presentation.html#a85fe75121d351785616b75b2c5661d8f>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-BOOKMARK: 'UnoEnum'
+BOOKMARK: object
 """
 The presentation jumps to a bookmark.
 """
-DOCUMENT: 'UnoEnum'
+DOCUMENT: object
 """
 The presentation jumps to another document.
 """
-FIRSTPAGE: 'UnoEnum'
+FIRSTPAGE: object
 """
 The presentation continues with the first page.
 """
-INVISIBLE: 'UnoEnum'
+INVISIBLE: object
 """
 The object renders itself invisible after a click.
 """
-LASTPAGE: 'UnoEnum'
+LASTPAGE: object
 """
 The presentation continues with the last page.
 """
-MACRO: 'UnoEnum'
+MACRO: object
 """
 A star basic macro is executed after the click.
 """
-NEXTPAGE: 'UnoEnum'
+NEXTPAGE: object
 """
 The presentation jumps to the next page.
 """
-NONE: 'UnoEnum'
+NONE: object
 """
 use no animation effects.
 
@@ -67,27 +63,27 @@ use no fade effects.
 
 No action is performed on click.
 """
-PREVPAGE: 'UnoEnum'
+PREVPAGE: object
 """
 The presentation jumps to the previous page.
 """
-PROGRAM: 'UnoEnum'
+PROGRAM: object
 """
 Another program is executed after a click.
 """
-SOUND: 'UnoEnum'
+SOUND: object
 """
 A sound is played after a click.
 """
-STOPPRESENTATION: 'UnoEnum'
+STOPPRESENTATION: object
 """
 The presentation is stopped after the click.
 """
-VANISH: 'UnoEnum'
+VANISH: object
 """
 The object vanishes with its effect.
 """
-VERB: 'UnoEnum'
+VERB: object
 """
 An OLE verb is performed on this object.
 """

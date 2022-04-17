@@ -26,24 +26,20 @@ ENUM SAXDocumentBuilderState
 See Also:
     `API SAXDocumentBuilderState <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1xml_1_1dom.html#a8e1d723b2d19d95078879bf81b535b36>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-BUILDING_DOCUMENT: 'UnoEnum'
+BUILDING_DOCUMENT: object
 """
 """
-BUILDING_FRAGMENT: 'UnoEnum'
+BUILDING_FRAGMENT: object
 """
 """
-DOCUMENT_FINISHED: 'UnoEnum'
+DOCUMENT_FINISHED: object
 """
 """
-FRAGMENT_FINISHED: 'UnoEnum'
+FRAGMENT_FINISHED: object
 """
 """
-READY: 'UnoEnum'
+READY: object
 """
 """
 

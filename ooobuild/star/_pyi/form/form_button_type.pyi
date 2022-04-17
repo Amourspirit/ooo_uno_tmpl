@@ -26,24 +26,20 @@ Enum
 See Also:
     `API FormButtonType <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1form.html#abd774094fc2fbbdf91448f8a60c1798a>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-PUSH: 'UnoEnum'
+PUSH: object
 """
 requires the button to act like a common push button, means no special action is triggered.
 """
-RESET: 'UnoEnum'
+RESET: object
 """
 When the button is clicked, it performs a reset on its containing form.
 """
-SUBMIT: 'UnoEnum'
+SUBMIT: object
 """
 When the button is clicked, it performs a submit on its containing form.
 """
-URL: 'UnoEnum'
+URL: object
 """
 When the button is clicked, a URL set for the button is opened.
 

@@ -26,20 +26,16 @@ Enum
 See Also:
     `API VerificationMode <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1ucb.html#ae0c1e5cfd30d96e351c556663af5638b>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-ALWAYS: 'UnoEnum'
+ALWAYS: object
 """
 Always.
 """
-NEVER: 'UnoEnum'
+NEVER: object
 """
 Never.
 """
-ONCE: 'UnoEnum'
+ONCE: object
 """
 Once.
 """

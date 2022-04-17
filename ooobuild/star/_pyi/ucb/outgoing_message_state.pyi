@@ -26,46 +26,42 @@ Enum
 See Also:
     `API OutgoingMessageState <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1ucb.html#a8dec3ee1933cc93724b3764b124b8cc1>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-COMPLETELY_LOCALLY_SENT: 'UnoEnum'
+COMPLETELY_LOCALLY_SENT: object
 """
 Message has been sent upstream to all recipients.
 """
-CONFIRMED: 'UnoEnum'
+CONFIRMED: object
 """
 Recipient confirmed reading.
 """
-EXTERNAL_ERROR: 'UnoEnum'
+EXTERNAL_ERROR: object
 """
 Global fatal error (e.g.
 
 last member in SMTP chain could not deliver the message).
 """
-NONRECOVERABLE_LOCAL_ERROR: 'UnoEnum'
+NONRECOVERABLE_LOCAL_ERROR: object
 """
 Local fatal error (e.g.
 
 first SMTP server upstream did not accept the message).
 """
-PARTIALLY_LOCALLY_SENT: 'UnoEnum'
+PARTIALLY_LOCALLY_SENT: object
 """
 Message has been sent upstream to some recipients.
 """
-RECOVERABLE_LOCAL_ERROR: 'UnoEnum'
+RECOVERABLE_LOCAL_ERROR: object
 """
 Local, non-fatal error (e.g.
 
 network temporarily not available).
 """
-WAITING_CONFIRMATION: 'UnoEnum'
+WAITING_CONFIRMATION: object
 """
 Message was sent; we are waiting for confirmation.
 """
-WRITTEN: 'UnoEnum'
+WRITTEN: object
 """
 Message has just been placed into the out tray.
 """

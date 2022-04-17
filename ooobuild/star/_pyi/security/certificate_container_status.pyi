@@ -26,20 +26,16 @@ Enum
 See Also:
     `API CertificateContainerStatus <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1security.html#abd9126083ddb902b337383198d342e9f>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-NOCERT: 'UnoEnum'
+NOCERT: object
 """
 The certificate was not found.
 """
-TRUSTED: 'UnoEnum'
+TRUSTED: object
 """
 The certificate was found and is trusted.
 """
-UNTRUSTED: 'UnoEnum'
+UNTRUSTED: object
 """
 The certificate was found but is untrusted.
 """

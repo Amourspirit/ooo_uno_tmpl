@@ -26,18 +26,14 @@ Enum
 See Also:
     `API PieChartOffsetMode <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1chart2.html#aa17c0b28cca2adc2be9b3c5954111489>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-ALL_EXPLODED: 'UnoEnum'
+ALL_EXPLODED: object
 """
 All pies are exploded by a certain percentage.
 
 The default is 10 percent.
 """
-NONE: 'UnoEnum'
+NONE: object
 """
 Default, no pies are exploded.
 

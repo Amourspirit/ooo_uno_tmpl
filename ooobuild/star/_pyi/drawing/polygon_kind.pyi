@@ -26,46 +26,42 @@ Enum
 See Also:
     `API PolygonKind <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1drawing.html#adec70dcaa1fdfc08f03cf30ccee65ef6>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-FREEFILL: 'UnoEnum'
+FREEFILL: object
 """
 This is the PolygonKind for a ClosedFreeHandShape.
 """
-FREELINE: 'UnoEnum'
+FREELINE: object
 """
 This is the PolygonKind for an OpenFreeHandShape.
 """
-LINE: 'UnoEnum'
+LINE: object
 """
 the ConnectorShape is drawn as a straight line
 
 This is the PolygonKind for a LineShape.
 """
-PATHFILL: 'UnoEnum'
+PATHFILL: object
 """
 This is the PolygonKind for a ClosedBezierShape.
 """
-PATHLINE: 'UnoEnum'
+PATHLINE: object
 """
 This is the PolygonKind for an OpenBezierShape.
 """
-PATHPLIN: 'UnoEnum'
+PATHPLIN: object
 """
 This is the PolygonKind for a PolyLinePathShape.
 """
-PATHPOLY: 'UnoEnum'
+PATHPOLY: object
 """
 This is the PolygonKind for a PolyPolygonPathShape.
 """
-PLIN: 'UnoEnum'
+PLIN: object
 """
 This is the PolygonKind for a PolyLineShape.
 """
-POLY: 'UnoEnum'
+POLY: object
 """
 This is the PolygonKind for a PolyPolygonShape.
 """

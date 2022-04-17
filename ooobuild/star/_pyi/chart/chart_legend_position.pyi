@@ -26,20 +26,16 @@ Enum
 See Also:
     `API ChartLegendPosition <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1chart.html#a65c2b55fdf73cbbf2fdcfef7d305b6c3>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-BOTTOM: 'UnoEnum'
+BOTTOM: object
 """
 displays the chart legend beneath the diagram.
 """
-LEFT: 'UnoEnum'
+LEFT: object
 """
 displays the chart legend on the left side of the diagram.
 """
-NONE: 'UnoEnum'
+NONE: object
 """
 error indicators are not displayed.
 
@@ -49,11 +45,11 @@ no chart legend is displayed.
 
 displays no error indicators.
 """
-RIGHT: 'UnoEnum'
+RIGHT: object
 """
 displays the chart legend on the right side of the diagram.
 """
-TOP: 'UnoEnum'
+TOP: object
 """
 displays the chart legend above the diagram.
 """

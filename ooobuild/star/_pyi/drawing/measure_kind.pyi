@@ -26,18 +26,14 @@ Enum
 See Also:
     `API MeasureKind <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1drawing.html#aba601430b0385cb6c2e7db8f7814cbff>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-RADIUS: 'UnoEnum'
+RADIUS: object
 """
 use the radius measurement.
 
 This option cannot be used from the GUI Interface.
 """
-STANDARD: 'UnoEnum'
+STANDARD: object
 """
 the graphic is rendered in the default color style of the output device,
 

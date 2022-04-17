@@ -26,18 +26,14 @@ Enum
 See Also:
     `API ProjectionMode <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1drawing.html#a635428fef8d6e4afba288610c9c65bd5>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-PARALLEL: 'UnoEnum'
+PARALLEL: object
 """
 the 3D objects are drawn in the parallel projection.
 
 This value specifies a flat parallel projection in the specified degree of freedom (X or Y).
 """
-PERSPECTIVE: 'UnoEnum'
+PERSPECTIVE: object
 """
 the 3D objects are drawn in the perspective projection.
 """

@@ -26,24 +26,20 @@ Enum
 See Also:
     `API MeasureTextHorzPos <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1drawing.html#a38140d53071a431128aa968be9ce4b7d>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-AUTO: 'UnoEnum'
+AUTO: object
 """
 the connection point is chosen automatically,
 
 Set this to have the application select the best horizontal position for the text.
 """
-INSIDE: 'UnoEnum'
+INSIDE: object
 """
 """
-LEFTOUTSIDE: 'UnoEnum'
+LEFTOUTSIDE: object
 """
 """
-RIGHTOUTSIDE: 'UnoEnum'
+RIGHTOUTSIDE: object
 """
 """
 

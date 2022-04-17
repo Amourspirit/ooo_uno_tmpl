@@ -26,20 +26,16 @@ Enum
 See Also:
     `API RelativeUriExcessParentSegments <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1uri.html#ac4782e395626cbc2118cab947e07af22>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-ERROR: 'UnoEnum'
+ERROR: object
 """
 causes excess special parent segments to be treated as an error.
 """
-REMOVE: 'UnoEnum'
+REMOVE: object
 """
 causes excess special parent segments to be removed.
 """
-RETAIN: 'UnoEnum'
+RETAIN: object
 """
 causes excess special parent segments to be retained, treating them like ordinary segments.
 """

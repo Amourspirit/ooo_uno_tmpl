@@ -26,52 +26,48 @@ Enum
 See Also:
     `API FrameAction <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1frame.html#a793fdb3e5cab69d63a9c89b5e4f83dfd>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-COMPONENT_ATTACHED: 'UnoEnum'
+COMPONENT_ATTACHED: object
 """
 an event of this kind is broadcast whenever a component is attached to a frame
 
 This is almost the same as the instantiation of the component within that frame. The component is attached to the frame immediately before this event is broadcast.
 """
-COMPONENT_DETACHING: 'UnoEnum'
+COMPONENT_DETACHING: object
 """
 an event of this kind is broadcast whenever a component is detaching from a frame
 
 This is quite the same as the destruction of the component which was in that frame. At the moment when the event is broadcast the component is still attached to the frame but in the next moment it won't.
 """
-COMPONENT_REATTACHED: 'UnoEnum'
+COMPONENT_REATTACHED: object
 """
 an event of this kind is broadcast whenever a component is attached to a new model.
 
 In this case the component remains the same but operates on a new model component.
 """
-CONTEXT_CHANGED: 'UnoEnum'
+CONTEXT_CHANGED: object
 """
 an event of this kind is broadcast whenever a component changes its internal context (i.e., the selection).
 
 If the activation status within a frame changes, this counts as a context change too.
 """
-FRAME_ACTIVATED: 'UnoEnum'
+FRAME_ACTIVATED: object
 """
 an event of this kind is broadcast whenever a component gets activated
 
 Activations are broadcast from the top component which was not active before, down to the inner most component.
 """
-FRAME_DEACTIVATING: 'UnoEnum'
+FRAME_DEACTIVATING: object
 """
 an event of this kind is broadcasted immediately before the component is deactivated
 
 Deactivations are broadcast from the innermost component which does not stay active up to the outer most component which does not stay active.
 """
-FRAME_UI_ACTIVATED: 'UnoEnum'
+FRAME_UI_ACTIVATED: object
 """
 an event of this kind is broadcast by an active frame when it is getting UI control (tool control).
 """
-FRAME_UI_DEACTIVATING: 'UnoEnum'
+FRAME_UI_DEACTIVATING: object
 """
 an event of this kind is broadcast by an active frame when it is losing UI control (tool control).
 """

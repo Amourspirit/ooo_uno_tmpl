@@ -26,44 +26,40 @@ Enum
 See Also:
     `API RectanglePoint <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1drawing.html#a4689f50c3960db0e79b179ddfc7d8827>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-LEFT_BOTTOM: 'UnoEnum'
+LEFT_BOTTOM: object
 """
 specify to the point on the bottom of the left side from the rectangle.
 """
-LEFT_MIDDLE: 'UnoEnum'
+LEFT_MIDDLE: object
 """
 specify to the point on the middle of the left side from the rectangle.
 """
-LEFT_TOP: 'UnoEnum'
+LEFT_TOP: object
 """
 specify to the point on the left side from the top of the rectangle.
 """
-MIDDLE_BOTTOM: 'UnoEnum'
+MIDDLE_BOTTOM: object
 """
 specify to the point on the middle of the bottom from the rectangle.
 """
-MIDDLE_MIDDLE: 'UnoEnum'
+MIDDLE_MIDDLE: object
 """
 specify to the point on the center from the rectangle.
 """
-MIDDLE_TOP: 'UnoEnum'
+MIDDLE_TOP: object
 """
 specify to the point on the middle of the top from the rectangle.
 """
-RIGHT_BOTTOM: 'UnoEnum'
+RIGHT_BOTTOM: object
 """
 specify to the point on the bottom of the right side from the rectangle.
 """
-RIGHT_MIDDLE: 'UnoEnum'
+RIGHT_MIDDLE: object
 """
 specify to the point on the middle of the right side from the rectangle.
 """
-RIGHT_TOP: 'UnoEnum'
+RIGHT_TOP: object
 """
 specify to the point on the right side from the top of the rectangle.
 """

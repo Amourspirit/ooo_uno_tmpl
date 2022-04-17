@@ -26,24 +26,20 @@ Enum
 See Also:
     `API PasteOperation <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1sheet.html#af53d63b24461405946937e0b962a8a9b>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-ADD: 'UnoEnum'
+ADD: object
 """
 old and new values are added.
 """
-DIVIDE: 'UnoEnum'
+DIVIDE: object
 """
 new values are divided by the new values.
 """
-MULTIPLY: 'UnoEnum'
+MULTIPLY: object
 """
 old and new values are multiplied.
 """
-NONE: 'UnoEnum'
+NONE: object
 """
 no cells are moved.
 
@@ -57,7 +53,7 @@ nothing is imported.
 
 no condition is specified.
 """
-SUBTRACT: 'UnoEnum'
+SUBTRACT: object
 """
 new values are subtracted from the old values.
 """

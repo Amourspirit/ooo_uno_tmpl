@@ -26,24 +26,20 @@ Enum
 See Also:
     `API Arrangement <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1drawing.html#ac4d32be4f663e5f65aa208c47e1faa81>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-BACK: 'UnoEnum'
+BACK: object
 """
 Move this object behind all other objects.
 """
-FRONT: 'UnoEnum'
+FRONT: object
 """
 Move this object in front of all other objects.
 """
-MORE_BACK: 'UnoEnum'
+MORE_BACK: object
 """
 Move this object one object more to the back.
 """
-MORE_FRONT: 'UnoEnum'
+MORE_FRONT: object
 """
 Move this object one object more to the front.
 """

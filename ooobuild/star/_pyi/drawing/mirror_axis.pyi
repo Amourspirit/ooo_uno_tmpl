@@ -26,16 +26,12 @@ Enum
 See Also:
     `API MirrorAxis <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1drawing.html#a4a57640f8e0cde4bd2c20b6b00d6affb>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-HORIZONTAL: 'UnoEnum'
+HORIZONTAL: object
 """
 mirror to the horizontal axis
 """
-VERTICAL: 'UnoEnum'
+VERTICAL: object
 """
 mirror to the vertical axis
 """

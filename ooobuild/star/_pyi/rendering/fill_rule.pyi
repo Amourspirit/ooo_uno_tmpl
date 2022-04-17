@@ -26,16 +26,12 @@ Enum
 See Also:
     `API FillRule <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1rendering.html#a9a534b0377c9ca41983d53b0dae0d5a4>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-EVEN_ODD: 'UnoEnum'
+EVEN_ODD: object
 """
 Fill every area, where, when traveling along a line, an uneven number of intersections with polygon edges have happened.
 """
-NON_ZERO: 'UnoEnum'
+NON_ZERO: object
 """
 Fill every area, where, when traveling along a line, the summed winding number (that is, -1 for a counter-clockwise-oriented polygon, and +1 for a clockwise-oriented) is non-zero.
 

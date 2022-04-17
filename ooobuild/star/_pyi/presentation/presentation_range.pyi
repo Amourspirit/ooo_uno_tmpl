@@ -26,20 +26,16 @@ Enum
 See Also:
     `API PresentationRange <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1presentation.html#a69c71b14b95cc70bce7122a7b8287045>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-PRESENTATIONRANGE_ALL: 'UnoEnum'
+PRESENTATIONRANGE_ALL: object
 """
 use all slides.
 """
-PRESENTATIONRANGE_FROM_PAGE: 'UnoEnum'
+PRESENTATIONRANGE_FROM_PAGE: object
 """
 use only the active slide.
 """
-PRESENTATIONRANGE_INDIVIDUAL: 'UnoEnum'
+PRESENTATIONRANGE_INDIVIDUAL: object
 """
 use an individual choice of slides.
 """

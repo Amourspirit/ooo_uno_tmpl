@@ -26,30 +26,26 @@ Enum
 See Also:
     `API ContentCreationError <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1ucb.html#aa2e437022c4d519cf5488a06e5e81ef4>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-CONTENT_CREATION_FAILED: 'UnoEnum'
+CONTENT_CREATION_FAILED: object
 """
 Provider was unable to create the content instance.
 """
-IDENTIFIER_CREATION_FAILED: 'UnoEnum'
+IDENTIFIER_CREATION_FAILED: object
 """
 Creation of content identifier failed.
 """
-NO_CONTENT_BROKER: 'UnoEnum'
+NO_CONTENT_BROKER: object
 """
 """
-NO_CONTENT_PROVIDER: 'UnoEnum'
+NO_CONTENT_PROVIDER: object
 """
 No Content Provider for given content identifier available.
 """
-NO_IDENTIFIER_FACTORY: 'UnoEnum'
+NO_IDENTIFIER_FACTORY: object
 """
 """
-UNKNOWN: 'UnoEnum'
+UNKNOWN: object
 """
 Unknown.
 

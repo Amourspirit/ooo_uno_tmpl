@@ -26,34 +26,30 @@ Enum
 See Also:
     `API CellHoriJustify <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1table.html#ab3c576b107bd5018643ab5612438fdf2>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-BLOCK: 'UnoEnum'
+BLOCK: object
 """
 contents are justified to the cell width.
 """
-CENTER: 'UnoEnum'
+CENTER: object
 """
 contents are horizontally centered.
 
 contents are aligned to the vertical middle of the cell.
 """
-LEFT: 'UnoEnum'
+LEFT: object
 """
 contents are aligned to the left edge of the cell.
 """
-REPEAT: 'UnoEnum'
+REPEAT: object
 """
 contents are repeated to fill the cell.
 """
-RIGHT: 'UnoEnum'
+RIGHT: object
 """
 contents are aligned to the right edge of the cell.
 """
-STANDARD: 'UnoEnum'
+STANDARD: object
 """
 default alignment is used (left for numbers, right for text).
 

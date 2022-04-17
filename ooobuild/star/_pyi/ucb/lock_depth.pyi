@@ -26,20 +26,16 @@ Enum
 See Also:
     `API LockDepth <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1ucb.html#a01e925906d2f84e461036af17439e9ca>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-INFINITY: 'UnoEnum'
+INFINITY: object
 """
 Infinity (includes children and children's children and ...).
 """
-ONE: 'UnoEnum'
+ONE: object
 """
 One (includes children).
 """
-ZERO: 'UnoEnum'
+ZERO: object
 """
 Zero (includes no children).
 """

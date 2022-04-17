@@ -26,12 +26,8 @@ Enum
 See Also:
     `API LabelOrigin <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1chart2_1_1data.html#a2afe9ba95ad4b3631057b40391bed0aa>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-COLUMN: 'UnoEnum'
+COLUMN: object
 """
 Uses the column name for label generation.
 
@@ -39,13 +35,13 @@ A spreadsheet range A1:A6 could, e.g., result in \"Column A\".
 
 If a range consists of more than one column the result of label generation may be empty. Of course, it could also succeed with a string like \"Columns A to B\".
 """
-LONG_SIDE: 'UnoEnum'
+LONG_SIDE: object
 """
 This is exactly the opposite of SHORT_SIDE.
 
 I.e., if SHORT_SIDE has the same effect as ROW, LONG_SIDE will have the same effect as COLUMN and the other way round.
 """
-ROW: 'UnoEnum'
+ROW: object
 """
 Uses the column name for label generation.
 
@@ -53,7 +49,7 @@ A spreadsheet range A2:D2 could, e.g., result in \"Row 2\".
 
 If a range consists of more than one row the result of label generation may be empty. Of course, it could also succeed with a string like \"Rows 1-3\".
 """
-SHORT_SIDE: 'UnoEnum'
+SHORT_SIDE: object
 """
 If a range spans a single row over more than one column, this parameter has the same effect as ROW.
 

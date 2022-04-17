@@ -26,20 +26,16 @@ Enum
 See Also:
     `API CellOrientation <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1table.html#ae84a4c3547c7628fcc19bdf41cc93c60>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-BOTTOMTOP: 'UnoEnum'
+BOTTOMTOP: object
 """
 contents are printed from bottom to top.
 """
-STACKED: 'UnoEnum'
+STACKED: object
 """
 contents are printed from top to bottom with individual characters in normal (horizontal) orientation.
 """
-STANDARD: 'UnoEnum'
+STANDARD: object
 """
 default alignment is used (left for numbers, right for text).
 
@@ -47,7 +43,7 @@ default alignment is used.
 
 contents are printed from left to right.
 """
-TOPBOTTOM: 'UnoEnum'
+TOPBOTTOM: object
 """
 contents are printed from top to bottom.
 """

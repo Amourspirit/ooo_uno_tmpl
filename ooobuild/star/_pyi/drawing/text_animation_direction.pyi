@@ -26,15 +26,11 @@ Enum
 See Also:
     `API TextAnimationDirection <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1drawing.html#a218f9e180f159784cd3e33cef99bfe86>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-DOWN: 'UnoEnum'
+DOWN: object
 """
 """
-LEFT: 'UnoEnum'
+LEFT: object
 """
 the connection line leaves the connected object to the left,
 
@@ -42,7 +38,7 @@ The left edge of the text is adjusted to the left edge of the shape.
 
 The text is positioned to the left.
 """
-RIGHT: 'UnoEnum'
+RIGHT: object
 """
 the connection line leaves the connected object to the right,
 
@@ -50,7 +46,7 @@ The right edge of the text is adjusted to the right edge of the shape.
 
 The text is positioned to the right.
 """
-UP: 'UnoEnum'
+UP: object
 """
 """
 

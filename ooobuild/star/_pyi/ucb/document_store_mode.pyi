@@ -26,16 +26,12 @@ Enum
 See Also:
     `API DocumentStoreMode <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1ucb.html#aea1ce806e915d3505569f7679447ecc2>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-LOCAL: 'UnoEnum'
+LOCAL: object
 """
 Document contents are stored locally.
 """
-REMOTE: 'UnoEnum'
+REMOTE: object
 """
 Document contents are not stored locally.
 """

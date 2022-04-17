@@ -26,24 +26,20 @@ Enum
 See Also:
     `API LayerType <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1drawing.html#a56943a0946e5f15e5e58054b8e7a04a4>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-CONTROLSA: 'UnoEnum'
+CONTROLSA: object
 """
 This is the layer for the controls.
 """
-DIMENSIONIANG_LINES: 'UnoEnum'
+DIMENSIONIANG_LINES: object
 """
 This is the layer for all measure shapes.
 """
-LAYOUT: 'UnoEnum'
+LAYOUT: object
 """
 This is the layer for all standard shapes.
 """
-USER_DEFINED: 'UnoEnum'
+USER_DEFINED: object
 """
 There can be zero or more layers of this type.
 """

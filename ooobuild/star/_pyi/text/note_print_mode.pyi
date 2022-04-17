@@ -26,24 +26,20 @@ Enum
 See Also:
     `API NotePrintMode <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1text.html#a95d9f731f1389ee9f277e756b476251c>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-DOC_END: 'UnoEnum'
+DOC_END: object
 """
 Notes are collected at the end of the document.
 """
-NOT: 'UnoEnum'
+NOT: object
 """
 Notes are not printed.
 """
-ONLY: 'UnoEnum'
+ONLY: object
 """
 Only notes are printed.
 """
-PAGE_END: 'UnoEnum'
+PAGE_END: object
 """
 Notes are collected at the end of a page and printed on an inserted page.
 """

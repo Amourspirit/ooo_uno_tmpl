@@ -26,20 +26,16 @@ Enum
 See Also:
     `API SearchRecursion <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1ucb.html#a8f357eda7c29e9601428bdc8834c7bd8>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-DEEP: 'UnoEnum'
+DEEP: object
 """
 Searches through the complete hierarchy of all sub-objects.
 """
-NONE: 'UnoEnum'
+NONE: object
 """
 Does not search through any sub-objects.
 """
-ONE_LEVEL: 'UnoEnum'
+ONE_LEVEL: object
 """
 Only searches through sub-objects of the first hierarchy level.
 """

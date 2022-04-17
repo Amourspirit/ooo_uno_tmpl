@@ -26,24 +26,20 @@ Enum
 See Also:
     `API ValidationAlertStyle <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1sheet.html#aecf58149730f4c8c5c18c70f3c7c5db7>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-INFO: 'UnoEnum'
+INFO: object
 """
 information message is shown and the user is asked whether the change will be accepted (defaulted to \"Yes\").
 """
-MACRO: 'UnoEnum'
+MACRO: object
 """
 macro is executed.
 """
-STOP: 'UnoEnum'
+STOP: object
 """
 error message is shown and the change is rejected.
 """
-WARNING: 'UnoEnum'
+WARNING: object
 """
 warning message is shown and the user is asked whether the change will be accepted (defaulted to \"No\").
 """

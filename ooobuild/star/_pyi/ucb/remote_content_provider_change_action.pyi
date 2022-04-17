@@ -26,16 +26,12 @@ Enum
 See Also:
     `API RemoteContentProviderChangeAction <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1ucb.html#abe4a959f1ea6647971dafe5b6c90c7ec>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-ADDED: 'UnoEnum'
+ADDED: object
 """
 The indicator that a remote content provider has been added.
 """
-REMOVED: 'UnoEnum'
+REMOVED: object
 """
 The indicator that a remote content provider has been removed.
 """

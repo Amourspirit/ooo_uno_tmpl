@@ -26,22 +26,18 @@ Enum
 See Also:
     `API SolverConstraintOperator <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1sheet.html#a491ab8ed5b7b5809e7be869d26b071cf>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-BINARY: 'UnoEnum'
+BINARY: object
 """
 The cell value is a binary value (0 or 1).
 """
-EQUAL: 'UnoEnum'
+EQUAL: object
 """
 value has to be equal to the specified value.
 
 The cell value is equal to the specified value.
 """
-GREATER_EQUAL: 'UnoEnum'
+GREATER_EQUAL: object
 """
 the value has to be greater than or equal to the specified value.
 
@@ -49,11 +45,11 @@ The cell value is greater or equal to the specified value.
 
 value has to be greater than or equal to the specified value.
 """
-INTEGER: 'UnoEnum'
+INTEGER: object
 """
 The cell value is an integer value.
 """
-LESS_EQUAL: 'UnoEnum'
+LESS_EQUAL: object
 """
 the value has to be less than or equal to the specified value.
 

@@ -26,28 +26,24 @@ Enum
 See Also:
     `API Border <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1sheet.html#aea307cd05a4c363d9cac3828a62f4127>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-BOTTOM: 'UnoEnum'
+BOTTOM: object
 """
 selects the bottom border.
 """
-LEFT: 'UnoEnum'
+LEFT: object
 """
 selects the left border.
 
 the cells to the right of the deleted cells are moved left.
 """
-RIGHT: 'UnoEnum'
+RIGHT: object
 """
 selects the right border.
 
 the cells to the right of the inserted cells are moved right.
 """
-TOP: 'UnoEnum'
+TOP: object
 """
 selects the top border.
 """

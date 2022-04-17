@@ -26,20 +26,16 @@ Enum
 See Also:
     `API ColorMode <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1drawing.html#a0e887cb85702e0dccbf34d7dbe40443f>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-GREYS: 'UnoEnum'
+GREYS: object
 """
 the graphic is rendered in grayscale on the output device,
 """
-MONO: 'UnoEnum'
+MONO: object
 """
 the graphic is rendered in black and white only,
 """
-STANDARD: 'UnoEnum'
+STANDARD: object
 """
 the graphic is rendered in the default color style of the output device,
 
@@ -47,7 +43,7 @@ use the length measurement.
 
 the connector is drawn with three lines, with the middle line perpendicular to the other two
 """
-WATERMARK: 'UnoEnum'
+WATERMARK: object
 """
 the graphic is rendered in a watermark like style,
 """

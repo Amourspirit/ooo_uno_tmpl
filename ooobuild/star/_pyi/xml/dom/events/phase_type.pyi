@@ -26,18 +26,14 @@ ENUM PhaseType
 See Also:
     `API PhaseType <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1xml_1_1dom_1_1events.html#af00a42ecad444bbda75cde1b64bd7e72>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-AT_TARGET: 'UnoEnum'
+AT_TARGET: object
 """
 """
-BUBBLING_PHASE: 'UnoEnum'
+BUBBLING_PHASE: object
 """
 """
-CAPTURING_PHASE: 'UnoEnum'
+CAPTURING_PHASE: object
 """
 """
 

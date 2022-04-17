@@ -26,22 +26,18 @@ Enum
 See Also:
     `API FinishReason <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1script.html#a8ab52fac6ca48179fe55e9a6aa3a345d>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-Cancel: 'UnoEnum'
+Cancel: object
 """
 script in the engine was cancelled.
 
 script execution was cancelled.
 """
-Error: 'UnoEnum'
+Error: object
 """
 error occurred during script execution or compiling.
 """
-OK: 'UnoEnum'
+OK: object
 """
 script in the engine terminated normally.
 """

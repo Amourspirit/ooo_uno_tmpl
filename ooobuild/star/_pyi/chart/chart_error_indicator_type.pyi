@@ -26,16 +26,12 @@ Enum
 See Also:
     `API ChartErrorIndicatorType <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1chart.html#a1391f7495aa3a95d4bc29dbf29a809ea>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-LOWER: 'UnoEnum'
+LOWER: object
 """
 displays only the lower value.
 """
-NONE: 'UnoEnum'
+NONE: object
 """
 error indicators are not displayed.
 
@@ -45,11 +41,11 @@ no chart legend is displayed.
 
 displays no error indicators.
 """
-TOP_AND_BOTTOM: 'UnoEnum'
+TOP_AND_BOTTOM: object
 """
 displays both the upper and lower values.
 """
-UPPER: 'UnoEnum'
+UPPER: object
 """
 displays only the upper value.
 """

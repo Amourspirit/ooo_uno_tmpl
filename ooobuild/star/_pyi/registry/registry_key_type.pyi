@@ -26,15 +26,11 @@ Enum
 See Also:
     `API RegistryKeyType <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1registry.html#a096c2bade01504c38ba808bfeadff2b2>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-KEY: 'UnoEnum'
+KEY: object
 """
 """
-LINK: 'UnoEnum'
+LINK: object
 """
 """
 

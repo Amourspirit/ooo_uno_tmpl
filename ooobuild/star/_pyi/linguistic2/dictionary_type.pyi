@@ -26,19 +26,15 @@ Enum
 See Also:
     `API DictionaryType <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1linguistic2.html#a281c5a7578308b66c77c9e0de51b806a>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-MIXED: 'UnoEnum'
+MIXED: object
 """
 """
-NEGATIVE: 'UnoEnum'
+NEGATIVE: object
 """
 all entries in the dictionary are negative.
 """
-POSITIVE: 'UnoEnum'
+POSITIVE: object
 """
 all entries in the dictionary are positive.
 """

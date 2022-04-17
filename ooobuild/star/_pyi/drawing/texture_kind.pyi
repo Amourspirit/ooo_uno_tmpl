@@ -26,18 +26,14 @@ Enum
 See Also:
     `API TextureKind <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1drawing.html#a36a384629c2a5cfb1a9d019d30923c2b>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-COLOR: 'UnoEnum'
+COLOR: object
 """
 With this mode the lighting is ignored and only the texture color information is used.
 
 With this mode, the lighting is ignored and only the texture color information is used.
 """
-LUMINANCE: 'UnoEnum'
+LUMINANCE: object
 """
 With TextureKind LUMINANCE, the texture and the lighting information is mixed to produce the image, so a lit, textured object is achieved.
 """

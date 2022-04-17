@@ -26,26 +26,22 @@ Enum
 See Also:
     `API ChartLegendExpansion <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1chart.html#ab1908f844354e32092fdec03c1b9b513>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-BALANCED: 'UnoEnum'
+BALANCED: object
 """
 The legend entries are arranged in a way that the aspect ratio of the resulting legend is as near to 1 as possible.
 """
-CUSTOM: 'UnoEnum'
+CUSTOM: object
 """
 The size of the legend is given explicitly.
 """
-HIGH: 'UnoEnum'
+HIGH: object
 """
 The legend entries are stacked in a single column if possible.
 
 If not enough space is available further columns are added.
 """
-WIDE: 'UnoEnum'
+WIDE: object
 """
 The legend entries are arranged in a single row if possible.
 

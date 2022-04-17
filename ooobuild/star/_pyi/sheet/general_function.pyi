@@ -26,38 +26,34 @@ Enum
 See Also:
     `API GeneralFunction <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1sheet.html#ad184d5bd9055f3b4fd57ce72c781758d>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-AUTO: 'UnoEnum'
+AUTO: object
 """
 specifies the use of a user-defined list.
 
 function is determined automatically.
 """
-AVERAGE: 'UnoEnum'
+AVERAGE: object
 """
 average of all numerical values is calculated.
 """
-COUNT: 'UnoEnum'
+COUNT: object
 """
 all values, including non-numerical values, are counted.
 """
-COUNTNUMS: 'UnoEnum'
+COUNTNUMS: object
 """
 numerical values are counted.
 """
-MAX: 'UnoEnum'
+MAX: object
 """
 maximum value of all numerical values is calculated.
 """
-MIN: 'UnoEnum'
+MIN: object
 """
 minimum value of all numerical values is calculated.
 """
-NONE: 'UnoEnum'
+NONE: object
 """
 no cells are moved.
 
@@ -71,27 +67,27 @@ nothing is imported.
 
 no condition is specified.
 """
-PRODUCT: 'UnoEnum'
+PRODUCT: object
 """
 product of all numerical values is calculated.
 """
-STDEV: 'UnoEnum'
+STDEV: object
 """
 standard deviation is calculated based on a sample.
 """
-STDEVP: 'UnoEnum'
+STDEVP: object
 """
 standard deviation is calculated based on the entire population.
 """
-SUM: 'UnoEnum'
+SUM: object
 """
 sum of all numerical values is calculated.
 """
-VAR: 'UnoEnum'
+VAR: object
 """
 variance is calculated based on a sample.
 """
-VARP: 'UnoEnum'
+VARP: object
 """
 variance is calculated based on the entire population.
 """

@@ -26,12 +26,8 @@ Enum
 See Also:
     `API SheetLinkMode <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1sheet.html#a34cdda19a5183f39256021e0c2bc46cc>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-NONE: 'UnoEnum'
+NONE: object
 """
 no cells are moved.
 
@@ -45,11 +41,11 @@ nothing is imported.
 
 no condition is specified.
 """
-NORMAL: 'UnoEnum'
+NORMAL: object
 """
 all contents (values and formulas) are copied.
 """
-VALUE: 'UnoEnum'
+VALUE: object
 """
 instead of using formulas, the result values are copied.
 """

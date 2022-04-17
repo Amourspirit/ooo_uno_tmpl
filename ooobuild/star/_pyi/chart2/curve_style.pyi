@@ -26,48 +26,44 @@ Enum
 See Also:
     `API CurveStyle <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1chart2.html#a6eee32347565343ce84b84adb82da419>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-B_SPLINES: 'UnoEnum'
+B_SPLINES: object
 """
 Data points are connected via a parametric, interpolating B-spline curve.
 """
-CUBIC_SPLINES: 'UnoEnum'
+CUBIC_SPLINES: object
 """
 Data points are connected via a smoothed cubic spline curve.
 
 The data points themselves are part of to the curve.
 """
-LINES: 'UnoEnum'
+LINES: object
 """
 Lines between data points are not smoothed.
 """
-NURBS: 'UnoEnum'
+NURBS: object
 """
 Non-uniform rational b-splines.
 """
-STEP_CENTER_X: 'UnoEnum'
+STEP_CENTER_X: object
 """
 Data points are connected via a 3-segmented stepped line.
 
 The lines is horizontal till the center of the X values.
 """
-STEP_CENTER_Y: 'UnoEnum'
+STEP_CENTER_Y: object
 """
 Data points are connected via a 3-segmented stepped line.
 
 The lines is horizontal at the center of the Y values.
 """
-STEP_END: 'UnoEnum'
+STEP_END: object
 """
 Data points are connected via a 2-segmented stepped line.
 
 The line ends horizontally.
 """
-STEP_START: 'UnoEnum'
+STEP_START: object
 """
 Data points are connected via a 2-segmented stepped line.
 

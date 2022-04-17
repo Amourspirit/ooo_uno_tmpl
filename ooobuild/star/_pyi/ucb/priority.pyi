@@ -26,28 +26,24 @@ Enum
 See Also:
     `API Priority <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1ucb.html#a315655b1bb5848c063491adffde62b15>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-HIGH: 'UnoEnum'
+HIGH: object
 """
 High priority.
 """
-HIGHEST: 'UnoEnum'
+HIGHEST: object
 """
 Highest priority.
 """
-LOW: 'UnoEnum'
+LOW: object
 """
 Low priority.
 """
-LOWEST: 'UnoEnum'
+LOWEST: object
 """
 Lowest priority.
 """
-NORMAL: 'UnoEnum'
+NORMAL: object
 """
 Normal priority.
 """

@@ -26,20 +26,16 @@ Enum
 See Also:
     `API SymbolStyle <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1chart2.html#a8068445d248b830d1708dcb2a2afb2c6>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-AUTO: 'UnoEnum'
+AUTO: object
 """
 The symbol is taken automatically.
 """
-GRAPHIC: 'UnoEnum'
+GRAPHIC: object
 """
 uses the graphic given in Symbol.Graphic as symbol.
 """
-NONE: 'UnoEnum'
+NONE: object
 """
 Default, no pies are exploded.
 
@@ -47,11 +43,11 @@ no transparency attribute is evaluated
 
 The symbol is invisible.
 """
-POLYGON: 'UnoEnum'
+POLYGON: object
 """
 uses the symbol given in the com.sun.star.drawing.PolyPolygonBezierCoords given in Symbol.PolygonCoords.
 """
-STANDARD: 'UnoEnum'
+STANDARD: object
 """
 uses one of the standard symbols.
 

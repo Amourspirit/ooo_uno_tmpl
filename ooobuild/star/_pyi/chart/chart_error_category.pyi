@@ -26,22 +26,18 @@ Enum
 See Also:
     `API ChartErrorCategory <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1chart.html#a5dc5747cfef559a2185b3400717ee431>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-CONSTANT_VALUE: 'UnoEnum'
+CONSTANT_VALUE: object
 """
 displays the same lower and upper error indicators for all data points.
 
 The values for these are given as absolute numbers in ChartStatistics.ConstantErrorLow and ChartStatistics.ConstantErrorHigh
 """
-ERROR_MARGIN: 'UnoEnum'
+ERROR_MARGIN: object
 """
 The length of the error indicators for all data points is calculated by taking the percentage given as ChartStatistics.ErrorMargin of the largest data point value.
 """
-NONE: 'UnoEnum'
+NONE: object
 """
 error indicators are not displayed.
 
@@ -51,15 +47,15 @@ no chart legend is displayed.
 
 displays no error indicators.
 """
-PERCENT: 'UnoEnum'
+PERCENT: object
 """
 The length of the error indicators is calculated for each data point by taking the percentage given as ChartStatistics.PercentageError of its value.
 """
-STANDARD_DEVIATION: 'UnoEnum'
+STANDARD_DEVIATION: object
 """
 displays error indicators for the standard deviation (square root of variance) of the data row.
 """
-VARIANCE: 'UnoEnum'
+VARIANCE: object
 """
 displays error indicators for the variance of the data row.
 """

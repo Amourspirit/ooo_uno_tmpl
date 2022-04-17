@@ -26,39 +26,35 @@ ENUM XPathObjectType
 See Also:
     `API XPathObjectType <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1xml_1_1xpath.html#a4e7de3ae7d09203486b85490e0a6f1a3>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-XPATH_BOOLEAN: 'UnoEnum'
+XPATH_BOOLEAN: object
 """
 """
-XPATH_LOCATIONSET: 'UnoEnum'
+XPATH_LOCATIONSET: object
 """
 """
-XPATH_NODESET: 'UnoEnum'
+XPATH_NODESET: object
 """
 """
-XPATH_NUMBER: 'UnoEnum'
+XPATH_NUMBER: object
 """
 """
-XPATH_POINT: 'UnoEnum'
+XPATH_POINT: object
 """
 """
-XPATH_RANGE: 'UnoEnum'
+XPATH_RANGE: object
 """
 """
-XPATH_STRING: 'UnoEnum'
+XPATH_STRING: object
 """
 """
-XPATH_UNDEFINED: 'UnoEnum'
+XPATH_UNDEFINED: object
 """
 """
-XPATH_USERS: 'UnoEnum'
+XPATH_USERS: object
 """
 """
-XPATH_XSLT_TREE: 'UnoEnum'
+XPATH_XSLT_TREE: object
 """
 """
 

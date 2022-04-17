@@ -26,28 +26,24 @@ ENUM LegendPosition
 See Also:
     `API LegendPosition <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1chart2.html#a85df18f245c9e4d24e32ebb9ee879042>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-CUSTOM: 'UnoEnum'
+CUSTOM: object
 """
 The position of the legend is given by an offset value.
 """
-LINE_END: 'UnoEnum'
+LINE_END: object
 """
 In LTR mode this is the right-hand side.
 """
-LINE_START: 'UnoEnum'
+LINE_START: object
 """
 In LTR mode this is the left-hand side.
 """
-PAGE_END: 'UnoEnum'
+PAGE_END: object
 """
 In LTR mode this is the bottom side.
 """
-PAGE_START: 'UnoEnum'
+PAGE_START: object
 """
 In LTR mode this is the top side.
 """

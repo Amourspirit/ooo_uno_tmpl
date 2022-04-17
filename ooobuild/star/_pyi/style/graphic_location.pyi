@@ -26,58 +26,54 @@ Enum
 See Also:
     `API GraphicLocation <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1style.html#ae71ca73feb713866e85597329dfaec2e>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-AREA: 'UnoEnum'
+AREA: object
 """
 The graphic is scaled to fill the whole surrounding area.
 """
-LEFT_BOTTOM: 'UnoEnum'
+LEFT_BOTTOM: object
 """
 The graphic is located in the bottom left corner.
 """
-LEFT_MIDDLE: 'UnoEnum'
+LEFT_MIDDLE: object
 """
 The graphic is located in the middle of the left edge.
 """
-LEFT_TOP: 'UnoEnum'
+LEFT_TOP: object
 """
 The graphic is located in the top left corner.
 """
-MIDDLE_BOTTOM: 'UnoEnum'
+MIDDLE_BOTTOM: object
 """
 The graphic is located in the middle of the bottom edge.
 """
-MIDDLE_MIDDLE: 'UnoEnum'
+MIDDLE_MIDDLE: object
 """
 The graphic is located at the center of the surrounding object.
 """
-MIDDLE_TOP: 'UnoEnum'
+MIDDLE_TOP: object
 """
 The graphic is located in the middle of the top edge.
 """
-NONE: 'UnoEnum'
+NONE: object
 """
 No column or page break is applied.
 
 This value specifies that a location is not yet assigned.
 """
-RIGHT_BOTTOM: 'UnoEnum'
+RIGHT_BOTTOM: object
 """
 The graphic is located in the bottom right corner.
 """
-RIGHT_MIDDLE: 'UnoEnum'
+RIGHT_MIDDLE: object
 """
 The graphic is located in the middle of the right edge.
 """
-RIGHT_TOP: 'UnoEnum'
+RIGHT_TOP: object
 """
 The graphic is located in the top right corner.
 """
-TILED: 'UnoEnum'
+TILED: object
 """
 The graphic is repeatedly spread over the surrounding object like tiles.
 """

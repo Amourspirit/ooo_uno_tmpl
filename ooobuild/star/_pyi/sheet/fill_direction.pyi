@@ -26,24 +26,20 @@ Enum
 See Also:
     `API FillDirection <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1sheet.html#aa8eeb1312106b2d89cd26342fa09aac9>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-TO_BOTTOM: 'UnoEnum'
+TO_BOTTOM: object
 """
 specifies that rows are filled from top to bottom.
 """
-TO_LEFT: 'UnoEnum'
+TO_LEFT: object
 """
 specifies that columns are filled from right to left.
 """
-TO_RIGHT: 'UnoEnum'
+TO_RIGHT: object
 """
 specifies that columns are filled from left to right.
 """
-TO_TOP: 'UnoEnum'
+TO_TOP: object
 """
 specifies that rows are filled from bottom to top.
 """

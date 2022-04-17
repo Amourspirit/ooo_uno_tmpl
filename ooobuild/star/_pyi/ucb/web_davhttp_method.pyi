@@ -26,78 +26,74 @@ Enum
 See Also:
     `API WebDAVHTTPMethod <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1ucb.html#a3c143367536e0c519b25183505ae3ed7>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-CONNECT: 'UnoEnum'
+CONNECT: object
 """
 HTTP request method as defined in RFC 2616: Hypertext Transfer Protocol – HTTP/1.1
 """
-COPY: 'UnoEnum'
+COPY: object
 """
 Copy the source to the target folder.
 
 WebDAV methods as defined in HTTP Extensions for Web Distributed Authoring and Versioning (WebDAV)
 """
-DELETE: 'UnoEnum'
+DELETE: object
 """
 HTTP request method as defined in RFC 2616: Hypertext Transfer Protocol – HTTP/1.1
 """
-GET: 'UnoEnum'
+GET: object
 """
 Get a list of all folders.
 
 HTTP request method as defined in RFC 2616: Hypertext Transfer Protocol – HTTP/1.1
 """
-HEAD: 'UnoEnum'
+HEAD: object
 """
 HTTP request method as defined in RFC 2616: Hypertext Transfer Protocol – HTTP/1.1
 """
-LOCK: 'UnoEnum'
+LOCK: object
 """
 WebDAV methods as defined in HTTP Extensions for Web Distributed Authoring and Versioning (WebDAV)
 """
-MKCOL: 'UnoEnum'
+MKCOL: object
 """
 WebDAV methods as defined in HTTP Extensions for Web Distributed Authoring and Versioning (WebDAV)
 """
-MOVE: 'UnoEnum'
+MOVE: object
 """
 Move the source to the target folder.
 
 WebDAV methods as defined in HTTP Extensions for Web Distributed Authoring and Versioning (WebDAV)
 """
-OPTIONS: 'UnoEnum'
+OPTIONS: object
 """
 HTTP request method as defined in RFC 2616: Hypertext Transfer Protocol – HTTP/1.1
 """
-PATCH: 'UnoEnum'
+PATCH: object
 """
 HTTP request method as defined in RFC 5789: PATCH Method for HTTP
 """
-POST: 'UnoEnum'
+POST: object
 """
 HTTP request method as defined in RFC 2616: Hypertext Transfer Protocol – HTTP/1.1
 """
-PROPFIND: 'UnoEnum'
+PROPFIND: object
 """
 WebDAV methods as defined in HTTP Extensions for Web Distributed Authoring and Versioning (WebDAV)
 """
-PROPPATCH: 'UnoEnum'
+PROPPATCH: object
 """
 WebDAV methods as defined in HTTP Extensions for Web Distributed Authoring and Versioning (WebDAV)
 """
-PUT: 'UnoEnum'
+PUT: object
 """
 HTTP request method as defined in RFC 2616: Hypertext Transfer Protocol – HTTP/1.1
 """
-TRACE: 'UnoEnum'
+TRACE: object
 """
 HTTP request method as defined in RFC 2616: Hypertext Transfer Protocol – HTTP/1.1
 """
-UNLOCK: 'UnoEnum'
+UNLOCK: object
 """
 WebDAV methods as defined in HTTP Extensions for Web Distributed Authoring and Versioning (WebDAV)
 """

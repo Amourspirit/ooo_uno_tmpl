@@ -26,32 +26,28 @@ Enum
 See Also:
     `API ConditionOperator <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1sheet.html#adab1b2b49825a75bed998dd77963eff9>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-BETWEEN: 'UnoEnum'
+BETWEEN: object
 """
 the value has to be between the two specified values.
 """
-EQUAL: 'UnoEnum'
+EQUAL: object
 """
 value has to be equal to the specified value.
 
 The cell value is equal to the specified value.
 """
-FORMULA: 'UnoEnum'
+FORMULA: object
 """
 the specified formula has to give a non-zero result.
 """
-GREATER: 'UnoEnum'
+GREATER: object
 """
 the value has to be greater than the specified value.
 
 value has to be greater than the specified value.
 """
-GREATER_EQUAL: 'UnoEnum'
+GREATER_EQUAL: object
 """
 the value has to be greater than or equal to the specified value.
 
@@ -59,13 +55,13 @@ The cell value is greater or equal to the specified value.
 
 value has to be greater than or equal to the specified value.
 """
-LESS: 'UnoEnum'
+LESS: object
 """
 the value has to be less than the specified value.
 
 value has to be less than the specified value.
 """
-LESS_EQUAL: 'UnoEnum'
+LESS_EQUAL: object
 """
 the value has to be less than or equal to the specified value.
 
@@ -73,7 +69,7 @@ The cell value is less or equal to the specified value.
 
 value has to be less than or equal to the specified value.
 """
-NONE: 'UnoEnum'
+NONE: object
 """
 no cells are moved.
 
@@ -87,11 +83,11 @@ nothing is imported.
 
 no condition is specified.
 """
-NOT_BETWEEN: 'UnoEnum'
+NOT_BETWEEN: object
 """
 the value has to be outside of the two specified values.
 """
-NOT_EQUAL: 'UnoEnum'
+NOT_EQUAL: object
 """
 the value must not be equal to the specified value.
 

@@ -26,16 +26,12 @@ Enum
 See Also:
     `API FilterConnection <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1sheet.html#a946b76fb59cd525a1296ff815333d110>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-AND: 'UnoEnum'
+AND: object
 """
 both conditions have to be fulfilled.
 """
-OR: 'UnoEnum'
+OR: object
 """
 at least one of the conditions has to be fulfilled.
 """

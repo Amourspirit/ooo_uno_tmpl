@@ -26,24 +26,20 @@ Enum
 See Also:
     `API CellContentType <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1table.html#affea688ab9e00781fa35d8a790d10f0e>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-EMPTY: 'UnoEnum'
+EMPTY: object
 """
 cell is empty.
 """
-FORMULA: 'UnoEnum'
+FORMULA: object
 """
 cell contains a formula.
 """
-TEXT: 'UnoEnum'
+TEXT: object
 """
 cell contains text.
 """
-VALUE: 'UnoEnum'
+VALUE: object
 """
 cell contains a constant value.
 """

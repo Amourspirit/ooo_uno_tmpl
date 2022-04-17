@@ -26,18 +26,14 @@ Enum
 See Also:
     `API BorderType <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1drawing_1_1framework.html#a62ba43b838957db08d5ecb9b46b8ca90>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-INNER_BORDER: 'UnoEnum'
+INNER_BORDER: object
 """
 """
-OUTER_BORDER: 'UnoEnum'
+OUTER_BORDER: object
 """
 """
-TOTAL_BORDER: 'UnoEnum'
+TOTAL_BORDER: object
 """
 """
 
