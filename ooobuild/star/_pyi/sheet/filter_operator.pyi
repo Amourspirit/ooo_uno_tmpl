@@ -26,36 +26,32 @@ Enum
 See Also:
     `API FilterOperator <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1sheet.html#af9e5fd8fd26fc252748d97ebd68ea6b1>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-BOTTOM_PERCENT: 'UnoEnum'
+BOTTOM_PERCENT: object
 """
 selects a specified percentage of entries with the lowest values.
 """
-BOTTOM_VALUES: 'UnoEnum'
+BOTTOM_VALUES: object
 """
 selects a specified number of entries with the lowest values.
 """
-EMPTY: 'UnoEnum'
+EMPTY: object
 """
 selects empty entries.
 """
-EQUAL: 'UnoEnum'
+EQUAL: object
 """
 value has to be equal to the specified value.
 
 The cell value is equal to the specified value.
 """
-GREATER: 'UnoEnum'
+GREATER: object
 """
 the value has to be greater than the specified value.
 
 value has to be greater than the specified value.
 """
-GREATER_EQUAL: 'UnoEnum'
+GREATER_EQUAL: object
 """
 the value has to be greater than or equal to the specified value.
 
@@ -63,13 +59,13 @@ The cell value is greater or equal to the specified value.
 
 value has to be greater than or equal to the specified value.
 """
-LESS: 'UnoEnum'
+LESS: object
 """
 the value has to be less than the specified value.
 
 value has to be less than the specified value.
 """
-LESS_EQUAL: 'UnoEnum'
+LESS_EQUAL: object
 """
 the value has to be less than or equal to the specified value.
 
@@ -77,21 +73,21 @@ The cell value is less or equal to the specified value.
 
 value has to be less than or equal to the specified value.
 """
-NOT_EMPTY: 'UnoEnum'
+NOT_EMPTY: object
 """
 selects non-empty entries.
 """
-NOT_EQUAL: 'UnoEnum'
+NOT_EQUAL: object
 """
 the value must not be equal to the specified value.
 
 value must not be equal to the specified value.
 """
-TOP_PERCENT: 'UnoEnum'
+TOP_PERCENT: object
 """
 selects a specified percentage of entries with the greatest values.
 """
-TOP_VALUES: 'UnoEnum'
+TOP_VALUES: object
 """
 selects a specified number of entries with the greatest values.
 """

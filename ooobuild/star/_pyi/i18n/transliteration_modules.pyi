@@ -26,163 +26,159 @@ Enum
 See Also:
     `API TransliterationModules <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1i18n.html#a9c57a33dd757352c82923f4c7f6cf93c>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-END_OF_MODULE: 'UnoEnum'
+END_OF_MODULE: object
 """
 """
-FULLWIDTH_HALFWIDTH: 'UnoEnum'
+FULLWIDTH_HALFWIDTH: object
 """
 Transliterate a string from full width character to half width character.
 """
-HALFWIDTH_FULLWIDTH: 'UnoEnum'
+HALFWIDTH_FULLWIDTH: object
 """
 Transliterate a string from half width character to full width character.
 """
-HIRAGANA_KATAKANA: 'UnoEnum'
+HIRAGANA_KATAKANA: object
 """
 Transliterate a Japanese string from Hiragana to Katakana.
 """
-IGNORE_CASE: 'UnoEnum'
+IGNORE_CASE: object
 """
 Ignore case when comparing strings by transliteration service.
 """
-IGNORE_KANA: 'UnoEnum'
+IGNORE_KANA: object
 """
 Ignore Hiragana and Katakana when comparing strings by transliteration service.
 """
-IGNORE_MASK: 'UnoEnum'
+IGNORE_MASK: object
 """
 """
-IGNORE_WIDTH: 'UnoEnum'
+IGNORE_WIDTH: object
 """
 Ignore full width and half width character when comparing strings by transliteration service.
 
 Ignore full width and half width characters when comparing strings by transliteration service.
 """
-IgnoreBaFa_ja_JP: 'UnoEnum'
+IgnoreBaFa_ja_JP: object
 """
 Ignore Katakana and Hiragana Ba/Gua and Ha/Fa in Japanese fuzzy search.
 """
-IgnoreHyuByu_ja_JP: 'UnoEnum'
+IgnoreHyuByu_ja_JP: object
 """
 Ignore Katakana and Hiragana Hyu/Fyu and Byu/Gyu in Japanese fuzzy search.
 """
-IgnoreIandEfollowedByYa_ja_JP: 'UnoEnum'
+IgnoreIandEfollowedByYa_ja_JP: object
 """
 Ignore Katakana YA/A which follows the character in either I or E row in Japanese fuzzy search.
 
 Ignore Katakana YA/A following the character in either I or E row in Japanese fuzzy search.
 """
-IgnoreIterationMark_ja_JP: 'UnoEnum'
+IgnoreIterationMark_ja_JP: object
 """
 Ignore Hiragana and Katakana iteration mark in Japanese fuzzy search.
 """
-IgnoreKiKuFollowedBySa_ja_JP: 'UnoEnum'
+IgnoreKiKuFollowedBySa_ja_JP: object
 """
 Ignore Katakana KI/KU which follows the character in SA column in Japanese fuzzy search.
 
 Ignore Katakana KI/KU following the character in SA column in Japanese fuzzy search.
 """
-IgnoreMiddleDot_ja_JP: 'UnoEnum'
+IgnoreMiddleDot_ja_JP: object
 """
 Ignore middle dot in Japanese fuzzy search.
 """
-IgnoreMinusSign_ja_JP: 'UnoEnum'
+IgnoreMinusSign_ja_JP: object
 """
 Ignore dash or minus sign in Japanese fuzzy search.
 """
-IgnoreProlongedSoundMark_ja_JP: 'UnoEnum'
+IgnoreProlongedSoundMark_ja_JP: object
 """
 Ignore Japanese prolonged sound mark in Japanese fuzzy search.
 """
-IgnoreSeZe_ja_JP: 'UnoEnum'
+IgnoreSeZe_ja_JP: object
 """
 Ignore Katakana and Hiragana Se/Sye and Ze/Je in Japanese fuzzy search.
 """
-IgnoreSeparator_ja_JP: 'UnoEnum'
+IgnoreSeparator_ja_JP: object
 """
 Ignore separator punctuations in Japanese fuzzy search.
 """
-IgnoreSize_ja_JP: 'UnoEnum'
+IgnoreSize_ja_JP: object
 """
 Ignore Japanese normal and small sized character in Japanese fuzzy search.
 """
-IgnoreSpace_ja_JP: 'UnoEnum'
+IgnoreSpace_ja_JP: object
 """
 Ignore white space characters, include space, TAB, return, etc. in Japanese fuzzy search.
 """
-IgnoreTiJi_ja_JP: 'UnoEnum'
+IgnoreTiJi_ja_JP: object
 """
 Ignore Katakana and Hiragana Tsui/Tea/Ti and Dyi/Ji in Japanese fuzzy search.
 """
-IgnoreTraditionalKana_ja_JP: 'UnoEnum'
+IgnoreTraditionalKana_ja_JP: object
 """
 Ignore Japanese traditional Katakana and Hiragana character in Japanese fuzzy search.
 
 Ignore Japanese traditional Katakana and Hiragana characters in Japanese fuzzy search.
 """
-IgnoreTraditionalKanji_ja_JP: 'UnoEnum'
+IgnoreTraditionalKanji_ja_JP: object
 """
 Ignore Japanese traditional Kanji character in Japanese fuzzy search.
 
 Ignore Japanese traditional Kanji characters in Japanese fuzzy search.
 """
-IgnoreZiZu_ja_JP: 'UnoEnum'
+IgnoreZiZu_ja_JP: object
 """
 Ignore Katakana and Hiragana Zi/Zi and Zu/Zu in Japanese fuzzy search.
 """
-KATAKANA_HIRAGANA: 'UnoEnum'
+KATAKANA_HIRAGANA: object
 """
 Transliterate a Japanese string from Katakana to Hiragana.
 """
-LOWERCASE_UPPERCASE: 'UnoEnum'
+LOWERCASE_UPPERCASE: object
 """
 Transliterate a string from lower case to upper case.
 """
-LargeToSmall_ja_JP: 'UnoEnum'
+LargeToSmall_ja_JP: object
 """
 transliterate Japanese normal sized character to small sized character
 """
-NON_IGNORE_MASK: 'UnoEnum'
+NON_IGNORE_MASK: object
 """
 """
-NumToTextFormalHangul_ko: 'UnoEnum'
+NumToTextFormalHangul_ko: object
 """
 Transliterate an ASCII number string to formal Korean Hangul number string in spellout format.
 """
-NumToTextFormalLower_ko: 'UnoEnum'
+NumToTextFormalLower_ko: object
 """
 Transliterate an ASCII number string to formal Korean Hanja lower case number string in spellout format.
 """
-NumToTextFormalUpper_ko: 'UnoEnum'
+NumToTextFormalUpper_ko: object
 """
 Transliterate an ASCII number string to formal Korean Hanja upper case number string in spellout format.
 """
-NumToTextLower_zh_CN: 'UnoEnum'
+NumToTextLower_zh_CN: object
 """
 Transliterate an ASCII number string to Simplified Chinese lower case number string in spellout format.
 """
-NumToTextLower_zh_TW: 'UnoEnum'
+NumToTextLower_zh_TW: object
 """
 Transliterate an ASCII number string to Traditional Chinese lower case number string in spellout format.
 """
-NumToTextUpper_zh_CN: 'UnoEnum'
+NumToTextUpper_zh_CN: object
 """
 Transliterate an ASCII number string to Simplified Chinese upper case number string in spellout format.
 """
-NumToTextUpper_zh_TW: 'UnoEnum'
+NumToTextUpper_zh_TW: object
 """
 Transliterate an ASCII number string to Traditional Chinese upper case number string in spellout format.
 """
-SmallToLarge_ja_JP: 'UnoEnum'
+SmallToLarge_ja_JP: object
 """
 transliterate Japanese small sized character to normal sized character
 """
-UPPERCASE_LOWERCASE: 'UnoEnum'
+UPPERCASE_LOWERCASE: object
 """
 Transliterate a string from upper case to lower case.
 """

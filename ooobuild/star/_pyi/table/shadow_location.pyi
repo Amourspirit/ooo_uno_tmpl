@@ -26,28 +26,24 @@ Enum
 See Also:
     `API ShadowLocation <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1table.html#a9ab4ece6abe8ce0c4ad3123d6e3916c0>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-BOTTOM_LEFT: 'UnoEnum'
+BOTTOM_LEFT: object
 """
 shadow is located along the lower and left sides.
 """
-BOTTOM_RIGHT: 'UnoEnum'
+BOTTOM_RIGHT: object
 """
 shadow is located along the lower and right sides.
 """
-NONE: 'UnoEnum'
+NONE: object
 """
 no shadow.
 """
-TOP_LEFT: 'UnoEnum'
+TOP_LEFT: object
 """
 shadow is located along the upper and left sides.
 """
-TOP_RIGHT: 'UnoEnum'
+TOP_RIGHT: object
 """
 shadow is located along the upper and right sides.
 """

@@ -26,20 +26,16 @@ Enum
 See Also:
     `API BitmapMode <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1drawing.html#ad26489b8cfc631a6aa6a1a59fd2e2356>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-NO_REPEAT: 'UnoEnum'
+NO_REPEAT: object
 """
 the bitmap is painted in its original or selected size.
 """
-REPEAT: 'UnoEnum'
+REPEAT: object
 """
 the bitmap is repeated over the fill area.
 """
-STRETCH: 'UnoEnum'
+STRETCH: object
 """
 the bitmap is stretched to fill the area.
 

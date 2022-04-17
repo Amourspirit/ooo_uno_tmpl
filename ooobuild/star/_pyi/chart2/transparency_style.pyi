@@ -26,20 +26,16 @@ ENUM TransparencyStyle
 See Also:
     `API TransparencyStyle <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1chart2.html#acc7ba74ba6531a134bb92607b8616cb6>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-GRADIENT: 'UnoEnum'
+GRADIENT: object
 """
 The property TransparencyGradient is evaluated, Transparency is ignored.
 """
-LINEAR: 'UnoEnum'
+LINEAR: object
 """
 The property Transparency is evaluated, TransparencyGradient is ignored.
 """
-NONE: 'UnoEnum'
+NONE: object
 """
 Default, no pies are exploded.
 

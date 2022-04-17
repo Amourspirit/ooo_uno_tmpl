@@ -26,16 +26,12 @@ Enum
 See Also:
     `API PageStyleLayout <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1style.html#ae13f8c21c10b194207bb33f84a33d50f>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-ALL: 'UnoEnum'
+ALL: object
 """
 The page style is identically used for left and right pages.
 """
-LEFT: 'UnoEnum'
+LEFT: object
 """
 set the horizontal alignment to the left margin from the container object
 
@@ -45,11 +41,11 @@ adjusted to the left border
 
 The page style is only used for left pages.
 """
-MIRRORED: 'UnoEnum'
+MIRRORED: object
 """
 The page style is used unchanged for left pages and mirrored for right pages.
 """
-RIGHT: 'UnoEnum'
+RIGHT: object
 """
 set the horizontal alignment to the right margin from the container object
 

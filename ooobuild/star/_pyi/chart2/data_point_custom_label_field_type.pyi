@@ -26,33 +26,29 @@ Enum
 See Also:
     `API DataPointCustomLabelFieldType <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1chart2.html#a364615e20b0759c6c5100f6a47add923>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-CATEGORYNAME: 'UnoEnum'
+CATEGORYNAME: object
 """
 """
-CELLRANGE: 'UnoEnum'
+CELLRANGE: object
 """
 """
-CELLREF: 'UnoEnum'
+CELLREF: object
 """
 """
-NEWLINE: 'UnoEnum'
+NEWLINE: object
 """
 """
-PERCENTAGE: 'UnoEnum'
+PERCENTAGE: object
 """
 """
-SERIESNAME: 'UnoEnum'
+SERIESNAME: object
 """
 """
-TEXT: 'UnoEnum'
+TEXT: object
 """
 """
-VALUE: 'UnoEnum'
+VALUE: object
 """
 """
 

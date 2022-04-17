@@ -26,16 +26,12 @@ ENUM Timing
 See Also:
     `API Timing <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1animations.html#ad073880fe621cbabcd7a7cf904ef332f>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-INDEFINITE: 'UnoEnum'
+INDEFINITE: object
 """
 specifies that a duration, end or start time is indefinite
 """
-MEDIA: 'UnoEnum'
+MEDIA: object
 """
 specifies a simple duration as the intrinsic media duration.
 

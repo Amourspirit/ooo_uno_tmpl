@@ -26,20 +26,16 @@ Enum
 See Also:
     `API DDELinkMode <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1sheet.html#a1b95ca535d92ad726d77981ea3d8ef8b>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-DEFAULT: 'UnoEnum'
+DEFAULT: object
 """
 numbers are converted into the default format.
 """
-ENGLISH: 'UnoEnum'
+ENGLISH: object
 """
 numbers are converted into the English default format.
 """
-TEXT: 'UnoEnum'
+TEXT: object
 """
 numbers are not converted, but treated as text.
 """

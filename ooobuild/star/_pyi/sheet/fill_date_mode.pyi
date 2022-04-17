@@ -26,24 +26,20 @@ Enum
 See Also:
     `API FillDateMode <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1sheet.html#a2ea1aac24b8de3ac28ac5a6ec79a80ca>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-FILL_DATE_DAY: 'UnoEnum'
+FILL_DATE_DAY: object
 """
 for every new value a single day is added.
 """
-FILL_DATE_MONTH: 'UnoEnum'
+FILL_DATE_MONTH: object
 """
 for every new value one month is added (day keeps unchanged).
 """
-FILL_DATE_WEEKDAY: 'UnoEnum'
+FILL_DATE_WEEKDAY: object
 """
 for every new value a single day is added, but Saturdays and Sundays are skipped.
 """
-FILL_DATE_YEAR: 'UnoEnum'
+FILL_DATE_YEAR: object
 """
 for every new value one year is added (day and month keep unchanged).
 """

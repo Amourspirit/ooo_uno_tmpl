@@ -26,24 +26,20 @@ Enum
 See Also:
     `API LineJoint <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1drawing.html#aa36e7b530c7d0049f623b0effe54d04f>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-BEVEL: 'UnoEnum'
+BEVEL: object
 """
 the edges of the thick lines will be joined by lines
 """
-MIDDLE: 'UnoEnum'
+MIDDLE: object
 """
 the middle value between the joints is used
 """
-MITER: 'UnoEnum'
+MITER: object
 """
 the lines join at intersections
 """
-NONE: 'UnoEnum'
+NONE: object
 """
 the area is not filled.
 
@@ -57,7 +53,7 @@ the joint between lines will not be connected
 
 the line has no special end.
 """
-ROUND: 'UnoEnum'
+ROUND: object
 """
 the dash is a point
 

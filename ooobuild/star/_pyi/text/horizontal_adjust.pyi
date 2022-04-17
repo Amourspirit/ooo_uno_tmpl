@@ -26,18 +26,14 @@ Enum
 See Also:
     `API HorizontalAdjust <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1text.html#a8105146481666b39ebbd63a934576b6c>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-CENTER: 'UnoEnum'
+CENTER: object
 """
 the object is adjusted to the center.
 
 centric adjusted.
 """
-LEFT: 'UnoEnum'
+LEFT: object
 """
 the object is left adjusted.
 
@@ -45,7 +41,7 @@ text flows to the left side of the object.
 
 adjusted to the left.
 """
-RIGHT: 'UnoEnum'
+RIGHT: object
 """
 the object is right adjusted.
 

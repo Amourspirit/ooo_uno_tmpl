@@ -26,22 +26,18 @@ Enum
 See Also:
     `API TextFitToSizeType <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1drawing.html#a119322ec5cab271556edacd80f9d780a>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-ALLLINES: 'UnoEnum'
+ALLLINES: object
 """
 Nowadays this is the same as PROPORTIONAL.
 """
-AUTOFIT: 'UnoEnum'
+AUTOFIT: object
 """
 The font size is scaled down (never up!) isotropically to fit the available space.
 
 Auto line-breaks will keep working.
 """
-NONE: 'UnoEnum'
+NONE: object
 """
 the area is not filled.
 
@@ -55,7 +51,7 @@ the joint between lines will not be connected
 
 the line has no special end.
 """
-PROPORTIONAL: 'UnoEnum'
+PROPORTIONAL: object
 """
 The bitmap with the rendered glyphs is scaled up or down proportionally to fit the size of the shape.
 

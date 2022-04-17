@@ -26,45 +26,41 @@ ENUM NodeType
 See Also:
     `API NodeType <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1xml_1_1dom.html#acac9cbaeea226ed297804c012dc12b16>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-ATTRIBUTE_NODE: 'UnoEnum'
+ATTRIBUTE_NODE: object
 """
 """
-CDATA_SECTION_NODE: 'UnoEnum'
+CDATA_SECTION_NODE: object
 """
 """
-COMMENT_NODE: 'UnoEnum'
+COMMENT_NODE: object
 """
 """
-DOCUMENT_FRAGMENT_NODE: 'UnoEnum'
+DOCUMENT_FRAGMENT_NODE: object
 """
 """
-DOCUMENT_NODE: 'UnoEnum'
+DOCUMENT_NODE: object
 """
 """
-DOCUMENT_TYPE_NODE: 'UnoEnum'
+DOCUMENT_TYPE_NODE: object
 """
 """
-ELEMENT_NODE: 'UnoEnum'
+ELEMENT_NODE: object
 """
 """
-ENTITY_NODE: 'UnoEnum'
+ENTITY_NODE: object
 """
 """
-ENTITY_REFERENCE_NODE: 'UnoEnum'
+ENTITY_REFERENCE_NODE: object
 """
 """
-NOTATION_NODE: 'UnoEnum'
+NOTATION_NODE: object
 """
 """
-PROCESSING_INSTRUCTION_NODE: 'UnoEnum'
+PROCESSING_INSTRUCTION_NODE: object
 """
 """
-TEXT_NODE: 'UnoEnum'
+TEXT_NODE: object
 """
 """
 

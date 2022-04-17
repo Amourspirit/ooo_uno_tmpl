@@ -26,168 +26,164 @@ Enum
 See Also:
     `API FadeEffect <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1presentation.html#a9db0b8c5e72e0ae290ff76da0dd53e3d>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-CLOCKWISE: 'UnoEnum'
+CLOCKWISE: object
 """
 use the animation effect \"Clockwise\".
 
 use the fade effect \"Clockwise\".
 """
-CLOSE_HORIZONTAL: 'UnoEnum'
+CLOSE_HORIZONTAL: object
 """
 use the animation effect \"Close Horizontal\".
 
 use the fade effect \"Close Horizontal\".
 """
-CLOSE_VERTICAL: 'UnoEnum'
+CLOSE_VERTICAL: object
 """
 use the animation effect \"Close Vertical\".
 
 use the fade effect \"Close Vertical\".
 """
-COUNTERCLOCKWISE: 'UnoEnum'
+COUNTERCLOCKWISE: object
 """
 use the animation effect \"Counter Clockwise\".
 
 use the fade effect \"Counter Clockwise\".
 """
-DISSOLVE: 'UnoEnum'
+DISSOLVE: object
 """
 use the animation effect \"Spiral Inward Left\".
 
 use the fade effect \"Dissolve\".
 """
-FADE_FROM_BOTTOM: 'UnoEnum'
+FADE_FROM_BOTTOM: object
 """
 use the animation effect \"Fade from Bottom\".
 
 use the fade effect \"Fade from Bottom\".
 """
-FADE_FROM_CENTER: 'UnoEnum'
+FADE_FROM_CENTER: object
 """
 use the animation effect \"Fade from Center\".
 
 use the fade effect \"Fade from Center\".
 """
-FADE_FROM_LEFT: 'UnoEnum'
+FADE_FROM_LEFT: object
 """
 use the animation effect \"Fade from Left\".
 
 use the fade effect \"Fade from Left\".
 """
-FADE_FROM_LOWERLEFT: 'UnoEnum'
+FADE_FROM_LOWERLEFT: object
 """
 use the animation effect \"Fade from Lower Left\".
 
 use the fade effect \"Fade from Lower Left\".
 """
-FADE_FROM_LOWERRIGHT: 'UnoEnum'
+FADE_FROM_LOWERRIGHT: object
 """
 use the animation effect \"Fade from Lower Right\".
 
 use the fade effect \"Fade from Lower Right\".
 """
-FADE_FROM_RIGHT: 'UnoEnum'
+FADE_FROM_RIGHT: object
 """
 use the animation effect \"Fade from Right\".
 
 use the fade effect \"Fade from Right\".
 """
-FADE_FROM_TOP: 'UnoEnum'
+FADE_FROM_TOP: object
 """
 use the animation effect \"Fade from Top\".
 
 use the fade effect \"Fade from Top\".
 """
-FADE_FROM_UPPERLEFT: 'UnoEnum'
+FADE_FROM_UPPERLEFT: object
 """
 use the animation effect \"Fade from Upper Left\".
 
 use the fade effect \"Fade from Upper Left\".
 """
-FADE_FROM_UPPERRIGHT: 'UnoEnum'
+FADE_FROM_UPPERRIGHT: object
 """
 use the animation effect \"Fade from Upper Right\".
 
 use the fade effect \"Fade from Upper Right\".
 """
-FADE_TO_CENTER: 'UnoEnum'
+FADE_TO_CENTER: object
 """
 use the animation effect \"Fade to Center\".
 
 use the fade effect \"Fade to Center\".
 """
-HORIZONTAL_CHECKERBOARD: 'UnoEnum'
+HORIZONTAL_CHECKERBOARD: object
 """
 use the animation effect \"Horizontal Checkerboard\".
 
 use the fade effect \"Horizontal Checkerboard\".
 """
-HORIZONTAL_LINES: 'UnoEnum'
+HORIZONTAL_LINES: object
 """
 use the animation effect \"Horizontal Lines\".
 
 use the fade effect \"Horizontal Lines\".
 """
-HORIZONTAL_STRIPES: 'UnoEnum'
+HORIZONTAL_STRIPES: object
 """
 use the animation effect \"Horizontal Stripes\".
 
 use the fade effect \"Horizontal Stripes\".
 """
-MOVE_FROM_BOTTOM: 'UnoEnum'
+MOVE_FROM_BOTTOM: object
 """
 use the animation effect \"Move from Bottom\".
 
 use the fade effect \"Move from Bottom\".
 """
-MOVE_FROM_LEFT: 'UnoEnum'
+MOVE_FROM_LEFT: object
 """
 use the animation effect \"Move from Left\".
 
 use the fade effect \"Move from Left\".
 """
-MOVE_FROM_LOWERLEFT: 'UnoEnum'
+MOVE_FROM_LOWERLEFT: object
 """
 use the animation effect \"Move from Lower Left\".
 
 use the fade effect \"Move from Lower Left\".
 """
-MOVE_FROM_LOWERRIGHT: 'UnoEnum'
+MOVE_FROM_LOWERRIGHT: object
 """
 use the animation effect \"Move from Lower Right\".
 
 use the fade effect \"Move from Lower Right\".
 """
-MOVE_FROM_RIGHT: 'UnoEnum'
+MOVE_FROM_RIGHT: object
 """
 use the animation effect \"Move from Right\".
 
 use the fade effect \"Move from Right\".
 """
-MOVE_FROM_TOP: 'UnoEnum'
+MOVE_FROM_TOP: object
 """
 use the animation effect \"Move from Top\".
 
 use the fade effect \"Move from Top\".
 """
-MOVE_FROM_UPPERLEFT: 'UnoEnum'
+MOVE_FROM_UPPERLEFT: object
 """
 use the animation effect \"Move from Upper Left\".
 
 use the fade effect \"Move from Upper Left\".
 """
-MOVE_FROM_UPPERRIGHT: 'UnoEnum'
+MOVE_FROM_UPPERRIGHT: object
 """
 use the animation effect \"Move from Upper Right\".
 
 use the fade effect \"Move from Upper Right\".
 """
-NONE: 'UnoEnum'
+NONE: object
 """
 use no animation effects.
 
@@ -195,157 +191,157 @@ use no fade effects.
 
 No action is performed on click.
 """
-OPEN_HORIZONTAL: 'UnoEnum'
+OPEN_HORIZONTAL: object
 """
 use the animation effect \"Open Horizontal\".
 
 use the fade effect \"Open Horizontal\".
 """
-OPEN_VERTICAL: 'UnoEnum'
+OPEN_VERTICAL: object
 """
 use the animation effect \"Open Vertical\".
 
 use the fade effect \"Open Vertical\".
 """
-RANDOM: 'UnoEnum'
+RANDOM: object
 """
 use the animation effect \"Random\".
 
 use the fade effect \"Random\".
 """
-ROLL_FROM_BOTTOM: 'UnoEnum'
+ROLL_FROM_BOTTOM: object
 """
 use the fade effect \"Roll from Bottom\".
 """
-ROLL_FROM_LEFT: 'UnoEnum'
+ROLL_FROM_LEFT: object
 """
 use the fade effect \"Roll from Left\".
 """
-ROLL_FROM_RIGHT: 'UnoEnum'
+ROLL_FROM_RIGHT: object
 """
 use the fade effect \"Roll from Right\".
 """
-ROLL_FROM_TOP: 'UnoEnum'
+ROLL_FROM_TOP: object
 """
 use the fade effect \"Roll from Top\".
 """
-SPIRALIN_LEFT: 'UnoEnum'
+SPIRALIN_LEFT: object
 """
 use the animation effect \"Spiral Inward Left\".
 
 use the fade effect \"Spiral Inward Left\".
 """
-SPIRALIN_RIGHT: 'UnoEnum'
+SPIRALIN_RIGHT: object
 """
 use the animation effect \"Spiral Inward Right\".
 
 use the fade effect \"Spiral Inward Right\".
 """
-SPIRALOUT_LEFT: 'UnoEnum'
+SPIRALOUT_LEFT: object
 """
 use the animation effect \"Spiral Outward Left\".
 
 use the fade effect \"Spiral Outward Left\".
 """
-SPIRALOUT_RIGHT: 'UnoEnum'
+SPIRALOUT_RIGHT: object
 """
 use the animation effect \"Spiral Outward Right\".
 
 use the fade effect \"Spiral Outward Right\".
 """
-STRETCH_FROM_BOTTOM: 'UnoEnum'
+STRETCH_FROM_BOTTOM: object
 """
 use the animation effect \"Stretch From Bottom\".
 
 use the fade effect \"Stretch from Bottom\".
 """
-STRETCH_FROM_LEFT: 'UnoEnum'
+STRETCH_FROM_LEFT: object
 """
 use the animation effect \"Stretch From Left\".
 
 use the fade effect \"Stretch from Left\".
 """
-STRETCH_FROM_RIGHT: 'UnoEnum'
+STRETCH_FROM_RIGHT: object
 """
 use the animation effect \"Stretch From Right\".
 
 use the fade effect \"Stretch from Right\".
 """
-STRETCH_FROM_TOP: 'UnoEnum'
+STRETCH_FROM_TOP: object
 """
 use the animation effect \"Stretch From Top\".
 
 use the fade effect \"Stretch from Top\".
 """
-UNCOVER_TO_BOTTOM: 'UnoEnum'
+UNCOVER_TO_BOTTOM: object
 """
 use the fade effect \"Uncover to Bottom\".
 """
-UNCOVER_TO_LEFT: 'UnoEnum'
+UNCOVER_TO_LEFT: object
 """
 use the fade effect \"Uncover to Left\".
 """
-UNCOVER_TO_LOWERLEFT: 'UnoEnum'
+UNCOVER_TO_LOWERLEFT: object
 """
 use the fade effect \"Uncover to Lower Left\".
 """
-UNCOVER_TO_LOWERRIGHT: 'UnoEnum'
+UNCOVER_TO_LOWERRIGHT: object
 """
 use the fade effect \"Uncover to Lower Right\".
 """
-UNCOVER_TO_RIGHT: 'UnoEnum'
+UNCOVER_TO_RIGHT: object
 """
 use the fade effect \"Uncover to Right\".
 """
-UNCOVER_TO_TOP: 'UnoEnum'
+UNCOVER_TO_TOP: object
 """
 use the fade effect \"Uncover to Top\".
 """
-UNCOVER_TO_UPPERLEFT: 'UnoEnum'
+UNCOVER_TO_UPPERLEFT: object
 """
 use the fade effect \"Uncover to Upper Left\".
 """
-UNCOVER_TO_UPPERRIGHT: 'UnoEnum'
+UNCOVER_TO_UPPERRIGHT: object
 """
 use the fade effect \"Uncover to Upper Right\".
 """
-VERTICAL_CHECKERBOARD: 'UnoEnum'
+VERTICAL_CHECKERBOARD: object
 """
 use the animation effect \"Vertical Checkerboard\".
 
 use the fade effect \"Vertical Checkerboard\".
 """
-VERTICAL_LINES: 'UnoEnum'
+VERTICAL_LINES: object
 """
 use the animation effect \"Vertical Lines\".
 
 use the fade effect \"Vertical Lines\".
 """
-VERTICAL_STRIPES: 'UnoEnum'
+VERTICAL_STRIPES: object
 """
 use the animation effect \"Vertical Stripes\".
 
 use the fade effect \"Vertical Stripes\".
 """
-WAVYLINE_FROM_BOTTOM: 'UnoEnum'
+WAVYLINE_FROM_BOTTOM: object
 """
 use the animation effect \"Wavy Line from Button\".
 
 use the fade effect \"Wavy Line from Bottom\".
 """
-WAVYLINE_FROM_LEFT: 'UnoEnum'
+WAVYLINE_FROM_LEFT: object
 """
 use the animation effect \"Wavy Line from Left\".
 
 use the fade effect \"Wavy Line from Left\".
 """
-WAVYLINE_FROM_RIGHT: 'UnoEnum'
+WAVYLINE_FROM_RIGHT: object
 """
 use the animation effect \"Wavy Line from Right\".
 
 use the fade effect \"Wavy Line from Right\".
 """
-WAVYLINE_FROM_TOP: 'UnoEnum'
+WAVYLINE_FROM_TOP: object
 """
 use the animation effect \"Wavy Line from Top\".
 

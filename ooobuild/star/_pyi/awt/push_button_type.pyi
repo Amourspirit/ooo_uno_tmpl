@@ -26,24 +26,20 @@ Enum
 See Also:
     `API PushButtonType <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1awt.html#aa4e49c7e6c5bf2b4d010ad4a50b90ec0>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-CANCEL: 'UnoEnum'
+CANCEL: object
 """
 acts like a cancel button.
 """
-HELP: 'UnoEnum'
+HELP: object
 """
 acts like a help button.
 """
-OK: 'UnoEnum'
+OK: object
 """
 acts like an OK button.
 """
-STANDARD: 'UnoEnum'
+STANDARD: object
 """
 acts like a standard push button.
 """

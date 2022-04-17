@@ -26,16 +26,12 @@ Enum
 See Also:
     `API LineCap <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1drawing.html#a6d67f779dcbc9e19f8bc6cdfbb6c23f8>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-BUTT: 'UnoEnum'
+BUTT: object
 """
 the line will end without any additional shape
 """
-ROUND: 'UnoEnum'
+ROUND: object
 """
 the dash is a point
 
@@ -43,7 +39,7 @@ the lines join with an arc
 
 the line will get a half circle as additional cap
 """
-SQUARE: 'UnoEnum'
+SQUARE: object
 """
 the line will get a half square as additional cap
 

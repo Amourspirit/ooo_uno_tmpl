@@ -26,16 +26,12 @@ Enum
 See Also:
     `API ParagraphAdjust <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1style.html#ab9b2806f97ec4c3b5d4e2d92084948f1>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-BLOCK: 'UnoEnum'
+BLOCK: object
 """
 adjusted to both borders / stretched, except for last line
 """
-CENTER: 'UnoEnum'
+CENTER: object
 """
 set the horizontal alignment to the center between the margins from the container object
 
@@ -43,7 +39,7 @@ The text range is centered between the previous tabulator (or the left border, i
 
 adjusted to the center
 """
-LEFT: 'UnoEnum'
+LEFT: object
 """
 set the horizontal alignment to the left margin from the container object
 
@@ -53,7 +49,7 @@ adjusted to the left border
 
 The page style is only used for left pages.
 """
-RIGHT: 'UnoEnum'
+RIGHT: object
 """
 set the horizontal alignment to the right margin from the container object
 
@@ -63,7 +59,7 @@ adjusted to the right border
 
 The page style is only used for right pages.
 """
-STRETCH: 'UnoEnum'
+STRETCH: object
 """
 adjusted to both borders / stretched, including last line
 """

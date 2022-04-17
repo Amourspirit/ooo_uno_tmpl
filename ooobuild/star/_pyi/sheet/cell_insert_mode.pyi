@@ -26,22 +26,18 @@ Enum
 See Also:
     `API CellInsertMode <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1sheet.html#a93cdb08109d5d34543f2fe04d1ef605a>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-COLUMNS: 'UnoEnum'
+COLUMNS: object
 """
 entire columns to the right of the deleted cells are moved left.
 
 entire columns to the right of the inserted cells are moved right.
 """
-DOWN: 'UnoEnum'
+DOWN: object
 """
 the cells below the inserted cells are moved down.
 """
-NONE: 'UnoEnum'
+NONE: object
 """
 no cells are moved.
 
@@ -55,13 +51,13 @@ nothing is imported.
 
 no condition is specified.
 """
-RIGHT: 'UnoEnum'
+RIGHT: object
 """
 selects the right border.
 
 the cells to the right of the inserted cells are moved right.
 """
-ROWS: 'UnoEnum'
+ROWS: object
 """
 entire rows below the deleted cells are moved up.
 

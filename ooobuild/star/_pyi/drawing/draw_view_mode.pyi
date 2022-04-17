@@ -26,20 +26,16 @@ Enum
 See Also:
     `API DrawViewMode <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1drawing.html#a15072729125e991609f3df469a03f611>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-DRAW: 'UnoEnum'
+DRAW: object
 """
 The view shows the drawing pages.
 """
-HANDOUT: 'UnoEnum'
+HANDOUT: object
 """
 The view shows the handout pages,.
 """
-NOTES: 'UnoEnum'
+NOTES: object
 """
 The view shows the notes pages.
 """

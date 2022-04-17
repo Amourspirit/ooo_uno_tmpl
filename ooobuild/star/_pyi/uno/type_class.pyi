@@ -26,136 +26,132 @@ Enum
 See Also:
     `API TypeClass <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1uno.html#a00683ed3ec24b47c36ead10a20d6f328>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-ANY: 'UnoEnum'
+ANY: object
 """
 reflecting the any type; anys can carry any UNO value except of any values
 """
-ARRAY: 'UnoEnum'
+ARRAY: object
 """
 Deprecated, UNOIDL does not have an array concept.
 """
-BOOLEAN: 'UnoEnum'
+BOOLEAN: object
 """
 reflecting the boolean type; true and false
 """
-BYTE: 'UnoEnum'
+BYTE: object
 """
 reflecting the 8-bit ordinal type
 """
-CHAR: 'UnoEnum'
+CHAR: object
 """
 reflecting the 16-bit unicode character type
 """
-CONSTANT: 'UnoEnum'
+CONSTANT: object
 """
 reflecting constants
 """
-CONSTANTS: 'UnoEnum'
+CONSTANTS: object
 """
 reflecting constants groups
 """
-DOUBLE: 'UnoEnum'
+DOUBLE: object
 """
 reflecting the 64-bit floating point type
 """
-ENUM: 'UnoEnum'
+ENUM: object
 """
 reflecting enum types
 """
-EXCEPTION: 'UnoEnum'
+EXCEPTION: object
 """
 reflecting exception types
 """
-FLOAT: 'UnoEnum'
+FLOAT: object
 """
 reflecting the 32-bit floating point type
 """
-HYPER: 'UnoEnum'
+HYPER: object
 """
 reflecting the signed 64-bit ordinal type
 """
-INTERFACE: 'UnoEnum'
+INTERFACE: object
 """
 reflecting interface types
 """
-INTERFACE_ATTRIBUTE: 'UnoEnum'
+INTERFACE_ATTRIBUTE: object
 """
 reflecting interface attributes
 """
-INTERFACE_METHOD: 'UnoEnum'
+INTERFACE_METHOD: object
 """
 reflecting interface methods
 """
-LONG: 'UnoEnum'
+LONG: object
 """
 reflecting the signed 32-bit ordinal type
 """
-MODULE: 'UnoEnum'
+MODULE: object
 """
 reflecting modules
 """
-PROPERTY: 'UnoEnum'
+PROPERTY: object
 """
 reflecting properties
 """
-SEQUENCE: 'UnoEnum'
+SEQUENCE: object
 """
 reflecting sequence types
 """
-SERVICE: 'UnoEnum'
+SERVICE: object
 """
 reflecting services
 """
-SHORT: 'UnoEnum'
+SHORT: object
 """
 reflecting the signed 16-bit ordinal type
 """
-SINGLETON: 'UnoEnum'
+SINGLETON: object
 """
 reflecting singletons
 """
-STRING: 'UnoEnum'
+STRING: object
 """
 reflecting the string type; strings of unicode characters
 """
-STRUCT: 'UnoEnum'
+STRUCT: object
 """
 reflecting compound types
 """
-TYPE: 'UnoEnum'
+TYPE: object
 """
 reflecting the meta type
 """
-TYPEDEF: 'UnoEnum'
+TYPEDEF: object
 """
 reflecting typedefed types referencing other types
 """
-UNION: 'UnoEnum'
+UNION: object
 """
 Deprecated, UNOIDL does not have a union concept.
 """
-UNKNOWN: 'UnoEnum'
+UNKNOWN: object
 """
 reflecting the unreflectable type
 """
-UNSIGNED_HYPER: 'UnoEnum'
+UNSIGNED_HYPER: object
 """
 reflecting the unsigned 64-bit ordinal type
 """
-UNSIGNED_LONG: 'UnoEnum'
+UNSIGNED_LONG: object
 """
 reflecting the unsigned 32-bit type
 """
-UNSIGNED_SHORT: 'UnoEnum'
+UNSIGNED_SHORT: object
 """
 reflecting the unsigned 16-bit ordinal type
 """
-VOID: 'UnoEnum'
+VOID: object
 """
 reflecting the void type; denotes no type
 """

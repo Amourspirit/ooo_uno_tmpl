@@ -26,16 +26,12 @@ Enum
 See Also:
     `API LockScope <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1ucb.html#ae15ecbfc9e84371b6044661d1493e6a5>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-EXCLUSIVE: 'UnoEnum'
+EXCLUSIVE: object
 """
 the lock is exclusive.
 """
-SHARED: 'UnoEnum'
+SHARED: object
 """
 the lock is shared.
 """

@@ -26,24 +26,20 @@ Enum
 See Also:
     `API FillStyle <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1drawing.html#a93450c852ea0dc97ffc5168069ed1bc0>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-BITMAP: 'UnoEnum'
+BITMAP: object
 """
 use a bitmap to fill the area.
 """
-GRADIENT: 'UnoEnum'
+GRADIENT: object
 """
 use a gradient color to fill the area.
 """
-HATCH: 'UnoEnum'
+HATCH: object
 """
 use a hatch to fill the area.
 """
-NONE: 'UnoEnum'
+NONE: object
 """
 the area is not filled.
 
@@ -57,7 +53,7 @@ the joint between lines will not be connected
 
 the line has no special end.
 """
-SOLID: 'UnoEnum'
+SOLID: object
 """
 use a solid color to fill the area.
 

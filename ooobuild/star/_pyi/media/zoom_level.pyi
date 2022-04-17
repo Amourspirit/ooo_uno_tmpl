@@ -26,46 +26,42 @@ ENUM ZoomLevel
 See Also:
     `API ZoomLevel <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1media.html#aa2569917c2883c1d1c0c0ee02e671ac6>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-FIT_TO_WINDOW: 'UnoEnum'
+FIT_TO_WINDOW: object
 """
 specifies that the video should be zoomed to window size
 """
-FIT_TO_WINDOW_FIXED_ASPECT: 'UnoEnum'
+FIT_TO_WINDOW_FIXED_ASPECT: object
 """
 specifies that the video should be zoomed to window size with using a fixed aspect ratio
 """
-FULLSCREEN: 'UnoEnum'
+FULLSCREEN: object
 """
 specifies that the video should be displayed in fullscreen mode, if available
 """
-NOT_AVAILABLE: 'UnoEnum'
+NOT_AVAILABLE: object
 """
 specifies that the video window itself is not available at all, e.g.
 
 in cases of pure audio playback
 """
-ORIGINAL: 'UnoEnum'
+ORIGINAL: object
 """
 specifies that the video should be displayed with its original size
 """
-ZOOM_1_TO_2: 'UnoEnum'
+ZOOM_1_TO_2: object
 """
 specifies that the video should be zoomed to a factor of 1:2
 """
-ZOOM_1_TO_4: 'UnoEnum'
+ZOOM_1_TO_4: object
 """
 specifies that the video should be zoomed to a factor of 1:4
 """
-ZOOM_2_TO_1: 'UnoEnum'
+ZOOM_2_TO_1: object
 """
 specifies that the video should be zoomed to a factor of 2:1
 """
-ZOOM_4_TO_1: 'UnoEnum'
+ZOOM_4_TO_1: object
 """
 specifies that the video should be zoomed to a factor of 4:1
 """

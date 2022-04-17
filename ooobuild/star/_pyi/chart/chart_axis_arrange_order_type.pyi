@@ -26,24 +26,20 @@ Enum
 See Also:
     `API ChartAxisArrangeOrderType <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1chart.html#a9c06520c0f143b00b5aaafeb4772dc39>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-AUTO: 'UnoEnum'
+AUTO: object
 """
 The descriptions are arranged automatically.
 """
-SIDE_BY_SIDE: 'UnoEnum'
+SIDE_BY_SIDE: object
 """
 The descriptions are arranged side by side.
 """
-STAGGER_EVEN: 'UnoEnum'
+STAGGER_EVEN: object
 """
 The descriptions are alternately put on two lines with the even values out of the normal line.
 """
-STAGGER_ODD: 'UnoEnum'
+STAGGER_ODD: object
 """
 The descriptions are alternately put on two lines with the odd values out of the normal line.
 """

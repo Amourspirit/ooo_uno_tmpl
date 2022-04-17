@@ -26,26 +26,22 @@ Enum
 See Also:
     `API ShadeMode <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1drawing.html#af49ab4b65513d2c0077f76b2227326e9>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-DRAFT: 'UnoEnum'
+DRAFT: object
 """
 DRAFT is a special mode which uses a BSP tree and triangle subdivision for displaying.
 """
-FLAT: 'UnoEnum'
+FLAT: object
 """
 forces one normal per flat part.
 
 With FLAT shading, the faces of the object are rendered in a solid color.
 """
-PHONG: 'UnoEnum'
+PHONG: object
 """
 With PHONG shading, the normal itself is interpolated to get more realistic colors and light reflections.
 """
-SMOOTH: 'UnoEnum'
+SMOOTH: object
 """
 the point is smooth, the first derivation from the curve discussion view.
 

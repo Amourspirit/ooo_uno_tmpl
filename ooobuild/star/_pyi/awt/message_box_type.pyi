@@ -26,28 +26,24 @@ Enum
 See Also:
     `API MessageBoxType <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1awt.html#ad249d76933bdf54c35f4eaf51a5b7965>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-ERRORBOX: 'UnoEnum'
+ERRORBOX: object
 """
 A message box to provide an error message to the user.
 """
-INFOBOX: 'UnoEnum'
+INFOBOX: object
 """
 A message box to inform the user about a certain event.
 """
-MESSAGEBOX: 'UnoEnum'
+MESSAGEBOX: object
 """
 A normal message box.
 """
-QUERYBOX: 'UnoEnum'
+QUERYBOX: object
 """
 A message box to query information from the user.
 """
-WARNINGBOX: 'UnoEnum'
+WARNINGBOX: object
 """
 A message to warn the user about a certain problem.
 """

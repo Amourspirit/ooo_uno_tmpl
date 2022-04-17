@@ -26,54 +26,50 @@ Enum
 See Also:
     `API ExtAltNameType <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1security.html#a5c5a31742567126d2ba88393b05efa3f>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-DIRECTORY_NAME: 'UnoEnum'
+DIRECTORY_NAME: object
 """
 Currently unsupported.
 """
-DNS_NAME: 'UnoEnum'
+DNS_NAME: object
 """
 The entry contains a dns name.
 
 The value of CertAltNameEntry contains a OUString.
 """
-EDI_PARTY_NAME: 'UnoEnum'
+EDI_PARTY_NAME: object
 """
 Currently unsupported.
 """
-IP_ADDRESS: 'UnoEnum'
+IP_ADDRESS: object
 """
 The entry contains an IP address.
 
 The value of CertAltNameEntry contains a Sequence of sal_Int8.
 """
-OTHER_NAME: 'UnoEnum'
+OTHER_NAME: object
 """
 Customize name/value pair The value of CertAltNameEntry contains a NamedValue.
 """
-REGISTERED_ID: 'UnoEnum'
+REGISTERED_ID: object
 """
 The entry contains a registered id.
 
 The value of CertAltNameEntry contains a OUString.
 """
-RFC822_NAME: 'UnoEnum'
+RFC822_NAME: object
 """
 The entry contains rfc822 name.
 
 The value of CertAltNameEntry contains an OUString.
 """
-URL: 'UnoEnum'
+URL: object
 """
 The entry contains a URL.
 
 The value of CertAltNameEntry contains a OUString.
 """
-X400_ADDRESS: 'UnoEnum'
+X400_ADDRESS: object
 """
 Currently unsupported.
 """

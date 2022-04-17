@@ -26,24 +26,20 @@ Enum
 See Also:
     `API InteractionClassification <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1task.html#ab0d207be361f7bd99bb18090b7a9e47b>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-ERROR: 'UnoEnum'
+ERROR: object
 """
 An error.
 """
-INFO: 'UnoEnum'
+INFO: object
 """
 Some information for the client/user (which will typically lead to the selection of an com.sun.star.task.XInteractionApprove continuation).
 """
-QUERY: 'UnoEnum'
+QUERY: object
 """
 A query for the client/user (which will typically lead to the selection of an com.sun.star.task.XInteractionApprove or com.sun.star.task.XInteractionDisapprove continuation).
 """
-WARNING: 'UnoEnum'
+WARNING: object
 """
 A warning, less severe than an error.
 """

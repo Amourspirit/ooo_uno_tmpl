@@ -26,34 +26,30 @@ Enum
 See Also:
     `API FontSlant <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1awt.html#a362a86d3ebca4a201d13bc3e7b94340e>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-DONTKNOW: 'UnoEnum'
+DONTKNOW: object
 """
 specifies a font with an unknown slant.
 
 specifies that the menu item type is unknown.
 """
-ITALIC: 'UnoEnum'
+ITALIC: object
 """
 specifies an italic font (slant designed into the font).
 """
-NONE: 'UnoEnum'
+NONE: object
 """
 specifies a font without slant.
 """
-OBLIQUE: 'UnoEnum'
+OBLIQUE: object
 """
 specifies an oblique font (slant not designed into the font).
 """
-REVERSE_ITALIC: 'UnoEnum'
+REVERSE_ITALIC: object
 """
 specifies a reverse italic font (slant designed into the font).
 """
-REVERSE_OBLIQUE: 'UnoEnum'
+REVERSE_OBLIQUE: object
 """
 specifies a reverse oblique font (slant not designed into the font).
 """

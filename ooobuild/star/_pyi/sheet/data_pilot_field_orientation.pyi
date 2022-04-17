@@ -26,30 +26,26 @@ Enum
 See Also:
     `API DataPilotFieldOrientation <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1sheet.html#a686c797e7cb837947558aa11c946245a>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-COLUMN: 'UnoEnum'
+COLUMN: object
 """
 the field is used as a column field.
 
 is applied to the columns.
 """
-DATA: 'UnoEnum'
+DATA: object
 """
 the field is used as a data field.
 """
-HIDDEN: 'UnoEnum'
+HIDDEN: object
 """
 the field is not used in the table.
 """
-PAGE: 'UnoEnum'
+PAGE: object
 """
 the field is used as a page field.
 """
-ROW: 'UnoEnum'
+ROW: object
 """
 the field is used as a row field.
 

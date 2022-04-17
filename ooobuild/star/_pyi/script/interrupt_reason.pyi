@@ -26,42 +26,38 @@ Enum
 See Also:
     `API InterruptReason <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1script.html#a298e9238891ddece524d1b3732aa33e4>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-BreakPoint: 'UnoEnum'
+BreakPoint: object
 """
 script stopped at a breakpoint.
 """
-Cancel: 'UnoEnum'
+Cancel: object
 """
 script in the engine was cancelled.
 
 script execution was cancelled.
 """
-CompileError: 'UnoEnum'
+CompileError: object
 """
 script has invalid syntax.
 """
-RuntimeError: 'UnoEnum'
+RuntimeError: object
 """
 runtime error occurred during script execution.
 """
-Step: 'UnoEnum'
+Step: object
 """
 script stops because only one scripting engine command was executed.
 """
-StepOut: 'UnoEnum'
+StepOut: object
 """
 script stops because it leaves a function.
 """
-StepOver: 'UnoEnum'
+StepOver: object
 """
 script stops because one step was executed.
 """
-StepStatement: 'UnoEnum'
+StepStatement: object
 """
 script stop because one step was executed.
 """

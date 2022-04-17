@@ -26,32 +26,28 @@ Enum
 See Also:
     `API ScanError <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1scanner.html#abd1619ea132004db8599d9529755e9ab>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-InvalidContext: 'UnoEnum'
+InvalidContext: object
 """
 InvalidContext: a device was requested that does not exist.
 """
-ScanCanceled: 'UnoEnum'
+ScanCanceled: object
 """
 ScanCanceled: the scan was canceled by the user.
 """
-ScanErrorNone: 'UnoEnum'
+ScanErrorNone: object
 """
 ScanErrorNone: no error occurred.
 """
-ScanFailed: 'UnoEnum'
+ScanFailed: object
 """
 ScanFailed: an error occurred during scanning.
 """
-ScanInProgress: 'UnoEnum'
+ScanInProgress: object
 """
 ScanInProgress: a scan is already in progress on this device that has to end before a new one can be started.
 """
-ScannerNotAvailable: 'UnoEnum'
+ScannerNotAvailable: object
 """
 ScannerNotAvailable: the requested device could not be opened.
 """

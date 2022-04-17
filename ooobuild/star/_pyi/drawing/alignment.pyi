@@ -26,12 +26,8 @@ Enum
 See Also:
     `API Alignment <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1drawing.html#acdfaca60ec19c0265bac2692d7982726>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-BOTTOM: 'UnoEnum'
+BOTTOM: object
 """
 the connection line leaves the connected object from the bottom,
 
@@ -39,17 +35,17 @@ The text is positioned below the main line.
 
 The bottom edge of the text is adjusted to the bottom edge of the shape.
 """
-BOTTOM_LEFT: 'UnoEnum'
+BOTTOM_LEFT: object
 """
 """
-BOTTOM_RIGHT: 'UnoEnum'
+BOTTOM_RIGHT: object
 """
 """
-CENTER: 'UnoEnum'
+CENTER: object
 """
 The text is centered inside the shape.
 """
-LEFT: 'UnoEnum'
+LEFT: object
 """
 the connection line leaves the connected object to the left,
 
@@ -57,7 +53,7 @@ The left edge of the text is adjusted to the left edge of the shape.
 
 The text is positioned to the left.
 """
-RIGHT: 'UnoEnum'
+RIGHT: object
 """
 the connection line leaves the connected object to the right,
 
@@ -65,7 +61,7 @@ The right edge of the text is adjusted to the right edge of the shape.
 
 The text is positioned to the right.
 """
-TOP: 'UnoEnum'
+TOP: object
 """
 the connection line leaves the connected object from the top,
 
@@ -73,10 +69,10 @@ The text is positioned above the main line.
 
 The top edge of the text is adjusted to the top edge of the shape.
 """
-TOP_LEFT: 'UnoEnum'
+TOP_LEFT: object
 """
 """
-TOP_RIGHT: 'UnoEnum'
+TOP_RIGHT: object
 """
 """
 

@@ -26,57 +26,53 @@ ENUM EventType
 See Also:
     `API EventType <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1xml_1_1dom_1_1events.html#a2628ea8d12e8b2563c32f05dc7fff6fa>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-DOMActivate: 'UnoEnum'
+DOMActivate: object
 """
 """
-DOMAttrModified: 'UnoEnum'
+DOMAttrModified: object
 """
 """
-DOMCharacterDataModified: 'UnoEnum'
+DOMCharacterDataModified: object
 """
 """
-DOMFocusIn: 'UnoEnum'
+DOMFocusIn: object
 """
 """
-DOMFocusOut: 'UnoEnum'
+DOMFocusOut: object
 """
 """
-DOMNodeInserted: 'UnoEnum'
+DOMNodeInserted: object
 """
 """
-DOMNodeInsertedIntoDocument: 'UnoEnum'
+DOMNodeInsertedIntoDocument: object
 """
 """
-DOMNodeRemoved: 'UnoEnum'
+DOMNodeRemoved: object
 """
 """
-DOMNodeRemovedFromDocument: 'UnoEnum'
+DOMNodeRemovedFromDocument: object
 """
 """
-DOMSubtreeModified: 'UnoEnum'
+DOMSubtreeModified: object
 """
 """
-click: 'UnoEnum'
+click: object
 """
 """
-mousedown: 'UnoEnum'
+mousedown: object
 """
 """
-mousemove: 'UnoEnum'
+mousemove: object
 """
 """
-mouseout: 'UnoEnum'
+mouseout: object
 """
 """
-mouseover: 'UnoEnum'
+mouseover: object
 """
 """
-mouseup: 'UnoEnum'
+mouseup: object
 """
 """
 

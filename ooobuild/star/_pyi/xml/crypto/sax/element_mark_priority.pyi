@@ -26,18 +26,14 @@ Enum
 See Also:
     `API ElementMarkPriority <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1xml_1_1crypto_1_1sax.html#a513614abfcc788af5f4afd633a9f5d0a>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-AFTERMODIFY: 'UnoEnum'
+AFTERMODIFY: object
 """
 """
-BEFOREMODIFY: 'UnoEnum'
+BEFOREMODIFY: object
 """
 """
-MINIMUM: 'UnoEnum'
+MINIMUM: object
 """
 """
 

@@ -26,24 +26,20 @@ Enum
 See Also:
     `API MozillaProductType <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1mozilla.html#a2bcdf854763e98ee224085041ac2ffa5>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-Default: 'UnoEnum'
+Default: object
 """
 Any product.
 """
-Firefox: 'UnoEnum'
+Firefox: object
 """
 Mozilla's next generation web browser.
 """
-Mozilla: 'UnoEnum'
+Mozilla: object
 """
 Mozilla browse and mail suite.
 """
-Thunderbird: 'UnoEnum'
+Thunderbird: object
 """
 Mozilla's next generation e-mail client.
 """

@@ -26,32 +26,28 @@ Enum
 See Also:
     `API ChartDataChangeType <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1chart.html#a37b4d47e7d1600aa406ad115a39fe1da>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-ALL: 'UnoEnum'
+ALL: object
 """
 Major changes were applied to the data.
 """
-COLUMN_DELETED: 'UnoEnum'
+COLUMN_DELETED: object
 """
 The column given in the ChartDataChangeEvent, was deleted.
 """
-COLUMN_INSERTED: 'UnoEnum'
+COLUMN_INSERTED: object
 """
 The column given in the ChartDataChangeEvent, was inserted.
 """
-DATA_RANGE: 'UnoEnum'
+DATA_RANGE: object
 """
 The range of columns and rows, given in the ChartDataChangeEvent, has changed.
 """
-ROW_DELETED: 'UnoEnum'
+ROW_DELETED: object
 """
 The row given in the ChartDataChangeEvent, was deleted.
 """
-ROW_INSERTED: 'UnoEnum'
+ROW_INSERTED: object
 """
 The row given in the ChartDataChangeEvent, was inserted.
 """

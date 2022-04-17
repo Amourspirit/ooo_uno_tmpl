@@ -26,30 +26,26 @@ Enum
 See Also:
     `API DockingArea <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1ui.html#abab7084b80a737f798ccebf692878cc1>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-DOCKINGAREA_BOTTOM: 'UnoEnum'
+DOCKINGAREA_BOTTOM: object
 """
 the bottom docking area above the status bar.
 """
-DOCKINGAREA_DEFAULT: 'UnoEnum'
+DOCKINGAREA_DEFAULT: object
 """
 a default docking area.
 
 It depends on the implementation how to treat this value.
 """
-DOCKINGAREA_LEFT: 'UnoEnum'
+DOCKINGAREA_LEFT: object
 """
 the left side docking area.
 """
-DOCKINGAREA_RIGHT: 'UnoEnum'
+DOCKINGAREA_RIGHT: object
 """
 the right side docking area.
 """
-DOCKINGAREA_TOP: 'UnoEnum'
+DOCKINGAREA_TOP: object
 """
 the top docking area below the menu bar.
 """

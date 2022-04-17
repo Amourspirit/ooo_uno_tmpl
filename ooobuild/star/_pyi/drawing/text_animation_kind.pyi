@@ -26,20 +26,16 @@ Enum
 See Also:
     `API TextAnimationKind <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1drawing.html#a86ab93c592ed65e3f2cd0eebaf5660a2>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-ALTERNATE: 'UnoEnum'
+ALTERNATE: object
 """
 Scroll the text from one side to the other and back.
 """
-BLINK: 'UnoEnum'
+BLINK: object
 """
 Let this text switch its state from visible to invisible continuously.
 """
-NONE: 'UnoEnum'
+NONE: object
 """
 the area is not filled.
 
@@ -53,11 +49,11 @@ the joint between lines will not be connected
 
 the line has no special end.
 """
-SCROLL: 'UnoEnum'
+SCROLL: object
 """
 Let this text scroll.
 """
-SLIDE: 'UnoEnum'
+SLIDE: object
 """
 Scroll the text from one side to the final position and stop there.
 """

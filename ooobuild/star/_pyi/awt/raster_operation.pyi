@@ -26,28 +26,24 @@ Enum
 See Also:
     `API RasterOperation <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1awt.html#a54da390665a5b42acc81143cd24926fd>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-ALLBITS: 'UnoEnum'
+ALLBITS: object
 """
 All bits which are affected by this operation are set to 1.
 """
-INVERT: 'UnoEnum'
+INVERT: object
 """
 All bits which are affected by this operation are inverted.
 """
-OVERPAINT: 'UnoEnum'
+OVERPAINT: object
 """
 sets all pixel as written in the output operation.
 """
-XOR: 'UnoEnum'
+XOR: object
 """
 uses the pixel written as one and the current pixel as the other operator of an exclusive or-operation.
 """
-ZEROBITS: 'UnoEnum'
+ZEROBITS: object
 """
 All bits which are affected by this operation are set to 0.
 """

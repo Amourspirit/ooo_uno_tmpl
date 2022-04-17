@@ -26,16 +26,12 @@ Enum
 See Also:
     `API DataEditorEventType <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1util.html#a78015743cb8b25dbfc2b64889f6bd261>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-CANCELED: 'UnoEnum'
+CANCELED: object
 """
 specifies that the data editing was canceled by the user (data not stored).
 """
-DONE: 'UnoEnum'
+DONE: object
 """
 specifies that the data editing is done (data stored).
 """

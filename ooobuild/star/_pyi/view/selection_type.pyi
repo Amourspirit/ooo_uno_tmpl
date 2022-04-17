@@ -26,28 +26,24 @@ Enum
 See Also:
     `API SelectionType <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1view.html#acffca3b33fddce63d3220bc7487e879d>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-MULTI: 'UnoEnum'
+MULTI: object
 """
 The selection can contain zero or more objects.
 """
-NONE: 'UnoEnum'
+NONE: object
 """
 No selection is possible.
 
 The selection is always empty.
 """
-RANGE: 'UnoEnum'
+RANGE: object
 """
 The selection can contain zero or more objects.
 
 all selected objects must be part of a continues range
 """
-SINGLE: 'UnoEnum'
+SINGLE: object
 """
 The selection can only contain one or zero objects.
 """

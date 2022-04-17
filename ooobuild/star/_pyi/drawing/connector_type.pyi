@@ -26,26 +26,22 @@ Enum
 See Also:
     `API ConnectorType <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1drawing.html#a086c6f6507c67c8809b218d90998c5d6>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-CURVE: 'UnoEnum'
+CURVE: object
 """
 the ConnectorShape is drawn as a curve
 """
-LINE: 'UnoEnum'
+LINE: object
 """
 the ConnectorShape is drawn as a straight line
 
 This is the PolygonKind for a LineShape.
 """
-LINES: 'UnoEnum'
+LINES: object
 """
 the connector is drawn with three lines
 """
-STANDARD: 'UnoEnum'
+STANDARD: object
 """
 the graphic is rendered in the default color style of the output device,
 

@@ -26,20 +26,16 @@ Enum
 See Also:
     `API TableSortFieldType <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1table.html#a8f4f5a263cd762ae00ab0f462ed1ae1c>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-ALPHANUMERIC: 'UnoEnum'
+ALPHANUMERIC: object
 """
 sort field contains text data.
 """
-AUTOMATIC: 'UnoEnum'
+AUTOMATIC: object
 """
 type is determined automatically.
 """
-NUMERIC: 'UnoEnum'
+NUMERIC: object
 """
 sort field contains numerical data.
 """

@@ -26,18 +26,14 @@ ENUM StackingDirection
 See Also:
     `API StackingDirection <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1chart2.html#ad5b96f2511266754f439e0cfdbe44545>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-NO_STACKING: 'UnoEnum'
+NO_STACKING: object
 """
 """
-Y_STACKING: 'UnoEnum'
+Y_STACKING: object
 """
 """
-Z_STACKING: 'UnoEnum'
+Z_STACKING: object
 """
 """
 

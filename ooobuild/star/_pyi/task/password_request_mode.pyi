@@ -26,20 +26,16 @@ Enum
 See Also:
     `API PasswordRequestMode <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1task.html#a921a6f0fb0abf824f006cab79dbc54d0>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-PASSWORD_CREATE: 'UnoEnum'
+PASSWORD_CREATE: object
 """
 Password creation.
 """
-PASSWORD_ENTER: 'UnoEnum'
+PASSWORD_ENTER: object
 """
 Ask for a password.
 """
-PASSWORD_REENTER: 'UnoEnum'
+PASSWORD_REENTER: object
 """
 Wrong password was entered, ask again.
 """

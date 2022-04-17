@@ -26,32 +26,28 @@ Enum
 See Also:
     `API ListSourceType <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1form.html#a52e06ed91fb133bc98c089a401a724fb>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-QUERY: 'UnoEnum'
+QUERY: object
 """
 The control should be filled with the results of a database query.
 """
-SQL: 'UnoEnum'
+SQL: object
 """
 The control should be filled with the results of a database statement.
 """
-SQLPASSTHROUGH: 'UnoEnum'
+SQLPASSTHROUGH: object
 """
 The control should be filled with the results of a database statement, which is not evaluated by the database engine.
 """
-TABLE: 'UnoEnum'
+TABLE: object
 """
 The control should be filled with the data of a table.
 """
-TABLEFIELDS: 'UnoEnum'
+TABLEFIELDS: object
 """
 The control should be filled with the field names of a database table.
 """
-VALUELIST: 'UnoEnum'
+VALUELIST: object
 """
 The control should be filled with a list of string values.
 """

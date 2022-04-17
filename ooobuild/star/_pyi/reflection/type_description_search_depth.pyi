@@ -26,18 +26,14 @@ Enum
 See Also:
     `API TypeDescriptionSearchDepth <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1reflection.html#a19627c9e2873087a7d672cd9e0913000>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-INFINITE: 'UnoEnum'
+INFINITE: object
 """
 Infinite search depth.
 
 Search through all children including direct children, grand children, grand children's children, ...
 """
-ONE: 'UnoEnum'
+ONE: object
 """
 Search only through direct children.
 """

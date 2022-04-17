@@ -26,22 +26,18 @@ Enum
 See Also:
     `API CellVertJustify <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1table.html#a17834bec5bf9ac4432141dee1c03b50b>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-BOTTOM: 'UnoEnum'
+BOTTOM: object
 """
 contents are aligned to the lower edge of the cell.
 """
-CENTER: 'UnoEnum'
+CENTER: object
 """
 contents are horizontally centered.
 
 contents are aligned to the vertical middle of the cell.
 """
-STANDARD: 'UnoEnum'
+STANDARD: object
 """
 default alignment is used (left for numbers, right for text).
 
@@ -49,7 +45,7 @@ default alignment is used.
 
 contents are printed from left to right.
 """
-TOP: 'UnoEnum'
+TOP: object
 """
 contents are aligned with the upper edge of the cell.
 """

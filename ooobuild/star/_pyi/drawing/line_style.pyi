@@ -26,16 +26,12 @@ Enum
 See Also:
     `API LineStyle <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1drawing.html#a86e0f5648542856159bb40775c854aa7>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-DASH: 'UnoEnum'
+DASH: object
 """
 the line use dashes.
 """
-NONE: 'UnoEnum'
+NONE: object
 """
 the area is not filled.
 
@@ -49,7 +45,7 @@ the joint between lines will not be connected
 
 the line has no special end.
 """
-SOLID: 'UnoEnum'
+SOLID: object
 """
 use a solid color to fill the area.
 

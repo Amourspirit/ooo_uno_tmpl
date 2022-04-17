@@ -26,16 +26,12 @@ Enum
 See Also:
     `API FormSubmitMethod <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1form.html#ae9bf553104504664f5d2066375a414df>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-GET: 'UnoEnum'
+GET: object
 """
 specifies to append the input information of a form to the target URL as parameters.
 """
-POST: 'UnoEnum'
+POST: object
 """
 specifies to send the input information in a data body.
 """
