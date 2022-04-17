@@ -50,14 +50,10 @@ See Also:
     `API $name <$link>`_
 #end if
 """
-from typing import TYPE_CHECKING
-
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
 
 #for $key in $key_list
 ##$self.get_safe_word($key)$self.get_typing($self.get_safe_word($key))
-$self.get_safe_word($key): 'UnoEnum'
+$self.get_safe_word($key): object
     #set $value = $enum_dict[$key]
 """
 #if isinstance($value, str):
