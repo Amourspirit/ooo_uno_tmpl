@@ -1,10 +1,10 @@
 # OOO UNO TEMPLATE
 
-Coverts Libre Office Api into Typings and classes.
+Coverts LibreOffice API into Typings and classes.
 
 This is the template project for [ooouno](https://github.com/Amourspirit/python-ooouno) project.
 
-This project reads all [Libre Office Api](https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star.html) and converts into python classes and typings.
+This project reads all [LibreOffice Api](https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star.html) and converts into python classes and typings.
 
 For help:
 
@@ -12,7 +12,7 @@ For help:
 python -m app -h
 ```
 
-For Extended Help see app.py built in help.
+For Extended Help see app.py built in help or see app [docstring](./app.py).
 
 ```bash
 $ pydoc app
@@ -22,10 +22,4 @@ $ pydoc app
 
 * Install [requirements](docs/setup_env.rst)
 * Activte env: `$ conda activte ./env`
-* run app make: `$ python -m app make`
-* create build/csslo namespace: `$ python -m app data star --css-lo`
-* create build/cssdyn namespace: `$ python -m app data star --css-dyn`
-
-**Note:**
-
-Initial full build will take some time
+* pydoc app

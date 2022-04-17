@@ -1,1 +1,1 @@
-OOO UNO Template package
+OOO UNO Template source.
