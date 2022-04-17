@@ -12,7 +12,7 @@ from ..utilities import util
 class WriteStarNs:
     """Writes imports for all 'ooobuild/lo' (paths set in config.json) files into  css... __init__.py files."""
 
-    def __init__(self, config: AppConfig, data: Dict[str, Component], rel_import: bool, write_ns: WriteNsEnum, log: Optional[logging.Logger] = None) -> None:
+    def __init__(self, config: AppConfig, data: Dict[str, List[Component]], rel_import: bool, write_ns: WriteNsEnum, log: Optional[logging.Logger] = None) -> None:
         """
         Constructor
 
@@ -82,44 +82,61 @@ class WriteStarNs:
             header_lines.extend(f_lic.read().splitlines())
 
         for ns, c_data in self._data.items():
-            lines = []
-            ns_path = ns.removeprefix('com.sun.star.')
-            ns_parts = ns_path.split('.')
-            if self._rel_import:
-                if self._write_ns == WriteNsEnum.CSS_LO:
-                    rel_ns_parts = [
-                        f_name for f_name in self._config.com_sun_star_lo]
-                elif self._write_ns == WriteNsEnum.STAR_PYI:
-                    rel_ns_parts = [
-                        f_name for f_name in self._config.com_sun_star_pyi]
-                else:
-                    rel_ns_parts = [
-                        f_name for f_name in self._config.com_sun_star_dyn]
-                rel_ns_parts.extend(ns_parts)
-                rel_ns = '.'.join(rel_ns_parts)
-            else:
-                rel_ns = None
-            write_path = self._write_root.joinpath(Path(*ns_parts))
-            self._mkdirp(dest_dir=write_path)
-            write_path = write_path.joinpath(init_file)
+            self._write_components(ns, c_data, header_lines, init_file)
 
-            gen_star = GenerateStarNs(
-                config=self._config, c_data=c_data,
-                write_ns=self._write_ns,  rel_ns=rel_ns)
-            lines.extend(gen_star.gen_lines())
+    def _write_components(self, ns: str, c_data: List[Component], header_lines: List[str], init_file: str) -> None:
+        def write_ns_file(file: Path, lns: List[str]) -> None:
+            new_lns = [s for s in lns]
             if self._write_ns == WriteNsEnum.CSS_DYN and self._dyn_ns_import_check:
                 text = "\n".join(header_lines)
                 text += '\n'
-                text += self._get_import_check_text(lines)
+                text += self._get_import_check_text(new_lns)
             else:
-                lines.append('')
-                all_lines = header_lines + lines
+                new_lns.append('')
+                all_lines = header_lines + new_lns
                 text = "\n".join(all_lines)
-            with open(write_path, 'w') as f:
+            with open(file, 'w') as f:
                 f.write(text)
             if self._log:
-                rel_path = write_path.relative_to(self._root_dir)
+                rel_path = file.relative_to(self._root_dir)
                 self._log.info('Wrote file %s', str(rel_path))
+
+        lines = []
+        ns_path = ns.removeprefix('com.sun.star.')
+        ns_parts = ns_path.split('.')
+        if self._rel_import:
+            if self._write_ns == WriteNsEnum.CSS_LO:
+                rel_ns_parts = [
+                    f_name for f_name in self._config.com_sun_star_lo]
+            elif self._write_ns == WriteNsEnum.STAR_PYI:
+                # pyi enums need to be writtent into a seperate module that matches the name of the enu.
+                rel_ns_parts = [
+                    f_name for f_name in self._config.com_sun_star_pyi]
+            else:
+                rel_ns_parts = [
+                    f_name for f_name in self._config.com_sun_star_dyn]
+            rel_ns_parts.extend(ns_parts)
+            rel_ns = '.'.join(rel_ns_parts)
+        else:
+            rel_ns = None
+        write_path = self._write_root.joinpath(Path(*ns_parts))
+        self._mkdirp(dest_dir=write_path)
+        write_file = write_path.joinpath(init_file)
+
+        gen_star = GenerateStarNs(
+            config=self._config, c_data=c_data,
+            write_ns=self._write_ns,  rel_ns=rel_ns)
+
+        lines.extend(gen_star.gen_lines())
+        write_ns_file(write_file, lines)
+
+        for finfo in gen_star.get_oth_files():
+            write_file = write_path / finfo.file_name
+            write_ns_file(write_file, lns=finfo.lines)
+        
+    
+    def _write_enums(self) -> None:
+        pass
 
     def _get_import_check_text(self, lines: List[str]) -> str:
         s = '# all imports are wrapped in try blocks for allowing of backwards compatibility.\n\n'
