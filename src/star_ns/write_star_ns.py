@@ -59,7 +59,7 @@ class WriteStarNs:
             p = Path(p, name)
             if not p.is_absolute():
                 p = self._root_dir.joinpath(p)
-            self._mkdirp(p)
+            util.mkdirp(p)
             init_file = Path(p, init_file)
             try:
                 init_file.touch(exist_ok=False)
@@ -120,7 +120,7 @@ class WriteStarNs:
         else:
             rel_ns = None
         write_path = self._write_root.joinpath(Path(*ns_parts))
-        self._mkdirp(dest_dir=write_path)
+        util.mkdirp(dest_dir=write_path)
         write_file = write_path.joinpath(init_file)
 
         gen_star = GenerateStarNs(
@@ -147,16 +147,3 @@ class WriteStarNs:
             s += "    pass\n"
         return s
 
-    def _mkdirp(self, dest_dir: Union[str, Path]):
-        """
-        Creates directory and all child directories if needed
-
-        Args:
-            dest_dir (Union[str, Path]): path to create directories for.
-                Must be dir path only. No checking is done for file names.
-        """
-        # Python ≥ 3.5
-        if isinstance(dest_dir, Path):
-            dest_dir.mkdir(parents=True, exist_ok=True)
-        else:
-            Path(dest_dir).mkdir(parents=True, exist_ok=True)
