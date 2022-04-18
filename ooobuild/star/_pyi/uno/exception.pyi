@@ -23,7 +23,8 @@ from ooo.oenv.env_const import UNO_NONE
 import typing
 from .x_interface import XInterface as XInterface_8f010a43
 
-class Exception(Exception):
+from builtins import Exception as BException
+class Exception(BException):
     """
     Exception Class
 
