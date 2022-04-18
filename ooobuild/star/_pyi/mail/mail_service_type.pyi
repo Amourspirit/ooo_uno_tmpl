@@ -26,20 +26,16 @@ ENUM MailServiceType
 See Also:
     `API MailServiceType <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1mail.html#ad93fba9b1c1a9b0a2469f7c1fc392a06>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-IMAP: 'UnoEnum'
+IMAP: object
 """
 A IMAP service.
 """
-POP3: 'UnoEnum'
+POP3: object
 """
 A POP3 service.
 """
-SMTP: 'UnoEnum'
+SMTP: object
 """
 A SMTP service.
 """

@@ -26,54 +26,50 @@ ENUM DOMExceptionType
 See Also:
     `API DOMExceptionType <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1xml_1_1dom.html#a31e3fb46d584de1cfc4b4c7640a41239>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-DOMSTRING_SIZE_ERR: 'UnoEnum'
+DOMSTRING_SIZE_ERR: object
 """
 """
-HIERARCHY_REQUEST_ERR: 'UnoEnum'
+HIERARCHY_REQUEST_ERR: object
 """
 """
-INDEX_SIZE_ERR: 'UnoEnum'
+INDEX_SIZE_ERR: object
 """
 """
-INUSE_ATTRIBUTE_ERR: 'UnoEnum'
+INUSE_ATTRIBUTE_ERR: object
 """
 """
-INVALID_ACCESS_ERR: 'UnoEnum'
+INVALID_ACCESS_ERR: object
 """
 """
-INVALID_CHARACTER_ERR: 'UnoEnum'
+INVALID_CHARACTER_ERR: object
 """
 """
-INVALID_MODIFICATION_ERR: 'UnoEnum'
+INVALID_MODIFICATION_ERR: object
 """
 """
-INVALID_STATE_ERR: 'UnoEnum'
+INVALID_STATE_ERR: object
 """
 """
-NAMESPACE_ERR: 'UnoEnum'
+NAMESPACE_ERR: object
 """
 """
-NOT_FOUND_ERR: 'UnoEnum'
+NOT_FOUND_ERR: object
 """
 """
-NOT_SUPPORTED_ERR: 'UnoEnum'
+NOT_SUPPORTED_ERR: object
 """
 """
-NO_DATA_ALLOWED_ERR: 'UnoEnum'
+NO_DATA_ALLOWED_ERR: object
 """
 """
-NO_MODIFICATION_ALLOWED_ERR: 'UnoEnum'
+NO_MODIFICATION_ALLOWED_ERR: object
 """
 """
-SYNTAX_ERR: 'UnoEnum'
+SYNTAX_ERR: object
 """
 """
-WRONG_DOCUMENT_ERR: 'UnoEnum'
+WRONG_DOCUMENT_ERR: object
 """
 """
 

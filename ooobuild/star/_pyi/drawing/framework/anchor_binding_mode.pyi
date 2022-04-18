@@ -26,15 +26,11 @@ Enum
 See Also:
     `API AnchorBindingMode <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1drawing_1_1framework.html#af2624f1e14ec2ab7890946d97b26724c>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-DIRECT: 'UnoEnum'
+DIRECT: object
 """
 """
-INDIRECT: 'UnoEnum'
+INDIRECT: object
 """
 """
 

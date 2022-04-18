@@ -26,26 +26,22 @@ Enum
 See Also:
     `API InteractiveSelectionResult <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1inspection.html#a2c7cbb6dbe76b989188c75ba8e400876>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-Cancelled: 'UnoEnum'
+Cancelled: object
 """
 The interactive selection of a property value was canceled.
 """
-ObtainedValue: 'UnoEnum'
+ObtainedValue: object
 """
 The interactive selection of a property value succeeded, a new property value has been obtained, but not yet set at the inspected component.
 
 In this case, the obtained value is passed to the caller of XPropertyHandler.onInteractivePropertySelection(), which is responsible for forwarding this value to the inspected component.
 """
-Pending: 'UnoEnum'
+Pending: object
 """
 The interactive selection of a property value is still pending.
 """
-Success: 'UnoEnum'
+Success: object
 """
 The interactive selection of a property value succeeded, and the new property value chosen by the user has already been set at the inspected component.
 """

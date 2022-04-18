@@ -26,22 +26,18 @@ Enum
 See Also:
     `API TextureProjectionMode <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1drawing.html#ae1e109a5c70543e3b92db3b854fd3acb>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-OBJECTSPECIFIC: 'UnoEnum'
+OBJECTSPECIFIC: object
 """
 This value specifies that the standard object projection method is used.
 """
-PARALLEL: 'UnoEnum'
+PARALLEL: object
 """
 the 3D objects are drawn in the parallel projection.
 
 This value specifies a flat parallel projection in the specified degree of freedom (X or Y).
 """
-SPHERE: 'UnoEnum'
+SPHERE: object
 """
 forces normals to think that the object is a sphere.
 

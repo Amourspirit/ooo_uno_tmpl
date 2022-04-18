@@ -26,16 +26,12 @@ Enum
 See Also:
     `API TableOrientation <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1table.html#a2b2c6150472f0123357a2273c315401c>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-COLUMNS: 'UnoEnum'
+COLUMNS: object
 """
 operations are carried out on columns.
 """
-ROWS: 'UnoEnum'
+ROWS: object
 """
 operations are carried out on rows.
 """

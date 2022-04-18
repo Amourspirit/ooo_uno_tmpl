@@ -26,22 +26,18 @@ Enum
 See Also:
     `API FolderListCommand <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1ucb.html#aa1260fc093737bd1d1134fba75333247>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-GET: 'UnoEnum'
+GET: object
 """
 Get a list of all folders.
 
 HTTP request method as defined in RFC 2616: Hypertext Transfer Protocol – HTTP/1.1
 """
-GET_SUBSCRIBED: 'UnoEnum'
+GET_SUBSCRIBED: object
 """
 Get a list of subscribed folders.
 """
-SET: 'UnoEnum'
+SET: object
 """
 Set a list of folders.
 """

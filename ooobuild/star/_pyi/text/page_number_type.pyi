@@ -26,20 +26,16 @@ Enum
 See Also:
     `API PageNumberType <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1text.html#aeffd73e249af906f303724f66f1f01c5>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-CURRENT: 'UnoEnum'
+CURRENT: object
 """
 The number of the current page is displayed.
 """
-NEXT: 'UnoEnum'
+NEXT: object
 """
 The number of the next page is displayed if there is any, otherwise the field is empty.
 """
-PREV: 'UnoEnum'
+PREV: object
 """
 The number of the previous page is displayed if there is any, otherwise the field is empty.
 """

@@ -26,20 +26,16 @@ Enum
 See Also:
     `API LineEndType <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1drawing.html#aa4142382acc18a0dd48cc4a563e2d168>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-ARROW: 'UnoEnum'
+ARROW: object
 """
 the line uses an arrow for the line end.
 """
-CIRCLE: 'UnoEnum'
+CIRCLE: object
 """
 the line uses a circle for the line end.
 """
-NONE: 'UnoEnum'
+NONE: object
 """
 the area is not filled.
 
@@ -53,13 +49,13 @@ the joint between lines will not be connected
 
 the line has no special end.
 """
-SPECIAL: 'UnoEnum'
+SPECIAL: object
 """
 not implemented, yet.
 
 deprecated
 """
-SQUARE: 'UnoEnum'
+SQUARE: object
 """
 the line will get a half square as additional cap
 

@@ -26,24 +26,20 @@ Enum
 See Also:
     `API ChartAxisPosition <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1chart.html#aa2815fba34da31acb139c7be75fda078>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-END: 'UnoEnum'
+END: object
 """
 Cross the other axes at their maximum scale value.
 """
-START: 'UnoEnum'
+START: object
 """
 Cross the other axes at their minimum scale value.
 """
-VALUE: 'UnoEnum'
+VALUE: object
 """
 Cross the other axes at the value specified in the property CrossoverValue.
 """
-ZERO: 'UnoEnum'
+ZERO: object
 """
 Cross the other axes at zero.
 

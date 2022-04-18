@@ -26,16 +26,12 @@ Enum
 See Also:
     `API ConversionDirection <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1linguistic2.html#a884af1a9fc4a39bcfd381c3acaa30997>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-FROM_LEFT: 'UnoEnum'
+FROM_LEFT: object
 """
 the text to be looked for should match the left part of a dictionary entry.
 """
-FROM_RIGHT: 'UnoEnum'
+FROM_RIGHT: object
 """
 the text to be looked for should match the right part of a dictionary entry.
 """

@@ -26,16 +26,12 @@ Enum
 See Also:
     `API ChartDataRowSource <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1chart.html#a0fb4f8088715abb6eb51a29c4bd79cce>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-COLUMNS: 'UnoEnum'
+COLUMNS: object
 """
 values displayed as data rows are taken from the columns of the data source.
 """
-ROWS: 'UnoEnum'
+ROWS: object
 """
 values displayed as data rows are taken from the rows of the data source.
 """

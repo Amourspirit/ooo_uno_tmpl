@@ -26,20 +26,16 @@ Enum
 See Also:
     `API CertificateKind <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1security.html#a15fb2a8475364a68c176c7789e3611cc>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-NONE: 'UnoEnum'
+NONE: object
 """
 No format specified.
 """
-OPENPGP: 'UnoEnum'
+OPENPGP: object
 """
 OpenPGP format of a certificate.
 """
-X509: 'UnoEnum'
+X509: object
 """
 X.509 format of a certificate.
 """

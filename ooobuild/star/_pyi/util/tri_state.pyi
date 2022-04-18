@@ -26,20 +26,16 @@ Enum
 See Also:
     `API TriState <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1util.html#a20884447391b4598296c73c6fa3d9470>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-INDETERMINATE: 'UnoEnum'
+INDETERMINATE: object
 """
 The value is indeterminate.
 """
-NO: 'UnoEnum'
+NO: object
 """
 The value is equivalent to FALSE.
 """
-YES: 'UnoEnum'
+YES: object
 """
 The value is equivalent to TRUE.
 """

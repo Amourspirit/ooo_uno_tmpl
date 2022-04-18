@@ -26,22 +26,18 @@ Enum
 See Also:
     `API PropertyState <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1beans.html#a1a5ccb5c59cace4a214c1e2eae8620b0>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-AMBIGUOUS_VALUE: 'UnoEnum'
+AMBIGUOUS_VALUE: object
 """
 The value of the property is only a recommendation because there are multiple values for this property (e.g., from a multi selection).
 
 The PropertyAttribute field in the struct Property must contain the PropertyAttribute.MAYBEAMBIGUOUS flag. The property value must be available and of the specified type. If the Attribute field in the struct Property contains PropertyAttribute.MAYBEVOID, then the value may be void.
 """
-DEFAULT_VALUE: 'UnoEnum'
+DEFAULT_VALUE: object
 """
 The value of the property is available from a master (e.g., template).
 """
-DIRECT_VALUE: 'UnoEnum'
+DIRECT_VALUE: object
 """
 The value of the property is stored in the PropertySet itself.
 """

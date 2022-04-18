@@ -26,20 +26,16 @@ ENUM SearchAlgorithms
 See Also:
     `API SearchAlgorithms <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1util.html#a88c44d0f9aaded4e5618f3f8adcde79f>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-ABSOLUTE: 'UnoEnum'
+ABSOLUTE: object
 """
 Literal.
 """
-APPROXIMATE: 'UnoEnum'
+APPROXIMATE: object
 """
 Weighted Levenshtein Distance.
 """
-REGEXP: 'UnoEnum'
+REGEXP: object
 """
 Regular expression.
 """

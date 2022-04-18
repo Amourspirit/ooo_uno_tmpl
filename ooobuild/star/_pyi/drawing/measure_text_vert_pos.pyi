@@ -26,30 +26,26 @@ Enum
 See Also:
     `API MeasureTextVertPos <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1drawing.html#afb97f6590316423181878e8f5f79f087>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-AUTO: 'UnoEnum'
+AUTO: object
 """
 the connection point is chosen automatically,
 
 Set this to have the application select the best horizontal position for the text.
 """
-BREAKEDLINE: 'UnoEnum'
+BREAKEDLINE: object
 """
 """
-CENTERED: 'UnoEnum'
+CENTERED: object
 """
 The text is positioned at the center.
 
 The text is positioned over the main line.
 """
-EAST: 'UnoEnum'
+EAST: object
 """
 """
-WEST: 'UnoEnum'
+WEST: object
 """
 """
 

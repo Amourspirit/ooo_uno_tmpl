@@ -26,28 +26,24 @@ Enum
 See Also:
     `API TextContentAnchorType <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1text.html#a470b1caeda4ff15fee438c8ff9e3d834>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-AS_CHARACTER: 'UnoEnum'
+AS_CHARACTER: object
 """
 The object is anchored instead of a character.
 """
-AT_CHARACTER: 'UnoEnum'
+AT_CHARACTER: object
 """
 The object is anchored to a character.
 """
-AT_FRAME: 'UnoEnum'
+AT_FRAME: object
 """
 The object is anchored to a text frame.
 """
-AT_PAGE: 'UnoEnum'
+AT_PAGE: object
 """
 The object is anchored to the page.
 """
-AT_PARAGRAPH: 'UnoEnum'
+AT_PARAGRAPH: object
 """
 The anchor of the object is set at the top left position of the paragraph.
 """

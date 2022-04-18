@@ -26,30 +26,26 @@ Enum
 See Also:
     `API MenuItemType <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1awt.html#a0014b68cdf9686458deff56691368317>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-DONTKNOW: 'UnoEnum'
+DONTKNOW: object
 """
 specifies a font with an unknown slant.
 
 specifies that the menu item type is unknown.
 """
-IMAGE: 'UnoEnum'
+IMAGE: object
 """
 specifies that the menu item has an image.
 """
-SEPARATOR: 'UnoEnum'
+SEPARATOR: object
 """
 specifies that the menu item is a separator.
 """
-STRING: 'UnoEnum'
+STRING: object
 """
 specifies that the menu item has a text.
 """
-STRINGIMAGE: 'UnoEnum'
+STRINGIMAGE: object
 """
 specifies that the menu item has a text and an image.
 """

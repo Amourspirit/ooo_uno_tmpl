@@ -26,18 +26,14 @@ ENUM AttrChangeType
 See Also:
     `API AttrChangeType <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1xml_1_1dom_1_1events.html#adfd54b6d9390eb4c83f1b1a365abc0f9>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-ADDITION: 'UnoEnum'
+ADDITION: object
 """
 """
-MODIFICATION: 'UnoEnum'
+MODIFICATION: object
 """
 """
-REMOVAL: 'UnoEnum'
+REMOVAL: object
 """
 """
 

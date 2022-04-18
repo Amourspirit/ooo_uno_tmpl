@@ -26,22 +26,18 @@ Enum
 See Also:
     `API ChartAxisMarkPosition <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1chart.html#aed594287d3f18573f625e8f708a27555>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-AT_AXIS: 'UnoEnum'
+AT_AXIS: object
 """
 The interval marks are drawn at the axis line.
 
 This makes a difference to \"AT_LABELS\" only when the labels are not placed near the axis (
 """
-AT_LABELS: 'UnoEnum'
+AT_LABELS: object
 """
 The interval marks are drawn besides the axis labels.
 """
-AT_LABELS_AND_AXIS: 'UnoEnum'
+AT_LABELS_AND_AXIS: object
 """
 Interval marks are drawn at the axis line and also besides the axis labels.
 

@@ -26,38 +26,34 @@ Enum
 See Also:
     `API BreakType <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1style.html#a3ae28cb49c180ec160a0984600b2b925>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-COLUMN_AFTER: 'UnoEnum'
+COLUMN_AFTER: object
 """
 A column break is applied after the object to which it belongs.
 """
-COLUMN_BEFORE: 'UnoEnum'
+COLUMN_BEFORE: object
 """
 A column break is applied before the object to which it belongs.
 """
-COLUMN_BOTH: 'UnoEnum'
+COLUMN_BOTH: object
 """
 A column break is applied before and after the object to which it belongs.
 """
-NONE: 'UnoEnum'
+NONE: object
 """
 No column or page break is applied.
 
 This value specifies that a location is not yet assigned.
 """
-PAGE_AFTER: 'UnoEnum'
+PAGE_AFTER: object
 """
 A page break is applied after the object to which it belongs.
 """
-PAGE_BEFORE: 'UnoEnum'
+PAGE_BEFORE: object
 """
 A page break is applied before the object to which it belongs.
 """
-PAGE_BOTH: 'UnoEnum'
+PAGE_BOTH: object
 """
 A page break is applied before and after the object to which it belongs.
 """

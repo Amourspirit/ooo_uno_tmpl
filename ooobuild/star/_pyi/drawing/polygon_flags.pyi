@@ -26,28 +26,24 @@ Enum
 See Also:
     `API PolygonFlags <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1drawing.html#af3965fa427851bc02bfe32c5d95d7406>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-CONTROL: 'UnoEnum'
+CONTROL: object
 """
 the point is a control point, to control the curve from the user interface.
 """
-NORMAL: 'UnoEnum'
+NORMAL: object
 """
 the text is drawn along the path without scaling.
 
 the point is normal, from the curve discussion view.
 """
-SMOOTH: 'UnoEnum'
+SMOOTH: object
 """
 the point is smooth, the first derivation from the curve discussion view.
 
 With SMOOTH shading, the colors of the lit vertices is interpolated.
 """
-SYMMETRIC: 'UnoEnum'
+SYMMETRIC: object
 """
 the point is symmetric, the second derivation from the curve discussion view.
 """

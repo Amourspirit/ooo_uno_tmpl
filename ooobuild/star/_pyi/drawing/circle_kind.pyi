@@ -26,24 +26,20 @@ Enum
 See Also:
     `API CircleKind <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1drawing.html#a6a52201f72a50075b45fea2c19340c0e>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-ARC: 'UnoEnum'
+ARC: object
 """
 a circle with an open cut
 """
-CUT: 'UnoEnum'
+CUT: object
 """
 a circle with a cut connected by two lines
 """
-FULL: 'UnoEnum'
+FULL: object
 """
 a full circle
 """
-SECTION: 'UnoEnum'
+SECTION: object
 """
 a circle with a cut connected by a line
 """

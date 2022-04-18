@@ -26,30 +26,26 @@ Enum
 See Also:
     `API WindowClass <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1awt.html#add6041e42e466bb2170771f84663460b>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-CONTAINER: 'UnoEnum'
+CONTAINER: object
 """
 is a container that may contain other components.
 
 It is not a top window.
 """
-MODALTOP: 'UnoEnum'
+MODALTOP: object
 """
 is a modal top level window on the desktop.
 
 It is also a container.
 """
-SIMPLE: 'UnoEnum'
+SIMPLE: object
 """
 is the simplest window.
 
 It can be a container.
 """
-TOP: 'UnoEnum'
+TOP: object
 """
 specifies a top level window on the desktop.
 

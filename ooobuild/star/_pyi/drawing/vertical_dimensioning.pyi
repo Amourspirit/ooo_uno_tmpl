@@ -26,18 +26,14 @@ Enum
 See Also:
     `API VerticalDimensioning <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1drawing.html#a3d694e7ac991a1dc3541f7d166f0b126>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-AUTO: 'UnoEnum'
+AUTO: object
 """
 the connection point is chosen automatically,
 
 Set this to have the application select the best horizontal position for the text.
 """
-BOTTOM: 'UnoEnum'
+BOTTOM: object
 """
 the connection line leaves the connected object from the bottom,
 
@@ -45,13 +41,13 @@ The text is positioned below the main line.
 
 The bottom edge of the text is adjusted to the bottom edge of the shape.
 """
-CENTERED: 'UnoEnum'
+CENTERED: object
 """
 The text is positioned at the center.
 
 The text is positioned over the main line.
 """
-TOP: 'UnoEnum'
+TOP: object
 """
 the connection line leaves the connected object from the top,
 

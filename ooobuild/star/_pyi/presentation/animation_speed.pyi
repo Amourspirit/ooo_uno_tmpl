@@ -26,20 +26,16 @@ Enum
 See Also:
     `API AnimationSpeed <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1presentation.html#a07b64dc4a366b20ad5052f974ffdbf62>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-FAST: 'UnoEnum'
+FAST: object
 """
 set the speed from the animation/fade to fast.
 """
-MEDIUM: 'UnoEnum'
+MEDIUM: object
 """
 set the speed from the animation/fade to medium.
 """
-SLOW: 'UnoEnum'
+SLOW: object
 """
 set the speed from the animation/fade to slow.
 """

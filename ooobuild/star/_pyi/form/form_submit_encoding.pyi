@@ -26,24 +26,20 @@ Enum
 See Also:
     `API FormSubmitEncoding <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1form.html#a4a4c5c07c0618f59711919741a523ab8>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-MULTIPART: 'UnoEnum'
+MULTIPART: object
 """
 Specifies to use \"multipart/form-data\" as submit encoding.
 
 Usually used when the form contains a file upload element.
 """
-TEXT: 'UnoEnum'
+TEXT: object
 """
 specifies to use \"text/plain\"
 
 Usually used if the FormSubmitMethod attribute has the value POST and the content should be reviewed as full text.
 """
-URL: 'UnoEnum'
+URL: object
 """
 When the button is clicked, a URL set for the button is opened.
 

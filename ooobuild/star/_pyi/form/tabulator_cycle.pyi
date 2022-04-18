@@ -26,12 +26,8 @@ Enum
 See Also:
     `API TabulatorCycle <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1form.html#acb5251eb1c7e6ff2149158596346de94>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-CURRENT: 'UnoEnum'
+CURRENT: object
 """
 a navigation bar is provided and navigation will be performed on the current/active form.
 
@@ -39,13 +35,13 @@ pressing the TAB key from the last control moves the focus to the first control 
 
 This is the default and most often encountered mode.
 """
-NONE: 'UnoEnum'
+NONE: object
 """
 no navigation bar is provided and navigation on the current form is only possible with the keyboard (TAB/SHIFT TAB).
 
 Note that when this mode is set, a simultaneous TabulatorCycle value of TabulatorCycle.CURRENT means that you cannot travel between records anymore.
 """
-PARENT: 'UnoEnum'
+PARENT: object
 """
 a navigation bar is provided and navigation will be performed on the parent of the current/active form.
 

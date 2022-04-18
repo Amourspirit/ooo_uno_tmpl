@@ -26,273 +26,269 @@ Enum
 See Also:
     `API UnicodeScript <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1i18n.html#a47be7d1d06e067d647f387cc160d5e29>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-kAlphabeticPresentation: 'UnoEnum'
+kAlphabeticPresentation: object
 """
 """
-kArabic: 'UnoEnum'
+kArabic: object
 """
 """
-kArabicPresentationA: 'UnoEnum'
+kArabicPresentationA: object
 """
 """
-kArabicPresentationB: 'UnoEnum'
+kArabicPresentationB: object
 """
 """
-kArmenian: 'UnoEnum'
+kArmenian: object
 """
 """
-kArrow: 'UnoEnum'
+kArrow: object
 """
 """
-kBasicLatin: 'UnoEnum'
+kBasicLatin: object
 """
 """
-kBengali: 'UnoEnum'
+kBengali: object
 """
 """
-kBlockElement: 'UnoEnum'
+kBlockElement: object
 """
 """
-kBopomofo: 'UnoEnum'
+kBopomofo: object
 """
 """
-kBopomofoExtended: 'UnoEnum'
+kBopomofoExtended: object
 """
 """
-kBoxDrawing: 'UnoEnum'
+kBoxDrawing: object
 """
 """
-kBraillePatterns: 'UnoEnum'
+kBraillePatterns: object
 """
 """
-kCJKCompatibility: 'UnoEnum'
+kCJKCompatibility: object
 """
 """
-kCJKCompatibilityForm: 'UnoEnum'
+kCJKCompatibilityForm: object
 """
 """
-kCJKCompatibilityIdeograph: 'UnoEnum'
+kCJKCompatibilityIdeograph: object
 """
 """
-kCJKRadicalsSupplement: 'UnoEnum'
+kCJKRadicalsSupplement: object
 """
 """
-kCJKSymbolPunctuation: 'UnoEnum'
+kCJKSymbolPunctuation: object
 """
 """
-kCJKUnifiedIdeograph: 'UnoEnum'
+kCJKUnifiedIdeograph: object
 """
 """
-kCJKUnifiedIdeographsExtensionA: 'UnoEnum'
+kCJKUnifiedIdeographsExtensionA: object
 """
 """
-kCherokee: 'UnoEnum'
+kCherokee: object
 """
 """
-kCombiningDiacritical: 'UnoEnum'
+kCombiningDiacritical: object
 """
 """
-kCombiningHalfMark: 'UnoEnum'
+kCombiningHalfMark: object
 """
 """
-kControlPicture: 'UnoEnum'
+kControlPicture: object
 """
 """
-kCurrencySymbolScript: 'UnoEnum'
+kCurrencySymbolScript: object
 """
 """
-kCyrillic: 'UnoEnum'
+kCyrillic: object
 """
 """
-kDevanagari: 'UnoEnum'
+kDevanagari: object
 """
 """
-kDingbat: 'UnoEnum'
+kDingbat: object
 """
 """
-kEnclosedAlphanumeric: 'UnoEnum'
+kEnclosedAlphanumeric: object
 """
 """
-kEnclosedCJKLetterMonth: 'UnoEnum'
+kEnclosedCJKLetterMonth: object
 """
 """
-kEthiopic: 'UnoEnum'
+kEthiopic: object
 """
 """
-kGeneralPunctuation: 'UnoEnum'
+kGeneralPunctuation: object
 """
 """
-kGeometricShape: 'UnoEnum'
+kGeometricShape: object
 """
 """
-kGeorgian: 'UnoEnum'
+kGeorgian: object
 """
 """
-kGreek: 'UnoEnum'
+kGreek: object
 """
 """
-kGreekExtended: 'UnoEnum'
+kGreekExtended: object
 """
 """
-kGujarati: 'UnoEnum'
+kGujarati: object
 """
 """
-kGurmukhi: 'UnoEnum'
+kGurmukhi: object
 """
 """
-kHalfwidthFullwidthForm: 'UnoEnum'
+kHalfwidthFullwidthForm: object
 """
 """
-kHangulCompatibilityJamo: 'UnoEnum'
+kHangulCompatibilityJamo: object
 """
 """
-kHangulJamo: 'UnoEnum'
+kHangulJamo: object
 """
 """
-kHangulSyllable: 'UnoEnum'
+kHangulSyllable: object
 """
 """
-kHebrew: 'UnoEnum'
+kHebrew: object
 """
 """
-kHighPrivateUseSurrogate: 'UnoEnum'
+kHighPrivateUseSurrogate: object
 """
 """
-kHighSurrogate: 'UnoEnum'
+kHighSurrogate: object
 """
 """
-kHiragana: 'UnoEnum'
+kHiragana: object
 """
 """
-kIPAExtension: 'UnoEnum'
+kIPAExtension: object
 """
 """
-kIdeographicDescriptionCharacters: 'UnoEnum'
+kIdeographicDescriptionCharacters: object
 """
 """
-kKanbun: 'UnoEnum'
+kKanbun: object
 """
 """
-kKangxiRadicals: 'UnoEnum'
+kKangxiRadicals: object
 """
 """
-kKannada: 'UnoEnum'
+kKannada: object
 """
 """
-kKatakana: 'UnoEnum'
+kKatakana: object
 """
 """
-kKhmer: 'UnoEnum'
+kKhmer: object
 """
 """
-kLao: 'UnoEnum'
+kLao: object
 """
 """
-kLatin1Supplement: 'UnoEnum'
+kLatin1Supplement: object
 """
 """
-kLatinExtendedA: 'UnoEnum'
+kLatinExtendedA: object
 """
 """
-kLatinExtendedAdditional: 'UnoEnum'
+kLatinExtendedAdditional: object
 """
 """
-kLatinExtendedB: 'UnoEnum'
+kLatinExtendedB: object
 """
 """
-kLetterlikeSymbol: 'UnoEnum'
+kLetterlikeSymbol: object
 """
 """
-kLowSurrogate: 'UnoEnum'
+kLowSurrogate: object
 """
 """
-kMalayalam: 'UnoEnum'
+kMalayalam: object
 """
 """
-kMathOperator: 'UnoEnum'
+kMathOperator: object
 """
 """
-kMiscSymbol: 'UnoEnum'
+kMiscSymbol: object
 """
 """
-kMiscTechnical: 'UnoEnum'
+kMiscTechnical: object
 """
 """
-kMongolian: 'UnoEnum'
+kMongolian: object
 """
 """
-kMyanmar: 'UnoEnum'
+kMyanmar: object
 """
 """
-kNoScript: 'UnoEnum'
+kNoScript: object
 """
 """
-kNumberForm: 'UnoEnum'
+kNumberForm: object
 """
 """
-kOgham: 'UnoEnum'
+kOgham: object
 """
 """
-kOpticalCharacter: 'UnoEnum'
+kOpticalCharacter: object
 """
 """
-kOriya: 'UnoEnum'
+kOriya: object
 """
 """
-kPrivateUse: 'UnoEnum'
+kPrivateUse: object
 """
 """
-kRunic: 'UnoEnum'
+kRunic: object
 """
 """
-kScriptCount: 'UnoEnum'
+kScriptCount: object
 """
 """
-kSinhala: 'UnoEnum'
+kSinhala: object
 """
 """
-kSmallFormVariant: 'UnoEnum'
+kSmallFormVariant: object
 """
 """
-kSpacingModifier: 'UnoEnum'
+kSpacingModifier: object
 """
 """
-kSuperSubScript: 'UnoEnum'
+kSuperSubScript: object
 """
 """
-kSymbolCombiningMark: 'UnoEnum'
+kSymbolCombiningMark: object
 """
 """
-kSyriac: 'UnoEnum'
+kSyriac: object
 """
 """
-kTamil: 'UnoEnum'
+kTamil: object
 """
 """
-kTelugu: 'UnoEnum'
+kTelugu: object
 """
 """
-kThaana: 'UnoEnum'
+kThaana: object
 """
 """
-kThai: 'UnoEnum'
+kThai: object
 """
 """
-kTibetan: 'UnoEnum'
+kTibetan: object
 """
 """
-kUnifiedCanadianAboriginalSyllabics: 'UnoEnum'
+kUnifiedCanadianAboriginalSyllabics: object
 """
 """
-kYiRadicals: 'UnoEnum'
+kYiRadicals: object
 """
 """
-kYiSyllables: 'UnoEnum'
+kYiSyllables: object
 """
 """
 

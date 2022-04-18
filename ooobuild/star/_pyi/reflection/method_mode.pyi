@@ -26,16 +26,12 @@ Enum
 See Also:
     `API MethodMode <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1reflection.html#a5e114fee85d0f2f8cb01480a474dd9b4>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-ONEWAY: 'UnoEnum'
+ONEWAY: object
 """
 method may be run asynchronously
 """
-TWOWAY: 'UnoEnum'
+TWOWAY: object
 """
 method is run The
 """

@@ -26,12 +26,8 @@ Enum
 See Also:
     `API TabAlign <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1style.html#a806c06853615662029f86b19111fe0a2>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-CENTER: 'UnoEnum'
+CENTER: object
 """
 set the horizontal alignment to the center between the margins from the container object
 
@@ -39,15 +35,15 @@ The text range is centered between the previous tabulator (or the left border, i
 
 adjusted to the center
 """
-DECIMAL: 'UnoEnum'
+DECIMAL: object
 """
 The decimal point of the text range to the left of this tabulator is aligned to the position of this tabulator.
 """
-DEFAULT: 'UnoEnum'
+DEFAULT: object
 """
 The default alignment for tabulators is applied.
 """
-LEFT: 'UnoEnum'
+LEFT: object
 """
 set the horizontal alignment to the left margin from the container object
 
@@ -57,7 +53,7 @@ adjusted to the left border
 
 The page style is only used for left pages.
 """
-RIGHT: 'UnoEnum'
+RIGHT: object
 """
 set the horizontal alignment to the right margin from the container object
 

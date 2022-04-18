@@ -26,22 +26,18 @@ ENUM EnhancedCustomShapeTextPathMode
 See Also:
     `API EnhancedCustomShapeTextPathMode <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1drawing.html#a0babaeb0d04df312f158184b26a302d6>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-NORMAL: 'UnoEnum'
+NORMAL: object
 """
 the text is drawn along the path without scaling.
 
 the point is normal, from the curve discussion view.
 """
-PATH: 'UnoEnum'
+PATH: object
 """
 the text is fit to the path.
 """
-SHAPE: 'UnoEnum'
+SHAPE: object
 """
 the text is fit to the bounding box of the shape.
 """

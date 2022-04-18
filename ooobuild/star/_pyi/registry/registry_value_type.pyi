@@ -26,40 +26,36 @@ Enum
 See Also:
     `API RegistryValueType <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1registry.html#a62fb96939bafde3da828f782a8433ac3>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-ASCII: 'UnoEnum'
+ASCII: object
 """
 the type of the key is ASCII.
 """
-ASCIILIST: 'UnoEnum'
+ASCIILIST: object
 """
 the type of the key is an ASCIILIST.
 """
-BINARY: 'UnoEnum'
+BINARY: object
 """
 the type of the key is binary.
 """
-LONG: 'UnoEnum'
+LONG: object
 """
 the type of the key is long.
 """
-LONGLIST: 'UnoEnum'
+LONGLIST: object
 """
 the type of the key is LONGLIST.
 """
-NOT_DEFINED: 'UnoEnum'
+NOT_DEFINED: object
 """
 the type of the key is not defined.
 """
-STRING: 'UnoEnum'
+STRING: object
 """
 the type of the key is a string.
 """
-STRINGLIST: 'UnoEnum'
+STRINGLIST: object
 """
 the type of the key is a STRINGLIST.
 """

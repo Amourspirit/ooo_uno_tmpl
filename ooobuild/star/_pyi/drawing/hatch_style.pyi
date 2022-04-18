@@ -26,20 +26,16 @@ Enum
 See Also:
     `API HatchStyle <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1drawing.html#a021284aa8478781ba1b958b81da7b608>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-DOUBLE: 'UnoEnum'
+DOUBLE: object
 """
 the hatch has a horizontal and a vertical line
 """
-SINGLE: 'UnoEnum'
+SINGLE: object
 """
 the hatch consists of a single horizontal line
 """
-TRIPLE: 'UnoEnum'
+TRIPLE: object
 """
 the hatch has a horizontal, a vertical and a diagonal line
 """

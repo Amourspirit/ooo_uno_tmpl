@@ -26,24 +26,20 @@ Enum
 See Also:
     `API SmartTagRecognizerMode <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1smarttags.html#a2eab74f21d11f78b5aa7826b0c60604f>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-CELL: 'UnoEnum'
+CELL: object
 """
 Text passed to the recognizer is a cell.
 """
-CHAR: 'UnoEnum'
+CHAR: object
 """
 Text passed to the recognizer is a single character.
 """
-PARAGRAPH: 'UnoEnum'
+PARAGRAPH: object
 """
 Text passed to the recognizer is a paragraph.
 """
-SINGLE_WORD: 'UnoEnum'
+SINGLE_WORD: object
 """
 Text passed to the recognizer is a single word.
 """

@@ -26,18 +26,14 @@ Enum
 See Also:
     `API TextVerticalAdjust <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1drawing.html#a4c2c10f0a1a5fa20d9f200d0fb5707ad>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-BLOCK: 'UnoEnum'
+BLOCK: object
 """
 The text extends from the left to the right edge of the shape.
 
 The text extends from the top to the bottom edge of the shape.
 """
-BOTTOM: 'UnoEnum'
+BOTTOM: object
 """
 the connection line leaves the connected object from the bottom,
 
@@ -45,11 +41,11 @@ The text is positioned below the main line.
 
 The bottom edge of the text is adjusted to the bottom edge of the shape.
 """
-CENTER: 'UnoEnum'
+CENTER: object
 """
 The text is centered inside the shape.
 """
-TOP: 'UnoEnum'
+TOP: object
 """
 the connection line leaves the connected object from the top,
 

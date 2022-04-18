@@ -26,18 +26,14 @@ Enum
 See Also:
     `API WrapTextMode <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1text.html#a1ed96de3f2d76e93588f67d506a0b0ae>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-DYNAMIC: 'UnoEnum'
+DYNAMIC: object
 """
 text flow depends on the situation.
 
 The text formatting decides the best way.
 """
-LEFT: 'UnoEnum'
+LEFT: object
 """
 the object is left adjusted.
 
@@ -45,15 +41,15 @@ text flows to the left side of the object.
 
 adjusted to the left.
 """
-NONE: 'UnoEnum'
+NONE: object
 """
 text does not flow around the object.
 """
-PARALLEL: 'UnoEnum'
+PARALLEL: object
 """
 text flows to the left and right of the object.
 """
-RIGHT: 'UnoEnum'
+RIGHT: object
 """
 the object is right adjusted.
 
@@ -61,11 +57,11 @@ text flows to the right side of the object.
 
 adjusted to the right.
 """
-THROUGH: 'UnoEnum'
+THROUGH: object
 """
 text flow ignores the object.
 """
-THROUGHT: 'UnoEnum'
+THROUGHT: object
 """
 text flow ignores the object: errant spelling deprecated in version 5.4
 """

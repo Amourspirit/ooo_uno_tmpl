@@ -26,34 +26,30 @@ Enum
 See Also:
     `API PrintableState <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1view.html#ad9b0afaffefc166344fd9575516b6626>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-JOB_ABORTED: 'UnoEnum'
+JOB_ABORTED: object
 """
 printing was aborted (e.g., by the user) while either printing or spooling.
 """
-JOB_COMPLETED: 'UnoEnum'
+JOB_COMPLETED: object
 """
 printing (rendering the document) has finished, spooling has begun
 """
-JOB_FAILED: 'UnoEnum'
+JOB_FAILED: object
 """
 printing ran into an error.
 """
-JOB_SPOOLED: 'UnoEnum'
+JOB_SPOOLED: object
 """
 spooling has finished successfully.
 
 This is the only state that can be considered as \"success\" for a print job.
 """
-JOB_SPOOLING_FAILED: 'UnoEnum'
+JOB_SPOOLING_FAILED: object
 """
 the document could be printed but not spooled.
 """
-JOB_STARTED: 'UnoEnum'
+JOB_STARTED: object
 """
 printing (rendering the document) has begun
 """

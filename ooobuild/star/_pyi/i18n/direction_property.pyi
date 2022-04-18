@@ -26,66 +26,62 @@ Enum
 See Also:
     `API DirectionProperty <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1i18n.html#a6e8fd3df14c13e43a44061c70daacd8b>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-ARABIC_NUMBER: 'UnoEnum'
+ARABIC_NUMBER: object
 """
 """
-BLOCK_SEPARATOR: 'UnoEnum'
+BLOCK_SEPARATOR: object
 """
 """
-BOUNDARY_NEUTRAL: 'UnoEnum'
+BOUNDARY_NEUTRAL: object
 """
 """
-COMMON_NUMBER_SEPARATOR: 'UnoEnum'
+COMMON_NUMBER_SEPARATOR: object
 """
 """
-DIR_NON_SPACING_MARK: 'UnoEnum'
+DIR_NON_SPACING_MARK: object
 """
 """
-EUROPEAN_NUMBER: 'UnoEnum'
+EUROPEAN_NUMBER: object
 """
 """
-EUROPEAN_NUMBER_SEPARATOR: 'UnoEnum'
+EUROPEAN_NUMBER_SEPARATOR: object
 """
 """
-EUROPEAN_NUMBER_TERMINATOR: 'UnoEnum'
+EUROPEAN_NUMBER_TERMINATOR: object
 """
 """
-LEFT_TO_RIGHT: 'UnoEnum'
+LEFT_TO_RIGHT: object
 """
 """
-LEFT_TO_RIGHT_EMBEDDING: 'UnoEnum'
+LEFT_TO_RIGHT_EMBEDDING: object
 """
 """
-LEFT_TO_RIGHT_OVERRIDE: 'UnoEnum'
+LEFT_TO_RIGHT_OVERRIDE: object
 """
 """
-OTHER_NEUTRAL: 'UnoEnum'
+OTHER_NEUTRAL: object
 """
 """
-POP_DIRECTIONAL_FORMAT: 'UnoEnum'
+POP_DIRECTIONAL_FORMAT: object
 """
 """
-RIGHT_TO_LEFT: 'UnoEnum'
+RIGHT_TO_LEFT: object
 """
 """
-RIGHT_TO_LEFT_ARABIC: 'UnoEnum'
+RIGHT_TO_LEFT_ARABIC: object
 """
 """
-RIGHT_TO_LEFT_EMBEDDING: 'UnoEnum'
+RIGHT_TO_LEFT_EMBEDDING: object
 """
 """
-RIGHT_TO_LEFT_OVERRIDE: 'UnoEnum'
+RIGHT_TO_LEFT_OVERRIDE: object
 """
 """
-SEGMENT_SEPARATOR: 'UnoEnum'
+SEGMENT_SEPARATOR: object
 """
 """
-WHITE_SPACE_NEUTRAL: 'UnoEnum'
+WHITE_SPACE_NEUTRAL: object
 """
 """
 

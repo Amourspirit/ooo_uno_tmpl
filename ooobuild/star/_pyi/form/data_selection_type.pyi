@@ -26,24 +26,20 @@ Enum
 See Also:
     `API DataSelectionType <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1form.html#abce772d425e368c8a4f81abe7afa7279>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-QUERY: 'UnoEnum'
+QUERY: object
 """
 The control should be filled with the results of a database query.
 """
-SQL: 'UnoEnum'
+SQL: object
 """
 The control should be filled with the results of a database statement.
 """
-SQLPASSTHROUGH: 'UnoEnum'
+SQLPASSTHROUGH: object
 """
 The control should be filled with the results of a database statement, which is not evaluated by the database engine.
 """
-TABLE: 'UnoEnum'
+TABLE: object
 """
 The control should be filled with the data of a table.
 """

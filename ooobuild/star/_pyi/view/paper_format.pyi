@@ -26,44 +26,40 @@ Enum
 See Also:
     `API PaperFormat <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1view.html#a12ab04987d08416f8347a9790c7abf3e>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-A3: 'UnoEnum'
+A3: object
 """
 specifies the paper format as A3.
 """
-A4: 'UnoEnum'
+A4: object
 """
 specifies the paper format as A4.
 """
-A5: 'UnoEnum'
+A5: object
 """
 specifies the paper format as A5.
 """
-B4: 'UnoEnum'
+B4: object
 """
 specifies the paper format as B4.
 """
-B5: 'UnoEnum'
+B5: object
 """
 specifies the paper format as B5.
 """
-LEGAL: 'UnoEnum'
+LEGAL: object
 """
 specifies the paper format as Legal.
 """
-LETTER: 'UnoEnum'
+LETTER: object
 """
 specifies the paper format as Letter.
 """
-TABLOID: 'UnoEnum'
+TABLOID: object
 """
 specifies the paper format as Tabloid.
 """
-USER: 'UnoEnum'
+USER: object
 """
 The real paper size is user defined in 100th mm.
 """

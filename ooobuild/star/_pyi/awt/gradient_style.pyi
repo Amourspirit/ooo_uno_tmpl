@@ -26,32 +26,28 @@ Enum
 See Also:
     `API GradientStyle <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1awt.html#aa6b9d577a1700f29923f49f7b77d165f>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-AXIAL: 'UnoEnum'
+AXIAL: object
 """
 specifies an axial gradient.
 """
-ELLIPTICAL: 'UnoEnum'
+ELLIPTICAL: object
 """
 specifies an elliptical gradient.
 """
-LINEAR: 'UnoEnum'
+LINEAR: object
 """
 specifies a linear gradient.
 """
-RADIAL: 'UnoEnum'
+RADIAL: object
 """
 specifies a radial gradient.
 """
-RECT: 'UnoEnum'
+RECT: object
 """
 specifies a gradient in the shape of a rectangle.
 """
-SQUARE: 'UnoEnum'
+SQUARE: object
 """
 specifies a gradient in the shape of a square.
 """

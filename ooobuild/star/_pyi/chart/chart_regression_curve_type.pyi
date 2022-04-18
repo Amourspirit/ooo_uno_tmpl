@@ -26,24 +26,20 @@ Enum
 See Also:
     `API ChartRegressionCurveType <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1chart.html#a00d1bb45d8b0a2aac5e07cde2f18302b>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-EXPONENTIAL: 'UnoEnum'
+EXPONENTIAL: object
 """
 displays an exponential regression curve.
 """
-LINEAR: 'UnoEnum'
+LINEAR: object
 """
 displays a linear regression curve.
 """
-LOGARITHM: 'UnoEnum'
+LOGARITHM: object
 """
 displays a linear logarithmic regression curve.
 """
-NONE: 'UnoEnum'
+NONE: object
 """
 error indicators are not displayed.
 
@@ -53,11 +49,11 @@ no chart legend is displayed.
 
 displays no error indicators.
 """
-POLYNOMIAL: 'UnoEnum'
+POLYNOMIAL: object
 """
 displays a polynomial regression curve.
 """
-POWER: 'UnoEnum'
+POWER: object
 """
 displays a regression curve using a power function.
 

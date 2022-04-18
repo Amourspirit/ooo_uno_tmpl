@@ -26,20 +26,16 @@ Enum
 See Also:
     `API DashStyle <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1drawing.html#a89f0dc2e221d6f608088093da27764d1>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-RECT: 'UnoEnum'
+RECT: object
 """
 the dash is a rectangle
 """
-RECTRELATIVE: 'UnoEnum'
+RECTRELATIVE: object
 """
 the dash is a rectangle, with the size of the dash given in relation to the length of the line
 """
-ROUND: 'UnoEnum'
+ROUND: object
 """
 the dash is a point
 
@@ -47,7 +43,7 @@ the lines join with an arc
 
 the line will get a half circle as additional cap
 """
-ROUNDRELATIVE: 'UnoEnum'
+ROUNDRELATIVE: object
 """
 the dash is a point, with the size of the dash given in relation to the length of the line
 """

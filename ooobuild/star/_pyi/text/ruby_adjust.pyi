@@ -26,26 +26,22 @@ Enum
 See Also:
     `API RubyAdjust <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1text.html#adf417fe4b45f486fe88af93ad0b59efb>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-BLOCK: 'UnoEnum'
+BLOCK: object
 """
 adjusted to both borders / stretched
 """
-CENTER: 'UnoEnum'
+CENTER: object
 """
 the object is adjusted to the center.
 
 centric adjusted.
 """
-INDENT_BLOCK: 'UnoEnum'
+INDENT_BLOCK: object
 """
 adjusted to both borders except for a small indent on both sides
 """
-LEFT: 'UnoEnum'
+LEFT: object
 """
 the object is left adjusted.
 
@@ -53,7 +49,7 @@ text flows to the left side of the object.
 
 adjusted to the left.
 """
-RIGHT: 'UnoEnum'
+RIGHT: object
 """
 the object is right adjusted.
 

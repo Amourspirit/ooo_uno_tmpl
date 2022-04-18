@@ -26,24 +26,20 @@ Enum
 See Also:
     `API PropertyValueState <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1ucb.html#a82ef3fdcd414866879e7aae1e52748d0>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-INVALID_NAME: 'UnoEnum'
+INVALID_NAME: object
 """
 The given property name/handle is invalid.
 """
-INVALID_TYPE: 'UnoEnum'
+INVALID_TYPE: object
 """
 The given property type is invalid.
 """
-PROCESSED: 'UnoEnum'
+PROCESSED: object
 """
 The value was obtained.
 """
-UNPROCESSED: 'UnoEnum'
+UNPROCESSED: object
 """
 The property value was not obtained yet.
 """

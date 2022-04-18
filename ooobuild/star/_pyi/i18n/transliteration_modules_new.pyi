@@ -26,273 +26,269 @@ Enum
 See Also:
     `API TransliterationModulesNew <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1i18n.html#a436afb2c972c4d40d888b71482e93020>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-CharToNumHangul_ko: 'UnoEnum'
+CharToNumHangul_ko: object
 """
 Transliterate a Korean Hangul number string to ASCII number string.
 """
-CharToNumLower_ko: 'UnoEnum'
+CharToNumLower_ko: object
 """
 Transliterate a Korean Hanja lower case number string to ASCII number string.
 """
-CharToNumLower_zh_CN: 'UnoEnum'
+CharToNumLower_zh_CN: object
 """
 Transliterate a Simplified Chinese lower case number string to ASCII number string.
 """
-CharToNumLower_zh_TW: 'UnoEnum'
+CharToNumLower_zh_TW: object
 """
 Transliterate a Traditional Chinese lower case number string to ASCII number string.
 """
-CharToNumUpper_ko: 'UnoEnum'
+CharToNumUpper_ko: object
 """
 Transliterate a Korean Hanja upper case number string to ASCII number string.
 """
-CharToNumUpper_zh_CN: 'UnoEnum'
+CharToNumUpper_zh_CN: object
 """
 Transliterate a Simplified Chinese upper case number string to ASCII number string.
 """
-CharToNumUpper_zh_TW: 'UnoEnum'
+CharToNumUpper_zh_TW: object
 """
 Transliterate a Traditional Chinese upper case number string to ASCII number string.
 """
-END_OF_MODULE: 'UnoEnum'
+END_OF_MODULE: object
 """
 """
-FULLWIDTH_HALFWIDTH: 'UnoEnum'
+FULLWIDTH_HALFWIDTH: object
 """
 Transliterate a string from full width character to half width character.
 """
-HALFWIDTH_FULLWIDTH: 'UnoEnum'
+HALFWIDTH_FULLWIDTH: object
 """
 Transliterate a string from half width character to full width character.
 """
-HIRAGANA_KATAKANA: 'UnoEnum'
+HIRAGANA_KATAKANA: object
 """
 Transliterate a Japanese string from Hiragana to Katakana.
 """
-IGNORE_CASE: 'UnoEnum'
+IGNORE_CASE: object
 """
 Ignore case when comparing strings by transliteration service.
 """
-IGNORE_KANA: 'UnoEnum'
+IGNORE_KANA: object
 """
 Ignore Hiragana and Katakana when comparing strings by transliteration service.
 """
-IGNORE_WIDTH: 'UnoEnum'
+IGNORE_WIDTH: object
 """
 Ignore full width and half width character when comparing strings by transliteration service.
 
 Ignore full width and half width characters when comparing strings by transliteration service.
 """
-IgnoreBaFa_ja_JP: 'UnoEnum'
+IgnoreBaFa_ja_JP: object
 """
 Ignore Katakana and Hiragana Ba/Gua and Ha/Fa in Japanese fuzzy search.
 """
-IgnoreHyuByu_ja_JP: 'UnoEnum'
+IgnoreHyuByu_ja_JP: object
 """
 Ignore Katakana and Hiragana Hyu/Fyu and Byu/Gyu in Japanese fuzzy search.
 """
-IgnoreIandEfollowedByYa_ja_JP: 'UnoEnum'
+IgnoreIandEfollowedByYa_ja_JP: object
 """
 Ignore Katakana YA/A which follows the character in either I or E row in Japanese fuzzy search.
 
 Ignore Katakana YA/A following the character in either I or E row in Japanese fuzzy search.
 """
-IgnoreIterationMark_ja_JP: 'UnoEnum'
+IgnoreIterationMark_ja_JP: object
 """
 Ignore Hiragana and Katakana iteration mark in Japanese fuzzy search.
 """
-IgnoreKiKuFollowedBySa_ja_JP: 'UnoEnum'
+IgnoreKiKuFollowedBySa_ja_JP: object
 """
 Ignore Katakana KI/KU which follows the character in SA column in Japanese fuzzy search.
 
 Ignore Katakana KI/KU following the character in SA column in Japanese fuzzy search.
 """
-IgnoreMiddleDot_ja_JP: 'UnoEnum'
+IgnoreMiddleDot_ja_JP: object
 """
 Ignore middle dot in Japanese fuzzy search.
 """
-IgnoreMinusSign_ja_JP: 'UnoEnum'
+IgnoreMinusSign_ja_JP: object
 """
 Ignore dash or minus sign in Japanese fuzzy search.
 """
-IgnoreProlongedSoundMark_ja_JP: 'UnoEnum'
+IgnoreProlongedSoundMark_ja_JP: object
 """
 Ignore Japanese prolonged sound mark in Japanese fuzzy search.
 """
-IgnoreSeZe_ja_JP: 'UnoEnum'
+IgnoreSeZe_ja_JP: object
 """
 Ignore Katakana and Hiragana Se/Sye and Ze/Je in Japanese fuzzy search.
 """
-IgnoreSeparator_ja_JP: 'UnoEnum'
+IgnoreSeparator_ja_JP: object
 """
 Ignore separator punctuations in Japanese fuzzy search.
 """
-IgnoreSize_ja_JP: 'UnoEnum'
+IgnoreSize_ja_JP: object
 """
 Ignore Japanese normal and small sized character in Japanese fuzzy search.
 """
-IgnoreSpace_ja_JP: 'UnoEnum'
+IgnoreSpace_ja_JP: object
 """
 Ignore white space characters, include space, TAB, return, etc. in Japanese fuzzy search.
 """
-IgnoreTiJi_ja_JP: 'UnoEnum'
+IgnoreTiJi_ja_JP: object
 """
 Ignore Katakana and Hiragana Tsui/Tea/Ti and Dyi/Ji in Japanese fuzzy search.
 """
-IgnoreTraditionalKana_ja_JP: 'UnoEnum'
+IgnoreTraditionalKana_ja_JP: object
 """
 Ignore Japanese traditional Katakana and Hiragana character in Japanese fuzzy search.
 
 Ignore Japanese traditional Katakana and Hiragana characters in Japanese fuzzy search.
 """
-IgnoreTraditionalKanji_ja_JP: 'UnoEnum'
+IgnoreTraditionalKanji_ja_JP: object
 """
 Ignore Japanese traditional Kanji character in Japanese fuzzy search.
 
 Ignore Japanese traditional Kanji characters in Japanese fuzzy search.
 """
-IgnoreZiZu_ja_JP: 'UnoEnum'
+IgnoreZiZu_ja_JP: object
 """
 Ignore Katakana and Hiragana Zi/Zi and Zu/Zu in Japanese fuzzy search.
 """
-KATAKANA_HIRAGANA: 'UnoEnum'
+KATAKANA_HIRAGANA: object
 """
 Transliterate a Japanese string from Katakana to Hiragana.
 """
-LOWERCASE_UPPERCASE: 'UnoEnum'
+LOWERCASE_UPPERCASE: object
 """
 Transliterate a string from lower case to upper case.
 """
-LargeToSmall_ja_JP: 'UnoEnum'
+LargeToSmall_ja_JP: object
 """
 transliterate Japanese normal sized character to small sized character
 """
-NumToCharFullwidth: 'UnoEnum'
+NumToCharFullwidth: object
 """
 Transliterate a half width number string to full width number string.
 """
-NumToCharHangul_ko: 'UnoEnum'
+NumToCharHangul_ko: object
 """
 Transliterate an ASCII number string to Korean Hangul number string.
 """
-NumToCharKanjiShort_ja_JP: 'UnoEnum'
+NumToCharKanjiShort_ja_JP: object
 """
 Transliterate an ASCII number string to Japanese Kanji number string.
 """
-NumToCharLower_ko: 'UnoEnum'
+NumToCharLower_ko: object
 """
 Transliterate an ASCII number string to Korean Hanja lower case number string.
 """
-NumToCharLower_zh_CN: 'UnoEnum'
+NumToCharLower_zh_CN: object
 """
 Transliterate an ASCII number string to Simplified Chinese lower case number string.
 """
-NumToCharLower_zh_TW: 'UnoEnum'
+NumToCharLower_zh_TW: object
 """
 Transliterate an ASCII number string to Traditional Chinese lower case number string.
 """
-NumToCharUpper_ko: 'UnoEnum'
+NumToCharUpper_ko: object
 """
 Transliterate an ASCII number string to Korean Hanja upper case number string.
 """
-NumToCharUpper_zh_CN: 'UnoEnum'
+NumToCharUpper_zh_CN: object
 """
 Transliterate an ASCII number string to Simplified Chinese upper case number string.
 """
-NumToCharUpper_zh_TW: 'UnoEnum'
+NumToCharUpper_zh_TW: object
 """
 Transliterate an ASCII number string to Traditional Chinese upper case number string.
 """
-NumToTextFormalHangul_ko: 'UnoEnum'
+NumToTextFormalHangul_ko: object
 """
 Transliterate an ASCII number string to formal Korean Hangul number string in spellout format.
 """
-NumToTextFormalLower_ko: 'UnoEnum'
+NumToTextFormalLower_ko: object
 """
 Transliterate an ASCII number string to formal Korean Hanja lower case number string in spellout format.
 """
-NumToTextFormalUpper_ko: 'UnoEnum'
+NumToTextFormalUpper_ko: object
 """
 Transliterate an ASCII number string to formal Korean Hanja upper case number string in spellout format.
 """
-NumToTextInformalHangul_ko: 'UnoEnum'
+NumToTextInformalHangul_ko: object
 """
 Transliterate an ASCII number string to informal Korean Hangul number string in spellout format.
 """
-NumToTextInformalLower_ko: 'UnoEnum'
+NumToTextInformalLower_ko: object
 """
 Transliterate an ASCII number string to informal Korean Hanja lower case number string in spellout format.
 """
-NumToTextInformalUpper_ko: 'UnoEnum'
+NumToTextInformalUpper_ko: object
 """
 Transliterate an ASCII number string to informal Korean Hanja upper case number string in spellout format.
 """
-NumToTextLower_zh_CN: 'UnoEnum'
+NumToTextLower_zh_CN: object
 """
 Transliterate an ASCII number string to Simplified Chinese lower case number string in spellout format.
 """
-NumToTextLower_zh_TW: 'UnoEnum'
+NumToTextLower_zh_TW: object
 """
 Transliterate an ASCII number string to Traditional Chinese lower case number string in spellout format.
 """
-NumToTextUpper_zh_CN: 'UnoEnum'
+NumToTextUpper_zh_CN: object
 """
 Transliterate an ASCII number string to Simplified Chinese upper case number string in spellout format.
 """
-NumToTextUpper_zh_TW: 'UnoEnum'
+NumToTextUpper_zh_TW: object
 """
 Transliterate an ASCII number string to Traditional Chinese upper case number string in spellout format.
 """
-SmallToLarge_ja_JP: 'UnoEnum'
+SmallToLarge_ja_JP: object
 """
 transliterate Japanese small sized character to normal sized character
 """
-TextToNumFormalHangul_ko: 'UnoEnum'
+TextToNumFormalHangul_ko: object
 """
 Transliterate a Korean formal Hangul number string (spellout) to ASCII number string.
 """
-TextToNumFormalLower_ko: 'UnoEnum'
+TextToNumFormalLower_ko: object
 """
 Transliterate a Korean formal Hanja lower case number string (spellout) to ASCII number string.
 """
-TextToNumFormalUpper_ko: 'UnoEnum'
+TextToNumFormalUpper_ko: object
 """
 Transliterate a Korean formal Hanja upper case number string (spellout) to ASCII number string.
 """
-TextToNumInformalHangul_ko: 'UnoEnum'
+TextToNumInformalHangul_ko: object
 """
 Transliterate a Korean informal Hangul number string (spellout) to ASCII number string.
 """
-TextToNumInformalLower_ko: 'UnoEnum'
+TextToNumInformalLower_ko: object
 """
 Transliterate a Korean informal Hanja lower case number string (spellout) to ASCII number string.
 """
-TextToNumInformalUpper_ko: 'UnoEnum'
+TextToNumInformalUpper_ko: object
 """
 Transliterate a Korean informal Hanja upper case number string (spellout) to ASCII number string.
 """
-TextToNumLower_zh_CN: 'UnoEnum'
+TextToNumLower_zh_CN: object
 """
 Transliterate a Simplified Chinese lower case number string (spellout) to ASCII number string.
 """
-TextToNumLower_zh_TW: 'UnoEnum'
+TextToNumLower_zh_TW: object
 """
 Transliterate a Traditional Chinese lower case number string (spellout) to ASCII number string.
 """
-TextToNumUpper_zh_CN: 'UnoEnum'
+TextToNumUpper_zh_CN: object
 """
 Transliterate a Simplified Chinese upper case number string (spellout) to ASCII number string.
 """
-TextToNumUpper_zh_TW: 'UnoEnum'
+TextToNumUpper_zh_TW: object
 """
 Transliterate a Traditional Chinese upper case number string (spellout) to ASCII number string.
 """
-UPPERCASE_LOWERCASE: 'UnoEnum'
+UPPERCASE_LOWERCASE: object
 """
 Transliterate a string from upper case to lower case.
 """

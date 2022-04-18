@@ -26,26 +26,22 @@ Enum
 See Also:
     `API ContextMenuInterceptorAction <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1ui.html#a6e0452a8960be949dce52c427920ebbe>`_
 """
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ooo.stubs.uno_enum import UnoEnum
-
-CANCELLED: 'UnoEnum'
+CANCELLED: object
 """
 the context menu must not be executed.
 
 The next registered XContextMenuInterceptor should not be notified.
 """
-CONTINUE_MODIFIED: 'UnoEnum'
+CONTINUE_MODIFIED: object
 """
 the menu has been modified and the next registered XContextMenuInterceptor should be notified.
 """
-EXECUTE_MODIFIED: 'UnoEnum'
+EXECUTE_MODIFIED: object
 """
 the menu has been modified and should be executed without notifying the next registered XContextMenuInterceptor.
 """
-IGNORED: 'UnoEnum'
+IGNORED: object
 """
 the XContextMenuInterceptor has ignored the call.
 
