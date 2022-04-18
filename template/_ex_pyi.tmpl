@@ -71,10 +71,15 @@ $self.get_from_import($name, $imp)
 #end for
 #end if
 
-#if $allow_db:
-class ${safe_name}($self.get_class_inherits_from_db())$self.get_class_end()
+#if $name == "Exception"
+from builtins import Exception as BException
+class Exception(BException)$self.get_class_end()
 #else
+    #if $allow_db:
+class ${safe_name}($self.get_class_inherits_from_db())$self.get_class_end()
+    #else
 class ${safe_name}($self.get_class_inherits($safe_name, $inherits))$self.get_class_end()
+    #end if
 #end if
 #if $include_desc
     """
