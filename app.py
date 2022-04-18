@@ -797,7 +797,7 @@ def _args_data_json(parser: argparse.ArgumentParser) -> None:
 
 
 def _args_data_star(parser: argparse.ArgumentParser, config: AppConfig) -> None:
-    opt_group = parser.add_argument_group()
+    opt_group = parser.add_mutually_exclusive_group()
     css_dir_lo = config.builld_dir + os.sep + os.sep.join(config.com_sun_star_lo)
     css_dir_dyn = config.builld_dir + os.sep + os.sep.join(config.com_sun_star_dyn)
     css_dir_pyi = config.builld_dir + os.sep + \
@@ -818,12 +818,21 @@ def _args_data_star(parser: argparse.ArgumentParser, config: AppConfig) -> None:
         default=False,
         required=False
     )
-    opt_group.add_argument(
+    star_group = parser.add_argument_group()
+    star_group.add_argument(
         '-i', '--css-pyi',
         help=f"Writes imports for all '{config.builld_dir}/{os.sep.join(config.pyi_dir)}' files into  {css_dir_pyi}... __init__.pyi files.",
         action='store_true',
         dest='write_pyi',
         default=False,
+        required=False
+    )
+    star_group.add_argument(
+        '-w', '--no-write-init',
+        help=f"Writes star/__init__py",
+        action='store_false',
+        dest='write_star_init',
+        default=True,
         required=False
     )
     parser.add_argument(
@@ -1384,7 +1393,8 @@ def _args_action_db_star(args: argparse.Namespace, config: AppConfig) -> None:
         write_lo=args.write_lo,
         write_dyn=args.write_dyn,
         write_pyi=args.write_pyi,
-        rel_import=args.rel_import
+        rel_import=args.rel_import,
+        write_pyi_star_init=args.write_star_init
     )
     qc_result = qc.results()
     if qc_result:
