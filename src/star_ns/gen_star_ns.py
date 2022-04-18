@@ -64,8 +64,9 @@ class GenerateStarNs:
             return results
 
         lines: List[str] = []
+        skip = ('enum', 'const')
         for comp in self._c_data:
-            if self._write_ns == WriteNsEnum.STAR_PYI and comp.type == 'enum':
+            if self._write_ns == WriteNsEnum.STAR_PYI and comp.type in skip:
                 continue
             if self._is_rel:
                 lines.extend(buld_lines_rel(comp))
@@ -77,13 +78,14 @@ class GenerateStarNs:
         results = []
         if self._write_ns != WriteNsEnum.STAR_PYI:
             return results
+        all_comp = ('enum', 'const')
         for comp in self._c_data:
-            if comp.type == 'enum':
+            if comp.type in all_comp:
                 f = f"{comp.name}.pyi"
                 if self._is_rel:
-                    lines = self._build_line_enum_pyi_rel(comp)
+                    lines = self._build_line_all_pyi_rel(comp)
                 else:
-                    lines = self._build_line_enum_pyi(comp)
+                    lines = self._build_line_all_pyi(comp)
                 results.append(
                     StarNsFile(
                         file_name=f,
@@ -93,14 +95,14 @@ class GenerateStarNs:
                 )
         return results
 
-    def _build_line_enum_pyi_rel(self, c: Component) -> List[str]:
+    def _build_line_all_pyi_rel(self, c: Component) -> List[str]:
         # from .._pyi.awt.font_slant import *
         ns = c.namespace.removeprefix('com.sun.star.')
         in_str = self._import_frm + '.' + ns + '.' + c.name
         ns_im = RelInfo.get_rel_import(in_str=in_str, ns=self._rel)
         return [f"from {ns_im.frm} import *"]
 
-    def _build_line_enum_pyi(self, c: Component) -> List[str]:
+    def _build_line_all_pyi(self, c: Component) -> List[str]:
         # from .._pyi.awt.font_slant import *
         ns = c.namespace.removeprefix('com.sun.star.')
         return [f"from {self._import_frm}.{ns}.{c.c_name} import *"]
