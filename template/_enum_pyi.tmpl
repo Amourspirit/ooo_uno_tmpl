@@ -34,6 +34,9 @@ $self.load_data()#slurp
 #if $libre_office_ver:
 # Libre Office Version: $libre_office_ver
 #end if
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    import uno
 """
 Enum
 
@@ -53,7 +56,7 @@ See Also:
 
 #for $key in $key_list
 ##$self.get_safe_word($key)$self.get_typing($self.get_safe_word($key))
-$self.get_safe_word($key): object
+$self.get_safe_word($key): 'uno.Enum'
     #set $value = $enum_dict[$key]
 """
 #if isinstance($value, str):
