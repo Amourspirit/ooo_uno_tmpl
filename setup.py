@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import pathlib
 from setuptools import setup, find_packages
-from src.parser import __version__
+from src import __version__
 PKG_NAME = 'oootmpl'
 VERSION = __version__
 PKG_MAIN = 'oot'
