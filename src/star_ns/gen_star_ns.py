@@ -3,6 +3,7 @@ from typing import List, Optional
 from rel import mod_rel as RelInfo
 from .opt import WriteNsEnum
 from ..data_manage.data_class.component import Component
+from ..data_manage.data_class.star_ns_file import StarNsFile
 from ..cfg.config import AppConfig
 
 
@@ -28,8 +29,8 @@ class GenerateStarNs:
             self._include_const_enum = True
             self._import_frm = self._config.dyn_dir
         elif self._write_ns == WriteNsEnum.STAR_PYI:
-            # self._import_frm = '.'.join(self._config.pyi_dir)
-            self._import_frm = self._config.pyi_dir[-1]
+            self._import_frm = '.'.join(self._config.pyi_dir)
+            # self._import_frm = self._config.pyi_dir[-1]
         else:
             self._import_frm = self._config.uno_obj_dir
 
@@ -63,9 +64,45 @@ class GenerateStarNs:
             return results
 
         lines: List[str] = []
+        skip = ('enum', 'const')
         for comp in self._c_data:
+            if self._write_ns == WriteNsEnum.STAR_PYI and comp.type in skip:
+                continue
             if self._is_rel:
                 lines.extend(buld_lines_rel(comp))
             else:
                 lines.extend(build_lines(comp))
         return lines
+
+    def get_oth_files(self) -> List[StarNsFile]:
+        results = []
+        if self._write_ns != WriteNsEnum.STAR_PYI:
+            return results
+        all_comp = ('enum', 'const')
+        for comp in self._c_data:
+            if comp.type in all_comp:
+                f = f"{comp.name}.pyi"
+                if self._is_rel:
+                    lines = self._build_line_all_pyi_rel(comp)
+                else:
+                    lines = self._build_line_all_pyi(comp)
+                results.append(
+                    StarNsFile(
+                        file_name=f,
+                        component=comp,
+                        lines=lines
+                    )
+                )
+        return results
+
+    def _build_line_all_pyi_rel(self, c: Component) -> List[str]:
+        # from .._pyi.awt.font_slant import *
+        ns = c.namespace.removeprefix('com.sun.star.')
+        in_str = self._import_frm + '.' + ns + '.' + c.name
+        ns_im = RelInfo.get_rel_import(in_str=in_str, ns=self._rel)
+        return [f"from {ns_im.frm} import *"]
+
+    def _build_line_all_pyi(self, c: Component) -> List[str]:
+        # from .._pyi.awt.font_slant import *
+        ns = c.namespace.removeprefix('com.sun.star.')
+        return [f"from {self._import_frm}.{ns}.{c.c_name} import *"]
