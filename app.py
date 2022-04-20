@@ -264,8 +264,8 @@ Regeneration of a new LO API version.
         Remvoe entire contents of ooodata dir.
         Remove entire contents of lo dir.
         Make sure cache_dir (set in config) is removed from system tmp dir.
-            Defaults to "ooo_uno_tmpl"
-            EG: $ rm -rf /tmp/ooo_uno_tmpl
+            Defaults to "ooo_uno_tmpl_7_2"
+            EG: $ rm -rf /tmp/ooo_uno_tmpl_7_2
 
     Regeneration steps:
         1. Set config to new version of LO API.
