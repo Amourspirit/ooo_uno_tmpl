@@ -49,9 +49,6 @@ $self.load_data()#slurp
 # Libre Office Version: $libre_office_ver
 from typing_extensions import Literal
 #end if
-#if len($properties) > 0
-from $oenv import UNO_NONE
-#end if
 #if $requires_typing or len($sorted) > 0
 import typing
 #end if
@@ -70,11 +67,18 @@ $self.get_from_import($name, $imp)
 $self.get_from_import($name, $imp)
 #end for
 #end if
+#if $name == "Exception"
+from builtins import Exception as BException
 
-#if $allow_db:
-class ${safe_name}($self.get_class_inherits_from_db())$self.get_class_end()
+
+class Exception(BException)$self.get_class_end()
 #else
+
+    #if $allow_db:
+class ${safe_name}($self.get_class_inherits_from_db())$self.get_class_end()
+    #else
 class ${safe_name}($self.get_class_inherits($safe_name, $inherits))$self.get_class_end()
+    #end if
 #end if
 #if $include_desc
     """

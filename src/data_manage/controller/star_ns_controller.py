@@ -4,6 +4,7 @@ from typing import Any, Union
 from ..db_class.qry_component import QryComponent
 from ..db_class.db_connect import DbConnect
 from ...star_ns.write_star_ns import WriteStarNs, WriteNsEnum
+from ...star_ns.star_pyi_init_err import write_star_error
 from ...cfg.config import AppConfig
 
 
@@ -27,6 +28,7 @@ class StarNsControler:
         self._write_lo = bool(kwargs.get('write_lo', False))
         self._write_dyn = bool(kwargs.get('write_dyn', False))
         self._write_pyi = bool(kwargs.get('write_pyi', False))
+        self._write_pyi_star_init = bool(kwargs.get('write_pyi_star_init', True))
         self._conn = DbConnect(config)
 
     def results(self) -> Any:
@@ -53,3 +55,5 @@ class StarNsControler:
                              write_ns=write_ns,
                              log=self._log)
         writer.write()
+        if self._write_pyi_star_init:
+            write_star_error()

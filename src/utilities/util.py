@@ -2,6 +2,7 @@
 import os
 import sys
 import __main__
+from typing import Union
 from pathlib import Path
 from ..cfg import config
 
@@ -51,3 +52,18 @@ def get_app_cfg() -> config.AppConfig:
     if _APP_CFG is None:
         _APP_CFG = config.read_config_default()
     return _APP_CFG
+
+
+def mkdirp(dest_dir: Union[str, Path]):
+    """
+    Creates directory and all child directories if needed
+
+    Args:
+        dest_dir (Union[str, Path]): path to create directories for.
+            Must be dir path only. No checking is done for file names.
+    """
+    # Python ≥ 3.5
+    if isinstance(dest_dir, Path):
+        dest_dir.mkdir(parents=True, exist_ok=True)
+    else:
+        Path(dest_dir).mkdir(parents=True, exist_ok=True)
