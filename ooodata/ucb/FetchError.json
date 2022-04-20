@@ -1,0 +1,67 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "FetchError",
+  "type": "const",
+  "namespace": "com.sun.star.ucb",
+  "parser_args": {
+    "sort": false,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "hex": false,
+    "flags": false,
+    "include_desc": true
+  },
+  "data": {
+    "name": "FetchError",
+    "namespace": "com.sun.star.ucb",
+    "url": "https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1ucb_1_1FetchError.html",
+    "flags": false,
+    "base_class": "ConstIntBase",
+    "allow_db": true,
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "from_imports": [],
+    "from_imports_typing": [],
+    "fullname": "com.sun.star.ucb.FetchError",
+    "desc": [
+      "These values are used to specify whether and which error has occurred while fetching data of some ContentResultSet rows."
+    ],
+    "items": [
+      {
+        "name": "SUCCESS",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 0,
+        "lines": [
+          "indicates that fetching of data was successful."
+        ]
+      },
+      {
+        "name": "ENDOFDATA",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 1,
+        "lines": [
+          "indicates that during fetching we went beyond the last or first row.",
+          "",
+          "Therefore the FetchResult does not contain the full count of demanded rows, but the maximum possible count must be contained."
+        ]
+      },
+      {
+        "name": "EXCEPTION",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 2,
+        "lines": [
+          "indicates that during fetching we got an exception.",
+          "",
+          "The row, that causes the exception, and all following ( \\\"following\\\" in read order! ) rows are not contained in the FetchResult. Therefore the FetchResult does not contain the full count of demanded rows. But all properly read rows so far must be contained."
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,175 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XClob",
+  "type": "interface",
+  "namespace": "com.sun.star.sdbc",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..io.x_input_stream",
+        "XInputStream",
+        "XInputStream_98d40ab4"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XClob",
+      "XInputStream_98d40ab4"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.io.XInputStream"
+      ]
+    },
+    "name": "XClob",
+    "imports": [],
+    "namespace": "com.sun.star.sdbc",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "is the mapping for the SQL CLOB type.",
+      "",
+      "A SQL CLOB is a built-in type that stores a Character Large Object as a column value in a row of a database table. The driver implements a Clob object using a SQL locator(CLOB) , which means that a Clob object contains a logical pointer to the SQL CLOB data rather than the data itself. A Clob object is valid for the duration of the transaction in which it was created.",
+      "",
+      "The Clob interface provides methods for getting the length of a SQL CLOB (Character Large Object) value, for materializing a CLOB value on the client, and for searching for a substring or CLOB object within a CLOB value.",
+      "",
+      "Methods in the interfaces com.sun.star.sdbc.XResultSet , and com.sun.star.sdbc.XPreparedStatement , such as getClob and setClob allow a programmer to access the SQL CLOB."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sdbc_1_1XClob.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getCharacterStream",
+          "returns": "XInputStream_98d40ab4",
+          "returns_origin": "com.sun.star.io.XInputStream",
+          "desc": [
+            "gets the Clob contents as a stream."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": []
+        },
+        {
+          "name": "getSubString",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "returns a copy of the specified substring in the Clob value designated by this Clob object.",
+            "",
+            "The substring begins at position pos and has up to length consecutive characters."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            {
+              "name": "pos",
+              "type": "int",
+              "direction": "in",
+              "origin": "hyper"
+            },
+            {
+              "name": "length",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "length",
+          "returns": "int",
+          "returns_origin": "hyper",
+          "desc": [
+            "returns the number of characters in the CLOB value designated by this Clob object."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": []
+        },
+        {
+          "name": "position",
+          "returns": "int",
+          "returns_origin": "hyper",
+          "desc": [
+            "determines the character position at which the specified substring searchstr appears in the Clob.",
+            "",
+            "The search begins at position start."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            {
+              "name": "searchstr",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "start",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "positionOfClob",
+          "returns": "int",
+          "returns_origin": "hyper",
+          "desc": [
+            "determines the position at which the specified Clob object pattern appears in this Clob object.",
+            "",
+            "The search begins at position start."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            {
+              "name": "pattern",
+              "type": "XClob",
+              "direction": "in",
+              "origin": "com.sun.star.sdbc.XClob"
+            },
+            {
+              "name": "start",
+              "type": "int",
+              "direction": "in",
+              "origin": "hyper"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

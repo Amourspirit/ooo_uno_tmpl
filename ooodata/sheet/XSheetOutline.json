@@ -1,0 +1,202 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XSheetOutline",
+  "type": "interface",
+  "namespace": "com.sun.star.sheet",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..table.cell_range_address",
+        "CellRangeAddress",
+        "CellRangeAddress_ec450d43"
+      ],
+      [
+        "..table.table_orientation",
+        "TableOrientation",
+        "TableOrientation_ee780d84"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "CellRangeAddress_ec450d43",
+      "TableOrientation_ee780d84"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.table.CellRangeAddress",
+        "com.sun.star.table.TableOrientation"
+      ]
+    },
+    "name": "XSheetOutline",
+    "imports": [],
+    "namespace": "com.sun.star.sheet",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "provides methods to access the outlines of a sheet."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sheet_1_1XSheetOutline.html",
+    "items": {
+      "methods": [
+        {
+          "name": "autoOutline",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "creates outline groups from formula references in a range."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aRange",
+              "type": "CellRangeAddress_ec450d43",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellRangeAddress"
+            }
+          ]
+        },
+        {
+          "name": "clearOutline",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "removes all outline groups from the sheet."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "group",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "creates an outline group."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aRange",
+              "type": "CellRangeAddress_ec450d43",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellRangeAddress"
+            },
+            {
+              "name": "nOrientation",
+              "type": "TableOrientation_ee780d84",
+              "direction": "in",
+              "origin": "com.sun.star.table.TableOrientation"
+            }
+          ]
+        },
+        {
+          "name": "hideDetail",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "collapses an outline group."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aRange",
+              "type": "CellRangeAddress_ec450d43",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellRangeAddress"
+            }
+          ]
+        },
+        {
+          "name": "showDetail",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "reopens an outline group."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aRange",
+              "type": "CellRangeAddress_ec450d43",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellRangeAddress"
+            }
+          ]
+        },
+        {
+          "name": "showLevel",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "shows all outlined groups below a specific level."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "nLevel",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "nOrientation",
+              "type": "TableOrientation_ee780d84",
+              "direction": "in",
+              "origin": "com.sun.star.table.TableOrientation"
+            }
+          ]
+        },
+        {
+          "name": "ungroup",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "removes outline groups.",
+            "",
+            "In the specified range, all outline groups on the innermost level are removed."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aRange",
+              "type": "CellRangeAddress_ec450d43",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellRangeAddress"
+            },
+            {
+              "name": "nOrientation",
+              "type": "TableOrientation_ee780d84",
+              "direction": "in",
+              "origin": "com.sun.star.table.TableOrientation"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,158 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "FormulaParser",
+  "type": "service",
+  "namespace": "com.sun.star.sheet",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..beans.property_set",
+        "PropertySet",
+        "PropertySet_b0e70ba2"
+      ],
+      [
+        ".x_formula_parser",
+        "XFormulaParser",
+        "XFormulaParser_d54d0cbc"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".external_link_info",
+        "ExternalLinkInfo",
+        "ExternalLinkInfo_f09b0d7e"
+      ],
+      [
+        ".formula_op_code_map_entry",
+        "FormulaOpCodeMapEntry",
+        "FormulaOpCodeMapEntry_37da0f61"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.beans.PropertySet": "PropertySet_b0e70ba2",
+      "com.sun.star.sheet.XFormulaParser": "XFormulaParser_d54d0cbc"
+    },
+    "quote": [
+      "typing.Tuple[ExternalLinkInfo_f09b0d7e, ...]",
+      "typing.Tuple[FormulaOpCodeMapEntry_37da0f61, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[ExternalLinkInfo_f09b0d7e, ...]",
+      "typing.Tuple[FormulaOpCodeMapEntry_37da0f61, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.PropertySet",
+        "com.sun.star.sheet.XFormulaParser"
+      ],
+      "typing": [
+        "com.sun.star.sheet.ExternalLinkInfo",
+        "com.sun.star.sheet.FormulaOpCodeMapEntry"
+      ]
+    },
+    "name": "FormulaParser",
+    "imports": [],
+    "namespace": "com.sun.star.sheet",
+    "extends": [
+      "com.sun.star.beans.PropertySet",
+      "com.sun.star.sheet.XFormulaParser"
+    ],
+    "desc": [
+      "",
+      "**since**",
+      "",
+      "    OOo 3.1"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1sheet_1_1FormulaParser.html",
+    "items": {
+      "types": [
+        {
+          "name": "ExternalLinks",
+          "returns": "typing.Tuple[ExternalLinkInfo_f09b0d7e, ...]",
+          "origtype": null,
+          "origin": "sequence< ExternalLinkInfo >",
+          "desc": [
+            "contains a list of external links referenced in formulas.",
+            "",
+            "Use of this property depends on the FormulaConvention in use. It is relevant only for AddressConvention.XL_OOX to map indices to external documents. The sequence must be in the order of indices used. Note that indices are 1-based, the sequence must start with an empty element.",
+            "",
+            "**since**",
+            "",
+            "    OOo 3.1"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "OpCodeMap",
+          "returns": "typing.Tuple[FormulaOpCodeMapEntry_37da0f61, ...]",
+          "origtype": null,
+          "origin": "sequence< FormulaOpCodeMapEntry >",
+          "desc": [
+            "contains the complete mapping of names to op-codes.",
+            "",
+            "Names and symbols not defined here lead to a parser/print error."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ],
+      "properties": [
+        {
+          "name": "CompileEnglish",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "specifies whether to use English parser and formatter.",
+            "",
+            "Note: When changing this, an already existing OpCodeMap needs to be recreated internally, so for performance reasons set this before setting the OpCodeMap."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FormulaConvention",
+          "returns": "int",
+          "origtype": null,
+          "origin": "short",
+          "desc": [
+            "specifies which address reference style convention to use when parsing a formula string."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IgnoreLeadingSpaces",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParameterSeparator",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

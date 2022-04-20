@@ -1,0 +1,105 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XGalleryThemeProvider",
+  "type": "interface",
+  "namespace": "com.sun.star.gallery",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..container.x_name_access",
+        "XNameAccess",
+        "XNameAccess_e2ab0cf6"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_gallery_theme",
+        "XGalleryTheme",
+        "XGalleryTheme_e28e0d13"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.container.XNameAccess": "XNameAccess_e2ab0cf6"
+    },
+    "quote": [
+      "XGalleryTheme_e28e0d13"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.container.XNameAccess"
+      ],
+      "typing": [
+        "com.sun.star.gallery.XGalleryTheme"
+      ]
+    },
+    "name": "XGalleryThemeProvider",
+    "imports": [],
+    "namespace": "com.sun.star.gallery",
+    "extends": [
+      "com.sun.star.container.XNameAccess"
+    ],
+    "desc": [
+      "provides access to the Gallery themes.",
+      "",
+      "It also allows inserting and removing of Gallery themes by name.",
+      "",
+      "This interface extends the interface com.sun.star.container.XNameAccess which provides access to existing Gallery themes collection."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1gallery_1_1XGalleryThemeProvider.html",
+    "items": {
+      "methods": [
+        {
+          "name": "insertNewByName",
+          "returns": "XGalleryTheme_e28e0d13",
+          "returns_origin": "com.sun.star.gallery.XGalleryTheme",
+          "desc": [
+            "creates a new Gallery theme and adds it to the collection."
+          ],
+          "raises": [
+            "com.sun.star.container.ElementExistException"
+          ],
+          "args": [
+            {
+              "name": "ThemeName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "removeByName",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "deletes a Gallery theme from the collection."
+          ],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException"
+          ],
+          "args": [
+            {
+              "name": "ThemeName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

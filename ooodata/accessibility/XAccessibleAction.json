@@ -1,0 +1,140 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XAccessibleAction",
+  "type": "interface",
+  "namespace": "com.sun.star.accessibility",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_accessible_key_binding",
+        "XAccessibleKeyBinding",
+        "XAccessibleKeyBinding_c493129a"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XAccessibleKeyBinding_c493129a"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.accessibility.XAccessibleKeyBinding"
+      ]
+    },
+    "name": "XAccessibleAction",
+    "imports": [],
+    "namespace": "com.sun.star.accessibility",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "Implement this interface to give access to actions that can be executed for accessible objects.",
+      "",
+      "Every accessible object that can be manipulated beyond its methods exported over the accessibility API should support this interface to expose all actions that it can perform. Each action can be performed or be queried for a description or associated key bindings.",
+      "",
+      "**since**",
+      "",
+      "    OOo 1.1.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleAction.html",
+    "items": {
+      "methods": [
+        {
+          "name": "doAccessibleAction",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "Perform the specified Action on the object."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "getAccessibleActionCount",
+          "returns": "int",
+          "returns_origin": "long",
+          "desc": [
+            "Returns the number of accessible actions available in this object.",
+            "",
+            "If there are more than one, the first one is considered the \\\"default\\\" action of the object."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getAccessibleActionDescription",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "Returns a description of the specified action of the object."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "getAccessibleActionKeyBinding",
+          "returns": "XAccessibleKeyBinding_c493129a",
+          "returns_origin": "com.sun.star.accessibility.XAccessibleKeyBinding",
+          "desc": [
+            "Returns a key binding object, if there is one, associated with the specified action.",
+            "",
+            "Note that there can be several alternative key bindings for an action. See XAccessibleKeyBinding for more information about how key bindings are represented."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

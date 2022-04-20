@@ -1,0 +1,101 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XFastPropertySet",
+  "type": "interface",
+  "namespace": "com.sun.star.beans",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": []
+    },
+    "name": "XFastPropertySet",
+    "imports": [],
+    "namespace": "com.sun.star.beans",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "provides a fast way of accessing and changing property values.",
+      "",
+      "This interface is an extension to the XPropertySet interface. The get and set methods use handles to access the property values instead of character strings."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XFastPropertySet.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getFastPropertyValue",
+          "returns": "object",
+          "returns_origin": "any",
+          "desc": [],
+          "raises": [
+            "com.sun.star.beans.UnknownPropertyException",
+            "com.sun.star.lang.WrappedTargetException"
+          ],
+          "args": [
+            {
+              "name": "nHandle",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "setFastPropertyValue",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "sets the value to the property with the specified name."
+          ],
+          "raises": [
+            "com.sun.star.beans.UnknownPropertyException",
+            "com.sun.star.beans.PropertyVetoException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.WrappedTargetException"
+          ],
+          "args": [
+            {
+              "name": "nHandle",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aValue",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

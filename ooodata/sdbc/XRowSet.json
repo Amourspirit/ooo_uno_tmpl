@@ -1,0 +1,115 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XRowSet",
+  "type": "interface",
+  "namespace": "com.sun.star.sdbc",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_result_set",
+        "XResultSet",
+        "XResultSet_98e30aa7"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_row_set_listener",
+        "XRowSetListener",
+        "XRowSetListener_d3580ca6"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.sdbc.XResultSet": "XResultSet_98e30aa7"
+    },
+    "quote": [
+      "XRowSetListener_d3580ca6"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.sdbc.XResultSet"
+      ],
+      "typing": [
+        "com.sun.star.sdbc.XRowSetListener"
+      ]
+    },
+    "name": "XRowSet",
+    "imports": [],
+    "namespace": "com.sun.star.sdbc",
+    "extends": [
+      "com.sun.star.sdbc.XResultSet"
+    ],
+    "desc": [
+      "enhances the functionality of a result set.",
+      "",
+      "It allows implementation of a special behavior for a result set and notifies an application on certain row set events such as a change in its value.",
+      "",
+      "The XRowSet interface is unique in that it is intended to be a software layer on top of an SDBC driver. Implementations of the RowSet interface can be provided by anyone."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sdbc_1_1XRowSet.html",
+    "items": {
+      "methods": [
+        {
+          "name": "addRowSetListener",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "adds the specified listener to receive the events \\\"cursorMoved\\\", \\\"rowChanged\\\", and \\\"rowSetChanged\\\"."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "listener",
+              "type": "XRowSetListener_d3580ca6",
+              "direction": "in",
+              "origin": "com.sun.star.sdbc.XRowSetListener"
+            }
+          ]
+        },
+        {
+          "name": "execute",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "populates a row set with data.",
+            "",
+            "The description of the data source and other important information for filling the row set with data."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": []
+        },
+        {
+          "name": "removeRowSetListener",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "removes the specified listener."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "listener",
+              "type": "XRowSetListener_d3580ca6",
+              "direction": "in",
+              "origin": "com.sun.star.sdbc.XRowSetListener"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

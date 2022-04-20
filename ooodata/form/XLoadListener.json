@@ -1,0 +1,154 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XLoadListener",
+  "type": "interface",
+  "namespace": "com.sun.star.form",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..lang.x_event_listener",
+        "XEventListener",
+        "XEventListener_c7230c4a"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..lang.event_object",
+        "EventObject",
+        "EventObject_a3d70b03"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.lang.XEventListener": "XEventListener_c7230c4a"
+    },
+    "quote": [
+      "EventObject_a3d70b03"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.lang.XEventListener"
+      ],
+      "typing": [
+        "com.sun.star.lang.EventObject"
+      ]
+    },
+    "name": "XLoadListener",
+    "imports": [],
+    "namespace": "com.sun.star.form",
+    "extends": [
+      "com.sun.star.lang.XEventListener"
+    ],
+    "desc": [
+      "receives load-related events from a loadable object.",
+      "",
+      "The interface is typically implemented by data-bound components, which want to listen to the data source that contains their database form."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1form_1_1XLoadListener.html",
+    "items": {
+      "methods": [
+        {
+          "name": "loaded",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "is invoked when the object has successfully connected to a datasource."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aEvent",
+              "type": "EventObject_a3d70b03",
+              "direction": "in",
+              "origin": "com.sun.star.lang.EventObject"
+            }
+          ]
+        },
+        {
+          "name": "reloaded",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "is invoked when the object has been reloaded."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aEvent",
+              "type": "EventObject_a3d70b03",
+              "direction": "in",
+              "origin": "com.sun.star.lang.EventObject"
+            }
+          ]
+        },
+        {
+          "name": "reloading",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "is invoked when the object is about to be reloaded.",
+            "",
+            "Components may use this to stop any other event processing related to the event source until they get the reloaded event."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aEvent",
+              "type": "EventObject_a3d70b03",
+              "direction": "in",
+              "origin": "com.sun.star.lang.EventObject"
+            }
+          ]
+        },
+        {
+          "name": "unloaded",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "is invoked after the object has disconnected from a datasource."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aEvent",
+              "type": "EventObject_a3d70b03",
+              "direction": "in",
+              "origin": "com.sun.star.lang.EventObject"
+            }
+          ]
+        },
+        {
+          "name": "unloading",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "is invoked when the object is about to be unloaded.",
+            "",
+            "Components may use this to stop any other event processing related to the event source before the object is unloaded."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aEvent",
+              "type": "EventObject_a3d70b03",
+              "direction": "in",
+              "origin": "com.sun.star.lang.EventObject"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

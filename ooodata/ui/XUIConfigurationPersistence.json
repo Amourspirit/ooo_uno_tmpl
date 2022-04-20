@@ -1,0 +1,138 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XUIConfigurationPersistence",
+  "type": "interface",
+  "namespace": "com.sun.star.ui",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..embed.x_storage",
+        "XStorage",
+        "XStorage_8e460a32"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XStorage_8e460a32"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.embed.XStorage"
+      ]
+    },
+    "name": "XUIConfigurationPersistence",
+    "imports": [],
+    "namespace": "com.sun.star.ui",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "specifies a persistence interface which supports to load/store user interface configuration data to a storage and to retrieve information about the current state.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.0"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ui_1_1XUIConfigurationPersistence.html",
+    "items": {
+      "methods": [
+        {
+          "name": "isModified",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "provides the current modify state of the configuration manager instance."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "isReadOnly",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "provides the current read-only state of the user configuration manager.",
+            "",
+            "Storing a user interface configuration to a read-only storage is not possible. A read-only configuration manager instance will also not support any changes to its configuration settings."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "reload",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "reloads the configuration data from the storage and reinitialize the user interface configuration manager instance with this data.",
+            "",
+            "It is up to the implementation if it defers the first loading process until the first data request using XUIConfigurationManager interface."
+          ],
+          "raises": [
+            "com.sun.star.uno.Exception"
+          ],
+          "args": []
+        },
+        {
+          "name": "store",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "stores the configuration data to the storage provided by setStorage() from the storage and initialize the user interface configuration manager instance with the newly data.",
+            "",
+            "This call can throw an com.sun.star.io.IOException if store() cannot store its data into the internal storage."
+          ],
+          "raises": [
+            "com.sun.star.uno.Exception"
+          ],
+          "args": []
+        },
+        {
+          "name": "storeToStorage",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "stores the configuration data to the provided storage, ignoring the previously set storage by setStorage().",
+            "",
+            "Can be used to make copy of the current user interface configuration data to another storage. This call will throw an com.sun.star.io.IOException if the provided storage is in read-only mode."
+          ],
+          "raises": [
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            {
+              "name": "Storage",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

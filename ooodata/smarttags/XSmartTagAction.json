@@ -1,0 +1,460 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XSmartTagAction",
+  "type": "interface",
+  "namespace": "com.sun.star.smarttags",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..lang.x_initialization",
+        "XInitialization",
+        "XInitialization_d46c0cca"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..container.x_string_key_map",
+        "XStringKeyMap",
+        "XStringKeyMap_ffc60de1"
+      ],
+      [
+        "..frame.x_controller",
+        "XController",
+        "XController_b00e0b8f"
+      ],
+      [
+        "..lang.locale",
+        "Locale",
+        "Locale_70d308fa"
+      ],
+      [
+        "..text.x_text_range",
+        "XTextRange",
+        "XTextRange_9a910ab7"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.lang.XInitialization": "XInitialization_d46c0cca"
+    },
+    "quote": [
+      "Locale_70d308fa",
+      "XController_b00e0b8f",
+      "XStringKeyMap_ffc60de1",
+      "XTextRange_9a910ab7"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.lang.XInitialization"
+      ],
+      "typing": [
+        "com.sun.star.container.XStringKeyMap",
+        "com.sun.star.frame.XController",
+        "com.sun.star.lang.Locale",
+        "com.sun.star.text.XTextRange"
+      ]
+    },
+    "name": "XSmartTagAction",
+    "imports": [],
+    "namespace": "com.sun.star.smarttags",
+    "extends": [
+      "com.sun.star.lang.XInitialization"
+    ],
+    "desc": [
+      "provides access to smart tag actions.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.3"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1smarttags_1_1XSmartTagAction.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getActionCaptionFromID",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "obtains a caption for a specified action for use in user interfaces."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "nActionID",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aApplicationName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "xProperties",
+              "type": "XStringKeyMap_ffc60de1",
+              "direction": "in",
+              "origin": "com.sun.star.container.XStringKeyMap"
+            },
+            {
+              "name": "aText",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aXML",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "xController",
+              "type": "XController_b00e0b8f",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XController"
+            },
+            {
+              "name": "xTarget",
+              "type": "XTextRange_9a910ab7",
+              "direction": "in",
+              "origin": "com.sun.star.text.XTextRange"
+            }
+          ]
+        },
+        {
+          "name": "getActionCount",
+          "returns": "int",
+          "returns_origin": "long",
+          "desc": [
+            "obtains the number of actions provided for a specified smart tag type."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aSmartTagName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "xController",
+              "type": "XController_b00e0b8f",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XController"
+            },
+            {
+              "name": "xProperties",
+              "type": "XStringKeyMap_ffc60de1",
+              "direction": "in",
+              "origin": "com.sun.star.container.XStringKeyMap"
+            }
+          ]
+        },
+        {
+          "name": "getActionID",
+          "returns": "int",
+          "returns_origin": "long",
+          "desc": [
+            "obtains a unique integer identifier for an action."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "aSmartTagName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nActionIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "xController",
+              "type": "XController_b00e0b8f",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XController"
+            }
+          ]
+        },
+        {
+          "name": "getActionNameFromID",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "obtains a language independent name of an action."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "nActionID",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "xController",
+              "type": "XController_b00e0b8f",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XController"
+            }
+          ]
+        },
+        {
+          "name": "getDescription",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "obtains a detailed description of this action component."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
+          ]
+        },
+        {
+          "name": "getName",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "obtains a name that describes this action component."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
+          ]
+        },
+        {
+          "name": "getSmartTagCaption",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "obtains the caption of the smart tag type for using in user interfaces."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            {
+              "name": "nSmartTagIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
+          ]
+        },
+        {
+          "name": "getSmartTagName",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "obtains the name of one specific smart tag type supported by this action component."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            {
+              "name": "nSmartTagIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "invokeAction",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "invokes an action."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "nActionID",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aApplicationName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "xController",
+              "type": "XController_b00e0b8f",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XController"
+            },
+            {
+              "name": "xTarget",
+              "type": "XTextRange_9a910ab7",
+              "direction": "in",
+              "origin": "com.sun.star.text.XTextRange"
+            },
+            {
+              "name": "xProperties",
+              "type": "XStringKeyMap_ffc60de1",
+              "direction": "in",
+              "origin": "com.sun.star.container.XStringKeyMap"
+            },
+            {
+              "name": "aText",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aXML",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
+          ]
+        },
+        {
+          "name": "isCaptionDynamic",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "determines whether a caption is dynamic."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "nActionID",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aApplicationName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "xController",
+              "type": "XController_b00e0b8f",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XController"
+            },
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
+          ]
+        },
+        {
+          "name": "isShowSmartTagIndicator",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "determines whether the smart tag indicator should be visible."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "nActionID",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aApplicationName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "xController",
+              "type": "XController_b00e0b8f",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XController"
+            },
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
+          ]
+        }
+      ],
+      "properties": [
+        {
+          "name": "SmartTagCount",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "the number of smart tag types supported by this action component."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "RadioButton",
+  "type": "service",
+  "namespace": "com.sun.star.form.component",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "...awt.uno_control_radio_button_model",
+        "UnoControlRadioButtonModel",
+        "UnoControlRadioButtonModel_6ad310c3"
+      ],
+      [
+        "..form_control_model",
+        "FormControlModel",
+        "FormControlModel_e2990d22"
+      ],
+      [
+        "..x_reset",
+        "XReset",
+        "XReset_71670917"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.awt.UnoControlRadioButtonModel": "UnoControlRadioButtonModel_6ad310c3",
+      "com.sun.star.form.FormControlModel": "FormControlModel_e2990d22",
+      "com.sun.star.form.XReset": "XReset_71670917"
+    },
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.awt.UnoControlRadioButtonModel",
+        "com.sun.star.form.FormControlModel",
+        "com.sun.star.form.XReset"
+      ],
+      "typing": []
+    },
+    "name": "RadioButton",
+    "imports": [],
+    "namespace": "com.sun.star.form.component",
+    "extends": [
+      "com.sun.star.awt.UnoControlRadioButtonModel",
+      "com.sun.star.form.FormControlModel",
+      "com.sun.star.form.XReset"
+    ],
+    "desc": [
+      "specifies a component which acts as a radio button as needed in HTMLForms.",
+      "",
+      "Radio buttons are controls which can be grouped together, and in every group, only one of the controls can be check. This means if one of them is checked by a user interaction, all other controls in the same group are automatically unchecked",
+      "",
+      "Like in HTML, radio buttons are grouped together if and only if they have the same name (see com.sun.star.form.FormComponent.Name)."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1form_1_1component_1_1RadioButton.html",
+    "items": {
+      "properties": [
+        {
+          "name": "DefaultState",
+          "returns": "int",
+          "origtype": null,
+          "origin": "short",
+          "desc": [
+            "contains a default value for the control.",
+            "",
+            "This value is used when the control is initially displayed, and for resetting it.",
+            "",
+            "In a group of radio buttons only one button should be checked by default."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RefValue",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "contains a reference value which is used for submission in a HTML form.",
+            "",
+            "If the form the control belongs to is to be submitted (see com.sun.star.form.XSubmit), and the control is checked, this reference value is used for submission."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "UncheckedRefValue",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "specifies a value which is to be associated with the control when it's not selected.",
+            "",
+            "In various situations, the RefValue is associated with the control if and only if it is selected.",
+            "UncheckedRefValue provides an extension of this concept: If present, the value should be associated with the control when it is not selected."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,122 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XIsolatedConnection",
+  "type": "interface",
+  "namespace": "com.sun.star.sdbc",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_connection",
+        "XConnection",
+        "XConnection_a36a0b0c"
+      ],
+      [
+        "..task.x_interaction_handler",
+        "XInteractionHandler",
+        "XInteractionHandler_bf80e51"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XConnection_a36a0b0c",
+      "XInteractionHandler_bf80e51"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.sdbc.XConnection",
+        "com.sun.star.task.XInteractionHandler"
+      ]
+    },
+    "name": "XIsolatedConnection",
+    "imports": [],
+    "namespace": "com.sun.star.sdbc",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "is used for establishing isolated connections via a factory.",
+      "",
+      "The XIsolatedConnection allows to create connections which are not shared among others as it is the case when creating connections in normal way.",
+      "",
+      "**since**",
+      "",
+      "    OOo 1.1.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sdbc_1_1XIsolatedConnection.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getIsolatedConnection",
+          "returns": "XConnection_a36a0b0c",
+          "returns_origin": "com.sun.star.sdbc.XConnection",
+          "desc": [
+            "attempts to establish a database connection."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            {
+              "name": "user",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "password",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "getIsolatedConnectionWithCompletion",
+          "returns": "XConnection_a36a0b0c",
+          "returns_origin": "com.sun.star.sdbc.XConnection",
+          "desc": [
+            "attempts to establish a database connection.",
+            "",
+            "If information is missing, such as a user's password, they are completed by user interaction."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            {
+              "name": "handler",
+              "type": "XInteractionHandler_bf80e51",
+              "direction": "in",
+              "origin": "com.sun.star.task.XInteractionHandler"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

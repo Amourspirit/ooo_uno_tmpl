@@ -1,0 +1,263 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XDocumentTemplates",
+  "type": "interface",
+  "namespace": "com.sun.star.frame",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_storable",
+        "XStorable",
+        "XStorable_998f0aa7"
+      ],
+      [
+        "..ucb.x_content",
+        "XContent",
+        "XContent_79db0975"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XContent_79db0975",
+      "XStorable_998f0aa7"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.frame.XStorable",
+        "com.sun.star.ucb.XContent"
+      ]
+    },
+    "name": "XDocumentTemplates",
+    "imports": [],
+    "namespace": "com.sun.star.frame",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "provides a high level API to organize document templates",
+      "",
+      "Template information is saved as links to the original content and organized in groups. This data should be persistent and can be updated by calling special method XDocumentTemplates.update(). A real implementation of this interface can do that on top of a ucb content provider. Method XDocumentTemplates.getContent() force that."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XDocumentTemplates.html",
+    "items": {
+      "methods": [
+        {
+          "name": "addGroup",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "creates a new group"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "GroupName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "addTemplate",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "creates the template with the given name in the given group using the given URL"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "GroupName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "TemplateName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "SourceURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "getContent",
+          "returns": "XContent_79db0975",
+          "returns_origin": "com.sun.star.ucb.XContent",
+          "desc": [
+            "provides access to the root of internal used hierarchy",
+            "",
+            "This content can be used for accessing the groups directly."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "removeGroup",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "remove an existing group"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "GroupName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "removeTemplate",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "remove a template from specified group"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "GroupName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "TemplateName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "renameGroup",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "rename an existing group"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "OldGroupName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "NewGroupName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "renameTemplate",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "rename a template inside specified group"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "GroupName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "OldTemplateName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "NewTemplateName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "storeTemplate",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "creates the template with the given name in the given group using the data from the storable"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "GroupName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "TemplateName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Storable",
+              "type": "XStorable_998f0aa7",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XStorable"
+            }
+          ]
+        },
+        {
+          "name": "update",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "force an update for internal structures",
+            "",
+            "Because the templates are well known by links and not as direct content they can be outdated. An update force actualization of that to find wrong links."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

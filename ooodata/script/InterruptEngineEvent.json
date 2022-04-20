@@ -1,0 +1,147 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "type": "struct",
+  "name": "InterruptEngineEvent",
+  "namespace": "com.sun.star.script",
+  "parser_args": {
+    "sort": false,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "sort": true,
+    "dynamic_struct": true,
+    "include_desc": true
+  },
+  "data": {
+    "name": "InterruptEngineEvent",
+    "namespace": "com.sun.star.script",
+    "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1script_1_1InterruptEngineEvent.html",
+    "from_imports": [
+      [
+        "..lang.event_object",
+        "EventObject",
+        "EventObject_a3d70b03"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".interrupt_reason",
+        "InterruptReason",
+        "InterruptReason_f3d00dd2"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.lang.EventObject": "EventObject_a3d70b03"
+    },
+    "quote": [
+      "InterruptReason_f3d00dd2"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.lang.EventObject"
+      ],
+      "typing": [
+        "com.sun.star.script.InterruptReason"
+      ]
+    },
+    "fullname": "com.sun.star.script.InterruptEngineEvent",
+    "desc": [
+      "describes an interrupt which occurs in the scripting engine.",
+      "",
+      ".. deprecated::",
+      "",
+      "    Class is deprecated."
+    ],
+    "imports": [],
+    "extends": [
+      "com.sun.star.lang.EventObject"
+    ],
+    "items": [
+      {
+        "name": "Name",
+        "type": "str",
+        "origtype": null,
+        "origin": "string",
+        "desc": [
+          "fully qualified name to address the module or function affected by the event that took place.",
+          "",
+          "If the module or function can't be addressed by name (for example, in case that a runtime-generated eval-module is executed), this string is empty."
+        ]
+      },
+      {
+        "name": "SourceCode",
+        "type": "str",
+        "origtype": null,
+        "origin": "string",
+        "desc": [
+          "source code of the Module affected by the event that took place.",
+          "",
+          "If the source can be accessed using the ModuleName, or if the source is unknown (executing compiled code), this string can be empty."
+        ]
+      },
+      {
+        "name": "StartLine",
+        "type": "int",
+        "origtype": null,
+        "origin": "long",
+        "desc": [
+          "contains the first line in the module's source code that is affected by the event that took place.",
+          "",
+          "If \\\"name\\\" addresses a function, all line and column values are nevertheless given relative to the module's source. If source code is not available, this value addresses a binary position in the compiled code."
+        ]
+      },
+      {
+        "name": "StartColumn",
+        "type": "int",
+        "origtype": null,
+        "origin": "long",
+        "desc": [
+          "contains the first column in the \\\"StartLine\\\" that is affected by the event that took place."
+        ]
+      },
+      {
+        "name": "EndLine",
+        "type": "int",
+        "origtype": null,
+        "origin": "long",
+        "desc": [
+          "contains the last line in the module's source code that is affected by the event that took place."
+        ]
+      },
+      {
+        "name": "EndColumn",
+        "type": "int",
+        "origtype": null,
+        "origin": "long",
+        "desc": [
+          "contains the first column in the \\\"EndLine\\\" which is NOT affected by the event that took place."
+        ]
+      },
+      {
+        "name": "ErrorMessage",
+        "type": "str",
+        "origtype": null,
+        "origin": "string",
+        "desc": [
+          "error message.",
+          "",
+          "Only valid if Reason is RuntimeError or CompileError."
+        ]
+      },
+      {
+        "name": "Reason",
+        "type": "InterruptReason_f3d00dd2",
+        "origtype": "com.sun.star.script.InterruptReason",
+        "origin": "com.sun.star.script.InterruptReason",
+        "desc": [
+          "contains the interrupt reason."
+        ]
+      }
+    ]
+  }
+}

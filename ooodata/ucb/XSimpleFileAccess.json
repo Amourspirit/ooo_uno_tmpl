@@ -1,0 +1,439 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XSimpleFileAccess",
+  "type": "interface",
+  "namespace": "com.sun.star.ucb",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..io.x_input_stream",
+        "XInputStream",
+        "XInputStream_98d40ab4"
+      ],
+      [
+        "..io.x_output_stream",
+        "XOutputStream",
+        "XOutputStream_a4e00b35"
+      ],
+      [
+        "..io.x_stream",
+        "XStream",
+        "XStream_678908a4"
+      ],
+      [
+        "..task.x_interaction_handler",
+        "XInteractionHandler",
+        "XInteractionHandler_bf80e51"
+      ],
+      [
+        "..util.date_time",
+        "DateTime",
+        "DateTime_84de09d3"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "DateTime_84de09d3",
+      "XInputStream_98d40ab4",
+      "XInteractionHandler_bf80e51",
+      "XOutputStream_a4e00b35",
+      "XStream_678908a4",
+      "typing.Tuple[str, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[str, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.io.XInputStream",
+        "com.sun.star.io.XOutputStream",
+        "com.sun.star.io.XStream",
+        "com.sun.star.task.XInteractionHandler",
+        "com.sun.star.util.DateTime"
+      ]
+    },
+    "name": "XSimpleFileAccess",
+    "imports": [],
+    "namespace": "com.sun.star.ucb",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "This is the basic interface to read data from a stream."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ucb_1_1XSimpleFileAccess.html",
+    "items": {
+      "methods": [
+        {
+          "name": "copy",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Copies a file."
+          ],
+          "raises": [
+            "com.sun.star.ucb.CommandAbortedException",
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            {
+              "name": "SourceURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "DestURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "createFolder",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Creates a new Folder."
+          ],
+          "raises": [
+            "com.sun.star.ucb.CommandAbortedException",
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            {
+              "name": "NewFolderURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "exists",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "Checks if a file exists."
+          ],
+          "raises": [
+            "com.sun.star.ucb.CommandAbortedException",
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            {
+              "name": "FileURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "getContentType",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "Returns the content type of a file."
+          ],
+          "raises": [
+            "com.sun.star.ucb.CommandAbortedException",
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            {
+              "name": "FileURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "getDateTimeModified",
+          "returns": "DateTime_84de09d3",
+          "returns_origin": "com.sun.star.util.DateTime",
+          "desc": [
+            "Returns the last modified date for the file."
+          ],
+          "raises": [
+            "com.sun.star.ucb.CommandAbortedException",
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            {
+              "name": "FileURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "getFolderContents",
+          "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
+          "desc": [
+            "Returns the contents of a folder."
+          ],
+          "raises": [
+            "com.sun.star.ucb.CommandAbortedException",
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            {
+              "name": "FolderURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "bIncludeFolders",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
+          ]
+        },
+        {
+          "name": "getSize",
+          "returns": "int",
+          "returns_origin": "long",
+          "desc": [
+            "Returns the size of a file."
+          ],
+          "raises": [
+            "com.sun.star.ucb.CommandAbortedException",
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            {
+              "name": "FileURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "isFolder",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "Checks if a URL represents a folder."
+          ],
+          "raises": [
+            "com.sun.star.ucb.CommandAbortedException",
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            {
+              "name": "FileURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "isReadOnly",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "Checks if a file is \\\"read only\\\"."
+          ],
+          "raises": [
+            "com.sun.star.ucb.CommandAbortedException",
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            {
+              "name": "FileURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "kill",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Removes a file.",
+            "",
+            "If the URL represents a folder, the folder will be removed, even if it's not empty."
+          ],
+          "raises": [
+            "com.sun.star.ucb.CommandAbortedException",
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            {
+              "name": "FileURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "move",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Moves a file."
+          ],
+          "raises": [
+            "com.sun.star.ucb.CommandAbortedException",
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            {
+              "name": "SourceURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "DestURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "openFileRead",
+          "returns": "XInputStream_98d40ab4",
+          "returns_origin": "com.sun.star.io.XInputStream",
+          "desc": [
+            "Opens file to read."
+          ],
+          "raises": [
+            "com.sun.star.ucb.CommandAbortedException",
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            {
+              "name": "FileURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "openFileReadWrite",
+          "returns": "XStream_678908a4",
+          "returns_origin": "com.sun.star.io.XStream",
+          "desc": [
+            "Opens file to read and write."
+          ],
+          "raises": [
+            "com.sun.star.ucb.CommandAbortedException",
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            {
+              "name": "FileURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "openFileWrite",
+          "returns": "XOutputStream_a4e00b35",
+          "returns_origin": "com.sun.star.io.XOutputStream",
+          "desc": [
+            "Opens file to write."
+          ],
+          "raises": [
+            "com.sun.star.ucb.CommandAbortedException",
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            {
+              "name": "FileURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "setInteractionHandler",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Sets an interaction handler to be used for further operations.",
+            "",
+            "A default interaction handler is available as service com.sun.star.task.InteractionHandler. The documentation of this service also contains further information about the interaction handler concept."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Handler",
+              "type": "XInteractionHandler_bf80e51",
+              "direction": "in",
+              "origin": "com.sun.star.task.XInteractionHandler"
+            }
+          ]
+        },
+        {
+          "name": "setReadOnly",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Sets the \\\"read only\\\" of a file according to the boolean parameter, if the actual process has the right to do so."
+          ],
+          "raises": [
+            "com.sun.star.ucb.CommandAbortedException",
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            {
+              "name": "FileURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "bReadOnly",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

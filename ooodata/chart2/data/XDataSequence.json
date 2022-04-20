@@ -1,0 +1,148 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XDataSequence",
+  "type": "interface",
+  "namespace": "com.sun.star.chart2.data",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "...uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".label_origin",
+        "LabelOrigin",
+        "LabelOrigin_f66b0d5c"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "LabelOrigin_f66b0d5c",
+      "typing.Tuple[object, ...]",
+      "typing.Tuple[str, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[object, ...]",
+      "typing.Tuple[str, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.chart2.data.LabelOrigin"
+      ]
+    },
+    "name": "XDataSequence",
+    "imports": [],
+    "namespace": "com.sun.star.chart2.data",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "allows access to a one-dimensional sequence of data.",
+      "",
+      "The data that is stored in this container may contain different types."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1chart2_1_1data_1_1XDataSequence.html",
+    "items": {
+      "methods": [
+        {
+          "name": "generateLabel",
+          "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
+          "desc": [
+            "creates a label that describes the origin of this data sequence.",
+            "",
+            "This is useful, if a XLabeledDataSequence has no label sequence. In this case you can call this method at the value sequence to obtain a fitting replacement label.",
+            "",
+            "The sequence returned here may be empty if no suitable label can be generated.",
+            "",
+            "The strings returned should be localized.",
+            "",
+            "If you have a non quadratic range you can ask for labels for the longer side with parameter LONG_SIDE or you can obtain labels for the shorter side with parameter SHORT_SIDE.",
+            "",
+            "If the range is not structured in a tabular way you may receive no label.",
+            "",
+            "Example: Assuming this sequence has a Range representation spanning row 5 and 6 in column 8. Following sequences of strings or similar strings are expected as return values:",
+            "",
+            "generateLabel( SHORT_SIDE ) -> \\\"Column 8\\\" generateLabel( LONG_SIDE ) -> \\\"Row 5\\\" \\\"Row 6\\\" generateLabel( COLUMN ) -> \\\"Column 8\\\" generateLabel( ROW ) -> \\\"Row 5\\\" \\\"Row 6\\\"",
+            "",
+            "Which strings exactly you return depends on the naming scheme of the application which provides its tabular data."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "eLabelOrigin",
+              "type": "LabelOrigin_f66b0d5c",
+              "direction": "in",
+              "origin": "com.sun.star.chart2.data.LabelOrigin"
+            }
+          ]
+        },
+        {
+          "name": "getData",
+          "returns": "typing.Tuple[object, ...]",
+          "returns_origin": "sequence< any >",
+          "desc": [
+            "retrieves the data stored in this component."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getNumberFormatKeyByIndex",
+          "returns": "int",
+          "returns_origin": "long",
+          "desc": [
+            "returns a number format key for the value at the given index in the data sequence.",
+            "",
+            "If nIndex is -1, a key for the entire sequence should be returned, e.g. the most commonly used one.",
+            "",
+            "If number formats are not supported, or there is no heuristic to return a key for the entire series, return 0 here.",
+            "",
+            "The number format key must be valid for the com.sun.star.util.XNumberFormatsSupplier given by the XDataProvider, or 0 which is assumed to be always valid."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "getSourceRangeRepresentation",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "returns the (UI) range representation string used by this XDataSequence."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

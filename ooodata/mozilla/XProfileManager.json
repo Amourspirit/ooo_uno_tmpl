@@ -1,0 +1,149 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XProfileManager",
+  "type": "interface",
+  "namespace": "com.sun.star.mozilla",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".mozilla_product_type",
+        "MozillaProductType",
+        "MozillaProductType_2e210f5b"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "MozillaProductType_2e210f5b"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.mozilla.MozillaProductType"
+      ]
+    },
+    "name": "XProfileManager",
+    "imports": [],
+    "namespace": "com.sun.star.mozilla",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "is the interface to boot up and switch Mozilla/Thunderbird profiles"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1mozilla_1_1XProfileManager.html",
+    "items": {
+      "methods": [
+        {
+          "name": "bootupProfile",
+          "returns": "int",
+          "returns_origin": "long",
+          "desc": [
+            "attempts to init XPCOM runtime using given profile."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "product",
+              "type": "MozillaProductType_2e210f5b",
+              "direction": "in",
+              "origin": "com.sun.star.mozilla.MozillaProductType"
+            },
+            {
+              "name": "profileName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "getCurrentProduct",
+          "returns": "MozillaProductType_2e210f5b",
+          "returns_origin": "com.sun.star.mozilla.MozillaProductType",
+          "desc": [
+            "attempts to get the current product."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getCurrentProfile",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "attempts to get the current profile name."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "isCurrentProfileLocked",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "attempts to check whether the current profile locked or not"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setCurrentProfile",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "attempts to set the current used profile name for the given product."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "product",
+              "type": "MozillaProductType_2e210f5b",
+              "direction": "in",
+              "origin": "com.sun.star.mozilla.MozillaProductType"
+            },
+            {
+              "name": "profileName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "shutdownProfile",
+          "returns": "int",
+          "returns_origin": "long",
+          "desc": [
+            "attempts to shutdown the current profile."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XCommandProcessor2",
+  "type": "interface",
+  "namespace": "com.sun.star.ucb",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_command_processor",
+        "XCommandProcessor",
+        "XCommandProcessor_dfe80d19"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.ucb.XCommandProcessor": "XCommandProcessor_dfe80d19"
+    },
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.ucb.XCommandProcessor"
+      ],
+      "typing": []
+    },
+    "name": "XCommandProcessor2",
+    "imports": [],
+    "namespace": "com.sun.star.ucb",
+    "extends": [
+      "com.sun.star.ucb.XCommandProcessor"
+    ],
+    "desc": [
+      "An improved version of a com.sun.star.ucb.XCommandProcessor that helps avoid ever-increasing resource consumption."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ucb_1_1XCommandProcessor2.html",
+    "items": {
+      "methods": [
+        {
+          "name": "releaseCommandIdentifier",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "releases a command identifier obtained through XCommandProcessor.createCommandIdentifier() when it is no longer used.",
+            "",
+            "After this call the command identifier cannot be used any longer in calls to XCommandProcessor.execute() and XCommandProcessor.abort(). (But it can happen that a call to XCommandProcessor.createCommandIdentifier() reuses this identifier.)"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "CommandId",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

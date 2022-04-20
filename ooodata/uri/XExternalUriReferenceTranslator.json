@@ -1,0 +1,83 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XExternalUriReferenceTranslator",
+  "type": "interface",
+  "namespace": "com.sun.star.uri",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [],
+    "from_imports_typing": [],
+    "extends_map": {},
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [],
+      "typing": []
+    },
+    "name": "XExternalUriReferenceTranslator",
+    "imports": [],
+    "namespace": "com.sun.star.uri",
+    "extends": [],
+    "desc": [
+      "translates between external and internal URI references.",
+      "",
+      "Some URI schemes leave unspecified important aspects of how to interpret URIs of those schemes. For example, it is unspecified for \u201cfile\u201d URLs how to map the byte sequences that constitute the path segments of a \u201cfile\u201d URL to filenames on a given platform: The UNO environment always assumes that path segments of \u201cfile\u201d URLs represent UTF-8\u2013encoded strings (which have to be mapped to filenames in a platform-specific way), while other applications typically assume that path segments of \u201cfile\u201d URLs directly represent a platform's byte-sequence filenames. This interface offers methods to translate between such internal URIs (e.g., UTF-8\u2013encoded \u201cfile\u201d URLs used within the UNO environment) and external URIs (e.g., byte-sequence\u2013oriented \u201cfile\u201d URLs used by other applications). Typically, only \u201cfile\u201d URLs are affected by this translation.",
+      "",
+      "Since the translation process is based on URI schemes, relative URI references (that do not include a scheme) are left unmodified by the translation process.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.0"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1uri_1_1XExternalUriReferenceTranslator.html",
+    "items": {
+      "methods": [
+        {
+          "name": "translateToExternal",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "returns the external counterpart of an internal URI reference."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "internalUriReference",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "translateToInternal",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "returns the internal counterpart of an external URI reference."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "externalUriReference",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XDispatchProviderInterceptor",
+  "type": "interface",
+  "namespace": "com.sun.star.frame",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_dispatch_provider",
+        "XDispatchProvider",
+        "XDispatchProvider_fc690de6"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.frame.XDispatchProvider": "XDispatchProvider_fc690de6"
+    },
+    "quote": [
+      "XDispatchProvider_fc690de6"
+    ],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.frame.XDispatchProvider"
+      ],
+      "typing": []
+    },
+    "name": "XDispatchProviderInterceptor",
+    "imports": [],
+    "namespace": "com.sun.star.frame",
+    "extends": [
+      "com.sun.star.frame.XDispatchProvider"
+    ],
+    "desc": [
+      "makes it possible to intercept request of XDispatch.",
+      "",
+      "Can be registered as an interceptor by using interface XDispatchProviderInterception."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XDispatchProviderInterceptor.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getMasterDispatchProvider",
+          "returns": "XDispatchProvider_fc690de6",
+          "returns_origin": "com.sun.star.frame.XDispatchProvider",
+          "desc": [
+            "access to the master XDispatchProvider of this interceptor"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getSlaveDispatchProvider",
+          "returns": "XDispatchProvider_fc690de6",
+          "returns_origin": "com.sun.star.frame.XDispatchProvider",
+          "desc": [
+            "access to the slave XDispatchProvider of this interceptor"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setMasterDispatchProvider",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "sets the master XDispatchProvider, which may forward calls to its XDispatchProvider.queryDispatch() to this dispatch provider."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "NewSupplier",
+              "type": "XDispatchProvider_fc690de6",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XDispatchProvider"
+            }
+          ]
+        },
+        {
+          "name": "setSlaveDispatchProvider",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "sets the slave XDispatchProvider to which calls to XDispatchProvider.queryDispatch() can be forwarded under control of this dispatch provider."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "NewDispatchProvider",
+              "type": "XDispatchProvider_fc690de6",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XDispatchProvider"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

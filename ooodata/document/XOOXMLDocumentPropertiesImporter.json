@@ -1,0 +1,101 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XOOXMLDocumentPropertiesImporter",
+  "type": "interface",
+  "namespace": "com.sun.star.document",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_document_properties",
+        "XDocumentProperties",
+        "XDocumentProperties_4c31102b"
+      ],
+      [
+        "..embed.x_storage",
+        "XStorage",
+        "XStorage_8e460a32"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XDocumentProperties_4c31102b",
+      "XStorage_8e460a32"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.document.XDocumentProperties",
+        "com.sun.star.embed.XStorage"
+      ]
+    },
+    "name": "XOOXMLDocumentPropertiesImporter",
+    "imports": [],
+    "namespace": "com.sun.star.document",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "allows to import the document properties from OOXML format"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1document_1_1XOOXMLDocumentPropertiesImporter.html",
+    "items": {
+      "methods": [
+        {
+          "name": "importProperties",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "allows to import the document properties from OOXML format",
+            "",
+            "The implementation should parse the document properties from OOXML format storage and set them to the target XDocumentProperties implementation.",
+            "",
+            "The storage must represent OOXML format and support com.sun.star.embed.XRelationshipAccess interface. Please see com.sun.star.embed.StorageFactory for details regarding creation of such a storage."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.xml.sax.SAXException",
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            {
+              "name": "xSource",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            },
+            {
+              "name": "xDocumentProperties",
+              "type": "XDocumentProperties_4c31102b",
+              "direction": "in",
+              "origin": "com.sun.star.document.XDocumentProperties"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

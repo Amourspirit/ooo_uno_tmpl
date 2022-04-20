@@ -1,0 +1,166 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XDesktop",
+  "type": "interface",
+  "namespace": "com.sun.star.frame",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..container.x_enumeration_access",
+        "XEnumerationAccess",
+        "XEnumerationAccess_4bac0ffc"
+      ],
+      [
+        ".x_frame",
+        "XFrame",
+        "XFrame_7a570956"
+      ],
+      [
+        ".x_terminate_listener",
+        "XTerminateListener",
+        "XTerminateListener_b760e5a"
+      ],
+      [
+        "..lang.x_component",
+        "XComponent",
+        "XComponent_98dc0ab5"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XComponent_98dc0ab5",
+      "XEnumerationAccess_4bac0ffc",
+      "XFrame_7a570956",
+      "XTerminateListener_b760e5a"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.container.XEnumerationAccess",
+        "com.sun.star.frame.XFrame",
+        "com.sun.star.frame.XTerminateListener",
+        "com.sun.star.lang.XComponent"
+      ]
+    },
+    "name": "XDesktop",
+    "imports": [],
+    "namespace": "com.sun.star.frame",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "This is the main interface of a desktop service.",
+      "",
+      "A desktop is an environment for components which can be viewed in frames. Frames are like frames in HTML framesets. This does not imply that a desktop can handle framesets; the frames may be top frames only."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XDesktop.html",
+    "items": {
+      "methods": [
+        {
+          "name": "addTerminateListener",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "registers an event listener to the desktop, which is called when the desktop is queried to terminate, and when it really terminates."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Listener",
+              "type": "XTerminateListener_b760e5a",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XTerminateListener"
+            }
+          ]
+        },
+        {
+          "name": "getComponents",
+          "returns": "XEnumerationAccess_4bac0ffc",
+          "returns_origin": "com.sun.star.container.XEnumerationAccess",
+          "desc": [
+            "provides read access to collection of all currently loaded components inside the frame tree",
+            "",
+            "The component is, by definition, the model of the control which is loaded into a frame, or if no model exists, into the control itself. The service Components which is available from this method is a collection of all components of the desktop which are open within a frame of the desktop."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getCurrentComponent",
+          "returns": "XComponent_98dc0ab5",
+          "returns_origin": "com.sun.star.lang.XComponent",
+          "desc": [
+            "provides read access to the component inside the tree which has the UI focus",
+            "",
+            "Normally, the component is the model part of the active component. If no model exists it is the active controller (view) itself."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getCurrentFrame",
+          "returns": "XFrame_7a570956",
+          "returns_origin": "com.sun.star.frame.XFrame",
+          "desc": [
+            "provides read access to the frame which contains the current component"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "removeTerminateListener",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "unregisters an event listener for termination events."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Listener",
+              "type": "XTerminateListener_b760e5a",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XTerminateListener"
+            }
+          ]
+        },
+        {
+          "name": "terminate",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "tries to terminate the desktop.",
+            "",
+            "First, every terminate listener is called by his XTerminateListener.queryTermination() method. Throwing of a TerminationVetoException can break the termination process and the listener how has done that will be the new \\\"controller\\\" of the desktop lifetime. He should try to terminate it by himself after his own processes will be finished. If nobody disagree with the termination request, every listener will be called by his XTerminateListener.notifyTermination() method."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

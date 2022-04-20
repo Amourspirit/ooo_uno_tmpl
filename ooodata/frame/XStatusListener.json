@@ -1,0 +1,82 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XStatusListener",
+  "type": "interface",
+  "namespace": "com.sun.star.frame",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..lang.x_event_listener",
+        "XEventListener",
+        "XEventListener_c7230c4a"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".feature_state_event",
+        "FeatureStateEvent",
+        "FeatureStateEvent_fcc10de2"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.lang.XEventListener": "XEventListener_c7230c4a"
+    },
+    "quote": [
+      "FeatureStateEvent_fcc10de2"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.lang.XEventListener"
+      ],
+      "typing": [
+        "com.sun.star.frame.FeatureStateEvent"
+      ]
+    },
+    "name": "XStatusListener",
+    "imports": [],
+    "namespace": "com.sun.star.frame",
+    "extends": [
+      "com.sun.star.lang.XEventListener"
+    ],
+    "desc": [
+      "makes it possible to receive events when the state of a feature changes.",
+      "",
+      "Nobody guarantee any notification. Use combination of XNotifyingDispatch and XDispatchResultListener for that."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XStatusListener.html",
+    "items": {
+      "methods": [
+        {
+          "name": "statusChanged",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "is called when the status of the feature changes."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "State",
+              "type": "FeatureStateEvent_fcc10de2",
+              "direction": "in",
+              "origin": "com.sun.star.frame.FeatureStateEvent"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

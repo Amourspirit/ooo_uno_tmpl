@@ -1,0 +1,90 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XViewFreezable",
+  "type": "interface",
+  "namespace": "com.sun.star.sheet",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": []
+    },
+    "name": "XViewFreezable",
+    "imports": [],
+    "namespace": "com.sun.star.sheet",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "enables a SpreadsheetView to freeze columns and rows of the view."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sheet_1_1XViewFreezable.html",
+    "items": {
+      "methods": [
+        {
+          "name": "freezeAtPosition",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "freezes panes with the specified number of columns and rows.",
+            "",
+            "To freeze only horizontally, specify nRows as 0. To freeze only vertically, specify nColumns as 0."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "nColumns",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nRows",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "hasFrozenPanes",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "returns TRUE if the view has frozen panes.",
+            "",
+            "Only one of XViewSplitable.getIsWindowSplit() and XViewFreezable.hasFrozenPanes() can be TRUE."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

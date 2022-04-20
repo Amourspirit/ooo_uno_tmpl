@@ -1,0 +1,104 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XSheetCellRanges",
+  "type": "interface",
+  "namespace": "com.sun.star.sheet",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..container.x_index_access",
+        "XIndexAccess",
+        "XIndexAccess_f0910d6d"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..container.x_enumeration_access",
+        "XEnumerationAccess",
+        "XEnumerationAccess_4bac0ffc"
+      ],
+      [
+        "..table.cell_range_address",
+        "CellRangeAddress",
+        "CellRangeAddress_ec450d43"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.container.XIndexAccess": "XIndexAccess_f0910d6d"
+    },
+    "quote": [
+      "XEnumerationAccess_4bac0ffc",
+      "typing.Tuple[CellRangeAddress_ec450d43, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[CellRangeAddress_ec450d43, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.container.XIndexAccess"
+      ],
+      "typing": [
+        "com.sun.star.container.XEnumerationAccess",
+        "com.sun.star.table.CellRangeAddress"
+      ]
+    },
+    "name": "XSheetCellRanges",
+    "imports": [],
+    "namespace": "com.sun.star.sheet",
+    "extends": [
+      "com.sun.star.container.XIndexAccess"
+    ],
+    "desc": [
+      "provides methods to access cell ranges in a collection via index and other helper methods."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sheet_1_1XSheetCellRanges.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getCells",
+          "returns": "XEnumerationAccess_4bac0ffc",
+          "returns_origin": "com.sun.star.container.XEnumerationAccess",
+          "desc": [
+            "returns the collection of all used cells."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getRangeAddresses",
+          "returns": "typing.Tuple[CellRangeAddress_ec450d43, ...]",
+          "returns_origin": "sequence< com.sun.star.table.CellRangeAddress >",
+          "desc": [
+            "creates a sequence with addresses of all contained cell ranges."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getRangeAddressesAsString",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "creates a string with addresses of all contained cell ranges.",
+            "",
+            "The range addresses are separated with semicolons. For instance the string could have the form \\\"Sheet1.A1:C3;Sheet2.D5:F8\\\"."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

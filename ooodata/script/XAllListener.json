@@ -1,0 +1,103 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XAllListener",
+  "type": "interface",
+  "namespace": "com.sun.star.script",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..lang.x_event_listener",
+        "XEventListener",
+        "XEventListener_c7230c4a"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".all_event_object",
+        "AllEventObject",
+        "AllEventObject_e2c20d0f"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.lang.XEventListener": "XEventListener_c7230c4a"
+    },
+    "quote": [
+      "AllEventObject_e2c20d0f"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.lang.XEventListener"
+      ],
+      "typing": [
+        "com.sun.star.script.AllEventObject"
+      ]
+    },
+    "name": "XAllListener",
+    "imports": [],
+    "namespace": "com.sun.star.script",
+    "extends": [
+      "com.sun.star.lang.XEventListener"
+    ],
+    "desc": [
+      "specifies a listener combining all methods of a listener interface in a single generic call.",
+      "",
+      "Without any output parameters, it is possible to adapt any interface if the XAllListenerAdapterService can generate an adapter."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1script_1_1XAllListener.html",
+    "items": {
+      "methods": [
+        {
+          "name": "approveFiring",
+          "returns": "object",
+          "returns_origin": "any",
+          "desc": [
+            "gets called when a \\\"vetoable event\\\" occurs at the object.",
+            "",
+            "That happens when the listener method raises an exception, or has a return value declared."
+          ],
+          "raises": [
+            "com.sun.star.reflection.InvocationTargetException"
+          ],
+          "args": [
+            {
+              "name": "aEvent",
+              "type": "AllEventObject_e2c20d0f",
+              "direction": "in",
+              "origin": "com.sun.star.script.AllEventObject"
+            }
+          ]
+        },
+        {
+          "name": "firing",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "gets called when an event occurs at the object."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "iaEvent",
+              "type": "AllEventObject_e2c20d0f",
+              "direction": "in",
+              "origin": "com.sun.star.script.AllEventObject"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

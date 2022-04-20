@@ -1,0 +1,145 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XMultiSelectionSupplier",
+  "type": "interface",
+  "namespace": "com.sun.star.view",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_selection_supplier",
+        "XSelectionSupplier",
+        "XSelectionSupplier_fed20e15"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..container.x_enumeration",
+        "XEnumeration",
+        "XEnumeration_f2180daa"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.view.XSelectionSupplier": "XSelectionSupplier_fed20e15"
+    },
+    "quote": [
+      "XEnumeration_f2180daa"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.view.XSelectionSupplier"
+      ],
+      "typing": [
+        "com.sun.star.container.XEnumeration"
+      ]
+    },
+    "name": "XMultiSelectionSupplier",
+    "imports": [],
+    "namespace": "com.sun.star.view",
+    "extends": [
+      "com.sun.star.view.XSelectionSupplier"
+    ],
+    "desc": [
+      "makes it possible to append and remove objects from a selection.",
+      "",
+      "The method XSelectionSupplier.setSelection() for an instance that also supports XMultiSelectionSupplier should be implemented that it also takes either a selectable object or a sequence of selectable objects.",
+      "",
+      "Adding an object more than once to a selection should not toggle the selection for that object but only select it once"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1view_1_1XMultiSelectionSupplier.html",
+    "items": {
+      "methods": [
+        {
+          "name": "addSelection",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "adds the object or the objects represented by Selection to the selection of this XMultiSelectionSupplier.",
+            "",
+            "Adding an object to the selection that is already part of the selection should not raise this exception"
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "Selection",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
+          ]
+        },
+        {
+          "name": "clearSelection",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "clears the selection of this XMultiSelectionSupplier."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "createReverseSelectionEnumeration",
+          "returns": "XEnumeration_f2180daa",
+          "returns_origin": "com.sun.star.container.XEnumeration",
+          "desc": [],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "createSelectionEnumeration",
+          "returns": "XEnumeration_f2180daa",
+          "returns_origin": "com.sun.star.container.XEnumeration",
+          "desc": [],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getSelectionCount",
+          "returns": "int",
+          "returns_origin": "long",
+          "desc": [
+            "returns the number of selected objects of this XMultiSelectionSupplier."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "removeSelection",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "remove the object or objects represented by Selection from the selection of this XMultiSelectionSupplier.",
+            "",
+            "Removing an object from the selection that is not part of the selection should not raise this exception"
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "Selection",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

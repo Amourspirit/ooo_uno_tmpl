@@ -1,0 +1,104 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XBridgeSupplier2",
+  "type": "interface",
+  "namespace": "com.sun.star.bridge",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "typing.Tuple[int, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[int, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": []
+    },
+    "name": "XBridgeSupplier2",
+    "imports": [],
+    "namespace": "com.sun.star.bridge",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "defines the interface for creating bridges to other object models.",
+      "",
+      "The created bridges are transparent to the user. That is, if one maps an interface into the target model, then the resulting target interface is a bridge implementation, that is not being noticed by an user. During a call on that interface, the bridge is invoked to convert the arguments and carry out a call according to the rules of the source model. Return values are automatically mapped to the types of the target model.",
+      "",
+      "Simple types are mapped to simple target types. That is, there is no additional bridging code involved when those types are being used.",
+      "",
+      "Sometimes a bridge cannot be created, depending on whether a program uses the XBridgeSupplier2 interface remotely. Assuming one wants to bridge an OLE Automation object to UNO by calling createBridge on a proxy, then the UNO remote bridge would not recognise that the Any argument contains an IDispatch interface. Therefore it cannot marshal it as COM requires it and the bridgeing would fail. To prevent this, implementations of this interface should be aware of this scenario and if necessary take the appropriate steps. The process ID argument to the createBridge function represents the calling process and may be used by the implementation to determine if it is being accessed remotely.",
+      "",
+      "All objects, whether they are part of the UNO object model or not, are carried in an any. The representation of this object is heavily model-dependent and has to be specified in the following list:",
+      "",
+      "Any implementation can supply its own bridges to other object models by implementing this interface and returning the bridge when the method XBridgeSupplier2.createBridge() is called with itself as the first parameter."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1bridge_1_1XBridgeSupplier2.html",
+    "items": {
+      "methods": [
+        {
+          "name": "createBridge",
+          "returns": "object",
+          "returns_origin": "any",
+          "desc": [
+            "creates a bridge to provide an object of one object model with another."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "aModelDepObject",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            },
+            {
+              "name": "aProcessId",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "in",
+              "origin": "sequence< byte >"
+            },
+            {
+              "name": "nSourceModelType",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "nDestModelType",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

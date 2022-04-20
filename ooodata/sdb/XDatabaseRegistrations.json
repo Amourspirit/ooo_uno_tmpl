@@ -1,0 +1,239 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XDatabaseRegistrations",
+  "type": "interface",
+  "namespace": "com.sun.star.sdb",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        ".x_database_registrations_listener",
+        "XDatabaseRegistrationsListener",
+        "XDatabaseRegistrationsListener_acf11262"
+      ]
+    ],
+    "extends_map": {},
+    "quote": [
+      "XDatabaseRegistrationsListener_acf11262",
+      "typing.Tuple[str, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[str, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.sdb.XDatabaseRegistrationsListener"
+      ]
+    },
+    "name": "XDatabaseRegistrations",
+    "imports": [],
+    "namespace": "com.sun.star.sdb",
+    "extends": [],
+    "desc": [
+      "provides access to the application-wide registered databases.",
+      "",
+      "This interface provides a mere wrapper around the respective configuration data, this way hiding the concrete configuration structure from its clients. You should, if possible at all, use this interface, instead of modifying or querying the configuration data directly.",
+      "",
+      "**since**",
+      "",
+      "    OOo 3.3"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sdb_1_1XDatabaseRegistrations.html",
+    "items": {
+      "methods": [
+        {
+          "name": "addDatabaseRegistrationsListener",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "registers a listener which is notified of changes in the registered databases"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Listener",
+              "type": "XDatabaseRegistrationsListener_acf11262",
+              "direction": "in",
+              "origin": "com.sun.star.sdb.XDatabaseRegistrationsListener"
+            }
+          ]
+        },
+        {
+          "name": "changeDatabaseLocation",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "changes the location of a given database registration"
+          ],
+          "raises": [
+            "",
+            "",
+            "com.sun.star.lang.IllegalAccessException"
+          ],
+          "args": [
+            {
+              "name": "Name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "NewLocation",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "getDatabaseLocation",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "returns the location of the database registered under the given name"
+          ],
+          "raises": [
+            "",
+            "com.sun.star.container.NoSuchElementException"
+          ],
+          "args": [
+            {
+              "name": "Name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "getRegistrationNames",
+          "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
+          "desc": [
+            "returns the names of all registered databases"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "hasRegisteredDatabase",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "determines whether a database is registered under the given name."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "Name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "isDatabaseRegistrationReadOnly",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "determines whether the registration data for a database given by name is read-only.",
+            "",
+            "In this case, attempts to revoke this registration will fail."
+          ],
+          "raises": [
+            "",
+            "com.sun.star.container.NoSuchElementException"
+          ],
+          "args": [
+            {
+              "name": "Name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "registerDatabaseLocation",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "registers a database, given by location, under a given name"
+          ],
+          "raises": [
+            "",
+            "com.sun.star.container.ElementExistException"
+          ],
+          "args": [
+            {
+              "name": "Name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Location",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "removeDatabaseRegistrationsListener",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "revokes a previously registered listener"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Listener",
+              "type": "XDatabaseRegistrationsListener_acf11262",
+              "direction": "in",
+              "origin": "com.sun.star.sdb.XDatabaseRegistrationsListener"
+            }
+          ]
+        },
+        {
+          "name": "revokeDatabaseLocation",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "revokes the registration of a database, given by name"
+          ],
+          "raises": [
+            "",
+            "",
+            "com.sun.star.lang.IllegalAccessException"
+          ],
+          "args": [
+            {
+              "name": "Name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

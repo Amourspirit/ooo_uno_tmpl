@@ -1,0 +1,98 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XPolicy",
+  "type": "interface",
+  "namespace": "com.sun.star.security",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "typing.Tuple[object, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[object, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": []
+    },
+    "name": "XPolicy",
+    "imports": [],
+    "namespace": "com.sun.star.security",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "Interface for getting sets of permissions of a specified user or the default permissions if no user is given.",
+      "",
+      "**since**",
+      "",
+      "    OOo 1.1.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1security_1_1XPolicy.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getDefaultPermissions",
+          "returns": "typing.Tuple[object, ...]",
+          "returns_origin": "sequence< any >",
+          "desc": [
+            "Gets the default permissions granted to all users."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getPermissions",
+          "returns": "typing.Tuple[object, ...]",
+          "returns_origin": "sequence< any >",
+          "desc": [
+            "Gets the permissions of the specified user excluding the default permissions granted to all users."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "userId",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "refresh",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Refreshes the policy configuration."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,225 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XMutableTreeNode",
+  "type": "interface",
+  "namespace": "com.sun.star.awt.tree",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_tree_node",
+        "XTreeNode",
+        "XTreeNode_baaf0ba0"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.awt.tree.XTreeNode": "XTreeNode_baaf0ba0"
+    },
+    "quote": [
+      "XMutableTreeNode"
+    ],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.awt.tree.XTreeNode"
+      ],
+      "typing": []
+    },
+    "name": "XMutableTreeNode",
+    "imports": [],
+    "namespace": "com.sun.star.awt.tree",
+    "extends": [
+      "com.sun.star.awt.tree.XTreeNode"
+    ],
+    "desc": [
+      "Represents a mutable tree node as used by the MutableTreeDataModel."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1tree_1_1XMutableTreeNode.html",
+    "items": {
+      "methods": [
+        {
+          "name": "appendChild",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "appends ChildNode to this instance."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "ChildNode",
+              "type": "XMutableTreeNode",
+              "direction": "in",
+              "origin": "com.sun.star.awt.tree.XMutableTreeNode"
+            }
+          ]
+        },
+        {
+          "name": "insertChildByIndex",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "inserts ChildNode to this instance at the given index."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            {
+              "name": "Index",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "ChildNode",
+              "type": "XMutableTreeNode",
+              "direction": "in",
+              "origin": "com.sun.star.awt.tree.XMutableTreeNode"
+            }
+          ]
+        },
+        {
+          "name": "removeChildByIndex",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "removes the node from this instance at the specified index."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            {
+              "name": "Index",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "setCollapsedGraphicURL",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "The URL for a graphic that is rendered to visualize collapsed non leaf nodes.",
+            "",
+            "If URL is empty, XTreeControl.DefaultCollapsedGraphicURL is used."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "URL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "setDisplayValue",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "sets the display value of this node"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Value",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
+          ]
+        },
+        {
+          "name": "setExpandedGraphicURL",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "The URL for a graphic that is rendered to visualize expanded non leaf nodes.",
+            "",
+            "If URL is empty, XTreeControl.DefaultExpandedGraphicURL is used."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "URL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "setHasChildrenOnDemand",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Changes if the children of this node are created on demand."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "ChildrenOnDemand",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
+          ]
+        },
+        {
+          "name": "setNodeGraphicURL",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "The URL for a graphic that is rendered before the text part of this node.",
+            "",
+            "If this URL is empty, no graphic is rendered."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "URL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        }
+      ],
+      "properties": [
+        {
+          "name": "DataValue",
+          "returns": "object",
+          "origtype": null,
+          "origin": "any",
+          "desc": [
+            "Stores an implementation dependent value.",
+            "",
+            "You can use this attribute to store data for this node that is independent of the display value"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

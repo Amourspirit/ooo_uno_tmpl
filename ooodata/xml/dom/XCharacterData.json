@@ -1,0 +1,231 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XCharacterData",
+  "type": "interface",
+  "namespace": "com.sun.star.xml.dom",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_node",
+        "XNode",
+        "XNode_83fb09a5"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.xml.dom.XNode": "XNode_83fb09a5"
+    },
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.xml.dom.XNode"
+      ],
+      "typing": []
+    },
+    "name": "XCharacterData",
+    "imports": [],
+    "namespace": "com.sun.star.xml.dom",
+    "extends": [
+      "com.sun.star.xml.dom.XNode"
+    ],
+    "desc": [],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1xml_1_1dom_1_1XCharacterData.html",
+    "items": {
+      "methods": [
+        {
+          "name": "appendData",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Append the string to the end of the character data of the node.",
+            "",
+            "Throws: DOMException - NO_MODIFICATION_ALLOWED_ERR: Raised if this node is readonly."
+          ],
+          "raises": [
+            "DOMException"
+          ],
+          "args": [
+            {
+              "name": "arg",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "deleteData",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Remove a range of 16-bit units from the node.",
+            "",
+            "Throws: DOMException - INDEX_SIZE_ERR: Raised if the specified offset is negative or greater than the number of 16-bit units in data, or if the specified count is negative. NO_MODIFICATION_ALLOWED_ERR: Raised if this node is readonly."
+          ],
+          "raises": [
+            "DOMException"
+          ],
+          "args": [
+            {
+              "name": "offset",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "count",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "getData",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "Return the character data of the node that implements this interface.",
+            "",
+            "Throws: DOMException - NO_MODIFICATION_ALLOWED_ERR: Raised when the node is readonly. DOMException - DOMSTRING_SIZE_ERR: Raised when it would return more characters than fit in a DOMString variable on the implementation platform."
+          ],
+          "raises": [
+            "DOMException"
+          ],
+          "args": []
+        },
+        {
+          "name": "getLength",
+          "returns": "int",
+          "returns_origin": "long",
+          "desc": [
+            "The number of 16-bit units that are available through data and the substringData method below."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "insertData",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Insert a string at the specified 16-bit unit offset.",
+            "",
+            "Throws: DOMException - INDEX_SIZE_ERR: Raised if the specified offset is negative or greater than the number of 16-bit units in data. NO_MODIFICATION_ALLOWED_ERR: Raised if this node is readonly."
+          ],
+          "raises": [
+            "DOMException"
+          ],
+          "args": [
+            {
+              "name": "offset",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "arg",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "replaceData",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Replace the characters starting at the specified 16-bit unit offset with the specified string.",
+            "",
+            "Throws; DOMException - INDEX_SIZE_ERR: Raised if the specified offset is negative or greater than the number of 16-bit units in data, or if the specified count is negative. NO_MODIFICATION_ALLOWED_ERR: Raised if this node is readonly."
+          ],
+          "raises": [
+            "DOMException"
+          ],
+          "args": [
+            {
+              "name": "offset",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "count",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "arg",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "setData",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Set the character data of the node that implements this interface.",
+            "",
+            "Throws: DOMException - NO_MODIFICATION_ALLOWED_ERR: Raised when the node is readonly. DOMException - DOMSTRING_SIZE_ERR: Raised when it would return more characters than fit in a DOMString variable on the implementation platform."
+          ],
+          "raises": [
+            "DOMException"
+          ],
+          "args": [
+            {
+              "name": "data",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "subStringData",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "Extracts a range of data from the node.",
+            "",
+            "Throws: DOMException - INDEX_SIZE_ERR: Raised if the specified offset is negative or greater than the number of 16-bit units in data, or if the specified count is negative. DOMSTRING_SIZE_ERR: Raised if the specified range of text does not fit into a DOMString."
+          ],
+          "raises": [
+            "DOMException"
+          ],
+          "args": [
+            {
+              "name": "offset",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "count",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

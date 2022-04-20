@@ -1,0 +1,118 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XEmbedObjectClipboardCreator",
+  "type": "interface",
+  "namespace": "com.sun.star.embed",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
+      ],
+      [
+        ".inserted_object_info",
+        "InsertedObjectInfo",
+        "InsertedObjectInfo_a0e0e26"
+      ],
+      [
+        ".x_storage",
+        "XStorage",
+        "XStorage_8e460a32"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "InsertedObjectInfo_a0e0e26",
+      "XStorage_8e460a32",
+      "typing.Tuple[PropertyValue_c9610c73, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[PropertyValue_c9610c73, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.embed.InsertedObjectInfo",
+        "com.sun.star.embed.XStorage"
+      ]
+    },
+    "name": "XEmbedObjectClipboardCreator",
+    "imports": [],
+    "namespace": "com.sun.star.embed",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "allows to create and initialize a new embedded object from clipboard.",
+      "",
+      "This interface contains methods that can help to create and initialize an embedded object based on system clipboard."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1embed_1_1XEmbedObjectClipboardCreator.html",
+    "items": {
+      "methods": [
+        {
+          "name": "createInstanceInitFromClipboard",
+          "returns": "InsertedObjectInfo_a0e0e26",
+          "returns_origin": "com.sun.star.embed.InsertedObjectInfo",
+          "desc": [
+            "creates a new object and initializes it from the system clipboard.",
+            "",
+            "In case specified entry exists it's contents are ignored and will be overwritten on storing.",
+            "",
+            "The clipboard can provide a number of choices that are container related. This information will be returned in the InsertedObjectInfo object."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.io.IOException",
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            {
+              "name": "xStorage",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            },
+            {
+              "name": "sEntryName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aObjectArgs",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< .com.sun.star.beans.PropertyValue >"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

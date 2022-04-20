@@ -1,0 +1,193 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "PropertyControlType",
+  "type": "const",
+  "namespace": "com.sun.star.inspection",
+  "parser_args": {
+    "sort": false,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "hex": false,
+    "flags": false,
+    "include_desc": true
+  },
+  "data": {
+    "name": "PropertyControlType",
+    "namespace": "com.sun.star.inspection",
+    "url": "https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1inspection_1_1PropertyControlType.html",
+    "flags": false,
+    "base_class": "ConstIntBase",
+    "allow_db": true,
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "from_imports": [],
+    "from_imports_typing": [],
+    "fullname": "com.sun.star.inspection.PropertyControlType",
+    "desc": [
+      "describes pre-defined possible control types to be used to display and enter property values within an ObjectInspector.",
+      "",
+      "The type of a control determines its visual appearance, its behavior, and - important for property handlers using a control - the expected type when reading and writing the control's value.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.0.3"
+    ],
+    "items": [
+      {
+        "name": "ListBox",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 1,
+        "lines": [
+          "denotes a control which allows the user to choose from a list of possible property values",
+          "",
+          "Controls of type ListBox exchange their values as string.",
+          "",
+          "Additionally, those controls support the XStringListControl interface."
+        ]
+      },
+      {
+        "name": "ComboBox",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 2,
+        "lines": [
+          "denotes a control which allows the user to choose from a list of possible property values, combined with the possibility to enter a new property value.",
+          "",
+          "Controls of type ComboBox exchange their values as string.",
+          "",
+          "Additionally, those controls support the XStringListControl interface."
+        ]
+      },
+      {
+        "name": "TextField",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 3,
+        "lines": [
+          "denotes a control which allows the user to enter property values consisting of a single line of text",
+          "",
+          "Controls of type TextField exchange their values as string."
+        ]
+      },
+      {
+        "name": "MultiLineTextField",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 4,
+        "lines": [
+          "denotes a control which allows the user to enter pure text, including line breaks",
+          "",
+          "Controls of type MultiLineTextField exchange their values as string."
+        ]
+      },
+      {
+        "name": "CharacterField",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 5,
+        "lines": [
+          "denotes a control which allows the user to enter a single character",
+          "",
+          "Controls of type CharacterField exchange their values as short, being a single UTF-16 character."
+        ]
+      },
+      {
+        "name": "StringListField",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 6,
+        "lines": [
+          "denotes a control which allows the user to enter a list of single-line strings",
+          "",
+          "Controls of type StringListField exchange their values as sequence< string >."
+        ]
+      },
+      {
+        "name": "ColorListBox",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 7,
+        "lines": [
+          "denotes a control which allows the user to choose from a list of colors.",
+          "",
+          "Controls of type ColorListBox usually exchange their values as com.sun.star.util.Color.",
+          "",
+          "Additionally, those controls support the XStringListControl interface. If you use this interface to add additional entries to the list box, which have no color associated with it, then you can also exchange values as string. That is, if you write a string into XPropertyControl.Value, and if this string has previously been added to the list using the XStringListControl interface, this string is selected. Vice versa, if the user selects one of those non-color strings in the list, then reading XPropertyControl.Value will retrieve you this string."
+        ]
+      },
+      {
+        "name": "NumericField",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 8,
+        "lines": [
+          "denotes a control which allows the user to enter a numerical value",
+          "",
+          "Controls of type NumericField exchange their values as double.",
+          "",
+          "Additionally, those controls support the XNumericControl interface."
+        ]
+      },
+      {
+        "name": "DateField",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 9,
+        "lines": [
+          "denotes a control which allows the user to enter a date value",
+          "",
+          "Controls of type DateField exchange their values as com.sun.star.util.Date."
+        ]
+      },
+      {
+        "name": "TimeField",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 10,
+        "lines": [
+          "denotes a control which allows the user to enter a time value",
+          "",
+          "Controls of type TimeField exchange their values as com.sun.star.util.Time."
+        ]
+      },
+      {
+        "name": "DateTimeField",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 11,
+        "lines": [
+          "denotes a control which allows the user to enter a combined date/time value",
+          "",
+          "Controls of type DateTimeField exchange their values as com.sun.star.util.DateTime."
+        ]
+      },
+      {
+        "name": "HyperlinkField",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 12,
+        "lines": [
+          "denotes a control which displays a string in a hyperlink-like appearance",
+          "",
+          "Controls of type HyperlinkField exchange their values as string.",
+          "",
+          "Additionally, those controls support the XHyperlinkControl interface."
+        ]
+      },
+      {
+        "name": "Unknown",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 13,
+        "lines": [
+          "denotes a non-standard property control, which is usually provided by an XPropertyHandler"
+        ]
+      }
+    ]
+  }
+}

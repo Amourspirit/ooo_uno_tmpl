@@ -1,0 +1,311 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XPopupMenu",
+  "type": "interface",
+  "namespace": "com.sun.star.awt",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_menu",
+        "XMenu",
+        "XMenu_5f470841"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".key_event",
+        "KeyEvent",
+        "KeyEvent_7a78097f"
+      ],
+      [
+        ".rectangle",
+        "Rectangle",
+        "Rectangle_84b109e9"
+      ],
+      [
+        ".x_window_peer",
+        "XWindowPeer",
+        "XWindowPeer_99760ab0"
+      ],
+      [
+        "..graphic.x_graphic",
+        "XGraphic",
+        "XGraphic_a4da0afc"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.awt.XMenu": "XMenu_5f470841"
+    },
+    "quote": [
+      "KeyEvent_7a78097f",
+      "Rectangle_84b109e9",
+      "XGraphic_a4da0afc",
+      "XWindowPeer_99760ab0"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.awt.XMenu"
+      ],
+      "typing": [
+        "com.sun.star.awt.KeyEvent",
+        "com.sun.star.awt.Rectangle",
+        "com.sun.star.awt.XWindowPeer",
+        "com.sun.star.graphic.XGraphic"
+      ]
+    },
+    "name": "XPopupMenu",
+    "imports": [],
+    "namespace": "com.sun.star.awt",
+    "extends": [
+      "com.sun.star.awt.XMenu"
+    ],
+    "desc": [
+      "controls a pop-up menu."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XPopupMenu.html",
+    "items": {
+      "methods": [
+        {
+          "name": "checkItem",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "sets the state of the item to be checked or unchecked."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "nItemId",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "bCheck",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
+          ]
+        },
+        {
+          "name": "endExecute",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "ends the execution of the PopupMenu.",
+            "",
+            "com.sun.star.awt.XPopupMenu.execute() will then return 0."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "execute",
+          "returns": "int",
+          "returns_origin": "short",
+          "desc": [
+            "executes the popup menu and returns the selected item or 0, if cancelled."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Parent",
+              "type": "XWindowPeer_99760ab0",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XWindowPeer"
+            },
+            {
+              "name": "Position",
+              "type": "Rectangle_84b109e9",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Rectangle"
+            },
+            {
+              "name": "Direction",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
+          ]
+        },
+        {
+          "name": "getAcceleratorKeyEvent",
+          "returns": "KeyEvent_7a78097f",
+          "returns_origin": "com.sun.star.awt.KeyEvent",
+          "desc": [
+            "retrieves the KeyEvent for the menu item.",
+            "",
+            "The KeyEvent is only used as a container to transport the shortcut information, so that in this case com.sun.star.lang.EventObject.Source is NULL."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "nItemId",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
+          ]
+        },
+        {
+          "name": "getDefaultItem",
+          "returns": "int",
+          "returns_origin": "short",
+          "desc": [
+            "returns the menu default item."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getItemImage",
+          "returns": "XGraphic_a4da0afc",
+          "returns_origin": "com.sun.star.graphic.XGraphic",
+          "desc": [
+            "retrieves the image for the menu item."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "nItemId",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
+          ]
+        },
+        {
+          "name": "insertSeparator",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "inserts a separator at the specified position."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "nItemPos",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
+          ]
+        },
+        {
+          "name": "isInExecute",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "queries if the PopupMenu is being.",
+            "",
+            "Returns TRUE only if the PopupMenu is being executed as a result of invoking XPopupMenu.execute(); that is, for a PopupMenu activated by a MenuBar item, this methods returns FALSE."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "isItemChecked",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "returns whether the item is checked or unchecked."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "nItemId",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
+          ]
+        },
+        {
+          "name": "setAcceleratorKeyEvent",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "sets the KeyEvent for the menu item.",
+            "",
+            "The KeyEvent is only used as a container to transport the shortcut information, this methods only draws the text corresponding to this keyboard shortcut. The client code is responsible for listening to keyboard events (typically done via XUserInputInterception), and dispatch the respective command."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "nItemId",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "aKeyEvent",
+              "type": "KeyEvent_7a78097f",
+              "direction": "in",
+              "origin": "com.sun.star.awt.KeyEvent"
+            }
+          ]
+        },
+        {
+          "name": "setDefaultItem",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "sets the menu default item."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "nItemId",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
+          ]
+        },
+        {
+          "name": "setItemImage",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "sets the image for the menu item."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "nItemId",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "xGraphic",
+              "type": "XGraphic_a4da0afc",
+              "direction": "in",
+              "origin": "com.sun.star.graphic.XGraphic"
+            },
+            {
+              "name": "bScale",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

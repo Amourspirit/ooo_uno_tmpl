@@ -1,0 +1,470 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XSchemaHandler",
+  "type": "interface",
+  "namespace": "com.sun.star.configuration.backend",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "...uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".template_identifier",
+        "TemplateIdentifier",
+        "TemplateIdentifier_2aaa14b5"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "TemplateIdentifier_2aaa14b5"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.configuration.backend.TemplateIdentifier"
+      ]
+    },
+    "name": "XSchemaHandler",
+    "imports": [],
+    "namespace": "com.sun.star.configuration.backend",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "receives a description of a configuration schema as a sequence of events.",
+      "",
+      "**since**",
+      "",
+      "    OOo 1.1.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1configuration_1_1backend_1_1XSchemaHandler.html",
+    "items": {
+      "methods": [
+        {
+          "name": "addInstance",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "receives notification that the current group has a child node that is an instance of a specified template.",
+            "",
+            "Not every implementation can detect each condition"
+          ],
+          "raises": [
+            "MalformedDataException",
+            "com.sun.star.lang.WrappedTargetException"
+          ],
+          "args": [
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aTemplate",
+              "type": "TemplateIdentifier_2aaa14b5",
+              "direction": "in",
+              "origin": "com.sun.star.configuration.backend.TemplateIdentifier"
+            }
+          ]
+        },
+        {
+          "name": "addItemType",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "receives notification that the current set can contain items that are instances of a specified template.",
+            "",
+            "Not every implementation can detect each condition"
+          ],
+          "raises": [
+            "MalformedDataException",
+            "com.sun.star.lang.WrappedTargetException"
+          ],
+          "args": [
+            {
+              "name": "aItemType",
+              "type": "TemplateIdentifier_2aaa14b5",
+              "direction": "in",
+              "origin": "com.sun.star.configuration.backend.TemplateIdentifier"
+            }
+          ]
+        },
+        {
+          "name": "addProperty",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "receives notification that a property is added to the current node.",
+            "",
+            "The property will have a default value of NULL (unless it is SchemaAttribute.REQUIRED).",
+            "",
+            "The value is a combination of SchemaAttribute flags.",
+            "",
+            "Not every implementation can detect each condition"
+          ],
+          "raises": [
+            "MalformedDataException",
+            "com.sun.star.lang.WrappedTargetException"
+          ],
+          "args": [
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aAttributes",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "aType",
+              "type": "object",
+              "direction": "in",
+              "origin": "type"
+            }
+          ]
+        },
+        {
+          "name": "addPropertyWithDefault",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "receives notification that a property having a default value is added to the current node.",
+            "",
+            "The value is a combination of SchemaAttribute flags.",
+            "",
+            "The value also determines the type. Therefore the value must not be VOID.",
+            "",
+            "Not every implementation can detect each condition"
+          ],
+          "raises": [
+            "MalformedDataException",
+            "com.sun.star.lang.WrappedTargetException"
+          ],
+          "args": [
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aAttributes",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "aDefaultValue",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
+          ]
+        },
+        {
+          "name": "endComponent",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "receives notification that a component description is complete.",
+            "",
+            "Must match a previous call to startComponent().",
+            "",
+            "Not every implementation can detect each condition"
+          ],
+          "raises": [
+            "MalformedDataException",
+            "com.sun.star.lang.WrappedTargetException"
+          ],
+          "args": []
+        },
+        {
+          "name": "endNode",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "receives notification that a node description is complete.",
+            "",
+            "Must match the last open call to startGroup() or startSet().",
+            "",
+            "Not every implementation can detect each condition"
+          ],
+          "raises": [
+            "MalformedDataException",
+            "com.sun.star.lang.WrappedTargetException"
+          ],
+          "args": []
+        },
+        {
+          "name": "endSchema",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "receives notification that the current schema description is complete.",
+            "",
+            "Must match a previous call to startSchema().",
+            "",
+            "Not every implementation can detect each condition"
+          ],
+          "raises": [
+            "MalformedDataException",
+            "com.sun.star.lang.WrappedTargetException"
+          ],
+          "args": []
+        },
+        {
+          "name": "endTemplate",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "receives notification that a template description is complete.",
+            "",
+            "Must match a previous call to startGroupTemplate() or startSetTemplate().",
+            "",
+            "Not every implementation can detect each condition"
+          ],
+          "raises": [
+            "MalformedDataException",
+            "com.sun.star.lang.WrappedTargetException"
+          ],
+          "args": []
+        },
+        {
+          "name": "importComponent",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "receives notification that the schema depends on templates from a different component.",
+            "",
+            "Not every implementation can detect each condition"
+          ],
+          "raises": [
+            "MalformedDataException",
+            "com.sun.star.lang.WrappedTargetException"
+          ],
+          "args": [
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "startComponent",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "receives notification that a component description is started.",
+            "",
+            "Subsequent calls describe the schema of the component until a matching call to endComponent() is encountered.",
+            "",
+            "Not every implementation can detect each condition"
+          ],
+          "raises": [
+            "MalformedDataException",
+            "com.sun.star.lang.WrappedTargetException"
+          ],
+          "args": [
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "startGroup",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "receives notification that a group description is started.",
+            "",
+            "Subsequent calls describe the members and properties of the group until a matching call to endNode() is encountered.",
+            "",
+            "The value is a combination of SchemaAttribute flags.",
+            "",
+            "SchemaAttribute.EXTENSIBLE can be used to describe a group with an extensible set of properties.",
+            "",
+            "Not every implementation can detect each condition"
+          ],
+          "raises": [
+            "MalformedDataException",
+            "com.sun.star.lang.WrappedTargetException"
+          ],
+          "args": [
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aAttributes",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
+          ]
+        },
+        {
+          "name": "startGroupTemplate",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "receives notification that a template description is started for a group.",
+            "",
+            "Subsequent calls describe the members and properties of the template until a matching call to endTemplate() is encountered.",
+            "",
+            "The value is a combination of SchemaAttribute flags.",
+            "",
+            "SchemaAttribute.EXTENSIBLE can be used to describe a template for a node with an extensible set of properties.",
+            "",
+            "Not every implementation can detect each condition"
+          ],
+          "raises": [
+            "MalformedDataException",
+            "com.sun.star.lang.WrappedTargetException"
+          ],
+          "args": [
+            {
+              "name": "aTemplate",
+              "type": "TemplateIdentifier_2aaa14b5",
+              "direction": "in",
+              "origin": "com.sun.star.configuration.backend.TemplateIdentifier"
+            },
+            {
+              "name": "aAttributes",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
+          ]
+        },
+        {
+          "name": "startSchema",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "receives notification that a schema description is started.",
+            "",
+            "The schema description may comprise components templates or both."
+          ],
+          "raises": [
+            "MalformedDataException",
+            "com.sun.star.lang.WrappedTargetException"
+          ],
+          "args": []
+        },
+        {
+          "name": "startSet",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "receives notification that a set description is started.",
+            "",
+            "Subsequent calls describe the item-types and properties of the set until a matching call to endNode() is encountered.",
+            "",
+            "The value is a combination of SchemaAttribute flags.",
+            "",
+            "SchemaAttribute.EXTENSIBLE can be used to describe a set with an extensible set of properties.",
+            "",
+            "Not every implementation can detect each condition"
+          ],
+          "raises": [
+            "MalformedDataException",
+            "com.sun.star.lang.WrappedTargetException"
+          ],
+          "args": [
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aAttributes",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "aItemType",
+              "type": "TemplateIdentifier_2aaa14b5",
+              "direction": "in",
+              "origin": "com.sun.star.configuration.backend.TemplateIdentifier"
+            }
+          ]
+        },
+        {
+          "name": "startSetTemplate",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "receives notification that a template description is started for a set.",
+            "",
+            "Subsequent calls describe the members and properties of the template until a matching call to endTemplate() is encountered.",
+            "",
+            "The value is a combination of SchemaAttribute flags.",
+            "",
+            "SchemaAttribute.EXTENSIBLE can be used to describe a template for a node with an extensible set of properties.",
+            "",
+            "Not every implementation can detect each condition"
+          ],
+          "raises": [
+            "MalformedDataException",
+            "com.sun.star.lang.WrappedTargetException"
+          ],
+          "args": [
+            {
+              "name": "aTemplate",
+              "type": "TemplateIdentifier_2aaa14b5",
+              "direction": "in",
+              "origin": "com.sun.star.configuration.backend.TemplateIdentifier"
+            },
+            {
+              "name": "aAttributes",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "aItemType",
+              "type": "TemplateIdentifier_2aaa14b5",
+              "direction": "in",
+              "origin": "com.sun.star.configuration.backend.TemplateIdentifier"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

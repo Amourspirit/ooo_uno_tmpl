@@ -1,0 +1,101 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "ResultSet",
+  "type": "service",
+  "namespace": "com.sun.star.sdbcx",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..sdbc.result_set",
+        "ResultSet",
+        "ResultSet_8ecf0a4f"
+      ],
+      [
+        ".x_delete_rows",
+        "XDeleteRows",
+        "XDeleteRows_af5c0b72"
+      ],
+      [
+        ".x_row_locate",
+        "XRowLocate",
+        "XRowLocate_a4730b04"
+      ],
+      [
+        "..util.x_cancellable",
+        "XCancellable",
+        "XCancellable_afc30b64"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.sdbc.ResultSet": "ResultSet_8ecf0a4f",
+      "com.sun.star.sdbcx.XDeleteRows": "XDeleteRows_af5c0b72",
+      "com.sun.star.sdbcx.XRowLocate": "XRowLocate_a4730b04",
+      "com.sun.star.util.XCancellable": "XCancellable_afc30b64"
+    },
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.sdbc.ResultSet",
+        "com.sun.star.sdbcx.XDeleteRows",
+        "com.sun.star.sdbcx.XRowLocate",
+        "com.sun.star.util.XCancellable"
+      ],
+      "typing": []
+    },
+    "name": "ResultSet",
+    "imports": [],
+    "namespace": "com.sun.star.sdbcx",
+    "extends": [
+      "com.sun.star.sdbc.ResultSet",
+      "com.sun.star.util.XCancellable",
+      "com.sun.star.sdbcx.XRowLocate",
+      "com.sun.star.sdbcx.XDeleteRows"
+    ],
+    "desc": [
+      "extends the SDBC ResultSet by the possibility of bookmark positioning, canceling the positioning, and updating of rows."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1sdbcx_1_1ResultSet.html",
+    "items": {
+      "properties": [
+        {
+          "name": "CanUpdateInsertedRows",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "returns whether the result set supports updating of newly inserted rows.",
+            "",
+            "This may not work, as the result set may contain automatic generated data which is used as key information."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsBookmarkable",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "returns if the result set supports bookmark navigation."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

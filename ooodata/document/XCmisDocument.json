@@ -1,0 +1,186 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XCmisDocument",
+  "type": "interface",
+  "namespace": "com.sun.star.document",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".cmis_property",
+        "CmisProperty",
+        "CmisProperty_e47d0d58"
+      ],
+      [
+        ".cmis_version",
+        "CmisVersion",
+        "CmisVersion_d71c0cd9"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "typing.Tuple[CmisProperty_e47d0d58, ...]",
+      "typing.Tuple[CmisVersion_d71c0cd9, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[CmisProperty_e47d0d58, ...]",
+      "typing.Tuple[CmisVersion_d71c0cd9, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.document.CmisProperty",
+        "com.sun.star.document.CmisVersion"
+      ]
+    },
+    "name": "XCmisDocument",
+    "imports": [],
+    "namespace": "com.sun.star.document",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "The document can provide access to CMIS properties and versions through this interface."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1document_1_1XCmisDocument.html",
+    "items": {
+      "methods": [
+        {
+          "name": "canCancelCheckOut",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "canCheckIn",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "canCheckOut",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "cancelCheckOut",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Cancel checked out document, this will discard all changes since check-out."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "checkIn",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Creates a new version of the document from the private working copy."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "isMajor",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            },
+            {
+              "name": "comment",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "checkOut",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Check out the document into a private working copy on the server, and update the loaded document to reflect this change."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getAllVersions",
+          "returns": "typing.Tuple[CmisVersion_d71c0cd9, ...]",
+          "returns_origin": "sequence< com.sun.star.document.CmisVersion >",
+          "desc": [],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "isVersionable",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "Tells whether a document can support versioning or not."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "updateCmisProperties",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [],
+          "raises": [],
+          "args": [
+            {
+              "name": "cmisProperties",
+              "type": "typing.Tuple[CmisProperty_e47d0d58, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.document.CmisProperty >"
+            }
+          ]
+        }
+      ],
+      "types": [
+        {
+          "name": "CmisProperties",
+          "returns": "typing.Tuple[CmisProperty_e47d0d58, ...]",
+          "origtype": null,
+          "origin": "sequence< com.sun.star.document.CmisProperty >",
+          "desc": [
+            "Contains the properties values named after their CMIS ID."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

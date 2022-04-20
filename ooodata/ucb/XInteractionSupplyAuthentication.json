@@ -1,0 +1,256 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XInteractionSupplyAuthentication",
+  "type": "interface",
+  "namespace": "com.sun.star.ucb",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..task.x_interaction_continuation",
+        "XInteractionContinuation",
+        "XInteractionContinuation_5af0108e"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".remember_authentication",
+        "RememberAuthentication",
+        "RememberAuthentication_28a80f31"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.task.XInteractionContinuation": "XInteractionContinuation_5af0108e"
+    },
+    "quote": [
+      "RememberAuthentication_28a80f31",
+      "typing.Tuple[RememberAuthentication_28a80f31, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[RememberAuthentication_28a80f31, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.task.XInteractionContinuation"
+      ],
+      "typing": [
+        "com.sun.star.ucb.RememberAuthentication"
+      ]
+    },
+    "name": "XInteractionSupplyAuthentication",
+    "imports": [],
+    "namespace": "com.sun.star.ucb",
+    "extends": [
+      "com.sun.star.task.XInteractionContinuation"
+    ],
+    "desc": [
+      "An interaction continuation handing back some authentication data.",
+      "",
+      "This continuation is typically used in conjunction with AuthenticationRequest."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ucb_1_1XInteractionSupplyAuthentication.html",
+    "items": {
+      "methods": [
+        {
+          "name": "canSetAccount",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "Specifies if an \\\"account\\\" value can be handed back."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "canSetPassword",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "Specifies if a \\\"password\\\" value can be handed back."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "canSetRealm",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "Specifies if a new \\\"realm\\\" value can be handed back."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "canSetUserName",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "Specifies if a \\\"user name\\\" value can be handed back."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getRememberAccountModes",
+          "returns": "typing.Tuple[RememberAuthentication_28a80f31, ...]",
+          "returns_origin": "sequence< com.sun.star.ucb.RememberAuthentication >",
+          "desc": [
+            "Specifies the available modes of how long to remember the account."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Default",
+              "type": "RememberAuthentication_28a80f31",
+              "direction": "out",
+              "origin": "com.sun.star.ucb.RememberAuthentication"
+            }
+          ]
+        },
+        {
+          "name": "getRememberPasswordModes",
+          "returns": "typing.Tuple[RememberAuthentication_28a80f31, ...]",
+          "returns_origin": "sequence< com.sun.star.ucb.RememberAuthentication >",
+          "desc": [
+            "Specifies the available modes of how long to remember the password."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Default",
+              "type": "RememberAuthentication_28a80f31",
+              "direction": "out",
+              "origin": "com.sun.star.ucb.RememberAuthentication"
+            }
+          ]
+        },
+        {
+          "name": "setAccount",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Set a new \\\"account\\\" value to hand back.",
+            "",
+            "This method should be called before com.sun.star.task.XInteractionContinuation.select(), and should only be called if XInteractionSupplyAuthentication.canSetAccount() returned TRUE."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Account",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "setPassword",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Set a new \\\"password\\\" value to hand back.",
+            "",
+            "This method should be called before com.sun.star.task.XInteractionContinuation.select(), and should only be called if XInteractionSupplyAuthentication.canSetPassword() returned TRUE."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Password",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "setRealm",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Set a new \\\"realm\\\" value to hand back.",
+            "",
+            "This method should be called before com.sun.star.task.XInteractionContinuation.select(), and should only be called if XInteractionSupplyAuthentication.canSetRealm() returned TRUE."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Realm",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "setRememberAccount",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Set a new mode of how long to remember the account.",
+            "",
+            "This method should be called before com.sun.star.task.XInteractionContinuation.select(), and should only be called if XInteractionSupplyAuthentication.setAccount() is also called."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Remember",
+              "type": "RememberAuthentication_28a80f31",
+              "direction": "in",
+              "origin": "com.sun.star.ucb.RememberAuthentication"
+            }
+          ]
+        },
+        {
+          "name": "setRememberPassword",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Set a new mode of how long to remember the password.",
+            "",
+            "This method should be called before com.sun.star.task.XInteractionContinuation.select(), and should only be called if XInteractionSupplyAuthentication.setPassword() is also called."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Remember",
+              "type": "RememberAuthentication_28a80f31",
+              "direction": "in",
+              "origin": "com.sun.star.ucb.RememberAuthentication"
+            }
+          ]
+        },
+        {
+          "name": "setUserName",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Set a new \\\"user name\\\" value to hand back.",
+            "",
+            "This method should be called before com.sun.star.task.XInteractionContinuation.select(), and should only be called if XInteractionSupplyAuthentication.canSetUserName() returned TRUE."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "UserName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

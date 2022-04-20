@@ -1,0 +1,200 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XAddIn",
+  "type": "interface",
+  "namespace": "com.sun.star.sheet",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..lang.x_localizable",
+        "XLocalizable",
+        "XLocalizable_aee00b64"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.lang.XLocalizable": "XLocalizable_aee00b64"
+    },
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.lang.XLocalizable"
+      ],
+      "typing": []
+    },
+    "name": "XAddIn",
+    "imports": [],
+    "namespace": "com.sun.star.sheet",
+    "extends": [
+      "com.sun.star.lang.XLocalizable"
+    ],
+    "desc": [
+      "gives access to function descriptions and user-visible names."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sheet_1_1XAddIn.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getArgumentDescription",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "returns the description of the specified argument.",
+            "",
+            "The argument description is shown to the user when prompting for arguments. It may be translated to the current language of the AddIn."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aProgrammaticFunctionName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nArgument",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "getDisplayArgumentName",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "returns the user-visible name of the specified argument.",
+            "",
+            "The argument name is shown to the user when prompting for arguments. It should be a single word and may be translated to the current language of the AddIn."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aProgrammaticFunctionName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nArgument",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "getDisplayCategoryName",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "returns the user-visible name of the category the function belongs to.",
+            "",
+            "This is used when category names are shown to the user."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aProgrammaticFunctionName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "getDisplayFunctionName",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "returns the user-visible function name for an internal name.",
+            "",
+            "The user-visible name of a function is the name shown to the user. It may be translated to the current language of the AddIn, so it is never stored in files. It should be a single word and is used when entering or displaying formulas."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aProgrammaticName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "getFunctionDescription",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "returns the description of a function.",
+            "",
+            "The description is shown to the user when selecting functions. It may be translated to the current language of the AddIn."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aProgrammaticName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "getProgrammaticCategoryName",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "returns the programmatic name of the category the function belongs to.",
+            "",
+            "The category name is used to group similar functions together. The programmatic category name should always be in English, it is never shown to the user. It should be one of the following names if the function falls into the corresponding category."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aProgrammaticFunctionName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "getProgrammaticFuntionName",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "returns the internal function name for an user-visible name.",
+            "",
+            "The user-visible name of a function is the name shown to the user. It may be translated to the current language of the AddIn, so it is never stored in files. It should be a single word and is used when entering or displaying formulas.",
+            "",
+            "Attention: The method name contains a spelling error. Due to compatibility reasons the name cannot be changed."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aDisplayName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XMembersAccess",
+  "type": "interface",
+  "namespace": "com.sun.star.sheet",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..container.x_name_access",
+        "XNameAccess",
+        "XNameAccess_e2ab0cf6"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.container.XNameAccess": "XNameAccess_e2ab0cf6"
+    },
+    "quote": [
+      "typing.Tuple[str, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[str, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.container.XNameAccess"
+      ],
+      "typing": []
+    },
+    "name": "XMembersAccess",
+    "imports": [],
+    "namespace": "com.sun.star.sheet",
+    "extends": [
+      "com.sun.star.container.XNameAccess"
+    ],
+    "desc": [
+      "is used to access named members in a data pilot source level collection."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sheet_1_1XMembersAccess.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getLocaleIndependentElementNames",
+          "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
+          "desc": [
+            "returns names of data pilot members in a locale independent notation.",
+            "",
+            "Specifically date values are represented in an ISO 8601 YYYY-MM-DD notation and date+time as YYYY-MM-DD HH:MM:SS, whereas the strings returned by com.sun.star.container.XNameAccess.getElementNames() may represent these in a locale dependent or user formatted notation such as MM/DD/YY or DD.MM.YYYY or other.",
+            "",
+            "The names returned by this function can NOT be used in calls to com.sun.star.container.XNameAccess.getByName(). However, the order returned in two immediately consecutive calls to getElementNames() and getLocaleIndependentElementNames() maps to the same elements in order."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XAccessibleValue",
+  "type": "interface",
+  "namespace": "com.sun.star.accessibility",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": []
+    },
+    "name": "XAccessibleValue",
+    "imports": [],
+    "namespace": "com.sun.star.accessibility",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "Implement this interface to give access to a single numerical value.",
+      "",
+      "The XAccessibleValue interface represents a single numerical value and should be implemented by any class that supports numerical value like scroll bars and spin boxes. This interface lets you access the value and its upper and lower bounds.",
+      "",
+      "**since**",
+      "",
+      "    OOo 1.1.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleValue.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getCurrentValue",
+          "returns": "object",
+          "returns_origin": "any",
+          "desc": [
+            "Returns the value of this object as a number.",
+            "",
+            "The exact return type is implementation dependent. Typical types are long and double."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getMaximumValue",
+          "returns": "object",
+          "returns_origin": "any",
+          "desc": [
+            "Returns the maximal value that can be represented by this object.",
+            "",
+            "The type of the returned value is implementation dependent. It does not have to be the same type as that returned by getCurrentAccessibleValue()."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getMinimumValue",
+          "returns": "object",
+          "returns_origin": "any",
+          "desc": [
+            "Returns the minimal value that can be represented by this object.",
+            "",
+            "The type of the returned value is implementation dependent. It does not have to be the same type as that returned by getCurrentAccessibleValue()."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setCurrentValue",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "Sets the value of this object to the given number.",
+            "",
+            "The argument is clipped to the valid interval whose upper and lower bounds are returned by the methods getMaximumAccessibleValue() and getMinimumAccessibleValue(), i.e. if it is lower than the minimum value the new value will be the minimum and if it is greater than the maximum then the new value will be the maximum."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aNumber",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

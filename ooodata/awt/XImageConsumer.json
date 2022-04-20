@@ -1,0 +1,273 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XImageConsumer",
+  "type": "interface",
+  "namespace": "com.sun.star.awt",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_image_producer",
+        "XImageProducer",
+        "XImageProducer_ba930bd3"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XImageProducer_ba930bd3",
+      "typing.Tuple[int, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[int, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.awt.XImageProducer"
+      ]
+    },
+    "name": "XImageConsumer",
+    "imports": [],
+    "namespace": "com.sun.star.awt",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "specifies a data sink for an image.",
+      "",
+      "An image consumer is a component which wants to display or just receive an image from an image producer."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XImageConsumer.html",
+    "items": {
+      "methods": [
+        {
+          "name": "complete",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "is called for the notification of the degree to which the image is delivered.",
+            "",
+            "The complete method is called when the image producer has finished delivering all of the pixels that the source image contains, or when a single frame of a multi-frame animation has been completed, or when an error in loading or producing the image has occurred. The image consumer should remove itself from the list of consumers registered with the image producer at this time, unless it is interested in successive frames."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Status",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "xProducer",
+              "type": "XImageProducer_ba930bd3",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XImageProducer"
+            }
+          ]
+        },
+        {
+          "name": "init",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "initializes the consumer with image dimensions."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Width",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "Height",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "setColorModel",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "changes color model for next pixels typically called once after initialization."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "BitCount",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "RGBAPal",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "in",
+              "origin": "sequence< long >"
+            },
+            {
+              "name": "RedMask",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "GreenMask",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "BlueMask",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "AlphaMask",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "setPixelsByBytes",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "delivers a chunk of pixels as long values.",
+            "",
+            "The pixels of the image are delivered using one or more calls to this method. Each call specifies the location and size of the rectangle of source pixels that are contained in the array of pixels. The specified color model object should be used to convert the pixels into their corresponding color and alpha components. Pixel (m,n) is stored in the pixels array at index (n * nScanSize"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "nX",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nY",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nWidth",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nHeight",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aProducerData",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "in",
+              "origin": "sequence< byte >"
+            },
+            {
+              "name": "nOffset",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nScanSize",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "setPixelsByLongs",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "delivers a chunk of pixels as byte values.",
+            "",
+            "The pixels of the image are delivered using one or more calls to this method. Each call specifies the location and size of the rectangle of source pixels that are contained in the array of pixels. The specified color model object should be used to convert the pixels into their corresponding color and alpha components. Pixel (m,n) is stored in the pixels array at index (n * nScanSize"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "nX",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nY",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nWidth",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nHeight",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aProducerData",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "in",
+              "origin": "sequence< long >"
+            },
+            {
+              "name": "nOffset",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nScanSize",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

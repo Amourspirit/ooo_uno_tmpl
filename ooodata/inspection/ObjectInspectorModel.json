@@ -1,0 +1,129 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "ObjectInspectorModel",
+  "type": "service",
+  "namespace": "com.sun.star.inspection",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_object_inspector_model",
+        "XObjectInspectorModel",
+        "XObjectInspectorModel_9077119b"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.inspection.XObjectInspectorModel": "XObjectInspectorModel_9077119b"
+    },
+    "quote": [
+      "typing.Tuple[object, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[object, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.inspection.XObjectInspectorModel"
+      ],
+      "typing": []
+    },
+    "name": "ObjectInspectorModel",
+    "imports": [],
+    "namespace": "com.sun.star.inspection",
+    "extends": [
+      "com.sun.star.inspection.XObjectInspectorModel"
+    ],
+    "desc": [
+      "describes a default implementation of an ObjectInspectorModel",
+      "",
+      "This service simplifies usage of an ObjectInspector.",
+      "",
+      "The XObjectInspectorModel implemented by this service will not provide any property categories, nor apply any particular order to the properties provided by its handler(s).",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.0.3"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1inspection_1_1ObjectInspectorModel.html",
+    "items": {
+      "methods": [
+        {
+          "name": "createDefault",
+          "returns": "None",
+          "returns_origin": null,
+          "desc": [
+            "creates a default ObjectInspectorModel, whose one and only handler factory creates a GenericPropertyHandler."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "createWithHandlerFactories",
+          "returns": "None",
+          "returns_origin": null,
+          "desc": [
+            "creates a default ObjectInspectorModel, using an externally provided sequence of property handler factories."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "handlerFactories",
+              "type": "typing.Tuple[object, ...]",
+              "direction": "in",
+              "origin": "sequence< any >"
+            }
+          ]
+        },
+        {
+          "name": "createWithHandlerFactoriesAndHelpSection",
+          "returns": "None",
+          "returns_origin": null,
+          "desc": [
+            "creates a default ObjectInspectorModel, using an externally provided sequence of property handler factories, and describing an ObjectInspector which has a help section.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.2"
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "handlerFactories",
+              "type": "typing.Tuple[object, ...]",
+              "direction": "in",
+              "origin": "sequence< any >"
+            },
+            {
+              "name": "minHelpTextLines",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "maxHelpTextLines",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

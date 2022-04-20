@@ -1,0 +1,79 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XCustomSprite",
+  "type": "interface",
+  "namespace": "com.sun.star.rendering",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_sprite",
+        "XSprite",
+        "XSprite_b2470b95"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_canvas",
+        "XCanvas",
+        "XCanvas_b19b0b7a"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.rendering.XSprite": "XSprite_b2470b95"
+    },
+    "quote": [
+      "XCanvas_b19b0b7a"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.rendering.XSprite"
+      ],
+      "typing": [
+        "com.sun.star.rendering.XCanvas"
+      ]
+    },
+    "name": "XCustomSprite",
+    "imports": [],
+    "namespace": "com.sun.star.rendering",
+    "extends": [
+      "com.sun.star.rendering.XSprite"
+    ],
+    "desc": [
+      "Interface to control a custom sprite object on a XSpriteCanvas.",
+      "",
+      "Every change performed on XCustomSprite objects is only visible after a XSpriteCanvas.updateScreen() call, to facilitate synchronized screen updates.",
+      "",
+      "TODO: Maybe more than alpha has to be overridden from render state. TODO: Provide means to change the output area"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1rendering_1_1XCustomSprite.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getContentCanvas",
+          "returns": "XCanvas_b19b0b7a",
+          "returns_origin": "com.sun.star.rendering.XCanvas",
+          "desc": [
+            "Query a render canvas for this sprite's content.",
+            "",
+            "Whatever is rendered to this canvas will become visible on the screen only after a XSpriteCanvas.updateScreen() call at the associated sprite canvas. This canvas is not equivalent to the host canvas of the sprite. At the very least, all output happens relative to the sprite's upper left corner, i.e. the origin of the sprite's canvas device coordinate system will move with the sprite across the screen."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

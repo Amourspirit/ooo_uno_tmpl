@@ -1,0 +1,126 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XDockingAreaAcceptor",
+  "type": "interface",
+  "namespace": "com.sun.star.ui",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..awt.rectangle",
+        "Rectangle",
+        "Rectangle_84b109e9"
+      ],
+      [
+        "..awt.x_window",
+        "XWindow",
+        "XWindow_713b0924"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "Rectangle_84b109e9",
+      "XWindow_713b0924"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.awt.Rectangle",
+        "com.sun.star.awt.XWindow"
+      ]
+    },
+    "name": "XDockingAreaAcceptor",
+    "imports": [],
+    "namespace": "com.sun.star.ui",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "this interface enables developer to implement different docking area acceptors which are used by the frame based layout manager.",
+      "",
+      "A docking area acceptor is responsible to control the docking area of a container window. As OLE for example supports inplace and outplace editing, there are different parts of code responsible for the container window. This interface enables developer to make support implementations for these scenarios.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.0"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ui_1_1XDockingAreaAcceptor.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getContainerWindow",
+          "returns": "XWindow_713b0924",
+          "returns_origin": "com.sun.star.awt.XWindow",
+          "desc": [
+            "provide the container window where the layout manager can request border space for docking windows.",
+            "",
+            "Additionally the layout manager uses this window to create its own child windows for docking purposes."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "requestDockingAreaSpace",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "method to ask an implementation if the provided space for docking windows is available or not.",
+            "",
+            "The com.sun.star.awt.Rectangle parameter is filled by the caller with pixel data. The members of com.sun.star.awt.Rectangle must be filled as following:"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "RequestedSpace",
+              "type": "Rectangle_84b109e9",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Rectangle"
+            }
+          ]
+        },
+        {
+          "name": "setDockingAreaSpace",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "method to brief an implementation that we need new border space.",
+            "",
+            "The callee must size its document window so that we have the amount of space we have provided. The com.sun.star.awt.Rectangle parameter is filled by the caller with pixel data. The members of com.sun.star.awt.Rectangle must be filled as following:"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "BorderSpace",
+              "type": "Rectangle_84b109e9",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Rectangle"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

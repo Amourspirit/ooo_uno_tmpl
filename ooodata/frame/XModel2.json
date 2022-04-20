@@ -1,0 +1,200 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XModel2",
+  "type": "interface",
+  "namespace": "com.sun.star.frame",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_model",
+        "XModel",
+        "XModel_7a6e095c"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
+      ],
+      [
+        "..container.x_enumeration",
+        "XEnumeration",
+        "XEnumeration_f2180daa"
+      ],
+      [
+        ".x_controller2",
+        "XController2",
+        "XController2_bbcf0bc1"
+      ],
+      [
+        ".x_frame",
+        "XFrame",
+        "XFrame_7a570956"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.frame.XModel": "XModel_7a6e095c"
+    },
+    "quote": [
+      "XController2_bbcf0bc1",
+      "XEnumeration_f2180daa",
+      "XFrame_7a570956",
+      "typing.Tuple[PropertyValue_c9610c73, ...]",
+      "typing.Tuple[str, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[PropertyValue_c9610c73, ...]",
+      "typing.Tuple[str, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.frame.XModel"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.container.XEnumeration",
+        "com.sun.star.frame.XController2",
+        "com.sun.star.frame.XFrame"
+      ]
+    },
+    "name": "XModel2",
+    "imports": [],
+    "namespace": "com.sun.star.frame",
+    "extends": [
+      "com.sun.star.frame.XModel"
+    ],
+    "desc": [
+      "extends interface XModel.",
+      "",
+      "The following functions are added:",
+      "",
+      "**since**",
+      "",
+      "    LibreOffice 6.3"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XModel2.html",
+    "items": {
+      "methods": [
+        {
+          "name": "createDefaultViewController",
+          "returns": "XController2_bbcf0bc1",
+          "returns_origin": "com.sun.star.frame.XController2",
+          "desc": [
+            "creates the default view instance for this model.",
+            "",
+            "Effectively, this method is equivalent to calling createView() with the ViewName being \\\"Default\\\"."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            {
+              "name": "Frame",
+              "type": "XFrame_7a570956",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XFrame"
+            }
+          ]
+        },
+        {
+          "name": "createViewController",
+          "returns": "XController2_bbcf0bc1",
+          "returns_origin": "com.sun.star.frame.XController2",
+          "desc": [
+            "creates a new view instance classified by the specified name and arguments.",
+            "",
+            "The newly created controller must not be connected with the document and the frame. That is, you should neither call XFrame.setComponent(), nor XController.attachFrame(), nor XController.attachModel(), nor XModel.connectController(), not XModel.setCurrentController(). All of this is the responsibility of the caller, which will do it in the proper order."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            {
+              "name": "ViewName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Arguments",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            },
+            {
+              "name": "Frame",
+              "type": "XFrame_7a570956",
+              "direction": "in",
+              "origin": "com.sun.star.frame.XFrame"
+            }
+          ]
+        },
+        {
+          "name": "getAvailableViewControllerNames",
+          "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
+          "desc": [
+            "provides the available names of the factory to be used to create views.",
+            "",
+            "The names are usually logical view names. The following names have a defined meaning, i.e. every concrete implementation which returns such a name must ensure it has the same meaning, and if a concrete implementation has a view with the given meaning, it must give it the name as defined here:",
+            "",
+            "Implementations of this interface might decide to support additional view names, which then are documented in the respective service descriptions."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getControllers",
+          "returns": "XEnumeration_f2180daa",
+          "returns_origin": "com.sun.star.container.XEnumeration",
+          "desc": [
+            "provides list of all currently connected controller objects.",
+            "",
+            "Please note: Because this interface will might be used inside multi threaded environments those list can contain still disposed items or it new added controller will be missing (if they were added after this enumeration was created)."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setArgs",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Sets com.sun.star.document.MediaDescriptor properties of the current model during runtime.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 6.3"
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.util.InvalidStateException"
+          ],
+          "args": [
+            {
+              "name": "Arguments",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValue >"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

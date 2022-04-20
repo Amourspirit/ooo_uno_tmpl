@@ -1,0 +1,90 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "type": "struct",
+  "name": "TreeDataModelEvent",
+  "namespace": "com.sun.star.awt.tree",
+  "parser_args": {
+    "sort": false,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "sort": true,
+    "dynamic_struct": true,
+    "include_desc": true
+  },
+  "data": {
+    "name": "TreeDataModelEvent",
+    "namespace": "com.sun.star.awt.tree",
+    "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1awt_1_1tree_1_1TreeDataModelEvent.html",
+    "from_imports": [
+      [
+        "...lang.event_object",
+        "EventObject",
+        "EventObject_a3d70b03"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_tree_node",
+        "XTreeNode",
+        "XTreeNode_baaf0ba0"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.lang.EventObject": "EventObject_a3d70b03"
+    },
+    "quote": [
+      "XTreeNode_baaf0ba0",
+      "typing.Tuple[XTreeNode_baaf0ba0, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[XTreeNode_baaf0ba0, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.lang.EventObject"
+      ],
+      "typing": [
+        "com.sun.star.awt.tree.XTreeNode"
+      ]
+    },
+    "fullname": "com.sun.star.awt.tree.TreeDataModelEvent",
+    "desc": [
+      "An event used by a XTreeDataModel to notify changes in the data model to the XTreeControl.",
+      "",
+      "You usually need to fill this event only if you implement the XTreeDataModel yourself."
+    ],
+    "imports": [],
+    "extends": [
+      "com.sun.star.lang.EventObject"
+    ],
+    "items": [
+      {
+        "name": "Nodes",
+        "type": "typing.Tuple[XTreeNode_baaf0ba0, ...]",
+        "origtype": null,
+        "origin": "sequence< XTreeNode >",
+        "desc": [
+          "contains the changed, added or removed nodes.",
+          "",
+          "All nodes must have ParentNode as parent."
+        ]
+      },
+      {
+        "name": "ParentNode",
+        "type": "XTreeNode_baaf0ba0",
+        "origtype": "com.sun.star.awt.tree.XTreeNode",
+        "origin": "com.sun.star.awt.tree.XTreeNode",
+        "desc": [
+          "holds the parent node for changed, added or removed nodes.",
+          "",
+          "If this is null, Nodes must contain only the root node"
+        ]
+      }
+    ]
+  }
+}

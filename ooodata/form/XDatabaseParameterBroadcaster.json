@@ -1,0 +1,99 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XDatabaseParameterBroadcaster",
+  "type": "interface",
+  "namespace": "com.sun.star.form",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_database_parameter_listener",
+        "XDatabaseParameterListener",
+        "XDatabaseParameterListener_77e01110"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XDatabaseParameterListener_77e01110"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.form.XDatabaseParameterListener"
+      ]
+    },
+    "name": "XDatabaseParameterBroadcaster",
+    "imports": [],
+    "namespace": "com.sun.star.form",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "provides the possibility of receiving an event for configuration of parameters.",
+      "",
+      "This interface is usually implemented by components which are to execute a statement, and may need parameter information. For example, the com.sun.star.form.component.DataForm is such a component. When it is bound to a statement which contains parameters, or to a query which is based upon a parametrized statement, it needs values to fill in the parameters with actual values when it is being loaded. One method to gather these values is calling the XDatabaseParameterListener listeners, which can fill them in."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1form_1_1XDatabaseParameterBroadcaster.html",
+    "items": {
+      "methods": [
+        {
+          "name": "addParameterListener",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "adds the specified listener, to allow it to fill in necessary parameter values."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aListener",
+              "type": "XDatabaseParameterListener_77e01110",
+              "direction": "in",
+              "origin": "com.sun.star.form.XDatabaseParameterListener"
+            }
+          ]
+        },
+        {
+          "name": "removeParameterListener",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "removes the specified listener."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aListener",
+              "type": "XDatabaseParameterListener_77e01110",
+              "direction": "in",
+              "origin": "com.sun.star.form.XDatabaseParameterListener"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

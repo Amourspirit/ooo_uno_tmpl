@@ -1,0 +1,114 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XMultipleOperation",
+  "type": "interface",
+  "namespace": "com.sun.star.sheet",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".table_operation_mode",
+        "TableOperationMode",
+        "TableOperationMode_b970e3f"
+      ],
+      [
+        "..table.cell_address",
+        "CellAddress",
+        "CellAddress_ae5f0b56"
+      ],
+      [
+        "..table.cell_range_address",
+        "CellRangeAddress",
+        "CellRangeAddress_ec450d43"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "CellAddress_ae5f0b56",
+      "CellRangeAddress_ec450d43",
+      "TableOperationMode_b970e3f"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.sheet.TableOperationMode",
+        "com.sun.star.table.CellAddress",
+        "com.sun.star.table.CellRangeAddress"
+      ]
+    },
+    "name": "XMultipleOperation",
+    "imports": [],
+    "namespace": "com.sun.star.sheet",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "provides a method to apply a Multiple Operations Table to the cell range."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sheet_1_1XMultipleOperation.html",
+    "items": {
+      "methods": [
+        {
+          "name": "setTableOperation",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "creates a table of formulas (a \\\"Multiple Operations Table\\\").",
+            "",
+            "The specified formulas are repeated, with references to the specified cells replaced by references to values in the first column and/or row of the range."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aFormulaRange",
+              "type": "CellRangeAddress_ec450d43",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellRangeAddress"
+            },
+            {
+              "name": "nMode",
+              "type": "TableOperationMode_b970e3f",
+              "direction": "in",
+              "origin": "com.sun.star.sheet.TableOperationMode"
+            },
+            {
+              "name": "aColumnCell",
+              "type": "CellAddress_ae5f0b56",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellAddress"
+            },
+            {
+              "name": "aRowCell",
+              "type": "CellAddress_ae5f0b56",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellAddress"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

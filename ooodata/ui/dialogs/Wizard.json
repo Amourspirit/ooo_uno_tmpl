@@ -1,0 +1,122 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "Wizard",
+  "type": "service",
+  "namespace": "com.sun.star.ui.dialogs",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_wizard",
+        "XWizard",
+        "XWizard_bae60bc0"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_wizard_controller",
+        "XWizardController",
+        "XWizardController_469d0fe4"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.ui.dialogs.XWizard": "XWizard_bae60bc0"
+    },
+    "quote": [
+      "XWizardController_469d0fe4",
+      "typing.Tuple[int, ...]",
+      "typing.Tuple[typing.Tuple[int, ...], ...]"
+    ],
+    "typings": [
+      "typing.Tuple[int, ...]",
+      "typing.Tuple[typing.Tuple[int, ...], ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.ui.dialogs.XWizard"
+      ],
+      "typing": [
+        "com.sun.star.ui.dialogs.XWizardController"
+      ]
+    },
+    "name": "Wizard",
+    "imports": [],
+    "namespace": "com.sun.star.ui.dialogs",
+    "extends": [
+      "com.sun.star.ui.dialogs.XWizard"
+    ],
+    "desc": [
+      "provides a framework for implementing a wizard dialog.",
+      "",
+      "**since**",
+      "",
+      "    OOo 3.3"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1ui_1_1dialogs_1_1Wizard.html",
+    "items": {
+      "methods": [
+        {
+          "name": "createMultiplePathsWizard",
+          "returns": "None",
+          "returns_origin": null,
+          "desc": [
+            "creates a wizard with a multiple possible execution paths"
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "PageIds",
+              "type": "typing.Tuple[typing.Tuple[int, ...], ...]",
+              "direction": "in",
+              "origin": "sequence< sequence< short > >"
+            },
+            {
+              "name": "Controller",
+              "type": "XWizardController_469d0fe4",
+              "direction": "in",
+              "origin": "com.sun.star.ui.dialogs.XWizardController"
+            }
+          ]
+        },
+        {
+          "name": "createSinglePathWizard",
+          "returns": "None",
+          "returns_origin": null,
+          "desc": [
+            "creates a wizard with a single execution path"
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "PageIds",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "in",
+              "origin": "sequence< short >"
+            },
+            {
+              "name": "Controller",
+              "type": "XWizardController_469d0fe4",
+              "direction": "in",
+              "origin": "com.sun.star.ui.dialogs.XWizardController"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "ContentAction",
+  "type": "const",
+  "namespace": "com.sun.star.ucb",
+  "parser_args": {
+    "sort": false,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "hex": false,
+    "flags": true,
+    "include_desc": true
+  },
+  "data": {
+    "name": "ContentAction",
+    "namespace": "com.sun.star.ucb",
+    "url": "https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1ucb_1_1ContentAction.html",
+    "flags": true,
+    "base_class": "ConstIntFlagsBase",
+    "allow_db": true,
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "from_imports": [],
+    "from_imports_typing": [],
+    "fullname": "com.sun.star.ucb.ContentAction",
+    "desc": [
+      "specifies actions which can be transported with content events.",
+      "",
+      "The situations under which contents will send ContentEvents of the various action types are described below. The description is broken into a list of useful definitions, a list of events that happen to contents, and a list of reactions taken by contents in response to those events.",
+      "",
+      "The definitions are as follows:",
+      "",
+      "The events that can happen to contents (and that are of interest in this context) are listed next. Note that \\\"event\\\" here does not mean an ContentEvent, but rather some event that occurs either because some content processes a command, or because a content gets informed about a relevant change in the underlying system it represents.",
+      "",
+      "Finally, the list of reactions taken by contents in response to the above events gives a description of what kinds of ContentEvents are sent in which situations:"
+    ],
+    "items": [
+      {
+        "name": "INSERTED",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 0,
+        "lines": [
+          "A content was inserted into a folder content (i.e., while updating the folder).",
+          "",
+          "This action must be notified at the listeners of the folder content."
+        ]
+      },
+      {
+        "name": "REMOVED",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 1,
+        "lines": [
+          "A content was removed from a folder content, but not physically destroyed (i.e., due to rules just applied to the folder).",
+          "",
+          "This action must be notified at the listeners of the folder content."
+        ]
+      },
+      {
+        "name": "DELETED",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 2,
+        "lines": [
+          "A content was physically destroyed.",
+          "",
+          "Events containing this action may be generated at any time. So a content event listener should be prepared to get notified the \\\"death\\\" of the related content!",
+          "",
+          "This action must be notified at the listeners of the deleted content."
+        ]
+      },
+      {
+        "name": "EXCHANGED",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 4,
+        "lines": [
+          "This Action indicates that a content has changed its identity (i.e.",
+          "",
+          "after renaming a file system folder).",
+          "",
+          "This action must be notified at the listeners of the exchanged content."
+        ]
+      },
+      {
+        "name": "SEARCH_MATCHED",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 128,
+        "lines": [
+          "This is obsolete and should no longer be used."
+        ]
+      }
+    ]
+  }
+}

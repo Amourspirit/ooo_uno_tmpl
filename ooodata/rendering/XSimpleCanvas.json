@@ -1,0 +1,495 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XSimpleCanvas",
+  "type": "interface",
+  "namespace": "com.sun.star.rendering",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..geometry.affine_matrix2_d",
+        "AffineMatrix2D",
+        "AffineMatrix2D_ff040da8"
+      ],
+      [
+        "..geometry.real_point2_d",
+        "RealPoint2D",
+        "RealPoint2D_d6e70c78"
+      ],
+      [
+        "..geometry.real_rectangle2_d",
+        "RealRectangle2D",
+        "RealRectangle2D_d9b0e03"
+      ],
+      [
+        ".font_metrics",
+        "FontMetrics",
+        "FontMetrics_e4540d34"
+      ],
+      [
+        ".render_state",
+        "RenderState",
+        "RenderState_e4490d27"
+      ],
+      [
+        ".string_context",
+        "StringContext",
+        "StringContext_d50e22"
+      ],
+      [
+        ".view_state",
+        "ViewState",
+        "ViewState_cab30c62"
+      ],
+      [
+        ".x_bitmap",
+        "XBitmap",
+        "XBitmap_b1b70b7b"
+      ],
+      [
+        ".x_canvas",
+        "XCanvas",
+        "XCanvas_b19b0b7a"
+      ],
+      [
+        ".x_canvas_font",
+        "XCanvasFont",
+        "XCanvasFont_e3380d11"
+      ],
+      [
+        ".x_graphic_device",
+        "XGraphicDevice",
+        "XGraphicDevice_ca80e2c"
+      ],
+      [
+        ".x_poly_polygon2_d",
+        "XPolyPolygon2D",
+        "XPolyPolygon2D_e1b0e20"
+      ],
+      [
+        "..util.color",
+        "Color",
+        "Color_68e908c5"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "AffineMatrix2D_ff040da8",
+      "Color_68e908c5",
+      "FontMetrics_e4540d34",
+      "RealPoint2D_d6e70c78",
+      "RealRectangle2D_d9b0e03",
+      "RenderState_e4490d27",
+      "StringContext_d50e22",
+      "ViewState_cab30c62",
+      "XBitmap_b1b70b7b",
+      "XCanvasFont_e3380d11",
+      "XCanvas_b19b0b7a",
+      "XGraphicDevice_ca80e2c",
+      "XPolyPolygon2D_e1b0e20"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.geometry.AffineMatrix2D",
+        "com.sun.star.geometry.RealPoint2D",
+        "com.sun.star.geometry.RealRectangle2D",
+        "com.sun.star.rendering.FontMetrics",
+        "com.sun.star.rendering.RenderState",
+        "com.sun.star.rendering.StringContext",
+        "com.sun.star.rendering.ViewState",
+        "com.sun.star.rendering.XBitmap",
+        "com.sun.star.rendering.XCanvas",
+        "com.sun.star.rendering.XCanvasFont",
+        "com.sun.star.rendering.XGraphicDevice",
+        "com.sun.star.rendering.XPolyPolygon2D",
+        "com.sun.star.util.Color"
+      ]
+    },
+    "name": "XSimpleCanvas",
+    "imports": [],
+    "namespace": "com.sun.star.rendering",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "Provides the basic graphical output operations for a canvas.",
+      "",
+      "This interface is a simplified version of the XCanvas interface. It holds explicit state, i.e. the pen and fill color, the current transformation, clip and font are persistently remembered.",
+      "",
+      "In contrast to the XCanvas interface, XSimpleCanvas does not distinguish between stroke and fill operations; instead, switching between stroke and fill (or taking both) works by setting appropriate pen and fill colors."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1rendering_1_1XSimpleCanvas.html",
+    "items": {
+      "methods": [
+        {
+          "name": "drawBitmap",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Draws the bitmap on the canvas."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xBitmap",
+              "type": "XBitmap_b1b70b7b",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.XBitmap"
+            },
+            {
+              "name": "aLeftTop",
+              "type": "RealPoint2D_d6e70c78",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.RealPoint2D"
+            }
+          ]
+        },
+        {
+          "name": "drawLine",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Draws a line on the canvas."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aStartPoint",
+              "type": "RealPoint2D_d6e70c78",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.RealPoint2D"
+            },
+            {
+              "name": "aEndPoint",
+              "type": "RealPoint2D_d6e70c78",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.RealPoint2D"
+            }
+          ]
+        },
+        {
+          "name": "drawPixel",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Sets a single pixel on the canvas."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aPoint",
+              "type": "RealPoint2D_d6e70c78",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.RealPoint2D"
+            }
+          ]
+        },
+        {
+          "name": "drawPolyPolygon",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Draws a poly-polygon on the canvas."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xPolyPolygon",
+              "type": "XPolyPolygon2D_e1b0e20",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.XPolyPolygon2D"
+            }
+          ]
+        },
+        {
+          "name": "drawRect",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Draws a rectangle on the canvas."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aRect",
+              "type": "RealRectangle2D_d9b0e03",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.RealRectangle2D"
+            }
+          ]
+        },
+        {
+          "name": "drawText",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Draws text on the canvas."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aText",
+              "type": "StringContext_d50e22",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.StringContext"
+            },
+            {
+              "name": "aOutPos",
+              "type": "RealPoint2D_d6e70c78",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.RealPoint2D"
+            },
+            {
+              "name": "nTextDirection",
+              "type": "int",
+              "direction": "in",
+              "origin": "byte"
+            }
+          ]
+        },
+        {
+          "name": "getCanvas",
+          "returns": "XCanvas_b19b0b7a",
+          "returns_origin": "com.sun.star.rendering.XCanvas",
+          "desc": [
+            "Query the underlying XCanvas."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getCurrentClipRect",
+          "returns": "RealRectangle2D_d9b0e03",
+          "returns_origin": "com.sun.star.geometry.RealRectangle2D",
+          "desc": [
+            "Retrieve current clip rect."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getCurrentFillColor",
+          "returns": "Color_68e908c5",
+          "returns_origin": "com.sun.star.util.Color",
+          "desc": [
+            "Retrieve color currently used for fills."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getCurrentFont",
+          "returns": "XCanvasFont_e3380d11",
+          "returns_origin": "com.sun.star.rendering.XCanvasFont",
+          "desc": [
+            "Retrieve currently selected font."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getCurrentPenColor",
+          "returns": "Color_68e908c5",
+          "returns_origin": "com.sun.star.util.Color",
+          "desc": [
+            "Retrieve color currently used for lines."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getCurrentRenderState",
+          "returns": "RenderState_e4490d27",
+          "returns_origin": "com.sun.star.rendering.RenderState",
+          "desc": [
+            "Retrieve render state."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "bUseFillColor",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
+          ]
+        },
+        {
+          "name": "getCurrentTransformation",
+          "returns": "AffineMatrix2D_ff040da8",
+          "returns_origin": "com.sun.star.geometry.AffineMatrix2D",
+          "desc": [
+            "Retrieve current transformation matrix."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getCurrentViewState",
+          "returns": "ViewState_cab30c62",
+          "returns_origin": "com.sun.star.rendering.ViewState",
+          "desc": [
+            "Retrieve view state."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getDevice",
+          "returns": "XGraphicDevice_ca80e2c",
+          "returns_origin": "com.sun.star.rendering.XGraphicDevice",
+          "desc": [
+            "Request the associated graphic device for this canvas.",
+            "",
+            "A graphic device provides methods specific to the underlying output device capabilities, which are common for all canvases rendering to such a device. This includes device resolution, color space, or bitmap formats."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getFontMetrics",
+          "returns": "FontMetrics_e4540d34",
+          "returns_origin": "com.sun.star.rendering.FontMetrics",
+          "desc": [
+            "Request the font metrics of the current font."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "selectFont",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Select a font.",
+            "",
+            "This method selects the specified font (or a close substitute) as the current font for text output."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "sFontName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "size",
+              "type": "float",
+              "direction": "in",
+              "origin": "double"
+            },
+            {
+              "name": "bold",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            },
+            {
+              "name": "italic",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
+          ]
+        },
+        {
+          "name": "setFillColor",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Sets the fill color.",
+            "",
+            "To disable filling, simply set this color to something with zero alpha (i.e. fully transparent)."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "nsRgbaColor",
+              "type": "Color_68e908c5",
+              "direction": "in",
+              "origin": "com.sun.star.util.Color"
+            }
+          ]
+        },
+        {
+          "name": "setPenColor",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Sets the color used by line and text operations.",
+            "",
+            "To disable stroking, simply set this color to something with zero alpha (i.e. fully transparent)."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "nsRgbaColor",
+              "type": "Color_68e908c5",
+              "direction": "in",
+              "origin": "com.sun.star.util.Color"
+            }
+          ]
+        },
+        {
+          "name": "setRectClip",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Sets the clip to the specified rectangle."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aRect",
+              "type": "RealRectangle2D_d9b0e03",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.RealRectangle2D"
+            }
+          ]
+        },
+        {
+          "name": "setTransformation",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Set the current transform matrix."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aTransform",
+              "type": "AffineMatrix2D_ff040da8",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.AffineMatrix2D"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XConnection2",
+  "type": "interface",
+  "namespace": "com.sun.star.connection",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_connection",
+        "XConnection",
+        "XConnection_f2320da0"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.connection.XConnection": "XConnection_f2320da0"
+    },
+    "quote": [
+      "typing.Tuple[int, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[int, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.connection.XConnection"
+      ],
+      "typing": []
+    },
+    "name": "XConnection2",
+    "imports": [],
+    "namespace": "com.sun.star.connection",
+    "extends": [
+      "com.sun.star.connection.XConnection"
+    ],
+    "desc": [
+      "XConnection2 extends the XConnection interface with available and readSomeBytes"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1connection_1_1XConnection2.html",
+    "items": {
+      "methods": [
+        {
+          "name": "available",
+          "returns": "int",
+          "returns_origin": "long",
+          "desc": [
+            "Gives the number of bytes available via read without blocking."
+          ],
+          "raises": [
+            "com.sun.star.io.IOException"
+          ],
+          "args": []
+        },
+        {
+          "name": "readSomeBytes",
+          "returns": "int",
+          "returns_origin": "long",
+          "desc": [
+            "Blocks if no data is available otherwise reads at max nMaxBytesToRead but at least 1 byte."
+          ],
+          "raises": [
+            "com.sun.star.io.IOException"
+          ],
+          "args": [
+            {
+              "name": "aData",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "out",
+              "origin": "sequence< byte >"
+            },
+            {
+              "name": "nMaxBytesToRead",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XMenuBarMergingAcceptor",
+  "type": "interface",
+  "namespace": "com.sun.star.frame",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..container.x_index_access",
+        "XIndexAccess",
+        "XIndexAccess_f0910d6d"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XIndexAccess_f0910d6d"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.container.XIndexAccess"
+      ]
+    },
+    "name": "XMenuBarMergingAcceptor",
+    "imports": [],
+    "namespace": "com.sun.star.frame",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "provides functions to set and remove a merged menu bar for inplace editing.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.0"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XMenuBarMergingAcceptor.html",
+    "items": {
+      "methods": [
+        {
+          "name": "removeMergedMenuBar",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "removes a previously set merged menu bar and sets a previously created menu bar back."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setMergedMenuBar",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "allows to set a merged menu bar.",
+            "",
+            "This function is normally used to provide inplace editing where functions from two application parts, container application and embedded object, are available to the user simultaneously. A menu bar which is set by this method has a higher priority than others created by com.sun.star.frame.XLayoutManager interface. Settings of a merged menu bar cannot be retrieved."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xMergedMenuBar",
+              "type": "XIndexAccess_f0910d6d",
+              "direction": "in",
+              "origin": "com.sun.star.container.XIndexAccess"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

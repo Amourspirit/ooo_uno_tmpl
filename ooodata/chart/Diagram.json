@@ -1,0 +1,170 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "Diagram",
+  "type": "service",
+  "namespace": "com.sun.star.chart",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..beans.x_property_set",
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
+      ],
+      [
+        ".x_axis_supplier",
+        "XAxisSupplier",
+        "XAxisSupplier_c81b0c5b"
+      ],
+      [
+        ".x_diagram",
+        "XDiagram",
+        "XDiagram_8e1e0a27"
+      ],
+      [
+        ".x_diagram_positioning",
+        "XDiagramPositioning",
+        "XDiagramPositioning_18f60eba"
+      ],
+      [
+        ".x_second_axis_title_supplier",
+        "XSecondAxisTitleSupplier",
+        "XSecondAxisTitleSupplier_680a10b9"
+      ],
+      [
+        "..xml.user_defined_attributes_supplier",
+        "UserDefinedAttributesSupplier",
+        "UserDefinedAttributesSupplier_9fbe1222"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".chart_data_row_source",
+        "ChartDataRowSource",
+        "ChartDataRowSource_9a00e2f"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa",
+      "com.sun.star.chart.XAxisSupplier": "XAxisSupplier_c81b0c5b",
+      "com.sun.star.chart.XDiagram": "XDiagram_8e1e0a27",
+      "com.sun.star.chart.XDiagramPositioning": "XDiagramPositioning_18f60eba",
+      "com.sun.star.chart.XSecondAxisTitleSupplier": "XSecondAxisTitleSupplier_680a10b9",
+      "com.sun.star.xml.UserDefinedAttributesSupplier": "UserDefinedAttributesSupplier_9fbe1222"
+    },
+    "quote": [
+      "ChartDataRowSource_9a00e2f"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XPropertySet",
+        "com.sun.star.chart.XAxisSupplier",
+        "com.sun.star.chart.XDiagram",
+        "com.sun.star.chart.XDiagramPositioning",
+        "com.sun.star.chart.XSecondAxisTitleSupplier",
+        "com.sun.star.xml.UserDefinedAttributesSupplier"
+      ],
+      "typing": [
+        "com.sun.star.chart.ChartDataRowSource"
+      ]
+    },
+    "name": "Diagram",
+    "imports": [],
+    "namespace": "com.sun.star.chart",
+    "extends": [
+      "com.sun.star.chart.XDiagram",
+      "com.sun.star.chart.XAxisSupplier",
+      "com.sun.star.chart.XSecondAxisTitleSupplier",
+      "com.sun.star.chart.XDiagramPositioning",
+      "com.sun.star.beans.XPropertySet",
+      "com.sun.star.xml.UserDefinedAttributesSupplier"
+    ],
+    "desc": [
+      "the base service for the diagram of the chart document.",
+      "",
+      "The diagram is the object that contains the actual plot.",
+      "",
+      "Different Diagram Types, e.g., PieDiagram or LineDiagram, can be instantiated by the com.sun.star.lang.XMultiServiceFactory of the XChartDocument.",
+      "",
+      "**since**",
+      "",
+      "    OOo 1.1.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1chart_1_1Diagram.html",
+    "items": {
+      "properties": [
+        {
+          "name": "AutomaticPosition",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "If this property is TRUE the position is calculated by the application automatically.",
+            "",
+            "Setting this property to false will have no effect. Instead use the interface com.sun.star.drawing.XShape to set a concrete position (note com.sun.star.chart.XDiagram is derived from com.sun.star.drawing.XShape)."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "AutomaticSize",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "If this property is TRUE the size is calculated by the application automatically.",
+            "",
+            "Setting this property to false will have no effect. Instead use the interface com.sun.star.drawing.XShape to set a concrete size (note com.sun.star.chart.XDiagram is derived from com.sun.star.drawing.XShape)."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "DataCaption",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "specifies how the caption of data points is displayed."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "DataRowSource",
+          "returns": "ChartDataRowSource_9a00e2f",
+          "origtype": "com.sun.star.chart.ChartDataRowSource",
+          "origin": "com.sun.star.chart.ChartDataRowSource",
+          "desc": [
+            "determines if the data for a data row is contained in the columns or in the rows of the data array."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "MissingValueTreatment",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "specifies how empty or invalid cells in the provided data should be handled when displayed"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

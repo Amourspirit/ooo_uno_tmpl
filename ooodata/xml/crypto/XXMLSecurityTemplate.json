@@ -1,0 +1,151 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XXMLSecurityTemplate",
+  "type": "interface",
+  "namespace": "com.sun.star.xml.crypto",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "...uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".security_operation_status",
+        "SecurityOperationStatus",
+        "SecurityOperationStatus_b66e12b5"
+      ],
+      [
+        "..wrapper.xxml_element_wrapper",
+        "XXMLElementWrapper",
+        "XXMLElementWrapper_66c0107c"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "SecurityOperationStatus_b66e12b5",
+      "XXMLElementWrapper_66c0107c"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.xml.crypto.SecurityOperationStatus",
+        "com.sun.star.xml.wrapper.XXMLElementWrapper"
+      ]
+    },
+    "name": "XXMLSecurityTemplate",
+    "imports": [],
+    "namespace": "com.sun.star.xml.crypto",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "Interface of the XML security template.",
+      "",
+      "This interface represents a security template, which is the super interface of the XXMLSignatureTemplate interface and the XXMLEncryptionTemplate interface."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1xml_1_1crypto_1_1XXMLSecurityTemplate.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getStatus",
+          "returns": "SecurityOperationStatus_b66e12b5",
+          "returns_origin": "com.sun.star.xml.crypto.SecurityOperationStatus",
+          "desc": [
+            "Get the template status."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getTemplate",
+          "returns": "XXMLElementWrapper_66c0107c",
+          "returns_origin": "com.sun.star.xml.wrapper.XXMLElementWrapper",
+          "desc": [
+            "Get the XML signature element that represents the signature template."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setStatus",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Set the template status."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "status",
+              "type": "SecurityOperationStatus_b66e12b5",
+              "direction": "in",
+              "origin": "com.sun.star.xml.crypto.SecurityOperationStatus"
+            }
+          ]
+        },
+        {
+          "name": "setTarget",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Load the target XML element, i.e.",
+            "",
+            "the element to be signed"
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "aXmlElement",
+              "type": "XXMLElementWrapper_66c0107c",
+              "direction": "in",
+              "origin": "com.sun.star.xml.wrapper.XXMLElementWrapper"
+            }
+          ]
+        },
+        {
+          "name": "setTemplate",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Load a XML signature template from XML signature element."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "aXmlElement",
+              "type": "XXMLElementWrapper_66c0107c",
+              "direction": "in",
+              "origin": "com.sun.star.xml.wrapper.XXMLElementWrapper"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

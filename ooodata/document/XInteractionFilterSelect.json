@@ -1,0 +1,84 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XInteractionFilterSelect",
+  "type": "interface",
+  "namespace": "com.sun.star.document",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..task.x_interaction_continuation",
+        "XInteractionContinuation",
+        "XInteractionContinuation_5af0108e"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.task.XInteractionContinuation": "XInteractionContinuation_5af0108e"
+    },
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.task.XInteractionContinuation"
+      ],
+      "typing": []
+    },
+    "name": "XInteractionFilterSelect",
+    "imports": [],
+    "namespace": "com.sun.star.document",
+    "extends": [
+      "com.sun.star.task.XInteractionContinuation"
+    ],
+    "desc": [
+      "continuation used by interaction mechanism at filter detection during loading documents",
+      "",
+      "If during loading time the filter can't be detected and wasn't given at calling time, a possible com.sun.star.task.InteractionHandler will be used. (it's a part of used MediaDescriptor) A NoSuchFilterRequest will be used then to start right interaction on that to get a decision which filter should be used for given URL. A possible continuation of that can be this XInteractionFilterSelect. It will transport the decision back to generic filter detection and force using of it. Of course it's possible to abort the loading process by use another continuation com.sun.star.task.XInteractionAbort."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1document_1_1XInteractionFilterSelect.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getFilter",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "used by detection to get selected filter"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setFilter",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "used by interaction to set selected filter",
+            "",
+            "This value must be saved till another one will be set and must be provided on getFilter() for interest users."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

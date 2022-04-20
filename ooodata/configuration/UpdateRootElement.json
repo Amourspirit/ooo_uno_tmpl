@@ -1,0 +1,66 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "UpdateRootElement",
+  "type": "service",
+  "namespace": "com.sun.star.configuration",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".access_root_element",
+        "AccessRootElement",
+        "AccessRootElement_7fef1140"
+      ],
+      [
+        "..util.x_changes_batch",
+        "XChangesBatch",
+        "XChangesBatch_bb3b0bb9"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.configuration.AccessRootElement": "AccessRootElement_7fef1140",
+      "com.sun.star.util.XChangesBatch": "XChangesBatch_bb3b0bb9"
+    },
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.configuration.AccessRootElement",
+        "com.sun.star.util.XChangesBatch"
+      ],
+      "typing": []
+    },
+    "name": "UpdateRootElement",
+    "imports": [],
+    "namespace": "com.sun.star.configuration",
+    "extends": [
+      "com.sun.star.configuration.AccessRootElement",
+      "com.sun.star.util.XChangesBatch"
+    ],
+    "desc": [
+      "provides update control for a hierarchy of configuration items and information about the hierarchy as a whole as well as its root.",
+      "",
+      "Extends AccessRootElement by adding support for collecting changes and applying them to a backend store as a single batch.",
+      "",
+      "An implementation represents the root of a partial hierarchy. [See the documentation for AccessRootElement]. The hierarchy in turn is a view onto a fragment of persistent data tree that can be accessed through several such views, or even several processes, simultaneously.",
+      "",
+      "Elements of the hierarchy, such as descendants of this root element, may support modification by providing appropriate interfaces. Changes done this way initially only affect these objects themselves and other objects within the same hierarchy, such as other descendants of this root element.",
+      "",
+      "The accumulated changes within this hierarchy can be managed using com.sun.star.util.XChangesBatch. Pending changes will become persistent and visible from other overlapping hierarchies only when com.sun.star.util.XChangesBatch.commitChanges() is called. If the hierarchy is disposed or discarded without committing changes, the changes will be lost."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1configuration_1_1UpdateRootElement.html",
+    "items": {}
+  }
+}

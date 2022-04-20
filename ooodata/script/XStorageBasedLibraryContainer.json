@@ -1,0 +1,108 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XStorageBasedLibraryContainer",
+  "type": "interface",
+  "namespace": "com.sun.star.script",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_persistent_library_container",
+        "XPersistentLibraryContainer",
+        "XPersistentLibraryContainer_b6b2129e"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..embed.x_storage",
+        "XStorage",
+        "XStorage_8e460a32"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.script.XPersistentLibraryContainer": "XPersistentLibraryContainer_b6b2129e"
+    },
+    "quote": [
+      "XStorage_8e460a32"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.script.XPersistentLibraryContainer"
+      ],
+      "typing": [
+        "com.sun.star.embed.XStorage"
+      ]
+    },
+    "name": "XStorageBasedLibraryContainer",
+    "imports": [],
+    "namespace": "com.sun.star.script",
+    "extends": [
+      "com.sun.star.script.XPersistentLibraryContainer"
+    ],
+    "desc": [
+      "is the interface for an XLibraryContainer which can be made persistent in a com.sun.star.embed.XStorage.",
+      "",
+      "A persistent library container is associated with a root storage. The container is responsible for a particular sub storage of the root storage, the container storage.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.3"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1script_1_1XStorageBasedLibraryContainer.html",
+    "items": {
+      "methods": [
+        {
+          "name": "storeLibrariesToStorage",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "stores the libraries to a storage other than the current container storage",
+            "",
+            "Note that the library container is not automatically associated with the new root storage. Instead, you need to manually set the RootStorage attribute afterwards. This separation allows for Save-To as well Save-As operations."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.WrappedTargetException"
+          ],
+          "args": [
+            {
+              "name": "RootStorage",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            }
+          ]
+        }
+      ],
+      "properties": [
+        {
+          "name": "RootStorage",
+          "returns": "XStorage_8e460a32",
+          "origtype": "com.sun.star.embed.XStorage",
+          "origin": "com.sun.star.embed.XStorage",
+          "desc": [
+            "denotes the root storage associated with the container.",
+            "",
+            "Effectively, this attribute is a typed version of XPersistentLibraryContainer.RootLocation, it's guaranteed that at every time, XPersistentLibraryContainer.RootLocation and RootStorage have the same value.",
+            "",
+            "You should only set this attribute to a new value if you previously called storeLibrariesToStorage with the same storage. Setting this attribute to a storage into which the container has not been stored previously might result in unexpected behavior."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

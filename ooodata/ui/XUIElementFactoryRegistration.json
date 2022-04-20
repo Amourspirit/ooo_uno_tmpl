@@ -1,0 +1,187 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XUIElementFactoryRegistration",
+  "type": "interface",
+  "namespace": "com.sun.star.ui",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
+      ],
+      [
+        ".xui_element_factory",
+        "XUIElementFactory",
+        "XUIElementFactory_d0280c7e"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XUIElementFactory_d0280c7e",
+      "typing.Tuple[typing.Tuple[PropertyValue_c9610c73, ...], ...]"
+    ],
+    "typings": [
+      "typing.Tuple[typing.Tuple[PropertyValue_c9610c73, ...], ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.ui.XUIElementFactory"
+      ]
+    },
+    "name": "XUIElementFactoryRegistration",
+    "imports": [],
+    "namespace": "com.sun.star.ui",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "is used to query, register and deregister user interface element factories.",
+      "",
+      "A user interface element factory is registered for a set of three properties.",
+      "",
+      "A combination of these three property values can uniquely identify every user interface element within OpenOffice.",
+      "",
+      "Currently the following user interface element types are defined:",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.0"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ui_1_1XUIElementFactoryRegistration.html",
+    "items": {
+      "methods": [
+        {
+          "name": "deregisterFactory",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "function to remove a previously defined user interface element factory.",
+            "",
+            "Using this function can be very dangerous as other implementation with OpenOffice may not be able to create their user interface element anymore."
+          ],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException"
+          ],
+          "args": [
+            {
+              "name": "aType",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "ModuleIdentifier",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "getFactory",
+          "returns": "XUIElementFactory_d0280c7e",
+          "returns_origin": "com.sun.star.ui.XUIElementFactory",
+          "desc": [
+            "function to retrieve a previously registered user interface element factory."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "ResourceURL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "ModuleIdentifier",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "getRegisteredFactories",
+          "returns": "typing.Tuple[typing.Tuple[PropertyValue_c9610c73, ...], ...]",
+          "returns_origin": "sequence< sequence< com.sun.star.beans.PropertyValue > >",
+          "desc": [
+            "function to retrieve a list of all registered user interface element factories",
+            "",
+            "The following properties are defined:"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "registerFactory",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "function to register a user interface element factory."
+          ],
+          "raises": [
+            "com.sun.star.container.ElementExistException"
+          ],
+          "args": [
+            {
+              "name": "aType",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aModuleIdentifier",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aFactoryImplementationName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

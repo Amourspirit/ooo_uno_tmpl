@@ -1,0 +1,120 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XTreeDataModel",
+  "type": "interface",
+  "namespace": "com.sun.star.awt.tree",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "...lang.x_component",
+        "XComponent",
+        "XComponent_98dc0ab5"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_tree_data_model_listener",
+        "XTreeDataModelListener",
+        "XTreeDataModelListener_748210cb"
+      ],
+      [
+        ".x_tree_node",
+        "XTreeNode",
+        "XTreeNode_baaf0ba0"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.lang.XComponent": "XComponent_98dc0ab5"
+    },
+    "quote": [
+      "XTreeDataModelListener_748210cb",
+      "XTreeNode_baaf0ba0"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.lang.XComponent"
+      ],
+      "typing": [
+        "com.sun.star.awt.tree.XTreeDataModelListener",
+        "com.sun.star.awt.tree.XTreeNode"
+      ]
+    },
+    "name": "XTreeDataModel",
+    "imports": [],
+    "namespace": "com.sun.star.awt.tree",
+    "extends": [
+      "com.sun.star.lang.XComponent"
+    ],
+    "desc": [
+      "An instance of this interface is used by the TreeControl to retrieve the hierarchical outline data that is displayed in the actual control.",
+      "",
+      "If you implement your own XTreeDataModel you need to notify registered XTreeDataModelListener if your model changes after the control is created. If this is not done correctly the TreeControl will not update the data properly.",
+      "",
+      "If you do not need your own model implementation, you can also use the MutableTreeDataModel."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1tree_1_1XTreeDataModel.html",
+    "items": {
+      "methods": [
+        {
+          "name": "addTreeDataModelListener",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Adds a listener for the TreeDataModelEvent posted after the tree changes."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Listener",
+              "type": "XTreeDataModelListener_748210cb",
+              "direction": "in",
+              "origin": "com.sun.star.awt.tree.XTreeDataModelListener"
+            }
+          ]
+        },
+        {
+          "name": "getRoot",
+          "returns": "XTreeNode_baaf0ba0",
+          "returns_origin": "com.sun.star.awt.tree.XTreeNode",
+          "desc": [
+            "Returns the root of the tree.",
+            "",
+            "Returns null only if the tree has no nodes."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "removeTreeDataModelListener",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Removes a listener previously added with addTreeDataModelListener()."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Listener",
+              "type": "XTreeDataModelListener_748210cb",
+              "direction": "in",
+              "origin": "com.sun.star.awt.tree.XTreeDataModelListener"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

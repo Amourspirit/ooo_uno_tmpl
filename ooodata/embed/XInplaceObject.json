@@ -1,0 +1,143 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XInplaceObject",
+  "type": "interface",
+  "namespace": "com.sun.star.embed",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..awt.key_event",
+        "KeyEvent",
+        "KeyEvent_7a78097f"
+      ],
+      [
+        "..awt.rectangle",
+        "Rectangle",
+        "Rectangle_84b109e9"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "Rectangle_84b109e9",
+      "typing.Tuple[KeyEvent_7a78097f, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[KeyEvent_7a78097f, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.awt.KeyEvent",
+        "com.sun.star.awt.Rectangle"
+      ]
+    },
+    "name": "XInplaceObject",
+    "imports": [],
+    "namespace": "com.sun.star.embed",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "represents common functionality for inplace embedded objects."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1embed_1_1XInplaceObject.html",
+    "items": {
+      "methods": [
+        {
+          "name": "enableModeless",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "enables or disables modeless dialogs of the object.",
+            "",
+            "In case container wants to show a modal dialog it should disable modeless of embedded object dialogs with this call. Later the same call can be used to enable it."
+          ],
+          "raises": [
+            "com.sun.star.embed.WrongStateException",
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            {
+              "name": "bEnable",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
+          ]
+        },
+        {
+          "name": "setObjectRectangles",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "sets the visible part of the inplace object.",
+            "",
+            "Both rectangles are provided in object's parent window coordinates in pixels. The intersection of rectangles specifies the visible part of the object. In case the position window has a size that is different from object's visual area size, the object should either scale or deactivate.",
+            "",
+            "The method must activate object repainting."
+          ],
+          "raises": [
+            "com.sun.star.embed.WrongStateException",
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            {
+              "name": "aPosRect",
+              "type": "Rectangle_84b109e9",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Rectangle"
+            },
+            {
+              "name": "aClipRect",
+              "type": "Rectangle_84b109e9",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Rectangle"
+            }
+          ]
+        },
+        {
+          "name": "translateAccelerators",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "provides accelerator table the container wants to use during inplace editing."
+          ],
+          "raises": [
+            "com.sun.star.embed.WrongStateException"
+          ],
+          "args": [
+            {
+              "name": "aKeys",
+              "type": "typing.Tuple[KeyEvent_7a78097f, ...]",
+              "direction": "in",
+              "origin": "sequence< .com.sun.star.awt.KeyEvent >"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

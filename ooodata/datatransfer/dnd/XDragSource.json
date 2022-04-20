@@ -1,0 +1,159 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XDragSource",
+  "type": "interface",
+  "namespace": "com.sun.star.datatransfer.dnd",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "...uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..x_transferable",
+        "XTransferable",
+        "XTransferable_2d800f38"
+      ],
+      [
+        ".drag_gesture_event",
+        "DragGestureEvent",
+        "DragGestureEvent_9e7211ca"
+      ],
+      [
+        ".x_drag_source_listener",
+        "XDragSourceListener",
+        "XDragSourceListener_d56f12f8"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "DragGestureEvent_9e7211ca",
+      "XDragSourceListener_d56f12f8",
+      "XTransferable_2d800f38"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.datatransfer.XTransferable",
+        "com.sun.star.datatransfer.dnd.DragGestureEvent",
+        "com.sun.star.datatransfer.dnd.XDragSourceListener"
+      ]
+    },
+    "name": "XDragSource",
+    "imports": [],
+    "namespace": "com.sun.star.datatransfer.dnd",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "This interface is implemented by a view or window that supports drag operations and will be received as part of a DragGestureEvent through a com.sun.star.datatransfer.dnd.XDragGestureListener.dragGestureRecognized() callback.",
+      "",
+      "Differently to Java, the association between view and interface is fixed and can not be changed. Otherwise, the AWT messaging would have to be implemented for any window supporting Drag and Drop operations, which would be a real performance issue."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1datatransfer_1_1dnd_1_1XDragSource.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getDefaultCursor",
+          "returns": "int",
+          "returns_origin": "long",
+          "desc": [
+            "To get the default cursor for a specified drag action.",
+            "",
+            "The returned value may be used as parameter for the method com.sun.star.datatransfer.dnd.XDragSourceContext.setCursor()."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "dragAction",
+              "type": "int",
+              "direction": "in",
+              "origin": "byte"
+            }
+          ]
+        },
+        {
+          "name": "isDragImageSupported",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "In order to query if drag image support is available."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "startDrag",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Starts the drag operation.",
+            "",
+            "Note: this call does not block until the drag and drop operation ends. If the Drag and Drop system is unable to initiate a drag operation or if the user attempts to start a drag while an existing drag operation is still executing, the action fails immediately. This is indicated by calling com.sun.star.datatransfer.dnd.XDragSourceListener.dragDropEnd() on the parameter listener with a DragSourceDragEvent showing a failure."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "trigger",
+              "type": "DragGestureEvent_9e7211ca",
+              "direction": "in",
+              "origin": "com.sun.star.datatransfer.dnd.DragGestureEvent"
+            },
+            {
+              "name": "sourceActions",
+              "type": "int",
+              "direction": "in",
+              "origin": "byte"
+            },
+            {
+              "name": "cursor",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "image",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "trans",
+              "type": "XTransferable_2d800f38",
+              "direction": "in",
+              "origin": "com.sun.star.datatransfer.XTransferable"
+            },
+            {
+              "name": "listener",
+              "type": "XDragSourceListener_d56f12f8",
+              "direction": "in",
+              "origin": "com.sun.star.datatransfer.dnd.XDragSourceListener"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

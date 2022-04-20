@@ -1,0 +1,169 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XLanguageGuessing",
+  "type": "interface",
+  "namespace": "com.sun.star.linguistic2",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        "..lang.locale",
+        "Locale",
+        "Locale_70d308fa"
+      ]
+    ],
+    "extends_map": {},
+    "quote": [
+      "Locale_70d308fa",
+      "typing.Tuple[Locale_70d308fa, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[Locale_70d308fa, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.lang.Locale"
+      ]
+    },
+    "name": "XLanguageGuessing",
+    "imports": [],
+    "namespace": "com.sun.star.linguistic2",
+    "extends": [],
+    "desc": [
+      "This interface allows to guess the language of a text.",
+      "",
+      "The current set of supported languages is:",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1linguistic2_1_1XLanguageGuessing.html",
+    "items": {
+      "methods": [
+        {
+          "name": "disableLanguages",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "allows to explicitly discard some languages from the set of languages possibly returned.",
+            "",
+            "By default all languages are enabled."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "aLanguages",
+              "type": "typing.Tuple[Locale_70d308fa, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.lang.Locale >"
+            }
+          ]
+        },
+        {
+          "name": "enableLanguages",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "allows to explicitly re-enable some languages that got previously disabled.",
+            "",
+            "By default all languages are enabled."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "aLanguages",
+              "type": "typing.Tuple[Locale_70d308fa, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.lang.Locale >"
+            }
+          ]
+        },
+        {
+          "name": "getAvailableLanguages",
+          "returns": "typing.Tuple[Locale_70d308fa, ...]",
+          "returns_origin": "sequence< com.sun.star.lang.Locale >",
+          "desc": [
+            "returns a list of all supported languages.",
+            "",
+            "This should be the same as the mathematical union of all enabled and disabled languages."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getDisabledLanguages",
+          "returns": "typing.Tuple[Locale_70d308fa, ...]",
+          "returns_origin": "sequence< com.sun.star.lang.Locale >",
+          "desc": [
+            "returns the list of all disabled languages"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getEnabledLanguages",
+          "returns": "typing.Tuple[Locale_70d308fa, ...]",
+          "returns_origin": "sequence< com.sun.star.lang.Locale >",
+          "desc": [
+            "returns the list of all enabled languages"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "guessPrimaryLanguage",
+          "returns": "Locale_70d308fa",
+          "returns_origin": "com.sun.star.lang.Locale",
+          "desc": [
+            "determines the single most probable language of a sub-string.",
+            "",
+            "Please note that because statistical analysis is part of the algorithm the likelihood to get the correct result increases with the length of the sub-string. A word is much less likely guessed correctly compared to a sentence or even a whole paragraph.",
+            "",
+            "Also note that some languages are that \\\"close\\\" to each other that it will be quite unlikely to find a difference in them, e.g. English (UK), English (IE) and English (AUS) and most likely English (US) as well. And thus the result may be arbitrary."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "aText",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nStartPos",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nLen",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

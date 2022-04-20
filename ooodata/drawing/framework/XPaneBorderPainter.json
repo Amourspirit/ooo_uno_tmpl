@@ -1,0 +1,245 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XPaneBorderPainter",
+  "type": "interface",
+  "namespace": "com.sun.star.drawing.framework",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        "...awt.point",
+        "Point",
+        "Point_5fb2085e"
+      ],
+      [
+        "...awt.rectangle",
+        "Rectangle",
+        "Rectangle_84b109e9"
+      ],
+      [
+        ".border_type",
+        "BorderType",
+        "BorderType_4b7f0ff0"
+      ],
+      [
+        "...rendering.x_canvas",
+        "XCanvas",
+        "XCanvas_b19b0b7a"
+      ]
+    ],
+    "extends_map": {},
+    "quote": [
+      "BorderType_4b7f0ff0",
+      "Point_5fb2085e",
+      "Rectangle_84b109e9",
+      "XCanvas_b19b0b7a"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.awt.Point",
+        "com.sun.star.awt.Rectangle",
+        "com.sun.star.drawing.framework.BorderType",
+        "com.sun.star.rendering.XCanvas"
+      ]
+    },
+    "name": "XPaneBorderPainter",
+    "imports": [],
+    "namespace": "com.sun.star.drawing.framework",
+    "extends": [],
+    "desc": [
+      "Paint the border around a rectangular region, typically a pane.",
+      "",
+      "Calling objects have to be able to derive inner bounding boxes of the border from the outer ones and inner ones from outer ones. This conversion and the painting of the border involves three rectangles. The inner and outer bounding box of the border. This is a logical bounding box which the paint methods may paint over. The center box is the third rectangle. This is the actual border between outer and inner background color or bitmap and it is used for placing the bitmaps that are used paint the border. The inner sides and corners are places relative to this center box, i.e. when not further offsets are given then the upper left corner bitmap is painted with its lower right at the upper left of the center box."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1drawing_1_1framework_1_1XPaneBorderPainter.html",
+    "items": {
+      "methods": [
+        {
+          "name": "addBorder",
+          "returns": "Rectangle_84b109e9",
+          "returns_origin": "com.sun.star.awt.Rectangle",
+          "desc": [
+            "Enlarge the given rectangle by the size of the specified part of the border.",
+            "",
+            "This method can be used to convert an inner bounding box into the center box or the outer bounding box."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "sPaneBorderStyleName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aRectangle",
+              "type": "Rectangle_84b109e9",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Rectangle"
+            },
+            {
+              "name": "eBorderType",
+              "type": "BorderType_4b7f0ff0",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.framework.BorderType"
+            }
+          ]
+        },
+        {
+          "name": "getCalloutOffset",
+          "returns": "Point_5fb2085e",
+          "returns_origin": "com.sun.star.awt.Point",
+          "desc": [
+            "Return the offset of a call out anchor with respect to the outer border.",
+            "",
+            "This value is used when the call out is realized by a fixed bitmap in order to determine the size and/or location of the outer border for a given call out."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "sPaneBorderStyleName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "paintBorder",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Paint the border around a pane."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "sPaneBorderStyleName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "xCanvas",
+              "type": "XCanvas_b19b0b7a",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.XCanvas"
+            },
+            {
+              "name": "aOuterBorderRectangle",
+              "type": "Rectangle_84b109e9",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Rectangle"
+            },
+            {
+              "name": "aRepaintArea",
+              "type": "Rectangle_84b109e9",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Rectangle"
+            },
+            {
+              "name": "sTitle",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "paintBorderWithCallout",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Paint the border around a pane where the border includes a call out that is anchored at the given point.",
+            "",
+            "Most arguments have the same meaning as in the paintBorder()."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "sPaneBorderStyleName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "xCanvas",
+              "type": "XCanvas_b19b0b7a",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.XCanvas"
+            },
+            {
+              "name": "aOuterBorderRectangle",
+              "type": "Rectangle_84b109e9",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Rectangle"
+            },
+            {
+              "name": "aRepaintArea",
+              "type": "Rectangle_84b109e9",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Rectangle"
+            },
+            {
+              "name": "sTitle",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aCalloutAnchor",
+              "type": "Point_5fb2085e",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Point"
+            }
+          ]
+        },
+        {
+          "name": "removeBorder",
+          "returns": "Rectangle_84b109e9",
+          "returns_origin": "com.sun.star.awt.Rectangle",
+          "desc": [
+            "Shrink the given rectangle by the size of the specified part of the border.",
+            "",
+            "This method can be used to convert an outer bounding box into the center box or the inner bounding box."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "sPaneBorderStyleName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aRectangle",
+              "type": "Rectangle_84b109e9",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Rectangle"
+            },
+            {
+              "name": "eBorderType",
+              "type": "BorderType_4b7f0ff0",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.framework.BorderType"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

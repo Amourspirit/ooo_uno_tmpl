@@ -1,0 +1,211 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XPackageEncryption",
+  "type": "interface",
+  "namespace": "com.sun.star.packages",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..beans.named_value",
+        "NamedValue",
+        "NamedValue_a37a0af3"
+      ],
+      [
+        "..io.x_input_stream",
+        "XInputStream",
+        "XInputStream_98d40ab4"
+      ],
+      [
+        "..io.x_output_stream",
+        "XOutputStream",
+        "XOutputStream_a4e00b35"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XInputStream_98d40ab4",
+      "XOutputStream_a4e00b35",
+      "typing.Tuple[NamedValue_a37a0af3, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[NamedValue_a37a0af3, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.beans.NamedValue",
+        "com.sun.star.io.XInputStream",
+        "com.sun.star.io.XOutputStream"
+      ]
+    },
+    "name": "XPackageEncryption",
+    "imports": [],
+    "namespace": "com.sun.star.packages",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "Allows to transparently plug-in crypto for PackageStreams.",
+      "",
+      "**since**",
+      "",
+      "    LibreOffice 7.0"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1packages_1_1XPackageEncryption.html",
+    "items": {
+      "methods": [
+        {
+          "name": "checkDataIntegrity",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "Check if decryption meta data is valid.",
+            "",
+            "Some implementations might for example check HMAC values here. Call this before trusting encrypted data."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "createEncryptionData",
+          "returns": "typing.Tuple[NamedValue_a37a0af3, ...]",
+          "returns_origin": "sequence< com.sun.star.beans.NamedValue >",
+          "desc": [
+            "Create key-value list of encryption meta data.",
+            "",
+            "After generateEncryptionKey() succeeded in setting up crypto, use this method to create requisite meta data. Depending on underlying crypto, this can be a salt, init vector, or other algorithm-specific information that needs to be stored alongside an encrypted document"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "rPassword",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "decrypt",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "Decrypt document content.",
+            "",
+            "After crypto setup via readEncryptionInfo(), pipe package bits through encryption engine."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "rxInputStream",
+              "type": "XInputStream_98d40ab4",
+              "direction": "in",
+              "origin": "com.sun.star.io.XInputStream"
+            },
+            {
+              "name": "rxOutputStream",
+              "type": "XOutputStream_a4e00b35",
+              "direction": "out",
+              "origin": "com.sun.star.io.XOutputStream"
+            }
+          ]
+        },
+        {
+          "name": "encrypt",
+          "returns": "typing.Tuple[NamedValue_a37a0af3, ...]",
+          "returns_origin": "sequence< com.sun.star.beans.NamedValue >",
+          "desc": [
+            "Encrypt given stream.",
+            "",
+            "After setting up crypto via setupEncryption(), use this method to encrypt content."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "rxInputStream",
+              "type": "XInputStream_98d40ab4",
+              "direction": "in",
+              "origin": "com.sun.star.io.XInputStream"
+            }
+          ]
+        },
+        {
+          "name": "generateEncryptionKey",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "Set or refresh encryption key."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "rPassword",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "readEncryptionInfo",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "Read package crypto information."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "rStreams",
+              "type": "typing.Tuple[NamedValue_a37a0af3, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.NamedValue >"
+            }
+          ]
+        },
+        {
+          "name": "setupEncryption",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "Set key-value list of encryption meta data.",
+            "",
+            "Use this method to setup requisite encryption meta data. Depending on the underlying crypto, this can be a salt, init vector, or other algorithm-specific information that needs to be stored alongside an encrypted document"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "rMediaEncData",
+              "type": "typing.Tuple[NamedValue_a37a0af3, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.NamedValue >"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

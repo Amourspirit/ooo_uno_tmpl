@@ -1,0 +1,266 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XFlatParagraph",
+  "type": "interface",
+  "namespace": "com.sun.star.text",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_text_markup",
+        "XTextMarkup",
+        "XTextMarkup_a5d60b3a"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
+      ],
+      [
+        "..lang.locale",
+        "Locale",
+        "Locale_70d308fa"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.text.XTextMarkup": "XTextMarkup_a5d60b3a"
+    },
+    "quote": [
+      "Locale_70d308fa",
+      "typing.Tuple[PropertyValue_c9610c73, ...]",
+      "typing.Tuple[int, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[PropertyValue_c9610c73, ...]",
+      "typing.Tuple[int, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.text.XTextMarkup"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.lang.Locale"
+      ]
+    },
+    "name": "XFlatParagraph",
+    "imports": [],
+    "namespace": "com.sun.star.text",
+    "extends": [
+      "com.sun.star.text.XTextMarkup"
+    ],
+    "desc": [
+      "provides functionality to ...",
+      "",
+      "**since**",
+      "",
+      "    OOo 3.0"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1text_1_1XFlatParagraph.html",
+    "items": {
+      "methods": [
+        {
+          "name": "changeAttributes",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "replace the attributes of the specific text with the given set of attributes."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "nPos",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nLen",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aAttributes",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence<.com.sun.star.beans.PropertyValue >"
+            }
+          ]
+        },
+        {
+          "name": "changeText",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "replace the specific text with new text."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "nPos",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nLen",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "NewText",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aAttributes",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence<.com.sun.star.beans.PropertyValue >"
+            }
+          ]
+        },
+        {
+          "name": "getLanguageOfText",
+          "returns": "Locale_70d308fa",
+          "returns_origin": "com.sun.star.lang.Locale",
+          "desc": [
+            "get the language of the specific text"
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "nPos",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nLen",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "getLanguagePortions",
+          "returns": "typing.Tuple[int, ...]",
+          "returns_origin": "sequence< long >",
+          "desc": [
+            "get a list of indexes that separate each two different languages"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getPrimaryLanguageOfText",
+          "returns": "Locale_70d308fa",
+          "returns_origin": "com.sun.star.lang.Locale",
+          "desc": [
+            "get the single most probable language of the specific text, especially after getLanguageOfText fails"
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "nPos",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nLen",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "getText",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "get the content of the paragraph"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "isChecked",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "returns whether the respective text node has already been processed"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "nType",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "isModified",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "check whether the content has been modified"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setChecked",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "change the \\\"checked\\\" flag of the respective text node, i.e., mark the text node as \\\"processed\\\""
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "nType",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "bVal",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

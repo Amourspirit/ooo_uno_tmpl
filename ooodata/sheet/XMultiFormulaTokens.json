@@ -1,0 +1,109 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XMultiFormulaTokens",
+  "type": "interface",
+  "namespace": "com.sun.star.sheet",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        ".formula_token",
+        "FormulaToken",
+        "FormulaToken_bd1c0bf8"
+      ]
+    ],
+    "extends_map": {},
+    "quote": [
+      "typing.Tuple[FormulaToken_bd1c0bf8, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[FormulaToken_bd1c0bf8, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.sheet.FormulaToken"
+      ]
+    },
+    "name": "XMultiFormulaTokens",
+    "imports": [],
+    "namespace": "com.sun.star.sheet",
+    "extends": [],
+    "desc": [
+      "gives access to multiple sets of formula tokens.",
+      "",
+      "A service implementing this interface can internally set an arbitrary number of formula token sequences. The number of allowed formula token sequences must be returned by the com.sun.star.sheet.XMultiFormulaTokens.getCount() method. When the client code tries to access formula tokens at index that is outside the allowed index range, the implementation shall return an com.sun.star.lang.IndexOutOfBoundsException."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sheet_1_1XMultiFormulaTokens.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getCount",
+          "returns": "int",
+          "returns_origin": "long",
+          "desc": [
+            "returns the number of formulas allowed in this formula token set."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getTokens",
+          "returns": "typing.Tuple[FormulaToken_bd1c0bf8, ...]",
+          "returns_origin": "sequence< FormulaToken >",
+          "desc": [
+            "returns the formula at specified index as sequence of tokens."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "setTokens",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "sets the formula at specified index as sequence of tokens."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aTokens",
+              "type": "typing.Tuple[FormulaToken_bd1c0bf8, ...]",
+              "direction": "in",
+              "origin": "sequence< FormulaToken >"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

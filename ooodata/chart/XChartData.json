@@ -1,0 +1,130 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XChartData",
+  "type": "interface",
+  "namespace": "com.sun.star.chart",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_chart_data_change_event_listener",
+        "XChartDataChangeEventListener",
+        "XChartDataChangeEventListener_bb19126c"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XChartDataChangeEventListener_bb19126c"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.chart.XChartDataChangeEventListener"
+      ]
+    },
+    "name": "XChartData",
+    "imports": [],
+    "namespace": "com.sun.star.chart",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "manages the data of the chart."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1chart_1_1XChartData.html",
+    "items": {
+      "methods": [
+        {
+          "name": "addChartDataChangeEventListener",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "allows a component supporting the XChartDataChangeEventListener interface to register as listener.",
+            "",
+            "The component will be notified with a ChartDataChangeEvent every time the chart's data changes."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aListener",
+              "type": "XChartDataChangeEventListener_bb19126c",
+              "direction": "in",
+              "origin": "com.sun.star.chart.XChartDataChangeEventListener"
+            }
+          ]
+        },
+        {
+          "name": "getNotANumber",
+          "returns": "float",
+          "returns_origin": "double",
+          "desc": [
+            "In IEEE arithmetic format it is one of the NaN values, so there are no conflicts with existing numeric values."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "isNotANumber",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "checks whether the value given is equal to the indicator value for a missing value.",
+            "",
+            "In IEEE arithmetic format it is one of the NaN values, so there are no conflicts with existing numeric values.",
+            "",
+            "Always use this method to check, if a value is not a number. If you compare the value returned by XChartData.getNotANumber() to another double value using the = operator, you may not get the desired result!"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "nNumber",
+              "type": "float",
+              "direction": "in",
+              "origin": "double"
+            }
+          ]
+        },
+        {
+          "name": "removeChartDataChangeEventListener",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "removes a previously registered listener."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aListener",
+              "type": "XChartDataChangeEventListener_bb19126c",
+              "direction": "in",
+              "origin": "com.sun.star.chart.XChartDataChangeEventListener"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

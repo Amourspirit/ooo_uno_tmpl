@@ -1,0 +1,87 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XDictionaryEntry",
+  "type": "interface",
+  "namespace": "com.sun.star.linguistic2",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": []
+    },
+    "name": "XDictionaryEntry",
+    "imports": [],
+    "namespace": "com.sun.star.linguistic2",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "This interfaces gives access to a dictionary entry.",
+      "",
+      "A dictionary entry can supply a word and its hyphenation and indicate if it is a negative word. If it is a negative entry it may supply a replacement text to be used instead of the entry word.",
+      "",
+      "Hyphenation positions are represented by an \\\"=\\\" in the word. If the \\\"=\\\" is the last character of the word this means it should not be hyphenated. If there is no \\\"=\\\" charter in the word, hyphenation positions will be determined automatically (i.e., from the hyphenator service alone).",
+      "",
+      "Entries whose words only differ in hyphenation are considered to be equal. Also a \\\".\\\" at the end of the word will make no difference."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1linguistic2_1_1XDictionaryEntry.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getDictionaryWord",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getReplacementText",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "is the suggested replacement text for negative words.",
+            "",
+            "It is undefined if the entry is not negative."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "isNegative",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

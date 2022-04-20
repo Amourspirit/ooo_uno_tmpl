@@ -1,0 +1,110 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XSubToolbarController",
+  "type": "interface",
+  "namespace": "com.sun.star.frame",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": []
+    },
+    "name": "XSubToolbarController",
+    "imports": [],
+    "namespace": "com.sun.star.frame",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "special interface to support sub-toolbars in a controller implementation.",
+      "",
+      "This interface is normally used to implement the toolbar button/sub- toolbar function feature. It exchanges the function of the toolbar button, that opened the sub-toolbar, with the one that has been selected on the sub-toolbar.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.0"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XSubToolbarController.html",
+    "items": {
+      "methods": [
+        {
+          "name": "functionSelected",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "gets called to notify a controller that a sub-toolbar function has been selected."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aCommand",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "getSubToolbarName",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "provides the resource URL of the sub-toolbar this controller opens."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "opensSubToolbar",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "if the controller features a sub-toolbar.",
+            "",
+            "Enables implementations to dynamically decide to support sub-toolbars or not."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "updateImage",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "gets called to notify a controller that it should set an image which represents the current selected function.",
+            "",
+            "Only the controller instance is able to set the correct image for the current function. A toolbar implementation will ask sub-toolbar controllers to update their image whenever it has to update the images of all its buttons."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

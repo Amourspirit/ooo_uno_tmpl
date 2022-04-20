@@ -1,0 +1,138 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XSubmit",
+  "type": "interface",
+  "namespace": "com.sun.star.form",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..awt.mouse_event",
+        "MouseEvent",
+        "MouseEvent_8f430a5f"
+      ],
+      [
+        "..awt.x_control",
+        "XControl",
+        "XControl_7a9c098d"
+      ],
+      [
+        ".x_submit_listener",
+        "XSubmitListener",
+        "XSubmitListener_d5950cce"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "MouseEvent_8f430a5f",
+      "XControl_7a9c098d",
+      "XSubmitListener_d5950cce"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.awt.MouseEvent",
+        "com.sun.star.awt.XControl",
+        "com.sun.star.form.XSubmitListener"
+      ]
+    },
+    "name": "XSubmit",
+    "imports": [],
+    "namespace": "com.sun.star.form",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "provides functionality to submit data from a component.",
+      "",
+      "Usually, this is used by com.sun.star.form.component.HTMLForms.",
+      "",
+      "See the HTML specification to learn about submitting forms."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1form_1_1XSubmit.html",
+    "items": {
+      "methods": [
+        {
+          "name": "addSubmitListener",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "adds the specified listener to receive the \\\"approveSubmit\\\" event."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aListener",
+              "type": "XSubmitListener_d5950cce",
+              "direction": "in",
+              "origin": "com.sun.star.form.XSubmitListener"
+            }
+          ]
+        },
+        {
+          "name": "removeSubmitListener",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "removes the specified listener."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aListener",
+              "type": "XSubmitListener_d5950cce",
+              "direction": "in",
+              "origin": "com.sun.star.form.XSubmitListener"
+            }
+          ]
+        },
+        {
+          "name": "submit",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "submits the component's data to a specified target."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aControl",
+              "type": "XControl_7a9c098d",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XControl"
+            },
+            {
+              "name": "aMouseEvt",
+              "type": "MouseEvent_8f430a5f",
+              "direction": "in",
+              "origin": "com.sun.star.awt.MouseEvent"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

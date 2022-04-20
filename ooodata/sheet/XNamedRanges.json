@@ -1,0 +1,179 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XNamedRanges",
+  "type": "interface",
+  "namespace": "com.sun.star.sheet",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..container.x_name_access",
+        "XNameAccess",
+        "XNameAccess_e2ab0cf6"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".border",
+        "Border",
+        "Border_7b2c097f"
+      ],
+      [
+        "..table.cell_address",
+        "CellAddress",
+        "CellAddress_ae5f0b56"
+      ],
+      [
+        "..table.cell_range_address",
+        "CellRangeAddress",
+        "CellRangeAddress_ec450d43"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.container.XNameAccess": "XNameAccess_e2ab0cf6"
+    },
+    "quote": [
+      "Border_7b2c097f",
+      "CellAddress_ae5f0b56",
+      "CellRangeAddress_ec450d43"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.container.XNameAccess"
+      ],
+      "typing": [
+        "com.sun.star.sheet.Border",
+        "com.sun.star.table.CellAddress",
+        "com.sun.star.table.CellRangeAddress"
+      ]
+    },
+    "name": "XNamedRanges",
+    "imports": [],
+    "namespace": "com.sun.star.sheet",
+    "extends": [
+      "com.sun.star.container.XNameAccess"
+    ],
+    "desc": [
+      "provides access to the members in a collection of named ranges and to insert and remove them."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sheet_1_1XNamedRanges.html",
+    "items": {
+      "methods": [
+        {
+          "name": "addNewByName",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "adds a new named range to the collection.",
+            "",
+            "A cell range address is one possible content of a named range.",
+            "",
+            "This parameter will be zero for any common named range."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aContent",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aPosition",
+              "type": "CellAddress_ae5f0b56",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellAddress"
+            },
+            {
+              "name": "nType",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "addNewFromTitles",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "creates named cell ranges from titles in a cell range.",
+            "",
+            "The names for the named ranges are taken from title cells in the top or bottom row, or from the cells of the left or right column of the range (depending on the parameter aBorder. The named ranges refer to single columns or rows in the inner part of the original range, excluding the labels.",
+            "",
+            "Example: The source range is A1:B3. The named ranges shall be created using row titles. This requires Border.TOP for the second parameter. The method creates two named ranges. The name of the first is equal to the content of cell A1 and contains the range $Sheet.$A$2:$A$3 (excluding the title cell). The latter named range is named using cell B1 and contains the cell range address $Sheet.$B$2:$B$3."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aSource",
+              "type": "CellRangeAddress_ec450d43",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellRangeAddress"
+            },
+            {
+              "name": "aBorder",
+              "type": "Border_7b2c097f",
+              "direction": "in",
+              "origin": "com.sun.star.sheet.Border"
+            }
+          ]
+        },
+        {
+          "name": "outputList",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "writes a list of all named ranges into the document.",
+            "",
+            "The first column of the list contains the names. The second column contains the contents of the named ranges."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aOutputPosition",
+              "type": "CellAddress_ae5f0b56",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellAddress"
+            }
+          ]
+        },
+        {
+          "name": "removeByName",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "removes a named range from the collection."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

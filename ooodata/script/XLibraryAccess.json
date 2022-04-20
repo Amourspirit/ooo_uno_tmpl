@@ -1,0 +1,179 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XLibraryAccess",
+  "type": "interface",
+  "namespace": "com.sun.star.script",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "typing.Tuple[int, ...]",
+      "typing.Tuple[str, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[int, ...]",
+      "typing.Tuple[str, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": []
+    },
+    "name": "XLibraryAccess",
+    "imports": [],
+    "namespace": "com.sun.star.script",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "provides access to additional scripting code.",
+      "",
+      "This code is organized in modules and these modules contain the functions. It is possible to get just the code from a function, but you can also get the whole code of a module with all functions in it.",
+      "",
+      ".. deprecated::",
+      "",
+      "    Class is deprecated."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1script_1_1XLibraryAccess.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getFunctionCode",
+          "returns": "typing.Tuple[int, ...]",
+          "returns_origin": "sequence< byte >",
+          "desc": [
+            "Get the compiled code of a function."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "FunctionName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "getFunctionSource",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "get the source code of a function."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aFunctionName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "getModuleCode",
+          "returns": "typing.Tuple[int, ...]",
+          "returns_origin": "sequence< byte >",
+          "desc": [
+            "Get the whole compiled code of a module."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aModuleName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "getModuleNames",
+          "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
+          "desc": [
+            "Return all module names which contain code.",
+            "",
+            "e.g., { \\\"UtilLibrary.ModuleDate\\\", \\\"UtilLibrary.Output\\\", ... }"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getModuleSource",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "get the source code of a module."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aModulName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "isFunction",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "returns TRUE, if the function is accessible through this library; otherwise it returns FALSE."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aFunctionName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "isValidPath",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "returns TRUE if a fully qualified function name begins with this name."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aPathName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

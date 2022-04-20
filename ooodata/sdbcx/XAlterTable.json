@@ -1,0 +1,119 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XAlterTable",
+  "type": "interface",
+  "namespace": "com.sun.star.sdbcx",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..beans.x_property_set",
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XPropertySet_bc180bfa"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.beans.XPropertySet"
+      ]
+    },
+    "name": "XAlterTable",
+    "imports": [],
+    "namespace": "com.sun.star.sdbcx",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "is used for creating and appending new objects to a specific container."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sdbcx_1_1XAlterTable.html",
+    "items": {
+      "methods": [
+        {
+          "name": "alterColumnByIndex",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "is intended to alter an existing column identified by its position.",
+            "",
+            "This operation must be atomic, in that it is done in one step.s"
+          ],
+          "raises": [
+            "com.sun.star.sdbc.SQLException",
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            {
+              "name": "index",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "descriptor",
+              "type": "XPropertySet_bc180bfa",
+              "direction": "in",
+              "origin": "com.sun.star.beans.XPropertySet"
+            }
+          ]
+        },
+        {
+          "name": "alterColumnByName",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "is intended to alter an existing column identified by its name.",
+            "",
+            "This operation must be atomic, in that it is done in one step.s"
+          ],
+          "raises": [
+            "com.sun.star.sdbc.SQLException",
+            "com.sun.star.container.NoSuchElementException"
+          ],
+          "args": [
+            {
+              "name": "colName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "descriptor",
+              "type": "XPropertySet_bc180bfa",
+              "direction": "in",
+              "origin": "com.sun.star.beans.XPropertySet"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

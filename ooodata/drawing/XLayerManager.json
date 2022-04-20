@@ -1,0 +1,146 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XLayerManager",
+  "type": "interface",
+  "namespace": "com.sun.star.drawing",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..container.x_index_access",
+        "XIndexAccess",
+        "XIndexAccess_f0910d6d"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_layer",
+        "XLayer",
+        "XLayer_8fd00a49"
+      ],
+      [
+        ".x_shape",
+        "XShape",
+        "XShape_8fd00a3d"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.container.XIndexAccess": "XIndexAccess_f0910d6d"
+    },
+    "quote": [
+      "XLayer_8fd00a49",
+      "XShape_8fd00a3d"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.container.XIndexAccess"
+      ],
+      "typing": [
+        "com.sun.star.drawing.XLayer",
+        "com.sun.star.drawing.XShape"
+      ]
+    },
+    "name": "XLayerManager",
+    "imports": [],
+    "namespace": "com.sun.star.drawing",
+    "extends": [
+      "com.sun.star.container.XIndexAccess"
+    ],
+    "desc": [
+      "This interface makes it possible to access and manage the Layers of a document."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1drawing_1_1XLayerManager.html",
+    "items": {
+      "methods": [
+        {
+          "name": "attachShapeToLayer",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "attaches a Shape to the given Layer."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xShape",
+              "type": "XShape_8fd00a3d",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.XShape"
+            },
+            {
+              "name": "xLayer",
+              "type": "XLayer_8fd00a49",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.XLayer"
+            }
+          ]
+        },
+        {
+          "name": "getLayerForShape",
+          "returns": "XLayer_8fd00a49",
+          "returns_origin": "com.sun.star.drawing.XLayer",
+          "desc": [
+            "queries the Layer that a Shape is attached to"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xShape",
+              "type": "XShape_8fd00a3d",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.XShape"
+            }
+          ]
+        },
+        {
+          "name": "insertNewByIndex",
+          "returns": "XLayer_8fd00a49",
+          "returns_origin": "com.sun.star.drawing.XLayer",
+          "desc": [
+            "creates a new Layer"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "remove",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "removes a Layer and all Shapes on this Layer."
+          ],
+          "raises": [
+            "com.sun.star.container.NoSuchElementException"
+          ],
+          "args": [
+            {
+              "name": "xLayer",
+              "type": "XLayer_8fd00a49",
+              "direction": "in",
+              "origin": "com.sun.star.drawing.XLayer"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

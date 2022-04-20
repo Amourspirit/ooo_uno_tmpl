@@ -1,0 +1,112 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XGridFieldDataSupplier",
+  "type": "interface",
+  "namespace": "com.sun.star.form",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "typing.Tuple[bool, ...]",
+      "typing.Tuple[object, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[bool, ...]",
+      "typing.Tuple[object, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": []
+    },
+    "name": "XGridFieldDataSupplier",
+    "imports": [],
+    "namespace": "com.sun.star.form",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "provides access to the data of a GridControl",
+      "",
+      "You can retrieve the data type information and the data in a row.",
+      "",
+      "This interface allows to retrieve data even for rows which are not current, which is quite useful, as normally, you can't affect the current row in a grid control without moving the cursor of the underlying com.sun.star.form.component.DataForm.",
+      "",
+      ".. deprecated::",
+      "",
+      "    Class is deprecated."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1form_1_1XGridFieldDataSupplier.html",
+    "items": {
+      "methods": [
+        {
+          "name": "queryFieldData",
+          "returns": "typing.Tuple[object, ...]",
+          "returns_origin": "sequence< any >",
+          "desc": [
+            "retrieves the actual column data for the given row",
+            "",
+            "If a column does not support the requested type, NULL is returned at the respective position."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "nRow",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "xType",
+              "type": "object",
+              "direction": "in",
+              "origin": "type"
+            }
+          ]
+        },
+        {
+          "name": "queryFieldDataType",
+          "returns": "typing.Tuple[bool, ...]",
+          "returns_origin": "sequence< boolean >",
+          "desc": [
+            "checks whether or not the content of the grid's columns can be retrieved in the requested format.",
+            "",
+            "Not every cell content can be retrieved in every representation. For example, in a text column, you usually won't be able to retrieve the content as double.",
+            "To check if the type you need is supported by the columns, use this method."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xType",
+              "type": "object",
+              "direction": "in",
+              "origin": "type"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

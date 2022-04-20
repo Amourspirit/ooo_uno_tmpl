@@ -1,0 +1,246 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XStringResourcePersistence",
+  "type": "interface",
+  "namespace": "com.sun.star.resource",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_string_resource_manager",
+        "XStringResourceManager",
+        "XStringResourceManager_80421142"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..embed.x_storage",
+        "XStorage",
+        "XStorage_8e460a32"
+      ],
+      [
+        "..task.x_interaction_handler",
+        "XInteractionHandler",
+        "XInteractionHandler_bf80e51"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.resource.XStringResourceManager": "XStringResourceManager_80421142"
+    },
+    "quote": [
+      "XInteractionHandler_bf80e51",
+      "XStorage_8e460a32",
+      "typing.Tuple[int, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[int, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.resource.XStringResourceManager"
+      ],
+      "typing": [
+        "com.sun.star.embed.XStorage",
+        "com.sun.star.task.XInteractionHandler"
+      ]
+    },
+    "name": "XStringResourcePersistence",
+    "imports": [],
+    "namespace": "com.sun.star.resource",
+    "extends": [
+      "com.sun.star.resource.XStringResourceManager"
+    ],
+    "desc": [
+      "Interface derived from XStringResourceManager containing basic persistence functionality limited to operations that are independent from an associated location or storage."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1resource_1_1XStringResourcePersistence.html",
+    "items": {
+      "methods": [
+        {
+          "name": "exportBinary",
+          "returns": "typing.Tuple[int, ...]",
+          "returns_origin": "sequence< byte >",
+          "desc": [
+            "Returns a sequence of byte representing the complete string resource in a binary format.",
+            "",
+            "This method is intended to support datatransfer functionality, e.g. provided by com.sun.star.datatransfer.XTransferable and related interfaces.",
+            "",
+            "See importBinary())."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "importBinary",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Initializes the string resource with binary data.",
+            "",
+            "This method expects the data format returned by exportBinary().",
+            "",
+            "All locales and strings previously added to the string resource will be deleted. So after calling this method the string resource only contains the locales and strings specified in the binary data.",
+            "",
+            "This method is intended to support datatransfer functionality, e.g. provided by com.sun.star.datatransfer.XTransferable and related interfaces.",
+            "",
+            "See importBinary())."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "Data",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "in",
+              "origin": "sequence< byte >"
+            }
+          ]
+        },
+        {
+          "name": "isModified",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "provides the current modify state of the StringResourceManager instance."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setComment",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Sets the comment stored first in each locale data file.",
+            "",
+            "This interface method can be used to overwrite the comment used during initialization of the services StringResourceWithLocation or StringResourceWithStorage"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Comment",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "store",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Stores all string table data respectively all data modified since the last call to store() to the location or storage associated with the StringResourceManager.",
+            "",
+            "Each locale is stored in a single file following the format of Java properties files.",
+            "",
+            "This interface is supported by the services StringResourceWithLocation and StringResourceWithStorage",
+            "",
+            "The StringResourceWithLocation is initialized with a URL specifying a location used to load data from and store data to, see StringResourceWithLocation.",
+            "",
+            "The StringResourceWithStorage is initialized with an instance of com.sun.star.embed.XStorage used to load data from and store data to, see StringResourceWithStorage.",
+            "",
+            "If the string table isn't modified (see isModified()) this method does nothing.",
+            "",
+            "This method can throw all exceptions thrown by the methods of com.sun.star.embed.XStorage respectively a com.sun.star.ucb.CommandAbortedException in case of a StringResourceWithLocation for all exceptions that are not handled by a previously specified com.sun.star.task.XInteractionHandler. The handler to be used for the store operation can be specified during initialization of StringResourceWithLocation."
+          ],
+          "raises": [
+            "com.sun.star.lang.NoSupportException",
+            "com.sun.star.uno.Exception"
+          ],
+          "args": []
+        },
+        {
+          "name": "storeToStorage",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Stores all string table data to the provided storage.",
+            "",
+            "Calling this method does not affect the association with a location (in case of a StringResourceWithLocation instance) respectively with a storage (in case of a StringResourceWithStorage instance). The modified state isn't affected either.",
+            "",
+            "This method can be used to make a copy of the current string table data to a storage. This method can throw all exceptions thrown by the methods of com.sun.star.embed.XStorage",
+            "",
+            "This method can throw all exceptions thrown by the methods of com.sun.star.embed.XStorage"
+          ],
+          "raises": [
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            {
+              "name": "Storage",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            },
+            {
+              "name": "BaseName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Comment",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "storeToURL",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Stores all string table data to the location specified by the passed URL string.",
+            "",
+            "Calling this method does not affect the association with a location (in case of a StringResourceWithLocation instance) respectively with a storage (in case of a StringResourceWithStorage instance). The modified state isn't affected either.",
+            "",
+            "This method can be used to make a copy of the current string table data to a location."
+          ],
+          "raises": [
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            {
+              "name": "URL",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "BaseName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Comment",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Handler",
+              "type": "XInteractionHandler_bf80e51",
+              "direction": "in",
+              "origin": "com.sun.star.task.XInteractionHandler"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

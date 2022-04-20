@@ -1,0 +1,109 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XConnectable",
+  "type": "interface",
+  "namespace": "com.sun.star.io",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XConnectable"
+    ],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": []
+    },
+    "name": "XConnectable",
+    "imports": [],
+    "namespace": "com.sun.star.io",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "makes it possible to connect data sinks and sources.",
+      "",
+      "The predecessor-member is the element in the connection that is nearer to the source of the data. The successor-member is the element that is further away from the source of the data. (Note that this classification does not depend on whether the class implements XInputStream or XOutputStream; it only depends on the direction of data flow.)",
+      "",
+      "This interface allows generic services to navigate between arbitrary elements of a connection."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1io_1_1XConnectable.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getPredecessor",
+          "returns": "XConnectable",
+          "returns_origin": "com.sun.star.io.XConnectable",
+          "desc": [],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getSuccessor",
+          "returns": "XConnectable",
+          "returns_origin": "com.sun.star.io.XConnectable",
+          "desc": [],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setPredecessor",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "sets the source of the data flow for this object."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aPredecessor",
+              "type": "XConnectable",
+              "direction": "in",
+              "origin": "com.sun.star.io.XConnectable"
+            }
+          ]
+        },
+        {
+          "name": "setSuccessor",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "sets the sink of the data flow for this object."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aSuccessor",
+              "type": "XConnectable",
+              "direction": "in",
+              "origin": "com.sun.star.io.XConnectable"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

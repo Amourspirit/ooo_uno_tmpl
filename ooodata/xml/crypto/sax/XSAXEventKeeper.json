@@ -1,0 +1,223 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XSAXEventKeeper",
+  "type": "interface",
+  "namespace": "com.sun.star.xml.crypto.sax",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "....uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "...sax.x_document_handler",
+        "XDocumentHandler",
+        "XDocumentHandler_9b90e28"
+      ],
+      [
+        "...wrapper.xxml_element_wrapper",
+        "XXMLElementWrapper",
+        "XXMLElementWrapper_66c0107c"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XDocumentHandler_9b90e28",
+      "XXMLElementWrapper_66c0107c"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.xml.sax.XDocumentHandler",
+        "com.sun.star.xml.wrapper.XXMLElementWrapper"
+      ]
+    },
+    "name": "XSAXEventKeeper",
+    "imports": [],
+    "namespace": "com.sun.star.xml.crypto.sax",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "Interface of SAX Event Keeper.",
+      "",
+      "This interface is used to manipulate element marks in a SAX event stream.",
+      "",
+      "There are two kinds of element mark, one is element collector, which is used to collect a particular element from the SAX event stream; the other is blocker, which is used to block the SAX event stream."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1xml_1_1crypto_1_1sax_1_1XSAXEventKeeper.html",
+    "items": {
+      "methods": [
+        {
+          "name": "addBlocker",
+          "returns": "int",
+          "returns_origin": "long",
+          "desc": [
+            "Adds a new blocker on the next element in the SAX event stream.",
+            "",
+            "No SAX event starting from the next element will be forwarded until this blocker is removed."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "addElementCollector",
+          "returns": "int",
+          "returns_origin": "long",
+          "desc": [
+            "Adds a new element collector on the next element in the SAX event stream."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getCurrentBlockingNode",
+          "returns": "XXMLElementWrapper_66c0107c",
+          "returns_origin": "com.sun.star.xml.wrapper.XXMLElementWrapper",
+          "desc": [
+            "Gets the element which current blocking happens.",
+            "",
+            "This element is the working element of the first blocker in tree order."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getElement",
+          "returns": "XXMLElementWrapper_66c0107c",
+          "returns_origin": "com.sun.star.xml.wrapper.XXMLElementWrapper",
+          "desc": [
+            "Gets the element of an element mark."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "id",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "isBlocking",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "Checks whether the SAX event stream is blocking."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "printBufferNodeTree",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "Prints information about all buffered elements."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "removeBlocker",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Removes a blocker."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "id",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "removeElementCollector",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Removes an element collector."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "id",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "setElement",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Sets the element of an element mark.",
+            "",
+            "When an element is replaced outside of this interface, then uses this method can restore the link between an element mark and its working element."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "id",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aElement",
+              "type": "XXMLElementWrapper_66c0107c",
+              "direction": "in",
+              "origin": "com.sun.star.xml.wrapper.XXMLElementWrapper"
+            }
+          ]
+        },
+        {
+          "name": "setNextHandler",
+          "returns": "XDocumentHandler_9b90e28",
+          "returns_origin": "com.sun.star.xml.sax.XDocumentHandler",
+          "desc": [
+            "Sets the next document handler in the SAX chain.",
+            "",
+            "This handler will receive SAX events forwarded by the SAXEventKeeper."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "nextHandler",
+              "type": "XDocumentHandler_9b90e28",
+              "direction": "in",
+              "origin": "com.sun.star.xml.sax.XDocumentHandler"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

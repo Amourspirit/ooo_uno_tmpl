@@ -1,0 +1,164 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XTextConvert",
+  "type": "interface",
+  "namespace": "com.sun.star.text",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..beans.property_values",
+        "PropertyValues",
+        "PropertyValues_d6470ce6"
+      ],
+      [
+        ".x_text_content",
+        "XTextContent",
+        "XTextContent_b16e0ba5"
+      ],
+      [
+        ".x_text_range",
+        "XTextRange",
+        "XTextRange_9a910ab7"
+      ],
+      [
+        ".x_text_table",
+        "XTextTable",
+        "XTextTable_9a810ab2"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "PropertyValues_d6470ce6",
+      "XTextContent_b16e0ba5",
+      "XTextRange_9a910ab7",
+      "XTextTable_9a810ab2",
+      "typing.Tuple[PropertyValues_d6470ce6, ...]",
+      "typing.Tuple[object, ...]",
+      "typing.Tuple[typing.Tuple[PropertyValues_d6470ce6, ...], ...]"
+    ],
+    "typings": [
+      "typing.Tuple[PropertyValues_d6470ce6, ...]",
+      "typing.Tuple[object, ...]",
+      "typing.Tuple[typing.Tuple[PropertyValues_d6470ce6, ...], ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValues",
+        "com.sun.star.text.XTextContent",
+        "com.sun.star.text.XTextRange",
+        "com.sun.star.text.XTextTable"
+      ]
+    },
+    "name": "XTextConvert",
+    "imports": [],
+    "namespace": "com.sun.star.text",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "allows converting selections of text to frames or tables."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1text_1_1XTextConvert.html",
+    "items": {
+      "methods": [
+        {
+          "name": "convertToTable",
+          "returns": "XTextTable_9a810ab2",
+          "returns_origin": "com.sun.star.text.XTextTable",
+          "desc": [
+            "converts the paragraphs marked in TableRanges into a table.",
+            "",
+            "The inner sequence contains the start and end paragraphs of each table cell. The next sequence groups the cells to a row and the outer sequence groups the rows of the table."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.beans.UnknownPropertyException"
+          ],
+          "args": [
+            {
+              "name": "TableRanges",
+              "type": "typing.Tuple[object, ...]",
+              "direction": "in",
+              "origin": "sequence< sequence< sequence< com.sun.star.text.XTextRange > > >"
+            },
+            {
+              "name": "CellProperties",
+              "type": "typing.Tuple[typing.Tuple[PropertyValues_d6470ce6, ...], ...]",
+              "direction": "in",
+              "origin": "sequence< sequence< com.sun.star.beans.PropertyValues > >"
+            },
+            {
+              "name": "RowProperties",
+              "type": "typing.Tuple[PropertyValues_d6470ce6, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.PropertyValues >"
+            },
+            {
+              "name": "TableProperties",
+              "type": "PropertyValues_d6470ce6",
+              "direction": "in",
+              "origin": "com.sun.star.beans.PropertyValues"
+            }
+          ]
+        },
+        {
+          "name": "convertToTextFrame",
+          "returns": "XTextContent_b16e0ba5",
+          "returns_origin": "com.sun.star.text.XTextContent",
+          "desc": [
+            "moves the paragraphs from Start to End into a text frame."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.beans.UnknownPropertyException",
+            "com.sun.star.beans.PropertyVetoException"
+          ],
+          "args": [
+            {
+              "name": "Start",
+              "type": "XTextRange_9a910ab7",
+              "direction": "in",
+              "origin": "com.sun.star.text.XTextRange"
+            },
+            {
+              "name": "End",
+              "type": "XTextRange_9a910ab7",
+              "direction": "in",
+              "origin": "com.sun.star.text.XTextRange"
+            },
+            {
+              "name": "FrameProperties",
+              "type": "PropertyValues_d6470ce6",
+              "direction": "in",
+              "origin": "com.sun.star.beans.PropertyValues"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

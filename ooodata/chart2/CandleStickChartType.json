@@ -1,0 +1,142 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "CandleStickChartType",
+  "type": "service",
+  "namespace": "com.sun.star.chart2",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".chart_type",
+        "ChartType",
+        "ChartType_a2640ae0"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..beans.x_property_set",
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.chart2.ChartType": "ChartType_a2640ae0"
+    },
+    "quote": [
+      "XPropertySet_bc180bfa"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.chart2.ChartType"
+      ],
+      "typing": [
+        "com.sun.star.beans.XPropertySet"
+      ]
+    },
+    "name": "CandleStickChartType",
+    "imports": [],
+    "namespace": "com.sun.star.chart2",
+    "extends": [
+      "com.sun.star.chart2.ChartType"
+    ],
+    "desc": [
+      "chart type service for candlestick charts."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1chart2_1_1CandleStickChartType.html",
+    "items": {
+      "properties": [
+        {
+          "name": "BlackDay",
+          "returns": "XPropertySet_bc180bfa",
+          "origtype": "com.sun.star.beans.XPropertySet",
+          "origin": "com.sun.star.beans.XPropertySet",
+          "desc": [
+            "If the candlestick chart shows Japanese candlesticks, that is the property Japanese is TRUE, the property set given here contains the formatting attributes of the black boxes, i.e.",
+            "",
+            "the boxes shown for falling values.",
+            "",
+            "The com.sun.star.beans.XPropertySet given here must support the services com.sun.star.drawing.FillProperties and com.sun.star.drawing.LineProperties."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Japanese",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "If this property is TRUE, the candlesticks are shown as Japanese candlesticks.",
+            "",
+            "This implies that the property ShowFirst is also TRUE.",
+            "",
+            "Japanese candlesticks show the first and last value as boxes. A rising course (i.e. if the last value is greater than the first one) is shown by a white box. A falling course is shown by a black box.",
+            "",
+            "Default is FALSE."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ShowFirst",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "If this property is TRUE, the first value (which would be the opening course in a stock chart) is shown in the chart.",
+            "",
+            "This also makes the role \\\"values-first\\\" mandatory.",
+            "",
+            "This property is only evaluated for non-Japanese candlestick charts, as Japanese candlesticks always require to show the first value.",
+            "",
+            "Default is FALSE."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ShowHighLow",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "If this property is TRUE, the low and high values are shown in the chart.",
+            "",
+            "This also makes the roles \\\"values-min\\\" and \\\"values-max\\\" mandatory.",
+            "",
+            "Default is TRUE."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "WhiteDay",
+          "returns": "XPropertySet_bc180bfa",
+          "origtype": "com.sun.star.beans.XPropertySet",
+          "origin": "com.sun.star.beans.XPropertySet",
+          "desc": [
+            "If the candlestick chart shows Japanese candlesticks, that is the property Japanese is TRUE, the property set given here contains the formatting attributes of the white boxes, i.e.",
+            "",
+            "the boxes shown for rising values.",
+            "",
+            "The com.sun.star.beans.XPropertySet given here must support the services com.sun.star.drawing.FillProperties and com.sun.star.drawing.LineProperties."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

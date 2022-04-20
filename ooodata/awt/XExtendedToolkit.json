@@ -1,0 +1,286 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XExtendedToolkit",
+  "type": "interface",
+  "namespace": "com.sun.star.awt",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_focus_listener",
+        "XFocusListener",
+        "XFocusListener_bb8e0bf2"
+      ],
+      [
+        ".x_key_handler",
+        "XKeyHandler",
+        "XKeyHandler_98520a93"
+      ],
+      [
+        ".x_top_window",
+        "XTopWindow",
+        "XTopWindow_8ebb0a57"
+      ],
+      [
+        ".x_top_window_listener",
+        "XTopWindowListener",
+        "XTopWindowListener_efc20d9d"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XFocusListener_bb8e0bf2",
+      "XInterface_8f010a43",
+      "XKeyHandler_98520a93",
+      "XTopWindowListener_efc20d9d",
+      "XTopWindow_8ebb0a57"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.awt.XFocusListener",
+        "com.sun.star.awt.XKeyHandler",
+        "com.sun.star.awt.XTopWindow",
+        "com.sun.star.awt.XTopWindowListener"
+      ]
+    },
+    "name": "XExtendedToolkit",
+    "imports": [],
+    "namespace": "com.sun.star.awt",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "The XExtendedToolkit is an extension of the com.sun.star.awt.XToolkit interface.",
+      "",
+      "It basically provides access to three event broadcasters which are used for instance in the context of accessibility. It is, however, not restricted to accessibility.",
+      "",
+      "The first event broadcaster lets you keep track of the open top-level windows (frames). To get the set of currently open top-level window use the XExtendedToolkit.getTopWindowCount() and XExtendedToolkit.getTopWindow() methods.",
+      "",
+      "The second event broadcaster informs its listeners of key events. Its listeners can, unlike with most other broadcasters/listeners, consume events, so that other listeners will not be called for consumed events.",
+      "",
+      "The last event broadcaster sends events on focus changes of all elements that can have the input focus.",
+      "",
+      "**since**",
+      "",
+      "    OOo 1.1.2",
+      "",
+      ".. deprecated::",
+      "",
+      "    Class is deprecated."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XExtendedToolkit.html",
+    "items": {
+      "methods": [
+        {
+          "name": "addFocusListener",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Add a new listener that is called on com.sun.star.awt.FocusEvent.",
+            "",
+            "Use this focus broadcaster to keep track of the object that currently has the input focus."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xListener",
+              "type": "XFocusListener_bb8e0bf2",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XFocusListener"
+            }
+          ]
+        },
+        {
+          "name": "addKeyHandler",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Add a new listener that is called on com.sun.star.awt.KeyEvent.",
+            "",
+            "Every listener is given the opportunity to consume the event, i.e. prevent the not yet called listeners from being called."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xHandler",
+              "type": "XKeyHandler_98520a93",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XKeyHandler"
+            }
+          ]
+        },
+        {
+          "name": "addTopWindowListener",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Add a new listener that is called for events that involve com.sun.star.awt.XTopWindow.",
+            "",
+            "After having obtained the current list of existing top-level windows you can keep this list up-to-date by listening to opened or closed top-level windows. Wait for activations or deactivations of top-level windows to keep track of the currently active frame."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xListener",
+              "type": "XTopWindowListener_efc20d9d",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XTopWindowListener"
+            }
+          ]
+        },
+        {
+          "name": "fireFocusGained",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Broadcasts the a focusGained on all registered focus listeners."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "source",
+              "type": "XInterface_8f010a43",
+              "direction": "in",
+              "origin": "com.sun.star.uno.XInterface"
+            }
+          ]
+        },
+        {
+          "name": "fireFocusLost",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Broadcasts the a focusGained on all registered focus listeners."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "source",
+              "type": "XInterface_8f010a43",
+              "direction": "in",
+              "origin": "com.sun.star.uno.XInterface"
+            }
+          ]
+        },
+        {
+          "name": "getActiveTopWindow",
+          "returns": "XTopWindow_8ebb0a57",
+          "returns_origin": "com.sun.star.awt.XTopWindow",
+          "desc": [
+            "Return the currently active top-level window, i.e.",
+            "",
+            "which has currently the input focus."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getTopWindow",
+          "returns": "XTopWindow_8ebb0a57",
+          "returns_origin": "com.sun.star.awt.XTopWindow",
+          "desc": [
+            "Return a reference to the specified top-level window.",
+            "",
+            "Note that the number of top-level windows may change between a call to getTopWindowCount() and successive calls to this function."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "getTopWindowCount",
+          "returns": "int",
+          "returns_origin": "long",
+          "desc": [
+            "This function returns the number of currently existing top-level windows."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "removeFocusListener",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Remove the specified listener from the list of listeners."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xListener",
+              "type": "XFocusListener_bb8e0bf2",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XFocusListener"
+            }
+          ]
+        },
+        {
+          "name": "removeKeyHandler",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Remove the specified listener from the list of listeners."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xHandler",
+              "type": "XKeyHandler_98520a93",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XKeyHandler"
+            }
+          ]
+        },
+        {
+          "name": "removeTopWindowListener",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Remove the specified listener from the list of listeners."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xListener",
+              "type": "XTopWindowListener_efc20d9d",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XTopWindowListener"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

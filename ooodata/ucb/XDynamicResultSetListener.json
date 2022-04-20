@@ -1,0 +1,88 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XDynamicResultSetListener",
+  "type": "interface",
+  "namespace": "com.sun.star.ucb",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..lang.x_event_listener",
+        "XEventListener",
+        "XEventListener_c7230c4a"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".list_event",
+        "ListEvent",
+        "ListEvent_83fa09e0"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.lang.XEventListener": "XEventListener_c7230c4a"
+    },
+    "quote": [
+      "ListEvent_83fa09e0"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.lang.XEventListener"
+      ],
+      "typing": [
+        "com.sun.star.ucb.ListEvent"
+      ]
+    },
+    "name": "XDynamicResultSetListener",
+    "imports": [],
+    "namespace": "com.sun.star.ucb",
+    "extends": [
+      "com.sun.star.lang.XEventListener"
+    ],
+    "desc": [
+      "used to receive notifications from an XDynamicResultSet."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ucb_1_1XDynamicResultSetListener.html",
+    "items": {
+      "methods": [
+        {
+          "name": "notify",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "A method used to propagate changes of a result set.",
+            "",
+            "In the first notify-call the listener gets two(!) com.sun.star.sdbc.XResultSets and has to hold them. The com.sun.star.sdbc.XResultSets are implementations of the service ContentResultSet.",
+            "",
+            "The notified new com.sun.star.sdbc.XResultSet will stay valid after returning from this method. The old one will become invalid after returning.",
+            "",
+            "While in notify-call the listener is allowed to read from old and new result set, except in the first call, where only the new result set is valid.",
+            "",
+            "The Listener is allowed to stay (block) this call, until he really wants to use the new result set. The only situation, where the listener has to return immediately is while he disposes his broadcaster or while he is removing himself as listener (otherwise you deadlock)!!!"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Changes",
+              "type": "ListEvent_83fa09e0",
+              "direction": "in",
+              "origin": "com.sun.star.ucb.ListEvent"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

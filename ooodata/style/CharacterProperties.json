@@ -1,0 +1,927 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "CharacterProperties",
+  "type": "service",
+  "namespace": "com.sun.star.style",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        "..awt.font_slant",
+        "FontSlant",
+        "FontSlant_849509ed"
+      ],
+      [
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
+      ],
+      [
+        "..container.x_name_container",
+        "XNameContainer",
+        "XNameContainer_cb90e47"
+      ],
+      [
+        "..lang.locale",
+        "Locale",
+        "Locale_70d308fa"
+      ],
+      [
+        "..table.border_line2",
+        "BorderLine2",
+        "BorderLine2_af200b28"
+      ],
+      [
+        "..table.shadow_format",
+        "ShadowFormat",
+        "ShadowFormat_bb840bdf"
+      ],
+      [
+        "..util.color",
+        "Color",
+        "Color_68e908c5"
+      ]
+    ],
+    "extends_map": {},
+    "quote": [
+      "BorderLine2_af200b28",
+      "Color_68e908c5",
+      "FontSlant_849509ed",
+      "Locale_70d308fa",
+      "ShadowFormat_bb840bdf",
+      "XNameContainer_cb90e47",
+      "typing.Tuple[PropertyValue_c9610c73, ...]",
+      "typing.Tuple[str, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[PropertyValue_c9610c73, ...]",
+      "typing.Tuple[str, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.awt.FontSlant",
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.container.XNameContainer",
+        "com.sun.star.lang.Locale",
+        "com.sun.star.table.BorderLine2",
+        "com.sun.star.table.ShadowFormat",
+        "com.sun.star.util.Color"
+      ]
+    },
+    "name": "CharacterProperties",
+    "imports": [],
+    "namespace": "com.sun.star.style",
+    "extends": [],
+    "desc": [
+      "This is a set of properties to describe the style of characters.",
+      "",
+      "**since**",
+      "",
+      "    LibreOffice 4.3"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1style_1_1CharacterProperties.html",
+    "items": {
+      "types": [
+        {
+          "name": "CharInteropGrabBag",
+          "returns": "typing.Tuple[PropertyValue_c9610c73, ...]",
+          "origtype": null,
+          "origin": "sequence< com.sun.star.beans.PropertyValue >",
+          "desc": [
+            "Grab bag of character properties, used as a string-any map for interim interop purposes.",
+            "",
+            "This property is intentionally not handled by the ODF filter. Any member that should be handled there should be first moved out from this grab bag to a separate property.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 4.3"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharStyleNames",
+          "returns": "typing.Tuple[str, ...]",
+          "origtype": null,
+          "origin": "sequence< string >",
+          "desc": [
+            "This optional property specifies the names of the all styles applied to the font.",
+            "",
+            "It is not guaranteed that the order in the sequence reflects the order of the evaluation of the character style attributes.",
+            "",
+            "**since**",
+            "",
+            "    OOo 1.1.2"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ],
+      "properties": [
+        {
+          "name": "CharAutoKerning",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "This optional property determines whether the kerning tables from the current font are used.",
+            "",
+            "Automatic kerning applies a spacing in between certain pairs of characters to make the text look better."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharBackColor",
+          "returns": "Color_68e908c5",
+          "origtype": "com.sun.star.util.Color",
+          "origin": "com.sun.star.util.Color",
+          "desc": [
+            "This optional property contains the text background color."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharBackTransparent",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "This property determines if the text background color is set to transparent."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharBorderDistance",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "This property contains the distance from the border to the object.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 4.2"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharBottomBorder",
+          "returns": "BorderLine2_af200b28",
+          "origtype": "com.sun.star.table.BorderLine2",
+          "origin": "com.sun.star.table.BorderLine2",
+          "desc": [
+            "This property contains the bottom border of the object.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 4.2"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharBottomBorderDistance",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "This property contains the distance from the bottom border to the object.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 4.2"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharCaseMap",
+          "returns": "int",
+          "origtype": null,
+          "origin": "short",
+          "desc": [
+            "This optional property contains the value of the case-mapping of the text for formatting and displaying."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharColor",
+          "returns": "Color_68e908c5",
+          "origtype": "com.sun.star.util.Color",
+          "origin": "com.sun.star.util.Color",
+          "desc": [
+            "This property contains the value of the text color."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharCombineIsOn",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "This optional property determines whether text is formatted in two lines.",
+            "",
+            "It is linked to the properties CharCombinePrefix and CharCombineSuffix."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharCombinePrefix",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "This optional property contains the prefix (usually parenthesis) before text that is formatted in two lines.",
+            "",
+            "It is linked to the properties CharCombineIsOn and CharCombineSuffix."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharCombineSuffix",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "This optional property contains the suffix (usually parenthesis) after text that is formatted in two lines.",
+            "",
+            "It is linked to the properties CharCombineIsOn and CharCombinePrefix."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharContoured",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "This optional property specifies if the characters are formatted and displayed with a contour effect."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharCrossedOut",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "This property is TRUE if the characters are crossed out."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharEmphasis",
+          "returns": "int",
+          "origtype": null,
+          "origin": "short",
+          "desc": [
+            "This optional property contains the font emphasis value."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharEscapement",
+          "returns": "int",
+          "origtype": null,
+          "origin": "short",
+          "desc": [
+            "specifies the percentage by which to raise/lower superscript/subscript characters.",
+            "",
+            "Negative values denote subscripts and positive values superscripts."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharEscapementHeight",
+          "returns": "int",
+          "origtype": null,
+          "origin": "byte",
+          "desc": [
+            "This is the relative height used for subscript or superscript characters in units of percent.",
+            "",
+            "The value 100 denotes the original height of the characters."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharFlash",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "If this optional property is TRUE, then the characters are flashing."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharFontCharSet",
+          "returns": "int",
+          "origtype": null,
+          "origin": "short",
+          "desc": [
+            "This property contains the text encoding of the font."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharFontFamily",
+          "returns": "int",
+          "origtype": null,
+          "origin": "short",
+          "desc": [
+            "This property contains font family."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharFontName",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "This property specifies the name of the font style.",
+            "",
+            "It may contain more than one name separated by comma."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharFontPitch",
+          "returns": "int",
+          "origtype": null,
+          "origin": "short",
+          "desc": [
+            "This property contains the font pitch."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharFontStyleName",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "This property contains the name of the font style.",
+            "",
+            "This property may be empty."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharFontType",
+          "returns": "int",
+          "origtype": null,
+          "origin": "short",
+          "desc": [
+            "This optional property specifies the fundamental technology of the font."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharHeight",
+          "returns": "float",
+          "origtype": null,
+          "origin": "float",
+          "desc": [
+            "This value contains the height of the characters in point."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharHidden",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "If this optional property is TRUE, then the characters are invisible.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharHighlight",
+          "returns": "Color_68e908c5",
+          "origtype": "com.sun.star.util.Color",
+          "origin": "com.sun.star.util.Color",
+          "desc": [
+            "Determines the color of the highlight.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 4.2"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharKeepTogether",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "This optional property marks a range of characters to prevent it from being broken into two lines.",
+            "",
+            "A line break is applied before the range of characters if the layout makes a break necessary within the range."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharKerning",
+          "returns": "int",
+          "origtype": null,
+          "origin": "short",
+          "desc": [
+            "This optional property contains the value of the kerning of the characters."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharLeftBorder",
+          "returns": "BorderLine2_af200b28",
+          "origtype": "com.sun.star.table.BorderLine2",
+          "origin": "com.sun.star.table.BorderLine2",
+          "desc": [
+            "This property contains the left border of the object.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 4.2"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharLeftBorderDistance",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "This property contains the distance from the left border to the object.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 4.2"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharLocale",
+          "returns": "Locale_70d308fa",
+          "origtype": "com.sun.star.lang.Locale",
+          "origin": "com.sun.star.lang.Locale",
+          "desc": [
+            "This property contains the value of the locale."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharNoHyphenation",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "This optional property determines if the word can be hyphenated at the character."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharNoLineBreak",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "This optional property marks a range of characters to ignore a line break in this area.",
+            "",
+            "A line break is applied behind the range of characters if the layout makes a break necessary within the range. That means that the text may go through the border."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharPosture",
+          "returns": "FontSlant_849509ed",
+          "origtype": "com.sun.star.awt.FontSlant",
+          "origin": "com.sun.star.awt.FontSlant",
+          "desc": [
+            "This property contains the value of the posture of the document."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharRelief",
+          "returns": "int",
+          "origtype": null,
+          "origin": "short",
+          "desc": [
+            "This optional property contains the relief style of the characters."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharRightBorder",
+          "returns": "BorderLine2_af200b28",
+          "origtype": "com.sun.star.table.BorderLine2",
+          "origin": "com.sun.star.table.BorderLine2",
+          "desc": [
+            "This property contains the right border of the object.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 4.2"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharRightBorderDistance",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "This property contains the distance from the right border to the object.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 4.2"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharRotation",
+          "returns": "int",
+          "origtype": null,
+          "origin": "short",
+          "desc": [
+            "This optional property determines the rotation of a character in tenths of a degree.",
+            "",
+            "Depending on the implementation only certain values may be allowed."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharRotationIsFitToLine",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "This optional property determines whether the text formatting tries to fit rotated text into the surrounded line height."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharScaleWidth",
+          "returns": "int",
+          "origtype": null,
+          "origin": "short",
+          "desc": [
+            "This optional property determines the percentage value for scaling the width of characters.",
+            "",
+            "The value refers to the original width which is denoted by 100, and it has to be greater than 0."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharShadingValue",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "This optional property contains the text shading value."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharShadowFormat",
+          "returns": "ShadowFormat_bb840bdf",
+          "origtype": "com.sun.star.table.ShadowFormat",
+          "origin": "com.sun.star.table.ShadowFormat",
+          "desc": [
+            "Determines the type, color, and width of the shadow.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 4.2"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharShadowed",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "This optional property specifies if the characters are formatted and displayed with a shadow effect."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharStrikeout",
+          "returns": "int",
+          "origtype": null,
+          "origin": "short",
+          "desc": [
+            "This property determines the type of the strike out of the character."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharStyleName",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "This optional property specifies the name of the style of the font."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharTopBorder",
+          "returns": "BorderLine2_af200b28",
+          "origtype": "com.sun.star.table.BorderLine2",
+          "origin": "com.sun.star.table.BorderLine2",
+          "desc": [
+            "This property contains the top border of the object.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 4.2"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharTopBorderDistance",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "This property contains the distance from the top border to the object.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 4.2"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharTransparence",
+          "returns": "int",
+          "origtype": null,
+          "origin": "short",
+          "desc": [
+            "This is the transparency of the character text.",
+            "",
+            "The value 100 means entirely transparent, while 0 means not transparent at all.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 7.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharUnderline",
+          "returns": "int",
+          "origtype": null,
+          "origin": "short",
+          "desc": [
+            "This property contains the value for the character underline."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharUnderlineColor",
+          "returns": "Color_68e908c5",
+          "origtype": "com.sun.star.util.Color",
+          "origin": "com.sun.star.util.Color",
+          "desc": [
+            "This property contains the color of the underline for the characters."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharUnderlineHasColor",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "This property specifies if the property CharUnderlineColor is used for an underline."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharWeight",
+          "returns": "float",
+          "origtype": null,
+          "origin": "float",
+          "desc": [
+            "This property contains the value of the font weight."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CharWordMode",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "If this property is TRUE, the underline and strike-through properties are not applied to white spaces."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "HyperLinkName",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "This optional property contains the name of the hyperlink."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "HyperLinkTarget",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "This optional property contains the name of the target for a hyperlink."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "HyperLinkURL",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "This optional property contains the URL of a hyperlink."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RubyAdjust",
+          "returns": "int",
+          "origtype": null,
+          "origin": "short",
+          "desc": [
+            "This optional property determines the adjustment of the ruby ."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RubyCharStyleName",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "This optional property contains the name of the character style that is applied to RubyText."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RubyIsAbove",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "This optional property determines whether the ruby text is printed above/left or below/right of the text.",
+            "",
+            "This property is replaced by RubyPosition."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RubyPosition",
+          "returns": "int",
+          "origtype": null,
+          "origin": "short",
+          "desc": [
+            "This optional property determines the position of the ruby .",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 6.1"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RubyText",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "This optional property contains the text that is set as ruby."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TextUserDefinedAttributes",
+          "returns": "XNameContainer_cb90e47",
+          "origtype": "com.sun.star.container.XNameContainer",
+          "origin": "com.sun.star.container.XNameContainer",
+          "desc": [
+            "This property stores XML attributes.",
+            "",
+            "They will be saved to and restored from automatic styles inside XML files."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "UnvisitedCharStyleName",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "This optional property contains the character style name for unvisited hyperlinks."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "VisitedCharStyleName",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "This optional property contains the character style name for visited hyperlinks."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

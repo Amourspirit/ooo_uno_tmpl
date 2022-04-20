@@ -1,0 +1,87 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XJob",
+  "type": "interface",
+  "namespace": "com.sun.star.task",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..beans.named_value",
+        "NamedValue",
+        "NamedValue_a37a0af3"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "typing.Tuple[NamedValue_a37a0af3, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[NamedValue_a37a0af3, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.beans.NamedValue"
+      ]
+    },
+    "name": "XJob",
+    "imports": [],
+    "namespace": "com.sun.star.task",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "specifies a job which is to be executed synchronously",
+      "",
+      "Instead of XAsyncJob the implementation of this interface will be executed synchronously every time. That means: they can be sure that the current stack context will be blocked till this job finish it's work."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1task_1_1XJob.html",
+    "items": {
+      "methods": [
+        {
+          "name": "execute",
+          "returns": "object",
+          "returns_origin": "any",
+          "desc": [
+            "executes the job synchronously"
+          ],
+          "raises": [
+            "",
+            "com.sun.star.uno.Exception"
+          ],
+          "args": [
+            {
+              "name": "Arguments",
+              "type": "typing.Tuple[NamedValue_a37a0af3, ...]",
+              "direction": "in",
+              "origin": "sequence< com.sun.star.beans.NamedValue >"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,258 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "DatabaseRange",
+  "type": "service",
+  "namespace": "com.sun.star.sheet",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..beans.x_property_set",
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
+      ],
+      [
+        "..container.x_named",
+        "XNamed",
+        "XNamed_a6520b08"
+      ],
+      [
+        ".x_cell_range_referrer",
+        "XCellRangeReferrer",
+        "XCellRangeReferrer_91c0e23"
+      ],
+      [
+        ".x_database_range",
+        "XDatabaseRange",
+        "XDatabaseRange_d37b0c7b"
+      ],
+      [
+        "..util.x_refreshable",
+        "XRefreshable",
+        "XRefreshable_b0d60b81"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..table.cell_range_address",
+        "CellRangeAddress",
+        "CellRangeAddress_ec450d43"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa",
+      "com.sun.star.container.XNamed": "XNamed_a6520b08",
+      "com.sun.star.sheet.XCellRangeReferrer": "XCellRangeReferrer_91c0e23",
+      "com.sun.star.sheet.XDatabaseRange": "XDatabaseRange_d37b0c7b",
+      "com.sun.star.util.XRefreshable": "XRefreshable_b0d60b81"
+    },
+    "quote": [
+      "CellRangeAddress_ec450d43"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XPropertySet",
+        "com.sun.star.container.XNamed",
+        "com.sun.star.sheet.XCellRangeReferrer",
+        "com.sun.star.sheet.XDatabaseRange",
+        "com.sun.star.util.XRefreshable"
+      ],
+      "typing": [
+        "com.sun.star.table.CellRangeAddress"
+      ]
+    },
+    "name": "DatabaseRange",
+    "imports": [],
+    "namespace": "com.sun.star.sheet",
+    "extends": [
+      "com.sun.star.sheet.XDatabaseRange",
+      "com.sun.star.sheet.XCellRangeReferrer",
+      "com.sun.star.beans.XPropertySet",
+      "com.sun.star.container.XNamed",
+      "com.sun.star.util.XRefreshable"
+    ],
+    "desc": [
+      "represents a database range in a spreadsheet document.",
+      "",
+      "A database range is a name for a cell range that also stores filtering, sorting, subtotal and data import settings and options.",
+      "",
+      "**since**",
+      "",
+      "    OOo 1.1.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1sheet_1_1DatabaseRange.html",
+    "items": {
+      "properties": [
+        {
+          "name": "AutoFilter",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "specifies whether the AutoFilter is enabled or not.",
+            "",
+            "**since**",
+            "",
+            "    OOo 1.1.2"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ContainsHeader",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "specifies whether this range includes a top row of headers.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 5.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FilterCriteriaSource",
+          "returns": "CellRangeAddress_ec450d43",
+          "origtype": "com.sun.star.table.CellRangeAddress",
+          "origin": "com.sun.star.table.CellRangeAddress",
+          "desc": [
+            "specifies the range where the filter can find the filter criteria.",
+            "",
+            "This is only used if SheetFilterDescriptor.UseFilterCriteriaSource is TRUE.",
+            "",
+            "**since**",
+            "",
+            "    OOo 1.1.2"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FromSelection",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "specifies whether the imported data is only a selection of the database.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "KeepFormats",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "if this property is set, cell formats are extended when the size of the range is changed by an update operation."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "MoveCells",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "if this property is set, columns or rows are inserted or deleted when the size of the range is changed by an update operation."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RefreshPeriod",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "specifies the time between two refresh actions in seconds.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "StripData",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "if this property is set, the cell contents within the database range are left out when the document is saved."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TokenIndex",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "returns the index used to refer to this range in token arrays.",
+            "",
+            "A token describing a database range shall contain the op-code obtained from the FormulaMapGroupSpecialOffset.DB_AREA and this index as data part.",
+            "",
+            "**since**",
+            "",
+            "    OOo 3.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TotalsRow",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "specifies whether this range includes a bottom row of totals.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 5.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "UseFilterCriteriaSource",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "specifies whether the filter criteria should be taken from a CellRange.",
+            "",
+            "**since**",
+            "",
+            "    OOo 1.1.2"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,514 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XAccessibleText",
+  "type": "interface",
+  "namespace": "com.sun.star.accessibility",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".accessible_scroll_type",
+        "AccessibleScrollType",
+        "AccessibleScrollType_b426126f"
+      ],
+      [
+        ".text_segment",
+        "TextSegment",
+        "TextSegment_1e5b0ee8"
+      ],
+      [
+        "..awt.point",
+        "Point",
+        "Point_5fb2085e"
+      ],
+      [
+        "..awt.rectangle",
+        "Rectangle",
+        "Rectangle_84b109e9"
+      ],
+      [
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "AccessibleScrollType_b426126f",
+      "Point_5fb2085e",
+      "Rectangle_84b109e9",
+      "TextSegment_1e5b0ee8",
+      "typing.Tuple[PropertyValue_c9610c73, ...]",
+      "typing.Tuple[str, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[PropertyValue_c9610c73, ...]",
+      "typing.Tuple[str, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.accessibility.AccessibleScrollType",
+        "com.sun.star.accessibility.TextSegment",
+        "com.sun.star.awt.Point",
+        "com.sun.star.awt.Rectangle",
+        "com.sun.star.beans.PropertyValue"
+      ]
+    },
+    "name": "XAccessibleText",
+    "imports": [],
+    "namespace": "com.sun.star.accessibility",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "Implement this interface to give read-only access to a text.",
+      "",
+      "The XAccessibleText interface should be implemented by all UNO components that present textual information on the display like buttons, text entry fields, or text portions of the document window. The interface provides access to the text's content, attributes, and spatial location. However, text can not be modified with this interface. That is the task of the XAccessibleEditableText interface.",
+      "",
+      "The text length, i.e. the number of characters in the text, is returned by XAccessibleText.getCharacterCount(). All methods that operate on particular characters (e.g. XAccessibleText.getCharacterAt()) use character indices from 0 to length-1. All methods that operate on character positions (e.g. XAccessibleText.getTextRange()) use indices from 0 to length.",
+      "",
+      "Please note that accessible text does not necessarily support selection. In this case it should behave as if there where no selection. An empty selection is used for example to express the current cursor position.",
+      "",
+      "**since**",
+      "",
+      "    OOo 1.1.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleText.html",
+    "items": {
+      "methods": [
+        {
+          "name": "copyText",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "Copy the specified text into the clipboard.",
+            "",
+            "Copy the specified text into the clipboard. The text that is copied is the same text that would have been selected by the XAccessibleText.getTextRange() method.",
+            "",
+            "The other clipboard related methods XAccessibleEditableText.cutText() and XAccessibleEditableText.deleteText() can be found in the XAccessibleEditableText because of their destructive nature."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            {
+              "name": "nStartIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nEndIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "getCaretPosition",
+          "returns": "int",
+          "returns_origin": "long",
+          "desc": [
+            "Return the position of the caret.",
+            "",
+            "Returns the offset of the caret. The caret is often called text cursor. The caret is actually the position between two characters. Its position/offset is that of the character to the right of it."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getCharacter",
+          "returns": "str",
+          "returns_origin": "char",
+          "desc": [
+            "Return the character at the specified position.",
+            "",
+            "Returns the character at the given index."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "getCharacterAttributes",
+          "returns": "typing.Tuple[PropertyValue_c9610c73, ...]",
+          "returns_origin": "sequence<.com.sun.star.beans.PropertyValue >",
+          "desc": [
+            "Get the attribute set for the specified position.",
+            "",
+            "Returns a set of attributes that are associated for the character at the given index. To prevent the method from returning possibly large sets of attributes that the caller is not interested in the caller has to provide a list of attributes that he wants to be returned.",
+            "",
+            "An empty sequence signals the callers interest in all the attributes. This is useful in two cases: a) Simply as a way to avoid passing a potentially large array to the called object or b) when the caller does not know what attributes the called objects supports but is interested in all of them nevertheless."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException",
+            "com.sun.star.beans.UnknownPropertyException"
+          ],
+          "args": [
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aRequestedAttributes",
+              "type": "typing.Tuple[str, ...]",
+              "direction": "in",
+              "origin": "sequence< string >"
+            }
+          ]
+        },
+        {
+          "name": "getCharacterBounds",
+          "returns": "Rectangle_84b109e9",
+          "returns_origin": "com.sun.star.awt.Rectangle",
+          "desc": [
+            "Return the bounding box of the specified position.",
+            "",
+            "Returns the bounding box of the indexed character.",
+            "",
+            "The virtual character after the last character of the represented text, i.e. the one at position length is a special case. It represents the current input position and will therefore typically be queried by AT more often than other positions. Because it does not represent an existing character its bounding box is defined in relation to preceding characters. It should be roughly equivalent to the bounding box of some character when inserted at the end of the text. Its height typically being the maximal height of all the characters in the text or the height of the preceding character, its width being at least one pixel so that the bounding box is not degenerate.",
+            "Note that the index \\\"length\\\" is not always valid. Whether it is or not is implementation dependent. It typically is when text is editable or otherwise when on the screen the caret can be placed behind the text. You can be sure that the index is valid after you have received an AccessibleEventId.CARET event for this index."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "getCharacterCount",
+          "returns": "int",
+          "returns_origin": "long",
+          "desc": [
+            "Return the number of characters in the represented text.",
+            "",
+            "Returns the number of characters in the text represented by this object or, in other words, the text length."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getIndexAtPoint",
+          "returns": "int",
+          "returns_origin": "long",
+          "desc": [
+            "Return the text position for the specified screen position.",
+            "",
+            "Given a point in local coordinates, i.e. relative to the coordinate system of the object, return the zero-based index of the character under that point. The same functionality could be achieved by using the bounding boxes for each character as returned by XAccessibleText.getCharacterBounds(). The method XAccessibleText.getIndexAtPoint(), however, can be implemented in a more efficient way."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aPoint",
+              "type": "Point_5fb2085e",
+              "direction": "in",
+              "origin": "com.sun.star.awt.Point"
+            }
+          ]
+        },
+        {
+          "name": "getSelectedText",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "Return the selected text.",
+            "",
+            "Returns the portion of the text that is selected."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getSelectionEnd",
+          "returns": "int",
+          "returns_origin": "long",
+          "desc": [
+            "Return the position of the end of the selection.",
+            "",
+            "Returns the index of the end of the selected text."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getSelectionStart",
+          "returns": "int",
+          "returns_origin": "long",
+          "desc": [
+            "Return the position of the start of the selection.",
+            "",
+            "Returns the index of the start of the selected text."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getText",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "Return the whole text.",
+            "",
+            "Returns the complete text. This is equivalent to a call to XAccessibleText.getTextRange() with the arguments zero and getCharacterCount()-1."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getTextAtIndex",
+          "returns": "TextSegment_1e5b0ee8",
+          "returns_origin": "com.sun.star.accessibility.TextSegment",
+          "desc": [
+            "Get a text portion around the given position.",
+            "",
+            "Returns the substring of the specified text type that contains the character at the given index, if any. For example, given the text type AccessibleTextType.WORD, the word which contains the character at position nIndex is returned, or an empty string if no word is found at the that position."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException",
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nTextType",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
+          ]
+        },
+        {
+          "name": "getTextBeforeIndex",
+          "returns": "TextSegment_1e5b0ee8",
+          "returns_origin": "com.sun.star.accessibility.TextSegment",
+          "desc": [
+            "Get a text portion before the given position.",
+            "",
+            "Returns the substring of the specified text type that is located before the given character and does not include it. The result of this method should be same as a result for XAccessibleText.getTextAtIndex() with a suitably decreased index value.",
+            "",
+            "For example, if text type is AccessibleTextType.WORD, then the complete word that is closest to and located before nIndex is returned.",
+            "",
+            "If the index is valid, but no suitable word (or other text type) is found, an empty text segment is returned."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException",
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nTextType",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
+          ]
+        },
+        {
+          "name": "getTextBehindIndex",
+          "returns": "TextSegment_1e5b0ee8",
+          "returns_origin": "com.sun.star.accessibility.TextSegment",
+          "desc": [
+            "Get a text portion behind the given position.",
+            "",
+            "Returns the substring of the specified text type that is located after the given character and does not include it. The result of this method should be same as a result for XAccessibleText.getTextAtIndex() with a suitably increased index value.",
+            "",
+            "For example, if text type is AccessibleTextType.WORD, then the complete word that is closest to and located behind nIndex is returned.",
+            "",
+            "If the index is valid, but no suitable word (or other text type) is found, an empty string is returned."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException",
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nTextType",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
+          ]
+        },
+        {
+          "name": "getTextRange",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "Return the specified text range.",
+            "",
+            "Returns the substring between the two given indices.",
+            "",
+            "The substring starts with the character at nStartIndex (inclusive) and up to the character at nEndIndex (exclusive), if nStartIndex is less or equal nEndIndex. If nEndIndex is lower than nStartIndex, the result is the same as a call with the two arguments being exchanged.",
+            "",
+            "The whole text can be requested by passing the indices zero and getCharacterCount(). If both indices have the same value, an empty string is returned."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            {
+              "name": "nStartIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nEndIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "scrollSubstringTo",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "Scroll the specified text to make it visible on screen.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 7.0"
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            {
+              "name": "nStartIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nEndIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "aScrollType",
+              "type": "AccessibleScrollType_b426126f",
+              "direction": "in",
+              "origin": "com.sun.star.accessibility.AccessibleScrollType"
+            }
+          ]
+        },
+        {
+          "name": "setCaretPosition",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "Set the position of the caret.",
+            "",
+            "The caret is often called text cursor. The caret is actually the position between two characters. Its position/offset is that of the character to the right of it.",
+            "",
+            "Setting the caret position may or may not alter the current selection. A change of the selection is notified to the accessibility event listeners with an AccessibleEventId.ACCESSIBLE_SELECTION_EVENT.",
+            "",
+            "When the new caret position differs from the old one (which, of course, is the standard case) this is notified to the accessibility event listeners with an AccessibleEventId.ACCESSIBLE_CARET_EVENT."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "setSelection",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "Set a new selection.",
+            "",
+            "Sets the selected text portion according to the given indices. The old selection is replaced by the new selection.",
+            "",
+            "The selection encompasses the same string of text that XAccessibleText.getTextRange() would have selected. See there for details.",
+            "",
+            "Setting the selection may or may not change the caret position. Typically the caret is moved to the position after the second argument. When the caret is moved this is notified to the accessibility event listeners with an AccessibleEventId.ACCESSIBLE_CARET_EVENT."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            {
+              "name": "nStartIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nEndIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

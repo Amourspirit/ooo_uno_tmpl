@@ -1,0 +1,178 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XSheetCondition",
+  "type": "interface",
+  "namespace": "com.sun.star.sheet",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".condition_operator",
+        "ConditionOperator",
+        "ConditionOperator_fec90e14"
+      ],
+      [
+        "..table.cell_address",
+        "CellAddress",
+        "CellAddress_ae5f0b56"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "CellAddress_ae5f0b56",
+      "ConditionOperator_fec90e14"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.sheet.ConditionOperator",
+        "com.sun.star.table.CellAddress"
+      ]
+    },
+    "name": "XSheetCondition",
+    "imports": [],
+    "namespace": "com.sun.star.sheet",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "provides methods to access the settings of a condition in a conditional format or data validation."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sheet_1_1XSheetCondition.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getFormula1",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "returns either the comparison value, which is used in the condition, or the first value if two values are needed for the operator."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getFormula2",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "if two values are needed for the operator, this method returns the second one."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getOperator",
+          "returns": "ConditionOperator_fec90e14",
+          "returns_origin": "com.sun.star.sheet.ConditionOperator",
+          "desc": [
+            "returns the operator in the condition."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getSourcePosition",
+          "returns": "CellAddress_ae5f0b56",
+          "returns_origin": "com.sun.star.table.CellAddress",
+          "desc": [
+            "returns the position in the document which is used as a base for relative references in the formulas."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setFormula1",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "sets either the comparison value, which is used in the condition, or the first value if two values are needed for the operator."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aFormula1",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "setFormula2",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "if two values are needed for the operator, this method sets the second one."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aFormula2",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "setOperator",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "sets the operator in the condition."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "nOperator",
+              "type": "ConditionOperator_fec90e14",
+              "direction": "in",
+              "origin": "com.sun.star.sheet.ConditionOperator"
+            }
+          ]
+        },
+        {
+          "name": "setSourcePosition",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "sets the position in the document which is used as a base for relative references in the formulas."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aSourcePosition",
+              "type": "CellAddress_ae5f0b56",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellAddress"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

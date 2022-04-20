@@ -1,0 +1,144 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XPrimitive2DRenderer",
+  "type": "interface",
+  "namespace": "com.sun.star.graphic",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
+      ],
+      [
+        "..geometry.real_rectangle2_d",
+        "RealRectangle2D",
+        "RealRectangle2D_d9b0e03"
+      ],
+      [
+        ".x_primitive2_d",
+        "XPrimitive2D",
+        "XPrimitive2D_d5730c6d"
+      ],
+      [
+        "..rendering.x_bitmap",
+        "XBitmap",
+        "XBitmap_b1b70b7b"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "RealRectangle2D_d9b0e03",
+      "XBitmap_b1b70b7b",
+      "typing.Tuple[PropertyValue_c9610c73, ...]",
+      "typing.Tuple[XPrimitive2D_d5730c6d, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[PropertyValue_c9610c73, ...]",
+      "typing.Tuple[XPrimitive2D_d5730c6d, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.geometry.RealRectangle2D",
+        "com.sun.star.graphic.XPrimitive2D",
+        "com.sun.star.rendering.XBitmap"
+      ]
+    },
+    "name": "XPrimitive2DRenderer",
+    "imports": [],
+    "namespace": "com.sun.star.graphic",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "XPrimitive2DRenderer interface.",
+      "",
+      "This interface allows to convert from a sequence of XPrimitive2Ds to a XBitmap"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1graphic_1_1XPrimitive2DRenderer.html",
+    "items": {
+      "methods": [
+        {
+          "name": "rasterize",
+          "returns": "XBitmap_b1b70b7b",
+          "returns_origin": "com.sun.star.rendering.XBitmap",
+          "desc": [
+            "return rasterized version of given XPrimitive2D",
+            "",
+            "0",
+            "",
+            "is given, a horizontal default resolution of 72 DPI is used.",
+            "",
+            "0",
+            "",
+            "is given, a vertical default resolution of 72 DPI is used."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Primitive2DSequence",
+              "type": "typing.Tuple[XPrimitive2D_d5730c6d, ...]",
+              "direction": "in",
+              "origin": "sequence< XPrimitive2D >"
+            },
+            {
+              "name": "aViewInformationSequence",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "in",
+              "origin": "sequence< .com.sun.star.beans.PropertyValue >"
+            },
+            {
+              "name": "DPIX",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "DPIY",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "Range",
+              "type": "RealRectangle2D_d9b0e03",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.RealRectangle2D"
+            },
+            {
+              "name": "MaximumQuadraticPixels",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XResource",
+  "type": "interface",
+  "namespace": "com.sun.star.drawing.framework",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        ".x_resource_id",
+        "XResourceId",
+        "XResourceId_5be3103d"
+      ]
+    ],
+    "extends_map": {},
+    "quote": [
+      "XResourceId_5be3103d"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.drawing.framework.XResourceId"
+      ]
+    },
+    "name": "XResource",
+    "imports": [],
+    "namespace": "com.sun.star.drawing.framework",
+    "extends": [],
+    "desc": [
+      "Base interface that provides functionality shared by all resource types of the drawing framework."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1drawing_1_1framework_1_1XResource.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getResourceId",
+          "returns": "XResourceId_5be3103d",
+          "returns_origin": "com.sun.star.drawing.framework.XResourceId",
+          "desc": [
+            "Return an XResourceId object for the called resource.",
+            "",
+            "The returned id unambiguously identifies the resource."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "isAnchorOnly",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "Some resources must not be leafs, i.e.",
+            "",
+            "have to be anchor to at least one other resource. Most panes are examples for this. Views on the other hand are in most cases no anchors. So the typical pane will return TRUE and the typical view will return FALSE.",
+            "",
+            "The return value is used to determine whether a resource has to be deactivated when it has no children, either because none is requested or because none can be created."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

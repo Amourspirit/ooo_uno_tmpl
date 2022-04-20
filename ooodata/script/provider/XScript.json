@@ -1,0 +1,97 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XScript",
+  "type": "interface",
+  "namespace": "com.sun.star.script.provider",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "...uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "typing.Tuple[int, ...]",
+      "typing.Tuple[object, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[int, ...]",
+      "typing.Tuple[object, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": []
+    },
+    "name": "XScript",
+    "imports": [],
+    "namespace": "com.sun.star.script.provider",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "This interface represents an invocable script or UNO function."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1script_1_1provider_1_1XScript.html",
+    "items": {
+      "methods": [
+        {
+          "name": "invoke",
+          "returns": "object",
+          "returns_origin": "any",
+          "desc": [
+            "invoke the script or function represented by the implementing object",
+            "",
+            "For example, if the script had the signature",
+            "long foo( [inout] string a, [in] string b, [out] string c )",
+            "the call would look like",
+            "bar.invoke( {\\\"foo\\\", \\\"foo2\\\", \\\"this-is-ignored\\\" }, aOutParamIndex, aOutParam);",
+            "and after the call the out sequences would contain"
+          ],
+          "raises": [
+            "",
+            "com.sun.star.reflection.InvocationTargetException"
+          ],
+          "args": [
+            {
+              "name": "aParams",
+              "type": "typing.Tuple[object, ...]",
+              "direction": "in",
+              "origin": "sequence< any >"
+            },
+            {
+              "name": "aOutParamIndex",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "out",
+              "origin": "sequence< short >"
+            },
+            {
+              "name": "aOutParam",
+              "type": "typing.Tuple[object, ...]",
+              "direction": "out",
+              "origin": "sequence< any >"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

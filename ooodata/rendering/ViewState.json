@@ -1,0 +1,88 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "type": "struct",
+  "name": "ViewState",
+  "namespace": "com.sun.star.rendering",
+  "parser_args": {
+    "sort": false,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "sort": true,
+    "dynamic_struct": true,
+    "include_desc": true
+  },
+  "data": {
+    "name": "ViewState",
+    "namespace": "com.sun.star.rendering",
+    "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1rendering_1_1ViewState.html",
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        "..geometry.affine_matrix2_d",
+        "AffineMatrix2D",
+        "AffineMatrix2D_ff040da8"
+      ],
+      [
+        ".x_poly_polygon2_d",
+        "XPolyPolygon2D",
+        "XPolyPolygon2D_e1b0e20"
+      ]
+    ],
+    "extends_map": {},
+    "quote": [
+      "AffineMatrix2D_ff040da8",
+      "XPolyPolygon2D_e1b0e20"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.geometry.AffineMatrix2D",
+        "com.sun.star.rendering.XPolyPolygon2D"
+      ]
+    },
+    "fullname": "com.sun.star.rendering.ViewState",
+    "desc": [
+      "This structure contains information considered the view state.",
+      "",
+      "This structure contains information considered the view state, i.e. the invariant setup used when painting a whole view of something.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.0"
+    ],
+    "imports": [],
+    "extends": [],
+    "items": [
+      {
+        "name": "AffineTransform",
+        "type": "AffineMatrix2D_ff040da8",
+        "origtype": "com.sun.star.geometry.AffineMatrix2D",
+        "origin": "com.sun.star.geometry.AffineMatrix2D",
+        "desc": [
+          "The affine transform associated with the view.",
+          "",
+          "This member is used to transform coordinates of draw operations from user space to screen space."
+        ]
+      },
+      {
+        "name": "Clip",
+        "type": "XPolyPolygon2D_e1b0e20",
+        "origtype": "com.sun.star.rendering.XPolyPolygon2D",
+        "origin": "com.sun.star.rendering.XPolyPolygon2D",
+        "desc": [
+          "The clipping area associated with the view.",
+          "",
+          "This clipping is interpreted in the view coordinate systems, i.e. subject to the view transform before mapping to the device coordinate space.",
+          "",
+          "Specifying an empty interface denotes no clipping, i.e. everything rendered to the canvas will be visible (subject to device-dependent constraints, of course). Specifying an empty XPolyPolygon2D, i.e. a poly-polygon containing zero polygons, or an XPolyPolygon2D with any number of empty sub-polygons, denotes the NULL clip. That means, nothing rendered to the canvas will be visible."
+        ]
+      }
+    ]
+  }
+}

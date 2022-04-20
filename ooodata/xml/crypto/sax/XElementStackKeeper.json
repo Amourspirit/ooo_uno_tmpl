@@ -1,0 +1,108 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XElementStackKeeper",
+  "type": "interface",
+  "namespace": "com.sun.star.xml.crypto.sax",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "....uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "...sax.x_document_handler",
+        "XDocumentHandler",
+        "XDocumentHandler_9b90e28"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XDocumentHandler_9b90e28"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.xml.sax.XDocumentHandler"
+      ]
+    },
+    "name": "XElementStackKeeper",
+    "imports": [],
+    "namespace": "com.sun.star.xml.crypto.sax",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "Manipulate the \\\"key SAX events\\\" in a SAX event stream."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1xml_1_1crypto_1_1sax_1_1XElementStackKeeper.html",
+    "items": {
+      "methods": [
+        {
+          "name": "retrieve",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Transfers the buffered key SAX events to a document handler.",
+            "",
+            "All transferred events are removed from the buffer."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "handler",
+              "type": "XDocumentHandler_9b90e28",
+              "direction": "in",
+              "origin": "com.sun.star.xml.sax.XDocumentHandler"
+            },
+            {
+              "name": "includingTheLastEvent",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
+          ]
+        },
+        {
+          "name": "start",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Starts to buffer key SAX events."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "stop",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Stops buffering key SAX events."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

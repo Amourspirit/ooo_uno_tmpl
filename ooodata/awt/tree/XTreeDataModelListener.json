@@ -1,0 +1,149 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XTreeDataModelListener",
+  "type": "interface",
+  "namespace": "com.sun.star.awt.tree",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "...lang.x_event_listener",
+        "XEventListener",
+        "XEventListener_c7230c4a"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".tree_data_model_event",
+        "TreeDataModelEvent",
+        "TreeDataModelEvent_349a0f2f"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.lang.XEventListener": "XEventListener_c7230c4a"
+    },
+    "quote": [
+      "TreeDataModelEvent_349a0f2f"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.lang.XEventListener"
+      ],
+      "typing": [
+        "com.sun.star.awt.tree.TreeDataModelEvent"
+      ]
+    },
+    "name": "XTreeDataModelListener",
+    "imports": [],
+    "namespace": "com.sun.star.awt.tree",
+    "extends": [
+      "com.sun.star.lang.XEventListener"
+    ],
+    "desc": [
+      "An instance of this interface is used by the TreeControl to get notifications about data model changes.",
+      "",
+      "Usually you must not implement this interface yourself as it is already handled by the TreeControl, but you must notify it correctly if you implement the XTreeDataModel yourself",
+      "",
+      "."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1tree_1_1XTreeDataModelListener.html",
+    "items": {
+      "methods": [
+        {
+          "name": "treeNodesChanged",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Invoked after a node (or a set of siblings) has changed in some way.",
+            "",
+            "The node(s) have not changed locations in the tree or altered their children arrays, but other attributes have changed and may affect presentation.",
+            "",
+            "Example: the name of a file has changed, but it is in the same location in the file system.",
+            "",
+            "To indicate the root has changed, TreeDataModelEvent.Nodes will contain the root node and TreeDataModelEvent.ParentNode will be empty."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Event",
+              "type": "TreeDataModelEvent_349a0f2f",
+              "direction": "in",
+              "origin": "com.sun.star.awt.tree.TreeDataModelEvent"
+            }
+          ]
+        },
+        {
+          "name": "treeNodesInserted",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Invoked after nodes have been inserted into the tree.",
+            "",
+            "Use TreeDataModelEvent.ParentNode to get the parent of the new node(s). TreeDataModelEvent.Nodes contains the new node(s)."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Event",
+              "type": "TreeDataModelEvent_349a0f2f",
+              "direction": "in",
+              "origin": "com.sun.star.awt.tree.TreeDataModelEvent"
+            }
+          ]
+        },
+        {
+          "name": "treeNodesRemoved",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Invoked after nodes have been removed from the tree.",
+            "",
+            "Note that if a subtree is removed from the tree, this method may only be invoked once for the root of the removed subtree, not once for each individual set of siblings removed.",
+            "",
+            "Use TreeDataModelEvent.ParentNode to get the former parent of the deleted node(s). TreeDataModelEvent.Nodes contains the removed node(s)."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Event",
+              "type": "TreeDataModelEvent_349a0f2f",
+              "direction": "in",
+              "origin": "com.sun.star.awt.tree.TreeDataModelEvent"
+            }
+          ]
+        },
+        {
+          "name": "treeStructureChanged",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Invoked after the tree has drastically changed structure from a given node down.",
+            "",
+            "Use TreeDataModelEvent.ParentNode to get the node which structure has changed. TreeDataModelEvent.Nodes is empty."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Event",
+              "type": "TreeDataModelEvent_349a0f2f",
+              "direction": "in",
+              "origin": "com.sun.star.awt.tree.TreeDataModelEvent"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

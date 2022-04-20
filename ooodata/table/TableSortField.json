@@ -1,0 +1,122 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "type": "struct",
+  "name": "TableSortField",
+  "namespace": "com.sun.star.table",
+  "parser_args": {
+    "sort": false,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "sort": true,
+    "dynamic_struct": true,
+    "include_desc": true
+  },
+  "data": {
+    "name": "TableSortField",
+    "namespace": "com.sun.star.table",
+    "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1table_1_1TableSortField.html",
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        "..lang.locale",
+        "Locale",
+        "Locale_70d308fa"
+      ],
+      [
+        ".table_sort_field_type",
+        "TableSortFieldType",
+        "TableSortFieldType_9a50e26"
+      ]
+    ],
+    "extends_map": {},
+    "quote": [
+      "Locale_70d308fa",
+      "TableSortFieldType_9a50e26"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.lang.Locale",
+        "com.sun.star.table.TableSortFieldType"
+      ]
+    },
+    "fullname": "com.sun.star.table.TableSortField",
+    "desc": [
+      "describes how to sort a single field (row/column) in a tables sort descriptor.",
+      "",
+      "**since**",
+      "",
+      "    OOo 1.1.2"
+    ],
+    "imports": [],
+    "extends": [],
+    "items": [
+      {
+        "name": "Field",
+        "type": "int",
+        "origtype": null,
+        "origin": "long",
+        "desc": [
+          "index of the row or column in the table to be sorted; 0-based."
+        ]
+      },
+      {
+        "name": "IsAscending",
+        "type": "bool",
+        "origtype": null,
+        "origin": "boolean",
+        "desc": [
+          "TRUE if data are sorted in ascending order, FALSE if in descending order."
+        ]
+      },
+      {
+        "name": "IsCaseSensitive",
+        "type": "bool",
+        "origtype": null,
+        "origin": "boolean",
+        "desc": [
+          "specifies if the case of letters is important when comparing entries."
+        ]
+      },
+      {
+        "name": "FieldType",
+        "type": "TableSortFieldType_9a50e26",
+        "origtype": "com.sun.star.table.TableSortFieldType",
+        "origin": "com.sun.star.table.TableSortFieldType",
+        "desc": [
+          "type of contents in the field.",
+          "",
+          "If the value is com.sun.star.table.TableSortFieldType.AUTOMATIC the algorithm used for sorting is application specific. Especially it may or may not use the values given by \\\"CollatorLocale\\\" and \\\"CollatorAlgorithm\\\"."
+        ]
+      },
+      {
+        "name": "CollatorLocale",
+        "type": "Locale_70d308fa",
+        "origtype": "com.sun.star.lang.Locale",
+        "origin": "com.sun.star.lang.Locale",
+        "desc": [
+          "the locale used by the collator when comparing/sorting text.",
+          "",
+          "This property will not be used when the \\\"FieldType\\\" is com.sun.star.table.TableSortFieldType.NUMERIC"
+        ]
+      },
+      {
+        "name": "CollatorAlgorithm",
+        "type": "str",
+        "origtype": null,
+        "origin": "string",
+        "desc": [
+          "the algorithm used by the collator when comparing/sorting text.",
+          "",
+          "This property will not be used when the \\\"FieldType\\\" is com.sun.star.table.TableSortFieldType.NUMERIC"
+        ]
+      }
+    ]
+  }
+}

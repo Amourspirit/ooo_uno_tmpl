@@ -1,0 +1,114 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XMenuProxy",
+  "type": "interface",
+  "namespace": "com.sun.star.mozilla",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..lang.x_component",
+        "XComponent",
+        "XComponent_98dc0ab5"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_menu_proxy_listener",
+        "XMenuProxyListener",
+        "XMenuProxyListener_2ccf0f55"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.lang.XComponent": "XComponent_98dc0ab5"
+    },
+    "quote": [
+      "XMenuProxyListener_2ccf0f55"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.lang.XComponent"
+      ],
+      "typing": [
+        "com.sun.star.mozilla.XMenuProxyListener"
+      ]
+    },
+    "name": "XMenuProxy",
+    "imports": [],
+    "namespace": "com.sun.star.mozilla",
+    "extends": [
+      "com.sun.star.lang.XComponent"
+    ],
+    "desc": [
+      "Allows to execute dispatch for a menu item and handles listeners for changes in menu items."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1mozilla_1_1XMenuProxy.html",
+    "items": {
+      "methods": [
+        {
+          "name": "addMenuProxyListener",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Registers an event listener, which will be called when the menu changes."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xListener",
+              "type": "XMenuProxyListener_2ccf0f55",
+              "direction": "in",
+              "origin": "com.sun.star.mozilla.XMenuProxyListener"
+            }
+          ]
+        },
+        {
+          "name": "executeMenuItem",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Executes dispatch for the given menu id."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "ID",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
+          ]
+        },
+        {
+          "name": "removeMenuProxyListener",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Unregisters an event listener which was registered with XMenuProxy.addMenuProxyListener()."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xListener",
+              "type": "XMenuProxyListener_2ccf0f55",
+              "direction": "in",
+              "origin": "com.sun.star.mozilla.XMenuProxyListener"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,774 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XDocumentDigitalSignatures",
+  "type": "interface",
+  "namespace": "com.sun.star.security",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..awt.x_window",
+        "XWindow",
+        "XWindow_713b0924"
+      ],
+      [
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
+      ],
+      [
+        "..embed.x_storage",
+        "XStorage",
+        "XStorage_8e460a32"
+      ],
+      [
+        "..graphic.x_graphic",
+        "XGraphic",
+        "XGraphic_a4da0afc"
+      ],
+      [
+        "..io.x_input_stream",
+        "XInputStream",
+        "XInputStream_98d40ab4"
+      ],
+      [
+        "..io.x_stream",
+        "XStream",
+        "XStream_678908a4"
+      ],
+      [
+        ".certificate_kind",
+        "CertificateKind",
+        "CertificateKind_ffd0e69"
+      ],
+      [
+        ".document_signature_information",
+        "DocumentSignatureInformation",
+        "DocumentSignatureInformation_f36c13f7"
+      ],
+      [
+        ".x_certificate",
+        "XCertificate",
+        "XCertificate_e55b0d3b"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "CertificateKind_ffd0e69",
+      "XCertificate_e55b0d3b",
+      "XGraphic_a4da0afc",
+      "XInputStream_98d40ab4",
+      "XStorage_8e460a32",
+      "XStream_678908a4",
+      "XWindow_713b0924",
+      "typing.Tuple[DocumentSignatureInformation_f36c13f7, ...]",
+      "typing.Tuple[PropertyValue_c9610c73, ...]",
+      "typing.Tuple[XCertificate_e55b0d3b, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[DocumentSignatureInformation_f36c13f7, ...]",
+      "typing.Tuple[PropertyValue_c9610c73, ...]",
+      "typing.Tuple[XCertificate_e55b0d3b, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.awt.XWindow",
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.embed.XStorage",
+        "com.sun.star.graphic.XGraphic",
+        "com.sun.star.io.XInputStream",
+        "com.sun.star.io.XStream",
+        "com.sun.star.security.CertificateKind",
+        "com.sun.star.security.DocumentSignatureInformation",
+        "com.sun.star.security.XCertificate"
+      ]
+    },
+    "name": "XDocumentDigitalSignatures",
+    "imports": [],
+    "namespace": "com.sun.star.security",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "Interface for signing and verifying digital signatures in office documents.",
+      "",
+      "This interface can be used to digitally sign different content in an office document. It can also be used to verify digital signatures.",
+      "",
+      "**since**",
+      "",
+      "    LibreOffice 5.3"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1security_1_1XDocumentDigitalSignatures.html",
+    "items": {
+      "methods": [
+        {
+          "name": "addAuthorToTrustedSources",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [],
+          "raises": [],
+          "args": [
+            {
+              "name": "Author",
+              "type": "XCertificate_e55b0d3b",
+              "direction": "in",
+              "origin": "com.sun.star.security.XCertificate"
+            }
+          ]
+        },
+        {
+          "name": "addLocationToTrustedSources",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [],
+          "raises": [],
+          "args": [
+            {
+              "name": "Location",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "chooseCertificate",
+          "returns": "XCertificate_e55b0d3b",
+          "returns_origin": "com.sun.star.security.XCertificate",
+          "desc": [
+            "This method shows the CertificateChooser dialog, used by document and PDF signing Shows only private certificates.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 5.3"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Description",
+              "type": "str",
+              "direction": "out",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "chooseCertificateWithProps",
+          "returns": "XCertificate_e55b0d3b",
+          "returns_origin": "com.sun.star.security.XCertificate",
+          "desc": [
+            "This method shows the CertificateChooser dialog, used by document and PDF signing Shows only private certificates and returns usage string in addition to description.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 6.0"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Properties",
+              "type": "typing.Tuple[PropertyValue_c9610c73, ...]",
+              "direction": "out",
+              "origin": "sequence<.com.sun.star.beans.PropertyValue >"
+            }
+          ]
+        },
+        {
+          "name": "chooseEncryptionCertificate",
+          "returns": "typing.Tuple[XCertificate_e55b0d3b, ...]",
+          "returns_origin": "sequence< com.sun.star.security.XCertificate >",
+          "desc": [
+            "This method shows the CertificateChooser dialog with all certificates, private and other people's.",
+            "",
+            "Useful when choosing certificate/key for encryption",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 6.0"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "chooseSigningCertificate",
+          "returns": "XCertificate_e55b0d3b",
+          "returns_origin": "com.sun.star.security.XCertificate",
+          "desc": [
+            "This is an alias for 'chooseCertificate', shows the CertificateChooser dialog with private certificates.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 6.0"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Description",
+              "type": "str",
+              "direction": "out",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "getDocumentContentSignatureDefaultStreamName",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "allows to get the default stream name for storing of the signature of the document content."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getPackageSignatureDefaultStreamName",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "allows to get the default stream name for storing of the signature of the package."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getScriptingContentSignatureDefaultStreamName",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "allows to get the default stream name for storing of the signature of the scripting content."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "isAuthorTrusted",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [],
+          "raises": [],
+          "args": [
+            {
+              "name": "Author",
+              "type": "XCertificate_e55b0d3b",
+              "direction": "in",
+              "origin": "com.sun.star.security.XCertificate"
+            }
+          ]
+        },
+        {
+          "name": "isLocationTrusted",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [],
+          "raises": [],
+          "args": [
+            {
+              "name": "Location",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "manageTrustedSources",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "manages trusted sources (Authors and paths )"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "selectSigningCertificate",
+          "returns": "XCertificate_e55b0d3b",
+          "returns_origin": "com.sun.star.security.XCertificate",
+          "desc": [
+            "This shows the certificate selection dialog and allows to only select the certificate without actually signing the document.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 6.1"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Description",
+              "type": "str",
+              "direction": "out",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "selectSigningCertificateWithType",
+          "returns": "XCertificate_e55b0d3b",
+          "returns_origin": "com.sun.star.security.XCertificate",
+          "desc": [
+            "This shows the certificate selection dialog and allows to only select the certificate without actually signing the document.",
+            "",
+            "Only certificates of the given type will be shown.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 6.2"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "certificateKind",
+              "type": "CertificateKind_ffd0e69",
+              "direction": "in",
+              "origin": "com.sun.star.security.CertificateKind"
+            },
+            {
+              "name": "Description",
+              "type": "str",
+              "direction": "out",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "setParentWindow",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Set parent window to use when showing dialogs.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 6.3"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xParentWindow",
+              "type": "XWindow_713b0924",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XWindow"
+            }
+          ]
+        },
+        {
+          "name": "showCertificate",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [],
+          "raises": [],
+          "args": [
+            {
+              "name": "Certificate",
+              "type": "XCertificate_e55b0d3b",
+              "direction": "in",
+              "origin": "com.sun.star.security.XCertificate"
+            }
+          ]
+        },
+        {
+          "name": "showDocumentContentSignatures",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "shows the digital signatures of the document content"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xStorage",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            },
+            {
+              "name": "xSignInStream",
+              "type": "XInputStream_98d40ab4",
+              "direction": "in",
+              "origin": "com.sun.star.io.XInputStream"
+            }
+          ]
+        },
+        {
+          "name": "showPackageSignatures",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "shows the digital signatures of the package"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xStorage",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            },
+            {
+              "name": "xSignInStream",
+              "type": "XInputStream_98d40ab4",
+              "direction": "in",
+              "origin": "com.sun.star.io.XInputStream"
+            }
+          ]
+        },
+        {
+          "name": "showScriptingContentSignatures",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "shows the digital signatures of the scripting content"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xStorage",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            },
+            {
+              "name": "xSignInStream",
+              "type": "XInputStream_98d40ab4",
+              "direction": "in",
+              "origin": "com.sun.star.io.XInputStream"
+            }
+          ]
+        },
+        {
+          "name": "signDocumentContent",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "signs the content of the document including text and pictures.",
+            "",
+            "Macros will not be signed."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xStorage",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            },
+            {
+              "name": "xSignStream",
+              "type": "XStream_678908a4",
+              "direction": "in",
+              "origin": "com.sun.star.io.XStream"
+            }
+          ]
+        },
+        {
+          "name": "signDocumentWithCertificate",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "Signs the content of the document with the provided certificate.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 6.2"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xCertificate",
+              "type": "XCertificate_e55b0d3b",
+              "direction": "in",
+              "origin": "com.sun.star.security.XCertificate"
+            },
+            {
+              "name": "xStorage",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            },
+            {
+              "name": "xStream",
+              "type": "XStream_678908a4",
+              "direction": "in",
+              "origin": "com.sun.star.io.XStream"
+            }
+          ]
+        },
+        {
+          "name": "signPackage",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "signs the full Package, which means everything in the storage except the content of META-INF"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Storage",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            },
+            {
+              "name": "xSignStream",
+              "type": "XStream_678908a4",
+              "direction": "in",
+              "origin": "com.sun.star.io.XStream"
+            }
+          ]
+        },
+        {
+          "name": "signPackageWithCertificate",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "signs the full Package, which means everything in the storage except the content of META-INF with the provided certificate.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 7.0"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xCertificate",
+              "type": "XCertificate_e55b0d3b",
+              "direction": "in",
+              "origin": "com.sun.star.security.XCertificate"
+            },
+            {
+              "name": "xStorage",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            },
+            {
+              "name": "xStream",
+              "type": "XStream_678908a4",
+              "direction": "in",
+              "origin": "com.sun.star.io.XStream"
+            }
+          ]
+        },
+        {
+          "name": "signScriptingContent",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "signs the content of the Scripting including macros and basic dialogs",
+            "",
+            "The rest of document content will not be signed."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xStorage",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            },
+            {
+              "name": "xSignStream",
+              "type": "XStream_678908a4",
+              "direction": "in",
+              "origin": "com.sun.star.io.XStream"
+            }
+          ]
+        },
+        {
+          "name": "signScriptingContentWithCertificate",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "signs the content of the Scripting including macros and basic dialogs with the provided certificate.",
+            "",
+            "The rest of document content will not be signed.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 7.0"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xCertificate",
+              "type": "XCertificate_e55b0d3b",
+              "direction": "in",
+              "origin": "com.sun.star.security.XCertificate"
+            },
+            {
+              "name": "xStorage",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            },
+            {
+              "name": "xStream",
+              "type": "XStream_678908a4",
+              "direction": "in",
+              "origin": "com.sun.star.io.XStream"
+            }
+          ]
+        },
+        {
+          "name": "signSignatureLine",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "Signs the content of the document including text and pictures using the given XCertificate.",
+            "",
+            "Also adds the given Signature Line Id and the signed and unsigned graphics to the signature.",
+            "",
+            "Macros will not be signed.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 6.1"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xStorage",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            },
+            {
+              "name": "xSignStream",
+              "type": "XStream_678908a4",
+              "direction": "in",
+              "origin": "com.sun.star.io.XStream"
+            },
+            {
+              "name": "signatureLineId",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "xCertificate",
+              "type": "XCertificate_e55b0d3b",
+              "direction": "in",
+              "origin": "com.sun.star.security.XCertificate"
+            },
+            {
+              "name": "xValidGraphic",
+              "type": "XGraphic_a4da0afc",
+              "direction": "in",
+              "origin": "com.sun.star.graphic.XGraphic"
+            },
+            {
+              "name": "xInvalidGraphic",
+              "type": "XGraphic_a4da0afc",
+              "direction": "in",
+              "origin": "com.sun.star.graphic.XGraphic"
+            },
+            {
+              "name": "comment",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "verifyDocumentContentSignatures",
+          "returns": "typing.Tuple[DocumentSignatureInformation_f36c13f7, ...]",
+          "returns_origin": "sequence< com.sun.star.security.DocumentSignatureInformation >",
+          "desc": [
+            "checks for digital signatures and their status.",
+            "",
+            "Only document content will be checked."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xStorage",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            },
+            {
+              "name": "xSignInStream",
+              "type": "XInputStream_98d40ab4",
+              "direction": "in",
+              "origin": "com.sun.star.io.XInputStream"
+            }
+          ]
+        },
+        {
+          "name": "verifyPackageSignatures",
+          "returns": "typing.Tuple[DocumentSignatureInformation_f36c13f7, ...]",
+          "returns_origin": "sequence< com.sun.star.security.DocumentSignatureInformation >",
+          "desc": [
+            "checks for digital signatures and their status.",
+            "",
+            "Only Package content will be checked."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Storage",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            },
+            {
+              "name": "xSignInStream",
+              "type": "XInputStream_98d40ab4",
+              "direction": "in",
+              "origin": "com.sun.star.io.XInputStream"
+            }
+          ]
+        },
+        {
+          "name": "verifyScriptingContentSignatures",
+          "returns": "typing.Tuple[DocumentSignatureInformation_f36c13f7, ...]",
+          "returns_origin": "sequence< com.sun.star.security.DocumentSignatureInformation >",
+          "desc": [
+            "checks for digital signatures and their status.",
+            "",
+            "Only Scripting content will be checked."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "xStorage",
+              "type": "XStorage_8e460a32",
+              "direction": "in",
+              "origin": "com.sun.star.embed.XStorage"
+            },
+            {
+              "name": "xSignInStream",
+              "type": "XInputStream_98d40ab4",
+              "direction": "in",
+              "origin": "com.sun.star.io.XInputStream"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

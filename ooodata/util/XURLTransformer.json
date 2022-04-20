@@ -1,0 +1,149 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XURLTransformer",
+  "type": "interface",
+  "namespace": "com.sun.star.util",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".url",
+        "URL",
+        "URL_57ad07b9"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "URL_57ad07b9"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.util.URL"
+      ]
+    },
+    "name": "XURLTransformer",
+    "imports": [],
+    "namespace": "com.sun.star.util",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "supports parsing and assembling of URLs"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1util_1_1XURLTransformer.html",
+    "items": {
+      "methods": [
+        {
+          "name": "assemble",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "assembles the parts of the URL specified by aURL and stores it into URL.Complete"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aURL",
+              "type": "object",
+              "direction": "in",
+              "origin": null
+            }
+          ]
+        },
+        {
+          "name": "getPresentation",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "returns a representation of the URL for UI purposes only",
+            "",
+            "Sometimes it can be useful to show a URL on an user interface in a more \\\"human readable\\\" form. Such URL can't be used on any API call, but make it easier for the user to understand it."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aURL",
+              "type": "URL_57ad07b9",
+              "direction": "in",
+              "origin": "com.sun.star.util.URL"
+            },
+            {
+              "name": "bWithPassword",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
+          ]
+        },
+        {
+          "name": "parseSmart",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "parses the string in URL.Complete, which may contain a syntactically complete URL or is specified by the provided protocol",
+            "",
+            "The implementation can use smart functions to correct or interpret URL.Complete if it is not a syntactically complete URL. The parts of the URL are stored in the other fields of aURL."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aURL",
+              "type": "object",
+              "direction": "in",
+              "origin": null
+            },
+            {
+              "name": "sSmartProtocol",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "parseStrict",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "parses the string in URL.Complete which should contain a syntactically complete URL.",
+            "",
+            "The implementation is allowed to correct minor failures in URL.Complete if the meaning of the URL remain unchanged. Parts of the URL are stored in the other fields of aURL."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aURL",
+              "type": "object",
+              "direction": "in",
+              "origin": null
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

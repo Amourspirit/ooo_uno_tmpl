@@ -1,0 +1,149 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XHierarchicalStorageAccess",
+  "type": "interface",
+  "namespace": "com.sun.star.embed",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        ".x_extended_storage_stream",
+        "XExtendedStorageStream",
+        "XExtendedStorageStream_46750fcf"
+      ]
+    ],
+    "extends_map": {},
+    "quote": [
+      "XExtendedStorageStream_46750fcf"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.embed.XExtendedStorageStream"
+      ]
+    },
+    "name": "XHierarchicalStorageAccess",
+    "imports": [],
+    "namespace": "com.sun.star.embed",
+    "extends": [],
+    "desc": [
+      "This interface allows hierarchical access to storage tree.",
+      "",
+      "Currently only streams can be opened using this interface.",
+      "",
+      "The hierarchical access can not be mixed with a normal access. Thus when in a storage a stream with a path \\\"a/b/c\\\" is accessed using hierarchical access, another stream \\\"a/b/d\\\" can also be opened with hierarchical access ( if it is still not opened ), but the substorage \\\"a\\\" can not be opened ( it is locked by hierarchical access )."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1embed_1_1XHierarchicalStorageAccess.html",
+    "items": {
+      "methods": [
+        {
+          "name": "openEncryptedStreamElementByHierarchicalName",
+          "returns": "XExtendedStorageStream_46750fcf",
+          "returns_origin": "com.sun.star.embed.XExtendedStorageStream",
+          "desc": [
+            "allows to get access to a child encrypted stream with password using hierarchical path.",
+            "",
+            "If storage does not allow any encryption this method will always throw com.sun.star.packages.NoEncryptionException.",
+            "",
+            "In case the stream is open in readonly mode the com.sun.star.io.XStream.getOutputStream() method will return an empty reference."
+          ],
+          "raises": [
+            "com.sun.star.embed.InvalidStorageException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.packages.NoEncryptionException",
+            "com.sun.star.packages.WrongPasswordException",
+            "com.sun.star.io.IOException",
+            "com.sun.star.embed.StorageWrappedTargetException"
+          ],
+          "args": [
+            {
+              "name": "sStreamName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nOpenMode",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "sPassword",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "openStreamElementByHierarchicalName",
+          "returns": "XExtendedStorageStream_46750fcf",
+          "returns_origin": "com.sun.star.embed.XExtendedStorageStream",
+          "desc": [
+            "allows to get access to a child stream of the storage, using hierarchical path.",
+            "",
+            "In case the stream is open in readonly mode the com.sun.star.io.XStream.getOutputStream() method will return an empty reference."
+          ],
+          "raises": [
+            "com.sun.star.embed.InvalidStorageException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.packages.WrongPasswordException",
+            "com.sun.star.io.IOException",
+            "com.sun.star.embed.StorageWrappedTargetException"
+          ],
+          "args": [
+            {
+              "name": "sStreamPath",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nOpenMode",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "removeStreamElementByHierarchicalName",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "removes a stream specified by hierarchical name from a storage."
+          ],
+          "raises": [
+            "com.sun.star.embed.InvalidStorageException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.container.NoSuchElementException",
+            "com.sun.star.io.IOException",
+            "com.sun.star.embed.StorageWrappedTargetException"
+          ],
+          "args": [
+            {
+              "name": "sElementPath",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

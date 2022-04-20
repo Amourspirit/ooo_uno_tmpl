@@ -1,0 +1,157 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XLayerImporter",
+  "type": "interface",
+  "namespace": "com.sun.star.configuration.backend",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "...uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_backend",
+        "XBackend",
+        "XBackend_6ce81076"
+      ],
+      [
+        ".x_layer",
+        "XLayer",
+        "XLayer_4cd50fcb"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XBackend_6ce81076",
+      "XLayer_4cd50fcb"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.configuration.backend.XBackend",
+        "com.sun.star.configuration.backend.XLayer"
+      ]
+    },
+    "name": "XLayerImporter",
+    "imports": [],
+    "namespace": "com.sun.star.configuration.backend",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "allows importing a layer into a Backend",
+      "",
+      "**since**",
+      "",
+      "    OOo 1.1.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1configuration_1_1backend_1_1XLayerImporter.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getTargetBackend",
+          "returns": "XBackend_6ce81076",
+          "returns_origin": "com.sun.star.configuration.backend.XBackend",
+          "desc": [
+            "gets the target backend for importing."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "importLayer",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Imports the layer given into the backend.",
+            "",
+            "This method imports data for the current entity of the backend."
+          ],
+          "raises": [
+            "MalformedDataException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.NullPointerException",
+            "com.sun.star.lang.WrappedTargetException"
+          ],
+          "args": [
+            {
+              "name": "aLayer",
+              "type": "XLayer_4cd50fcb",
+              "direction": "in",
+              "origin": "com.sun.star.configuration.backend.XLayer"
+            }
+          ]
+        },
+        {
+          "name": "importLayerForEntity",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Imports the layer given into the backend for a given entity.",
+            "",
+            "This method imports data for the current entity of the backend."
+          ],
+          "raises": [
+            "MalformedDataException",
+            "com.sun.star.lang.IllegalArgumentException",
+            "com.sun.star.lang.NullPointerException",
+            "com.sun.star.lang.WrappedTargetException"
+          ],
+          "args": [
+            {
+              "name": "aLayer",
+              "type": "XLayer_4cd50fcb",
+              "direction": "in",
+              "origin": "com.sun.star.configuration.backend.XLayer"
+            },
+            {
+              "name": "aEntity",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "setTargetBackend",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "sets the target backend for importing."
+          ],
+          "raises": [
+            "com.sun.star.lang.NullPointerException"
+          ],
+          "args": [
+            {
+              "name": "aBackend",
+              "type": "XBackend_6ce81076",
+              "direction": "in",
+              "origin": "com.sun.star.configuration.backend.XBackend"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

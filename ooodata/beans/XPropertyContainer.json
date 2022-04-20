@@ -1,0 +1,108 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XPropertyContainer",
+  "type": "interface",
+  "namespace": "com.sun.star.beans",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": []
+    },
+    "name": "XPropertyContainer",
+    "imports": [],
+    "namespace": "com.sun.star.beans",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "makes it possible to add and remove properties to or from an object.",
+      "",
+      "Some scripting engines cannot access properties directly when the property set is changed. Please use XPropertySet.getPropertyValue() etc. in this case."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XPropertyContainer.html",
+    "items": {
+      "methods": [
+        {
+          "name": "addProperty",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "adds a property to the object."
+          ],
+          "raises": [
+            "com.sun.star.beans.PropertyExistException",
+            "com.sun.star.beans.IllegalTypeException",
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "Name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Attributes",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "DefaultValue",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
+          ]
+        },
+        {
+          "name": "removeProperty",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "removes a property from the object."
+          ],
+          "raises": [
+            "com.sun.star.beans.UnknownPropertyException",
+            "com.sun.star.beans.NotRemoveableException"
+          ],
+          "args": [
+            {
+              "name": "Name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

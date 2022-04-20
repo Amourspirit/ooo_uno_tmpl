@@ -1,0 +1,80 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XUnoTunnel",
+  "type": "interface",
+  "namespace": "com.sun.star.lang",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "typing.Tuple[int, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[int, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": []
+    },
+    "name": "XUnoTunnel",
+    "imports": [],
+    "namespace": "com.sun.star.lang",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "An interface to tunnel UNO.",
+      "",
+      "This means providing access to data or something else, which is not specified by UNO-IDL.",
+      "",
+      "Common usage: Getting a C++ object pointer in the same process, thus to use an implementation directly, most often because of a design flaw."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1lang_1_1XUnoTunnel.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getSomething",
+          "returns": "int",
+          "returns_origin": "hyper",
+          "desc": [
+            "Call this method to get something which is not specified in UNO, e.g.",
+            "",
+            "an address to some C++ object."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aIdentifier",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "in",
+              "origin": "sequence< byte >"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

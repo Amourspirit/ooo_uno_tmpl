@@ -1,0 +1,140 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XSQLData",
+  "type": "interface",
+  "namespace": "com.sun.star.sdbc",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".xsql_input",
+        "XSQLInput",
+        "XSQLInput_8c4109fc"
+      ],
+      [
+        ".xsql_output",
+        "XSQLOutput",
+        "XSQLOutput_96fb0a7d"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XSQLInput_8c4109fc",
+      "XSQLOutput_96fb0a7d"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.sdbc.XSQLInput",
+        "com.sun.star.sdbc.XSQLOutput"
+      ]
+    },
+    "name": "XSQLData",
+    "imports": [],
+    "namespace": "com.sun.star.sdbc",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "is used for the custom mapping of SQL user-defined types.",
+      "",
+      "This interface must be implemented by a service that is registered in a type mapping. It is expected that this interface will normally be implemented by a tool. The methods in this interface are called by the driver and are never called by a programmer directly."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sdbc_1_1XSQLData.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getSQLTypeName",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "returns the fully-qualified name of the SQL user-defined type that this object represents.",
+            "",
+            "This method is called by the SDBC driver to get the name of the UDT instance that is being mapped to this instance of SQLData."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": []
+        },
+        {
+          "name": "readSQL",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "populates this object with data read from the database.",
+            "",
+            "The implementation of the method must follow this protocol:",
+            "It must read each of the attributes or elements of the SQL type from the given input stream. This is done by calling a method of the input stream to read each item, in the order that they appear in the SQL definition of the type. The method readSQL then assigns the data to appropriate fields or elements (of this or other objects).",
+            "Specifically, it must call the appropriate XSQLInput.readXXX method(s) to do the following: for a Distinct Type, read its single data element; for a Structured Type, read a value for each attribute of the SQL type.",
+            "",
+            "The SDBC driver initializes the input stream with a type map before calling this method, which is used by the appropriate SQLInput.readXXX method on the stream."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            {
+              "name": "stream",
+              "type": "XSQLInput_8c4109fc",
+              "direction": "in",
+              "origin": "com.sun.star.sdbc.XSQLInput"
+            },
+            {
+              "name": "typeName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "writeSQL",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "writes this object to the given SQL data stream.",
+            "",
+            "The implementation of the method must follow this protocol:",
+            "It must write each of the attributes of the SQL type to the given output stream. This is done by calling a method of the output stream to write each item, in the order that they appear in the SQL definition of the type. Specifically, it must call the appropriate XSQLOutput.writeXXX method(s) to do the following:",
+            "for a Distinct Type, write its single data element; for a Structured Type, write a value for each attribute of the SQL type."
+          ],
+          "raises": [
+            "SQLException"
+          ],
+          "args": [
+            {
+              "name": "stream",
+              "type": "XSQLOutput_96fb0a7d",
+              "direction": "in",
+              "origin": "com.sun.star.sdbc.XSQLOutput"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

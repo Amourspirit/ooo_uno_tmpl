@@ -1,0 +1,100 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XPopupMenuController",
+  "type": "interface",
+  "namespace": "com.sun.star.frame",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..awt.x_popup_menu",
+        "XPopupMenu",
+        "XPopupMenu_8ee90a55"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XPopupMenu_8ee90a55"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.awt.XPopupMenu"
+      ]
+    },
+    "name": "XPopupMenuController",
+    "imports": [],
+    "namespace": "com.sun.star.frame",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "provides data to a pop-up menu controller implementation to fill and update a pop-up menu dynamically.",
+      "",
+      "A pop-up menu controller gets a com.sun.star.awt.XPopupMenu from its parent menu implementation. The controller has to fill this pop-up menu with a set of menu items and/or sub menus. The parent menu implementation briefs the controller whenever the pop-up menu gets activated by a user.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.0"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1frame_1_1XPopupMenuController.html",
+    "items": {
+      "methods": [
+        {
+          "name": "setPopupMenu",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "provides a com.sun.star.awt.XPopupMenu to a pop-up menu controller implementation.",
+            "",
+            "The controller must fill this pop-up menu with its functions."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "PopupMenu",
+              "type": "XPopupMenu_8ee90a55",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XPopupMenu"
+            }
+          ]
+        },
+        {
+          "name": "updatePopupMenu",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "briefs the pop-up menu controller to update the contents of the provided pop-up menu to reflect the current state.",
+            "",
+            "A controller should never update the pop-up menu structure on its own to prevent performance problems. A better way would be that a controller registers itself as status listener to for a command URL and immediately deregister after that. Therefore status updates will not be send regularly for a non visible pop-up menu."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

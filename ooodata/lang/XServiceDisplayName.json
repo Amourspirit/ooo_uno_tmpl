@@ -1,0 +1,84 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XServiceDisplayName",
+  "type": "interface",
+  "namespace": "com.sun.star.lang",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".locale",
+        "Locale",
+        "Locale_70d308fa"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "Locale_70d308fa"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.lang.Locale"
+      ]
+    },
+    "name": "XServiceDisplayName",
+    "imports": [],
+    "namespace": "com.sun.star.lang",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "provides a name for the service to be used in displays.",
+      "",
+      "This name can be used in displays (dialogs, menus, etc.) to provide a more memorable / meaningful name than the service name or its implementation name. It should not be used to identify / select a specific service / implementation."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1lang_1_1XServiceDisplayName.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getServiceDisplayName",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "returns the display name of the service for a given language.",
+            "",
+            "The caller may specify a com.sun.star.lang.Locale for the preferred language of the resulting string. However, if that locale is not supported the resulting string may be given in a different language. Usually this should be English."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

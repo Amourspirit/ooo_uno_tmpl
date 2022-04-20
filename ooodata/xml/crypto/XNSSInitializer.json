@@ -1,0 +1,126 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XNSSInitializer",
+  "type": "interface",
+  "namespace": "com.sun.star.xml.crypto",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_cipher_context_supplier",
+        "XCipherContextSupplier",
+        "XCipherContextSupplier_9fd31214"
+      ],
+      [
+        ".x_digest_context_supplier",
+        "XDigestContextSupplier",
+        "XDigestContextSupplier_a0151219"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".nss_profile",
+        "NSSProfile",
+        "NSSProfile_e1f00ced"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.xml.crypto.XCipherContextSupplier": "XCipherContextSupplier_9fd31214",
+      "com.sun.star.xml.crypto.XDigestContextSupplier": "XDigestContextSupplier_a0151219"
+    },
+    "quote": [
+      "typing.Tuple[NSSProfile_e1f00ced, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[NSSProfile_e1f00ced, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.xml.crypto.XCipherContextSupplier",
+        "com.sun.star.xml.crypto.XDigestContextSupplier"
+      ],
+      "typing": [
+        "com.sun.star.xml.crypto.NSSProfile"
+      ]
+    },
+    "name": "XNSSInitializer",
+    "imports": [],
+    "namespace": "com.sun.star.xml.crypto",
+    "extends": [
+      "com.sun.star.xml.crypto.XDigestContextSupplier",
+      "com.sun.star.xml.crypto.XCipherContextSupplier"
+    ],
+    "desc": [
+      "",
+      "**since**",
+      "",
+      "    LibreOffice 4.0"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1xml_1_1crypto_1_1XNSSInitializer.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getNSSProfiles",
+          "returns": "typing.Tuple[NSSProfile_e1f00ced, ...]",
+          "returns_origin": "sequence< NSSProfile >",
+          "desc": [
+            "get the current profile list",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 7.1"
+          ],
+          "raises": [],
+          "args": []
+        }
+      ],
+      "properties": [
+        {
+          "name": "IsNSSinitialized",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "the state of the NSS initialization",
+            "",
+            "This attribute returns true, if the NSS library is initialized.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 7.1"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "NSSPath",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "the current path to the NSS databases",
+            "",
+            "This attribute returns the current setting, based on the user selection or automatic detection. This value can change until someone uses NSS crypto functions, because just then LibreOffice initializes the NSS library and the value stays fixed until LibreOffice is restarted!",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 7.1"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

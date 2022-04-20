@@ -1,0 +1,114 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XFormulaParser",
+  "type": "interface",
+  "namespace": "com.sun.star.report.meta",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "...beans.x_property_set",
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
+      ],
+      [
+        "...lang.x_component",
+        "XComponent",
+        "XComponent_98dc0ab5"
+      ],
+      [
+        "...sheet.x_formula_parser",
+        "XFormulaParser",
+        "XFormulaParser_d54d0cbc"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "...sheet.formula_op_code_map_entry",
+        "FormulaOpCodeMapEntry",
+        "FormulaOpCodeMapEntry_37da0f61"
+      ],
+      [
+        "...sheet.x_formula_op_code_mapper",
+        "XFormulaOpCodeMapper",
+        "XFormulaOpCodeMapper_27ff0eee"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa",
+      "com.sun.star.lang.XComponent": "XComponent_98dc0ab5",
+      "com.sun.star.sheet.XFormulaParser": "XFormulaParser_d54d0cbc"
+    },
+    "quote": [
+      "XFormulaOpCodeMapper_27ff0eee",
+      "typing.Tuple[FormulaOpCodeMapEntry_37da0f61, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[FormulaOpCodeMapEntry_37da0f61, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XPropertySet",
+        "com.sun.star.lang.XComponent",
+        "com.sun.star.sheet.XFormulaParser"
+      ],
+      "typing": [
+        "com.sun.star.sheet.FormulaOpCodeMapEntry",
+        "com.sun.star.sheet.XFormulaOpCodeMapper"
+      ]
+    },
+    "name": "XFormulaParser",
+    "imports": [],
+    "namespace": "com.sun.star.report.meta",
+    "extends": [
+      "com.sun.star.lang.XComponent",
+      "com.sun.star.sheet.XFormulaParser",
+      "com.sun.star.beans.XPropertySet"
+    ],
+    "desc": [
+      "identifies a XFormulaParser which allows to retrieve the meta data of all supported functions."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1report_1_1meta_1_1XFormulaParser.html",
+    "items": {
+      "types": [
+        {
+          "name": "OpCodeMap",
+          "returns": "typing.Tuple[FormulaOpCodeMapEntry_37da0f61, ...]",
+          "origtype": null,
+          "origin": "sequence< com.sun.star.sheet.FormulaOpCodeMapEntry >",
+          "desc": [
+            "The complete mapping of Names to OpCodes.",
+            "",
+            "Names and symbols not defined here lead to a parser/print error."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ],
+      "properties": [
+        {
+          "name": "FormulaOpCodeMapper",
+          "returns": "XFormulaOpCodeMapper_27ff0eee",
+          "origtype": "com.sun.star.sheet.XFormulaOpCodeMapper",
+          "origin": "com.sun.star.sheet.XFormulaOpCodeMapper",
+          "desc": [
+            "return the mapper for op codes."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

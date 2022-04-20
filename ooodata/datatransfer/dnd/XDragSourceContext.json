@@ -1,0 +1,115 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XDragSourceContext",
+  "type": "interface",
+  "namespace": "com.sun.star.datatransfer.dnd",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "...uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": []
+    },
+    "name": "XDragSourceContext",
+    "imports": [],
+    "namespace": "com.sun.star.datatransfer.dnd",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "The drag source context class is responsible for managing the initiator side of the Drag and Drop protocol.",
+      "",
+      "In particular, it is responsible for managing event notifications to the DragSourceListener and providing the Transferable state to enable the data transfer.",
+      "",
+      "An instance of this class is created as a result of the method XDragSource.startDrag() being successfully invoked. This instance is responsible for tracking the state of the operation on behalf of the drag source and dispatching state changes to the drag source listener."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1datatransfer_1_1dnd_1_1XDragSourceContext.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getCurrentCursor",
+          "returns": "int",
+          "returns_origin": "long",
+          "desc": [
+            "Get the identifier of the currently used cursor."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setCursor",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "This method sets the current drag cursor.",
+            "",
+            "This method should only be called to set another cursor than the default one for drag action currently selected by the user.",
+            "",
+            "Invalid cursor identifiers will be ignored."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "cursorId",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "setImage",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "This method sets the current drag image."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "imageId",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "transferablesFlavorsChanged",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "This method notifies the context that the com.sun.star.datatransfer.DataFlavor types of the transferable object have changed."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

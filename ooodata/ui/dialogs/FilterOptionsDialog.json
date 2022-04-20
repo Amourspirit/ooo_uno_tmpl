@@ -1,0 +1,70 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "FilterOptionsDialog",
+  "type": "service",
+  "namespace": "com.sun.star.ui.dialogs",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "...beans.x_property_access",
+        "XPropertyAccess",
+        "XPropertyAccess_e1d40d20"
+      ],
+      [
+        ".x_executable_dialog",
+        "XExecutableDialog",
+        "XExecutableDialog_450f0fa1"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.beans.XPropertyAccess": "XPropertyAccess_e1d40d20",
+      "com.sun.star.ui.dialogs.XExecutableDialog": "XExecutableDialog_450f0fa1"
+    },
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XPropertyAccess",
+        "com.sun.star.ui.dialogs.XExecutableDialog"
+      ],
+      "typing": []
+    },
+    "name": "FilterOptionsDialog",
+    "imports": [],
+    "namespace": "com.sun.star.ui.dialogs",
+    "extends": [
+      "com.sun.star.beans.XPropertyAccess",
+      "com.sun.star.ui.dialogs.XExecutableDialog"
+    ],
+    "desc": [
+      "This service enables a filter developer to register a dialog to query for user options before the filter operation is performed.",
+      "",
+      "The user options are stored inside the com.sun.star.document.MediaDescriptor and can be queried from the com.sun.star.document.MediaDescriptor by the component that implements com.sun.star.document.XFilter.",
+      "",
+      "The application will set the com.sun.star.document.MediaDescriptor using the interface com.sun.star.beans.XPropertyAccess and then call XExecutableDialog.execute().",
+      "",
+      "If that method returns ExecutableDialogResults.OK, the application will retrieve the changed com.sun.star.document.MediaDescriptor back using the interface com.sun.star.beans.XPropertyAccess. The filter operation is then continued, using the new com.sun.star.document.MediaDescriptor.",
+      "",
+      "Otherwise, the filter operation is canceled.",
+      "",
+      "**since**",
+      "",
+      "    OOo 1.1.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1ui_1_1dialogs_1_1FilterOptionsDialog.html",
+    "items": {}
+  }
+}

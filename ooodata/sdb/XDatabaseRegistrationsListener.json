@@ -1,0 +1,120 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XDatabaseRegistrationsListener",
+  "type": "interface",
+  "namespace": "com.sun.star.sdb",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..lang.x_event_listener",
+        "XEventListener",
+        "XEventListener_c7230c4a"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".database_registration_event",
+        "DatabaseRegistrationEvent",
+        "DatabaseRegistrationEvent_56721053"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.lang.XEventListener": "XEventListener_c7230c4a"
+    },
+    "quote": [
+      "DatabaseRegistrationEvent_56721053"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.lang.XEventListener"
+      ],
+      "typing": [
+        "com.sun.star.sdb.DatabaseRegistrationEvent"
+      ]
+    },
+    "name": "XDatabaseRegistrationsListener",
+    "imports": [],
+    "namespace": "com.sun.star.sdb",
+    "extends": [
+      "com.sun.star.lang.XEventListener"
+    ],
+    "desc": [
+      "implemented by components which want to be notified of changes in the application-wide registered databases.",
+      "",
+      "**since**",
+      "",
+      "    OOo 3.3"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sdb_1_1XDatabaseRegistrationsListener.html",
+    "items": {
+      "methods": [
+        {
+          "name": "changedDatabaseLocation",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "called when the location of a registered database changed",
+            "",
+            "Note that this talks about registration data only. That is, if the actual file denoted by the database registration is moved, this is in no way monitored or reported. Only (successful) calls to XDatabaseRegistrations.changeDatabaseLocation() are reported here."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Event",
+              "type": "DatabaseRegistrationEvent_56721053",
+              "direction": "in",
+              "origin": "com.sun.star.sdb.DatabaseRegistrationEvent"
+            }
+          ]
+        },
+        {
+          "name": "registeredDatabaseLocation",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "called when a database has been registered"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Event",
+              "type": "DatabaseRegistrationEvent_56721053",
+              "direction": "in",
+              "origin": "com.sun.star.sdb.DatabaseRegistrationEvent"
+            }
+          ]
+        },
+        {
+          "name": "revokedDatabaseLocation",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "called when a database registration has been revoked"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Event",
+              "type": "DatabaseRegistrationEvent_56721053",
+              "direction": "in",
+              "origin": "com.sun.star.sdb.DatabaseRegistrationEvent"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

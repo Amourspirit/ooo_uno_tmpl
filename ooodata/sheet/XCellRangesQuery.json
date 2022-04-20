@@ -1,0 +1,192 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XCellRangesQuery",
+  "type": "interface",
+  "namespace": "com.sun.star.sheet",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_sheet_cell_ranges",
+        "XSheetCellRanges",
+        "XSheetCellRanges_edef0d52"
+      ],
+      [
+        "..table.cell_address",
+        "CellAddress",
+        "CellAddress_ae5f0b56"
+      ],
+      [
+        "..table.cell_range_address",
+        "CellRangeAddress",
+        "CellRangeAddress_ec450d43"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "CellAddress_ae5f0b56",
+      "CellRangeAddress_ec450d43",
+      "XSheetCellRanges_edef0d52"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.sheet.XSheetCellRanges",
+        "com.sun.star.table.CellAddress",
+        "com.sun.star.table.CellRangeAddress"
+      ]
+    },
+    "name": "XCellRangesQuery",
+    "imports": [],
+    "namespace": "com.sun.star.sheet",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "provides methods to query for cell ranges with specific contents.",
+      "",
+      "All methods return a collection of cell ranges."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sheet_1_1XCellRangesQuery.html",
+    "items": {
+      "methods": [
+        {
+          "name": "queryColumnDifferences",
+          "returns": "XSheetCellRanges_edef0d52",
+          "returns_origin": "com.sun.star.sheet.XSheetCellRanges",
+          "desc": [
+            "queries all cells with different values in a specified row.",
+            "",
+            "This method takes each column of the current cell range(s) and compares all cells with the cell in the specified row. All cells which are different to this comparison cell will be returned."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aCompare",
+              "type": "CellAddress_ae5f0b56",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellAddress"
+            }
+          ]
+        },
+        {
+          "name": "queryContentCells",
+          "returns": "XSheetCellRanges_edef0d52",
+          "returns_origin": "com.sun.star.sheet.XSheetCellRanges",
+          "desc": [
+            "queries all cells with the specified content type(s).",
+            "",
+            "Attention: Despite the CellFlags flags are long values, this method expects a short parameter.",
+            "",
+            "Attention: Empty cells in the range may be skipped depending on the content flag used. For instance, when querying for STYLES, the returned ranges may not include empty cells even if styles are applied to those cells."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "nContentFlags",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
+          ]
+        },
+        {
+          "name": "queryEmptyCells",
+          "returns": "XSheetCellRanges_edef0d52",
+          "returns_origin": "com.sun.star.sheet.XSheetCellRanges",
+          "desc": [
+            "queries all empty cells."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "queryFormulaCells",
+          "returns": "XSheetCellRanges_edef0d52",
+          "returns_origin": "com.sun.star.sheet.XSheetCellRanges",
+          "desc": [
+            "queries all formula cells with the specified result type."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "nResultFlags",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "queryIntersection",
+          "returns": "XSheetCellRanges_edef0d52",
+          "returns_origin": "com.sun.star.sheet.XSheetCellRanges",
+          "desc": [
+            "intersects the current cell range(s) with the specified cell range."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aRange",
+              "type": "CellRangeAddress_ec450d43",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellRangeAddress"
+            }
+          ]
+        },
+        {
+          "name": "queryRowDifferences",
+          "returns": "XSheetCellRanges_edef0d52",
+          "returns_origin": "com.sun.star.sheet.XSheetCellRanges",
+          "desc": [
+            "queries all cells with different values in a specified column.",
+            "",
+            "This method takes each row of the current cell range(s) and compares all cells with the cell in the specified column. All cells which are different to this comparison cell will be returned."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aCompare",
+              "type": "CellAddress_ae5f0b56",
+              "direction": "in",
+              "origin": "com.sun.star.table.CellAddress"
+            }
+          ]
+        },
+        {
+          "name": "queryVisibleCells",
+          "returns": "XSheetCellRanges_edef0d52",
+          "returns_origin": "com.sun.star.sheet.XSheetCellRanges",
+          "desc": [
+            "queries all visible cells."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

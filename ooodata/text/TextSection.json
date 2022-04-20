@@ -1,0 +1,500 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "TextSection",
+  "type": "service",
+  "namespace": "com.sun.star.text",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..beans.x_property_set",
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
+      ],
+      [
+        "..beans.x_property_state",
+        "XPropertyState",
+        "XPropertyState_d55c0ccf"
+      ],
+      [
+        "..container.x_named",
+        "XNamed",
+        "XNamed_a6520b08"
+      ],
+      [
+        ".text_content",
+        "TextContent",
+        "TextContent_a6810b4d"
+      ],
+      [
+        ".x_text_section",
+        "XTextSection",
+        "XTextSection_b1730b9f"
+      ],
+      [
+        "..xml.user_defined_attributes_supplier",
+        "UserDefinedAttributesSupplier",
+        "UserDefinedAttributesSupplier_9fbe1222"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..graphic.x_graphic",
+        "XGraphic",
+        "XGraphic_a4da0afc"
+      ],
+      [
+        "..style.graphic_location",
+        "GraphicLocation",
+        "GraphicLocation_e3ef0d30"
+      ],
+      [
+        ".section_file_link",
+        "SectionFileLink",
+        "SectionFileLink_d63e0cb0"
+      ],
+      [
+        ".x_text_columns",
+        "XTextColumns",
+        "XTextColumns_b17f0bab"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa",
+      "com.sun.star.beans.XPropertyState": "XPropertyState_d55c0ccf",
+      "com.sun.star.container.XNamed": "XNamed_a6520b08",
+      "com.sun.star.text.TextContent": "TextContent_a6810b4d",
+      "com.sun.star.text.XTextSection": "XTextSection_b1730b9f",
+      "com.sun.star.xml.UserDefinedAttributesSupplier": "UserDefinedAttributesSupplier_9fbe1222"
+    },
+    "quote": [
+      "GraphicLocation_e3ef0d30",
+      "SectionFileLink_d63e0cb0",
+      "XGraphic_a4da0afc",
+      "XTextColumns_b17f0bab"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XPropertySet",
+        "com.sun.star.beans.XPropertyState",
+        "com.sun.star.container.XNamed",
+        "com.sun.star.text.TextContent",
+        "com.sun.star.text.XTextSection",
+        "com.sun.star.xml.UserDefinedAttributesSupplier"
+      ],
+      "typing": [
+        "com.sun.star.graphic.XGraphic",
+        "com.sun.star.style.GraphicLocation",
+        "com.sun.star.text.SectionFileLink",
+        "com.sun.star.text.XTextColumns"
+      ]
+    },
+    "name": "TextSection",
+    "imports": [],
+    "namespace": "com.sun.star.text",
+    "extends": [
+      "com.sun.star.text.TextContent",
+      "com.sun.star.xml.UserDefinedAttributesSupplier",
+      "com.sun.star.text.XTextSection",
+      "com.sun.star.container.XNamed",
+      "com.sun.star.beans.XPropertySet",
+      "com.sun.star.beans.XPropertyState"
+    ],
+    "desc": [
+      "A TextSection is a range of complete paragraphs within a text.",
+      "",
+      "The content of the section may be the content of a link into another document, a link from the same document, or the result of a DDE operation.",
+      "",
+      "TextSection instances can be linked from and to other texts.",
+      "",
+      "**since**",
+      "",
+      "    LibreOffice 6.1"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1text_1_1TextSection.html",
+    "items": {
+      "properties": [
+        {
+          "name": "BackGraphic",
+          "returns": "XGraphic_a4da0afc",
+          "origtype": "com.sun.star.graphic.XGraphic",
+          "origin": "com.sun.star.graphic.XGraphic",
+          "desc": [
+            "contains the graphic of the background.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 6.1"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BackGraphicFilter",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "contains the name of the file filter for the background graphic."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BackGraphicLocation",
+          "returns": "GraphicLocation_e3ef0d30",
+          "origtype": "com.sun.star.style.GraphicLocation",
+          "origin": "com.sun.star.style.GraphicLocation",
+          "desc": [
+            "determines the position of the background graphic."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "BackGraphicURL",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "contains the URL for the background graphic.",
+            "",
+            "Note the new behaviour since it this was deprecated: This property can only be set and only external URLs are supported (no more vnd.sun.star.GraphicObject scheme). When an URL is set, then it will load the graphic and set the BackGraphic property."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Condition",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "This property contains a conditional expression.",
+            "",
+            "If the result of the conditional expression is TRUE and the property TextSection.IsVisible is FALSE, then the section is hidden."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "DDECommandElement",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "specifies the source element of the command string for a DDE operation.",
+            "",
+            "The element can be i.e. a name of a cell in a sheet or a bookmark."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "DDECommandFile",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "specifies the source file name of the command string for a DDE operation."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "DDECommandType",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "specifies the type of the command string for a DDE operation.",
+            "",
+            "The type can be the name of the application that provides a DDE source."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "EndnoteIsCollectAtTextEnd",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "determines whether endnotes inside the section are displayed at the end of the section text."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "EndnoteIsOwnNumbering",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "determines whether the endnotes within the section use an own numbering format.",
+            "",
+            "This is only valid if EndnoteIsRestartNumbering is set."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "EndnoteIsRestartNumbering",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "determines whether the endnotes numbering restarts within the section.",
+            "",
+            "This is only valid if EndnoteIsRestartNumbering is set."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "EndnoteNumberingPrefix",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "determines the prefix that is display before the endnote number.",
+            "",
+            "This is only valid if EndnoteIsOwnNumbering is set."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "EndnoteNumberingSuffix",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "determines the suffix that is display after the endnote number.",
+            "",
+            "This is only valid if EndnoteIsOwnNumbering is set."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "EndnoteNumberingType",
+          "returns": "int",
+          "origtype": null,
+          "origin": "short",
+          "desc": [
+            "determines the numbering type of the endnote numbering as a value of com.sun.star.style.NumberingType.",
+            "",
+            "This is only valid if EndoteIsOwnNumbering is set."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "EndnoteRestartNumberingAt",
+          "returns": "int",
+          "origtype": null,
+          "origin": "short",
+          "desc": [
+            "determines at which number the endnote numbering inside of the section starts.",
+            "",
+            "This is only valid if EndnoteIsRestartNumbering is set."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FileLink",
+          "returns": "SectionFileLink_d63e0cb0",
+          "origtype": "com.sun.star.text.SectionFileLink",
+          "origin": "com.sun.star.text.SectionFileLink",
+          "desc": [
+            "If this property is set, then the content of the section is read from the specified document."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FootnoteIsCollectAtTextEnd",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "determines whether footnotes inside the section are displayed at the end of the section text."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FootnoteIsOwnNumbering",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "determines whether the footnotes within the section use an own numbering format.",
+            "",
+            "This is only valid if FootnoteIsRestartNumbering is set."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FootnoteIsRestartNumbering",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "determines whether the footnotes numbering restarts within the section.",
+            "",
+            "This is only valid if FootnoteIsRestartNumbering is set."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FootnoteNumberingPrefix",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "determines the prefix that is display before the footnote number.",
+            "",
+            "This is only valid if FootnoteIsOwnNumbering is set."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FootnoteNumberingSuffix",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "determines the suffix that is display after of the footnote number.",
+            "",
+            "This is only valid if FootnoteIsOwnNumbering is set."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FootnoteNumberingType",
+          "returns": "int",
+          "origtype": null,
+          "origin": "short",
+          "desc": [
+            "determines the numbering type of the footnote numbering as a value of com.sun.star.style.NumberingType.",
+            "",
+            "This is only valid if FootnoteIsOwnNumbering is set."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FootnoteRestartNumberingAt",
+          "returns": "int",
+          "origtype": null,
+          "origin": "short",
+          "desc": [
+            "determines at which number the footnote numbering inside of the section starts.",
+            "",
+            "This is only valid if FootnoteIsRestartNumbering is set."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsAutomaticUpdate",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "determines if a DDE link is updated automatically."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsProtected",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "If this property is TRUE, the text section is protected and cannot be modified from the user interface."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsVisible",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "If this property is FALSE, the text section is hidden."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "LinkRegion",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "specifies the source of a file link in the document that is specified in TextSection.FileLink.",
+            "",
+            "The source may be a text section or a bookmark. If TextSection.FileLink is empty, then the current document is searched for the source. If this property is empty and TextSection.FileLink is set, then the complete document content is linked into this section."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SectionLeftMargin",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "determines the left margin of the section"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SectionRightMargin",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "determines the left margin of the section"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TextColumns",
+          "returns": "XTextColumns_b17f0bab",
+          "origtype": "com.sun.star.text.XTextColumns",
+          "origin": "com.sun.star.text.XTextColumns",
+          "desc": [
+            "allows columns to be set into the text section"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

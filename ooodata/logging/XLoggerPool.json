@@ -1,0 +1,88 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XLoggerPool",
+  "type": "interface",
+  "namespace": "com.sun.star.logging",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        ".x_logger",
+        "XLogger",
+        "XLogger_9a510aa7"
+      ]
+    ],
+    "extends_map": {},
+    "quote": [
+      "XLogger_9a510aa7"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.logging.XLogger"
+      ]
+    },
+    "name": "XLoggerPool",
+    "imports": [],
+    "namespace": "com.sun.star.logging",
+    "extends": [],
+    "desc": [
+      "implements a pool for named XLogger instances",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.3"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1logging_1_1XLoggerPool.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getDefaultLogger",
+          "returns": "XLogger_9a510aa7",
+          "returns_origin": "com.sun.star.logging.XLogger",
+          "desc": [
+            "retrieves a logger with the default name \\\"org.openoffice.logging.DefaultLogger\\\".",
+            "",
+            "Calling this method is equivalent to calling getNamedLogger( \\\"org.openoffice.logging.DefaultLogger\\\" )."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getNamedLogger",
+          "returns": "XLogger_9a510aa7",
+          "returns_origin": "com.sun.star.logging.XLogger",
+          "desc": [
+            "retrieves a logger with the given name",
+            "",
+            "Multiple attempts to retrieve a logger with the same name will return the same instance.",
+            "",
+            "Newly created logger instances are initialized via configuration. See the configuration module /org.openoffice.Office.Logging for an explanation of the initialization pattern."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Name",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

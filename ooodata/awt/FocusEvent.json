@@ -1,0 +1,92 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "type": "struct",
+  "name": "FocusEvent",
+  "namespace": "com.sun.star.awt",
+  "parser_args": {
+    "sort": false,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "sort": true,
+    "dynamic_struct": true,
+    "include_desc": true
+  },
+  "data": {
+    "name": "FocusEvent",
+    "namespace": "com.sun.star.awt",
+    "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1awt_1_1FocusEvent.html",
+    "from_imports": [
+      [
+        "..lang.event_object",
+        "EventObject",
+        "EventObject_a3d70b03"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.lang.EventObject": "EventObject_a3d70b03"
+    },
+    "quote": [
+      "XInterface_8f010a43"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.lang.EventObject"
+      ],
+      "typing": [
+        "com.sun.star.uno.XInterface"
+      ]
+    },
+    "fullname": "com.sun.star.awt.FocusEvent",
+    "desc": [
+      "specifies a keyboard focus event.",
+      "",
+      "There are two levels of focus change events: permanent and temporary. Permanent focus change events occur when focus is directly moved from one component to another, such as through calls to requestFocus() or as the user uses the Tab key to traverse components. Temporary focus change events occur when focus is gained or lost for a component as the indirect result of another operation, such as window deactivation or a scrollbar drag. In this case, the original focus state will automatically be restored once that operation is finished, or for the case of window deactivation, when the window is reactivated. Both permanent and temporary focus events are delivered using the FOCUS_GAINED and FOCUS_LOST event ids; the levels may be distinguished in the event using the isTemporary() method."
+    ],
+    "imports": [],
+    "extends": [
+      "com.sun.star.lang.EventObject"
+    ],
+    "items": [
+      {
+        "name": "FocusFlags",
+        "type": "int",
+        "origtype": null,
+        "origin": "short",
+        "desc": [
+          "specifies the reason for the focus change as an arithmetic-or combination of FocusChangeReason."
+        ]
+      },
+      {
+        "name": "NextFocus",
+        "type": "XInterface_8f010a43",
+        "origtype": "com.sun.star.uno.XInterface",
+        "origin": "com.sun.star.uno.XInterface",
+        "desc": [
+          "contains the window which gets the focus on a lose focus event."
+        ]
+      },
+      {
+        "name": "Temporary",
+        "type": "bool",
+        "origtype": null,
+        "origin": "boolean",
+        "desc": [
+          "specifies if this focus change event is a temporary change."
+        ]
+      }
+    ]
+  }
+}

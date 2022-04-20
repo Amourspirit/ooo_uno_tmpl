@@ -1,0 +1,147 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XConnection",
+  "type": "interface",
+  "namespace": "com.sun.star.connection",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "typing.Tuple[int, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[int, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": []
+    },
+    "name": "XConnection",
+    "imports": [],
+    "namespace": "com.sun.star.connection",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "A bidirectional bytestream.",
+      "",
+      "You should additionally implement XConnection2."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1connection_1_1XConnection.html",
+    "items": {
+      "methods": [
+        {
+          "name": "close",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Immediately terminates any ongoing read or write calls.",
+            "",
+            "All subsequent read or write calls()"
+          ],
+          "raises": [
+            "com.sun.star.io.IOException"
+          ],
+          "args": []
+        },
+        {
+          "name": "flush",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Empties all internal buffers."
+          ],
+          "raises": [
+            "com.sun.star.io.IOException"
+          ],
+          "args": []
+        },
+        {
+          "name": "getDescription",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "A unique string describing the connection.",
+            "",
+            "This string is different from the arguments to XConnection.accept() and XConnector.connect(). In general, the string contains an additional handle value. For example, \\\"socket,host=localhost,port=2002,uniqueValue=2324\\\"."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "read",
+          "returns": "int",
+          "returns_origin": "long",
+          "desc": [
+            "reads a requested number of bytes from the connection.",
+            "",
+            "This method is blocking, meaning that it always returns a bytesequence with the requested number of bytes, unless it has reached end of file (which often means, that close() has been called).",
+            "",
+            "please see also the readSomeBytes() method of XConnection2."
+          ],
+          "raises": [
+            "com.sun.star.io.IOException"
+          ],
+          "args": [
+            {
+              "name": "aReadBytes",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "out",
+              "origin": "sequence< byte >"
+            },
+            {
+              "name": "nBytesToRead",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "write",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "writes the given bytesequence to the stream.",
+            "",
+            "The method blocks until the whole sequence is written."
+          ],
+          "raises": [
+            "com.sun.star.io.IOException"
+          ],
+          "args": [
+            {
+              "name": "aData",
+              "type": "typing.Tuple[int, ...]",
+              "direction": "in",
+              "origin": "sequence< byte >"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "ValueBinding",
+  "type": "service",
+  "namespace": "com.sun.star.form.binding",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "...beans.x_property_set",
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
+      ],
+      [
+        ".x_value_binding",
+        "XValueBinding",
+        "XValueBinding_271b0ed5"
+      ],
+      [
+        "...lang.x_component",
+        "XComponent",
+        "XComponent_98dc0ab5"
+      ],
+      [
+        "...util.x_modify_broadcaster",
+        "XModifyBroadcaster",
+        "XModifyBroadcaster_fd990df0"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa",
+      "com.sun.star.form.binding.XValueBinding": "XValueBinding_271b0ed5",
+      "com.sun.star.lang.XComponent": "XComponent_98dc0ab5",
+      "com.sun.star.util.XModifyBroadcaster": "XModifyBroadcaster_fd990df0"
+    },
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XPropertySet",
+        "com.sun.star.form.binding.XValueBinding",
+        "com.sun.star.lang.XComponent",
+        "com.sun.star.util.XModifyBroadcaster"
+      ],
+      "typing": []
+    },
+    "name": "ValueBinding",
+    "imports": [],
+    "namespace": "com.sun.star.form.binding",
+    "extends": [
+      "com.sun.star.beans.XPropertySet",
+      "com.sun.star.form.binding.XValueBinding",
+      "com.sun.star.util.XModifyBroadcaster",
+      "com.sun.star.lang.XComponent"
+    ],
+    "desc": [
+      "defines a component which allows access to a single value",
+      "",
+      "Read/Write access to the value represented by this component is supported, as well as (optionally) active broadcasting of value changes"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1form_1_1binding_1_1ValueBinding.html",
+    "items": {
+      "properties": [
+        {
+          "name": "ReadOnly",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "determines whether the value is currently readonly",
+            "",
+            "For instance, you could imagine a ValueBinding which represents a cell in a spreadsheet document, and whose value is readonly as long as the spreadsheet is locked.",
+            "",
+            "As long as this property is TRUE, the value binding should throw an InvalidBindingStateException when its XValueBinding.setValue() method is invoked."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Relevant",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "determines the relevance of the value represented by the binding",
+            "",
+            "In a more complex scenario, where different form controls are bound to different values, which all are part of a larger data structure, some of the items in this data structure may not be relevant currently. This is indicated by the Relevant property being FALSE.",
+            "",
+            "XBindableValues which are bound to this binding may or may not react in certain ways on the (ir)relevance of their bound value.",
+            "",
+            "One possible reaction could be that user interface elements which are associated with the XBindableValue are disabled as long as Relevant is FALSE."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

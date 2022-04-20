@@ -1,0 +1,127 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XBitmap",
+  "type": "interface",
+  "namespace": "com.sun.star.rendering",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..geometry.integer_size2_d",
+        "IntegerSize2D",
+        "IntegerSize2D_f2690d53"
+      ],
+      [
+        "..geometry.real_size2_d",
+        "RealSize2D",
+        "RealSize2D_ca1a0c09"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "IntegerSize2D_f2690d53",
+      "RealSize2D_ca1a0c09",
+      "XBitmap"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.geometry.IntegerSize2D",
+        "com.sun.star.geometry.RealSize2D"
+      ]
+    },
+    "name": "XBitmap",
+    "imports": [],
+    "namespace": "com.sun.star.rendering",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "This is a generic interface to a bitmap.",
+      "",
+      "This interface contains the generic functionality to be used on every XCanvas bitmap object. More format-specific methods can be found at the XIntegerBitmap, XIeeeDoubleBitmap, XIeeeFloatBitmap and XHalfFloatBitmap interfaces.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.0"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1rendering_1_1XBitmap.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getScaledBitmap",
+          "returns": "XBitmap",
+          "returns_origin": "com.sun.star.rendering.XBitmap",
+          "desc": [
+            "Query a scaled copy of the original bitmap."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException",
+            "VolatileContentDestroyedException"
+          ],
+          "args": [
+            {
+              "name": "newSize",
+              "type": "RealSize2D_ca1a0c09",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.RealSize2D"
+            },
+            {
+              "name": "beFast",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
+          ]
+        },
+        {
+          "name": "getSize",
+          "returns": "IntegerSize2D_f2690d53",
+          "returns_origin": "com.sun.star.geometry.IntegerSize2D",
+          "desc": [
+            "Query the size of the bitmap.",
+            "",
+            "This method queries the bitmap size in pixel."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "hasAlpha",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "Query transparency status of the bitmap.",
+            "",
+            "The method checks, whether the bitmap contains any alpha information. The same information is also available at the XColorSpace associated with this bitmap, though much easier to access here (the color space then has a component flagged ColorComponentTag.ALPHA)."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

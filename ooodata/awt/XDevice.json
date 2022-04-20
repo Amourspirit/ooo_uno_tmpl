@@ -1,0 +1,230 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XDevice",
+  "type": "interface",
+  "namespace": "com.sun.star.awt",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".device_info",
+        "DeviceInfo",
+        "DeviceInfo_8e370a30"
+      ],
+      [
+        ".font_descriptor",
+        "FontDescriptor",
+        "FontDescriptor_bc110c0a"
+      ],
+      [
+        ".x_bitmap",
+        "XBitmap",
+        "XBitmap_70cd0909"
+      ],
+      [
+        ".x_display_bitmap",
+        "XDisplayBitmap",
+        "XDisplayBitmap_bb550bdf"
+      ],
+      [
+        ".x_font",
+        "XFont",
+        "XFont_5f480843"
+      ],
+      [
+        ".x_graphics",
+        "XGraphics",
+        "XGraphics_842309dd"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "DeviceInfo_8e370a30",
+      "FontDescriptor_bc110c0a",
+      "XBitmap_70cd0909",
+      "XDevice",
+      "XDisplayBitmap_bb550bdf",
+      "XFont_5f480843",
+      "XGraphics_842309dd",
+      "typing.Tuple[FontDescriptor_bc110c0a, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[FontDescriptor_bc110c0a, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.awt.DeviceInfo",
+        "com.sun.star.awt.FontDescriptor",
+        "com.sun.star.awt.XBitmap",
+        "com.sun.star.awt.XDisplayBitmap",
+        "com.sun.star.awt.XFont",
+        "com.sun.star.awt.XGraphics"
+      ]
+    },
+    "name": "XDevice",
+    "imports": [],
+    "namespace": "com.sun.star.awt",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "provides information about a graphical output device and offers a factory for the graphics which provides write operations on the device."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XDevice.html",
+    "items": {
+      "methods": [
+        {
+          "name": "createBitmap",
+          "returns": "XBitmap_70cd0909",
+          "returns_origin": "com.sun.star.awt.XBitmap",
+          "desc": [
+            "creates a bitmap with the current device depth.",
+            "",
+            "If the specified area does not lie entirely in the device, the bits outside are not specified."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "nX",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nY",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nWidth",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nHeight",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "createDevice",
+          "returns": "XDevice",
+          "returns_origin": "com.sun.star.awt.XDevice",
+          "desc": [
+            "creates a new device which is compatible with this one.",
+            "",
+            "If the device does not support the GETBITS device capability, this method returns NULL."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "nWidth",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nHeight",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "createDisplayBitmap",
+          "returns": "XDisplayBitmap_bb550bdf",
+          "returns_origin": "com.sun.star.awt.XDisplayBitmap",
+          "desc": [
+            "creates a device compatible bitmap.",
+            "",
+            "The data of the bitmap is in process memory instead of in the device, so that the output operation is fast."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Bitmap",
+              "type": "XBitmap_70cd0909",
+              "direction": "in",
+              "origin": "com.sun.star.awt.XBitmap"
+            }
+          ]
+        },
+        {
+          "name": "createGraphics",
+          "returns": "XGraphics_842309dd",
+          "returns_origin": "com.sun.star.awt.XGraphics",
+          "desc": [
+            "creates a new graphics whose output operation is directed to this device."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getFont",
+          "returns": "XFont_5f480843",
+          "returns_origin": "com.sun.star.awt.XFont",
+          "desc": [
+            "returns information about a font offered by this device."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aDescriptor",
+              "type": "FontDescriptor_bc110c0a",
+              "direction": "in",
+              "origin": "com.sun.star.awt.FontDescriptor"
+            }
+          ]
+        },
+        {
+          "name": "getFontDescriptors",
+          "returns": "typing.Tuple[FontDescriptor_bc110c0a, ...]",
+          "returns_origin": "sequence< FontDescriptor >",
+          "desc": [
+            "returns the list of available font descriptors."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getInfo",
+          "returns": "DeviceInfo_8e370a30",
+          "returns_origin": "com.sun.star.awt.DeviceInfo",
+          "desc": [
+            "returns information about the device."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,250 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XExtendedIndexEntrySupplier",
+  "type": "interface",
+  "namespace": "com.sun.star.i18n",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_index_entry_supplier",
+        "XIndexEntrySupplier",
+        "XIndexEntrySupplier_1cb0dfe"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..lang.locale",
+        "Locale",
+        "Locale_70d308fa"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.i18n.XIndexEntrySupplier": "XIndexEntrySupplier_1cb0dfe"
+    },
+    "quote": [
+      "Locale_70d308fa",
+      "typing.Tuple[Locale_70d308fa, ...]",
+      "typing.Tuple[str, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[Locale_70d308fa, ...]",
+      "typing.Tuple[str, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.i18n.XIndexEntrySupplier"
+      ],
+      "typing": [
+        "com.sun.star.lang.Locale"
+      ]
+    },
+    "name": "XExtendedIndexEntrySupplier",
+    "imports": [],
+    "namespace": "com.sun.star.i18n",
+    "extends": [
+      "com.sun.star.i18n.XIndexEntrySupplier"
+    ],
+    "desc": [
+      "This interface provides information for creating \\\"Table of Index\\\".",
+      "",
+      "It is derived from com.sun.star.i18n.XIndexEntrySupplier and provides following additional functionalities.",
+      "",
+      "**since**",
+      "",
+      "    OOo 1.1.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1i18n_1_1XExtendedIndexEntrySupplier.html",
+    "items": {
+      "methods": [
+        {
+          "name": "compareIndexEntry",
+          "returns": "int",
+          "returns_origin": "short",
+          "desc": [
+            "Compares index entries.",
+            "",
+            "Note that loadAlgorithm should be called before calling this function."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aIndexEntry1",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aPhoneticEntry1",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aLocale1",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "aIndexEntry2",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aPhoneticEntry2",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aLocale2",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
+          ]
+        },
+        {
+          "name": "getAlgorithmList",
+          "returns": "typing.Tuple[str, ...]",
+          "returns_origin": "sequence< string >",
+          "desc": [
+            "Returns index algorithm list for specific locale."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
+          ]
+        },
+        {
+          "name": "getIndexKey",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "Returns index key.",
+            "",
+            "Note that loadAlgorithm should be called before calling this function."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aIndexEntry",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aPhoneticEntry",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
+          ]
+        },
+        {
+          "name": "getLocaleList",
+          "returns": "typing.Tuple[Locale_70d308fa, ...]",
+          "returns_origin": "sequence< com.sun.star.lang.Locale >",
+          "desc": [
+            "Returns locale list for which the IndexEntrySupplier provides service."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getPhoneticCandidate",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "Returns phonetic candidate for index entry for the locale."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aIndexEntry",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
+          ]
+        },
+        {
+          "name": "loadAlgorithm",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "Loads index algorithm for the locale."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            },
+            {
+              "name": "aIndexAlgorithm",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "nCollatorOptions",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "usePhoneticEntry",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "Checks if Phonetic Entry should be used for the locale."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aLocale",
+              "type": "Locale_70d308fa",
+              "direction": "in",
+              "origin": "com.sun.star.lang.Locale"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

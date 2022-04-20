@@ -1,0 +1,184 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XConnectionTools",
+  "type": "interface",
+  "namespace": "com.sun.star.sdb.tools",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        "...container.x_name_access",
+        "XNameAccess",
+        "XNameAccess_e2ab0cf6"
+      ],
+      [
+        "...lang.x_component",
+        "XComponent",
+        "XComponent_98dc0ab5"
+      ],
+      [
+        "..x_single_select_query_composer",
+        "XSingleSelectQueryComposer",
+        "XSingleSelectQueryComposer_66e310b9"
+      ],
+      [
+        ".x_data_source_meta_data",
+        "XDataSourceMetaData",
+        "XDataSourceMetaData_547c0fe4"
+      ],
+      [
+        ".x_object_names",
+        "XObjectNames",
+        "XObjectNames_ed550d43"
+      ],
+      [
+        ".x_table_name",
+        "XTableName",
+        "XTableName_d3140c61"
+      ]
+    ],
+    "extends_map": {},
+    "quote": [
+      "XComponent_98dc0ab5",
+      "XDataSourceMetaData_547c0fe4",
+      "XNameAccess_e2ab0cf6",
+      "XObjectNames_ed550d43",
+      "XSingleSelectQueryComposer_66e310b9",
+      "XTableName_d3140c61"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.container.XNameAccess",
+        "com.sun.star.lang.XComponent",
+        "com.sun.star.sdb.XSingleSelectQueryComposer",
+        "com.sun.star.sdb.tools.XDataSourceMetaData",
+        "com.sun.star.sdb.tools.XObjectNames",
+        "com.sun.star.sdb.tools.XTableName"
+      ]
+    },
+    "name": "XConnectionTools",
+    "imports": [],
+    "namespace": "com.sun.star.sdb.tools",
+    "extends": [],
+    "desc": [
+      "encapsulates various useful functionality around a com.sun.star.sdb.Connection",
+      "",
+      "Most of the functionality provided here is meaningful only relative to a given database connection. For instance, for quoting table names, you need the meta data instance of the connection. Thus, the entry point for obtaining a XConnectionTools instance is the com.sun.star.sdb.Connection service.",
+      "",
+      "Note that nearly all functionality provided by this interface is also available by other means, it's only provided here for convenience purposes.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.0.4"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sdb_1_1tools_1_1XConnectionTools.html",
+    "items": {
+      "methods": [
+        {
+          "name": "createTableName",
+          "returns": "XTableName_d3140c61",
+          "returns_origin": "com.sun.star.sdb.tools.XTableName",
+          "desc": [
+            "creates an instance supporting the XTableName interface, which can be used to manipulate table names for various purposes.",
+            "",
+            "The returned object is guaranteed to not be NULL."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getComposer",
+          "returns": "XSingleSelectQueryComposer_66e310b9",
+          "returns_origin": "com.sun.star.sdb.XSingleSelectQueryComposer",
+          "desc": [
+            "get the composer initialized with a command and command type."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "commandType",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "command",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "getDataSourceMetaData",
+          "returns": "XDataSourceMetaData_547c0fe4",
+          "returns_origin": "com.sun.star.sdb.tools.XDataSourceMetaData",
+          "desc": [
+            "provides access to the application-level data source meta data"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getFieldsByCommandDescriptor",
+          "returns": "XNameAccess_e2ab0cf6",
+          "returns_origin": "com.sun.star.container.XNameAccess",
+          "desc": [
+            "get fields for a result set given by a \\\"command descriptor\\\"",
+            "",
+            "A command descriptor here means:"
+          ],
+          "raises": [
+            "com.sun.star.sdbc.SQLException"
+          ],
+          "args": [
+            {
+              "name": "commandType",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "command",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "keepFieldsAlive",
+              "type": "XComponent_98dc0ab5",
+              "direction": "out",
+              "origin": "com.sun.star.lang.XComponent"
+            }
+          ]
+        },
+        {
+          "name": "getObjectNames",
+          "returns": "XObjectNames_ed550d43",
+          "returns_origin": "com.sun.star.sdb.tools.XObjectNames",
+          "desc": [
+            "returns an instance supporting the XObjectNames interface, which provides access to functionality around table and query names.",
+            "",
+            "The returned object is guaranteed to not be NULL."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XPropertyWithState",
+  "type": "interface",
+  "namespace": "com.sun.star.beans",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".property_state",
+        "PropertyState",
+        "PropertyState_c97b0c77"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "PropertyState_c97b0c77",
+      "XInterface_8f010a43"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyState"
+      ]
+    },
+    "name": "XPropertyWithState",
+    "imports": [],
+    "namespace": "com.sun.star.beans",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "makes it possible to query information about the state of this object, seen as a property contained in a property set.",
+      "",
+      "This interface provides direct access to operations that are available if the containing property set implements XPropertyState.",
+      "",
+      "The state contains the information if:",
+      "",
+      "Generally objects that implement this interface also implement XProperty."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XPropertyWithState.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getDefaultAsProperty",
+          "returns": "XInterface_8f010a43",
+          "returns_origin": "com.sun.star.uno.XInterface",
+          "desc": [
+            "If no default exists, is not known or is void, then the return value is NULL."
+          ],
+          "raises": [
+            "com.sun.star.lang.WrappedTargetException"
+          ],
+          "args": []
+        },
+        {
+          "name": "getStateAsProperty",
+          "returns": "PropertyState_c97b0c77",
+          "returns_origin": "com.sun.star.beans.PropertyState",
+          "desc": [],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setToDefaultAsProperty",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "sets this to its default value.",
+            "",
+            "The value depends on the implementation of this interface. If this is a bound property, the value changes before the change events are fired. If this is a constrained property, the vetoable event is fired before the property value changes."
+          ],
+          "raises": [
+            "com.sun.star.lang.WrappedTargetException"
+          ],
+          "args": []
+        }
+      ]
+    }
+  }
+}

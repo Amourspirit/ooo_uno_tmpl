@@ -1,0 +1,153 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XTransitionFactory",
+  "type": "interface",
+  "namespace": "com.sun.star.presentation",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_slide_show_view",
+        "XSlideShowView",
+        "XSlideShowView_3eb40fa9"
+      ],
+      [
+        ".x_transition",
+        "XTransition",
+        "XTransition_123a0ea7"
+      ],
+      [
+        "..rendering.x_bitmap",
+        "XBitmap",
+        "XBitmap_b1b70b7b"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "XBitmap_b1b70b7b",
+      "XSlideShowView_3eb40fa9",
+      "XTransition_123a0ea7"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.presentation.XSlideShowView",
+        "com.sun.star.presentation.XTransition",
+        "com.sun.star.rendering.XBitmap"
+      ]
+    },
+    "name": "XTransitionFactory",
+    "imports": [],
+    "namespace": "com.sun.star.presentation",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "TransitionFactory interface to request optional custom Transition instances for slide show transitions.",
+      "",
+      "This interface provides the necessary methods to query and create optional transition effects for a SlideShow",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.4"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1presentation_1_1XTransitionFactory.html",
+    "items": {
+      "methods": [
+        {
+          "name": "createTransition",
+          "returns": "XTransition_123a0ea7",
+          "returns_origin": "com.sun.star.presentation.XTransition",
+          "desc": [
+            "Actually create a transition for the given transition id."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "transitionType",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "transitionSubType",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "transitionFadeColor",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "view",
+              "type": "XSlideShowView_3eb40fa9",
+              "direction": "in",
+              "origin": "com.sun.star.presentation.XSlideShowView"
+            },
+            {
+              "name": "leavingBitmap",
+              "type": "XBitmap_b1b70b7b",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.XBitmap"
+            },
+            {
+              "name": "enteringBitmap",
+              "type": "XBitmap_b1b70b7b",
+              "direction": "in",
+              "origin": "com.sun.star.rendering.XBitmap"
+            }
+          ]
+        },
+        {
+          "name": "hasTransition",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "Checks whether this instance provides an implementation for given transition id."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "transitionType",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "transitionSubType",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

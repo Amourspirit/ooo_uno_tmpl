@@ -1,0 +1,123 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "ChartDataRowProperties",
+  "type": "service",
+  "namespace": "com.sun.star.chart",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".chart_data_point_properties",
+        "ChartDataPointProperties",
+        "ChartDataPointProperties_677c10bd"
+      ],
+      [
+        ".chart_statistics",
+        "ChartStatistics",
+        "ChartStatistics_e2190d37"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..beans.x_property_set",
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.chart.ChartDataPointProperties": "ChartDataPointProperties_677c10bd",
+      "com.sun.star.chart.ChartStatistics": "ChartStatistics_e2190d37"
+    },
+    "quote": [
+      "XPropertySet_bc180bfa"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.chart.ChartDataPointProperties",
+        "com.sun.star.chart.ChartStatistics"
+      ],
+      "typing": [
+        "com.sun.star.beans.XPropertySet"
+      ]
+    },
+    "name": "ChartDataRowProperties",
+    "imports": [],
+    "namespace": "com.sun.star.chart",
+    "extends": [
+      "com.sun.star.chart.ChartDataPointProperties",
+      "com.sun.star.chart.ChartStatistics"
+    ],
+    "desc": [
+      "specifies the properties for a group of graphic elements which belong to a data row (also known as data series).",
+      "",
+      "For this service, the properties supported by ChartDataPointProperties are applied to all data point elements contained in this group. They serve as a template; thus, when changing a data point property afterwards",
+      "",
+      "**since**",
+      "",
+      "    OOo 1.1.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1chart_1_1ChartDataRowProperties.html",
+    "items": {
+      "properties": [
+        {
+          "name": "Axis",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "determines to which axis the data row is assigned.",
+            "",
+            "The axis must be a primary or secondary y-axis"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "DataErrorProperties",
+          "returns": "XPropertySet_bc180bfa",
+          "origtype": "com.sun.star.beans.XPropertySet",
+          "origin": "com.sun.star.beans.XPropertySet",
+          "desc": [
+            "holds the properties of the error markers, if those are enabled."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "DataMeanValueProperties",
+          "returns": "XPropertySet_bc180bfa",
+          "origtype": "com.sun.star.beans.XPropertySet",
+          "origin": "com.sun.star.beans.XPropertySet",
+          "desc": [
+            "holds the properties of the average line, if such one is enabled."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "DataRegressionProperties",
+          "returns": "XPropertySet_bc180bfa",
+          "origtype": "com.sun.star.beans.XPropertySet",
+          "origin": "com.sun.star.beans.XPropertySet",
+          "desc": [
+            "holds the properties of the regression line, if such one is enabled."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,160 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XTolerantMultiPropertySet",
+  "type": "interface",
+  "namespace": "com.sun.star.beans",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".get_direct_property_tolerant_result",
+        "GetDirectPropertyTolerantResult",
+        "GetDirectPropertyTolerantResult_e91c13b9"
+      ],
+      [
+        ".get_property_tolerant_result",
+        "GetPropertyTolerantResult",
+        "GetPropertyTolerantResult_7c4e115e"
+      ],
+      [
+        ".set_property_tolerant_failed",
+        "SetPropertyTolerantFailed",
+        "SetPropertyTolerantFailed_7cbd1130"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "typing.Tuple[GetDirectPropertyTolerantResult_e91c13b9, ...]",
+      "typing.Tuple[GetPropertyTolerantResult_7c4e115e, ...]",
+      "typing.Tuple[SetPropertyTolerantFailed_7cbd1130, ...]",
+      "typing.Tuple[object, ...]",
+      "typing.Tuple[str, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[GetDirectPropertyTolerantResult_e91c13b9, ...]",
+      "typing.Tuple[GetPropertyTolerantResult_7c4e115e, ...]",
+      "typing.Tuple[SetPropertyTolerantFailed_7cbd1130, ...]",
+      "typing.Tuple[object, ...]",
+      "typing.Tuple[str, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.beans.GetDirectPropertyTolerantResult",
+        "com.sun.star.beans.GetPropertyTolerantResult",
+        "com.sun.star.beans.SetPropertyTolerantFailed"
+      ]
+    },
+    "name": "XTolerantMultiPropertySet",
+    "imports": [],
+    "namespace": "com.sun.star.beans",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "provides access to multiple iformation of a set of properties with a single call.",
+      "",
+      "The speciality of this interface is that none of the functions will throw the usual exceptions associated with setting and retrieving of property values. Instead the data for the failures is collected and returned.",
+      "",
+      "Note: There is no support for property change listeners in this interface."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XTolerantMultiPropertySet.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getDirectPropertyValuesTolerant",
+          "returns": "typing.Tuple[GetDirectPropertyTolerantResult_e91c13b9, ...]",
+          "returns_origin": "sequence< com.sun.star.beans.GetDirectPropertyTolerantResult >",
+          "desc": [
+            "retrieve only those values of the specified properties which are direct values.",
+            "",
+            "Since the count of returned elements may be different from the number of supplied property names the returned elements will also state the name of the property.",
+            "",
+            "If the names are not sorted the behaviour of the method is undefined!"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aPropertyNames",
+              "type": "typing.Tuple[str, ...]",
+              "direction": "in",
+              "origin": "sequence< string >"
+            }
+          ]
+        },
+        {
+          "name": "getPropertyValuesTolerant",
+          "returns": "typing.Tuple[GetPropertyTolerantResult_7c4e115e, ...]",
+          "returns_origin": "sequence< com.sun.star.beans.GetPropertyTolerantResult >",
+          "desc": [
+            "retrieve the values of the specified properties",
+            "",
+            "The count and order of the values in the returned sequence will be the same as the order of the names in the argument.",
+            "",
+            "If the names are not sorted the behaviour of the method is undefined!"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aPropertyNames",
+              "type": "typing.Tuple[str, ...]",
+              "direction": "in",
+              "origin": "sequence< string >"
+            }
+          ]
+        },
+        {
+          "name": "setPropertyValuesTolerant",
+          "returns": "typing.Tuple[SetPropertyTolerantFailed_7cbd1130, ...]",
+          "returns_origin": "sequence< com.sun.star.beans.SetPropertyTolerantFailed >",
+          "desc": [
+            "sets the values to the properties with the specified names.",
+            "",
+            "If the names are not sorted the behaviour of the method is undefined!",
+            "",
+            "Otherwise for every property value that could not successfully be set an entry of the com.sun.star.beans.SetPropertyTolerantFailed will be present in this sequence. The order of the properties is also alphabetically ascending."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "aPropertyNames",
+              "type": "typing.Tuple[str, ...]",
+              "direction": "in",
+              "origin": "sequence< string >"
+            },
+            {
+              "name": "aValues",
+              "type": "typing.Tuple[object, ...]",
+              "direction": "in",
+              "origin": "sequence< any >"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

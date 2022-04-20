@@ -1,0 +1,182 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XGraphicRasterizer",
+  "type": "interface",
+  "namespace": "com.sun.star.graphic",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..awt.size",
+        "Size",
+        "Size_576707ef"
+      ],
+      [
+        "..beans.property_values",
+        "PropertyValues",
+        "PropertyValues_d6470ce6"
+      ],
+      [
+        ".x_graphic",
+        "XGraphic",
+        "XGraphic_a4da0afc"
+      ],
+      [
+        "..io.x_input_stream",
+        "XInputStream",
+        "XInputStream_98d40ab4"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "PropertyValues_d6470ce6",
+      "Size_576707ef",
+      "XGraphic_a4da0afc",
+      "XInputStream_98d40ab4"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.awt.Size",
+        "com.sun.star.beans.PropertyValues",
+        "com.sun.star.graphic.XGraphic",
+        "com.sun.star.io.XInputStream"
+      ]
+    },
+    "name": "XGraphicRasterizer",
+    "imports": [],
+    "namespace": "com.sun.star.graphic",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "This interfaces exposes the initialize and a rasterize method to rasterize a given data stream to a pixel graphic."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1graphic_1_1XGraphicRasterizer.html",
+    "items": {
+      "methods": [
+        {
+          "name": "initializeData",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "Initializing the rasterizer.",
+            "",
+            "This method could also be used to determine, if the provided data is able to be rasterized by the implementation. The implementation should take care of this feature as well as setting the default image size in pixel within the given output parameter.",
+            "",
+            "0",
+            "",
+            "is given, a horizontal default resolution of 72 DPI is used.",
+            "",
+            "0",
+            "",
+            "is given, a vertical default resolution of 72 DPI is used.",
+            "",
+            "In case no default size can be determined during initialization, a default pixel size of 0,0 is returned. In this case, the caller needs to assume a default pixel size, appropriate for the calling context."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "DataStream",
+              "type": "XInputStream_98d40ab4",
+              "direction": "in",
+              "origin": "com.sun.star.io.XInputStream"
+            },
+            {
+              "name": "DPIX",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "DPIY",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "DefaultSizePixel",
+              "type": "Size_576707ef",
+              "direction": "out",
+              "origin": "com.sun.star.awt.Size"
+            }
+          ]
+        },
+        {
+          "name": "rasterize",
+          "returns": "XGraphic_a4da0afc",
+          "returns_origin": "com.sun.star.graphic.XGraphic",
+          "desc": [
+            "Rasterizing the initialized data into a XGraphic container.",
+            "",
+            "The XGraphic container will contain a pixel type graphic after a successful rasterization process",
+            "",
+            "In case of any fault during the rasterization process, the XGraphic container will be empty afterwards and the method will return false"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Width",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "Height",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "RotateAngle",
+              "type": "float",
+              "direction": "in",
+              "origin": "double"
+            },
+            {
+              "name": "ShearAngleX",
+              "type": "float",
+              "direction": "in",
+              "origin": "double"
+            },
+            {
+              "name": "ShearAngleY",
+              "type": "float",
+              "direction": "in",
+              "origin": "double"
+            },
+            {
+              "name": "RasterizeProperties",
+              "type": "PropertyValues_d6470ce6",
+              "direction": "in",
+              "origin": "com.sun.star.beans.PropertyValues"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

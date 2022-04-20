@@ -1,0 +1,432 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XTextLayout",
+  "type": "interface",
+  "namespace": "com.sun.star.rendering",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..geometry.real_point2_d",
+        "RealPoint2D",
+        "RealPoint2D_d6e70c78"
+      ],
+      [
+        "..geometry.real_rectangle2_d",
+        "RealRectangle2D",
+        "RealRectangle2D_d9b0e03"
+      ],
+      [
+        ".caret",
+        "Caret",
+        "Caret_9b480ab5"
+      ],
+      [
+        ".string_context",
+        "StringContext",
+        "StringContext_d50e22"
+      ],
+      [
+        ".text_hit",
+        "TextHit",
+        "TextHit_b25d0b90"
+      ],
+      [
+        ".x_canvas_font",
+        "XCanvasFont",
+        "XCanvasFont_e3380d11"
+      ],
+      [
+        ".x_poly_polygon2_d",
+        "XPolyPolygon2D",
+        "XPolyPolygon2D_e1b0e20"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "Caret_9b480ab5",
+      "RealPoint2D_d6e70c78",
+      "RealRectangle2D_d9b0e03",
+      "StringContext_d50e22",
+      "TextHit_b25d0b90",
+      "XCanvasFont_e3380d11",
+      "XPolyPolygon2D_e1b0e20",
+      "typing.Tuple[RealRectangle2D_d9b0e03, ...]",
+      "typing.Tuple[XPolyPolygon2D_e1b0e20, ...]",
+      "typing.Tuple[XTextLayout, ...]",
+      "typing.Tuple[float, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[RealRectangle2D_d9b0e03, ...]",
+      "typing.Tuple[XPolyPolygon2D_e1b0e20, ...]",
+      "typing.Tuple[XTextLayout, ...]",
+      "typing.Tuple[float, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.geometry.RealPoint2D",
+        "com.sun.star.geometry.RealRectangle2D",
+        "com.sun.star.rendering.Caret",
+        "com.sun.star.rendering.StringContext",
+        "com.sun.star.rendering.TextHit",
+        "com.sun.star.rendering.XCanvasFont",
+        "com.sun.star.rendering.XPolyPolygon2D"
+      ]
+    },
+    "name": "XTextLayout",
+    "imports": [],
+    "namespace": "com.sun.star.rendering",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "This is the central interface for text layouting.",
+      "",
+      "This is the central interface for text-related tasks more complicated than simple string rendering. Note that all query methods are subject to the current layout state of this object. That is, calls to XTextLayout.justify() or XTextLayout.applyLogicalAdvancements() are likely to change subsequent output of those query methods.",
+      "",
+      "Similar to XCanvasFont, all measurements and coordinates accepted and returned by this interface are relative to the font's local coordinate system (which only equals device coordinate space, if the combined render transformation used during text output is the identity transformation). Conversely, if the combined transformation used during text output is not the identity transformation, all measurements returned by this interface should be subjected to that transformation, to yield values in device coordinate space. Depending on the underlying font technology, actual device output might be off by up to one device pixel from the transformed metrics.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.0"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1rendering_1_1XTextLayout.html",
+    "items": {
+      "methods": [
+        {
+          "name": "applyLogicalAdvancements",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Apply explicit advancements for every character in the layout string.",
+            "",
+            "This method applies the specified advancements to every logical character in the input string (not for every glyph. There might be multiple glyphs per input character, or multiple input characters per glyph). This is useful to explicitly manipulate the exact output positions of characters, e.g. relative to a reference output device."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "aAdvancements",
+              "type": "typing.Tuple[float, ...]",
+              "direction": "in",
+              "origin": "sequence< double >"
+            }
+          ]
+        },
+        {
+          "name": "combinedJustify",
+          "returns": "float",
+          "returns_origin": "double",
+          "desc": [
+            "Justify a number of text layouts to the given size.",
+            "",
+            "This method can be used to combine the layout of a text line into a single justification run. This is e.g. useful if the line consists of several text portions (e.g. because of different fonts or colors), but it is desirable to spread the available space more globally across the different layout objects. If, for example, one layout object contains significantly more whitespace or Kashidas than the rest, this method can assign proportionally more space to this layout object."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "aNextLayouts",
+              "type": "typing.Tuple[XTextLayout, ...]",
+              "direction": "in",
+              "origin": "sequence< XTextLayout >"
+            },
+            {
+              "name": "nSize",
+              "type": "float",
+              "direction": "in",
+              "origin": "double"
+            }
+          ]
+        },
+        {
+          "name": "getBaselineOffset",
+          "returns": "float",
+          "returns_origin": "double",
+          "desc": [
+            "This method yields the baseline offset.",
+            "",
+            "This method returns the baseline offset for this layout object, either measured from the top or the left edge, depending on the writing direction (horizontally or vertically). Since rendering this layout via XCanvas.drawTextLayout() outputs relative to the layout object's baseline, this method can be used to e.g. output relative to the left, top edge."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getCaret",
+          "returns": "Caret_9b480ab5",
+          "returns_origin": "com.sun.star.rendering.Caret",
+          "desc": [
+            "This method converts an insertion index to a caret.",
+            "",
+            "This method generates caret information for a given insertion point in the layout text."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            {
+              "name": "nInsertionIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "bExcludeLigatures",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
+          ]
+        },
+        {
+          "name": "getFont",
+          "returns": "XCanvasFont_e3380d11",
+          "returns_origin": "com.sun.star.rendering.XCanvasFont",
+          "desc": [
+            "Request the associated font for this layout."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getMainTextDirection",
+          "returns": "int",
+          "returns_origin": "byte",
+          "desc": [
+            "This method returns the main writing direction.",
+            "",
+            "This method returns the main writing direction of this layout, i.e. either LEFT_TO_RIGHT or RIGHT_TO_LEFT."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getNextInsertionIndex",
+          "returns": "int",
+          "returns_origin": "long",
+          "desc": [
+            "This method calculates a new insertion index.",
+            "",
+            "This method calculates a new insertion index, given a start index and the number of characters to skip. This is most useful for caret traveling."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            {
+              "name": "nStartIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nCaretAdvancement",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "bExcludeLigatures",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
+          ]
+        },
+        {
+          "name": "getText",
+          "returns": "StringContext_d50e22",
+          "returns_origin": "com.sun.star.rendering.StringContext",
+          "desc": [
+            "Request the text this layout contains."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getTextHit",
+          "returns": "TextHit_b25d0b90",
+          "returns_origin": "com.sun.star.rendering.TextHit",
+          "desc": [
+            "This method determines the hit position in the text.",
+            "",
+            "This method determines the index of the character hit at the specified position (in font coordinate space)."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aHitPoint",
+              "type": "RealPoint2D_d6e70c78",
+              "direction": "in",
+              "origin": "com.sun.star.geometry.RealPoint2D"
+            }
+          ]
+        },
+        {
+          "name": "justify",
+          "returns": "float",
+          "returns_origin": "double",
+          "desc": [
+            "Justify the text to the given size.",
+            "",
+            "This method is the core of the XTextLayout interface, because it layouts the text in a typographically correct way into the available space."
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "nSize",
+              "type": "float",
+              "direction": "in",
+              "origin": "double"
+            }
+          ]
+        },
+        {
+          "name": "queryInkMeasures",
+          "returns": "typing.Tuple[RealRectangle2D_d9b0e03, ...]",
+          "returns_origin": "sequence<.com.sun.star.geometry.RealRectangle2D >",
+          "desc": [
+            "Query the ink bounding boxes for every glyph in the layouted text.",
+            "",
+            "Ink, or tight bounding boxes in this case means that for e.g. an \\\"a\\\", the bounding box for the XPolyPolygon2D describing the glyph \\\"a\\\" is returned, not the logical dimensions of the character in the font."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "queryLogicalAdvancements",
+          "returns": "typing.Tuple[float, ...]",
+          "returns_origin": "sequence< double >",
+          "desc": [
+            "Query the advancements for every character in the input string.",
+            "",
+            "This method returns a sequence of advancements, one for each character in the input string (not for every glyph. There might be multiple glyphs per input character, or multiple input characters per glyph).",
+            "",
+            "An advancement value is the distance of the glyph to the beginning edge, which is left for LTR text and is right for RTL text. The maximum of the advancements can be deemed as the width of the whole text layout.",
+            "",
+            "This method can be used to query for the layout's default advancements, which can subsequently be changed and applied to the layout via XTextLayout.applyLogicalAdvancements()."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "queryLogicalHighlighting",
+          "returns": "XPolyPolygon2D_e1b0e20",
+          "returns_origin": "com.sun.star.rendering.XPolyPolygon2D",
+          "desc": [
+            "This method generates a highlight polygon.",
+            "",
+            "This method generates a highlighting polygon from two insertion indices. This polygon will not always be visually continuous, if e.g. the text direction changes in the middle of the selection, the might be parts visually between start and end position that are not selected."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            {
+              "name": "nStartIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nEndIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "queryMeasures",
+          "returns": "typing.Tuple[RealRectangle2D_d9b0e03, ...]",
+          "returns_origin": "sequence<.com.sun.star.geometry.RealRectangle2D >",
+          "desc": [
+            "Query the logical bounding boxes of every character in the given text string.",
+            "",
+            "Logical bounding boxes means the space that the font allocates for the given character, which, e.g. for a \\\".\\\", might be significantly broader than the bounds returned via XTextLayout.queryInkMeasures()."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "queryTextBounds",
+          "returns": "RealRectangle2D_d9b0e03",
+          "returns_origin": "com.sun.star.geometry.RealRectangle2D",
+          "desc": [
+            "Query the overall bounding box of the text.",
+            "",
+            "This method is similar to XTextLayout.queryTextMeasures(), only that the overall bounds are returned by this method."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "queryTextShapes",
+          "returns": "typing.Tuple[XPolyPolygon2D_e1b0e20, ...]",
+          "returns_origin": "sequence< XPolyPolygon2D >",
+          "desc": [
+            "Extract the polygonal shapes of the layouted text.",
+            "",
+            "Each glyph is represented by a separate XPolyPolygon2D in the returned sequence."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "queryVisualHighlighting",
+          "returns": "XPolyPolygon2D_e1b0e20",
+          "returns_origin": "com.sun.star.rendering.XPolyPolygon2D",
+          "desc": [
+            "This method generates a highlight polygon.",
+            "",
+            "This method generates a highlighting polygon from two insertion indices. This polygon will be visually continuous, i.e. will not have non-highlighted text in between."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            {
+              "name": "nStartIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "nEndIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,219 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "DataPilotSourceDimension",
+  "type": "service",
+  "namespace": "com.sun.star.sheet",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..beans.x_property_set",
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
+      ],
+      [
+        "..container.x_named",
+        "XNamed",
+        "XNamed_a6520b08"
+      ],
+      [
+        ".x_hierarchies_supplier",
+        "XHierarchiesSupplier",
+        "XHierarchiesSupplier_29a50f34"
+      ],
+      [
+        "..util.x_cloneable",
+        "XCloneable",
+        "XCloneable_99d00aa3"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".data_pilot_field_orientation",
+        "DataPilotFieldOrientation",
+        "DataPilotFieldOrientation_78701113"
+      ],
+      [
+        ".general_function",
+        "GeneralFunction",
+        "GeneralFunction_e2280d25"
+      ],
+      [
+        ".table_filter_field",
+        "TableFilterField",
+        "TableFilterField_ee760d53"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa",
+      "com.sun.star.container.XNamed": "XNamed_a6520b08",
+      "com.sun.star.sheet.XHierarchiesSupplier": "XHierarchiesSupplier_29a50f34",
+      "com.sun.star.util.XCloneable": "XCloneable_99d00aa3"
+    },
+    "quote": [
+      "DataPilotFieldOrientation_78701113",
+      "GeneralFunction_e2280d25",
+      "XNamed_a6520b08",
+      "typing.Tuple[TableFilterField_ee760d53, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[TableFilterField_ee760d53, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XPropertySet",
+        "com.sun.star.container.XNamed",
+        "com.sun.star.sheet.XHierarchiesSupplier",
+        "com.sun.star.util.XCloneable"
+      ],
+      "typing": [
+        "com.sun.star.sheet.DataPilotFieldOrientation",
+        "com.sun.star.sheet.GeneralFunction",
+        "com.sun.star.sheet.TableFilterField"
+      ]
+    },
+    "name": "DataPilotSourceDimension",
+    "imports": [],
+    "namespace": "com.sun.star.sheet",
+    "extends": [
+      "com.sun.star.container.XNamed",
+      "com.sun.star.sheet.XHierarchiesSupplier",
+      "com.sun.star.util.XCloneable",
+      "com.sun.star.beans.XPropertySet"
+    ],
+    "desc": [
+      "represents a dimension in a data pilot source.",
+      "",
+      "A dimension is equivalent to a column of a cell range in a spreadsheet used for a data pilot field.",
+      "",
+      "In more complex data sources, a dimension may contain several hierarchies, which consolidate items of a complex data type, called levels.",
+      "",
+      "Example: In a database, a column contains date values. This column will be a dimension of the data pilot source. One hierarchy may contain the 3 levels year, month, day. Another hierarchy may contain the 2 levels year and week number.",
+      "",
+      "**since**",
+      "",
+      "    LibreOffice 5.3"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1sheet_1_1DataPilotSourceDimension.html",
+    "items": {
+      "types": [
+        {
+          "name": "Filter",
+          "returns": "typing.Tuple[TableFilterField_ee760d53, ...]",
+          "origtype": null,
+          "origin": "sequence< com.sun.star.sheet.TableFilterField >",
+          "desc": [
+            "specifies which values are used."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ],
+      "properties": [
+        {
+          "name": "Flags",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "contains flags that control the usage of the dimension."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Function",
+          "returns": "GeneralFunction_e2280d25",
+          "origtype": "com.sun.star.sheet.GeneralFunction",
+          "origin": "com.sun.star.sheet.GeneralFunction",
+          "desc": [
+            "specifies how data are aggregated."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Function2",
+          "returns": "int",
+          "origtype": null,
+          "origin": "short",
+          "desc": [
+            "specifies how data are aggregated.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 5.3"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsDataLayoutDimension",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "contains TRUE if this is the dimension used to layout the different data dimensions."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Orientation",
+          "returns": "DataPilotFieldOrientation_78701113",
+          "origtype": "com.sun.star.sheet.DataPilotFieldOrientation",
+          "origin": "com.sun.star.sheet.DataPilotFieldOrientation",
+          "desc": [
+            "specifies where the dimension is used."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Original",
+          "returns": "XNamed_a6520b08",
+          "origtype": "com.sun.star.container.XNamed",
+          "origin": "com.sun.star.container.XNamed",
+          "desc": [
+            "returns the name of the dimension from which this dimension was cloned, or NULL if it was not cloned."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Position",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "specifies the position of the dimension within its orientation."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "UsedHierarchy",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "specifies which hierarchy of the dimension is used."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

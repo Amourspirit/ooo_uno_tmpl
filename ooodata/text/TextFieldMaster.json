@@ -1,0 +1,102 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "TextFieldMaster",
+  "type": "service",
+  "namespace": "com.sun.star.text",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..beans.x_property_set",
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".x_dependent_text_field",
+        "XDependentTextField",
+        "XDependentTextField_c3d0e45"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa"
+    },
+    "quote": [
+      "typing.Tuple[XDependentTextField_c3d0e45, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[XDependentTextField_c3d0e45, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XPropertySet"
+      ],
+      "typing": [
+        "com.sun.star.text.XDependentTextField"
+      ]
+    },
+    "name": "TextFieldMaster",
+    "imports": [],
+    "namespace": "com.sun.star.text",
+    "extends": [
+      "com.sun.star.beans.XPropertySet"
+    ],
+    "desc": [
+      "A TextFieldMaster specifies important data for its DependentTextFields."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1text_1_1TextFieldMaster.html",
+    "items": {
+      "types": [
+        {
+          "name": "DependentTextFields",
+          "returns": "typing.Tuple[XDependentTextField_c3d0e45, ...]",
+          "origtype": null,
+          "origin": "sequence< XDependentTextField >",
+          "desc": [
+            "contains a sequence of all fields that depend on this master."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ],
+      "properties": [
+        {
+          "name": "InstanceName",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "contains the instance name as it is used in the com.sun.star.text.XTextFieldsSupplier."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Name",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "determines the name of the field master.",
+            "",
+            "The name is void as long as the instance is not member of the document structure. When the value is being set the instance is inserted into the document and the name cannot be changed afterwards. That does not apply to the Database text field master."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

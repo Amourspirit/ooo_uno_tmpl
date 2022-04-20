@@ -1,0 +1,286 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XObjectInspectorUI",
+  "type": "interface",
+  "namespace": "com.sun.star.inspection",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        ".x_property_control",
+        "XPropertyControl",
+        "XPropertyControl_3f260fe2"
+      ],
+      [
+        ".x_property_control_observer",
+        "XPropertyControlObserver",
+        "XPropertyControlObserver_cc6d132a"
+      ]
+    ],
+    "extends_map": {},
+    "quote": [
+      "XPropertyControlObserver_cc6d132a",
+      "XPropertyControl_3f260fe2"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.inspection.XPropertyControl",
+        "com.sun.star.inspection.XPropertyControlObserver"
+      ]
+    },
+    "name": "XObjectInspectorUI",
+    "imports": [],
+    "namespace": "com.sun.star.inspection",
+    "extends": [],
+    "desc": [
+      "grants access to certain aspects of the user interface of an object inspector",
+      "",
+      "This interface is used as callback for XPropertyHandlers.",
+      "",
+      "As a consequence, methods operating on the UI for a property, and taking the name of this property, are tolerant against properties which do not exist. For instance, if a property handler tries to disable the UI for property Foo, but another handler has superseded this property, then the ObjectInspector will not have any UI for it. In this case, the call to enablePropertyUI( \\\"Foo\\\" ) will simply be ignored.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.0.3"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1inspection_1_1XObjectInspectorUI.html",
+    "items": {
+      "methods": [
+        {
+          "name": "enablePropertyUI",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "enables or disables all components belonging to the UI representation of a property",
+            "",
+            "This is usually used by an XPropertyHandler if it handles properties, where one does only make sense if another one has a certain value."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "PropertyName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Enable",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
+          ]
+        },
+        {
+          "name": "enablePropertyUIElements",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "enables or disables the single elements which can be part of the UI representation of a property",
+            "",
+            "Note that the complete UI for the property must be enabled in order for these settings to be evaluated. That is, enablePropertyUIElements() does not have any effect if somebody previously disabled the complete UI for this property with enablePropertyUI()."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "PropertyName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Elements",
+              "type": "int",
+              "direction": "in",
+              "origin": "short"
+            },
+            {
+              "name": "Enable",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
+          ]
+        },
+        {
+          "name": "getPropertyControl",
+          "returns": "XPropertyControl_3f260fe2",
+          "returns_origin": "com.sun.star.inspection.XPropertyControl",
+          "desc": [
+            "retrieves the control currently used to display a given property"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "PropertyName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "hidePropertyUI",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "hides the UI for a given property"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "PropertyName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "rebuildPropertyUI",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "completely rebuilds the UI for the given property.",
+            "",
+            "This method might be used by an XPropertyHandler if it wants to change the type of control (see PropertyControlType) used to display a certain property.",
+            "",
+            "The object inspector will then call describePropertyLine again, and update its UI accordingly.",
+            "",
+            "Note that the property whose UI should be rebuilt must not necessarily be (though usually is) in the responsibility of the handler which calls this method. The object inspector will look up the handler with the responsibility for PropertyName and call its XPropertyHandler.describePropertyLine()"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "PropertyName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "registerControlObserver",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "registers an observer for all property controls",
+            "",
+            "The given XPropertyControlObserver will be notified of all changes in all property controls.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.2"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Observer",
+              "type": "XPropertyControlObserver_cc6d132a",
+              "direction": "in",
+              "origin": "com.sun.star.inspection.XPropertyControlObserver"
+            }
+          ]
+        },
+        {
+          "name": "revokeControlObserver",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "revokes a previously registered control observer",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.2"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Observer",
+              "type": "XPropertyControlObserver_cc6d132a",
+              "direction": "in",
+              "origin": "com.sun.star.inspection.XPropertyControlObserver"
+            }
+          ]
+        },
+        {
+          "name": "setHelpSectionText",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "sets the text of the help section, if the object inspector contains one.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.2"
+          ],
+          "raises": [
+            "com.sun.star.lang.NoSupportException"
+          ],
+          "args": [
+            {
+              "name": "HelpText",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "showCategory",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "shows or hides all properties belonging to a given category"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Category",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Show",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
+          ]
+        },
+        {
+          "name": "showPropertyUI",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "shows the UI for a given property"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "PropertyName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

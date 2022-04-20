@@ -1,0 +1,120 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "DocumentMacroConfirmationRequest",
+  "type": "exception",
+  "namespace": "com.sun.star.task",
+  "parser_args": {
+    "sort": false,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".classified_interaction_request",
+        "ClassifiedInteractionRequest",
+        "ClassifiedInteractionRequest_9f72121b"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..embed.x_storage",
+        "XStorage",
+        "XStorage_8e460a32"
+      ],
+      [
+        "..security.document_signature_information",
+        "DocumentSignatureInformation",
+        "DocumentSignatureInformation_f36c13f7"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.task.ClassifiedInteractionRequest": "ClassifiedInteractionRequest_9f72121b"
+    },
+    "quote": [
+      "XStorage_8e460a32",
+      "typing.Tuple[DocumentSignatureInformation_f36c13f7, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[DocumentSignatureInformation_f36c13f7, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.task.ClassifiedInteractionRequest"
+      ],
+      "typing": [
+        "com.sun.star.embed.XStorage",
+        "com.sun.star.security.DocumentSignatureInformation"
+      ]
+    },
+    "name": "DocumentMacroConfirmationRequest",
+    "imports": [],
+    "namespace": "com.sun.star.task",
+    "extends": [
+      "com.sun.star.task.ClassifiedInteractionRequest"
+    ],
+    "desc": [
+      "describes the request to approve or deny the execution of macros contained in a document."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/exceptioncom_1_1sun_1_1star_1_1task_1_1DocumentMacroConfirmationRequest.html",
+    "items": {
+      "types": [
+        {
+          "name": "DocumentSignatureInformation",
+          "returns": "typing.Tuple[DocumentSignatureInformation_f36c13f7, ...]",
+          "origtype": null,
+          "origin": "sequence< .com.sun.star.security.DocumentSignatureInformation >",
+          "desc": [
+            "contains information about the signatures in the document"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ],
+      "properties": [
+        {
+          "name": "DocumentURL",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "specifies the URL of the document which contains macros whose execution should be approved or rejected."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "DocumentStorage",
+          "returns": "XStorage_8e460a32",
+          "origtype": "com.sun.star.embed.XStorage",
+          "origin": "com.sun.star.embed.XStorage",
+          "desc": [
+            "refers to the storage related to the last committed version of the document.",
+            "",
+            "This storage is necessary e.g. for displaying the existing signatures to the user, to allow him a decision whether or not to trust those signatures and thus the signed macros."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "DocumentVersion",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "contains information about the ODF version of the document"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

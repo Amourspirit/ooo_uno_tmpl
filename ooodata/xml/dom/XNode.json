@@ -1,0 +1,471 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XNode",
+  "type": "interface",
+  "namespace": "com.sun.star.xml.dom",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "...uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".node_type",
+        "NodeType",
+        "NodeType_a3b00aef"
+      ],
+      [
+        ".x_document",
+        "XDocument",
+        "XDocument_aebc0b5e"
+      ],
+      [
+        ".x_named_node_map",
+        "XNamedNodeMap",
+        "XNamedNodeMap_de600ca8"
+      ],
+      [
+        ".x_node_list",
+        "XNodeList",
+        "XNodeList_ae540b41"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "NodeType_a3b00aef",
+      "XDocument_aebc0b5e",
+      "XNamedNodeMap_de600ca8",
+      "XNode",
+      "XNodeList_ae540b41"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.xml.dom.NodeType",
+        "com.sun.star.xml.dom.XDocument",
+        "com.sun.star.xml.dom.XNamedNodeMap",
+        "com.sun.star.xml.dom.XNodeList"
+      ]
+    },
+    "name": "XNode",
+    "imports": [],
+    "namespace": "com.sun.star.xml.dom",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "The primary dom datatype.",
+      "",
+      "The Node interface is the primary datatype for the entire Document Object Model. It represents a single node in the document tree. While all objects implementing the Node interface expose methods for dealing with children, not all objects implementing the Node interface may have children. For example, Text nodes may not have children, and adding children to such nodes results in a DOMException being raised.",
+      "",
+      "The attributes nodeName, nodeValue and attributes are included as a mechanism to get at node information without casting down to the specific derived interface. In cases where there is no obvious mapping of these attributes for a specific nodeType (e.g., nodeValue for an Element or attributes for a Comment ), this returns null. Note that the specialized interfaces may contain additional and more convenient mechanisms to get and set the relevant information.",
+      "",
+      "The values of nodeName, nodeValue, and attributes vary according to the node type as follows:",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.0"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1xml_1_1dom_1_1XNode.html",
+    "items": {
+      "methods": [
+        {
+          "name": "appendChild",
+          "returns": "XNode",
+          "returns_origin": "com.sun.star.xml.dom.XNode",
+          "desc": [
+            "Adds the node newChild to the end of the list of children of this node.",
+            "",
+            "HIERARCHY_REQUEST_ERR: Raised if this node is of a type that does not allow children of the type of the newChild node, or if the node to append is one of this node's ancestors or this node itself.",
+            "",
+            "WRONG_DOCUMENT_ERR: Raised if newChild was created from a different document than the one that created this node.",
+            "",
+            "NO_MODIFICATION_ALLOWED_ERR: Raised if this node is readonly or if the previous parent of the node being inserted is readonly."
+          ],
+          "raises": [
+            "DOMException"
+          ],
+          "args": [
+            {
+              "name": "newChild",
+              "type": "XNode",
+              "direction": "in",
+              "origin": "com.sun.star.xml.dom.XNode"
+            }
+          ]
+        },
+        {
+          "name": "cloneNode",
+          "returns": "XNode",
+          "returns_origin": "com.sun.star.xml.dom.XNode",
+          "desc": [
+            "Returns a duplicate of this node, i.e., serves as a generic copy constructor for nodes."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "deep",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
+          ]
+        },
+        {
+          "name": "getAttributes",
+          "returns": "XNamedNodeMap_de600ca8",
+          "returns_origin": "com.sun.star.xml.dom.XNamedNodeMap",
+          "desc": [
+            "A NamedNodeMap containing the attributes of this node (if it is an Element) or null otherwise."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getChildNodes",
+          "returns": "XNodeList_ae540b41",
+          "returns_origin": "com.sun.star.xml.dom.XNodeList",
+          "desc": [
+            "A NodeList that contains all children of this node."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getFirstChild",
+          "returns": "XNode",
+          "returns_origin": "com.sun.star.xml.dom.XNode",
+          "desc": [
+            "The first child of this node."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getLastChild",
+          "returns": "XNode",
+          "returns_origin": "com.sun.star.xml.dom.XNode",
+          "desc": [
+            "The last child of this node."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getLocalName",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "Returns the local part of the qualified name of this node."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getNamespaceURI",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "The namespace URI of this node, or null if it is unspecified."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getNextSibling",
+          "returns": "XNode",
+          "returns_origin": "com.sun.star.xml.dom.XNode",
+          "desc": [
+            "The node immediately following this node."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getNodeName",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "The name of this node, depending on its type; see the table above."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getNodeType",
+          "returns": "NodeType_a3b00aef",
+          "returns_origin": "com.sun.star.xml.dom.NodeType",
+          "desc": [
+            "A code representing the type of the underlying object, as defined above."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getNodeValue",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "The value of this node, depending on its type; see the table above.",
+            "",
+            "DOMSTRING_SIZE_ERR: Raised when it would return more characters than fit in a DOMString variable on the implementation platform."
+          ],
+          "raises": [
+            "DOMException"
+          ],
+          "args": []
+        },
+        {
+          "name": "getOwnerDocument",
+          "returns": "XDocument_aebc0b5e",
+          "returns_origin": "com.sun.star.xml.dom.XDocument",
+          "desc": [
+            "The Document object associated with this node."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getParentNode",
+          "returns": "XNode",
+          "returns_origin": "com.sun.star.xml.dom.XNode",
+          "desc": [
+            "The parent of this node."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getPrefix",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "The namespace prefix of this node, or null if it is unspecified."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getPreviousSibling",
+          "returns": "XNode",
+          "returns_origin": "com.sun.star.xml.dom.XNode",
+          "desc": [
+            "The node immediately preceding this node."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "hasAttributes",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "Returns whether this node (if it is an element) has any attributes."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "hasChildNodes",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "Returns whether this node has any children."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "insertBefore",
+          "returns": "XNode",
+          "returns_origin": "com.sun.star.xml.dom.XNode",
+          "desc": [
+            "Inserts the node newChild before the existing child node refChild.",
+            "",
+            "HIERARCHY_REQUEST_ERR: Raised if this node is of a type that does not allow children of the type of the newChild node, or if the node to insert is one of this node's ancestors or this node itself.",
+            "",
+            "WRONG_DOCUMENT_ERR: Raised if newChild was created from a different document than the one that created this node.",
+            "",
+            "NO_MODIFICATION_ALLOWED_ERR: Raised if this node is readonly or if the parent of the node being inserted is readonly.",
+            "",
+            "NOT_FOUND_ERR: Raised if refChild is not a child of this node."
+          ],
+          "raises": [
+            "DOMException"
+          ],
+          "args": [
+            {
+              "name": "newChild",
+              "type": "XNode",
+              "direction": "in",
+              "origin": "com.sun.star.xml.dom.XNode"
+            },
+            {
+              "name": "refChild",
+              "type": "XNode",
+              "direction": "in",
+              "origin": "com.sun.star.xml.dom.XNode"
+            }
+          ]
+        },
+        {
+          "name": "isSupported",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "Tests whether the DOM implementation implements a specific feature and that feature is supported by this node."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "feature",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "ver",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "normalize",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Puts all Text nodes in the full depth of the sub-tree underneath this Node, including attribute nodes, into a \\\"normal\\\" form where only structure (e.g., elements, comments, processing instructions, CDATA sections, and entity references) separates Text nodes, i.e., there are neither adjacent Text nodes nor empty Text nodes."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "removeChild",
+          "returns": "XNode",
+          "returns_origin": "com.sun.star.xml.dom.XNode",
+          "desc": [
+            "Removes the child node indicated by oldChild from the list of children, and returns it.",
+            "",
+            "NO_MODIFICATION_ALLOWED_ERR: Raised if this node is readonly.",
+            "",
+            "NOT_FOUND_ERR: Raised if oldChild is not a child of this node."
+          ],
+          "raises": [
+            "DOMException"
+          ],
+          "args": [
+            {
+              "name": "oldChild",
+              "type": "XNode",
+              "direction": "in",
+              "origin": "com.sun.star.xml.dom.XNode"
+            }
+          ]
+        },
+        {
+          "name": "replaceChild",
+          "returns": "XNode",
+          "returns_origin": "com.sun.star.xml.dom.XNode",
+          "desc": [
+            "Replaces the child node oldChild with newChild in the list of children, and returns the oldChild node.",
+            "",
+            "HIERARCHY_REQUEST_ERR: Raised if this node is of a type that does not allow children of the type of the newChild node, or if the node to put in is one of this node's ancestors or this node itself.",
+            "",
+            "WRONG_DOCUMENT_ERR: Raised if newChild was created from a different document than the one that created this node.",
+            "",
+            "NO_MODIFICATION_ALLOWED_ERR: Raised if this node or the parent of the new node is readonly.",
+            "",
+            "NOT_FOUND_ERR: Raised if oldChild is not a child of this node."
+          ],
+          "raises": [
+            "DOMException"
+          ],
+          "args": [
+            {
+              "name": "newChild",
+              "type": "XNode",
+              "direction": "in",
+              "origin": "com.sun.star.xml.dom.XNode"
+            },
+            {
+              "name": "oldChild",
+              "type": "XNode",
+              "direction": "in",
+              "origin": "com.sun.star.xml.dom.XNode"
+            }
+          ]
+        },
+        {
+          "name": "setNodeValue",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "The value of this node, depending on its type; see the table above.",
+            "",
+            "NO_MODIFICATION_ALLOWED_ERR: Raised when the node is readonly.",
+            "",
+            "DOMSTRING_SIZE_ERR: Raised when it would return more characters than fit in a DOMString variable on the implementation platform."
+          ],
+          "raises": [
+            "DOMException"
+          ],
+          "args": [
+            {
+              "name": "nodeValue",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "setPrefix",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "The namespace prefix of this node, or null if it is unspecified.",
+            "",
+            "INVALID_CHARACTER_ERR: Raised if the specified prefix contains an illegal character, per the XML 1.0 specification .",
+            "",
+            "NO_MODIFICATION_ALLOWED_ERR: Raised if this node is readonly.",
+            "",
+            "NAMESPACE_ERR: Raised if the specified prefix is malformed per the Namespaces in XML specification, if the namespaceURI of this node is null, if the specified prefix is \\\"xml\\\" and the namespaceURI of this node is different from \\\"http://www.w3.org/XML/1998/namespace\\\", if this node is an attribute and the specified prefix is \\\"xmlns\\\" and the namespaceURI of this node is different from \\\" http://www.w3.org/2000/xmlns/\\\", or if this node is an attribute and the qualifiedName of this node is \\\"xmlns\\\" ."
+          ],
+          "raises": [
+            "DOMException"
+          ],
+          "args": [
+            {
+              "name": "prefix",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

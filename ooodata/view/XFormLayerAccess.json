@@ -1,0 +1,124 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XFormLayerAccess",
+  "type": "interface",
+  "namespace": "com.sun.star.view",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_control_access",
+        "XControlAccess",
+        "XControlAccess_c89d0c4e"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..form.x_form",
+        "XForm",
+        "XForm_684408a8"
+      ],
+      [
+        "..form.runtime.x_form_controller",
+        "XFormController",
+        "XFormController_4a570ffe"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.view.XControlAccess": "XControlAccess_c89d0c4e"
+    },
+    "quote": [
+      "XFormController_4a570ffe",
+      "XForm_684408a8"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.view.XControlAccess"
+      ],
+      "typing": [
+        "com.sun.star.form.XForm",
+        "com.sun.star.form.runtime.XFormController"
+      ]
+    },
+    "name": "XFormLayerAccess",
+    "imports": [],
+    "namespace": "com.sun.star.view",
+    "extends": [
+      "com.sun.star.view.XControlAccess"
+    ],
+    "desc": [
+      "provides access to the form layer elements in a view",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.3"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1view_1_1XFormLayerAccess.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getFormController",
+          "returns": "XFormController_4a570ffe",
+          "returns_origin": "com.sun.star.form.runtime.XFormController",
+          "desc": [
+            "returns the com.sun.star.form.FormController instance which operates on a given form.",
+            "",
+            "A form controller is a component which controls the user interaction with the form layer, as long as the form is not in design mode."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "Form",
+              "type": "XForm_684408a8",
+              "direction": "in",
+              "origin": "com.sun.star.form.XForm"
+            }
+          ]
+        },
+        {
+          "name": "isFormDesignMode",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "determines whether the view's form layer is currently in design or alive mode",
+            "",
+            "Note: This is a convenience method. In the user interface, the design mode is coupled with the .uno:SwitchControlDesignMode feature (see com.sun.star.frame.XDispatchProvider), and asking for the current mode is the same as asking for the state of this feature."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "setFormDesignMode",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "determines whether the view's form layer is currently in design or alive mode",
+            "",
+            "Note: This is a convenience method. In the user interface, the design mode is coupled with the .uno:SwitchControlDesignMode feature (see com.sun.star.frame.XDispatchProvider), and changing the current mode is the same as dispatching this feature URL."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "DesignMode",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

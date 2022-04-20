@@ -1,0 +1,141 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XAccessibleMultiLineText",
+  "type": "interface",
+  "namespace": "com.sun.star.accessibility",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        ".x_accessible_text",
+        "XAccessibleText",
+        "XAccessibleText_5b77105b"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".text_segment",
+        "TextSegment",
+        "TextSegment_1e5b0ee8"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.accessibility.XAccessibleText": "XAccessibleText_5b77105b"
+    },
+    "quote": [
+      "TextSegment_1e5b0ee8"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.accessibility.XAccessibleText"
+      ],
+      "typing": [
+        "com.sun.star.accessibility.TextSegment"
+      ]
+    },
+    "name": "XAccessibleMultiLineText",
+    "imports": [],
+    "namespace": "com.sun.star.accessibility",
+    "extends": [
+      "com.sun.star.accessibility.XAccessibleText"
+    ],
+    "desc": [
+      "Implement this interface to give provide a mapping between text index and line numbers.",
+      "",
+      "This interface is typically used in conjunction with the XAccessibleText interface and extents it with a notion of line numbers",
+      "",
+      "**since**",
+      "",
+      "    OOo 3.0 not yet published"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1accessibility_1_1XAccessibleMultiLineText.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getLineNumberAtIndex",
+          "returns": "int",
+          "returns_origin": "long",
+          "desc": [
+            "Returns the line number at the specified index.",
+            "",
+            "For a text object that is spread over multiple lines, this method provides a mapping from a text index to the corresponding line number."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            {
+              "name": "nIndex",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "getNumberOfLineWithCaret",
+          "returns": "int",
+          "returns_origin": "long",
+          "desc": [
+            "Returns the number of the line in which the caret is located.",
+            "",
+            "The line number returned will most of the time be identical to calling XAccessibleMultiLineText.getLineNumberAtIndex() with the index returned by XAccessibleText.getCaretPosition() beside the following special case:",
+            "",
+            "Some text implementations place the caret at the end of the current line when the End key gets pressed. Since the index of this position is identical to the one of the first character of the following line, XAccessibleMultiLineText.getLineNumberAtIndex() will return the line following the current one in this case."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getTextAtLineNumber",
+          "returns": "TextSegment_1e5b0ee8",
+          "returns_origin": "com.sun.star.accessibility.TextSegment",
+          "desc": [
+            "Returns the text of the specified line.",
+            "",
+            "Returns the substring of text that makes up the specified line number.",
+            "",
+            "The number of lines can be obtained by calling XAccessibleMultiLineText.getLineNumberAtIndex() with the index of the last character. In a loop, the last line has been reached when TextSegment.SegmentEnd of the returned value is equal to the index of the last character of the text."
+          ],
+          "raises": [
+            "com.sun.star.lang.IndexOutOfBoundsException"
+          ],
+          "args": [
+            {
+              "name": "nLineNo",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        },
+        {
+          "name": "getTextAtLineWithCaret",
+          "returns": "TextSegment_1e5b0ee8",
+          "returns_origin": "com.sun.star.accessibility.TextSegment",
+          "desc": [
+            "Returns the text of the line in which the caret is located.",
+            "",
+            "The substring returned will most of the time be identical to calling XAccessibleText.getTextAtIndex() with the index returned by XAccessibleText.getCaretPosition() and type AccessibleTextType.LINE beside the following special case:",
+            "",
+            "Some text implementations place the caret at the end of the current line when the End key gets pressed. Since the index of this position is identical to the one of the first character of the following line, XAccessibleMultiLineText.getLineNumberAtIndex() will return the line following the current one in this case."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

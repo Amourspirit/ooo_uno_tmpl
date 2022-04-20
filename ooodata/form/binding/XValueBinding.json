@@ -1,0 +1,126 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XValueBinding",
+  "type": "interface",
+  "namespace": "com.sun.star.form.binding",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "...uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "typing.Tuple[object, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[object, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": []
+    },
+    "name": "XValueBinding",
+    "imports": [],
+    "namespace": "com.sun.star.form.binding",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "specifies a binding to a value which can be read and written."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1form_1_1binding_1_1XValueBinding.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getSupportedValueTypes",
+          "returns": "typing.Tuple[object, ...]",
+          "returns_origin": "sequence< type >",
+          "desc": [
+            "determines the types which are supported by this binding for value exchange"
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "getValue",
+          "returns": "object",
+          "returns_origin": "any",
+          "desc": [
+            "retrieves the current value"
+          ],
+          "raises": [
+            "IncompatibleTypesException"
+          ],
+          "args": [
+            {
+              "name": "aType",
+              "type": "object",
+              "direction": "in",
+              "origin": "type"
+            }
+          ]
+        },
+        {
+          "name": "setValue",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "sets the current value"
+          ],
+          "raises": [
+            "IncompatibleTypesException",
+            "InvalidBindingStateException",
+            "com.sun.star.lang.NoSupportException"
+          ],
+          "args": [
+            {
+              "name": "aValue",
+              "type": "object",
+              "direction": "in",
+              "origin": "any"
+            }
+          ]
+        },
+        {
+          "name": "supportsType",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "determines whether a given type is supported by this binding for value exchange",
+            "",
+            "Calling this method is equal to calling getSupportedValueTypes(), and looking up the given type in the resulting type sequence."
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "aType",
+              "type": "object",
+              "direction": "in",
+              "origin": "type"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

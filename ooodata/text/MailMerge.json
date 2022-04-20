@@ -1,0 +1,582 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "MailMerge",
+  "type": "service",
+  "namespace": "com.sun.star.text",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..beans.x_property_set",
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
+      ],
+      [
+        "..sdb.data_access_descriptor",
+        "DataAccessDescriptor",
+        "DataAccessDescriptor_6c50e2c"
+      ],
+      [
+        "..task.x_job",
+        "XJob",
+        "XJob_5fa1082e"
+      ],
+      [
+        ".x_mail_merge_broadcaster",
+        "XMailMergeBroadcaster",
+        "XMailMergeBroadcaster_27c30f02"
+      ],
+      [
+        "..util.x_cancellable",
+        "XCancellable",
+        "XCancellable_afc30b64"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        "..beans.property_value",
+        "PropertyValue",
+        "PropertyValue_c9610c73"
+      ],
+      [
+        "..frame.x_model",
+        "XModel",
+        "XModel_7a6e095c"
+      ],
+      [
+        "..sdbc.x_connection",
+        "XConnection",
+        "XConnection_a36a0b0c"
+      ],
+      [
+        "..sdbc.x_result_set",
+        "XResultSet",
+        "XResultSet_98e30aa7"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.beans.XPropertySet": "XPropertySet_bc180bfa",
+      "com.sun.star.sdb.DataAccessDescriptor": "DataAccessDescriptor_6c50e2c",
+      "com.sun.star.task.XJob": "XJob_5fa1082e",
+      "com.sun.star.text.XMailMergeBroadcaster": "XMailMergeBroadcaster_27c30f02",
+      "com.sun.star.util.XCancellable": "XCancellable_afc30b64"
+    },
+    "quote": [
+      "XConnection_a36a0b0c",
+      "XModel_7a6e095c",
+      "XResultSet_98e30aa7",
+      "typing.Tuple[PropertyValue_c9610c73, ...]",
+      "typing.Tuple[object, ...]",
+      "typing.Tuple[str, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[PropertyValue_c9610c73, ...]",
+      "typing.Tuple[object, ...]",
+      "typing.Tuple[str, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.beans.XPropertySet",
+        "com.sun.star.sdb.DataAccessDescriptor",
+        "com.sun.star.task.XJob",
+        "com.sun.star.text.XMailMergeBroadcaster",
+        "com.sun.star.util.XCancellable"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyValue",
+        "com.sun.star.frame.XModel",
+        "com.sun.star.sdbc.XConnection",
+        "com.sun.star.sdbc.XResultSet"
+      ]
+    },
+    "name": "MailMerge",
+    "imports": [],
+    "namespace": "com.sun.star.text",
+    "extends": [
+      "com.sun.star.task.XJob",
+      "com.sun.star.util.XCancellable",
+      "com.sun.star.beans.XPropertySet",
+      "com.sun.star.text.XMailMergeBroadcaster",
+      "com.sun.star.sdb.DataAccessDescriptor"
+    ],
+    "desc": [
+      "Gives access to mail merge functionality.",
+      "",
+      "**since**",
+      "",
+      "    OOo 1.1.2"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1text_1_1MailMerge.html",
+    "items": {
+      "types": [
+        {
+          "name": "BlindCopiesTo",
+          "returns": "typing.Tuple[str, ...]",
+          "origtype": null,
+          "origin": "sequence< string >",
+          "desc": [
+            "This property is only evaluated for e-Mail output.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CopiesTo",
+          "returns": "typing.Tuple[str, ...]",
+          "origtype": null,
+          "origin": "sequence< string >",
+          "desc": [
+            "contains a list of e-Mail addresses to",
+            "",
+            "This property is only evaluated for e-Mail output.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "PrintOptions",
+          "returns": "typing.Tuple[PropertyValue_c9610c73, ...]",
+          "origtype": null,
+          "origin": "sequence< com.sun.star.beans.PropertyValue >",
+          "desc": [
+            "contains the properties that are defined in <com.sun.star.view.PrintOptions>.",
+            "",
+            "This property is only evaluated for printer output.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Selection",
+          "returns": "typing.Tuple[object, ...]",
+          "origtype": null,
+          "origin": "sequence< any >",
+          "desc": [
+            "contains a selection that refers to bookmarks of the ResultSet.",
+            "",
+            "This property is relevant in conjunction with the ResultSet only. A single element of this array describes a bookmark relative to the result set.",
+            "Note that this implies that the ResultSet needs to support the com.sun.star.sdbcx.XRowLocate interface.",
+            "",
+            "If this array is empty, the whole result set, as described by ResultSet respectively the triple (DataSourceName, CommandType, Command).",
+            "",
+            "For the interaction of this property with other data access relevant properties, see the com.sun.star.sdb.DataAccessDescriptor service."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ],
+      "properties": [
+        {
+          "name": "ActiveConnection",
+          "returns": "XConnection_a36a0b0c",
+          "origtype": "com.sun.star.sdbc.XConnection",
+          "origin": "com.sun.star.sdbc.XConnection",
+          "desc": [
+            "contains the connection to the database.",
+            "",
+            "For the interaction of this property with other data access relevant properties, see the com.sun.star.sdb.DataAccessDescriptor service."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "AddressFromColumn",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "contains the name of the data base column that contains the e-Mail address to the e-Mail to.",
+            "",
+            "This property is only evaluated for e-Mail output.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "AttachmentFilter",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "contains the name of the document filter to save the attached mail merge document.",
+            "",
+            "This property is only valid if \\\"SendAsAttachment\\\" is set to TRUE.",
+            "",
+            "This property is only evaluated for e-Mail output.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "AttachmentName",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "contains the name of the attachment.",
+            "",
+            "This property is only valid if \\\"SendAsAttachment\\\" is set to TRUE.",
+            "",
+            "This property is only evaluated for e-Mail output.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Command",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "contains the database command.",
+            "",
+            "For the interaction of this property with other data access relevant properties, see the com.sun.star.sdb.DataAccessDescriptor service."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "CommandType",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "determines the type of the database command as described in com.sun.star.sdb.CommandType",
+            "",
+            "For the interaction of this property with other data access relevant properties, see the com.sun.star.sdb.DataAccessDescriptor service."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "DataSourceName",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "contains the name of the data source that is to be used for merging.",
+            "",
+            "For the interaction of this property with other data access relevant properties, see the com.sun.star.sdb.DataAccessDescriptor service."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "DocumentURL",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "contains the URL of a text document that is to be processed.",
+            "",
+            "If this property is not set an empty document is created."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "EscapeProcessing",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "returns if escape processing is on or off.",
+            "",
+            "For the interaction of this property with other data access relevant properties, see the com.sun.star.sdb.DataAccessDescriptor service."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FileNameFromColumn",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "determines whether file names of created files are generated using the content of a database column.",
+            "",
+            "This property is only evaluated for file output."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FileNamePrefix",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "contains the name of the column to generate the output file names.",
+            "",
+            "If FileNameFromColumn is true the content of the related column is added to the OutputURL.",
+            "",
+            "If \\\"OutputURL\\\" or \\\"FileNamePrefix\\\" are empty the missing value is generated from the location or title of the source documents.",
+            "",
+            "This property is only evaluated for file output."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Filter",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "contains a filter expression for an SQL statement.",
+            "",
+            "For the interaction of this property with other data access relevant properties, see the com.sun.star.sdb.DataAccessDescriptor service."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "InServerPassword",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "Contains the password of the incoming mail server.",
+            "",
+            "It is necessary to set this if the mail server configuration is set to \\\"SMTP after POP\\\" authentication and the password is not already stored in the configuration for security reasons.",
+            "",
+            "This property is only evaluated for e-Mail output.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "MailBody",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "contains the text of the mail body.",
+            "",
+            "This property is only valid if the property \\\"SendAsAttachment\\\" is set to TRUE",
+            "",
+            "This property is only evaluated for e-Mail output.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Model",
+          "returns": "XModel_7a6e095c",
+          "origtype": "com.sun.star.frame.XModel",
+          "origin": "com.sun.star.frame.XModel",
+          "desc": [
+            "provides access to the model of the document to be processed.",
+            "",
+            "This property will automatically be set to the documents model if a document URL was set."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "OutServerPassword",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "Contains the password of the outgoing mail server.",
+            "",
+            "It is necessary to set this if the password is not already stored in the configuration for security reasons.",
+            "",
+            "This property is only evaluated for e-Mail output.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "OutputType",
+          "returns": "int",
+          "origtype": null,
+          "origin": "short",
+          "desc": [
+            "determines the destination of the mail merge action."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "OutputURL",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "contains the path where generated files are created.",
+            "",
+            "If \\\"OutputURL\\\" or \\\"FileNamePrefix\\\" are empty the missing value is generated from the location or title of the source documents.",
+            "",
+            "This property is only evaluated for file output."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ResultSet",
+          "returns": "XResultSet_98e30aa7",
+          "origtype": "com.sun.star.sdbc.XResultSet",
+          "origin": "com.sun.star.sdbc.XResultSet",
+          "desc": [
+            "provides access to a com.sun.star.sdbc.XResultSet of a com.sun.star.sdbc.ResultSet service.",
+            "",
+            "Note that any superservices of com.sun.star.sdbc.ResultSet are also allowed. Especially, this member can denote an instance of the com.sun.star.sdb.RowSet, or an instance obtained by calling com.sun.star.sdb.XResultSetAccess.createResultSet() on such a com.sun.star.sdb.RowSet. This becomes important in conjunction with the Selection property.",
+            "",
+            "For the interaction of this property with other data access relevant properties, see the com.sun.star.sdb.DataAccessDescriptor service."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SaveAsSingleFile",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "determines that the output of the mail merge is saved in one single file.",
+            "",
+            "This property is only evaluated for file output.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SaveFilter",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "contains the name of the document filter to save the output file(s).",
+            "",
+            "This property is only evaluated for file output.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SendAsAttachment",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "determines that the created mail merge document is sent as attachment.",
+            "",
+            "This property is only evaluated for e-Mail output.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SendAsHTML",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "determines that the created mail merge document is sent as body in HTML format.",
+            "",
+            "This property is only valid if the property \\\"SendAsAttachment\\\" is set to FALSE.",
+            "",
+            "This property is only evaluated for e-Mail output.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SinglePrintJobs",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "determines whether single print jobs will be generated per output document.",
+            "",
+            "This property is only evaluated for printer output."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Subject",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "contains the subject of the e-Mail message.",
+            "",
+            "This property is only evaluated for e-Mail output.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XChangesBatch",
+  "type": "interface",
+  "namespace": "com.sun.star.util",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".changes_set",
+        "ChangesSet",
+        "ChangesSet_99de0aab"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "ChangesSet_99de0aab"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.util.ChangesSet"
+      ]
+    },
+    "name": "XChangesBatch",
+    "imports": [],
+    "namespace": "com.sun.star.util",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "this interface enables applying a set of changes in one batch transaction.",
+      "",
+      "An object implementing this interface allows other interfaces to change its state locally. It will keep a list of pending changes until such changes are committed or canceled.",
+      "",
+      "Only when they are explicitly committed will these changes take effect persistently or globally."
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1util_1_1XChangesBatch.html",
+    "items": {
+      "methods": [
+        {
+          "name": "commitChanges",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "commits any pending changes.",
+            "",
+            "The exact action depends on the concrete service."
+          ],
+          "raises": [
+            "com.sun.star.lang.WrappedTargetException"
+          ],
+          "args": []
+        },
+        {
+          "name": "getPendingChanges",
+          "returns": "ChangesSet_99de0aab",
+          "returns_origin": "com.sun.star.util.ChangesSet",
+          "desc": [
+            "queries for any pending changes that can be committed."
+          ],
+          "raises": [],
+          "args": []
+        },
+        {
+          "name": "hasPendingChanges",
+          "returns": "bool",
+          "returns_origin": "boolean",
+          "desc": [
+            "checks whether this object has any pending changes that can be committed."
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
+  }
+}

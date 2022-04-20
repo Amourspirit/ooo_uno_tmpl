@@ -1,0 +1,147 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XPropertyState",
+  "type": "interface",
+  "namespace": "com.sun.star.beans",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [
+      [
+        "..uno.x_interface",
+        "XInterface",
+        "XInterface_8f010a43"
+      ]
+    ],
+    "from_imports_typing": [
+      [
+        ".property_state",
+        "PropertyState",
+        "PropertyState_c97b0c77"
+      ]
+    ],
+    "extends_map": {
+      "com.sun.star.uno.XInterface": "XInterface_8f010a43"
+    },
+    "quote": [
+      "PropertyState_c97b0c77",
+      "typing.Tuple[PropertyState_c97b0c77, ...]",
+      "typing.Tuple[str, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[PropertyState_c97b0c77, ...]",
+      "typing.Tuple[str, ...]"
+    ],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [
+        "com.sun.star.uno.XInterface"
+      ],
+      "typing": [
+        "com.sun.star.beans.PropertyState"
+      ]
+    },
+    "name": "XPropertyState",
+    "imports": [],
+    "namespace": "com.sun.star.beans",
+    "extends": [
+      "com.sun.star.uno.XInterface"
+    ],
+    "desc": [
+      "makes it possible to query information about the state of one or more properties.",
+      "",
+      "The state contains the information if:"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XPropertyState.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getPropertyDefault",
+          "returns": "object",
+          "returns_origin": "any",
+          "desc": [
+            "If no default exists, is not known or is void, then the return type is void."
+          ],
+          "raises": [
+            "com.sun.star.beans.UnknownPropertyException",
+            "com.sun.star.lang.WrappedTargetException"
+          ],
+          "args": [
+            {
+              "name": "aPropertyName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "getPropertyState",
+          "returns": "PropertyState_c97b0c77",
+          "returns_origin": "com.sun.star.beans.PropertyState",
+          "desc": [],
+          "raises": [
+            "com.sun.star.beans.UnknownPropertyException"
+          ],
+          "args": [
+            {
+              "name": "PropertyName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        },
+        {
+          "name": "getPropertyStates",
+          "returns": "typing.Tuple[PropertyState_c97b0c77, ...]",
+          "returns_origin": "sequence< com.sun.star.beans.PropertyState >",
+          "desc": [
+            "The order of the states is correlating to the order of the given property names."
+          ],
+          "raises": [
+            "com.sun.star.beans.UnknownPropertyException"
+          ],
+          "args": [
+            {
+              "name": "aPropertyName",
+              "type": "typing.Tuple[str, ...]",
+              "direction": "in",
+              "origin": "sequence< string >"
+            }
+          ]
+        },
+        {
+          "name": "setPropertyToDefault",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "Sets the property to default value.",
+            "",
+            "The value depends on the implementation of this interface. If it is a bound property, you must change the value before the change events are fired. If it is a constrained property, you must fire the vetoable event before you change the property value."
+          ],
+          "raises": [
+            "com.sun.star.beans.UnknownPropertyException"
+          ],
+          "args": [
+            {
+              "name": "PropertyName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,171 @@
+{
+  "id": "uno-ooo-parser",
+  "version": "0.1.26",
+  "libre_office_ver": "7.2",
+  "name": "XTableName",
+  "type": "interface",
+  "namespace": "com.sun.star.sdb.tools",
+  "parser_args": {
+    "sort": true,
+    "long_names": true,
+    "remove_parent_inherited": true
+  },
+  "writer_args": {
+    "include_desc": true
+  },
+  "data": {
+    "allow_db": true,
+    "from_imports": [],
+    "from_imports_typing": [
+      [
+        "...beans.x_property_set",
+        "XPropertySet",
+        "XPropertySet_bc180bfa"
+      ]
+    ],
+    "extends_map": {},
+    "quote": [
+      "XPropertySet_bc180bfa"
+    ],
+    "typings": [],
+    "requires_typing": true,
+    "full_imports": {
+      "general": [],
+      "typing": [
+        "com.sun.star.beans.XPropertySet"
+      ]
+    },
+    "name": "XTableName",
+    "imports": [],
+    "namespace": "com.sun.star.sdb.tools",
+    "extends": [],
+    "desc": [
+      "allows to manipulate table names.",
+      "",
+      "When, in a database application, dealing with table names, there's many degrees of freedom to deal with. For instance, suppose you want to have the full name of a table object, as it should be used in a SELECT statement's FROM part. This requires you to evaluate whether or not the table has a catalog and/or schema name, to combine the catalog, the schema, and the basic table name into one name, respecting the database's quoting character, and the order in which all those parts should be combined. Additionally, you have to respect the client-side settings which tell OpenOffice.org to use or not use catalogs and schemas in SELECT at all.",
+      "",
+      "The XTableName interface eases this and other, similar tasks around table names.",
+      "",
+      "The component itself does not have life-time control mechanisms, i.e. you cannot explicitly dispose it (com.sun.star.lang.XComponent.dispose()), and you cannot be notified when it dies.",
+      "However, if your try to access any of its methods or attributes, after the connection which was used to create it was closed, a com.sun.star.lang.DisposedException will be thrown.",
+      "",
+      "**since**",
+      "",
+      "    OOo 2.0.4"
+    ],
+    "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1sdb_1_1tools_1_1XTableName.html",
+    "items": {
+      "methods": [
+        {
+          "name": "getComposedName",
+          "returns": "str",
+          "returns_origin": "string",
+          "desc": [
+            "returns the composed table name, including the catalog and schema name, respecting the database's quoting requirements, plus"
+          ],
+          "raises": [
+            "com.sun.star.lang.IllegalArgumentException"
+          ],
+          "args": [
+            {
+              "name": "Type",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            },
+            {
+              "name": "Quote",
+              "type": "bool",
+              "direction": "in",
+              "origin": "boolean"
+            }
+          ]
+        },
+        {
+          "name": "setComposedName",
+          "returns": "None",
+          "returns_origin": "void",
+          "desc": [
+            "sets a new composed table name"
+          ],
+          "raises": [],
+          "args": [
+            {
+              "name": "ComposedName",
+              "type": "str",
+              "direction": "in",
+              "origin": "string"
+            },
+            {
+              "name": "Type",
+              "type": "int",
+              "direction": "in",
+              "origin": "long"
+            }
+          ]
+        }
+      ],
+      "properties": [
+        {
+          "name": "CatalogName",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "denotes the name of the catalog which the table is a part of"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "NameForSelect",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "represents the table name in a form to be used in a SELECT statement.",
+            "",
+            "On a per-data-source basis, OpenOffice.org allows to override database meta data information in that you can specify to not use catalog and or schema names in SELECT statements. Using this attribute, you can generate a table name which respects those settings."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SchemaName",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "denotes the name of the schema which the table is a part of"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Table",
+          "returns": "XPropertySet_bc180bfa",
+          "origtype": "com.sun.star.beans.XPropertySet",
+          "origin": "com.sun.star.beans.XPropertySet",
+          "desc": [
+            "is the com.sun.star.sdb.Table object specified by the current name.",
+            "",
+            "Retrieving this attribute is equivalent to obtaining the tables container from the connection (via com.sun.star.sdbcx.XTablesSupplier), and calling its com.sun.star.container.XNameAccess.getByName() method with the ComposedName."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TableName",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "denotes the mere, unqualified table name, excluding any catalog and schema."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        }
+      ]
+    }
+  }
+}
