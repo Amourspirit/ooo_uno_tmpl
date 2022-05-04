@@ -27,11 +27,11 @@ class TblComponent(BaseSqlTable):
         # https://stackoverflow.com/questions/15277373/sqlite-upsert-update-or-insert
         values = [asdict(itm) for itm in data]
         query = """INSERT INTO component
-        VALUES (:id_component, :type, :version, :name, :namespace, :lo_ver, :file, :c_name, :map_name)
+        VALUES (:id_component, :type, :version, :name, :namespace, :lo_ver, :file, :url, :c_name, :map_name)
         ON CONFLICT(id_component) 
         DO UPDATE SET type=excluded.type, version=excluded.version,
         name=excluded.name, namespace=excluded.namespace, lo_ver=excluded.lo_ver, file=excluded.file,
-        c_name=excluded.c_name, map_name=excluded.map_name;
+        url=excluded.url, c_name=excluded.c_name, map_name=excluded.map_name;
         """
         with SqlCtx(self.conn_str) as db:
             with db.connection:

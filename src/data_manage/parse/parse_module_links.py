@@ -1,4 +1,8 @@
 # coding: utf-8
+"""
+Reads Module Links Json data.
+Writes module_detail and module_info tables in databaase.
+"""
 import verr
 import json
 import glob
