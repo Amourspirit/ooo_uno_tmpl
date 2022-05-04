@@ -7,7 +7,8 @@ from pathlib import Path
 from typing import List, Dict
 from rel import mod_rel as RelInfo
 from ...cfg.config import AppConfig
-from ...model.shared.ooo_class import OooClass
+# from ...model.shared.ooo_class import OooClass
+from ...model.ooodata.ooodata_class import OooDataClass
 from ...utilities import util
 from ..data_class.extend import Extend
 from ..data_class.component import Component
@@ -24,7 +25,11 @@ class ParseModuleJson:
             util.get_root(), self._app_config.data_dir)
         self._db = DbModuleJson(config=self._app_config)
 
-    def get_module_json_files(self) -> List[str]:
+    def get_module_json_files(self) -> filter[str]:
+        """
+        Gets a filter of all json files in the ooodata dir and sub dir.
+        All module_links.json files are ignored.
+        """
         def filter_fn(name) -> bool:
             p_name = Path(name).name
             if p_name == self._app_config.module_links_file:
@@ -55,7 +60,7 @@ class ParseModuleJson:
 
     def _read_main(self, json_data: dict, file: str) -> None:
         rel = Path(file).relative_to(self._json_data_dir)
-        o_class = OooClass(**json_data)
+        o_class = OooDataClass(**json_data)
         ns = o_class.namespace
         name = o_class.name
         # ns = json_data['namespace']
