@@ -20,7 +20,7 @@ class QryComponent(BaseSql):
             Union[Component, None]: Component instance if ``full_ns`` is a match; Otherwise, ``None``
         """
         qry_str = """SELECT component.id_component, component.name, component.namespace as ns,
-            component.type, component.version, component.lo_ver, component.file, component.c_name,
+            component.type, component.version, component.lo_ver, component.file, component.url, component.c_name,
             component.map_name, module_detail.sort as sort
             FROM component
             LEFT JOIN module_detail ON module_detail.id_namespace = component.id_component
@@ -39,6 +39,7 @@ class QryComponent(BaseSql):
                     version=row['version'],
                     lo_ver=row['lo_ver'],
                     file=row['file'],
+                    url=row['url'],
                     c_name=row['c_name'],
                     map_name=row['map_name'],
                     sort=row['sort']
@@ -57,7 +58,7 @@ class QryComponent(BaseSql):
             Union[Component, None]: Component instance if ``map_name`` is a match; Otherwise, ``None``
         """
         qry_str = """SELECT component.id_component, component.name, component.namespace as ns,
-            component.type, component.version, component.lo_ver, component.file, component.c_name,
+            component.type, component.version, component.lo_ver, component.file, component.url, component.c_name,
             component.map_name, module_detail.sort as sort
             FROM component
             LEFT JOIN module_detail ON module_detail.id_namespace = component.id_component
@@ -76,6 +77,7 @@ class QryComponent(BaseSql):
                     version=row['version'],
                     lo_ver=row['lo_ver'],
                     file=row['file'],
+                    url=row['url'],
                     c_name=row['c_name'],
                     map_name=row['map_name'],
                     sort=row['sort']
@@ -94,7 +96,7 @@ class QryComponent(BaseSql):
             List[Component]: Component instances.
         """
         qry_str = """SELECT component.id_component, component.name, component.namespace as ns,
-            component.type, component.version, component.lo_ver, component.file, component.c_name,
+            component.type, component.version, component.lo_ver, component.file, component.url, component.c_name,
             module_detail.sort as sort
             FROM component
             LEFT JOIN module_detail ON module_detail.id_namespace = component.id_component
@@ -113,6 +115,7 @@ class QryComponent(BaseSql):
                     version=row['version'],
                     lo_ver=row['lo_ver'],
                     file=row['file'],
+                    url=row['url'],
                     c_name=row['c_name'],
                     map_name=row['map_name'],
                     sort=row['sort']
@@ -131,7 +134,7 @@ class QryComponent(BaseSql):
             Dict[str, Component]: Component instances grouped by namespace.
         """
         qry_str = """SELECT component.id_component, component.name, component.namespace as ns,
-            component.type, component.version, component.lo_ver, component.file, component.c_name,
+            component.type, component.version, component.lo_ver, component.file, component.url, component.c_name,
             component.map_name, module_detail.sort as sort
             FROM component
             LEFT JOIN module_detail ON module_detail.id_namespace = component.id_component"""
@@ -154,6 +157,7 @@ class QryComponent(BaseSql):
                     version=row['version'],
                     lo_ver=row['lo_ver'],
                     file=row['file'],
+                    url=row['url'],
                     c_name=row['c_name'],
                     map_name=row['map_name'],
                     sort=row['sort']
