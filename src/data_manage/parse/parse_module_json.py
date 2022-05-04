@@ -7,7 +7,6 @@ from pathlib import Path
 from typing import List, Dict, Iterator
 from rel import mod_rel as RelInfo
 from ...cfg.config import AppConfig
-# from ...model.shared.ooo_class import OooClass
 from ...model.ooodata.ooodata_class import OooDataClass
 from ...utilities import util
 from ..data_class.extend import Extend
@@ -78,6 +77,7 @@ class ParseModuleJson:
             # lo_ver=json_data['libre_office_ver'],
             lo_ver=o_class.libre_office_ver,
             file=str(rel),
+            url=o_class.data.url,
             c_name=RelInfo.camel_to_snake(name),
             map_name=map_name
         )

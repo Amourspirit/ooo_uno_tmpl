@@ -13,6 +13,7 @@ class Component:
     lo_ver: str
     file: str
     c_name: str
+    url: str
     map_name: Union[str, None] = None
     sort: int = -1
 
