@@ -4,7 +4,7 @@ import json
 import glob
 import hashlib
 from pathlib import Path
-from typing import List, Dict
+from typing import List, Dict, Iterator
 from rel import mod_rel as RelInfo
 from ...cfg.config import AppConfig
 # from ...model.shared.ooo_class import OooClass
@@ -25,7 +25,7 @@ class ParseModuleJson:
             util.get_root(), self._app_config.data_dir)
         self._db = DbModuleJson(config=self._app_config)
 
-    def get_module_json_files(self) -> filter[str]:
+    def get_module_json_files(self) -> Iterator[str]:
         """
         Gets a filter of all json files in the ooodata dir and sub dir.
         All module_links.json files are ignored.
