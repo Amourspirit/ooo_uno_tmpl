@@ -27,13 +27,13 @@ $ pydoc app
 
 ## Related Projects:
 
-[ooouno](https://github.com/Amourspirit/python-ooouno)
-[LibreOffice API Typings](https://github.com/Amourspirit/python-types-unopy)
-[ScriptForge Typings](https://github.com/Amourspirit/python-types-scriptforge)
-[Access2base Typings](https://github.com/Amourspirit/python-types-access2base)
-[LibreOffice Python UNO Examples](https://github.com/Amourspirit/python-ooouno-ex)
-[LibreOffice Developer Search](https://github.com/Amourspirit/python_lo_dev_search)
-[LibreOffice UNO Typings](https://github.com/Amourspirit/python-types-uno-script)
+* [ooouno](https://github.com/Amourspirit/python-ooouno)
+* [LibreOffice API Typings](https://github.com/Amourspirit/python-types-unopy)
+* [ScriptForge Typings](https://github.com/Amourspirit/python-types-scriptforge)
+* [Access2base Typings](https://github.com/Amourspirit/python-types-access2base)
+* [LibreOffice Python UNO Examples](https://github.com/Amourspirit/python-ooouno-ex)
+* [LibreOffice Developer Search](https://github.com/Amourspirit/python_lo_dev_search)
+* [LibreOffice UNO Typings](https://github.com/Amourspirit/python-types-uno-script)
 
 ## See
 
