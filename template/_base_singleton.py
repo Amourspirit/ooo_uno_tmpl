@@ -2,7 +2,7 @@
 from typing import Dict, Tuple, List
 from _base_json import BaseJson
 from verr import Version
-from oootmpl.model.singleton.model_singleton import ModelSingleton
+from src.model.singleton.model_singleton import ModelSingleton
 
 class BaseSingleton(BaseJson):
     def __init__(self, *args, **kwargs):
