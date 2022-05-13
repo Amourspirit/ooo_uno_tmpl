@@ -7,7 +7,7 @@ import glob
 import logging
 import subprocess
 from multiprocessing import Pool
-from typing import List, Set
+from typing import List, Set, Dict
 from kwhelp.exceptions import RuleError
 from pathlib import Path
 from . import compare as comp
@@ -23,6 +23,7 @@ from ..utilities import util
 class Make(FilesBase):
     def __init__(self, config: AppConfig, log: logging.Logger, ** kwargs) -> None:
         super().__init__(config=config)
+        self._local_env = None
         self._log = log
         self._clean = bool(kwargs.get('clean', False))
         self._root_dir = Path(util.get_root())
@@ -40,7 +41,6 @@ class Make(FilesBase):
         self._mkdirp(self._build)
         self._ensure_init(self._build)
         self._make()
-        
 
     def _ensure_init(self, path: Path, ext: str = '.py'):
         init_file = Path(path, f'__init__{ext}')
@@ -74,6 +74,21 @@ class Make(FilesBase):
                 continue
             except Exception as e:
                 self._log.error(e)
+
+    def _get_env(self) -> Dict[str, str]:
+        """
+        Gets Environment used for subprocess.
+        This allows temlates to have access to src directory imports.
+        """
+        if self._local_env is None:
+            myenv = os.environ.copy()
+            pypath = ''
+            p_sep = ';' if os.name == 'nt' else ':'
+            for d in sys.path:
+                pypath = pypath + d + p_sep
+            myenv['PYTHONPATH'] = pypath
+            self._local_env = myenv
+        return self._local_env
 
     def _make(self):
         self._make_tmpl()
@@ -161,14 +176,14 @@ class Make(FilesBase):
                         py_file=py_file,
                         scratch_path=self._get_pyi_write_path(
                             tmpl_file=py_file),
-                        ext= '.pyi'
+                        ext='.pyi'
                     )
                     c_lst.append(w_info)
             except Exception as e:
                 self._log.error(e)
         if len(c_lst) == 0:
             return
-        pyi_dir = Path(self._build , *self._config.pyi_dir)
+        pyi_dir = Path(self._build, *self._config.pyi_dir)
         self._ensure_init(pyi_dir, '.pyi')
         # run two pools. First to compile. Second to write
         with Pool(processes=self._processes) as pool:
@@ -323,7 +338,7 @@ class Make(FilesBase):
         p_scratch = Path(
             p_scratch_dir, self.camel_to_snake(str(p_file.stem)) + ext)
         return p_scratch
-    
+
     def _get_pyi_write_path(self, tmpl_file) -> Path:
         p_file = Path(tmpl_file)
         ext = '.pyi'
@@ -346,7 +361,8 @@ class Make(FilesBase):
                 self._log.info('Created File: %s', str(init_file))
         ensure_init(w_info.scratch_path.parent)
         with open(w_info.scratch_path, "w") as outfile:
-            subprocess.run([sys.executable, w_info.py_file], stdout=outfile)
+            subprocess.run([sys.executable, w_info.py_file],
+                           stdout=outfile, env=self._get_env())
             self._log.info('Wrote file: %s', str(w_info.scratch_path))
 
 

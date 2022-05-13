@@ -4,8 +4,8 @@ from typing import Dict, Optional, Set, Tuple, List, Union
 from _base_json import BaseJson
 from verr import Version
 from _base_tmpl import SqlComponent
-from oootmpl.template_helper.models_struct import ModelsStruct
 from _base_json import EventArgs
+from src.template_helper.models_struct import ModelsStruct
 
 
 class BaseStruct(BaseJson):

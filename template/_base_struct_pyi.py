@@ -1,7 +1,6 @@
 # coding: utf-8
 from typing import List
 from _base_struct import BaseStruct
-from _base_json import EventArgs
 
 
 class BaseStructPyi(BaseStruct):

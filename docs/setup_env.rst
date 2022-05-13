@@ -2,6 +2,11 @@
 LibreOffice python development environment setup guidelines
 ===========================================================
 
+Limitations
+===========
+
+Currently this project will only work on linux. However, the output from this project is cross platform.
+
 System Setup
 ============
 
@@ -24,20 +29,6 @@ Virtual Environment for this project uses conda.
 .. code::
 
     $ conda env create --prefix ./env -f environment.yml
-
-oootmpl
-=======
-
-A link from src dir to ./env/.../site-packages/oootmpl is required.
-
-Because templates are compile by cheetah this link is neessary for templates
-to have accesss to src modules.
-
-Run the following command to create link after Virtual environment is setup.
-
-.. code::
-
-    $ python app_cmd/run_link_src.py --add
 
 UNO
 ===

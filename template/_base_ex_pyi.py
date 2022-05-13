@@ -1,5 +1,4 @@
 # coding: utf-8
-from typing import List, Tuple
 from _base_ex import BaseEx
 
 class BaseExPyi(BaseEx):

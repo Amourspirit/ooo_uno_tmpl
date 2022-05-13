@@ -1,6 +1,6 @@
 # coding: utf-8
 from typing import Dict, List
-from _base_json import BaseJson, CancelEventArgs
+from _base_json import BaseJson
 from verr import Version
 
 
