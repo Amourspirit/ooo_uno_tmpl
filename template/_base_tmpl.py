@@ -15,7 +15,7 @@ from types import ModuleType
 from typing import Iterable, Tuple, List, Union, Optional
 from Cheetah.Template import Template
 from dataclasses import dataclass
-from oootmpl.logger.log_handle import get_logger
+from src.logger.log_handle import get_logger
 
 
 # set up path for importing modules from main app

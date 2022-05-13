@@ -1,5 +1,5 @@
 # coding: utf-8
-from typing import Dict, List
+from typing import List
 from _base_json import BaseJson
 from verr import Version
 
