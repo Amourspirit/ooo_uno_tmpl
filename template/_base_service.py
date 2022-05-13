@@ -2,8 +2,7 @@
 from verr import Version
 from typing import Dict, Tuple, List
 from _base_json import BaseJson
-from oootmpl.model.service.model_service import ModelService
-
+from src.model.service.model_service import ModelService
 
 class BaseService(BaseJson):
     def __init__(self, *args, **kwargs):

@@ -2,7 +2,7 @@
 from verr import Version
 from typing import Dict, Tuple, List
 from _base_json import BaseJson
-from oootmpl.model.interface.model_interface import ModelInterface
+from src.model.interface.model_interface import ModelInterface
 
 
 class BaseInterface(BaseJson):

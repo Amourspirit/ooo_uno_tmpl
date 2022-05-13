@@ -7,7 +7,7 @@ import glob
 import logging
 import subprocess
 from multiprocessing import Pool
-from typing import List, Set
+from typing import List, Set, Dict
 from kwhelp.exceptions import RuleError
 from pathlib import Path
 from . import compare as comp
@@ -23,6 +23,7 @@ from ..utilities import util
 class Make(FilesBase):
     def __init__(self, config: AppConfig, log: logging.Logger, ** kwargs) -> None:
         super().__init__(config=config)
+        self._local_env = None
         self._log = log
         self._clean = bool(kwargs.get('clean', False))
         self._root_dir = Path(util.get_root())
@@ -74,6 +75,21 @@ class Make(FilesBase):
                 continue
             except Exception as e:
                 self._log.error(e)
+
+    def _get_env(self) -> Dict[str, str]:
+        """
+        Gets Environment used for subprocess.
+        This allows temlates to have access to src directory imports.
+        """
+        if self._local_env is None:
+            myenv = os.environ.copy()
+            pypath = ''
+            p_sep = ';' if os.name == 'nt' else ':'
+            for d in sys.path:
+                pypath = pypath + d + p_sep
+            myenv['PYTHONPATH'] = pypath
+            self._local_env = myenv
+        return self._local_env
 
     def _make(self):
         self._make_tmpl()
@@ -346,7 +362,7 @@ class Make(FilesBase):
                 self._log.info('Created File: %s', str(init_file))
         ensure_init(w_info.scratch_path.parent)
         with open(w_info.scratch_path, "w") as outfile:
-            subprocess.run([sys.executable, w_info.py_file], stdout=outfile)
+            subprocess.run([sys.executable, w_info.py_file], stdout=outfile, env=self._get_env())
             self._log.info('Wrote file: %s', str(w_info.scratch_path))
 
 

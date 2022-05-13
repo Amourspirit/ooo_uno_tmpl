@@ -4,7 +4,8 @@ from typing import Any
 from _base_const import BaseConst
 from _base_json import EventArgs
 import uno
-from oootmpl.parser.enumerations.value_type import ValTypeEnum
+from src.parser.enumerations.value_type import ValTypeEnum
+
 class BaseConstPyi(BaseConst):
 
     def on_after_init_data(self, args: EventArgs) -> None:
