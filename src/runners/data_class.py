@@ -4,6 +4,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Optional
 from ..cfg.config import AppConfig
+from ..model.shared.ooo_class import OooClass
 # region Data Class
 
 
@@ -13,6 +14,7 @@ class WriteInfo:
     py_file: str
     scratch_path: Path
     ext: str = '.py'
+    model: Optional[OooClass] = None
 
 
 @dataclass

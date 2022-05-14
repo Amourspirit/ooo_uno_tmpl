@@ -13,6 +13,7 @@ $self.init_data()#slurp
 #attr $desc = "" ## str, list, tupple
 #attr $quote = set()
 #attr $typings = set()
+#attr $write_class = False
 ## $enum_dict
 #*
 key: const name
@@ -21,6 +22,11 @@ value: string or list, tuple of strings
 #attr $enum_dict = {}
 $self.load_data()#slurp
 ## Main Template
+#if $write_class
+#set $indt = "    "
+#else
+#set $indt = ""
+#end if
 #set $safe_name = $self.get_safe_word($name)
 #set $fullname = $namespace + '.' + $safe_name
 #set s_enum = ''
@@ -37,34 +43,39 @@ $self.load_data()#slurp
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     import uno
-"""
-Enum
+#if $write_class
+from enum import Enum
+
+class ${safe_name}(Enum):
+#end if
+${indt}"""
+${indt}Enum
 
     #if isinstance($desc, str)
-$desc
+${indt}${desc}
     #else
         #for $line in $desc
-$line
+${indt}${line}
         #end for
     #end if
 #if $link:
 
-See Also:
-    `API $name <$link>`_
+${indt}See Also:
+${indt}    `API $name <$link>`_
 #end if
-"""
+${indt}"""
 
 #for $key in $key_list
 ##$self.get_safe_word($key)$self.get_typing($self.get_safe_word($key))
-$self.get_safe_word($key): 'uno.Enum'
+${indt}$self.get_safe_word($key): 'uno.Enum'
     #set $value = $enum_dict[$key]
-"""
+${indt}"""
 #if isinstance($value, str):
-$value
+${indt}$value
 #else
     #for $line in $value
-$line
+${indt}$line
     #end for
 #end if
-"""
+${indt}"""
 #end for
