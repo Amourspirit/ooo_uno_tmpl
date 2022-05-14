@@ -391,7 +391,7 @@ def _main():
     # url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1ucb_1_1OpenCommandArgument2.html'
     # args = 'url-parse struct -t -u '
     # args += url
-    args = 'data star -i'
+    args = 'make'
     sys.argv.extend(args.split())
     main()
 
