@@ -70,6 +70,12 @@ class FilesBase:
                       self._config.template_pyi_py_ext)
         return p_file
 
+    def _get_json_path(self, tmpl_file) -> Path:
+        """Get the json file the represents the template"""
+        t_file = Path(tmpl_file)
+        p_file = Path(t_file.parent, f"{t_file.stem}.json")
+        return p_file
+
     def get_module_link_files(self, dir_name: Optional[str] = None) -> Set[str]:
         if dir_name:
             dirname = str(self._root_dir / dir_name)

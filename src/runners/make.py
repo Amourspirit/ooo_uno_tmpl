@@ -6,6 +6,7 @@ import shutil
 import glob
 import logging
 import subprocess
+import json
 from multiprocessing import Pool
 from typing import List, Set, Dict
 from kwhelp.exceptions import RuleError
@@ -15,6 +16,8 @@ from . import data_class as d_cls
 from .file_base import FilesBase
 from ..cfg.config import AppConfig
 from ..utilities import util
+from ..model.shared.ooo_class import OooClass
+from ..model.shared.ooo_type import OooType
 # endregion Imports
 
 # region Make
@@ -43,12 +46,20 @@ class Make(FilesBase):
         self._make()
 
     def _ensure_init(self, path: Path, ext: str = '.py'):
+        """Ensures the path contains a  __init__.py(i) file."""
         init_file = Path(path, f'__init__{ext}')
         if not init_file.exists():
             init_file.touch()
             self._log.info('Created File: %s', str(init_file))
 
     def _create_sys_links(self, dest: Path):
+        """
+        Ensures that all _base*.py file are linked from template dir to dest path.
+        The templates inherit fome _base*.py files.
+        
+        By creating links the dest template files act as thought
+        the class that is inherits from is in the dest path.
+        """
         # rel = Path('../../template')
         for file in self._template_py_files:
             try:
@@ -98,6 +109,10 @@ class Make(FilesBase):
 
     # region TMPL
     def _compile_tmpl(self, w_info: d_cls.WriteInfo):
+        """
+        Runs Cheetah to compile the template (*.tmpl).
+        Cheetah creates a *.py file with the same name as the template
+        """
         self._log.debug('Compiling file: %s', w_info.file)
         cmd_str = f"cheetah compile --nobackup {w_info.file}"
         self._log.info('Running subprocess: %s', cmd_str)
@@ -111,6 +126,12 @@ class Make(FilesBase):
             self._log.warning("Cheeta error Outuput: %s", p.stderr.decode())
 
     def _make_tmpl(self):
+        """
+        Gathers all *.tmpl files that have been changed and performs the following:
+        
+        * Compiles the temlate into python file with *.py ext.
+        * Runs the template and Writes the results of the template output to ``lo`` subfolder.
+        """
         files = self._get_template_files()
         c_lst: List[d_cls.WriteInfo] = []
         for file in files:
@@ -145,6 +166,10 @@ class Make(FilesBase):
 
     # region PYI
     def _compile_pyi(self, w_info: d_cls.WriteInfo):
+        """
+        Runs Cheetah to compile the template (*.tpyi).
+        Cheetah creates a *.pyipy file with the same name as the template
+        """
         self._log.debug('Compiling file: %s', w_info.file)
         cmd_str = f"cheetah compile --nobackup --iext={self.config.template_pyi_ext} --oext={self.config.template_pyi_py_ext} {w_info.file}"
         self._log.info('Running subprocess: %s', cmd_str)
@@ -158,6 +183,12 @@ class Make(FilesBase):
             self._log.warning("Cheeta error Outuput: %s", p.stderr.decode())
 
     def _make_pyi(self):
+        """
+        Gathers all *.tpyi files that have been changed and performs the following:
+        
+        * Compiles the temlate into python file with *.pyipy ext.
+        * Runs the template and Writes the results of the template output to ``lo`` subfolder.
+        """
         files = self._get_template_pyi_files()
         c_lst: List[d_cls.WriteInfo] = []
         for file in files:
@@ -170,12 +201,13 @@ class Make(FilesBase):
                         self._create_sys_links(f_dir)
 
                     py_file = self._get_py_pyi_path(tmpl_file=file)
+                    json_file = self._get_json_path(tmpl_file=file)
 
                     w_info = d_cls.WriteInfo(
                         file=file,
                         py_file=py_file,
                         scratch_path=self._get_pyi_write_path(
-                            tmpl_file=py_file),
+                            tmpl_file=py_file, json_file=json_file),
                         ext='.pyi'
                     )
                     c_lst.append(w_info)
@@ -195,6 +227,10 @@ class Make(FilesBase):
     # region DYN
 
     def _compile_dyn(self, w_info: d_cls.WriteInfo):
+        """
+        Runs Cheetah to compile the template (*.dyn).
+        Cheetah creates a *.dynpy file with the same name as the template
+        """
         self._log.debug('Compiling file: %s', w_info.file)
         cmd_str = f"cheetah compile --nobackup --iext={self.config.template_dyn_ext} --oext={self.config.template_dyn_py_ext} {w_info.file}"
         self._log.info('Running subprocess: %s', cmd_str)
@@ -208,6 +244,12 @@ class Make(FilesBase):
             self._log.warning("Cheeta error Outuput: %s", p.stderr.decode())
 
     def _make_dyn(self):
+        """
+        Gathers all *.dyn files that have been changed and performs the following:
+        
+        * Compiles the temlate into python file with *.dynpy ext.
+        * Runs the template and Writes the results of the template output to ``lo`` subfolder.
+        """
         files = self._get_template_dyn_files()
         c_lst: List[d_cls.WriteInfo] = []
         for file in files:
@@ -244,6 +286,12 @@ class Make(FilesBase):
     # region TPPI
 
     def _compile_tppi(self, w_info: d_cls.WriteInfo):
+        """
+        This method is not currently being used.
+        
+        Runs Cheetah to compile the template (*.tppi).
+        Cheetah creates a *.dynpy file with the same name as the template
+        """
         self._log.debug('Compiling file: %s', w_info.file)
         cmd_str = f"cheetah compile --nobackup --iext=.tppi {w_info.file}"
         self._log.info('Running subprocess: %s', cmd_str)
@@ -257,6 +305,14 @@ class Make(FilesBase):
             self._log.warning("Cheeta error Outuput: %s", p.stderr.decode())
 
     def _make_tppi(self):
+        """
+        This method is not currently being used.
+
+        Gathers all *.tppi files that have been changed and performs the following:
+        
+        * Compiles the temlate into python file with *.pyi ext.
+        * Runs the template and Writes the results of the template output to ``lo`` subfolder.
+        """
         files = self._get_template_tppi_files()
         c_lst: List[d_cls.WriteInfo] = []
         for file in files:
@@ -331,26 +387,45 @@ class Make(FilesBase):
         # when there is a root it is at the start of the tuple
         # https://tinyurl.com/lfl7fwd
         parts = list(p_rel.parts)
-        parts[0] = self._config.dyn_dir  # replace uno with dyn
-        # build up to build/dyn/somepath/somefile.py
+        parts[0] = self._config.dyn_dir  # replace lo with dyn
+        # build up to ooobuild/dyn/somepath/somefile.py
         p_scratch_dir = Path(self._build, *parts)
         self._mkdirp(p_scratch_dir)
         p_scratch = Path(
             p_scratch_dir, self.camel_to_snake(str(p_file.stem)) + ext)
         return p_scratch
 
-    def _get_pyi_write_path(self, tmpl_file) -> Path:
+    def _get_model(self, json_file: Path) -> OooClass:
+        with open(json_file, 'r') as file:
+            data = json.loads(file.read())
+        m = OooClass(**data)
+        return m
+
+    def _get_pyi_write_path(self, tmpl_file: Path, json_file: Path) -> Path:
+        model = self._get_model(json_file)
+        is_ns_write = model.type == OooType.CONST or model.type == OooType.ENUM
         p_file = Path(tmpl_file)
         ext = '.pyi'
         p_dir = p_file.parent
         p_rel = p_dir.relative_to(self._root_dir)
         parts = list(p_rel.parts)
-        parts[0] = Path(*self._config.pyi_dir)  # replace uno with dyn
-        # build up to build/dyn/somepath/somefile.py
+        if is_ns_write:
+            # replace lo with /star
+            parts[0] = Path(*self._config.com_sun_star_pyi)
+        else:
+            # replace lo with /star/_pyi
+            parts[0] = Path(*self._config.pyi_dir)
+        # build up to ooobuild/star/_pyi/somepath/somefile.py
         p_scratch_dir = Path(self._build, *parts)
+        if is_ns_write:
+            p_scratch_dir = Path(p_scratch_dir, model.name)
+
         self._mkdirp(p_scratch_dir)
-        p_scratch = Path(
-            p_scratch_dir, self.camel_to_snake(str(p_file.stem)) + ext)
+        if is_ns_write:
+            p_scratch = Path(p_scratch_dir, '__init__.pyi')
+        else:
+            p_scratch = Path(
+                p_scratch_dir, f"{self.camel_to_snake(model.name)}{ext}")
         return p_scratch
 
     def _write_multi(self, w_info: d_cls.WriteInfo):
