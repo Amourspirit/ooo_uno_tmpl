@@ -22,7 +22,7 @@ $ pydoc app
 ## Quickstart
 
 * Install [requirements](docs/setup_env.rst)
-* Activte env: `$ conda activte ./env`
+* Activate env: `$ conda activate ./env`
 * pydoc app
 
 ## Related Projects:
@@ -34,3 +34,4 @@ $ pydoc app
 * [LibreOffice Python UNO Examples](https://github.com/Amourspirit/python-ooouno-ex)
 * [LibreOffice Developer Search](https://github.com/Amourspirit/python_lo_dev_search)
 * [LibreOffice UNO Typings](https://github.com/Amourspirit/python-types-uno-script)
+* [LibreOffice Developer Search](https://github.com/Amourspirit/python_lo_dev_search)

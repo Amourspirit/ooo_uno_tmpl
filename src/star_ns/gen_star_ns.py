@@ -76,6 +76,8 @@ class GenerateStarNs:
 
     def get_oth_files(self) -> List[StarNsFile]:
         results = []
+        # Now PYI const and Enum write directly into star dir and not star/_pyi dir from Make cmd
+        return results
         if self._write_ns != WriteNsEnum.STAR_PYI:
             return results
         all_comp = ('enum', 'const')
