@@ -26,7 +26,7 @@ from ..model.shared.ooo_type import OooType
 class Make(FilesBase):
     def __init__(self, config: AppConfig, log: logging.Logger, ** kwargs) -> None:
         super().__init__(config=config)
-        self._local_env = None
+        self._env_extra: dict | None = None
         self._log = log
         self._clean = bool(kwargs.get('clean', False))
         self._root_dir = Path(util.get_root())
@@ -44,6 +44,7 @@ class Make(FilesBase):
         self._mkdirp(self._build)
         self._ensure_init(self._build)
         self._make()
+        
 
     def _ensure_init(self, path: Path, ext: str = '.py'):
         """Ensures the path contains a  __init__.py(i) file."""
@@ -91,17 +92,18 @@ class Make(FilesBase):
         Gets Environment used for subprocess.
         This allows temlates to have access to src directory imports.
         """
-        if self._local_env is None:
-            myenv = os.environ.copy()
-            pypath = ''
-            p_sep = ';' if os.name == 'nt' else ':'
-            for d in sys.path:
-                pypath = pypath + d + p_sep
-            myenv['PYTHONPATH'] = pypath
-            self._local_env = myenv
-        return self._local_env
+        myenv = os.environ.copy()
+        pypath = ''
+        p_sep = ';' if os.name == 'nt' else ':'
+        for d in sys.path:
+            pypath = pypath + d + p_sep
+        myenv['PYTHONPATH'] = pypath
+        if self._env_extra is not None:
+            myenv.update(self._env_extra)
+        return myenv
 
     def _make(self):
+        self._env_extra = None
         self._make_tmpl()
         self._make_dyn()
         self._make_tppi()
@@ -132,6 +134,7 @@ class Make(FilesBase):
         * Compiles the temlate into python file with *.py ext.
         * Runs the template and Writes the results of the template output to ``lo`` subfolder.
         """
+        self._env_extra = None
         files = self._get_template_files()
         c_lst: List[d_cls.WriteInfo] = []
         for file in files:
@@ -202,26 +205,55 @@ class Make(FilesBase):
 
                     py_file = self._get_py_pyi_path(tmpl_file=file)
                     json_file = self._get_json_path(tmpl_file=file)
+                    model = self._get_model(json_file)
 
                     w_info = d_cls.WriteInfo(
                         file=file,
                         py_file=py_file,
                         scratch_path=self._get_pyi_write_path(
-                            tmpl_file=py_file, json_file=json_file),
-                        ext='.pyi'
+                            tmpl_file=py_file, model=model),
+                        ext= '.pyi',
+                        model=model
                     )
                     c_lst.append(w_info)
             except Exception as e:
                 self._log.error(e)
         if len(c_lst) == 0:
             return
-        pyi_dir = Path(self._build, *self._config.pyi_dir)
+        self._env_extra = {"PYI_CLASS": "True"}
+        pyi_dir = Path(self._build , *self._config.pyi_dir)
         self._ensure_init(pyi_dir, '.pyi')
         # run two pools. First to compile. Second to write
         with Pool(processes=self._processes) as pool:
             pool.map(self._compile_pyi, c_lst)
         with Pool(processes=self._processes) as pool:
             pool.map(self._write_multi, c_lst)
+        self._env_extra = None
+        self._make_pyi_star(c_lst)
+        
+    def _make_pyi_star(self, write_infos: List[d_cls.WriteInfo]) -> None:
+        def copy_wi(o:d_cls.WriteInfo) -> d_cls.WriteInfo:
+            c = d_cls.WriteInfo(
+                file=o.file,
+                py_file=o.py_file,
+                scratch_path=self._get_pyi_write_path_star(o.file, o.model),
+                ext=o.ext,
+                model=o.model
+            )
+            return c
+        self._env_extra = None
+        c_lst: List[d_cls.WriteInfo] = []
+        
+        for wi in write_infos:
+            if wi.model is None:
+                continue
+            if wi.model.type == OooType.CONST or wi.model.type == OooType.ENUM:
+                cpy = copy_wi(wi)
+                c_lst.append(cpy)
+        if len(c_lst) == 0:
+            return
+        with Pool(processes=self._processes) as pool:
+            pool.map(self._write_multi_star, c_lst)
     # endregion PYI
 
     # region DYN
@@ -250,6 +282,7 @@ class Make(FilesBase):
         * Compiles the temlate into python file with *.dynpy ext.
         * Runs the template and Writes the results of the template output to ``lo`` subfolder.
         """
+        self._env_extra = None
         files = self._get_template_dyn_files()
         c_lst: List[d_cls.WriteInfo] = []
         for file in files:
@@ -313,6 +346,7 @@ class Make(FilesBase):
         * Compiles the temlate into python file with *.pyi ext.
         * Runs the template and Writes the results of the template output to ``lo`` subfolder.
         """
+        self._env_extra = None
         files = self._get_template_tppi_files()
         c_lst: List[d_cls.WriteInfo] = []
         for file in files:
@@ -344,7 +378,17 @@ class Make(FilesBase):
 
     # endregion TPPI
 
-    def _is_skip_compile(self, tmpl_file, ext: str = '.py') -> bool:
+    def _is_skip_compile(self, tmpl_file: str, ext: str = '.py') -> bool:
+        """
+        Gets if a file should be skip based on its modified date.
+
+        Args:
+            tmpl_file (str): File to check
+            ext (str, optional): Extension of file used for comparsion. Defaults to '.py'.
+
+        Returns:
+            bool: True if Modified date is older; Othwrwise, False
+        """
         if self._force_compile:
             return False
         t_file = Path(tmpl_file)
@@ -401,31 +445,32 @@ class Make(FilesBase):
         m = OooClass(**data)
         return m
 
-    def _get_pyi_write_path(self, tmpl_file: Path, json_file: Path) -> Path:
-        model = self._get_model(json_file)
-        is_ns_write = model.type == OooType.CONST or model.type == OooType.ENUM
+    def _get_pyi_write_path(self, tmpl_file: Path, model: OooClass) -> Path:
         p_file = Path(tmpl_file)
         ext = '.pyi'
         p_dir = p_file.parent
         p_rel = p_dir.relative_to(self._root_dir)
         parts = list(p_rel.parts)
-        if is_ns_write:
-            # replace lo with /star
-            parts[0] = Path(*self._config.com_sun_star_pyi)
-        else:
-            # replace lo with /star/_pyi
-            parts[0] = Path(*self._config.pyi_dir)
-        # build up to ooobuild/star/_pyi/somepath/somefile.py
+        parts[0] = Path(*self._config.pyi_dir)  # replace lo with /star/_pyi
+        # build up to ooobuild/star/_pyi/somepath/somefile.pyi
         p_scratch_dir = Path(self._build, *parts)
-        if is_ns_write:
-            p_scratch_dir = Path(p_scratch_dir, model.name)
+        self._mkdirp(p_scratch_dir)
+        p_scratch = Path(
+            p_scratch_dir, f"{self.camel_to_snake(model.name)}{ext}")
+        return p_scratch
+    
+    def _get_pyi_write_path_star(self, tmpl_file: Path, model: OooClass) -> Path:
+        p_file = Path(tmpl_file)
+        p_dir = p_file.parent
+        p_rel = p_dir.relative_to(self._root_dir)
+        parts = list(p_rel.parts)
+        parts[0] = Path(*self._config.com_sun_star_pyi)  # replace lo with /star
+        # build up to ooobuild/star//somepath/__init.pyi
+        p_scratch_dir = Path(self._build, *parts)
+        p_scratch_dir = Path(p_scratch_dir, model.name)
 
         self._mkdirp(p_scratch_dir)
-        if is_ns_write:
-            p_scratch = Path(p_scratch_dir, '__init__.pyi')
-        else:
-            p_scratch = Path(
-                p_scratch_dir, f"{self.camel_to_snake(model.name)}{ext}")
+        p_scratch = Path(p_scratch_dir, '__init__.pyi')
         return p_scratch
 
     def _write_multi(self, w_info: d_cls.WriteInfo):
@@ -436,8 +481,12 @@ class Make(FilesBase):
                 self._log.info('Created File: %s', str(init_file))
         ensure_init(w_info.scratch_path.parent)
         with open(w_info.scratch_path, "w") as outfile:
-            subprocess.run([sys.executable, w_info.py_file],
-                           stdout=outfile, env=self._get_env())
+            subprocess.run([sys.executable, w_info.py_file], stdout=outfile, env=self._get_env())
+            self._log.info('Wrote file: %s', str(w_info.scratch_path))
+    
+    def _write_multi_star(self, w_info: d_cls.WriteInfo):
+        with open(w_info.scratch_path, "w") as outfile:
+            subprocess.run([sys.executable, w_info.py_file], stdout=outfile, env=self._get_env())
             self._log.info('Wrote file: %s', str(w_info.scratch_path))
 
 
