@@ -16,9 +16,15 @@ $self.init_data()#slurp
 #attr $from_imports = []
 #attr $from_typing_imports = []
 #attr $requires_typing = False
+#attr $write_class = False
 #attr $attribs = []
 $self.load_data()#slurp
 ## Main Template
+#if $write_class
+#set $indt = "    "
+#else
+#set $indt = ""
+#end if
 #set $safe_name = $self.get_safe_word($name)
 #set $fullname = $namespace + '.' + $safe_name
 # coding: utf-8
@@ -42,33 +48,38 @@ from $frm import $imp
 #for $frm, $imp in $from_typing_imports
 from $frm import $imp
 #end for
-"""
-Const
+#if $write_class
+
+
+class ${safe_name}(object):
+#end if
+${indt}"""
+${indt}Const
 
     #if isinstance($desc, str)
-$desc
+${indt}${desc}
     #else
         #for $line in $desc
-$line
+${indt}${line}
         #end for
     #end if
 #if $link:
 
-See Also:
-    `API $name <$link>`_
+${indt}See Also:
+${indt}    `API $name <$link>`_
 #end if
-"""
+${indt}"""
 #for $item in $attribs
-$self.get_safe_word($item['name']): $self.get_const_type($item)
+${indt}$self.get_safe_word($item['name']): $self.get_const_type($item)
     #if len($item['lines']) > 0
-"""
+${indt}"""
         #if isinstance($item['lines'], str)
-$item['lines']
+${indt}$item['lines']
         #else
             #for $line in $item['lines']
-$line
+${indt}$line
             #end for
         #end if
-"""
+${indt}"""
     #end if
 #end for

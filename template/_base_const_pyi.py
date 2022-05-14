@@ -1,16 +1,20 @@
 # coding: utf-8
-from tkinter.tix import INTEGER
 from typing import Any
 from _base_const import BaseConst
 from _base_json import EventArgs
 import uno
+import os
 from src.parser.enumerations.value_type import ValTypeEnum
+
 
 class BaseConstPyi(BaseConst):
 
     def on_after_init_data(self, args: EventArgs) -> None:
         super().on_after_init_data(args=args)
-
+        self.write_class = False
+        is_cls = os.environ.get("PYI_CLASS", None)
+        if is_cls is not None and is_cls.lower() in ('true', '1', 't', 'y', 'yes'):
+            self.write_class = True
 
     def get_const_type(self, data: dict) -> str:
         def get_from_val(val: Any) -> str:
