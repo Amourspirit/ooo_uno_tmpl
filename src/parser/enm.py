@@ -216,8 +216,12 @@ class EnumBlock(BlockObj):
                 if not div_memitem:
                     div_memitem = None
                     break
-                class_ = div_memitem.get('class', [])
-                class_name = "" if len(class_) == 0 else class_[0].lower()
+                try:
+                    class_ = div_memitem.get('class', [])
+                    class_name = "" if len(class_) == 0 else class_[0].lower()
+                except Exception:
+                    i += 1
+                    continue
                 if i > 4:
                     div_memitem = None
                     break
