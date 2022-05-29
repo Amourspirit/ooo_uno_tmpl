@@ -38,7 +38,11 @@ class SoupObj:
     def soup(self) -> BeautifulSoup:
         """Gets soup for this instance"""
         if not self._soup:
-            self._soup = BeautifulSoup(self._response.raw_html, 'lxml')
+            # clean up whitespace
+            # https://stackoverflow.com/questions/4270742/how-to-remove-whitespace-in-beautifulsoup
+            html = "".join(line.strip()
+                           for line in self._response.raw_html.split("\n"))
+            self._soup = BeautifulSoup(html, 'lxml')
         return self._soup
 
     @property
