@@ -106,49 +106,131 @@ class EnumBlock(BlockObj):
             Exception: If element is not found
 
         Returns:
-            Tag: [description]
+            Tag: memitem call block for current enum
         """
+
+        # search for memitem class for current emum
+        # h2.memtitle:nth-child(38) > span:nth-child(1) > a:nth-child(1)
+        # html body div.contents h2.memtitle span.permalink a
+        # html body div.contents h2.memtitle span.permalink a[href='#a1b95ca535d92ad726d77981ea3d8ef8b']
+        #
+        # permalink is wrapped in a h2 with class of memtitle.
+        # <h2 class="memtitle"><span class="permalink"><a href="#a1b95ca535d92ad726d77981ea3d8ef8b">◆&nbsp;</a></span>FillMode</h2>
+        #
+        # The following has enums of: DEFAULT, ENGLISH and TEXT
+        #
+        # <div class="memitem">
+        # <div class="memproto">
+        #     <table class="mlabels">
+        #         <tbody>
+        #             <tr>
+        #             <td class="mlabels-left">
+        #                 <table class="memname">
+        #                     <tbody>
+        #                         <tr>
+        #                         <td class="memname">enum <a class="el" href="namespacecom_1_1sun_1_1star_1_1sheet.html#a1b95ca535d92ad726d77981ea3d8ef8b">DDELinkMode</a></td>
+        #                         </tr>
+        #                     </tbody>
+        #                 </table>
+        #             </td>
+        #             <td class="mlabels-right">
+        #                 <span class="mlabels"><span class="mlabel">published</span></span>
+        #             </td>
+        #             </tr>
+        #         </tbody>
+        #     </table>
+        # </div>
+        # <div class="memdoc">
+        #     <p>used to specify how the DDE server application converts its data into numbers. </p>
+        #     <dl class="section see">
+        #         <dt>See also</dt>
+        #         <dd><a class="el" href="interfacecom_1_1sun_1_1star_1_1sheet_1_1XDDELinks.html" title="provides a method to add a DDE link to a spreadsheet.">com::sun::star::sheet::XDDELinks</a></dd>
+        #     </dl>
+        #     <dl class="section since">
+        #         <dt>Since</dt>
+        #         <dd>OOo 3.0 </dd>
+        #     </dl>
+        #     <table class="fieldtable">
+        #         <tbody>
+        #             <tr>
+        #             <th colspan="2">Enumerator</th>
+        #             </tr>
+        #             <tr>
+        #             <td class="fieldname"><a id="a1b95ca535d92ad726d77981ea3d8ef8ba88ec7d5086d2469ba843c7fcceade8a6"></a>DEFAULT&nbsp;</td>
+        #             <td class="fielddoc">
+        #                 <p>numbers are converted into the default format. </p>
+        #             </td>
+        #             </tr>
+        #             <tr>
+        #             <td class="fieldname"><a id="a1b95ca535d92ad726d77981ea3d8ef8bafb297577dad4cc723ce8e94430f3defc"></a>ENGLISH&nbsp;</td>
+        #             <td class="fielddoc">
+        #                 <p>numbers are converted into the English default format. </p>
+        #             </td>
+        #             </tr>
+        #             <tr>
+        #             <td class="fieldname"><a id="a1b95ca535d92ad726d77981ea3d8ef8ba9a4a47c1606e295076055a9cc4373197"></a>TEXT&nbsp;</td>
+        #             <td class="fielddoc">
+        #                 <p>numbers are not converted, but treated as text. </p>
+        #             </td>
+        #             </tr>
+        #         </tbody>
+        #     </table>
+        # </div>
+        # </div>
+
         if not self._obj_data is False:
             return self._obj_data
         self._obj_data = None
         try:
-            _cls = 'el'
-            links = self._soup.soup.find_all('a', class_=_cls, attrs={
-                                             "href": self._urlobj.page_link})
-            for link in links:
-                # if len(links) < 2:
-                #     raise Exception(f"Second match ont found: Class: {_cls}, href: {self._urlobj.page_link}")
-                # link = links[1]
-                if not link:
-                    raise Exception(
-                        f"Element not found: Class: {_cls}, href: {self._urlobj.page_link}")
-                result: Tag = link
-                class_ = result.get('class', [])
+            # get: <a href="#a75a9acd74effffae38daed55136b0980">◆&nbsp;</a>
+            perma_link = self._soup.soup.select_one(
+                f"html body div.contents h2.memtitle span.permalink a[href='#{self.url_obj.fragment}']")
+
+            if perma_link is None:
+                raise Exception(
+                    f"Unable to find permalink for {self.url_obj.url}")
+
+            # find parent memtitle of perma_link
+            h2_memtitle = perma_link
+            class_name = ""
+            while class_name != 'memtitle':
+                h2_memtitle = h2_memtitle.parent
+                if not h2_memtitle:
+                    h2_memtitle = None
+                    break
+                class_ = h2_memtitle.get('class', [])
                 class_name = "" if len(class_) == 0 else class_[0].lower()
-                too_far = False
-                while class_name != 'memitem':
-                    result = result.parent
-                    if not result:
-                        break
-                    class_ = result.get('class', [])
-                    class_name = "" if len(class_) == 0 else class_[0].lower()
-                    if class_name == 'contents':
-                        too_far = True
-                        break
-                if too_far:
-                    continue
-                # for _ in range(_up_steps):
-                #     result = result.parent
-                try:
-                    class_ = result.get('class', [])
-                    class_name = "" if len(class_) == 0 else class_[0].lower()
-                    if class_name == 'memitem':
-                        if not self._is_valid_block(result):
-                            continue
-                        self._obj_data = result
-                        break
-                except Exception:
-                    continue
+                if class_name == 'contents':
+                    h2_memtitle = None
+                    break
+            if h2_memtitle is None:
+                raise Exception(
+                    f"Unable to find permalink parent class memtitle for {self.url_obj.url}")
+
+            # now that perma_link block is found need to find next
+            div_memitem = h2_memtitle
+            class_name = ""
+            i = 0
+            while class_name != 'memitem':
+                div_memitem = div_memitem.next_sibling
+                if not div_memitem:
+                    div_memitem = None
+                    break
+                class_ = div_memitem.get('class', [])
+                class_name = "" if len(class_) == 0 else class_[0].lower()
+                if i > 4:
+                    div_memitem = None
+                    break
+                i += 1
+
+            if div_memitem is None:
+                raise Exception(
+                    f"Unable to find permalink parent class memitem for {self.url_obj.url}")
+            if not self._is_valid_block(div_memitem):
+                raise Exception(
+                    f"memitem block invalid for {self.url_obj.url}")
+
+            self._obj_data = div_memitem
         except Exception as e:
             url = self.url_obj.url
             logger.error(
@@ -532,7 +614,6 @@ class EnumWriter(base.WriteBase):
             out_file.write(contents)
         logger.info('create file: %s', write_path)
 
-
     def _write_to_json(self):
         p = self._file_full_path.parent
         jsn_p = p / (str(self._file_full_path.stem) + '.json')
@@ -827,4 +908,3 @@ def main():
     if args.print_template is False and args.print_json is False:
         print('')
     parse(**args_dict)
-
