@@ -829,7 +829,7 @@ def _args_data_star(parser: argparse.ArgumentParser, config: AppConfig) -> None:
     )
     star_group.add_argument(
         '-w', '--no-write-init',
-        help=f"Writes star/__init__py",
+        help=f"Writes star/__init__.py",
         action='store_false',
         dest='write_star_init',
         default=True,
