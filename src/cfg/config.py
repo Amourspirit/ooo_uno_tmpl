@@ -163,6 +163,13 @@ class AppConfig:
     Newer releases of this lin can probally turn this off and user can then use previous
     version for backward compatibility.
     """
+    gloabal_ignore_import_error: str
+    """
+    This is the key used when creating com.sun.star.__init__.py for pyi.
+    
+    Thsi global key is used in os.environ to check if import error should be
+    raised when importing from com.sun.star (default is is error is raised if not TYPE_CHECKING).
+    """
 
 
 def read_config(config_file: str) -> AppConfig:
