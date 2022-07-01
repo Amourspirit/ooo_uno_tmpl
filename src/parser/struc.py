@@ -180,7 +180,6 @@ class Parser(base.ParserBase):
                 "desc": "(List[str]), description of constant",
                 "url": "Url to LibreOffice of constant",
                 "namespace": "namespace",
-                "imports": "List[str], imports",
                 "extends": "(List[str]), inherits"
             }
         """
@@ -547,11 +546,10 @@ class StructWriter(base.WriteBase):
         key = '_get_imports_'
         if key in self._cache:
             return self._cache[key]
-        lst = []
         lst_im = list(self._p_imports)
         # sort for consistency in json
         lst_im.sort()
-        self._cache[key] = lst
+        self._cache[key] =lst_im
         return self._cache[key]
 
     def _get_from_imports_typing(self) -> List[List[str]]:
