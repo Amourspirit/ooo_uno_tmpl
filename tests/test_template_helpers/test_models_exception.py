@@ -71,8 +71,8 @@ def test_authentication_failed_exception(root_path):
     assert full[1].as_tuple() == tpl
 
 
-def test_read_only_open_request(root_path):
-    # this exception is LibreOffice Ver 7.2 +
+def _test_read_only_open_request(root_path):
+    # this exception is LibreOffice Ver 7.2 and eariler
     from src.template_helper.models_exception import ModelsException
     p = 'lo/document/ReadOnlyOpenRequest.json'
     mod = ModelsException(json_data=p)
