@@ -388,10 +388,9 @@ def _main():
     # ns = 'com.sun.star.text.TextRange'
     # args = 'data db-json -n com.sun.star.form.control.GridControl'
     # url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1chart2_1_1SubIncrement.html'
-    # url = 'https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1ucb_1_1OpenCommandArgument2.html'
-    # args = 'url-parse struct -t -u '
-    # args += url
-    args = 'make'
+    url = 'https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1document_1_1Settings.html'
+    args = 'url-parse service -t -u '
+    args += url
     sys.argv.extend(args.split())
     main()
 

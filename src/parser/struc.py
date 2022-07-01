@@ -741,6 +741,7 @@ class StructWriter(base.WriteBase):
         self._validate_p_info()
         self._p_from_imports.update(data['extends'])
         self._p_imports_typing.update(self._parser.from_imports)
+        self._p_imports.update(self._parser.imports)
         self._p_from_imports = Util.get_clean_imports(
             ns=self._p_namespace,
             imports=self._p_from_imports

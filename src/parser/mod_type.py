@@ -207,6 +207,7 @@ class PythonType(object):
             type=self.type,
             requires_typing=self.requires_typing,
             from_imports=self.from_imports,
+            imports=self.imports,
             is_py_type=self.is_py_type,
             realtype=self.realtype,
             origtype=self.origtype,
@@ -665,7 +666,6 @@ class RuleByteSequence(BaseRule):
             requires_typing=False,
             is_py_type=True, # don't want to quote.
             realtype="uno.ByteSequence",
-            origtype=in_type,
             origin="sequence< byte >",
             imports="uno"
         )

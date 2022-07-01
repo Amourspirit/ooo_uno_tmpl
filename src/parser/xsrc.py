@@ -237,7 +237,6 @@ class Parser(base.ParserBase):
         Returns:
             Dict[str, object]: {
                 "name": "str, class name",
-                "imports": "List[str], imports",
                 "namespace": "str, Namespace",
                 "extends": "List[str], class extends",
                 "desc": "List[str], class description",
@@ -255,7 +254,6 @@ class Parser(base.ParserBase):
         result = {
             # 'name': ni.name,
             'name': ni.name,
-            'imports': list(self.imports),
             'namespace': self._api_data.ns.namespace_str,
             'extends': ex,
             'desc': self._api_data.desc.get_obj(),
@@ -393,12 +391,10 @@ class Parser(base.ParserBase):
         si_lst = self._api_data.property_summaries.get_obj()
         key = 'properties'
         import_info = self._api_data.get_import_info_property()
-        if len(import_info.from_imports) > 0:
-            # return {}
-            if import_info.requires_typing:
-                self._requires_typing = True
-            self._from_imports.update(import_info.from_imports)
-            self._imports.update(import_info.imports)
+        if import_info.requires_typing:
+            self._requires_typing = True
+        self._from_imports.update(import_info.from_imports)
+        self._imports.update(import_info.imports)
         return self._get_summary_data(si_lst=si_lst, key=key)
 
     def _get_types_data(self):
@@ -406,12 +402,10 @@ class Parser(base.ParserBase):
         si_lst = self._api_data.types_summaries.get_obj()
         key = 'types'
         import_info = self._api_data.get_import_info_type()
-        if len(import_info.from_imports) > 0:
-            # return {}
-            if import_info.requires_typing:
-                self._requires_typing = True
-            self._from_imports.update(import_info.from_imports)
-            self._imports.update(import_info.imports)
+        if import_info.requires_typing:
+            self._requires_typing = True
+        self._from_imports.update(import_info.from_imports)
+        self._imports.update(import_info.imports)
         return self._get_summary_data(si_lst=si_lst, key=key)
 
     # endregion get data
@@ -602,6 +596,7 @@ class Writer(base.WriteBase):
         p_dict['typings'] = self._get_typings()
         p_dict['requires_typing'] = self._p_requires_typing
         p_dict['full_imports'] = self._get_full_imports()
+        p_dict['imports'] = self._get_simple_imports()
         p_dict.update(self._parser.get_dict_data())
 
         json_dict = {
@@ -632,19 +627,11 @@ class Writer(base.WriteBase):
         key = '_get_simple_imports'
         if key in self._cache:
             return self._cache[key]
-        lst = []
-        if self._parser.long_names:
-            rel_fn = Util.get_rel_import_long
-        else:
-            rel_fn = Util.get_rel_import
-        lst_im = list(self._p_from_imports)
+
+        lst_im = list(self._p_imports)
         # sort for consistency in json
         lst_im.sort()
-        for ns in lst_im:
-            # f, n = rel_fn(ns, self._p_namespace)
-            # lst.append([f, n])
-            lst.append([*rel_fn(ns, self._p_namespace)])
-        self._cache[key] = lst
+        self._cache[key] = lst_im
         return self._cache[key]
 
     def _get_full_imports(self) -> Dict[str, List[str]]:
@@ -882,7 +869,7 @@ class Writer(base.WriteBase):
         self._p_data = self._parser.get_formated_data()
         self._p_requires_typing = False
         self._validate_p_info()
-        self._p_imports.update(data['imports'])
+        self._p_imports.update(self._parser.imports)
         for el in self._parser.api_data.inherited.get_obj():
             if el.python_import:
                 continue
