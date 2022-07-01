@@ -19,6 +19,7 @@
 # Namespace: com.sun.star.packages.zip
 # Libre Office Version: 7.3
 from typing_extensions import Literal
+import uno
 import typing
 
 

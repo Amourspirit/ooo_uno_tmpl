@@ -19,6 +19,7 @@
 # Namespace: com.sun.star.mozilla
 # Libre Office Version: 7.3
 from ooo.oenv.env_const import UNO_NONE
+import uno
 import typing
 
 
