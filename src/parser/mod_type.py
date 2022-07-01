@@ -3,6 +3,7 @@
 Handles conversion of LibreOffice types to Python Types
 """
 # region Imports
+from __future__ import annotations
 import re
 from abc import ABC, abstractmethod, abstractproperty
 from typing import List, Match, Optional, Set, Union
@@ -200,7 +201,7 @@ class PythonType(object):
 
     def get_all_imports(self, ns: Optional[str] = None) -> Set[str]:
         """
-        Get import for inststance and allof children recursivly
+        Get import for inststance and all of children recursivly
 
         Args:
             ns (str, optional): Optional namespace. When present all namesapces
@@ -343,6 +344,7 @@ class TypeRules(ITypeRules):
         self._reg_rule(rule=RuleNone)
         self._reg_rule(rule=RulePrimative)
         self._reg_rule(rule=RuleKnownPrimative)
+        self._reg_rule(rule=RuleByteSequence)
         self._reg_rule(rule=RuleKnownItterType)
         self._reg_rule(rule=RuleComType)
         self._reg_rule(rule=RuleTypeDef)
@@ -600,6 +602,45 @@ class RuleComType(BaseRule):
         )
 
 
+class RuleByteSequence(BaseRule):
+    """
+    Rule for sequence< byte >
+    
+    This type is uno.ByteSequence
+    """
+
+    def __init__(self, rules: ITypeRules) -> None:
+        super().__init__(rules=rules)
+        self._rx = re.compile(r"sequence<[ ]*byte[ ]*>")
+        self._match: Match[str] | None = False
+
+    def get_is_match(self, in_type: str) -> bool:
+        self._set_default()
+        self._set_match(in_type)
+        if self._match is not None:
+            return True
+        return False
+        
+
+    def get_python_type(self, in_type: str) -> PythonType:
+        return PythonType(
+            type="uno.ByteSequence",
+            requires_typing=True,
+            imports="uno",
+            is_py_type=False,
+            realtype="uno.ByteSequence",
+            origtype=in_type,
+            origin="sequence< byte >"
+        )
+
+    def _set_default(self):
+        self._match = False
+
+    def _set_match(self, in_type: str) -> None:
+        if self._match is not False:
+            return
+        self._match = self._rx.match(in_type)
+
 class RuleKnownItterType(BaseRule):
     """Rule for Known itter uno types such as sequence"""
 
@@ -714,12 +755,12 @@ class RuleSeqLikeNonPrim(BaseRule):
         super().__init__(rules=rules)
         self._seq_prim = self.rules.get_rule_instance(RuleSeqLikePrimative)
         self._rx = re.compile(r"([a-zA-Z]+)<[ ]*([a-zA-Z0-9._]+)[ ]*>")
-        self._match: Union[Match[str], None] = False
+        self._match: Match[str] | None = False
         self._wrapper_type: PythonType = None
         self._recursive_state = False
 
     def _set_match(self, in_type: str) -> None:
-        if not self._match is False:
+        if self._match is not False:
             return
         self._match = self._rx.match(in_type)
 
@@ -758,7 +799,7 @@ class RuleSeqLikeNonPrim(BaseRule):
             return False
         self._set_default()
         self._set_match(in_type)
-        if not self._match:
+        if self._match is None:
             return False
         wrapper_str: str = self._match.groups()[0]
         self._set_wrapper(wrapper_str)
