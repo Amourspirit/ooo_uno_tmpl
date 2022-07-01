@@ -206,7 +206,7 @@ class ModelsStruct(ModelsBase):
         imp.update(self._model.data.full_imports.typing)
         return imp
 
-    def get_full_imports(self) -> List[FromImport]:
+    def get_from_full_imports(self) -> List[FromImport]:
         """
         Get full import for current model plus all parent models.
 
@@ -233,7 +233,7 @@ class ModelsStruct(ModelsBase):
         m_imports = self._get_model_full_imports()
         for arg in pargs:
             if not arg.p_type is None:
-                imports = arg.p_type.get_all_imports(ns=self._model.namespace)
+                imports = arg.p_type.get_all_from_imports(ns=self._model.namespace)
                 for imp in imports:
                     if not imp in m_imports:
                         # this import is not currently part of any imports

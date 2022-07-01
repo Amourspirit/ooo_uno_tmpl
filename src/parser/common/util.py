@@ -742,12 +742,12 @@ class Util:
         def is_self_import(s: str, class_name: str) -> bool:
             try:
                 p_type = Util.TYPE_RULES.get_python_type(in_type=s)
-                if not p_type.imports:
+                if not p_type.from_imports:
                     return False
-                if p_type.imports == class_name:
+                if p_type.from_imports == class_name:
                     return True
                 full_name = ns + '.' + class_name
-                return p_type.imports == full_name
+                return p_type.from_imports == full_name
             except Exception as e:
                 log.logger.error(e, exc_info=True)
                 raise e
@@ -761,7 +761,7 @@ class Util:
         try:
             py_type = Util.TYPE_RULES.get_python_type(in_type)
             if self_import:
-                py_type.imports = None
+                py_type.from_imports = None
             return py_type
         except Exception as e:
             log.logger.error(e, exc_info=True)

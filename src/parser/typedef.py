@@ -62,6 +62,7 @@ class SummaryInfo:
     name: str
     type: str
     requires_typing: bool
+    from_imports: Set[str] = field(default_factory=set)
     imports: Set[str] = field(default_factory=set)
     p_type: PythonType = None
 
@@ -97,6 +98,7 @@ class ApiSummaries(BlockObj):
         self._data = []
         rows = self._block.get_obj()
         for row in rows:
+            _from_imports: Set[str] = set()
             _imports: Set[str] = set()
             _req_typing = False
             cls_name = row.get('class')[0]
@@ -125,6 +127,7 @@ class ApiSummaries(BlockObj):
                 s_type = p_type.type
                 if p_type.requires_typing:
                     _req_typing = True
+                _from_imports.update(p_type.get_all_from_imports())
                 _imports.update(p_type.get_all_imports())
             else:
                 p_type = PythonType(
@@ -143,6 +146,7 @@ class ApiSummaries(BlockObj):
                 name=name,
                 type=s_type,
                 requires_typing=_req_typing,
+                from_imports=_from_imports,
                 imports=_imports,
                 p_type=p_type
             )
@@ -318,6 +322,7 @@ class ParserTypeDef(base.ParserBase):
                 name=si.name,
                 type=si.type,
                 requires_typing=si.requires_typing,
+                from_imports=si.from_imports,
                 imports=si.imports
             )
             t_def.desc.extend(desc)
@@ -422,7 +427,7 @@ class WriterTypeDef(base.WriteBase):
         }
 
         p_dict['from_imports'] = self._get_from_imports(t_def)
-        p_dict['imports'] = list(t_def.imports)
+        p_dict['imports'] = self._get_imports(t_def)
         p_dict['quote'] = self._get_quote_flat(t_def.id)
         p_dict['typings'] = self._get_typings(t_def.id)
         p_dict['desc'] = t_def.desc
@@ -462,7 +467,7 @@ class WriterTypeDef(base.WriteBase):
         if key in self._cache:
             return self._cache[key]
         lst = []
-        lst_im = list(t_def.imports)
+        lst_im = list(t_def.from_imports)
         # sort for consistency in json
         lst_im.sort()
         for ns in lst_im:
@@ -470,6 +475,17 @@ class WriterTypeDef(base.WriteBase):
                 i_str=ns, ns=self._p_namespace
             )
             lst.append([f, n])
+        self._cache[key] = lst
+        return self._cache[key]
+    
+    def _get_imports(self, t_def: TypeDef) -> List[List[str]]:
+        key = '_get_imports_' + t_def.id
+        if key in self._cache:
+            return self._cache[key]
+        lst = []
+        lst_im = list(t_def.imports)
+        # sort for consistency in json
+        lst_im.sort()
         self._cache[key] = lst
         return self._cache[key]
     # endregion get Imports
@@ -524,6 +540,10 @@ class WriterTypeDef(base.WriteBase):
         t = t.replace(
             '{from_imports}',
             Util.get_formated_dict_list_str(self._get_from_imports(t_def))
+        ) 
+        t = t.replace(
+            '{imports}',
+            Util.get_formated_dict_list_str(self._get_imports(t_def))
         )
         if len(t_def.desc) > 0:
             desc = Util.get_formated_dict_list_str(t_def.desc, indent=4)

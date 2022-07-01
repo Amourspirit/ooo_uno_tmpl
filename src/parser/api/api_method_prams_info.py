@@ -23,6 +23,7 @@ class ApiMethodPramsInfo(BlockObj):
         self._block: ApiProtoBlock = block
         super().__init__(self._block.soup)
         self._requires_typing = False
+        self._from_imports: Set[str] = set()
         self._imports: Set[str] = set()
         self._ns = ns
         self._long_names = long_names
@@ -116,6 +117,7 @@ class ApiMethodPramsInfo(BlockObj):
         pinfo.p_type = t_info
         if t_info.requires_typing:
             self._requires_typing = True
+        self._from_imports.update(t_info.get_all_from_imports())
         self._imports.update(t_info.get_all_imports())
         return
 
@@ -141,6 +143,11 @@ class ApiMethodPramsInfo(BlockObj):
         """Gets require_typing value"""
         return self._requires_typing
 
+    @property
+    def from_imports(self) -> Set[str]:
+        """Gets from imports value"""
+        return self._from_imports
+    
     @property
     def imports(self) -> Set[str]:
         """Gets imports value"""

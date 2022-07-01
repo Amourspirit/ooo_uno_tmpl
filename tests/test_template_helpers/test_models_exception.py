@@ -63,7 +63,7 @@ def test_authentication_failed_exception(root_path):
     assert parg.type == "str"
     
     # test get_full_import()
-    full = mod.get_full_imports()
+    full = mod.get_from_full_imports()
     assert len(full) == 2
     assert str(
         full[1]) == "from ...uno.x_interface import XInterface as XInterface_8f010a43"

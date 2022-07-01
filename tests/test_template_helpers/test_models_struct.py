@@ -15,7 +15,7 @@ def test_open_command_argument2(root_path):
     assert arg.name == "SortingInfo"
     assert arg.default == "UNO_NONE"
     assert arg.type == "typing.Tuple[NumberedSortingInfo_fd0e0de6, ...]"
-    fi  = mod.get_full_imports()
+    fi  = mod.get_from_full_imports()
     assert len(fi) > 0
 
 def test_adjustment_event(root_path):
@@ -29,5 +29,5 @@ def test_adjustment_event(root_path):
     assert arg.name == "Value"
     assert arg.default == "0"
     assert arg.type == "int"
-    fi = mod.get_full_imports()
+    fi = mod.get_from_full_imports()
     assert len(fi) > 0

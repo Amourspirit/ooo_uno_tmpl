@@ -207,6 +207,7 @@ class Parser(base.ParserBase):
             remove_parent_inherited=self._remove_parent_inherited
         )
         self._requires_typing = False
+        self._from_imports: Set[str] = set()
         self._imports: Set[str] = set()
         self._cache = {}
     # endregion Constructor
@@ -254,7 +255,7 @@ class Parser(base.ParserBase):
         result = {
             # 'name': ni.name,
             'name': ni.name,
-            'imports': [],
+            'imports': list(self.imports),
             'namespace': self._api_data.ns.namespace_str,
             'extends': ex,
             'desc': self._api_data.desc.get_obj(),
@@ -312,12 +313,14 @@ class Parser(base.ParserBase):
                     "%s._get_methods_data() Imports require typing for: %s, %s",
                     self.__class__.__name__, si.name, si.id)
                 self._requires_typing = True
+            self._from_imports.update(import_info.from_imports)
             self._imports.update(import_info.imports)
             if params_info.requires_typing:
                 logger.debug(
                     "%s._get_methods_data() Params require typing for: %s, %s",
                     self.__class__.__name__, si.name, si.id)
                 self._requires_typing = True
+            self._from_imports.update(params_info.from_imports)
             self._imports.update(params_info.imports)
             if si.p_type.requires_typing:
                 logger.debug(
@@ -390,10 +393,11 @@ class Parser(base.ParserBase):
         si_lst = self._api_data.property_summaries.get_obj()
         key = 'properties'
         import_info = self._api_data.get_import_info_property()
-        if len(import_info.imports) > 0:
+        if len(import_info.from_imports) > 0:
             # return {}
             if import_info.requires_typing:
                 self._requires_typing = True
+            self._from_imports.update(import_info.from_imports)
             self._imports.update(import_info.imports)
         return self._get_summary_data(si_lst=si_lst, key=key)
 
@@ -402,10 +406,11 @@ class Parser(base.ParserBase):
         si_lst = self._api_data.types_summaries.get_obj()
         key = 'types'
         import_info = self._api_data.get_import_info_type()
-        if len(import_info.imports) > 0:
+        if len(import_info.from_imports) > 0:
             # return {}
             if import_info.requires_typing:
                 self._requires_typing = True
+            self._from_imports.update(import_info.from_imports)
             self._imports.update(import_info.imports)
         return self._get_summary_data(si_lst=si_lst, key=key)
 
@@ -413,20 +418,28 @@ class Parser(base.ParserBase):
 
     # region Properties
     @property
+    def from_imports(self) -> Set[str]:
+        """Gets from imports value"""
+        key = 'get_formated_data'
+        if not key in self._cache:
+            self.get_formated_data()
+
+        key = 'from_imports_clean'
+        if not key in self._cache:
+            if len(self._from_imports) > 0:
+                info = self.get_info()
+                ns = info['namespace']
+                self._from_imports = Util.get_clean_imports(
+                    ns=ns, imports=self._from_imports)
+            self._cache[key] = True
+        return self._from_imports
+    
+    @property
     def imports(self) -> Set[str]:
         """Gets imports value"""
         key = 'get_formated_data'
         if not key in self._cache:
             self.get_formated_data()
-
-        key = 'imports_clean'
-        if not key in self._cache:
-            if len(self._imports) > 0:
-                info = self.get_info()
-                ns = info['namespace']
-                self._imports = Util.get_clean_imports(
-                    ns=ns, imports=self._imports)
-            self._cache[key] = True
         return self._imports
 
     @property
@@ -492,6 +505,7 @@ class Writer(base.WriteBase):
         self._indent_amt = 4
         self._json_str = None
         self._p_name: str = None
+        self._p_from_imports: Set[str] = set()
         self._p_imports: Set[str] = set()
         self._p_imports_typing: Set[str] = set()
         self._p_namespace: str = None
@@ -614,6 +628,25 @@ class Writer(base.WriteBase):
         return contents
 
     # region get Imports
+    def _get_simple_imports(self) -> List[List[str]]:
+        key = '_get_simple_imports'
+        if key in self._cache:
+            return self._cache[key]
+        lst = []
+        if self._parser.long_names:
+            rel_fn = Util.get_rel_import_long
+        else:
+            rel_fn = Util.get_rel_import
+        lst_im = list(self._p_from_imports)
+        # sort for consistency in json
+        lst_im.sort()
+        for ns in lst_im:
+            # f, n = rel_fn(ns, self._p_namespace)
+            # lst.append([f, n])
+            lst.append([*rel_fn(ns, self._p_namespace)])
+        self._cache[key] = lst
+        return self._cache[key]
+
     def _get_full_imports(self) -> Dict[str, List[str]]:
         key = '_get_full_imports'
         if key in self._cache:
@@ -621,7 +654,7 @@ class Writer(base.WriteBase):
 
         def get_imports() -> List[str]:
             ims = []
-            lst_im = list(self._p_imports)
+            lst_im = list(self._p_from_imports)
             # sort for consistency in json
             lst_im.sort()
             for ns in lst_im:
@@ -654,7 +687,7 @@ class Writer(base.WriteBase):
             rel_fn = Util.get_rel_import_long
         else:
             rel_fn = Util.get_rel_import
-        lst_im = list(self._p_imports)
+        lst_im = list(self._p_from_imports)
         # sort for consistency in json
         lst_im.sort()
         for ns in lst_im:
@@ -691,7 +724,7 @@ class Writer(base.WriteBase):
         if self._parser.long_names is False:
             return results
         # sort for consistency in json
-        lst = list(self._p_imports)
+        lst = list(self._p_from_imports)
         lst.sort()
         for im in lst:
             results[im] = Util.get_rel_import_long_name(
@@ -811,7 +844,9 @@ class Writer(base.WriteBase):
         self._template = self._template.replace(
             '{inherits}', Util.get_string_list(lines=self._p_extends))
         self._template = self._template.replace(
-            '{imports}', "[]")
+            '{imports}',
+            Util.get_formated_dict_list_str(self._get_simple_imports())
+        )
         self._template = self._template.replace(
             '{from_imports}',
             Util.get_formated_dict_list_str(self._get_from_imports())
@@ -847,16 +882,15 @@ class Writer(base.WriteBase):
         self._p_data = self._parser.get_formated_data()
         self._p_requires_typing = False
         self._validate_p_info()
-        _imports = data['imports']
-        self._p_imports.update(_imports)
+        self._p_imports.update(data['imports'])
         for el in self._parser.api_data.inherited.get_obj():
             if el.python_import:
                 continue
-            self._p_imports.add(el.fullns)
-        self._p_imports_typing.update(self._parser.imports)
-        self._p_imports = Util.get_clean_imports(
+            self._p_from_imports.add(el.fullns)
+        self._p_imports_typing.update(self._parser.from_imports)
+        self._p_from_imports = Util.get_clean_imports(
             ns=self._p_namespace,
-            imports=self._p_imports
+            imports=self._p_from_imports
         )
         self._p_imports_typing = Util.get_clean_imports(
             ns=self._p_namespace,
@@ -866,7 +900,7 @@ class Writer(base.WriteBase):
         # https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1beans_1_1XIntrospectionAccess.html
         # class is a subclass of XInterface and has a method the has return type XInterface.
         # remove any overlap in _p_imports_typing
-        self._p_imports_typing = self._p_imports_typing - self._p_imports
+        self._p_imports_typing = self._p_imports_typing - self._p_from_imports
         if len(self._p_imports_typing) > 0:
             self._p_requires_typing = True
         if not self._p_requires_typing:

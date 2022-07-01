@@ -34,6 +34,8 @@ class BaseTypeDef(BaseJson):
         self.quote.update(quote)
         typings: List[str] = data.get('typings', [])
         self.typings.update(typings)
+        if self.json_version > Version(0, 2, 8):
+            set_data('imports')
 
     def _validate_data(self, data: dict) -> bool:
         super()._validate_data(data=data)
