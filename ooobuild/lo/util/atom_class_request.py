@@ -37,7 +37,7 @@ class AtomClassRequest(object):
     typeName: str = 'com.sun.star.util.AtomClassRequest'
     """Literal Constant ``com.sun.star.util.AtomClassRequest``"""
 
-    def __init__(self, atoms: typing.Optional[typing.Tuple[int, ...]] = UNO_NONE, atomClass: typing.Optional[int] = 0) -> None:
+    def __init__(self, atoms: typing.Optional[typing.Tuple[int, ...]] = (), atomClass: typing.Optional[int] = 0) -> None:
         """
         Constructor
 
@@ -57,8 +57,6 @@ class AtomClassRequest(object):
             "atoms": atoms,
             "atomClass": atomClass,
         }
-        if kargs["atoms"] is UNO_NONE:
-            kargs["atoms"] = None
         self._init(**kargs)
 
     def _init(self, **kwargs) -> None:

@@ -82,8 +82,7 @@ class Statement(XPropertySet_bc180bfa, XComponent_98dc0ab5, XBatchExecution_d1eb
         """
         returns the maximum number of bytes allowed for any column value.
         
-        This limit is the maximum number of bytes that can be returned for any column value. The limit applies only to com.sun.star.sdbc.DataType.BINARY , com.sun.star.sdbc.DataType.VARBINARY , com.sun.star.sdbc.DataType.LONGVARBINARY , com.sun.star.sdbc.DataType.CHAR , com.sun.star.sdbc.DataType.VARCHAR , and com.sun.star.sdbc.DataType.LONGVARCHAR columns. If the limit is exceeded, the excess data is silently discarded.
-        There is no limitation, if set to zero.
+        This limit is the maximum number of bytes that can be returned for any column value. The limit applies only to com.sun.star.sdbc.DataType.BINARY , com.sun.star.sdbc.DataType.VARBINARY , com.sun.star.sdbc.DataType.LONGVARBINARY , com.sun.star.sdbc.DataType.CHAR , com.sun.star.sdbc.DataType.VARCHAR , and com.sun.star.sdbc.DataType.LONGVARCHAR columns. If the limit is exceeded, the excess data is silently discarded. There is no limitation, if set to zero.
         """
 
     @abstractproperty
@@ -91,8 +90,7 @@ class Statement(XPropertySet_bc180bfa, XComponent_98dc0ab5, XBatchExecution_d1eb
         """
         retrieves the maximum number of rows that a ResultSet can contain.
         
-        If the limit is exceeded, the excess rows are silently dropped.
-        There is no limitation, if set to zero.
+        If the limit is exceeded, the excess rows are silently dropped. There is no limitation, if set to zero.
         """
 
     @abstractproperty

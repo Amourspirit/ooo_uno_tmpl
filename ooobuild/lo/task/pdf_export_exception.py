@@ -42,7 +42,7 @@ class PDFExportException(Exception_85530a09):
     typeName: str = 'com.sun.star.task.PDFExportException'
     """Literal Constant ``com.sun.star.task.PDFExportException``"""
 
-    def __init__(self, Message: typing.Optional[str] = '', Context: typing.Optional[XInterface_8f010a43] = None, ErrorCodes: typing.Optional[typing.Tuple[int, ...]] = UNO_NONE) -> None:
+    def __init__(self, Message: typing.Optional[str] = '', Context: typing.Optional[XInterface_8f010a43] = None, ErrorCodes: typing.Optional[typing.Tuple[int, ...]] = ()) -> None:
         """
         Constructor
 
@@ -56,8 +56,6 @@ class PDFExportException(Exception_85530a09):
             "Context": Context,
             "ErrorCodes": ErrorCodes,
         }
-        if kargs["ErrorCodes"] is UNO_NONE:
-            kargs["ErrorCodes"] = None
         self._init(**kargs)
 
     def _init(self, **kwargs) -> None:

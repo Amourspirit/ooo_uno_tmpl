@@ -19,6 +19,7 @@
 # Libre Office Version: 7.3
 # Namespace: com.sun.star.sdbc
 import typing
+import uno
 from abc import abstractmethod
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
@@ -64,7 +65,7 @@ class XRowUpdate(XInterface_8f010a43):
             SQLException: ``SQLException``
         """
     @abstractmethod
-    def updateBytes(self, columnIndex: int, x: 'typing.Tuple[int, ...]') -> None:
+    def updateBytes(self, columnIndex: int, x: uno.ByteSequence) -> None:
         """
         updates a column with a byte array value.
 

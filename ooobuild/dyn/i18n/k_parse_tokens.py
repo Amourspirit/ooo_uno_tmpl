@@ -148,9 +148,7 @@ else:
         
         If this bit is not set, the two double quotes are parsed as one escaped double quote and string parsing continues. The bit is ignored in nStartCharFlags parameters.
         
-        Example:
-        \"abc\"\"def\" --> bit not set => abc\"def <br/>
-        \"abc\"\"def\" --> bit set => abc
+        Example: \"abc\"\"def\" --> bit not set => abc\"def <br/>\"abc\"\"def\" --> bit set => abc
         """
         UNI_OTHER = KParseTokens.UNI_OTHER
         """

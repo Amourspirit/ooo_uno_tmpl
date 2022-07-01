@@ -19,6 +19,7 @@
 # Libre Office Version: 7.3
 # Namespace: com.sun.star.document
 import typing
+import uno
 from abc import abstractproperty
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 if typing.TYPE_CHECKING:
@@ -44,7 +45,7 @@ class Settings(XPropertySet_bc180bfa):
     __ooo_type_name__: str = 'service'
 
     @abstractproperty
-    def PrinterSetup(self) -> 'typing.Tuple[int, ...]':
+    def PrinterSetup(self) -> uno.ByteSequence:
         """
         platform and driver dependent printer setup data.
         

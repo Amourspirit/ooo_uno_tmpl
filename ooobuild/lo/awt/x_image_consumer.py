@@ -19,6 +19,7 @@
 # Libre Office Version: 7.3
 # Namespace: com.sun.star.awt
 import typing
+import uno
 from abc import abstractmethod
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
@@ -56,7 +57,7 @@ class XImageConsumer(XInterface_8f010a43):
         changes color model for next pixels typically called once after initialization.
         """
     @abstractmethod
-    def setPixelsByBytes(self, nX: int, nY: int, nWidth: int, nHeight: int, aProducerData: 'typing.Tuple[int, ...]', nOffset: int, nScanSize: int) -> None:
+    def setPixelsByBytes(self, nX: int, nY: int, nWidth: int, nHeight: int, aProducerData: uno.ByteSequence, nOffset: int, nScanSize: int) -> None:
         """
         delivers a chunk of pixels as long values.
         

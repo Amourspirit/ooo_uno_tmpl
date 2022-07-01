@@ -41,7 +41,7 @@ class ClipboardFormats(object):
     typeName: str = 'com.sun.star.frame.status.ClipboardFormats'
     """Literal Constant ``com.sun.star.frame.status.ClipboardFormats``"""
 
-    def __init__(self, Identifiers: typing.Optional[typing.Tuple[int, ...]] = UNO_NONE, Names: typing.Optional[typing.Tuple[str, ...]] = UNO_NONE) -> None:
+    def __init__(self, Identifiers: typing.Optional[typing.Tuple[int, ...]] = (), Names: typing.Optional[typing.Tuple[str, ...]] = ()) -> None:
         """
         Constructor
 
@@ -61,10 +61,6 @@ class ClipboardFormats(object):
             "Identifiers": Identifiers,
             "Names": Names,
         }
-        if kargs["Identifiers"] is UNO_NONE:
-            kargs["Identifiers"] = None
-        if kargs["Names"] is UNO_NONE:
-            kargs["Names"] = None
         self._init(**kargs)
 
     def _init(self, **kwargs) -> None:

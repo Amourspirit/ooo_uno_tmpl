@@ -48,8 +48,7 @@ class AppletShape(Shape_85cc09e5):
     @abstractproperty
     def AppletCode(self) -> str:
         """
-        This property specifies one of the following:
-        The name of the class file that contains the compiled applet subclass.
+        This property specifies one of the following: The name of the class file that contains the compiled applet subclass.
         
         The path to the class, including the class file itself.
         """

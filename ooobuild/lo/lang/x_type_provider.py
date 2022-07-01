@@ -19,6 +19,7 @@
 # Libre Office Version: 7.3
 # Namespace: com.sun.star.lang
 import typing
+import uno
 from abc import abstractmethod
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 
@@ -35,7 +36,7 @@ class XTypeProvider(XInterface_8f010a43):
     __pyunointerface__: str = 'com.sun.star.lang.XTypeProvider'
 
     @abstractmethod
-    def getImplementationId(self) -> 'typing.Tuple[int, ...]':
+    def getImplementationId(self) -> uno.ByteSequence:
         """
         Obsolete unique identifier.
         

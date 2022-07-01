@@ -19,6 +19,7 @@
 # Libre Office Version: 7.3
 # Namespace: com.sun.star.sdbc
 import typing
+import uno
 from abc import abstractmethod
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
@@ -88,7 +89,7 @@ class XSQLInput(XInterface_8f010a43):
             SQLException: ``SQLException``
         """
     @abstractmethod
-    def readBytes(self) -> 'typing.Tuple[int, ...]':
+    def readBytes(self) -> uno.ByteSequence:
         """
         reads the next attribute in the stream as sequence of bytes.
 

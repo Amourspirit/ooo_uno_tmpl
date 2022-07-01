@@ -58,8 +58,7 @@ class XInterfaceTypeDescription(XTypeDescription_3c210fb1):
         """
         Deprecated.
         
-        UIK are not used anymore, a type is uniquely identified by its name.
-        Returns the UIK, i.e. the unique identifier of the interface.
+        UIK are not used anymore, a type is uniquely identified by its name.Returns the UIK, i.e. the unique identifier of the interface.
         """
 
 __all__ = ['XInterfaceTypeDescription']

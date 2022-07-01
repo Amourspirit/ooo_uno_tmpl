@@ -19,6 +19,7 @@
 # Libre Office Version: 7.3
 # Namespace: com.sun.star.script
 import typing
+import uno
 from abc import abstractmethod
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 
@@ -41,7 +42,7 @@ class XLibraryAccess(XInterface_8f010a43):
     __pyunointerface__: str = 'com.sun.star.script.XLibraryAccess'
 
     @abstractmethod
-    def getFunctionCode(self, FunctionName: str) -> 'typing.Tuple[int, ...]':
+    def getFunctionCode(self, FunctionName: str) -> uno.ByteSequence:
         """
         Get the compiled code of a function.
         """
@@ -51,7 +52,7 @@ class XLibraryAccess(XInterface_8f010a43):
         get the source code of a function.
         """
     @abstractmethod
-    def getModuleCode(self, aModuleName: str) -> 'typing.Tuple[int, ...]':
+    def getModuleCode(self, aModuleName: str) -> uno.ByteSequence:
         """
         Get the whole compiled code of a module.
         """

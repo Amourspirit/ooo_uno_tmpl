@@ -33,12 +33,12 @@ class MenuMultipleChange(object):
     """
     typeName: Literal['com.sun.star.mozilla.MenuMultipleChange']
 
-    def __init__(self, Image: typing.Optional[typing.Tuple[int, ...]] = ..., ID: typing.Optional[int] = ..., GroupID: typing.Optional[int] = ..., PreItemID: typing.Optional[int] = ..., ItemText: typing.Optional[str] = ..., IsVisible: typing.Optional[bool] = ..., IsActive: typing.Optional[bool] = ..., IsCheckable: typing.Optional[bool] = ..., IsChecked: typing.Optional[bool] = ...) -> None:
+    def __init__(self, Image: typing.Optional[uno.ByteSequence] = ..., ID: typing.Optional[int] = ..., GroupID: typing.Optional[int] = ..., PreItemID: typing.Optional[int] = ..., ItemText: typing.Optional[str] = ..., IsVisible: typing.Optional[bool] = ..., IsActive: typing.Optional[bool] = ..., IsCheckable: typing.Optional[bool] = ..., IsChecked: typing.Optional[bool] = ...) -> None:
         """
         Constructor
 
         Arguments:
-            Image (typing.Tuple[int, ...], optional): Image value.
+            Image (uno.ByteSequence, optional): Image value.
             ID (int, optional): ID value.
             GroupID (int, optional): GroupID value.
             PreItemID (int, optional): PreItemID value.
@@ -51,7 +51,7 @@ class MenuMultipleChange(object):
 
 
     @property
-    def Image(self) -> typing.Tuple[int, ...]:
+    def Image(self) -> uno.ByteSequence:
         """
         sequence of bytes representing a possible image
         """

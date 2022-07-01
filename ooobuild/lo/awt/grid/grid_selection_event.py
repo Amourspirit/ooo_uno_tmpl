@@ -39,7 +39,7 @@ class GridSelectionEvent(EventObject_a3d70b03):
     typeName: str = 'com.sun.star.awt.grid.GridSelectionEvent'
     """Literal Constant ``com.sun.star.awt.grid.GridSelectionEvent``"""
 
-    def __init__(self, Source: typing.Optional[XInterface_8f010a43] = None, SelectedRowIndexes: typing.Optional[typing.Tuple[int, ...]] = UNO_NONE, SelectedColumnIndexes: typing.Optional[typing.Tuple[int, ...]] = UNO_NONE) -> None:
+    def __init__(self, Source: typing.Optional[XInterface_8f010a43] = None, SelectedRowIndexes: typing.Optional[typing.Tuple[int, ...]] = (), SelectedColumnIndexes: typing.Optional[typing.Tuple[int, ...]] = ()) -> None:
         """
         Constructor
 
@@ -61,10 +61,6 @@ class GridSelectionEvent(EventObject_a3d70b03):
             "SelectedRowIndexes": SelectedRowIndexes,
             "SelectedColumnIndexes": SelectedColumnIndexes,
         }
-        if kargs["SelectedRowIndexes"] is UNO_NONE:
-            kargs["SelectedRowIndexes"] = None
-        if kargs["SelectedColumnIndexes"] is UNO_NONE:
-            kargs["SelectedColumnIndexes"] = None
         self._init(**kargs)
 
     def _init(self, **kwargs) -> None:

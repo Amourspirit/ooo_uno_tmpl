@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.2.0",
+  "version": "0.2.9",
   "libre_office_ver": "7.3",
   "name": "XRegistryKey",
   "type": "interface",
@@ -60,8 +60,10 @@
         "com.sun.star.registry.RegistryValueType"
       ]
     },
+    "imports": [
+      "uno"
+    ],
     "name": "XRegistryKey",
-    "imports": [],
     "namespace": "com.sun.star.registry",
     "extends": [
       "com.sun.star.uno.XInterface"
@@ -194,7 +196,7 @@
         },
         {
           "name": "getBinaryValue",
-          "returns": "typing.Tuple[int, ...]",
+          "returns": "uno.ByteSequence",
           "returns_origin": "sequence< byte >",
           "desc": [],
           "raises": [
@@ -432,7 +434,7 @@
           "args": [
             {
               "name": "value",
-              "type": "typing.Tuple[int, ...]",
+              "type": "uno.ByteSequence",
               "direction": "in",
               "origin": "sequence< byte >"
             }

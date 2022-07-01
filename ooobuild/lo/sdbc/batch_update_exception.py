@@ -44,7 +44,7 @@ class BatchUpdateException(SQLException_acc90b43):
     typeName: str = 'com.sun.star.sdbc.BatchUpdateException'
     """Literal Constant ``com.sun.star.sdbc.BatchUpdateException``"""
 
-    def __init__(self, Message: typing.Optional[str] = '', Context: typing.Optional[XInterface_8f010a43] = None, SQLState: typing.Optional[str] = '', ErrorCode: typing.Optional[int] = 0, NextException: typing.Optional[object] = None, UpdateCounts: typing.Optional[typing.Tuple[int, ...]] = UNO_NONE) -> None:
+    def __init__(self, Message: typing.Optional[str] = '', Context: typing.Optional[XInterface_8f010a43] = None, SQLState: typing.Optional[str] = '', ErrorCode: typing.Optional[int] = 0, NextException: typing.Optional[object] = None, UpdateCounts: typing.Optional[typing.Tuple[int, ...]] = ()) -> None:
         """
         Constructor
 
@@ -64,8 +64,6 @@ class BatchUpdateException(SQLException_acc90b43):
             "NextException": NextException,
             "UpdateCounts": UpdateCounts,
         }
-        if kargs["UpdateCounts"] is UNO_NONE:
-            kargs["UpdateCounts"] = None
         self._init(**kargs)
 
     def _init(self, **kwargs) -> None:

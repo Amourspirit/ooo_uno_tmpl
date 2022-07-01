@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.2.0",
+  "version": "0.2.9",
   "libre_office_ver": "7.3",
   "name": "XCertificate",
   "type": "interface",
@@ -46,12 +46,10 @@
       "CertificateKind_ffd0e69",
       "DateTime_84de09d3",
       "XCertificateExtension_6ead10f8",
-      "typing.Tuple[XCertificateExtension_6ead10f8, ...]",
-      "typing.Tuple[int, ...]"
+      "typing.Tuple[XCertificateExtension_6ead10f8, ...]"
     ],
     "typings": [
-      "typing.Tuple[XCertificateExtension_6ead10f8, ...]",
-      "typing.Tuple[int, ...]"
+      "typing.Tuple[XCertificateExtension_6ead10f8, ...]"
     ],
     "requires_typing": true,
     "full_imports": {
@@ -64,8 +62,10 @@
         "com.sun.star.util.DateTime"
       ]
     },
+    "imports": [
+      "uno"
+    ],
     "name": "XCertificate",
-    "imports": [],
     "namespace": "com.sun.star.security",
     "extends": [
       "com.sun.star.uno.XInterface"
@@ -93,7 +93,7 @@
           "args": [
             {
               "name": "oid",
-              "type": "typing.Tuple[int, ...]",
+              "type": "uno.ByteSequence",
               "direction": "in",
               "origin": "sequence< byte >"
             }
@@ -115,8 +115,8 @@
       "types": [
         {
           "name": "Encoded",
-          "returns": "typing.Tuple[int, ...]",
-          "origtype": null,
+          "returns": "uno.ByteSequence",
+          "origtype": "sequence< byte >",
           "origin": "sequence< byte >",
           "desc": [
             "the DER encoded form of the certificate"
@@ -137,8 +137,8 @@
         },
         {
           "name": "IssuerUniqueID",
-          "returns": "typing.Tuple[int, ...]",
-          "origtype": null,
+          "returns": "uno.ByteSequence",
+          "origtype": "sequence< byte >",
           "origin": "sequence< byte >",
           "desc": [
             "the issuer unique ID attribute of the certificate."
@@ -148,8 +148,8 @@
         },
         {
           "name": "MD5Thumbprint",
-          "returns": "typing.Tuple[int, ...]",
-          "origtype": null,
+          "returns": "uno.ByteSequence",
+          "origtype": "sequence< byte >",
           "origin": "sequence< byte >",
           "desc": [
             "the MD5 thumbprint"
@@ -159,8 +159,8 @@
         },
         {
           "name": "SHA1Thumbprint",
-          "returns": "typing.Tuple[int, ...]",
-          "origtype": null,
+          "returns": "uno.ByteSequence",
+          "origtype": "sequence< byte >",
           "origin": "sequence< byte >",
           "desc": [
             "the SHA-1 thumbprint"
@@ -170,8 +170,8 @@
         },
         {
           "name": "SerialNumber",
-          "returns": "typing.Tuple[int, ...]",
-          "origtype": null,
+          "returns": "uno.ByteSequence",
+          "origtype": "sequence< byte >",
           "origin": "sequence< byte >",
           "desc": [
             "the serial number attribute of the certificate."
@@ -181,8 +181,8 @@
         },
         {
           "name": "SubjectPublicKeyValue",
-          "returns": "typing.Tuple[int, ...]",
-          "origtype": null,
+          "returns": "uno.ByteSequence",
+          "origtype": "sequence< byte >",
           "origin": "sequence< byte >",
           "desc": [
             "the value of the subject public key"
@@ -192,8 +192,8 @@
         },
         {
           "name": "SubjectUniqueID",
-          "returns": "typing.Tuple[int, ...]",
-          "origtype": null,
+          "returns": "uno.ByteSequence",
+          "origtype": "sequence< byte >",
           "origin": "sequence< byte >",
           "desc": [
             "the subject unique ID attribute of the certificate."

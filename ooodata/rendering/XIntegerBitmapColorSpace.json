@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.2.0",
+  "version": "0.2.9",
   "libre_office_ver": "7.3",
   "name": "XIntegerBitmapColorSpace",
   "type": "interface",
@@ -67,8 +67,10 @@
         "com.sun.star.rendering.RGBColor"
       ]
     },
+    "imports": [
+      "uno"
+    ],
     "name": "XIntegerBitmapColorSpace",
-    "imports": [],
     "namespace": "com.sun.star.rendering",
     "extends": [
       "com.sun.star.rendering.XColorSpace"
@@ -96,7 +98,7 @@
           "args": [
             {
               "name": "deviceColor",
-              "type": "typing.Tuple[int, ...]",
+              "type": "uno.ByteSequence",
               "direction": "in",
               "origin": "sequence< byte >"
             },
@@ -110,7 +112,7 @@
         },
         {
           "name": "convertIntegerFromARGB",
-          "returns": "typing.Tuple[int, ...]",
+          "returns": "uno.ByteSequence",
           "returns_origin": "sequence< byte >",
           "desc": [
             "Convert sRGB color with linear alpha into this color space.",
@@ -131,7 +133,7 @@
         },
         {
           "name": "convertIntegerFromPARGB",
-          "returns": "typing.Tuple[int, ...]",
+          "returns": "uno.ByteSequence",
           "returns_origin": "sequence< byte >",
           "desc": [
             "Convert premultiplied sRGB color with linear alpha into this color space.",
@@ -152,7 +154,7 @@
         },
         {
           "name": "convertIntegerFromRGB",
-          "returns": "typing.Tuple[int, ...]",
+          "returns": "uno.ByteSequence",
           "returns_origin": "sequence< byte >",
           "desc": [
             "Convert sRGB color to an integer representation in this color space.",
@@ -186,7 +188,7 @@
           "args": [
             {
               "name": "deviceColor",
-              "type": "typing.Tuple[int, ...]",
+              "type": "uno.ByteSequence",
               "direction": "in",
               "origin": "sequence< byte >"
             }
@@ -207,7 +209,7 @@
           "args": [
             {
               "name": "deviceColor",
-              "type": "typing.Tuple[int, ...]",
+              "type": "uno.ByteSequence",
               "direction": "in",
               "origin": "sequence< byte >"
             }
@@ -228,7 +230,7 @@
           "args": [
             {
               "name": "deviceColor",
-              "type": "typing.Tuple[int, ...]",
+              "type": "uno.ByteSequence",
               "direction": "in",
               "origin": "sequence< byte >"
             }
@@ -236,7 +238,7 @@
         },
         {
           "name": "convertToIntegerColorSpace",
-          "returns": "typing.Tuple[int, ...]",
+          "returns": "uno.ByteSequence",
           "returns_origin": "sequence< byte >",
           "desc": [
             "Convert integer bitmap color to integer bitmap color of another integer bitmap color space.",
@@ -249,7 +251,7 @@
           "args": [
             {
               "name": "deviceColor",
-              "type": "typing.Tuple[int, ...]",
+              "type": "uno.ByteSequence",
               "direction": "in",
               "origin": "sequence< byte >"
             },

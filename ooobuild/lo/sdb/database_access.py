@@ -69,8 +69,7 @@ class DatabaseAccess(XPropertySet_bc180bfa, XCompletedConnection_98a0e46, XDatab
     @abstractproperty
     def ConnectURL(self) -> str:
         """
-        indicates a database url of the form
-        jdbc:subprotocol:subname or  sdbc:subprotocol:subname
+        indicates a database url of the form  jdbc:subprotocol:subname or  sdbc:subprotocol:subname
         """
 
     @abstractproperty

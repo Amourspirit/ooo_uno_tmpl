@@ -19,6 +19,7 @@
 # Libre Office Version: 7.3
 # Namespace: com.sun.star.embed
 import typing
+import uno
 from abc import abstractmethod
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
@@ -65,7 +66,7 @@ class XEmbedObjectCreator(XInterface_8f010a43):
             com.sun.star.uno.Exception: ``Exception``
         """
     @abstractmethod
-    def createInstanceInitNew(self, aClassID: 'typing.Tuple[int, ...]', sClassName: str, xStorage: 'XStorage_8e460a32', sEntryName: str, aObjectArgs: 'typing.Tuple[PropertyValue_c9610c73, ...]') -> 'XInterface_8f010a43':
+    def createInstanceInitNew(self, aClassID: uno.ByteSequence, sClassName: str, xStorage: 'XStorage_8e460a32', sEntryName: str, aObjectArgs: 'typing.Tuple[PropertyValue_c9610c73, ...]') -> 'XInterface_8f010a43':
         """
         creates a new object and initializes it as a new one.
         

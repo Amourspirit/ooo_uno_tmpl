@@ -94,8 +94,7 @@ class PreparedStatement(XPropertySet_bc180bfa, XComponent_98dc0ab5, XCloseable_9
         """
         retrieves the maximum number of rows that a ResultSet can contain.
         
-        If the limit is exceeded, the excess rows are silently dropped.
-        There is no limitation, if set to zero.
+        If the limit is exceeded, the excess rows are silently dropped. There is no limitation, if set to zero.
         """
 
     @abstractproperty

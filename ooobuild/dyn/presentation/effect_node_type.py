@@ -48,8 +48,7 @@ else:
 
         This constants defines a type for an animation effect node.
         
-        This is stored with the name node-type inside the com.sun.star.animations.XAnimationNode.UserData sequence.
-        This does not manipulate the timing or synchronization. It can be used to quickly identify semantic blocks inside an animation hierarchy.
+        This is stored with the name node-type inside the com.sun.star.animations.XAnimationNode.UserData sequence. This does not manipulate the timing or synchronization. It can be used to quickly identify semantic blocks inside an animation hierarchy.
         """
         DEFAULT = EffectNodeType.DEFAULT
         """
