@@ -482,11 +482,10 @@ class WriterTypeDef(base.WriteBase):
         key = '_get_imports_' + t_def.id
         if key in self._cache:
             return self._cache[key]
-        lst = []
         lst_im = list(t_def.imports)
         # sort for consistency in json
         lst_im.sort()
-        self._cache[key] = lst
+        self._cache[key] = lst_im
         return self._cache[key]
     # endregion get Imports
 
