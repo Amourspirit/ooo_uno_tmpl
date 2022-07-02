@@ -649,7 +649,7 @@ class RuleByteSequence(BaseRule):
 
     def __init__(self, rules: ITypeRules) -> None:
         super().__init__(rules=rules)
-        self._rx = re.compile(r"sequence<[ ]*byte[ ]*>")
+        self._rx = re.compile(r"sequence<[ ]*(byte|int|short|long|hyper)[ ]*>")
         self._match: Match[str] | None = False
 
     def get_is_match(self, in_type: str) -> bool:

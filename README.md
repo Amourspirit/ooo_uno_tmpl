@@ -16,7 +16,7 @@ python -m app -h
 For Extended Help see app.py built in help or see app [docstring](./app.py).
 
 ```bash
-$ pydoc app
+pydoc app
 ```
 
 ## Quickstart
@@ -25,7 +25,7 @@ $ pydoc app
 * Activate env: `$ conda activate ./env`
 * pydoc app
 
-## Related Projects:
+## Related Projects
 
 * [ooouno](https://github.com/Amourspirit/python-ooouno)
 * [LibreOffice API Typings](https://github.com/Amourspirit/python-types-unopy)

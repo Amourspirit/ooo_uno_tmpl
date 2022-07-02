@@ -14,7 +14,7 @@ Requirements:
 Getting Started:
 
     This project already has data compiled of the entire LO API.
-    The file are compiled as *.JSON files, *.tmplm *.dyn, *.tpyi files in project root directorty 'lo'.
+    The file are compiled as *.JSON files, *.tmpl *.dyn, *.tpyi files in project root directorty 'lo'.
 
     API file generation groups api into the following categories:
         const:      Constant classes
