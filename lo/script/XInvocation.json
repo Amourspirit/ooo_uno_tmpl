@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.28",
+  "version": "0.1.32",
   "libre_office_ver": "7.2",
   "name": "XInvocation",
   "type": "interface",
@@ -34,11 +34,9 @@
     },
     "quote": [
       "XIntrospectionAccess_2a050f2c",
-      "typing.Tuple[int, ...]",
       "typing.Tuple[object, ...]"
     ],
     "typings": [
-      "typing.Tuple[int, ...]",
       "typing.Tuple[object, ...]"
     ],
     "requires_typing": true,
@@ -50,8 +48,10 @@
         "com.sun.star.beans.XIntrospectionAccess"
       ]
     },
+    "imports": [
+      "uno"
+    ],
     "name": "XInvocation",
-    "imports": [],
     "namespace": "com.sun.star.script",
     "extends": [
       "com.sun.star.uno.XInterface"
@@ -158,9 +158,9 @@
             },
             {
               "name": "aOutParamIndex",
-              "type": "typing.Tuple[int, ...]",
+              "type": "uno.ByteSequence",
               "direction": "out",
-              "origin": "sequence< short >"
+              "origin": "sequence< byte >"
             },
             {
               "name": "aOutParam",

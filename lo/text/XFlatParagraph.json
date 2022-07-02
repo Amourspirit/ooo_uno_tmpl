@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.28",
+  "version": "0.1.32",
   "libre_office_ver": "7.2",
   "name": "XFlatParagraph",
   "type": "interface",
@@ -39,12 +39,10 @@
     },
     "quote": [
       "Locale_70d308fa",
-      "typing.Tuple[PropertyValue_c9610c73, ...]",
-      "typing.Tuple[int, ...]"
+      "typing.Tuple[PropertyValue_c9610c73, ...]"
     ],
     "typings": [
-      "typing.Tuple[PropertyValue_c9610c73, ...]",
-      "typing.Tuple[int, ...]"
+      "typing.Tuple[PropertyValue_c9610c73, ...]"
     ],
     "requires_typing": true,
     "full_imports": {
@@ -56,8 +54,10 @@
         "com.sun.star.lang.Locale"
       ]
     },
+    "imports": [
+      "uno"
+    ],
     "name": "XFlatParagraph",
-    "imports": [],
     "namespace": "com.sun.star.text",
     "extends": [
       "com.sun.star.text.XTextMarkup"
@@ -167,8 +167,8 @@
         },
         {
           "name": "getLanguagePortions",
-          "returns": "typing.Tuple[int, ...]",
-          "returns_origin": "sequence< long >",
+          "returns": "uno.ByteSequence",
+          "returns_origin": "sequence< byte >",
           "desc": [
             "get a list of indexes that separate each two different languages"
           ],

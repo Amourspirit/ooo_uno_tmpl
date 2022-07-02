@@ -27,6 +27,7 @@ class ApiSummaries(BlockObj):
         self._block: ApiSummaryRows = block
         super().__init__(self._block.soup)
         self._requires_typing = False
+        self._from_imports: Set[str] = set()
         self._imports: Set[str] = set()
         self._rule_engine = rule_engine
         self._ns = ns
@@ -111,8 +112,8 @@ class ApiSummaries(BlockObj):
                              type=p_type.type, p_type=p_type)
             if p_type.requires_typing:
                 self._requires_typing = True
-            im = p_type.get_all_imports()
-            self._imports.update(im)
+            self._from_imports.update(p_type.get_all_from_imports())
+            self._imports.update(p_type.get_all_imports())
             self._data.append(si)
 
         if self._rule_engine:
@@ -124,6 +125,11 @@ class ApiSummaries(BlockObj):
     def requires_typing(self) -> bool:
         """Gets requires_typing value"""
         return self._requires_typing
+
+    @property
+    def from_imports(self) -> Set[str]:
+        """Gets from imports value"""
+        return self._from_imports
 
     @property
     def imports(self) -> Set[str]:

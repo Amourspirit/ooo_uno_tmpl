@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.28",
+  "version": "0.1.32",
   "libre_office_ver": "7.2",
   "name": "XSecurityEnvironment",
   "type": "interface",
@@ -34,12 +34,10 @@
     },
     "quote": [
       "XCertificate_e55b0d3b",
-      "typing.Tuple[XCertificate_e55b0d3b, ...]",
-      "typing.Tuple[int, ...]"
+      "typing.Tuple[XCertificate_e55b0d3b, ...]"
     ],
     "typings": [
-      "typing.Tuple[XCertificate_e55b0d3b, ...]",
-      "typing.Tuple[int, ...]"
+      "typing.Tuple[XCertificate_e55b0d3b, ...]"
     ],
     "requires_typing": true,
     "full_imports": {
@@ -50,8 +48,10 @@
         "com.sun.star.security.XCertificate"
       ]
     },
+    "imports": [
+      "uno"
+    ],
     "name": "XSecurityEnvironment",
-    "imports": [],
     "namespace": "com.sun.star.xml.crypto",
     "extends": [
       "com.sun.star.uno.XInterface"
@@ -117,7 +117,7 @@
           "args": [
             {
               "name": "rawCertificate",
-              "type": "typing.Tuple[int, ...]",
+              "type": "uno.ByteSequence",
               "direction": "in",
               "origin": "sequence< byte >"
             }
@@ -158,7 +158,7 @@
             },
             {
               "name": "serialNumber",
-              "type": "typing.Tuple[int, ...]",
+              "type": "uno.ByteSequence",
               "direction": "in",
               "origin": "sequence< byte >"
             }

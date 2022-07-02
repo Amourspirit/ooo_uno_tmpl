@@ -151,6 +151,7 @@ class Parser(base.ParserBase):
             remove_parent_inherited=self._remove_parent_inherited
         )
         self._data = None
+        self._from_imports: Set[str] = set()
         self._imports: Set[str] = set()
         self._requires_typing = False
         self._cache: Dict[str, object] = {
@@ -179,7 +180,6 @@ class Parser(base.ParserBase):
                 "desc": "(List[str]), description of constant",
                 "url": "Url to LibreOffice of constant",
                 "namespace": "namespace",
-                "imports": "List[str], imports",
                 "extends": "(List[str]), inherits"
             }
         """
@@ -199,7 +199,6 @@ class Parser(base.ParserBase):
                 "desc": self._api_data.desc.get_obj(),
                 "url": self.url,
                 "namespace": ns,
-                'imports': [],
                 "extends": ex
             }
             self._cache[key] = info
@@ -279,6 +278,7 @@ class Parser(base.ParserBase):
         import_info = self._api_data.get_import_info_property()
         if import_info.requires_typing:
             self._requires_typing = True
+        self._from_imports.update(import_info.from_imports)
         self._imports.update(import_info.imports)
 
         si_lst = self._api_data.property_summaries.get_obj()
@@ -289,6 +289,7 @@ class Parser(base.ParserBase):
         import_info = self._api_data.get_import_info_type()
         if import_info.requires_typing:
             self._requires_typing = True
+        self._from_imports.update(import_info.from_imports)
         self._imports.update(import_info.imports)
 
         si_lst = self._api_data.types_summaries.get_obj()
@@ -299,7 +300,7 @@ class Parser(base.ParserBase):
 
     # region Properties
     @property
-    def imports(self) -> Set[str]:
+    def from_imports(self) -> Set[str]:
         """Gets imports value"""
         key = 'get_formated_data'
         if not key in self._cache:
@@ -307,12 +308,21 @@ class Parser(base.ParserBase):
 
         key = 'imports_clean'
         if not key in self._cache:
-            if len(self._imports) > 0:
+            if len(self._from_imports) > 0:
                 info = self.get_info()
                 ns = info['namespace']
-                self._imports = Util.get_clean_imports(
-                    ns=ns, imports=self._imports)
+                self._from_imports = Util.get_clean_imports(
+                    ns=ns, imports=self._from_imports)
             self._cache[key] = True
+        return self._from_imports
+
+    @property
+    def imports(self) -> Set[str]:
+        """Gets imports value"""
+        key = 'get_formated_data'
+        if not key in self._cache:
+            self.get_formated_data()
+
         return self._imports
 
     @property
@@ -377,6 +387,7 @@ class StructWriter(base.WriteBase):
         self._p_url = None
         self._p_desc = None
         self._p_extends: List[str] = None
+        self._p_from_imports: Set[str] = set()
         self._p_imports: Set[str] = set()
         self._p_imports_typing: Set[str] = set()
         self._p_requires_typing = False
@@ -404,7 +415,7 @@ class StructWriter(base.WriteBase):
 
     def _get_template_pyi(self) -> Union[str, None]:
         return 'struct_pyi.tmpl'
-    
+
     def _get_template(self):
         with open(self._template_file) as f:
             contents = f.read()
@@ -451,6 +462,7 @@ class StructWriter(base.WriteBase):
             "url": 'place holder'
         }
         p_dict['from_imports'] = self._get_from_imports()
+        p_dict['imports'] = self._get_imports()
         p_dict['from_imports_typing'] = self._get_from_imports_typing()
         p_dict['extends_map'] = self._get_imports_map()
         p_dict['quote'] = self._get_quote_flat()
@@ -489,7 +501,7 @@ class StructWriter(base.WriteBase):
 
         def get_imports() -> List[str]:
             ims = []
-            lst_im = list(self._p_imports)
+            lst_im = list(self._p_from_imports)
             # sort for consistency in json
             lst_im.sort()
             for ns in lst_im:
@@ -522,12 +534,22 @@ class StructWriter(base.WriteBase):
             rel_fn = Util.get_rel_import_long
         else:
             rel_fn = Util.get_rel_import
-        lst_im = list(self._p_imports)
+        lst_im = list(self._p_from_imports)
         # sort for consistency in json
         lst_im.sort()
         for ns in lst_im:
             lst.append([*rel_fn(ns, self._p_namespace)])
         self._cache[key] = lst
+        return self._cache[key]
+
+    def _get_imports(self) -> List[List[str]]:
+        key = '_get_imports_'
+        if key in self._cache:
+            return self._cache[key]
+        lst_im = list(self._p_imports)
+        # sort for consistency in json
+        lst_im.sort()
+        self._cache[key] = lst_im
         return self._cache[key]
 
     def _get_from_imports_typing(self) -> List[List[str]]:
@@ -555,7 +577,7 @@ class StructWriter(base.WriteBase):
         if self._parser.long_names is False:
             return results
         # sort for consistency in json
-        lst = list(self._p_imports)
+        lst = list(self._p_from_imports)
         lst.sort()
         for im in lst:
             results[im] = Util.get_rel_import_long_name(
@@ -638,7 +660,9 @@ class StructWriter(base.WriteBase):
         self._template = self._template.replace(
             '{inherits}', Util.get_string_list(lines=self._p_extends))
         self._template = self._template.replace(
-            '{imports}', "[]")
+            '{imports}',
+            Util.get_formated_dict_list_str(self._get_imports())
+        )
         self._template = self._template.replace(
             '{from_imports}',
             Util.get_formated_dict_list_str(self._get_from_imports())
@@ -713,18 +737,18 @@ class StructWriter(base.WriteBase):
         self._p_namespace = data['namespace']
         self._p_extends = get_extends(data['extends'])
         self._validate_p_info()
-        self._p_imports.update(data['imports'])
-        self._p_imports.update(data['extends'])
-        self._p_imports_typing.update(self._parser.imports)
-        self._p_imports = Util.get_clean_imports(
+        self._p_from_imports.update(data['extends'])
+        self._p_imports_typing.update(self._parser.from_imports)
+        self._p_imports.update(self._parser.imports)
+        self._p_from_imports = Util.get_clean_imports(
             ns=self._p_namespace,
-            imports=self._p_imports
+            imports=self._p_from_imports
         )
         self._p_imports_typing = Util.get_clean_imports(
             ns=self._p_namespace,
             imports=self._p_imports_typing
         )
-        self._p_imports_typing = self._p_imports_typing - self._p_imports
+        self._p_imports_typing = self._p_imports_typing - self._p_from_imports
         if len(self._p_imports_typing) > 0:
             self._p_requires_typing = True
         if not self._p_requires_typing:

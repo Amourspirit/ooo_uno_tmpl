@@ -48,8 +48,7 @@ else:
 
         Bitmask transliteration types used with XTransliteration.getType() and XTransliteration.getAvailableModules() methods.
         
-        Non-IGNORE type modules provide XTransliteration.transliterate().
-        IGNORE type modules provide XTransliteration.equals() and XTransliteration.transliterateRange().
+        Non-IGNORE type modules provide XTransliteration.transliterate(). IGNORE type modules provide XTransliteration.equals() and XTransliteration.transliterateRange().
         """
         NONE = TransliterationType.NONE
         ONE_TO_ONE = TransliterationType.ONE_TO_ONE

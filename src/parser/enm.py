@@ -212,6 +212,9 @@ class EnumBlock(BlockObj):
             class_name = ""
             i = 0
             while class_name != 'memitem':
+                if i > 4: # should be the next sibling, Just in case limit.
+                    div_memitem = None
+                    break
                 div_memitem = div_memitem.next_sibling
                 if not div_memitem:
                     div_memitem = None
@@ -222,9 +225,6 @@ class EnumBlock(BlockObj):
                 except Exception:
                     i += 1
                     continue
-                if i > 4:
-                    div_memitem = None
-                    break
                 i += 1
 
             if div_memitem is None:

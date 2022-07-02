@@ -268,6 +268,11 @@ Regeneration of a new LO API version.
             EG: $ rm -rf /tmp/ooo_uno_tmpl
 
     Regeneration steps:
+        NOTE: SKIP STEPS 1 - 7 for version 0.1.x
+        It is not possible to regenreate module links for this version,
+        therefore steps 1 - 7 must be omitted.
+        The only way to regen data if from an existing cache of Lo 7.2 genereated by this app.
+        
         1. Set config to new version of LO API.
             config.json is found in src/cfg/
             config property is libre_office_ver

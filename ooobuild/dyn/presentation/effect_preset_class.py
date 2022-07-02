@@ -48,8 +48,7 @@ else:
 
         This constants defines the class for a preset animation effect.
         
-        This is stored with the name preset-class inside the com.sun.star.animations.XAnimationNode.UserData sequence.
-        This does not manipulate the timing or synchronization. It can be used to quickly identify preset animations inside an animation hierarchy.
+        This is stored with the name preset-class inside the com.sun.star.animations.XAnimationNode.UserData sequence. This does not manipulate the timing or synchronization. It can be used to quickly identify preset animations inside an animation hierarchy.
         """
         CUSTOM = EffectPresetClass.CUSTOM
         ENTRANCE = EffectPresetClass.ENTRANCE

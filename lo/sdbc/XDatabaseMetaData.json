@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.28",
+  "version": "0.1.32",
   "libre_office_ver": "7.2",
   "name": "XDatabaseMetaData",
   "type": "interface",
@@ -40,11 +40,9 @@
     "quote": [
       "XConnection_a36a0b0c",
       "XResultSet_98e30aa7",
-      "typing.Tuple[int, ...]",
       "typing.Tuple[str, ...]"
     ],
     "typings": [
-      "typing.Tuple[int, ...]",
       "typing.Tuple[str, ...]"
     ],
     "requires_typing": true,
@@ -57,8 +55,10 @@
         "com.sun.star.sdbc.XResultSet"
       ]
     },
+    "imports": [
+      "uno"
+    ],
     "name": "XDatabaseMetaData",
-    "imports": [],
     "namespace": "com.sun.star.sdbc",
     "extends": [
       "com.sun.star.uno.XInterface"
@@ -1241,9 +1241,9 @@
             },
             {
               "name": "types",
-              "type": "typing.Tuple[int, ...]",
+              "type": "uno.ByteSequence",
               "direction": "in",
-              "origin": "sequence< long >"
+              "origin": "sequence< byte >"
             }
           ]
         },

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.28",
+  "version": "0.1.32",
   "libre_office_ver": "7.2",
   "name": "XColorSpace",
   "type": "interface",
@@ -44,15 +44,13 @@
       "typing.Tuple[ARGBColor_c6ee0be1, ...]",
       "typing.Tuple[ColorComponent_e4c0e78, ...]",
       "typing.Tuple[PropertyValue_c9610c73, ...]",
-      "typing.Tuple[RGBColor_bbdf0ba0, ...]",
-      "typing.Tuple[int, ...]"
+      "typing.Tuple[RGBColor_bbdf0ba0, ...]"
     ],
     "typings": [
       "typing.Tuple[ARGBColor_c6ee0be1, ...]",
       "typing.Tuple[ColorComponent_e4c0e78, ...]",
       "typing.Tuple[PropertyValue_c9610c73, ...]",
-      "typing.Tuple[RGBColor_bbdf0ba0, ...]",
-      "typing.Tuple[int, ...]"
+      "typing.Tuple[RGBColor_bbdf0ba0, ...]"
     ],
     "requires_typing": true,
     "full_imports": {
@@ -64,8 +62,10 @@
         "com.sun.star.rendering.RGBColor"
       ]
     },
+    "imports": [
+      "uno"
+    ],
     "name": "XColorSpace",
-    "imports": [],
     "namespace": "com.sun.star.rendering",
     "extends": [],
     "desc": [
@@ -231,7 +231,7 @@
         },
         {
           "name": "getComponentTags",
-          "returns": "typing.Tuple[int, ...]",
+          "returns": "uno.ByteSequence",
           "returns_origin": "sequence< byte >",
           "desc": [
             "Query the kind for each color component.",

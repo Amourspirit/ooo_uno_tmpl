@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.28",
+  "version": "0.1.32",
   "libre_office_ver": "7.2",
   "name": "XRegistryKey",
   "type": "interface",
@@ -42,12 +42,10 @@
       "RegistryValueType_30390f79",
       "XRegistryKey",
       "typing.Tuple[XRegistryKey, ...]",
-      "typing.Tuple[int, ...]",
       "typing.Tuple[str, ...]"
     ],
     "typings": [
       "typing.Tuple[XRegistryKey, ...]",
-      "typing.Tuple[int, ...]",
       "typing.Tuple[str, ...]"
     ],
     "requires_typing": true,
@@ -60,8 +58,10 @@
         "com.sun.star.registry.RegistryValueType"
       ]
     },
+    "imports": [
+      "uno"
+    ],
     "name": "XRegistryKey",
-    "imports": [],
     "namespace": "com.sun.star.registry",
     "extends": [
       "com.sun.star.uno.XInterface"
@@ -194,7 +194,7 @@
         },
         {
           "name": "getBinaryValue",
-          "returns": "typing.Tuple[int, ...]",
+          "returns": "uno.ByteSequence",
           "returns_origin": "sequence< byte >",
           "desc": [],
           "raises": [
@@ -249,8 +249,8 @@
         },
         {
           "name": "getLongListValue",
-          "returns": "typing.Tuple[int, ...]",
-          "returns_origin": "sequence< long >",
+          "returns": "uno.ByteSequence",
+          "returns_origin": "sequence< byte >",
           "desc": [],
           "raises": [
             "com.sun.star.registry.InvalidRegistryException",
@@ -432,7 +432,7 @@
           "args": [
             {
               "name": "value",
-              "type": "typing.Tuple[int, ...]",
+              "type": "uno.ByteSequence",
               "direction": "in",
               "origin": "sequence< byte >"
             }
@@ -453,9 +453,9 @@
           "args": [
             {
               "name": "seqValue",
-              "type": "typing.Tuple[int, ...]",
+              "type": "uno.ByteSequence",
               "direction": "in",
-              "origin": "sequence< long >"
+              "origin": "sequence< byte >"
             }
           ]
         },

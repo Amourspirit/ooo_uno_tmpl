@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.1.28",
+  "version": "0.1.32",
   "libre_office_ver": "7.2",
   "name": "XHalfFloatReadOnlyBitmap",
   "type": "interface",
@@ -45,12 +45,9 @@
     "quote": [
       "FloatingPointBitmapLayout_c66812df",
       "IntegerPoint2D_8f0dc2",
-      "IntegerRectangle2D_3c5c0f4d",
-      "typing.Tuple[int, ...]"
+      "IntegerRectangle2D_3c5c0f4d"
     ],
-    "typings": [
-      "typing.Tuple[int, ...]"
-    ],
+    "typings": [],
     "requires_typing": true,
     "full_imports": {
       "general": [
@@ -62,8 +59,10 @@
         "com.sun.star.rendering.FloatingPointBitmapLayout"
       ]
     },
+    "imports": [
+      "uno"
+    ],
     "name": "XHalfFloatReadOnlyBitmap",
-    "imports": [],
     "namespace": "com.sun.star.rendering",
     "extends": [
       "com.sun.star.rendering.XBitmap"
@@ -82,8 +81,8 @@
       "methods": [
         {
           "name": "getData",
-          "returns": "typing.Tuple[int, ...]",
-          "returns_origin": "sequence< short >",
+          "returns": "uno.ByteSequence",
+          "returns_origin": "sequence< byte >",
           "desc": [
             "Query the raw data of this bitmap.",
             "",
@@ -114,8 +113,8 @@
         },
         {
           "name": "getPixel",
-          "returns": "typing.Tuple[int, ...]",
-          "returns_origin": "sequence< short >",
+          "returns": "uno.ByteSequence",
+          "returns_origin": "sequence< byte >",
           "desc": [
             "Get a single pixel of the bitmap, returning its color value."
           ],
