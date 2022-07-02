@@ -75,6 +75,9 @@ class ${safe_name}($self.get_class_inherits($name, $inherits)):
         `API $name <$link>`_
 #end if
     """
+#if $is_method is False and $is_types is False and $is_properties is False
+    ...
+#end if
 #if $is_method
 #set $methods = $attribs['methods']
     #for $method in $methods
@@ -100,6 +103,7 @@ class ${safe_name}($self.get_class_inherits($name, $inherits)):
         #end for
     #end if
         """
+        ...
     #end for
 #end if
 #if $is_types
@@ -126,6 +130,7 @@ class ${safe_name}($self.get_class_inherits($name, $inherits)):
     #end for
     #end if
         """
+        ...
 #end for
 #end if
 #if $is_properties
@@ -152,6 +157,7 @@ class ${safe_name}($self.get_class_inherits($name, $inherits)):
     #end for
     #end if
         """
+        ...
 #end for
 #end if
 
