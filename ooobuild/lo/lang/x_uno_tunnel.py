@@ -45,6 +45,7 @@ class XUnoTunnel(XInterface_8f010a43):
         
         an address to some C++ object.
         """
+        ...
 
 __all__ = ['XUnoTunnel']
 

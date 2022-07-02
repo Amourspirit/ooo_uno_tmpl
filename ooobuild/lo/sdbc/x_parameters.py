@@ -58,6 +58,7 @@ class XParameters(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def setArray(self, parameterIndex: int, x: 'XArray_708108fb') -> None:
         """
@@ -66,6 +67,7 @@ class XParameters(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def setBinaryStream(self, parameterIndex: int, x: 'XInputStream_98d40ab4', length: int) -> None:
         """
@@ -76,6 +78,7 @@ class XParameters(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def setBlob(self, parameterIndex: int, x: 'XBlob_6773087b') -> None:
         """
@@ -84,6 +87,7 @@ class XParameters(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def setBoolean(self, parameterIndex: int, x: bool) -> None:
         """
@@ -94,6 +98,7 @@ class XParameters(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def setByte(self, parameterIndex: int, x: int) -> None:
         """
@@ -104,6 +109,7 @@ class XParameters(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def setBytes(self, parameterIndex: int, x: uno.ByteSequence) -> None:
         """
@@ -114,6 +120,7 @@ class XParameters(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def setCharacterStream(self, parameterIndex: int, x: 'XInputStream_98d40ab4', length: int) -> None:
         """
@@ -124,6 +131,7 @@ class XParameters(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def setClob(self, parameterIndex: int, x: 'XClob_6777087c') -> None:
         """
@@ -132,6 +140,7 @@ class XParameters(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def setDate(self, parameterIndex: int, x: 'Date_60040844') -> None:
         """
@@ -142,6 +151,7 @@ class XParameters(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def setDouble(self, parameterIndex: int, x: float) -> None:
         """
@@ -152,6 +162,7 @@ class XParameters(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def setFloat(self, parameterIndex: int, x: float) -> None:
         """
@@ -162,6 +173,7 @@ class XParameters(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def setInt(self, parameterIndex: int, x: int) -> None:
         """
@@ -172,6 +184,7 @@ class XParameters(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def setLong(self, parameterIndex: int, x: int) -> None:
         """
@@ -182,6 +195,7 @@ class XParameters(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def setNull(self, parameterIndex: int, sqlType: int) -> None:
         """
@@ -190,6 +204,7 @@ class XParameters(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def setObject(self, parameterIndex: int, x: object) -> None:
         """
@@ -202,6 +217,7 @@ class XParameters(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def setObjectNull(self, parameterIndex: int, sqlType: int, typeName: str) -> None:
         """
@@ -214,6 +230,7 @@ class XParameters(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def setObjectWithInfo(self, parameterIndex: int, x: object, targetSqlType: int, scale: int) -> None:
         """
@@ -226,6 +243,7 @@ class XParameters(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def setRef(self, parameterIndex: int, x: 'XRef_5f110819') -> None:
         """
@@ -234,6 +252,7 @@ class XParameters(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def setShort(self, parameterIndex: int, x: int) -> None:
         """
@@ -244,6 +263,7 @@ class XParameters(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def setString(self, parameterIndex: int, x: str) -> None:
         """
@@ -254,6 +274,7 @@ class XParameters(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def setTime(self, parameterIndex: int, x: 'Time_604e0855') -> None:
         """
@@ -264,6 +285,7 @@ class XParameters(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def setTimestamp(self, parameterIndex: int, x: 'DateTime_84de09d3') -> None:
         """
@@ -274,6 +296,7 @@ class XParameters(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
 
 __all__ = ['XParameters']
 

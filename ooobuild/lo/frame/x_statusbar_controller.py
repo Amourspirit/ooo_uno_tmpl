@@ -53,16 +53,19 @@ class XStatusbarController(XStatusListener_e2740d35, XComponent_98dc0ab5, XIniti
         """
         is called by a status bar if the user clicked with mouse into the field of the corresponding control.
         """
+        ...
     @abstractmethod
     def command(self, aPos: 'Point_5fb2085e', nCommand: int, bMouseEvent: bool, aData: object) -> None:
         """
         is called by a status bar if a command event is available for a controller.
         """
+        ...
     @abstractmethod
     def doubleClick(self, aPos: 'Point_5fb2085e') -> None:
         """
         is called by a status bar if the user double-clicked with mouse into the field of the corresponding control.
         """
+        ...
     @abstractmethod
     def mouseButtonDown(self, aMouseEvent: 'MouseEvent_8f430a5f') -> bool:
         """
@@ -70,6 +73,7 @@ class XStatusbarController(XStatusListener_e2740d35, XComponent_98dc0ab5, XIniti
         
         If the controller has captured the mouse input this function is also called when the mouse position is not within the controller.
         """
+        ...
     @abstractmethod
     def mouseButtonUp(self, aMouseEvent: 'MouseEvent_8f430a5f') -> bool:
         """
@@ -77,6 +81,7 @@ class XStatusbarController(XStatusListener_e2740d35, XComponent_98dc0ab5, XIniti
         
         If the controller has captured the mouse input this function is also called when the mouse position is not within the controller.
         """
+        ...
     @abstractmethod
     def mouseMove(self, aMouseEvent: 'MouseEvent_8f430a5f') -> bool:
         """
@@ -84,11 +89,13 @@ class XStatusbarController(XStatusListener_e2740d35, XComponent_98dc0ab5, XIniti
         
         If the controller has captured the mouse input this function is also called when the mouse position is not within the controller.
         """
+        ...
     @abstractmethod
     def paint(self, xGraphics: 'XGraphics_842309dd', OutputRectangle: 'Rectangle_84b109e9', nStyle: int) -> None:
         """
         is called by a status bar if the controller has to update the visual representation.
         """
+        ...
 
 __all__ = ['XStatusbarController']
 

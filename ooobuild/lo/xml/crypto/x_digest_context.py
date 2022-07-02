@@ -48,6 +48,7 @@ class XDigestContext(XInterface_8f010a43):
         Raises:
             com.sun.star.lang.DisposedException: ``DisposedException``
         """
+        ...
     @abstractmethod
     def updateDigest(self, aData: uno.ByteSequence) -> None:
         """
@@ -56,6 +57,7 @@ class XDigestContext(XInterface_8f010a43):
         Raises:
             com.sun.star.lang.DisposedException: ``DisposedException``
         """
+        ...
 
 __all__ = ['XDigestContext']
 

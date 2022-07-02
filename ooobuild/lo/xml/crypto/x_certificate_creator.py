@@ -46,6 +46,7 @@ class XCertificateCreator(XInterface_8f010a43):
         """
         Adds a certificate to the certificate database with the trust provided by the trust string.
         """
+        ...
     @abstractmethod
     def createDERCertificateWithPrivateKey(self, aDerCertificate: uno.ByteSequence, aPrivateKey: uno.ByteSequence) -> 'XCertificate_e55b0d3b':
         """
@@ -54,6 +55,7 @@ class XCertificateCreator(XInterface_8f010a43):
         Raises:
             com.sun.star.uno.SecurityException: ``SecurityException``
         """
+        ...
 
 __all__ = ['XCertificateCreator']
 

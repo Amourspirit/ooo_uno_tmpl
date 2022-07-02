@@ -45,11 +45,13 @@ class XDataContainer(XIndexContainer_1c040ebe):
         """
         returns the content type (MIME Type) of the data container.
         """
+        ...
     @abstractmethod
     def getData(self) -> uno.ByteSequence:
         """
         returns the data of the data container.
         """
+        ...
     @abstractmethod
     def getDataURL(self) -> str:
         """
@@ -57,16 +59,19 @@ class XDataContainer(XIndexContainer_1c040ebe):
         
         Do not use!
         """
+        ...
     @abstractmethod
     def setContentType(self, aType: str) -> None:
         """
         sets the content type (MIME Type) of the data container.
         """
+        ...
     @abstractmethod
     def setData(self, aData: uno.ByteSequence) -> None:
         """
         sets the data of the data container.
         """
+        ...
     @abstractmethod
     def setDataURL(self, aURL: str) -> None:
         """
@@ -74,6 +79,7 @@ class XDataContainer(XIndexContainer_1c040ebe):
         
         Do not use!
         """
+        ...
 
 __all__ = ['XDataContainer']
 

@@ -49,6 +49,7 @@ class XSecurityEnvironment(XInterface_8f010a43):
         Raises:
             com.sun.star.uno.SecurityException: ``SecurityException``
         """
+        ...
     @abstractmethod
     def createCertificateFromAscii(self, asciiCertificate: str) -> 'XCertificate_e55b0d3b':
         """
@@ -57,6 +58,7 @@ class XSecurityEnvironment(XInterface_8f010a43):
         Raises:
             com.sun.star.uno.SecurityException: ``SecurityException``
         """
+        ...
     @abstractmethod
     def createCertificateFromRaw(self, rawCertificate: uno.ByteSequence) -> 'XCertificate_e55b0d3b':
         """
@@ -65,6 +67,7 @@ class XSecurityEnvironment(XInterface_8f010a43):
         Raises:
             com.sun.star.uno.SecurityException: ``SecurityException``
         """
+        ...
     @abstractmethod
     def getAllCertificates(self) -> 'typing.Tuple[XCertificate_e55b0d3b, ...]':
         """
@@ -77,6 +80,7 @@ class XSecurityEnvironment(XInterface_8f010a43):
         Raises:
             com.sun.star.uno.SecurityException: ``SecurityException``
         """
+        ...
     @abstractmethod
     def getCertificate(self, issuerName: str, serialNumber: uno.ByteSequence) -> 'XCertificate_e55b0d3b':
         """
@@ -85,6 +89,7 @@ class XSecurityEnvironment(XInterface_8f010a43):
         Raises:
             com.sun.star.uno.SecurityException: ``SecurityException``
         """
+        ...
     @abstractmethod
     def getCertificateCharacters(self, xCertificate: 'XCertificate_e55b0d3b') -> int:
         """
@@ -97,6 +102,7 @@ class XSecurityEnvironment(XInterface_8f010a43):
         Raises:
             com.sun.star.uno.SecurityException: ``SecurityException``
         """
+        ...
     @abstractmethod
     def getPersonalCertificates(self) -> 'typing.Tuple[XCertificate_e55b0d3b, ...]':
         """
@@ -105,11 +111,13 @@ class XSecurityEnvironment(XInterface_8f010a43):
         Raises:
             com.sun.star.uno.SecurityException: ``SecurityException``
         """
+        ...
     @abstractmethod
     def getSecurityEnvironmentInformation(self) -> str:
         """
         Get the Environment detail information.
         """
+        ...
     @abstractmethod
     def verifyCertificate(self, xEECertificate: 'XCertificate_e55b0d3b', intermediateCertificates: 'typing.Tuple[XCertificate_e55b0d3b, ...]') -> int:
         """
@@ -120,6 +128,7 @@ class XSecurityEnvironment(XInterface_8f010a43):
         Raises:
             com.sun.star.uno.SecurityException: ``SecurityException``
         """
+        ...
 
 __all__ = ['XSecurityEnvironment']
 

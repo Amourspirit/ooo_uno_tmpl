@@ -64,6 +64,7 @@ class ObjectInspector(XObjectInspector_3c860faa):
         
             OOo 2.2
         """
+        ...
     @abstractmethod
     def createWithModel(self, Model: 'XObjectInspectorModel_9077119b') -> None:
         """
@@ -76,6 +77,7 @@ class ObjectInspector(XObjectInspector_3c860faa):
         Raises:
             com.sun.star.lang.IllegalArgumentException: ``IllegalArgumentException``
         """
+        ...
 
 
 __all__ = ['ObjectInspector']

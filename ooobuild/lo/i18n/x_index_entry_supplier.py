@@ -43,6 +43,7 @@ class XIndexEntrySupplier(XInterface_8f010a43):
         
         For example, in English locale it returns \"K\" for \"keyboard\"
         """
+        ...
     @abstractmethod
     def getIndexFollowPageWord(self, bMorePages: bool, aLocale: 'Locale_70d308fa') -> str:
         """
@@ -50,6 +51,7 @@ class XIndexEntrySupplier(XInterface_8f010a43):
         
         For example, in English locale it returns \"p.\" for bMorePages == FALSE \"pp.\" for bMorePages == TRUE
         """
+        ...
 
 __all__ = ['XIndexEntrySupplier']
 

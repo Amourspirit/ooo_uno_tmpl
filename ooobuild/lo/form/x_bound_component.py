@@ -42,6 +42,7 @@ class XBoundComponent(XUpdateBroadcaster_fc910de1):
         """
         commits the content of the component into the data source it is bound to.
         """
+        ...
 
 __all__ = ['XBoundComponent']
 

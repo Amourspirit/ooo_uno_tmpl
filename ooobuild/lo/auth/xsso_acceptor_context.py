@@ -53,6 +53,7 @@ class XSSOAcceptorContext(XSSOContext_a2840aec):
             InvalidContextException: ``InvalidContextException``
             AuthenticationFailedException: ``AuthenticationFailedException``
         """
+        ...
 
 __all__ = ['XSSOAcceptorContext']
 

@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.2.9",
+  "version": "0.2.10",
   "libre_office_ver": "7.3",
   "name": "XScript",
   "type": "interface",
@@ -27,11 +27,9 @@
       "com.sun.star.uno.XInterface": "XInterface_8f010a43"
     },
     "quote": [
-      "typing.Tuple[int, ...]",
       "typing.Tuple[object, ...]"
     ],
     "typings": [
-      "typing.Tuple[int, ...]",
       "typing.Tuple[object, ...]"
     ],
     "requires_typing": true,
@@ -41,7 +39,9 @@
       ],
       "typing": []
     },
-    "imports": [],
+    "imports": [
+      "uno"
+    ],
     "name": "XScript",
     "namespace": "com.sun.star.script.provider",
     "extends": [
@@ -75,9 +75,9 @@
             },
             {
               "name": "aOutParamIndex",
-              "type": "typing.Tuple[int, ...]",
+              "type": "uno.ByteSequence",
               "direction": "out",
-              "origin": "sequence< short >"
+              "origin": "sequence< byte >"
             },
             {
               "name": "aOutParam",

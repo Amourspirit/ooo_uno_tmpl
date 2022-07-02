@@ -43,11 +43,13 @@ class XStarBasicDialogInfo(XInterface_8f010a43):
         """
         returns binary data describing the SIDialog in SBX stream format
         """
+        ...
     @abstractmethod
     def getName(self) -> str:
         """
         returns the name of the dialog
         """
+        ...
 
 __all__ = ['XStarBasicDialogInfo']
 

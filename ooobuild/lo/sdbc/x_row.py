@@ -55,6 +55,7 @@ class XRow(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def getBinaryStream(self, columnIndex: int) -> 'XInputStream_98d40ab4':
         """
@@ -67,6 +68,7 @@ class XRow(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def getBlob(self, columnIndex: int) -> 'XBlob_6773087b':
         """
@@ -75,6 +77,7 @@ class XRow(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def getBoolean(self, columnIndex: int) -> bool:
         """
@@ -83,6 +86,7 @@ class XRow(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def getByte(self, columnIndex: int) -> int:
         """
@@ -91,6 +95,7 @@ class XRow(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def getBytes(self, columnIndex: int) -> uno.ByteSequence:
         """
@@ -101,6 +106,7 @@ class XRow(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def getCharacterStream(self, columnIndex: int) -> 'XInputStream_98d40ab4':
         """
@@ -113,6 +119,7 @@ class XRow(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def getClob(self, columnIndex: int) -> 'XClob_6777087c':
         """
@@ -121,6 +128,7 @@ class XRow(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def getDate(self, columnIndex: int) -> 'Date_60040844':
         """
@@ -129,6 +137,7 @@ class XRow(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def getDouble(self, columnIndex: int) -> float:
         """
@@ -137,6 +146,7 @@ class XRow(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def getFloat(self, columnIndex: int) -> float:
         """
@@ -145,6 +155,7 @@ class XRow(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def getInt(self, columnIndex: int) -> int:
         """
@@ -153,6 +164,7 @@ class XRow(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def getLong(self, columnIndex: int) -> int:
         """
@@ -161,6 +173,7 @@ class XRow(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def getObject(self, columnIndex: int, typeMap: 'XNameAccess_e2ab0cf6') -> object:
         """
@@ -171,6 +184,7 @@ class XRow(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def getRef(self, columnIndex: int) -> 'XRef_5f110819':
         """
@@ -179,6 +193,7 @@ class XRow(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def getShort(self, columnIndex: int) -> int:
         """
@@ -187,6 +202,7 @@ class XRow(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def getString(self, columnIndex: int) -> str:
         """
@@ -195,6 +211,7 @@ class XRow(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def getTime(self, columnIndex: int) -> 'Time_604e0855':
         """
@@ -203,6 +220,7 @@ class XRow(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def getTimestamp(self, columnIndex: int) -> 'DateTime_84de09d3':
         """
@@ -211,6 +229,7 @@ class XRow(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def wasNull(self) -> bool:
         """
@@ -221,6 +240,7 @@ class XRow(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
 
 __all__ = ['XRow']
 

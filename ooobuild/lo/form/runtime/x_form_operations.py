@@ -61,6 +61,7 @@ class XFormOperations(XComponent_98dc0ab5):
         Raises:
             com.sun.star.sdbc.SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def commitCurrentRecord(self, RecordInserted: bool) -> bool:
         """
@@ -71,6 +72,7 @@ class XFormOperations(XComponent_98dc0ab5):
         Raises:
             com.sun.star.sdbc.SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def execute(self, Feature: int) -> None:
         """
@@ -81,6 +83,7 @@ class XFormOperations(XComponent_98dc0ab5):
             : ````
             com.sun.star.lang.WrappedTargetException: ``WrappedTargetException``
         """
+        ...
     @abstractmethod
     def executeWithArguments(self, Feature: int, Arguments: 'typing.Tuple[NamedValue_a37a0af3, ...]') -> None:
         """
@@ -91,6 +94,7 @@ class XFormOperations(XComponent_98dc0ab5):
             : ````
             com.sun.star.lang.WrappedTargetException: ``WrappedTargetException``
         """
+        ...
     @abstractmethod
     def getState(self, Feature: int) -> 'FeatureState_1c3f0ebb':
         """
@@ -98,6 +102,7 @@ class XFormOperations(XComponent_98dc0ab5):
         
         You would usually use this to update some user interface to reflect this state. For instance, you could imagine a toolbar button which is associated with a given feature. This button would be enabled if and only if the respective feature is currently available, and be checked if and only if the feature state is a boolean evaluating to TRUE.
         """
+        ...
     @abstractmethod
     def isEnabled(self, Feature: int) -> bool:
         """
@@ -105,6 +110,7 @@ class XFormOperations(XComponent_98dc0ab5):
         
         Calling this is equivalent to calling getState(), and evaluating the FeatureState.Enabled member.
         """
+        ...
     @abstractmethod
     def isInsertionRow(self) -> bool:
         """
@@ -115,6 +121,7 @@ class XFormOperations(XComponent_98dc0ab5):
         Raises:
             com.sun.star.lang.WrappedTargetException: ``WrappedTargetException``
         """
+        ...
     @abstractmethod
     def isModifiedRow(self) -> bool:
         """
@@ -125,6 +132,7 @@ class XFormOperations(XComponent_98dc0ab5):
         Raises:
             com.sun.star.lang.WrappedTargetException: ``WrappedTargetException``
         """
+        ...
     @abstractproperty
     def Controller(self) -> 'XFormController_4a570ffe':
         """
@@ -132,12 +140,14 @@ class XFormOperations(XComponent_98dc0ab5):
         
         Note that it is possible to operate on a user interface form without actually having access to the form controller instance. However, in this case some functionality will not be available. In particular, every feature which relies on the active control of the controller might be of limited use.
         """
+        ...
 
     @abstractproperty
     def Cursor(self) -> 'XRowSet_7a090960':
         """
         provides access to the cursor of the form the instance is operating on.
         """
+        ...
 
     @abstractproperty
     def FeatureInvalidation(self) -> 'XFeatureInvalidation_9f4211f4':
@@ -150,12 +160,14 @@ class XFormOperations(XComponent_98dc0ab5):
         
         Note that the instance does not actually notify changes in the feature states, but only potential changes: It's up to the callee to react on this appropriately. This is since OpenOffice.org's application framework features own mechanisms to cache and invalidate feature states, so we do not burden this implementation here with such mechanisms.
         """
+        ...
 
     @abstractproperty
     def UpdateCursor(self) -> 'XResultSetUpdate_e0fb0d0a':
         """
         provides access to the update cursor of the form the instance is operating on.
         """
+        ...
 
 
 __all__ = ['XFormOperations']

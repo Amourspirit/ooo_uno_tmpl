@@ -46,16 +46,19 @@ class XVndSunStarScriptUrl(XInterface_8f010a43):
         """
         returns the name part of this URL.
         """
+        ...
     @abstractmethod
     def getParameter(self, key: str) -> str:
         """
         returns the value of a parameter with a given key.
         """
+        ...
     @abstractmethod
     def hasParameter(self, key: str) -> bool:
         """
         returns whether this URL has a parameter with a given key.
         """
+        ...
     @abstractmethod
     def setName(self, name: str) -> None:
         """
@@ -68,6 +71,7 @@ class XVndSunStarScriptUrl(XInterface_8f010a43):
         Raises:
             com.sun.star.lang.IllegalArgumentException: ``IllegalArgumentException``
         """
+        ...
     @abstractmethod
     def setParameter(self, key: str, value: str) -> None:
         """
@@ -80,6 +84,7 @@ class XVndSunStarScriptUrl(XInterface_8f010a43):
         Raises:
             com.sun.star.lang.IllegalArgumentException: ``IllegalArgumentException``
         """
+        ...
 
 __all__ = ['XVndSunStarScriptUrl']
 

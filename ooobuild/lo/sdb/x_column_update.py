@@ -48,6 +48,7 @@ class XColumnUpdate(XInterface_8f010a43):
         Raises:
             com.sun.star.sdbc.SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def updateBoolean(self, x: bool) -> None:
         """
@@ -56,6 +57,7 @@ class XColumnUpdate(XInterface_8f010a43):
         Raises:
             com.sun.star.sdbc.SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def updateByte(self, x: int) -> None:
         """
@@ -64,6 +66,7 @@ class XColumnUpdate(XInterface_8f010a43):
         Raises:
             com.sun.star.sdbc.SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def updateBytes(self, x: uno.ByteSequence) -> None:
         """
@@ -72,6 +75,7 @@ class XColumnUpdate(XInterface_8f010a43):
         Raises:
             com.sun.star.sdbc.SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def updateCharacterStream(self, x: 'XInputStream_98d40ab4', length: int) -> None:
         """
@@ -80,6 +84,7 @@ class XColumnUpdate(XInterface_8f010a43):
         Raises:
             com.sun.star.sdbc.SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def updateDate(self, x: 'Date_60040844') -> None:
         """
@@ -88,6 +93,7 @@ class XColumnUpdate(XInterface_8f010a43):
         Raises:
             com.sun.star.sdbc.SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def updateDouble(self, x: float) -> None:
         """
@@ -96,6 +102,7 @@ class XColumnUpdate(XInterface_8f010a43):
         Raises:
             com.sun.star.sdbc.SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def updateFloat(self, x: float) -> None:
         """
@@ -104,6 +111,7 @@ class XColumnUpdate(XInterface_8f010a43):
         Raises:
             com.sun.star.sdbc.SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def updateInt(self, x: int) -> None:
         """
@@ -112,6 +120,7 @@ class XColumnUpdate(XInterface_8f010a43):
         Raises:
             com.sun.star.sdbc.SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def updateLong(self, x: int) -> None:
         """
@@ -120,6 +129,7 @@ class XColumnUpdate(XInterface_8f010a43):
         Raises:
             com.sun.star.sdbc.SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def updateNull(self) -> None:
         """
@@ -128,6 +138,7 @@ class XColumnUpdate(XInterface_8f010a43):
         Raises:
             com.sun.star.sdbc.SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def updateNumericObject(self, x: object, scale: int) -> None:
         """
@@ -136,6 +147,7 @@ class XColumnUpdate(XInterface_8f010a43):
         Raises:
             com.sun.star.sdbc.SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def updateObject(self, x: object) -> None:
         """
@@ -144,6 +156,7 @@ class XColumnUpdate(XInterface_8f010a43):
         Raises:
             com.sun.star.sdbc.SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def updateShort(self, x: int) -> None:
         """
@@ -152,6 +165,7 @@ class XColumnUpdate(XInterface_8f010a43):
         Raises:
             com.sun.star.sdbc.SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def updateString(self, x: str) -> None:
         """
@@ -160,6 +174,7 @@ class XColumnUpdate(XInterface_8f010a43):
         Raises:
             com.sun.star.sdbc.SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def updateTime(self, x: 'Time_604e0855') -> None:
         """
@@ -168,6 +183,7 @@ class XColumnUpdate(XInterface_8f010a43):
         Raises:
             com.sun.star.sdbc.SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def updateTimestamp(self, x: 'DateTime_84de09d3') -> None:
         """
@@ -176,6 +192,7 @@ class XColumnUpdate(XInterface_8f010a43):
         Raises:
             com.sun.star.sdbc.SQLException: ``SQLException``
         """
+        ...
 
 __all__ = ['XColumnUpdate']
 

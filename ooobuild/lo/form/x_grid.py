@@ -44,11 +44,13 @@ class XGrid(XInterface_8f010a43):
         """
         retrieves the current column position.
         """
+        ...
     @abstractmethod
     def setCurrentColumnPosition(self, nPos: int) -> None:
         """
         sets the current column position.
         """
+        ...
 
 __all__ = ['XGrid']
 

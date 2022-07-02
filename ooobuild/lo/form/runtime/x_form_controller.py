@@ -90,6 +90,7 @@ class XFormController(XTabController_bacd0be7, XChild_a6390b07, XEnumerationAcce
         """
         adds the specified listener to receive notifications whenever the activation state of the controller changes.
         """
+        ...
     @abstractmethod
     def addChildController(self, ChildController: 'XFormController') -> None:
         """
@@ -98,22 +99,26 @@ class XFormController(XTabController_bacd0be7, XChild_a6390b07, XEnumerationAcce
         Raises:
             com.sun.star.lang.IllegalArgumentException: ``IllegalArgumentException``
         """
+        ...
     @abstractmethod
     def removeActivateListener(self, Listener: 'XFormControllerListener_49ba1012') -> None:
         """
         removes the specified listener from the list of components to receive notifications whenever the activation state of the controller changes.
         """
+        ...
     @abstractproperty
     def Context(self) -> 'XFormControllerContext_c54112e3':
         """
         allows to delegate certain tasks to the context of the form controller
         """
+        ...
 
     @abstractproperty
     def CurrentControl(self) -> 'XControl_7a9c098d':
         """
         provides access to the currently active control
         """
+        ...
 
     @abstractproperty
     def FormOperations(self) -> 'XFormOperations_4a450ffe':
@@ -122,12 +127,14 @@ class XFormController(XTabController_bacd0be7, XChild_a6390b07, XEnumerationAcce
         
         This instance can be used, for instance, to determine the current state of certain form features.
         """
+        ...
 
     @abstractproperty
     def InteractionHandler(self) -> 'XInteractionHandler_bf80e51':
         """
         used (if not NULL) for user interactions triggered by the form controller.
         """
+        ...
 
 
 __all__ = ['XFormController']

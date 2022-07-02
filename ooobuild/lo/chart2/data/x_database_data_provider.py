@@ -53,6 +53,7 @@ class XDatabaseDataProvider(XPropertySet_bc180bfa, XDataProvider_122f0e31, XRang
         
         If the report is no sub report (e.g. its parent is not a report itself), this property is not evaluated.
         """
+        ...
 
     @abstractproperty
     def MasterFields(self) -> 'typing.Tuple[str, ...]':
@@ -63,18 +64,21 @@ class XDatabaseDataProvider(XPropertySet_bc180bfa, XDataProvider_122f0e31, XRang
         
         If the report is no sub report (e.g. its parent is not a report itself), this property is not evaluated.
         """
+        ...
 
     @abstractproperty
     def ActiveConnection(self) -> 'XConnection_a36a0b0c':
         """
         specifies the active connection which is used to create the resulting report.
         """
+        ...
 
     @abstractproperty
     def ApplyFilter(self) -> bool:
         """
         indicates whether the filter should be applied or not, default is FALSE.
         """
+        ...
 
     @abstractproperty
     def Command(self) -> str:
@@ -83,6 +87,7 @@ class XDatabaseDataProvider(XPropertySet_bc180bfa, XDataProvider_122f0e31, XRang
         
         In case of a CommandType of CommandType.COMMAND, means in case the Command specifies an SQL statement, the inherited com.sun.star.sdbc.RowSet.EscapeProcessing becomes relevant:It then can be to used to specify whether the SQL statement should be analyzed on the client side before sending it to the database server.The default value for com.sun.star.sdbc.RowSet.EscapeProcessing is TRUE. By switching it to FALSE, you can pass backend-specific SQL statements, which are not standard SQL, to your database.
         """
+        ...
 
     @abstractproperty
     def CommandType(self) -> int:
@@ -93,12 +98,14 @@ class XDatabaseDataProvider(XPropertySet_bc180bfa, XDataProvider_122f0e31, XRang
         
         This property is only meaningful together with the Command property, thus either both or none of them are present.
         """
+        ...
 
     @abstractproperty
     def DataSourceName(self) -> str:
         """
         is the name of the data source to use, this could be a named data source or the URL of a data access component.
         """
+        ...
 
     @abstractproperty
     def EscapeProcessing(self) -> bool:
@@ -109,6 +116,7 @@ class XDatabaseDataProvider(XPropertySet_bc180bfa, XDataProvider_122f0e31, XRang
         
         This property is usually present together with the Command and CommandType properties, and is evaluated if and only if CommandType equals CommandType.COMMAND.
         """
+        ...
 
     @abstractproperty
     def Filter(self) -> str:
@@ -121,24 +129,28 @@ class XDatabaseDataProvider(XPropertySet_bc180bfa, XDataProvider_122f0e31, XRang
         
         Note that the Filter property does not make sense if a resultSet has been specified in the DataAccessDescriptor.
         """
+        ...
 
     @abstractproperty
     def GroupBy(self) -> str:
         """
         additional group by for the row set
         """
+        ...
 
     @abstractproperty
     def HavingClause(self) -> str:
         """
         additional having clause for the row set
         """
+        ...
 
     @abstractproperty
     def Order(self) -> str:
         """
         is an additional sort order definition for a row set.
         """
+        ...
 
     @abstractproperty
     def RowLimit(self) -> int:
@@ -147,6 +159,7 @@ class XDatabaseDataProvider(XPropertySet_bc180bfa, XDataProvider_122f0e31, XRang
         
         A value of zero implies that no limit exists.
         """
+        ...
 
 
 __all__ = ['XDatabaseDataProvider']

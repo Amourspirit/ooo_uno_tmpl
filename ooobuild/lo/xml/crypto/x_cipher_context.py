@@ -53,6 +53,7 @@ class XCipherContext(XInterface_8f010a43):
             com.sun.star.lang.IllegalArgumentException: ``IllegalArgumentException``
             com.sun.star.lang.DisposedException: ``DisposedException``
         """
+        ...
     @abstractmethod
     def finalizeCipherContextAndDispose(self) -> uno.ByteSequence:
         """
@@ -61,6 +62,7 @@ class XCipherContext(XInterface_8f010a43):
         Raises:
             com.sun.star.lang.DisposedException: ``DisposedException``
         """
+        ...
 
 __all__ = ['XCipherContext']
 

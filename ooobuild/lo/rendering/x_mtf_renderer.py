@@ -37,10 +37,12 @@ class XMtfRenderer(XInterface_8f010a43):
     def draw(self, fScaleX: float, fScaleY: float) -> None:
         """
         """
+        ...
     @abstractmethod
     def setMetafile(self, aMtf: uno.ByteSequence) -> None:
         """
         """
+        ...
 
 __all__ = ['XMtfRenderer']
 

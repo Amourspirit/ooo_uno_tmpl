@@ -19,6 +19,7 @@
 # Libre Office Version: 7.3
 # Namespace: com.sun.star.util
 import typing
+import uno
 from abc import abstractmethod
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
@@ -46,21 +47,25 @@ class XAtomServer(XInterface_8f010a43):
         """
         registers or searches for a string
         """
+        ...
     @abstractmethod
     def getAtomDescriptions(self, atoms: 'typing.Tuple[AtomClassRequest_e2a60d36, ...]') -> 'typing.Tuple[str, ...]':
         """
         returns the strings for an arbitrary amount of atoms of multiple classes
         """
+        ...
     @abstractmethod
     def getClass(self, atomClass: int) -> 'typing.Tuple[AtomDescription_d6080cdb, ...]':
         """
         returns a whole atom class
         """
+        ...
     @abstractmethod
-    def getClasses(self, atomClasses: 'typing.Tuple[int, ...]') -> 'typing.Tuple[typing.Tuple[AtomDescription_d6080cdb, ...], ...]':
+    def getClasses(self, atomClasses: uno.ByteSequence) -> 'typing.Tuple[typing.Tuple[AtomDescription_d6080cdb, ...], ...]':
         """
         returns multiple atom classes
         """
+        ...
     @abstractmethod
     def getRecentAtoms(self, atomClass: int, atom: int) -> 'typing.Tuple[AtomDescription_d6080cdb, ...]':
         """
@@ -68,6 +73,7 @@ class XAtomServer(XInterface_8f010a43):
         
         Hint to implementor: using ascending atoms is the easiest way to decide, which atoms are recent.
         """
+        ...
 
 __all__ = ['XAtomServer']
 

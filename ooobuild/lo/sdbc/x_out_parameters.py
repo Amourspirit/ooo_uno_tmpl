@@ -47,6 +47,7 @@ class XOutParameters(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def registerOutParameter(self, parameterIndex: int, sqlType: int, typeName: str) -> None:
         """
@@ -63,6 +64,7 @@ class XOutParameters(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
 
 __all__ = ['XOutParameters']
 

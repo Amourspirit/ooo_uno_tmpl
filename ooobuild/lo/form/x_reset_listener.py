@@ -43,11 +43,13 @@ class XResetListener(XEventListener_c7230c4a):
         """
         is invoked before a component is reset.
         """
+        ...
     @abstractmethod
     def resetted(self, rEvent: 'EventObject_a3d70b03') -> None:
         """
         is invoked when a component has been reset.
         """
+        ...
 
 __all__ = ['XResetListener']
 

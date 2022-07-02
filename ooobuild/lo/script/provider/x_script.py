@@ -19,6 +19,7 @@
 # Libre Office Version: 7.3
 # Namespace: com.sun.star.script.provider
 import typing
+import uno
 from abc import abstractmethod
 from ...uno.x_interface import XInterface as XInterface_8f010a43
 
@@ -35,7 +36,7 @@ class XScript(XInterface_8f010a43):
     __pyunointerface__: str = 'com.sun.star.script.provider.XScript'
 
     @abstractmethod
-    def invoke(self, aParams: 'typing.Tuple[object, ...]', aOutParamIndex: 'typing.Tuple[int, ...]', aOutParam: 'typing.Tuple[object, ...]') -> object:
+    def invoke(self, aParams: 'typing.Tuple[object, ...]', aOutParamIndex: uno.ByteSequence, aOutParam: 'typing.Tuple[object, ...]') -> object:
         """
         invoke the script or function represented by the implementing object
         
@@ -48,6 +49,7 @@ class XScript(XInterface_8f010a43):
             : ````
             com.sun.star.reflection.InvocationTargetException: ``InvocationTargetException``
         """
+        ...
 
 __all__ = ['XScript']
 

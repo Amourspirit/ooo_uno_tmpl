@@ -49,6 +49,7 @@ class XBlob(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def getBytes(self, pos: int, length: int) -> uno.ByteSequence:
         """
@@ -59,6 +60,7 @@ class XBlob(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def length(self) -> int:
         """
@@ -67,6 +69,7 @@ class XBlob(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def position(self, pattern: uno.ByteSequence, start: int) -> int:
         """
@@ -77,6 +80,7 @@ class XBlob(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def positionOfBlob(self, pattern: 'XBlob', start: int) -> int:
         """
@@ -87,6 +91,7 @@ class XBlob(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
 
 __all__ = ['XBlob']
 

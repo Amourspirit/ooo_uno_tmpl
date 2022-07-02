@@ -80,6 +80,7 @@ class XFastParser(XInterface_8f010a43):
         Raises:
             com.sun.star.lang.IllegalArgumentException: ``IllegalArgumentException``
         """
+        ...
     @abstractmethod
     def parseStream(self, aInputSource: 'InputSource_c88c0c54') -> None:
         """
@@ -91,6 +92,7 @@ class XFastParser(XInterface_8f010a43):
             SAXException: ``SAXException``
             com.sun.star.io.IOException: ``IOException``
         """
+        ...
     @abstractmethod
     def registerNamespace(self, NamespaceURL: str, NamespaceToken: int) -> None:
         """
@@ -99,6 +101,7 @@ class XFastParser(XInterface_8f010a43):
         Raises:
             com.sun.star.lang.IllegalArgumentException: ``IllegalArgumentException``
         """
+        ...
     @abstractmethod
     def setCustomEntityNames(self, replacements: 'typing.Tuple[typing.Tuple[str, str], ...]') -> None:
         """
@@ -110,11 +113,13 @@ class XFastParser(XInterface_8f010a43):
         
             LibreOffice 7.1
         """
+        ...
     @abstractmethod
     def setEntityResolver(self, Resolver: 'XEntityResolver_fcf10dfa') -> None:
         """
         allows an application to register a DTD-Handler.
         """
+        ...
     @abstractmethod
     def setErrorHandler(self, Handler: 'XErrorHandler_e0860cf3') -> None:
         """
@@ -122,11 +127,13 @@ class XFastParser(XInterface_8f010a43):
         
         Note that the error handler can throw an exception when an error or warning occurs. Note that an exception is thrown by the parser when an unrecoverable (fatal) error occurs.
         """
+        ...
     @abstractmethod
     def setFastDocumentHandler(self, Handler: 'XFastDocumentHandler_454c0fb6') -> None:
         """
         Application must register a document event handler to get sax events for the parsed stream.
         """
+        ...
     @abstractmethod
     def setLocale(self, locale: 'Locale_70d308fa') -> None:
         """
@@ -134,15 +141,18 @@ class XFastParser(XInterface_8f010a43):
         
         Set the language of the error messages. Useful when the parsing errors will be presented to the user.
         """
+        ...
     @abstractmethod
     def setNamespaceHandler(self, Handler: 'XFastNamespaceHandler_549c1004') -> None:
         """
         """
+        ...
     @abstractmethod
     def setTokenHandler(self, Handler: 'XFastTokenHandler_17510e78') -> None:
         """
         must be registered to translate known XML names to integer tokens.
         """
+        ...
 
 __all__ = ['XFastParser']
 

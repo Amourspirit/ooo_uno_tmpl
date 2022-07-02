@@ -53,6 +53,7 @@ class XColumn(XInterface_8f010a43):
         Raises:
             com.sun.star.sdbc.SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def getBinaryStream(self) -> 'XInputStream_98d40ab4':
         """
@@ -65,6 +66,7 @@ class XColumn(XInterface_8f010a43):
         Raises:
             com.sun.star.sdbc.SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def getBlob(self) -> 'XBlob_6773087b':
         """
@@ -73,6 +75,7 @@ class XColumn(XInterface_8f010a43):
         Raises:
             com.sun.star.sdbc.SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def getBoolean(self) -> bool:
         """
@@ -81,6 +84,7 @@ class XColumn(XInterface_8f010a43):
         Raises:
             com.sun.star.sdbc.SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def getByte(self) -> int:
         """
@@ -89,6 +93,7 @@ class XColumn(XInterface_8f010a43):
         Raises:
             com.sun.star.sdbc.SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def getBytes(self) -> uno.ByteSequence:
         """
@@ -99,6 +104,7 @@ class XColumn(XInterface_8f010a43):
         Raises:
             com.sun.star.sdbc.SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def getCharacterStream(self) -> 'XInputStream_98d40ab4':
         """
@@ -111,6 +117,7 @@ class XColumn(XInterface_8f010a43):
         Raises:
             com.sun.star.sdbc.SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def getClob(self) -> 'XClob_6777087c':
         """
@@ -119,6 +126,7 @@ class XColumn(XInterface_8f010a43):
         Raises:
             com.sun.star.sdbc.SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def getDate(self) -> 'Date_60040844':
         """
@@ -127,6 +135,7 @@ class XColumn(XInterface_8f010a43):
         Raises:
             com.sun.star.sdbc.SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def getDouble(self) -> float:
         """
@@ -135,6 +144,7 @@ class XColumn(XInterface_8f010a43):
         Raises:
             com.sun.star.sdbc.SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def getFloat(self) -> float:
         """
@@ -143,6 +153,7 @@ class XColumn(XInterface_8f010a43):
         Raises:
             com.sun.star.sdbc.SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def getInt(self) -> int:
         """
@@ -151,6 +162,7 @@ class XColumn(XInterface_8f010a43):
         Raises:
             com.sun.star.sdbc.SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def getLong(self) -> int:
         """
@@ -159,6 +171,7 @@ class XColumn(XInterface_8f010a43):
         Raises:
             com.sun.star.sdbc.SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def getObject(self, typeMap: 'XNameAccess_e2ab0cf6') -> object:
         """
@@ -166,6 +179,7 @@ class XColumn(XInterface_8f010a43):
         Raises:
             com.sun.star.sdbc.SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def getRef(self) -> 'XRef_5f110819':
         """
@@ -174,6 +188,7 @@ class XColumn(XInterface_8f010a43):
         Raises:
             com.sun.star.sdbc.SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def getShort(self) -> int:
         """
@@ -182,6 +197,7 @@ class XColumn(XInterface_8f010a43):
         Raises:
             com.sun.star.sdbc.SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def getString(self) -> str:
         """
@@ -190,6 +206,7 @@ class XColumn(XInterface_8f010a43):
         Raises:
             com.sun.star.sdbc.SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def getTime(self) -> 'Time_604e0855':
         """
@@ -198,6 +215,7 @@ class XColumn(XInterface_8f010a43):
         Raises:
             com.sun.star.sdbc.SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def getTimestamp(self) -> 'DateTime_84de09d3':
         """
@@ -206,6 +224,7 @@ class XColumn(XInterface_8f010a43):
         Raises:
             com.sun.star.sdbc.SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def wasNull(self) -> bool:
         """
@@ -216,6 +235,7 @@ class XColumn(XInterface_8f010a43):
         Raises:
             com.sun.star.sdbc.SQLException: ``SQLException``
         """
+        ...
 
 __all__ = ['XColumn']
 

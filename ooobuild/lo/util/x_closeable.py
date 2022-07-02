@@ -55,6 +55,7 @@ class XCloseable(XCloseBroadcaster_ef230d7e):
         Raises:
             CloseVetoException: ``CloseVetoException``
         """
+        ...
 
 __all__ = ['XCloseable']
 

@@ -46,16 +46,19 @@ class XLibraryAccess(XInterface_8f010a43):
         """
         Get the compiled code of a function.
         """
+        ...
     @abstractmethod
     def getFunctionSource(self, aFunctionName: str) -> str:
         """
         get the source code of a function.
         """
+        ...
     @abstractmethod
     def getModuleCode(self, aModuleName: str) -> uno.ByteSequence:
         """
         Get the whole compiled code of a module.
         """
+        ...
     @abstractmethod
     def getModuleNames(self) -> 'typing.Tuple[str, ...]':
         """
@@ -63,21 +66,25 @@ class XLibraryAccess(XInterface_8f010a43):
         
         e.g., { \"UtilLibrary.ModuleDate\", \"UtilLibrary.Output\", ... }
         """
+        ...
     @abstractmethod
     def getModuleSource(self, aModulName: str) -> str:
         """
         get the source code of a module.
         """
+        ...
     @abstractmethod
     def isFunction(self, aFunctionName: str) -> bool:
         """
         returns TRUE, if the function is accessible through this library; otherwise it returns FALSE.
         """
+        ...
     @abstractmethod
     def isValidPath(self, aPathName: str) -> bool:
         """
         returns TRUE if a fully qualified function name begins with this name.
         """
+        ...
 
 __all__ = ['XLibraryAccess']
 

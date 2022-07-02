@@ -49,6 +49,7 @@ class XSQLData(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def readSQL(self, stream: 'XSQLInput_8c4109fc', typeName: str) -> None:
         """
@@ -61,6 +62,7 @@ class XSQLData(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def writeSQL(self, stream: 'XSQLOutput_96fb0a7d') -> None:
         """
@@ -71,6 +73,7 @@ class XSQLData(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
 
 __all__ = ['XSQLData']
 

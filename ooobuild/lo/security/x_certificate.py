@@ -50,6 +50,7 @@ class XCertificate(XInterface_8f010a43):
         """
         Find an extension with an object identifier.
         """
+        ...
     @abstractmethod
     def getCertificateUsage(self) -> int:
         """
@@ -57,53 +58,62 @@ class XCertificate(XInterface_8f010a43):
         
         The return value is a set of bits, as defined in RFC3280 for the KeyUsage BIT STRING. Note the bit and byte order used in ASN.1, so for instance the bit dataEncipherment in KeyUsage, \"bit 3\", corresponds to CERT_DATA_ENCIPHERMENT_KEY_USAGE in Win32 and KU_DATA_ENCIPHERMENT in NSS, both with value 0x10.
         """
+        ...
     @abstractproperty
     def Encoded(self) -> uno.ByteSequence:
         """
         the DER encoded form of the certificate
         """
+        ...
 
     @abstractproperty
     def Extensions(self) -> 'typing.Tuple[XCertificateExtension_6ead10f8, ...]':
         """
         all extensions of a certificate.
         """
+        ...
 
     @abstractproperty
     def IssuerUniqueID(self) -> uno.ByteSequence:
         """
         the issuer unique ID attribute of the certificate.
         """
+        ...
 
     @abstractproperty
     def MD5Thumbprint(self) -> uno.ByteSequence:
         """
         the MD5 thumbprint
         """
+        ...
 
     @abstractproperty
     def SHA1Thumbprint(self) -> uno.ByteSequence:
         """
         the SHA-1 thumbprint
         """
+        ...
 
     @abstractproperty
     def SerialNumber(self) -> uno.ByteSequence:
         """
         the serial number attribute of the certificate.
         """
+        ...
 
     @abstractproperty
     def SubjectPublicKeyValue(self) -> uno.ByteSequence:
         """
         the value of the subject public key
         """
+        ...
 
     @abstractproperty
     def SubjectUniqueID(self) -> uno.ByteSequence:
         """
         the subject unique ID attribute of the certificate.
         """
+        ...
 
     @abstractproperty
     def CertificateKind(self) -> 'CertificateKind_ffd0e69':
@@ -114,48 +124,56 @@ class XCertificate(XInterface_8f010a43):
         
             LibreOffice 5.4
         """
+        ...
 
     @abstractproperty
     def IssuerName(self) -> str:
         """
         the issuer name attribute of the certificate.
         """
+        ...
 
     @abstractproperty
     def NotValidAfter(self) -> 'DateTime_84de09d3':
         """
         the validity NotAfter date attribute of the certificate.
         """
+        ...
 
     @abstractproperty
     def NotValidBefore(self) -> 'DateTime_84de09d3':
         """
         the validity NotBefore date attribute of the certificate.
         """
+        ...
 
     @abstractproperty
     def SignatureAlgorithm(self) -> str:
         """
         the signature algorithm
         """
+        ...
 
     @abstractproperty
     def SubjectName(self) -> str:
         """
         the subject name attribute of the certificate.
         """
+        ...
 
     @abstractproperty
     def SubjectPublicKeyAlgorithm(self) -> str:
         """
         the algorithm of the subject public key
         """
+        ...
 
     @abstractproperty
     def Version(self) -> int:
         """
         the version number attribute of the certificate.
         """
+        ...
 
 
 __all__ = ['XCertificate']

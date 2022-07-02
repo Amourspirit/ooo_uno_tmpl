@@ -50,6 +50,7 @@ class XSingleSelectQueryAnalyzer(XInterface_8f010a43):
         
         The filter criteria returned is part of the where condition of the select command, but it does not contain the where token.
         """
+        ...
     @abstractmethod
     def getGroup(self) -> str:
         """
@@ -57,6 +58,7 @@ class XSingleSelectQueryAnalyzer(XInterface_8f010a43):
         
         The group criteria returned is part of the GROUP BY clause of the select command, but it does not contain the GROUP BY keyword .
         """
+        ...
     @abstractmethod
     def getGroupColumns(self) -> 'XIndexAccess_f0910d6d':
         """
@@ -64,6 +66,7 @@ class XSingleSelectQueryAnalyzer(XInterface_8f010a43):
         
         The columns returned from the GROUP BY clause.
         """
+        ...
     @abstractmethod
     def getHavingClause(self) -> str:
         """
@@ -71,6 +74,7 @@ class XSingleSelectQueryAnalyzer(XInterface_8f010a43):
         
         The HAVING filter criteria returned is part of the HAVING condition of the select command, but it does not contain the HAVING token.
         """
+        ...
     @abstractmethod
     def getOrder(self) -> str:
         """
@@ -78,6 +82,7 @@ class XSingleSelectQueryAnalyzer(XInterface_8f010a43):
         
         The order criteria returned is part of the ORDER BY clause of the select command, but it does not contain the ORDER BY keyword .
         """
+        ...
     @abstractmethod
     def getOrderColumns(self) -> 'XIndexAccess_f0910d6d':
         """
@@ -85,11 +90,13 @@ class XSingleSelectQueryAnalyzer(XInterface_8f010a43):
         
         The order criteria returned is part of the ORDER BY clause of the select command, but it does not contain the ORDER BY keyword .
         """
+        ...
     @abstractmethod
     def getQuery(self) -> str:
         """
         returns the query.
         """
+        ...
     @abstractmethod
     def getQueryWithSubstitution(self) -> str:
         """
@@ -108,6 +115,7 @@ class XSingleSelectQueryAnalyzer(XInterface_8f010a43):
         Raises:
             com.sun.star.sdbc.SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def getStructuredFilter(self) -> 'typing.Tuple[typing.Tuple[PropertyValue_c9610c73, ...], ...]':
         """
@@ -115,6 +123,7 @@ class XSingleSelectQueryAnalyzer(XInterface_8f010a43):
         
         The filter criteria is split into levels. Each level represents the OR criteria. Within each level, the filters are provided as an AND criteria with the name of the column and the filter condition. The filter condition is of type string. The operator used, is defined by com.sun.star.sdb.SQLFilterOperator.
         """
+        ...
     @abstractmethod
     def getStructuredHavingClause(self) -> 'typing.Tuple[typing.Tuple[PropertyValue_c9610c73, ...], ...]':
         """
@@ -122,6 +131,7 @@ class XSingleSelectQueryAnalyzer(XInterface_8f010a43):
         
         The HAVING filter criteria is split into levels. Each level represents the OR criteria. Within each level, the filters are provided as an AND criteria with the name of the column and the filter condition. The filter condition is of type string. The operator used, is defined by com.sun.star.sdb.SQLFilterOperator.
         """
+        ...
     @abstractmethod
     def setCommand(self, Command: str, CommandType: int) -> None:
         """
@@ -132,6 +142,7 @@ class XSingleSelectQueryAnalyzer(XInterface_8f010a43):
         Raises:
             com.sun.star.sdbc.SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def setQuery(self, command: str) -> None:
         """
@@ -140,6 +151,7 @@ class XSingleSelectQueryAnalyzer(XInterface_8f010a43):
         Raises:
             com.sun.star.sdbc.SQLException: ``SQLException``
         """
+        ...
 
 __all__ = ['XSingleSelectQueryAnalyzer']
 

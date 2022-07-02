@@ -52,6 +52,7 @@ class XTiledRenderable(XInterface_8f010a43):
         
             LibreOffice 5.0
         """
+        ...
 
 __all__ = ['XTiledRenderable']
 

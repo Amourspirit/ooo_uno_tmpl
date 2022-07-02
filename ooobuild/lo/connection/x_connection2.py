@@ -42,6 +42,7 @@ class XConnection2(XConnection_f2320da0):
         Raises:
             com.sun.star.io.IOException: ``IOException``
         """
+        ...
     @abstractmethod
     def readSomeBytes(self, aData: uno.ByteSequence, nMaxBytesToRead: int) -> int:
         """
@@ -52,6 +53,7 @@ class XConnection2(XConnection_f2320da0):
         Raises:
             com.sun.star.io.IOException: ``IOException``
         """
+        ...
 
 __all__ = ['XConnection2']
 

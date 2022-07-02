@@ -44,6 +44,7 @@ class XBinaryDataContainer(ABC):
         """
         Get a copy of the contained data.
         """
+        ...
 
 __all__ = ['XBinaryDataContainer']
 

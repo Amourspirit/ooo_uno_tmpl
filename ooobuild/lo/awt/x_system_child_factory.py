@@ -48,6 +48,7 @@ class XSystemChildFactory(XInterface_8f010a43):
         
         MAC: (NSView*) pointer.
         """
+        ...
 
 __all__ = ['XSystemChildFactory']
 

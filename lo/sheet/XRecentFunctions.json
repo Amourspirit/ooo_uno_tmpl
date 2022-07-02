@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.2.9",
+  "version": "0.2.10",
   "libre_office_ver": "7.3",
   "name": "XRecentFunctions",
   "type": "interface",
@@ -26,20 +26,18 @@
     "extends_map": {
       "com.sun.star.uno.XInterface": "XInterface_8f010a43"
     },
-    "quote": [
-      "typing.Tuple[int, ...]"
-    ],
-    "typings": [
-      "typing.Tuple[int, ...]"
-    ],
-    "requires_typing": true,
+    "quote": [],
+    "typings": [],
+    "requires_typing": false,
     "full_imports": {
       "general": [
         "com.sun.star.uno.XInterface"
       ],
       "typing": []
     },
-    "imports": [],
+    "imports": [
+      "uno"
+    ],
     "name": "XRecentFunctions",
     "namespace": "com.sun.star.sheet",
     "extends": [
@@ -63,8 +61,8 @@
         },
         {
           "name": "getRecentFunctionIds",
-          "returns": "typing.Tuple[int, ...]",
-          "returns_origin": "sequence< long >",
+          "returns": "uno.ByteSequence",
+          "returns_origin": "sequence< byte >",
           "desc": [
             "returns a sequence of those functions that were most recently used.",
             "",
@@ -86,9 +84,9 @@
           "args": [
             {
               "name": "aRecentFunctionIds",
-              "type": "typing.Tuple[int, ...]",
+              "type": "uno.ByteSequence",
               "direction": "in",
-              "origin": "sequence< long >"
+              "origin": "sequence< byte >"
             }
           ]
         }

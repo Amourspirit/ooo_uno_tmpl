@@ -56,6 +56,7 @@ class PropertyBrowserController(XFastPropertySet_ee6b0d88, XMultiPropertySet_fd8
         
         Valid values are (this list may be extended in the future):
         """
+        ...
 
     @abstractproperty
     def IntrospectedObject(self) -> 'XPropertySet_bc180bfa':
@@ -64,6 +65,7 @@ class PropertyBrowserController(XFastPropertySet_ee6b0d88, XMultiPropertySet_fd8
         
         Changing this property from outside causes the controller to update its view with the data of the new object
         """
+        ...
 
 
 

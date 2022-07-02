@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.2.9",
+  "version": "0.2.10",
   "libre_office_ver": "7.3",
   "name": "XMutableGridDataModel",
   "type": "interface",
@@ -34,12 +34,10 @@
     },
     "quote": [
       "XGridDataListener_23f10ec6",
-      "typing.Tuple[int, ...]",
       "typing.Tuple[object, ...]",
       "typing.Tuple[typing.Tuple[object, ...], ...]"
     ],
     "typings": [
-      "typing.Tuple[int, ...]",
       "typing.Tuple[object, ...]",
       "typing.Tuple[typing.Tuple[object, ...], ...]"
     ],
@@ -52,7 +50,9 @@
         "com.sun.star.awt.grid.XGridDataListener"
       ]
     },
-    "imports": [],
+    "imports": [
+      "uno"
+    ],
     "name": "XMutableGridDataModel",
     "namespace": "com.sun.star.awt.grid",
     "extends": [
@@ -316,9 +316,9 @@
           "args": [
             {
               "name": "ColumnIndexes",
-              "type": "typing.Tuple[int, ...]",
+              "type": "uno.ByteSequence",
               "direction": "in",
-              "origin": "sequence< long >"
+              "origin": "sequence< byte >"
             },
             {
               "name": "RowIndex",

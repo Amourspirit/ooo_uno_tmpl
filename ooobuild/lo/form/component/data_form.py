@@ -57,6 +57,7 @@ class DataForm(Form_ca1d0c51, RowSet_67d208a5, XDatabaseParameterBroadcaster_ac7
         
         If the form is no sub form (e.g. its parent is not a form itself), this property is not evaluated.
         """
+        ...
 
     @abstractproperty
     def MasterFields(self) -> 'typing.Tuple[str, ...]':
@@ -67,6 +68,7 @@ class DataForm(Form_ca1d0c51, RowSet_67d208a5, XDatabaseParameterBroadcaster_ac7
         
         If the form is no sub form (e.g. its parent is not a form itself), this property is not evaluated.
         """
+        ...
 
     @abstractproperty
     def AllowDeletes(self) -> bool:
@@ -75,6 +77,7 @@ class DataForm(Form_ca1d0c51, RowSet_67d208a5, XDatabaseParameterBroadcaster_ac7
         
         Note that this is a recommendation for user interface components displaying the form. Form implementations may decide to allow for deletions done via the API, even if the property is set to FALSE, but the user interface should respect the property value.
         """
+        ...
 
     @abstractproperty
     def AllowInserts(self) -> bool:
@@ -83,6 +86,7 @@ class DataForm(Form_ca1d0c51, RowSet_67d208a5, XDatabaseParameterBroadcaster_ac7
         
         Note that this is a recommendation for user interface components displaying the form. Form implementations may decide to allow for insertions done via the API, even if the property is set to FALSE, but the user interface should respect the property value.
         """
+        ...
 
     @abstractproperty
     def AllowUpdates(self) -> bool:
@@ -91,18 +95,21 @@ class DataForm(Form_ca1d0c51, RowSet_67d208a5, XDatabaseParameterBroadcaster_ac7
         
         Note that this is a recommendation for user interface components displaying the form. Form implementations may decide to allow for updates done via the API, even if the property is set to FALSE, but the user interface should respect the property value.
         """
+        ...
 
     @abstractproperty
     def Cycle(self) -> 'TabulatorCycle_c9250c5a':
         """
         returns the kind of tabulator controlling.
         """
+        ...
 
     @abstractproperty
     def NavigationBarMode(self) -> 'NavigationBarMode_efbc0d66':
         """
         determines how a navigation bar for this form should act.
         """
+        ...
 
 
 

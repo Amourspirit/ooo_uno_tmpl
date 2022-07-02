@@ -58,6 +58,7 @@ class XSQLOutput(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def writeBinaryStream(self, x: 'XInputStream_98d40ab4') -> None:
         """
@@ -66,6 +67,7 @@ class XSQLOutput(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def writeBlob(self, x: 'XBlob_6773087b') -> None:
         """
@@ -74,6 +76,7 @@ class XSQLOutput(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def writeBoolean(self, x: bool) -> None:
         """
@@ -82,6 +85,7 @@ class XSQLOutput(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def writeByte(self, x: int) -> None:
         """
@@ -90,6 +94,7 @@ class XSQLOutput(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def writeBytes(self, x: uno.ByteSequence) -> None:
         """
@@ -98,6 +103,7 @@ class XSQLOutput(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def writeCharacterStream(self, x: 'XInputStream_98d40ab4') -> None:
         """
@@ -106,6 +112,7 @@ class XSQLOutput(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def writeClob(self, x: 'XClob_6777087c') -> None:
         """
@@ -114,6 +121,7 @@ class XSQLOutput(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def writeDate(self, x: 'Date_60040844') -> None:
         """
@@ -122,6 +130,7 @@ class XSQLOutput(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def writeDouble(self, x: float) -> None:
         """
@@ -130,6 +139,7 @@ class XSQLOutput(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def writeFloat(self, x: float) -> None:
         """
@@ -138,6 +148,7 @@ class XSQLOutput(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def writeInt(self, x: int) -> None:
         """
@@ -146,6 +157,7 @@ class XSQLOutput(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def writeLong(self, x: int) -> None:
         """
@@ -154,6 +166,7 @@ class XSQLOutput(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def writeObject(self, x: 'XSQLData_81fe0966') -> None:
         """
@@ -164,6 +177,7 @@ class XSQLOutput(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def writeRef(self, x: 'XRef_5f110819') -> None:
         """
@@ -172,6 +186,7 @@ class XSQLOutput(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def writeShort(self, x: int) -> None:
         """
@@ -180,6 +195,7 @@ class XSQLOutput(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def writeString(self, x: str) -> None:
         """
@@ -188,6 +204,7 @@ class XSQLOutput(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def writeStruct(self, x: 'XStruct_7a760981') -> None:
         """
@@ -196,6 +213,7 @@ class XSQLOutput(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def writeTime(self, x: 'Time_604e0855') -> None:
         """
@@ -204,6 +222,7 @@ class XSQLOutput(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def writeTimestamp(self, x: 'DateTime_84de09d3') -> None:
         """
@@ -212,6 +231,7 @@ class XSQLOutput(XInterface_8f010a43):
         Raises:
             SQLException: ``SQLException``
         """
+        ...
 
 __all__ = ['XSQLOutput']
 

@@ -60,6 +60,7 @@ class XIntegerReadOnlyBitmap(XBitmap_b1b70b7b):
             com.sun.star.lang.IndexOutOfBoundsException: ``IndexOutOfBoundsException``
             VolatileContentDestroyedException: ``VolatileContentDestroyedException``
         """
+        ...
     @abstractmethod
     def getMemoryLayout(self) -> 'IntegerBitmapLayout_5b94106f':
         """
@@ -67,6 +68,7 @@ class XIntegerReadOnlyBitmap(XBitmap_b1b70b7b):
         
         Please note that for volatile bitmaps, the memory layout might change between subsequent calls.
         """
+        ...
     @abstractmethod
     def getPixel(self, bitmapLayout: 'IntegerBitmapLayout_5b94106f', pos: 'IntegerPoint2D_8f0dc2') -> uno.ByteSequence:
         """
@@ -82,6 +84,7 @@ class XIntegerReadOnlyBitmap(XBitmap_b1b70b7b):
             com.sun.star.lang.IndexOutOfBoundsException: ``IndexOutOfBoundsException``
             VolatileContentDestroyedException: ``VolatileContentDestroyedException``
         """
+        ...
 
 __all__ = ['XIntegerReadOnlyBitmap']
 

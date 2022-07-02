@@ -49,6 +49,7 @@ class XGridFieldDataSupplier(XInterface_8f010a43):
         
         If a column does not support the requested type, NULL is returned at the respective position.
         """
+        ...
     @abstractmethod
     def queryFieldDataType(self, xType: object) -> 'typing.Tuple[bool, ...]':
         """
@@ -56,6 +57,7 @@ class XGridFieldDataSupplier(XInterface_8f010a43):
         
         Not every cell content can be retrieved in every representation. For example, in a text column, you usually won't be able to retrieve the content as double.To check if the type you need is supported by the columns, use this method.
         """
+        ...
 
 __all__ = ['XGridFieldDataSupplier']
 

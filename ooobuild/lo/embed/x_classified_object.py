@@ -39,11 +39,13 @@ class XClassifiedObject(XInterface_8f010a43):
         """
         retrieves class ID of the object.
         """
+        ...
     @abstractmethod
     def getClassName(self) -> str:
         """
         retrieves symbolic name for the object type to be used in UI.
         """
+        ...
     @abstractmethod
     def setClassInfo(self, aClassID: uno.ByteSequence, sClassName: str) -> None:
         """
@@ -52,6 +54,7 @@ class XClassifiedObject(XInterface_8f010a43):
         Raises:
             com.sun.star.lang.NoSupportException: ``NoSupportException``
         """
+        ...
 
 __all__ = ['XClassifiedObject']
 

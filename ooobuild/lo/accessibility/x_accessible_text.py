@@ -62,6 +62,7 @@ class XAccessibleText(XInterface_8f010a43):
         Raises:
             com.sun.star.lang.IndexOutOfBoundsException: ``IndexOutOfBoundsException``
         """
+        ...
     @abstractmethod
     def getCaretPosition(self) -> int:
         """
@@ -69,6 +70,7 @@ class XAccessibleText(XInterface_8f010a43):
         
         Returns the offset of the caret. The caret is often called text cursor. The caret is actually the position between two characters. Its position/offset is that of the character to the right of it.
         """
+        ...
     @abstractmethod
     def getCharacter(self, nIndex: int) -> str:
         """
@@ -79,6 +81,7 @@ class XAccessibleText(XInterface_8f010a43):
         Raises:
             com.sun.star.lang.IndexOutOfBoundsException: ``IndexOutOfBoundsException``
         """
+        ...
     @abstractmethod
     def getCharacterAttributes(self, nIndex: int, aRequestedAttributes: 'typing.Tuple[str, ...]') -> 'typing.Tuple[PropertyValue_c9610c73, ...]':
         """
@@ -92,6 +95,7 @@ class XAccessibleText(XInterface_8f010a43):
             com.sun.star.lang.IndexOutOfBoundsException: ``IndexOutOfBoundsException``
             com.sun.star.beans.UnknownPropertyException: ``UnknownPropertyException``
         """
+        ...
     @abstractmethod
     def getCharacterBounds(self, nIndex: int) -> 'Rectangle_84b109e9':
         """
@@ -104,6 +108,7 @@ class XAccessibleText(XInterface_8f010a43):
         Raises:
             com.sun.star.lang.IndexOutOfBoundsException: ``IndexOutOfBoundsException``
         """
+        ...
     @abstractmethod
     def getCharacterCount(self) -> int:
         """
@@ -111,6 +116,7 @@ class XAccessibleText(XInterface_8f010a43):
         
         Returns the number of characters in the text represented by this object or, in other words, the text length.
         """
+        ...
     @abstractmethod
     def getIndexAtPoint(self, aPoint: 'Point_5fb2085e') -> int:
         """
@@ -118,6 +124,7 @@ class XAccessibleText(XInterface_8f010a43):
         
         Given a point in local coordinates, i.e. relative to the coordinate system of the object, return the zero-based index of the character under that point. The same functionality could be achieved by using the bounding boxes for each character as returned by XAccessibleText.getCharacterBounds(). The method XAccessibleText.getIndexAtPoint(), however, can be implemented in a more efficient way.
         """
+        ...
     @abstractmethod
     def getSelectedText(self) -> str:
         """
@@ -125,6 +132,7 @@ class XAccessibleText(XInterface_8f010a43):
         
         Returns the portion of the text that is selected.
         """
+        ...
     @abstractmethod
     def getSelectionEnd(self) -> int:
         """
@@ -132,6 +140,7 @@ class XAccessibleText(XInterface_8f010a43):
         
         Returns the index of the end of the selected text.
         """
+        ...
     @abstractmethod
     def getSelectionStart(self) -> int:
         """
@@ -139,6 +148,7 @@ class XAccessibleText(XInterface_8f010a43):
         
         Returns the index of the start of the selected text.
         """
+        ...
     @abstractmethod
     def getText(self) -> str:
         """
@@ -146,6 +156,7 @@ class XAccessibleText(XInterface_8f010a43):
         
         Returns the complete text. This is equivalent to a call to XAccessibleText.getTextRange() with the arguments zero and getCharacterCount()-1.
         """
+        ...
     @abstractmethod
     def getTextAtIndex(self, nIndex: int, nTextType: int) -> 'TextSegment_1e5b0ee8':
         """
@@ -157,6 +168,7 @@ class XAccessibleText(XInterface_8f010a43):
             com.sun.star.lang.IndexOutOfBoundsException: ``IndexOutOfBoundsException``
             com.sun.star.lang.IllegalArgumentException: ``IllegalArgumentException``
         """
+        ...
     @abstractmethod
     def getTextBeforeIndex(self, nIndex: int, nTextType: int) -> 'TextSegment_1e5b0ee8':
         """
@@ -172,6 +184,7 @@ class XAccessibleText(XInterface_8f010a43):
             com.sun.star.lang.IndexOutOfBoundsException: ``IndexOutOfBoundsException``
             com.sun.star.lang.IllegalArgumentException: ``IllegalArgumentException``
         """
+        ...
     @abstractmethod
     def getTextBehindIndex(self, nIndex: int, nTextType: int) -> 'TextSegment_1e5b0ee8':
         """
@@ -187,6 +200,7 @@ class XAccessibleText(XInterface_8f010a43):
             com.sun.star.lang.IndexOutOfBoundsException: ``IndexOutOfBoundsException``
             com.sun.star.lang.IllegalArgumentException: ``IllegalArgumentException``
         """
+        ...
     @abstractmethod
     def getTextRange(self, nStartIndex: int, nEndIndex: int) -> str:
         """
@@ -201,6 +215,7 @@ class XAccessibleText(XInterface_8f010a43):
         Raises:
             com.sun.star.lang.IndexOutOfBoundsException: ``IndexOutOfBoundsException``
         """
+        ...
     @abstractmethod
     def scrollSubstringTo(self, nStartIndex: int, nEndIndex: int, aScrollType: 'AccessibleScrollType_b426126f') -> bool:
         """
@@ -213,6 +228,7 @@ class XAccessibleText(XInterface_8f010a43):
         Raises:
             com.sun.star.lang.IndexOutOfBoundsException: ``IndexOutOfBoundsException``
         """
+        ...
     @abstractmethod
     def setCaretPosition(self, nIndex: int) -> bool:
         """
@@ -227,6 +243,7 @@ class XAccessibleText(XInterface_8f010a43):
         Raises:
             com.sun.star.lang.IndexOutOfBoundsException: ``IndexOutOfBoundsException``
         """
+        ...
     @abstractmethod
     def setSelection(self, nStartIndex: int, nEndIndex: int) -> bool:
         """
@@ -241,6 +258,7 @@ class XAccessibleText(XInterface_8f010a43):
         Raises:
             com.sun.star.lang.IndexOutOfBoundsException: ``IndexOutOfBoundsException``
         """
+        ...
 
 __all__ = ['XAccessibleText']
 

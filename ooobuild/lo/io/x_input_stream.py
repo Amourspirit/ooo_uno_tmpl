@@ -47,6 +47,7 @@ class XInputStream(XInterface_8f010a43):
             com.sun.star.io.NotConnectedException: ``NotConnectedException``
             com.sun.star.io.IOException: ``IOException``
         """
+        ...
     @abstractmethod
     def closeInput(self) -> None:
         """
@@ -58,6 +59,7 @@ class XInputStream(XInterface_8f010a43):
             com.sun.star.io.NotConnectedException: ``NotConnectedException``
             com.sun.star.io.IOException: ``IOException``
         """
+        ...
     @abstractmethod
     def readBytes(self, aData: uno.ByteSequence, nBytesToRead: int) -> int:
         """
@@ -72,6 +74,7 @@ class XInputStream(XInterface_8f010a43):
             com.sun.star.io.BufferSizeExceededException: ``BufferSizeExceededException``
             com.sun.star.io.IOException: ``IOException``
         """
+        ...
     @abstractmethod
     def readSomeBytes(self, aData: uno.ByteSequence, nMaxBytesToRead: int) -> int:
         """
@@ -86,6 +89,7 @@ class XInputStream(XInterface_8f010a43):
             com.sun.star.io.BufferSizeExceededException: ``BufferSizeExceededException``
             com.sun.star.io.IOException: ``IOException``
         """
+        ...
     @abstractmethod
     def skipBytes(self, nBytesToSkip: int) -> None:
         """
@@ -98,6 +102,7 @@ class XInputStream(XInterface_8f010a43):
             com.sun.star.io.BufferSizeExceededException: ``BufferSizeExceededException``
             com.sun.star.io.IOException: ``IOException``
         """
+        ...
 
 __all__ = ['XInputStream']
 

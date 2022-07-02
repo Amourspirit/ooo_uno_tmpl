@@ -48,6 +48,7 @@ class XOutputStream(XInterface_8f010a43):
             com.sun.star.io.BufferSizeExceededException: ``BufferSizeExceededException``
             com.sun.star.io.IOException: ``IOException``
         """
+        ...
     @abstractmethod
     def flush(self) -> None:
         """
@@ -60,6 +61,7 @@ class XOutputStream(XInterface_8f010a43):
             com.sun.star.io.BufferSizeExceededException: ``BufferSizeExceededException``
             com.sun.star.io.IOException: ``IOException``
         """
+        ...
     @abstractmethod
     def writeBytes(self, aData: uno.ByteSequence) -> None:
         """
@@ -72,6 +74,7 @@ class XOutputStream(XInterface_8f010a43):
             com.sun.star.io.BufferSizeExceededException: ``BufferSizeExceededException``
             com.sun.star.io.IOException: ``IOException``
         """
+        ...
 
 __all__ = ['XOutputStream']
 

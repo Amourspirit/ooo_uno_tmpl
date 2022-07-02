@@ -47,11 +47,13 @@ class XIdlClass(XInterface_8f010a43):
 
         * ``obj`` is an out direction argument.
         """
+        ...
     @abstractmethod
     def equals(self, Type: 'XIdlClass') -> bool:
         """
         Tests whether two reflecting objects reflect the same type.
         """
+        ...
     @abstractmethod
     def getArray(self) -> 'XIdlArray_d65d0ca3':
         """
@@ -59,6 +61,7 @@ class XIdlClass(XInterface_8f010a43):
         
         If the reflected type is not an array, then a null-reference is returned.
         """
+        ...
     @abstractmethod
     def getClass(self, aName: str) -> 'XIdlClass':
         """
@@ -66,6 +69,7 @@ class XIdlClass(XInterface_8f010a43):
         
         Do not call.
         """
+        ...
     @abstractmethod
     def getClasses(self) -> 'typing.Tuple[XIdlClass, ...]':
         """
@@ -73,11 +77,13 @@ class XIdlClass(XInterface_8f010a43):
         
         Do not call.
         """
+        ...
     @abstractmethod
     def getComponentType(self) -> 'XIdlClass':
         """
         If the reflected type is an array or sequence, then this method returns a XIdlClass interface reflecting the element.
         """
+        ...
     @abstractmethod
     def getField(self, aName: str) -> 'XIdlField_d62c0c88':
         """
@@ -85,6 +91,7 @@ class XIdlClass(XInterface_8f010a43):
         
         If the reflected type is not an interface, struct or union or the interface, struct or union does not have a field (/interface attribute) with the demanded name, then a null-reference is returned.
         """
+        ...
     @abstractmethod
     def getFields(self) -> 'typing.Tuple[XIdlField_d62c0c88, ...]':
         """
@@ -92,6 +99,7 @@ class XIdlClass(XInterface_8f010a43):
         
         This also includes all inherited fields (/interface attributes) of the interface, struct of union. If the reflected type is not an interface, struct or union or the interface, struct or union does not have any field (/interface attribute), then an empty sequence is returned.
         """
+        ...
     @abstractmethod
     def getInterfaces(self) -> 'typing.Tuple[XIdlClass, ...]':
         """
@@ -99,6 +107,7 @@ class XIdlClass(XInterface_8f010a43):
         
         Do not call.
         """
+        ...
     @abstractmethod
     def getMethod(self, aName: str) -> 'XIdlMethod_e3740d05':
         """
@@ -106,6 +115,7 @@ class XIdlClass(XInterface_8f010a43):
         
         If the reflected type is not an interface or the interface does not have a method with the demanded name (including inherited methods), then a null-reference is returned.
         """
+        ...
     @abstractmethod
     def getMethods(self) -> 'typing.Tuple[XIdlMethod_e3740d05, ...]':
         """
@@ -113,11 +123,13 @@ class XIdlClass(XInterface_8f010a43):
         
         This also includes the inherited methods of the interface. If the reflected type is not an interface or the interface does not have any methods, then a null-reference is returned.
         """
+        ...
     @abstractmethod
     def getName(self) -> str:
         """
         Returns the fully-qualified name of the reflected type.
         """
+        ...
     @abstractmethod
     def getSuperclasses(self) -> 'typing.Tuple[XIdlClass, ...]':
         """
@@ -125,11 +137,13 @@ class XIdlClass(XInterface_8f010a43):
         
         If the reflected type is not an interface or an interface that is not derived from another, then an empty sequence is returned.
         """
+        ...
     @abstractmethod
     def getTypeClass(self) -> 'TypeClass_853109f2':
         """
         Returns the com.sun.star.uno.TypeClass of the reflected type.
         """
+        ...
     @abstractmethod
     def getUik(self) -> 'Uik_4fac0783':
         """
@@ -137,11 +151,13 @@ class XIdlClass(XInterface_8f010a43):
         
         Do not call.
         """
+        ...
     @abstractmethod
     def isAssignableFrom(self, xType: 'XIdlClass') -> bool:
         """
         Tests whether values of this reflected type are assignable from values of a second one (xType).
         """
+        ...
 
 __all__ = ['XIdlClass']
 

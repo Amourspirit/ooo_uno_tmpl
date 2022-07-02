@@ -45,6 +45,7 @@ class XRowLocate(XInterface_8f010a43):
         Raises:
             com.sun.star.sdbc.SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def getBookmark(self) -> object:
         """
@@ -53,6 +54,7 @@ class XRowLocate(XInterface_8f010a43):
         Raises:
             com.sun.star.sdbc.SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def hasOrderedBookmarks(self) -> bool:
         """
@@ -61,6 +63,7 @@ class XRowLocate(XInterface_8f010a43):
         Raises:
             com.sun.star.sdbc.SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def hashBookmark(self, bookmark: object) -> int:
         """
@@ -69,6 +72,7 @@ class XRowLocate(XInterface_8f010a43):
         Raises:
             com.sun.star.sdbc.SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def moveRelativeToBookmark(self, bookmark: object, rows: int) -> bool:
         """
@@ -79,6 +83,7 @@ class XRowLocate(XInterface_8f010a43):
         Raises:
             com.sun.star.sdbc.SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def moveToBookmark(self, bookmark: object) -> bool:
         """
@@ -89,6 +94,7 @@ class XRowLocate(XInterface_8f010a43):
         Raises:
             com.sun.star.sdbc.SQLException: ``SQLException``
         """
+        ...
 
 __all__ = ['XRowLocate']
 

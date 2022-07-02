@@ -46,6 +46,7 @@ class XConnection(XInterface_8f010a43):
         Raises:
             com.sun.star.io.IOException: ``IOException``
         """
+        ...
     @abstractmethod
     def flush(self) -> None:
         """
@@ -54,6 +55,7 @@ class XConnection(XInterface_8f010a43):
         Raises:
             com.sun.star.io.IOException: ``IOException``
         """
+        ...
     @abstractmethod
     def getDescription(self) -> str:
         """
@@ -61,6 +63,7 @@ class XConnection(XInterface_8f010a43):
         
         This string is different from the arguments to XConnection.accept() and XConnector.connect(). In general, the string contains an additional handle value. For example, \"socket,host=localhost,port=2002,uniqueValue=2324\".
         """
+        ...
     @abstractmethod
     def read(self, aReadBytes: uno.ByteSequence, nBytesToRead: int) -> int:
         """
@@ -75,6 +78,7 @@ class XConnection(XInterface_8f010a43):
         Raises:
             com.sun.star.io.IOException: ``IOException``
         """
+        ...
     @abstractmethod
     def write(self, aData: uno.ByteSequence) -> None:
         """
@@ -85,6 +89,7 @@ class XConnection(XInterface_8f010a43):
         Raises:
             com.sun.star.io.IOException: ``IOException``
         """
+        ...
 
 __all__ = ['XConnection']
 

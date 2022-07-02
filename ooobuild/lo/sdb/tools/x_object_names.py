@@ -54,6 +54,7 @@ class XObjectNames(ABC):
         Raises:
             com.sun.star.sdbc.SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def convertToSQLName(self, Name: str) -> str:
         """
@@ -61,6 +62,7 @@ class XObjectNames(ABC):
         
         The conversion takes place by converting every character which is neither allowed by the SQL-92 standard, nor part of the special characters supported by the database, with an underscore character (_).
         """
+        ...
     @abstractmethod
     def isNameUsed(self, CommandType: int, Name: str) -> bool:
         """
@@ -74,6 +76,7 @@ class XObjectNames(ABC):
             com.sun.star.lang.IllegalArgumentException: ``IllegalArgumentException``
             com.sun.star.sdbc.SQLException: ``SQLException``
         """
+        ...
     @abstractmethod
     def isNameValid(self, CommandType: int, Name: str) -> bool:
         """
@@ -86,6 +89,7 @@ class XObjectNames(ABC):
         Raises:
             com.sun.star.lang.IllegalArgumentException: ``IllegalArgumentException``
         """
+        ...
     @abstractmethod
     def suggestName(self, CommandType: int, BaseName: str) -> str:
         """
@@ -101,6 +105,7 @@ class XObjectNames(ABC):
             com.sun.star.lang.IllegalArgumentException: ``IllegalArgumentException``
             com.sun.star.sdbc.SQLException: ``SQLException``
         """
+        ...
 
 __all__ = ['XObjectNames']
 
