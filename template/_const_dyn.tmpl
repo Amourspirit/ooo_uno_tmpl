@@ -45,6 +45,7 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 if not TYPE_CHECKING and _DYNAMIC:
     from $namespace import $safe_name as $safe_name
+    from ooo.helper.enum_helper import ConstEnumMeta
 #*
     Not sure this is the best way to accomplish adding attribues to const.
     Class is a slots class with no dictionary, therefore adding attributes normally
@@ -62,14 +63,9 @@ if not TYPE_CHECKING and _DYNAMIC:
     Bulding enum statically can cause issues in backwards compatibility such as com.sun.star.style.NumberingType
     contains attribs in 7x version that were not availabe in 6x version.
 *#
-    def build_enum():
-        global ${safe_name}Enum
-        ls = [f for f in dir($safe_name) if not callable(getattr($safe_name, f)) and not f.startswith('__')]
-        _dict = {}
-        for name in ls:
-            _dict[name] = getattr($safe_name, name)
-        ${safe_name}Enum = ${enum_class}('${safe_name}Enum', _dict)
-    build_enum()
+    class ${safe_name}Enum(${enum_class}, metaclass=ConstEnumMeta, type_name="$fullname", name_space="$namespace"):
+        pass
+
 else:
     $self.get_rel_import(in_str=$uno_obj_in, ns=$uno_obj_ns) as $safe_name
 
@@ -86,7 +82,11 @@ else:
         #end if
         """
     #for $item in $attribs
-        $self.get_safe_word($item['name']) = ${safe_name}.$self.get_safe_word($item['name'])
+##      Rather then setting enum value from imported const group assign directly the value.
+##      This will be faster and perhaps help with any import issues.
+##      Also this class is only active when TYPING_CHEKING is True.
+##      $self.get_safe_word($item['name']) = ${safe_name}.$self.get_safe_word($item['name'])
+        $self.get_safe_word($item['name']) = $self.get_q_type($item['value'])
         #if len($item['lines']) > 0
         """
             #if isinstance($item['lines'], str)

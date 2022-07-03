@@ -1,9 +1,10 @@
 # coding: utf-8
 from typing import Any
 import uno
-
+from enum import Enum, EnumMeta, IntEnum
 
 # coding: utf-8
+
 
 def uno_enum_class_new(cls, value):
     """
@@ -155,3 +156,152 @@ class UnoEnumMeta(type):
             # metaclass __dict__ is a mappingproxy
             # the only way to set attribue is to call super
             super().__setattr__(key, value)  # Transparent access.
+
+
+class ConstEnumMeta(EnumMeta):
+    """
+    Dynamic Enum for Constants
+    
+    Enums that use this metaclass will automatically look up const values from uno and assign enums on the fly.
+    
+    :example:
+        .. code-block:: python
+        
+            class AccessibleRelationTypeEnum(IntEnum, metaclass=ConstEnumMeta, type_name="com.sun.star.accessibility.AccessibleRelationType", name_space="com.sun.star.accessibility"):
+                pass
+            
+            # INVALID is lookup up automatically and added to enum
+            assert AccessibleRelationTypeEnum.INVALID.value == 0
+    
+    """
+    _initialized = False  # This class var is important. It is always False.
+    # The instances will override this with their own,
+    # set to True.
+    __ooo_type_name__ = "const"
+    __ooo_full_ns__ = None
+    __ooo_ns__ = None
+
+    @classmethod
+    def __prepare__(metacls, cls, bases, **kwds):
+        return super().__prepare__(cls, bases, **kwds)
+
+    def __new__(metacls, cls, bases, classdict, **kwds):
+        return super().__new__(metacls, cls, bases, classdict)
+
+    def __init__(cls, name, bases, namespace, **kwds):
+        super().__init__(name, bases, namespace)
+        type_name = kwds["type_name"]
+        name_space = kwds["name_space"]
+        cls.__ooo_full_ns__ = type_name
+        cls.__ooo_ns__ = name_space
+        cls._initialized = True
+
+    def __getattr__(self, name: str) -> uno.Enum | Any:
+        if self._initialized:
+            # Provide the caller attributes in whatever ways interest you.
+            try:
+                if name.startswith('_'):
+                    try:
+                        super().__setattr__("_initialized", False)
+                        return super().__getattr__(name)
+                    finally:
+                        super().__setattr__("_initialized", True)
+                member = self._value2member_map_.get(name, None)
+                if member is None:
+                    try:
+                        super().__setattr__("_initialized", False)
+                        member = self._create_pseudo_member_(name)
+                    finally:
+                        super().__setattr__("_initialized", True)
+                return member
+            except Exception as e:
+                raise AttributeError(
+                    f"Enum {self.__ooo_full_ns__} has no attribute {name}") from e
+        else:
+            try:
+                # Transparent access to instance vars.
+                return super().__getattr__(name)
+            except KeyError:
+                raise AttributeError(name)
+
+    def _create_pseudo_member_(self, name):
+        const = uno.getConstantByName(f"{self.__ooo_full_ns__}.{name}")
+        sup = super(self)
+
+        # new_enum = sup.__thisclass__(
+        #     sup.__thisclass__.__name__, [(name, const)])
+        new_enum = self(
+            sup.__thisclass__.__name__, [(name, const)])
+        new_member = getattr(new_enum, name)
+        pseudo_member = self._value2member_map_.setdefault(
+            name, new_member)
+        self._member_names_.append(name)
+        return pseudo_member
+
+    @staticmethod
+    def _get_mixins_(class_name, bases):
+        """
+        Returns the type for creating enum members, and the first inherited
+        enum class.
+
+        bases: the tuple of bases that was given to __new__
+        """
+        if not bases:
+            return object, Enum
+
+        def _find_data_type(bases):
+            data_types = set()
+            for chain in bases:
+                candidate = None
+                for base in chain.__mro__:
+                    if base is object:
+                        continue
+                    elif issubclass(base, Enum):
+                        if base._member_type_ is not object:
+                            data_types.add(base._member_type_)
+                            break
+                    elif '__new__' in base.__dict__:
+                        if issubclass(base, Enum):
+                            continue
+                        data_types.add(candidate or base)
+                        break
+                    else:
+                        candidate = candidate or base
+            if len(data_types) > 1:
+                raise TypeError('%r: too many data types: %r' %
+                                (class_name, data_types))
+            elif data_types:
+                return data_types.pop()
+            else:
+                return None
+
+        # ensure final parent class is an Enum derivative, find any concrete
+        # data type, and check that Enum has no members
+        first_enum = bases[-1]
+        if not issubclass(first_enum, Enum):
+            raise TypeError("new enumerations should be created as "
+                            "`EnumName([mixin_type, ...] [data_type,] enum_type)`")
+        member_type = _find_data_type(bases) or object
+        return member_type, first_enum
+
+
+    @classmethod
+    def _check_for_existing_members(cls, class_name, bases):
+        if cls._initialized is False:
+            return
+        for chain in bases:
+            for base in chain.__mro__:
+                if issubclass(base, Enum) and base._member_names_:
+                    raise TypeError(
+                            "%s: cannot extend enumeration %r"
+                            % (class_name, base.__name__)
+                            )
+
+    def __setattr__(self, key, value):
+        if self._initialized:
+            pass
+        else:
+            # metaclass __dict__ is a mappingproxy
+            # the only way to set attribue is to call super
+            super().__setattr__(key, value)  # Transparent access.
+
