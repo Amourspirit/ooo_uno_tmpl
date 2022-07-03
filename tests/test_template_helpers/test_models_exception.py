@@ -15,7 +15,6 @@ def test_exception(root_path):
     assert arg.name == "Message"
     assert arg.default == ""
     assert arg.type == "str"
-    
 
 
 def test_deployment_exception(root_path):
@@ -29,6 +28,7 @@ def test_deployment_exception(root_path):
     assert len(parent_args) > 0
     args = mod.get_class_args()
     assert len(args) == 0
+
 
 def test_authentication_failed_exception(root_path):
     from src.template_helper.models_exception import ModelsException
@@ -61,7 +61,7 @@ def test_authentication_failed_exception(root_path):
     assert parg.name == "Message"
     assert parg.default == ""
     assert parg.type == "str"
-    
+
     # test get_full_import()
     full = mod.get_full_imports()
     assert len(full) == 2
@@ -103,4 +103,3 @@ def test_filter_options_request(root_path):
     assert arg.name == "rProperties"
     arg = all_args[3]
     assert arg.name == "rModel"
-    

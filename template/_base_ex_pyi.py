@@ -1,6 +1,7 @@
 # coding: utf-8
 from _base_ex import BaseEx
 
+
 class BaseExPyi(BaseEx):
 
     def get_constructor(self) -> str:
@@ -11,6 +12,5 @@ class BaseExPyi(BaseEx):
             return "def __init__(self) -> None:"
         self._linfo("Constructor Args — True")
         names = self.get_constructor_args_str(
-            include_value=True, include_type=True, value = " = ...")
+            include_value=True, include_type=True, value=" = ...")
         return f"def __init__(self, {names}) -> None:"
-

@@ -47,4 +47,3 @@ class BaseTypeDef(BaseJson):
         if ver < min_ver:
             raise Exception(
                 "Invalid Data: Expected version to be at least '{min_ver}' got {ver}")
-

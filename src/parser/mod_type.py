@@ -643,7 +643,7 @@ class RuleComType(BaseRule):
 class RuleByteSequence(BaseRule):
     """
     Rule for sequence< byte >
-    
+
     This type is uno.ByteSequence
     """
 

@@ -5,6 +5,7 @@ if __name__ == "__main__":
 
 import uno
 
+
 def test_adjustment_type():
     # test dynamic AdjustmentType class.
     # all dynamic enums ar classes that use enum_helper.UnoEnumMeta as a meta class
@@ -19,18 +20,16 @@ def test_adjustment_type():
 
     assert AdjustmentType.ADJUST_ABS == ADJUST_ABS
     assert AdjustmentType.ADJUST_ABS == ADJUST_ABS
-    
+
     assert AdjustmentType.ADJUST_LINE == ADJUST_LINE
     atype = AdjustmentType("ADJUST_PAGE")
     assert atype == ADJUST_PAGE
-    
+
     atype = AdjustmentType(ADJUST_LINE)
     assert atype == ADJUST_LINE
-    
+
     with pytest.raises(TypeError):
         AdjustmentType(10)
-    
+
     with pytest.raises(TypeError):
         AdjustmentType("ADJUST")
-    
-    

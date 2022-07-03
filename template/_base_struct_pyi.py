@@ -1,5 +1,4 @@
 # coding: utf-8
-from typing import List
 from _base_struct import BaseStruct
 
 
