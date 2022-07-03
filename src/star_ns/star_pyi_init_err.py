@@ -14,7 +14,7 @@ def write_star_error() -> None:
     as a valid import. The issue is when uno.py imports it expects an import
     error for imports such as ``from com.sun.star.uno import Exception as UnoException``.
 
-    Becuase `import com.sun.star.uno`` imports as a namesapce the import error is not
+    Becuase ``import com.sun.star.uno`` imports as a namesapce the import error is not
     triggered and uno import method would return a namesapce and then an ImportError
     would be raised as ``com.sun.star.uno`` is valid but ``import as Exception``
     raises an ImportError Exception.
