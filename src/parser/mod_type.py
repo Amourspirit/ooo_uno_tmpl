@@ -172,15 +172,15 @@ class PythonType(object):
     def realtype(self, value: str):
         self._default_check()
         self._realtype = value
-    
+
     @property
     def origtype(self) -> Union[str, None]:
         return self._origtype
-    
+
     @origtype.setter
     def origtype(self, value: Union[str, None]) -> None:
         self._origtype = value
-    
+
     @property
     def origin(self) -> Union[str, None]:
         return self._origin
@@ -243,7 +243,7 @@ class PythonType(object):
         im: Set[str] = set()
         get_imports(self, im, get_full_ns)
         return im
-    
+
     def get_all_imports(self, ns: Optional[str] = None) -> Set[str]:
         """
         Get imports for inststance and all of children recursivly
@@ -643,7 +643,7 @@ class RuleComType(BaseRule):
 class RuleByteSequence(BaseRule):
     """
     Rule for sequence< byte >
-    
+
     This type is uno.ByteSequence
     """
 
@@ -658,13 +658,12 @@ class RuleByteSequence(BaseRule):
         if self._match is not None:
             return True
         return False
-        
 
     def get_python_type(self, in_type: str) -> PythonType:
         return PythonType(
             type="uno.ByteSequence",
             requires_typing=False,
-            is_py_type=True, # don't want to quote.
+            is_py_type=True,  # don't want to quote.
             realtype="uno.ByteSequence",
             origin="sequence< byte >",
             imports="uno"
@@ -677,6 +676,7 @@ class RuleByteSequence(BaseRule):
         if self._match is not False:
             return
         self._match = self._rx.match(in_type)
+
 
 class RuleKnownItterType(BaseRule):
     """Rule for Known itter uno types such as sequence"""

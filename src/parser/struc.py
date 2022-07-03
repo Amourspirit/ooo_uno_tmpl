@@ -315,7 +315,7 @@ class Parser(base.ParserBase):
                     ns=ns, imports=self._from_imports)
             self._cache[key] = True
         return self._from_imports
-    
+
     @property
     def imports(self) -> Set[str]:
         """Gets imports value"""
@@ -415,7 +415,7 @@ class StructWriter(base.WriteBase):
 
     def _get_template_pyi(self) -> Union[str, None]:
         return 'struct_pyi.tmpl'
-    
+
     def _get_template(self):
         with open(self._template_file) as f:
             contents = f.read()
@@ -541,7 +541,7 @@ class StructWriter(base.WriteBase):
             lst.append([*rel_fn(ns, self._p_namespace)])
         self._cache[key] = lst
         return self._cache[key]
-    
+
     def _get_imports(self) -> List[List[str]]:
         key = '_get_imports_'
         if key in self._cache:
@@ -549,7 +549,7 @@ class StructWriter(base.WriteBase):
         lst_im = list(self._p_imports)
         # sort for consistency in json
         lst_im.sort()
-        self._cache[key] =lst_im
+        self._cache[key] = lst_im
         return self._cache[key]
 
     def _get_from_imports_typing(self) -> List[List[str]]:

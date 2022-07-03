@@ -147,7 +147,7 @@ class ApiMethodPramsInfo(BlockObj):
     def from_imports(self) -> Set[str]:
         """Gets from imports value"""
         return self._from_imports
-    
+
     @property
     def imports(self) -> Set[str]:
         """Gets imports value"""

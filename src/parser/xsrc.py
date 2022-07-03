@@ -427,7 +427,7 @@ class Parser(base.ParserBase):
                     ns=ns, imports=self._from_imports)
             self._cache[key] = True
         return self._from_imports
-    
+
     @property
     def imports(self) -> Set[str]:
         """Gets imports value"""
@@ -539,7 +539,7 @@ class Writer(base.WriteBase):
 
     def _get_template_dyn(self) -> Union[str, None]:
         return 'interface_dyn.tmpl'
-    
+
     def _get_template_pyi(self) -> Union[str, None]:
         return 'interface_pyi.tmpl'
 
@@ -1122,7 +1122,7 @@ def parse(**kwargs) -> Union[str, None]:
         allow_known_json (bool, optional): Allow Known Json to be used. Default ``True``
         verbose (str, optional): Verobose output.
         log_file (str, optional): Log File
-    
+
     Returns:
         Union[str, None]: Returns json string if json_out is ``True``
     """

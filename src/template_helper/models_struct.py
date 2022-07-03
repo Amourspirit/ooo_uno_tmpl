@@ -233,7 +233,8 @@ class ModelsStruct(ModelsBase):
         m_imports = self._get_model_full_imports()
         for arg in pargs:
             if not arg.p_type is None:
-                imports = arg.p_type.get_all_from_imports(ns=self._model.namespace)
+                imports = arg.p_type.get_all_from_imports(
+                    ns=self._model.namespace)
                 for imp in imports:
                     if not imp in m_imports:
                         # this import is not currently part of any imports
@@ -260,8 +261,8 @@ class ModelsStruct(ModelsBase):
             return True
         return False
 
-
         # region Abstract Implementions
+
     def get_name(self) -> str:
         return self._model.name
 

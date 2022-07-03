@@ -457,7 +457,7 @@ class WriterTypeDef(base.WriteBase):
 
     def _get_template_dyn(self) -> Union[str, None]:
         return 'typedef_dyn.tmpl'
-    
+
     def _get_template_pyi(self) -> Union[str, None]:
         return 'typedef_pyi.tmpl'
 
@@ -477,7 +477,7 @@ class WriterTypeDef(base.WriteBase):
             lst.append([f, n])
         self._cache[key] = lst
         return self._cache[key]
-    
+
     def _get_imports(self, t_def: TypeDef) -> List[List[str]]:
         key = '_get_imports_' + t_def.id
         if key in self._cache:
@@ -539,7 +539,7 @@ class WriterTypeDef(base.WriteBase):
         t = t.replace(
             '{from_imports}',
             Util.get_formated_dict_list_str(self._get_from_imports(t_def))
-        ) 
+        )
         t = t.replace(
             '{imports}',
             Util.get_formated_dict_list_str(self._get_imports(t_def))
@@ -640,7 +640,7 @@ class WriterTypeDef(base.WriteBase):
             with open(file_path, 'w') as f:
                 f.write(contents)
             logger.info("Created file: %s", file_path)
-    
+
     def _write_to_file_pyi(self):
         name = self._get_template_pyi()
         if name is None:
