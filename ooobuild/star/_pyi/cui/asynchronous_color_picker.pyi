@@ -40,4 +40,3 @@ class AsynchronousColorPicker(XAsynchronousExecutableDialog_255014ad):
         """
         ...
 
-
