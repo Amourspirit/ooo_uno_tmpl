@@ -54,9 +54,9 @@ if not TYPE_CHECKING and _DYNAMIC:
     This is the only solution I have come up with thus far. PM
 *#
     if hasattr($safe_name, '_constants') and isinstance(${safe_name}._constants, dict):
-        ${safe_name}._constants['__ooo_ns__'] = '$namespace'
-        ${safe_name}._constants['__ooo_full_ns__'] = '$fullname'
-        ${safe_name}._constants['__ooo_type_name__'] = 'const'
+        ${safe_name}._constants["__ooo_type_name__"] = "const"
+        ${safe_name}._constants["__ooo_full_ns__"] = "$fullname"
+        ${safe_name}._constants["__ooo_ns__"] = "$namespace"
 #*
     Build enum dynamicallly.
 
@@ -65,6 +65,7 @@ if not TYPE_CHECKING and _DYNAMIC:
 *#
 
     class ${safe_name}Enum(${enum_class}, metaclass=ConstEnumMeta, type_name="$fullname", name_space="$namespace"):
+        """Dynamic Enum. Contains all the constant values of ``$fullname`` as Enum values"""
         pass
 
 else:
