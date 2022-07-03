@@ -21,24 +21,21 @@
 from enum import IntEnum
 from typing import TYPE_CHECKING
 from ooo.oenv.env_const import UNO_ENVIRONMENT, UNO_RUNTIME
+
 _DYNAMIC = False
 if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from com.sun.star.i18n import NumberFormatIndex as NumberFormatIndex
-    if hasattr(NumberFormatIndex, '_constants') and isinstance(NumberFormatIndex._constants, dict):
-        NumberFormatIndex._constants['__ooo_ns__'] = 'com.sun.star.i18n'
-        NumberFormatIndex._constants['__ooo_full_ns__'] = 'com.sun.star.i18n.NumberFormatIndex'
-        NumberFormatIndex._constants['__ooo_type_name__'] = 'const'
-    def build_enum():
-        global NumberFormatIndexEnum
-        ls = [f for f in dir(NumberFormatIndex) if not callable(getattr(NumberFormatIndex, f)) and not f.startswith('__')]
-        _dict = {}
-        for name in ls:
-            _dict[name] = getattr(NumberFormatIndex, name)
-        NumberFormatIndexEnum = IntEnum('NumberFormatIndexEnum', _dict)
-    build_enum()
+    from ooo.helper.enum_helper import UnoConstMeta,ConstEnumMeta
+    class NumberFormatIndex(metaclass=UnoConstMeta, type_name="com.sun.star.i18n.NumberFormatIndex", name_space="com.sun.star.i18n"):
+        """Dynamic Class. Contains all the constant values of ``com.sun.star.i18n.NumberFormatIndex``"""
+        pass
+
+    class NumberFormatIndexEnum(IntEnum, metaclass=ConstEnumMeta, type_name="com.sun.star.i18n.NumberFormatIndex", name_space="com.sun.star.i18n"):
+        """Dynamic Enum. Contains all the constant values of ``com.sun.star.i18n.NumberFormatIndex`` as Enum values"""
+        pass
+
 else:
     from ...lo.i18n.number_format_index import NumberFormatIndex as NumberFormatIndex
 

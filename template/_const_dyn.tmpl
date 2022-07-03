@@ -45,7 +45,8 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import UnoConstMeta,ConstEnumMeta
+    from ooo.helper.enum_helper import UnoConstMeta, ConstEnumMeta
+
     class ${safe_name}(metaclass=UnoConstMeta, type_name="$fullname", name_space="$namespace"):
         """Dynamic Class. Contains all the constant values of ``$fullname``"""
         pass
