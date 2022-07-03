@@ -129,28 +129,28 @@ class UnoEnumMeta(type):
             return value
         raise TypeError("%r is not a valid %s" % (value, cls.__name__))
 
-    def __getattr__(self, __name: str) -> uno.Enum | Any:
-        if self._initialized:
+    def __getattr__(cls, __name: str) -> uno.Enum | Any:
+        if cls._initialized:
             # Provide the caller attributes in whatever ways interest you.
             try:
                 key = __name
-                e = uno.Enum(self.typeName, __name)
+                e = uno.Enum(cls.typeName, __name)
                 # metaclass __dict__ is a mappingproxy
                 # the only way to set attribue is to call super
                 super().__setattr__(key, e)
-                return self.__dict__[key]
+                return cls.__dict__[key]
             except Exception:
                 raise AttributeError(
-                    f"Enum {self.typeName} has no attribute {__name}")
+                    f"Enum {cls.typeName} has no attribute {__name}")
         else:
             try:
                 # Transparent access to instance vars.
-                return self.__dict__[__name]
+                return cls.__dict__[__name]
             except KeyError:
                 raise AttributeError(__name)
 
-    def __setattr__(self, key, value):
-        if self._initialized:
+    def __setattr__(cls, key, value):
+        if cls._initialized:
             pass
         else:
             # metaclass __dict__ is a mappingproxy
@@ -196,8 +196,8 @@ class ConstEnumMeta(EnumMeta):
         cls.__ooo_ns__ = name_space
         cls._initialized = True
 
-    def __getattr__(self, name: str) -> uno.Enum | Any:
-        if self._initialized:
+    def __getattr__(cls, name: str) -> uno.Enum | Any:
+        if cls._initialized:
             # Provide the caller attributes in whatever ways interest you.
             try:
                 if name.startswith('_'):
@@ -206,17 +206,17 @@ class ConstEnumMeta(EnumMeta):
                         return super().__getattr__(name)
                     finally:
                         super().__setattr__("_initialized", True)
-                member = self._value2member_map_.get(name, None)
+                member = cls._value2member_map_.get(name, None)
                 if member is None:
                     try:
                         super().__setattr__("_initialized", False)
-                        member = self._create_pseudo_member_(name)
+                        member = cls._create_pseudo_member_(name)
                     finally:
                         super().__setattr__("_initialized", True)
                 return member
             except Exception as e:
                 raise AttributeError(
-                    f"Enum {self.__ooo_full_ns__} has no attribute {name}") from e
+                    f"Enum {cls.__ooo_full_ns__} has no attribute {name}") from e
         else:
             try:
                 # Transparent access to instance vars.
@@ -224,18 +224,18 @@ class ConstEnumMeta(EnumMeta):
             except KeyError:
                 raise AttributeError(name)
 
-    def _create_pseudo_member_(self, name):
-        const = uno.getConstantByName(f"{self.__ooo_full_ns__}.{name}")
-        sup = super(self)
+    def _create_pseudo_member_(cls, name):
+        const = uno.getConstantByName(f"{cls.__ooo_full_ns__}.{name}")
+        sup = super(cls)
 
         # new_enum = sup.__thisclass__(
         #     sup.__thisclass__.__name__, [(name, const)])
-        new_enum = self(
+        new_enum = cls(
             sup.__thisclass__.__name__, [(name, const)])
         new_member = getattr(new_enum, name)
-        pseudo_member = self._value2member_map_.setdefault(
+        pseudo_member = cls._value2member_map_.setdefault(
             name, new_member)
-        self._member_names_.append(name)
+        cls._member_names_.append(name)
         return pseudo_member
 
     @staticmethod
@@ -297,11 +297,82 @@ class ConstEnumMeta(EnumMeta):
                             % (class_name, base.__name__)
                             )
 
-    def __setattr__(self, key, value):
-        if self._initialized:
+    def __setattr__(cls, key, value):
+        if cls._initialized:
             pass
         else:
             # metaclass __dict__ is a mappingproxy
             # the only way to set attribue is to call super
             super().__setattr__(key, value)  # Transparent access.
 
+
+class UnoConstMeta(type):
+    """
+    Get access to Uno Enum values without having to directly import them.
+
+    This is a meta class.
+
+    Example:
+
+        .. code-block:: python
+
+            class FillMode(metaclass=UnoEnumMeta, type_name="com.sun.star.sheet.FillMode", name_space="com.sun.star.sheet"):
+                pass
+
+    Note:
+        Uno enums can not be imported directly in python.
+
+        ``from com.sun.star.sheet import FillMode`` is not a valid import
+        and results in an import error.
+
+        ``from com.sun.star.sheet.FillMode import LINEAR, SIMPLE, GROWTH`` is valid import but cumbersome.
+
+        This metaclass use a just in time approach. If the enum is not yet an attribute it is automatiacally added dynamically.
+        All subsequent calls automatically use the dynamically added attribute.
+    """
+    __initialized = False  # This class var is important. It is always False.
+    # The instances will override this with their own,
+    # set to True.
+    __ooo_type_name__ = "const"
+    __ooo_full_ns__ = None
+    __ooo_ns__ = None
+
+    @classmethod
+    def __prepare__(metacls, name, bases, **kwargs):
+        return super().__prepare__(name, bases, **kwargs)
+
+    def __new__(metacls, name, bases, namespace, **kwargs):
+        return super().__new__(metacls, name, bases, namespace)
+
+    def __init__(cls, name, bases, namespace, type_name, name_space, **kwargs):
+        super().__init__(name, bases, namespace)
+        cls.__ooo_full_ns__ = type_name
+        cls.__ooo_ns__ = name_space
+        cls.__initialized = True
+
+    def __getattr__(cls, name: str) -> uno.Enum | Any:
+        if cls.__initialized:
+            # Provide the caller attributes in whatever ways interest you.
+            try:
+                const = uno.getConstantByName(f"{cls.__ooo_full_ns__}.{name}")
+                # metaclass __dict__ is a mappingproxy
+                # the only way to set attribue is to call super
+                super().__setattr__(name, const)
+                return cls.__dict__[name]
+            except Exception:
+                raise AttributeError(
+                    f"Enum {cls.__ooo_full_ns__} has no attribute {name}")
+        else:
+            try:
+                # Transparent access to instance vars.
+                return cls.__dict__[name]
+            except KeyError:
+                raise AttributeError(name)
+
+    def __setattr__(cls, key, value):
+        if cls.__initialized:
+            pass
+        else:
+            # metaclass __dict__ is a mappingproxy
+            # the only way to set attribue is to call super
+            super().__setattr__(key, value)  # Transparent access.

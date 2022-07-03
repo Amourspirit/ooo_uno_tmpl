@@ -1,6 +1,7 @@
 
 import pytest
-from enum import Enum, IntEnum
+from enum import IntEnum
+
 if __name__ == "__main__":
     pytest.main([__file__])
 

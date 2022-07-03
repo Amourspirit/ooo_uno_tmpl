@@ -39,31 +39,23 @@ $self.load_data()#slurp
 from enum import $enum_class
 from typing import TYPE_CHECKING
 from $oenv import UNO_ENVIRONMENT, UNO_RUNTIME
+
 _DYNAMIC = False
 if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from $namespace import $safe_name as $safe_name
-    from ooo.helper.enum_helper import ConstEnumMeta
-#*
-    Not sure this is the best way to accomplish adding attribues to const.
-    Class is a slots class with no dictionary, therefore adding attributes normally
-    is not an option. Also underlying uno._ConstantGroup class prevents access to any attributes
-    that is not in the _constants dictionary class.
-    This is the only solution I have come up with thus far. PM
-*#
-    if hasattr($safe_name, '_constants') and isinstance(${safe_name}._constants, dict):
-        ${safe_name}._constants["__ooo_type_name__"] = "const"
-        ${safe_name}._constants["__ooo_full_ns__"] = "$fullname"
-        ${safe_name}._constants["__ooo_ns__"] = "$namespace"
+    from ooo.helper.enum_helper import UnoConstMeta,ConstEnumMeta
+    class ${safe_name}(metaclass=UnoConstMeta, type_name="$fullname", name_space="$namespace"):
+        """Dynamic Class. Contains all the constant values of ``$fullname``"""
+        pass
+
 #*
     Build enum dynamicallly.
 
     Bulding enum statically can cause issues in backwards compatibility such as com.sun.star.style.NumberingType
     contains attribs in 7x version that were not availabe in 6x version.
 *#
-
     class ${safe_name}Enum(${enum_class}, metaclass=ConstEnumMeta, type_name="$fullname", name_space="$namespace"):
         """Dynamic Enum. Contains all the constant values of ``$fullname`` as Enum values"""
         pass
