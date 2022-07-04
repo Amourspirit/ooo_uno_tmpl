@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.2.0",
+  "version": "0.2.10",
   "libre_office_ver": "7.3",
   "name": "XStringResourcePersistence",
   "type": "interface",
@@ -39,12 +39,9 @@
     },
     "quote": [
       "XInteractionHandler_bf80e51",
-      "XStorage_8e460a32",
-      "typing.Tuple[int, ...]"
+      "XStorage_8e460a32"
     ],
-    "typings": [
-      "typing.Tuple[int, ...]"
-    ],
+    "typings": [],
     "requires_typing": true,
     "full_imports": {
       "general": [
@@ -55,8 +52,10 @@
         "com.sun.star.task.XInteractionHandler"
       ]
     },
+    "imports": [
+      "uno"
+    ],
     "name": "XStringResourcePersistence",
-    "imports": [],
     "namespace": "com.sun.star.resource",
     "extends": [
       "com.sun.star.resource.XStringResourceManager"
@@ -69,7 +68,7 @@
       "methods": [
         {
           "name": "exportBinary",
-          "returns": "typing.Tuple[int, ...]",
+          "returns": "uno.ByteSequence",
           "returns_origin": "sequence< byte >",
           "desc": [
             "Returns a sequence of byte representing the complete string resource in a binary format.",
@@ -102,7 +101,7 @@
           "args": [
             {
               "name": "Data",
-              "type": "typing.Tuple[int, ...]",
+              "type": "uno.ByteSequence",
               "direction": "in",
               "origin": "sequence< byte >"
             }

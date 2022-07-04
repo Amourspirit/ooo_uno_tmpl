@@ -41,7 +41,7 @@ class BaseEx(BaseJson):
                 self.requires_typing = True
         self.extends_map.update(mdata.extends_map)
         self.from_imports = [x.as_tuple()
-                             for x in self._models.get_full_imports()]
+                             for x in self._models.get_from_full_imports()]
         self.from_imports_typing = [x.as_tuple()
                                     for x in mdata.from_imports_typing]
         self.quote.update(mdata.quote)

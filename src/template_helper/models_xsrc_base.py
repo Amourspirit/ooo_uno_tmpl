@@ -11,21 +11,22 @@ from ..model.shared.data.properties.prop import Prop
 
 
 class ModelsXsrcBase(ModelsBase):
-    # region Constructor   
+    # region Constructor
     def __init__(self) -> None:
         super().__init__()
-        
+
     # endregion Constructor
 
     @abstractmethod
-    def _get_parents_class_args(self, uno_none: bool = True) -> List[ClassArg]: ...
+    def _get_parents_class_args(
+        self, uno_none: bool = True) -> List[ClassArg]: ...
 
     @abstractproperty
     def model_data(self) -> Data: ...
-    
+
     @abstractproperty
     def parser_args(self) -> ParserArgs: ...
-    
+
     def get_properties_all(self) -> List[dict]:
         """
         Gets combined args for types, and properties as dict.
@@ -165,7 +166,7 @@ class ModelsXsrcBase(ModelsBase):
         imp.update(self.model_data.full_imports.typing)
         return imp
 
-    def get_full_imports(self) -> List[FromImport]:
+    def get_from_full_imports(self) -> List[FromImport]:
         """
         Get full import for current model plus all parent models.
 
@@ -192,10 +193,10 @@ class ModelsXsrcBase(ModelsBase):
         m_imports = self._get_model_full_imports()
         for arg in pargs:
             if not arg.p_type is None:
-                imports = arg.p_type.get_all_imports(ns=self.model_data.namespace)
+                imports = arg.p_type.get_all_from_imports(
+                    ns=self.model_data.namespace)
                 for imp in imports:
                     if not imp in m_imports:
                         # this import is not currently part of any imports
                         result.append(get_rel(imp))
         return result
-

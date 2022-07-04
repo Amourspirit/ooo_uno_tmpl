@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.2.0",
+  "version": "0.2.10",
   "libre_office_ver": "7.3",
   "name": "Wizard",
   "type": "service",
@@ -34,12 +34,10 @@
     },
     "quote": [
       "XWizardController_469d0fe4",
-      "typing.Tuple[int, ...]",
-      "typing.Tuple[typing.Tuple[int, ...], ...]"
+      "typing.Tuple[uno.ByteSequence, ...]"
     ],
     "typings": [
-      "typing.Tuple[int, ...]",
-      "typing.Tuple[typing.Tuple[int, ...], ...]"
+      "typing.Tuple[uno.ByteSequence, ...]"
     ],
     "requires_typing": true,
     "full_imports": {
@@ -50,8 +48,10 @@
         "com.sun.star.ui.dialogs.XWizardController"
       ]
     },
+    "imports": [
+      "uno"
+    ],
     "name": "Wizard",
-    "imports": [],
     "namespace": "com.sun.star.ui.dialogs",
     "extends": [
       "com.sun.star.ui.dialogs.XWizard"
@@ -79,7 +79,7 @@
           "args": [
             {
               "name": "PageIds",
-              "type": "typing.Tuple[typing.Tuple[int, ...], ...]",
+              "type": "typing.Tuple[uno.ByteSequence, ...]",
               "direction": "in",
               "origin": "sequence< sequence< short > >"
             },
@@ -104,9 +104,9 @@
           "args": [
             {
               "name": "PageIds",
-              "type": "typing.Tuple[int, ...]",
+              "type": "uno.ByteSequence",
               "direction": "in",
-              "origin": "sequence< short >"
+              "origin": "sequence< byte >"
             },
             {
               "name": "Controller",

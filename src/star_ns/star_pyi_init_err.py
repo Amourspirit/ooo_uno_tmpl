@@ -2,25 +2,26 @@ from pathlib import Path
 from ..utilities import util
 from .. import __version__
 
+
 def write_star_error() -> None:
     """
     Writes __init__.py with raise ImportError into star namesapce.
 
     When com.sun.star namesapce is pure typings then
     any import form the namesapce will be imported by python a namesapce.
-    
+
     This means python would see ``import com.sun.star.uno``
     as a valid import. The issue is when uno.py imports it expects an import
     error for imports such as ``from com.sun.star.uno import Exception as UnoException``.
-    
-    Becuase `import com.sun.star.uno`` imports as a namesapce the import error is not
+
+    Becuase ``import com.sun.star.uno`` imports as a namesapce the import error is not
     triggered and uno import method would return a namesapce and then an ImportError
     would be raised as ``com.sun.star.uno`` is valid but ``import as Exception``
     raises an ImportError Exception.
-    
+
     The solution is to raise an ImportError at the namespace level. This is caught by
     uno and then a real uno object is imported and returned.
-    
+
     In some cases it may be desireable to not raise import error.
     For this reason a check in done for a global key that is set in
     config.json as ``gloabal_ignore_import_error`` with a default value of ``ooouno_ignore_import_error``.

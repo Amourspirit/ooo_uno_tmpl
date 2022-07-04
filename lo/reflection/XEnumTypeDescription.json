@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.2.0",
+  "version": "0.2.10",
   "libre_office_ver": "7.3",
   "name": "XEnumTypeDescription",
   "type": "interface",
@@ -27,11 +27,9 @@
       "com.sun.star.reflection.XTypeDescription": "XTypeDescription_3c210fb1"
     },
     "quote": [
-      "typing.Tuple[int, ...]",
       "typing.Tuple[str, ...]"
     ],
     "typings": [
-      "typing.Tuple[int, ...]",
       "typing.Tuple[str, ...]"
     ],
     "requires_typing": true,
@@ -41,8 +39,10 @@
       ],
       "typing": []
     },
+    "imports": [
+      "uno"
+    ],
     "name": "XEnumTypeDescription",
-    "imports": [],
     "namespace": "com.sun.star.reflection",
     "extends": [
       "com.sun.star.reflection.XTypeDescription"
@@ -75,8 +75,8 @@
         },
         {
           "name": "getEnumValues",
-          "returns": "typing.Tuple[int, ...]",
-          "returns_origin": "sequence< long >",
+          "returns": "uno.ByteSequence",
+          "returns_origin": "sequence< byte >",
           "desc": [
             "Returns the enum member names."
           ],

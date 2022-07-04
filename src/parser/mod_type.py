@@ -3,6 +3,7 @@
 Handles conversion of LibreOffice types to Python Types
 """
 # region Imports
+from __future__ import annotations
 import re
 from abc import ABC, abstractmethod, abstractproperty
 from typing import List, Match, Optional, Set, Union
@@ -59,20 +60,22 @@ class PythonType(object):
     def __init__(
         self, type: str = 'object',
         requires_typing: bool = False,
-        imports: Optional[str] = None,
+        from_imports: str | None = None,
         is_py_type: bool = True,
-        children: Optional[List['PythonType']] = None,
+        children: List['PythonType'] | None = None,
         realtype: str = 'object',
-        origtype: Optional[str] = None,
-        origin: Optional[str] = None
+        origtype: str | None = None,
+        origin: str | None = None,
+        imports: str | None = None
     ) -> None:
         self._type = type
         self._requires_typing = requires_typing
-        self._imports = imports
+        self._from_imports = from_imports
         self._is_py_type = is_py_type
         self._realtype = realtype
         self._origtype = origtype
         self._origin = origin
+        self._imports = imports
         if children is None:
             self._children = []
         else:
@@ -110,7 +113,21 @@ class PythonType(object):
         self._requires_typing = value
 
     @property
-    def imports(self) -> Union[str, None]:
+    def from_imports(self) -> str | None:
+        """Specifies imports
+
+            :getter: Gets from imports value.
+            :setter: Sets from imports value.
+        """
+        return self._from_imports
+
+    @from_imports.setter
+    def from_imports(self, value: str | None):
+        self._default_check()
+        self._from_imports = value
+
+    @property
+    def imports(self) -> str | None:
         """Specifies imports
 
             :getter: Gets imports value.
@@ -119,7 +136,7 @@ class PythonType(object):
         return self._imports
 
     @imports.setter
-    def imports(self, value: Union[str, None]):
+    def imports(self, value: str | None):
         self._default_check()
         self._imports = value
 
@@ -155,15 +172,15 @@ class PythonType(object):
     def realtype(self, value: str):
         self._default_check()
         self._realtype = value
-    
+
     @property
     def origtype(self) -> Union[str, None]:
         return self._origtype
-    
+
     @origtype.setter
     def origtype(self, value: Union[str, None]) -> None:
         self._origtype = value
-    
+
     @property
     def origin(self) -> Union[str, None]:
         return self._origin
@@ -189,6 +206,7 @@ class PythonType(object):
         p_type = PythonType(
             type=self.type,
             requires_typing=self.requires_typing,
+            from_imports=self.from_imports,
             imports=self.imports,
             is_py_type=self.is_py_type,
             realtype=self.realtype,
@@ -198,16 +216,16 @@ class PythonType(object):
         p_type.children.extend(self.children)
         return p_type
 
-    def get_all_imports(self, ns: Optional[str] = None) -> Set[str]:
+    def get_all_from_imports(self, ns: Optional[str] = None) -> Set[str]:
         """
-        Get import for inststance and allof children recursivly
+        Get from imports for inststance and all of children recursivly
 
         Args:
             ns (str, optional): Optional namespace. When present all namesapces
                 that do not contain a ``.`` will be prepended with this value.
 
         Returns:
-            Set[str]: Set containing all imports
+            Set[str]: Set containing all from imports
         """
 
         def get_full_ns(namespace: Union[str, None], name: str) -> str:
@@ -218,12 +236,33 @@ class PythonType(object):
             return name
 
         def get_imports(p_type: PythonType, imports: Set[str], ns_fn: callable) -> None:
-            if p_type.imports:
-                imports.add(ns_fn(ns, p_type.imports))
+            if p_type.from_imports:
+                imports.add(ns_fn(ns, p_type.from_imports))
             for child in p_type.children:
                 get_imports(child, imports, ns_fn)
         im: Set[str] = set()
         get_imports(self, im, get_full_ns)
+        return im
+
+    def get_all_imports(self, ns: Optional[str] = None) -> Set[str]:
+        """
+        Get imports for inststance and all of children recursivly
+
+        Args:
+            ns (str, optional): Optional namespace. When present all namesapces
+                that do not contain a ``.`` will be prepended with this value.
+
+        Returns:
+            Set[str]: Set containing all imports
+        """
+
+        def get_imports(p_type: PythonType, imports: Set[str]) -> None:
+            if p_type.imports:
+                imports.add(p_type.imports)
+            for child in p_type.children:
+                get_imports(child, imports)
+        im: Set[str] = set()
+        get_imports(self, im)
         return im
 
     def is_default(self) -> bool:
@@ -343,6 +382,7 @@ class TypeRules(ITypeRules):
         self._reg_rule(rule=RuleNone)
         self._reg_rule(rule=RulePrimative)
         self._reg_rule(rule=RuleKnownPrimative)
+        self._reg_rule(rule=RuleByteSequence)
         self._reg_rule(rule=RuleKnownItterType)
         self._reg_rule(rule=RuleComType)
         self._reg_rule(rule=RuleTypeDef)
@@ -592,12 +632,50 @@ class RuleComType(BaseRule):
         return PythonType(
             type=s,
             requires_typing=False,
-            imports=s_type,
+            from_imports=s_type,
             is_py_type=False,
             realtype=s,
             origtype=in_type,
             origin=in_type
         )
+
+
+class RuleByteSequence(BaseRule):
+    """
+    Rule for sequence< byte >
+
+    This type is uno.ByteSequence
+    """
+
+    def __init__(self, rules: ITypeRules) -> None:
+        super().__init__(rules=rules)
+        self._rx = re.compile(r"sequence<[ ]*(byte|int|short|long|hyper)[ ]*>")
+        self._match: Match[str] | None = False
+
+    def get_is_match(self, in_type: str) -> bool:
+        self._set_default()
+        self._set_match(in_type)
+        if self._match is not None:
+            return True
+        return False
+
+    def get_python_type(self, in_type: str) -> PythonType:
+        return PythonType(
+            type="uno.ByteSequence",
+            requires_typing=False,
+            is_py_type=True,  # don't want to quote.
+            realtype="uno.ByteSequence",
+            origin="sequence< byte >",
+            imports="uno"
+        )
+
+    def _set_default(self):
+        self._match = False
+
+    def _set_match(self, in_type: str) -> None:
+        if self._match is not False:
+            return
+        self._match = self._rx.match(in_type)
 
 
 class RuleKnownItterType(BaseRule):
@@ -714,12 +792,12 @@ class RuleSeqLikeNonPrim(BaseRule):
         super().__init__(rules=rules)
         self._seq_prim = self.rules.get_rule_instance(RuleSeqLikePrimative)
         self._rx = re.compile(r"([a-zA-Z]+)<[ ]*([a-zA-Z0-9._]+)[ ]*>")
-        self._match: Union[Match[str], None] = False
+        self._match: Match[str] | None = False
         self._wrapper_type: PythonType = None
         self._recursive_state = False
 
     def _set_match(self, in_type: str) -> None:
-        if not self._match is False:
+        if self._match is not False:
             return
         self._match = self._rx.match(in_type)
 
@@ -758,7 +836,7 @@ class RuleSeqLikeNonPrim(BaseRule):
             return False
         self._set_default()
         self._set_match(in_type)
-        if not self._match:
+        if self._match is None:
             return False
         wrapper_str: str = self._match.groups()[0]
         self._set_wrapper(wrapper_str)
@@ -802,7 +880,7 @@ class RuleSeqLikeNonPrim(BaseRule):
             is_py_type = True
             child.is_py_type = True
             child.children.clear()
-            child.imports = None
+            child.from_imports = None
             child.is_py_type = True
             child.requires_typing = False
             child.type = t_name_full
@@ -830,7 +908,7 @@ class RuleSeqLikeNonPrim(BaseRule):
             origin=in_type
         )
         if not is_py_type:
-            p_type.imports = inner_str
+            p_type.from_imports = inner_str
         return p_type
 
 

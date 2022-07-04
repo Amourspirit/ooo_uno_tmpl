@@ -2,6 +2,10 @@
 Release Notes
 =============
 
+Version 0.2.10
+==============
+Add type rules to detect uno.ByteSequence
+
 Version 0.2.1
 =============
 

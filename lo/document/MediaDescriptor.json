@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.2.0",
+  "version": "0.2.10",
   "libre_office_ver": "7.3",
   "name": "MediaDescriptor",
   "type": "service",
@@ -55,12 +55,10 @@
       "XInteractionHandler_bf80e51",
       "XOutputStream_a4e00b35",
       "XStatusIndicator_e2d00d34",
-      "typing.Tuple[NamedValue_a37a0af3, ...]",
-      "typing.Tuple[int, ...]"
+      "typing.Tuple[NamedValue_a37a0af3, ...]"
     ],
     "typings": [
-      "typing.Tuple[NamedValue_a37a0af3, ...]",
-      "typing.Tuple[int, ...]"
+      "typing.Tuple[NamedValue_a37a0af3, ...]"
     ],
     "requires_typing": true,
     "full_imports": {
@@ -74,8 +72,10 @@
         "com.sun.star.task.XStatusIndicator"
       ]
     },
+    "imports": [
+      "uno"
+    ],
     "name": "MediaDescriptor",
-    "imports": [],
     "namespace": "com.sun.star.document",
     "extends": [],
     "desc": [
@@ -83,8 +83,7 @@
       "",
       "This service may be represented by a com.sun.star.beans.PropertyValue[]. Such descriptors will be passed to different functions, included into possible load/save processes. Every member of such process can use this descriptor and may change it if to actualize the information about the document. So this descriptor should be used as an in/out parameter.",
       "",
-      "Note:",
-      "It's not allowed to hold member of this descriptor by references longer than they will be used (especially a possible stream). It's allowed to use it directly or by copying it only.",
+      "Note:It's not allowed to hold member of this descriptor by references longer than they will be used (especially a possible stream). It's allowed to use it directly or by copying it only.",
       "",
       "**since**",
       "",
@@ -110,7 +109,7 @@
         },
         {
           "name": "PostData",
-          "returns": "typing.Tuple[int, ...]",
+          "returns": "uno.ByteSequence",
           "origtype": null,
           "origin": "sequence< byte >",
           "desc": [
@@ -608,8 +607,7 @@
           "desc": [
             "name of document referrer",
             "",
-            "A URL describing the environment of the request; e.g. a referrer may be a URL of a document, if a hyperlink inside this document is clicked to load another document. The referrer may be evaluated by the addressed UCB content or the loaded document. Without a referrer the processing of URLs that needs security checks will be denied, e.g. \\\"macro:\\\" URLs.",
-            "Don't be confused about the wrong spelling; it is kept for compatibility reasons."
+            "A URL describing the environment of the request; e.g. a referrer may be a URL of a document, if a hyperlink inside this document is clicked to load another document. The referrer may be evaluated by the addressed UCB content or the loaded document. Without a referrer the processing of URLs that needs security checks will be denied, e.g. \\\"macro:\\\" URLs. Don't be confused about the wrong spelling; it is kept for compatibility reasons."
           ],
           "raises_get": "",
           "raises_set": ""
@@ -792,8 +790,7 @@
           "desc": [
             "specifies the name of the view controller to create when loading a document",
             "",
-            "If this property is used when loading a document into a frame, then it specifies the name of the view controller to create. That is, the property is passed to the document's com.sun.star.frame.XModel2.createViewController() method.",
-            "If the loaded document does not support the XModel2 interface, the property is ignored.",
+            "If this property is used when loading a document into a frame, then it specifies the name of the view controller to create. That is, the property is passed to the document's com.sun.star.frame.XModel2.createViewController() method.If the loaded document does not support the XModel2 interface, the property is ignored.",
             "",
             "**since**",
             "",

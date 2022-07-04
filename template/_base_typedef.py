@@ -34,6 +34,7 @@ class BaseTypeDef(BaseJson):
         self.quote.update(quote)
         typings: List[str] = data.get('typings', [])
         self.typings.update(typings)
+        set_data('imports')
 
     def _validate_data(self, data: dict) -> bool:
         super()._validate_data(data=data)
@@ -46,4 +47,3 @@ class BaseTypeDef(BaseJson):
         if ver < min_ver:
             raise Exception(
                 "Invalid Data: Expected version to be at least '{min_ver}' got {ver}")
-

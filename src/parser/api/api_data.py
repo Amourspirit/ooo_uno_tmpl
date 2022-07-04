@@ -121,7 +121,8 @@ class APIData:
         params_info.get_obj()
 
         info.requires_typing = params_info.requires_typing or fn_info.requires_typing
-        info.imports.update(params_info.imports)
+        info.from_imports.update(params_info.from_imports)
+        info.from_imports.update(fn_info.from_imports)
         info.imports.update(fn_info.imports)
         return info
 
@@ -140,6 +141,7 @@ class APIData:
         # ensure data is primed
         p_info.get_obj()
         info.requires_typing = p_info.requires_typing
+        info.from_imports.update(p_info.from_imports)
         info.imports.update(p_info.imports)
         return info
 
@@ -158,6 +160,7 @@ class APIData:
         # ensure data is primed
         p_info.get_obj()
         info.requires_typing = p_info.requires_typing
+        info.from_imports.update(p_info.from_imports)
         info.imports.update(p_info.imports)
         return info
 

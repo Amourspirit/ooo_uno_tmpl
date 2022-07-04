@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.2.0",
+  "version": "0.2.10",
   "libre_office_ver": "7.3",
   "name": "XCollator",
   "type": "interface",
@@ -34,11 +34,9 @@
     },
     "quote": [
       "Locale_70d308fa",
-      "typing.Tuple[int, ...]",
       "typing.Tuple[str, ...]"
     ],
     "typings": [
-      "typing.Tuple[int, ...]",
       "typing.Tuple[str, ...]"
     ],
     "requires_typing": true,
@@ -50,8 +48,10 @@
         "com.sun.star.lang.Locale"
       ]
     },
+    "imports": [
+      "uno"
+    ],
     "name": "XCollator",
-    "imports": [],
     "namespace": "com.sun.star.i18n",
     "extends": [
       "com.sun.star.uno.XInterface"
@@ -151,8 +151,8 @@
         },
         {
           "name": "listCollatorOptions",
-          "returns": "typing.Tuple[int, ...]",
-          "returns_origin": "sequence< long >",
+          "returns": "uno.ByteSequence",
+          "returns_origin": "sequence< byte >",
           "desc": [
             "List all end user collator options for a given algorithm."
           ],
@@ -218,9 +218,9 @@
             },
             {
               "name": "aCollatorOptions",
-              "type": "typing.Tuple[int, ...]",
+              "type": "uno.ByteSequence",
               "direction": "in",
-              "origin": "sequence< long >"
+              "origin": "sequence< byte >"
             }
           ]
         },
