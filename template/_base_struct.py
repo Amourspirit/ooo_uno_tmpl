@@ -43,7 +43,7 @@ class BaseStruct(BaseJson):
         set_data('imports')
         # set_data('from_imports')
         self.from_imports = [x.as_tuple()
-                             for x in self._models.get_full_imports()]
+                             for x in self._models.get_from_full_imports()]
         set_data('from_imports_typing')
         quote: List[str] = data.get('quote', [])
         self.quote.update(quote)

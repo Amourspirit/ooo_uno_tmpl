@@ -705,7 +705,7 @@ class RuleImport(RuleBase):
             p_type = Util.get_python_type(
                 in_type=im, name_info=self._rules.name_info, ns=self._rules.api_ns.namespace_str)
 
-            rel = Util.get_rel_import(p_type.imports, ns.namespace_str)
+            rel = Util.get_rel_import(p_type.from_imports, ns.namespace_str)
 
             val = f"{rel[1]}.{name}"
             result = Val(text=si.name,
@@ -929,7 +929,7 @@ class ApiSummaries(BlockObj):
             )
             if p_type.requires_typing:
                 self._requires_typing = True
-            self._imports.update(p_type.get_all_imports())
+            self._imports.update(p_type.get_all_from_imports())
             self._data[si.id] = si
         return self._data
 
@@ -1368,7 +1368,7 @@ class Parser(base.ParserBase):
             if itm.val.p_type:
                 if itm.val.p_type.requires_typing:
                     self._requires_typing = True
-                im.update(itm.val.p_type.get_all_imports())
+                im.update(itm.val.p_type.get_all_from_imports())
         self._cache[key] = Util.get_clean_imports(ns=ns, imports=im)
         return self._cache[key]
 

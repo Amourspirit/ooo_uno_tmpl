@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.2.0",
+  "version": "0.2.10",
   "libre_office_ver": "7.3",
   "name": "XGraphics",
   "type": "interface",
@@ -82,12 +82,10 @@
       "XDisplayBitmap_bb550bdf",
       "XFont_5f480843",
       "XRegion_70f30910",
-      "typing.Tuple[int, ...]",
-      "typing.Tuple[typing.Tuple[int, ...], ...]"
+      "typing.Tuple[uno.ByteSequence, ...]"
     ],
     "typings": [
-      "typing.Tuple[int, ...]",
-      "typing.Tuple[typing.Tuple[int, ...], ...]"
+      "typing.Tuple[uno.ByteSequence, ...]"
     ],
     "requires_typing": true,
     "full_imports": {
@@ -106,8 +104,10 @@
         "com.sun.star.util.Color"
       ]
     },
+    "imports": [
+      "uno"
+    ],
     "name": "XGraphics",
-    "imports": [],
     "namespace": "com.sun.star.awt",
     "extends": [
       "com.sun.star.uno.XInterface"
@@ -572,15 +572,15 @@
           "args": [
             {
               "name": "DataX",
-              "type": "typing.Tuple[int, ...]",
+              "type": "uno.ByteSequence",
               "direction": "in",
-              "origin": "sequence< long >"
+              "origin": "sequence< byte >"
             },
             {
               "name": "DataY",
-              "type": "typing.Tuple[int, ...]",
+              "type": "uno.ByteSequence",
               "direction": "in",
-              "origin": "sequence< long >"
+              "origin": "sequence< byte >"
             }
           ]
         },
@@ -595,13 +595,13 @@
           "args": [
             {
               "name": "DataX",
-              "type": "typing.Tuple[typing.Tuple[int, ...], ...]",
+              "type": "typing.Tuple[uno.ByteSequence, ...]",
               "direction": "in",
               "origin": "sequence< sequence< long > >"
             },
             {
               "name": "DataY",
-              "type": "typing.Tuple[typing.Tuple[int, ...], ...]",
+              "type": "typing.Tuple[uno.ByteSequence, ...]",
               "direction": "in",
               "origin": "sequence< sequence< long > >"
             }
@@ -618,15 +618,15 @@
           "args": [
             {
               "name": "DataX",
-              "type": "typing.Tuple[int, ...]",
+              "type": "uno.ByteSequence",
               "direction": "in",
-              "origin": "sequence< long >"
+              "origin": "sequence< byte >"
             },
             {
               "name": "DataY",
-              "type": "typing.Tuple[int, ...]",
+              "type": "uno.ByteSequence",
               "direction": "in",
-              "origin": "sequence< long >"
+              "origin": "sequence< byte >"
             }
           ]
         },
@@ -770,9 +770,9 @@
             },
             {
               "name": "Longs",
-              "type": "typing.Tuple[int, ...]",
+              "type": "uno.ByteSequence",
               "direction": "in",
-              "origin": "sequence< long >"
+              "origin": "sequence< byte >"
             }
           ]
         },

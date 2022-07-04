@@ -4,6 +4,7 @@ from typing import Dict, Tuple, List
 from _base_json import BaseJson
 from src.model.service.model_service import ModelService
 
+
 class BaseService(BaseJson):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

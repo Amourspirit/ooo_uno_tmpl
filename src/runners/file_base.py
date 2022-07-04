@@ -69,7 +69,7 @@ class FilesBase:
         p_file = Path(t_file.parent, str(t_file.stem) +
                       self._config.template_pyi_py_ext)
         return p_file
-    
+
     def _get_json_path(self, tmpl_file) -> Path:
         """Get the json file the represents the template"""
         t_file = Path(tmpl_file)

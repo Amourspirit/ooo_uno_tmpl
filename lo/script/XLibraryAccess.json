@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.2.0",
+  "version": "0.2.10",
   "libre_office_ver": "7.3",
   "name": "XLibraryAccess",
   "type": "interface",
@@ -27,11 +27,9 @@
       "com.sun.star.uno.XInterface": "XInterface_8f010a43"
     },
     "quote": [
-      "typing.Tuple[int, ...]",
       "typing.Tuple[str, ...]"
     ],
     "typings": [
-      "typing.Tuple[int, ...]",
       "typing.Tuple[str, ...]"
     ],
     "requires_typing": true,
@@ -41,8 +39,10 @@
       ],
       "typing": []
     },
+    "imports": [
+      "uno"
+    ],
     "name": "XLibraryAccess",
-    "imports": [],
     "namespace": "com.sun.star.script",
     "extends": [
       "com.sun.star.uno.XInterface"
@@ -61,7 +61,7 @@
       "methods": [
         {
           "name": "getFunctionCode",
-          "returns": "typing.Tuple[int, ...]",
+          "returns": "uno.ByteSequence",
           "returns_origin": "sequence< byte >",
           "desc": [
             "Get the compiled code of a function."
@@ -95,7 +95,7 @@
         },
         {
           "name": "getModuleCode",
-          "returns": "typing.Tuple[int, ...]",
+          "returns": "uno.ByteSequence",
           "returns_origin": "sequence< byte >",
           "desc": [
             "Get the whole compiled code of a module."

@@ -4,6 +4,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import List
 
+
 @dataclass
 class AppConfig:
     libre_office_ver: str
@@ -69,7 +70,7 @@ class AppConfig:
     Shape that has no link has another border color. This is the no link border color.
     Used for finding shape within an image.
     """
-    pixel_map_min_shape_width:int
+    pixel_map_min_shape_width: int
     """
     Min number of pixels to match for a shape in an image.
     See Also: ``pixel_map_no_link``
@@ -185,6 +186,7 @@ def read_config(config_file: str) -> AppConfig:
     with open(config_file, 'r') as file:
         data = json.load(file)
         return AppConfig(**data)
+
 
 def read_config_default() -> AppConfig:
     """
