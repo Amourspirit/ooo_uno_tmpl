@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Any
 import sys
 import uno
-from enum import Enum, EnumMeta
+from enum import Enum, EnumMeta, _EnumDict
 
 # coding: utf-8
 
@@ -208,7 +208,7 @@ class ConstEnumMeta(EnumMeta):
                         return super().__getattr__(name)
                     finally:
                         super().__setattr__("_initialized", True)
-                member = cls._value2member_map_.get(name, None)
+                member = cls._member_map_.get(name, None)
                 if member is None:
                     try:
                         super().__setattr__("_initialized", False)
@@ -232,13 +232,23 @@ class ConstEnumMeta(EnumMeta):
 
         # new_enum = sup.__thisclass__(
         #     sup.__thisclass__.__name__, [(name, const)])
+        enum_dict = _EnumDict()
+        enum_dict._cls_name = cls.__name__
+        enum_dict['_generate_next_value_'] = None
+        enum_dict[name] = const
         new_enum = cls(
-            sup.__thisclass__.__name__, [(name, const)])
-        new_member = getattr(new_enum, name)
-        pseudo_member = cls._value2member_map_.setdefault(
-            name, new_member)
-        cls._member_names_.append(name)
-        return pseudo_member
+            sup.__thisclass__.__name__, enum_dict)
+        new_member: Enum = getattr(new_enum, name)
+        # assigning new_member.__classs__ is essential.
+        # Otherwise it will point to the enum in memory just created.
+        # this would lead to other issues as each enum value depends on
+        # having the same class for Flags and other operations.
+        setattr(new_member, "__class__", cls)
+        cls._value2member_map_[new_member.value] = new_member
+        cls._member_map_[new_member.name] = new_member
+
+        cls._member_names_.append(new_member.name)
+        return cls._member_map_[new_member.name]
 
     if sys.version_info < (3, 8, 0):
         @staticmethod

@@ -2,6 +2,7 @@ import pytest
 if __name__ == "__main__":
     pytest.main([__file__])
 
+from enum import IntFlag
 import uno
 
 
@@ -44,3 +45,19 @@ def test_focus_change_reason():
     e = FocusChangeReasonEnum.AROUND | FocusChangeReasonEnum.CURSOR
     assert FocusChangeReasonEnum.AROUND & e == FocusChangeReasonEnum.AROUND
     assert FocusChangeReasonEnum.CURSOR & e == FocusChangeReasonEnum.CURSOR
+
+def test_simple_flags() -> None:
+    class Simple(IntFlag):
+        VALUE = 1
+        DATETIME = 2
+        STRING = 4
+    
+    flags = Simple.VALUE | Simple.STRING
+    new_flags = Simple(flags)
+    assert new_flags == flags
+
+def test_cell_flags() -> None:
+    from ooobuild.dyn.sheet.cell_flags import CellFlagsEnum
+    flags = CellFlagsEnum.VALUE | CellFlagsEnum.STRING
+    new_flags = CellFlagsEnum(flags)
+    assert new_flags == flags
