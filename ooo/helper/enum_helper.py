@@ -244,7 +244,7 @@ class ConstEnumMeta(EnumMeta):
         # this would lead to other issues as each enum value depends on
         # having the same class for Flags and other operations.
         setattr(new_member, "__class__", cls)
-        cls._value2member_map_[new_member.value] = new_member.name
+        cls._value2member_map_[new_member.value] = new_member
         cls._member_map_[new_member.name] = new_member
 
         cls._member_names_.append(new_member.name)
