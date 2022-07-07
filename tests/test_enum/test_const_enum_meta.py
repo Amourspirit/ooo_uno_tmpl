@@ -27,7 +27,7 @@ def test_accessible_relation_type_enum_meta():
 
     class AccessibleRelationTypeEnum(IntEnum, metaclass=ConstEnumMeta, type_name=ns, name_space="com.sun.star.accessibility"):
         pass
-    
+
     from ooobuild.dyn.accessibility.accessible_relation_type import AccessibleRelationType
 
     assert AccessibleRelationTypeEnum.INVALID.value == AccessibleRelationType.INVALID

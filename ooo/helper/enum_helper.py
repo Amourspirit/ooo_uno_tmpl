@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Any
 import sys
 import uno
-from enum import Enum, EnumMeta
+from enum import Enum, EnumMeta, _EnumDict
 
 # coding: utf-8
 
@@ -163,18 +163,18 @@ class UnoEnumMeta(type):
 class ConstEnumMeta(EnumMeta):
     """
     Dynamic Enum for Constants
-    
+
     Enums that use this metaclass will automatically look up const values from uno and assign enums on the fly.
-    
+
     :example:
         .. code-block:: python
-        
+
             class AccessibleRelationTypeEnum(IntEnum, metaclass=ConstEnumMeta, type_name="com.sun.star.accessibility.AccessibleRelationType", name_space="com.sun.star.accessibility"):
                 pass
-            
+
             # INVALID is lookup up automatically and added to enum
             assert AccessibleRelationTypeEnum.INVALID.value == 0
-    
+
     """
     _initialized = False  # This class var is important. It is always False.
     # The instances will override this with their own,
@@ -185,7 +185,6 @@ class ConstEnumMeta(EnumMeta):
 
     @classmethod
     def __prepare__(metacls, cls, bases, **kwds):
-        # return super().__prepare__(cls, bases, **kwds)
         return super().__prepare__(cls, bases)
 
     def __new__(metacls, cls, bases, classdict, **kwds):
@@ -209,7 +208,7 @@ class ConstEnumMeta(EnumMeta):
                         return super().__getattr__(name)
                     finally:
                         super().__setattr__("_initialized", True)
-                member = cls._value2member_map_.get(name, None)
+                member = cls._member_map_.get(name, None)
                 if member is None:
                     try:
                         super().__setattr__("_initialized", False)
@@ -233,13 +232,23 @@ class ConstEnumMeta(EnumMeta):
 
         # new_enum = sup.__thisclass__(
         #     sup.__thisclass__.__name__, [(name, const)])
+        enum_dict = _EnumDict()
+        enum_dict._cls_name = cls.__name__
+        enum_dict['_generate_next_value_'] = None
+        enum_dict[name] = const
         new_enum = cls(
-            sup.__thisclass__.__name__, [(name, const)])
-        new_member = getattr(new_enum, name)
-        pseudo_member = cls._value2member_map_.setdefault(
-            name, new_member)
-        cls._member_names_.append(name)
-        return pseudo_member
+            sup.__thisclass__.__name__, enum_dict)
+        new_member: Enum = getattr(new_enum, name)
+        # assigning new_member.__classs__ is essential.
+        # Otherwise it will point to the enum in memory just created.
+        # this would lead to other issues as each enum value depends on
+        # having the same class for Flags and other operations.
+        setattr(new_member, "__class__", cls)
+        cls._value2member_map_[new_member.value] = new_member
+        cls._member_map_[new_member.name] = new_member
+
+        cls._member_names_.append(new_member.name)
+        return cls._member_map_[new_member.name]
 
     if sys.version_info < (3, 8, 0):
         @staticmethod
@@ -364,7 +373,7 @@ class UnoConstMeta(type):
         This metaclass use a just in time approach. If the enum is not yet an attribute it is automatiacally added dynamically.
         All subsequent calls automatically use the dynamically added attribute.
     """
-    __initialized = False  # This class var is important. It is always False.
+    _initialized = False  # This class var is important. It is always False.
     # The instances will override this with their own,
     # set to True.
     __ooo_type_name__ = "const"
@@ -382,10 +391,10 @@ class UnoConstMeta(type):
         super().__init__(name, bases, namespace)
         cls.__ooo_full_ns__ = type_name
         cls.__ooo_ns__ = name_space
-        cls.__initialized = True
+        cls._initialized = True
 
     def __getattr__(cls, name: str) -> uno.Enum | Any:
-        if cls.__initialized:
+        if cls._initialized:
             # Provide the caller attributes in whatever ways interest you.
             try:
                 const = uno.getConstantByName(f"{cls.__ooo_full_ns__}.{name}")
@@ -404,7 +413,7 @@ class UnoConstMeta(type):
                 raise AttributeError(name)
 
     def __setattr__(cls, key, value):
-        if cls.__initialized:
+        if cls._initialized:
             pass
         else:
             # metaclass __dict__ is a mappingproxy
