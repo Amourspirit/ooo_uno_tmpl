@@ -246,7 +246,7 @@ class ConstEnumMeta(EnumMeta):
         setattr(new_member, "__class__", cls)
         cls._value2member_map_[new_member.value] = new_member.name
         cls._member_map_[new_member.name] = new_member
-        
+
         cls._member_names_.append(new_member.name)
         return cls._member_map_[new_member.name]
 
