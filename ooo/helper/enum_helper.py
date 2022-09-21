@@ -1,13 +1,8 @@
 # coding: utf-8
 from __future__ import annotations
 from typing import Any
-import sys
-import importlib
 import uno
-from enum import Enum, EnumMeta, _EnumDict, IntEnum
-
-
-# coding: utf-8
+from enum import Enum, EnumMeta, _EnumDict
 
 
 def uno_enum_class_new(cls, value):
@@ -165,6 +160,7 @@ class UnoEnumMeta(type):
     def __get_enum_name(cls) -> str:
         return cls.__ooo_full_ns__.rsplit(sep=".", maxsplit=1)[1]
 
+
 class ConstEnumMeta(EnumMeta):
     """
     Dynamic Enum for Constants
@@ -201,6 +197,7 @@ class ConstEnumMeta(EnumMeta):
                 val = getattr(const, attr, None)
                 if val is not None:
                     dic[attr] = val
+
         type_name: str = kwds["type_name"]
         name_space: str = kwds["name_space"]
         enum_name = type_name.rsplit(sep=".", maxsplit=1)[1]
