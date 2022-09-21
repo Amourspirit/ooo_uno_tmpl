@@ -75,3 +75,22 @@ def test_message_box_results_str():
     result = MessageBoxResultsEnum("OK")
     assert result.value == 1
     assert result == MessageBoxResultsEnum.OK
+
+def test_focus_change_reason():
+    # FocusChangeReason is Flags Enum
+    from ooobuild.dyn.awt.focus_change_reason import FocusChangeReason
+    from ooobuild.dyn.awt.focus_change_reason import FocusChangeReasonEnum
+    assert FocusChangeReason.__ooo_ns__ == 'com.sun.star.awt'
+    assert FocusChangeReason.__ooo_full_ns__ == 'com.sun.star.awt.FocusChangeReason'
+    assert FocusChangeReason.__ooo_type_name__ == 'const'
+    e = FocusChangeReasonEnum.AROUND | FocusChangeReasonEnum.CURSOR
+    assert FocusChangeReasonEnum.AROUND & e == FocusChangeReasonEnum.AROUND
+    assert FocusChangeReasonEnum.CURSOR & e == FocusChangeReasonEnum.CURSOR
+
+def test_cell_flags() -> None:
+    from ooobuild.dyn.sheet.cell_flags import CellFlagsEnum
+    flags = CellFlagsEnum.VALUE | CellFlagsEnum.STRING
+    new_flags = CellFlagsEnum(flags)
+    assert new_flags == flags
+    new_flags = CellFlagsEnum(flags.value)
+    assert new_flags == flags
