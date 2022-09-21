@@ -33,33 +33,3 @@ def test_adjustment_type():
 
     with pytest.raises(TypeError):
         AdjustmentType("ADJUST")
-
-
-def test_focus_change_reason():
-    # FocusChangeReason is Flags Enum
-    from ooobuild.dyn.awt.focus_change_reason import FocusChangeReason
-    from ooobuild.dyn.awt.focus_change_reason import FocusChangeReasonEnum
-    assert FocusChangeReason.__ooo_ns__ == 'com.sun.star.awt'
-    assert FocusChangeReason.__ooo_full_ns__ == 'com.sun.star.awt.FocusChangeReason'
-    assert FocusChangeReason.__ooo_type_name__ == 'const'
-    e = FocusChangeReasonEnum.AROUND | FocusChangeReasonEnum.CURSOR
-    assert FocusChangeReasonEnum.AROUND & e == FocusChangeReasonEnum.AROUND
-    assert FocusChangeReasonEnum.CURSOR & e == FocusChangeReasonEnum.CURSOR
-
-
-def test_simple_flags() -> None:
-    class Simple(IntFlag):
-        VALUE = 1
-        DATETIME = 2
-        STRING = 4
-
-    flags = Simple.VALUE | Simple.STRING
-    new_flags = Simple(flags)
-    assert new_flags == flags
-
-
-def test_cell_flags() -> None:
-    from ooobuild.dyn.sheet.cell_flags import CellFlagsEnum
-    flags = CellFlagsEnum.VALUE | CellFlagsEnum.STRING
-    new_flags = CellFlagsEnum(flags)
-    assert new_flags == flags
