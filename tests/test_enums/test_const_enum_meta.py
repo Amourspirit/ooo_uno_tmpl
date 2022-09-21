@@ -5,12 +5,12 @@ from enum import IntEnum
 if __name__ == "__main__":
     pytest.main([__file__])
 
-import uno
 
 
 def test_accessible_relation_type_enum_meta():
     from ooo.helper.enum_helper import ConstEnumMeta
     ns = "com.sun.star.accessibility.AccessibleRelationType"
+    # import uno
     values = (
         "INVALID",
         "CONTENT_FLOWS_FROM",
@@ -61,3 +61,17 @@ def test_accessible_relation_type_enum():
         const1 = getattr(AccessibleRelationTypeEnum, value)
         const2 = getattr(AccessibleRelationType, value)
         assert const1.value == const2
+
+
+def test_message_box_results_int():
+    from ooobuild.dyn.awt.message_box_results import MessageBoxResultsEnum
+    result = MessageBoxResultsEnum(1)
+    assert result.value == 1
+    assert MessageBoxResultsEnum.OK == result
+
+def test_message_box_results_str():
+    from ooobuild.dyn.awt.message_box_results import MessageBoxResultsEnum
+    assert MessageBoxResultsEnum.OK.value == 1
+    result = MessageBoxResultsEnum("OK")
+    assert result.value == 1
+    assert result == MessageBoxResultsEnum.OK

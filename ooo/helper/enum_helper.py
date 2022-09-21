@@ -2,8 +2,10 @@
 from __future__ import annotations
 from typing import Any
 import sys
+import importlib
 import uno
-from enum import Enum, EnumMeta, _EnumDict
+from enum import Enum, EnumMeta, _EnumDict, IntEnum
+
 
 # coding: utf-8
 
@@ -188,15 +190,45 @@ class ConstEnumMeta(EnumMeta):
         return super().__prepare__(cls, bases)
 
     def __new__(metacls, cls, bases, classdict, **kwds):
+        def set_enum_values(name: str, ns: str, dic: _EnumDict) -> None:
+            m_obj = __import__(name=ns, fromlist=[name])
+            const = getattr(m_obj, name)
+            attrs = [a for a in dir(const) if not a.startswith('__')]
+            for attr in attrs:
+                val = getattr(const, attr, None)
+                if val is not None:
+                    dic[attr] = val
+                    # dic._member_names.append(attr)
+        type_name: str = kwds["type_name"]
+        name_space: str = kwds["name_space"]
+        enum_name = type_name.rsplit(sep=".", maxsplit=1)[1]
+        set_enum_values(enum_name, name_space, classdict)
         return super().__new__(metacls, cls, bases, classdict)
 
     def __init__(cls, name, bases, namespace, **kwds):
         super().__init__(name, bases, namespace)
         type_name = kwds["type_name"]
         name_space = kwds["name_space"]
-        cls.__ooo_full_ns__ = type_name
-        cls.__ooo_ns__ = name_space
+        cls.__ooo_full_ns__: str = type_name
+        cls.__ooo_ns__: str = name_space
+        cls.__ooo_name__: str = cls.__get_enum_name()
+        cls.__ooo_enum_name__: str = cls.__ooo_name__ + "Enum"
         cls._initialized = True
+
+    def __call__(cls, value, names=None, *, module=None, qualname=None, type=None, start=1):
+        if isinstance(value, str) and value != cls.__ooo_enum_name__:
+            return cls.__get_enum_from_str(value)
+        return super().__call__(value=value, names=names, module=module, qualname=qualname, type=type, start=start)
+
+    def __get_enum_name(cls) -> str:
+        return cls.__ooo_full_ns__.rsplit(sep=".", maxsplit=1)[1]
+
+    def __get_enum_from_str(cls, value: str) -> IntEnum:
+        if not value:
+            return None
+        val = getattr(cls, value, None)
+        return val
+
 
     def __getattr__(cls, name: str) -> uno.Enum | Any:
         if cls._initialized:

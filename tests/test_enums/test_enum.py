@@ -61,3 +61,5 @@ def test_cell_flags() -> None:
     flags = CellFlagsEnum.VALUE | CellFlagsEnum.STRING
     new_flags = CellFlagsEnum(flags)
     assert new_flags == flags
+    new_flags = CellFlagsEnum(flags.value)
+    assert new_flags == flags
