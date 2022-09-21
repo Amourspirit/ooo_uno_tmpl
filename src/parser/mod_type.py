@@ -660,12 +660,13 @@ class RuleByteSequence(BaseRule):
         return False
 
     def get_python_type(self, in_type: str) -> PythonType:
+        orig_type = self._match[1]
         return PythonType(
             type="uno.ByteSequence",
             requires_typing=False,
             is_py_type=True,  # don't want to quote.
             realtype="uno.ByteSequence",
-            origin="sequence< byte >",
+            origin=f"sequence< {orig_type} >",
             imports="uno"
         )
 

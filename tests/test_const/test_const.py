@@ -30,7 +30,6 @@ def test_accessible_relation_type_const_meta():
     class AccessibleRelationType(metaclass=UnoConstMeta, type_name=ns, name_space="com.sun.star.accessibility"):
         pass
 
-
     assert AccessibleRelationType.INVALID == UnoAccessibleRelationType.INVALID
     assert AccessibleRelationType.INVALID == UnoAccessibleRelationType.INVALID
     for value in values:
