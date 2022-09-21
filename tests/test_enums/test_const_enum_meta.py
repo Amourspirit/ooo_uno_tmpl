@@ -76,6 +76,12 @@ def test_message_box_results_str():
     assert result.value == 1
     assert result == MessageBoxResultsEnum.OK
 
+def test_message_box_results_enum():
+    from ooobuild.dyn.awt.message_box_results import MessageBoxResultsEnum
+    result = MessageBoxResultsEnum(MessageBoxResultsEnum.OK)
+    assert result.value == 1
+    assert result == MessageBoxResultsEnum.OK
+
 def test_focus_change_reason():
     # FocusChangeReason is Flags Enum
     from ooobuild.dyn.awt.focus_change_reason import FocusChangeReason

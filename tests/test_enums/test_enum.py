@@ -35,14 +35,4 @@ def test_adjustment_type():
         AdjustmentType("ADJUST")
 
 
-def test_simple_flags() -> None:
-    class Simple(IntFlag):
-        VALUE = 1
-        DATETIME = 2
-        STRING = 4
-    
-    flags = Simple.VALUE | Simple.STRING
-    new_flags = Simple(flags)
-    assert new_flags == flags
-
 
