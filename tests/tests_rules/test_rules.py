@@ -32,20 +32,33 @@ def test_rule_primative_seq():
     tester = tm.TypeRules()
     seq = 'sequence< long >'
     p_type = tester.get_python_type(seq)
-    assert p_type.type == 'typing.Tuple[int, ...]'
-    assert p_type.requires_typing
+    assert p_type.type == 'uno.ByteSequence'
+    assert p_type.requires_typing == False
     assert p_type.is_py_type
-    assert p_type.realtype == 'tuple'
+    assert p_type.realtype == 'uno.ByteSequence'
     assert p_type.origin == seq
     assert p_type.origtype == None
-    assert len(p_type.children) == 1
-    p_child = p_type.children[0]
-    assert p_child.type == 'int'
-    assert p_child.realtype == 'int'
-    assert p_child.is_py_type
-    assert p_child.requires_typing == False
-    assert len(p_child.children) == 0
-    assert len(p_child.get_all_from_imports()) == 0
+    assert len(p_type.children) == 0
+
+    seq = 'sequence< int >'
+    p_type = tester.get_python_type(seq)
+    assert p_type.type == 'uno.ByteSequence'
+    assert p_type.requires_typing == False
+    assert p_type.is_py_type
+    assert p_type.realtype == 'uno.ByteSequence'
+    assert p_type.origin == seq
+    assert p_type.origtype == None
+    assert len(p_type.children) == 0
+    
+    seq = 'sequence< short >'
+    p_type = tester.get_python_type(seq)
+    assert p_type.type == 'uno.ByteSequence'
+    assert p_type.requires_typing == False
+    assert p_type.is_py_type
+    assert p_type.realtype == 'uno.ByteSequence'
+    assert p_type.origin == seq
+    assert p_type.origtype == None
+    assert len(p_type.children) == 0
 
     seq = 'sequence<string>'
     p_type = tester.get_python_type(seq)
