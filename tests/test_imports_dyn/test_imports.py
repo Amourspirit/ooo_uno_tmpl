@@ -1,5 +1,6 @@
 # coding: utf-8
 import pytest
+
 if __name__ == "__main__":
     # import os
     # import sys
@@ -8,7 +9,7 @@ if __name__ == "__main__":
 from tests.import_check import ImportCheck
 
 
-@pytest.fixture(scope='session')
+@pytest.fixture(scope="session")
 def singlton_data(module_types):
     lst = module_types["singleton"]
     results = []
@@ -18,7 +19,7 @@ def singlton_data(module_types):
     return results
 
 
-@pytest.fixture(scope='session')
+@pytest.fixture(scope="session")
 def enum_data(module_types):
     lst = module_types["enum"]
     results = []
@@ -28,7 +29,7 @@ def enum_data(module_types):
     return results
 
 
-@pytest.fixture(scope='session')
+@pytest.fixture(scope="session")
 def const_data(module_types):
     lst = module_types["const"]
     results = []
@@ -38,7 +39,7 @@ def const_data(module_types):
     return results
 
 
-@pytest.fixture(scope='session')
+@pytest.fixture(scope="session")
 def ex_data(module_types):
     lst = module_types["exception"]
     results = []
@@ -48,7 +49,7 @@ def ex_data(module_types):
     return results
 
 
-@pytest.fixture(scope='session')
+@pytest.fixture(scope="session")
 def typedef_data(module_types):
     lst = module_types["typedef"]
     results = []
@@ -57,7 +58,8 @@ def typedef_data(module_types):
         results.append(name)
     return results
 
-@pytest.fixture(scope='session')
+
+@pytest.fixture(scope="session")
 def struct_data(module_types):
     lst = module_types["struct"]
     results = []
@@ -67,7 +69,7 @@ def struct_data(module_types):
     return results
 
 
-@pytest.fixture(scope='session')
+@pytest.fixture(scope="session")
 def interface_data(module_types):
     lst = module_types["interface"]
     results = []
@@ -77,7 +79,7 @@ def interface_data(module_types):
     return results
 
 
-@pytest.fixture(scope='session')
+@pytest.fixture(scope="session")
 def service_data(module_types):
     lst = module_types["service"]
     results = []
@@ -88,73 +90,61 @@ def service_data(module_types):
 
 
 def test_imp_singleton(singlton_data: str, monkeypatch):
-    monkeypatch.setenv('ooouno_ignore_runtime', 'True')
+    monkeypatch.setenv("ooouno_ignore_runtime", "True")
     # https://github.com/pytest-dev/pytest/issues/6374
     imc = ImportCheck()
-    assert imc.load_import(singlton_data) == True
+    assert imc.load_import(singlton_data, True) == True
 
-def test_imp_enum_uno(enum_data: str, monkeypatch):
-    monkeypatch.setenv('ooouno_ignore_runtime', 'False')
-    imc = ImportCheck()
-    assert imc.load_import(enum_data) == True
 
 def test_imp_enum(enum_data: str, monkeypatch):
-    monkeypatch.setenv('ooouno_ignore_runtime', 'True')
+    monkeypatch.setenv("ooouno_ignore_runtime", "True")
     imc = ImportCheck()
-    assert imc.load_import(enum_data) == True
+    assert imc.load_import(enum_data, True) == True
 
-def test_imp_const_uno(const_data: str, monkeypatch):
-    monkeypatch.setenv('ooouno_ignore_runtime', 'False')
-    imc = ImportCheck()
-    assert imc.load_import(const_data) == True
 
 def test_imp_const(const_data: str, monkeypatch):
-    monkeypatch.setenv('ooouno_ignore_runtime', 'True')
+    monkeypatch.setenv("ooouno_ignore_runtime", "True")
     imc = ImportCheck()
     assert imc.load_import(const_data) == True
     const_enum = const_data + "Enum"
-    assert imc.load_import(const_enum) == True
+    assert imc.load_import(const_enum, True) == True
 
-def test_imp_ex_uno(ex_data: str, monkeypatch):
-    monkeypatch.setenv('ooouno_ignore_runtime', 'False')
-    imc = ImportCheck()
-    assert imc.load_import(ex_data) == True
-    
+
 def test_imp_ex(ex_data: str, monkeypatch):
-    monkeypatch.setenv('ooouno_ignore_runtime', 'True')
+    monkeypatch.setenv("ooouno_ignore_runtime", "True")
     imc = ImportCheck()
-    assert imc.load_import(ex_data) == True
+    assert imc.load_import(ex_data, True) == True
 
 
 def test_imp_typedef(typedef_data: str, monkeypatch):
-    monkeypatch.setenv('ooouno_ignore_runtime', 'True')
+    monkeypatch.setenv("ooouno_ignore_runtime", "True")
     imc = ImportCheck()
-    assert imc.load_import(typedef_data) == True
+    assert imc.load_import(typedef_data, True) == True
 
-
-def test_imp_struct_uno(struct_data: str, monkeypatch):
-    monkeypatch.setenv('ooouno_ignore_runtime', 'True')
-    imc = ImportCheck()
-    assert imc.load_import(struct_data) == True
 
 def test_imp_struct(struct_data: str, monkeypatch):
-    monkeypatch.setenv('ooouno_ignore_runtime', 'False')
+
+    monkeypatch.setenv("ooouno_ignore_runtime", "True")
     imc = ImportCheck()
-    assert imc.load_import(struct_data) == True
+    assert imc.load_import(struct_data, True) == True
 
 
 def test_imp_interface(interface_data: str, monkeypatch):
-    monkeypatch.setenv('ooouno_ignore_runtime', 'True')
+    monkeypatch.setenv("ooouno_ignore_runtime", "True")
+    from typing import TYPE_CHECKING
+
+    assert TYPE_CHECKING == False
     imc = ImportCheck()
-    assert imc.load_import(interface_data) == True
+    assert imc.load_import(interface_data, True) == True
 
 
 def test_imp_service(service_data: str, monkeypatch):
-    monkeypatch.setenv('ooouno_ignore_runtime', 'True')
+    monkeypatch.setenv("ooouno_ignore_runtime", "True")
     imc = ImportCheck()
-    assert imc.load_import(service_data) == True
+    assert imc.load_import(service_data, True) == True
+
 
 def _test_generic():
-    ns = 'build.uno_obj.text.text_view_cursor.TextViewCursor'
+    ns = "build.uno_obj.text.text_view_cursor.TextViewCursor"
     imc = ImportCheck()
-    assert imc.load_import(ns) == True
+    assert imc.load_import(ns, True) == True
