@@ -21,12 +21,17 @@ pydoc app
 
 ## Quickstart
 
-* Install [requirements](docs/setup_env.rst)
-* Activate env: `$ conda activate ./env`
-* pydoc app
+* `python -m venv ./.venv`
+* `source ./.venv/bin/activate`
+* `poetry install`
+* `python -m app cmd-link --add`
+
+For details on setup see [Setup Environment](docs/setup_env.rst)
 
 ## Related Projects
 
+* [OOO Development Tools](https://github.com/Amourspirit/python_ooo_dev_tools)
+* [LibreOffice Python UNO Examples](https://github.com/Amourspirit/python-ooouno-ex)
 * [ooouno](https://github.com/Amourspirit/python-ooouno)
 * [LibreOffice API Typings](https://github.com/Amourspirit/python-types-unopy)
 * [ScriptForge Typings](https://github.com/Amourspirit/python-types-scriptforge)
@@ -34,4 +39,3 @@ pydoc app
 * [LibreOffice Python UNO Examples](https://github.com/Amourspirit/python-ooouno-ex)
 * [LibreOffice Developer Search](https://github.com/Amourspirit/python_lo_dev_search)
 * [LibreOffice UNO Typings](https://github.com/Amourspirit/python-types-uno-script)
-* [LibreOffice Developer Search](https://github.com/Amourspirit/python_lo_dev_search)
