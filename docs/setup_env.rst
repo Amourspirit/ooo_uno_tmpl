@@ -71,9 +71,9 @@ That's it! Now should be ready for development.
 
 For other options try:
 
-    .. code::
+.. code::
 
-        (.venv) $ python -m app cmd-link -h
+    (.venv) $ python -m app cmd-link -h
 
 
 Testing Virtual Environment
