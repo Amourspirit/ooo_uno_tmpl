@@ -1,11 +1,12 @@
 # coding: utf-8
+import sys
+import os
+from typing import TYPE_CHECKING
+
 try:
     import uno
 except ImportError:
     pass
-import sys
-import os
-from typing import TYPE_CHECKING
 
 UNO_ENVIRONMENT = False
 if not TYPE_CHECKING:

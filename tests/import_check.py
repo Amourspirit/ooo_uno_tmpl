@@ -52,7 +52,7 @@ class ImportCheck:
                 return False
         return True
 
-    def load_import(self, im: str) -> bool:
+    def load_import(self, im: str, raise_err: bool = False) -> bool:
         """
         Load an import name for later comparsion.
         Name is expected in format of ``scratch.uno_obj.form.component.rich_text_control.RichTextControl``
@@ -71,11 +71,15 @@ class ImportCheck:
             _, cl = self.dynamic_imp(pkg_name, mod_name, cls_name)
             names_lst = self.get_class_names(cl, False)
         except Exception:
+            if raise_err:
+                raise
             return False
         try:
             for n in names_lst:
                 self._unique.add(n)
         except Exception:
+            if raise_err:
+                raise
             return False
         return True
 
