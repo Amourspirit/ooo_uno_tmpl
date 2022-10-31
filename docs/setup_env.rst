@@ -1,15 +1,14 @@
-===========================================================
 LibreOffice python development environment setup guidelines
 ===========================================================
 
 Limitations
-===========
+-----------
 
 Currently this project will only work on linux.
 However, the output from this project is cross platform.
 
 System Setup
-============
+------------
 
 At the time of this writting, Libre Office only provides python3 system packages, not pip packages.
 
@@ -22,52 +21,71 @@ APT packages
 
     $ sudo apt-get install libreoffice python3 libreoffice-script-provider-python python3-uno uno-libs-private libuno-salhelpergcc3-3 libuno-sal3 libuno-purpenvhelpergcc3-3 libuno-cppuhelpergcc3-3 libuno-cppu3
 
-Virtual Environment
-===================
 
-Virtual Environment for this project uses conda.
+
+Virtual Environment
+-------------------
+
+This project use a virtual environment for development purposes.
+
+`Poetry <https://python-poetry.org/>`_ is required to install this project in a development environment.
+
+Set up virtual environment if not existing.
+
+Linux
+^^^^^
 
 .. code::
 
-    $ conda env create --prefix ./env -f environment.yml
+    $ python -m venv ./.venv
 
-UNO
-===
+Activate virtual environment.
 
-No uno pip
-----------
+.. code::
 
-Uno is required to compile templates of this project.
+    source ./.venv/bin/activate
 
-As stated there is no uno pip install. However uno is required for this project.
+Install requirements using Poetry.
 
-uno in env
-----------
+.. code::
 
-There are a couple of ways to setup uno for this project after uno has been install on system.
+    (.venv) $ poetry install
 
-Manual
-++++++
+In order to run test it is essential that ``uno.py`` and ``unohelper.py`` can be imported.
+These files are part of the LibreOffice installation.
+The location of these files vary depending on OS and other factors.
 
-1. Copy uno file into env subfolder.
 
-    .. code::
+On Linux what is required to communicate with LibreOffice API it a copy of, or link to ``uno.py`` and ``unohelper.py`` in the virtual environment.
+``uno.py`` sets up the necessary code that makes importing from LibreOffice API possible.
 
-        $ cp '/usr/lib/python3/dist-packages/uno.py' env/lib/python3.10/site-packages/uno.py
+This project has a command to accomplish this in the virtual environment on Linux.
 
-2. Link uno file into env subfolder.
+.. code::
 
-    .. code::
+    (.venv) $ python -m app cmd-link --add
 
-        $ ln -s '/usr/lib/python3/dist-packages/uno.py' env/lib/python3.10/site-packages/uno.py
+After virtual environment is set up and **activated**, running the above command on Linux will search in known paths for ``uno.py`` and ``unohelper.py``
+and create links to files in the current virtual environment.
+That's it! Now should be ready for development.
 
-Linking helps future proof incase of updates.
-
-Automatic
-+++++++++
-
-Script ``app_cmd/run_uno_lnk.py`` can be used to create these links.
+For other options try:
 
     .. code::
 
-        $ python app_cmd/run_uno_lnk.py
+        (.venv) $ python -m app cmd-link -h
+
+
+Testing Virtual Environment
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+For a quick test of environment import ``uno`` If there is no import  error you should be good to go.
+
+.. code-block:: text
+
+    PS C:\python_ooo_dev_tools> .\.venv\scripts\activate
+    (.venv) PS C:\python_ooo_dev_tools> python
+    Python 3.8.10 (default, Mar 23 2022, 15:43:48) [MSC v.1928 64 bit (AMD64)] on win32
+    Type "help", "copyright", "credits" or "license" for more information.
+    >>> import uno
+    >>>

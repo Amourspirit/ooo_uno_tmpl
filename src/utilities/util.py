@@ -67,3 +67,28 @@ def mkdirp(dest_dir: Union[str, Path]):
         dest_dir.mkdir(parents=True, exist_ok=True)
     else:
         Path(dest_dir).mkdir(parents=True, exist_ok=True)
+
+def _get_virtual_path() -> str:
+    spath = os.environ.get("VIRTUAL_ENV", None)
+    if spath is not None:
+        return spath
+    return sys.base_exec_prefix
+
+
+def get_site_packeges_dir() -> Union[Path, None]:
+    """
+    Gets the ``site-packages`` directory for current python environment.
+
+    Returns:
+        Union[Path, None]: site-packages dir if found; Otherwise, None.
+    """
+    v_path = _get_virtual_path()
+    p_site = Path(v_path, "Lib", "site-packages")
+    if p_site.exists() and p_site.is_dir():
+        return p_site
+
+    ver = f"{sys.version_info[0]}.{sys.version_info[1]}"
+    p_site = Path(v_path, "lib", f"python{ver}", "site-packages")
+    if p_site.exists() and p_site.is_dir():
+        return p_site
+    return None
