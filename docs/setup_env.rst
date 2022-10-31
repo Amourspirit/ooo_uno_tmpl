@@ -81,11 +81,12 @@ Testing Virtual Environment
 
 For a quick test of environment import ``uno`` If there is no import  error you should be good to go.
 
-.. code-block:: text
+.. code::
 
-    PS C:\python_ooo_dev_tools> .\.venv\scripts\activate
-    (.venv) PS C:\python_ooo_dev_tools> python
-    Python 3.8.10 (default, Mar 23 2022, 15:43:48) [MSC v.1928 64 bit (AMD64)] on win32
+    $ source ./.venv/bin/activate
+    (.venv) user@cpu:~/Projects/Python/ooo_uno_tmpl
+    $ python
+    Python 3.10.5 (main, Jul 31 2022, 06:03:52) [GCC 11.2.0] on linux
     Type "help", "copyright", "credits" or "license" for more information.
     >>> import uno
-    >>>
+    >>> 
