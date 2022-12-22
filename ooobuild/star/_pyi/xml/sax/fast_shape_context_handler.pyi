@@ -30,4 +30,3 @@ class FastShapeContextHandler(XFastShapeContextHandler_8790114d):
     """
     ...
 
-

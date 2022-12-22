@@ -6,6 +6,7 @@ from verr import Version
 
 class BaseConst(BaseJson):
     def __init__(self, *args, **kwargs):
+        self.pytype = None
         super().__init__(*args, **kwargs)
         # self._linfo('hello')
 
@@ -28,7 +29,10 @@ class BaseConst(BaseJson):
         set_data('imports')
         set_data('from_imports')
         set_data('from_typing_imports')
-        set_data('base_class')
+        
+        # new in  version 1.35
+        self.pytype = json_data.get("pytype", None)
+        
         # get lo ver if it exist. Defaut to False
         self.libre_office_ver = json_data.get('libre_office_ver', False)
         self.requires_typing = bool(data.get('requires_typing', False))

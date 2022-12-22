@@ -1122,7 +1122,7 @@ def parse(**kwargs) -> Union[str, None]:
         allow_known_json (bool, optional): Allow Known Json to be used. Default ``True``
         verbose (str, optional): Verobose output.
         log_file (str, optional): Log File
-    
+
     Returns:
         Union[str, None]: Returns json string if json_out is ``True``
     """
