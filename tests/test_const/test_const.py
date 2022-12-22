@@ -37,7 +37,6 @@ def test_accessible_relation_type_const_meta():
         const2 = getattr(UnoAccessibleRelationType, value)
         assert const1 == const2
 
-
 def test_accessible_relation_type_const():
     from ooobuild.dyn.accessibility.accessible_relation_type import AccessibleRelationType
     try:
@@ -65,3 +64,19 @@ def test_accessible_relation_type_const():
         const1 = getattr(AccessibleRelationType, value)
         const2 = getattr(UnoAccessibleRelationType, value)
         assert const1 == const2
+
+def test_font_weight_const_enum():
+    # just enum class, not IntEnum or FlagEnum
+    from ooobuild.dyn.awt.font_weight import FontWeightEnum
+    from com.sun.star.awt import FontWeight
+
+    assert FontWeightEnum.BLACK.value == FontWeight.BLACK
+    assert FontWeightEnum.BOLD.value == FontWeight.BOLD
+    assert FontWeightEnum.DONTKNOW.value == FontWeight.DONTKNOW
+    assert FontWeightEnum.LIGHT.value == FontWeight.LIGHT
+    assert FontWeightEnum.NORMAL.value == FontWeight.NORMAL
+    assert FontWeightEnum.SEMIBOLD.value == FontWeight.SEMIBOLD
+    assert FontWeightEnum.SEMILIGHT.value == FontWeight.SEMILIGHT
+    assert FontWeightEnum.THIN.value == FontWeight.THIN
+    assert FontWeightEnum.ULTRABOLD.value == FontWeight.ULTRABOLD
+    assert FontWeightEnum.ULTRALIGHT.value == FontWeight.ULTRALIGHT
