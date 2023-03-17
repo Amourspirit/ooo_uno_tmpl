@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.2.10",
-  "libre_office_ver": "7.3",
+  "version": "0.2.15",
+  "libre_office_ver": "7.4",
   "name": "XDocumentInsertable",
   "type": "interface",
   "namespace": "com.sun.star.document",
@@ -54,7 +54,7 @@
       "com.sun.star.uno.XInterface"
     ],
     "desc": [
-      "makes it possible to import a document from a given URL into this document."
+      "Makes it possible to import a document from a given URL into this document."
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1document_1_1XDocumentInsertable.html",
     "items": {
@@ -64,7 +64,11 @@
           "returns": "None",
           "returns_origin": "void",
           "desc": [
-            "inserts the document that is specified by the URL."
+            "Inserts the document that is specified by the URL.",
+            "",
+            "The document will be inserted at the current cursor position.",
+            "",
+            "Make sure that you insert at a position which can be split in two paragraphs (i.e. not inside of a field)."
           ],
           "raises": [
             "com.sun.star.lang.IllegalArgumentException",

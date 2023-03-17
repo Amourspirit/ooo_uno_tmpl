@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.2.9",
-  "libre_office_ver": "7.3",
+  "version": "0.2.15",
+  "libre_office_ver": "7.4",
   "name": "XFont",
   "type": "interface",
   "namespace": "com.sun.star.awt",
@@ -40,11 +40,9 @@
     "quote": [
       "FontDescriptor_bc110c0a",
       "SimpleFontMetric_d53c0cb9",
-      "typing.Tuple[int, ...]",
       "typing.Tuple[str, ...]"
     ],
     "typings": [
-      "typing.Tuple[int, ...]",
       "typing.Tuple[str, ...]"
     ],
     "requires_typing": true,
@@ -57,7 +55,9 @@
         "com.sun.star.awt.SimpleFontMetric"
       ]
     },
-    "imports": [],
+    "imports": [
+      "uno"
+    ],
     "name": "XFont",
     "namespace": "com.sun.star.awt",
     "extends": [
@@ -90,7 +90,7 @@
         },
         {
           "name": "getCharWidths",
-          "returns": "typing.Tuple[int, ...]",
+          "returns": "uno.ByteSequence",
           "returns_origin": "sequence< short >",
           "desc": [
             "returns the widths of the specified characters."
@@ -156,7 +156,7 @@
             },
             {
               "name": "Kerns",
-              "type": "typing.Tuple[int, ...]",
+              "type": "uno.ByteSequence",
               "direction": "out",
               "origin": "sequence< short >"
             }
@@ -196,7 +196,7 @@
             },
             {
               "name": "aDXArray",
-              "type": "typing.Tuple[int, ...]",
+              "type": "uno.ByteSequence",
               "direction": "out",
               "origin": "sequence< long >"
             }

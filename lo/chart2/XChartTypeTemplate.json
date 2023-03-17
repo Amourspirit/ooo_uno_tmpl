@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.2.10",
-  "libre_office_ver": "7.3",
+  "version": "0.2.15",
+  "libre_office_ver": "7.4",
   "name": "XChartTypeTemplate",
   "type": "interface",
   "namespace": "com.sun.star.chart2",
@@ -34,11 +34,6 @@
         "XChartType_ad200b38"
       ],
       [
-        ".x_data_interpreter",
-        "XDataInterpreter",
-        "XDataInterpreter_f84f0db2"
-      ],
-      [
         ".x_data_series",
         "XDataSeries",
         "XDataSeries_b8150b89"
@@ -59,10 +54,10 @@
     },
     "quote": [
       "XChartType_ad200b38",
-      "XDataInterpreter_f84f0db2",
       "XDataSeries_b8150b89",
       "XDataSource_f6340d57",
       "XDiagram_96fe0a59",
+      "XInterface_8f010a43",
       "typing.Tuple[PropertyValue_c9610c73, ...]",
       "typing.Tuple[XChartType_ad200b38, ...]"
     ],
@@ -78,7 +73,6 @@
       "typing": [
         "com.sun.star.beans.PropertyValue",
         "com.sun.star.chart2.XChartType",
-        "com.sun.star.chart2.XDataInterpreter",
         "com.sun.star.chart2.XDataSeries",
         "com.sun.star.chart2.XDiagram",
         "com.sun.star.chart2.data.XDataSource"
@@ -229,9 +223,13 @@
         },
         {
           "name": "getDataInterpreter",
-          "returns": "XDataInterpreter_f84f0db2",
-          "returns_origin": "com.sun.star.chart2.XDataInterpreter",
-          "desc": [],
+          "returns": "XInterface_8f010a43",
+          "returns_origin": "com.sun.star.uno.XInterface",
+          "desc": [
+            "This used to have a return type of XDataInterpreter.",
+            "",
+            "Then I removed the whole XChartTypeTemplate interface in commit 58766f997d59e4684f2887fd8cdeb12d2f8a9366. Which turned out to be a bad idea, so I restored it. I restored it in this form because I want to restore binary compatibily with vtable layout, but I don't want to restore the XDataInterpreter stuff, which was not useful for external use."
+          ],
           "raises": [],
           "args": []
         },
