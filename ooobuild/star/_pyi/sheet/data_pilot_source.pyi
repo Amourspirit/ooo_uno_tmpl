@@ -48,11 +48,19 @@ class DataPilotSource(XPropertySet_bc180bfa, XDataPilotResults_fc0c0ded, XDimens
             OOo 3.0
         """
         ...
+
+    @ColumnFieldCount.setter
+    def ColumnFieldCount(self, value: int) -> None:
+        ...
     @property
     def ColumnGrand(self) -> bool:
         """
         specifies if grand totals for the columns are inserted.
         """
+        ...
+
+    @ColumnGrand.setter
+    def ColumnGrand(self, value: bool) -> None:
         ...
     @property
     def DataFieldCount(self) -> int:
@@ -64,6 +72,10 @@ class DataPilotSource(XPropertySet_bc180bfa, XDataPilotResults_fc0c0ded, XDimens
             OOo 3.0
         """
         ...
+
+    @DataFieldCount.setter
+    def DataFieldCount(self, value: int) -> None:
+        ...
     @property
     def RowFieldCount(self) -> int:
         """
@@ -74,6 +86,10 @@ class DataPilotSource(XPropertySet_bc180bfa, XDataPilotResults_fc0c0ded, XDimens
             OOo 3.0
         """
         ...
+
+    @RowFieldCount.setter
+    def RowFieldCount(self, value: int) -> None:
+        ...
     @property
     def RowGrand(self) -> bool:
         """
@@ -81,4 +97,7 @@ class DataPilotSource(XPropertySet_bc180bfa, XDataPilotResults_fc0c0ded, XDimens
         """
         ...
 
+    @RowGrand.setter
+    def RowGrand(self, value: bool) -> None:
+        ...
 

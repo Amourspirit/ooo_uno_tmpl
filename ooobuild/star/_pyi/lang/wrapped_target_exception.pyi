@@ -54,6 +54,9 @@ class WrappedTargetException(Exception_85530a09):
         """
         ...
 
+    @TargetException.setter
+    def TargetException(self, value: object) -> None:
+        ...
 
 __all__ = ['WrappedTargetException']
 

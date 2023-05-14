@@ -52,6 +52,9 @@ class VisualRepresentation(object):
         """
         ...
 
+    @Flavor.setter
+    def Flavor(self, value: DataFlavor_ffd30deb) -> None:
+        ...
 
     @property
     def Data(self) -> object:
@@ -60,4 +63,7 @@ class VisualRepresentation(object):
         """
         ...
 
+    @Data.setter
+    def Data(self, value: object) -> None:
+        ...
 

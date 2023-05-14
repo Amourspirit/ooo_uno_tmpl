@@ -37,4 +37,3 @@ class LocaleData2(XLocaleData5_a7af0a9f):
     """
     ...
 
-

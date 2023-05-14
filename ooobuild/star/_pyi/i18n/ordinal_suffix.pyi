@@ -35,4 +35,3 @@ class OrdinalSuffix(XOrdinalSuffix_c03f0bde):
     """
     ...
 
-

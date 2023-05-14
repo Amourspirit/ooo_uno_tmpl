@@ -40,4 +40,7 @@ class Descriptor(XPropertySet_bc180bfa):
         """
         ...
 
+    @Name.setter
+    def Name(self, value: str) -> None:
+        ...
 

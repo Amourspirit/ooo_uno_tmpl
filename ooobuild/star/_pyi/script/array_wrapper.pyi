@@ -55,6 +55,9 @@ class ArrayWrapper(object):
         """
         ...
 
+    @IsZeroIndex.setter
+    def IsZeroIndex(self, value: bool) -> None:
+        ...
 
     @property
     def Array(self) -> object:
@@ -65,4 +68,7 @@ class ArrayWrapper(object):
         """
         ...
 
+    @Array.setter
+    def Array(self, value: object) -> None:
+        ...
 

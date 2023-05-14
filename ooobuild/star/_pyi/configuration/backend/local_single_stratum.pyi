@@ -31,4 +31,3 @@ class LocalSingleStratum(SingleLayerStratum_2a7614c5):
     """
     ...
 
-

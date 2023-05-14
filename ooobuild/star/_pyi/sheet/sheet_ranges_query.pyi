@@ -32,4 +32,3 @@ class SheetRangesQuery(XCellRangesQuery_edde0d6f, XFormulaQuery_c8d10c65):
     """
     ...
 
-

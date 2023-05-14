@@ -61,6 +61,9 @@ class ExternalReference(object):
         """
         ...
 
+    @Index.setter
+    def Index(self, value: int) -> None:
+        ...
 
     @property
     def Reference(self) -> object:
@@ -73,4 +76,7 @@ class ExternalReference(object):
         """
         ...
 
+    @Reference.setter
+    def Reference(self, value: object) -> None:
+        ...
 

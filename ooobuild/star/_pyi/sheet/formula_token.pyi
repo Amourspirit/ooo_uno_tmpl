@@ -51,6 +51,9 @@ class FormulaToken(object):
         """
         ...
 
+    @OpCode.setter
+    def OpCode(self, value: int) -> None:
+        ...
 
     @property
     def Data(self) -> object:
@@ -59,4 +62,7 @@ class FormulaToken(object):
         """
         ...
 
+    @Data.setter
+    def Data(self, value: object) -> None:
+        ...
 

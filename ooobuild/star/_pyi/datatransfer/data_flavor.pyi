@@ -54,6 +54,9 @@ class DataFlavor(object):
         """
         ...
 
+    @MimeType.setter
+    def MimeType(self, value: str) -> None:
+        ...
 
     @property
     def HumanPresentableName(self) -> str:
@@ -62,6 +65,9 @@ class DataFlavor(object):
         """
         ...
 
+    @HumanPresentableName.setter
+    def HumanPresentableName(self, value: str) -> None:
+        ...
 
     @property
     def DataType(self) -> object:
@@ -70,4 +76,7 @@ class DataFlavor(object):
         """
         ...
 
+    @DataType.setter
+    def DataType(self, value: object) -> None:
+        ...
 

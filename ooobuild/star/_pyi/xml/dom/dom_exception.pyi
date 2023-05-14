@@ -52,6 +52,9 @@ class DOMException(Exception_85530a09):
         """
         ...
 
+    @Code.setter
+    def Code(self, value: DOMExceptionType_5c70df8) -> None:
+        ...
 
 __all__ = ['DOMException']
 

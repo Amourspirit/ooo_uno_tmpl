@@ -54,6 +54,9 @@ class CertAltNameEntry(object):
         """
         ...
 
+    @Type.setter
+    def Type(self, value: ExtAltNameType_8c0df5) -> None:
+        ...
 
     @property
     def Value(self) -> object:
@@ -62,4 +65,7 @@ class CertAltNameEntry(object):
         """
         ...
 
+    @Value.setter
+    def Value(self, value: object) -> None:
+        ...
 

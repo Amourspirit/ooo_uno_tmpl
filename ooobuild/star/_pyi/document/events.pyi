@@ -33,4 +33,3 @@ class Events(XNameReplace_f0900d60):
     """
     ...
 
-

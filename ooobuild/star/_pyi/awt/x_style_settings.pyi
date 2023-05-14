@@ -57,12 +57,18 @@ class XStyleSettings(ABC):
         """
         ...
 
+    @ActiveBorderColor.setter
+    def ActiveBorderColor(self, value: 'Color_68e908c5') -> None:
+        ...
     @property
     def ActiveColor(self) -> 'Color_68e908c5':
         """
         """
         ...
 
+    @ActiveColor.setter
+    def ActiveColor(self, value: 'Color_68e908c5') -> None:
+        ...
     @property
     def ActiveTabColor(self) -> 'Color_68e908c5':
         """
@@ -70,6 +76,9 @@ class XStyleSettings(ABC):
         """
         ...
 
+    @ActiveTabColor.setter
+    def ActiveTabColor(self, value: 'Color_68e908c5') -> None:
+        ...
     @property
     def ActiveTextColor(self) -> 'Color_68e908c5':
         """
@@ -77,6 +86,9 @@ class XStyleSettings(ABC):
         """
         ...
 
+    @ActiveTextColor.setter
+    def ActiveTextColor(self, value: 'Color_68e908c5') -> None:
+        ...
     @property
     def ApplicationFont(self) -> 'FontDescriptor_bc110c0a':
         """
@@ -84,6 +96,9 @@ class XStyleSettings(ABC):
         """
         ...
 
+    @ApplicationFont.setter
+    def ApplicationFont(self, value: 'FontDescriptor_bc110c0a') -> None:
+        ...
     @property
     def ButtonRolloverTextColor(self) -> 'Color_68e908c5':
         """
@@ -91,6 +106,9 @@ class XStyleSettings(ABC):
         """
         ...
 
+    @ButtonRolloverTextColor.setter
+    def ButtonRolloverTextColor(self, value: 'Color_68e908c5') -> None:
+        ...
     @property
     def ButtonTextColor(self) -> 'Color_68e908c5':
         """
@@ -98,12 +116,18 @@ class XStyleSettings(ABC):
         """
         ...
 
+    @ButtonTextColor.setter
+    def ButtonTextColor(self, value: 'Color_68e908c5') -> None:
+        ...
     @property
     def CheckedColor(self) -> 'Color_68e908c5':
         """
         """
         ...
 
+    @CheckedColor.setter
+    def CheckedColor(self, value: 'Color_68e908c5') -> None:
+        ...
     @property
     def DarkShadowColor(self) -> 'Color_68e908c5':
         """
@@ -111,6 +135,9 @@ class XStyleSettings(ABC):
         """
         ...
 
+    @DarkShadowColor.setter
+    def DarkShadowColor(self, value: 'Color_68e908c5') -> None:
+        ...
     @property
     def DeactiveBorderColor(self) -> 'Color_68e908c5':
         """
@@ -118,12 +145,18 @@ class XStyleSettings(ABC):
         """
         ...
 
+    @DeactiveBorderColor.setter
+    def DeactiveBorderColor(self, value: 'Color_68e908c5') -> None:
+        ...
     @property
     def DeactiveColor(self) -> 'Color_68e908c5':
         """
         """
         ...
 
+    @DeactiveColor.setter
+    def DeactiveColor(self, value: 'Color_68e908c5') -> None:
+        ...
     @property
     def DeactiveTextColor(self) -> 'Color_68e908c5':
         """
@@ -131,6 +164,9 @@ class XStyleSettings(ABC):
         """
         ...
 
+    @DeactiveTextColor.setter
+    def DeactiveTextColor(self, value: 'Color_68e908c5') -> None:
+        ...
     @property
     def DialogColor(self) -> 'Color_68e908c5':
         """
@@ -138,6 +174,9 @@ class XStyleSettings(ABC):
         """
         ...
 
+    @DialogColor.setter
+    def DialogColor(self, value: 'Color_68e908c5') -> None:
+        ...
     @property
     def DialogTextColor(self) -> 'Color_68e908c5':
         """
@@ -145,6 +184,9 @@ class XStyleSettings(ABC):
         """
         ...
 
+    @DialogTextColor.setter
+    def DialogTextColor(self, value: 'Color_68e908c5') -> None:
+        ...
     @property
     def DisableColor(self) -> 'Color_68e908c5':
         """
@@ -152,18 +194,27 @@ class XStyleSettings(ABC):
         """
         ...
 
+    @DisableColor.setter
+    def DisableColor(self, value: 'Color_68e908c5') -> None:
+        ...
     @property
     def FaceColor(self) -> 'Color_68e908c5':
         """
         """
         ...
 
+    @FaceColor.setter
+    def FaceColor(self, value: 'Color_68e908c5') -> None:
+        ...
     @property
     def FaceGradientColor(self) -> 'Color_68e908c5':
         """
         """
         ...
 
+    @FaceGradientColor.setter
+    def FaceGradientColor(self, value: 'Color_68e908c5') -> None:
+        ...
     @property
     def FieldColor(self) -> 'Color_68e908c5':
         """
@@ -171,6 +222,9 @@ class XStyleSettings(ABC):
         """
         ...
 
+    @FieldColor.setter
+    def FieldColor(self, value: 'Color_68e908c5') -> None:
+        ...
     @property
     def FieldFont(self) -> 'FontDescriptor_bc110c0a':
         """
@@ -178,6 +232,9 @@ class XStyleSettings(ABC):
         """
         ...
 
+    @FieldFont.setter
+    def FieldFont(self, value: 'FontDescriptor_bc110c0a') -> None:
+        ...
     @property
     def FieldRolloverTextColor(self) -> 'Color_68e908c5':
         """
@@ -185,6 +242,9 @@ class XStyleSettings(ABC):
         """
         ...
 
+    @FieldRolloverTextColor.setter
+    def FieldRolloverTextColor(self, value: 'Color_68e908c5') -> None:
+        ...
     @property
     def FieldTextColor(self) -> 'Color_68e908c5':
         """
@@ -192,6 +252,9 @@ class XStyleSettings(ABC):
         """
         ...
 
+    @FieldTextColor.setter
+    def FieldTextColor(self, value: 'Color_68e908c5') -> None:
+        ...
     @property
     def FloatTitleFont(self) -> 'FontDescriptor_bc110c0a':
         """
@@ -199,6 +262,9 @@ class XStyleSettings(ABC):
         """
         ...
 
+    @FloatTitleFont.setter
+    def FloatTitleFont(self, value: 'FontDescriptor_bc110c0a') -> None:
+        ...
     @property
     def GroupFont(self) -> 'FontDescriptor_bc110c0a':
         """
@@ -206,6 +272,9 @@ class XStyleSettings(ABC):
         """
         ...
 
+    @GroupFont.setter
+    def GroupFont(self, value: 'FontDescriptor_bc110c0a') -> None:
+        ...
     @property
     def GroupTextColor(self) -> 'Color_68e908c5':
         """
@@ -213,6 +282,9 @@ class XStyleSettings(ABC):
         """
         ...
 
+    @GroupTextColor.setter
+    def GroupTextColor(self, value: 'Color_68e908c5') -> None:
+        ...
     @property
     def HelpColor(self) -> 'Color_68e908c5':
         """
@@ -220,6 +292,9 @@ class XStyleSettings(ABC):
         """
         ...
 
+    @HelpColor.setter
+    def HelpColor(self, value: 'Color_68e908c5') -> None:
+        ...
     @property
     def HelpFont(self) -> 'FontDescriptor_bc110c0a':
         """
@@ -227,6 +302,9 @@ class XStyleSettings(ABC):
         """
         ...
 
+    @HelpFont.setter
+    def HelpFont(self, value: 'FontDescriptor_bc110c0a') -> None:
+        ...
     @property
     def HelpTextColor(self) -> 'Color_68e908c5':
         """
@@ -234,6 +312,9 @@ class XStyleSettings(ABC):
         """
         ...
 
+    @HelpTextColor.setter
+    def HelpTextColor(self, value: 'Color_68e908c5') -> None:
+        ...
     @property
     def HighContrastMode(self) -> bool:
         """
@@ -241,6 +322,9 @@ class XStyleSettings(ABC):
         """
         ...
 
+    @HighContrastMode.setter
+    def HighContrastMode(self, value: bool) -> None:
+        ...
     @property
     def HighlightColor(self) -> 'Color_68e908c5':
         """
@@ -248,6 +332,9 @@ class XStyleSettings(ABC):
         """
         ...
 
+    @HighlightColor.setter
+    def HighlightColor(self, value: 'Color_68e908c5') -> None:
+        ...
     @property
     def HighlightTextColor(self) -> 'Color_68e908c5':
         """
@@ -255,6 +342,9 @@ class XStyleSettings(ABC):
         """
         ...
 
+    @HighlightTextColor.setter
+    def HighlightTextColor(self, value: 'Color_68e908c5') -> None:
+        ...
     @property
     def InactiveTabColor(self) -> 'Color_68e908c5':
         """
@@ -262,6 +352,9 @@ class XStyleSettings(ABC):
         """
         ...
 
+    @InactiveTabColor.setter
+    def InactiveTabColor(self, value: 'Color_68e908c5') -> None:
+        ...
     @property
     def LabelFont(self) -> 'FontDescriptor_bc110c0a':
         """
@@ -269,6 +362,9 @@ class XStyleSettings(ABC):
         """
         ...
 
+    @LabelFont.setter
+    def LabelFont(self, value: 'FontDescriptor_bc110c0a') -> None:
+        ...
     @property
     def LabelTextColor(self) -> 'Color_68e908c5':
         """
@@ -276,12 +372,18 @@ class XStyleSettings(ABC):
         """
         ...
 
+    @LabelTextColor.setter
+    def LabelTextColor(self, value: 'Color_68e908c5') -> None:
+        ...
     @property
     def LightColor(self) -> 'Color_68e908c5':
         """
         """
         ...
 
+    @LightColor.setter
+    def LightColor(self, value: 'Color_68e908c5') -> None:
+        ...
     @property
     def MenuBarColor(self) -> 'Color_68e908c5':
         """
@@ -289,6 +391,9 @@ class XStyleSettings(ABC):
         """
         ...
 
+    @MenuBarColor.setter
+    def MenuBarColor(self, value: 'Color_68e908c5') -> None:
+        ...
     @property
     def MenuBarTextColor(self) -> 'Color_68e908c5':
         """
@@ -296,6 +401,9 @@ class XStyleSettings(ABC):
         """
         ...
 
+    @MenuBarTextColor.setter
+    def MenuBarTextColor(self, value: 'Color_68e908c5') -> None:
+        ...
     @property
     def MenuBorderColor(self) -> 'Color_68e908c5':
         """
@@ -303,12 +411,18 @@ class XStyleSettings(ABC):
         """
         ...
 
+    @MenuBorderColor.setter
+    def MenuBorderColor(self, value: 'Color_68e908c5') -> None:
+        ...
     @property
     def MenuColor(self) -> 'Color_68e908c5':
         """
         """
         ...
 
+    @MenuColor.setter
+    def MenuColor(self, value: 'Color_68e908c5') -> None:
+        ...
     @property
     def MenuFont(self) -> 'FontDescriptor_bc110c0a':
         """
@@ -316,6 +430,9 @@ class XStyleSettings(ABC):
         """
         ...
 
+    @MenuFont.setter
+    def MenuFont(self, value: 'FontDescriptor_bc110c0a') -> None:
+        ...
     @property
     def MenuHighlightColor(self) -> 'Color_68e908c5':
         """
@@ -323,6 +440,9 @@ class XStyleSettings(ABC):
         """
         ...
 
+    @MenuHighlightColor.setter
+    def MenuHighlightColor(self, value: 'Color_68e908c5') -> None:
+        ...
     @property
     def MenuHighlightTextColor(self) -> 'Color_68e908c5':
         """
@@ -330,12 +450,18 @@ class XStyleSettings(ABC):
         """
         ...
 
+    @MenuHighlightTextColor.setter
+    def MenuHighlightTextColor(self, value: 'Color_68e908c5') -> None:
+        ...
     @property
     def MenuTextColor(self) -> 'Color_68e908c5':
         """
         """
         ...
 
+    @MenuTextColor.setter
+    def MenuTextColor(self, value: 'Color_68e908c5') -> None:
+        ...
     @property
     def MonoColor(self) -> 'Color_68e908c5':
         """
@@ -343,6 +469,9 @@ class XStyleSettings(ABC):
         """
         ...
 
+    @MonoColor.setter
+    def MonoColor(self, value: 'Color_68e908c5') -> None:
+        ...
     @property
     def PushButtonFont(self) -> 'FontDescriptor_bc110c0a':
         """
@@ -350,6 +479,9 @@ class XStyleSettings(ABC):
         """
         ...
 
+    @PushButtonFont.setter
+    def PushButtonFont(self, value: 'FontDescriptor_bc110c0a') -> None:
+        ...
     @property
     def RadioCheckFont(self) -> 'FontDescriptor_bc110c0a':
         """
@@ -357,6 +489,9 @@ class XStyleSettings(ABC):
         """
         ...
 
+    @RadioCheckFont.setter
+    def RadioCheckFont(self, value: 'FontDescriptor_bc110c0a') -> None:
+        ...
     @property
     def RadioCheckTextColor(self) -> 'Color_68e908c5':
         """
@@ -364,6 +499,9 @@ class XStyleSettings(ABC):
         """
         ...
 
+    @RadioCheckTextColor.setter
+    def RadioCheckTextColor(self, value: 'Color_68e908c5') -> None:
+        ...
     @property
     def SeparatorColor(self) -> 'Color_68e908c5':
         """
@@ -371,6 +509,9 @@ class XStyleSettings(ABC):
         """
         ...
 
+    @SeparatorColor.setter
+    def SeparatorColor(self, value: 'Color_68e908c5') -> None:
+        ...
     @property
     def ShadowColor(self) -> 'Color_68e908c5':
         """
@@ -378,6 +519,9 @@ class XStyleSettings(ABC):
         """
         ...
 
+    @ShadowColor.setter
+    def ShadowColor(self, value: 'Color_68e908c5') -> None:
+        ...
     @property
     def TitleFont(self) -> 'FontDescriptor_bc110c0a':
         """
@@ -385,6 +529,9 @@ class XStyleSettings(ABC):
         """
         ...
 
+    @TitleFont.setter
+    def TitleFont(self, value: 'FontDescriptor_bc110c0a') -> None:
+        ...
     @property
     def ToolFont(self) -> 'FontDescriptor_bc110c0a':
         """
@@ -392,6 +539,9 @@ class XStyleSettings(ABC):
         """
         ...
 
+    @ToolFont.setter
+    def ToolFont(self, value: 'FontDescriptor_bc110c0a') -> None:
+        ...
     @property
     def WindowColor(self) -> 'Color_68e908c5':
         """
@@ -399,6 +549,9 @@ class XStyleSettings(ABC):
         """
         ...
 
+    @WindowColor.setter
+    def WindowColor(self, value: 'Color_68e908c5') -> None:
+        ...
     @property
     def WindowTextColor(self) -> 'Color_68e908c5':
         """
@@ -406,6 +559,9 @@ class XStyleSettings(ABC):
         """
         ...
 
+    @WindowTextColor.setter
+    def WindowTextColor(self, value: 'Color_68e908c5') -> None:
+        ...
     @property
     def WorkspaceColor(self) -> 'Color_68e908c5':
         """
@@ -413,4 +569,7 @@ class XStyleSettings(ABC):
         """
         ...
 
+    @WorkspaceColor.setter
+    def WorkspaceColor(self, value: 'Color_68e908c5') -> None:
+        ...
 

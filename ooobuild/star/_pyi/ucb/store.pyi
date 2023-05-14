@@ -31,4 +31,3 @@ class Store(XPropertySetRegistryFactory_7c63115c):
     """
     ...
 
-

@@ -39,4 +39,3 @@ class UpdateRequiredDialog(XExecutableDialog_450f0fa1):
         """
         ...
 
-

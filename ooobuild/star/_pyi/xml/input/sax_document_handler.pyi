@@ -34,4 +34,3 @@ class SaxDocumentHandler(XInitialization_d46c0cca, XDocumentHandler_9b90e28):
     """
     ...
 
-

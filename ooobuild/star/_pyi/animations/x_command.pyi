@@ -39,6 +39,9 @@ class XCommand(XAnimationNode_1cf10eb9):
         """
         ...
 
+    @Command.setter
+    def Command(self, value: int) -> None:
+        ...
     @property
     def Parameter(self) -> object:
         """
@@ -48,6 +51,9 @@ class XCommand(XAnimationNode_1cf10eb9):
         """
         ...
 
+    @Parameter.setter
+    def Parameter(self, value: object) -> None:
+        ...
     @property
     def Target(self) -> object:
         """
@@ -57,4 +63,7 @@ class XCommand(XAnimationNode_1cf10eb9):
         """
         ...
 
+    @Target.setter
+    def Target(self, value: object) -> None:
+        ...
 

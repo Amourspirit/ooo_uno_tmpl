@@ -60,6 +60,9 @@ class Caret(object):
         """
         ...
 
+    @MainCaretIndex.setter
+    def MainCaretIndex(self, value: int) -> None:
+        ...
 
     @property
     def SecondaryCaretIndex(self) -> int:
@@ -70,6 +73,9 @@ class Caret(object):
         """
         ...
 
+    @SecondaryCaretIndex.setter
+    def SecondaryCaretIndex(self, value: int) -> None:
+        ...
 
     @property
     def CaretAngle(self) -> float:
@@ -80,4 +86,7 @@ class Caret(object):
         """
         ...
 
+    @CaretAngle.setter
+    def CaretAngle(self, value: float) -> None:
+        ...
 

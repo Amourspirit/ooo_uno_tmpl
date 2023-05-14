@@ -43,4 +43,7 @@ class XNode(ABC):
         """
         ...
 
+    @StringValue.setter
+    def StringValue(self, value: str) -> None:
+        ...
 

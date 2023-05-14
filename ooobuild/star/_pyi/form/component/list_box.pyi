@@ -41,11 +41,20 @@ class ListBox(UnoControlListBoxModel_2a3c0f1d, FormControlModel_e2990d22, XReset
         This selection is used initially or for a reset.
         """
         ...
+
+    @DefaultSelection.setter
+    def DefaultSelection(self, value: uno.ByteSequence) -> None:
+        ...
+
     @property
     def ListSource(self) -> 'typing.Tuple[str, ...]':
         """
         contains the values associated to the strings to be displayed (which are specified by com.sun.star.awt.UnoControlListBoxModel.StringItemList)
         """
+        ...
+
+    @ListSource.setter
+    def ListSource(self, value: 'typing.Tuple[str, ...]') -> None:
         ...
 
 

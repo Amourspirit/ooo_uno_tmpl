@@ -35,4 +35,3 @@ class ImportFilter(XImportFilter_b0790b92):
     """
     ...
 
-

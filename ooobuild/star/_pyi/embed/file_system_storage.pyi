@@ -31,4 +31,3 @@ class FileSystemStorage(BaseStorage_ae680b55):
     """
     ...
 
-

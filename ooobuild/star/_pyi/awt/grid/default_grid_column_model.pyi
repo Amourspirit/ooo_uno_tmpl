@@ -35,4 +35,3 @@ class DefaultGridColumnModel(XGridColumnModel_16290e65):
     """
     ...
 
-

@@ -33,4 +33,3 @@ class LabelRange(XLabelRange_af090b46):
     """
     ...
 
-

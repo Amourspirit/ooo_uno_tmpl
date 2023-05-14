@@ -58,6 +58,9 @@ class ErrorCodeRequest(Exception_85530a09):
         """
         ...
 
+    @ErrCode.setter
+    def ErrCode(self, value: int) -> None:
+        ...
 
 __all__ = ['ErrorCodeRequest']
 

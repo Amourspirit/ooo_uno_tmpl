@@ -54,6 +54,9 @@ class SystemShellExecuteException(Exception_85530a09):
         """
         ...
 
+    @PosixError.setter
+    def PosixError(self, value: int) -> None:
+        ...
 
 __all__ = ['SystemShellExecuteException']
 

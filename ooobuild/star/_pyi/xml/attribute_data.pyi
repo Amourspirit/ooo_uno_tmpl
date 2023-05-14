@@ -54,6 +54,9 @@ class AttributeData(object):
         """
         ...
 
+    @Namespace.setter
+    def Namespace(self, value: str) -> None:
+        ...
 
     @property
     def Type(self) -> str:
@@ -64,6 +67,9 @@ class AttributeData(object):
         """
         ...
 
+    @Type.setter
+    def Type(self, value: str) -> None:
+        ...
 
     @property
     def Value(self) -> str:
@@ -72,4 +78,7 @@ class AttributeData(object):
         """
         ...
 
+    @Value.setter
+    def Value(self, value: str) -> None:
+        ...
 

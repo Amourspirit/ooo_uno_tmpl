@@ -44,4 +44,3 @@ class FilterOptionsDialog(XPropertyAccess_e1d40d20, XExecutableDialog_450f0fa1):
     """
     ...
 
-

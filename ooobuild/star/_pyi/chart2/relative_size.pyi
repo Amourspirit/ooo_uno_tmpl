@@ -61,6 +61,9 @@ class RelativeSize(object):
         """
         ...
 
+    @Primary.setter
+    def Primary(self, value: float) -> None:
+        ...
 
     @property
     def Secondary(self) -> float:
@@ -77,4 +80,7 @@ class RelativeSize(object):
         """
         ...
 
+    @Secondary.setter
+    def Secondary(self, value: float) -> None:
+        ...
 

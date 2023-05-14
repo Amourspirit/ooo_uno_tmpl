@@ -41,6 +41,9 @@ class XNumericControl(XPropertyControl_3f260fe2):
         """
         ...
 
+    @DecimalDigits.setter
+    def DecimalDigits(self, value: int) -> None:
+        ...
     @property
     def DisplayUnit(self) -> int:
         """
@@ -50,6 +53,9 @@ class XNumericControl(XPropertyControl_3f260fe2):
         """
         ...
 
+    @DisplayUnit.setter
+    def DisplayUnit(self, value: int) -> None:
+        ...
     @property
     def MaxValue(self) -> object:
         """
@@ -57,6 +63,9 @@ class XNumericControl(XPropertyControl_3f260fe2):
         """
         ...
 
+    @MaxValue.setter
+    def MaxValue(self, value: object) -> None:
+        ...
     @property
     def MinValue(self) -> object:
         """
@@ -64,6 +73,9 @@ class XNumericControl(XPropertyControl_3f260fe2):
         """
         ...
 
+    @MinValue.setter
+    def MinValue(self, value: object) -> None:
+        ...
     @property
     def ValueUnit(self) -> int:
         """
@@ -73,4 +85,7 @@ class XNumericControl(XPropertyControl_3f260fe2):
         """
         ...
 
+    @ValueUnit.setter
+    def ValueUnit(self, value: int) -> None:
+        ...
 

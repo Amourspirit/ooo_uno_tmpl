@@ -54,6 +54,9 @@ class TargetProperties(object):
         """
         ...
 
+    @Properties.setter
+    def Properties(self, value: typing.Tuple[NamedValue_a37a0af3, ...]) -> None:
+        ...
 
     @property
     def Target(self) -> object:
@@ -62,4 +65,7 @@ class TargetProperties(object):
         """
         ...
 
+    @Target.setter
+    def Target(self, value: object) -> None:
+        ...
 

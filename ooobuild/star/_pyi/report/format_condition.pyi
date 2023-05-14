@@ -30,4 +30,3 @@ class FormatCondition(XFormatCondition_ffb00e0c):
     """
     ...
 
-

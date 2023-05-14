@@ -35,4 +35,3 @@ class TableColumns(XTableColumns_c66d0c31):
     """
     ...
 
-

@@ -31,4 +31,3 @@ class DataPilotItemsEnumeration(XEnumeration_f2180daa):
     """
     ...
 
-

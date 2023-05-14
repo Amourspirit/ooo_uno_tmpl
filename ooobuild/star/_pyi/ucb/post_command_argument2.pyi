@@ -56,6 +56,9 @@ class PostCommandArgument2(PostCommandArgument_fc590dea):
         """
         ...
 
+    @MediaType.setter
+    def MediaType(self, value: str) -> None:
+        ...
 
     @property
     def Referer(self) -> str:
@@ -64,4 +67,7 @@ class PostCommandArgument2(PostCommandArgument_fc590dea):
         """
         ...
 
+    @Referer.setter
+    def Referer(self, value: str) -> None:
+        ...
 

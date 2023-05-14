@@ -40,17 +40,29 @@ class SheetSortDescriptor(TableSortDescriptor_18ef0ebf):
         specifies if cell formats are moved with the contents they belong to.
         """
         ...
+
+    @BindFormatsToContent.setter
+    def BindFormatsToContent(self, value: bool) -> None:
+        ...
     @property
     def CopyOutputData(self) -> bool:
         """
         specifies if the sorted data should be copied to another position in the document.
         """
         ...
+
+    @CopyOutputData.setter
+    def CopyOutputData(self, value: bool) -> None:
+        ...
     @property
     def IsUserListEnabled(self) -> bool:
         """
         specifies if a user defined sorting list is used.
         """
+        ...
+
+    @IsUserListEnabled.setter
+    def IsUserListEnabled(self, value: bool) -> None:
         ...
     @property
     def OutputPosition(self) -> 'CellAddress_ae5f0b56':
@@ -59,6 +71,10 @@ class SheetSortDescriptor(TableSortDescriptor_18ef0ebf):
         
         This property is only used, if SheetSortDescriptor.CopyOutputData is TRUE.
         """
+        ...
+
+    @OutputPosition.setter
+    def OutputPosition(self, value: 'CellAddress_ae5f0b56') -> None:
         ...
     @property
     def UserListIndex(self) -> int:
@@ -69,4 +85,7 @@ class SheetSortDescriptor(TableSortDescriptor_18ef0ebf):
         """
         ...
 
+    @UserListIndex.setter
+    def UserListIndex(self, value: int) -> None:
+        ...
 

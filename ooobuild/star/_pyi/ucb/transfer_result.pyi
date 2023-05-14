@@ -52,6 +52,9 @@ class TransferResult(object):
         """
         ...
 
+    @Source.setter
+    def Source(self, value: str) -> None:
+        ...
 
     @property
     def Target(self) -> str:
@@ -60,6 +63,9 @@ class TransferResult(object):
         """
         ...
 
+    @Target.setter
+    def Target(self, value: str) -> None:
+        ...
 
     @property
     def Result(self) -> object:
@@ -68,4 +74,7 @@ class TransferResult(object):
         """
         ...
 
+    @Result.setter
+    def Result(self, value: object) -> None:
+        ...
 

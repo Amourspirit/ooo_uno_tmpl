@@ -53,6 +53,9 @@ class CrossReference(object):
         """
         ...
 
+    @Group.setter
+    def Group(self, value: str) -> None:
+        ...
 
     @property
     def Id(self) -> int:
@@ -61,4 +64,7 @@ class CrossReference(object):
         """
         ...
 
+    @Id.setter
+    def Id(self, value: int) -> None:
+        ...
 

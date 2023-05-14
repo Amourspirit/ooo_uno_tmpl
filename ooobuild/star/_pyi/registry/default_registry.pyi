@@ -39,4 +39,3 @@ class DefaultRegistry(XSimpleRegistry_10150e9c):
     """
     ...
 
-

@@ -33,4 +33,3 @@ class MenuBar(XMenuBar_7a040956):
     """
     ...
 
-

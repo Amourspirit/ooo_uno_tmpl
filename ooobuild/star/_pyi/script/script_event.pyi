@@ -60,6 +60,9 @@ class ScriptEvent(AllEventObject_e2c20d0f):
         """
         ...
 
+    @ScriptType.setter
+    def ScriptType(self, value: str) -> None:
+        ...
 
     @property
     def ScriptCode(self) -> str:
@@ -70,4 +73,7 @@ class ScriptEvent(AllEventObject_e2c20d0f):
         """
         ...
 
+    @ScriptCode.setter
+    def ScriptCode(self, value: str) -> None:
+        ...
 

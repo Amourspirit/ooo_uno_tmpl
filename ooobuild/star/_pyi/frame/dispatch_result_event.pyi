@@ -56,6 +56,9 @@ class DispatchResultEvent(EventObject_a3d70b03):
         """
         ...
 
+    @State.setter
+    def State(self, value: int) -> None:
+        ...
 
     @property
     def Result(self) -> object:
@@ -64,4 +67,7 @@ class DispatchResultEvent(EventObject_a3d70b03):
         """
         ...
 
+    @Result.setter
+    def Result(self, value: object) -> None:
+        ...
 

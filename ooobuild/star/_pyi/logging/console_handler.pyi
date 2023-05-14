@@ -52,4 +52,3 @@ class ConsoleHandler(XConsoleHandler_fdad0dd8):
         """
         ...
 
-

@@ -71,11 +71,19 @@ class Spreadsheet(Scenario_8f730a55, SheetCellRange_d4540c87, XNamed_a6520b08, X
         This property can only be true, if there are no print areas given on this sheet. If the property is set to true the print areas of this sheet will be removed.
         """
         ...
+
+    @AutomaticPrintArea.setter
+    def AutomaticPrintArea(self, value: bool) -> None:
+        ...
     @property
     def ConditionalFormats(self) -> 'XConditionalFormats_1ab20ec9':
         """
         specifies all conditional formats of that sheet
         """
+        ...
+
+    @ConditionalFormats.setter
+    def ConditionalFormats(self, value: 'XConditionalFormats_1ab20ec9') -> None:
         ...
     @property
     def IsVisible(self) -> bool:
@@ -83,17 +91,29 @@ class Spreadsheet(Scenario_8f730a55, SheetCellRange_d4540c87, XNamed_a6520b08, X
         specifies if the sheet is visible.
         """
         ...
+
+    @IsVisible.setter
+    def IsVisible(self, value: bool) -> None:
+        ...
     @property
     def PageStyle(self) -> str:
         """
         specifies the page style of the sheet.
         """
         ...
+
+    @PageStyle.setter
+    def PageStyle(self, value: str) -> None:
+        ...
     @property
     def TabColor(self) -> 'Color_68e908c5':
         """
         specifies the color of the sheet tab, if any.
         """
+        ...
+
+    @TabColor.setter
+    def TabColor(self, value: 'Color_68e908c5') -> None:
         ...
     @property
     def TableLayout(self) -> int:
@@ -104,4 +124,7 @@ class Spreadsheet(Scenario_8f730a55, SheetCellRange_d4540c87, XNamed_a6520b08, X
         """
         ...
 
+    @TableLayout.setter
+    def TableLayout(self, value: int) -> None:
+        ...
 

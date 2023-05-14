@@ -36,4 +36,3 @@ class UnoControlTabPage(UnoControlContainer_fe670e0a, XTabPage_a2060aa5):
     """
     ...
 
-

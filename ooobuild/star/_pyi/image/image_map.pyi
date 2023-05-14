@@ -32,4 +32,3 @@ class ImageMap(XIndexContainer_1c040ebe, XNamed_a6520b08):
     """
     ...
 
-

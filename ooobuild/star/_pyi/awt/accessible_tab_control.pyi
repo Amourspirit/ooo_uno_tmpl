@@ -38,4 +38,3 @@ class AccessibleTabControl(XAccessibleContext_8eae119b, XAccessibleEventBroadcas
     """
     ...
 
-

@@ -35,6 +35,10 @@ class ReferencePageSet(TextField_90260a56):
         determines whether the ReferencePageGet text fields are displayed or not.
         """
         ...
+
+    @NameOn.setter
+    def NameOn(self, value: bool) -> None:
+        ...
     @property
     def Offset(self) -> int:
         """
@@ -42,4 +46,7 @@ class ReferencePageSet(TextField_90260a56):
         """
         ...
 
+    @Offset.setter
+    def Offset(self, value: int) -> None:
+        ...
 

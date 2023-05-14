@@ -58,6 +58,9 @@ class InstallException(Exception_85530a09):
         """
         ...
 
+    @displayName.setter
+    def displayName(self, value: str) -> None:
+        ...
 
 __all__ = ['InstallException']
 

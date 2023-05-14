@@ -46,11 +46,19 @@ class UnoControlSpinButtonModel(UnoControlModel_c8ce0c58):
         specifies the RGB color to be used for the control
         """
         ...
+
+    @BackgroundColor.setter
+    def BackgroundColor(self, value: 'Color_68e908c5') -> None:
+        ...
     @property
     def Border(self) -> int:
         """
         specifies the border style of the control.
         """
+        ...
+
+    @Border.setter
+    def Border(self, value: int) -> None:
         ...
     @property
     def BorderColor(self) -> int:
@@ -64,11 +72,19 @@ class UnoControlSpinButtonModel(UnoControlModel_c8ce0c58):
             OOo 2.0
         """
         ...
+
+    @BorderColor.setter
+    def BorderColor(self, value: int) -> None:
+        ...
     @property
     def Enabled(self) -> bool:
         """
         determines whether the control is enabled or disabled.
         """
+        ...
+
+    @Enabled.setter
+    def Enabled(self, value: bool) -> None:
         ...
     @property
     def HelpText(self) -> str:
@@ -76,11 +92,19 @@ class UnoControlSpinButtonModel(UnoControlModel_c8ce0c58):
         specifies the help text of the control.
         """
         ...
+
+    @HelpText.setter
+    def HelpText(self, value: str) -> None:
+        ...
     @property
     def HelpURL(self) -> str:
         """
         specifies the help URL of the control.
         """
+        ...
+
+    @HelpURL.setter
+    def HelpURL(self, value: str) -> None:
         ...
     @property
     def MouseWheelBehavior(self) -> int:
@@ -90,17 +114,29 @@ class UnoControlSpinButtonModel(UnoControlModel_c8ce0c58):
         Usually, the mouse wheel spins the numeric value displayed in the control. Using this property, and one of the MouseWheelBehavior constants, you can control under which circumstances this is possible.
         """
         ...
+
+    @MouseWheelBehavior.setter
+    def MouseWheelBehavior(self, value: int) -> None:
+        ...
     @property
     def Orientation(self) -> int:
         """
         specifies the ScrollBarOrientation of the control.
         """
         ...
+
+    @Orientation.setter
+    def Orientation(self, value: int) -> None:
+        ...
     @property
     def Printable(self) -> bool:
         """
         specifies whether the control will be printed with the document.
         """
+        ...
+
+    @Printable.setter
+    def Printable(self, value: bool) -> None:
         ...
     @property
     def Repeat(self) -> bool:
@@ -110,6 +146,10 @@ class UnoControlSpinButtonModel(UnoControlModel_c8ce0c58):
         repeatedly trigger an action when keeping pressed.
         """
         ...
+
+    @Repeat.setter
+    def Repeat(self, value: bool) -> None:
+        ...
     @property
     def RepeatDelay(self) -> int:
         """
@@ -118,11 +158,19 @@ class UnoControlSpinButtonModel(UnoControlModel_c8ce0c58):
         When the user presses a mouse in a control area where this triggers an action (such as spinning the value), then usual control implementations allow to repeatedly trigger this action, without the need to release the mouse button and to press it again. The delay between two such triggers is specified with this property.
         """
         ...
+
+    @RepeatDelay.setter
+    def RepeatDelay(self, value: int) -> None:
+        ...
     @property
     def SpinIncrement(self) -> int:
         """
         specifies the increment by which the value is changed when using operating the spin button.
         """
+        ...
+
+    @SpinIncrement.setter
+    def SpinIncrement(self, value: int) -> None:
         ...
     @property
     def SpinValue(self) -> int:
@@ -130,17 +178,29 @@ class UnoControlSpinButtonModel(UnoControlModel_c8ce0c58):
         specifies the current value of the control.
         """
         ...
+
+    @SpinValue.setter
+    def SpinValue(self, value: int) -> None:
+        ...
     @property
     def SpinValueMax(self) -> int:
         """
         specifies the maximum value of the control.
         """
         ...
+
+    @SpinValueMax.setter
+    def SpinValueMax(self, value: int) -> None:
+        ...
     @property
     def SpinValueMin(self) -> int:
         """
         specifies the minimum value of the control.
         """
+        ...
+
+    @SpinValueMin.setter
+    def SpinValueMin(self, value: int) -> None:
         ...
     @property
     def SymbolColor(self) -> 'Color_68e908c5':
@@ -149,4 +209,7 @@ class UnoControlSpinButtonModel(UnoControlModel_c8ce0c58):
         """
         ...
 
+    @SymbolColor.setter
+    def SymbolColor(self, value: 'Color_68e908c5') -> None:
+        ...
 

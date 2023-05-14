@@ -44,6 +44,10 @@ class DatasourceAdministrationDialog(XPropertySet_bc180bfa, XInitialization_d46c
         This property can't be set while the dialog is being displayed.
         """
         ...
+
+    @ParentWindow.setter
+    def ParentWindow(self, value: 'XWindow_713b0924') -> None:
+        ...
     @property
     def Title(self) -> str:
         """
@@ -51,4 +55,7 @@ class DatasourceAdministrationDialog(XPropertySet_bc180bfa, XInitialization_d46c
         """
         ...
 
+    @Title.setter
+    def Title(self, value: str) -> None:
+        ...
 

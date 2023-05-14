@@ -54,4 +54,3 @@ class Wizard(XWizard_bae60bc0):
         """
         ...
 
-

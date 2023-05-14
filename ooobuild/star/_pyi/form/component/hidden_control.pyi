@@ -40,4 +40,7 @@ class HiddenControl(FormComponent_bc700c03):
         """
         ...
 
+    @HiddenValue.setter
+    def HiddenValue(self, value: str) -> None:
+        ...
 

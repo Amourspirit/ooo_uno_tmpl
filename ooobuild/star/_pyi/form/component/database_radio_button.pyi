@@ -32,4 +32,3 @@ class DatabaseRadioButton(DataAwareControlModel_27110ef8, RadioButton_2b130f28):
     """
     ...
 
-

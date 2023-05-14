@@ -44,4 +44,7 @@ class DataPoint(DataPointProperties_24a00efd, CharacterProperties_1d4f0ef3, Char
         """
         ...
 
+    @Offset.setter
+    def Offset(self, value: float) -> None:
+        ...
 

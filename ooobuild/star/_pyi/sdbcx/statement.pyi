@@ -38,4 +38,7 @@ class Statement(Statement_8ed50a59):
         """
         ...
 
+    @UseBookmarks.setter
+    def UseBookmarks(self, value: bool) -> None:
+        ...
 

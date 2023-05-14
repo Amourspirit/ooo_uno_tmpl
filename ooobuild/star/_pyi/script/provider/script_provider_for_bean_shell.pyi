@@ -31,4 +31,3 @@ class ScriptProviderForBeanShell(LanguageScriptProvider_325141a):
     """
     ...
 
-

@@ -41,4 +41,3 @@ class OfficeInstallationDirectories(XOfficeInstallationDirectories_c38f12d9):
     """
     ...
 
-

@@ -33,4 +33,3 @@ class ExponentialScaling(XScaling_97500a65):
     """
     ...
 
-

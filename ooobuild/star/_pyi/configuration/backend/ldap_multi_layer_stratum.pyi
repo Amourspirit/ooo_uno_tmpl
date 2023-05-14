@@ -31,4 +31,3 @@ class LdapMultiLayerStratum(MultiLayerStratum_16ad146e):
     """
     ...
 
-

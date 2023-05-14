@@ -49,9 +49,15 @@ class ParagraphTarget(object):
     def Shape(self) -> XShape_8fd00a3d:
         ...
 
+    @Shape.setter
+    def Shape(self, value: XShape_8fd00a3d) -> None:
+        ...
 
     @property
     def Paragraph(self) -> int:
         ...
 
+    @Paragraph.setter
+    def Paragraph(self, value: int) -> None:
+        ...
 

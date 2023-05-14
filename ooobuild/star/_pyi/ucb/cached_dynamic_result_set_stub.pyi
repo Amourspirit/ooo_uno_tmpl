@@ -34,4 +34,3 @@ class CachedDynamicResultSetStub(XDynamicResultSet_e0360d0a, XSourceInitializati
     """
     ...
 
-

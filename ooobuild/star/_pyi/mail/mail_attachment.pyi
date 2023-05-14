@@ -58,6 +58,9 @@ class MailAttachment(object):
         """
         ...
 
+    @Data.setter
+    def Data(self, value: XTransferable_2d800f38) -> None:
+        ...
 
     @property
     def ReadableName(self) -> str:
@@ -68,4 +71,7 @@ class MailAttachment(object):
         """
         ...
 
+    @ReadableName.setter
+    def ReadableName(self, value: str) -> None:
+        ...
 

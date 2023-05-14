@@ -31,4 +31,3 @@ class ConsolidationDescriptor(XConsolidationDescriptor_6b7610ee):
     """
     ...
 
-

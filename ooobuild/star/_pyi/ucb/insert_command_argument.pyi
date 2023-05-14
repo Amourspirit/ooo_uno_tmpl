@@ -54,6 +54,9 @@ class InsertCommandArgument(object):
         """
         ...
 
+    @Data.setter
+    def Data(self, value: XInputStream_98d40ab4) -> None:
+        ...
 
     @property
     def ReplaceExisting(self) -> bool:
@@ -64,4 +67,7 @@ class InsertCommandArgument(object):
         """
         ...
 
+    @ReplaceExisting.setter
+    def ReplaceExisting(self, value: bool) -> None:
+        ...
 

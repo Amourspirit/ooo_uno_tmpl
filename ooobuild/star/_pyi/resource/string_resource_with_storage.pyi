@@ -42,4 +42,3 @@ class StringResourceWithStorage(XStringResourceWithStorage_ca5312f8):
         """
         ...
 
-

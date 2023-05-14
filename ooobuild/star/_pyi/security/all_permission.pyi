@@ -51,4 +51,7 @@ class AllPermission(object):
     def dummy(self) -> int:
         ...
 
+    @dummy.setter
+    def dummy(self, value: int) -> None:
+        ...
 

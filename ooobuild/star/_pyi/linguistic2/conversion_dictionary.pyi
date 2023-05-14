@@ -39,4 +39,3 @@ class ConversionDictionary(XConversionDictionary_a04e1209, XConversionPropertyTy
     """
     ...
 
-

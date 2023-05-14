@@ -79,6 +79,9 @@ class XReportDefinition(XDocumentSubStorageSupplier_da021351, XStorageBasedDocum
         """
         ...
 
+    @ActiveConnection.setter
+    def ActiveConnection(self, value: 'XConnection_a36a0b0c') -> None:
+        ...
     @property
     def Caption(self) -> str:
         """
@@ -86,6 +89,9 @@ class XReportDefinition(XDocumentSubStorageSupplier_da021351, XStorageBasedDocum
         """
         ...
 
+    @Caption.setter
+    def Caption(self, value: str) -> None:
+        ...
     @property
     def Command(self) -> str:
         """
@@ -95,6 +101,9 @@ class XReportDefinition(XDocumentSubStorageSupplier_da021351, XStorageBasedDocum
         """
         ...
 
+    @Command.setter
+    def Command(self, value: str) -> None:
+        ...
     @property
     def CommandType(self) -> int:
         """
@@ -106,6 +115,9 @@ class XReportDefinition(XDocumentSubStorageSupplier_da021351, XStorageBasedDocum
         """
         ...
 
+    @CommandType.setter
+    def CommandType(self, value: int) -> None:
+        ...
     @property
     def DataSourceName(self) -> str:
         """
@@ -113,6 +125,9 @@ class XReportDefinition(XDocumentSubStorageSupplier_da021351, XStorageBasedDocum
         """
         ...
 
+    @DataSourceName.setter
+    def DataSourceName(self, value: str) -> None:
+        ...
     @property
     def Detail(self) -> 'XSection_9b630ad1':
         """
@@ -120,6 +135,9 @@ class XReportDefinition(XDocumentSubStorageSupplier_da021351, XStorageBasedDocum
         """
         ...
 
+    @Detail.setter
+    def Detail(self, value: 'XSection_9b630ad1') -> None:
+        ...
     @property
     def EscapeProcessing(self) -> bool:
         """
@@ -131,6 +149,9 @@ class XReportDefinition(XDocumentSubStorageSupplier_da021351, XStorageBasedDocum
         """
         ...
 
+    @EscapeProcessing.setter
+    def EscapeProcessing(self, value: bool) -> None:
+        ...
     @property
     def Filter(self) -> str:
         """
@@ -144,6 +165,9 @@ class XReportDefinition(XDocumentSubStorageSupplier_da021351, XStorageBasedDocum
         """
         ...
 
+    @Filter.setter
+    def Filter(self, value: str) -> None:
+        ...
     @property
     def GroupKeepTogether(self) -> int:
         """
@@ -151,6 +175,9 @@ class XReportDefinition(XDocumentSubStorageSupplier_da021351, XStorageBasedDocum
         """
         ...
 
+    @GroupKeepTogether.setter
+    def GroupKeepTogether(self, value: int) -> None:
+        ...
     @property
     def Groups(self) -> 'XGroups_90d00a7c':
         """
@@ -158,6 +185,9 @@ class XReportDefinition(XDocumentSubStorageSupplier_da021351, XStorageBasedDocum
         """
         ...
 
+    @Groups.setter
+    def Groups(self, value: 'XGroups_90d00a7c') -> None:
+        ...
     @property
     def MimeType(self) -> str:
         """
@@ -165,6 +195,9 @@ class XReportDefinition(XDocumentSubStorageSupplier_da021351, XStorageBasedDocum
         """
         ...
 
+    @MimeType.setter
+    def MimeType(self, value: str) -> None:
+        ...
     @property
     def PageFooter(self) -> 'XSection_9b630ad1':
         """
@@ -172,6 +205,9 @@ class XReportDefinition(XDocumentSubStorageSupplier_da021351, XStorageBasedDocum
         """
         ...
 
+    @PageFooter.setter
+    def PageFooter(self, value: 'XSection_9b630ad1') -> None:
+        ...
     @property
     def PageFooterOn(self) -> bool:
         """
@@ -181,6 +217,9 @@ class XReportDefinition(XDocumentSubStorageSupplier_da021351, XStorageBasedDocum
         """
         ...
 
+    @PageFooterOn.setter
+    def PageFooterOn(self, value: bool) -> None:
+        ...
     @property
     def PageFooterOption(self) -> int:
         """
@@ -188,6 +227,9 @@ class XReportDefinition(XDocumentSubStorageSupplier_da021351, XStorageBasedDocum
         """
         ...
 
+    @PageFooterOption.setter
+    def PageFooterOption(self, value: int) -> None:
+        ...
     @property
     def PageHeader(self) -> 'XSection_9b630ad1':
         """
@@ -195,6 +237,9 @@ class XReportDefinition(XDocumentSubStorageSupplier_da021351, XStorageBasedDocum
         """
         ...
 
+    @PageHeader.setter
+    def PageHeader(self, value: 'XSection_9b630ad1') -> None:
+        ...
     @property
     def PageHeaderOn(self) -> bool:
         """
@@ -204,6 +249,9 @@ class XReportDefinition(XDocumentSubStorageSupplier_da021351, XStorageBasedDocum
         """
         ...
 
+    @PageHeaderOn.setter
+    def PageHeaderOn(self, value: bool) -> None:
+        ...
     @property
     def PageHeaderOption(self) -> int:
         """
@@ -211,6 +259,9 @@ class XReportDefinition(XDocumentSubStorageSupplier_da021351, XStorageBasedDocum
         """
         ...
 
+    @PageHeaderOption.setter
+    def PageHeaderOption(self, value: int) -> None:
+        ...
     @property
     def ReportFooter(self) -> 'XSection_9b630ad1':
         """
@@ -218,6 +269,9 @@ class XReportDefinition(XDocumentSubStorageSupplier_da021351, XStorageBasedDocum
         """
         ...
 
+    @ReportFooter.setter
+    def ReportFooter(self, value: 'XSection_9b630ad1') -> None:
+        ...
     @property
     def ReportFooterOn(self) -> bool:
         """
@@ -227,6 +281,9 @@ class XReportDefinition(XDocumentSubStorageSupplier_da021351, XStorageBasedDocum
         """
         ...
 
+    @ReportFooterOn.setter
+    def ReportFooterOn(self, value: bool) -> None:
+        ...
     @property
     def ReportHeader(self) -> 'XSection_9b630ad1':
         """
@@ -234,6 +291,9 @@ class XReportDefinition(XDocumentSubStorageSupplier_da021351, XStorageBasedDocum
         """
         ...
 
+    @ReportHeader.setter
+    def ReportHeader(self, value: 'XSection_9b630ad1') -> None:
+        ...
     @property
     def ReportHeaderOn(self) -> bool:
         """
@@ -243,4 +303,7 @@ class XReportDefinition(XDocumentSubStorageSupplier_da021351, XStorageBasedDocum
         """
         ...
 
+    @ReportHeaderOn.setter
+    def ReportHeaderOn(self, value: bool) -> None:
+        ...
 

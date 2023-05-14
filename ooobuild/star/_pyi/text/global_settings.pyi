@@ -32,4 +32,3 @@ class GlobalSettings(XPrintSettingsSupplier_3c330fcd, XViewSettingsSupplier_2be9
     """
     ...
 
-

@@ -53,4 +53,3 @@ class Literal(XLiteral_79ec0969, XNode_5ee40822):
         """
         ...
 
-

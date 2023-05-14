@@ -37,4 +37,3 @@ class BridgeSupplier(XBridgeSupplier2_fb800da0):
     """
     ...
 
-

@@ -44,6 +44,10 @@ class GraphicDescriptor(XPropertySet_bc180bfa):
         The status of this flag is not always clear if the graphic was not loaded at all, e.g. in case of just querying for the GraphicDescriptor
         """
         ...
+
+    @Alpha.setter
+    def Alpha(self, value: bool) -> None:
+        ...
     @property
     def Animated(self) -> bool:
         """
@@ -51,6 +55,10 @@ class GraphicDescriptor(XPropertySet_bc180bfa):
         
         The status of this flag is not always clear if the graphic was not loaded at all, e.g. in case of just querying for the GraphicDescriptor
         """
+        ...
+
+    @Animated.setter
+    def Animated(self, value: bool) -> None:
         ...
     @property
     def BitsPerPixel(self) -> int:
@@ -60,11 +68,19 @@ class GraphicDescriptor(XPropertySet_bc180bfa):
         This property is not available for vector graphics and may not be available for some kinds of pixel graphics
         """
         ...
+
+    @BitsPerPixel.setter
+    def BitsPerPixel(self, value: int) -> None:
+        ...
     @property
     def GraphicType(self) -> int:
         """
         The type of the graphic.
         """
+        ...
+
+    @GraphicType.setter
+    def GraphicType(self, value: int) -> None:
         ...
     @property
     def Linked(self) -> bool:
@@ -76,6 +92,10 @@ class GraphicDescriptor(XPropertySet_bc180bfa):
             LibreOffice 6.1
         """
         ...
+
+    @Linked.setter
+    def Linked(self, value: bool) -> None:
+        ...
     @property
     def MimeType(self) -> str:
         """
@@ -85,6 +105,10 @@ class GraphicDescriptor(XPropertySet_bc180bfa):
         
         Currently, the following mime types are supported for loaded graphics:
         """
+        ...
+
+    @MimeType.setter
+    def MimeType(self, value: str) -> None:
         ...
     @property
     def OriginURL(self) -> str:
@@ -96,6 +120,10 @@ class GraphicDescriptor(XPropertySet_bc180bfa):
             LibreOffice 6.1
         """
         ...
+
+    @OriginURL.setter
+    def OriginURL(self, value: str) -> None:
+        ...
     @property
     def Size100thMM(self) -> 'Size_576707ef':
         """
@@ -104,6 +132,10 @@ class GraphicDescriptor(XPropertySet_bc180bfa):
         This property may not be available in case of pixel graphics or if the logical size can not be determined correctly for some formats without loading the whole graphic
         """
         ...
+
+    @Size100thMM.setter
+    def Size100thMM(self, value: 'Size_576707ef') -> None:
+        ...
     @property
     def SizePixel(self) -> 'Size_576707ef':
         """
@@ -111,6 +143,10 @@ class GraphicDescriptor(XPropertySet_bc180bfa):
         
         This property may not be available in case of vector graphics or if the pixel size can not be determined correctly for some formats without loading the whole graphic
         """
+        ...
+
+    @SizePixel.setter
+    def SizePixel(self, value: 'Size_576707ef') -> None:
         ...
     @property
     def Transparent(self) -> bool:
@@ -121,4 +157,7 @@ class GraphicDescriptor(XPropertySet_bc180bfa):
         """
         ...
 
+    @Transparent.setter
+    def Transparent(self, value: bool) -> None:
+        ...
 

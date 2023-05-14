@@ -38,4 +38,7 @@ class KeyColumnDescriptor(Descriptor_a5200b3b):
         """
         ...
 
+    @RelatedColumn.setter
+    def RelatedColumn(self, value: str) -> None:
+        ...
 

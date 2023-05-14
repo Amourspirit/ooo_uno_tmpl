@@ -39,4 +39,3 @@ class HangulHanjaConversionDictionary(ConversionDictionary_8fa111b1):
     """
     ...
 
-

@@ -31,4 +31,3 @@ class XMLSecurityContext(XXMLSecurityContext_681010ae):
     """
     ...
 
-

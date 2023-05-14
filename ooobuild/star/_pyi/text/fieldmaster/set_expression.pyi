@@ -37,11 +37,19 @@ class SetExpression(TextFieldMaster_d6410cc2):
         This values is used if the field master is set as number sequence.
         """
         ...
+
+    @ChapterNumberingLevel.setter
+    def ChapterNumberingLevel(self, value: int) -> None:
+        ...
     @property
     def NumberingSeparator(self) -> str:
         """
         determines the numbering separator string if the field master is set as number sequence.
         """
+        ...
+
+    @NumberingSeparator.setter
+    def NumberingSeparator(self, value: str) -> None:
         ...
     @property
     def SubType(self) -> int:
@@ -50,4 +58,7 @@ class SetExpression(TextFieldMaster_d6410cc2):
         """
         ...
 
+    @SubType.setter
+    def SubType(self, value: int) -> None:
+        ...
 

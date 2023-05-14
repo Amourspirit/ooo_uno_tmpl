@@ -42,4 +42,3 @@ class SpreadsheetView(Controller_a5330b37, SpreadsheetViewPane_1c0b0eb8, Spreads
     """
     ...
 
-

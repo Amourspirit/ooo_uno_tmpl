@@ -41,4 +41,3 @@ class WebDAVDocumentContent(XPropertiesChangeNotifier_7a7b111c, XPropertyContain
     """
     ...
 
-

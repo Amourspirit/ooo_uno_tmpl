@@ -55,6 +55,9 @@ class RemoteContentProviderChangeEvent(EventObject_a3d70b03):
         """
         ...
 
+    @Identifier.setter
+    def Identifier(self, value: str) -> None:
+        ...
 
     @property
     def Action(self) -> RemoteContentProviderChangeAction_e9701378:
@@ -63,4 +66,7 @@ class RemoteContentProviderChangeEvent(EventObject_a3d70b03):
         """
         ...
 
+    @Action.setter
+    def Action(self, value: RemoteContentProviderChangeAction_e9701378) -> None:
+        ...
 

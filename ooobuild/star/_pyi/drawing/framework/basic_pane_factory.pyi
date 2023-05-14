@@ -42,4 +42,3 @@ class BasicPaneFactory(XResourceFactory_b3561268):
         """
         ...
 
-

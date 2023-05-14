@@ -50,9 +50,15 @@ class InterpretedData(object):
     def Series(self) -> typing.Tuple[typing.Tuple[XDataSeries_b8150b89, ...], ...]:
         ...
 
+    @Series.setter
+    def Series(self, value: typing.Tuple[typing.Tuple[XDataSeries_b8150b89, ...], ...]) -> None:
+        ...
 
     @property
     def Categories(self) -> XLabeledDataSequence_7e1a10c8:
         ...
 
+    @Categories.setter
+    def Categories(self, value: XLabeledDataSequence_7e1a10c8) -> None:
+        ...
 

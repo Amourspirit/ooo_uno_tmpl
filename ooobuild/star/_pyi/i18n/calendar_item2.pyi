@@ -60,4 +60,7 @@ class CalendarItem2(CalendarItem_a86c0af1):
         """
         ...
 
+    @NarrowName.setter
+    def NarrowName(self, value: str) -> None:
+        ...
 

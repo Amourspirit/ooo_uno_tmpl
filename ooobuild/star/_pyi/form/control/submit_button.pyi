@@ -35,4 +35,3 @@ class SubmitButton(XSubmission_3cfd0fba):
     """
     ...
 
-

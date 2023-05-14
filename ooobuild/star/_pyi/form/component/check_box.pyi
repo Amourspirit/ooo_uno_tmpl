@@ -41,6 +41,10 @@ class CheckBox(UnoControlCheckBoxModel_383d0f5f, FormControlModel_e2990d22, XRes
         This value is used when the control is initially displayed, and for resetting it.
         """
         ...
+
+    @DefaultState.setter
+    def DefaultState(self, value: int) -> None:
+        ...
     @property
     def RefValue(self) -> str:
         """
@@ -50,4 +54,7 @@ class CheckBox(UnoControlCheckBoxModel_383d0f5f, FormControlModel_e2990d22, XRes
         """
         ...
 
+    @RefValue.setter
+    def RefValue(self, value: str) -> None:
+        ...
 

@@ -52,6 +52,9 @@ class CommandInfo(object):
         """
         ...
 
+    @Name.setter
+    def Name(self, value: str) -> None:
+        ...
 
     @property
     def Handle(self) -> int:
@@ -62,6 +65,9 @@ class CommandInfo(object):
         """
         ...
 
+    @Handle.setter
+    def Handle(self, value: int) -> None:
+        ...
 
     @property
     def ArgType(self) -> object:
@@ -70,4 +76,7 @@ class CommandInfo(object):
         """
         ...
 
+    @ArgType.setter
+    def ArgType(self, value: object) -> None:
+        ...
 

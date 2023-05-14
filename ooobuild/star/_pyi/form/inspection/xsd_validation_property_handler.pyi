@@ -35,4 +35,3 @@ class XSDValidationPropertyHandler(XPropertyHandler_3e950fbf):
     """
     ...
 
-

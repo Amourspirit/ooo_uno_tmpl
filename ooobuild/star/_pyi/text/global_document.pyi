@@ -35,4 +35,3 @@ class GlobalDocument(GenericTextDocument_d200e6e):
     """
     ...
 
-

@@ -37,11 +37,19 @@ class ColumnDescriptor(Descriptor_a5200b3b):
         specifies how to create an auto-increment column.
         """
         ...
+
+    @AutoIncrementCreation.setter
+    def AutoIncrementCreation(self, value: str) -> None:
+        ...
     @property
     def DefaultValue(self) -> str:
         """
         keeps a default value for a column, is provided as string.
         """
+        ...
+
+    @DefaultValue.setter
+    def DefaultValue(self, value: str) -> None:
         ...
     @property
     def Description(self) -> str:
@@ -49,11 +57,19 @@ class ColumnDescriptor(Descriptor_a5200b3b):
         keeps a description of the object.
         """
         ...
+
+    @Description.setter
+    def Description(self, value: str) -> None:
+        ...
     @property
     def IsAutoIncrement(self) -> bool:
         """
         indicates whether the column is automatically numbered, thus read-only.
         """
+        ...
+
+    @IsAutoIncrement.setter
+    def IsAutoIncrement(self, value: bool) -> None:
         ...
     @property
     def IsNullable(self) -> int:
@@ -61,11 +77,19 @@ class ColumnDescriptor(Descriptor_a5200b3b):
         indicates the nullability of values in the designated column.
         """
         ...
+
+    @IsNullable.setter
+    def IsNullable(self, value: int) -> None:
+        ...
     @property
     def IsRowVersion(self) -> bool:
         """
         indicates that the column contains some kind of time or date stamp used to track updates.
         """
+        ...
+
+    @IsRowVersion.setter
+    def IsRowVersion(self, value: bool) -> None:
         ...
     @property
     def Precision(self) -> int:
@@ -73,17 +97,29 @@ class ColumnDescriptor(Descriptor_a5200b3b):
         gets a column's number of decimal digits.
         """
         ...
+
+    @Precision.setter
+    def Precision(self, value: int) -> None:
+        ...
     @property
     def Scale(self) -> int:
         """
         gets a column's number of digits to right of the decimal point.
         """
         ...
+
+    @Scale.setter
+    def Scale(self, value: int) -> None:
+        ...
     @property
     def Type(self) -> int:
         """
         is the com.sun.star.sdbc.DataType of the column.
         """
+        ...
+
+    @Type.setter
+    def Type(self, value: int) -> None:
         ...
     @property
     def TypeName(self) -> str:
@@ -94,4 +130,7 @@ class ColumnDescriptor(Descriptor_a5200b3b):
         """
         ...
 
+    @TypeName.setter
+    def TypeName(self, value: str) -> None:
+        ...
 

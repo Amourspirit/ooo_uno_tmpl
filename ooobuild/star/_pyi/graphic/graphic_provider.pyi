@@ -33,4 +33,3 @@ class GraphicProvider(XGraphicProvider_b5b0e47):
     """
     ...
 
-

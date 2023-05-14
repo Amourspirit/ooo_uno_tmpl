@@ -33,4 +33,3 @@ class SimpleSystemMail(XSimpleMailClientSupplier_8f9111a5):
     """
     ...
 
-

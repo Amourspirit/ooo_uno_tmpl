@@ -43,6 +43,10 @@ class MeasureShape(LineProperties_f13f0da9, MeasureProperties_1d340ef3, Rotation
         this point is the end of the measured distance
         """
         ...
+
+    @EndPosition.setter
+    def EndPosition(self, value: 'Point_5fb2085e') -> None:
+        ...
     @property
     def StartPosition(self) -> 'Point_5fb2085e':
         """
@@ -50,4 +54,7 @@ class MeasureShape(LineProperties_f13f0da9, MeasureProperties_1d340ef3, Rotation
         """
         ...
 
+    @StartPosition.setter
+    def StartPosition(self, value: 'Point_5fb2085e') -> None:
+        ...
 

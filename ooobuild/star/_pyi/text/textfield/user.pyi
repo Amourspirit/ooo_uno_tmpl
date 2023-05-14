@@ -43,17 +43,29 @@ class User(DependentTextField_fed90ded):
             OOo 1.1.2
         """
         ...
+
+    @IsFixedLanguage.setter
+    def IsFixedLanguage(self, value: bool) -> None:
+        ...
     @property
     def IsShowFormula(self) -> bool:
         """
         determines if the content is shown as text rather than as value.
         """
         ...
+
+    @IsShowFormula.setter
+    def IsShowFormula(self, value: bool) -> None:
+        ...
     @property
     def IsVisible(self) -> bool:
         """
         determines if the field is visible.
         """
+        ...
+
+    @IsVisible.setter
+    def IsVisible(self, value: bool) -> None:
         ...
     @property
     def NumberFormat(self) -> int:
@@ -62,4 +74,7 @@ class User(DependentTextField_fed90ded):
         """
         ...
 
+    @NumberFormat.setter
+    def NumberFormat(self, value: int) -> None:
+        ...
 

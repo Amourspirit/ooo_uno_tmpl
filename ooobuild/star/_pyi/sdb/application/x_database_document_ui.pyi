@@ -158,6 +158,10 @@ class XDatabaseDocumentUI(ABC):
         """
         ...
 
+    @SubComponents.setter
+    def SubComponents(self, value: 'typing.Tuple[XComponent_98dc0ab5, ...]') -> None:
+        ...
+
     @property
     def ActiveConnection(self) -> 'XConnection_a36a0b0c':
         """
@@ -167,6 +171,9 @@ class XDatabaseDocumentUI(ABC):
         """
         ...
 
+    @ActiveConnection.setter
+    def ActiveConnection(self, value: 'XConnection_a36a0b0c') -> None:
+        ...
     @property
     def ApplicationMainWindow(self) -> 'XWindow_713b0924':
         """
@@ -176,6 +183,9 @@ class XDatabaseDocumentUI(ABC):
         """
         ...
 
+    @ApplicationMainWindow.setter
+    def ApplicationMainWindow(self, value: 'XWindow_713b0924') -> None:
+        ...
     @property
     def DataSource(self) -> 'XDataSource_a2990ae7':
         """
@@ -183,4 +193,7 @@ class XDatabaseDocumentUI(ABC):
         """
         ...
 
+    @DataSource.setter
+    def DataSource(self, value: 'XDataSource_a2990ae7') -> None:
+        ...
 

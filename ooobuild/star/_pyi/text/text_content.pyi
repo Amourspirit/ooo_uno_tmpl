@@ -43,11 +43,20 @@ class TextContent(XTextContent_b16e0ba5):
         contains the anchor type of the text content.
         """
         ...
+
+    @AnchorTypes.setter
+    def AnchorTypes(self, value: 'typing.Tuple[TextContentAnchorType_2cbe0f4a, ...]') -> None:
+        ...
+
     @property
     def AnchorType(self) -> 'TextContentAnchorType_2cbe0f4a':
         """
         specifies how the text content is attached to its surrounding Text.
         """
+        ...
+
+    @AnchorType.setter
+    def AnchorType(self, value: 'TextContentAnchorType_2cbe0f4a') -> None:
         ...
     @property
     def TextWrap(self) -> 'WrapTextMode_b1dd0b91':
@@ -56,4 +65,7 @@ class TextContent(XTextContent_b16e0ba5):
         """
         ...
 
+    @TextWrap.setter
+    def TextWrap(self, value: 'WrapTextMode_b1dd0b91') -> None:
+        ...
 

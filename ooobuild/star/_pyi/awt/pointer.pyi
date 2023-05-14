@@ -34,4 +34,3 @@ class Pointer(XPointer_7abe098d):
     """
     ...
 
-

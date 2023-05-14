@@ -55,6 +55,9 @@ class GridSelectionEvent(EventObject_a3d70b03):
         """
         ...
 
+    @SelectedRowIndexes.setter
+    def SelectedRowIndexes(self, value: uno.ByteSequence) -> None:
+        ...
 
     @property
     def SelectedColumnIndexes(self) -> uno.ByteSequence:
@@ -63,4 +66,7 @@ class GridSelectionEvent(EventObject_a3d70b03):
         """
         ...
 
+    @SelectedColumnIndexes.setter
+    def SelectedColumnIndexes(self, value: uno.ByteSequence) -> None:
+        ...
 

@@ -31,4 +31,3 @@ class StringResource(XStringResourcePersistence_cabc130c):
     """
     ...
 
-

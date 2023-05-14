@@ -120,11 +120,19 @@ class XDocumentProperties(ABC):
         """
         ...
 
+    @DocumentStatistics.setter
+    def DocumentStatistics(self, value: 'typing.Tuple[NamedValue_a37a0af3, ...]') -> None:
+        ...
+
     @property
     def Keywords(self) -> 'typing.Tuple[str, ...]':
         """
         contains a list of keywords for the document.
         """
+        ...
+
+    @Keywords.setter
+    def Keywords(self, value: 'typing.Tuple[str, ...]') -> None:
         ...
 
     @property
@@ -134,6 +142,9 @@ class XDocumentProperties(ABC):
         """
         ...
 
+    @Author.setter
+    def Author(self, value: str) -> None:
+        ...
     @property
     def AutoloadSecs(self) -> int:
         """
@@ -143,6 +154,9 @@ class XDocumentProperties(ABC):
         """
         ...
 
+    @AutoloadSecs.setter
+    def AutoloadSecs(self, value: int) -> None:
+        ...
     @property
     def AutoloadURL(self) -> str:
         """
@@ -152,6 +166,9 @@ class XDocumentProperties(ABC):
         """
         ...
 
+    @AutoloadURL.setter
+    def AutoloadURL(self, value: str) -> None:
+        ...
     @property
     def CreationDate(self) -> 'DateTime_84de09d3':
         """
@@ -159,6 +176,9 @@ class XDocumentProperties(ABC):
         """
         ...
 
+    @CreationDate.setter
+    def CreationDate(self, value: 'DateTime_84de09d3') -> None:
+        ...
     @property
     def DefaultTarget(self) -> str:
         """
@@ -168,6 +188,9 @@ class XDocumentProperties(ABC):
         """
         ...
 
+    @DefaultTarget.setter
+    def DefaultTarget(self, value: str) -> None:
+        ...
     @property
     def Description(self) -> str:
         """
@@ -177,6 +200,9 @@ class XDocumentProperties(ABC):
         """
         ...
 
+    @Description.setter
+    def Description(self, value: str) -> None:
+        ...
     @property
     def EditingCycles(self) -> int:
         """
@@ -184,6 +210,9 @@ class XDocumentProperties(ABC):
         """
         ...
 
+    @EditingCycles.setter
+    def EditingCycles(self, value: int) -> None:
+        ...
     @property
     def EditingDuration(self) -> int:
         """
@@ -191,6 +220,9 @@ class XDocumentProperties(ABC):
         """
         ...
 
+    @EditingDuration.setter
+    def EditingDuration(self, value: int) -> None:
+        ...
     @property
     def Generator(self) -> str:
         """
@@ -200,6 +232,9 @@ class XDocumentProperties(ABC):
         """
         ...
 
+    @Generator.setter
+    def Generator(self, value: str) -> None:
+        ...
     @property
     def Language(self) -> 'Locale_70d308fa':
         """
@@ -207,6 +242,9 @@ class XDocumentProperties(ABC):
         """
         ...
 
+    @Language.setter
+    def Language(self, value: 'Locale_70d308fa') -> None:
+        ...
     @property
     def ModificationDate(self) -> 'DateTime_84de09d3':
         """
@@ -216,6 +254,9 @@ class XDocumentProperties(ABC):
         """
         ...
 
+    @ModificationDate.setter
+    def ModificationDate(self, value: 'DateTime_84de09d3') -> None:
+        ...
     @property
     def ModifiedBy(self) -> str:
         """
@@ -223,6 +264,9 @@ class XDocumentProperties(ABC):
         """
         ...
 
+    @ModifiedBy.setter
+    def ModifiedBy(self, value: str) -> None:
+        ...
     @property
     def PrintDate(self) -> 'DateTime_84de09d3':
         """
@@ -232,6 +276,9 @@ class XDocumentProperties(ABC):
         """
         ...
 
+    @PrintDate.setter
+    def PrintDate(self, value: 'DateTime_84de09d3') -> None:
+        ...
     @property
     def PrintedBy(self) -> str:
         """
@@ -239,6 +286,9 @@ class XDocumentProperties(ABC):
         """
         ...
 
+    @PrintedBy.setter
+    def PrintedBy(self, value: str) -> None:
+        ...
     @property
     def Subject(self) -> str:
         """
@@ -246,6 +296,9 @@ class XDocumentProperties(ABC):
         """
         ...
 
+    @Subject.setter
+    def Subject(self, value: str) -> None:
+        ...
     @property
     def TemplateDate(self) -> 'DateTime_84de09d3':
         """
@@ -253,6 +306,9 @@ class XDocumentProperties(ABC):
         """
         ...
 
+    @TemplateDate.setter
+    def TemplateDate(self, value: 'DateTime_84de09d3') -> None:
+        ...
     @property
     def TemplateName(self) -> str:
         """
@@ -262,6 +318,9 @@ class XDocumentProperties(ABC):
         """
         ...
 
+    @TemplateName.setter
+    def TemplateName(self, value: str) -> None:
+        ...
     @property
     def TemplateURL(self) -> str:
         """
@@ -271,6 +330,9 @@ class XDocumentProperties(ABC):
         """
         ...
 
+    @TemplateURL.setter
+    def TemplateURL(self, value: str) -> None:
+        ...
     @property
     def Title(self) -> str:
         """
@@ -278,4 +340,7 @@ class XDocumentProperties(ABC):
         """
         ...
 
+    @Title.setter
+    def Title(self, value: str) -> None:
+        ...
 

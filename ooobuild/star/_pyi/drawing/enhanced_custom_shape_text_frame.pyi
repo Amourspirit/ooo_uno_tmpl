@@ -49,9 +49,15 @@ class EnhancedCustomShapeTextFrame(object):
     def TopLeft(self) -> EnhancedCustomShapeParameterPair_262914a3:
         ...
 
+    @TopLeft.setter
+    def TopLeft(self, value: EnhancedCustomShapeParameterPair_262914a3) -> None:
+        ...
 
     @property
     def BottomRight(self) -> EnhancedCustomShapeParameterPair_262914a3:
         ...
 
+    @BottomRight.setter
+    def BottomRight(self, value: EnhancedCustomShapeParameterPair_262914a3) -> None:
+        ...
 

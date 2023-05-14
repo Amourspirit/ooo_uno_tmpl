@@ -33,4 +33,3 @@ class ContentProvider(XContentIdentifierFactory_56b91050, XContentProvider_d4150
     """
     ...
 
-

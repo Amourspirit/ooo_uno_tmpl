@@ -56,6 +56,9 @@ class PropertyCommandArgument(object):
         """
         ...
 
+    @Property.setter
+    def Property(self, value: Property_8f4e0a76) -> None:
+        ...
 
     @property
     def DefaultValue(self) -> object:
@@ -64,4 +67,7 @@ class PropertyCommandArgument(object):
         """
         ...
 
+    @DefaultValue.setter
+    def DefaultValue(self, value: object) -> None:
+        ...
 

@@ -31,4 +31,3 @@ class GraphicExportFilter(XGraphicExportFilter_49570ff2):
     """
     ...
 
-

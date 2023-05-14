@@ -53,6 +53,11 @@ class DataAccessDescriptor(ABC):
         If the sequence is empty, it is ignored.
         """
         ...
+
+    @ConnectionInfo.setter
+    def ConnectionInfo(self, value: 'typing.Tuple[PropertyValue_c9610c73, ...]') -> None:
+        ...
+
     @property
     def Selection(self) -> 'typing.Tuple[object, ...]':
         """
@@ -65,6 +70,11 @@ class DataAccessDescriptor(ABC):
         If the elements specify bookmarks, and a ResultSet has been specified, then this result set is required to support the com.sun.star.sdbcx.XRowLocate interface.
         """
         ...
+
+    @Selection.setter
+    def Selection(self, value: 'typing.Tuple[object, ...]') -> None:
+        ...
+
     @property
     def ActiveConnection(self) -> 'XConnection_a36a0b0c':
         """
@@ -74,6 +84,10 @@ class DataAccessDescriptor(ABC):
         
         If no ActiveConnection is given, then a DataSourceName is required.
         """
+        ...
+
+    @ActiveConnection.setter
+    def ActiveConnection(self, value: 'XConnection_a36a0b0c') -> None:
         ...
     @property
     def BookmarkSelection(self) -> bool:
@@ -85,6 +99,10 @@ class DataAccessDescriptor(ABC):
         If TRUE, then the single elements of the array specified by Selection are bookmarks relative to the result set, if FALSE, they're record numbers.
         """
         ...
+
+    @BookmarkSelection.setter
+    def BookmarkSelection(self, value: bool) -> None:
+        ...
     @property
     def Column(self) -> 'XPropertySet_bc180bfa':
         """
@@ -95,6 +113,10 @@ class DataAccessDescriptor(ABC):
         The object will at least support the com.sun.star.sdbcx.Column service, but more often it will even be a Column from the com.sun.star.sdb module.
         """
         ...
+
+    @Column.setter
+    def Column(self, value: 'XPropertySet_bc180bfa') -> None:
+        ...
     @property
     def ColumnName(self) -> str:
         """
@@ -103,6 +125,10 @@ class DataAccessDescriptor(ABC):
         This property is usually used together with the Command and CommandType properties.
         """
         ...
+
+    @ColumnName.setter
+    def ColumnName(self, value: str) -> None:
+        ...
     @property
     def Command(self) -> str:
         """
@@ -110,6 +136,10 @@ class DataAccessDescriptor(ABC):
         
         This property is only meaningful together with the CommandType property, thus either both or none of them are present.
         """
+        ...
+
+    @Command.setter
+    def Command(self, value: str) -> None:
         ...
     @property
     def CommandType(self) -> int:
@@ -121,6 +151,10 @@ class DataAccessDescriptor(ABC):
         This property is only meaningful together with the Command property, thus either both or none of them are present.
         """
         ...
+
+    @CommandType.setter
+    def CommandType(self, value: int) -> None:
+        ...
     @property
     def ConnectionResource(self) -> str:
         """
@@ -128,6 +162,10 @@ class DataAccessDescriptor(ABC):
         
         This database URL is usually used to create a Connection. If no ConnectionResource is given, then an ActiveConnection is required.
         """
+        ...
+
+    @ConnectionResource.setter
+    def ConnectionResource(self, value: str) -> None:
         ...
     @property
     def DataSourceName(self) -> str:
@@ -137,6 +175,10 @@ class DataAccessDescriptor(ABC):
         This data source is usually used to create a Connection. If no DataSourceName is given and the DatabaseLocation and the ConnectionResource are empty, then an ActiveConnection is required.
         """
         ...
+
+    @DataSourceName.setter
+    def DataSourceName(self, value: str) -> None:
+        ...
     @property
     def DatabaseLocation(self) -> str:
         """
@@ -144,6 +186,10 @@ class DataAccessDescriptor(ABC):
         
         This database location is usually used to create a Connection. If no DatabaseLocation is given and the ConnectionResource is empty, then an ActiveConnection is required.
         """
+        ...
+
+    @DatabaseLocation.setter
+    def DatabaseLocation(self, value: str) -> None:
         ...
     @property
     def EscapeProcessing(self) -> bool:
@@ -154,6 +200,10 @@ class DataAccessDescriptor(ABC):
         
         This property is usually present together with the Command and CommandType properties, and is evaluated if and only if CommandType equals CommandType.COMMAND.
         """
+        ...
+
+    @EscapeProcessing.setter
+    def EscapeProcessing(self, value: bool) -> None:
         ...
     @property
     def Filter(self) -> str:
@@ -167,6 +217,10 @@ class DataAccessDescriptor(ABC):
         Note that the Filter property does not make sense if a ResultSet has been specified in the DataAccessDescriptor.
         """
         ...
+
+    @Filter.setter
+    def Filter(self, value: str) -> None:
+        ...
     @property
     def GroupBy(self) -> str:
         """
@@ -174,6 +228,10 @@ class DataAccessDescriptor(ABC):
         
         The keyword GROUP BY itself is not part of this property.
         """
+        ...
+
+    @GroupBy.setter
+    def GroupBy(self, value: str) -> None:
         ...
     @property
     def HavingClause(self) -> str:
@@ -183,6 +241,10 @@ class DataAccessDescriptor(ABC):
         The keyword HAVING itself is not part of this property.
         """
         ...
+
+    @HavingClause.setter
+    def HavingClause(self, value: str) -> None:
+        ...
     @property
     def Order(self) -> str:
         """
@@ -190,6 +252,10 @@ class DataAccessDescriptor(ABC):
         
         The keyword ORDER BY itself is not part of this property.
         """
+        ...
+
+    @Order.setter
+    def Order(self, value: str) -> None:
         ...
     @property
     def ResultSet(self) -> 'XResultSet_98e30aa7':
@@ -204,4 +270,7 @@ class DataAccessDescriptor(ABC):
         """
         ...
 
+    @ResultSet.setter
+    def ResultSet(self, value: 'XResultSet_98e30aa7') -> None:
+        ...
 

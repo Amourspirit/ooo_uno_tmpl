@@ -35,4 +35,3 @@ class Invocation(XSingleServiceFactory_27210f0d):
     """
     ...
 
-

@@ -46,4 +46,7 @@ class CellValueBinding(ValueBinding_18de0e7d, XInitialization_d46c0cca):
         """
         ...
 
+    @BoundCell.setter
+    def BoundCell(self, value: 'CellAddress_ae5f0b56') -> None:
+        ...
 

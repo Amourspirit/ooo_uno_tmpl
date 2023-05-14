@@ -52,6 +52,9 @@ class DockingData(object):
         """
         ...
 
+    @TrackingRectangle.setter
+    def TrackingRectangle(self, value: Rectangle_84b109e9) -> None:
+        ...
 
     @property
     def bFloating(self) -> bool:
@@ -60,4 +63,7 @@ class DockingData(object):
         """
         ...
 
+    @bFloating.setter
+    def bFloating(self, value: bool) -> None:
+        ...
 

@@ -50,14 +50,23 @@ class PolyPolygonShape3D(object):
     def SequenceX(self) -> DoubleSequenceSequence_6b8010c1:
         ...
 
+    @SequenceX.setter
+    def SequenceX(self, value: DoubleSequenceSequence_6b8010c1) -> None:
+        ...
 
     @property
     def SequenceY(self) -> DoubleSequenceSequence_6b8010c1:
         ...
 
+    @SequenceY.setter
+    def SequenceY(self, value: DoubleSequenceSequence_6b8010c1) -> None:
+        ...
 
     @property
     def SequenceZ(self) -> DoubleSequenceSequence_6b8010c1:
         ...
 
+    @SequenceZ.setter
+    def SequenceZ(self, value: DoubleSequenceSequence_6b8010c1) -> None:
+        ...
 

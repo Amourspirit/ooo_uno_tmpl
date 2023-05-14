@@ -33,4 +33,3 @@ class ButtonNavigationHandler(XPropertyHandler_3e950fbf):
     """
     ...
 
-

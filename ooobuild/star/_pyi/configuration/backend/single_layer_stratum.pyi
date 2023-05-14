@@ -32,4 +32,3 @@ class SingleLayerStratum(XBackendEntities_fecf13bb, XSingleLayerStratum_3e74151d
     """
     ...
 
-

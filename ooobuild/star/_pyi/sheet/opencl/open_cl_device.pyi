@@ -51,6 +51,9 @@ class OpenCLDevice(object):
         """
         ...
 
+    @Name.setter
+    def Name(self, value: str) -> None:
+        ...
 
     @property
     def Vendor(self) -> str:
@@ -59,6 +62,9 @@ class OpenCLDevice(object):
         """
         ...
 
+    @Vendor.setter
+    def Vendor(self, value: str) -> None:
+        ...
 
     @property
     def Driver(self) -> str:
@@ -67,4 +73,7 @@ class OpenCLDevice(object):
         """
         ...
 
+    @Driver.setter
+    def Driver(self, value: str) -> None:
+        ...
 

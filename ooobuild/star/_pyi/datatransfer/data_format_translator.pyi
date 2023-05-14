@@ -35,4 +35,3 @@ class DataFormatTranslator(XDataFormatTranslator_b2b5126c):
     """
     ...
 
-

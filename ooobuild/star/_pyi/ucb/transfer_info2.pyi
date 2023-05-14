@@ -55,4 +55,7 @@ class TransferInfo2(TransferInfo_a4600b13):
         """
         ...
 
+    @MimeType.setter
+    def MimeType(self, value: str) -> None:
+        ...
 

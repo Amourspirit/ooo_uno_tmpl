@@ -35,4 +35,3 @@ class PasswordContainer(XPasswordContainer2_ce70e3b):
     """
     ...
 
-

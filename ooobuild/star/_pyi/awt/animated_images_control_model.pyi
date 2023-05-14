@@ -36,4 +36,3 @@ class AnimatedImagesControlModel(UnoControlModel_c8ce0c58, XAnimatedImages_c6990
     """
     ...
 
-

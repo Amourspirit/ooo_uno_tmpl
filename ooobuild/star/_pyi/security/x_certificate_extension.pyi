@@ -46,11 +46,19 @@ class XCertificateExtension(XInterface_8f010a43):
         """
         ...
 
+    @ExtensionId.setter
+    def ExtensionId(self, value: uno.ByteSequence) -> None:
+        ...
+
     @property
     def ExtensionValue(self) -> uno.ByteSequence:
         """
         Get the extension value.
         """
+        ...
+
+    @ExtensionValue.setter
+    def ExtensionValue(self, value: uno.ByteSequence) -> None:
         ...
 
 

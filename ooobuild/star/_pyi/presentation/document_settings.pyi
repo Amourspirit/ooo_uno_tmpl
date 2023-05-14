@@ -36,11 +36,19 @@ class DocumentSettings(HeaderFooterSettings_5acd1070, Settings_b2bc0bb8):
         enables or disables the printing of the drawing pages
         """
         ...
+
+    @IsPrintDrawing.setter
+    def IsPrintDrawing(self, value: bool) -> None:
+        ...
     @property
     def IsPrintFitPage(self) -> bool:
         """
         enables or disables the fitting of the page to the printable area during print
         """
+        ...
+
+    @IsPrintFitPage.setter
+    def IsPrintFitPage(self, value: bool) -> None:
         ...
     @property
     def IsPrintHandout(self) -> bool:
@@ -48,11 +56,19 @@ class DocumentSettings(HeaderFooterSettings_5acd1070, Settings_b2bc0bb8):
         enables or disables the printing of the handout pages
         """
         ...
+
+    @IsPrintHandout.setter
+    def IsPrintHandout(self, value: bool) -> None:
+        ...
     @property
     def IsPrintHiddenPages(self) -> bool:
         """
         enables or disables the printing of draw pages that are marked hidden
         """
+        ...
+
+    @IsPrintHiddenPages.setter
+    def IsPrintHiddenPages(self, value: bool) -> None:
         ...
     @property
     def IsPrintNotes(self) -> bool:
@@ -60,17 +76,29 @@ class DocumentSettings(HeaderFooterSettings_5acd1070, Settings_b2bc0bb8):
         enables or disables the printing of the notes pages
         """
         ...
+
+    @IsPrintNotes.setter
+    def IsPrintNotes(self, value: bool) -> None:
+        ...
     @property
     def IsPrintOutline(self) -> bool:
         """
         enables or disables the printing of the outline pages
         """
         ...
+
+    @IsPrintOutline.setter
+    def IsPrintOutline(self, value: bool) -> None:
+        ...
     @property
     def IsPrintTilePage(self) -> bool:
         """
         if this is true and the paper size for printing is larger than the paper size of the printer than the content is tiled over multiple pages.
         """
+        ...
+
+    @IsPrintTilePage.setter
+    def IsPrintTilePage(self, value: bool) -> None:
         ...
     @property
     def PageNumberFormat(self) -> int:
@@ -79,6 +107,10 @@ class DocumentSettings(HeaderFooterSettings_5acd1070, Settings_b2bc0bb8):
         
         Values 0-7 are supported.
         """
+        ...
+
+    @PageNumberFormat.setter
+    def PageNumberFormat(self, value: int) -> None:
         ...
     @property
     def ParagraphSummation(self) -> bool:
@@ -89,4 +121,7 @@ class DocumentSettings(HeaderFooterSettings_5acd1070, Settings_b2bc0bb8):
         """
         ...
 
+    @ParagraphSummation.setter
+    def ParagraphSummation(self, value: bool) -> None:
+        ...
 

@@ -36,4 +36,3 @@ class Job(XJob_5fa1082e, XCloseable_99ee0aa8):
     """
     ...
 
-

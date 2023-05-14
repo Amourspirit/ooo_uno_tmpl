@@ -42,4 +42,3 @@ class AccessRootElement(HierarchyElement_6fb410e9, XComponent_98dc0ab5, XLocaliz
     """
     ...
 
-

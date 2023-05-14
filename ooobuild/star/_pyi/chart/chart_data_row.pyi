@@ -58,6 +58,9 @@ class ChartDataRow(object):
         """
         ...
 
+    @Points.setter
+    def Points(self, value: typing.Tuple[typing.Tuple[ChartDataValue_d3310c83, ...], ...]) -> None:
+        ...
 
     @property
     def Name(self) -> str:
@@ -66,4 +69,7 @@ class ChartDataRow(object):
         """
         ...
 
+    @Name.setter
+    def Name(self, value: str) -> None:
+        ...
 

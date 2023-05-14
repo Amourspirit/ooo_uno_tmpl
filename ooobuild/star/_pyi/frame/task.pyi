@@ -41,4 +41,3 @@ class Task(XTask_712808fe):
     """
     ...
 
-

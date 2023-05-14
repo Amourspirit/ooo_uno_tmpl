@@ -33,4 +33,3 @@ class PopupMenu(XPopupMenu_8ee90a55):
     """
     ...
 
-

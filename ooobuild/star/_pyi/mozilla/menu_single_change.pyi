@@ -52,6 +52,9 @@ class MenuSingleChange(object):
         """
         ...
 
+    @ID.setter
+    def ID(self, value: int) -> None:
+        ...
 
     @property
     def ChangeID(self) -> int:
@@ -60,6 +63,9 @@ class MenuSingleChange(object):
         """
         ...
 
+    @ChangeID.setter
+    def ChangeID(self, value: int) -> None:
+        ...
 
     @property
     def Change(self) -> object:
@@ -68,4 +74,7 @@ class MenuSingleChange(object):
         """
         ...
 
+    @Change.setter
+    def Change(self, value: object) -> None:
+        ...
 

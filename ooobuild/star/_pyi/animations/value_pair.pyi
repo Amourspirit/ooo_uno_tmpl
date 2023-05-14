@@ -47,9 +47,15 @@ class ValuePair(object):
     def First(self) -> object:
         ...
 
+    @First.setter
+    def First(self, value: object) -> None:
+        ...
 
     @property
     def Second(self) -> object:
         ...
 
+    @Second.setter
+    def Second(self, value: object) -> None:
+        ...
 

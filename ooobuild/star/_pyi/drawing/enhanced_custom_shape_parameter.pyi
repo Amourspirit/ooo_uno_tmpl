@@ -51,9 +51,15 @@ class EnhancedCustomShapeParameter(object):
         """
         ...
 
+    @Value.setter
+    def Value(self, value: object) -> None:
+        ...
 
     @property
     def Type(self) -> int:
         ...
 
+    @Type.setter
+    def Type(self, value: int) -> None:
+        ...
 

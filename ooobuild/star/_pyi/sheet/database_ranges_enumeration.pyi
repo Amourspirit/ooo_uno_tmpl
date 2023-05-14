@@ -31,4 +31,3 @@ class DatabaseRangesEnumeration(XEnumeration_f2180daa):
     """
     ...
 
-

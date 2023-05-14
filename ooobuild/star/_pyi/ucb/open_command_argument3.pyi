@@ -64,4 +64,7 @@ class OpenCommandArgument3(OpenCommandArgument2_9210e08):
         """
         ...
 
+    @OpeningFlags.setter
+    def OpeningFlags(self, value: typing.Tuple[NamedValue_a37a0af3, ...]) -> None:
+        ...
 

@@ -36,11 +36,20 @@ class DropDown(TextField_90260a56):
         The items of the dropdown field.
         """
         ...
+
+    @Items.setter
+    def Items(self, value: 'typing.Tuple[str, ...]') -> None:
+        ...
+
     @property
     def Name(self) -> str:
         """
         The name of the drop down field.
         """
+        ...
+
+    @Name.setter
+    def Name(self, value: str) -> None:
         ...
     @property
     def SelectedItem(self) -> str:
@@ -51,4 +60,7 @@ class DropDown(TextField_90260a56):
         """
         ...
 
+    @SelectedItem.setter
+    def SelectedItem(self, value: str) -> None:
+        ...
 

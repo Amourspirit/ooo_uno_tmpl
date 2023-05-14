@@ -33,4 +33,3 @@ class HatchTable(XNameContainer_cb90e47):
     """
     ...
 
-

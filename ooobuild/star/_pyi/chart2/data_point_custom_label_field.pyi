@@ -34,4 +34,3 @@ class DataPointCustomLabelField(XDataPointCustomLabelField_94771167):
     """
     ...
 
-

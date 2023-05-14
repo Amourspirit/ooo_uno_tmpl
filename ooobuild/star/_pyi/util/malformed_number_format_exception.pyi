@@ -52,6 +52,9 @@ class MalformedNumberFormatException(Exception_85530a09):
         """
         ...
 
+    @CheckPos.setter
+    def CheckPos(self, value: int) -> None:
+        ...
 
 __all__ = ['MalformedNumberFormatException']
 

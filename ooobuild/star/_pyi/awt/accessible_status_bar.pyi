@@ -37,4 +37,3 @@ class AccessibleStatusBar(XAccessibleContext_8eae119b, XAccessibleEventBroadcast
     """
     ...
 
-

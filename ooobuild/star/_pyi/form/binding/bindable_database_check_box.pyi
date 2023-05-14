@@ -43,4 +43,7 @@ class BindableDatabaseCheckBox(BindableDataAwareControlModel_47091512, DatabaseC
         """
         ...
 
+    @SecondaryRefValue.setter
+    def SecondaryRefValue(self, value: str) -> None:
+        ...
 

@@ -59,6 +59,9 @@ class DataPilotTablePositionData(object):
         """
         ...
 
+    @PositionType.setter
+    def PositionType(self, value: int) -> None:
+        ...
 
     @property
     def PositionData(self) -> object:
@@ -69,4 +72,7 @@ class DataPilotTablePositionData(object):
         """
         ...
 
+    @PositionData.setter
+    def PositionData(self, value: object) -> None:
+        ...
 

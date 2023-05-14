@@ -31,4 +31,3 @@ class Scaling(XScaling_97500a65):
     """
     ...
 
-

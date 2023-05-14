@@ -33,4 +33,3 @@ class CellCursor(XCellCursor_ae900b66):
     """
     ...
 
-

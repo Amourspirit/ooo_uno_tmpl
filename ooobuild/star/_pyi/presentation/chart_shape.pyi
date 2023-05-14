@@ -34,4 +34,3 @@ class ChartShape(OLE2Shape_add20af7, Shape_c0c80c15):
     """
     ...
 
-

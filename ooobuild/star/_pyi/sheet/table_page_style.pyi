@@ -44,11 +44,19 @@ class TablePageStyle(PageStyle_9b210ac7):
         determines whether the table is centered horizontally on the page.
         """
         ...
+
+    @CenterHorizontally.setter
+    def CenterHorizontally(self, value: bool) -> None:
+        ...
     @property
     def CenterVertically(self) -> bool:
         """
         determines whether the table is centered vertically on the page.
         """
+        ...
+
+    @CenterVertically.setter
+    def CenterVertically(self, value: bool) -> None:
         ...
     @property
     def FirstPageNumber(self) -> int:
@@ -58,6 +66,10 @@ class TablePageStyle(PageStyle_9b210ac7):
         The value 0 indicates that the page numbers are continued from the previous sheet.
         """
         ...
+
+    @FirstPageNumber.setter
+    def FirstPageNumber(self, value: int) -> None:
+        ...
     @property
     def LeftPageFooterContent(self) -> 'XHeaderFooterContent_275c0f0c':
         """
@@ -65,6 +77,10 @@ class TablePageStyle(PageStyle_9b210ac7):
         
         After changing the footer text contents, this property has to be reinserted into the property set.
         """
+        ...
+
+    @LeftPageFooterContent.setter
+    def LeftPageFooterContent(self, value: 'XHeaderFooterContent_275c0f0c') -> None:
         ...
     @property
     def LeftPageHeaderContent(self) -> 'XHeaderFooterContent_275c0f0c':
@@ -74,11 +90,19 @@ class TablePageStyle(PageStyle_9b210ac7):
         After changing the header text contents, this property has to be reinserted into the property set.
         """
         ...
+
+    @LeftPageHeaderContent.setter
+    def LeftPageHeaderContent(self, value: 'XHeaderFooterContent_275c0f0c') -> None:
+        ...
     @property
     def PageScale(self) -> int:
         """
         contains the scaling factor (in percent) for printing the sheet.
         """
+        ...
+
+    @PageScale.setter
+    def PageScale(self, value: int) -> None:
         ...
     @property
     def PrintAnnotations(self) -> bool:
@@ -86,11 +110,19 @@ class TablePageStyle(PageStyle_9b210ac7):
         enables printing of cell annotations.
         """
         ...
+
+    @PrintAnnotations.setter
+    def PrintAnnotations(self, value: bool) -> None:
+        ...
     @property
     def PrintCharts(self) -> bool:
         """
         enables printing of charts.
         """
+        ...
+
+    @PrintCharts.setter
+    def PrintCharts(self, value: bool) -> None:
         ...
     @property
     def PrintDownFirst(self) -> bool:
@@ -100,11 +132,19 @@ class TablePageStyle(PageStyle_9b210ac7):
         If TRUE, the order for printing pages begins with top-to-bottom, then continues with the next set of cell columns to the right. If FALSE, the order for printing pages begins with left-to-right, then continues with the next set of cell rows to the bottom.
         """
         ...
+
+    @PrintDownFirst.setter
+    def PrintDownFirst(self, value: bool) -> None:
+        ...
     @property
     def PrintDrawing(self) -> bool:
         """
         enables printing of drawing objects.
         """
+        ...
+
+    @PrintDrawing.setter
+    def PrintDrawing(self, value: bool) -> None:
         ...
     @property
     def PrintFormulas(self) -> bool:
@@ -112,11 +152,19 @@ class TablePageStyle(PageStyle_9b210ac7):
         enables printing of formulas instead of their results.
         """
         ...
+
+    @PrintFormulas.setter
+    def PrintFormulas(self, value: bool) -> None:
+        ...
     @property
     def PrintGrid(self) -> bool:
         """
         enables printing of the cell grid.
         """
+        ...
+
+    @PrintGrid.setter
+    def PrintGrid(self, value: bool) -> None:
         ...
     @property
     def PrintHeaders(self) -> bool:
@@ -124,17 +172,29 @@ class TablePageStyle(PageStyle_9b210ac7):
         enables printing of column and row headers.
         """
         ...
+
+    @PrintHeaders.setter
+    def PrintHeaders(self, value: bool) -> None:
+        ...
     @property
     def PrintObjects(self) -> bool:
         """
         enables printing of embedded objects.
         """
         ...
+
+    @PrintObjects.setter
+    def PrintObjects(self, value: bool) -> None:
+        ...
     @property
     def PrintZeroValues(self) -> bool:
         """
         enables printing of zero-values.
         """
+        ...
+
+    @PrintZeroValues.setter
+    def PrintZeroValues(self, value: bool) -> None:
         ...
     @property
     def RightPageFooterContent(self) -> 'XHeaderFooterContent_275c0f0c':
@@ -144,6 +204,10 @@ class TablePageStyle(PageStyle_9b210ac7):
         After changing the footer text contents, this property has to be reinserted into the property set.
         """
         ...
+
+    @RightPageFooterContent.setter
+    def RightPageFooterContent(self, value: 'XHeaderFooterContent_275c0f0c') -> None:
+        ...
     @property
     def RightPageHeaderContent(self) -> 'XHeaderFooterContent_275c0f0c':
         """
@@ -152,11 +216,19 @@ class TablePageStyle(PageStyle_9b210ac7):
         After changing the header text contents, this property has to be reinserted into the property set.
         """
         ...
+
+    @RightPageHeaderContent.setter
+    def RightPageHeaderContent(self, value: 'XHeaderFooterContent_275c0f0c') -> None:
+        ...
     @property
     def ScaleToPages(self) -> int:
         """
         contains the number of pages the sheet will printed.
         """
+        ...
+
+    @ScaleToPages.setter
+    def ScaleToPages(self, value: int) -> None:
         ...
     @property
     def ScaleToPagesX(self) -> int:
@@ -167,6 +239,10 @@ class TablePageStyle(PageStyle_9b210ac7):
         
             OOo 2.0
         """
+        ...
+
+    @ScaleToPagesX.setter
+    def ScaleToPagesX(self, value: int) -> None:
         ...
     @property
     def ScaleToPagesY(self) -> int:
@@ -179,4 +255,7 @@ class TablePageStyle(PageStyle_9b210ac7):
         """
         ...
 
+    @ScaleToPagesY.setter
+    def ScaleToPagesY(self, value: int) -> None:
+        ...
 

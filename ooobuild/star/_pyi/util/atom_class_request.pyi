@@ -52,6 +52,9 @@ class AtomClassRequest(object):
         """
         ...
 
+    @atoms.setter
+    def atoms(self, value: uno.ByteSequence) -> None:
+        ...
 
     @property
     def atomClass(self) -> int:
@@ -60,4 +63,7 @@ class AtomClassRequest(object):
         """
         ...
 
+    @atomClass.setter
+    def atomClass(self, value: int) -> None:
+        ...
 

@@ -57,6 +57,9 @@ class CertificateValidationRequest(ClassifiedInteractionRequest_9f72121b):
         """
         ...
 
+    @CertificateValidity.setter
+    def CertificateValidity(self, value: int) -> None:
+        ...
     @property
     def Certificate(self) -> XCertificate_e55b0d3b:
         """
@@ -64,6 +67,9 @@ class CertificateValidationRequest(ClassifiedInteractionRequest_9f72121b):
         """
         ...
 
+    @Certificate.setter
+    def Certificate(self, value: XCertificate_e55b0d3b) -> None:
+        ...
     @property
     def HostName(self) -> str:
         """
@@ -71,6 +77,9 @@ class CertificateValidationRequest(ClassifiedInteractionRequest_9f72121b):
         """
         ...
 
+    @HostName.setter
+    def HostName(self, value: str) -> None:
+        ...
 
 __all__ = ['CertificateValidationRequest']
 

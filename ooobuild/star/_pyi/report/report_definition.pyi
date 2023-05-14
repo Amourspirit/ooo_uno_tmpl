@@ -30,4 +30,3 @@ class ReportDefinition(XReportDefinition_ec30e81):
     """
     ...
 
-

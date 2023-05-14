@@ -31,4 +31,3 @@ class TextFieldEnumeration(XEnumeration_f2180daa):
     """
     ...
 
-

@@ -57,6 +57,9 @@ class XFrame2(XDispatchInformationProvider_afb6126c, XDispatchProvider_fc690de6,
         """
         ...
 
+    @DispatchRecorderSupplier.setter
+    def DispatchRecorderSupplier(self, value: 'XDispatchRecorderSupplier_79301125') -> None:
+        ...
     @property
     def LayoutManager(self) -> 'XInterface_8f010a43':
         """
@@ -66,6 +69,9 @@ class XFrame2(XDispatchInformationProvider_afb6126c, XDispatchProvider_fc690de6,
         """
         ...
 
+    @LayoutManager.setter
+    def LayoutManager(self, value: 'XInterface_8f010a43') -> None:
+        ...
     @property
     def Title(self) -> str:
         """
@@ -75,6 +81,9 @@ class XFrame2(XDispatchInformationProvider_afb6126c, XDispatchProvider_fc690de6,
         """
         ...
 
+    @Title.setter
+    def Title(self, value: str) -> None:
+        ...
     @property
     def UserDefinedAttributes(self) -> 'XNameContainer_cb90e47':
         """
@@ -82,4 +91,7 @@ class XFrame2(XDispatchInformationProvider_afb6126c, XDispatchProvider_fc690de6,
         """
         ...
 
+    @UserDefinedAttributes.setter
+    def UserDefinedAttributes(self, value: 'XNameContainer_cb90e47') -> None:
+        ...
 

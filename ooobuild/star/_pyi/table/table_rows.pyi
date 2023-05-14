@@ -32,4 +32,3 @@ class TableRows(XEnumerationAccess_4bac0ffc, XTableRows_a37e0afb):
     """
     ...
 
-

@@ -36,4 +36,3 @@ class AccessibleListBox(AccessibleContext_7e0e1143, XAccessibleExtendedComponent
     """
     ...
 
-

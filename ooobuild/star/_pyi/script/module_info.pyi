@@ -48,9 +48,15 @@ class ModuleInfo(object):
     def ModuleObject(self) -> XInterface_8f010a43:
         ...
 
+    @ModuleObject.setter
+    def ModuleObject(self, value: XInterface_8f010a43) -> None:
+        ...
 
     @property
     def ModuleType(self) -> int:
         ...
 
+    @ModuleType.setter
+    def ModuleType(self, value: int) -> None:
+        ...
 

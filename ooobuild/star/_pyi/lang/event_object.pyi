@@ -51,4 +51,7 @@ class EventObject(object):
         """
         ...
 
+    @Source.setter
+    def Source(self, value: XInterface_8f010a43) -> None:
+        ...
 

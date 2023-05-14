@@ -35,4 +35,3 @@ class JavaVirtualMachine(XJavaVM_799d0927):
     """
     ...
 
-

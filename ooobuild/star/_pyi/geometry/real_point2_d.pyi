@@ -57,6 +57,9 @@ class RealPoint2D(object):
         """
         ...
 
+    @X.setter
+    def X(self, value: float) -> None:
+        ...
 
     @property
     def Y(self) -> float:
@@ -65,4 +68,7 @@ class RealPoint2D(object):
         """
         ...
 
+    @Y.setter
+    def Y(self, value: float) -> None:
+        ...
 

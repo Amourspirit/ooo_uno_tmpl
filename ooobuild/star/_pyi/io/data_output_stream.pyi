@@ -34,4 +34,3 @@ class DataOutputStream(XActiveDataSource_d1900c7f, XDataOutputStream_d2f40caf):
     """
     ...
 
-

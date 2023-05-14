@@ -35,17 +35,29 @@ class Day(XDataType_83f209cb):
         specifies the exclusive upper bound for the value
         """
         ...
+
+    @MaxExclusiveInt.setter
+    def MaxExclusiveInt(self, value: int) -> None:
+        ...
     @property
     def MaxInclusiveInt(self) -> int:
         """
         specifies the inclusive upper bound for the value
         """
         ...
+
+    @MaxInclusiveInt.setter
+    def MaxInclusiveInt(self, value: int) -> None:
+        ...
     @property
     def MinExclusiveInt(self) -> int:
         """
         specifies the exclusive lower bound for the value
         """
+        ...
+
+    @MinExclusiveInt.setter
+    def MinExclusiveInt(self, value: int) -> None:
         ...
     @property
     def MinInclusiveInt(self) -> int:
@@ -54,4 +66,7 @@ class Day(XDataType_83f209cb):
         """
         ...
 
+    @MinInclusiveInt.setter
+    def MinInclusiveInt(self, value: int) -> None:
+        ...
 

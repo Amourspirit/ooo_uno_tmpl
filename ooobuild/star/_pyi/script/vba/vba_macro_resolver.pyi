@@ -30,4 +30,3 @@ class VBAMacroResolver(XVBAMacroResolver_42690f79):
     """
     ...
 
-

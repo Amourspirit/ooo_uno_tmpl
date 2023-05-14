@@ -36,4 +36,3 @@ class OpenBezierShape(LineProperties_f13f0da9, PolyPolygonBezierDescriptor_c7e61
     """
     ...
 
-

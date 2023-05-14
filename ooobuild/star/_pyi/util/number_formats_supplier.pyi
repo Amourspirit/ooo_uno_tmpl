@@ -47,4 +47,3 @@ class NumberFormatsSupplier(XNumberFormatsSupplier_3afb0fb7):
         """
         ...
 
-

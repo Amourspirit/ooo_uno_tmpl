@@ -59,4 +59,7 @@ class ModeChangeEvent(EventObject_a3d70b03):
         """
         ...
 
+    @NewMode.setter
+    def NewMode(self, value: str) -> None:
+        ...
 

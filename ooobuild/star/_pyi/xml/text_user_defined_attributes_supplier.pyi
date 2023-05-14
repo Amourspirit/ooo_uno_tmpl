@@ -47,4 +47,7 @@ class TextUserDefinedAttributesSupplier(ABC):
         """
         ...
 
+    @TextUserDefinedAttributes.setter
+    def TextUserDefinedAttributes(self, value: 'XNameContainer_cb90e47') -> None:
+        ...
 

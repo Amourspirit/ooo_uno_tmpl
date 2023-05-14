@@ -38,6 +38,9 @@ class XTempFile(XSeekable_79540954, XStream_678908a4):
         """
         ...
 
+    @RemoveFile.setter
+    def RemoveFile(self, value: bool) -> None:
+        ...
     @property
     def ResourceName(self) -> str:
         """
@@ -45,6 +48,9 @@ class XTempFile(XSeekable_79540954, XStream_678908a4):
         """
         ...
 
+    @ResourceName.setter
+    def ResourceName(self, value: str) -> None:
+        ...
     @property
     def Uri(self) -> str:
         """
@@ -52,4 +58,7 @@ class XTempFile(XSeekable_79540954, XStream_678908a4):
         """
         ...
 
+    @Uri.setter
+    def Uri(self, value: str) -> None:
+        ...
 

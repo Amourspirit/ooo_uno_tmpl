@@ -46,6 +46,10 @@ class PreviewView(Controller_a5330b37, XWindow_713b0924, XPropertySet_bc180bfa, 
         This is the drawing page that is currently visible.
         """
         ...
+
+    @CurrentPage.setter
+    def CurrentPage(self, value: 'XDrawPage_b07a0b57') -> None:
+        ...
     @property
     def VisibleArea(self) -> 'Rectangle_84b109e9':
         """
@@ -53,4 +57,7 @@ class PreviewView(Controller_a5330b37, XWindow_713b0924, XPropertySet_bc180bfa, 
         """
         ...
 
+    @VisibleArea.setter
+    def VisibleArea(self, value: 'Rectangle_84b109e9') -> None:
+        ...
 

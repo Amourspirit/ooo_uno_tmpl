@@ -37,4 +37,3 @@ class UIElementFactory(XUIElementFactory_d0280c7e):
     """
     ...
 
-

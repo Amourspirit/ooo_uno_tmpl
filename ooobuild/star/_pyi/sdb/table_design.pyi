@@ -40,4 +40,3 @@ class TableDesign(XController_b00e0b8f, XInitialization_d46c0cca):
     """
     ...
 
-

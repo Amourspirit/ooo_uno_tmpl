@@ -32,4 +32,3 @@ class XMLSignature(XInitialization_d46c0cca, XXMLSignature_aa50e23):
     """
     ...
 
-

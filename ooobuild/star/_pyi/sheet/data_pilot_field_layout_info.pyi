@@ -51,6 +51,9 @@ class DataPilotFieldLayoutInfo(object):
         """
         ...
 
+    @LayoutMode.setter
+    def LayoutMode(self, value: int) -> None:
+        ...
 
     @property
     def AddEmptyLines(self) -> bool:
@@ -59,4 +62,7 @@ class DataPilotFieldLayoutInfo(object):
         """
         ...
 
+    @AddEmptyLines.setter
+    def AddEmptyLines(self, value: bool) -> None:
+        ...
 

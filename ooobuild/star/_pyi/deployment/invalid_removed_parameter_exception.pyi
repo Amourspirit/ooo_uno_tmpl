@@ -58,6 +58,9 @@ class InvalidRemovedParameterException(Exception_85530a09):
         """
         ...
 
+    @PreviousValue.setter
+    def PreviousValue(self, value: bool) -> None:
+        ...
     @property
     def Extension(self) -> XPackage_cb1f0c4d:
         """
@@ -67,6 +70,9 @@ class InvalidRemovedParameterException(Exception_85530a09):
         """
         ...
 
+    @Extension.setter
+    def Extension(self, value: XPackage_cb1f0c4d) -> None:
+        ...
 
 __all__ = ['InvalidRemovedParameterException']
 

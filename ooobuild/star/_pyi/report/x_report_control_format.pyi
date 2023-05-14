@@ -50,6 +50,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @CharAutoKerning.setter
+    def CharAutoKerning(self, value: bool) -> None:
+        ...
     @property
     def CharCaseMap(self) -> int:
         """
@@ -57,6 +60,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @CharCaseMap.setter
+    def CharCaseMap(self, value: int) -> None:
+        ...
     @property
     def CharColor(self) -> 'Color_68e908c5':
         """
@@ -64,6 +70,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @CharColor.setter
+    def CharColor(self, value: 'Color_68e908c5') -> None:
+        ...
     @property
     def CharCombineIsOn(self) -> bool:
         """
@@ -73,6 +82,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @CharCombineIsOn.setter
+    def CharCombineIsOn(self, value: bool) -> None:
+        ...
     @property
     def CharCombinePrefix(self) -> str:
         """
@@ -82,6 +94,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @CharCombinePrefix.setter
+    def CharCombinePrefix(self, value: str) -> None:
+        ...
     @property
     def CharCombineSuffix(self) -> str:
         """
@@ -91,6 +106,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @CharCombineSuffix.setter
+    def CharCombineSuffix(self, value: str) -> None:
+        ...
     @property
     def CharContoured(self) -> bool:
         """
@@ -98,6 +116,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @CharContoured.setter
+    def CharContoured(self, value: bool) -> None:
+        ...
     @property
     def CharEmphasis(self) -> int:
         """
@@ -105,6 +126,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @CharEmphasis.setter
+    def CharEmphasis(self, value: int) -> None:
+        ...
     @property
     def CharEscapement(self) -> int:
         """
@@ -114,6 +138,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @CharEscapement.setter
+    def CharEscapement(self, value: int) -> None:
+        ...
     @property
     def CharEscapementHeight(self) -> int:
         """
@@ -123,6 +150,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @CharEscapementHeight.setter
+    def CharEscapementHeight(self, value: int) -> None:
+        ...
     @property
     def CharFlash(self) -> bool:
         """
@@ -130,6 +160,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @CharFlash.setter
+    def CharFlash(self, value: bool) -> None:
+        ...
     @property
     def CharFontCharSet(self) -> int:
         """
@@ -137,6 +170,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @CharFontCharSet.setter
+    def CharFontCharSet(self, value: int) -> None:
+        ...
     @property
     def CharFontCharSetAsian(self) -> int:
         """
@@ -144,6 +180,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @CharFontCharSetAsian.setter
+    def CharFontCharSetAsian(self, value: int) -> None:
+        ...
     @property
     def CharFontCharSetComplex(self) -> int:
         """
@@ -151,6 +190,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @CharFontCharSetComplex.setter
+    def CharFontCharSetComplex(self, value: int) -> None:
+        ...
     @property
     def CharFontFamily(self) -> int:
         """
@@ -158,6 +200,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @CharFontFamily.setter
+    def CharFontFamily(self, value: int) -> None:
+        ...
     @property
     def CharFontFamilyAsian(self) -> int:
         """
@@ -165,6 +210,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @CharFontFamilyAsian.setter
+    def CharFontFamilyAsian(self, value: int) -> None:
+        ...
     @property
     def CharFontFamilyComplex(self) -> int:
         """
@@ -172,6 +220,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @CharFontFamilyComplex.setter
+    def CharFontFamilyComplex(self, value: int) -> None:
+        ...
     @property
     def CharFontName(self) -> str:
         """
@@ -181,6 +232,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @CharFontName.setter
+    def CharFontName(self, value: str) -> None:
+        ...
     @property
     def CharFontNameAsian(self) -> str:
         """
@@ -190,6 +244,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @CharFontNameAsian.setter
+    def CharFontNameAsian(self, value: str) -> None:
+        ...
     @property
     def CharFontNameComplex(self) -> str:
         """
@@ -199,6 +256,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @CharFontNameComplex.setter
+    def CharFontNameComplex(self, value: str) -> None:
+        ...
     @property
     def CharFontPitch(self) -> int:
         """
@@ -206,6 +266,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @CharFontPitch.setter
+    def CharFontPitch(self, value: int) -> None:
+        ...
     @property
     def CharFontPitchAsian(self) -> int:
         """
@@ -213,6 +276,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @CharFontPitchAsian.setter
+    def CharFontPitchAsian(self, value: int) -> None:
+        ...
     @property
     def CharFontPitchComplex(self) -> int:
         """
@@ -220,6 +286,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @CharFontPitchComplex.setter
+    def CharFontPitchComplex(self, value: int) -> None:
+        ...
     @property
     def CharFontStyleName(self) -> str:
         """
@@ -229,6 +298,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @CharFontStyleName.setter
+    def CharFontStyleName(self, value: str) -> None:
+        ...
     @property
     def CharFontStyleNameAsian(self) -> str:
         """
@@ -238,6 +310,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @CharFontStyleNameAsian.setter
+    def CharFontStyleNameAsian(self, value: str) -> None:
+        ...
     @property
     def CharFontStyleNameComplex(self) -> str:
         """
@@ -247,6 +322,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @CharFontStyleNameComplex.setter
+    def CharFontStyleNameComplex(self, value: str) -> None:
+        ...
     @property
     def CharHeight(self) -> float:
         """
@@ -254,6 +332,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @CharHeight.setter
+    def CharHeight(self, value: float) -> None:
+        ...
     @property
     def CharHeightAsian(self) -> float:
         """
@@ -261,6 +342,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @CharHeightAsian.setter
+    def CharHeightAsian(self, value: float) -> None:
+        ...
     @property
     def CharHeightComplex(self) -> float:
         """
@@ -268,6 +352,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @CharHeightComplex.setter
+    def CharHeightComplex(self, value: float) -> None:
+        ...
     @property
     def CharHidden(self) -> bool:
         """
@@ -279,6 +366,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @CharHidden.setter
+    def CharHidden(self, value: bool) -> None:
+        ...
     @property
     def CharKerning(self) -> int:
         """
@@ -286,6 +376,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @CharKerning.setter
+    def CharKerning(self, value: int) -> None:
+        ...
     @property
     def CharLocale(self) -> 'Locale_70d308fa':
         """
@@ -293,6 +386,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @CharLocale.setter
+    def CharLocale(self, value: 'Locale_70d308fa') -> None:
+        ...
     @property
     def CharLocaleAsian(self) -> 'Locale_70d308fa':
         """
@@ -300,6 +396,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @CharLocaleAsian.setter
+    def CharLocaleAsian(self, value: 'Locale_70d308fa') -> None:
+        ...
     @property
     def CharLocaleComplex(self) -> 'Locale_70d308fa':
         """
@@ -307,6 +406,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @CharLocaleComplex.setter
+    def CharLocaleComplex(self, value: 'Locale_70d308fa') -> None:
+        ...
     @property
     def CharPosture(self) -> 'FontSlant_849509ed':
         """
@@ -314,6 +416,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @CharPosture.setter
+    def CharPosture(self, value: 'FontSlant_849509ed') -> None:
+        ...
     @property
     def CharPostureAsian(self) -> 'FontSlant_849509ed':
         """
@@ -321,6 +426,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @CharPostureAsian.setter
+    def CharPostureAsian(self, value: 'FontSlant_849509ed') -> None:
+        ...
     @property
     def CharPostureComplex(self) -> 'FontSlant_849509ed':
         """
@@ -328,6 +436,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @CharPostureComplex.setter
+    def CharPostureComplex(self, value: 'FontSlant_849509ed') -> None:
+        ...
     @property
     def CharRelief(self) -> int:
         """
@@ -335,6 +446,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @CharRelief.setter
+    def CharRelief(self, value: int) -> None:
+        ...
     @property
     def CharRotation(self) -> int:
         """
@@ -344,6 +458,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @CharRotation.setter
+    def CharRotation(self, value: int) -> None:
+        ...
     @property
     def CharScaleWidth(self) -> int:
         """
@@ -353,6 +470,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @CharScaleWidth.setter
+    def CharScaleWidth(self, value: int) -> None:
+        ...
     @property
     def CharShadowed(self) -> bool:
         """
@@ -360,6 +480,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @CharShadowed.setter
+    def CharShadowed(self, value: bool) -> None:
+        ...
     @property
     def CharStrikeout(self) -> int:
         """
@@ -367,6 +490,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @CharStrikeout.setter
+    def CharStrikeout(self, value: int) -> None:
+        ...
     @property
     def CharUnderline(self) -> int:
         """
@@ -374,6 +500,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @CharUnderline.setter
+    def CharUnderline(self, value: int) -> None:
+        ...
     @property
     def CharUnderlineColor(self) -> 'Color_68e908c5':
         """
@@ -381,6 +510,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @CharUnderlineColor.setter
+    def CharUnderlineColor(self, value: 'Color_68e908c5') -> None:
+        ...
     @property
     def CharWeight(self) -> float:
         """
@@ -388,6 +520,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @CharWeight.setter
+    def CharWeight(self, value: float) -> None:
+        ...
     @property
     def CharWeightAsian(self) -> float:
         """
@@ -395,6 +530,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @CharWeightAsian.setter
+    def CharWeightAsian(self, value: float) -> None:
+        ...
     @property
     def CharWeightComplex(self) -> float:
         """
@@ -402,6 +540,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @CharWeightComplex.setter
+    def CharWeightComplex(self, value: float) -> None:
+        ...
     @property
     def CharWordMode(self) -> bool:
         """
@@ -409,6 +550,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @CharWordMode.setter
+    def CharWordMode(self, value: bool) -> None:
+        ...
     @property
     def ControlBackground(self) -> 'Color_68e908c5':
         """
@@ -416,6 +560,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @ControlBackground.setter
+    def ControlBackground(self, value: 'Color_68e908c5') -> None:
+        ...
     @property
     def ControlBackgroundTransparent(self) -> bool:
         """
@@ -423,6 +570,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @ControlBackgroundTransparent.setter
+    def ControlBackgroundTransparent(self, value: bool) -> None:
+        ...
     @property
     def ControlTextEmphasis(self) -> int:
         """
@@ -430,6 +580,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @ControlTextEmphasis.setter
+    def ControlTextEmphasis(self, value: int) -> None:
+        ...
     @property
     def FontDescriptor(self) -> 'FontDescriptor_bc110c0a':
         """
@@ -437,6 +590,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @FontDescriptor.setter
+    def FontDescriptor(self, value: 'FontDescriptor_bc110c0a') -> None:
+        ...
     @property
     def FontDescriptorAsian(self) -> 'FontDescriptor_bc110c0a':
         """
@@ -444,6 +600,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @FontDescriptorAsian.setter
+    def FontDescriptorAsian(self, value: 'FontDescriptor_bc110c0a') -> None:
+        ...
     @property
     def FontDescriptorComplex(self) -> 'FontDescriptor_bc110c0a':
         """
@@ -451,6 +610,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @FontDescriptorComplex.setter
+    def FontDescriptorComplex(self, value: 'FontDescriptor_bc110c0a') -> None:
+        ...
     @property
     def HyperLinkName(self) -> str:
         """
@@ -458,6 +620,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @HyperLinkName.setter
+    def HyperLinkName(self, value: str) -> None:
+        ...
     @property
     def HyperLinkTarget(self) -> str:
         """
@@ -465,6 +630,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @HyperLinkTarget.setter
+    def HyperLinkTarget(self, value: str) -> None:
+        ...
     @property
     def HyperLinkURL(self) -> str:
         """
@@ -472,6 +640,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @HyperLinkURL.setter
+    def HyperLinkURL(self, value: str) -> None:
+        ...
     @property
     def ParaAdjust(self) -> int:
         """
@@ -479,6 +650,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @ParaAdjust.setter
+    def ParaAdjust(self, value: int) -> None:
+        ...
     @property
     def UnvisitedCharStyleName(self) -> str:
         """
@@ -486,6 +660,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @UnvisitedCharStyleName.setter
+    def UnvisitedCharStyleName(self, value: str) -> None:
+        ...
     @property
     def VerticalAlign(self) -> 'VerticalAlignment_8d0e12':
         """
@@ -493,6 +670,9 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @VerticalAlign.setter
+    def VerticalAlign(self, value: 'VerticalAlignment_8d0e12') -> None:
+        ...
     @property
     def VisitedCharStyleName(self) -> str:
         """
@@ -500,4 +680,7 @@ class XReportControlFormat(ABC):
         """
         ...
 
+    @VisitedCharStyleName.setter
+    def VisitedCharStyleName(self, value: str) -> None:
+        ...
 

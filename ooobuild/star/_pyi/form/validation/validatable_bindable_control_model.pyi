@@ -36,4 +36,3 @@ class ValidatableBindableControlModel(BindableControlModel_9a1111a8, Validatable
     """
     ...
 
-

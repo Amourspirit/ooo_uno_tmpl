@@ -39,4 +39,3 @@ class WindowContentFactory(XSingleComponentFactory_46cc0fef):
     """
     ...
 
-

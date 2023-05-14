@@ -53,6 +53,9 @@ class GetPropertyTolerantResult(object):
         """
         ...
 
+    @Result.setter
+    def Result(self, value: int) -> None:
+        ...
 
     @property
     def State(self) -> PropertyState_c97b0c77:
@@ -63,6 +66,9 @@ class GetPropertyTolerantResult(object):
         """
         ...
 
+    @State.setter
+    def State(self, value: PropertyState_c97b0c77) -> None:
+        ...
 
     @property
     def Value(self) -> object:
@@ -73,4 +79,7 @@ class GetPropertyTolerantResult(object):
         """
         ...
 
+    @Value.setter
+    def Value(self, value: object) -> None:
+        ...
 

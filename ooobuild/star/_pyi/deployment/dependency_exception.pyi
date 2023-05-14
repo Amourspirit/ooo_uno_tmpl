@@ -63,6 +63,9 @@ class DependencyException(Exception_85530a09):
         """
         ...
 
+    @UnsatisfiedDependencies.setter
+    def UnsatisfiedDependencies(self, value: typing.Tuple[XElement_a33d0ae9, ...]) -> None:
+        ...
 
 __all__ = ['DependencyException']
 

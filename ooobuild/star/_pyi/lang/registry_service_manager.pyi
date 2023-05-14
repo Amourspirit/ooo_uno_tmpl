@@ -42,4 +42,7 @@ class RegistryServiceManager(ServiceManager_c7920c36, XInitialization_d46c0cca):
         """
         ...
 
+    @Registry.setter
+    def Registry(self, value: 'XSimpleRegistry_10150e9c') -> None:
+        ...
 

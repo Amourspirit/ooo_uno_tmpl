@@ -55,6 +55,9 @@ class TransferInfo(object):
         """
         ...
 
+    @MoveData.setter
+    def MoveData(self, value: bool) -> None:
+        ...
 
     @property
     def SourceURL(self) -> str:
@@ -65,6 +68,9 @@ class TransferInfo(object):
         """
         ...
 
+    @SourceURL.setter
+    def SourceURL(self, value: str) -> None:
+        ...
 
     @property
     def NewTitle(self) -> str:
@@ -75,6 +81,9 @@ class TransferInfo(object):
         """
         ...
 
+    @NewTitle.setter
+    def NewTitle(self, value: str) -> None:
+        ...
 
     @property
     def NameClash(self) -> int:
@@ -89,4 +98,7 @@ class TransferInfo(object):
         """
         ...
 
+    @NameClash.setter
+    def NameClash(self, value: int) -> None:
+        ...
 

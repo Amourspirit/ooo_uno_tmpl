@@ -40,4 +40,3 @@ class DocumentAcceleratorConfiguration(XAcceleratorConfiguration_46580ffb):
         """
         ...
 
-

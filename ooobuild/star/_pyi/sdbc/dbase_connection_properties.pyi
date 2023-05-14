@@ -40,4 +40,7 @@ class DBASEConnectionProperties(FILEConnectionProperties_4e7f1001):
         """
         ...
 
+    @ShowDeleted.setter
+    def ShowDeleted(self, value: bool) -> None:
+        ...
 

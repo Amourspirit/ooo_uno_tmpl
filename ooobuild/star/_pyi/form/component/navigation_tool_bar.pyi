@@ -40,17 +40,29 @@ class NavigationToolBar(FormControlModel_e2990d22):
         Allowed values are
         """
         ...
+
+    @Border.setter
+    def Border(self, value: int) -> None:
+        ...
     @property
     def Enabled(self) -> bool:
         """
         determines whether the control is enabled or disabled.
         """
         ...
+
+    @Enabled.setter
+    def Enabled(self, value: bool) -> None:
+        ...
     @property
     def FontDescriptor(self) -> 'FontDescriptor_bc110c0a':
         """
         contains the font attributes for the text in the control
         """
+        ...
+
+    @FontDescriptor.setter
+    def FontDescriptor(self, value: 'FontDescriptor_bc110c0a') -> None:
         ...
     @property
     def FontEmphasisMark(self) -> int:
@@ -60,6 +72,10 @@ class NavigationToolBar(FormControlModel_e2990d22):
         The value must be one of the com.sun.star.text.FontEmphasis constants.
         """
         ...
+
+    @FontEmphasisMark.setter
+    def FontEmphasisMark(self, value: int) -> None:
+        ...
     @property
     def FontRelief(self) -> int:
         """
@@ -67,6 +83,10 @@ class NavigationToolBar(FormControlModel_e2990d22):
         
         The value must be one of the com.sun.star.text.FontRelief constants.
         """
+        ...
+
+    @FontRelief.setter
+    def FontRelief(self, value: int) -> None:
         ...
     @property
     def IconSize(self) -> int:
@@ -76,6 +96,10 @@ class NavigationToolBar(FormControlModel_e2990d22):
         At least the following values are to be supported:
         """
         ...
+
+    @IconSize.setter
+    def IconSize(self, value: int) -> None:
+        ...
     @property
     def RepeatDelay(self) -> int:
         """
@@ -84,11 +108,19 @@ class NavigationToolBar(FormControlModel_e2990d22):
         Some buttons of a NavigationToolBar may show repeating behavior, e.g. may be repeatedly triggered when the user keeps the mouse pressed over such a button.The delay between two such triggers (in milliseconds) is specified with this property.
         """
         ...
+
+    @RepeatDelay.setter
+    def RepeatDelay(self, value: int) -> None:
+        ...
     @property
     def ShowFilterSort(self) -> bool:
         """
         determines whether the control should provide functionality for filtering and sorting the parent form
         """
+        ...
+
+    @ShowFilterSort.setter
+    def ShowFilterSort(self, value: bool) -> None:
         ...
     @property
     def ShowNavigation(self) -> bool:
@@ -96,11 +128,19 @@ class NavigationToolBar(FormControlModel_e2990d22):
         determines whether the control should provide functionality for navigating the parent form
         """
         ...
+
+    @ShowNavigation.setter
+    def ShowNavigation(self, value: bool) -> None:
+        ...
     @property
     def ShowPosition(self) -> bool:
         """
         determines whether the control should provide functionality for positioning the parent form
         """
+        ...
+
+    @ShowPosition.setter
+    def ShowPosition(self, value: bool) -> None:
         ...
     @property
     def ShowRecordActions(self) -> bool:
@@ -108,11 +148,19 @@ class NavigationToolBar(FormControlModel_e2990d22):
         determines whether the control should provide functionality for acting on the current record of the parent form
         """
         ...
+
+    @ShowRecordActions.setter
+    def ShowRecordActions(self, value: bool) -> None:
+        ...
     @property
     def TextColor(self) -> int:
         """
         specifies the text color (as RGB value) of the control.
         """
+        ...
+
+    @TextColor.setter
+    def TextColor(self, value: int) -> None:
         ...
     @property
     def TextLineColor(self) -> int:
@@ -123,4 +171,7 @@ class NavigationToolBar(FormControlModel_e2990d22):
         """
         ...
 
+    @TextLineColor.setter
+    def TextLineColor(self, value: int) -> None:
+        ...
 

@@ -39,4 +39,3 @@ class BrowseNodeFactory(XBrowseNodeFactory_8e541185):
     """
     ...
 
-

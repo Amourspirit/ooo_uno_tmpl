@@ -90,6 +90,9 @@ class XReportEngine(XPropertySet_bc180bfa, XComponent_98dc0ab5):
         """
         ...
 
+    @ActiveConnection.setter
+    def ActiveConnection(self, value: 'XConnection_a36a0b0c') -> None:
+        ...
     @property
     def MaxRows(self) -> int:
         """
@@ -99,6 +102,9 @@ class XReportEngine(XPropertySet_bc180bfa, XComponent_98dc0ab5):
         """
         ...
 
+    @MaxRows.setter
+    def MaxRows(self, value: int) -> None:
+        ...
     @property
     def ReportDefinition(self) -> 'XReportDefinition_ec30e81':
         """
@@ -106,6 +112,9 @@ class XReportEngine(XPropertySet_bc180bfa, XComponent_98dc0ab5):
         """
         ...
 
+    @ReportDefinition.setter
+    def ReportDefinition(self, value: 'XReportDefinition_ec30e81') -> None:
+        ...
     @property
     def StatusIndicator(self) -> 'XStatusIndicator_e2d00d34':
         """
@@ -113,4 +122,7 @@ class XReportEngine(XPropertySet_bc180bfa, XComponent_98dc0ab5):
         """
         ...
 
+    @StatusIndicator.setter
+    def StatusIndicator(self, value: 'XStatusIndicator_e2d00d34') -> None:
+        ...
 

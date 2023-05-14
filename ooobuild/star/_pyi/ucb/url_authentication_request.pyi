@@ -68,6 +68,9 @@ class URLAuthenticationRequest(AuthenticationRequest_1b520eeb):
         """
         ...
 
+    @URL.setter
+    def URL(self, value: str) -> None:
+        ...
 
 __all__ = ['URLAuthenticationRequest']
 

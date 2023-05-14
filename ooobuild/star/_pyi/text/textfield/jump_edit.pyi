@@ -35,11 +35,19 @@ class JumpEdit(TextField_90260a56):
         determines a hint that is displayed at the user interface as tip.
         """
         ...
+
+    @Hint.setter
+    def Hint(self, value: str) -> None:
+        ...
     @property
     def PlaceHolder(self) -> str:
         """
         determines the text of the place holder.
         """
+        ...
+
+    @PlaceHolder.setter
+    def PlaceHolder(self, value: str) -> None:
         ...
     @property
     def PlaceHolderType(self) -> int:
@@ -48,4 +56,7 @@ class JumpEdit(TextField_90260a56):
         """
         ...
 
+    @PlaceHolderType.setter
+    def PlaceHolderType(self, value: int) -> None:
+        ...
 

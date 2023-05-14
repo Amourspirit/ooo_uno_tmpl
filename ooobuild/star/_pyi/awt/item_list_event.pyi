@@ -57,6 +57,9 @@ class ItemListEvent(EventObject_a3d70b03):
         """
         ...
 
+    @ItemPosition.setter
+    def ItemPosition(self, value: int) -> None:
+        ...
 
     @property
     def ItemText(self) -> object:
@@ -67,6 +70,9 @@ class ItemListEvent(EventObject_a3d70b03):
         """
         ...
 
+    @ItemText.setter
+    def ItemText(self, value: object) -> None:
+        ...
 
     @property
     def ItemImageURL(self) -> object:
@@ -77,4 +83,7 @@ class ItemListEvent(EventObject_a3d70b03):
         """
         ...
 
+    @ItemImageURL.setter
+    def ItemImageURL(self, value: object) -> None:
+        ...
 

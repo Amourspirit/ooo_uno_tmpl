@@ -38,4 +38,3 @@ class AccessibleTextDocumentView(XAccessibleComponent_b2f21269, XAccessibleConte
     """
     ...
 
-

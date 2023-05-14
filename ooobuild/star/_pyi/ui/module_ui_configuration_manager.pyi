@@ -50,4 +50,3 @@ class ModuleUIConfigurationManager(XModuleUIConfigurationManager2_98c61187):
         """
         ...
 
-

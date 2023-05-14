@@ -60,6 +60,9 @@ class NameClashResolveRequest(ClassifiedInteractionRequest_9f72121b):
         """
         ...
 
+    @TargetFolderURL.setter
+    def TargetFolderURL(self, value: str) -> None:
+        ...
     @property
     def ClashingName(self) -> str:
         """
@@ -67,6 +70,9 @@ class NameClashResolveRequest(ClassifiedInteractionRequest_9f72121b):
         """
         ...
 
+    @ClashingName.setter
+    def ClashingName(self, value: str) -> None:
+        ...
     @property
     def ProposedNewName(self) -> str:
         """
@@ -76,6 +82,9 @@ class NameClashResolveRequest(ClassifiedInteractionRequest_9f72121b):
         """
         ...
 
+    @ProposedNewName.setter
+    def ProposedNewName(self, value: str) -> None:
+        ...
 
 __all__ = ['NameClashResolveRequest']
 

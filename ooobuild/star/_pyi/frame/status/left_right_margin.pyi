@@ -55,6 +55,9 @@ class LeftRightMargin(object):
         """
         ...
 
+    @Left.setter
+    def Left(self, value: int) -> None:
+        ...
 
     @property
     def Right(self) -> int:
@@ -63,4 +66,7 @@ class LeftRightMargin(object):
         """
         ...
 
+    @Right.setter
+    def Right(self, value: int) -> None:
+        ...
 

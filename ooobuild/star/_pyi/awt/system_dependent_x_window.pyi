@@ -57,6 +57,9 @@ class SystemDependentXWindow(object):
         """
         ...
 
+    @WindowHandle.setter
+    def WindowHandle(self, value: int) -> None:
+        ...
 
     @property
     def DisplayPointer(self) -> int:
@@ -65,4 +68,7 @@ class SystemDependentXWindow(object):
         """
         ...
 
+    @DisplayPointer.setter
+    def DisplayPointer(self, value: int) -> None:
+        ...
 

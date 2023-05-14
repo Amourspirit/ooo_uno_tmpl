@@ -58,6 +58,9 @@ class InteractiveAppException(ClassifiedInteractionRequest_9f72121b):
         """
         ...
 
+    @Code.setter
+    def Code(self, value: int) -> None:
+        ...
 
 __all__ = ['InteractiveAppException']
 

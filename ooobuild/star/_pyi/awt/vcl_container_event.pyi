@@ -55,4 +55,7 @@ class VclContainerEvent(EventObject_a3d70b03):
         """
         ...
 
+    @Child.setter
+    def Child(self, value: XInterface_8f010a43) -> None:
+        ...
 

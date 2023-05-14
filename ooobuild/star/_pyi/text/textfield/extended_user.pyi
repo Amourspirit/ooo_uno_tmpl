@@ -35,6 +35,10 @@ class ExtendedUser(TextField_90260a56):
         contains the content.
         """
         ...
+
+    @Content.setter
+    def Content(self, value: str) -> None:
+        ...
     @property
     def CurrentPresentation(self) -> str:
         """
@@ -43,11 +47,19 @@ class ExtendedUser(TextField_90260a56):
         This property is especially useful for import/export purposes.
         """
         ...
+
+    @CurrentPresentation.setter
+    def CurrentPresentation(self, value: str) -> None:
+        ...
     @property
     def IsFixed(self) -> bool:
         """
         If this flag is set to FALSE the content is regularly updated.
         """
+        ...
+
+    @IsFixed.setter
+    def IsFixed(self, value: bool) -> None:
         ...
     @property
     def UserDataType(self) -> int:
@@ -56,4 +68,7 @@ class ExtendedUser(TextField_90260a56):
         """
         ...
 
+    @UserDataType.setter
+    def UserDataType(self, value: int) -> None:
+        ...
 

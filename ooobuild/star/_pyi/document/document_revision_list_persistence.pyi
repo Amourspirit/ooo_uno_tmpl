@@ -31,4 +31,3 @@ class DocumentRevisionListPersistence(XDocumentRevisionListPersistence_4207156e)
     """
     ...
 
-

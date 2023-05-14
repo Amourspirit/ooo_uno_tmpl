@@ -34,4 +34,3 @@ class RegressionEquation(XPropertySet_bc180bfa):
     """
     ...
 
-

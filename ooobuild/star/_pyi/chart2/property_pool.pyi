@@ -31,4 +31,3 @@ class PropertyPool(Style_7336094a, XDefaultsSupplier_ffc40e1d):
     """
     ...
 
-

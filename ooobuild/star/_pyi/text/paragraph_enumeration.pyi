@@ -31,4 +31,3 @@ class ParagraphEnumeration(XEnumeration_f2180daa):
     """
     ...
 
-

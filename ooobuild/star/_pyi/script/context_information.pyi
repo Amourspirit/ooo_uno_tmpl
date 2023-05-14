@@ -60,6 +60,9 @@ class ContextInformation(object):
         """
         ...
 
+    @LocalVariableNames.setter
+    def LocalVariableNames(self, value: typing.Tuple[str, ...]) -> None:
+        ...
 
     @property
     def Name(self) -> str:
@@ -70,6 +73,9 @@ class ContextInformation(object):
         """
         ...
 
+    @Name.setter
+    def Name(self, value: str) -> None:
+        ...
 
     @property
     def SourceCode(self) -> str:
@@ -80,6 +86,9 @@ class ContextInformation(object):
         """
         ...
 
+    @SourceCode.setter
+    def SourceCode(self, value: str) -> None:
+        ...
 
     @property
     def StartLine(self) -> int:
@@ -90,6 +99,9 @@ class ContextInformation(object):
         """
         ...
 
+    @StartLine.setter
+    def StartLine(self, value: int) -> None:
+        ...
 
     @property
     def StartColumn(self) -> int:
@@ -98,6 +110,9 @@ class ContextInformation(object):
         """
         ...
 
+    @StartColumn.setter
+    def StartColumn(self, value: int) -> None:
+        ...
 
     @property
     def EndLine(self) -> int:
@@ -106,6 +121,9 @@ class ContextInformation(object):
         """
         ...
 
+    @EndLine.setter
+    def EndLine(self, value: int) -> None:
+        ...
 
     @property
     def EndColumn(self) -> int:
@@ -114,4 +132,7 @@ class ContextInformation(object):
         """
         ...
 
+    @EndColumn.setter
+    def EndColumn(self, value: int) -> None:
+        ...
 

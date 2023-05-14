@@ -40,6 +40,9 @@ class XPathSettings(XPropertySet_bc180bfa):
         """
         ...
 
+    @Addin.setter
+    def Addin(self, value: str) -> None:
+        ...
     @property
     def AutoCorrect(self) -> str:
         """
@@ -49,6 +52,9 @@ class XPathSettings(XPropertySet_bc180bfa):
         """
         ...
 
+    @AutoCorrect.setter
+    def AutoCorrect(self, value: str) -> None:
+        ...
     @property
     def AutoText(self) -> str:
         """
@@ -58,6 +64,9 @@ class XPathSettings(XPropertySet_bc180bfa):
         """
         ...
 
+    @AutoText.setter
+    def AutoText(self, value: str) -> None:
+        ...
     @property
     def Backup(self) -> str:
         """
@@ -65,18 +74,27 @@ class XPathSettings(XPropertySet_bc180bfa):
         """
         ...
 
+    @Backup.setter
+    def Backup(self, value: str) -> None:
+        ...
     @property
     def BasePathShareLayer(self) -> str:
         """
         """
         ...
 
+    @BasePathShareLayer.setter
+    def BasePathShareLayer(self, value: str) -> None:
+        ...
     @property
     def BasePathUserLayer(self) -> str:
         """
         """
         ...
 
+    @BasePathUserLayer.setter
+    def BasePathUserLayer(self, value: str) -> None:
+        ...
     @property
     def Basic(self) -> str:
         """
@@ -86,6 +104,9 @@ class XPathSettings(XPropertySet_bc180bfa):
         """
         ...
 
+    @Basic.setter
+    def Basic(self, value: str) -> None:
+        ...
     @property
     def Bitmap(self) -> str:
         """
@@ -93,6 +114,9 @@ class XPathSettings(XPropertySet_bc180bfa):
         """
         ...
 
+    @Bitmap.setter
+    def Bitmap(self, value: str) -> None:
+        ...
     @property
     def Config(self) -> str:
         """
@@ -102,6 +126,9 @@ class XPathSettings(XPropertySet_bc180bfa):
         """
         ...
 
+    @Config.setter
+    def Config(self, value: str) -> None:
+        ...
     @property
     def Dictionary(self) -> str:
         """
@@ -109,6 +136,9 @@ class XPathSettings(XPropertySet_bc180bfa):
         """
         ...
 
+    @Dictionary.setter
+    def Dictionary(self, value: str) -> None:
+        ...
     @property
     def Favorite(self) -> str:
         """
@@ -116,6 +146,9 @@ class XPathSettings(XPropertySet_bc180bfa):
         """
         ...
 
+    @Favorite.setter
+    def Favorite(self, value: str) -> None:
+        ...
     @property
     def Filter(self) -> str:
         """
@@ -123,6 +156,9 @@ class XPathSettings(XPropertySet_bc180bfa):
         """
         ...
 
+    @Filter.setter
+    def Filter(self, value: str) -> None:
+        ...
     @property
     def Gallery(self) -> str:
         """
@@ -132,6 +168,9 @@ class XPathSettings(XPropertySet_bc180bfa):
         """
         ...
 
+    @Gallery.setter
+    def Gallery(self, value: str) -> None:
+        ...
     @property
     def Graphic(self) -> str:
         """
@@ -139,6 +178,9 @@ class XPathSettings(XPropertySet_bc180bfa):
         """
         ...
 
+    @Graphic.setter
+    def Graphic(self, value: str) -> None:
+        ...
     @property
     def Help(self) -> str:
         """
@@ -146,6 +188,9 @@ class XPathSettings(XPropertySet_bc180bfa):
         """
         ...
 
+    @Help.setter
+    def Help(self, value: str) -> None:
+        ...
     @property
     def Linguistic(self) -> str:
         """
@@ -153,6 +198,9 @@ class XPathSettings(XPropertySet_bc180bfa):
         """
         ...
 
+    @Linguistic.setter
+    def Linguistic(self, value: str) -> None:
+        ...
     @property
     def Module(self) -> str:
         """
@@ -160,6 +208,9 @@ class XPathSettings(XPropertySet_bc180bfa):
         """
         ...
 
+    @Module.setter
+    def Module(self, value: str) -> None:
+        ...
     @property
     def Palette(self) -> str:
         """
@@ -169,6 +220,9 @@ class XPathSettings(XPropertySet_bc180bfa):
         """
         ...
 
+    @Palette.setter
+    def Palette(self, value: str) -> None:
+        ...
     @property
     def Plugin(self) -> str:
         """
@@ -178,6 +232,9 @@ class XPathSettings(XPropertySet_bc180bfa):
         """
         ...
 
+    @Plugin.setter
+    def Plugin(self, value: str) -> None:
+        ...
     @property
     def Storage(self) -> str:
         """
@@ -185,6 +242,9 @@ class XPathSettings(XPropertySet_bc180bfa):
         """
         ...
 
+    @Storage.setter
+    def Storage(self, value: str) -> None:
+        ...
     @property
     def Temp(self) -> str:
         """
@@ -192,6 +252,9 @@ class XPathSettings(XPropertySet_bc180bfa):
         """
         ...
 
+    @Temp.setter
+    def Temp(self, value: str) -> None:
+        ...
     @property
     def Template(self) -> str:
         """
@@ -201,6 +264,9 @@ class XPathSettings(XPropertySet_bc180bfa):
         """
         ...
 
+    @Template.setter
+    def Template(self, value: str) -> None:
+        ...
     @property
     def UIConfig(self) -> str:
         """
@@ -210,6 +276,9 @@ class XPathSettings(XPropertySet_bc180bfa):
         """
         ...
 
+    @UIConfig.setter
+    def UIConfig(self, value: str) -> None:
+        ...
     @property
     def UserConfig(self) -> str:
         """
@@ -217,6 +286,9 @@ class XPathSettings(XPropertySet_bc180bfa):
         """
         ...
 
+    @UserConfig.setter
+    def UserConfig(self, value: str) -> None:
+        ...
     @property
     def UserDictionary(self) -> str:
         """
@@ -224,6 +296,9 @@ class XPathSettings(XPropertySet_bc180bfa):
         """
         ...
 
+    @UserDictionary.setter
+    def UserDictionary(self, value: str) -> None:
+        ...
     @property
     def Work(self) -> str:
         """
@@ -233,4 +308,7 @@ class XPathSettings(XPropertySet_bc180bfa):
         """
         ...
 
+    @Work.setter
+    def Work(self, value: str) -> None:
+        ...
 

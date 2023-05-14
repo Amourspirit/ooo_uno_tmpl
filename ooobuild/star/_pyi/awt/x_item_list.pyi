@@ -159,4 +159,7 @@ class XItemList(ABC):
         """
         ...
 
+    @ItemCount.setter
+    def ItemCount(self, value: int) -> None:
+        ...
 

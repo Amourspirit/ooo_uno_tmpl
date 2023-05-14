@@ -44,4 +44,3 @@ class ErrorMessageDialog(XExecutableDialog_450f0fa1):
         """
         ...
 
-

@@ -70,6 +70,9 @@ class XFormulaOpCodeMapper(ABC):
         """
         ...
 
+    @OpCodeExternal.setter
+    def OpCodeExternal(self, value: int) -> None:
+        ...
     @property
     def OpCodeUnknown(self) -> int:
         """
@@ -79,4 +82,7 @@ class XFormulaOpCodeMapper(ABC):
         """
         ...
 
+    @OpCodeUnknown.setter
+    def OpCodeUnknown(self, value: int) -> None:
+        ...
 

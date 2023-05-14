@@ -53,6 +53,9 @@ class DocumentHeaderField(object):
         """
         ...
 
+    @Name.setter
+    def Name(self, value: str) -> None:
+        ...
 
     @property
     def Value(self) -> str:
@@ -61,4 +64,7 @@ class DocumentHeaderField(object):
         """
         ...
 
+    @Value.setter
+    def Value(self, value: str) -> None:
+        ...
 

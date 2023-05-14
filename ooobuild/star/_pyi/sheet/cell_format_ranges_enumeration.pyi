@@ -31,4 +31,3 @@ class CellFormatRangesEnumeration(XEnumeration_f2180daa):
     """
     ...
 
-

@@ -53,6 +53,9 @@ class DataPilotFieldReference(object):
         """
         ...
 
+    @ReferenceType.setter
+    def ReferenceType(self, value: int) -> None:
+        ...
 
     @property
     def ReferenceField(self) -> str:
@@ -61,6 +64,9 @@ class DataPilotFieldReference(object):
         """
         ...
 
+    @ReferenceField.setter
+    def ReferenceField(self, value: str) -> None:
+        ...
 
     @property
     def ReferenceItemType(self) -> int:
@@ -69,6 +75,9 @@ class DataPilotFieldReference(object):
         """
         ...
 
+    @ReferenceItemType.setter
+    def ReferenceItemType(self, value: int) -> None:
+        ...
 
     @property
     def ReferenceItemName(self) -> str:
@@ -77,4 +86,7 @@ class DataPilotFieldReference(object):
         """
         ...
 
+    @ReferenceItemName.setter
+    def ReferenceItemName(self, value: str) -> None:
+        ...
 

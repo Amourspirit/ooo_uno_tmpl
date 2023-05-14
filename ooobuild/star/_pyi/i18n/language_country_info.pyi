@@ -54,6 +54,9 @@ class LanguageCountryInfo(object):
         """
         ...
 
+    @Language.setter
+    def Language(self, value: str) -> None:
+        ...
 
     @property
     def LanguageDefaultName(self) -> str:
@@ -62,6 +65,9 @@ class LanguageCountryInfo(object):
         """
         ...
 
+    @LanguageDefaultName.setter
+    def LanguageDefaultName(self, value: str) -> None:
+        ...
 
     @property
     def Country(self) -> str:
@@ -70,6 +76,9 @@ class LanguageCountryInfo(object):
         """
         ...
 
+    @Country.setter
+    def Country(self, value: str) -> None:
+        ...
 
     @property
     def CountryDefaultName(self) -> str:
@@ -78,6 +87,9 @@ class LanguageCountryInfo(object):
         """
         ...
 
+    @CountryDefaultName.setter
+    def CountryDefaultName(self, value: str) -> None:
+        ...
 
     @property
     def Variant(self) -> str:
@@ -86,4 +98,7 @@ class LanguageCountryInfo(object):
         """
         ...
 
+    @Variant.setter
+    def Variant(self, value: str) -> None:
+        ...
 

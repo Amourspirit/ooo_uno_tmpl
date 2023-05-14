@@ -58,6 +58,9 @@ class DataPointLabel(object):
         """
         ...
 
+    @ShowNumber.setter
+    def ShowNumber(self, value: bool) -> None:
+        ...
 
     @property
     def ShowNumberInPercent(self) -> bool:
@@ -70,6 +73,9 @@ class DataPointLabel(object):
         """
         ...
 
+    @ShowNumberInPercent.setter
+    def ShowNumberInPercent(self, value: bool) -> None:
+        ...
 
     @property
     def ShowCategoryName(self) -> bool:
@@ -78,6 +84,9 @@ class DataPointLabel(object):
         """
         ...
 
+    @ShowCategoryName.setter
+    def ShowCategoryName(self, value: bool) -> None:
+        ...
 
     @property
     def ShowLegendSymbol(self) -> bool:
@@ -86,6 +95,9 @@ class DataPointLabel(object):
         """
         ...
 
+    @ShowLegendSymbol.setter
+    def ShowLegendSymbol(self, value: bool) -> None:
+        ...
 
     @property
     def ShowCustomLabel(self) -> bool:
@@ -98,6 +110,9 @@ class DataPointLabel(object):
         """
         ...
 
+    @ShowCustomLabel.setter
+    def ShowCustomLabel(self, value: bool) -> None:
+        ...
 
     @property
     def ShowSeriesName(self) -> bool:
@@ -110,4 +125,7 @@ class DataPointLabel(object):
         """
         ...
 
+    @ShowSeriesName.setter
+    def ShowSeriesName(self, value: bool) -> None:
+        ...
 

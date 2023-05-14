@@ -34,4 +34,3 @@ class DispatchProvider(XDispatchProvider_fc690de6, XDispatchProviderInterception
     """
     ...
 
-

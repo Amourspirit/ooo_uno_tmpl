@@ -30,4 +30,3 @@ class FixedText(XFixedText_b1ad0b91):
     """
     ...
 
-

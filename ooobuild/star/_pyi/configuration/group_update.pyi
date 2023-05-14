@@ -34,4 +34,3 @@ class GroupUpdate(GroupAccess_1f8f0edf, XNameReplace_f0900d60):
     """
     ...
 
-

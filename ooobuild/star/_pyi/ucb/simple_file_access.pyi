@@ -31,4 +31,3 @@ class SimpleFileAccess(XSimpleFileAccess3_ebe70d09):
     """
     ...
 
-

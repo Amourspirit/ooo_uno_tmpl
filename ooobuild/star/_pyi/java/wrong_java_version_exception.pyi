@@ -54,6 +54,9 @@ class WrongJavaVersionException(Exception_85530a09):
         """
         ...
 
+    @LowestSupportedVersion.setter
+    def LowestSupportedVersion(self, value: str) -> None:
+        ...
     @property
     def HighestSupportedVersion(self) -> str:
         """
@@ -61,6 +64,9 @@ class WrongJavaVersionException(Exception_85530a09):
         """
         ...
 
+    @HighestSupportedVersion.setter
+    def HighestSupportedVersion(self, value: str) -> None:
+        ...
     @property
     def DetectedVersion(self) -> str:
         """
@@ -68,6 +74,9 @@ class WrongJavaVersionException(Exception_85530a09):
         """
         ...
 
+    @DetectedVersion.setter
+    def DetectedVersion(self, value: str) -> None:
+        ...
 
 __all__ = ['WrongJavaVersionException']
 

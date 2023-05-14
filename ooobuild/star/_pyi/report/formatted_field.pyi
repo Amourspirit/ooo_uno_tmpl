@@ -30,4 +30,3 @@ class FormattedField(XFormattedField_f1e20d86):
     """
     ...
 
-

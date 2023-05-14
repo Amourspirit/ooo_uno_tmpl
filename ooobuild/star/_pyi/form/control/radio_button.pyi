@@ -34,4 +34,3 @@ class RadioButton(UnoControlRadioButton_1b1a0ed2, XBoundControl_bba00bed):
     """
     ...
 
-

@@ -55,6 +55,9 @@ class InsertCommandArgument2(InsertCommandArgument_19550eb9):
         """
         ...
 
+    @MimeType.setter
+    def MimeType(self, value: str) -> None:
+        ...
 
     @property
     def DocumentId(self) -> str:
@@ -63,4 +66,7 @@ class InsertCommandArgument2(InsertCommandArgument_19550eb9):
         """
         ...
 
+    @DocumentId.setter
+    def DocumentId(self, value: str) -> None:
+        ...
 

@@ -37,4 +37,3 @@ class OleBridgeSupplier(XBridgeSupplier_ede00d6e):
     """
     ...
 
-

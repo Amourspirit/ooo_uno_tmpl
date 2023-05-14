@@ -44,6 +44,10 @@ class Shape(Shape_85cc09e5):
         Possible objects are XSpreadsheet and XCell.
         """
         ...
+
+    @Anchor.setter
+    def Anchor(self, value: 'XInterface_8f010a43') -> None:
+        ...
     @property
     def HoriOrientPosition(self) -> int:
         """
@@ -56,6 +60,10 @@ class Shape(Shape_85cc09e5):
         If the underlying table layout direction is right to left the position is the difference of the right top edge of the anchor object and the right top edge of the drawing object.
         """
         ...
+
+    @HoriOrientPosition.setter
+    def HoriOrientPosition(self, value: int) -> None:
+        ...
     @property
     def ResizeWithCell(self) -> bool:
         """
@@ -67,6 +75,10 @@ class Shape(Shape_85cc09e5):
         
             LibreOffice 6.3
         """
+        ...
+
+    @ResizeWithCell.setter
+    def ResizeWithCell(self, value: bool) -> None:
         ...
     @property
     def VertOrientPosition(self) -> int:
@@ -81,4 +93,7 @@ class Shape(Shape_85cc09e5):
         """
         ...
 
+    @VertOrientPosition.setter
+    def VertOrientPosition(self, value: int) -> None:
+        ...
 

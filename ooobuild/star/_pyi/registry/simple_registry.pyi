@@ -35,4 +35,3 @@ class SimpleRegistry(XSimpleRegistry_10150e9c):
     """
     ...
 
-

@@ -41,4 +41,3 @@ class UriReferenceFactory(XUriReferenceFactory_a740e47):
     """
     ...
 
-

@@ -52,6 +52,9 @@ class ContentProviderInfo(object):
         """
         ...
 
+    @ContentProvider.setter
+    def ContentProvider(self, value: XContentProvider_d4150cc0) -> None:
+        ...
 
     @property
     def Scheme(self) -> str:
@@ -60,4 +63,7 @@ class ContentProviderInfo(object):
         """
         ...
 
+    @Scheme.setter
+    def Scheme(self, value: str) -> None:
+        ...
 

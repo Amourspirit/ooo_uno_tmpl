@@ -34,4 +34,3 @@ class LinearRegressionCurve(XRegressionCurve_fa3c0dca):
     """
     ...
 
-

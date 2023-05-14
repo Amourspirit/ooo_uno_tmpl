@@ -84,6 +84,9 @@ class XAnimatedImages(XContainer_d6fb0cc6):
         """
         ...
 
+    @AutoRepeat.setter
+    def AutoRepeat(self, value: bool) -> None:
+        ...
     @property
     def ScaleMode(self) -> int:
         """
@@ -93,6 +96,9 @@ class XAnimatedImages(XContainer_d6fb0cc6):
         """
         ...
 
+    @ScaleMode.setter
+    def ScaleMode(self, value: int) -> None:
+        ...
     @property
     def StepTime(self) -> int:
         """
@@ -102,4 +108,7 @@ class XAnimatedImages(XContainer_d6fb0cc6):
         """
         ...
 
+    @StepTime.setter
+    def StepTime(self, value: int) -> None:
+        ...
 

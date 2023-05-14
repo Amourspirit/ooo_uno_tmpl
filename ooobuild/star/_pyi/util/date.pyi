@@ -54,6 +54,9 @@ class Date(object):
         """
         ...
 
+    @Day.setter
+    def Day(self, value: int) -> None:
+        ...
 
     @property
     def Month(self) -> int:
@@ -62,6 +65,9 @@ class Date(object):
         """
         ...
 
+    @Month.setter
+    def Month(self, value: int) -> None:
+        ...
 
     @property
     def Year(self) -> int:
@@ -70,4 +76,7 @@ class Date(object):
         """
         ...
 
+    @Year.setter
+    def Year(self, value: int) -> None:
+        ...
 

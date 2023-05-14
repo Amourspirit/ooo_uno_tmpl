@@ -35,4 +35,3 @@ class GraphicMapper(XGraphicMapper_eec10d61):
     """
     ...
 
-

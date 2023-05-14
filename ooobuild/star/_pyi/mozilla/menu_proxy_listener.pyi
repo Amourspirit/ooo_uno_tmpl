@@ -31,4 +31,3 @@ class MenuProxyListener(XMenuProxyListener_2ccf0f55):
     """
     ...
 
-

@@ -55,6 +55,9 @@ class XPersistentLibraryContainer(XLibraryContainer2_1c490e9f, XModifiable_a4f60
         """
         ...
 
+    @ContainerLocationName.setter
+    def ContainerLocationName(self, value: str) -> None:
+        ...
     @property
     def RootLocation(self) -> object:
         """
@@ -66,4 +69,7 @@ class XPersistentLibraryContainer(XLibraryContainer2_1c490e9f, XModifiable_a4f60
         """
         ...
 
+    @RootLocation.setter
+    def RootLocation(self, value: object) -> None:
+        ...
 

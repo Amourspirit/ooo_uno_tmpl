@@ -57,6 +57,9 @@ class RealSize2D(object):
         """
         ...
 
+    @Width.setter
+    def Width(self, value: float) -> None:
+        ...
 
     @property
     def Height(self) -> float:
@@ -65,4 +68,7 @@ class RealSize2D(object):
         """
         ...
 
+    @Height.setter
+    def Height(self, value: float) -> None:
+        ...
 

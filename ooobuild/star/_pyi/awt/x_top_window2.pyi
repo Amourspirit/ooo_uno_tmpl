@@ -39,6 +39,9 @@ class XTopWindow2(XTopWindow_8ebb0a57):
         """
         ...
 
+    @Display.setter
+    def Display(self, value: int) -> None:
+        ...
     @property
     def IsMaximized(self) -> bool:
         """
@@ -46,6 +49,9 @@ class XTopWindow2(XTopWindow_8ebb0a57):
         """
         ...
 
+    @IsMaximized.setter
+    def IsMaximized(self, value: bool) -> None:
+        ...
     @property
     def IsMinimized(self) -> bool:
         """
@@ -53,4 +59,7 @@ class XTopWindow2(XTopWindow_8ebb0a57):
         """
         ...
 
+    @IsMinimized.setter
+    def IsMinimized(self, value: bool) -> None:
+        ...
 

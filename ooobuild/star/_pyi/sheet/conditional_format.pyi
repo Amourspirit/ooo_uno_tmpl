@@ -38,6 +38,10 @@ class ConditionalFormat(XPropertySet_bc180bfa, XConditionalFormat_be90e56):
         """
         """
         ...
+
+    @ID.setter
+    def ID(self, value: int) -> None:
+        ...
     @property
     def Range(self) -> 'XSheetCellRanges_edef0d52':
         """
@@ -45,4 +49,7 @@ class ConditionalFormat(XPropertySet_bc180bfa, XConditionalFormat_be90e56):
         """
         ...
 
+    @Range.setter
+    def Range(self, value: 'XSheetCellRanges_edef0d52') -> None:
+        ...
 

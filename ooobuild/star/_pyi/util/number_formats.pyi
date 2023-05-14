@@ -32,4 +32,3 @@ class NumberFormats(XNumberFormatTypes_fe740e05, XNumberFormats_c9120c63):
     """
     ...
 
-

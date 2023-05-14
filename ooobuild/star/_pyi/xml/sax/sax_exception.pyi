@@ -56,6 +56,9 @@ class SAXException(Exception_85530a09):
         """
         ...
 
+    @WrappedException.setter
+    def WrappedException(self, value: object) -> None:
+        ...
 
 __all__ = ['SAXException']
 

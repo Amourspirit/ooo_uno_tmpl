@@ -60,6 +60,9 @@ class UnsupportedOverwriteRequest(ClassifiedInteractionRequest_9f72121b):
         """
         ...
 
+    @Name.setter
+    def Name(self, value: str) -> None:
+        ...
 
 __all__ = ['UnsupportedOverwriteRequest']
 

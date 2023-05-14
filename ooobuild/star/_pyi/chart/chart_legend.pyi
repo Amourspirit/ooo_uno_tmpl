@@ -46,6 +46,10 @@ class ChartLegend(Shape_85cc09e5, CharacterProperties_1d4f0ef3, UserDefinedAttri
         determines the alignment of the legend relative to the diagram.
         """
         ...
+
+    @Alignment.setter
+    def Alignment(self, value: 'ChartLegendPosition_18bc0eb0') -> None:
+        ...
     @property
     def AutomaticPosition(self) -> bool:
         """
@@ -55,4 +59,7 @@ class ChartLegend(Shape_85cc09e5, CharacterProperties_1d4f0ef3, UserDefinedAttri
         """
         ...
 
+    @AutomaticPosition.setter
+    def AutomaticPosition(self, value: bool) -> None:
+        ...
 

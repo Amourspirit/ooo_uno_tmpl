@@ -30,4 +30,3 @@ class SmoketestCommandEnvironment(XCommandEnvironment_fb330dee):
     """
     ...
 
-

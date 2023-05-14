@@ -43,4 +43,7 @@ class BindableDatabaseRadioButton(BindableDataAwareControlModel_47091512, Databa
         """
         ...
 
+    @SecondaryRefValue.setter
+    def SecondaryRefValue(self, value: str) -> None:
+        ...
 

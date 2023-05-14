@@ -41,4 +41,3 @@ class AnyCompareFactory(XAnyCompareFactory_ec090d61):
         """
         ...
 
-

@@ -60,4 +60,3 @@ class ResourceId(XResourceId_5be3103d):
         """
         ...
 
-

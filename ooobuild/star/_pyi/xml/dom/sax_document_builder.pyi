@@ -30,4 +30,3 @@ class SAXDocumentBuilder(XSAXDocumentBuilder2_40550f43):
     """
     ...
 
-

@@ -33,4 +33,3 @@ class DrawPage(GenericDrawPage_fd960dbc, XMasterPageTarget_1a670e9c, XFormsSuppl
     """
     ...
 
-

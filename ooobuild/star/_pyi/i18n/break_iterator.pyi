@@ -35,4 +35,3 @@ class BreakIterator(XBreakIterator_bf270bcf):
     """
     ...
 
-

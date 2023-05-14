@@ -40,4 +40,7 @@ class ComboBox(UnoControlComboBoxModel_39030f71, FormControlModel_e2990d22, XRes
         """
         ...
 
+    @DefaultText.setter
+    def DefaultText(self, value: str) -> None:
+        ...
 

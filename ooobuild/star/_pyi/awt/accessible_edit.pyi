@@ -38,4 +38,3 @@ class AccessibleEdit(XAccessibleContext_8eae119b, XAccessibleEditableText_eb1413
     """
     ...
 
-

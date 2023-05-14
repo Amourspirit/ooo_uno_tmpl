@@ -45,6 +45,10 @@ class CachedContentResultSet(ContentResultSet_d4ee0cc8):
         If you set the value to com.sun.star.sdbc.FetchDirection.UNKNOWN an implementation specific direction will be used.
         """
         ...
+
+    @FetchDirection.setter
+    def FetchDirection(self, value: int) -> None:
+        ...
     @property
     def FetchSize(self) -> int:
         """
@@ -56,4 +60,7 @@ class CachedContentResultSet(ContentResultSet_d4ee0cc8):
         """
         ...
 
+    @FetchSize.setter
+    def FetchSize(self, value: int) -> None:
+        ...
 

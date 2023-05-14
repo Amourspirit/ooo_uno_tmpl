@@ -46,6 +46,9 @@ class XGroup(XPropertySet_bc180bfa, XChild_a6390b07, XComponent_98dc0ab5, XFunct
         """
         ...
 
+    @Expression.setter
+    def Expression(self, value: str) -> None:
+        ...
     @property
     def Footer(self) -> 'XSection_9b630ad1':
         """
@@ -53,6 +56,9 @@ class XGroup(XPropertySet_bc180bfa, XChild_a6390b07, XComponent_98dc0ab5, XFunct
         """
         ...
 
+    @Footer.setter
+    def Footer(self, value: 'XSection_9b630ad1') -> None:
+        ...
     @property
     def FooterOn(self) -> bool:
         """
@@ -60,6 +66,9 @@ class XGroup(XPropertySet_bc180bfa, XChild_a6390b07, XComponent_98dc0ab5, XFunct
         """
         ...
 
+    @FooterOn.setter
+    def FooterOn(self, value: bool) -> None:
+        ...
     @property
     def GroupInterval(self) -> int:
         """
@@ -67,6 +76,9 @@ class XGroup(XPropertySet_bc180bfa, XChild_a6390b07, XComponent_98dc0ab5, XFunct
         """
         ...
 
+    @GroupInterval.setter
+    def GroupInterval(self, value: int) -> None:
+        ...
     @property
     def GroupOn(self) -> int:
         """
@@ -74,6 +86,9 @@ class XGroup(XPropertySet_bc180bfa, XChild_a6390b07, XComponent_98dc0ab5, XFunct
         """
         ...
 
+    @GroupOn.setter
+    def GroupOn(self, value: int) -> None:
+        ...
     @property
     def Groups(self) -> 'XGroups_90d00a7c':
         """
@@ -81,6 +96,9 @@ class XGroup(XPropertySet_bc180bfa, XChild_a6390b07, XComponent_98dc0ab5, XFunct
         """
         ...
 
+    @Groups.setter
+    def Groups(self, value: 'XGroups_90d00a7c') -> None:
+        ...
     @property
     def Header(self) -> 'XSection_9b630ad1':
         """
@@ -88,6 +106,9 @@ class XGroup(XPropertySet_bc180bfa, XChild_a6390b07, XComponent_98dc0ab5, XFunct
         """
         ...
 
+    @Header.setter
+    def Header(self, value: 'XSection_9b630ad1') -> None:
+        ...
     @property
     def HeaderOn(self) -> bool:
         """
@@ -95,6 +116,9 @@ class XGroup(XPropertySet_bc180bfa, XChild_a6390b07, XComponent_98dc0ab5, XFunct
         """
         ...
 
+    @HeaderOn.setter
+    def HeaderOn(self, value: bool) -> None:
+        ...
     @property
     def KeepTogether(self) -> int:
         """
@@ -102,6 +126,9 @@ class XGroup(XPropertySet_bc180bfa, XChild_a6390b07, XComponent_98dc0ab5, XFunct
         """
         ...
 
+    @KeepTogether.setter
+    def KeepTogether(self, value: int) -> None:
+        ...
     @property
     def ResetPageNumber(self) -> bool:
         """
@@ -109,6 +136,9 @@ class XGroup(XPropertySet_bc180bfa, XChild_a6390b07, XComponent_98dc0ab5, XFunct
         """
         ...
 
+    @ResetPageNumber.setter
+    def ResetPageNumber(self, value: bool) -> None:
+        ...
     @property
     def SortAscending(self) -> bool:
         """
@@ -118,6 +148,9 @@ class XGroup(XPropertySet_bc180bfa, XChild_a6390b07, XComponent_98dc0ab5, XFunct
         """
         ...
 
+    @SortAscending.setter
+    def SortAscending(self, value: bool) -> None:
+        ...
     @property
     def StartNewColumn(self) -> bool:
         """
@@ -125,4 +158,7 @@ class XGroup(XPropertySet_bc180bfa, XChild_a6390b07, XComponent_98dc0ab5, XFunct
         """
         ...
 
+    @StartNewColumn.setter
+    def StartNewColumn(self, value: bool) -> None:
+        ...
 

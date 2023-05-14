@@ -54,6 +54,9 @@ class UnsupportedOpenModeException(Exception_85530a09):
         """
         ...
 
+    @Mode.setter
+    def Mode(self, value: int) -> None:
+        ...
 
 __all__ = ['UnsupportedOpenModeException']
 

@@ -33,4 +33,3 @@ class LogarithmicScaling(XScaling_97500a65):
     """
     ...
 
-

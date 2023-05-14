@@ -35,6 +35,10 @@ class StackableDiagram(ABC):
         If TRUE, the series of the diagram are stacked and each category sums up to 100%.
         """
         ...
+
+    @Percent.setter
+    def Percent(self, value: bool) -> None:
+        ...
     @property
     def Stacked(self) -> bool:
         """
@@ -44,4 +48,7 @@ class StackableDiagram(ABC):
         """
         ...
 
+    @Stacked.setter
+    def Stacked(self, value: bool) -> None:
+        ...
 

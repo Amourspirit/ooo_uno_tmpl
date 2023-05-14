@@ -37,6 +37,10 @@ class FrameControl(UnoControl_8f2c0a67):
         contains the type of the component which is loaded into the frame, or the document which implicitly specifies the type
         """
         ...
+
+    @ComponentUrl.setter
+    def ComponentUrl(self, value: str) -> None:
+        ...
     @property
     def Frame(self) -> str:
         """
@@ -46,4 +50,7 @@ class FrameControl(UnoControl_8f2c0a67):
         """
         ...
 
+    @Frame.setter
+    def Frame(self, value: str) -> None:
+        ...
 

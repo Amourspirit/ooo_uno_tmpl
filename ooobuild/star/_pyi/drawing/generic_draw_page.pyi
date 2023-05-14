@@ -55,11 +55,19 @@ class GenericDrawPage(XPropertySet_bc180bfa, XNamed_a6520b08, XShapeBinder_d4f70
             LibreOffice 7.2
         """
         ...
+
+    @BackgroundFullSize.setter
+    def BackgroundFullSize(self, value: bool) -> None:
+        ...
     @property
     def BorderBottom(self) -> int:
         """
         This is the border at the bottom.
         """
+        ...
+
+    @BorderBottom.setter
+    def BorderBottom(self, value: int) -> None:
         ...
     @property
     def BorderLeft(self) -> int:
@@ -67,11 +75,19 @@ class GenericDrawPage(XPropertySet_bc180bfa, XNamed_a6520b08, XShapeBinder_d4f70
         This is the border at the left.
         """
         ...
+
+    @BorderLeft.setter
+    def BorderLeft(self, value: int) -> None:
+        ...
     @property
     def BorderRight(self) -> int:
         """
         This is the border at the right.
         """
+        ...
+
+    @BorderRight.setter
+    def BorderRight(self, value: int) -> None:
         ...
     @property
     def BorderTop(self) -> int:
@@ -79,11 +95,19 @@ class GenericDrawPage(XPropertySet_bc180bfa, XNamed_a6520b08, XShapeBinder_d4f70
         This is the border at the top.
         """
         ...
+
+    @BorderTop.setter
+    def BorderTop(self, value: int) -> None:
+        ...
     @property
     def Height(self) -> int:
         """
         This is the height.
         """
+        ...
+
+    @Height.setter
+    def Height(self, value: int) -> None:
         ...
     @property
     def IsBackgroundDark(self) -> bool:
@@ -93,6 +117,10 @@ class GenericDrawPage(XPropertySet_bc180bfa, XNamed_a6520b08, XShapeBinder_d4f70
         This can be used to determine the actual value of an auto color.
         """
         ...
+
+    @IsBackgroundDark.setter
+    def IsBackgroundDark(self, value: bool) -> None:
+        ...
     @property
     def NavigationOrder(self) -> 'XIndexAccess_f0910d6d':
         """
@@ -101,17 +129,29 @@ class GenericDrawPage(XPropertySet_bc180bfa, XNamed_a6520b08, XShapeBinder_d4f70
         By default this is equal to the index access of the slide itself, making the z-order the default navigation order for top level shapes.
         """
         ...
+
+    @NavigationOrder.setter
+    def NavigationOrder(self, value: 'XIndexAccess_f0910d6d') -> None:
+        ...
     @property
     def Number(self) -> int:
         """
         This is the number of this page, starting with 1.
         """
         ...
+
+    @Number.setter
+    def Number(self, value: int) -> None:
+        ...
     @property
     def Orientation(self) -> 'PaperOrientation_e36f0d47':
         """
         This is the orientation of this page.
         """
+        ...
+
+    @Orientation.setter
+    def Orientation(self, value: 'PaperOrientation_e36f0d47') -> None:
         ...
     @property
     def UserDefinedAttributes(self) -> 'XNameContainer_cb90e47':
@@ -121,6 +161,10 @@ class GenericDrawPage(XPropertySet_bc180bfa, XNamed_a6520b08, XShapeBinder_d4f70
         They will be saved to and restored from automatic styles inside xml files.
         """
         ...
+
+    @UserDefinedAttributes.setter
+    def UserDefinedAttributes(self, value: 'XNameContainer_cb90e47') -> None:
+        ...
     @property
     def Width(self) -> int:
         """
@@ -128,4 +172,7 @@ class GenericDrawPage(XPropertySet_bc180bfa, XNamed_a6520b08, XShapeBinder_d4f70
         """
         ...
 
+    @Width.setter
+    def Width(self, value: int) -> None:
+        ...
 

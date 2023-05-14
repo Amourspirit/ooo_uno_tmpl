@@ -30,4 +30,3 @@ class FastTokenHandler(XFastTokenHandler_17510e78):
     """
     ...
 
-

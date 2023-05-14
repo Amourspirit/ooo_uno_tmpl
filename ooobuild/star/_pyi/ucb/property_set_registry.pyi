@@ -32,4 +32,3 @@ class PropertySetRegistry(XNameAccess_e2ab0cf6, XPropertySetRegistry_c2e0e84):
     """
     ...
 
-

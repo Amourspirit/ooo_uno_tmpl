@@ -59,6 +59,9 @@ class DDEItemInfo(object):
         """
         ...
 
+    @Results.setter
+    def Results(self, value: typing.Tuple[typing.Tuple[object, ...], ...]) -> None:
+        ...
 
     @property
     def Item(self) -> str:
@@ -67,4 +70,7 @@ class DDEItemInfo(object):
         """
         ...
 
+    @Item.setter
+    def Item(self, value: str) -> None:
+        ...
 

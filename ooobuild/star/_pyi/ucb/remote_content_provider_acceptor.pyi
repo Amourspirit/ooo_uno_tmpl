@@ -32,4 +32,3 @@ class RemoteContentProviderAcceptor(XRemoteContentProviderAcceptor_af1b125d, XRe
     """
     ...
 
-

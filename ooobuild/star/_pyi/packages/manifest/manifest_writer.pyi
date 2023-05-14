@@ -30,4 +30,3 @@ class ManifestWriter(XManifestWriter_9d0811d8):
     """
     ...
 
-

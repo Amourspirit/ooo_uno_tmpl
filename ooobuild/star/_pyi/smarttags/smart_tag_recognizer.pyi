@@ -37,4 +37,3 @@ class SmartTagRecognizer(XSmartTagRecognizer_5ccd1071):
     """
     ...
 
-

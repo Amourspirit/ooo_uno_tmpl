@@ -35,4 +35,3 @@ class ContentHandler(XNotifyingDispatch_bc10e52):
     """
     ...
 
-

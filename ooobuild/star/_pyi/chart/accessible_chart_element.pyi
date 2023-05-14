@@ -43,4 +43,3 @@ class AccessibleChartElement(XAccessible_1cbc0eb6, XAccessibleContext_8eae119b, 
     """
     ...
 
-

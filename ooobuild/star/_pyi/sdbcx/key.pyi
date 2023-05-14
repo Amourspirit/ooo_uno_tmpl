@@ -37,11 +37,19 @@ class Key(XPropertySet_bc180bfa, XColumnsSupplier_f0600da9, XDataDescriptorFacto
         is the rule which is applied for deletions; only used for foreign keys.
         """
         ...
+
+    @DeleteRule.setter
+    def DeleteRule(self, value: int) -> None:
+        ...
     @property
     def Name(self) -> str:
         """
         is the name of the key
         """
+        ...
+
+    @Name.setter
+    def Name(self, value: str) -> None:
         ...
     @property
     def ReferencedTable(self) -> str:
@@ -49,11 +57,19 @@ class Key(XPropertySet_bc180bfa, XColumnsSupplier_f0600da9, XDataDescriptorFacto
         is the name of the referenced table, only used for foreign keys.
         """
         ...
+
+    @ReferencedTable.setter
+    def ReferencedTable(self, value: str) -> None:
+        ...
     @property
     def Type(self) -> int:
         """
         indicates the type of the key.
         """
+        ...
+
+    @Type.setter
+    def Type(self, value: int) -> None:
         ...
     @property
     def UpdateRule(self) -> int:
@@ -62,4 +78,7 @@ class Key(XPropertySet_bc180bfa, XColumnsSupplier_f0600da9, XDataDescriptorFacto
         """
         ...
 
+    @UpdateRule.setter
+    def UpdateRule(self, value: int) -> None:
+        ...
 

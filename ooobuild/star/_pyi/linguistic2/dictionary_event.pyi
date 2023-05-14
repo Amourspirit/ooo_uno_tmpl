@@ -59,6 +59,9 @@ class DictionaryEvent(EventObject_a3d70b03):
         """
         ...
 
+    @nEvent.setter
+    def nEvent(self, value: int) -> None:
+        ...
 
     @property
     def xDictionaryEntry(self) -> XDictionaryEntry_49ef0ff5:
@@ -69,4 +72,7 @@ class DictionaryEvent(EventObject_a3d70b03):
         """
         ...
 
+    @xDictionaryEntry.setter
+    def xDictionaryEntry(self, value: XDictionaryEntry_49ef0ff5) -> None:
+        ...
 

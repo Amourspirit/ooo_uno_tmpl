@@ -40,4 +40,3 @@ class DatabaseDefinition(XGroupsSupplier_e3410d48, XTablesSupplier_e1ad0d23, XUs
     """
     ...
 
-

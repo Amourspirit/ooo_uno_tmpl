@@ -40,4 +40,3 @@ class BasicViewFactory(XResourceFactory_b3561268):
         """
         ...
 
-

@@ -55,6 +55,9 @@ class CannotConvertException(Exception_85530a09):
         """
         ...
 
+    @DestinationTypeClass.setter
+    def DestinationTypeClass(self, value: TypeClass_853109f2) -> None:
+        ...
     @property
     def Reason(self) -> int:
         """
@@ -64,6 +67,9 @@ class CannotConvertException(Exception_85530a09):
         """
         ...
 
+    @Reason.setter
+    def Reason(self, value: int) -> None:
+        ...
     @property
     def ArgumentIndex(self) -> int:
         """
@@ -73,6 +79,9 @@ class CannotConvertException(Exception_85530a09):
         """
         ...
 
+    @ArgumentIndex.setter
+    def ArgumentIndex(self, value: int) -> None:
+        ...
 
 __all__ = ['CannotConvertException']
 

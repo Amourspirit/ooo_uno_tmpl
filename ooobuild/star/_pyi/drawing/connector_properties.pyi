@@ -38,11 +38,19 @@ class ConnectorProperties(ABC):
         This property contains the kind of the connector.
         """
         ...
+
+    @EdgeKind.setter
+    def EdgeKind(self, value: 'ConnectorType_e40b0d41') -> None:
+        ...
     @property
     def EdgeNode1HorzDist(self) -> int:
         """
         This property contains the horizontal distance of node 1.
         """
+        ...
+
+    @EdgeNode1HorzDist.setter
+    def EdgeNode1HorzDist(self, value: int) -> None:
         ...
     @property
     def EdgeNode1VertDist(self) -> int:
@@ -50,11 +58,19 @@ class ConnectorProperties(ABC):
         This property contains the vertical distance of node 1.
         """
         ...
+
+    @EdgeNode1VertDist.setter
+    def EdgeNode1VertDist(self, value: int) -> None:
+        ...
     @property
     def EdgeNode2HorzDist(self) -> int:
         """
         This property contains the horizontal distance of node 2.
         """
+        ...
+
+    @EdgeNode2HorzDist.setter
+    def EdgeNode2HorzDist(self, value: int) -> None:
         ...
     @property
     def EdgeNode2VertDist(self) -> int:
@@ -63,4 +79,7 @@ class ConnectorProperties(ABC):
         """
         ...
 
+    @EdgeNode2VertDist.setter
+    def EdgeNode2VertDist(self, value: int) -> None:
+        ...
 

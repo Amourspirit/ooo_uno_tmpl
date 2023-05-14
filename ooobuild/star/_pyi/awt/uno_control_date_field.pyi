@@ -39,4 +39,3 @@ class UnoControlDateField(UnoControlEdit_bc4e0bed, XDateField_8d520a0e, XSpinFie
     """
     ...
 
-

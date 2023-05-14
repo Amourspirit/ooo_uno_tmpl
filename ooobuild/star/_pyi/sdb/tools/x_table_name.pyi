@@ -64,6 +64,9 @@ class XTableName(ABC):
         """
         ...
 
+    @CatalogName.setter
+    def CatalogName(self, value: str) -> None:
+        ...
     @property
     def NameForSelect(self) -> str:
         """
@@ -73,6 +76,9 @@ class XTableName(ABC):
         """
         ...
 
+    @NameForSelect.setter
+    def NameForSelect(self, value: str) -> None:
+        ...
     @property
     def SchemaName(self) -> str:
         """
@@ -80,6 +86,9 @@ class XTableName(ABC):
         """
         ...
 
+    @SchemaName.setter
+    def SchemaName(self, value: str) -> None:
+        ...
     @property
     def Table(self) -> 'XPropertySet_bc180bfa':
         """
@@ -89,6 +98,9 @@ class XTableName(ABC):
         """
         ...
 
+    @Table.setter
+    def Table(self, value: 'XPropertySet_bc180bfa') -> None:
+        ...
     @property
     def TableName(self) -> str:
         """
@@ -96,4 +108,7 @@ class XTableName(ABC):
         """
         ...
 
+    @TableName.setter
+    def TableName(self, value: str) -> None:
+        ...
 

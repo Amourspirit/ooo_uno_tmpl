@@ -52,4 +52,7 @@ class RowsChangeEvent(RowChangeEvent_ba0c0bc1):
     def Bookmarks(self) -> typing.Tuple[object, ...]:
         ...
 
+    @Bookmarks.setter
+    def Bookmarks(self, value: typing.Tuple[object, ...]) -> None:
+        ...
 

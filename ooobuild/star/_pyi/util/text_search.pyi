@@ -33,4 +33,3 @@ class TextSearch(XTextSearch_a56a0b19):
     """
     ...
 
-

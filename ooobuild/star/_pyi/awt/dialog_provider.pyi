@@ -44,4 +44,3 @@ class DialogProvider(XDialogProvider_c70f0c47):
         """
         ...
 
-

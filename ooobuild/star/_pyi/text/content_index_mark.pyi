@@ -36,4 +36,7 @@ class ContentIndexMark(BaseIndexMark_bbb30bcb):
         """
         ...
 
+    @Level.setter
+    def Level(self, value: int) -> None:
+        ...
 

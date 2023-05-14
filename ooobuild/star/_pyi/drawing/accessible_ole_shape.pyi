@@ -42,4 +42,3 @@ class AccessibleOLEShape(AccessibleShape_fdd20dd3, XAccessibleAction_7ccc1114):
     """
     ...
 
-

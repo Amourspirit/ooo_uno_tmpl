@@ -47,17 +47,30 @@ class CustomShape(FillProperties_f1200da8, LineProperties_f13f0da9, RotationDesc
         If the CustomShapeEngine property is \"com.sun.star.drawing.EnhancedCustomShapeEngine\", then this property is containing properties as they are specified in the service com.sun.star.drawing.EnhancedCustomShapeGeometry
         """
         ...
+
+    @CustomShapeGeometry.setter
+    def CustomShapeGeometry(self, value: 'typing.Tuple[PropertyValue_c9610c73, ...]') -> None:
+        ...
+
     @property
     def CustomShapeData(self) -> str:
         """
         This property can be used to store data that the CustomShapeEngine may use for rendering.
         """
         ...
+
+    @CustomShapeData.setter
+    def CustomShapeData(self, value: str) -> None:
+        ...
     @property
     def CustomShapeEngine(self) -> str:
         """
         This property contains the CustomShapeEngine service name that has to be used for rendering.
         """
+        ...
+
+    @CustomShapeEngine.setter
+    def CustomShapeEngine(self, value: str) -> None:
         ...
     @property
     def CustomShapeReplacementURL(self) -> str:
@@ -66,4 +79,7 @@ class CustomShape(FillProperties_f1200da8, LineProperties_f13f0da9, RotationDesc
         """
         ...
 
+    @CustomShapeReplacementURL.setter
+    def CustomShapeReplacementURL(self, value: str) -> None:
+        ...
 

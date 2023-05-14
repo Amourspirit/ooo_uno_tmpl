@@ -38,4 +38,3 @@ class AccessibleList(AccessibleContext_7e0e1143, XAccessible_1cbc0eb6, XAccessib
     """
     ...
 
-

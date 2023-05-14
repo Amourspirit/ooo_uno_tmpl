@@ -37,4 +37,7 @@ class Footnote(XFootnote_901e0a73, XText_690408ca):
         """
         ...
 
+    @ReferenceId.setter
+    def ReferenceId(self, value: int) -> None:
+        ...
 

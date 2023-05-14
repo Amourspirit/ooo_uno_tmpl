@@ -49,6 +49,9 @@ class XEmbeddedObjectSupplier2(XEmbeddedObjectSupplier_8b631174):
         """
         ...
 
+    @Aspect.setter
+    def Aspect(self, value: int) -> None:
+        ...
     @property
     def ReplacementGraphic(self) -> 'XGraphic_a4da0afc':
         """
@@ -56,4 +59,7 @@ class XEmbeddedObjectSupplier2(XEmbeddedObjectSupplier_8b631174):
         """
         ...
 
+    @ReplacementGraphic.setter
+    def ReplacementGraphic(self, value: 'XGraphic_a4da0afc') -> None:
+        ...
 

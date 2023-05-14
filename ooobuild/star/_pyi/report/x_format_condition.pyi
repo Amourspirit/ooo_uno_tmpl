@@ -38,6 +38,9 @@ class XFormatCondition(XPropertySet_bc180bfa, XReportControlFormat_3d4e0fc2):
         """
         ...
 
+    @Enabled.setter
+    def Enabled(self, value: bool) -> None:
+        ...
     @property
     def Formula(self) -> str:
         """
@@ -47,4 +50,7 @@ class XFormatCondition(XPropertySet_bc180bfa, XReportControlFormat_3d4e0fc2):
         """
         ...
 
+    @Formula.setter
+    def Formula(self, value: str) -> None:
+        ...
 

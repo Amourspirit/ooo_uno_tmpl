@@ -35,4 +35,3 @@ class NativeNumberSupplier(XNativeNumberSupplier_1eb80ec4):
     """
     ...
 
-

@@ -40,4 +40,7 @@ class SpinButton(UnoControlSpinButtonModel_5b16106e, FormControlModel_e2990d22, 
         """
         ...
 
+    @DefaultSpinValue.setter
+    def DefaultSpinValue(self, value: int) -> None:
+        ...
 

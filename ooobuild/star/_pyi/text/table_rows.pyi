@@ -35,4 +35,3 @@ class TableRows(XTableRows_a37e0afb):
     """
     ...
 
-

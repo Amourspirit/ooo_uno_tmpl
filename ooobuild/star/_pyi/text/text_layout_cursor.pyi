@@ -32,4 +32,3 @@ class TextLayoutCursor(TextCursor_9b770af0, XPageCursor_a4cf0b20):
     """
     ...
 
-

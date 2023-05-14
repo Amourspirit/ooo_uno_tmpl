@@ -60,6 +60,9 @@ class LicenseException(Exception_85530a09):
         """
         ...
 
+    @ExtensionName.setter
+    def ExtensionName(self, value: str) -> None:
+        ...
     @property
     def Text(self) -> str:
         """
@@ -67,6 +70,9 @@ class LicenseException(Exception_85530a09):
         """
         ...
 
+    @Text.setter
+    def Text(self, value: str) -> None:
+        ...
     @property
     def AcceptBy(self) -> str:
         """
@@ -74,6 +80,9 @@ class LicenseException(Exception_85530a09):
         """
         ...
 
+    @AcceptBy.setter
+    def AcceptBy(self, value: str) -> None:
+        ...
 
 __all__ = ['LicenseException']
 

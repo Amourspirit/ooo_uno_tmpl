@@ -34,4 +34,3 @@ class NumberingRule(NumberingAlignment_f290e7f, NumberingLevel_d7f70cd8):
     """
     ...
 
-

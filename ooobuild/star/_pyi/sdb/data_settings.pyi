@@ -39,11 +39,19 @@ class DataSettings(ABC):
         indicates whether the filter should be applied or not, default is FALSE.
         """
         ...
+
+    @ApplyFilter.setter
+    def ApplyFilter(self, value: bool) -> None:
+        ...
     @property
     def Filter(self) -> str:
         """
         additional filter for the data object.
         """
+        ...
+
+    @Filter.setter
+    def Filter(self, value: str) -> None:
         ...
     @property
     def FontDescriptor(self) -> 'FontDescriptor_bc110c0a':
@@ -51,11 +59,19 @@ class DataSettings(ABC):
         specifies the font attributes for data displaying.
         """
         ...
+
+    @FontDescriptor.setter
+    def FontDescriptor(self, value: 'FontDescriptor_bc110c0a') -> None:
+        ...
     @property
     def GroupBy(self) -> str:
         """
         additional group by for the data object.
         """
+        ...
+
+    @GroupBy.setter
+    def GroupBy(self, value: str) -> None:
         ...
     @property
     def HavingClause(self) -> str:
@@ -63,17 +79,29 @@ class DataSettings(ABC):
         additional having clause for the data object.
         """
         ...
+
+    @HavingClause.setter
+    def HavingClause(self, value: str) -> None:
+        ...
     @property
     def Order(self) -> str:
         """
         is an additional sort order definition.
         """
         ...
+
+    @Order.setter
+    def Order(self, value: str) -> None:
+        ...
     @property
     def RowHeight(self) -> int:
         """
         specifies the height of a data row.
         """
+        ...
+
+    @RowHeight.setter
+    def RowHeight(self, value: int) -> None:
         ...
     @property
     def TextColor(self) -> 'Color_68e908c5':
@@ -82,4 +110,7 @@ class DataSettings(ABC):
         """
         ...
 
+    @TextColor.setter
+    def TextColor(self, value: 'Color_68e908c5') -> None:
+        ...
 

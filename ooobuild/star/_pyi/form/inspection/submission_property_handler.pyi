@@ -33,4 +33,3 @@ class SubmissionPropertyHandler(XPropertyHandler_3e950fbf):
     """
     ...
 
-

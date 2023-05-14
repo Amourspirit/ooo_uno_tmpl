@@ -52,6 +52,9 @@ class LocalizedName(object):
         """
         ...
 
+    @Locale.setter
+    def Locale(self, value: Locale_70d308fa) -> None:
+        ...
 
     @property
     def Name(self) -> str:
@@ -60,4 +63,7 @@ class LocalizedName(object):
         """
         ...
 
+    @Name.setter
+    def Name(self, value: str) -> None:
+        ...
 

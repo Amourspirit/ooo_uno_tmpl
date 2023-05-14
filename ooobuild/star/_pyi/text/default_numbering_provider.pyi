@@ -31,4 +31,3 @@ class DefaultNumberingProvider(XDefaultNumberingProvider_6b4610dc):
     """
     ...
 
-

@@ -34,4 +34,3 @@ class HierarchyDataReadWriteAccess(HierarchyDataReadAccess_34820f29, XNameContai
     """
     ...
 
-

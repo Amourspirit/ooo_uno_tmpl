@@ -33,4 +33,3 @@ class MutableTreeDataModel(XMutableTreeDataModel_6517104f):
     """
     ...
 
-

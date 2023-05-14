@@ -53,6 +53,9 @@ class ForbiddenCharacters(object):
         """
         ...
 
+    @beginLine.setter
+    def beginLine(self, value: str) -> None:
+        ...
 
     @property
     def endLine(self) -> str:
@@ -61,4 +64,7 @@ class ForbiddenCharacters(object):
         """
         ...
 
+    @endLine.setter
+    def endLine(self, value: str) -> None:
+        ...
 

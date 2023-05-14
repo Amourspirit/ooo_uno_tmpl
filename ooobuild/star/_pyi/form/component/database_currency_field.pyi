@@ -32,4 +32,3 @@ class DatabaseCurrencyField(DataAwareControlModel_27110ef8, CurrencyField_4b4d0f
     """
     ...
 
-

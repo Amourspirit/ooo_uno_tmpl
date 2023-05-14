@@ -58,6 +58,9 @@ class GlobalTransferCommandArgument2(GlobalTransferCommandArgument_9ae711da):
         """
         ...
 
+    @MimeType.setter
+    def MimeType(self, value: str) -> None:
+        ...
 
     @property
     def DocumentId(self) -> str:
@@ -66,4 +69,7 @@ class GlobalTransferCommandArgument2(GlobalTransferCommandArgument_9ae711da):
         """
         ...
 
+    @DocumentId.setter
+    def DocumentId(self, value: str) -> None:
+        ...
 

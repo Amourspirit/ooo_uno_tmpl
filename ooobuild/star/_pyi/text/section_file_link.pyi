@@ -57,6 +57,9 @@ class SectionFileLink(object):
         """
         ...
 
+    @FileURL.setter
+    def FileURL(self, value: str) -> None:
+        ...
 
     @property
     def FilterName(self) -> str:
@@ -65,4 +68,7 @@ class SectionFileLink(object):
         """
         ...
 
+    @FilterName.setter
+    def FilterName(self, value: str) -> None:
+        ...
 

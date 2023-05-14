@@ -31,4 +31,3 @@ class CachedContentResultSetFactory(XCachedContentResultSetFactory_a99d1230):
     """
     ...
 
-

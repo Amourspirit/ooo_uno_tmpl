@@ -40,11 +40,19 @@ class QueryDescriptor(DataSettings_a3000b0c, Descriptor_a5200b3b, XColumnsSuppli
         is the command of the query, this is typically a select statement.
         """
         ...
+
+    @Command.setter
+    def Command(self, value: str) -> None:
+        ...
     @property
     def EscapeProcessing(self) -> bool:
         """
         should we use escape processing for the query.
         """
+        ...
+
+    @EscapeProcessing.setter
+    def EscapeProcessing(self, value: bool) -> None:
         ...
     @property
     def UpdateCatalogName(self) -> str:
@@ -52,11 +60,19 @@ class QueryDescriptor(DataSettings_a3000b0c, Descriptor_a5200b3b, XColumnsSuppli
         is the name of the update table catalog.
         """
         ...
+
+    @UpdateCatalogName.setter
+    def UpdateCatalogName(self, value: str) -> None:
+        ...
     @property
     def UpdateSchemaName(self) -> str:
         """
         is the name of the update table schema.
         """
+        ...
+
+    @UpdateSchemaName.setter
+    def UpdateSchemaName(self, value: str) -> None:
         ...
     @property
     def UpdateTableName(self) -> str:
@@ -67,4 +83,7 @@ class QueryDescriptor(DataSettings_a3000b0c, Descriptor_a5200b3b, XColumnsSuppli
         """
         ...
 
+    @UpdateTableName.setter
+    def UpdateTableName(self, value: str) -> None:
+        ...
 

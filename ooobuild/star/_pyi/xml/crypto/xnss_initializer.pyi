@@ -60,6 +60,9 @@ class XNSSInitializer(XCipherContextSupplier_9fd31214, XDigestContextSupplier_a0
         """
         ...
 
+    @IsNSSinitialized.setter
+    def IsNSSinitialized(self, value: bool) -> None:
+        ...
     @property
     def NSSPath(self) -> str:
         """
@@ -73,4 +76,7 @@ class XNSSInitializer(XCipherContextSupplier_9fd31214, XDigestContextSupplier_a0
         """
         ...
 
+    @NSSPath.setter
+    def NSSPath(self, value: str) -> None:
+        ...
 

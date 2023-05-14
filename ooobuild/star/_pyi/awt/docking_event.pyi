@@ -58,6 +58,9 @@ class DockingEvent(EventObject_a3d70b03):
         """
         ...
 
+    @TrackingRectangle.setter
+    def TrackingRectangle(self, value: Rectangle_84b109e9) -> None:
+        ...
 
     @property
     def MousePos(self) -> Point_5fb2085e:
@@ -66,6 +69,9 @@ class DockingEvent(EventObject_a3d70b03):
         """
         ...
 
+    @MousePos.setter
+    def MousePos(self, value: Point_5fb2085e) -> None:
+        ...
 
     @property
     def bLiveMode(self) -> bool:
@@ -74,6 +80,9 @@ class DockingEvent(EventObject_a3d70b03):
         """
         ...
 
+    @bLiveMode.setter
+    def bLiveMode(self, value: bool) -> None:
+        ...
 
     @property
     def bInteractive(self) -> bool:
@@ -82,4 +91,7 @@ class DockingEvent(EventObject_a3d70b03):
         """
         ...
 
+    @bInteractive.setter
+    def bInteractive(self, value: bool) -> None:
+        ...
 

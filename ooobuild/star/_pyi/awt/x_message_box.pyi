@@ -43,6 +43,9 @@ class XMessageBox(ABC):
         """
         ...
 
+    @CaptionText.setter
+    def CaptionText(self, value: str) -> None:
+        ...
     @property
     def MessageText(self) -> str:
         """
@@ -50,4 +53,7 @@ class XMessageBox(ABC):
         """
         ...
 
+    @MessageText.setter
+    def MessageText(self, value: str) -> None:
+        ...
 

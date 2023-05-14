@@ -31,4 +31,3 @@ class TextDocument(GenericTextDocument_d200e6e):
     """
     ...
 
-

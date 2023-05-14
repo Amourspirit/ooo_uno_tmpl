@@ -44,4 +44,7 @@ class UnoControlModel(UnoControlDialogElement_38ef0f81, XControlModel_affc0b7e, 
         """
         ...
 
+    @DefaultControl.setter
+    def DefaultControl(self, value: str) -> None:
+        ...
 

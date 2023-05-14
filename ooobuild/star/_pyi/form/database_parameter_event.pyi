@@ -58,4 +58,7 @@ class DatabaseParameterEvent(EventObject_a3d70b03):
         """
         ...
 
+    @Parameters.setter
+    def Parameters(self, value: XIndexAccess_f0910d6d) -> None:
+        ...
 

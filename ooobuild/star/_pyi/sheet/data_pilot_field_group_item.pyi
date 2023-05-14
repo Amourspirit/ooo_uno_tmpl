@@ -31,4 +31,3 @@ class DataPilotFieldGroupItem(XNamed_a6520b08):
     """
     ...
 
-

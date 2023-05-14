@@ -39,4 +39,7 @@ class TextField(RichTextControl_6b7310c9, XReset_71670917):
         """
         ...
 
+    @DefaultText.setter
+    def DefaultText(self, value: str) -> None:
+        ...
 

@@ -106,6 +106,9 @@ class XFilterController(ABC):
         """
         ...
 
+    @ActiveTerm.setter
+    def ActiveTerm(self, value: int) -> None:
+        ...
     @property
     def DisjunctiveTerms(self) -> int:
         """
@@ -113,6 +116,9 @@ class XFilterController(ABC):
         """
         ...
 
+    @DisjunctiveTerms.setter
+    def DisjunctiveTerms(self, value: int) -> None:
+        ...
     @property
     def FilterComponents(self) -> int:
         """
@@ -122,4 +128,7 @@ class XFilterController(ABC):
         """
         ...
 
+    @FilterComponents.setter
+    def FilterComponents(self, value: int) -> None:
+        ...
 

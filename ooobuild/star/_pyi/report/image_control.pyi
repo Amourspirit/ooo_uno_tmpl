@@ -30,4 +30,3 @@ class ImageControl(XImageControl_d6170cc0):
     """
     ...
 
-

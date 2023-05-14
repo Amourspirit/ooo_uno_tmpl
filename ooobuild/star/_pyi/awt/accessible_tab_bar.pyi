@@ -37,4 +37,3 @@ class AccessibleTabBar(XAccessibleContext_8eae119b, XAccessibleEventBroadcaster_
     """
     ...
 
-

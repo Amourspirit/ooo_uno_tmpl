@@ -31,4 +31,3 @@ class CachedContentResultSetStubFactory(XCachedContentResultSetStubFactory_f6431
     """
     ...
 
-

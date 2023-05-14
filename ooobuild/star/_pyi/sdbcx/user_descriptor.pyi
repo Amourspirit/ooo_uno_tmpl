@@ -36,4 +36,7 @@ class UserDescriptor(Descriptor_a5200b3b):
         """
         ...
 
+    @Password.setter
+    def Password(self, value: str) -> None:
+        ...
 

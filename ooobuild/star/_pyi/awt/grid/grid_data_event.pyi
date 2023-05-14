@@ -64,6 +64,9 @@ class GridDataEvent(EventObject_a3d70b03):
         """
         ...
 
+    @FirstColumn.setter
+    def FirstColumn(self, value: int) -> None:
+        ...
 
     @property
     def LastColumn(self) -> int:
@@ -72,6 +75,9 @@ class GridDataEvent(EventObject_a3d70b03):
         """
         ...
 
+    @LastColumn.setter
+    def LastColumn(self, value: int) -> None:
+        ...
 
     @property
     def FirstRow(self) -> int:
@@ -82,6 +88,9 @@ class GridDataEvent(EventObject_a3d70b03):
         """
         ...
 
+    @FirstRow.setter
+    def FirstRow(self, value: int) -> None:
+        ...
 
     @property
     def LastRow(self) -> int:
@@ -90,4 +99,7 @@ class GridDataEvent(EventObject_a3d70b03):
         """
         ...
 
+    @LastRow.setter
+    def LastRow(self, value: int) -> None:
+        ...
 

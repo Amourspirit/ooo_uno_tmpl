@@ -34,4 +34,3 @@ class CallableStatement(PreparedStatement_e1880d29, CallableStatement_eccf0d69):
     """
     ...
 
-

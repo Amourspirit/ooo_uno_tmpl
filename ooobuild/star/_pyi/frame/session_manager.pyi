@@ -33,4 +33,3 @@ class SessionManager(XSessionManagerClient_379b0f69):
     """
     ...
 
-

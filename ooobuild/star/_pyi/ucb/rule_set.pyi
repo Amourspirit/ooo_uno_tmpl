@@ -54,6 +54,9 @@ class RuleSet(object):
         """
         ...
 
+    @Rules.setter
+    def Rules(self, value: typing.Tuple[Rule_571307da, ...]) -> None:
+        ...
 
     @property
     def HandleFolder(self) -> bool:
@@ -62,4 +65,7 @@ class RuleSet(object):
         """
         ...
 
+    @HandleFolder.setter
+    def HandleFolder(self, value: bool) -> None:
+        ...
 

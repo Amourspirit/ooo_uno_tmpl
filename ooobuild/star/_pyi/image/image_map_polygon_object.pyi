@@ -39,4 +39,7 @@ class ImageMapPolygonObject(ImageMapObject_d1e20c63):
         """
         ...
 
+    @Polygon.setter
+    def Polygon(self, value: 'PointSequence_e43f0d37') -> None:
+        ...
 

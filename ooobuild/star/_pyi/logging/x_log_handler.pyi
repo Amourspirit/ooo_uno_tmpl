@@ -60,6 +60,9 @@ class XLogHandler(XComponent_98dc0ab5):
         """
         ...
 
+    @Encoding.setter
+    def Encoding(self, value: str) -> None:
+        ...
     @property
     def Formatter(self) -> 'XLogFormatter_e23d0d1d':
         """
@@ -67,6 +70,9 @@ class XLogHandler(XComponent_98dc0ab5):
         """
         ...
 
+    @Formatter.setter
+    def Formatter(self, value: 'XLogFormatter_e23d0d1d') -> None:
+        ...
     @property
     def Level(self) -> int:
         """
@@ -76,4 +82,7 @@ class XLogHandler(XComponent_98dc0ab5):
         """
         ...
 
+    @Level.setter
+    def Level(self, value: int) -> None:
+        ...
 

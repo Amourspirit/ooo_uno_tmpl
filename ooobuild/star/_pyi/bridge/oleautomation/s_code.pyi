@@ -55,4 +55,7 @@ class SCode(object):
     def Value(self) -> int:
         ...
 
+    @Value.setter
+    def Value(self, value: int) -> None:
+        ...
 

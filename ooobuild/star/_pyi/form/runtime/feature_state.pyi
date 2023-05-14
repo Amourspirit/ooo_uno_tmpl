@@ -57,6 +57,9 @@ class FeatureState(object):
         """
         ...
 
+    @Enabled.setter
+    def Enabled(self, value: bool) -> None:
+        ...
 
     @property
     def State(self) -> object:
@@ -67,4 +70,7 @@ class FeatureState(object):
         """
         ...
 
+    @State.setter
+    def State(self, value: object) -> None:
+        ...
 

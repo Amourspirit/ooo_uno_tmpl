@@ -31,4 +31,3 @@ class GalleryTheme(XGalleryTheme_e28e0d13):
     """
     ...
 
-

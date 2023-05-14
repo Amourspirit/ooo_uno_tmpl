@@ -61,6 +61,9 @@ class DataTruncation(SQLWarning_96f10a6a):
         """
         ...
 
+    @Index.setter
+    def Index(self, value: int) -> None:
+        ...
     @property
     def IsParameter(self) -> bool:
         """
@@ -68,6 +71,9 @@ class DataTruncation(SQLWarning_96f10a6a):
         """
         ...
 
+    @IsParameter.setter
+    def IsParameter(self, value: bool) -> None:
+        ...
     @property
     def DuringRead(self) -> bool:
         """
@@ -75,6 +81,9 @@ class DataTruncation(SQLWarning_96f10a6a):
         """
         ...
 
+    @DuringRead.setter
+    def DuringRead(self, value: bool) -> None:
+        ...
     @property
     def DataSize(self) -> int:
         """
@@ -84,6 +93,9 @@ class DataTruncation(SQLWarning_96f10a6a):
         """
         ...
 
+    @DataSize.setter
+    def DataSize(self, value: int) -> None:
+        ...
     @property
     def TransferSize(self) -> int:
         """
@@ -93,6 +105,9 @@ class DataTruncation(SQLWarning_96f10a6a):
         """
         ...
 
+    @TransferSize.setter
+    def TransferSize(self, value: int) -> None:
+        ...
 
 __all__ = ['DataTruncation']
 

@@ -67,6 +67,9 @@ class SocketPermission(object):
         """
         ...
 
+    @Host.setter
+    def Host(self, value: str) -> None:
+        ...
 
     @property
     def Actions(self) -> str:
@@ -75,4 +78,7 @@ class SocketPermission(object):
         """
         ...
 
+    @Actions.setter
+    def Actions(self, value: str) -> None:
+        ...
 

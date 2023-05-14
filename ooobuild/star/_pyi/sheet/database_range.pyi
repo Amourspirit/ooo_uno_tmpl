@@ -52,6 +52,10 @@ class DatabaseRange(XPropertySet_bc180bfa, XNamed_a6520b08, XCellRangeReferrer_9
             OOo 1.1.2
         """
         ...
+
+    @AutoFilter.setter
+    def AutoFilter(self, value: bool) -> None:
+        ...
     @property
     def ContainsHeader(self) -> bool:
         """
@@ -61,6 +65,10 @@ class DatabaseRange(XPropertySet_bc180bfa, XNamed_a6520b08, XCellRangeReferrer_9
         
             LibreOffice 5.0
         """
+        ...
+
+    @ContainsHeader.setter
+    def ContainsHeader(self, value: bool) -> None:
         ...
     @property
     def FilterCriteriaSource(self) -> 'CellRangeAddress_ec450d43':
@@ -74,6 +82,10 @@ class DatabaseRange(XPropertySet_bc180bfa, XNamed_a6520b08, XCellRangeReferrer_9
             OOo 1.1.2
         """
         ...
+
+    @FilterCriteriaSource.setter
+    def FilterCriteriaSource(self, value: 'CellRangeAddress_ec450d43') -> None:
+        ...
     @property
     def FromSelection(self) -> bool:
         """
@@ -84,17 +96,29 @@ class DatabaseRange(XPropertySet_bc180bfa, XNamed_a6520b08, XCellRangeReferrer_9
             OOo 2.0
         """
         ...
+
+    @FromSelection.setter
+    def FromSelection(self, value: bool) -> None:
+        ...
     @property
     def KeepFormats(self) -> bool:
         """
         if this property is set, cell formats are extended when the size of the range is changed by an update operation.
         """
         ...
+
+    @KeepFormats.setter
+    def KeepFormats(self, value: bool) -> None:
+        ...
     @property
     def MoveCells(self) -> bool:
         """
         if this property is set, columns or rows are inserted or deleted when the size of the range is changed by an update operation.
         """
+        ...
+
+    @MoveCells.setter
+    def MoveCells(self, value: bool) -> None:
         ...
     @property
     def RefreshPeriod(self) -> int:
@@ -106,11 +130,19 @@ class DatabaseRange(XPropertySet_bc180bfa, XNamed_a6520b08, XCellRangeReferrer_9
             OOo 2.0
         """
         ...
+
+    @RefreshPeriod.setter
+    def RefreshPeriod(self, value: int) -> None:
+        ...
     @property
     def StripData(self) -> bool:
         """
         if this property is set, the cell contents within the database range are left out when the document is saved.
         """
+        ...
+
+    @StripData.setter
+    def StripData(self, value: bool) -> None:
         ...
     @property
     def TokenIndex(self) -> int:
@@ -124,6 +156,10 @@ class DatabaseRange(XPropertySet_bc180bfa, XNamed_a6520b08, XCellRangeReferrer_9
             OOo 3.0
         """
         ...
+
+    @TokenIndex.setter
+    def TokenIndex(self, value: int) -> None:
+        ...
     @property
     def TotalsRow(self) -> bool:
         """
@@ -133,6 +169,10 @@ class DatabaseRange(XPropertySet_bc180bfa, XNamed_a6520b08, XCellRangeReferrer_9
         
             LibreOffice 5.0
         """
+        ...
+
+    @TotalsRow.setter
+    def TotalsRow(self, value: bool) -> None:
         ...
     @property
     def UseFilterCriteriaSource(self) -> bool:
@@ -145,4 +185,7 @@ class DatabaseRange(XPropertySet_bc180bfa, XNamed_a6520b08, XCellRangeReferrer_9
         """
         ...
 
+    @UseFilterCriteriaSource.setter
+    def UseFilterCriteriaSource(self, value: bool) -> None:
+        ...
 

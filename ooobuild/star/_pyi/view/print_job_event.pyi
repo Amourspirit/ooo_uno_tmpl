@@ -62,4 +62,7 @@ class PrintJobEvent(EventObject_a3d70b03):
         """
         ...
 
+    @State.setter
+    def State(self, value: PrintableState_c9fb0c65) -> None:
+        ...
 

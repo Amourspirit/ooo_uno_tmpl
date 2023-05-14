@@ -96,6 +96,9 @@ class XMailMessage(XInterface_8f010a43):
         """
         ...
 
+    @Body.setter
+    def Body(self, value: 'XTransferable_2d800f38') -> None:
+        ...
     @property
     def ReplyToAddress(self) -> str:
         """
@@ -105,6 +108,9 @@ class XMailMessage(XInterface_8f010a43):
         """
         ...
 
+    @ReplyToAddress.setter
+    def ReplyToAddress(self, value: str) -> None:
+        ...
     @property
     def SenderAddress(self) -> str:
         """
@@ -114,6 +120,9 @@ class XMailMessage(XInterface_8f010a43):
         """
         ...
 
+    @SenderAddress.setter
+    def SenderAddress(self, value: str) -> None:
+        ...
     @property
     def SenderName(self) -> str:
         """
@@ -121,6 +130,9 @@ class XMailMessage(XInterface_8f010a43):
         """
         ...
 
+    @SenderName.setter
+    def SenderName(self, value: str) -> None:
+        ...
     @property
     def Subject(self) -> str:
         """
@@ -128,4 +140,7 @@ class XMailMessage(XInterface_8f010a43):
         """
         ...
 
+    @Subject.setter
+    def Subject(self, value: str) -> None:
+        ...
 

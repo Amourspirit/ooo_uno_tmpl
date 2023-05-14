@@ -35,6 +35,10 @@ class StandardDiagramCreationParameters(ABC):
         States whether the first XLabeledDataSequence in a data-source is used as categories.
         """
         ...
+
+    @HasCategories.setter
+    def HasCategories(self, value: bool) -> None:
+        ...
     @property
     def UseCategoriesAsX(self) -> bool:
         """
@@ -44,4 +48,7 @@ class StandardDiagramCreationParameters(ABC):
         """
         ...
 
+    @UseCategoriesAsX.setter
+    def UseCategoriesAsX(self, value: bool) -> None:
+        ...
 

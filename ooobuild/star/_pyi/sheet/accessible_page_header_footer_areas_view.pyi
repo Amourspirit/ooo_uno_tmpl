@@ -37,4 +37,3 @@ class AccessiblePageHeaderFooterAreasView(XAccessibleComponent_b2f21269, XAccess
     """
     ...
 
-

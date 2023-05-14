@@ -34,4 +34,3 @@ class BindableDatabaseNumericField(BindableDataAwareControlModel_47091512, Datab
     """
     ...
 
-

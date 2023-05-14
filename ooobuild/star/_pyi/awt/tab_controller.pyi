@@ -31,4 +31,3 @@ class TabController(XTabController_bacd0be7):
     """
     ...
 
-

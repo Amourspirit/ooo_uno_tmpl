@@ -41,4 +41,3 @@ class PropertyBag(XPropertyBag_bbd00bd8):
         """
         ...
 
-

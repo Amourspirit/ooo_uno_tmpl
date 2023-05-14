@@ -39,4 +39,3 @@ class OleObjectFactory(XMultiServiceFactory_191e0eb6):
     """
     ...
 
-

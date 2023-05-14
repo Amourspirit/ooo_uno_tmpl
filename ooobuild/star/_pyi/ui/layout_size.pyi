@@ -51,14 +51,23 @@ class LayoutSize(object):
     def Minimum(self) -> int:
         ...
 
+    @Minimum.setter
+    def Minimum(self, value: int) -> None:
+        ...
 
     @property
     def Maximum(self) -> int:
         ...
 
+    @Maximum.setter
+    def Maximum(self, value: int) -> None:
+        ...
 
     @property
     def Preferred(self) -> int:
         ...
 
+    @Preferred.setter
+    def Preferred(self, value: int) -> None:
+        ...
 

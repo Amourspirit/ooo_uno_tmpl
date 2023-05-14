@@ -50,6 +50,9 @@ class XStatusbarItem(ABC):
         """
         ...
 
+    @AccessibleName.setter
+    def AccessibleName(self, value: str) -> None:
+        ...
     @property
     def Command(self) -> str:
         """
@@ -57,6 +60,9 @@ class XStatusbarItem(ABC):
         """
         ...
 
+    @Command.setter
+    def Command(self, value: str) -> None:
+        ...
     @property
     def HelpText(self) -> str:
         """
@@ -64,6 +70,9 @@ class XStatusbarItem(ABC):
         """
         ...
 
+    @HelpText.setter
+    def HelpText(self, value: str) -> None:
+        ...
     @property
     def ItemId(self) -> int:
         """
@@ -71,6 +80,9 @@ class XStatusbarItem(ABC):
         """
         ...
 
+    @ItemId.setter
+    def ItemId(self, value: int) -> None:
+        ...
     @property
     def ItemRect(self) -> 'Rectangle_84b109e9':
         """
@@ -78,6 +90,9 @@ class XStatusbarItem(ABC):
         """
         ...
 
+    @ItemRect.setter
+    def ItemRect(self, value: 'Rectangle_84b109e9') -> None:
+        ...
     @property
     def Offset(self) -> int:
         """
@@ -85,6 +100,9 @@ class XStatusbarItem(ABC):
         """
         ...
 
+    @Offset.setter
+    def Offset(self, value: int) -> None:
+        ...
     @property
     def QuickHelpText(self) -> str:
         """
@@ -92,6 +110,9 @@ class XStatusbarItem(ABC):
         """
         ...
 
+    @QuickHelpText.setter
+    def QuickHelpText(self, value: str) -> None:
+        ...
     @property
     def Style(self) -> int:
         """
@@ -105,6 +126,9 @@ class XStatusbarItem(ABC):
         """
         ...
 
+    @Style.setter
+    def Style(self, value: int) -> None:
+        ...
     @property
     def Text(self) -> str:
         """
@@ -112,6 +136,9 @@ class XStatusbarItem(ABC):
         """
         ...
 
+    @Text.setter
+    def Text(self, value: str) -> None:
+        ...
     @property
     def Visible(self) -> bool:
         """
@@ -119,6 +146,9 @@ class XStatusbarItem(ABC):
         """
         ...
 
+    @Visible.setter
+    def Visible(self, value: bool) -> None:
+        ...
     @property
     def Width(self) -> int:
         """
@@ -126,4 +156,7 @@ class XStatusbarItem(ABC):
         """
         ...
 
+    @Width.setter
+    def Width(self, value: int) -> None:
+        ...
 

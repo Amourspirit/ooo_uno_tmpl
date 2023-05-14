@@ -58,4 +58,7 @@ class XUndoAction(ABC):
         """
         ...
 
+    @Title.setter
+    def Title(self, value: str) -> None:
+        ...
 

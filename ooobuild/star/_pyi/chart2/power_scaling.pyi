@@ -33,4 +33,3 @@ class PowerScaling(XScaling_97500a65):
     """
     ...
 
-

@@ -55,6 +55,9 @@ class EndPopupModeEvent(EventObject_a3d70b03):
         """
         ...
 
+    @bTearoff.setter
+    def bTearoff(self, value: bool) -> None:
+        ...
 
     @property
     def FloatingPosition(self) -> Point_5fb2085e:
@@ -63,4 +66,7 @@ class EndPopupModeEvent(EventObject_a3d70b03):
         """
         ...
 
+    @FloatingPosition.setter
+    def FloatingPosition(self, value: Point_5fb2085e) -> None:
+        ...
 

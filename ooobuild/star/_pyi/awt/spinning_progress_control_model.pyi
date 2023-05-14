@@ -35,4 +35,3 @@ class SpinningProgressControlModel(AnimatedImagesControlModel_67d1109f):
     """
     ...
 
-

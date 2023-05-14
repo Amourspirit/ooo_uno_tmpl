@@ -58,6 +58,9 @@ class SQLException(Exception_85530a09):
         """
         ...
 
+    @SQLState.setter
+    def SQLState(self, value: str) -> None:
+        ...
     @property
     def ErrorCode(self) -> int:
         """
@@ -67,6 +70,9 @@ class SQLException(Exception_85530a09):
         """
         ...
 
+    @ErrorCode.setter
+    def ErrorCode(self, value: int) -> None:
+        ...
     @property
     def NextException(self) -> object:
         """
@@ -76,6 +82,9 @@ class SQLException(Exception_85530a09):
         """
         ...
 
+    @NextException.setter
+    def NextException(self, value: object) -> None:
+        ...
 
 __all__ = ['SQLException']
 

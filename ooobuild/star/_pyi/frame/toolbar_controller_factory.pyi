@@ -39,4 +39,3 @@ class ToolbarControllerFactory(XUIControllerFactory_25e60f05):
     """
     ...
 
-

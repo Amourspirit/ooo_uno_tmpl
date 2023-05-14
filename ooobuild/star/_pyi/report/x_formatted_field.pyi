@@ -42,6 +42,9 @@ class XFormattedField(XReportControlModel_2d800f4a):
         """
         ...
 
+    @FormatKey.setter
+    def FormatKey(self, value: int) -> None:
+        ...
     @property
     def FormatsSupplier(self) -> 'XNumberFormatsSupplier_3afb0fb7':
         """
@@ -49,4 +52,7 @@ class XFormattedField(XReportControlModel_2d800f4a):
         """
         ...
 
+    @FormatsSupplier.setter
+    def FormatsSupplier(self, value: 'XNumberFormatsSupplier_3afb0fb7') -> None:
+        ...
 

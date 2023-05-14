@@ -35,4 +35,3 @@ class SQLQueryComposer(XSQLQueryComposer_dd370ce7, XColumnsSupplier_f0600da9, XT
     """
     ...
 
-

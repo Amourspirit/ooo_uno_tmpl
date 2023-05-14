@@ -37,6 +37,10 @@ class AutoTextGroup(XIndexAccess_f0910d6d, XNamed_a6520b08, XAutoTextGroup_c9770
         The path to the file containing the AutoTextEntry's in this group.
         """
         ...
+
+    @FilePath.setter
+    def FilePath(self, value: str) -> None:
+        ...
     @property
     def Title(self) -> str:
         """
@@ -44,4 +48,7 @@ class AutoTextGroup(XIndexAccess_f0910d6d, XNamed_a6520b08, XAutoTextGroup_c9770
         """
         ...
 
+    @Title.setter
+    def Title(self, value: str) -> None:
+        ...
 

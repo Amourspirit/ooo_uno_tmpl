@@ -34,4 +34,3 @@ class Writer(XWriter_99830aa8):
     """
     ...
 
-

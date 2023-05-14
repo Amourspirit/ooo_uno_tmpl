@@ -42,6 +42,10 @@ class Storage(BaseStorage_ae680b55, XEncryptionProtectedSource_8cdf11a3, XTransa
         In case it is set to TRUE the storage itself and/or a tree of substorages contain encrypted streams. Usually in case this property is supported the implementation supports XEncryptionProtectedSource interface.
         """
         ...
+
+    @HasEncryptedEntries.setter
+    def HasEncryptedEntries(self, value: bool) -> None:
+        ...
     @property
     def HasNonEncryptedEntries(self) -> bool:
         """
@@ -50,17 +54,29 @@ class Storage(BaseStorage_ae680b55, XEncryptionProtectedSource_8cdf11a3, XTransa
         In case it is set to TRUE the storage itself and/or a tree of substorages contains non-encrypted streams. Usually in case this property is supported the implementation supports XEncryptionProtectedSource interface.
         """
         ...
+
+    @HasNonEncryptedEntries.setter
+    def HasNonEncryptedEntries(self, value: bool) -> None:
+        ...
     @property
     def IsRoot(self) -> bool:
         """
         allows to detect whether the storage is a root one.
         """
         ...
+
+    @IsRoot.setter
+    def IsRoot(self, value: bool) -> None:
+        ...
     @property
     def MediaType(self) -> str:
         """
         allows to get and set the media type of the storage.
         """
+        ...
+
+    @MediaType.setter
+    def MediaType(self, value: str) -> None:
         ...
     @property
     def MediaTypeFallbackIsUsed(self) -> bool:
@@ -72,11 +88,19 @@ class Storage(BaseStorage_ae680b55, XEncryptionProtectedSource_8cdf11a3, XTransa
         Usually means that the document validity is questionable, although the package itself is not corrupted. The decision about document validity in this case is in application hands. It is up to user of the storage to decide whether he accepts the fallback approach for an implementation of this service, outputs a warning or an error.
         """
         ...
+
+    @MediaTypeFallbackIsUsed.setter
+    def MediaTypeFallbackIsUsed(self, value: bool) -> None:
+        ...
     @property
     def RepairPackage(self) -> bool:
         """
         allows to detect whether storage is open in \"repair package\" mode or not.
         """
+        ...
+
+    @RepairPackage.setter
+    def RepairPackage(self, value: bool) -> None:
         ...
     @property
     def Version(self) -> str:
@@ -85,4 +109,7 @@ class Storage(BaseStorage_ae680b55, XEncryptionProtectedSource_8cdf11a3, XTransa
         """
         ...
 
+    @Version.setter
+    def Version(self, value: str) -> None:
+        ...
 

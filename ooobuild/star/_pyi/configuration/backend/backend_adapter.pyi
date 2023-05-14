@@ -36,4 +36,3 @@ class BackendAdapter(Backend_5cb2101e, XInitialization_d46c0cca):
     """
     ...
 
-

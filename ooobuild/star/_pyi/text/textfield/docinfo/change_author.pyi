@@ -35,6 +35,10 @@ class ChangeAuthor(TextField_90260a56):
         contains the name of the author.
         """
         ...
+
+    @Author.setter
+    def Author(self, value: str) -> None:
+        ...
     @property
     def CurrentPresentation(self) -> str:
         """
@@ -43,6 +47,10 @@ class ChangeAuthor(TextField_90260a56):
         This property is especially useful for import/export purposes.
         """
         ...
+
+    @CurrentPresentation.setter
+    def CurrentPresentation(self, value: str) -> None:
+        ...
     @property
     def IsFixed(self) -> bool:
         """
@@ -50,4 +58,7 @@ class ChangeAuthor(TextField_90260a56):
         """
         ...
 
+    @IsFixed.setter
+    def IsFixed(self, value: bool) -> None:
+        ...
 

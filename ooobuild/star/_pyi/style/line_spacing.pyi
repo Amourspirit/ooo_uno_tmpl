@@ -51,6 +51,9 @@ class LineSpacing(object):
         """
         ...
 
+    @Mode.setter
+    def Mode(self, value: int) -> None:
+        ...
 
     @property
     def Height(self) -> int:
@@ -59,4 +62,7 @@ class LineSpacing(object):
         """
         ...
 
+    @Height.setter
+    def Height(self, value: int) -> None:
+        ...
 

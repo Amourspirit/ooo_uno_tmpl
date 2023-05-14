@@ -32,4 +32,3 @@ class PageStyle(PageProperties_d7220ce3, Style_7336094a):
     """
     ...
 
-

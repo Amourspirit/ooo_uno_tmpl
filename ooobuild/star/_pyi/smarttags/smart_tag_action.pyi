@@ -37,4 +37,3 @@ class SmartTagAction(XSmartTagAction_1d750eb7):
     """
     ...
 
-

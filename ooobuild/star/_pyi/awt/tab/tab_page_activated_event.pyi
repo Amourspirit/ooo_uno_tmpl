@@ -57,4 +57,7 @@ class TabPageActivatedEvent(EventObject_a3d70b03):
         """
         ...
 
+    @TabPageID.setter
+    def TabPageID(self, value: int) -> None:
+        ...
 

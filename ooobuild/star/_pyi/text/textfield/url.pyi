@@ -35,6 +35,10 @@ class URL(TextField_90260a56):
         Specifies how the URL is formatted on output.
         """
         ...
+
+    @Format.setter
+    def Format(self, value: int) -> None:
+        ...
     @property
     def Representation(self) -> str:
         """
@@ -43,11 +47,19 @@ class URL(TextField_90260a56):
         If this string is empty, the URL will be shown.
         """
         ...
+
+    @Representation.setter
+    def Representation(self, value: str) -> None:
+        ...
     @property
     def TargetFrame(self) -> str:
         """
         Specifies the frame name in that the URL will be opened.
         """
+        ...
+
+    @TargetFrame.setter
+    def TargetFrame(self, value: str) -> None:
         ...
     @property
     def URL(self) -> str:
@@ -56,4 +68,7 @@ class URL(TextField_90260a56):
         """
         ...
 
+    @URL.setter
+    def URL(self, value: str) -> None:
+        ...
 

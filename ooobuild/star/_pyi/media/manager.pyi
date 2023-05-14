@@ -33,4 +33,3 @@ class Manager(XManager_8daa0a1b):
     """
     ...
 
-

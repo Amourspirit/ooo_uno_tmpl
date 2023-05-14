@@ -38,4 +38,3 @@ class AccessibleTextGraphicObject(XAccessibleComponent_b2f21269, XAccessibleCont
     """
     ...
 
-

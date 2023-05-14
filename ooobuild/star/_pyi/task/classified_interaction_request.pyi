@@ -53,6 +53,9 @@ class ClassifiedInteractionRequest(Exception_85530a09):
         """
         ...
 
+    @Classification.setter
+    def Classification(self, value: InteractionClassification_6c4d10e7) -> None:
+        ...
 
 __all__ = ['ClassifiedInteractionRequest']
 

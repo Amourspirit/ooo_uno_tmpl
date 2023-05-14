@@ -35,6 +35,10 @@ class HiddenParagraph(TextField_90260a56):
         contains the condition.
         """
         ...
+
+    @Condition.setter
+    def Condition(self, value: str) -> None:
+        ...
     @property
     def IsHidden(self) -> bool:
         """
@@ -44,4 +48,7 @@ class HiddenParagraph(TextField_90260a56):
         """
         ...
 
+    @IsHidden.setter
+    def IsHidden(self, value: bool) -> None:
+        ...
 

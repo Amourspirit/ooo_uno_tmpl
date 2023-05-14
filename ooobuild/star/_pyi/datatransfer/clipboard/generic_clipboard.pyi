@@ -34,4 +34,3 @@ class GenericClipboard(XClipboardEx_c626128a, XClipboardNotifier_3e4e150d, XComp
     """
     ...
 
-

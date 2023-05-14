@@ -39,6 +39,9 @@ class XVeto(ABC):
         """
         ...
 
+    @Details.setter
+    def Details(self, value: object) -> None:
+        ...
     @property
     def Reason(self) -> str:
         """
@@ -46,4 +49,7 @@ class XVeto(ABC):
         """
         ...
 
+    @Reason.setter
+    def Reason(self, value: str) -> None:
+        ...
 

@@ -55,6 +55,9 @@ class SendInfo(object):
         """
         ...
 
+    @ProtocolType.setter
+    def ProtocolType(self, value: str) -> None:
+        ...
 
     @property
     def Value(self) -> str:
@@ -63,4 +66,7 @@ class SendInfo(object):
         """
         ...
 
+    @Value.setter
+    def Value(self, value: str) -> None:
+        ...
 

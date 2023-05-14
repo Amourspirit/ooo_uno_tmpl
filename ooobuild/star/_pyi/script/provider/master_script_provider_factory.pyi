@@ -37,4 +37,3 @@ class MasterScriptProviderFactory(XScriptProviderFactory_3ce1426):
     """
     ...
 
-

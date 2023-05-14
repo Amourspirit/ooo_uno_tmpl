@@ -36,4 +36,3 @@ class FormattedField(UnoControlFormattedField_4a610ff1, XBoundControl_bba00bed):
     """
     ...
 
-

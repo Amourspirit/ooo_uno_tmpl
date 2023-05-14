@@ -55,6 +55,9 @@ class NumberedSortingInfo(object):
         """
         ...
 
+    @ColumnIndex.setter
+    def ColumnIndex(self, value: int) -> None:
+        ...
 
     @property
     def Ascending(self) -> bool:
@@ -63,4 +66,7 @@ class NumberedSortingInfo(object):
         """
         ...
 
+    @Ascending.setter
+    def Ascending(self, value: bool) -> None:
+        ...
 

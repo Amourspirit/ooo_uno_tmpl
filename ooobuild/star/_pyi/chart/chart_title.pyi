@@ -44,6 +44,10 @@ class ChartTitle(Shape_85cc09e5, UserDefinedAttributesSupplier_9fbe1222):
         Setting this property to false will have no effect. Instead use the interface com.sun.star.drawing.XShape to set a concrete position.
         """
         ...
+
+    @AutomaticPosition.setter
+    def AutomaticPosition(self, value: bool) -> None:
+        ...
     @property
     def String(self) -> str:
         """
@@ -51,6 +55,10 @@ class ChartTitle(Shape_85cc09e5, UserDefinedAttributesSupplier_9fbe1222):
         
         Note that you cannot change attributes of parts of a title, e.g., put one word in bold characters. All formatting affects the entire string.
         """
+        ...
+
+    @String.setter
+    def String(self, value: str) -> None:
         ...
     @property
     def TextRotation(self) -> int:
@@ -61,4 +69,7 @@ class ChartTitle(Shape_85cc09e5, UserDefinedAttributesSupplier_9fbe1222):
         """
         ...
 
+    @TextRotation.setter
+    def TextRotation(self, value: int) -> None:
+        ...
 

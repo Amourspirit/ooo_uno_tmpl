@@ -31,4 +31,3 @@ class CellAreaLinksEnumeration(XEnumeration_f2180daa):
     """
     ...
 
-

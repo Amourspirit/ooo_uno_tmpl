@@ -43,6 +43,9 @@ class XSolverDescription(XInterface_8f010a43):
         """
         ...
 
+    @ComponentDescription.setter
+    def ComponentDescription(self, value: str) -> None:
+        ...
     @property
     def StatusDescription(self) -> str:
         """
@@ -50,4 +53,7 @@ class XSolverDescription(XInterface_8f010a43):
         """
         ...
 
+    @StatusDescription.setter
+    def StatusDescription(self, value: str) -> None:
+        ...
 

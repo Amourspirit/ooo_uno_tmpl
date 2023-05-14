@@ -33,4 +33,3 @@ class Acceptor(XAcceptor_d6eb0cc1):
     """
     ...
 
-

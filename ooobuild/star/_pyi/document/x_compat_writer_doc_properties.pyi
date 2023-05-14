@@ -35,16 +35,25 @@ class XCompatWriterDocProperties(ABC):
         """
         ...
 
+    @Category.setter
+    def Category(self, value: str) -> None:
+        ...
     @property
     def Company(self) -> str:
         """
         """
         ...
 
+    @Company.setter
+    def Company(self, value: str) -> None:
+        ...
     @property
     def Manager(self) -> str:
         """
         """
         ...
 
+    @Manager.setter
+    def Manager(self, value: str) -> None:
+        ...
 

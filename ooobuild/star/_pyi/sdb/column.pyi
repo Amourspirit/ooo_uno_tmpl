@@ -32,4 +32,3 @@ class Column(ColumnSettings_bbba0c00, Column_7b1d098a):
     """
     ...
 
-

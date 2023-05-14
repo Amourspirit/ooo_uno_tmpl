@@ -39,4 +39,3 @@ class UnoControlPatternField(UnoControlEdit_bc4e0bed, XPatternField_afc10b6e, XS
     """
     ...
 
-

@@ -38,4 +38,3 @@ class FileContentProvider(XPropertySet_bc180bfa, XContentIdentifierFactory_56b91
     """
     ...
 
-

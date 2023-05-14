@@ -54,6 +54,9 @@ class SolverConstraint(object):
         """
         ...
 
+    @Left.setter
+    def Left(self, value: CellAddress_ae5f0b56) -> None:
+        ...
 
     @property
     def Operator(self) -> SolverConstraintOperator_6e4a110d:
@@ -62,6 +65,9 @@ class SolverConstraint(object):
         """
         ...
 
+    @Operator.setter
+    def Operator(self, value: SolverConstraintOperator_6e4a110d) -> None:
+        ...
 
     @property
     def Right(self) -> object:
@@ -70,4 +76,7 @@ class SolverConstraint(object):
         """
         ...
 
+    @Right.setter
+    def Right(self, value: object) -> None:
+        ...
 

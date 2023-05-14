@@ -33,4 +33,3 @@ class DynamicResultSet(XDynamicResultSet_e0360d0a):
     """
     ...
 
-

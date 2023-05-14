@@ -32,4 +32,3 @@ class ControlShape(Shape_85cc09e5, XControlShape_e34e0d1e):
     """
     ...
 
-

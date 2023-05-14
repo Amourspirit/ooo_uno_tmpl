@@ -34,4 +34,3 @@ class SequenceTimeContainer(XTimeContainer_1cca0ec5):
     """
     ...
 
-

@@ -38,4 +38,3 @@ class SessionListener(XSessionManagerListener2_68af1082):
         """
         ...
 
-

@@ -43,4 +43,3 @@ class DatabaseAccessConnection(Connection_98fe0ab4, DatabaseDefinition_9d00e3a, 
     """
     ...
 
-

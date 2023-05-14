@@ -39,6 +39,9 @@ class XAnimateMotion(XAnimate_ca680c52):
         """
         ...
 
+    @Origin.setter
+    def Origin(self, value: object) -> None:
+        ...
     @property
     def Path(self) -> object:
         """
@@ -48,4 +51,7 @@ class XAnimateMotion(XAnimate_ca680c52):
         """
         ...
 
+    @Path.setter
+    def Path(self, value: object) -> None:
+        ...
 

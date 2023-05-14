@@ -31,4 +31,3 @@ class LanguageScriptProvider(ScriptProvider_6fa610f6):
     """
     ...
 
-

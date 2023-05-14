@@ -52,6 +52,9 @@ class DropCapFormat(object):
         """
         ...
 
+    @Lines.setter
+    def Lines(self, value: int) -> None:
+        ...
 
     @property
     def Count(self) -> int:
@@ -60,6 +63,9 @@ class DropCapFormat(object):
         """
         ...
 
+    @Count.setter
+    def Count(self, value: int) -> None:
+        ...
 
     @property
     def Distance(self) -> int:
@@ -68,4 +74,7 @@ class DropCapFormat(object):
         """
         ...
 
+    @Distance.setter
+    def Distance(self, value: int) -> None:
+        ...
 

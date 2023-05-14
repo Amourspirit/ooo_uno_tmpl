@@ -31,4 +31,3 @@ class ListPositionCellBinding(CellValueBinding_ecf40d48):
     """
     ...
 
-

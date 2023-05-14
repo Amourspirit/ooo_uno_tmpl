@@ -32,4 +32,3 @@ class CellRange(CellProperties_d4360cbd, XCellRange_a2f70ad5):
     """
     ...
 
-

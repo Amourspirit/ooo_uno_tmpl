@@ -40,11 +40,19 @@ class OLE2Shape(Shape_85cc09e5):
         If you set it, an empty OLE2 document stream with this CLSID is created within this OLE2 shape.
         """
         ...
+
+    @CLSID.setter
+    def CLSID(self, value: str) -> None:
+        ...
     @property
     def IsInternal(self) -> bool:
         """
         This property returns TRUE for all OLE2 that are internal Office components.
         """
+        ...
+
+    @IsInternal.setter
+    def IsInternal(self, value: bool) -> None:
         ...
     @property
     def Model(self) -> 'XModel_7a6e095c':
@@ -54,6 +62,10 @@ class OLE2Shape(Shape_85cc09e5):
         This property returns an empty reference if the OLE2 is not an Office component.
         """
         ...
+
+    @Model.setter
+    def Model(self, value: 'XModel_7a6e095c') -> None:
+        ...
     @property
     def PersistName(self) -> str:
         """
@@ -61,4 +73,7 @@ class OLE2Shape(Shape_85cc09e5):
         """
         ...
 
+    @PersistName.setter
+    def PersistName(self, value: str) -> None:
+        ...
 

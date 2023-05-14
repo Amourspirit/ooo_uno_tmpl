@@ -47,11 +47,19 @@ class TextPortion(TextRange_90540a5f, XTolerantMultiPropertySet_7bd4114e):
         contains the bookmark of a text portion of type Bookmark.
         """
         ...
+
+    @Bookmark.setter
+    def Bookmark(self, value: 'XTextContent_b16e0ba5') -> None:
+        ...
     @property
     def ControlCharacter(self) -> int:
         """
         contains the control character of a text portion of type ControlCharacter.
         """
+        ...
+
+    @ControlCharacter.setter
+    def ControlCharacter(self, value: int) -> None:
         ...
     @property
     def DocumentIndexMark(self) -> 'XTextContent_b16e0ba5':
@@ -59,11 +67,19 @@ class TextPortion(TextRange_90540a5f, XTolerantMultiPropertySet_7bd4114e):
         contains the document index mark of a text portion of type DocumentIndexMark.
         """
         ...
+
+    @DocumentIndexMark.setter
+    def DocumentIndexMark(self, value: 'XTextContent_b16e0ba5') -> None:
+        ...
     @property
     def Footnote(self) -> 'XFootnote_901e0a73':
         """
         contains the footnote of a text portion of type Footnote.
         """
+        ...
+
+    @Footnote.setter
+    def Footnote(self, value: 'XFootnote_901e0a73') -> None:
         ...
     @property
     def InContentMetadata(self) -> 'XTextContent_b16e0ba5':
@@ -75,11 +91,19 @@ class TextPortion(TextRange_90540a5f, XTolerantMultiPropertySet_7bd4114e):
             OOo 3.2
         """
         ...
+
+    @InContentMetadata.setter
+    def InContentMetadata(self, value: 'XTextContent_b16e0ba5') -> None:
+        ...
     @property
     def IsCollapsed(self) -> bool:
         """
         contains whether the portion is a point only.
         """
+        ...
+
+    @IsCollapsed.setter
+    def IsCollapsed(self, value: bool) -> None:
         ...
     @property
     def IsStart(self) -> bool:
@@ -89,17 +113,29 @@ class TextPortion(TextRange_90540a5f, XTolerantMultiPropertySet_7bd4114e):
         This is used for portions which are represented by 2 TextPortion objects (e.g., DocmentIndexMark).
         """
         ...
+
+    @IsStart.setter
+    def IsStart(self, value: bool) -> None:
+        ...
     @property
     def ReferenceMark(self) -> 'XTextContent_b16e0ba5':
         """
         contains the bookmark of a text portion of type ReferenceMark.
         """
         ...
+
+    @ReferenceMark.setter
+    def ReferenceMark(self, value: 'XTextContent_b16e0ba5') -> None:
+        ...
     @property
     def TextField(self) -> 'XTextField_9a630aae':
         """
         contains the text field of a text portion of type TextField.
         """
+        ...
+
+    @TextField.setter
+    def TextField(self, value: 'XTextField_9a630aae') -> None:
         ...
     @property
     def TextPortionType(self) -> str:
@@ -112,4 +148,7 @@ class TextPortion(TextRange_90540a5f, XTolerantMultiPropertySet_7bd4114e):
         """
         ...
 
+    @TextPortionType.setter
+    def TextPortionType(self, value: str) -> None:
+        ...
 

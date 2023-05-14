@@ -33,4 +33,3 @@ class BridgeFactory(XBridgeFactory2_ecc10d24):
     """
     ...
 
-

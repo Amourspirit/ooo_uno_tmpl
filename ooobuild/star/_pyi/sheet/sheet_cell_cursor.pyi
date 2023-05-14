@@ -36,4 +36,3 @@ class SheetCellCursor(SheetCellRange_d4540c87, CellCursor_a3b80b0e, XSheetCellCu
     """
     ...
 
-

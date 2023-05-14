@@ -44,11 +44,20 @@ class TableSortDescriptor2(SortDescriptor2_d7270cbf):
         Each entry specifies properties that state the row/column to be sorted and how that should be done.
         """
         ...
+
+    @SortFields.setter
+    def SortFields(self, value: 'typing.Tuple[TableSortField_d3860c84, ...]') -> None:
+        ...
+
     @property
     def IsSortColumns(self) -> bool:
         """
         specifies if the columns or rows are to be sorted.
         """
+        ...
+
+    @IsSortColumns.setter
+    def IsSortColumns(self, value: bool) -> None:
         ...
     @property
     def MaxSortFieldsCount(self) -> int:
@@ -57,4 +66,7 @@ class TableSortDescriptor2(SortDescriptor2_d7270cbf):
         """
         ...
 
+    @MaxSortFieldsCount.setter
+    def MaxSortFieldsCount(self, value: int) -> None:
+        ...
 

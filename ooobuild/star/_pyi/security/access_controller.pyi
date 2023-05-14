@@ -37,4 +37,3 @@ class AccessController(XAccessController_2cc60f4e):
     """
     ...
 
-

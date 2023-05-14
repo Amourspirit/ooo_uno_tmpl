@@ -37,4 +37,3 @@ class ModuleWindowStateConfiguration(XNameContainer_cb90e47):
     """
     ...
 
-

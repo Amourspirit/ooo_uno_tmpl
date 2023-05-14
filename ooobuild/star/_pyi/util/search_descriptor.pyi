@@ -39,11 +39,19 @@ class SearchDescriptor(XSearchDescriptor_ef600d93):
         If TRUE, the search is done backwards in the document.
         """
         ...
+
+    @SearchBackwards.setter
+    def SearchBackwards(self, value: bool) -> None:
+        ...
     @property
     def SearchCaseSensitive(self) -> bool:
         """
         If TRUE, the case of the letters is important for the match.
         """
+        ...
+
+    @SearchCaseSensitive.setter
+    def SearchCaseSensitive(self, value: bool) -> None:
         ...
     @property
     def SearchRegularExpression(self) -> bool:
@@ -52,6 +60,10 @@ class SearchDescriptor(XSearchDescriptor_ef600d93):
         
         SearchRegularExpression, SearchWildcard and SearchSimilarity are mutually exclusive, only one can be TRUE at the same time.
         """
+        ...
+
+    @SearchRegularExpression.setter
+    def SearchRegularExpression(self, value: bool) -> None:
         ...
     @property
     def SearchSimilarity(self) -> bool:
@@ -63,17 +75,29 @@ class SearchDescriptor(XSearchDescriptor_ef600d93):
         SearchRegularExpression, SearchWildcard and SearchSimilarity are mutually exclusive, only one can be TRUE at the same time.
         """
         ...
+
+    @SearchSimilarity.setter
+    def SearchSimilarity(self, value: bool) -> None:
+        ...
     @property
     def SearchSimilarityAdd(self) -> int:
         """
         specifies the number of characters that must be added to match the search pattern.
         """
         ...
+
+    @SearchSimilarityAdd.setter
+    def SearchSimilarityAdd(self, value: int) -> None:
+        ...
     @property
     def SearchSimilarityExchange(self) -> int:
         """
         This property specifies the number of characters that must be replaced to match the search pattern.
         """
+        ...
+
+    @SearchSimilarityExchange.setter
+    def SearchSimilarityExchange(self, value: int) -> None:
         ...
     @property
     def SearchSimilarityRelax(self) -> bool:
@@ -83,17 +107,29 @@ class SearchDescriptor(XSearchDescriptor_ef600d93):
         In the case of a relaxed similarity search, the following properties are applied together:
         """
         ...
+
+    @SearchSimilarityRelax.setter
+    def SearchSimilarityRelax(self, value: bool) -> None:
+        ...
     @property
     def SearchSimilarityRemove(self) -> int:
         """
         This property specifies the number of characters that may be ignored to match the search pattern.
         """
         ...
+
+    @SearchSimilarityRemove.setter
+    def SearchSimilarityRemove(self, value: int) -> None:
+        ...
     @property
     def SearchStyles(self) -> bool:
         """
         If TRUE, it is searched for positions where the paragraph style with the name of the search pattern is applied.
         """
+        ...
+
+    @SearchStyles.setter
+    def SearchStyles(self, value: bool) -> None:
         ...
     @property
     def SearchWildcard(self) -> bool:
@@ -109,6 +145,10 @@ class SearchDescriptor(XSearchDescriptor_ef600d93):
             LibreOffice 5.2
         """
         ...
+
+    @SearchWildcard.setter
+    def SearchWildcard(self, value: bool) -> None:
+        ...
     @property
     def SearchWords(self) -> bool:
         """
@@ -116,4 +156,7 @@ class SearchDescriptor(XSearchDescriptor_ef600d93):
         """
         ...
 
+    @SearchWords.setter
+    def SearchWords(self, value: bool) -> None:
+        ...
 

@@ -55,6 +55,9 @@ class ScriptExceptionRaisedException(ScriptErrorRaisedException_585f15bc):
         """
         ...
 
+    @exceptionType.setter
+    def exceptionType(self, value: str) -> None:
+        ...
 
 __all__ = ['ScriptExceptionRaisedException']
 

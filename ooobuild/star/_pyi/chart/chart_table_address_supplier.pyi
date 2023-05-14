@@ -42,6 +42,11 @@ class ChartTableAddressSupplier(ABC):
         This sequence should contain one element for each series in the chart.
         """
         ...
+
+    @SeriesAddresses.setter
+    def SeriesAddresses(self, value: 'typing.Tuple[ChartSeriesAddress_a480e3d, ...]') -> None:
+        ...
+
     @property
     def CategoriesRangeAddress(self) -> str:
         """
@@ -50,11 +55,19 @@ class ChartTableAddressSupplier(ABC):
         Note: Each value of a data series belongs exactly to one category.
         """
         ...
+
+    @CategoriesRangeAddress.setter
+    def CategoriesRangeAddress(self, value: str) -> None:
+        ...
     @property
     def MainTitleAddress(self) -> str:
         """
         contains the address to the main title.
         """
+        ...
+
+    @MainTitleAddress.setter
+    def MainTitleAddress(self, value: str) -> None:
         ...
     @property
     def SubTitleAddress(self) -> str:
@@ -63,4 +76,7 @@ class ChartTableAddressSupplier(ABC):
         """
         ...
 
+    @SubTitleAddress.setter
+    def SubTitleAddress(self, value: str) -> None:
+        ...
 

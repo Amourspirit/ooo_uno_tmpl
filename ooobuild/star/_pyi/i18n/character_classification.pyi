@@ -33,4 +33,3 @@ class CharacterClassification(XCharacterClassification_4ac00fd9):
     """
     ...
 
-

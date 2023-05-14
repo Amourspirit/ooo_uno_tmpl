@@ -51,6 +51,9 @@ class DataResult(object):
         """
         ...
 
+    @Flags.setter
+    def Flags(self, value: int) -> None:
+        ...
 
     @property
     def Value(self) -> float:
@@ -59,4 +62,7 @@ class DataResult(object):
         """
         ...
 
+    @Value.setter
+    def Value(self, value: float) -> None:
+        ...
 

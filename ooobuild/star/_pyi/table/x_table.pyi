@@ -58,6 +58,9 @@ class XTable(XFastPropertySet_ee6b0d88, XPropertySet_bc180bfa, XComponent_98dc0a
         """
         ...
 
+    @ColumnCount.setter
+    def ColumnCount(self, value: int) -> None:
+        ...
     @property
     def RowCount(self) -> int:
         """
@@ -65,4 +68,7 @@ class XTable(XFastPropertySet_ee6b0d88, XPropertySet_bc180bfa, XComponent_98dc0a
         """
         ...
 
+    @RowCount.setter
+    def RowCount(self, value: int) -> None:
+        ...
 

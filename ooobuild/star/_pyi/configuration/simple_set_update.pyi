@@ -38,4 +38,3 @@ class SimpleSetUpdate(SimpleSetAccess_5ea81068, XNameContainer_cb90e47, XMultiSe
     """
     ...
 
-

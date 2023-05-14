@@ -31,4 +31,3 @@ class SystemClipboard(XSystemClipboard_16621452):
     """
     ...
 
-

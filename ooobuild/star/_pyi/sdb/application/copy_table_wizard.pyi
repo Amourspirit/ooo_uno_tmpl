@@ -80,4 +80,3 @@ class CopyTableWizard(XCopyTableWizard_89b7114f):
         """
         ...
 
-

@@ -49,14 +49,23 @@ class Direction3D(object):
     def DirectionX(self) -> float:
         ...
 
+    @DirectionX.setter
+    def DirectionX(self, value: float) -> None:
+        ...
 
     @property
     def DirectionY(self) -> float:
         ...
 
+    @DirectionY.setter
+    def DirectionY(self, value: float) -> None:
+        ...
 
     @property
     def DirectionZ(self) -> float:
         ...
 
+    @DirectionZ.setter
+    def DirectionZ(self, value: float) -> None:
+        ...
 

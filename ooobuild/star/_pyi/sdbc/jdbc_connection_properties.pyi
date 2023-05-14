@@ -46,6 +46,11 @@ class JDBCConnectionProperties(ConnectionProperties_1a9f0ee1):
         specifies a set of properties to pass to java.lang.System.setProperty before loading the system's JDBC driver.
         """
         ...
+
+    @SystemProperties.setter
+    def SystemProperties(self, value: 'typing.Tuple[NamedValue_a37a0af3, ...]') -> None:
+        ...
+
     @property
     def TypeInfoSettings(self) -> 'typing.Tuple[object, ...]':
         """
@@ -56,11 +61,20 @@ class JDBCConnectionProperties(ConnectionProperties_1a9f0ee1):
         COLUMN(X) defines the column which will be compared and the column which will be replaced. In the example above column 2 will be compared with the value -5. If this is true than column 6 will now return the value PRECISION.
         """
         ...
+
+    @TypeInfoSettings.setter
+    def TypeInfoSettings(self, value: 'typing.Tuple[object, ...]') -> None:
+        ...
+
     @property
     def AutoRetrievingStatement(self) -> str:
         """
         specifies the statement which should be executed when asking an \"INSERT\" statement for the XGeneratedResultSet (future concept) interface.
         """
+        ...
+
+    @AutoRetrievingStatement.setter
+    def AutoRetrievingStatement(self, value: str) -> None:
         ...
     @property
     def IsAutoRetrievingEnabled(self) -> bool:
@@ -70,11 +84,19 @@ class JDBCConnectionProperties(ConnectionProperties_1a9f0ee1):
         If TRUE than the statement will support the XGeneratedResultSet (future concept) interface, otherwise not.
         """
         ...
+
+    @IsAutoRetrievingEnabled.setter
+    def IsAutoRetrievingEnabled(self, value: bool) -> None:
+        ...
     @property
     def JavaDriverClass(self) -> str:
         """
         which JDBC driver class should be loaded to create the connection.
         """
+        ...
+
+    @JavaDriverClass.setter
+    def JavaDriverClass(self, value: str) -> None:
         ...
     @property
     def JavaDriverClassPath(self) -> str:
@@ -89,4 +111,7 @@ class JDBCConnectionProperties(ConnectionProperties_1a9f0ee1):
         """
         ...
 
+    @JavaDriverClassPath.setter
+    def JavaDriverClassPath(self, value: str) -> None:
+        ...
 

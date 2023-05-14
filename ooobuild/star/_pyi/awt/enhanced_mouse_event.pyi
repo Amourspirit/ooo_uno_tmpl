@@ -63,4 +63,7 @@ class EnhancedMouseEvent(MouseEvent_8f430a5f):
         """
         ...
 
+    @Target.setter
+    def Target(self, value: XInterface_8f010a43) -> None:
+        ...
 

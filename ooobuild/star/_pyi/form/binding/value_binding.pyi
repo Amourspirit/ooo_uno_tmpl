@@ -44,6 +44,10 @@ class ValueBinding(XPropertySet_bc180bfa, XValueBinding_271b0ed5, XComponent_98d
         As long as this property is TRUE, the value binding should throw an InvalidBindingStateException when its XValueBinding.setValue() method is invoked.
         """
         ...
+
+    @ReadOnly.setter
+    def ReadOnly(self, value: bool) -> None:
+        ...
     @property
     def Relevant(self) -> bool:
         """
@@ -57,4 +61,7 @@ class ValueBinding(XPropertySet_bc180bfa, XValueBinding_271b0ed5, XComponent_98d
         """
         ...
 
+    @Relevant.setter
+    def Relevant(self, value: bool) -> None:
+        ...
 

@@ -31,4 +31,3 @@ class JobManager(XJobManager_a40d0af4):
     """
     ...
 
-

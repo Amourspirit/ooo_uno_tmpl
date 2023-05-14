@@ -56,6 +56,9 @@ class CorruptedFilterConfigurationException(RuntimeException_d7390ced):
         """
         ...
 
+    @Details.setter
+    def Details(self, value: str) -> None:
+        ...
 
 __all__ = ['CorruptedFilterConfigurationException']
 

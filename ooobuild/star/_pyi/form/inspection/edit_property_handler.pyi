@@ -35,4 +35,3 @@ class EditPropertyHandler(XPropertyHandler_3e950fbf):
     """
     ...
 
-

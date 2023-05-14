@@ -61,6 +61,9 @@ class TableColumnSeparator(object):
         """
         ...
 
+    @Position.setter
+    def Position(self, value: int) -> None:
+        ...
 
     @property
     def IsVisible(self) -> bool:
@@ -69,4 +72,7 @@ class TableColumnSeparator(object):
         """
         ...
 
+    @IsVisible.setter
+    def IsVisible(self, value: bool) -> None:
+        ...
 

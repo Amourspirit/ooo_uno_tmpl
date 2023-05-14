@@ -61,6 +61,11 @@ class OfficeDocument(XDocumentEventBroadcaster_b2f1126a, XDocumentPropertiesSupp
             LibreOffice 4.2
         """
         ...
+
+    @InteropGrabBag.setter
+    def InteropGrabBag(self, value: 'typing.Tuple[PropertyValue_c9610c73, ...]') -> None:
+        ...
+
     @property
     def ApplyFormDesignMode(self) -> bool:
         """
@@ -69,6 +74,10 @@ class OfficeDocument(XDocumentEventBroadcaster_b2f1126a, XDocumentPropertiesSupp
         If set to TRUE, upon loading the document, the form controls will be in design mode.If set to FALSE, they will be alive, i.e. operational.With this, you may control if your document works primarily as a form document.
         """
         ...
+
+    @ApplyFormDesignMode.setter
+    def ApplyFormDesignMode(self, value: bool) -> None:
+        ...
     @property
     def AutomaticControlFocus(self) -> bool:
         """
@@ -76,6 +85,10 @@ class OfficeDocument(XDocumentEventBroadcaster_b2f1126a, XDocumentPropertiesSupp
         
         If this flag is set to TRUE, any view belonging to the document should focus the first control in the document. With this, you may control if your document works primarily as a form document.
         """
+        ...
+
+    @AutomaticControlFocus.setter
+    def AutomaticControlFocus(self, value: bool) -> None:
         ...
     @property
     def RuntimeUID(self) -> str:
@@ -86,4 +99,7 @@ class OfficeDocument(XDocumentEventBroadcaster_b2f1126a, XDocumentPropertiesSupp
         """
         ...
 
+    @RuntimeUID.setter
+    def RuntimeUID(self, value: str) -> None:
+        ...
 

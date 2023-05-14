@@ -49,6 +49,9 @@ class XSection(XPropertySet_bc180bfa, XChild_a6390b07, XContainer_d6fb0cc6, XEnu
         """
         ...
 
+    @BackColor.setter
+    def BackColor(self, value: 'Color_68e908c5') -> None:
+        ...
     @property
     def BackTransparent(self) -> bool:
         """
@@ -56,6 +59,9 @@ class XSection(XPropertySet_bc180bfa, XChild_a6390b07, XContainer_d6fb0cc6, XEnu
         """
         ...
 
+    @BackTransparent.setter
+    def BackTransparent(self, value: bool) -> None:
+        ...
     @property
     def CanGrow(self) -> bool:
         """
@@ -65,6 +71,9 @@ class XSection(XPropertySet_bc180bfa, XChild_a6390b07, XContainer_d6fb0cc6, XEnu
         """
         ...
 
+    @CanGrow.setter
+    def CanGrow(self, value: bool) -> None:
+        ...
     @property
     def CanShrink(self) -> bool:
         """
@@ -72,6 +81,9 @@ class XSection(XPropertySet_bc180bfa, XChild_a6390b07, XContainer_d6fb0cc6, XEnu
         """
         ...
 
+    @CanShrink.setter
+    def CanShrink(self, value: bool) -> None:
+        ...
     @property
     def ConditionalPrintExpression(self) -> str:
         """
@@ -81,6 +93,9 @@ class XSection(XPropertySet_bc180bfa, XChild_a6390b07, XContainer_d6fb0cc6, XEnu
         """
         ...
 
+    @ConditionalPrintExpression.setter
+    def ConditionalPrintExpression(self, value: str) -> None:
+        ...
     @property
     def ForceNewPage(self) -> int:
         """
@@ -90,6 +105,9 @@ class XSection(XPropertySet_bc180bfa, XChild_a6390b07, XContainer_d6fb0cc6, XEnu
         """
         ...
 
+    @ForceNewPage.setter
+    def ForceNewPage(self, value: int) -> None:
+        ...
     @property
     def Group(self) -> 'XGroup_86540a09':
         """
@@ -97,6 +115,9 @@ class XSection(XPropertySet_bc180bfa, XChild_a6390b07, XContainer_d6fb0cc6, XEnu
         """
         ...
 
+    @Group.setter
+    def Group(self, value: 'XGroup_86540a09') -> None:
+        ...
     @property
     def Height(self) -> int:
         """
@@ -104,6 +125,9 @@ class XSection(XPropertySet_bc180bfa, XChild_a6390b07, XContainer_d6fb0cc6, XEnu
         """
         ...
 
+    @Height.setter
+    def Height(self, value: int) -> None:
+        ...
     @property
     def KeepTogether(self) -> bool:
         """
@@ -113,6 +137,9 @@ class XSection(XPropertySet_bc180bfa, XChild_a6390b07, XContainer_d6fb0cc6, XEnu
         """
         ...
 
+    @KeepTogether.setter
+    def KeepTogether(self, value: bool) -> None:
+        ...
     @property
     def Name(self) -> str:
         """
@@ -120,6 +147,9 @@ class XSection(XPropertySet_bc180bfa, XChild_a6390b07, XContainer_d6fb0cc6, XEnu
         """
         ...
 
+    @Name.setter
+    def Name(self, value: str) -> None:
+        ...
     @property
     def NewRowOrCol(self) -> int:
         """
@@ -129,6 +159,9 @@ class XSection(XPropertySet_bc180bfa, XChild_a6390b07, XContainer_d6fb0cc6, XEnu
         """
         ...
 
+    @NewRowOrCol.setter
+    def NewRowOrCol(self, value: int) -> None:
+        ...
     @property
     def RepeatSection(self) -> bool:
         """
@@ -138,6 +171,9 @@ class XSection(XPropertySet_bc180bfa, XChild_a6390b07, XContainer_d6fb0cc6, XEnu
         """
         ...
 
+    @RepeatSection.setter
+    def RepeatSection(self, value: bool) -> None:
+        ...
     @property
     def ReportDefinition(self) -> 'XReportDefinition_ec30e81':
         """
@@ -145,6 +181,9 @@ class XSection(XPropertySet_bc180bfa, XChild_a6390b07, XContainer_d6fb0cc6, XEnu
         """
         ...
 
+    @ReportDefinition.setter
+    def ReportDefinition(self, value: 'XReportDefinition_ec30e81') -> None:
+        ...
     @property
     def Visible(self) -> bool:
         """
@@ -152,4 +191,7 @@ class XSection(XPropertySet_bc180bfa, XChild_a6390b07, XContainer_d6fb0cc6, XEnu
         """
         ...
 
+    @Visible.setter
+    def Visible(self, value: bool) -> None:
+        ...
 

@@ -43,4 +43,3 @@ class OfficeDatabaseDocument(OfficeDocument_fecd0df2, XLoadable_989a0a7f, XScrip
     """
     ...
 
-

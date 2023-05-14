@@ -34,4 +34,3 @@ class PrimitiveFactory2D(XPrimitiveFactory2D_398c0f45):
     """
     ...
 
-

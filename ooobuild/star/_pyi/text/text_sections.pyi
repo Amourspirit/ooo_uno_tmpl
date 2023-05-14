@@ -32,4 +32,3 @@ class TextSections(XIndexAccess_f0910d6d, XNameAccess_e2ab0cf6):
     """
     ...
 
-

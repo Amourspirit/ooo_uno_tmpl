@@ -31,4 +31,3 @@ class LabeledDataSequence(XLabeledDataSequence2_8f1410fa):
     """
     ...
 
-

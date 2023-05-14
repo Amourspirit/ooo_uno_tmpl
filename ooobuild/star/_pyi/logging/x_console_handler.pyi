@@ -47,4 +47,7 @@ class XConsoleHandler(XLogHandler_c7f80c27):
         """
         ...
 
+    @Threshold.setter
+    def Threshold(self, value: int) -> None:
+        ...
 

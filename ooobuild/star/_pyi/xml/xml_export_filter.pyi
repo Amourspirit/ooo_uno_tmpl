@@ -33,4 +33,3 @@ class XMLExportFilter(ExportFilter_e5320d4f):
     """
     ...
 
-

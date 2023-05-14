@@ -34,4 +34,3 @@ class LogarithmicRegressionCurve(XRegressionCurve_fa3c0dca):
     """
     ...
 
-

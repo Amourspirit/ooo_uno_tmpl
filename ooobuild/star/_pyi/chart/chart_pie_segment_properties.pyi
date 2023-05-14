@@ -40,4 +40,7 @@ class ChartPieSegmentProperties(ChartDataPointProperties_677c10bd):
         """
         ...
 
+    @SegmentOffset.setter
+    def SegmentOffset(self, value: int) -> None:
+        ...
 

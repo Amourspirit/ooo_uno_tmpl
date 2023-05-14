@@ -38,17 +38,29 @@ class TableRow(XPropertySet_bc180bfa, XCellRange_a2f70ad5):
         When hidden, it returns the height which the row would have, if it were visible.
         """
         ...
+
+    @Height.setter
+    def Height(self, value: int) -> None:
+        ...
     @property
     def IsStartOfNewPage(self) -> bool:
         """
         is TRUE, if there is a manual vertical page break attached to the row.
         """
         ...
+
+    @IsStartOfNewPage.setter
+    def IsStartOfNewPage(self, value: bool) -> None:
+        ...
     @property
     def IsVisible(self) -> bool:
         """
         is TRUE, if the row is visible.
         """
+        ...
+
+    @IsVisible.setter
+    def IsVisible(self, value: bool) -> None:
         ...
     @property
     def OptimalHeight(self) -> bool:
@@ -57,4 +69,7 @@ class TableRow(XPropertySet_bc180bfa, XCellRange_a2f70ad5):
         """
         ...
 
+    @OptimalHeight.setter
+    def OptimalHeight(self, value: bool) -> None:
+        ...
 

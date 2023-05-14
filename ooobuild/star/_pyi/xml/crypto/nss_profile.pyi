@@ -58,6 +58,9 @@ class NSSProfile(object):
         """
         ...
 
+    @Name.setter
+    def Name(self, value: str) -> None:
+        ...
 
     @property
     def Path(self) -> str:
@@ -66,6 +69,9 @@ class NSSProfile(object):
         """
         ...
 
+    @Path.setter
+    def Path(self, value: str) -> None:
+        ...
 
     @property
     def Type(self) -> MozillaProductType_2e210f5b:
@@ -74,4 +80,7 @@ class NSSProfile(object):
         """
         ...
 
+    @Type.setter
+    def Type(self, value: MozillaProductType_2e210f5b) -> None:
+        ...
 

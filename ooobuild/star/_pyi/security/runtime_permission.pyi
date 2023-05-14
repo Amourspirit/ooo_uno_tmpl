@@ -56,4 +56,7 @@ class RuntimePermission(object):
         """
         ...
 
+    @Name.setter
+    def Name(self, value: str) -> None:
+        ...
 

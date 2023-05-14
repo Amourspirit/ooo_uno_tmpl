@@ -32,4 +32,3 @@ class BindableControlModel(FormControlModel_e2990d22, XBindableValue_35880f2b):
     """
     ...
 
-

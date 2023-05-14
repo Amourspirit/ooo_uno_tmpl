@@ -39,4 +39,3 @@ class SchemaParser(XSchema_5ce7101f, XActiveDataSink_b8d00ba3, XInitialization_d
     """
     ...
 
-

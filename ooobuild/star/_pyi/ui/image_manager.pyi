@@ -34,4 +34,3 @@ class ImageManager(XImageManager_a20b0adc):
     """
     ...
 
-

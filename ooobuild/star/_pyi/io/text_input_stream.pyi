@@ -33,4 +33,3 @@ class TextInputStream(XTextInputStream2_d4390c8b):
     """
     ...
 
-

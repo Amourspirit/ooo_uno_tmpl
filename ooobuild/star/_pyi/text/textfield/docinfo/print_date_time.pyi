@@ -41,11 +41,19 @@ class PrintDateTime(TextField_90260a56):
         This property is especially useful for import/export purposes.
         """
         ...
+
+    @CurrentPresentation.setter
+    def CurrentPresentation(self, value: str) -> None:
+        ...
     @property
     def DateTimeValue(self) -> float:
         """
         contains the date and time as double value.
         """
+        ...
+
+    @DateTimeValue.setter
+    def DateTimeValue(self, value: float) -> None:
         ...
     @property
     def IsDate(self) -> bool:
@@ -54,6 +62,10 @@ class PrintDateTime(TextField_90260a56):
         
         If it is set to FALSE only the time is used here.
         """
+        ...
+
+    @IsDate.setter
+    def IsDate(self, value: bool) -> None:
         ...
     @property
     def IsFixed(self) -> bool:
@@ -67,11 +79,19 @@ class PrintDateTime(TextField_90260a56):
             OOo 1.1.2
         """
         ...
+
+    @IsFixed.setter
+    def IsFixed(self, value: bool) -> None:
+        ...
     @property
     def IsFixedLanguage(self) -> bool:
         """
         determines whether changes in language attributes at the position the text field is located also change the number format as appropriate for this language.
         """
+        ...
+
+    @IsFixedLanguage.setter
+    def IsFixedLanguage(self, value: bool) -> None:
         ...
     @property
     def NumberFormat(self) -> int:
@@ -80,4 +100,7 @@ class PrintDateTime(TextField_90260a56):
         """
         ...
 
+    @NumberFormat.setter
+    def NumberFormat(self, value: int) -> None:
+        ...
 

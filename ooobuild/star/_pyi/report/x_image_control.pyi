@@ -41,6 +41,9 @@ class XImageControl(XImageProducerSupplier_37df0f8f, XReportControlModel_2d800f4
         """
         ...
 
+    @ImageURL.setter
+    def ImageURL(self, value: str) -> None:
+        ...
     @property
     def PreserveIRI(self) -> bool:
         """
@@ -50,6 +53,9 @@ class XImageControl(XImageProducerSupplier_37df0f8f, XReportControlModel_2d800f4
         """
         ...
 
+    @PreserveIRI.setter
+    def PreserveIRI(self, value: bool) -> None:
+        ...
     @property
     def ScaleMode(self) -> int:
         """
@@ -65,4 +71,7 @@ class XImageControl(XImageProducerSupplier_37df0f8f, XReportControlModel_2d800f4
         """
         ...
 
+    @ScaleMode.setter
+    def ScaleMode(self, value: int) -> None:
+        ...
 

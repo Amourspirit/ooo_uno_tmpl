@@ -42,4 +42,3 @@ class AccessibleMenu(XAccessibleExtendedComponent_539d159a, XAccessibleAction_7c
     """
     ...
 
-
