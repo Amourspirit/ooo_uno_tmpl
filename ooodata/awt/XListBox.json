@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.2.9",
-  "libre_office_ver": "7.3",
+  "version": "0.2.15",
+  "libre_office_ver": "7.4",
   "name": "XListBox",
   "type": "interface",
   "namespace": "com.sun.star.awt",
@@ -40,11 +40,9 @@
     "quote": [
       "XActionListener_c7560c50",
       "XItemListener_af710b81",
-      "typing.Tuple[int, ...]",
       "typing.Tuple[str, ...]"
     ],
     "typings": [
-      "typing.Tuple[int, ...]",
       "typing.Tuple[str, ...]"
     ],
     "requires_typing": true,
@@ -57,7 +55,9 @@
         "com.sun.star.awt.XItemListener"
       ]
     },
-    "imports": [],
+    "imports": [
+      "uno"
+    ],
     "name": "XListBox",
     "namespace": "com.sun.star.awt",
     "extends": [
@@ -232,7 +232,7 @@
         },
         {
           "name": "getSelectedItemsPos",
-          "returns": "typing.Tuple[int, ...]",
+          "returns": "uno.ByteSequence",
           "returns_origin": "sequence< short >",
           "desc": [
             "returns the positions of all currently selected items."
@@ -381,7 +381,7 @@
           "args": [
             {
               "name": "aPositions",
-              "type": "typing.Tuple[int, ...]",
+              "type": "uno.ByteSequence",
               "direction": "in",
               "origin": "sequence< short >"
             },

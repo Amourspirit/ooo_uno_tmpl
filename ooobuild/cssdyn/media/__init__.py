@@ -1,6 +1,6 @@
 # coding: utf-8
 #
-# Copyright 2022 :Barry-Thomas-Paul: Moss
+# Copyright 2023 :Barry-Thomas-Paul: Moss
 #
 # Licensed under the Apache License, Version 2.0 (the "License")
 # you may not use this file except in compliance with the License.
@@ -18,5 +18,7 @@ from ...dyn.media.manager import Manager as Manager
 from ...dyn.media.x_frame_grabber import XFrameGrabber as XFrameGrabber
 from ...dyn.media.x_manager import XManager as XManager
 from ...dyn.media.x_player import XPlayer as XPlayer
+from ...dyn.media.x_player_listener import XPlayerListener as XPlayerListener
+from ...dyn.media.x_player_notifier import XPlayerNotifier as XPlayerNotifier
 from ...dyn.media.x_player_window import XPlayerWindow as XPlayerWindow
 from ...dyn.media.zoom_level import ZoomLevel as ZoomLevel

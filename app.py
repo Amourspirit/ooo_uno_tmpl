@@ -210,6 +210,12 @@ Regeneration of Database:
         This is done by running the following on the command line.
         python app.py compile batch --data --all
         The --data flag instructs app to write into ooodata directory.
+        It is important to check Logs for ERROR after this command.
+        There may be timeout or connections issues, etc,
+        such as `('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))`
+        For Connections issues run the command again, such as,
+        python app.py compile batch --data -i
+        The caching will kick in and only items not in the cache will be downloaded again.
     3. Created database if it does not exist.
         This is done by running the following on the command line.
         python app.py data init --init-db
@@ -280,6 +286,13 @@ Regeneration of a new LO API version.
                 Cache will be created in system tmp dir.
                 Json data will be written into ooodata and sub directories.
                 each json file represents a class.
+
+                It is important to check Logs for ERROR after this command.
+                There may be timeout or connections issues, etc,
+                such as `('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))`
+                For Connections issues run the command again, such as,
+                python app.py compile batch --data -i
+                The caching will kick in and only items not in the cache will be downloaded again.
         5. Generate database.
             $ python -m app data init --init-db
         6. Write data into database.

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.2.9",
-  "libre_office_ver": "7.3",
+  "version": "0.2.15",
+  "libre_office_ver": "7.4",
   "name": "XDeleteRows",
   "type": "interface",
   "namespace": "com.sun.star.sdbcx",
@@ -27,11 +27,9 @@
       "com.sun.star.uno.XInterface": "XInterface_8f010a43"
     },
     "quote": [
-      "typing.Tuple[int, ...]",
       "typing.Tuple[object, ...]"
     ],
     "typings": [
-      "typing.Tuple[int, ...]",
       "typing.Tuple[object, ...]"
     ],
     "requires_typing": true,
@@ -41,7 +39,9 @@
       ],
       "typing": []
     },
-    "imports": [],
+    "imports": [
+      "uno"
+    ],
     "name": "XDeleteRows",
     "namespace": "com.sun.star.sdbcx",
     "extends": [
@@ -55,7 +55,7 @@
       "methods": [
         {
           "name": "deleteRows",
-          "returns": "typing.Tuple[int, ...]",
+          "returns": "uno.ByteSequence",
           "returns_origin": "sequence< long >",
           "desc": [
             "deletes one or more rows identified by their bookmarks."

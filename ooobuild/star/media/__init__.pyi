@@ -1,6 +1,6 @@
 # coding: utf-8
 #
-# Copyright 2022 :Barry-Thomas-Paul: Moss
+# Copyright 2023 :Barry-Thomas-Paul: Moss
 #
 # Licensed under the Apache License, Version 2.0 (the "License")
 # you may not use this file except in compliance with the License.
@@ -18,4 +18,6 @@ from .._pyi.media.manager import Manager as Manager
 from .._pyi.media.x_frame_grabber import XFrameGrabber as XFrameGrabber
 from .._pyi.media.x_manager import XManager as XManager
 from .._pyi.media.x_player import XPlayer as XPlayer
+from .._pyi.media.x_player_listener import XPlayerListener as XPlayerListener
+from .._pyi.media.x_player_notifier import XPlayerNotifier as XPlayerNotifier
 from .._pyi.media.x_player_window import XPlayerWindow as XPlayerWindow

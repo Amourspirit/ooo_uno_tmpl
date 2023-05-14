@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
   "version": "0.2.15",
-  "libre_office_ver": "7.3",
+  "libre_office_ver": "7.4",
   "name": "AccessibleTableModelChangeType",
   "type": "const",
   "pytype": "int",
@@ -37,28 +37,6 @@
     ],
     "items": [
       {
-        "name": "INSERT",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 1,
-        "lines": [
-          "One or more rows and/or columns have been inserted.",
-          "",
-          "Use the fields of the AccessibleTableModelChange structure to determine the indices of the rows and/or columns that have been inserted."
-        ]
-      },
-      {
-        "name": "DELETE",
-        "type": "int",
-        "value_type": "INTEGER",
-        "value": 2,
-        "lines": [
-          "One or more rows and/or columns have been deleted.",
-          "",
-          "The affected area of the table is stored in the fields of the AccessibleTableModelChange structure."
-        ]
-      },
-      {
         "name": "UPDATE",
         "type": "int",
         "value_type": "INTEGER",
@@ -67,6 +45,66 @@
           "Some of the table data has changed.",
           "",
           "The number of rows and columns remains unchanged. Only (some of) the content of the cells in the range that is specified by the fields of the AccessibleTableModelChange structure have been changed."
+        ]
+      },
+      {
+        "name": "ROWS_INSERTED",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 4,
+        "lines": [
+          "One or more rows have been inserted.",
+          "",
+          "Use the fields of the AccessibleTableModelChange structure to determine the indices of the rows that have been inserted. Column indices should be set to -1.",
+          "",
+          "**since**",
+          "",
+          "    LibreOffice 7.4"
+        ]
+      },
+      {
+        "name": "COLUMNS_INSERTED",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 5,
+        "lines": [
+          "One or more columns have been inserted.",
+          "",
+          "Use the fields of the AccessibleTableModelChange structure to determine the indices of the columns that have been inserted. Row indices should be set to -1.",
+          "",
+          "**since**",
+          "",
+          "    LibreOffice 7.4"
+        ]
+      },
+      {
+        "name": "ROWS_REMOVED",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 6,
+        "lines": [
+          "One or more rows have been removed.",
+          "",
+          "Use the fields of the AccessibleTableModelChange structure to determine the indices of the rows that have been removed. Column indices should be set to -1.",
+          "",
+          "**since**",
+          "",
+          "    LibreOffice 7.4"
+        ]
+      },
+      {
+        "name": "COLUMNS_REMOVED",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 7,
+        "lines": [
+          "One or more columns have been removed.",
+          "",
+          "Use the fields of the AccessibleTableModelChange structure to determine the indices of the columns that have been removed. Row indices should be set to -1.",
+          "",
+          "**since**",
+          "",
+          "    LibreOffice 7.4"
         ]
       }
     ]

@@ -1,6 +1,6 @@
 # coding: utf-8
 #
-# Copyright 2022 :Barry-Thomas-Paul: Moss
+# Copyright 2023 :Barry-Thomas-Paul: Moss
 #
 # Licensed under the Apache License, Version 2.0 (the "License")
 # you may not use this file except in compliance with the License.
@@ -74,6 +74,8 @@ from ...dyn.drawing.enhanced_custom_shape_geometry import EnhancedCustomShapeGeo
 from ...dyn.drawing.enhanced_custom_shape_glue_point_type import EnhancedCustomShapeGluePointType as EnhancedCustomShapeGluePointType
 from ...dyn.drawing.enhanced_custom_shape_glue_point_type import EnhancedCustomShapeGluePointTypeEnum as EnhancedCustomShapeGluePointTypeEnum
 from ...dyn.drawing.enhanced_custom_shape_handle import EnhancedCustomShapeHandle as EnhancedCustomShapeHandle
+from ...dyn.drawing.enhanced_custom_shape_metal_type import EnhancedCustomShapeMetalType as EnhancedCustomShapeMetalType
+from ...dyn.drawing.enhanced_custom_shape_metal_type import EnhancedCustomShapeMetalTypeEnum as EnhancedCustomShapeMetalTypeEnum
 from ...dyn.drawing.enhanced_custom_shape_parameter import EnhancedCustomShapeParameter as EnhancedCustomShapeParameter
 from ...dyn.drawing.enhanced_custom_shape_parameter_pair import EnhancedCustomShapeParameterPair as EnhancedCustomShapeParameterPair
 from ...dyn.drawing.enhanced_custom_shape_parameter_type import EnhancedCustomShapeParameterType as EnhancedCustomShapeParameterType
