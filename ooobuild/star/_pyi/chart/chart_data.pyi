@@ -31,4 +31,3 @@ class ChartData(XChartData_a3580ade):
     """
     ...
 
-

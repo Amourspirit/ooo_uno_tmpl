@@ -38,17 +38,29 @@ class DateTime(XDataType_83f209cb):
         specifies the exclusive upper bound for the value
         """
         ...
+
+    @MaxExclusiveDateTime.setter
+    def MaxExclusiveDateTime(self, value: 'DateTime_84de09d3') -> None:
+        ...
     @property
     def MaxInclusiveDateTime(self) -> 'DateTime_84de09d3':
         """
         specifies the inclusive upper bound for the value
         """
         ...
+
+    @MaxInclusiveDateTime.setter
+    def MaxInclusiveDateTime(self, value: 'DateTime_84de09d3') -> None:
+        ...
     @property
     def MinExclusiveDateTime(self) -> 'DateTime_84de09d3':
         """
         specifies the exclusive lower bound for the value
         """
+        ...
+
+    @MinExclusiveDateTime.setter
+    def MinExclusiveDateTime(self, value: 'DateTime_84de09d3') -> None:
         ...
     @property
     def MinInclusiveDateTime(self) -> 'DateTime_84de09d3':
@@ -57,4 +69,7 @@ class DateTime(XDataType_83f209cb):
         """
         ...
 
+    @MinInclusiveDateTime.setter
+    def MinInclusiveDateTime(self, value: 'DateTime_84de09d3') -> None:
+        ...
 

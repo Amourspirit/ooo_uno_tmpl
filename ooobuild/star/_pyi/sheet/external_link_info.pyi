@@ -55,6 +55,9 @@ class ExternalLinkInfo(object):
         """
         ...
 
+    @Type.setter
+    def Type(self, value: int) -> None:
+        ...
 
     @property
     def Data(self) -> object:
@@ -65,4 +68,7 @@ class ExternalLinkInfo(object):
         """
         ...
 
+    @Data.setter
+    def Data(self, value: object) -> None:
+        ...
 

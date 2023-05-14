@@ -36,4 +36,3 @@ class Defaults(ConnectorProperties_3c5e0fcc, FillProperties_f1200da8, LineProper
     """
     ...
 
-

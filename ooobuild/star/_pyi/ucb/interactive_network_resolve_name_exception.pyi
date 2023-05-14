@@ -54,6 +54,9 @@ class InteractiveNetworkResolveNameException(InteractiveNetworkException_7ca3115
         """
         ...
 
+    @Server.setter
+    def Server(self, value: str) -> None:
+        ...
 
 __all__ = ['InteractiveNetworkResolveNameException']
 

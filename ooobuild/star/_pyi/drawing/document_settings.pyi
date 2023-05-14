@@ -36,11 +36,19 @@ class DocumentSettings(HeaderFooterSettings_5acd1070, Settings_b2bc0bb8):
         enables or disables the fitting of the page to the printable area during print
         """
         ...
+
+    @IsPrintFitPage.setter
+    def IsPrintFitPage(self, value: bool) -> None:
+        ...
     @property
     def IsPrintTilePage(self) -> bool:
         """
         if this is true and the paper size for printing is larger than the paper size of the printer than the content is tiled over multiple pages.
         """
+        ...
+
+    @IsPrintTilePage.setter
+    def IsPrintTilePage(self, value: bool) -> None:
         ...
     @property
     def MeasureUnit(self) -> int:
@@ -50,6 +58,10 @@ class DocumentSettings(HeaderFooterSettings_5acd1070, Settings_b2bc0bb8):
         the measure text
         """
         ...
+
+    @MeasureUnit.setter
+    def MeasureUnit(self, value: int) -> None:
+        ...
     @property
     def PageNumberFormat(self) -> int:
         """
@@ -57,6 +69,10 @@ class DocumentSettings(HeaderFooterSettings_5acd1070, Settings_b2bc0bb8):
         
         Values 0-7 are supported.
         """
+        ...
+
+    @PageNumberFormat.setter
+    def PageNumberFormat(self, value: int) -> None:
         ...
     @property
     def ParagraphSummation(self) -> bool:
@@ -66,11 +82,19 @@ class DocumentSettings(HeaderFooterSettings_5acd1070, Settings_b2bc0bb8):
         If false, only the greater of the two is chosen.
         """
         ...
+
+    @ParagraphSummation.setter
+    def ParagraphSummation(self, value: bool) -> None:
+        ...
     @property
     def ScaleDenominator(self) -> int:
         """
         is the denominator for the logical scale of the document
         """
+        ...
+
+    @ScaleDenominator.setter
+    def ScaleDenominator(self, value: int) -> None:
         ...
     @property
     def ScaleNumerator(self) -> int:
@@ -79,4 +103,7 @@ class DocumentSettings(HeaderFooterSettings_5acd1070, Settings_b2bc0bb8):
         """
         ...
 
+    @ScaleNumerator.setter
+    def ScaleNumerator(self, value: int) -> None:
+        ...
 

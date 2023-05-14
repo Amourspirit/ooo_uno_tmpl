@@ -50,6 +50,10 @@ class NamedRange(XCellRangeReferrer_91c0e23, XNamedRange_af450b4b):
             OOo 3.0
         """
         ...
+
+    @IsSharedFormula.setter
+    def IsSharedFormula(self, value: bool) -> None:
+        ...
     @property
     def TokenIndex(self) -> int:
         """
@@ -63,4 +67,7 @@ class NamedRange(XCellRangeReferrer_91c0e23, XNamedRange_af450b4b):
         """
         ...
 
+    @TokenIndex.setter
+    def TokenIndex(self, value: int) -> None:
+        ...
 

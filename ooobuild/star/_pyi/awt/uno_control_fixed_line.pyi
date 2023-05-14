@@ -31,4 +31,3 @@ class UnoControlFixedLine(UnoControl_8f2c0a67):
     """
     ...
 
-

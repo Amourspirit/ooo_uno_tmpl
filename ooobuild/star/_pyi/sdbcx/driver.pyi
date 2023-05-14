@@ -38,4 +38,3 @@ class Driver(Driver_70e70910, XCreateCatalog_d3410c83, XDataDefinitionSupplier_5
     """
     ...
 
-

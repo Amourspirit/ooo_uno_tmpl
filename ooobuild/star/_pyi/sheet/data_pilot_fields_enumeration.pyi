@@ -31,4 +31,3 @@ class DataPilotFieldsEnumeration(XEnumeration_f2180daa):
     """
     ...
 
-

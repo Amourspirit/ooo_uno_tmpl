@@ -62,6 +62,9 @@ class InteractiveFileIOException(InteractiveIOException_27a60f07):
         """
         ...
 
+    @FileName.setter
+    def FileName(self, value: str) -> None:
+        ...
 
 __all__ = ['InteractiveFileIOException']
 

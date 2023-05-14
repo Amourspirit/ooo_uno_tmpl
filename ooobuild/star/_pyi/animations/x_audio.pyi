@@ -44,6 +44,9 @@ class XAudio(XAnimationNode_1cf10eb9):
         """
         ...
 
+    @HideDuringShow.setter
+    def HideDuringShow(self, value: bool) -> None:
+        ...
     @property
     def Narration(self) -> bool:
         """
@@ -55,6 +58,9 @@ class XAudio(XAnimationNode_1cf10eb9):
         """
         ...
 
+    @Narration.setter
+    def Narration(self, value: bool) -> None:
+        ...
     @property
     def Source(self) -> object:
         """
@@ -62,10 +68,16 @@ class XAudio(XAnimationNode_1cf10eb9):
         """
         ...
 
+    @Source.setter
+    def Source(self, value: object) -> None:
+        ...
     @property
     def Volume(self) -> float:
         """
         """
         ...
 
+    @Volume.setter
+    def Volume(self, value: float) -> None:
+        ...
 

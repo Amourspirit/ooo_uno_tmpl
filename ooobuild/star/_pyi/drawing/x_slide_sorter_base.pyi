@@ -43,6 +43,9 @@ class XSlideSorterBase(XDrawView_b0b80b75, XView_ffed0de3):
         """
         ...
 
+    @BackgroundColor.setter
+    def BackgroundColor(self, value: 'Color_68e908c5') -> None:
+        ...
     @property
     def DocumentSlides(self) -> 'XIndexAccess_f0910d6d':
         """
@@ -52,12 +55,18 @@ class XSlideSorterBase(XDrawView_b0b80b75, XView_ffed0de3):
         """
         ...
 
+    @DocumentSlides.setter
+    def DocumentSlides(self, value: 'XIndexAccess_f0910d6d') -> None:
+        ...
     @property
     def HighlightColor(self) -> 'Color_68e908c5':
         """
         """
         ...
 
+    @HighlightColor.setter
+    def HighlightColor(self, value: 'Color_68e908c5') -> None:
+        ...
     @property
     def IsCenterSelection(self) -> bool:
         """
@@ -69,6 +78,9 @@ class XSlideSorterBase(XDrawView_b0b80b75, XView_ffed0de3):
         """
         ...
 
+    @IsCenterSelection.setter
+    def IsCenterSelection(self, value: bool) -> None:
+        ...
     @property
     def IsHighlightCurrentSlide(self) -> bool:
         """
@@ -78,6 +90,9 @@ class XSlideSorterBase(XDrawView_b0b80b75, XView_ffed0de3):
         """
         ...
 
+    @IsHighlightCurrentSlide.setter
+    def IsHighlightCurrentSlide(self, value: bool) -> None:
+        ...
     @property
     def IsOrientationVertical(self) -> bool:
         """
@@ -85,6 +100,9 @@ class XSlideSorterBase(XDrawView_b0b80b75, XView_ffed0de3):
         """
         ...
 
+    @IsOrientationVertical.setter
+    def IsOrientationVertical(self, value: bool) -> None:
+        ...
     @property
     def IsShowFocus(self) -> bool:
         """
@@ -94,6 +112,9 @@ class XSlideSorterBase(XDrawView_b0b80b75, XView_ffed0de3):
         """
         ...
 
+    @IsShowFocus.setter
+    def IsShowFocus(self, value: bool) -> None:
+        ...
     @property
     def IsShowSelection(self) -> bool:
         """
@@ -103,6 +124,9 @@ class XSlideSorterBase(XDrawView_b0b80b75, XView_ffed0de3):
         """
         ...
 
+    @IsShowSelection.setter
+    def IsShowSelection(self, value: bool) -> None:
+        ...
     @property
     def IsSmoothScrolling(self) -> bool:
         """
@@ -110,6 +134,9 @@ class XSlideSorterBase(XDrawView_b0b80b75, XView_ffed0de3):
         """
         ...
 
+    @IsSmoothScrolling.setter
+    def IsSmoothScrolling(self, value: bool) -> None:
+        ...
     @property
     def IsSuspendPreviewUpdatesDuringFullScreenPresentation(self) -> bool:
         """
@@ -121,6 +148,9 @@ class XSlideSorterBase(XDrawView_b0b80b75, XView_ffed0de3):
         """
         ...
 
+    @IsSuspendPreviewUpdatesDuringFullScreenPresentation.setter
+    def IsSuspendPreviewUpdatesDuringFullScreenPresentation(self, value: bool) -> None:
+        ...
     @property
     def IsUIReadOnly(self) -> bool:
         """
@@ -130,16 +160,25 @@ class XSlideSorterBase(XDrawView_b0b80b75, XView_ffed0de3):
         """
         ...
 
+    @IsUIReadOnly.setter
+    def IsUIReadOnly(self, value: bool) -> None:
+        ...
     @property
     def SelectionColor(self) -> 'Color_68e908c5':
         """
         """
         ...
 
+    @SelectionColor.setter
+    def SelectionColor(self, value: 'Color_68e908c5') -> None:
+        ...
     @property
     def TextColor(self) -> 'Color_68e908c5':
         """
         """
         ...
 
+    @TextColor.setter
+    def TextColor(self, value: 'Color_68e908c5') -> None:
+        ...
 

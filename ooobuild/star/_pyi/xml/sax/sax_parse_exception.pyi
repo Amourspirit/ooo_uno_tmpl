@@ -56,6 +56,9 @@ class SAXParseException(SAXException_d1a00c6e):
         """
         ...
 
+    @PublicId.setter
+    def PublicId(self, value: str) -> None:
+        ...
     @property
     def SystemId(self) -> str:
         """
@@ -63,6 +66,9 @@ class SAXParseException(SAXException_d1a00c6e):
         """
         ...
 
+    @SystemId.setter
+    def SystemId(self, value: str) -> None:
+        ...
     @property
     def LineNumber(self) -> int:
         """
@@ -70,6 +76,9 @@ class SAXParseException(SAXException_d1a00c6e):
         """
         ...
 
+    @LineNumber.setter
+    def LineNumber(self, value: int) -> None:
+        ...
     @property
     def ColumnNumber(self) -> int:
         """
@@ -77,6 +86,9 @@ class SAXParseException(SAXException_d1a00c6e):
         """
         ...
 
+    @ColumnNumber.setter
+    def ColumnNumber(self, value: int) -> None:
+        ...
 
 __all__ = ['SAXParseException']
 

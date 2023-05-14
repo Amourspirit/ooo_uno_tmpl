@@ -53,4 +53,7 @@ class RangeSelectionEvent(EventObject_a3d70b03):
         """
         ...
 
+    @RangeDescriptor.setter
+    def RangeDescriptor(self, value: str) -> None:
+        ...
 

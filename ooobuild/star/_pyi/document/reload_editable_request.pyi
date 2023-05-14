@@ -56,6 +56,9 @@ class ReloadEditableRequest(Exception_85530a09):
         """
         ...
 
+    @DocumentURL.setter
+    def DocumentURL(self, value: str) -> None:
+        ...
 
 __all__ = ['ReloadEditableRequest']
 

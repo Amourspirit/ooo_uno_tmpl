@@ -33,4 +33,3 @@ class ChartType(XPropertySet_bc180bfa, XChartType_ad200b38, XDataSeriesContainer
     """
     ...
 
-

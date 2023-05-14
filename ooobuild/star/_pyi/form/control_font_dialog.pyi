@@ -40,4 +40,3 @@ class ControlFontDialog(XExecutableDialog_450f0fa1):
         """
         ...
 
-

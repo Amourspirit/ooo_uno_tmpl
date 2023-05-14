@@ -57,6 +57,9 @@ class SearchInfo(object):
         """
         ...
 
+    @Criteria.setter
+    def Criteria(self, value: typing.Tuple[SearchCriterium_c6d30c4c, ...]) -> None:
+        ...
 
     @property
     def Recursion(self) -> SearchRecursion_c7080c52:
@@ -65,6 +68,9 @@ class SearchInfo(object):
         """
         ...
 
+    @Recursion.setter
+    def Recursion(self, value: SearchRecursion_c7080c52) -> None:
+        ...
 
     @property
     def IncludeBase(self) -> bool:
@@ -73,6 +79,9 @@ class SearchInfo(object):
         """
         ...
 
+    @IncludeBase.setter
+    def IncludeBase(self, value: bool) -> None:
+        ...
 
     @property
     def RespectFolderViewRestrictions(self) -> bool:
@@ -81,6 +90,9 @@ class SearchInfo(object):
         """
         ...
 
+    @RespectFolderViewRestrictions.setter
+    def RespectFolderViewRestrictions(self, value: bool) -> None:
+        ...
 
     @property
     def RespectDocViewRestrictions(self) -> bool:
@@ -89,6 +101,9 @@ class SearchInfo(object):
         """
         ...
 
+    @RespectDocViewRestrictions.setter
+    def RespectDocViewRestrictions(self, value: bool) -> None:
+        ...
 
     @property
     def FollowIndirections(self) -> bool:
@@ -97,4 +112,7 @@ class SearchInfo(object):
         """
         ...
 
+    @FollowIndirections.setter
+    def FollowIndirections(self, value: bool) -> None:
+        ...
 

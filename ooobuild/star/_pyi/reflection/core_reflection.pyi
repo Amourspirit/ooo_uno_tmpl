@@ -38,4 +38,3 @@ class CoreReflection(XComponent_98dc0ab5, XIdlReflection_1b8b0eaf):
     """
     ...
 
-

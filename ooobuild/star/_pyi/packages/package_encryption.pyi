@@ -30,4 +30,3 @@ class PackageEncryption(XPackageEncryption_36ec0f76):
     """
     ...
 
-

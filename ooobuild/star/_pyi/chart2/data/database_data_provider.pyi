@@ -36,4 +36,3 @@ class DatabaseDataProvider(XDatabaseDataProvider_8fe51146):
         """
         ...
 
-

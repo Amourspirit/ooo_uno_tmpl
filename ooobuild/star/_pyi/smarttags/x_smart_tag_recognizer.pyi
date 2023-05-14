@@ -96,4 +96,7 @@ class XSmartTagRecognizer(XInitialization_d46c0cca):
         """
         ...
 
+    @SmartTagCount.setter
+    def SmartTagCount(self, value: int) -> None:
+        ...
 

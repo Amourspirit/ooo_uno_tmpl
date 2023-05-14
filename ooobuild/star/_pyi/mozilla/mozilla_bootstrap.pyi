@@ -31,4 +31,3 @@ class MozillaBootstrap(XMozillaBootstrap_1db70eee):
     """
     ...
 
-

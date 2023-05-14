@@ -51,6 +51,9 @@ class Selection(object):
         """
         ...
 
+    @Min.setter
+    def Min(self, value: int) -> None:
+        ...
 
     @property
     def Max(self) -> int:
@@ -59,4 +62,7 @@ class Selection(object):
         """
         ...
 
+    @Max.setter
+    def Max(self, value: int) -> None:
+        ...
 

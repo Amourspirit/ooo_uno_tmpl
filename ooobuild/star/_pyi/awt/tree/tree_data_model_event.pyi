@@ -59,6 +59,9 @@ class TreeDataModelEvent(EventObject_a3d70b03):
         """
         ...
 
+    @Nodes.setter
+    def Nodes(self, value: typing.Tuple[XTreeNode_baaf0ba0, ...]) -> None:
+        ...
 
     @property
     def ParentNode(self) -> XTreeNode_baaf0ba0:
@@ -69,4 +72,7 @@ class TreeDataModelEvent(EventObject_a3d70b03):
         """
         ...
 
+    @ParentNode.setter
+    def ParentNode(self, value: XTreeNode_baaf0ba0) -> None:
+        ...
 

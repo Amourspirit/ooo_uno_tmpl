@@ -54,4 +54,7 @@ class ClipboardEvent(EventObject_a3d70b03):
         """
         ...
 
+    @Contents.setter
+    def Contents(self, value: XTransferable_2d800f38) -> None:
+        ...
 

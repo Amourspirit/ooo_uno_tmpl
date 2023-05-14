@@ -37,4 +37,3 @@ class FTPContentProvider(XContentProvider_d4150cc0):
     """
     ...
 
-

@@ -31,4 +31,3 @@ class ColumnDescriptorControl(UnoControl_8f2c0a67):
     """
     ...
 
-

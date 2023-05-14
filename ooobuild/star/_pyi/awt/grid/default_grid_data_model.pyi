@@ -39,4 +39,3 @@ class DefaultGridDataModel(XMutableGridDataModel_6387103b):
     """
     ...
 
-

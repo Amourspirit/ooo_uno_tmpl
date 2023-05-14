@@ -33,4 +33,3 @@ class DonutDiagram(Diagram_844409cf):
     """
     ...
 
-

@@ -53,6 +53,9 @@ class ExpandVetoException(VetoException_bdad0c13):
         """
         ...
 
+    @Event.setter
+    def Event(self, value: TreeExpansionEvent_378b0f79) -> None:
+        ...
 
 __all__ = ['ExpandVetoException']
 

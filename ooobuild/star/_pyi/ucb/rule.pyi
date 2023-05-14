@@ -55,6 +55,9 @@ class Rule(object):
         """
         ...
 
+    @Terms.setter
+    def Terms(self, value: typing.Tuple[RuleTerm_7a4b0972, ...]) -> None:
+        ...
 
     @property
     def Parameter(self) -> str:
@@ -63,6 +66,9 @@ class Rule(object):
         """
         ...
 
+    @Parameter.setter
+    def Parameter(self, value: str) -> None:
+        ...
 
     @property
     def Action(self) -> int:
@@ -73,4 +79,7 @@ class Rule(object):
         """
         ...
 
+    @Action.setter
+    def Action(self, value: int) -> None:
+        ...
 

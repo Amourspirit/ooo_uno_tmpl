@@ -47,4 +47,7 @@ class SlidesView(Controller_a5330b37, XWindow_713b0924, XPropertySet_bc180bfa):
         """
         ...
 
+    @VisibleArea.setter
+    def VisibleArea(self, value: 'Rectangle_84b109e9') -> None:
+        ...
 

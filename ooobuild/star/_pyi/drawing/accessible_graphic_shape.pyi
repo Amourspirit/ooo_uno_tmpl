@@ -38,4 +38,3 @@ class AccessibleGraphicShape(AccessibleShape_fdd20dd3, XAccessibleImage_6bc11099
     """
     ...
 
-

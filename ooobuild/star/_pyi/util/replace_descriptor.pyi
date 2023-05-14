@@ -32,4 +32,3 @@ class ReplaceDescriptor(SearchDescriptor_e2c20d3b, XReplaceDescriptor_fd510df9):
     """
     ...
 
-

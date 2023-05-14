@@ -36,4 +36,7 @@ class DataProvider(XDataProvider_122f0e31, XRangeXMLConversion_6cef1070):
         """
         ...
 
+    @IncludeHiddenCells.setter
+    def IncludeHiddenCells(self, value: bool) -> None:
+        ...
 

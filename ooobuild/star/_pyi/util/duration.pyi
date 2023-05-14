@@ -65,6 +65,9 @@ class Duration(object):
         """
         ...
 
+    @Negative.setter
+    def Negative(self, value: bool) -> None:
+        ...
 
     @property
     def Years(self) -> int:
@@ -73,6 +76,9 @@ class Duration(object):
         """
         ...
 
+    @Years.setter
+    def Years(self, value: int) -> None:
+        ...
 
     @property
     def Months(self) -> int:
@@ -81,6 +87,9 @@ class Duration(object):
         """
         ...
 
+    @Months.setter
+    def Months(self, value: int) -> None:
+        ...
 
     @property
     def Days(self) -> int:
@@ -89,6 +98,9 @@ class Duration(object):
         """
         ...
 
+    @Days.setter
+    def Days(self, value: int) -> None:
+        ...
 
     @property
     def Hours(self) -> int:
@@ -97,6 +109,9 @@ class Duration(object):
         """
         ...
 
+    @Hours.setter
+    def Hours(self, value: int) -> None:
+        ...
 
     @property
     def Minutes(self) -> int:
@@ -105,6 +120,9 @@ class Duration(object):
         """
         ...
 
+    @Minutes.setter
+    def Minutes(self, value: int) -> None:
+        ...
 
     @property
     def Seconds(self) -> int:
@@ -113,6 +131,9 @@ class Duration(object):
         """
         ...
 
+    @Seconds.setter
+    def Seconds(self, value: int) -> None:
+        ...
 
     @property
     def NanoSeconds(self) -> int:
@@ -121,4 +142,7 @@ class Duration(object):
         """
         ...
 
+    @NanoSeconds.setter
+    def NanoSeconds(self, value: int) -> None:
+        ...
 

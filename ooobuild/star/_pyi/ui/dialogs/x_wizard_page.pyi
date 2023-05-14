@@ -68,6 +68,9 @@ class XWizardPage(XComponent_98dc0ab5):
         """
         ...
 
+    @PageId.setter
+    def PageId(self, value: int) -> None:
+        ...
     @property
     def Window(self) -> 'XWindow_713b0924':
         """
@@ -75,4 +78,7 @@ class XWizardPage(XComponent_98dc0ab5):
         """
         ...
 
+    @Window.setter
+    def Window(self, value: 'XWindow_713b0924') -> None:
+        ...
 

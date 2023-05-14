@@ -31,4 +31,3 @@ class ScriptProviderForJava(LanguageScriptProvider_325141a):
     """
     ...
 
-

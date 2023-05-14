@@ -31,4 +31,3 @@ class SpreadsheetsEnumeration(XEnumeration_f2180daa):
     """
     ...
 
-

@@ -33,4 +33,3 @@ class DocumentTemplates(XDocumentTemplates_b000e59):
     """
     ...
 
-

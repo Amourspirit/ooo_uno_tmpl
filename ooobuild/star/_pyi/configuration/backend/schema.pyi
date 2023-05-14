@@ -48,4 +48,7 @@ class Schema(XSchema_5ce7101f):
         """
         ...
 
+    @URL.setter
+    def URL(self, value: str) -> None:
+        ...
 

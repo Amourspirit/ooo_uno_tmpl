@@ -37,4 +37,3 @@ class EmfTools(XEmfParser_bb680bc3):
     """
     ...
 
-

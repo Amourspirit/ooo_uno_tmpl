@@ -52,6 +52,9 @@ class BoundVolume(object):
         """
         ...
 
+    @min.setter
+    def min(self, value: Position3D_bddc0bc0) -> None:
+        ...
 
     @property
     def max(self) -> Position3D_bddc0bc0:
@@ -60,4 +63,7 @@ class BoundVolume(object):
         """
         ...
 
+    @max.setter
+    def max(self, value: Position3D_bddc0bc0) -> None:
+        ...
 

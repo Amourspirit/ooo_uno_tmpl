@@ -57,6 +57,9 @@ class ListEntryEvent(EventObject_a3d70b03):
         """
         ...
 
+    @Entries.setter
+    def Entries(self, value: typing.Tuple[str, ...]) -> None:
+        ...
 
     @property
     def Position(self) -> int:
@@ -67,6 +70,9 @@ class ListEntryEvent(EventObject_a3d70b03):
         """
         ...
 
+    @Position.setter
+    def Position(self, value: int) -> None:
+        ...
 
     @property
     def Count(self) -> int:
@@ -75,4 +81,7 @@ class ListEntryEvent(EventObject_a3d70b03):
         """
         ...
 
+    @Count.setter
+    def Count(self, value: int) -> None:
+        ...
 

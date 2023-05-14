@@ -38,4 +38,3 @@ class AccessibleMenuBar(XAccessibleContext_8eae119b, XAccessibleEventBroadcaster
     """
     ...
 
-

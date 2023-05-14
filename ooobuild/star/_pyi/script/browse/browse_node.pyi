@@ -38,4 +38,3 @@ class BrowseNode(XInvocation_be070c0f, XBrowseNode_1d000ead):
     """
     ...
 
-

@@ -40,4 +40,7 @@ class XSimpleMailMessage2(XSimpleMailMessage_1d420eb7):
         """
         ...
 
+    @Body.setter
+    def Body(self, value: str) -> None:
+        ...
 

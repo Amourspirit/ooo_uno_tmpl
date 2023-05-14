@@ -57,6 +57,9 @@ class BasicErrorException(Exception_85530a09):
         """
         ...
 
+    @ErrorCode.setter
+    def ErrorCode(self, value: int) -> None:
+        ...
     @property
     def ErrorMessageArgument(self) -> str:
         """
@@ -64,6 +67,9 @@ class BasicErrorException(Exception_85530a09):
         """
         ...
 
+    @ErrorMessageArgument.setter
+    def ErrorMessageArgument(self, value: str) -> None:
+        ...
 
 __all__ = ['BasicErrorException']
 

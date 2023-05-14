@@ -43,4 +43,3 @@ class FilePicker(XFilePicker3_f99e0d60):
         """
         ...
 
-

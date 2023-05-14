@@ -54,6 +54,9 @@ class ElementChange(object):
         """
         ...
 
+    @Accessor.setter
+    def Accessor(self, value: object) -> None:
+        ...
 
     @property
     def Element(self) -> object:
@@ -62,6 +65,9 @@ class ElementChange(object):
         """
         ...
 
+    @Element.setter
+    def Element(self, value: object) -> None:
+        ...
 
     @property
     def ReplacedElement(self) -> object:
@@ -70,4 +76,7 @@ class ElementChange(object):
         """
         ...
 
+    @ReplacedElement.setter
+    def ReplacedElement(self, value: object) -> None:
+        ...
 

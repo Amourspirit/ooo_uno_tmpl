@@ -38,4 +38,7 @@ class ActionTriggerSeparator(ABC):
         """
         ...
 
+    @SeparatorType.setter
+    def SeparatorType(self, value: int) -> None:
+        ...
 

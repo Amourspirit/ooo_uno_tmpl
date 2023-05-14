@@ -40,4 +40,3 @@ class FilledNetDiagram(ChartAxisXSupplier_a950e4d, ChartAxisYSupplier_a9e0e4e, D
     """
     ...
 
-

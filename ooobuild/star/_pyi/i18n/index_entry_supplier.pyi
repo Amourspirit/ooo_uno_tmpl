@@ -31,4 +31,3 @@ class IndexEntrySupplier(XExtendedIndexEntrySupplier_7e70112f):
     """
     ...
 
-

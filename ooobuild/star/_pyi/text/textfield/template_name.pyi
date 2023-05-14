@@ -36,4 +36,7 @@ class TemplateName(TextField_90260a56):
         """
         ...
 
+    @FileFormat.setter
+    def FileFormat(self, value: int) -> None:
+        ...
 

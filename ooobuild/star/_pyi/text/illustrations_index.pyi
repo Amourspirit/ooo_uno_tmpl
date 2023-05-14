@@ -34,10 +34,18 @@ class IllustrationsIndex(BaseIndex_8f0d0a40):
         """
         """
         ...
+
+    @CreateFromLabels.setter
+    def CreateFromLabels(self, value: bool) -> None:
+        ...
     @property
     def LabelCategory(self) -> str:
         """
         """
+        ...
+
+    @LabelCategory.setter
+    def LabelCategory(self, value: str) -> None:
         ...
     @property
     def LabelDisplayType(self) -> int:
@@ -45,4 +53,7 @@ class IllustrationsIndex(BaseIndex_8f0d0a40):
         """
         ...
 
+    @LabelDisplayType.setter
+    def LabelDisplayType(self, value: int) -> None:
+        ...
 

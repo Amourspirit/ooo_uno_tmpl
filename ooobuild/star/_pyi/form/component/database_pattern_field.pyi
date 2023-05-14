@@ -41,4 +41,7 @@ class DatabasePatternField(DataAwareControlModel_27110ef8, PatternField_3b2c0f7f
         """
         ...
 
+    @ConvertEmptyToNull.setter
+    def ConvertEmptyToNull(self, value: bool) -> None:
+        ...
 

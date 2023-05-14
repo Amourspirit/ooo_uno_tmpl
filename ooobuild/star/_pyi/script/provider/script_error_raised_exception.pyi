@@ -54,6 +54,9 @@ class ScriptErrorRaisedException(Exception_85530a09):
         """
         ...
 
+    @scriptName.setter
+    def scriptName(self, value: str) -> None:
+        ...
     @property
     def language(self) -> str:
         """
@@ -61,6 +64,9 @@ class ScriptErrorRaisedException(Exception_85530a09):
         """
         ...
 
+    @language.setter
+    def language(self, value: str) -> None:
+        ...
     @property
     def lineNum(self) -> int:
         """
@@ -68,6 +74,9 @@ class ScriptErrorRaisedException(Exception_85530a09):
         """
         ...
 
+    @lineNum.setter
+    def lineNum(self, value: int) -> None:
+        ...
 
 __all__ = ['ScriptErrorRaisedException']
 

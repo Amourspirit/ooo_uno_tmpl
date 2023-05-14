@@ -57,4 +57,3 @@ class DefaultFormComponentInspectorModel(XObjectInspectorModel_9077119b):
         """
         ...
 
-

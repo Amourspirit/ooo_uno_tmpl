@@ -31,4 +31,3 @@ class TempFile(XTempFile_794e094e):
     """
     ...
 
-

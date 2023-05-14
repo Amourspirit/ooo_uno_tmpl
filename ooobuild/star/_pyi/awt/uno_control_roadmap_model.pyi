@@ -45,11 +45,19 @@ class UnoControlRoadmapModel(UnoControlModel_c8ce0c58, XIndexContainer_1c040ebe)
         The Default value is white
         """
         ...
+
+    @BackgroundColor.setter
+    def BackgroundColor(self, value: int) -> None:
+        ...
     @property
     def Border(self) -> int:
         """
         specifies the border style of the control.
         """
+        ...
+
+    @Border.setter
+    def Border(self, value: int) -> None:
         ...
     @property
     def Complete(self) -> bool:
@@ -59,6 +67,10 @@ class UnoControlRoadmapModel(UnoControlModel_c8ce0c58, XIndexContainer_1c040ebe)
         If it is false than a non - interactive RoadmapItem is appended
         """
         ...
+
+    @Complete.setter
+    def Complete(self, value: bool) -> None:
+        ...
     @property
     def CurrentItemID(self) -> int:
         """
@@ -66,6 +78,10 @@ class UnoControlRoadmapModel(UnoControlModel_c8ce0c58, XIndexContainer_1c040ebe)
         
         Initially this property is set to \"-1\" which is equal to \"undefined\" If the Roadmap Item that the CurrentItemID refers to is removed the property \"CurrentItemID\" is set to -1
         """
+        ...
+
+    @CurrentItemID.setter
+    def CurrentItemID(self, value: int) -> None:
         ...
     @property
     def Graphic(self) -> 'XGraphic_a4da0afc':
@@ -79,17 +95,29 @@ class UnoControlRoadmapModel(UnoControlModel_c8ce0c58, XIndexContainer_1c040ebe)
             OOo 2.1
         """
         ...
+
+    @Graphic.setter
+    def Graphic(self, value: 'XGraphic_a4da0afc') -> None:
+        ...
     @property
     def HelpText(self) -> str:
         """
         specifies the help text of the control.
         """
         ...
+
+    @HelpText.setter
+    def HelpText(self, value: str) -> None:
+        ...
     @property
     def HelpURL(self) -> str:
         """
         specifies the help URL of the control.
         """
+        ...
+
+    @HelpURL.setter
+    def HelpURL(self, value: str) -> None:
         ...
     @property
     def ImageURL(self) -> str:
@@ -99,6 +127,10 @@ class UnoControlRoadmapModel(UnoControlModel_c8ce0c58, XIndexContainer_1c040ebe)
         The image is placed in the lower right corner of the control
         """
         ...
+
+    @ImageURL.setter
+    def ImageURL(self, value: str) -> None:
+        ...
     @property
     def Interactive(self) -> bool:
         """
@@ -107,11 +139,19 @@ class UnoControlRoadmapModel(UnoControlModel_c8ce0c58, XIndexContainer_1c040ebe)
         A roadmap control which is interactive allows selecting its items out-of-order, by simply clicking them.
         """
         ...
+
+    @Interactive.setter
+    def Interactive(self, value: bool) -> None:
+        ...
     @property
     def Printable(self) -> bool:
         """
         specifies whether the control will be printed with the document.
         """
+        ...
+
+    @Printable.setter
+    def Printable(self, value: bool) -> None:
         ...
     @property
     def Text(self) -> str:
@@ -120,4 +160,7 @@ class UnoControlRoadmapModel(UnoControlModel_c8ce0c58, XIndexContainer_1c040ebe)
         """
         ...
 
+    @Text.setter
+    def Text(self, value: str) -> None:
+        ...
 

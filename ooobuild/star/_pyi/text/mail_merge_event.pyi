@@ -60,4 +60,7 @@ class MailMergeEvent(EventObject_a3d70b03):
         """
         ...
 
+    @Model.setter
+    def Model(self, value: XModel_7a6e095c) -> None:
+        ...
 

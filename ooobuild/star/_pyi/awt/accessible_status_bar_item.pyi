@@ -38,4 +38,3 @@ class AccessibleStatusBarItem(XAccessibleContext_8eae119b, XAccessibleEventBroad
     """
     ...
 
-

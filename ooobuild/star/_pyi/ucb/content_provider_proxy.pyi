@@ -35,4 +35,3 @@ class ContentProviderProxy(XContentProvider_d4150cc0, XContentProviderSupplier_4
     """
     ...
 
-

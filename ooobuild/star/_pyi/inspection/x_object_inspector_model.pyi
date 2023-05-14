@@ -69,6 +69,10 @@ class XObjectInspectorModel(ABC):
         """
         ...
 
+    @HandlerFactories.setter
+    def HandlerFactories(self, value: 'typing.Tuple[object, ...]') -> None:
+        ...
+
     @property
     def HasHelpSection(self) -> bool:
         """
@@ -82,6 +86,9 @@ class XObjectInspectorModel(ABC):
         """
         ...
 
+    @HasHelpSection.setter
+    def HasHelpSection(self, value: bool) -> None:
+        ...
     @property
     def IsReadOnly(self) -> bool:
         """
@@ -93,6 +100,9 @@ class XObjectInspectorModel(ABC):
         """
         ...
 
+    @IsReadOnly.setter
+    def IsReadOnly(self, value: bool) -> None:
+        ...
     @property
     def MaxHelpTextLines(self) -> int:
         """
@@ -108,6 +118,9 @@ class XObjectInspectorModel(ABC):
         """
         ...
 
+    @MaxHelpTextLines.setter
+    def MaxHelpTextLines(self, value: int) -> None:
+        ...
     @property
     def MinHelpTextLines(self) -> int:
         """
@@ -123,4 +136,7 @@ class XObjectInspectorModel(ABC):
         """
         ...
 
+    @MinHelpTextLines.setter
+    def MinHelpTextLines(self, value: int) -> None:
+        ...
 

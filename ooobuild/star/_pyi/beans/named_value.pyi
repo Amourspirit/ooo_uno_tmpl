@@ -51,6 +51,9 @@ class NamedValue(object):
         """
         ...
 
+    @Name.setter
+    def Name(self, value: str) -> None:
+        ...
 
     @property
     def Value(self) -> object:
@@ -59,4 +62,7 @@ class NamedValue(object):
         """
         ...
 
+    @Value.setter
+    def Value(self, value: object) -> None:
+        ...
 

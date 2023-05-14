@@ -31,4 +31,3 @@ class ScannerManager(XScannerManager2_b740e01):
     """
     ...
 
-

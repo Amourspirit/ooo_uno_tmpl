@@ -41,11 +41,19 @@ class ActionTrigger(ABC):
         contains the command URL for the menu entry.
         """
         ...
+
+    @CommandURL.setter
+    def CommandURL(self, value: str) -> None:
+        ...
     @property
     def HelpURL(self) -> str:
         """
         contains the a URL that points to a help text.
         """
+        ...
+
+    @HelpURL.setter
+    def HelpURL(self, value: str) -> None:
         ...
     @property
     def Image(self) -> 'XBitmap_70cd0909':
@@ -53,11 +61,19 @@ class ActionTrigger(ABC):
         contains the menu item image.
         """
         ...
+
+    @Image.setter
+    def Image(self, value: 'XBitmap_70cd0909') -> None:
+        ...
     @property
     def SubContainer(self) -> 'XIndexContainer_1c040ebe':
         """
         contains a sub menu.
         """
+        ...
+
+    @SubContainer.setter
+    def SubContainer(self, value: 'XIndexContainer_1c040ebe') -> None:
         ...
     @property
     def Text(self) -> str:
@@ -66,4 +82,7 @@ class ActionTrigger(ABC):
         """
         ...
 
+    @Text.setter
+    def Text(self, value: str) -> None:
+        ...
 

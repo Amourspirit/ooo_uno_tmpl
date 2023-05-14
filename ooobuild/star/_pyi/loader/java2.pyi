@@ -37,4 +37,3 @@ class Java2(XImplementationLoader_498f0ff4):
     """
     ...
 
-

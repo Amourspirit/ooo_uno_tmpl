@@ -54,6 +54,9 @@ class CameraGeometry(object):
         """
         ...
 
+    @vrp.setter
+    def vrp(self, value: Position3D_bddc0bc0) -> None:
+        ...
 
     @property
     def vpn(self) -> Direction3D_c9370c0c:
@@ -62,6 +65,9 @@ class CameraGeometry(object):
         """
         ...
 
+    @vpn.setter
+    def vpn(self, value: Direction3D_c9370c0c) -> None:
+        ...
 
     @property
     def vup(self) -> Direction3D_c9370c0c:
@@ -70,4 +76,7 @@ class CameraGeometry(object):
         """
         ...
 
+    @vup.setter
+    def vup(self, value: Direction3D_c9370c0c) -> None:
+        ...
 

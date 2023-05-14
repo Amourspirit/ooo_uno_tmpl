@@ -57,6 +57,9 @@ class IntegerSize2D(object):
         """
         ...
 
+    @Width.setter
+    def Width(self, value: int) -> None:
+        ...
 
     @property
     def Height(self) -> int:
@@ -65,4 +68,7 @@ class IntegerSize2D(object):
         """
         ...
 
+    @Height.setter
+    def Height(self, value: int) -> None:
+        ...
 

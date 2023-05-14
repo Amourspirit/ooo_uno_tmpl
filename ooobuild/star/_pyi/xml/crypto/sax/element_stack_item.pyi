@@ -53,6 +53,9 @@ class ElementStackItem(object):
         """
         ...
 
+    @isStartElementEvent.setter
+    def isStartElementEvent(self, value: bool) -> None:
+        ...
 
     @property
     def elementName(self) -> str:
@@ -61,6 +64,9 @@ class ElementStackItem(object):
         """
         ...
 
+    @elementName.setter
+    def elementName(self, value: str) -> None:
+        ...
 
     @property
     def xAttributes(self) -> XAttributeList_eec70d7b:
@@ -69,4 +75,7 @@ class ElementStackItem(object):
         """
         ...
 
+    @xAttributes.setter
+    def xAttributes(self, value: XAttributeList_eec70d7b) -> None:
+        ...
 

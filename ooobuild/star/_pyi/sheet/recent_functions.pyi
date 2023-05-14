@@ -31,4 +31,3 @@ class RecentFunctions(XRecentFunctions_ef5e0d93):
     """
     ...
 
-

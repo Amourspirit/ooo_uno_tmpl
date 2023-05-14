@@ -57,6 +57,9 @@ class PaintEvent(EventObject_a3d70b03):
         """
         ...
 
+    @UpdateRect.setter
+    def UpdateRect(self, value: Rectangle_84b109e9) -> None:
+        ...
 
     @property
     def Count(self) -> int:
@@ -67,4 +70,7 @@ class PaintEvent(EventObject_a3d70b03):
         """
         ...
 
+    @Count.setter
+    def Count(self, value: int) -> None:
+        ...
 

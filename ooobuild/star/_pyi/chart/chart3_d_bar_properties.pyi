@@ -36,4 +36,7 @@ class Chart3DBarProperties(XPropertySet_bc180bfa):
         """
         ...
 
+    @SolidType.setter
+    def SolidType(self, value: int) -> None:
+        ...
 

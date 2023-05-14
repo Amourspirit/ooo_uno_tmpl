@@ -65,6 +65,10 @@ class SheetCell(SheetRangesQuery_efbe0d90, CharacterProperties_1d4f0ef3, Charact
         \"$Sheet1.$B$2\".
         """
         ...
+
+    @AbsoluteName.setter
+    def AbsoluteName(self, value: str) -> None:
+        ...
     @property
     def CellContentType(self) -> 'CellContentType_e08c0d0d':
         """
@@ -75,6 +79,10 @@ class SheetCell(SheetRangesQuery_efbe0d90, CharacterProperties_1d4f0ef3, Charact
             LibreOffice 6.1
         """
         ...
+
+    @CellContentType.setter
+    def CellContentType(self, value: 'CellContentType_e08c0d0d') -> None:
+        ...
     @property
     def ConditionalFormat(self) -> 'XSheetConditionalEntries_694810c0':
         """
@@ -82,6 +90,10 @@ class SheetCell(SheetRangesQuery_efbe0d90, CharacterProperties_1d4f0ef3, Charact
         
         After a conditional format has been changed it has to be reinserted into the property set.
         """
+        ...
+
+    @ConditionalFormat.setter
+    def ConditionalFormat(self, value: 'XSheetConditionalEntries_694810c0') -> None:
         ...
     @property
     def ConditionalFormatLocal(self) -> 'XSheetConditionalEntries_694810c0':
@@ -91,6 +103,10 @@ class SheetCell(SheetRangesQuery_efbe0d90, CharacterProperties_1d4f0ef3, Charact
         After a conditional format has been changed it has to be reinserted into the property set.
         """
         ...
+
+    @ConditionalFormatLocal.setter
+    def ConditionalFormatLocal(self, value: 'XSheetConditionalEntries_694810c0') -> None:
+        ...
     @property
     def FormulaLocal(self) -> str:
         """
@@ -99,6 +115,10 @@ class SheetCell(SheetRangesQuery_efbe0d90, CharacterProperties_1d4f0ef3, Charact
         This property can also be used to set a new localized formula.
         """
         ...
+
+    @FormulaLocal.setter
+    def FormulaLocal(self, value: str) -> None:
+        ...
     @property
     def FormulaResultType(self) -> int:
         """
@@ -106,6 +126,10 @@ class SheetCell(SheetRangesQuery_efbe0d90, CharacterProperties_1d4f0ef3, Charact
         
         This property returns not com.sun.star.sheet.FormulaResult but instead com.sun.star.table.CellContentType. Use FormulaResult2 if the correct property is needed.
         """
+        ...
+
+    @FormulaResultType.setter
+    def FormulaResultType(self, value: int) -> None:
         ...
     @property
     def FormulaResultType2(self) -> int:
@@ -117,6 +141,10 @@ class SheetCell(SheetRangesQuery_efbe0d90, CharacterProperties_1d4f0ef3, Charact
             LibreOffice 6.1
         """
         ...
+
+    @FormulaResultType2.setter
+    def FormulaResultType2(self, value: int) -> None:
+        ...
     @property
     def Position(self) -> 'Point_5fb2085e':
         """
@@ -125,11 +153,19 @@ class SheetCell(SheetRangesQuery_efbe0d90, CharacterProperties_1d4f0ef3, Charact
         This property contains the absolute position in the whole sheet, not the position in the visible area.
         """
         ...
+
+    @Position.setter
+    def Position(self, value: 'Point_5fb2085e') -> None:
+        ...
     @property
     def Size(self) -> 'Size_576707ef':
         """
         contains the size of this cell (in 1/100 mm).
         """
+        ...
+
+    @Size.setter
+    def Size(self, value: 'Size_576707ef') -> None:
         ...
     @property
     def Validation(self) -> 'XPropertySet_bc180bfa':
@@ -138,6 +174,10 @@ class SheetCell(SheetRangesQuery_efbe0d90, CharacterProperties_1d4f0ef3, Charact
         
         After the data validation settings have been changed the validation has to be reinserted into the property set.
         """
+        ...
+
+    @Validation.setter
+    def Validation(self, value: 'XPropertySet_bc180bfa') -> None:
         ...
     @property
     def ValidationLocal(self) -> 'XPropertySet_bc180bfa':
@@ -148,4 +188,7 @@ class SheetCell(SheetRangesQuery_efbe0d90, CharacterProperties_1d4f0ef3, Charact
         """
         ...
 
+    @ValidationLocal.setter
+    def ValidationLocal(self, value: 'XPropertySet_bc180bfa') -> None:
+        ...
 

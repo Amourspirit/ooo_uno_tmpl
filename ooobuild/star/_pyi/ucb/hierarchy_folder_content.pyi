@@ -40,4 +40,3 @@ class HierarchyFolderContent(XPropertiesChangeNotifier_7a7b111c, XPropertyContai
     """
     ...
 
-

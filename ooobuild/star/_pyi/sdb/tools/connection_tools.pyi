@@ -40,4 +40,3 @@ class ConnectionTools(XConnectionTools_28110f19):
         """
         ...
 
-

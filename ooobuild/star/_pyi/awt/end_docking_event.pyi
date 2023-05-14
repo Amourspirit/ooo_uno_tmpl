@@ -56,6 +56,9 @@ class EndDockingEvent(EventObject_a3d70b03):
         """
         ...
 
+    @WindowRectangle.setter
+    def WindowRectangle(self, value: Rectangle_84b109e9) -> None:
+        ...
 
     @property
     def bFloating(self) -> bool:
@@ -64,6 +67,9 @@ class EndDockingEvent(EventObject_a3d70b03):
         """
         ...
 
+    @bFloating.setter
+    def bFloating(self, value: bool) -> None:
+        ...
 
     @property
     def bCancelled(self) -> bool:
@@ -72,4 +78,7 @@ class EndDockingEvent(EventObject_a3d70b03):
         """
         ...
 
+    @bCancelled.setter
+    def bCancelled(self, value: bool) -> None:
+        ...
 

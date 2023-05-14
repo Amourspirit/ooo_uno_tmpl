@@ -35,4 +35,3 @@ class ShapeCollection(XShapes_9a800ab0):
     """
     ...
 
-

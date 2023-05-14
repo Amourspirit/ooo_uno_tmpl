@@ -49,14 +49,23 @@ class HomogenMatrixLine3(object):
     def Column1(self) -> float:
         ...
 
+    @Column1.setter
+    def Column1(self, value: float) -> None:
+        ...
 
     @property
     def Column2(self) -> float:
         ...
 
+    @Column2.setter
+    def Column2(self, value: float) -> None:
+        ...
 
     @property
     def Column3(self) -> float:
         ...
 
+    @Column3.setter
+    def Column3(self, value: float) -> None:
+        ...
 

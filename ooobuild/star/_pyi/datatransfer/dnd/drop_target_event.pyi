@@ -55,4 +55,7 @@ class DropTargetEvent(EventObject_a3d70b03):
         """
         ...
 
+    @Dummy.setter
+    def Dummy(self, value: int) -> None:
+        ...
 

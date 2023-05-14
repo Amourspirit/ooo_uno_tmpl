@@ -32,4 +32,3 @@ class ListEntrySource(XListEntrySource_576b103c, XComponent_98dc0ab5):
     """
     ...
 
-

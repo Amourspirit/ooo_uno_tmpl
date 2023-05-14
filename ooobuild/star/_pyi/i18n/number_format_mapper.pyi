@@ -31,4 +31,3 @@ class NumberFormatMapper(XNumberFormatCode_e5c00ced):
     """
     ...
 
-

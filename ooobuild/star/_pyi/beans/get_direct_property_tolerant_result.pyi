@@ -57,4 +57,7 @@ class GetDirectPropertyTolerantResult(GetPropertyTolerantResult_7c4e115e):
         """
         ...
 
+    @Name.setter
+    def Name(self, value: str) -> None:
+        ...
 

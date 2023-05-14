@@ -31,4 +31,3 @@ class LabelRangesEnumeration(XEnumeration_f2180daa):
     """
     ...
 
-

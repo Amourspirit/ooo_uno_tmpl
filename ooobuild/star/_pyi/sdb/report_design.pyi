@@ -35,4 +35,3 @@ class ReportDesign(XController2_bbcf0bc1):
     """
     ...
 
-

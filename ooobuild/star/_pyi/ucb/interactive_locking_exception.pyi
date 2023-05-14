@@ -60,6 +60,9 @@ class InteractiveLockingException(ClassifiedInteractionRequest_9f72121b):
         """
         ...
 
+    @Url.setter
+    def Url(self, value: str) -> None:
+        ...
 
 __all__ = ['InteractiveLockingException']
 

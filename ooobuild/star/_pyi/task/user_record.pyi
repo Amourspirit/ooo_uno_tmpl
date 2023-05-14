@@ -50,6 +50,9 @@ class UserRecord(object):
         """
         ...
 
+    @Passwords.setter
+    def Passwords(self, value: typing.Tuple[str, ...]) -> None:
+        ...
 
     @property
     def UserName(self) -> str:
@@ -58,4 +61,7 @@ class UserRecord(object):
         """
         ...
 
+    @UserName.setter
+    def UserName(self, value: str) -> None:
+        ...
 

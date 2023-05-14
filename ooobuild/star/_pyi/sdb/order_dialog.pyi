@@ -47,4 +47,3 @@ class OrderDialog(XExecutableDialog_450f0fa1):
         """
         ...
 
-

@@ -58,4 +58,7 @@ class Date(object):
         """
         ...
 
+    @Value.setter
+    def Value(self, value: float) -> None:
+        ...
 

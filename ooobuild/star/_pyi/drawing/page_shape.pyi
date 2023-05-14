@@ -40,4 +40,7 @@ class PageShape(Shape_85cc09e5):
         """
         ...
 
+    @PageNumber.setter
+    def PageNumber(self, value: int) -> None:
+        ...
 

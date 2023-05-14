@@ -132,6 +132,9 @@ class XFormOperations(XComponent_98dc0ab5):
         """
         ...
 
+    @Controller.setter
+    def Controller(self, value: 'XFormController_4a570ffe') -> None:
+        ...
     @property
     def Cursor(self) -> 'XRowSet_7a090960':
         """
@@ -139,6 +142,9 @@ class XFormOperations(XComponent_98dc0ab5):
         """
         ...
 
+    @Cursor.setter
+    def Cursor(self, value: 'XRowSet_7a090960') -> None:
+        ...
     @property
     def FeatureInvalidation(self) -> 'XFeatureInvalidation_9f4211f4':
         """
@@ -152,6 +158,9 @@ class XFormOperations(XComponent_98dc0ab5):
         """
         ...
 
+    @FeatureInvalidation.setter
+    def FeatureInvalidation(self, value: 'XFeatureInvalidation_9f4211f4') -> None:
+        ...
     @property
     def UpdateCursor(self) -> 'XResultSetUpdate_e0fb0d0a':
         """
@@ -159,4 +168,7 @@ class XFormOperations(XComponent_98dc0ab5):
         """
         ...
 
+    @UpdateCursor.setter
+    def UpdateCursor(self, value: 'XResultSetUpdate_e0fb0d0a') -> None:
+        ...
 

@@ -31,4 +31,3 @@ class SchemaSupplier(XSchemaSupplier_eca11373):
     """
     ...
 
-

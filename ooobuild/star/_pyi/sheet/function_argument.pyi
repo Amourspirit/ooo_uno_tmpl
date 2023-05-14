@@ -52,6 +52,9 @@ class FunctionArgument(object):
         """
         ...
 
+    @Name.setter
+    def Name(self, value: str) -> None:
+        ...
 
     @property
     def Description(self) -> str:
@@ -60,6 +63,9 @@ class FunctionArgument(object):
         """
         ...
 
+    @Description.setter
+    def Description(self, value: str) -> None:
+        ...
 
     @property
     def IsOptional(self) -> bool:
@@ -68,4 +74,7 @@ class FunctionArgument(object):
         """
         ...
 
+    @IsOptional.setter
+    def IsOptional(self, value: bool) -> None:
+        ...
 

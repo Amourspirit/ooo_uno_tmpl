@@ -50,6 +50,9 @@ class SubIncrement(object):
         """
         ...
 
+    @IntervalCount.setter
+    def IntervalCount(self, value: object) -> None:
+        ...
 
     @property
     def PostEquidistant(self) -> object:
@@ -58,4 +61,7 @@ class SubIncrement(object):
         """
         ...
 
+    @PostEquidistant.setter
+    def PostEquidistant(self, value: object) -> None:
+        ...
 

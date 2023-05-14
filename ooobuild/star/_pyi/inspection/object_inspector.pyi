@@ -72,4 +72,3 @@ class ObjectInspector(XObjectInspector_3c860faa):
         """
         ...
 
-

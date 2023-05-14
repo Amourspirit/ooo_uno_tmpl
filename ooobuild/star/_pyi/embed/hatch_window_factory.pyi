@@ -34,4 +34,3 @@ class HatchWindowFactory(XHatchWindowFactory_167d0e95):
     """
     ...
 
-

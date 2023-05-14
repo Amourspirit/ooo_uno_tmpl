@@ -40,4 +40,3 @@ class TypeDescriptionManager(XHierarchicalNameAccess_9e2611b5, XSet_90c40a4f, XC
     """
     ...
 
-

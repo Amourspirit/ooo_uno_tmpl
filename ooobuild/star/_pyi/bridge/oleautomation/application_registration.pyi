@@ -39,4 +39,3 @@ class ApplicationRegistration(XInterface_8f010a43):
     """
     ...
 
-

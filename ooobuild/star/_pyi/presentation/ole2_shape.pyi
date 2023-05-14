@@ -34,4 +34,3 @@ class OLE2Shape(OLE2Shape_add20af7, Shape_c0c80c15):
     """
     ...
 
-

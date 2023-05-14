@@ -31,4 +31,3 @@ class Footer(TextField_90260a56):
     """
     ...
 
-

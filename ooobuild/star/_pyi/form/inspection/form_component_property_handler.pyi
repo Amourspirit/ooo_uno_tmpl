@@ -31,4 +31,3 @@ class FormComponentPropertyHandler(XPropertyHandler_3e950fbf):
     """
     ...
 
-

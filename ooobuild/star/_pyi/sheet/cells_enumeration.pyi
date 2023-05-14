@@ -31,4 +31,3 @@ class CellsEnumeration(XEnumeration_f2180daa):
     """
     ...
 
-

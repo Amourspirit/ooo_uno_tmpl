@@ -58,6 +58,9 @@ class ControlCommand(object):
         """
         ...
 
+    @Arguments.setter
+    def Arguments(self, value: typing.Tuple[NamedValue_a37a0af3, ...]) -> None:
+        ...
 
     @property
     def Command(self) -> str:
@@ -66,4 +69,7 @@ class ControlCommand(object):
         """
         ...
 
+    @Command.setter
+    def Command(self, value: str) -> None:
+        ...
 

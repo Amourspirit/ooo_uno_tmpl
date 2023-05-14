@@ -31,4 +31,3 @@ class LinguProperties(XLinguProperties_4a6e0ff9):
     """
     ...
 
-

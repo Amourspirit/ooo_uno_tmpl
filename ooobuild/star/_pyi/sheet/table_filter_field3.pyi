@@ -60,6 +60,9 @@ class TableFilterField3(object):
         """
         ...
 
+    @Values.setter
+    def Values(self, value: typing.Tuple[FilterFieldValue_ef2a0d68, ...]) -> None:
+        ...
 
     @property
     def Connection(self) -> FilterConnection_f01f0d97:
@@ -68,6 +71,9 @@ class TableFilterField3(object):
         """
         ...
 
+    @Connection.setter
+    def Connection(self, value: FilterConnection_f01f0d97) -> None:
+        ...
 
     @property
     def Field(self) -> int:
@@ -76,6 +82,9 @@ class TableFilterField3(object):
         """
         ...
 
+    @Field.setter
+    def Field(self, value: int) -> None:
+        ...
 
     @property
     def Operator(self) -> int:
@@ -84,4 +93,7 @@ class TableFilterField3(object):
         """
         ...
 
+    @Operator.setter
+    def Operator(self, value: int) -> None:
+        ...
 

@@ -35,4 +35,3 @@ class PrinterServer(XPrinterServer2_c8ba0c39):
     """
     ...
 
-

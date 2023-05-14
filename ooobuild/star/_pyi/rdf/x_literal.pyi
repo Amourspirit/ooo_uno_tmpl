@@ -48,6 +48,9 @@ class XLiteral(XNode_5ee40822):
         """
         ...
 
+    @Datatype.setter
+    def Datatype(self, value: 'XURI_5682078c') -> None:
+        ...
     @property
     def Language(self) -> str:
         """
@@ -55,6 +58,9 @@ class XLiteral(XNode_5ee40822):
         """
         ...
 
+    @Language.setter
+    def Language(self, value: str) -> None:
+        ...
     @property
     def Value(self) -> str:
         """
@@ -62,4 +68,7 @@ class XLiteral(XNode_5ee40822):
         """
         ...
 
+    @Value.setter
+    def Value(self, value: str) -> None:
+        ...
 

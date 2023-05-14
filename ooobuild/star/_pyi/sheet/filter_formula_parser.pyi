@@ -31,4 +31,3 @@ class FilterFormulaParser(XFilterFormulaParser_29590f22):
     """
     ...
 
-

@@ -35,4 +35,3 @@ class XMLFormsPropertyHandler(XPropertyHandler_3e950fbf):
     """
     ...
 
-

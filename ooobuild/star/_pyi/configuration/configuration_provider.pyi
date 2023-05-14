@@ -40,4 +40,3 @@ class ConfigurationProvider(XComponent_98dc0ab5, XMultiServiceFactory_191e0eb6):
     """
     ...
 
-

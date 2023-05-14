@@ -38,11 +38,20 @@ class FunctionDescription(ABC):
         returns a sequence of localized descriptions of the function's arguments (in the order specified by the function).
         """
         ...
+
+    @Arguments.setter
+    def Arguments(self, value: 'typing.Tuple[FunctionArgument_f1080daa, ...]') -> None:
+        ...
+
     @property
     def Category(self) -> int:
         """
         returns the function's category.
         """
+        ...
+
+    @Category.setter
+    def Category(self, value: int) -> None:
         ...
     @property
     def Description(self) -> str:
@@ -50,11 +59,19 @@ class FunctionDescription(ABC):
         returns a localized description of the function.
         """
         ...
+
+    @Description.setter
+    def Description(self, value: str) -> None:
+        ...
     @property
     def Id(self) -> int:
         """
         returns the function's unique identifier.
         """
+        ...
+
+    @Id.setter
+    def Id(self, value: int) -> None:
         ...
     @property
     def Name(self) -> str:
@@ -63,4 +80,7 @@ class FunctionDescription(ABC):
         """
         ...
 
+    @Name.setter
+    def Name(self, value: str) -> None:
+        ...
 

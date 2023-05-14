@@ -32,4 +32,3 @@ class LayerManager(XNameAccess_e2ab0cf6, XLayerManager_e24b0d04):
     """
     ...
 
-

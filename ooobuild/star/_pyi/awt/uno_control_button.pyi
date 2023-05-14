@@ -33,4 +33,3 @@ class UnoControlButton(UnoControl_8f2c0a67, XButton_71380928, XLayoutConstrains_
     """
     ...
 
-

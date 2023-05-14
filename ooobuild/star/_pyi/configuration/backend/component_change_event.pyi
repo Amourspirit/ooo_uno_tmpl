@@ -53,4 +53,7 @@ class ComponentChangeEvent(EventObject_a3d70b03):
         """
         ...
 
+    @Component.setter
+    def Component(self, value: str) -> None:
+        ...
 

@@ -39,11 +39,19 @@ class CharacterPropertiesComplex(ABC):
         This property contains the text encoding of the font as specified in com.sun.star.awt.CharSet.
         """
         ...
+
+    @CharFontCharSetComplex.setter
+    def CharFontCharSetComplex(self, value: int) -> None:
+        ...
     @property
     def CharFontFamilyComplex(self) -> int:
         """
         This property contains font family as specified in com.sun.star.awt.FontFamily .
         """
+        ...
+
+    @CharFontFamilyComplex.setter
+    def CharFontFamilyComplex(self, value: int) -> None:
         ...
     @property
     def CharFontNameComplex(self) -> str:
@@ -53,11 +61,19 @@ class CharacterPropertiesComplex(ABC):
         It may contain more than one name separated by comma.
         """
         ...
+
+    @CharFontNameComplex.setter
+    def CharFontNameComplex(self, value: str) -> None:
+        ...
     @property
     def CharFontPitchComplex(self) -> int:
         """
         This property contains the font pitch as specified in com.sun.star.awt.FontPitch.
         """
+        ...
+
+    @CharFontPitchComplex.setter
+    def CharFontPitchComplex(self, value: int) -> None:
         ...
     @property
     def CharFontStyleNameComplex(self) -> str:
@@ -67,11 +83,19 @@ class CharacterPropertiesComplex(ABC):
         This property may be empty.
         """
         ...
+
+    @CharFontStyleNameComplex.setter
+    def CharFontStyleNameComplex(self, value: str) -> None:
+        ...
     @property
     def CharHeightComplex(self) -> float:
         """
         This value contains the height of the characters in point.
         """
+        ...
+
+    @CharHeightComplex.setter
+    def CharHeightComplex(self, value: float) -> None:
         ...
     @property
     def CharLocaleComplex(self) -> 'Locale_70d308fa':
@@ -79,11 +103,19 @@ class CharacterPropertiesComplex(ABC):
         contains the value of the locale.
         """
         ...
+
+    @CharLocaleComplex.setter
+    def CharLocaleComplex(self, value: 'Locale_70d308fa') -> None:
+        ...
     @property
     def CharPostureComplex(self) -> 'FontSlant_849509ed':
         """
         This property contains the value of the posture of the document.
         """
+        ...
+
+    @CharPostureComplex.setter
+    def CharPostureComplex(self, value: 'FontSlant_849509ed') -> None:
         ...
     @property
     def CharWeightComplex(self) -> float:
@@ -92,4 +124,7 @@ class CharacterPropertiesComplex(ABC):
         """
         ...
 
+    @CharWeightComplex.setter
+    def CharWeightComplex(self, value: float) -> None:
+        ...
 

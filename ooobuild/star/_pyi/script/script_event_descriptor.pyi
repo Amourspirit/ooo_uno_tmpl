@@ -54,6 +54,9 @@ class ScriptEventDescriptor(object):
         """
         ...
 
+    @ListenerType.setter
+    def ListenerType(self, value: str) -> None:
+        ...
 
     @property
     def EventMethod(self) -> str:
@@ -62,6 +65,9 @@ class ScriptEventDescriptor(object):
         """
         ...
 
+    @EventMethod.setter
+    def EventMethod(self, value: str) -> None:
+        ...
 
     @property
     def AddListenerParam(self) -> str:
@@ -72,6 +78,9 @@ class ScriptEventDescriptor(object):
         """
         ...
 
+    @AddListenerParam.setter
+    def AddListenerParam(self, value: str) -> None:
+        ...
 
     @property
     def ScriptType(self) -> str:
@@ -80,6 +89,9 @@ class ScriptEventDescriptor(object):
         """
         ...
 
+    @ScriptType.setter
+    def ScriptType(self, value: str) -> None:
+        ...
 
     @property
     def ScriptCode(self) -> str:
@@ -88,4 +100,7 @@ class ScriptEventDescriptor(object):
         """
         ...
 
+    @ScriptCode.setter
+    def ScriptCode(self, value: str) -> None:
+        ...
 

@@ -60,6 +60,9 @@ class DragSourceDropEvent(DragSourceEvent_8ccf115c):
         """
         ...
 
+    @DropAction.setter
+    def DropAction(self, value: int) -> None:
+        ...
 
     @property
     def DropSuccess(self) -> bool:
@@ -68,4 +71,7 @@ class DragSourceDropEvent(DragSourceEvent_8ccf115c):
         """
         ...
 
+    @DropSuccess.setter
+    def DropSuccess(self, value: bool) -> None:
+        ...
 

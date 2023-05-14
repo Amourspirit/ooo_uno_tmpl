@@ -37,10 +37,19 @@ class DataBar(XConditionEntry_e2340d32):
         """
         """
         ...
+
+    @DataBarEntries.setter
+    def DataBarEntries(self, value: 'typing.Tuple[XDataBarEntry_c61d0c1a, ...]') -> None:
+        ...
+
     @property
     def AxisColor(self) -> 'Color_68e908c5':
         """
         """
+        ...
+
+    @AxisColor.setter
+    def AxisColor(self, value: 'Color_68e908c5') -> None:
         ...
     @property
     def AxisPosition(self) -> int:
@@ -48,10 +57,18 @@ class DataBar(XConditionEntry_e2340d32):
         See com.sun.star.sheet.DataBarAxis for possible values.
         """
         ...
+
+    @AxisPosition.setter
+    def AxisPosition(self, value: int) -> None:
+        ...
     @property
     def Color(self) -> 'Color_68e908c5':
         """
         """
+        ...
+
+    @Color.setter
+    def Color(self, value: 'Color_68e908c5') -> None:
         ...
     @property
     def MaximumLength(self) -> float:
@@ -61,6 +78,10 @@ class DataBar(XConditionEntry_e2340d32):
         Allowed values are (0, 1000) but larger than MinimumLength.
         """
         ...
+
+    @MaximumLength.setter
+    def MaximumLength(self, value: float) -> None:
+        ...
     @property
     def MinimumLength(self) -> float:
         """
@@ -69,20 +90,36 @@ class DataBar(XConditionEntry_e2340d32):
         Allowed values are [0, 100) but smaller than MaximumLength.
         """
         ...
+
+    @MinimumLength.setter
+    def MinimumLength(self, value: float) -> None:
+        ...
     @property
     def NegativeColor(self) -> 'Color_68e908c5':
         """
         """
+        ...
+
+    @NegativeColor.setter
+    def NegativeColor(self, value: 'Color_68e908c5') -> None:
         ...
     @property
     def ShowValue(self) -> bool:
         """
         """
         ...
+
+    @ShowValue.setter
+    def ShowValue(self, value: bool) -> None:
+        ...
     @property
     def UseGradient(self) -> bool:
         """
         """
+        ...
+
+    @UseGradient.setter
+    def UseGradient(self, value: bool) -> None:
         ...
     @property
     def UseNegativeColor(self) -> bool:
@@ -90,4 +127,7 @@ class DataBar(XConditionEntry_e2340d32):
         """
         ...
 
+    @UseNegativeColor.setter
+    def UseNegativeColor(self, value: bool) -> None:
+        ...
 

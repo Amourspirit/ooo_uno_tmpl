@@ -35,4 +35,3 @@ class Desktop(XDesktop2_98eb0a77):
     """
     ...
 
-

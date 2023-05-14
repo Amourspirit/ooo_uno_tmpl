@@ -53,4 +53,3 @@ class DocumentDialogLibraryContainer(XStorageBasedLibraryContainer_d72a1321):
         """
         ...
 
-

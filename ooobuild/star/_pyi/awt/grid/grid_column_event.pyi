@@ -60,6 +60,9 @@ class GridColumnEvent(EventObject_a3d70b03):
         """
         ...
 
+    @AttributeName.setter
+    def AttributeName(self, value: str) -> None:
+        ...
 
     @property
     def OldValue(self) -> object:
@@ -68,6 +71,9 @@ class GridColumnEvent(EventObject_a3d70b03):
         """
         ...
 
+    @OldValue.setter
+    def OldValue(self, value: object) -> None:
+        ...
 
     @property
     def NewValue(self) -> object:
@@ -76,6 +82,9 @@ class GridColumnEvent(EventObject_a3d70b03):
         """
         ...
 
+    @NewValue.setter
+    def NewValue(self, value: object) -> None:
+        ...
 
     @property
     def ColumnIndex(self) -> int:
@@ -84,4 +93,7 @@ class GridColumnEvent(EventObject_a3d70b03):
         """
         ...
 
+    @ColumnIndex.setter
+    def ColumnIndex(self, value: int) -> None:
+        ...
 

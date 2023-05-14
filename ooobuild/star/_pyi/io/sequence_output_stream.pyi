@@ -31,4 +31,3 @@ class SequenceOutputStream(XSequenceOutputStream_bae0e6e):
     """
     ...
 
-

@@ -33,4 +33,3 @@ class BitmapTable(XNameContainer_cb90e47):
     """
     ...
 
-

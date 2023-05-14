@@ -58,4 +58,3 @@ class InstanceLocker(XComponent_98dc0ab5):
         """
         ...
 
-

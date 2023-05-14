@@ -51,4 +51,7 @@ class SearchCriterium(object):
         """
         ...
 
+    @Terms.setter
+    def Terms(self, value: typing.Tuple[RuleTerm_7a4b0972, ...]) -> None:
+        ...
 

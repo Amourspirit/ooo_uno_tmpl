@@ -58,6 +58,10 @@ class PreparedStatement(XPropertySet_bc180bfa, XComponent_98dc0ab5, XCloseable_9
         Note:  By definition, positioned update/delete execution must be done by a different Statement than the one which generated the ResultSet being used for positioning. Also, cursor names must be unique within a connection.
         """
         ...
+
+    @CursorName.setter
+    def CursorName(self, value: str) -> None:
+        ...
     @property
     def FetchDirection(self) -> int:
         """
@@ -66,6 +70,10 @@ class PreparedStatement(XPropertySet_bc180bfa, XComponent_98dc0ab5, XCloseable_9
         If this Statement object has not set a fetch direction, the return value is implementation-specific.
         """
         ...
+
+    @FetchDirection.setter
+    def FetchDirection(self, value: int) -> None:
+        ...
     @property
     def FetchSize(self) -> int:
         """
@@ -73,6 +81,10 @@ class PreparedStatement(XPropertySet_bc180bfa, XComponent_98dc0ab5, XCloseable_9
         
         If this Statement object has not set a fetch size, the return value is implementation-specific.
         """
+        ...
+
+    @FetchSize.setter
+    def FetchSize(self, value: int) -> None:
         ...
     @property
     def MaxFieldSize(self) -> int:
@@ -84,6 +96,10 @@ class PreparedStatement(XPropertySet_bc180bfa, XComponent_98dc0ab5, XCloseable_9
         There is no limitation, if set to zero.
         """
         ...
+
+    @MaxFieldSize.setter
+    def MaxFieldSize(self, value: int) -> None:
+        ...
     @property
     def MaxRows(self) -> int:
         """
@@ -91,6 +107,10 @@ class PreparedStatement(XPropertySet_bc180bfa, XComponent_98dc0ab5, XCloseable_9
         
         If the limit is exceeded, the excess rows are silently dropped. There is no limitation, if set to zero.
         """
+        ...
+
+    @MaxRows.setter
+    def MaxRows(self, value: int) -> None:
         ...
     @property
     def QueryTimeOut(self) -> int:
@@ -100,11 +120,19 @@ class PreparedStatement(XPropertySet_bc180bfa, XComponent_98dc0ab5, XCloseable_9
         If the limit is exceeded, a SQLException is thrown. There is no limitation, if set to zero.
         """
         ...
+
+    @QueryTimeOut.setter
+    def QueryTimeOut(self, value: int) -> None:
+        ...
     @property
     def ResultSetConcurrency(self) -> int:
         """
         retrieves the result set concurrency.
         """
+        ...
+
+    @ResultSetConcurrency.setter
+    def ResultSetConcurrency(self, value: int) -> None:
         ...
     @property
     def ResultSetType(self) -> int:
@@ -113,4 +141,7 @@ class PreparedStatement(XPropertySet_bc180bfa, XComponent_98dc0ab5, XCloseable_9
         """
         ...
 
+    @ResultSetType.setter
+    def ResultSetType(self, value: int) -> None:
+        ...
 

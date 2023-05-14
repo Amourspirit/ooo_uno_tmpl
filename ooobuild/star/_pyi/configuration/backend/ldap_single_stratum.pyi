@@ -31,4 +31,3 @@ class LdapSingleStratum(SingleLayerStratum_2a7614c5):
     """
     ...
 
-

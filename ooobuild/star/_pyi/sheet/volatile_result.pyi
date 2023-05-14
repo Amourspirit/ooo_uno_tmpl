@@ -33,4 +33,3 @@ class VolatileResult(XVolatileResult_e2e00d38):
     """
     ...
 
-

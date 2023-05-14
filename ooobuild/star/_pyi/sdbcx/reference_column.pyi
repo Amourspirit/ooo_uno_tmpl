@@ -38,4 +38,7 @@ class ReferenceColumn(Column_7b1d098a):
         """
         ...
 
+    @ReferencedColumn.setter
+    def ReferencedColumn(self, value: str) -> None:
+        ...
 

@@ -45,4 +45,7 @@ class Binding(ListEntrySource_48260fe4, ValueBinding_18de0e7d, XValidator_2a5c0f
         """
         ...
 
+    @BindingNamespaces.setter
+    def BindingNamespaces(self, value: 'XNameContainer_cb90e47') -> None:
+        ...
 

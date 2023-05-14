@@ -59,6 +59,9 @@ class FilterOptionsRequest(Exception_85530a09):
         """
         ...
 
+    @rProperties.setter
+    def rProperties(self, value: typing.Tuple[PropertyValue_c9610c73, ...]) -> None:
+        ...
     @property
     def rModel(self) -> XModel_7a6e095c:
         """
@@ -66,6 +69,9 @@ class FilterOptionsRequest(Exception_85530a09):
         """
         ...
 
+    @rModel.setter
+    def rModel(self, value: XModel_7a6e095c) -> None:
+        ...
 
 __all__ = ['FilterOptionsRequest']
 

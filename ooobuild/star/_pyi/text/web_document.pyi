@@ -35,4 +35,3 @@ class WebDocument(GenericTextDocument_d200e6e):
     """
     ...
 
-

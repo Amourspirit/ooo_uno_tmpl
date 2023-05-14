@@ -36,4 +36,3 @@ class UnoControlTabPageContainer(UnoControl_8f2c0a67, XTabPageContainer_137e0e48
     """
     ...
 
-

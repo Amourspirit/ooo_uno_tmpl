@@ -31,4 +31,3 @@ class MimeContentTypeFactory(XMimeContentTypeFactory_d969133c):
     """
     ...
 
-

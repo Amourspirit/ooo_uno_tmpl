@@ -61,6 +61,9 @@ class ParametersRequest(ClassifiedInteractionRequest_9f72121b):
         """
         ...
 
+    @Parameters.setter
+    def Parameters(self, value: XIndexAccess_f0910d6d) -> None:
+        ...
     @property
     def Connection(self) -> XConnection_a36a0b0c:
         """
@@ -70,6 +73,9 @@ class ParametersRequest(ClassifiedInteractionRequest_9f72121b):
         """
         ...
 
+    @Connection.setter
+    def Connection(self, value: XConnection_a36a0b0c) -> None:
+        ...
 
 __all__ = ['ParametersRequest']
 

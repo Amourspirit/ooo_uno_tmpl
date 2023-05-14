@@ -39,4 +39,3 @@ class Proofreader(XProofreader_dab0e46):
     """
     ...
 
-

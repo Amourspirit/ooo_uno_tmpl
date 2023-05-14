@@ -30,4 +30,3 @@ class InteractionRequestStringResolver(XInteractionRequestStringResolver_23b1445
     """
     ...
 
-

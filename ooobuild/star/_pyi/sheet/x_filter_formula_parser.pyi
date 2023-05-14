@@ -37,4 +37,7 @@ class XFilterFormulaParser(XFormulaParser_d54d0cbc):
         """
         ...
 
+    @SupportedNamespace.setter
+    def SupportedNamespace(self, value: str) -> None:
+        ...
 

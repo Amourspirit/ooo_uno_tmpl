@@ -51,6 +51,9 @@ class ScannerContext(object):
         """
         ...
 
+    @ScannerName.setter
+    def ScannerName(self, value: str) -> None:
+        ...
 
     @property
     def InternalData(self) -> int:
@@ -59,4 +62,7 @@ class ScannerContext(object):
         """
         ...
 
+    @InternalData.setter
+    def InternalData(self, value: int) -> None:
+        ...
 

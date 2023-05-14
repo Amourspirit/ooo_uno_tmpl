@@ -36,11 +36,19 @@ class IndexDescriptor(Descriptor_a5200b3b, XColumnsSupplier_f0600da9):
         is the name of the index catalog, may be empty.
         """
         ...
+
+    @Catalog.setter
+    def Catalog(self, value: str) -> None:
+        ...
     @property
     def IsClustered(self) -> bool:
         """
         indicates that the index is clustered.
         """
+        ...
+
+    @IsClustered.setter
+    def IsClustered(self, value: bool) -> None:
         ...
     @property
     def IsUnique(self) -> bool:
@@ -49,4 +57,7 @@ class IndexDescriptor(Descriptor_a5200b3b, XColumnsSupplier_f0600da9):
         """
         ...
 
+    @IsUnique.setter
+    def IsUnique(self, value: bool) -> None:
+        ...
 

@@ -40,4 +40,7 @@ class BaseFrame(BaseFrameProperties_b990e60, TextContent_a6810b4d, XPropertySet_
         """
         ...
 
+    @FrameStyleName.setter
+    def FrameStyleName(self, value: str) -> None:
+        ...
 

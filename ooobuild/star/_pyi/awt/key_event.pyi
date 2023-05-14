@@ -58,6 +58,9 @@ class KeyEvent(InputEvent_8f520a66):
         """
         ...
 
+    @KeyCode.setter
+    def KeyCode(self, value: int) -> None:
+        ...
 
     @property
     def KeyChar(self) -> str:
@@ -66,6 +69,9 @@ class KeyEvent(InputEvent_8f520a66):
         """
         ...
 
+    @KeyChar.setter
+    def KeyChar(self, value: str) -> None:
+        ...
 
     @property
     def KeyFunc(self) -> int:
@@ -76,4 +82,7 @@ class KeyEvent(InputEvent_8f520a66):
         """
         ...
 
+    @KeyFunc.setter
+    def KeyFunc(self, value: int) -> None:
+        ...
 

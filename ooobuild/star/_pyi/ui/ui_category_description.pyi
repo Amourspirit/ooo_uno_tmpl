@@ -39,4 +39,3 @@ class UICategoryDescription(XNameAccess_e2ab0cf6):
     """
     ...
 
-

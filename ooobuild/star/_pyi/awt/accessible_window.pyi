@@ -37,4 +37,3 @@ class AccessibleWindow(XAccessibleContext_8eae119b, XAccessibleEventBroadcaster_
     """
     ...
 
-

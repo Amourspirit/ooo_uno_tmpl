@@ -34,4 +34,3 @@ class DateField(UnoControlDateField_fd2e0dc9, XBoundControl_bba00bed):
     """
     ...
 
-

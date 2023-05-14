@@ -39,4 +39,3 @@ class PopupMenuControllerFactory(XUIControllerFactory_25e60f05):
     """
     ...
 
-

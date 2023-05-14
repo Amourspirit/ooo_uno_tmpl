@@ -47,9 +47,15 @@ class TextPosition(object):
     def Paragraph(self) -> int:
         ...
 
+    @Paragraph.setter
+    def Paragraph(self, value: int) -> None:
+        ...
 
     @property
     def PositionInParagraph(self) -> int:
         ...
 
+    @PositionInParagraph.setter
+    def PositionInParagraph(self, value: int) -> None:
+        ...
 

@@ -43,4 +43,3 @@ class HierarchyAccess(XExactName_a3310adf, XMultiPropertyStates_2a3e0f4d, XPrope
     """
     ...
 
-

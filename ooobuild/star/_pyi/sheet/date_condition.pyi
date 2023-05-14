@@ -34,10 +34,17 @@ class DateCondition(XConditionEntry_e2340d32):
         See com.sun.star.sheet.DateType for possible values.
         """
         ...
+
+    @DateType.setter
+    def DateType(self, value: int) -> None:
+        ...
     @property
     def StyleName(self) -> str:
         """
         """
         ...
 
+    @StyleName.setter
+    def StyleName(self, value: str) -> None:
+        ...
 

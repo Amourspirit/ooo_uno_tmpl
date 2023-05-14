@@ -38,4 +38,7 @@ class Group(XPropertySet_bc180bfa, XAuthorizable_c8dd0c5e, XUsersSupplier_d6060c
         """
         ...
 
+    @Name.setter
+    def Name(self, value: str) -> None:
+        ...
 

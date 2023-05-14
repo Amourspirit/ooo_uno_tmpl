@@ -55,6 +55,9 @@ class Ambiguous(object):
         """
         ...
 
+    @Value.setter
+    def Value(self, value: object) -> None:
+        ...
 
     @property
     def IsAmbiguous(self) -> bool:
@@ -63,4 +66,7 @@ class Ambiguous(object):
         """
         ...
 
+    @IsAmbiguous.setter
+    def IsAmbiguous(self, value: bool) -> None:
+        ...
 

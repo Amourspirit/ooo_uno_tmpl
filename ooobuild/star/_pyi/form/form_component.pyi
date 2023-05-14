@@ -47,4 +47,7 @@ class FormComponent(XPropertyBag_bbd00bd8, XPropertySet_bc180bfa, XNamed_a6520b0
         """
         ...
 
+    @Name.setter
+    def Name(self, value: str) -> None:
+        ...
 

@@ -52,6 +52,9 @@ class ExportStreamInfo(object):
         """
         ...
 
+    @Target.setter
+    def Target(self, value: XOutputStream_a4e00b35) -> None:
+        ...
 
     @property
     def ForceBodies(self) -> bool:
@@ -60,4 +63,7 @@ class ExportStreamInfo(object):
         """
         ...
 
+    @ForceBodies.setter
+    def ForceBodies(self, value: bool) -> None:
+        ...
 

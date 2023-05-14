@@ -44,6 +44,9 @@ class XLinguProperties(XPropertySet_bc180bfa):
         """
         ...
 
+    @DefaultLocale.setter
+    def DefaultLocale(self, value: 'Locale_70d308fa') -> None:
+        ...
     @property
     def DefaultLocale_CJK(self) -> 'Locale_70d308fa':
         """
@@ -51,6 +54,9 @@ class XLinguProperties(XPropertySet_bc180bfa):
         """
         ...
 
+    @DefaultLocale_CJK.setter
+    def DefaultLocale_CJK(self, value: 'Locale_70d308fa') -> None:
+        ...
     @property
     def DefaultLocale_CTL(self) -> 'Locale_70d308fa':
         """
@@ -58,6 +64,9 @@ class XLinguProperties(XPropertySet_bc180bfa):
         """
         ...
 
+    @DefaultLocale_CTL.setter
+    def DefaultLocale_CTL(self, value: 'Locale_70d308fa') -> None:
+        ...
     @property
     def HyphMinLeading(self) -> int:
         """
@@ -65,6 +74,9 @@ class XLinguProperties(XPropertySet_bc180bfa):
         """
         ...
 
+    @HyphMinLeading.setter
+    def HyphMinLeading(self, value: int) -> None:
+        ...
     @property
     def HyphMinTrailing(self) -> int:
         """
@@ -72,6 +84,9 @@ class XLinguProperties(XPropertySet_bc180bfa):
         """
         ...
 
+    @HyphMinTrailing.setter
+    def HyphMinTrailing(self, value: int) -> None:
+        ...
     @property
     def HyphMinWordLength(self) -> int:
         """
@@ -79,6 +94,9 @@ class XLinguProperties(XPropertySet_bc180bfa):
         """
         ...
 
+    @HyphMinWordLength.setter
+    def HyphMinWordLength(self, value: int) -> None:
+        ...
     @property
     def IsHyphAuto(self) -> bool:
         """
@@ -86,6 +104,9 @@ class XLinguProperties(XPropertySet_bc180bfa):
         """
         ...
 
+    @IsHyphAuto.setter
+    def IsHyphAuto(self, value: bool) -> None:
+        ...
     @property
     def IsHyphSpecial(self) -> bool:
         """
@@ -93,6 +114,9 @@ class XLinguProperties(XPropertySet_bc180bfa):
         """
         ...
 
+    @IsHyphSpecial.setter
+    def IsHyphSpecial(self, value: bool) -> None:
+        ...
     @property
     def IsIgnoreControlCharacters(self) -> bool:
         """
@@ -100,6 +124,9 @@ class XLinguProperties(XPropertySet_bc180bfa):
         """
         ...
 
+    @IsIgnoreControlCharacters.setter
+    def IsIgnoreControlCharacters(self, value: bool) -> None:
+        ...
     @property
     def IsSpellAuto(self) -> bool:
         """
@@ -107,6 +134,9 @@ class XLinguProperties(XPropertySet_bc180bfa):
         """
         ...
 
+    @IsSpellAuto.setter
+    def IsSpellAuto(self, value: bool) -> None:
+        ...
     @property
     def IsSpellCapitalization(self) -> bool:
         """
@@ -114,6 +144,9 @@ class XLinguProperties(XPropertySet_bc180bfa):
         """
         ...
 
+    @IsSpellCapitalization.setter
+    def IsSpellCapitalization(self, value: bool) -> None:
+        ...
     @property
     def IsSpellSpecial(self) -> bool:
         """
@@ -121,6 +154,9 @@ class XLinguProperties(XPropertySet_bc180bfa):
         """
         ...
 
+    @IsSpellSpecial.setter
+    def IsSpellSpecial(self, value: bool) -> None:
+        ...
     @property
     def IsSpellUpperCase(self) -> bool:
         """
@@ -128,6 +164,9 @@ class XLinguProperties(XPropertySet_bc180bfa):
         """
         ...
 
+    @IsSpellUpperCase.setter
+    def IsSpellUpperCase(self, value: bool) -> None:
+        ...
     @property
     def IsSpellWithDigits(self) -> bool:
         """
@@ -135,6 +174,9 @@ class XLinguProperties(XPropertySet_bc180bfa):
         """
         ...
 
+    @IsSpellWithDigits.setter
+    def IsSpellWithDigits(self, value: bool) -> None:
+        ...
     @property
     def IsUseDictionaryList(self) -> bool:
         """
@@ -142,6 +184,9 @@ class XLinguProperties(XPropertySet_bc180bfa):
         """
         ...
 
+    @IsUseDictionaryList.setter
+    def IsUseDictionaryList(self, value: bool) -> None:
+        ...
     @property
     def IsWrapReverse(self) -> bool:
         """
@@ -149,4 +194,7 @@ class XLinguProperties(XPropertySet_bc180bfa):
         """
         ...
 
+    @IsWrapReverse.setter
+    def IsWrapReverse(self, value: bool) -> None:
+        ...
 

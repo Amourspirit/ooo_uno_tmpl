@@ -58,6 +58,9 @@ class BatchUpdateException(SQLException_acc90b43):
         """
         ...
 
+    @UpdateCounts.setter
+    def UpdateCounts(self, value: uno.ByteSequence) -> None:
+        ...
 
 __all__ = ['BatchUpdateException']
 

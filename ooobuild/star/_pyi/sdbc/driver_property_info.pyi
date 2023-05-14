@@ -56,6 +56,9 @@ class DriverPropertyInfo(object):
         """
         ...
 
+    @Choices.setter
+    def Choices(self, value: typing.Tuple[str, ...]) -> None:
+        ...
 
     @property
     def Name(self) -> str:
@@ -64,6 +67,9 @@ class DriverPropertyInfo(object):
         """
         ...
 
+    @Name.setter
+    def Name(self, value: str) -> None:
+        ...
 
     @property
     def Description(self) -> str:
@@ -72,6 +78,9 @@ class DriverPropertyInfo(object):
         """
         ...
 
+    @Description.setter
+    def Description(self, value: str) -> None:
+        ...
 
     @property
     def IsRequired(self) -> bool:
@@ -80,6 +89,9 @@ class DriverPropertyInfo(object):
         """
         ...
 
+    @IsRequired.setter
+    def IsRequired(self, value: bool) -> None:
+        ...
 
     @property
     def Value(self) -> str:
@@ -90,4 +102,7 @@ class DriverPropertyInfo(object):
         """
         ...
 
+    @Value.setter
+    def Value(self, value: str) -> None:
+        ...
 

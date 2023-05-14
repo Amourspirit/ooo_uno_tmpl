@@ -44,6 +44,10 @@ class RenderOptions(ABC):
         Hyperlinks, notes, and outlines cannot be exported on a per page base. They have to be exported once before the first page is exported. Therefore the IsFirstPage property has been introduced. It is evaluated in the render function and indicates that the current page is the first page to be exported.
         """
         ...
+
+    @IsFirstPage.setter
+    def IsFirstPage(self, value: bool) -> None:
+        ...
     @property
     def IsLastPage(self) -> bool:
         """
@@ -51,6 +55,10 @@ class RenderOptions(ABC):
         
         Hyperlinks from the EditEngine have to be exported once after the last page has been processed. Therefore the IsLastPage property has been introduced. It is evaluated in the render function and indicates that the current page is the last page to be exported.
         """
+        ...
+
+    @IsLastPage.setter
+    def IsLastPage(self, value: bool) -> None:
         ...
     @property
     def IsSkipEmptyPages(self) -> bool:
@@ -60,6 +68,10 @@ class RenderOptions(ABC):
         Tells the PDF export to skip empty pages. This flag also has to be passed to the render function, in order to calculate to correct page numbers during the export of hyperlinks, notes, and outlines.
         """
         ...
+
+    @IsSkipEmptyPages.setter
+    def IsSkipEmptyPages(self, value: bool) -> None:
+        ...
     @property
     def PageRange(self) -> str:
         """
@@ -68,6 +80,10 @@ class RenderOptions(ABC):
         Tells the PDF export to skip empty pages. This flag also has to be passed to the render function, in order to calculate to correct page numbers during the export of hyperlinks, notes, and outlines.
         """
         ...
+
+    @PageRange.setter
+    def PageRange(self, value: str) -> None:
+        ...
     @property
     def RenderDevice(self) -> 'XDevice_70ba08fc':
         """
@@ -75,4 +91,7 @@ class RenderOptions(ABC):
         """
         ...
 
+    @RenderDevice.setter
+    def RenderDevice(self, value: 'XDevice_70ba08fc') -> None:
+        ...
 

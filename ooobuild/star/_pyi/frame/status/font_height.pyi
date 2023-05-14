@@ -58,6 +58,9 @@ class FontHeight(object):
         """
         ...
 
+    @Height.setter
+    def Height(self, value: float) -> None:
+        ...
 
     @property
     def Prop(self) -> int:
@@ -66,6 +69,9 @@ class FontHeight(object):
         """
         ...
 
+    @Prop.setter
+    def Prop(self, value: int) -> None:
+        ...
 
     @property
     def Diff(self) -> float:
@@ -74,4 +80,7 @@ class FontHeight(object):
         """
         ...
 
+    @Diff.setter
+    def Diff(self, value: float) -> None:
+        ...
 

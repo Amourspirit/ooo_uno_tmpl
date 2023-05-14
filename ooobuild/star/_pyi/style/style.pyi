@@ -59,6 +59,11 @@ class Style(UserDefinedAttributesSupplier_9fbe1222, XMultiPropertySet_fd880e05, 
             OOo 2.0.1
         """
         ...
+
+    @ParaStyleConditions.setter
+    def ParaStyleConditions(self, value: 'typing.Tuple[NamedValue_a37a0af3, ...]') -> None:
+        ...
+
     @property
     def StyleInteropGrabBag(self) -> 'typing.Tuple[PropertyValue_c9610c73, ...]':
         """
@@ -71,6 +76,11 @@ class Style(UserDefinedAttributesSupplier_9fbe1222, XMultiPropertySet_fd880e05, 
             LibreOffice 4.2
         """
         ...
+
+    @StyleInteropGrabBag.setter
+    def StyleInteropGrabBag(self, value: 'typing.Tuple[PropertyValue_c9610c73, ...]') -> None:
+        ...
+
     @property
     def DisplayName(self) -> str:
         """
@@ -79,6 +89,10 @@ class Style(UserDefinedAttributesSupplier_9fbe1222, XMultiPropertySet_fd880e05, 
         The names of the styles at the API are language independent. The user interface names are localized.
         """
         ...
+
+    @DisplayName.setter
+    def DisplayName(self, value: str) -> None:
+        ...
     @property
     def FollowStyle(self) -> str:
         """
@@ -86,6 +100,10 @@ class Style(UserDefinedAttributesSupplier_9fbe1222, XMultiPropertySet_fd880e05, 
         
         This property is usually available at paragraph styles only.
         """
+        ...
+
+    @FollowStyle.setter
+    def FollowStyle(self, value: str) -> None:
         ...
     @property
     def Hidden(self) -> bool:
@@ -97,6 +115,10 @@ class Style(UserDefinedAttributesSupplier_9fbe1222, XMultiPropertySet_fd880e05, 
             LibreOffice 4.0
         """
         ...
+
+    @Hidden.setter
+    def Hidden(self, value: bool) -> None:
+        ...
     @property
     def IsAutoUpdate(self) -> str:
         """
@@ -104,6 +126,10 @@ class Style(UserDefinedAttributesSupplier_9fbe1222, XMultiPropertySet_fd880e05, 
         
         For example, if the style is applied to a paragraph and the properties of the paragraph are changed then the style will be updated accordingly.
         """
+        ...
+
+    @IsAutoUpdate.setter
+    def IsAutoUpdate(self, value: str) -> None:
         ...
     @property
     def IsPhysical(self) -> bool:
@@ -114,4 +140,7 @@ class Style(UserDefinedAttributesSupplier_9fbe1222, XMultiPropertySet_fd880e05, 
         """
         ...
 
+    @IsPhysical.setter
+    def IsPhysical(self, value: bool) -> None:
+        ...
 

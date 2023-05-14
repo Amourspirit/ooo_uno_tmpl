@@ -53,6 +53,9 @@ class Event(object):
         """
         ...
 
+    @Source.setter
+    def Source(self, value: object) -> None:
+        ...
 
     @property
     def Trigger(self) -> int:
@@ -61,6 +64,9 @@ class Event(object):
         """
         ...
 
+    @Trigger.setter
+    def Trigger(self, value: int) -> None:
+        ...
 
     @property
     def Offset(self) -> object:
@@ -71,6 +77,9 @@ class Event(object):
         """
         ...
 
+    @Offset.setter
+    def Offset(self, value: object) -> None:
+        ...
 
     @property
     def Repeat(self) -> int:
@@ -81,4 +90,7 @@ class Event(object):
         """
         ...
 
+    @Repeat.setter
+    def Repeat(self, value: int) -> None:
+        ...
 

@@ -35,4 +35,3 @@ class ChartDocument(XChartDocument_dd6f0cd5, XTitled_8d490a0a, XDataReceiver_117
     """
     ...
 
-

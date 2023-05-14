@@ -50,4 +50,7 @@ class XScriptInvocationContext(ABC):
         """
         ...
 
+    @ScriptContainer.setter
+    def ScriptContainer(self, value: 'XEmbeddedScripts_1ab50eb1') -> None:
+        ...
 

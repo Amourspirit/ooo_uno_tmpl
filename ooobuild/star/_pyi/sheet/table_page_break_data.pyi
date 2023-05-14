@@ -51,6 +51,9 @@ class TablePageBreakData(object):
         """
         ...
 
+    @Position.setter
+    def Position(self, value: int) -> None:
+        ...
 
     @property
     def ManualBreak(self) -> bool:
@@ -59,4 +62,7 @@ class TablePageBreakData(object):
         """
         ...
 
+    @ManualBreak.setter
+    def ManualBreak(self, value: bool) -> None:
+        ...
 

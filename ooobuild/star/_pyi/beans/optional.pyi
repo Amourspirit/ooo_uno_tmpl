@@ -53,6 +53,9 @@ class Optional(object):
         """
         ...
 
+    @IsPresent.setter
+    def IsPresent(self, value: bool) -> None:
+        ...
 
     @property
     def Value(self) -> object:
@@ -63,4 +66,7 @@ class Optional(object):
         """
         ...
 
+    @Value.setter
+    def Value(self, value: object) -> None:
+        ...
 

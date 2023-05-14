@@ -45,6 +45,10 @@ class TextDocumentView(OfficeDocumentView_fd320de9, XPropertySet_bc180bfa, XText
             OOo 2.0
         """
         ...
+
+    @IsConstantSpellcheck.setter
+    def IsConstantSpellcheck(self, value: bool) -> None:
+        ...
     @property
     def IsHideSpellMarks(self) -> bool:
         """
@@ -54,6 +58,10 @@ class TextDocumentView(OfficeDocumentView_fd320de9, XPropertySet_bc180bfa, XText
         
             OOo 2.0
         """
+        ...
+
+    @IsHideSpellMarks.setter
+    def IsHideSpellMarks(self, value: bool) -> None:
         ...
     @property
     def LineCount(self) -> int:
@@ -69,6 +77,10 @@ class TextDocumentView(OfficeDocumentView_fd320de9, XPropertySet_bc180bfa, XText
             OOo 2.0
         """
         ...
+
+    @LineCount.setter
+    def LineCount(self, value: int) -> None:
+        ...
     @property
     def PageCount(self) -> int:
         """
@@ -82,4 +94,7 @@ class TextDocumentView(OfficeDocumentView_fd320de9, XPropertySet_bc180bfa, XText
         """
         ...
 
+    @PageCount.setter
+    def PageCount(self, value: int) -> None:
+        ...
 

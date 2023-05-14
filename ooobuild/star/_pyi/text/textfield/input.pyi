@@ -37,6 +37,10 @@ class Input(TextField_90260a56):
         The field displays the text content.
         """
         ...
+
+    @Content.setter
+    def Content(self, value: str) -> None:
+        ...
     @property
     def Help(self) -> str:
         """
@@ -47,6 +51,10 @@ class Input(TextField_90260a56):
         It's content must NEVER be modified by the user.
         """
         ...
+
+    @Help.setter
+    def Help(self, value: str) -> None:
+        ...
     @property
     def Hint(self) -> str:
         """
@@ -56,4 +64,7 @@ class Input(TextField_90260a56):
         """
         ...
 
+    @Hint.setter
+    def Hint(self, value: str) -> None:
+        ...
 

@@ -40,4 +40,3 @@ class PackageFolderContent(XPropertiesChangeNotifier_7a7b111c, XPropertyContaine
     """
     ...
 
-

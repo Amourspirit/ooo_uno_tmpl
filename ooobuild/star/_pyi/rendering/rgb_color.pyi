@@ -53,6 +53,9 @@ class RGBColor(object):
         """
         ...
 
+    @Red.setter
+    def Red(self, value: ColorComponent_e4c0e78) -> None:
+        ...
 
     @property
     def Green(self) -> ColorComponent_e4c0e78:
@@ -61,6 +64,9 @@ class RGBColor(object):
         """
         ...
 
+    @Green.setter
+    def Green(self, value: ColorComponent_e4c0e78) -> None:
+        ...
 
     @property
     def Blue(self) -> ColorComponent_e4c0e78:
@@ -69,4 +75,7 @@ class RGBColor(object):
         """
         ...
 
+    @Blue.setter
+    def Blue(self, value: ColorComponent_e4c0e78) -> None:
+        ...
 

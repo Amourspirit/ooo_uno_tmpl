@@ -60,6 +60,9 @@ class FinishEngineEvent(EventObject_a3d70b03):
         """
         ...
 
+    @Finish.setter
+    def Finish(self, value: FinishReason_ca230c66) -> None:
+        ...
 
     @property
     def ErrorMessage(self) -> str:
@@ -70,6 +73,9 @@ class FinishEngineEvent(EventObject_a3d70b03):
         """
         ...
 
+    @ErrorMessage.setter
+    def ErrorMessage(self, value: str) -> None:
+        ...
 
     @property
     def Return(self) -> object:
@@ -80,4 +86,7 @@ class FinishEngineEvent(EventObject_a3d70b03):
         """
         ...
 
+    @Return.setter
+    def Return(self, value: object) -> None:
+        ...
 

@@ -52,6 +52,9 @@ class ErrorCodeIOException(IOException_8c450a27):
         """
         ...
 
+    @ErrCode.setter
+    def ErrCode(self, value: int) -> None:
+        ...
 
 __all__ = ['ErrorCodeIOException']
 

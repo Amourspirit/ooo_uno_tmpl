@@ -58,6 +58,9 @@ class PropertyCategoryDescriptor(object):
         """
         ...
 
+    @ProgrammaticName.setter
+    def ProgrammaticName(self, value: str) -> None:
+        ...
 
     @property
     def UIName(self) -> str:
@@ -66,6 +69,9 @@ class PropertyCategoryDescriptor(object):
         """
         ...
 
+    @UIName.setter
+    def UIName(self, value: str) -> None:
+        ...
 
     @property
     def HelpURL(self) -> str:
@@ -74,4 +80,7 @@ class PropertyCategoryDescriptor(object):
         """
         ...
 
+    @HelpURL.setter
+    def HelpURL(self, value: str) -> None:
+        ...
 

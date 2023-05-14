@@ -60,6 +60,9 @@ class BackendSetupException(CannotLoadConfigurationException_b325176a):
         """
         ...
 
+    @BackendException.setter
+    def BackendException(self, value: object) -> None:
+        ...
 
 __all__ = ['BackendSetupException']
 

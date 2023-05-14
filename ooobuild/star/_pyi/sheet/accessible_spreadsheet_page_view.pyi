@@ -37,4 +37,3 @@ class AccessibleSpreadsheetPageView(XAccessibleComponent_b2f21269, XAccessibleCo
     """
     ...
 
-

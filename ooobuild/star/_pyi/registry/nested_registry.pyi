@@ -42,4 +42,3 @@ class NestedRegistry(XInitialization_d46c0cca, XSimpleRegistry_10150e9c):
     """
     ...
 
-

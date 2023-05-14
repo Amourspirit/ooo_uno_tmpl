@@ -33,4 +33,3 @@ class SubTotalField(XSubTotalField_d4710c8b):
     """
     ...
 
-

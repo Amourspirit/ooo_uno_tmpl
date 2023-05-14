@@ -36,4 +36,7 @@ class ParagraphCount(TextField_90260a56):
         """
         ...
 
+    @NumberingType.setter
+    def NumberingType(self, value: int) -> None:
+        ...
 

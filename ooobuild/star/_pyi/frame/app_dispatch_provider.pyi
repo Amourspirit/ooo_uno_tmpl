@@ -34,4 +34,3 @@ class AppDispatchProvider(XAppDispatchProvider_26dc0f07):
     """
     ...
 
-

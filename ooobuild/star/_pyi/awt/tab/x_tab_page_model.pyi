@@ -41,6 +41,9 @@ class XTabPageModel(ABC):
         """
         ...
 
+    @Enabled.setter
+    def Enabled(self, value: bool) -> None:
+        ...
     @property
     def ImageURL(self) -> str:
         """
@@ -48,6 +51,9 @@ class XTabPageModel(ABC):
         """
         ...
 
+    @ImageURL.setter
+    def ImageURL(self, value: str) -> None:
+        ...
     @property
     def TabPageID(self) -> int:
         """
@@ -55,6 +61,9 @@ class XTabPageModel(ABC):
         """
         ...
 
+    @TabPageID.setter
+    def TabPageID(self, value: int) -> None:
+        ...
     @property
     def Title(self) -> str:
         """
@@ -62,6 +71,9 @@ class XTabPageModel(ABC):
         """
         ...
 
+    @Title.setter
+    def Title(self, value: str) -> None:
+        ...
     @property
     def ToolTip(self) -> str:
         """
@@ -69,4 +81,7 @@ class XTabPageModel(ABC):
         """
         ...
 
+    @ToolTip.setter
+    def ToolTip(self, value: str) -> None:
+        ...
 

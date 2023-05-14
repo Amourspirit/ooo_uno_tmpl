@@ -59,6 +59,9 @@ class BezierPoint(object):
         """
         ...
 
+    @Position.setter
+    def Position(self, value: Point_5fb2085e) -> None:
+        ...
 
     @property
     def ControlPoint1(self) -> Point_5fb2085e:
@@ -67,6 +70,9 @@ class BezierPoint(object):
         """
         ...
 
+    @ControlPoint1.setter
+    def ControlPoint1(self, value: Point_5fb2085e) -> None:
+        ...
 
     @property
     def ControlPoint2(self) -> Point_5fb2085e:
@@ -75,4 +81,7 @@ class BezierPoint(object):
         """
         ...
 
+    @ControlPoint2.setter
+    def ControlPoint2(self, value: Point_5fb2085e) -> None:
+        ...
 

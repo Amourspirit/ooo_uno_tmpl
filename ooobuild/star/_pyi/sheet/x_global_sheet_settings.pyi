@@ -43,6 +43,10 @@ class XGlobalSheetSettings(ABC):
         """
         ...
 
+    @UserLists.setter
+    def UserLists(self, value: 'typing.Tuple[str, ...]') -> None:
+        ...
+
     @property
     def DoAutoComplete(self) -> bool:
         """
@@ -50,6 +54,9 @@ class XGlobalSheetSettings(ABC):
         """
         ...
 
+    @DoAutoComplete.setter
+    def DoAutoComplete(self, value: bool) -> None:
+        ...
     @property
     def EnterEdit(self) -> bool:
         """
@@ -57,6 +64,9 @@ class XGlobalSheetSettings(ABC):
         """
         ...
 
+    @EnterEdit.setter
+    def EnterEdit(self, value: bool) -> None:
+        ...
     @property
     def ExpandReferences(self) -> bool:
         """
@@ -64,6 +74,9 @@ class XGlobalSheetSettings(ABC):
         """
         ...
 
+    @ExpandReferences.setter
+    def ExpandReferences(self, value: bool) -> None:
+        ...
     @property
     def ExtendFormat(self) -> bool:
         """
@@ -71,6 +84,9 @@ class XGlobalSheetSettings(ABC):
         """
         ...
 
+    @ExtendFormat.setter
+    def ExtendFormat(self, value: bool) -> None:
+        ...
     @property
     def LinkUpdateMode(self) -> int:
         """
@@ -84,6 +100,9 @@ class XGlobalSheetSettings(ABC):
         """
         ...
 
+    @LinkUpdateMode.setter
+    def LinkUpdateMode(self, value: int) -> None:
+        ...
     @property
     def MarkHeader(self) -> bool:
         """
@@ -91,6 +110,9 @@ class XGlobalSheetSettings(ABC):
         """
         ...
 
+    @MarkHeader.setter
+    def MarkHeader(self, value: bool) -> None:
+        ...
     @property
     def Metric(self) -> int:
         """
@@ -98,6 +120,9 @@ class XGlobalSheetSettings(ABC):
         """
         ...
 
+    @Metric.setter
+    def Metric(self, value: int) -> None:
+        ...
     @property
     def MoveDirection(self) -> int:
         """
@@ -105,6 +130,9 @@ class XGlobalSheetSettings(ABC):
         """
         ...
 
+    @MoveDirection.setter
+    def MoveDirection(self, value: int) -> None:
+        ...
     @property
     def MoveSelection(self) -> bool:
         """
@@ -112,6 +140,9 @@ class XGlobalSheetSettings(ABC):
         """
         ...
 
+    @MoveSelection.setter
+    def MoveSelection(self, value: bool) -> None:
+        ...
     @property
     def PrintAllSheets(self) -> bool:
         """
@@ -119,6 +150,9 @@ class XGlobalSheetSettings(ABC):
         """
         ...
 
+    @PrintAllSheets.setter
+    def PrintAllSheets(self, value: bool) -> None:
+        ...
     @property
     def PrintEmptyPages(self) -> bool:
         """
@@ -126,6 +160,9 @@ class XGlobalSheetSettings(ABC):
         """
         ...
 
+    @PrintEmptyPages.setter
+    def PrintEmptyPages(self, value: bool) -> None:
+        ...
     @property
     def RangeFinder(self) -> bool:
         """
@@ -133,6 +170,9 @@ class XGlobalSheetSettings(ABC):
         """
         ...
 
+    @RangeFinder.setter
+    def RangeFinder(self, value: bool) -> None:
+        ...
     @property
     def ReplaceCellsWarning(self) -> bool:
         """
@@ -142,6 +182,9 @@ class XGlobalSheetSettings(ABC):
         """
         ...
 
+    @ReplaceCellsWarning.setter
+    def ReplaceCellsWarning(self, value: bool) -> None:
+        ...
     @property
     def Scale(self) -> int:
         """
@@ -157,6 +200,9 @@ class XGlobalSheetSettings(ABC):
         """
         ...
 
+    @Scale.setter
+    def Scale(self, value: int) -> None:
+        ...
     @property
     def StatusBarFunction(self) -> int:
         """
@@ -164,6 +210,9 @@ class XGlobalSheetSettings(ABC):
         """
         ...
 
+    @StatusBarFunction.setter
+    def StatusBarFunction(self, value: int) -> None:
+        ...
     @property
     def UsePrinterMetrics(self) -> bool:
         """
@@ -171,6 +220,9 @@ class XGlobalSheetSettings(ABC):
         """
         ...
 
+    @UsePrinterMetrics.setter
+    def UsePrinterMetrics(self, value: bool) -> None:
+        ...
     @property
     def UseTabCol(self) -> bool:
         """
@@ -178,4 +230,7 @@ class XGlobalSheetSettings(ABC):
         """
         ...
 
+    @UseTabCol.setter
+    def UseTabCol(self, value: bool) -> None:
+        ...
 

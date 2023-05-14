@@ -58,6 +58,9 @@ class FormatElement(object):
         """
         ...
 
+    @formatCode.setter
+    def formatCode(self, value: str) -> None:
+        ...
 
     @property
     def formatName(self) -> str:
@@ -66,6 +69,9 @@ class FormatElement(object):
         """
         ...
 
+    @formatName.setter
+    def formatName(self, value: str) -> None:
+        ...
 
     @property
     def formatKey(self) -> str:
@@ -74,6 +80,9 @@ class FormatElement(object):
         """
         ...
 
+    @formatKey.setter
+    def formatKey(self, value: str) -> None:
+        ...
 
     @property
     def formatType(self) -> str:
@@ -82,6 +91,9 @@ class FormatElement(object):
         """
         ...
 
+    @formatType.setter
+    def formatType(self, value: str) -> None:
+        ...
 
     @property
     def formatUsage(self) -> str:
@@ -90,6 +102,9 @@ class FormatElement(object):
         """
         ...
 
+    @formatUsage.setter
+    def formatUsage(self, value: str) -> None:
+        ...
 
     @property
     def formatIndex(self) -> int:
@@ -98,6 +113,9 @@ class FormatElement(object):
         """
         ...
 
+    @formatIndex.setter
+    def formatIndex(self, value: int) -> None:
+        ...
 
     @property
     def isDefault(self) -> bool:
@@ -106,4 +124,7 @@ class FormatElement(object):
         """
         ...
 
+    @isDefault.setter
+    def isDefault(self, value: bool) -> None:
+        ...
 

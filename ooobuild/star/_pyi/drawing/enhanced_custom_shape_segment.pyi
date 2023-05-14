@@ -47,9 +47,15 @@ class EnhancedCustomShapeSegment(object):
     def Command(self) -> int:
         ...
 
+    @Command.setter
+    def Command(self, value: int) -> None:
+        ...
 
     @property
     def Count(self) -> int:
         ...
 
+    @Count.setter
+    def Count(self, value: int) -> None:
+        ...
 

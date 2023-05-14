@@ -56,6 +56,9 @@ class UseBackupException(IOException_8c450a27):
         """
         ...
 
+    @TemporaryFileURL.setter
+    def TemporaryFileURL(self, value: str) -> None:
+        ...
 
 __all__ = ['UseBackupException']
 

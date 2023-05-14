@@ -30,4 +30,3 @@ class RangeHighlighter(XRangeHighlighter_4e810fc8):
     """
     ...
 
-

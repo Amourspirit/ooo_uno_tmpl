@@ -34,4 +34,3 @@ class PolynomialRegressionCurve(XRegressionCurve_fa3c0dca):
     """
     ...
 
-

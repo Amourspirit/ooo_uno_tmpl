@@ -39,11 +39,19 @@ class TextEmbeddedObject(BaseFrame_8f020a33, XEmbeddedObjectSupplier_8b631174):
         """
         """
         ...
+
+    @CLSID.setter
+    def CLSID(self, value: str) -> None:
+        ...
     @property
     def Component(self) -> 'XComponent_98dc0ab5':
         """
         This is the component for the OLE2 object.
         """
+        ...
+
+    @Component.setter
+    def Component(self, value: 'XComponent_98dc0ab5') -> None:
         ...
     @property
     def Model(self) -> 'XModel_7a6e095c':
@@ -54,4 +62,7 @@ class TextEmbeddedObject(BaseFrame_8f020a33, XEmbeddedObjectSupplier_8b631174):
         """
         ...
 
+    @Model.setter
+    def Model(self, value: 'XModel_7a6e095c') -> None:
+        ...
 

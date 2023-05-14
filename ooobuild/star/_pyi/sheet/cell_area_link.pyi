@@ -43,17 +43,29 @@ class CellAreaLink(XPropertySet_bc180bfa, XAreaLink_98db0a80, XRefreshable_b0d60
         specifies the name of the filter used to load the source document.
         """
         ...
+
+    @Filter.setter
+    def Filter(self, value: str) -> None:
+        ...
     @property
     def FilterOptions(self) -> str:
         """
         specifies the filter options needed to load the source document.
         """
         ...
+
+    @FilterOptions.setter
+    def FilterOptions(self, value: str) -> None:
+        ...
     @property
     def RefreshDelay(self) -> int:
         """
         specifies the delay time between two refresh actions in seconds.
         """
+        ...
+
+    @RefreshDelay.setter
+    def RefreshDelay(self, value: int) -> None:
         ...
     @property
     def RefreshPeriod(self) -> int:
@@ -65,6 +77,10 @@ class CellAreaLink(XPropertySet_bc180bfa, XAreaLink_98db0a80, XRefreshable_b0d60
             OOo 2.0
         """
         ...
+
+    @RefreshPeriod.setter
+    def RefreshPeriod(self, value: int) -> None:
+        ...
     @property
     def Url(self) -> str:
         """
@@ -72,4 +88,7 @@ class CellAreaLink(XPropertySet_bc180bfa, XAreaLink_98db0a80, XRefreshable_b0d60
         """
         ...
 
+    @Url.setter
+    def Url(self, value: str) -> None:
+        ...
 

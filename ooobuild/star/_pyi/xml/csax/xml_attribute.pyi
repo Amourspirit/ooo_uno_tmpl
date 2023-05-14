@@ -51,6 +51,9 @@ class XMLAttribute(object):
         """
         ...
 
+    @sName.setter
+    def sName(self, value: str) -> None:
+        ...
 
     @property
     def sValue(self) -> str:
@@ -59,4 +62,7 @@ class XMLAttribute(object):
         """
         ...
 
+    @sValue.setter
+    def sValue(self, value: str) -> None:
+        ...
 

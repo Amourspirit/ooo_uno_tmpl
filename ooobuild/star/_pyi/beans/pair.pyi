@@ -57,6 +57,9 @@ class Pair(object):
         """
         ...
 
+    @First.setter
+    def First(self, value: object) -> None:
+        ...
 
     @property
     def Second(self) -> object:
@@ -65,4 +68,7 @@ class Pair(object):
         """
         ...
 
+    @Second.setter
+    def Second(self, value: object) -> None:
+        ...
 

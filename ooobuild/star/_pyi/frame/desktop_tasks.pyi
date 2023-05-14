@@ -34,4 +34,3 @@ class DesktopTasks(XEnumerationAccess_4bac0ffc):
     """
     ...
 
-

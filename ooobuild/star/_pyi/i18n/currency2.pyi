@@ -68,4 +68,7 @@ class Currency2(Currency_80230993):
         """
         ...
 
+    @LegacyOnly.setter
+    def LegacyOnly(self, value: bool) -> None:
+        ...
 

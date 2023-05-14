@@ -36,4 +36,3 @@ class CommandButton(UnoControlButton_d5e30ce3, XApproveActionBroadcaster_693d10b
     """
     ...
 
-

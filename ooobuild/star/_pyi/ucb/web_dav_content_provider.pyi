@@ -33,4 +33,3 @@ class WebDAVContentProvider(XContentProvider_d4150cc0):
     """
     ...
 
-

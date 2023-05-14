@@ -36,4 +36,3 @@ class AnimatedImagesControl(UnoControl_8f2c0a67, XAnimation_8e510a4c):
     """
     ...
 
-

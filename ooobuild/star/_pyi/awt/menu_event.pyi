@@ -53,4 +53,7 @@ class MenuEvent(EventObject_a3d70b03):
         """
         ...
 
+    @MenuId.setter
+    def MenuId(self, value: int) -> None:
+        ...
 

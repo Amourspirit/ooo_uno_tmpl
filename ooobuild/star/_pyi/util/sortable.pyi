@@ -39,4 +39,3 @@ class Sortable(XSortable_8ff20a5a):
     """
     ...
 
-

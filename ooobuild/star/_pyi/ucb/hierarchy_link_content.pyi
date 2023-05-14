@@ -41,4 +41,3 @@ class HierarchyLinkContent(XPropertiesChangeNotifier_7a7b111c, XPropertyContaine
     """
     ...
 
-

@@ -31,4 +31,3 @@ class TableAutoFormatsEnumeration(XEnumeration_f2180daa):
     """
     ...
 
-

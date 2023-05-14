@@ -57,6 +57,9 @@ class CopyTableRowEvent(EventObject_a3d70b03):
         """
         ...
 
+    @SourceData.setter
+    def SourceData(self, value: XResultSet_98e30aa7) -> None:
+        ...
 
     @property
     def Error(self) -> object:
@@ -67,4 +70,7 @@ class CopyTableRowEvent(EventObject_a3d70b03):
         """
         ...
 
+    @Error.setter
+    def Error(self, value: object) -> None:
+        ...
 

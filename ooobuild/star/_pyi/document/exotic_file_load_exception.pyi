@@ -57,6 +57,9 @@ class ExoticFileLoadException(Exception_85530a09):
         """
         ...
 
+    @URL.setter
+    def URL(self, value: str) -> None:
+        ...
     @property
     def FilterUIName(self) -> str:
         """
@@ -64,6 +67,9 @@ class ExoticFileLoadException(Exception_85530a09):
         """
         ...
 
+    @FilterUIName.setter
+    def FilterUIName(self, value: str) -> None:
+        ...
 
 __all__ = ['ExoticFileLoadException']
 

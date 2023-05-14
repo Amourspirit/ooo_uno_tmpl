@@ -33,4 +33,3 @@ class XMLElementWrapper(XInitialization_d46c0cca, XUnoTunnel_98fb0aaa, XXMLEleme
     """
     ...
 
-

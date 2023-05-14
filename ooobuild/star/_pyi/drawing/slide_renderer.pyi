@@ -35,4 +35,3 @@ class SlideRenderer(XSlideRenderer_efc90d74):
         """
         ...
 
-

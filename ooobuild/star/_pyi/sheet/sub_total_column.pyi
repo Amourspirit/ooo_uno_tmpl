@@ -52,6 +52,9 @@ class SubTotalColumn(object):
         """
         ...
 
+    @Column.setter
+    def Column(self, value: int) -> None:
+        ...
 
     @property
     def Function(self) -> GeneralFunction_e2280d25:
@@ -60,4 +63,7 @@ class SubTotalColumn(object):
         """
         ...
 
+    @Function.setter
+    def Function(self, value: GeneralFunction_e2280d25) -> None:
+        ...
 

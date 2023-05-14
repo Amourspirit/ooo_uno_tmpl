@@ -51,6 +51,9 @@ class XFunctionCategory(XPropertySet_bc180bfa, XIndexAccess_f0910d6d):
         """
         ...
 
+    @Name.setter
+    def Name(self, value: str) -> None:
+        ...
     @property
     def Number(self) -> int:
         """
@@ -58,4 +61,7 @@ class XFunctionCategory(XPropertySet_bc180bfa, XIndexAccess_f0910d6d):
         """
         ...
 
+    @Number.setter
+    def Number(self, value: int) -> None:
+        ...
 

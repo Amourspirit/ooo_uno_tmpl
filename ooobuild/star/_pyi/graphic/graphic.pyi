@@ -34,4 +34,3 @@ class Graphic(GraphicDescriptor_1a520ec3, XGraphic_a4da0afc):
     """
     ...
 
-

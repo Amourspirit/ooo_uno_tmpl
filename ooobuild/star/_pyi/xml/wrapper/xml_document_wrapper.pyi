@@ -32,4 +32,3 @@ class XMLDocumentWrapper(XInitialization_d46c0cca, XXMLDocumentWrapper_782410f1)
     """
     ...
 
-

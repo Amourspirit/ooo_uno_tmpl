@@ -37,11 +37,19 @@ class FileName(TextField_90260a56):
         This property is especially useful for import/export purposes.
         """
         ...
+
+    @CurrentPresentation.setter
+    def CurrentPresentation(self, value: str) -> None:
+        ...
     @property
     def FileFormat(self) -> int:
         """
         determines the format the file name is displayed as specified in com.sun.star.text.FilenameDisplayFormat.
         """
+        ...
+
+    @FileFormat.setter
+    def FileFormat(self, value: int) -> None:
         ...
     @property
     def IsFixed(self) -> bool:
@@ -50,4 +58,7 @@ class FileName(TextField_90260a56):
         """
         ...
 
+    @IsFixed.setter
+    def IsFixed(self, value: bool) -> None:
+        ...
 

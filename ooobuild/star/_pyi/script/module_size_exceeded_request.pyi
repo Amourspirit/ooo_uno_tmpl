@@ -52,6 +52,9 @@ class ModuleSizeExceededRequest(Exception_85530a09):
         """
         ...
 
+    @Names.setter
+    def Names(self, value: typing.Tuple[str, ...]) -> None:
+        ...
 
 __all__ = ['ModuleSizeExceededRequest']
 

@@ -31,4 +31,3 @@ class PDFDialog(FilterOptionsDialog_67651099):
     """
     ...
 
-

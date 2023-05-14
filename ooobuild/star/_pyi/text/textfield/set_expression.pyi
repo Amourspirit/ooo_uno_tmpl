@@ -39,6 +39,10 @@ class SetExpression(DependentTextField_fed90ded):
         contains the textual content of the field.
         """
         ...
+
+    @Content.setter
+    def Content(self, value: str) -> None:
+        ...
     @property
     def CurrentPresentation(self) -> str:
         """
@@ -47,11 +51,19 @@ class SetExpression(DependentTextField_fed90ded):
         This property is especially useful for import/export purposes.
         """
         ...
+
+    @CurrentPresentation.setter
+    def CurrentPresentation(self, value: str) -> None:
+        ...
     @property
     def Hint(self) -> str:
         """
         contains an informational text that is displayed at the user interface if it's an input field.
         """
+        ...
+
+    @Hint.setter
+    def Hint(self, value: str) -> None:
         ...
     @property
     def IsFixedLanguage(self) -> bool:
@@ -63,11 +75,19 @@ class SetExpression(DependentTextField_fed90ded):
             OOo 1.1.2
         """
         ...
+
+    @IsFixedLanguage.setter
+    def IsFixedLanguage(self, value: bool) -> None:
+        ...
     @property
     def IsInput(self) -> bool:
         """
         determines whether this field is an input field.
         """
+        ...
+
+    @IsInput.setter
+    def IsInput(self, value: bool) -> None:
         ...
     @property
     def IsShowFormula(self) -> bool:
@@ -75,11 +95,19 @@ class SetExpression(DependentTextField_fed90ded):
         determines whether the content is displayed or evaluated.
         """
         ...
+
+    @IsShowFormula.setter
+    def IsShowFormula(self, value: bool) -> None:
+        ...
     @property
     def IsVisible(self) -> bool:
         """
         determines whether the field is visible.
         """
+        ...
+
+    @IsVisible.setter
+    def IsVisible(self, value: bool) -> None:
         ...
     @property
     def NumberFormat(self) -> int:
@@ -87,11 +115,19 @@ class SetExpression(DependentTextField_fed90ded):
         this is the number format for this field.
         """
         ...
+
+    @NumberFormat.setter
+    def NumberFormat(self, value: int) -> None:
+        ...
     @property
     def NumberingType(self) -> int:
         """
         specifies the type of the numbering as com.sun.star.style.NumberingType
         """
+        ...
+
+    @NumberingType.setter
+    def NumberingType(self, value: int) -> None:
         ...
     @property
     def SequenceValue(self) -> int:
@@ -99,17 +135,29 @@ class SetExpression(DependentTextField_fed90ded):
         contains the sequence value when this field is used as sequence field.
         """
         ...
+
+    @SequenceValue.setter
+    def SequenceValue(self, value: int) -> None:
+        ...
     @property
     def SubType(self) -> int:
         """
         determines the type of the variable as described in com.sun.star.text.SetVariableType
         """
         ...
+
+    @SubType.setter
+    def SubType(self, value: int) -> None:
+        ...
     @property
     def Value(self) -> float:
         """
         contains the numerical value of the field.
         """
+        ...
+
+    @Value.setter
+    def Value(self, value: float) -> None:
         ...
     @property
     def VariableName(self) -> str:
@@ -118,4 +166,7 @@ class SetExpression(DependentTextField_fed90ded):
         """
         ...
 
+    @VariableName.setter
+    def VariableName(self, value: str) -> None:
+        ...
 

@@ -108,6 +108,9 @@ class XFormController(XTabController_bacd0be7, XChild_a6390b07, XEnumerationAcce
         """
         ...
 
+    @Context.setter
+    def Context(self, value: 'XFormControllerContext_c54112e3') -> None:
+        ...
     @property
     def CurrentControl(self) -> 'XControl_7a9c098d':
         """
@@ -115,6 +118,9 @@ class XFormController(XTabController_bacd0be7, XChild_a6390b07, XEnumerationAcce
         """
         ...
 
+    @CurrentControl.setter
+    def CurrentControl(self, value: 'XControl_7a9c098d') -> None:
+        ...
     @property
     def FormOperations(self) -> 'XFormOperations_4a450ffe':
         """
@@ -124,6 +130,9 @@ class XFormController(XTabController_bacd0be7, XChild_a6390b07, XEnumerationAcce
         """
         ...
 
+    @FormOperations.setter
+    def FormOperations(self, value: 'XFormOperations_4a450ffe') -> None:
+        ...
     @property
     def InteractionHandler(self) -> 'XInteractionHandler_bf80e51':
         """
@@ -131,4 +140,7 @@ class XFormController(XTabController_bacd0be7, XChild_a6390b07, XEnumerationAcce
         """
         ...
 
+    @InteractionHandler.setter
+    def InteractionHandler(self, value: 'XInteractionHandler_bf80e51') -> None:
+        ...
 

@@ -31,4 +31,3 @@ class UnoControlGroupBox(UnoControl_8f2c0a67):
     """
     ...
 
-

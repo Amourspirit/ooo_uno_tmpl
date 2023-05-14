@@ -44,4 +44,3 @@ class BindableDataAwareControlModel(DataAwareControlModel_27110ef8, BindableCont
     """
     ...
 
-

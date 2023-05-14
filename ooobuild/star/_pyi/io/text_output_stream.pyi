@@ -33,4 +33,3 @@ class TextOutputStream(XTextOutputStream2_e26b0d0c):
     """
     ...
 
-

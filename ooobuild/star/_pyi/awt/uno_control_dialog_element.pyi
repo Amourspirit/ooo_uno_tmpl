@@ -35,11 +35,19 @@ class UnoControlDialogElement(ABC):
         specifies the height of the control.
         """
         ...
+
+    @Height.setter
+    def Height(self, value: int) -> None:
+        ...
     @property
     def Name(self) -> str:
         """
         specifies the name of the control.
         """
+        ...
+
+    @Name.setter
+    def Name(self, value: str) -> None:
         ...
     @property
     def PositionX(self) -> str:
@@ -47,11 +55,19 @@ class UnoControlDialogElement(ABC):
         specifies the horizontal position of the control.
         """
         ...
+
+    @PositionX.setter
+    def PositionX(self, value: str) -> None:
+        ...
     @property
     def PositionY(self) -> str:
         """
         specifies the vertical position of the control.
         """
+        ...
+
+    @PositionY.setter
+    def PositionY(self, value: str) -> None:
         ...
     @property
     def Step(self) -> int:
@@ -59,17 +75,29 @@ class UnoControlDialogElement(ABC):
         specifies the step of the control.
         """
         ...
+
+    @Step.setter
+    def Step(self, value: int) -> None:
+        ...
     @property
     def TabIndex(self) -> int:
         """
         specifies the tabindex of the control.
         """
         ...
+
+    @TabIndex.setter
+    def TabIndex(self, value: int) -> None:
+        ...
     @property
     def Tag(self) -> str:
         """
         specifies the tag of the control.
         """
+        ...
+
+    @Tag.setter
+    def Tag(self, value: str) -> None:
         ...
     @property
     def Width(self) -> int:
@@ -78,4 +106,7 @@ class UnoControlDialogElement(ABC):
         """
         ...
 
+    @Width.setter
+    def Width(self, value: int) -> None:
+        ...
 

@@ -31,4 +31,3 @@ class ScriptProviderForBasic(LanguageScriptProvider_325141a):
     """
     ...
 
-

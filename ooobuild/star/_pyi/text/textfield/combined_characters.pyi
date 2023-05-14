@@ -36,4 +36,7 @@ class CombinedCharacters(TextField_90260a56):
         """
         ...
 
+    @Content.setter
+    def Content(self, value: str) -> None:
+        ...
 

@@ -40,4 +40,3 @@ class ZipFileAccess(XZipFileAccess2_45470f57):
         """
         ...
 
-

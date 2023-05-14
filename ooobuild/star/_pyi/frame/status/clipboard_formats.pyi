@@ -56,6 +56,9 @@ class ClipboardFormats(object):
         """
         ...
 
+    @Identifiers.setter
+    def Identifiers(self, value: uno.ByteSequence) -> None:
+        ...
 
     @property
     def Names(self) -> typing.Tuple[str, ...]:
@@ -64,4 +67,7 @@ class ClipboardFormats(object):
         """
         ...
 
+    @Names.setter
+    def Names(self, value: typing.Tuple[str, ...]) -> None:
+        ...
 

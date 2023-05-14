@@ -53,6 +53,9 @@ class Boundary(object):
         """
         ...
 
+    @startPos.setter
+    def startPos(self, value: int) -> None:
+        ...
 
     @property
     def endPos(self) -> int:
@@ -61,4 +64,7 @@ class Boundary(object):
         """
         ...
 
+    @endPos.setter
+    def endPos(self, value: int) -> None:
+        ...
 

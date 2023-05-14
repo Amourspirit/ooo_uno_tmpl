@@ -35,11 +35,19 @@ class HeaderFooterSettings(XPropertySet_bc180bfa):
         enables or disables the printing of the date in the header or footer
         """
         ...
+
+    @IsPrintDate.setter
+    def IsPrintDate(self, value: bool) -> None:
+        ...
     @property
     def IsPrintPageName(self) -> bool:
         """
         enables or disables the printing of the page name in the header or footer
         """
+        ...
+
+    @IsPrintPageName.setter
+    def IsPrintPageName(self, value: bool) -> None:
         ...
     @property
     def IsPrintTime(self) -> bool:
@@ -48,4 +56,7 @@ class HeaderFooterSettings(XPropertySet_bc180bfa):
         """
         ...
 
+    @IsPrintTime.setter
+    def IsPrintTime(self, value: bool) -> None:
+        ...
 

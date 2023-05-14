@@ -53,6 +53,9 @@ class InvalidTextContentException(Exception_85530a09):
         """
         ...
 
+    @TextContent.setter
+    def TextContent(self, value: XTextContent_b16e0ba5) -> None:
+        ...
 
 __all__ = ['InvalidTextContentException']
 

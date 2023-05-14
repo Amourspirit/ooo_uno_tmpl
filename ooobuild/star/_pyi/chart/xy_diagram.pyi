@@ -33,4 +33,3 @@ class XYDiagram(LineDiagram_af100b57):
     """
     ...
 
-

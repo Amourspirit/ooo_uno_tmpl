@@ -33,4 +33,3 @@ class UnoControlFixedHyperlink(UnoControl_8f2c0a67, XFixedHyperlink_c77d0c52, XL
     """
     ...
 
-

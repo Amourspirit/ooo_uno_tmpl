@@ -41,4 +41,3 @@ class ReadWriteAccess(XReadWriteAccess_6da510b1):
         """
         ...
 
-

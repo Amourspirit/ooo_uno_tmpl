@@ -42,4 +42,3 @@ class UnoControlDialogModelProvider(XNameContainer_cb90e47):
         """
         ...
 
-

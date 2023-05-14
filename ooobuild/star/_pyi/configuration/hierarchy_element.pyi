@@ -39,4 +39,3 @@ class HierarchyElement(XProperty_99770ace, XPropertyWithState_c960e6b, XChild_a6
     """
     ...
 
-

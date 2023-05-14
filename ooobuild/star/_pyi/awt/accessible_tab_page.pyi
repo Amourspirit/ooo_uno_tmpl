@@ -38,4 +38,3 @@ class AccessibleTabPage(XAccessibleContext_8eae119b, XAccessibleEventBroadcaster
     """
     ...
 
-

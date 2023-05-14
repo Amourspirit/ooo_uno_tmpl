@@ -37,4 +37,7 @@ class Table(DataSettings_a3000b0c, Table_71780904):
         """
         ...
 
+    @Privileges.setter
+    def Privileges(self, value: int) -> None:
+        ...
 

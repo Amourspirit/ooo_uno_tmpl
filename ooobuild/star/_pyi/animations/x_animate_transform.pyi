@@ -40,4 +40,7 @@ class XAnimateTransform(XAnimate_ca680c52):
         """
         ...
 
+    @TransformType.setter
+    def TransformType(self, value: int) -> None:
+        ...
 

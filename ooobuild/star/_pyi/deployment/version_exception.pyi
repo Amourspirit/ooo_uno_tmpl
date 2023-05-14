@@ -61,6 +61,9 @@ class VersionException(Exception_85530a09):
         """
         ...
 
+    @NewVersion.setter
+    def NewVersion(self, value: str) -> None:
+        ...
     @property
     def NewDisplayName(self) -> str:
         """
@@ -68,6 +71,9 @@ class VersionException(Exception_85530a09):
         """
         ...
 
+    @NewDisplayName.setter
+    def NewDisplayName(self, value: str) -> None:
+        ...
     @property
     def Deployed(self) -> XPackage_cb1f0c4d:
         """
@@ -77,6 +83,9 @@ class VersionException(Exception_85530a09):
         """
         ...
 
+    @Deployed.setter
+    def Deployed(self, value: XPackage_cb1f0c4d) -> None:
+        ...
 
 __all__ = ['VersionException']
 

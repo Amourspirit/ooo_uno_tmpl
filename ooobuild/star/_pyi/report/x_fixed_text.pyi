@@ -36,4 +36,7 @@ class XFixedText(XReportControlModel_2d800f4a):
         """
         ...
 
+    @Label.setter
+    def Label(self, value: str) -> None:
+        ...
 

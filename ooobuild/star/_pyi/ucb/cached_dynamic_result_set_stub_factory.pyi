@@ -31,4 +31,3 @@ class CachedDynamicResultSetStubFactory(XCachedDynamicResultSetStubFactory_f47f1
     """
     ...
 
-

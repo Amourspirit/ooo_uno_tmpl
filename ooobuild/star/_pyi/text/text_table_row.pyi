@@ -52,17 +52,31 @@ class TextTableRow(XPropertySet_bc180bfa):
             LibreOffice 4.4
         """
         ...
+
+    @RowInteropGrabBag.setter
+    def RowInteropGrabBag(self, value: 'typing.Tuple[PropertyValue_c9610c73, ...]') -> None:
+        ...
+
     @property
     def TableColumnSeparators(self) -> 'typing.Tuple[TableColumnSeparator_1b630ed4, ...]':
         """
         contains the description of the columns in the table row.
         """
         ...
+
+    @TableColumnSeparators.setter
+    def TableColumnSeparators(self, value: 'typing.Tuple[TableColumnSeparator_1b630ed4, ...]') -> None:
+        ...
+
     @property
     def BackColor(self) -> 'Color_68e908c5':
         """
         specifies the color of the background.
         """
+        ...
+
+    @BackColor.setter
+    def BackColor(self, value: 'Color_68e908c5') -> None:
         ...
     @property
     def BackGraphic(self) -> 'XGraphic_a4da0afc':
@@ -74,17 +88,29 @@ class TextTableRow(XPropertySet_bc180bfa):
             LibreOffice 6.1
         """
         ...
+
+    @BackGraphic.setter
+    def BackGraphic(self, value: 'XGraphic_a4da0afc') -> None:
+        ...
     @property
     def BackGraphicFilter(self) -> str:
         """
         contains the name of the file filter of a background graphic.
         """
         ...
+
+    @BackGraphicFilter.setter
+    def BackGraphicFilter(self, value: str) -> None:
+        ...
     @property
     def BackGraphicLocation(self) -> 'GraphicLocation_e3ef0d30':
         """
         determines the position of the background graphic.
         """
+        ...
+
+    @BackGraphicLocation.setter
+    def BackGraphicLocation(self, value: 'GraphicLocation_e3ef0d30') -> None:
         ...
     @property
     def BackGraphicURL(self) -> str:
@@ -94,11 +120,19 @@ class TextTableRow(XPropertySet_bc180bfa):
         Note the new behaviour since it this was deprecated: This property can only be set and only external URLs are supported (no more vnd.sun.star.GraphicObject scheme). When an URL is set, then it will load the graphic and set the BackGraphic property.
         """
         ...
+
+    @BackGraphicURL.setter
+    def BackGraphicURL(self, value: str) -> None:
+        ...
     @property
     def BackTransparent(self) -> bool:
         """
         If TRUE, the background color value in \"BackColor\" is not visible.
         """
+        ...
+
+    @BackTransparent.setter
+    def BackTransparent(self, value: bool) -> None:
         ...
     @property
     def HasTextChangesOnly(self) -> bool:
@@ -110,17 +144,29 @@ class TextTableRow(XPropertySet_bc180bfa):
             LibreOffice 7.2
         """
         ...
+
+    @HasTextChangesOnly.setter
+    def HasTextChangesOnly(self, value: bool) -> None:
+        ...
     @property
     def Height(self) -> int:
         """
         contains the height of the table row.
         """
         ...
+
+    @Height.setter
+    def Height(self, value: int) -> None:
+        ...
     @property
     def IsAutoHeight(self) -> bool:
         """
         If the value of this property is TRUE, the height of the table row depends on the content of the table cells.
         """
+        ...
+
+    @IsAutoHeight.setter
+    def IsAutoHeight(self, value: bool) -> None:
         ...
     @property
     def IsSplitAllowed(self) -> bool:
@@ -129,4 +175,7 @@ class TextTableRow(XPropertySet_bc180bfa):
         """
         ...
 
+    @IsSplitAllowed.setter
+    def IsSplitAllowed(self, value: bool) -> None:
+        ...
 

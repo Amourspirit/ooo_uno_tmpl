@@ -35,4 +35,3 @@ class LocaleCalendar2(XCalendar4_927b09ee):
     """
     ...
 
-

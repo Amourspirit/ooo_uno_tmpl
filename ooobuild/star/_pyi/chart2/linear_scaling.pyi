@@ -33,4 +33,3 @@ class LinearScaling(XScaling_97500a65):
     """
     ...
 
-

@@ -30,4 +30,3 @@ class FastParser(XFastParser_c6ba0c26):
     """
     ...
 
-

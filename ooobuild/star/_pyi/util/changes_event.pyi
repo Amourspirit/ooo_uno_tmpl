@@ -57,6 +57,9 @@ class ChangesEvent(EventObject_a3d70b03):
         """
         ...
 
+    @Base.setter
+    def Base(self, value: object) -> None:
+        ...
 
     @property
     def Changes(self) -> ChangesSet_99de0aab:
@@ -65,4 +68,7 @@ class ChangesEvent(EventObject_a3d70b03):
         """
         ...
 
+    @Changes.setter
+    def Changes(self, value: ChangesSet_99de0aab) -> None:
+        ...
 

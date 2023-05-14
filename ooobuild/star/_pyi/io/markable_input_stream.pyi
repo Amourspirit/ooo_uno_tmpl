@@ -36,4 +36,3 @@ class MarkableInputStream(XActiveDataSink_b8d00ba3, XConnectable_980a0a96, XInpu
     """
     ...
 
-

@@ -56,6 +56,9 @@ class TextConversionResult(object):
         """
         ...
 
+    @Candidates.setter
+    def Candidates(self, value: typing.Tuple[str, ...]) -> None:
+        ...
 
     @property
     def Boundary(self) -> Boundary_7fe2098c:
@@ -66,4 +69,7 @@ class TextConversionResult(object):
         """
         ...
 
+    @Boundary.setter
+    def Boundary(self, value: Boundary_7fe2098c) -> None:
+        ...
 

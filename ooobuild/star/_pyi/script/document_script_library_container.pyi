@@ -53,4 +53,3 @@ class DocumentScriptLibraryContainer(XStorageBasedLibraryContainer_d72a1321):
         """
         ...
 
-

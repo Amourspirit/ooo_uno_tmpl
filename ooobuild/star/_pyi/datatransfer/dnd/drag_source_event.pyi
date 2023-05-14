@@ -58,6 +58,9 @@ class DragSourceEvent(EventObject_a3d70b03):
         """
         ...
 
+    @DragSourceContext.setter
+    def DragSourceContext(self, value: XDragSourceContext_c2661297) -> None:
+        ...
 
     @property
     def DragSource(self) -> XDragSource_49900fb2:
@@ -66,4 +69,7 @@ class DragSourceEvent(EventObject_a3d70b03):
         """
         ...
 
+    @DragSource.setter
+    def DragSource(self, value: XDragSource_49900fb2) -> None:
+        ...
 

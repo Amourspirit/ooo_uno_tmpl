@@ -56,6 +56,9 @@ class UpdateInformationEntry(object):
         """
         ...
 
+    @UpdateDocument.setter
+    def UpdateDocument(self, value: XElement_a33d0ae9) -> None:
+        ...
 
     @property
     def Description(self) -> str:
@@ -64,4 +67,7 @@ class UpdateInformationEntry(object):
         """
         ...
 
+    @Description.setter
+    def Description(self, value: str) -> None:
+        ...
 

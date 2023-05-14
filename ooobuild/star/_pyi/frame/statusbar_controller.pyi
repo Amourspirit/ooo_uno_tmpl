@@ -37,4 +37,3 @@ class StatusbarController(XStatusbarController_2a730f48):
     """
     ...
 
-

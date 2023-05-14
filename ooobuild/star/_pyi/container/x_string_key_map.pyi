@@ -80,4 +80,7 @@ class XStringKeyMap(ABC):
         """
         ...
 
+    @Count.setter
+    def Count(self, value: int) -> None:
+        ...
 

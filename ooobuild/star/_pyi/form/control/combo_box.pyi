@@ -34,4 +34,3 @@ class ComboBox(UnoControlComboBox_efd50d80, XBoundControl_bba00bed):
     """
     ...
 
-

@@ -41,4 +41,3 @@ class CanvasFactory(XMultiComponentFactory_381b0f98):
     """
     ...
 
-

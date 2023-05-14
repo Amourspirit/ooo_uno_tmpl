@@ -38,17 +38,29 @@ class NumberFormatProperties(ABC):
         contains a comment regarding the number format for display to the user.
         """
         ...
+
+    @Comment.setter
+    def Comment(self, value: str) -> None:
+        ...
     @property
     def FormatString(self) -> str:
         """
         contains the format string of the number format.
         """
         ...
+
+    @FormatString.setter
+    def FormatString(self, value: str) -> None:
+        ...
     @property
     def Locale(self) -> 'Locale_70d308fa':
         """
         contains the locale of the number format.
         """
+        ...
+
+    @Locale.setter
+    def Locale(self, value: 'Locale_70d308fa') -> None:
         ...
     @property
     def Type(self) -> int:
@@ -57,4 +69,7 @@ class NumberFormatProperties(ABC):
         """
         ...
 
+    @Type.setter
+    def Type(self, value: int) -> None:
+        ...
 

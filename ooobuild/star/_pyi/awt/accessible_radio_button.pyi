@@ -40,4 +40,3 @@ class AccessibleRadioButton(XAccessibleAction_7ccc1114, XAccessibleContext_8eae1
     """
     ...
 
-

@@ -48,9 +48,15 @@ class NameToken(object):
     def Index(self) -> int:
         ...
 
+    @Index.setter
+    def Index(self, value: int) -> None:
+        ...
 
     @property
     def Sheet(self) -> int:
         ...
 
+    @Sheet.setter
+    def Sheet(self, value: int) -> None:
+        ...
 

@@ -142,7 +142,7 @@ class ${safe_name}($self.get_class_inherits($safe_name, $inherits))$self.get_cla
 #set $p_return = $property['returns']
 #set $p_desc = $property['desc']
     @property
-    def ${p_name}(self) -> $property['returns']:
+    def ${p_name}(self) -> $p_return:
         """
     #for $line in $self.line_gen($p_desc)
         $line
@@ -160,7 +160,9 @@ class ${safe_name}($self.get_class_inherits($safe_name, $inherits))$self.get_cla
     #end if
         """
         ...
-
+    @${p_name}.setter
+    def ${p_name}(self, value: $p_return) -> None:
+        ...
 #end for
 #end if
 

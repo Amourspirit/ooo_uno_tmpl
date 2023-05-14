@@ -39,4 +39,3 @@ class Configuration(XConfiguration_8f0511a0):
         """
         ...
 
-

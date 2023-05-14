@@ -51,6 +51,9 @@ class StringPair(object):
         """
         ...
 
+    @First.setter
+    def First(self, value: str) -> None:
+        ...
 
     @property
     def Second(self) -> str:
@@ -59,4 +62,7 @@ class StringPair(object):
         """
         ...
 
+    @Second.setter
+    def Second(self, value: str) -> None:
+        ...
 

@@ -43,11 +43,19 @@ class EllipseShape(FillProperties_f1200da8, LineProperties_f13f0da9, RotationDes
         If the kind specifies an open circle, this is the end angle.
         """
         ...
+
+    @CircleEndAngle.setter
+    def CircleEndAngle(self, value: int) -> None:
+        ...
     @property
     def CircleKind(self) -> 'CircleKind_bca50bcc':
         """
         This is the kind of circle.
         """
+        ...
+
+    @CircleKind.setter
+    def CircleKind(self, value: 'CircleKind_bca50bcc') -> None:
         ...
     @property
     def CircleStartAngle(self) -> int:
@@ -56,4 +64,7 @@ class EllipseShape(FillProperties_f1200da8, LineProperties_f13f0da9, RotationDes
         """
         ...
 
+    @CircleStartAngle.setter
+    def CircleStartAngle(self, value: int) -> None:
+        ...
 

@@ -35,4 +35,3 @@ class GroupElement(HierarchyElement_6fb410e9):
     """
     ...
 
-

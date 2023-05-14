@@ -55,6 +55,9 @@ class Defaulted(object):
         """
         ...
 
+    @Value.setter
+    def Value(self, value: object) -> None:
+        ...
 
     @property
     def IsDefaulted(self) -> bool:
@@ -63,4 +66,7 @@ class Defaulted(object):
         """
         ...
 
+    @IsDefaulted.setter
+    def IsDefaulted(self, value: bool) -> None:
+        ...
 

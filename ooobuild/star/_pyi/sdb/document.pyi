@@ -41,6 +41,10 @@ class Document(XPropertySet_bc180bfa):
         is the URL of the document.
         """
         ...
+
+    @DocumentLocation.setter
+    def DocumentLocation(self, value: str) -> None:
+        ...
     @property
     def Name(self) -> str:
         """
@@ -50,4 +54,7 @@ class Document(XPropertySet_bc180bfa):
         """
         ...
 
+    @Name.setter
+    def Name(self, value: str) -> None:
+        ...
 

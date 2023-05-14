@@ -42,4 +42,7 @@ class Defaults(CharacterProperties_1d4f0ef3, CharacterPropertiesAsian_6d8a10df, 
         """
         ...
 
+    @TabStopDistance.setter
+    def TabStopDistance(self, value: int) -> None:
+        ...
 

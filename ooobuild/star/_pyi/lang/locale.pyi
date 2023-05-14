@@ -60,6 +60,9 @@ class Locale(object):
         """
         ...
 
+    @Language.setter
+    def Language(self, value: str) -> None:
+        ...
 
     @property
     def Country(self) -> str:
@@ -72,6 +75,9 @@ class Locale(object):
         """
         ...
 
+    @Country.setter
+    def Country(self, value: str) -> None:
+        ...
 
     @property
     def Variant(self) -> str:
@@ -86,4 +92,7 @@ class Locale(object):
         """
         ...
 
+    @Variant.setter
+    def Variant(self, value: str) -> None:
+        ...
 

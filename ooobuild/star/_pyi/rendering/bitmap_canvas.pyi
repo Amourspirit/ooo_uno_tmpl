@@ -32,4 +32,3 @@ class BitmapCanvas(XBitmap_b1b70b7b, XBitmapCanvas_fe5f0dd7):
     """
     ...
 
-

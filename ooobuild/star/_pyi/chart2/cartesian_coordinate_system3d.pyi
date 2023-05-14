@@ -34,4 +34,3 @@ class CartesianCoordinateSystem3d(XCoordinateSystem_7ff0e31):
     """
     ...
 
-

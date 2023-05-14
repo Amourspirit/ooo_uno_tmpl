@@ -46,4 +46,3 @@ class StringRepresentation(XStringRepresentation_939311e6):
         """
         ...
 
-

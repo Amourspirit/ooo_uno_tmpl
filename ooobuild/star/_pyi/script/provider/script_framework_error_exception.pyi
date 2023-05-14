@@ -54,6 +54,9 @@ class ScriptFrameworkErrorException(Exception_85530a09):
         """
         ...
 
+    @scriptName.setter
+    def scriptName(self, value: str) -> None:
+        ...
     @property
     def language(self) -> str:
         """
@@ -61,6 +64,9 @@ class ScriptFrameworkErrorException(Exception_85530a09):
         """
         ...
 
+    @language.setter
+    def language(self, value: str) -> None:
+        ...
     @property
     def errorType(self) -> int:
         """
@@ -68,6 +74,9 @@ class ScriptFrameworkErrorException(Exception_85530a09):
         """
         ...
 
+    @errorType.setter
+    def errorType(self, value: int) -> None:
+        ...
 
 __all__ = ['ScriptFrameworkErrorException']
 

@@ -49,6 +49,11 @@ class FormulaParser(PropertySet_b0e70ba2, XFormulaParser_d54d0cbc):
             OOo 3.1
         """
         ...
+
+    @ExternalLinks.setter
+    def ExternalLinks(self, value: 'typing.Tuple[ExternalLinkInfo_f09b0d7e, ...]') -> None:
+        ...
+
     @property
     def OpCodeMap(self) -> 'typing.Tuple[FormulaOpCodeMapEntry_37da0f61, ...]':
         """
@@ -57,6 +62,11 @@ class FormulaParser(PropertySet_b0e70ba2, XFormulaParser_d54d0cbc):
         Names and symbols not defined here lead to a parser/print error.
         """
         ...
+
+    @OpCodeMap.setter
+    def OpCodeMap(self, value: 'typing.Tuple[FormulaOpCodeMapEntry_37da0f61, ...]') -> None:
+        ...
+
     @property
     def CompileEnglish(self) -> bool:
         """
@@ -65,21 +75,37 @@ class FormulaParser(PropertySet_b0e70ba2, XFormulaParser_d54d0cbc):
         Note: When changing this, an already existing OpCodeMap needs to be recreated internally, so for performance reasons set this before setting the OpCodeMap.
         """
         ...
+
+    @CompileEnglish.setter
+    def CompileEnglish(self, value: bool) -> None:
+        ...
     @property
     def FormulaConvention(self) -> int:
         """
         specifies which address reference style convention to use when parsing a formula string.
         """
         ...
+
+    @FormulaConvention.setter
+    def FormulaConvention(self, value: int) -> None:
+        ...
     @property
     def IgnoreLeadingSpaces(self) -> bool:
         """
         """
         ...
+
+    @IgnoreLeadingSpaces.setter
+    def IgnoreLeadingSpaces(self, value: bool) -> None:
+        ...
     @property
     def ParameterSeparator(self) -> str:
         """
         """
+        ...
+
+    @ParameterSeparator.setter
+    def ParameterSeparator(self, value: str) -> None:
         ...
     @property
     def RefConventionChartOOXML(self) -> bool:
@@ -94,4 +120,7 @@ class FormulaParser(PropertySet_b0e70ba2, XFormulaParser_d54d0cbc):
         """
         ...
 
+    @RefConventionChartOOXML.setter
+    def RefConventionChartOOXML(self, value: bool) -> None:
+        ...
 

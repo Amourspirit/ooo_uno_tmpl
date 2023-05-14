@@ -54,4 +54,7 @@ class ListEvent(EventObject_a3d70b03):
         """
         ...
 
+    @Changes.setter
+    def Changes(self, value: typing.Tuple[ListAction_8df40a3c, ...]) -> None:
+        ...
 

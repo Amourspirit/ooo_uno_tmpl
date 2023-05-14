@@ -39,4 +39,3 @@ class UriSchemeParser_vndDOTsunDOTstarDOTexpand(XUriSchemeParser_d3fd0ca2):
     """
     ...
 
-

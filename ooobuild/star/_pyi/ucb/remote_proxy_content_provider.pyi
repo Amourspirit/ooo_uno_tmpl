@@ -41,4 +41,3 @@ class RemoteProxyContentProvider(XContentIdentifierFactory_56b91050, XContentPro
     """
     ...
 
-

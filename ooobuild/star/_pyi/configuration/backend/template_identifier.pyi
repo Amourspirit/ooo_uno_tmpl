@@ -57,6 +57,9 @@ class TemplateIdentifier(object):
         """
         ...
 
+    @Name.setter
+    def Name(self, value: str) -> None:
+        ...
 
     @property
     def Component(self) -> str:
@@ -65,4 +68,7 @@ class TemplateIdentifier(object):
         """
         ...
 
+    @Component.setter
+    def Component(self, value: str) -> None:
+        ...
 

@@ -31,4 +31,3 @@ class LocalSchemaSupplier(SchemaSupplier_da03131b):
     """
     ...
 
-

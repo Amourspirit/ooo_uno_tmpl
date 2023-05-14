@@ -55,4 +55,7 @@ class SpinEvent(EventObject_a3d70b03):
         """
         ...
 
+    @dummy1.setter
+    def dummy1(self, value: int) -> None:
+        ...
 

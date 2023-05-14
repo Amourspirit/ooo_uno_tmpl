@@ -58,6 +58,9 @@ class LdapGenericException(Exception_85530a09):
         """
         ...
 
+    @ErrorCode.setter
+    def ErrorCode(self, value: int) -> None:
+        ...
 
 __all__ = ['LdapGenericException']
 

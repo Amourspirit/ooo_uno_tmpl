@@ -56,6 +56,9 @@ class AccessControlException(SecurityException_e4950d61):
         """
         ...
 
+    @LackingPermission.setter
+    def LackingPermission(self, value: object) -> None:
+        ...
 
 __all__ = ['AccessControlException']
 

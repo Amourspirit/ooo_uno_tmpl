@@ -41,4 +41,3 @@ class OleBridgeSupplier2(XBridgeSupplier2_fb800da0):
     """
     ...
 
-

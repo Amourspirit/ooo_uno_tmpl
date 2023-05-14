@@ -34,4 +34,3 @@ class PresentationDocument(GenericDrawingDocument_6a2d10bc, XLinkTargetSupplier_
     """
     ...
 
-

@@ -57,6 +57,9 @@ class PropertySetInfoChangeEvent(EventObject_a3d70b03):
         """
         ...
 
+    @Name.setter
+    def Name(self, value: str) -> None:
+        ...
 
     @property
     def Handle(self) -> int:
@@ -67,6 +70,9 @@ class PropertySetInfoChangeEvent(EventObject_a3d70b03):
         """
         ...
 
+    @Handle.setter
+    def Handle(self, value: int) -> None:
+        ...
 
     @property
     def Reason(self) -> int:
@@ -75,4 +81,7 @@ class PropertySetInfoChangeEvent(EventObject_a3d70b03):
         """
         ...
 
+    @Reason.setter
+    def Reason(self, value: int) -> None:
+        ...
 

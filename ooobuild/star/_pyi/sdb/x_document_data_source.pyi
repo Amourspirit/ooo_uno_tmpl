@@ -48,4 +48,7 @@ class XDocumentDataSource(ABC):
         """
         ...
 
+    @DatabaseDocument.setter
+    def DatabaseDocument(self, value: 'XOfficeDatabaseDocument_327f0f39') -> None:
+        ...
 

@@ -31,4 +31,3 @@ class HeaderFooterContent(XHeaderFooterContent_275c0f0c):
     """
     ...
 
-

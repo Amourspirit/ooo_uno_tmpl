@@ -60,6 +60,9 @@ class XPropertyControl(ABC):
         """
         ...
 
+    @ControlContext.setter
+    def ControlContext(self, value: 'XPropertyControlContext_b94c12c7') -> None:
+        ...
     @property
     def ControlType(self) -> int:
         """
@@ -67,6 +70,9 @@ class XPropertyControl(ABC):
         """
         ...
 
+    @ControlType.setter
+    def ControlType(self, value: int) -> None:
+        ...
     @property
     def ControlWindow(self) -> 'XWindow_713b0924':
         """
@@ -78,6 +84,9 @@ class XPropertyControl(ABC):
         """
         ...
 
+    @ControlWindow.setter
+    def ControlWindow(self, value: 'XWindow_713b0924') -> None:
+        ...
     @property
     def Value(self) -> object:
         """
@@ -87,6 +96,9 @@ class XPropertyControl(ABC):
         """
         ...
 
+    @Value.setter
+    def Value(self, value: object) -> None:
+        ...
     @property
     def ValueType(self) -> object:
         """
@@ -94,4 +106,7 @@ class XPropertyControl(ABC):
         """
         ...
 
+    @ValueType.setter
+    def ValueType(self, value: object) -> None:
+        ...
 

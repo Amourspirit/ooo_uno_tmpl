@@ -53,4 +53,7 @@ class DataTransferEvent(EventObject_a3d70b03):
         """
         ...
 
+    @aException.setter
+    def aException(self, value: object) -> None:
+        ...
 

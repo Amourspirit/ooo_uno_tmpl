@@ -34,4 +34,3 @@ class OutlinerShape(TextShape_b1b80b8a, Shape_c0c80c15):
     """
     ...
 
-

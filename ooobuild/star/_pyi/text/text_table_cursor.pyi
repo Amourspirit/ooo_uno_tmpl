@@ -39,4 +39,3 @@ class TextTableCursor(CharacterProperties_1d4f0ef3, CharacterPropertiesAsian_6d8
     """
     ...
 
-

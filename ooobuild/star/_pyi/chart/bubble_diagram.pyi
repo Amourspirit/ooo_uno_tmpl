@@ -38,4 +38,3 @@ class BubbleDiagram(ChartAxisXSupplier_a950e4d, ChartStatistics_e2190d37, ChartT
     """
     ...
 
-

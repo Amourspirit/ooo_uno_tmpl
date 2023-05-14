@@ -40,4 +40,7 @@ class BaseIndexMark(TextContent_a6810b4d):
         """
         ...
 
+    @AlternativeText.setter
+    def AlternativeText(self, value: str) -> None:
+        ...
 

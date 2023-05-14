@@ -88,6 +88,9 @@ class XGridDataModel(XComponent_98dc0ab5, XCloneable_99d00aa3):
         """
         ...
 
+    @ColumnCount.setter
+    def ColumnCount(self, value: int) -> None:
+        ...
     @property
     def RowCount(self) -> int:
         """
@@ -95,4 +98,7 @@ class XGridDataModel(XComponent_98dc0ab5, XCloneable_99d00aa3):
         """
         ...
 
+    @RowCount.setter
+    def RowCount(self, value: int) -> None:
+        ...
 

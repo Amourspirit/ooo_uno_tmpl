@@ -39,4 +39,3 @@ class SSOManagerFactory(XSSOManagerFactory_f7ef0d9a):
     """
     ...
 
-

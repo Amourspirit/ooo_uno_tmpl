@@ -44,4 +44,3 @@ class OLESimpleStorage(XOLESimpleStorage_f6db0d7c):
         """
         ...
 
-

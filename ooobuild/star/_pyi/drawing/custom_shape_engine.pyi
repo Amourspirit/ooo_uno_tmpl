@@ -32,4 +32,3 @@ class CustomShapeEngine(XCustomShapeEngine_2a880f0e, XInitialization_d46c0cca):
     """
     ...
 
-

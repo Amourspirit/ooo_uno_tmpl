@@ -39,4 +39,3 @@ class StorageFactory(XSingleServiceFactory_27210f0d):
     """
     ...
 
-

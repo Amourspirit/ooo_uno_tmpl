@@ -58,6 +58,9 @@ class MissingJavaRuntimeException(JavaInitializationException_8b6211a3):
         """
         ...
 
+    @URLRuntimeLib.setter
+    def URLRuntimeLib(self, value: str) -> None:
+        ...
 
 __all__ = ['MissingJavaRuntimeException']
 

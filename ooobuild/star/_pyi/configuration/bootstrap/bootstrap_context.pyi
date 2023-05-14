@@ -43,4 +43,3 @@ class BootstrapContext(XComponentContext_e2e10d4a):
     """
     ...
 
-

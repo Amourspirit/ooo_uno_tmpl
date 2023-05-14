@@ -61,6 +61,9 @@ class InteractiveLockingLockedException(InteractiveLockingException_7af31136):
         """
         ...
 
+    @SelfOwned.setter
+    def SelfOwned(self, value: bool) -> None:
+        ...
 
 __all__ = ['InteractiveLockingLockedException']
 

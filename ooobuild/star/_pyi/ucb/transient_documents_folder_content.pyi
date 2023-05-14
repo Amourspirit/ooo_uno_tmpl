@@ -46,4 +46,3 @@ class TransientDocumentsFolderContent(XPropertiesChangeNotifier_7a7b111c, XPrope
     """
     ...
 
-

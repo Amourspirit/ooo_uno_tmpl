@@ -34,4 +34,3 @@ class GraphicObjectShape(GraphicObjectShape_29a00efa, Shape_c0c80c15):
     """
     ...
 
-

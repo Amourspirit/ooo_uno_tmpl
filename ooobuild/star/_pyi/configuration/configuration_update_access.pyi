@@ -40,4 +40,3 @@ class ConfigurationUpdateAccess(ConfigurationAccess_a5d4122a, GroupUpdate_20340e
     """
     ...
 
-

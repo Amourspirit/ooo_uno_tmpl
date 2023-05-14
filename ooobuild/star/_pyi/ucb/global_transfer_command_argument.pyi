@@ -55,6 +55,9 @@ class GlobalTransferCommandArgument(object):
         """
         ...
 
+    @Operation.setter
+    def Operation(self, value: TransferCommandOperation_486a0ff7) -> None:
+        ...
 
     @property
     def SourceURL(self) -> str:
@@ -63,6 +66,9 @@ class GlobalTransferCommandArgument(object):
         """
         ...
 
+    @SourceURL.setter
+    def SourceURL(self, value: str) -> None:
+        ...
 
     @property
     def TargetURL(self) -> str:
@@ -71,6 +77,9 @@ class GlobalTransferCommandArgument(object):
         """
         ...
 
+    @TargetURL.setter
+    def TargetURL(self, value: str) -> None:
+        ...
 
     @property
     def NewTitle(self) -> str:
@@ -81,6 +90,9 @@ class GlobalTransferCommandArgument(object):
         """
         ...
 
+    @NewTitle.setter
+    def NewTitle(self, value: str) -> None:
+        ...
 
     @property
     def NameClash(self) -> int:
@@ -91,4 +103,7 @@ class GlobalTransferCommandArgument(object):
         """
         ...
 
+    @NameClash.setter
+    def NameClash(self, value: int) -> None:
+        ...
 

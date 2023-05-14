@@ -36,4 +36,3 @@ class ImageControl(UnoControlImageControl_29c00f2b, XBoundControl_bba00bed):
     """
     ...
 
-

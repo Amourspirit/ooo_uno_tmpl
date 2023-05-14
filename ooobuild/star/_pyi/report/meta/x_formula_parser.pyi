@@ -45,6 +45,10 @@ class XFormulaParser(XPropertySet_bc180bfa, XComponent_98dc0ab5, XFormulaParser_
         """
         ...
 
+    @OpCodeMap.setter
+    def OpCodeMap(self, value: 'typing.Tuple[FormulaOpCodeMapEntry_37da0f61, ...]') -> None:
+        ...
+
     @property
     def FormulaOpCodeMapper(self) -> 'XFormulaOpCodeMapper_27ff0eee':
         """
@@ -52,4 +56,7 @@ class XFormulaParser(XPropertySet_bc180bfa, XComponent_98dc0ab5, XFormulaParser_
         """
         ...
 
+    @FormulaOpCodeMapper.setter
+    def FormulaOpCodeMapper(self, value: 'XFormulaOpCodeMapper_27ff0eee') -> None:
+        ...
 

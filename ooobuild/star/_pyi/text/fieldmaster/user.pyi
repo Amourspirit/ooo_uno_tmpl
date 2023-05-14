@@ -35,11 +35,19 @@ class User(TextFieldMaster_d6410cc2):
         contains the content.
         """
         ...
+
+    @Content.setter
+    def Content(self, value: str) -> None:
+        ...
     @property
     def IsExpression(self) -> bool:
         """
         determines whether the field contains an expression.
         """
+        ...
+
+    @IsExpression.setter
+    def IsExpression(self, value: bool) -> None:
         ...
     @property
     def Value(self) -> float:
@@ -48,4 +56,7 @@ class User(TextFieldMaster_d6410cc2):
         """
         ...
 
+    @Value.setter
+    def Value(self, value: float) -> None:
+        ...
 

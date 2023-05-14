@@ -57,6 +57,9 @@ class IntegerPoint2D(object):
         """
         ...
 
+    @X.setter
+    def X(self, value: int) -> None:
+        ...
 
     @property
     def Y(self) -> int:
@@ -65,4 +68,7 @@ class IntegerPoint2D(object):
         """
         ...
 
+    @Y.setter
+    def Y(self, value: int) -> None:
+        ...
 

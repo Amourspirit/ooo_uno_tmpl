@@ -30,4 +30,3 @@ class FormulaOpCodeMapper(XFormulaOpCodeMapper_27ff0eee):
     """
     ...
 
-

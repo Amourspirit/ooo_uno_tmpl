@@ -55,6 +55,9 @@ class TimeInterval(object):
         """
         ...
 
+    @Number.setter
+    def Number(self, value: int) -> None:
+        ...
 
     @property
     def TimeUnit(self) -> int:
@@ -65,4 +68,7 @@ class TimeInterval(object):
         """
         ...
 
+    @TimeUnit.setter
+    def TimeUnit(self, value: int) -> None:
+        ...
 

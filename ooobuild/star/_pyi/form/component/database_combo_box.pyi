@@ -45,6 +45,10 @@ class DatabaseComboBox(DataAwareControlModel_27110ef8, ComboBox_fecc0dd6):
         If the property is set to TRUE, and an empty text is to be committed, this is converted into NULL, else it is written as empty string.
         """
         ...
+
+    @ConvertEmptyToNull.setter
+    def ConvertEmptyToNull(self, value: bool) -> None:
+        ...
     @property
     def ListSource(self) -> str:
         """
@@ -52,6 +56,10 @@ class DatabaseComboBox(DataAwareControlModel_27110ef8, ComboBox_fecc0dd6):
         
         The concrete meaning of this property depends on the value of ListSourceType
         """
+        ...
+
+    @ListSource.setter
+    def ListSource(self, value: str) -> None:
         ...
     @property
     def ListSourceType(self) -> 'ListSourceType_c9850c6b':
@@ -62,4 +70,7 @@ class DatabaseComboBox(DataAwareControlModel_27110ef8, ComboBox_fecc0dd6):
         """
         ...
 
+    @ListSourceType.setter
+    def ListSourceType(self, value: 'ListSourceType_c9850c6b') -> None:
+        ...
 

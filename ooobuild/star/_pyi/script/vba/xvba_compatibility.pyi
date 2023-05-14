@@ -51,16 +51,25 @@ class XVBACompatibility(ABC):
         """
         ...
 
+    @ProjectName.setter
+    def ProjectName(self, value: str) -> None:
+        ...
     @property
     def RunningVBAScripts(self) -> int:
         """
         """
         ...
 
+    @RunningVBAScripts.setter
+    def RunningVBAScripts(self, value: int) -> None:
+        ...
     @property
     def VBACompatibilityMode(self) -> bool:
         """
         """
         ...
 
+    @VBACompatibilityMode.setter
+    def VBACompatibilityMode(self, value: bool) -> None:
+        ...
 

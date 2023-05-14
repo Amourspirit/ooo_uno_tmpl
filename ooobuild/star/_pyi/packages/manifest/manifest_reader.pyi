@@ -30,4 +30,3 @@ class ManifestReader(XManifestReader_9c5911ae):
     """
     ...
 
-

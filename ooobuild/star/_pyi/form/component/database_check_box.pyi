@@ -34,4 +34,3 @@ class DatabaseCheckBox(DataAwareControlModel_27110ef8, CheckBox_fe600dc4):
     """
     ...
 
-

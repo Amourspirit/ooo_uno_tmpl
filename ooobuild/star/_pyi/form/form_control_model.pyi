@@ -40,6 +40,10 @@ class FormControlModel(UnoControlModel_c8ce0c58, FormComponent_bc700c03, XFastPr
         specifies the ID for classification of the component.
         """
         ...
+
+    @ClassId.setter
+    def ClassId(self, value: int) -> None:
+        ...
     @property
     def TabIndex(self) -> int:
         """
@@ -52,6 +56,10 @@ class FormControlModel(UnoControlModel_c8ce0c58, FormComponent_bc700c03, XFastPr
         Normally, a FormController instance is evaluating this property.
         """
         ...
+
+    @TabIndex.setter
+    def TabIndex(self, value: int) -> None:
+        ...
     @property
     def Tag(self) -> str:
         """
@@ -61,4 +69,7 @@ class FormControlModel(UnoControlModel_c8ce0c58, FormComponent_bc700c03, XFastPr
         """
         ...
 
+    @Tag.setter
+    def Tag(self, value: str) -> None:
+        ...
 

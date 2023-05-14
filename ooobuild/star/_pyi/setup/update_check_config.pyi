@@ -35,4 +35,3 @@ class UpdateCheckConfig(XNameReplace_f0900d60):
     """
     ...
 
-

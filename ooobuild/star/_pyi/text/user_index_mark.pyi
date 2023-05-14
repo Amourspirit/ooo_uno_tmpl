@@ -36,4 +36,7 @@ class UserIndexMark(BaseIndexMark_bbb30bcb):
         """
         ...
 
+    @UserIndexName.setter
+    def UserIndexName(self, value: str) -> None:
+        ...
 

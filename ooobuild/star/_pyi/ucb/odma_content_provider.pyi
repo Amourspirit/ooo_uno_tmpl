@@ -37,4 +37,3 @@ class ODMAContentProvider(XContentProvider_d4150cc0):
     """
     ...
 
-

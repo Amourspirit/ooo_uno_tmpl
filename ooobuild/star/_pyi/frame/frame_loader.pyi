@@ -35,4 +35,3 @@ class FrameLoader(XNamed_a6520b08, XFrameLoader_ba3a0bad, XInitialization_d46c0c
     """
     ...
 
-

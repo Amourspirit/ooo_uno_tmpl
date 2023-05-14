@@ -57,6 +57,9 @@ class UpperLowerMarginScale(object):
         """
         ...
 
+    @Upper.setter
+    def Upper(self, value: int) -> None:
+        ...
 
     @property
     def Lower(self) -> int:
@@ -65,6 +68,9 @@ class UpperLowerMarginScale(object):
         """
         ...
 
+    @Lower.setter
+    def Lower(self, value: int) -> None:
+        ...
 
     @property
     def ScaleUpper(self) -> int:
@@ -73,6 +79,9 @@ class UpperLowerMarginScale(object):
         """
         ...
 
+    @ScaleUpper.setter
+    def ScaleUpper(self, value: int) -> None:
+        ...
 
     @property
     def ScaleLower(self) -> int:
@@ -81,4 +90,7 @@ class UpperLowerMarginScale(object):
         """
         ...
 
+    @ScaleLower.setter
+    def ScaleLower(self, value: int) -> None:
+        ...
 

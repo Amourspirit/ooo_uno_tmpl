@@ -30,4 +30,3 @@ class GnomeVFSContentProvider(XContentProvider_d4150cc0):
     """
     ...
 
-

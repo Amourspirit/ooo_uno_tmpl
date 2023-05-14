@@ -32,4 +32,3 @@ class TableConditionalEntry(XSheetCondition_e1940d19, XSheetConditionalEntry_484
     """
     ...
 
-

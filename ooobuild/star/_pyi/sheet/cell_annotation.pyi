@@ -34,4 +34,3 @@ class CellAnnotation(XChild_a6390b07, XSheetAnnotation_ef4a0d8d, XSheetAnnotatio
     """
     ...
 
-

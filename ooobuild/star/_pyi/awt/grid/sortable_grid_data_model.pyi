@@ -64,4 +64,3 @@ class SortableGridDataModel(XSortableMutableGridDataModel_f6af1377):
         """
         ...
 
-

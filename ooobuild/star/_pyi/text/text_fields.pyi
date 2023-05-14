@@ -32,4 +32,3 @@ class TextFields(XEnumerationAccess_4bac0ffc, XRefreshable_b0d60b81):
     """
     ...
 
-

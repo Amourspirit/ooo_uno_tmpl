@@ -32,4 +32,3 @@ class ChartDocumentWrapper(ChartDocument_c7790c4b, XAggregation_a4230b1a):
     """
     ...
 
-

@@ -59,6 +59,9 @@ class DatabaseRegistrationEvent(EventObject_a3d70b03):
         """
         ...
 
+    @Name.setter
+    def Name(self, value: str) -> None:
+        ...
 
     @property
     def OldLocation(self) -> str:
@@ -67,6 +70,9 @@ class DatabaseRegistrationEvent(EventObject_a3d70b03):
         """
         ...
 
+    @OldLocation.setter
+    def OldLocation(self, value: str) -> None:
+        ...
 
     @property
     def NewLocation(self) -> str:
@@ -75,4 +81,7 @@ class DatabaseRegistrationEvent(EventObject_a3d70b03):
         """
         ...
 
+    @NewLocation.setter
+    def NewLocation(self, value: str) -> None:
+        ...
 

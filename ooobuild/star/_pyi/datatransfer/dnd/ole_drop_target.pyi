@@ -35,4 +35,3 @@ class OleDropTarget(XDropTarget_49e50fbf, XComponent_98dc0ab5, XInitialization_d
     """
     ...
 
-

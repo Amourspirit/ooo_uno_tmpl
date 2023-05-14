@@ -53,4 +53,7 @@ class TitleChangedEvent(EventObject_a3d70b03):
         """
         ...
 
+    @Title.setter
+    def Title(self, value: str) -> None:
+        ...
 

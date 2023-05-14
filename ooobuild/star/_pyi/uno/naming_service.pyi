@@ -31,4 +31,3 @@ class NamingService(XNamingService_bb9a0bdd):
     """
     ...
 
-

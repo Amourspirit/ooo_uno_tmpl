@@ -33,4 +33,3 @@ class DashTable(XNameContainer_cb90e47):
     """
     ...
 
-

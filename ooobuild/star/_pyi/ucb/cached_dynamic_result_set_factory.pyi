@@ -31,4 +31,3 @@ class CachedDynamicResultSetFactory(XCachedDynamicResultSetFactory_a831121a):
     """
     ...
 
-

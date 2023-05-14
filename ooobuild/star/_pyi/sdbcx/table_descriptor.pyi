@@ -41,11 +41,19 @@ class TableDescriptor(Descriptor_a5200b3b, XColumnsSupplier_f0600da9, XKeysSuppl
         is the name of the table catalog.
         """
         ...
+
+    @CatalogName.setter
+    def CatalogName(self, value: str) -> None:
+        ...
     @property
     def Description(self) -> str:
         """
         supplies a comment on the table, Could be empty if not supported by the driver.
         """
+        ...
+
+    @Description.setter
+    def Description(self, value: str) -> None:
         ...
     @property
     def SchemaName(self) -> str:
@@ -54,4 +62,7 @@ class TableDescriptor(Descriptor_a5200b3b, XColumnsSupplier_f0600da9, XKeysSuppl
         """
         ...
 
+    @SchemaName.setter
+    def SchemaName(self, value: str) -> None:
+        ...
 

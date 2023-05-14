@@ -56,6 +56,9 @@ class ARGBColor(object):
         """
         ...
 
+    @Alpha.setter
+    def Alpha(self, value: ColorComponent_e4c0e78) -> None:
+        ...
 
     @property
     def Red(self) -> ColorComponent_e4c0e78:
@@ -64,6 +67,9 @@ class ARGBColor(object):
         """
         ...
 
+    @Red.setter
+    def Red(self, value: ColorComponent_e4c0e78) -> None:
+        ...
 
     @property
     def Green(self) -> ColorComponent_e4c0e78:
@@ -72,6 +78,9 @@ class ARGBColor(object):
         """
         ...
 
+    @Green.setter
+    def Green(self, value: ColorComponent_e4c0e78) -> None:
+        ...
 
     @property
     def Blue(self) -> ColorComponent_e4c0e78:
@@ -80,4 +89,7 @@ class ARGBColor(object):
         """
         ...
 
+    @Blue.setter
+    def Blue(self, value: ColorComponent_e4c0e78) -> None:
+        ...
 

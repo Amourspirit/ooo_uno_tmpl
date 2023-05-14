@@ -53,6 +53,9 @@ class NoMasterException(RuntimeException_d7390ced):
         """
         ...
 
+    @Mode.setter
+    def Mode(self, value: PasswordRequestMode_ec10e7c) -> None:
+        ...
 
 __all__ = ['NoMasterException']
 

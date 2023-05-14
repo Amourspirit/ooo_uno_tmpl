@@ -147,4 +147,7 @@ class XSingleSelectQueryComposer(XSingleSelectQueryAnalyzer_66ad10b7):
         """
         ...
 
+    @ElementaryQuery.setter
+    def ElementaryQuery(self, value: str) -> None:
+        ...
 

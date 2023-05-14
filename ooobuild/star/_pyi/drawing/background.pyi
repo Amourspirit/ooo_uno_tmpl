@@ -33,4 +33,3 @@ class Background(FillProperties_f1200da8):
     """
     ...
 
-

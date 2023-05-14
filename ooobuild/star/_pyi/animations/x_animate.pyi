@@ -39,11 +39,19 @@ class XAnimate(XAnimationNode_1cf10eb9):
         """
         ...
 
+    @KeyTimes.setter
+    def KeyTimes(self, value: 'typing.Tuple[float, ...]') -> None:
+        ...
+
     @property
     def TimeFilter(self) -> 'typing.Tuple[TimeFilterPair_1d250ebc, ...]':
         """
         todo: timeFilter=\"0,0; 0.14,0.36; 0.43,0.73; 0.71,0.91; 1.0,1.0\" ?
         """
+        ...
+
+    @TimeFilter.setter
+    def TimeFilter(self, value: 'typing.Tuple[TimeFilterPair_1d250ebc, ...]') -> None:
         ...
 
     @property
@@ -53,6 +61,10 @@ class XAnimate(XAnimationNode_1cf10eb9):
         """
         ...
 
+    @Values.setter
+    def Values(self, value: 'typing.Tuple[object, ...]') -> None:
+        ...
+
     @property
     def Accumulate(self) -> bool:
         """
@@ -60,6 +72,9 @@ class XAnimate(XAnimationNode_1cf10eb9):
         """
         ...
 
+    @Accumulate.setter
+    def Accumulate(self, value: bool) -> None:
+        ...
     @property
     def Additive(self) -> int:
         """
@@ -67,6 +82,9 @@ class XAnimate(XAnimationNode_1cf10eb9):
         """
         ...
 
+    @Additive.setter
+    def Additive(self, value: int) -> None:
+        ...
     @property
     def AttributeName(self) -> str:
         """
@@ -74,6 +92,9 @@ class XAnimate(XAnimationNode_1cf10eb9):
         """
         ...
 
+    @AttributeName.setter
+    def AttributeName(self, value: str) -> None:
+        ...
     @property
     def By(self) -> object:
         """
@@ -83,6 +104,9 @@ class XAnimate(XAnimationNode_1cf10eb9):
         """
         ...
 
+    @By.setter
+    def By(self, value: object) -> None:
+        ...
     @property
     def CalcMode(self) -> int:
         """
@@ -92,6 +116,9 @@ class XAnimate(XAnimationNode_1cf10eb9):
         """
         ...
 
+    @CalcMode.setter
+    def CalcMode(self, value: int) -> None:
+        ...
     @property
     def Formula(self) -> str:
         """
@@ -101,6 +128,9 @@ class XAnimate(XAnimationNode_1cf10eb9):
         """
         ...
 
+    @Formula.setter
+    def Formula(self, value: str) -> None:
+        ...
     @property
     def From(self) -> object:
         """
@@ -110,6 +140,9 @@ class XAnimate(XAnimationNode_1cf10eb9):
         """
         ...
 
+    @From.setter
+    def From(self, value: object) -> None:
+        ...
     @property
     def SubItem(self) -> int:
         """
@@ -119,6 +152,9 @@ class XAnimate(XAnimationNode_1cf10eb9):
         """
         ...
 
+    @SubItem.setter
+    def SubItem(self, value: int) -> None:
+        ...
     @property
     def Target(self) -> object:
         """
@@ -128,6 +164,9 @@ class XAnimate(XAnimationNode_1cf10eb9):
         """
         ...
 
+    @Target.setter
+    def Target(self, value: object) -> None:
+        ...
     @property
     def To(self) -> object:
         """
@@ -137,10 +176,16 @@ class XAnimate(XAnimationNode_1cf10eb9):
         """
         ...
 
+    @To.setter
+    def To(self, value: object) -> None:
+        ...
     @property
     def ValueType(self) -> int:
         """
         """
         ...
 
+    @ValueType.setter
+    def ValueType(self, value: int) -> None:
+        ...
 

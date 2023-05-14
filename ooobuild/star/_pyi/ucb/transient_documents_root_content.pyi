@@ -45,4 +45,3 @@ class TransientDocumentsRootContent(XPropertiesChangeNotifier_7a7b111c, XPropert
     """
     ...
 
-

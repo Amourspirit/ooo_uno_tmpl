@@ -63,4 +63,7 @@ class DropTargetDragEnterEvent(DropTargetDragEvent_d60612e7):
         """
         ...
 
+    @SupportedDataFlavors.setter
+    def SupportedDataFlavors(self, value: typing.Tuple[DataFlavor_ffd30deb, ...]) -> None:
+        ...
 

@@ -66,6 +66,9 @@ class TextSegment(object):
         """
         ...
 
+    @SegmentText.setter
+    def SegmentText(self, value: str) -> None:
+        ...
 
     @property
     def SegmentStart(self) -> int:
@@ -76,6 +79,9 @@ class TextSegment(object):
         """
         ...
 
+    @SegmentStart.setter
+    def SegmentStart(self, value: int) -> None:
+        ...
 
     @property
     def SegmentEnd(self) -> int:
@@ -86,4 +92,7 @@ class TextSegment(object):
         """
         ...
 
+    @SegmentEnd.setter
+    def SegmentEnd(self, value: int) -> None:
+        ...
 

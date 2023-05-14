@@ -35,4 +35,3 @@ class ExternalUriReferenceTranslator(XExternalUriReferenceTranslator_c41d12dc):
     """
     ...
 
-

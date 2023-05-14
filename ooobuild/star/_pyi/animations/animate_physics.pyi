@@ -30,4 +30,3 @@ class AnimatePhysics(XAnimationNode_1cf10eb9):
     """
     ...
 
-

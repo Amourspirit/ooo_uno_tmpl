@@ -39,4 +39,3 @@ class PathSettings(XPathSettings_bc930bfc):
     """
     ...
 
-

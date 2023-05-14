@@ -69,6 +69,9 @@ class SearchOptions2(SearchOptions_bd140c08):
         """
         ...
 
+    @AlgorithmType2.setter
+    def AlgorithmType2(self, value: int) -> None:
+        ...
 
     @property
     def WildcardEscapeCharacter(self) -> int:
@@ -81,4 +84,7 @@ class SearchOptions2(SearchOptions_bd140c08):
         """
         ...
 
+    @WildcardEscapeCharacter.setter
+    def WildcardEscapeCharacter(self, value: int) -> None:
+        ...
 

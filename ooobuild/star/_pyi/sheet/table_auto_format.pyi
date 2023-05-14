@@ -40,11 +40,19 @@ class TableAutoFormat(XPropertySet_bc180bfa, XEnumerationAccess_4bac0ffc, XIndex
         specifies whether the background settings from the fields are used.
         """
         ...
+
+    @IncludeBackground.setter
+    def IncludeBackground(self, value: bool) -> None:
+        ...
     @property
     def IncludeBorder(self) -> bool:
         """
         specifies whether the border settings from the fields are used.
         """
+        ...
+
+    @IncludeBorder.setter
+    def IncludeBorder(self, value: bool) -> None:
         ...
     @property
     def IncludeFont(self) -> bool:
@@ -52,17 +60,29 @@ class TableAutoFormat(XPropertySet_bc180bfa, XEnumerationAccess_4bac0ffc, XIndex
         specifies whether the font settings from the fields are used.
         """
         ...
+
+    @IncludeFont.setter
+    def IncludeFont(self, value: bool) -> None:
+        ...
     @property
     def IncludeJustify(self) -> bool:
         """
         specifies whether the justification settings from the fields are used.
         """
         ...
+
+    @IncludeJustify.setter
+    def IncludeJustify(self, value: bool) -> None:
+        ...
     @property
     def IncludeNumberFormat(self) -> bool:
         """
         specifies whether the number format settings from the fields are used.
         """
+        ...
+
+    @IncludeNumberFormat.setter
+    def IncludeNumberFormat(self, value: bool) -> None:
         ...
     @property
     def IncludeWidthAndHeight(self) -> bool:
@@ -71,4 +91,7 @@ class TableAutoFormat(XPropertySet_bc180bfa, XEnumerationAccess_4bac0ffc, XIndex
         """
         ...
 
+    @IncludeWidthAndHeight.setter
+    def IncludeWidthAndHeight(self, value: bool) -> None:
+        ...
 

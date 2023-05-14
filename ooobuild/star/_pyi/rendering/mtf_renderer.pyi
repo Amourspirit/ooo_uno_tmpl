@@ -36,4 +36,3 @@ class MtfRenderer(XMtfRenderer_f0d90d7c):
         """
         ...
 
-

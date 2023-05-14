@@ -35,6 +35,10 @@ class InputUser(TextField_90260a56):
         contains the name of the corresponding field master.
         """
         ...
+
+    @Content.setter
+    def Content(self, value: str) -> None:
+        ...
     @property
     def Hint(self) -> str:
         """
@@ -44,4 +48,7 @@ class InputUser(TextField_90260a56):
         """
         ...
 
+    @Hint.setter
+    def Hint(self, value: str) -> None:
+        ...
 

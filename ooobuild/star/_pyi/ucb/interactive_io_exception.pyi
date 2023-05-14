@@ -55,6 +55,9 @@ class InteractiveIOException(ClassifiedInteractionRequest_9f72121b):
         """
         ...
 
+    @Code.setter
+    def Code(self, value: IOErrorCode_96ab0a5f) -> None:
+        ...
 
 __all__ = ['InteractiveIOException']
 

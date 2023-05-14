@@ -33,4 +33,3 @@ class NumberFormatter(XNumberFormatter2_f0840d6d):
     """
     ...
 
-

@@ -31,4 +31,3 @@ class UnoUrlResolver(XUnoUrlResolver_eec20d84):
     """
     ...
 
-

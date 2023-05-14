@@ -30,4 +30,3 @@ class VBATextEventProcessor(XVBAEventProcessor_52fa0ff7):
     """
     ...
 
-

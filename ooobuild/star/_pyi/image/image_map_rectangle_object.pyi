@@ -39,4 +39,7 @@ class ImageMapRectangleObject(ImageMapObject_d1e20c63):
         """
         ...
 
+    @Boundary.setter
+    def Boundary(self, value: 'Rectangle_84b109e9') -> None:
+        ...
 

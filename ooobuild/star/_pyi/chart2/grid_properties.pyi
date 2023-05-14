@@ -36,4 +36,7 @@ class GridProperties(LineProperties_f13f0da9):
         """
         ...
 
+    @Show.setter
+    def Show(self, value: bool) -> None:
+        ...
 

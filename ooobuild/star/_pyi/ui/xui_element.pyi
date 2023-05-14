@@ -50,6 +50,9 @@ class XUIElement(XInterface_8f010a43):
         """
         ...
 
+    @Frame.setter
+    def Frame(self, value: 'XFrame_7a570956') -> None:
+        ...
     @property
     def ResourceURL(self) -> str:
         """
@@ -57,6 +60,9 @@ class XUIElement(XInterface_8f010a43):
         """
         ...
 
+    @ResourceURL.setter
+    def ResourceURL(self, value: str) -> None:
+        ...
     @property
     def Type(self) -> int:
         """
@@ -64,4 +70,7 @@ class XUIElement(XInterface_8f010a43):
         """
         ...
 
+    @Type.setter
+    def Type(self, value: int) -> None:
+        ...
 

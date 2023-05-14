@@ -34,4 +34,3 @@ class NumericField(UnoControlNumericField_2abb0f1e, XBoundControl_bba00bed):
     """
     ...
 
-

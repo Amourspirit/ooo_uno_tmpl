@@ -53,6 +53,9 @@ class PDFExportException(Exception_85530a09):
         """
         ...
 
+    @ErrorCodes.setter
+    def ErrorCodes(self, value: uno.ByteSequence) -> None:
+        ...
 
 __all__ = ['PDFExportException']
 

@@ -31,4 +31,3 @@ class CellAnnotationShape(CaptionShape_d6200cb3):
     """
     ...
 
-

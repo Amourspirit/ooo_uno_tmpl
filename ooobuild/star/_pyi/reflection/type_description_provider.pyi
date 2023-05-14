@@ -41,4 +41,3 @@ class TypeDescriptionProvider(XHierarchicalNameAccess_9e2611b5, XComponent_98dc0
     """
     ...
 
-

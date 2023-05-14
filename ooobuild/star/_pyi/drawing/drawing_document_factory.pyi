@@ -34,4 +34,3 @@ class DrawingDocumentFactory(XMultiServiceFactory_191e0eb6):
     """
     ...
 
-

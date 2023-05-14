@@ -34,4 +34,3 @@ class HandoutShape(PageShape_b0a30b62, Shape_c0c80c15):
     """
     ...
 
-

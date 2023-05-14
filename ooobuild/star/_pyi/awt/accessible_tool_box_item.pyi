@@ -39,4 +39,3 @@ class AccessibleToolBoxItem(AccessibleContext_7e0e1143, XAccessibleAction_7ccc11
     """
     ...
 
-

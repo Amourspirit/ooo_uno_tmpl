@@ -36,11 +36,19 @@ class Presentation(XPropertySet_bc180bfa, XPresentation_30890f78):
         enables/disables the shape animations.
         """
         ...
+
+    @AllowAnimations.setter
+    def AllowAnimations(self, value: bool) -> None:
+        ...
     @property
     def CustomShow(self) -> str:
         """
         If this string is not empty, it contains the name of a customized show that is used for the presentation.
         """
+        ...
+
+    @CustomShow.setter
+    def CustomShow(self, value: str) -> None:
         ...
     @property
     def FirstPage(self) -> str:
@@ -48,11 +56,19 @@ class Presentation(XPropertySet_bc180bfa, XPresentation_30890f78):
         If this string is not empty, it contains the name of the page where the presentation is started.
         """
         ...
+
+    @FirstPage.setter
+    def FirstPage(self, value: str) -> None:
+        ...
     @property
     def IsAlwaysOnTop(self) -> bool:
         """
         If this property is set to TRUE, the window of the presentation is always on top of all other windows.
         """
+        ...
+
+    @IsAlwaysOnTop.setter
+    def IsAlwaysOnTop(self, value: bool) -> None:
         ...
     @property
     def IsAutomatic(self) -> bool:
@@ -62,17 +78,29 @@ class Presentation(XPropertySet_bc180bfa, XPresentation_30890f78):
         This overrides the properties of the pages.
         """
         ...
+
+    @IsAutomatic.setter
+    def IsAutomatic(self, value: bool) -> None:
+        ...
     @property
     def IsEndless(self) -> bool:
         """
         If this property is set to TRUE, the presentation is repeated endlessly.
         """
         ...
+
+    @IsEndless.setter
+    def IsEndless(self, value: bool) -> None:
+        ...
     @property
     def IsFullScreen(self) -> bool:
         """
         If this property is set to TRUE, the presentation runs in full-screen mode.
         """
+        ...
+
+    @IsFullScreen.setter
+    def IsFullScreen(self, value: bool) -> None:
         ...
     @property
     def IsLivePresentation(self) -> bool:
@@ -82,11 +110,19 @@ class Presentation(XPropertySet_bc180bfa, XPresentation_30890f78):
         Implementations that have no live mode capability may ignore this property and always return false.
         """
         ...
+
+    @IsLivePresentation.setter
+    def IsLivePresentation(self, value: bool) -> None:
+        ...
     @property
     def IsMouseVisible(self) -> bool:
         """
         If this property is TRUE, the mouse is visible during the presentation.
         """
+        ...
+
+    @IsMouseVisible.setter
+    def IsMouseVisible(self, value: bool) -> None:
         ...
     @property
     def Pause(self) -> int:
@@ -96,11 +132,19 @@ class Presentation(XPropertySet_bc180bfa, XPresentation_30890f78):
         If this is set to 0, no black screen is shown.
         """
         ...
+
+    @Pause.setter
+    def Pause(self, value: int) -> None:
+        ...
     @property
     def StartWithNavigator(self) -> bool:
         """
         If this is set to TRUE, the Navigator is opened at the start of the presentation.
         """
+        ...
+
+    @StartWithNavigator.setter
+    def StartWithNavigator(self, value: bool) -> None:
         ...
     @property
     def UsePen(self) -> bool:
@@ -111,4 +155,7 @@ class Presentation(XPropertySet_bc180bfa, XPresentation_30890f78):
         """
         ...
 
+    @UsePen.setter
+    def UsePen(self, value: bool) -> None:
+        ...
 

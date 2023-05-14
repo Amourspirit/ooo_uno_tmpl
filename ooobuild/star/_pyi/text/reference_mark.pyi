@@ -32,4 +32,3 @@ class ReferenceMark(XNamed_a6520b08, XTextContent_b16e0ba5):
     """
     ...
 
-

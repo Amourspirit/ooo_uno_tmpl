@@ -33,4 +33,3 @@ class ConnectionPool(XConnectionPool_d3710ca6):
     """
     ...
 
-

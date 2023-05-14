@@ -40,11 +40,20 @@ class PluginShape(Shape_85cc09e5):
         This sequence contains parameters that are passed to the application that renders the plugin when it is initialized.
         """
         ...
+
+    @PluginCommands.setter
+    def PluginCommands(self, value: 'typing.Tuple[PropertyValue_c9610c73, ...]') -> None:
+        ...
+
     @property
     def PluginMimeType(self) -> str:
         """
         This property specifies the media-type to which this plugin should be registered.
         """
+        ...
+
+    @PluginMimeType.setter
+    def PluginMimeType(self, value: str) -> None:
         ...
     @property
     def PluginURL(self) -> str:
@@ -53,4 +62,7 @@ class PluginShape(Shape_85cc09e5):
         """
         ...
 
+    @PluginURL.setter
+    def PluginURL(self, value: str) -> None:
+        ...
 

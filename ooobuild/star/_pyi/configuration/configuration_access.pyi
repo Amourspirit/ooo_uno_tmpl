@@ -53,4 +53,3 @@ class ConfigurationAccess(AccessRootElement_7fef1140, GroupAccess_1f8f0edf, Grou
     """
     ...
 
-

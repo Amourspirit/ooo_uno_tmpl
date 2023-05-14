@@ -39,4 +39,3 @@ class AccessibleSpreadsheet(XAccessibleComponent_b2f21269, XAccessibleContext_8e
     """
     ...
 
-

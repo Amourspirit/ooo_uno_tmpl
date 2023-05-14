@@ -47,4 +47,3 @@ class MailMessage(XMailMessage_ae200b4b):
         """
         ...
 
-

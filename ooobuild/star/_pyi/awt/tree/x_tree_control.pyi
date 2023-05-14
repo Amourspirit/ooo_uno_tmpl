@@ -178,6 +178,9 @@ class XTreeControl(XMultiSelectionSupplier_4b0d1020):
         """
         ...
 
+    @DefaultCollapsedGraphicURL.setter
+    def DefaultCollapsedGraphicURL(self, value: str) -> None:
+        ...
     @property
     def DefaultExpandedGraphicURL(self) -> str:
         """
@@ -187,4 +190,7 @@ class XTreeControl(XMultiSelectionSupplier_4b0d1020):
         """
         ...
 
+    @DefaultExpandedGraphicURL.setter
+    def DefaultExpandedGraphicURL(self, value: str) -> None:
+        ...
 

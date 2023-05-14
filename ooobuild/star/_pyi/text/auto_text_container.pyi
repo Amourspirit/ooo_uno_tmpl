@@ -31,4 +31,3 @@ class AutoTextContainer(XAutoTextContainer2_d140e38):
     """
     ...
 
-

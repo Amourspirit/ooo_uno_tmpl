@@ -63,6 +63,9 @@ class AuthenticationRequest(ClassifiedInteractionRequest_9f72121b):
         """
         ...
 
+    @ServerName.setter
+    def ServerName(self, value: str) -> None:
+        ...
     @property
     def Diagnostic(self) -> str:
         """
@@ -70,6 +73,9 @@ class AuthenticationRequest(ClassifiedInteractionRequest_9f72121b):
         """
         ...
 
+    @Diagnostic.setter
+    def Diagnostic(self, value: str) -> None:
+        ...
     @property
     def HasRealm(self) -> bool:
         """
@@ -77,6 +83,9 @@ class AuthenticationRequest(ClassifiedInteractionRequest_9f72121b):
         """
         ...
 
+    @HasRealm.setter
+    def HasRealm(self, value: bool) -> None:
+        ...
     @property
     def Realm(self) -> str:
         """
@@ -86,6 +95,9 @@ class AuthenticationRequest(ClassifiedInteractionRequest_9f72121b):
         """
         ...
 
+    @Realm.setter
+    def Realm(self, value: str) -> None:
+        ...
     @property
     def HasUserName(self) -> bool:
         """
@@ -93,6 +105,9 @@ class AuthenticationRequest(ClassifiedInteractionRequest_9f72121b):
         """
         ...
 
+    @HasUserName.setter
+    def HasUserName(self, value: bool) -> None:
+        ...
     @property
     def UserName(self) -> str:
         """
@@ -102,6 +117,9 @@ class AuthenticationRequest(ClassifiedInteractionRequest_9f72121b):
         """
         ...
 
+    @UserName.setter
+    def UserName(self, value: str) -> None:
+        ...
     @property
     def HasPassword(self) -> bool:
         """
@@ -109,6 +127,9 @@ class AuthenticationRequest(ClassifiedInteractionRequest_9f72121b):
         """
         ...
 
+    @HasPassword.setter
+    def HasPassword(self, value: bool) -> None:
+        ...
     @property
     def Password(self) -> str:
         """
@@ -118,6 +139,9 @@ class AuthenticationRequest(ClassifiedInteractionRequest_9f72121b):
         """
         ...
 
+    @Password.setter
+    def Password(self, value: str) -> None:
+        ...
     @property
     def HasAccount(self) -> bool:
         """
@@ -125,6 +149,9 @@ class AuthenticationRequest(ClassifiedInteractionRequest_9f72121b):
         """
         ...
 
+    @HasAccount.setter
+    def HasAccount(self, value: bool) -> None:
+        ...
     @property
     def Account(self) -> str:
         """
@@ -134,6 +161,9 @@ class AuthenticationRequest(ClassifiedInteractionRequest_9f72121b):
         """
         ...
 
+    @Account.setter
+    def Account(self, value: str) -> None:
+        ...
 
 __all__ = ['AuthenticationRequest']
 

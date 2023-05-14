@@ -65,6 +65,9 @@ class FontRequest(object):
         """
         ...
 
+    @FontDescription.setter
+    def FontDescription(self, value: FontInfo_bded0be9) -> None:
+        ...
 
     @property
     def CellSize(self) -> float:
@@ -81,6 +84,9 @@ class FontRequest(object):
         """
         ...
 
+    @CellSize.setter
+    def CellSize(self, value: float) -> None:
+        ...
 
     @property
     def ReferenceAdvancement(self) -> float:
@@ -95,6 +101,9 @@ class FontRequest(object):
         """
         ...
 
+    @ReferenceAdvancement.setter
+    def ReferenceAdvancement(self, value: float) -> None:
+        ...
 
     @property
     def Locale(self) -> Locale_70d308fa:
@@ -105,4 +114,7 @@ class FontRequest(object):
         """
         ...
 
+    @Locale.setter
+    def Locale(self, value: Locale_70d308fa) -> None:
+        ...
 

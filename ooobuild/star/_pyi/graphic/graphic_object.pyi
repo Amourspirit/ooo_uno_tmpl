@@ -35,4 +35,3 @@ class GraphicObject(XGraphicObject_ee970d53):
         """
         ...
 
-

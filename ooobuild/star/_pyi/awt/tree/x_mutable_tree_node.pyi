@@ -96,4 +96,7 @@ class XMutableTreeNode(XTreeNode_baaf0ba0):
         """
         ...
 
+    @DataValue.setter
+    def DataValue(self, value: object) -> None:
+        ...
 

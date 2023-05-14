@@ -53,6 +53,9 @@ class SearchCommandArgument(object):
         """
         ...
 
+    @Properties.setter
+    def Properties(self, value: typing.Tuple[Property_8f4e0a76, ...]) -> None:
+        ...
 
     @property
     def Info(self) -> SearchInfo_8daf0a24:
@@ -61,4 +64,7 @@ class SearchCommandArgument(object):
         """
         ...
 
+    @Info.setter
+    def Info(self, value: SearchInfo_8daf0a24) -> None:
+        ...
 

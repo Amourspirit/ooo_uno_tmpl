@@ -35,11 +35,19 @@ class ChartAxisYSupplier(XAxisYSupplier_d4430cb4):
         Determines if the y-axis is shown or hidden.
         """
         ...
+
+    @HasYAxis.setter
+    def HasYAxis(self, value: bool) -> None:
+        ...
     @property
     def HasYAxisDescription(self) -> bool:
         """
         Determines if the description of the y-axis is shown or hidden.
         """
+        ...
+
+    @HasYAxisDescription.setter
+    def HasYAxisDescription(self, value: bool) -> None:
         ...
     @property
     def HasYAxisGrid(self) -> bool:
@@ -47,11 +55,19 @@ class ChartAxisYSupplier(XAxisYSupplier_d4430cb4):
         Determines if the major grid of the y-axis is shown or hidden.
         """
         ...
+
+    @HasYAxisGrid.setter
+    def HasYAxisGrid(self, value: bool) -> None:
+        ...
     @property
     def HasYAxisHelpGrid(self) -> bool:
         """
         Determines if the minor grid of the y-axis is shown or hidden.
         """
+        ...
+
+    @HasYAxisHelpGrid.setter
+    def HasYAxisHelpGrid(self, value: bool) -> None:
         ...
     @property
     def HasYAxisTitle(self) -> bool:
@@ -60,4 +76,7 @@ class ChartAxisYSupplier(XAxisYSupplier_d4430cb4):
         """
         ...
 
+    @HasYAxisTitle.setter
+    def HasYAxisTitle(self, value: bool) -> None:
+        ...
 

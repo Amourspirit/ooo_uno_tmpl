@@ -53,6 +53,9 @@ class Rectangle(object):
         """
         ...
 
+    @X.setter
+    def X(self, value: int) -> None:
+        ...
 
     @property
     def Y(self) -> int:
@@ -61,6 +64,9 @@ class Rectangle(object):
         """
         ...
 
+    @Y.setter
+    def Y(self, value: int) -> None:
+        ...
 
     @property
     def Width(self) -> int:
@@ -69,6 +75,9 @@ class Rectangle(object):
         """
         ...
 
+    @Width.setter
+    def Width(self, value: int) -> None:
+        ...
 
     @property
     def Height(self) -> int:
@@ -77,4 +86,7 @@ class Rectangle(object):
         """
         ...
 
+    @Height.setter
+    def Height(self, value: int) -> None:
+        ...
 

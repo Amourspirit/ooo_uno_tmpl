@@ -45,6 +45,10 @@ class DatabaseDocument(XPropertySet_bc180bfa, XDataDescriptorFactory_46170fe5, X
         is the name of the document.
         """
         ...
+
+    @Name.setter
+    def Name(self, value: str) -> None:
+        ...
     @property
     def URL(self) -> str:
         """
@@ -52,4 +56,7 @@ class DatabaseDocument(XPropertySet_bc180bfa, XDataDescriptorFactory_46170fe5, X
         """
         ...
 
+    @URL.setter
+    def URL(self, value: str) -> None:
+        ...
 

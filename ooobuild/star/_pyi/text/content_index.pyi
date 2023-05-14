@@ -38,17 +38,29 @@ class ContentIndex(BaseIndex_8f0d0a40):
         contains TRUE if the document index marks are included in this index.
         """
         ...
+
+    @CreateFromMarks.setter
+    def CreateFromMarks(self, value: bool) -> None:
+        ...
     @property
     def CreateFromOutline(self) -> bool:
         """
         determines if the document index is created from outlines.
         """
         ...
+
+    @CreateFromOutline.setter
+    def CreateFromOutline(self, value: bool) -> None:
+        ...
     @property
     def Level(self) -> int:
         """
         determines the depth of outline levels that are included into the content index.
         """
+        ...
+
+    @Level.setter
+    def Level(self, value: int) -> None:
         ...
     @property
     def LevelParagraphStyles(self) -> 'XIndexReplace_feed0dd7':
@@ -57,4 +69,7 @@ class ContentIndex(BaseIndex_8f0d0a40):
         """
         ...
 
+    @LevelParagraphStyles.setter
+    def LevelParagraphStyles(self, value: 'XIndexReplace_feed0dd7') -> None:
+        ...
 

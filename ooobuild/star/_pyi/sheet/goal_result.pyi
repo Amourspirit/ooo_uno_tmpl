@@ -51,6 +51,9 @@ class GoalResult(object):
         """
         ...
 
+    @Divergence.setter
+    def Divergence(self, value: float) -> None:
+        ...
 
     @property
     def Result(self) -> float:
@@ -59,4 +62,7 @@ class GoalResult(object):
         """
         ...
 
+    @Result.setter
+    def Result(self, value: float) -> None:
+        ...
 

@@ -34,4 +34,3 @@ class ExponentialRegressionCurve(XRegressionCurve_fa3c0dca):
     """
     ...
 
-

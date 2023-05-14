@@ -56,6 +56,9 @@ class BrokenPackageRequest(Exception_85530a09):
         """
         ...
 
+    @aName.setter
+    def aName(self, value: str) -> None:
+        ...
 
 __all__ = ['BrokenPackageRequest']
 

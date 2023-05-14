@@ -38,4 +38,7 @@ class CurrencyField(UnoControlCurrencyFieldModel_8e351187, FormControlModel_e299
         """
         ...
 
+    @DefaultValue.setter
+    def DefaultValue(self, value: float) -> None:
+        ...
 

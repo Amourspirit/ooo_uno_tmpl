@@ -54,4 +54,7 @@ class DataEditorEvent(EventObject_a3d70b03):
         """
         ...
 
+    @Type.setter
+    def Type(self, value: DataEditorEventType_b080e4b) -> None:
+        ...
 

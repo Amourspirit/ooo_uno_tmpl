@@ -32,4 +32,3 @@ class SubmitButton(FormControlModel_e2990d22, XSubmissionSupplier_c98f130e):
     """
     ...
 
-

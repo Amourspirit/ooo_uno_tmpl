@@ -35,4 +35,3 @@ class NetDiagram(ChartAxisYSupplier_a9e0e4e, Diagram_844409cf, StackableDiagram_
     """
     ...
 
-

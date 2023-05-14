@@ -30,4 +30,3 @@ class ChartTypeTemplate(XChartTypeTemplate_15300e74):
     """
     ...
 
-

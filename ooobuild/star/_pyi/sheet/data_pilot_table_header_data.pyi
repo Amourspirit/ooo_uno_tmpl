@@ -60,6 +60,9 @@ class DataPilotTableHeaderData(object):
         """
         ...
 
+    @Dimension.setter
+    def Dimension(self, value: int) -> None:
+        ...
 
     @property
     def Hierarchy(self) -> int:
@@ -68,6 +71,9 @@ class DataPilotTableHeaderData(object):
         """
         ...
 
+    @Hierarchy.setter
+    def Hierarchy(self, value: int) -> None:
+        ...
 
     @property
     def Level(self) -> int:
@@ -76,6 +82,9 @@ class DataPilotTableHeaderData(object):
         """
         ...
 
+    @Level.setter
+    def Level(self, value: int) -> None:
+        ...
 
     @property
     def Flags(self) -> int:
@@ -84,6 +93,9 @@ class DataPilotTableHeaderData(object):
         """
         ...
 
+    @Flags.setter
+    def Flags(self, value: int) -> None:
+        ...
 
     @property
     def MemberName(self) -> str:
@@ -92,4 +104,7 @@ class DataPilotTableHeaderData(object):
         """
         ...
 
+    @MemberName.setter
+    def MemberName(self, value: str) -> None:
+        ...
 

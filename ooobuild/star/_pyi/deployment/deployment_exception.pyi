@@ -58,6 +58,9 @@ class DeploymentException(Exception_85530a09):
         """
         ...
 
+    @Cause.setter
+    def Cause(self, value: object) -> None:
+        ...
 
 __all__ = ['DeploymentException']
 

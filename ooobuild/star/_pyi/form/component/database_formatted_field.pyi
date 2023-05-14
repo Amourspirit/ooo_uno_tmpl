@@ -41,4 +41,7 @@ class DatabaseFormattedField(DataAwareControlModel_27110ef8, FormattedField_5b5c
         """
         ...
 
+    @ConvertEmptyToNull.setter
+    def ConvertEmptyToNull(self, value: bool) -> None:
+        ...
 

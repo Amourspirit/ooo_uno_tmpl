@@ -41,4 +41,3 @@ class PopupMenuController(XDispatchProvider_fc690de6, XPopupMenuController_29740
     """
     ...
 
-

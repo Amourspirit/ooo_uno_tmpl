@@ -39,4 +39,3 @@ class GenericPropertyHandler(XPropertyHandler_3e950fbf):
     """
     ...
 
-

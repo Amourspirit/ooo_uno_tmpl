@@ -51,6 +51,9 @@ class Implementation(object):
         """
         ...
 
+    @unoID.setter
+    def unoID(self, value: str) -> None:
+        ...
 
     @property
     def isDefault(self) -> bool:
@@ -59,4 +62,7 @@ class Implementation(object):
         """
         ...
 
+    @isDefault.setter
+    def isDefault(self, value: bool) -> None:
+        ...
 

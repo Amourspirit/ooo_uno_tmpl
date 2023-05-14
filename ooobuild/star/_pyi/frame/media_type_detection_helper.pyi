@@ -33,4 +33,3 @@ class MediaTypeDetectionHelper(XStringMapping_c99c0c61):
     """
     ...
 
-

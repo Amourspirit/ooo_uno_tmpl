@@ -58,6 +58,10 @@ class XController2(XController_b00e0b8f):
         """
         ...
 
+    @CreationArguments.setter
+    def CreationArguments(self, value: 'typing.Tuple[PropertyValue_c9610c73, ...]') -> None:
+        ...
+
     @property
     def ComponentWindow(self) -> 'XWindow_713b0924':
         """
@@ -67,6 +71,9 @@ class XController2(XController_b00e0b8f):
         """
         ...
 
+    @ComponentWindow.setter
+    def ComponentWindow(self, value: 'XWindow_713b0924') -> None:
+        ...
     @property
     def ViewControllerName(self) -> str:
         """
@@ -76,4 +83,7 @@ class XController2(XController_b00e0b8f):
         """
         ...
 
+    @ViewControllerName.setter
+    def ViewControllerName(self, value: str) -> None:
+        ...
 

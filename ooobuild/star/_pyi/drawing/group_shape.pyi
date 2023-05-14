@@ -33,4 +33,3 @@ class GroupShape(Shape_85cc09e5, XShapeGroup_c8d30c4a, XShapes_9a800ab0):
     """
     ...
 
-

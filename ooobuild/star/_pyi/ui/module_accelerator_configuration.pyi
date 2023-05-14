@@ -37,4 +37,3 @@ class ModuleAcceleratorConfiguration(XAcceleratorConfiguration_46580ffb):
         """
         ...
 
-

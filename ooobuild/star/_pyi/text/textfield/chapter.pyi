@@ -35,6 +35,10 @@ class Chapter(TextField_90260a56):
         determines how the chapter should be displayed as described in com.sun.star.text.ChapterFormat.
         """
         ...
+
+    @ChapterFormat.setter
+    def ChapterFormat(self, value: int) -> None:
+        ...
     @property
     def Level(self) -> int:
         """
@@ -44,4 +48,7 @@ class Chapter(TextField_90260a56):
         """
         ...
 
+    @Level.setter
+    def Level(self, value: int) -> None:
+        ...
 

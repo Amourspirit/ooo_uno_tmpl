@@ -33,4 +33,3 @@ class SvgTools(XSvgParser_bc350bdb):
     """
     ...
 
-

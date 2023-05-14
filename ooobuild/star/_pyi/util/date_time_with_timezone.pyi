@@ -56,6 +56,9 @@ class DateTimeWithTimezone(object):
         """
         ...
 
+    @DateTimeInTZ.setter
+    def DateTimeInTZ(self, value: DateTime_84de09d3) -> None:
+        ...
 
     @property
     def Timezone(self) -> int:
@@ -66,4 +69,7 @@ class DateTimeWithTimezone(object):
         """
         ...
 
+    @Timezone.setter
+    def Timezone(self, value: int) -> None:
+        ...
 

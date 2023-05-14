@@ -40,4 +40,3 @@ class BootstrapMacroExpander(MacroExpander_bca00bef, XInitialization_d46c0cca):
     """
     ...
 
-

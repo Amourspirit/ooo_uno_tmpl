@@ -35,4 +35,3 @@ class CertificateContainer(XCertificateContainer_6e1910de):
     """
     ...
 
-

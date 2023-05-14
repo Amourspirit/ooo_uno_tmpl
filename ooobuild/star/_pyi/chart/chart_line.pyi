@@ -32,4 +32,3 @@ class ChartLine(LineProperties_f13f0da9, XPropertySet_bc180bfa):
     """
     ...
 
-

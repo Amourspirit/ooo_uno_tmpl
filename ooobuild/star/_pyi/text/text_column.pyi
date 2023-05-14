@@ -54,6 +54,9 @@ class TextColumn(object):
         """
         ...
 
+    @Width.setter
+    def Width(self, value: int) -> None:
+        ...
 
     @property
     def LeftMargin(self) -> int:
@@ -64,6 +67,9 @@ class TextColumn(object):
         """
         ...
 
+    @LeftMargin.setter
+    def LeftMargin(self, value: int) -> None:
+        ...
 
     @property
     def RightMargin(self) -> int:
@@ -74,4 +80,7 @@ class TextColumn(object):
         """
         ...
 
+    @RightMargin.setter
+    def RightMargin(self, value: int) -> None:
+        ...
 

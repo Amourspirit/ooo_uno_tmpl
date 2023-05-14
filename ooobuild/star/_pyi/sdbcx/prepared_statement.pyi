@@ -38,4 +38,7 @@ class PreparedStatement(PreparedStatement_eef40d8c):
         """
         ...
 
+    @UseBookmarks.setter
+    def UseBookmarks(self, value: bool) -> None:
+        ...
 

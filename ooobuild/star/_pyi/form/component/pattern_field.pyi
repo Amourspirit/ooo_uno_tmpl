@@ -40,4 +40,7 @@ class PatternField(UnoControlPatternFieldModel_7c49111a, FormControlModel_e2990d
         """
         ...
 
+    @DefaultText.setter
+    def DefaultText(self, value: str) -> None:
+        ...
 

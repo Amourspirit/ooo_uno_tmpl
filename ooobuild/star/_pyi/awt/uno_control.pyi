@@ -44,4 +44,3 @@ class UnoControl(XAccessible_1cbc0eb6, XControl_7a9c098d, XView_5f670847, XWindo
     """
     ...
 
-

@@ -51,6 +51,9 @@ class Point(object):
         """
         ...
 
+    @X.setter
+    def X(self, value: int) -> None:
+        ...
 
     @property
     def Y(self) -> int:
@@ -59,4 +62,7 @@ class Point(object):
         """
         ...
 
+    @Y.setter
+    def Y(self, value: int) -> None:
+        ...
 

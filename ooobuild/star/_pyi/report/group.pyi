@@ -30,4 +30,3 @@ class Group(XGroup_86540a09):
     """
     ...
 
-

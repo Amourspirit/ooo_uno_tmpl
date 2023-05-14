@@ -31,4 +31,3 @@ class SheetCellRangesEnumeration(XEnumeration_f2180daa):
     """
     ...
 
-

@@ -30,4 +30,3 @@ class FixedLine(XFixedLine_b1760b74):
     """
     ...
 
-

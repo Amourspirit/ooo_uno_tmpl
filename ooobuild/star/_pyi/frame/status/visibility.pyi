@@ -54,4 +54,7 @@ class Visibility(object):
         """
         ...
 
+    @bVisible.setter
+    def bVisible(self, value: bool) -> None:
+        ...
 

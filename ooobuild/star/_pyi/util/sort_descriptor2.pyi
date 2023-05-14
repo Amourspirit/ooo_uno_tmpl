@@ -39,4 +39,3 @@ class SortDescriptor2(ABC):
     """
     ...
 
-

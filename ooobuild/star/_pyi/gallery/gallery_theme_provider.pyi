@@ -32,4 +32,3 @@ class GalleryThemeProvider(XGalleryThemeProvider_59c7105e, XInitialization_d46c0
     """
     ...
 
-

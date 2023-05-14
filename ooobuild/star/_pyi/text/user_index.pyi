@@ -38,11 +38,19 @@ class UserIndex(BaseIndex_8f0d0a40):
         determines if embedded objects are included in the index.
         """
         ...
+
+    @CreateFromEmbeddedObjects.setter
+    def CreateFromEmbeddedObjects(self, value: bool) -> None:
+        ...
     @property
     def CreateFromGraphicObjects(self) -> bool:
         """
         determines if graphic objects are included in the index.
         """
+        ...
+
+    @CreateFromGraphicObjects.setter
+    def CreateFromGraphicObjects(self, value: bool) -> None:
         ...
     @property
     def CreateFromMarks(self) -> bool:
@@ -50,11 +58,19 @@ class UserIndex(BaseIndex_8f0d0a40):
         determines if the document index marks are included in this index.
         """
         ...
+
+    @CreateFromMarks.setter
+    def CreateFromMarks(self, value: bool) -> None:
+        ...
     @property
     def CreateFromTables(self) -> bool:
         """
         determines if tables are included in the index.
         """
+        ...
+
+    @CreateFromTables.setter
+    def CreateFromTables(self, value: bool) -> None:
         ...
     @property
     def CreateFromTextFrames(self) -> bool:
@@ -62,17 +78,29 @@ class UserIndex(BaseIndex_8f0d0a40):
         determines if text frames are included in the index.
         """
         ...
+
+    @CreateFromTextFrames.setter
+    def CreateFromTextFrames(self, value: bool) -> None:
+        ...
     @property
     def LevelParagraphStyles(self) -> 'XIndexReplace_feed0dd7':
         """
         contains the interface to access the paragraph style names that are included in this index.
         """
         ...
+
+    @LevelParagraphStyles.setter
+    def LevelParagraphStyles(self, value: 'XIndexReplace_feed0dd7') -> None:
+        ...
     @property
     def UseLevelFromSource(self) -> bool:
         """
         determines if the outline level of the location of the indexed object is used as index level of the index entry.
         """
+        ...
+
+    @UseLevelFromSource.setter
+    def UseLevelFromSource(self, value: bool) -> None:
         ...
     @property
     def UserIndexName(self) -> str:
@@ -81,4 +109,7 @@ class UserIndex(BaseIndex_8f0d0a40):
         """
         ...
 
+    @UserIndexName.setter
+    def UserIndexName(self, value: str) -> None:
+        ...
 

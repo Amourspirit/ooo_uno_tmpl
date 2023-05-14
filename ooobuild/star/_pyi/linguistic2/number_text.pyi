@@ -39,4 +39,3 @@ class NumberText(XNumberText_feeb0ddb):
     """
     ...
 
-

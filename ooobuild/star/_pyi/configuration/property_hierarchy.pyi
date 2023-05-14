@@ -36,4 +36,3 @@ class PropertyHierarchy(XHierarchicalPropertySet_679a10b9, XMultiHierarchicalPro
     """
     ...
 
-

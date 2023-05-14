@@ -46,6 +46,9 @@ class XEmbeddedScripts(ABC):
         """
         ...
 
+    @AllowMacroExecution.setter
+    def AllowMacroExecution(self, value: bool) -> None:
+        ...
     @property
     def BasicLibraries(self) -> 'XStorageBasedLibraryContainer_d72a1321':
         """
@@ -53,6 +56,9 @@ class XEmbeddedScripts(ABC):
         """
         ...
 
+    @BasicLibraries.setter
+    def BasicLibraries(self, value: 'XStorageBasedLibraryContainer_d72a1321') -> None:
+        ...
     @property
     def DialogLibraries(self) -> 'XStorageBasedLibraryContainer_d72a1321':
         """
@@ -60,4 +66,7 @@ class XEmbeddedScripts(ABC):
         """
         ...
 
+    @DialogLibraries.setter
+    def DialogLibraries(self, value: 'XStorageBasedLibraryContainer_d72a1321') -> None:
+        ...
 

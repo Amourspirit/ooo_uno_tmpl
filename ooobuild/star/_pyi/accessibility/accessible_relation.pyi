@@ -60,6 +60,9 @@ class AccessibleRelation(object):
         """
         ...
 
+    @TargetSet.setter
+    def TargetSet(self, value: typing.Tuple[XInterface_8f010a43, ...]) -> None:
+        ...
 
     @property
     def RelationType(self) -> int:
@@ -70,4 +73,7 @@ class AccessibleRelation(object):
         """
         ...
 
+    @RelationType.setter
+    def RelationType(self, value: int) -> None:
+        ...
 

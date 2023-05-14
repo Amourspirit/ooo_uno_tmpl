@@ -31,4 +31,3 @@ class Canvas(XCanvas_b19b0b7a):
     """
     ...
 
-

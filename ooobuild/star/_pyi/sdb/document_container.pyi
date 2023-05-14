@@ -39,4 +39,3 @@ class DocumentContainer(DefinitionContainer_fc1e0ded, DefinitionContent_e0d20d25
     """
     ...
 
-

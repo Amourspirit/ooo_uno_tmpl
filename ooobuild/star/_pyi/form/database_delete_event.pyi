@@ -56,4 +56,7 @@ class DatabaseDeleteEvent(EventObject_a3d70b03):
     def Bookmarks(self) -> typing.Tuple[object, ...]:
         ...
 
+    @Bookmarks.setter
+    def Bookmarks(self, value: typing.Tuple[object, ...]) -> None:
+        ...
 

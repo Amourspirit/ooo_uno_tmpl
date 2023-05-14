@@ -52,6 +52,9 @@ class Position3D(object):
         """
         ...
 
+    @PositionX.setter
+    def PositionX(self, value: float) -> None:
+        ...
 
     @property
     def PositionY(self) -> float:
@@ -60,6 +63,9 @@ class Position3D(object):
         """
         ...
 
+    @PositionY.setter
+    def PositionY(self, value: float) -> None:
+        ...
 
     @property
     def PositionZ(self) -> float:
@@ -68,4 +74,7 @@ class Position3D(object):
         """
         ...
 
+    @PositionZ.setter
+    def PositionZ(self, value: float) -> None:
+        ...
 

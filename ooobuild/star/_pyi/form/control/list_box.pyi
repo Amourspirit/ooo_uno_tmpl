@@ -35,4 +35,3 @@ class ListBox(UnoControlListBox_e2b20d2c, XBoundControl_bba00bed, XChangeBroadca
     """
     ...
 
-

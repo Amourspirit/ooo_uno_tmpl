@@ -54,4 +54,3 @@ class PackageManagerDialog(XAsynchronousExecutableDialog_255014ad):
         """
         ...
 
-

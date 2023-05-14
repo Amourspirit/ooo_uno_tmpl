@@ -46,4 +46,7 @@ class DatabaseImageControl(UnoControlImageControlModel_7b36111c, DataAwareContro
         """
         ...
 
+    @ReadOnly.setter
+    def ReadOnly(self, value: bool) -> None:
+        ...
 

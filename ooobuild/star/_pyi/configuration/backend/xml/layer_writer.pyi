@@ -39,4 +39,3 @@ class LayerWriter(XLayerHandler_c5d61289, XActiveDataSource_d1900c7f, XInitializ
     """
     ...
 
-

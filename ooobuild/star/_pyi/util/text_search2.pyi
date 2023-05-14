@@ -33,4 +33,3 @@ class TextSearch2(XTextSearch2_b0b50b4b):
     """
     ...
 
-

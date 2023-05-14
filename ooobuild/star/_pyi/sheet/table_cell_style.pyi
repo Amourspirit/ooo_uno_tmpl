@@ -38,4 +38,3 @@ class TableCellStyle(CellStyle_9b190aca, CharacterProperties_1d4f0ef3, Character
     """
     ...
 
-

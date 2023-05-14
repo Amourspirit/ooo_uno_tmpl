@@ -39,6 +39,10 @@ class ConnectionProperties(ABC):
         the password
         """
         ...
+
+    @password.setter
+    def password(self, value: str) -> None:
+        ...
     @property
     def user(self) -> str:
         """
@@ -46,4 +50,7 @@ class ConnectionProperties(ABC):
         """
         ...
 
+    @user.setter
+    def user(self, value: str) -> None:
+        ...
 
