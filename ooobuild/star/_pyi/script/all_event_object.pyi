@@ -58,6 +58,9 @@ class AllEventObject(EventObject_a3d70b03):
         """
         ...
 
+    @Arguments.setter
+    def Arguments(self, value: typing.Tuple[object, ...]) -> None:
+        ...
 
     @property
     def Helper(self) -> object:
@@ -68,6 +71,9 @@ class AllEventObject(EventObject_a3d70b03):
         """
         ...
 
+    @Helper.setter
+    def Helper(self, value: object) -> None:
+        ...
 
     @property
     def ListenerType(self) -> object:
@@ -76,6 +82,9 @@ class AllEventObject(EventObject_a3d70b03):
         """
         ...
 
+    @ListenerType.setter
+    def ListenerType(self, value: object) -> None:
+        ...
 
     @property
     def MethodName(self) -> str:
@@ -84,4 +93,7 @@ class AllEventObject(EventObject_a3d70b03):
         """
         ...
 
+    @MethodName.setter
+    def MethodName(self, value: str) -> None:
+        ...
 

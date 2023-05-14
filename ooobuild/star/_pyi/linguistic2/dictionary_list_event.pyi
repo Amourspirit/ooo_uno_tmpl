@@ -59,6 +59,9 @@ class DictionaryListEvent(EventObject_a3d70b03):
         """
         ...
 
+    @aDictionaryEvents.setter
+    def aDictionaryEvents(self, value: typing.Tuple[DictionaryEvent_3ae00f8d, ...]) -> None:
+        ...
 
     @property
     def nCondensedEvent(self) -> int:
@@ -69,4 +72,7 @@ class DictionaryListEvent(EventObject_a3d70b03):
         """
         ...
 
+    @nCondensedEvent.setter
+    def nCondensedEvent(self, value: int) -> None:
+        ...
 

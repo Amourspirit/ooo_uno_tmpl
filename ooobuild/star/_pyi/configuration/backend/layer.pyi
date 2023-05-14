@@ -47,4 +47,7 @@ class Layer(XCompositeLayer_ed7f137e, XTimeStamped_b09b0b7b):
         """
         ...
 
+    @URL.setter
+    def URL(self, value: str) -> None:
+        ...
 

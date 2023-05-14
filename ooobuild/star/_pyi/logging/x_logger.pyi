@@ -78,6 +78,9 @@ class XLogger(ABC):
         """
         ...
 
+    @Level.setter
+    def Level(self, value: int) -> None:
+        ...
     @property
     def Name(self) -> str:
         """
@@ -85,4 +88,7 @@ class XLogger(ABC):
         """
         ...
 
+    @Name.setter
+    def Name(self, value: str) -> None:
+        ...
 

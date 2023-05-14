@@ -30,4 +30,3 @@ class FilterAdapter(XFilterAdapter_fe8f0de6):
     """
     ...
 
-

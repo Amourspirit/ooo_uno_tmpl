@@ -39,4 +39,3 @@ class Accessible(XAccessible_1cbc0eb6):
     """
     ...
 
-

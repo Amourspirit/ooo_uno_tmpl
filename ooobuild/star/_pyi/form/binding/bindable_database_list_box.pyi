@@ -34,4 +34,3 @@ class BindableDatabaseListBox(BindableDataAwareControlModel_47091512, DatabaseLi
     """
     ...
 
-

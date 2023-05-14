@@ -46,4 +46,3 @@ class PackageRegistryBackend(XPackageRegistry_3be50fa6):
         """
         ...
 
-

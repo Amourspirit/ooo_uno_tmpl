@@ -54,6 +54,10 @@ class XCsvLogFormatter(XLogFormatter_e23d0d1d):
         """
         ...
 
+    @Columnnames.setter
+    def Columnnames(self, value: 'typing.Tuple[str, ...]') -> None:
+        ...
+
     @property
     def LogEventNo(self) -> bool:
         """
@@ -61,6 +65,9 @@ class XCsvLogFormatter(XLogFormatter_e23d0d1d):
         """
         ...
 
+    @LogEventNo.setter
+    def LogEventNo(self, value: bool) -> None:
+        ...
     @property
     def LogSource(self) -> bool:
         """
@@ -68,6 +75,9 @@ class XCsvLogFormatter(XLogFormatter_e23d0d1d):
         """
         ...
 
+    @LogSource.setter
+    def LogSource(self, value: bool) -> None:
+        ...
     @property
     def LogThread(self) -> bool:
         """
@@ -75,6 +85,9 @@ class XCsvLogFormatter(XLogFormatter_e23d0d1d):
         """
         ...
 
+    @LogThread.setter
+    def LogThread(self, value: bool) -> None:
+        ...
     @property
     def LogTimestamp(self) -> bool:
         """
@@ -82,4 +95,7 @@ class XCsvLogFormatter(XLogFormatter_e23d0d1d):
         """
         ...
 
+    @LogTimestamp.setter
+    def LogTimestamp(self, value: bool) -> None:
+        ...
 

@@ -53,6 +53,9 @@ class FolderList(object):
         """
         ...
 
+    @List.setter
+    def List(self, value: typing.Tuple[FolderListEntry_c6c30c4c, ...]) -> None:
+        ...
 
     @property
     def Command(self) -> FolderListCommand_e0140cf9:
@@ -61,4 +64,7 @@ class FolderList(object):
         """
         ...
 
+    @Command.setter
+    def Command(self, value: FolderListCommand_e0140cf9) -> None:
+        ...
 

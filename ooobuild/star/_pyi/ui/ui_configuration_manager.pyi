@@ -35,4 +35,3 @@ class UIConfigurationManager(XUIConfigurationManager2_34030f21):
     """
     ...
 
-

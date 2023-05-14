@@ -31,4 +31,3 @@ class ContentProviderProxyFactory(XContentProviderFactory_37fd0f98):
     """
     ...
 
-

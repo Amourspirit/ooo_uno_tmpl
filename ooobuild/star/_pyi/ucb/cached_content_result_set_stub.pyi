@@ -33,4 +33,3 @@ class CachedContentResultSetStub(ContentResultSet_d4ee0cc8, XFetchProvider_b9f10
     """
     ...
 
-

@@ -54,6 +54,9 @@ class MissingPropertiesException(Exception_85530a09):
         """
         ...
 
+    @Properties.setter
+    def Properties(self, value: typing.Tuple[str, ...]) -> None:
+        ...
 
 __all__ = ['MissingPropertiesException']
 

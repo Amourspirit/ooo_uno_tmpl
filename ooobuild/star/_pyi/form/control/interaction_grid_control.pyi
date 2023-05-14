@@ -32,4 +32,3 @@ class InteractionGridControl(GridControl_c9d0e52, XDispatch_98ff0a9b):
     """
     ...
 
-

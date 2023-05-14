@@ -52,6 +52,9 @@ class CellAddress(object):
         """
         ...
 
+    @Sheet.setter
+    def Sheet(self, value: int) -> None:
+        ...
 
     @property
     def Column(self) -> int:
@@ -60,6 +63,9 @@ class CellAddress(object):
         """
         ...
 
+    @Column.setter
+    def Column(self, value: int) -> None:
+        ...
 
     @property
     def Row(self) -> int:
@@ -68,4 +74,7 @@ class CellAddress(object):
         """
         ...
 
+    @Row.setter
+    def Row(self, value: int) -> None:
+        ...
 

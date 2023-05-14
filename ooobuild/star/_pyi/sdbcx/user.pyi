@@ -38,4 +38,7 @@ class User(XPropertySet_bc180bfa, XGroupsSupplier_e3410d48, XUser_718e0913):
         """
         ...
 
+    @Name.setter
+    def Name(self, value: str) -> None:
+        ...
 

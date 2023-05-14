@@ -36,4 +36,3 @@ class MultiServiceFactory(XMultiComponentFactory_381b0f98, XMultiServiceFactory_
     """
     ...
 
-

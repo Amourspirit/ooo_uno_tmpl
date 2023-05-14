@@ -38,4 +38,3 @@ class FilterFactory(XContainerQuery_1cdd0edc, XNameContainer_cb90e47, XMultiServ
     """
     ...
 
-

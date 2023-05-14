@@ -52,4 +52,7 @@ class DialogClosedEvent(EventObject_a3d70b03):
     def DialogResult(self) -> int:
         ...
 
+    @DialogResult.setter
+    def DialogResult(self, value: int) -> None:
+        ...
 

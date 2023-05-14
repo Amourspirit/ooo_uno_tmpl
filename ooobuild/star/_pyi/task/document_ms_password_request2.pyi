@@ -63,6 +63,9 @@ class DocumentMSPasswordRequest2(DocumentMSPasswordRequest_69f810d6):
         """
         ...
 
+    @IsRequestPasswordToModify.setter
+    def IsRequestPasswordToModify(self, value: bool) -> None:
+        ...
 
 __all__ = ['DocumentMSPasswordRequest2']
 

@@ -61,4 +61,7 @@ class NativeNumberXmlAttributes2(NativeNumberXmlAttributes_5e4f1070):
         """
         ...
 
+    @Spellout.setter
+    def Spellout(self, value: str) -> None:
+        ...
 

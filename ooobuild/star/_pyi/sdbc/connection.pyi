@@ -39,4 +39,3 @@ class Connection(XComponent_98dc0ab5, XConnection_a36a0b0c, XWarningsSupplier_ef
     """
     ...
 
-

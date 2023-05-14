@@ -54,6 +54,9 @@ class IllegalArgumentException(RuntimeException_d7390ced):
         """
         ...
 
+    @ArgumentPosition.setter
+    def ArgumentPosition(self, value: int) -> None:
+        ...
 
 __all__ = ['IllegalArgumentException']
 

@@ -44,4 +44,7 @@ class XConnectionSupplier(XInitialization_d46c0cca):
         """
         ...
 
+    @ActiveConnection.setter
+    def ActiveConnection(self, value: 'XConnection_a36a0b0c') -> None:
+        ...
 

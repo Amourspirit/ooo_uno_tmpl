@@ -44,4 +44,3 @@ class BasicToolBarFactory(XResourceFactory_b3561268):
         """
         ...
 
-

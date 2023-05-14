@@ -61,6 +61,9 @@ class RelativePosition(object):
         """
         ...
 
+    @Primary.setter
+    def Primary(self, value: float) -> None:
+        ...
 
     @property
     def Secondary(self) -> float:
@@ -75,6 +78,9 @@ class RelativePosition(object):
         """
         ...
 
+    @Secondary.setter
+    def Secondary(self, value: float) -> None:
+        ...
 
     @property
     def Anchor(self) -> Alignment_b1400b93:
@@ -87,4 +93,7 @@ class RelativePosition(object):
         """
         ...
 
+    @Anchor.setter
+    def Anchor(self, value: Alignment_b1400b93) -> None:
+        ...
 

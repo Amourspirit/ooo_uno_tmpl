@@ -38,4 +38,7 @@ class IndexColumnDescriptor(Descriptor_a5200b3b):
         """
         ...
 
+    @IsAscending.setter
+    def IsAscending(self, value: bool) -> None:
+        ...
 

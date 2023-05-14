@@ -35,4 +35,3 @@ class ObjectOutputStream(XActiveDataSource_d1900c7f, XConnectable_980a0a96, XObj
     """
     ...
 
-

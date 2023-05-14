@@ -40,11 +40,19 @@ class SubTotalDescriptor(XPropertySet_bc180bfa, XEnumerationAccess_4bac0ffc, XIn
         specifies if cell formats are moved with the contents they belong to.
         """
         ...
+
+    @BindFormatsToContent.setter
+    def BindFormatsToContent(self, value: bool) -> None:
+        ...
     @property
     def EnableSort(self) -> bool:
         """
         specifies if the contents of the fields will be sorted to groups while performing a subtotal operation.
         """
+        ...
+
+    @EnableSort.setter
+    def EnableSort(self, value: bool) -> None:
         ...
     @property
     def EnableUserSortList(self) -> bool:
@@ -52,17 +60,29 @@ class SubTotalDescriptor(XPropertySet_bc180bfa, XEnumerationAccess_4bac0ffc, XIn
         specifies if a user defined sorting list is used.
         """
         ...
+
+    @EnableUserSortList.setter
+    def EnableUserSortList(self, value: bool) -> None:
+        ...
     @property
     def InsertPageBreaks(self) -> bool:
         """
         specifies if page breaks are inserted after each group change.
         """
         ...
+
+    @InsertPageBreaks.setter
+    def InsertPageBreaks(self, value: bool) -> None:
+        ...
     @property
     def IsCaseSensitive(self) -> bool:
         """
         specifies if the case of letters is important when comparing entries.
         """
+        ...
+
+    @IsCaseSensitive.setter
+    def IsCaseSensitive(self, value: bool) -> None:
         ...
     @property
     def MaxFieldCount(self) -> int:
@@ -72,11 +92,19 @@ class SubTotalDescriptor(XPropertySet_bc180bfa, XEnumerationAccess_4bac0ffc, XIn
         This read-only property indicates the maximum count of fields the current implementation supports.
         """
         ...
+
+    @MaxFieldCount.setter
+    def MaxFieldCount(self, value: int) -> None:
+        ...
     @property
     def SortAscending(self) -> bool:
         """
         specifies the sorting order if SubTotalDescriptor.EnableSort is set to TRUE.
         """
+        ...
+
+    @SortAscending.setter
+    def SortAscending(self, value: bool) -> None:
         ...
     @property
     def UserSortListIndex(self) -> int:
@@ -87,4 +115,7 @@ class SubTotalDescriptor(XPropertySet_bc180bfa, XEnumerationAccess_4bac0ffc, XIn
         """
         ...
 
+    @UserSortListIndex.setter
+    def UserSortListIndex(self, value: int) -> None:
+        ...
 

@@ -33,4 +33,3 @@ class SpreadsheetViewPane(XCellRangeReferrer_91c0e23, XViewPane_99a40a98, XContr
     """
     ...
 
-

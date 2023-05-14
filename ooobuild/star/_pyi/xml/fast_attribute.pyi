@@ -51,6 +51,9 @@ class FastAttribute(object):
         """
         ...
 
+    @Token.setter
+    def Token(self, value: int) -> None:
+        ...
 
     @property
     def Value(self) -> str:
@@ -59,4 +62,7 @@ class FastAttribute(object):
         """
         ...
 
+    @Value.setter
+    def Value(self, value: str) -> None:
+        ...
 

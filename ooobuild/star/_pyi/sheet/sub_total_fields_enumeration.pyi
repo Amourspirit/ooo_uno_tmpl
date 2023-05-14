@@ -31,4 +31,3 @@ class SubTotalFieldsEnumeration(XEnumeration_f2180daa):
     """
     ...
 
-

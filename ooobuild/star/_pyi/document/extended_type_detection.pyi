@@ -35,4 +35,3 @@ class ExtendedTypeDetection(XExtendedFilterDetection_9ff211f5):
     """
     ...
 
-

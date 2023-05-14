@@ -59,6 +59,9 @@ class HoriOrientationFormat(object):
         """
         ...
 
+    @XPos.setter
+    def XPos(self, value: int) -> None:
+        ...
 
     @property
     def HorizontalOrientation(self) -> int:
@@ -69,6 +72,9 @@ class HoriOrientationFormat(object):
         """
         ...
 
+    @HorizontalOrientation.setter
+    def HorizontalOrientation(self, value: int) -> None:
+        ...
 
     @property
     def HorizontalRelation(self) -> int:
@@ -77,6 +83,9 @@ class HoriOrientationFormat(object):
         """
         ...
 
+    @HorizontalRelation.setter
+    def HorizontalRelation(self, value: int) -> None:
+        ...
 
     @property
     def PositionToggle(self) -> bool:
@@ -85,4 +94,7 @@ class HoriOrientationFormat(object):
         """
         ...
 
+    @PositionToggle.setter
+    def PositionToggle(self, value: bool) -> None:
+        ...
 

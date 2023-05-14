@@ -37,4 +37,3 @@ class AccessibleMenuSeparator(XAccessibleContext_8eae119b, XAccessibleEventBroad
     """
     ...
 
-

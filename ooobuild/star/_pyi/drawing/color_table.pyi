@@ -34,4 +34,3 @@ class ColorTable(XNameContainer_cb90e47):
     """
     ...
 
-

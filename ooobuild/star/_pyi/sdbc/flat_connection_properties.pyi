@@ -39,11 +39,19 @@ class FLATConnectionProperties(FILEConnectionProperties_4e7f1001):
         A one character delimiter to separate the decimal.
         """
         ...
+
+    @DecimalDelimiter.setter
+    def DecimalDelimiter(self, value: str) -> None:
+        ...
     @property
     def Extension(self) -> str:
         """
         the extension of the files to be used.
         """
+        ...
+
+    @Extension.setter
+    def Extension(self, value: str) -> None:
         ...
     @property
     def FieldDelimiter(self) -> str:
@@ -51,17 +59,29 @@ class FLATConnectionProperties(FILEConnectionProperties_4e7f1001):
         A one character delimiter to separate the fields.
         """
         ...
+
+    @FieldDelimiter.setter
+    def FieldDelimiter(self, value: str) -> None:
+        ...
     @property
     def HeaderLine(self) -> bool:
         """
         TRUE when the file contains a header line otherwise FALSE
         """
         ...
+
+    @HeaderLine.setter
+    def HeaderLine(self, value: bool) -> None:
+        ...
     @property
     def StringDelimiter(self) -> str:
         """
         A one character delimiter to separate the strings.
         """
+        ...
+
+    @StringDelimiter.setter
+    def StringDelimiter(self, value: str) -> None:
         ...
     @property
     def ThousandDelimiter(self) -> str:
@@ -70,4 +90,7 @@ class FLATConnectionProperties(FILEConnectionProperties_4e7f1001):
         """
         ...
 
+    @ThousandDelimiter.setter
+    def ThousandDelimiter(self, value: str) -> None:
+        ...
 

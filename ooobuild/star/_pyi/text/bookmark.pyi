@@ -32,4 +32,3 @@ class Bookmark(TextContent_a6810b4d, XNamed_a6520b08):
     """
     ...
 
-

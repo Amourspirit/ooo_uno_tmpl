@@ -50,6 +50,10 @@ class XReportComponent(XPropertySet_bc180bfa, XChild_a6390b07, XShape_8fd00a3d, 
         """
         ...
 
+    @DetailFields.setter
+    def DetailFields(self, value: 'typing.Tuple[str, ...]') -> None:
+        ...
+
     @property
     def MasterFields(self) -> 'typing.Tuple[str, ...]':
         """
@@ -61,6 +65,10 @@ class XReportComponent(XPropertySet_bc180bfa, XChild_a6390b07, XShape_8fd00a3d, 
         """
         ...
 
+    @MasterFields.setter
+    def MasterFields(self, value: 'typing.Tuple[str, ...]') -> None:
+        ...
+
     @property
     def AutoGrow(self) -> bool:
         """
@@ -68,6 +76,9 @@ class XReportComponent(XPropertySet_bc180bfa, XChild_a6390b07, XShape_8fd00a3d, 
         """
         ...
 
+    @AutoGrow.setter
+    def AutoGrow(self, value: bool) -> None:
+        ...
     @property
     def ControlBorder(self) -> int:
         """
@@ -75,6 +86,9 @@ class XReportComponent(XPropertySet_bc180bfa, XChild_a6390b07, XShape_8fd00a3d, 
         """
         ...
 
+    @ControlBorder.setter
+    def ControlBorder(self, value: int) -> None:
+        ...
     @property
     def ControlBorderColor(self) -> int:
         """
@@ -84,6 +98,9 @@ class XReportComponent(XPropertySet_bc180bfa, XChild_a6390b07, XShape_8fd00a3d, 
         """
         ...
 
+    @ControlBorderColor.setter
+    def ControlBorderColor(self, value: int) -> None:
+        ...
     @property
     def Height(self) -> int:
         """
@@ -91,6 +108,9 @@ class XReportComponent(XPropertySet_bc180bfa, XChild_a6390b07, XShape_8fd00a3d, 
         """
         ...
 
+    @Height.setter
+    def Height(self, value: int) -> None:
+        ...
     @property
     def Name(self) -> str:
         """
@@ -98,6 +118,9 @@ class XReportComponent(XPropertySet_bc180bfa, XChild_a6390b07, XShape_8fd00a3d, 
         """
         ...
 
+    @Name.setter
+    def Name(self, value: str) -> None:
+        ...
     @property
     def PositionX(self) -> int:
         """
@@ -105,6 +128,9 @@ class XReportComponent(XPropertySet_bc180bfa, XChild_a6390b07, XShape_8fd00a3d, 
         """
         ...
 
+    @PositionX.setter
+    def PositionX(self, value: int) -> None:
+        ...
     @property
     def PositionY(self) -> int:
         """
@@ -112,6 +138,9 @@ class XReportComponent(XPropertySet_bc180bfa, XChild_a6390b07, XShape_8fd00a3d, 
         """
         ...
 
+    @PositionY.setter
+    def PositionY(self, value: int) -> None:
+        ...
     @property
     def PrintRepeatedValues(self) -> bool:
         """
@@ -121,6 +150,9 @@ class XReportComponent(XPropertySet_bc180bfa, XChild_a6390b07, XShape_8fd00a3d, 
         """
         ...
 
+    @PrintRepeatedValues.setter
+    def PrintRepeatedValues(self, value: bool) -> None:
+        ...
     @property
     def Section(self) -> 'XSection_9b630ad1':
         """
@@ -130,6 +162,9 @@ class XReportComponent(XPropertySet_bc180bfa, XChild_a6390b07, XShape_8fd00a3d, 
         """
         ...
 
+    @Section.setter
+    def Section(self, value: 'XSection_9b630ad1') -> None:
+        ...
     @property
     def Width(self) -> int:
         """
@@ -137,4 +172,7 @@ class XReportComponent(XPropertySet_bc180bfa, XChild_a6390b07, XShape_8fd00a3d, 
         """
         ...
 
+    @Width.setter
+    def Width(self, value: int) -> None:
+        ...
 

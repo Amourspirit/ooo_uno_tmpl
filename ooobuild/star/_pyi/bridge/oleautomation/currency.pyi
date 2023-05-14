@@ -58,4 +58,7 @@ class Currency(object):
         """
         ...
 
+    @Value.setter
+    def Value(self, value: int) -> None:
+        ...
 

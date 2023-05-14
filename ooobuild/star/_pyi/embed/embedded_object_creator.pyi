@@ -34,4 +34,3 @@ class EmbeddedObjectCreator(XEmbeddedObjectCreator_41d90f8e):
     """
     ...
 
-

@@ -49,11 +49,19 @@ class TextRangeContentProperties(ABC):
         may contain a table cell.
         """
         ...
+
+    @Cell.setter
+    def Cell(self, value: 'XCell_70d408e8') -> None:
+        ...
     @property
     def DocumentIndex(self) -> 'XDocumentIndex_c9330c5c':
         """
         may contain a document index.
         """
+        ...
+
+    @DocumentIndex.setter
+    def DocumentIndex(self, value: 'XDocumentIndex_c9330c5c') -> None:
         ...
     @property
     def DocumentIndexMark(self) -> 'XDocumentIndexMark_fe490de7':
@@ -61,17 +69,29 @@ class TextRangeContentProperties(ABC):
         may contain a document index mark.
         """
         ...
+
+    @DocumentIndexMark.setter
+    def DocumentIndexMark(self, value: 'XDocumentIndexMark_fe490de7') -> None:
+        ...
     @property
     def Endnote(self) -> 'XFootnote_901e0a73':
         """
         may contain an endnote.
         """
         ...
+
+    @Endnote.setter
+    def Endnote(self, value: 'XFootnote_901e0a73') -> None:
+        ...
     @property
     def Footnote(self) -> 'XFootnote_901e0a73':
         """
         may contain a footnote.
         """
+        ...
+
+    @Footnote.setter
+    def Footnote(self, value: 'XFootnote_901e0a73') -> None:
         ...
     @property
     def NestedTextContent(self) -> 'XTextContent_b16e0ba5':
@@ -81,17 +101,29 @@ class TextRangeContentProperties(ABC):
         For example, may contain an InContentMetadata or a com.sun.star.text.textfield.MetadataField.
         """
         ...
+
+    @NestedTextContent.setter
+    def NestedTextContent(self, value: 'XTextContent_b16e0ba5') -> None:
+        ...
     @property
     def ReferenceMark(self) -> 'XTextContent_b16e0ba5':
         """
         may contain a reference mark.
         """
         ...
+
+    @ReferenceMark.setter
+    def ReferenceMark(self, value: 'XTextContent_b16e0ba5') -> None:
+        ...
     @property
     def TextFrame(self) -> 'XTextFrame_9a7e0ab5':
         """
         may contain a text frame.
         """
+        ...
+
+    @TextFrame.setter
+    def TextFrame(self, value: 'XTextFrame_9a7e0ab5') -> None:
         ...
     @property
     def TextParagraph(self) -> 'XTextContent_b16e0ba5':
@@ -103,11 +135,19 @@ class TextRangeContentProperties(ABC):
             LibreOffice 6.0
         """
         ...
+
+    @TextParagraph.setter
+    def TextParagraph(self, value: 'XTextContent_b16e0ba5') -> None:
+        ...
     @property
     def TextSection(self) -> 'XTextSection_b1730b9f':
         """
         may contain a text section.
         """
+        ...
+
+    @TextSection.setter
+    def TextSection(self, value: 'XTextSection_b1730b9f') -> None:
         ...
     @property
     def TextTable(self) -> 'XTextTable_9a810ab2':
@@ -116,4 +156,7 @@ class TextRangeContentProperties(ABC):
         """
         ...
 
+    @TextTable.setter
+    def TextTable(self, value: 'XTextTable_9a810ab2') -> None:
+        ...
 

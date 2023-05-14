@@ -36,4 +36,3 @@ class SingleSelectQueryAnalyzer(XParametersSupplier_fc7c0e01, XSingleSelectQuery
     """
     ...
 
-

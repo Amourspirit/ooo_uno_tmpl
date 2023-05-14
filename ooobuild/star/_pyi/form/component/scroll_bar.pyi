@@ -40,4 +40,7 @@ class ScrollBar(UnoControlScrollBarModel_49910fdc, FormControlModel_e2990d22, XR
         """
         ...
 
+    @DefaultScrollValue.setter
+    def DefaultScrollValue(self, value: int) -> None:
+        ...
 

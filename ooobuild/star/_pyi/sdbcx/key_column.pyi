@@ -38,4 +38,7 @@ class KeyColumn(Column_7b1d098a):
         """
         ...
 
+    @RelatedColumn.setter
+    def RelatedColumn(self, value: str) -> None:
+        ...
 

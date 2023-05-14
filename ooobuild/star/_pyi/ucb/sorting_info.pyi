@@ -53,6 +53,9 @@ class SortingInfo(object):
         """
         ...
 
+    @PropertyName.setter
+    def PropertyName(self, value: str) -> None:
+        ...
 
     @property
     def Ascending(self) -> bool:
@@ -61,4 +64,7 @@ class SortingInfo(object):
         """
         ...
 
+    @Ascending.setter
+    def Ascending(self, value: bool) -> None:
+        ...
 

@@ -35,4 +35,3 @@ class InvocationAdapterFactory(XInvocationAdapterFactory2_a0fe11da):
     """
     ...
 
-

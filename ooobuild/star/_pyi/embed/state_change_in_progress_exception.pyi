@@ -54,6 +54,9 @@ class StateChangeInProgressException(WrongStateException_19f60ec2):
         """
         ...
 
+    @TargetState.setter
+    def TargetState(self, value: int) -> None:
+        ...
 
 __all__ = ['StateChangeInProgressException']
 

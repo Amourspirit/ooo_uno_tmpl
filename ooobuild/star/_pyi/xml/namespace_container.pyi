@@ -33,4 +33,3 @@ class NamespaceContainer(XNameContainer_cb90e47):
     """
     ...
 
-

@@ -44,4 +44,7 @@ class FILEConnectionProperties(ConnectionProperties_1a9f0ee1):
         """
         ...
 
+    @CharSet.setter
+    def CharSet(self, value: str) -> None:
+        ...
 

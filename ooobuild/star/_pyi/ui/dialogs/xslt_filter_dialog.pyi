@@ -34,4 +34,3 @@ class XSLTFilterDialog(XExecutableDialog_450f0fa1):
     """
     ...
 
-

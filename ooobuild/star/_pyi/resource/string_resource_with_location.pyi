@@ -42,4 +42,3 @@ class StringResourceWithLocation(XStringResourceWithLocation_dd27135c):
         """
         ...
 
-

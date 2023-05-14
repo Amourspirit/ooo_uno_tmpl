@@ -44,17 +44,29 @@ class NumberingLevel(ABC):
         This is the name of the font that is used for the bullet.
         """
         ...
+
+    @BulletFontName.setter
+    def BulletFontName(self, value: str) -> None:
+        ...
     @property
     def BulletId(self) -> int:
         """
         The bullet symbol with this code in the assigned font is used.
         """
         ...
+
+    @BulletId.setter
+    def BulletId(self, value: int) -> None:
+        ...
     @property
     def CharStyleName(self) -> str:
         """
         This is the name of the character style that is used for the symbol(s).
         """
+        ...
+
+    @CharStyleName.setter
+    def CharStyleName(self, value: str) -> None:
         ...
     @property
     def GraphicBitmap(self) -> 'XBitmap_70cd0909':
@@ -66,6 +78,10 @@ class NumberingLevel(ABC):
             LibreOffice 6.1
         """
         ...
+
+    @GraphicBitmap.setter
+    def GraphicBitmap(self, value: 'XBitmap_70cd0909') -> None:
+        ...
     @property
     def GraphicURL(self) -> str:
         """
@@ -73,6 +89,10 @@ class NumberingLevel(ABC):
         
         Note the new behaviour since it this was deprecated: This property can only be set and only external URLs are supported (no more vnd.sun.star.GraphicObject scheme). When an URL is set, then it will load the graphic and set the GraphicBitmap property.
         """
+        ...
+
+    @GraphicURL.setter
+    def GraphicURL(self, value: str) -> None:
         ...
     @property
     def ListFormat(self) -> str:
@@ -90,11 +110,19 @@ class NumberingLevel(ABC):
             LibreOffice 7.2
         """
         ...
+
+    @ListFormat.setter
+    def ListFormat(self, value: str) -> None:
+        ...
     @property
     def NumberingType(self) -> int:
         """
         specifies the type of numbering.
         """
+        ...
+
+    @NumberingType.setter
+    def NumberingType(self, value: int) -> None:
         ...
     @property
     def ParentNumbering(self) -> int:
@@ -102,17 +130,29 @@ class NumberingLevel(ABC):
         specifies the number of higher numbering levels that are included in the representation of the current number.
         """
         ...
+
+    @ParentNumbering.setter
+    def ParentNumbering(self, value: int) -> None:
+        ...
     @property
     def Prefix(self) -> str:
         """
         This prefix is inserted in front of the numbering symbol(s).
         """
         ...
+
+    @Prefix.setter
+    def Prefix(self, value: str) -> None:
+        ...
     @property
     def StartWith(self) -> int:
         """
         This specifies the start value for the numbering.
         """
+        ...
+
+    @StartWith.setter
+    def StartWith(self, value: int) -> None:
         ...
     @property
     def Suffix(self) -> str:
@@ -121,4 +161,7 @@ class NumberingLevel(ABC):
         """
         ...
 
+    @Suffix.setter
+    def Suffix(self, value: str) -> None:
+        ...
 

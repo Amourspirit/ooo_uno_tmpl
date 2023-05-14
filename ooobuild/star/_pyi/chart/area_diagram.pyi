@@ -37,4 +37,3 @@ class AreaDiagram(ChartAxisXSupplier_a950e4d, ChartAxisZSupplier_aa70e4f, ChartS
     """
     ...
 
-

@@ -44,4 +44,7 @@ class DatabaseEnvironment(XPropertySet_bc180bfa, XDatabaseEnvironment_8280e43):
         """
         ...
 
+    @NumberFormatsSupplier.setter
+    def NumberFormatsSupplier(self, value: 'XNumberFormatsSupplier_3afb0fb7') -> None:
+        ...
 

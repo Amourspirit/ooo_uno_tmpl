@@ -32,4 +32,3 @@ class DatabaseNumericField(DataAwareControlModel_27110ef8, NumericField_3b0a0f74
     """
     ...
 
-

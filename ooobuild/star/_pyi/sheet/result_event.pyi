@@ -55,4 +55,7 @@ class ResultEvent(EventObject_a3d70b03):
         """
         ...
 
+    @Value.setter
+    def Value(self, value: object) -> None:
+        ...
 

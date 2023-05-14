@@ -33,4 +33,3 @@ class TransparencyGradientTable(XNameContainer_cb90e47):
     """
     ...
 
-

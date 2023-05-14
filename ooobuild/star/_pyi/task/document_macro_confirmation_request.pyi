@@ -59,6 +59,9 @@ class DocumentMacroConfirmationRequest(ClassifiedInteractionRequest_9f72121b):
         """
         ...
 
+    @DocumentSignatureInformation.setter
+    def DocumentSignatureInformation(self, value: typing.Tuple[DocumentSignatureInformation_f36c13f7, ...]) -> None:
+        ...
     @property
     def DocumentURL(self) -> str:
         """
@@ -66,6 +69,9 @@ class DocumentMacroConfirmationRequest(ClassifiedInteractionRequest_9f72121b):
         """
         ...
 
+    @DocumentURL.setter
+    def DocumentURL(self, value: str) -> None:
+        ...
     @property
     def DocumentStorage(self) -> XStorage_8e460a32:
         """
@@ -75,6 +81,9 @@ class DocumentMacroConfirmationRequest(ClassifiedInteractionRequest_9f72121b):
         """
         ...
 
+    @DocumentStorage.setter
+    def DocumentStorage(self, value: XStorage_8e460a32) -> None:
+        ...
     @property
     def DocumentVersion(self) -> str:
         """
@@ -82,6 +91,9 @@ class DocumentMacroConfirmationRequest(ClassifiedInteractionRequest_9f72121b):
         """
         ...
 
+    @DocumentVersion.setter
+    def DocumentVersion(self, value: str) -> None:
+        ...
 
 __all__ = ['DocumentMacroConfirmationRequest']
 

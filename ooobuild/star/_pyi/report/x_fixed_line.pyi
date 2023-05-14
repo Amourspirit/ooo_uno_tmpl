@@ -41,6 +41,9 @@ class XFixedLine(XReportControlModel_2d800f4a):
         """
         ...
 
+    @LineColor.setter
+    def LineColor(self, value: 'Color_68e908c5') -> None:
+        ...
     @property
     def LineDash(self) -> 'LineDash_a54e0afc':
         """
@@ -48,6 +51,9 @@ class XFixedLine(XReportControlModel_2d800f4a):
         """
         ...
 
+    @LineDash.setter
+    def LineDash(self, value: 'LineDash_a54e0afc') -> None:
+        ...
     @property
     def LineStyle(self) -> 'LineStyle_b1600b8d':
         """
@@ -55,6 +61,9 @@ class XFixedLine(XReportControlModel_2d800f4a):
         """
         ...
 
+    @LineStyle.setter
+    def LineStyle(self, value: 'LineStyle_b1600b8d') -> None:
+        ...
     @property
     def LineTransparence(self) -> int:
         """
@@ -62,6 +71,9 @@ class XFixedLine(XReportControlModel_2d800f4a):
         """
         ...
 
+    @LineTransparence.setter
+    def LineTransparence(self, value: int) -> None:
+        ...
     @property
     def LineWidth(self) -> int:
         """
@@ -69,6 +81,9 @@ class XFixedLine(XReportControlModel_2d800f4a):
         """
         ...
 
+    @LineWidth.setter
+    def LineWidth(self, value: int) -> None:
+        ...
     @property
     def Orientation(self) -> int:
         """
@@ -76,4 +91,7 @@ class XFixedLine(XReportControlModel_2d800f4a):
         """
         ...
 
+    @Orientation.setter
+    def Orientation(self, value: int) -> None:
+        ...
 

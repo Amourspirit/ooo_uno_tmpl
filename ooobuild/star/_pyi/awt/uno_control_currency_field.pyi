@@ -39,4 +39,3 @@ class UnoControlCurrencyField(UnoControlEdit_bc4e0bed, XCurrencyField_bbd10bdb, 
     """
     ...
 
-

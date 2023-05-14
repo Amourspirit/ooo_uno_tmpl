@@ -52,6 +52,9 @@ class DataPilotFieldSortInfo(object):
         """
         ...
 
+    @Field.setter
+    def Field(self, value: str) -> None:
+        ...
 
     @property
     def IsAscending(self) -> bool:
@@ -60,6 +63,9 @@ class DataPilotFieldSortInfo(object):
         """
         ...
 
+    @IsAscending.setter
+    def IsAscending(self, value: bool) -> None:
+        ...
 
     @property
     def Mode(self) -> int:
@@ -68,4 +74,7 @@ class DataPilotFieldSortInfo(object):
         """
         ...
 
+    @Mode.setter
+    def Mode(self, value: int) -> None:
+        ...
 

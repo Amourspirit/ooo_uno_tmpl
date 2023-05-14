@@ -30,4 +30,3 @@ class GIOContentProvider(XContentProvider_d4150cc0):
     """
     ...
 
-

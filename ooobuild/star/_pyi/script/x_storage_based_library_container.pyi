@@ -62,4 +62,7 @@ class XStorageBasedLibraryContainer(XPersistentLibraryContainer_b6b2129e):
         """
         ...
 
+    @RootStorage.setter
+    def RootStorage(self, value: 'XStorage_8e460a32') -> None:
+        ...
 

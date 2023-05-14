@@ -35,4 +35,3 @@ class PdfTools(XPdfDecomposer_ee260d69):
     """
     ...
 
-

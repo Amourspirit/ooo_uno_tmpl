@@ -43,6 +43,9 @@ class XAnimatePhysics(XAnimate_ca680c52):
         """
         ...
 
+    @Bounciness.setter
+    def Bounciness(self, value: object) -> None:
+        ...
     @property
     def Density(self) -> object:
         """
@@ -52,6 +55,9 @@ class XAnimatePhysics(XAnimate_ca680c52):
         """
         ...
 
+    @Density.setter
+    def Density(self, value: object) -> None:
+        ...
     @property
     def StartVelocityX(self) -> object:
         """
@@ -61,6 +67,9 @@ class XAnimatePhysics(XAnimate_ca680c52):
         """
         ...
 
+    @StartVelocityX.setter
+    def StartVelocityX(self, value: object) -> None:
+        ...
     @property
     def StartVelocityY(self) -> object:
         """
@@ -70,4 +79,7 @@ class XAnimatePhysics(XAnimate_ca680c52):
         """
         ...
 
+    @StartVelocityY.setter
+    def StartVelocityY(self, value: object) -> None:
+        ...
 

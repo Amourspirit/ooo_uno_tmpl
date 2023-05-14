@@ -34,4 +34,3 @@ class PreparedStatement(PreparedStatement_eef40d8c, XColumnsSupplier_f0600da9):
     """
     ...
 
-

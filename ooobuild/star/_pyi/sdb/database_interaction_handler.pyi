@@ -35,4 +35,3 @@ class DatabaseInteractionHandler(XInteractionHandler2_1a7b0e83):
     """
     ...
 
-

@@ -38,6 +38,10 @@ class BaseStorage(XPropertySet_bc180bfa, XStorage_8e460a32):
         Can be a combination of values from ElementModes.
         """
         ...
+
+    @OpenMode.setter
+    def OpenMode(self, value: int) -> None:
+        ...
     @property
     def URL(self) -> str:
         """
@@ -45,4 +49,7 @@ class BaseStorage(XPropertySet_bc180bfa, XStorage_8e460a32):
         """
         ...
 
+    @URL.setter
+    def URL(self, value: str) -> None:
+        ...
 

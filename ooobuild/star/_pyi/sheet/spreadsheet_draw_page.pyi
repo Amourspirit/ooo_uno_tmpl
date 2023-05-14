@@ -38,4 +38,3 @@ class SpreadsheetDrawPage(XDrawPage_b07a0b57, XShapeGrouper_e2a30d21):
     """
     ...
 
-

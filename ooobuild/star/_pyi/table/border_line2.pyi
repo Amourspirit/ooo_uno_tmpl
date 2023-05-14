@@ -61,6 +61,9 @@ class BorderLine2(BorderLine_a3f80af6):
         """
         ...
 
+    @LineStyle.setter
+    def LineStyle(self, value: int) -> None:
+        ...
 
     @property
     def LineWidth(self) -> int:
@@ -73,4 +76,7 @@ class BorderLine2(BorderLine_a3f80af6):
         """
         ...
 
+    @LineWidth.setter
+    def LineWidth(self, value: int) -> None:
+        ...
 

@@ -34,4 +34,3 @@ class FixedText(UnoControlFixedTextModel_49a00fed, FormControlModel_e2990d22):
     """
     ...
 
-

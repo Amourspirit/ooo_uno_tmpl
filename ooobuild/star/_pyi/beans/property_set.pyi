@@ -37,4 +37,3 @@ class PropertySet(XFastPropertySet_ee6b0d88, XMultiPropertySet_fd880e05, XProper
     """
     ...
 
-

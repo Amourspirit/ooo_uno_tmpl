@@ -57,6 +57,9 @@ class PivotTableFieldEntry(object):
         """
         ...
 
+    @Name.setter
+    def Name(self, value: str) -> None:
+        ...
 
     @property
     def DimensionIndex(self) -> int:
@@ -65,6 +68,9 @@ class PivotTableFieldEntry(object):
         """
         ...
 
+    @DimensionIndex.setter
+    def DimensionIndex(self, value: int) -> None:
+        ...
 
     @property
     def DimensionPositionIndex(self) -> int:
@@ -73,6 +79,9 @@ class PivotTableFieldEntry(object):
         """
         ...
 
+    @DimensionPositionIndex.setter
+    def DimensionPositionIndex(self, value: int) -> None:
+        ...
 
     @property
     def HasHiddenMembers(self) -> bool:
@@ -81,4 +90,7 @@ class PivotTableFieldEntry(object):
         """
         ...
 
+    @HasHiddenMembers.setter
+    def HasHiddenMembers(self, value: bool) -> None:
+        ...
 

@@ -62,4 +62,7 @@ class OpenCommandArgument2(OpenCommandArgument_fb0a0dd6):
         """
         ...
 
+    @SortingInfo.setter
+    def SortingInfo(self, value: typing.Tuple[NumberedSortingInfo_fd0e0de6, ...]) -> None:
+        ...
 

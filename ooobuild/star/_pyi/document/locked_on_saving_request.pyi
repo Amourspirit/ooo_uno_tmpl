@@ -57,6 +57,9 @@ class LockedOnSavingRequest(Exception_85530a09):
         """
         ...
 
+    @DocumentURL.setter
+    def DocumentURL(self, value: str) -> None:
+        ...
     @property
     def UserInfo(self) -> str:
         """
@@ -64,6 +67,9 @@ class LockedOnSavingRequest(Exception_85530a09):
         """
         ...
 
+    @UserInfo.setter
+    def UserInfo(self, value: str) -> None:
+        ...
 
 __all__ = ['LockedOnSavingRequest']
 

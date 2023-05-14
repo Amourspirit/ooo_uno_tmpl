@@ -42,4 +42,7 @@ class CellRangeListSource(ListEntrySource_48260fe4, XInitialization_d46c0cca):
         """
         ...
 
+    @CellRange.setter
+    def CellRange(self, value: 'CellRangeAddress_ec450d43') -> None:
+        ...
 

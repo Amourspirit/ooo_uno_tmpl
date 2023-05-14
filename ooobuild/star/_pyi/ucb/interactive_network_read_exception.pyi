@@ -54,6 +54,9 @@ class InteractiveNetworkReadException(InteractiveNetworkException_7ca31159):
         """
         ...
 
+    @Diagnostic.setter
+    def Diagnostic(self, value: str) -> None:
+        ...
 
 __all__ = ['InteractiveNetworkReadException']
 

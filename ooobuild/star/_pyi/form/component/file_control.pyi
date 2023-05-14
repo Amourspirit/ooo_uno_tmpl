@@ -40,4 +40,7 @@ class FileControl(UnoControlFileControlModel_6a4410b9, FormControlModel_e2990d22
         """
         ...
 
+    @DefaultText.setter
+    def DefaultText(self, value: str) -> None:
+        ...
 

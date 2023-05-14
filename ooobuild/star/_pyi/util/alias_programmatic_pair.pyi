@@ -51,6 +51,9 @@ class AliasProgrammaticPair(object):
         """
         ...
 
+    @Alias.setter
+    def Alias(self, value: str) -> None:
+        ...
 
     @property
     def ProgrammaticName(self) -> str:
@@ -59,4 +62,7 @@ class AliasProgrammaticPair(object):
         """
         ...
 
+    @ProgrammaticName.setter
+    def ProgrammaticName(self, value: str) -> None:
+        ...
 

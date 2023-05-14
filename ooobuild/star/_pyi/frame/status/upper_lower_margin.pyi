@@ -55,6 +55,9 @@ class UpperLowerMargin(object):
         """
         ...
 
+    @Upper.setter
+    def Upper(self, value: int) -> None:
+        ...
 
     @property
     def Lower(self) -> int:
@@ -63,4 +66,7 @@ class UpperLowerMargin(object):
         """
         ...
 
+    @Lower.setter
+    def Lower(self, value: int) -> None:
+        ...
 

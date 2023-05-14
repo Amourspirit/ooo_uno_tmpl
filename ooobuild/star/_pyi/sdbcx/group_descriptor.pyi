@@ -36,4 +36,7 @@ class GroupDescriptor(Descriptor_a5200b3b):
         """
         ...
 
+    @Name.setter
+    def Name(self, value: str) -> None:
+        ...
 

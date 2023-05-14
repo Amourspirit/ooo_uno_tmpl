@@ -31,4 +31,3 @@ class RangeHighlightListener(XSelectionChangeListener_58bf104d):
     """
     ...
 
-

@@ -63,6 +63,9 @@ class DDELinkInfo(object):
         """
         ...
 
+    @Items.setter
+    def Items(self, value: typing.Tuple[DDEItemInfo_ac870b09, ...]) -> None:
+        ...
 
     @property
     def Service(self) -> str:
@@ -71,6 +74,9 @@ class DDELinkInfo(object):
         """
         ...
 
+    @Service.setter
+    def Service(self, value: str) -> None:
+        ...
 
     @property
     def Topic(self) -> str:
@@ -79,4 +85,7 @@ class DDELinkInfo(object):
         """
         ...
 
+    @Topic.setter
+    def Topic(self, value: str) -> None:
+        ...
 

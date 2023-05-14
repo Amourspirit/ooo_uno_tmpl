@@ -32,4 +32,3 @@ class TabControllerModel(XTabControllerModel_fbef0dd8, XPersistObject_af2f0b79):
     """
     ...
 
-

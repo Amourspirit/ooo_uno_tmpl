@@ -32,4 +32,3 @@ class LabelRanges(XEnumerationAccess_4bac0ffc, XLabelRanges_bac20bb9):
     """
     ...
 
-

@@ -37,4 +37,3 @@ class AccessibleTextDocumentPageView(XAccessibleComponent_b2f21269, XAccessibleC
     """
     ...
 
-

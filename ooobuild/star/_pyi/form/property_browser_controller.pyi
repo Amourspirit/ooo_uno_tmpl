@@ -52,6 +52,10 @@ class PropertyBrowserController(XFastPropertySet_ee6b0d88, XMultiPropertySet_fd8
         Valid values are (this list may be extended in the future):
         """
         ...
+
+    @CurrentPage.setter
+    def CurrentPage(self, value: str) -> None:
+        ...
     @property
     def IntrospectedObject(self) -> 'XPropertySet_bc180bfa':
         """
@@ -61,4 +65,7 @@ class PropertyBrowserController(XFastPropertySet_ee6b0d88, XMultiPropertySet_fd8
         """
         ...
 
+    @IntrospectedObject.setter
+    def IntrospectedObject(self, value: 'XPropertySet_bc180bfa') -> None:
+        ...
 

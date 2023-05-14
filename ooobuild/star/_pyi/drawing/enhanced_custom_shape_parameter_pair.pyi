@@ -49,9 +49,15 @@ class EnhancedCustomShapeParameterPair(object):
     def First(self) -> EnhancedCustomShapeParameter_d6171317:
         ...
 
+    @First.setter
+    def First(self, value: EnhancedCustomShapeParameter_d6171317) -> None:
+        ...
 
     @property
     def Second(self) -> EnhancedCustomShapeParameter_d6171317:
         ...
 
+    @Second.setter
+    def Second(self, value: EnhancedCustomShapeParameter_d6171317) -> None:
+        ...
 

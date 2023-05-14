@@ -52,6 +52,9 @@ class InvalidBootstrapFileException(CannotLoadConfigurationException_b325176a):
         """
         ...
 
+    @BootstrapFileURL.setter
+    def BootstrapFileURL(self, value: str) -> None:
+        ...
 
 __all__ = ['InvalidBootstrapFileException']
 

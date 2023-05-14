@@ -41,4 +41,7 @@ class DatabaseTextField(DataAwareControlModel_27110ef8, TextField_db00e46):
         """
         ...
 
+    @ConvertEmptyToNull.setter
+    def ConvertEmptyToNull(self, value: bool) -> None:
+        ...
 

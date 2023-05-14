@@ -57,6 +57,9 @@ class NamedArgument(object):
         """
         ...
 
+    @Name.setter
+    def Name(self, value: str) -> None:
+        ...
 
     @property
     def Value(self) -> object:
@@ -65,4 +68,7 @@ class NamedArgument(object):
         """
         ...
 
+    @Value.setter
+    def Value(self, value: object) -> None:
+        ...
 

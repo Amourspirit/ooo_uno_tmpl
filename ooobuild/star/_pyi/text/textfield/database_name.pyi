@@ -41,6 +41,10 @@ class DatabaseName(DependentTextField_fed90ded):
         specifies the database name.
         """
         ...
+
+    @DataBaseName.setter
+    def DataBaseName(self, value: str) -> None:
+        ...
     @property
     def DataBaseResource(self) -> str:
         """
@@ -50,6 +54,10 @@ class DatabaseName(DependentTextField_fed90ded):
         
             OOo 2.0
         """
+        ...
+
+    @DataBaseResource.setter
+    def DataBaseResource(self, value: str) -> None:
         ...
     @property
     def DataBaseURL(self) -> str:
@@ -61,11 +69,19 @@ class DatabaseName(DependentTextField_fed90ded):
             OOo 2.0
         """
         ...
+
+    @DataBaseURL.setter
+    def DataBaseURL(self, value: str) -> None:
+        ...
     @property
     def DataCommandType(self) -> int:
         """
         determines the interpretation of the property DataTableName.
         """
+        ...
+
+    @DataCommandType.setter
+    def DataCommandType(self, value: int) -> None:
         ...
     @property
     def DataTableName(self) -> str:
@@ -74,4 +90,7 @@ class DatabaseName(DependentTextField_fed90ded):
         """
         ...
 
+    @DataTableName.setter
+    def DataTableName(self, value: str) -> None:
+        ...
 

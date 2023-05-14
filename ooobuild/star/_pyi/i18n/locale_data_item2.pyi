@@ -75,4 +75,7 @@ class LocaleDataItem2(LocaleDataItem_beff0ba1):
         """
         ...
 
+    @decimalSeparatorAlternative.setter
+    def decimalSeparatorAlternative(self, value: str) -> None:
+        ...
 

@@ -36,4 +36,7 @@ class ParagraphPropertiesComplex(ABC):
         """
         ...
 
+    @WritingMode.setter
+    def WritingMode(self, value: int) -> None:
+        ...
 

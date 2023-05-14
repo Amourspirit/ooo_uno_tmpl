@@ -34,4 +34,3 @@ class DataFilter(DataSink_cf980c23, DataSource_e9580cff):
     """
     ...
 
-

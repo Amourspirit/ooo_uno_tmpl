@@ -53,6 +53,9 @@ class UnreachableStateException(Exception_85530a09):
         """
         ...
 
+    @CurrentState.setter
+    def CurrentState(self, value: int) -> None:
+        ...
     @property
     def NextState(self) -> int:
         """
@@ -60,6 +63,9 @@ class UnreachableStateException(Exception_85530a09):
         """
         ...
 
+    @NextState.setter
+    def NextState(self, value: int) -> None:
+        ...
 
 __all__ = ['UnreachableStateException']
 

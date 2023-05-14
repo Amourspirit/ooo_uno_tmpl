@@ -40,4 +40,3 @@ class AccessibleSlideViewObject(XAccessible_1cbc0eb6, XAccessibleComponent_b2f21
     """
     ...
 
-

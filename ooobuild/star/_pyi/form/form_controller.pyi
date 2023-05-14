@@ -45,4 +45,3 @@ class FormController(FormControllerDispatcher_5b3a107b, XConfirmDeleteBroadcaste
     """
     ...
 
-

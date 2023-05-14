@@ -40,30 +40,54 @@ class RegressionCurveEquation(PropertySet_b0e70ba2, FillProperties_f1200da8, Lin
         """
         """
         ...
+
+    @NumberFormat.setter
+    def NumberFormat(self, value: int) -> None:
+        ...
     @property
     def ReferencePageSize(self) -> 'Size_576707ef':
         """
         """
+        ...
+
+    @ReferencePageSize.setter
+    def ReferencePageSize(self, value: 'Size_576707ef') -> None:
         ...
     @property
     def RelativePosition(self) -> 'RelativePosition_fae10ddd':
         """
         """
         ...
+
+    @RelativePosition.setter
+    def RelativePosition(self, value: 'RelativePosition_fae10ddd') -> None:
+        ...
     @property
     def ShowCorrelationCoefficient(self) -> bool:
         """
         """
+        ...
+
+    @ShowCorrelationCoefficient.setter
+    def ShowCorrelationCoefficient(self, value: bool) -> None:
         ...
     @property
     def ShowEquation(self) -> bool:
         """
         """
         ...
+
+    @ShowEquation.setter
+    def ShowEquation(self, value: bool) -> None:
+        ...
     @property
     def XName(self) -> str:
         """
         """
+        ...
+
+    @XName.setter
+    def XName(self, value: str) -> None:
         ...
     @property
     def YName(self) -> str:
@@ -71,4 +95,7 @@ class RegressionCurveEquation(PropertySet_b0e70ba2, FillProperties_f1200da8, Lin
         """
         ...
 
+    @YName.setter
+    def YName(self, value: str) -> None:
+        ...
 

@@ -35,4 +35,3 @@ class VndSunStarPkgUrlReferenceFactory(XVndSunStarPkgUrlReferenceFactory_e5f9136
     """
     ...
 
-

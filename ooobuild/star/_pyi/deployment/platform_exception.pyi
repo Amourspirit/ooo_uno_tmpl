@@ -57,6 +57,9 @@ class PlatformException(Exception_85530a09):
         """
         ...
 
+    @package.setter
+    def package(self, value: XPackage_cb1f0c4d) -> None:
+        ...
 
 __all__ = ['PlatformException']
 

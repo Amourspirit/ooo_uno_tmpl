@@ -36,4 +36,3 @@ class ImageButton(UnoControlImageControl_29c00f2b, XApproveActionBroadcaster_693
     """
     ...
 
-

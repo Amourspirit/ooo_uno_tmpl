@@ -59,4 +59,7 @@ class EventObject(EventObject_a3d70b03):
         """
         ...
 
+    @EventName.setter
+    def EventName(self, value: str) -> None:
+        ...
 

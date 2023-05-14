@@ -33,4 +33,3 @@ class LinkTargets(XNameAccess_e2ab0cf6):
     """
     ...
 
-

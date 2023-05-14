@@ -42,4 +42,3 @@ class MacroExpander(XComponent_98dc0ab5, XMacroExpander_c8360c47):
     """
     ...
 
-

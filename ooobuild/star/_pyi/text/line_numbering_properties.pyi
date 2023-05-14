@@ -39,11 +39,19 @@ class LineNumberingProperties(ABC):
         The name of the character style that is used for the line number.
         """
         ...
+
+    @CharStyleName.setter
+    def CharStyleName(self, value: str) -> None:
+        ...
     @property
     def CountEmptyLines(self) -> bool:
         """
         If TRUE, empty lines are counted.
         """
+        ...
+
+    @CountEmptyLines.setter
+    def CountEmptyLines(self, value: bool) -> None:
         ...
     @property
     def CountLinesInFrames(self) -> bool:
@@ -51,11 +59,19 @@ class LineNumberingProperties(ABC):
         If TRUE, lines in frames are included in counting.
         """
         ...
+
+    @CountLinesInFrames.setter
+    def CountLinesInFrames(self, value: bool) -> None:
+        ...
     @property
     def Distance(self) -> int:
         """
         specifies the distance between the line number and the start or end of the text area.
         """
+        ...
+
+    @Distance.setter
+    def Distance(self, value: int) -> None:
         ...
     @property
     def Interval(self) -> int:
@@ -63,11 +79,19 @@ class LineNumberingProperties(ABC):
         Line numbers are shown on every Intervalth line.
         """
         ...
+
+    @Interval.setter
+    def Interval(self, value: int) -> None:
+        ...
     @property
     def IsOn(self) -> bool:
         """
         If TRUE, line numbering is used.
         """
+        ...
+
+    @IsOn.setter
+    def IsOn(self, value: bool) -> None:
         ...
     @property
     def NumberPosition(self) -> int:
@@ -75,11 +99,19 @@ class LineNumberingProperties(ABC):
         specifies the position of the line number (constant LineNumberPositions left/right/inside/outside).
         """
         ...
+
+    @NumberPosition.setter
+    def NumberPosition(self, value: int) -> None:
+        ...
     @property
     def NumberingType(self) -> int:
         """
         specifies the type of the numbering.
         """
+        ...
+
+    @NumberingType.setter
+    def NumberingType(self, value: int) -> None:
         ...
     @property
     def RestartAtEachPage(self) -> bool:
@@ -93,11 +125,19 @@ class LineNumberingProperties(ABC):
             OOo 2.0
         """
         ...
+
+    @RestartAtEachPage.setter
+    def RestartAtEachPage(self, value: bool) -> None:
+        ...
     @property
     def SeparatorInterval(self) -> int:
         """
         The line separator is shown every SeparatorIntervalth line.
         """
+        ...
+
+    @SeparatorInterval.setter
+    def SeparatorInterval(self, value: int) -> None:
         ...
     @property
     def SeparatorText(self) -> str:
@@ -106,4 +146,7 @@ class LineNumberingProperties(ABC):
         """
         ...
 
+    @SeparatorText.setter
+    def SeparatorText(self, value: str) -> None:
+        ...
 

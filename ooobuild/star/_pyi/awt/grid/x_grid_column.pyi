@@ -57,6 +57,9 @@ class XGridColumn(XComponent_98dc0ab5, XCloneable_99d00aa3):
         """
         ...
 
+    @ColumnWidth.setter
+    def ColumnWidth(self, value: int) -> None:
+        ...
     @property
     def DataColumnIndex(self) -> int:
         """
@@ -70,6 +73,9 @@ class XGridColumn(XComponent_98dc0ab5, XCloneable_99d00aa3):
         """
         ...
 
+    @DataColumnIndex.setter
+    def DataColumnIndex(self, value: int) -> None:
+        ...
     @property
     def Flexibility(self) -> int:
         """
@@ -85,6 +91,9 @@ class XGridColumn(XComponent_98dc0ab5, XCloneable_99d00aa3):
         """
         ...
 
+    @Flexibility.setter
+    def Flexibility(self, value: int) -> None:
+        ...
     @property
     def HelpText(self) -> str:
         """
@@ -94,6 +103,9 @@ class XGridColumn(XComponent_98dc0ab5, XCloneable_99d00aa3):
         """
         ...
 
+    @HelpText.setter
+    def HelpText(self, value: str) -> None:
+        ...
     @property
     def HorizontalAlign(self) -> 'HorizontalAlignment_1f800f02':
         """
@@ -101,6 +113,9 @@ class XGridColumn(XComponent_98dc0ab5, XCloneable_99d00aa3):
         """
         ...
 
+    @HorizontalAlign.setter
+    def HorizontalAlign(self, value: 'HorizontalAlignment_1f800f02') -> None:
+        ...
     @property
     def Identifier(self) -> object:
         """
@@ -110,6 +125,9 @@ class XGridColumn(XComponent_98dc0ab5, XCloneable_99d00aa3):
         """
         ...
 
+    @Identifier.setter
+    def Identifier(self, value: object) -> None:
+        ...
     @property
     def Index(self) -> int:
         """
@@ -119,6 +137,9 @@ class XGridColumn(XComponent_98dc0ab5, XCloneable_99d00aa3):
         """
         ...
 
+    @Index.setter
+    def Index(self, value: int) -> None:
+        ...
     @property
     def MaxWidth(self) -> int:
         """
@@ -126,6 +147,9 @@ class XGridColumn(XComponent_98dc0ab5, XCloneable_99d00aa3):
         """
         ...
 
+    @MaxWidth.setter
+    def MaxWidth(self, value: int) -> None:
+        ...
     @property
     def MinWidth(self) -> int:
         """
@@ -133,6 +157,9 @@ class XGridColumn(XComponent_98dc0ab5, XCloneable_99d00aa3):
         """
         ...
 
+    @MinWidth.setter
+    def MinWidth(self, value: int) -> None:
+        ...
     @property
     def Resizeable(self) -> bool:
         """
@@ -142,6 +169,9 @@ class XGridColumn(XComponent_98dc0ab5, XCloneable_99d00aa3):
         """
         ...
 
+    @Resizeable.setter
+    def Resizeable(self, value: bool) -> None:
+        ...
     @property
     def Title(self) -> str:
         """
@@ -149,4 +179,7 @@ class XGridColumn(XComponent_98dc0ab5, XCloneable_99d00aa3):
         """
         ...
 
+    @Title.setter
+    def Title(self, value: str) -> None:
+        ...
 

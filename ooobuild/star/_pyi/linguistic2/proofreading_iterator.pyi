@@ -37,4 +37,3 @@ class ProofreadingIterator(XProofreadingIterator_a00011f7):
     """
     ...
 
-

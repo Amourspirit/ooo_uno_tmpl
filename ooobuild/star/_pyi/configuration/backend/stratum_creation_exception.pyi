@@ -58,6 +58,9 @@ class StratumCreationException(BackendSetupException_68ae15de):
         """
         ...
 
+    @StratumService.setter
+    def StratumService(self, value: str) -> None:
+        ...
     @property
     def StratumData(self) -> str:
         """
@@ -65,6 +68,9 @@ class StratumCreationException(BackendSetupException_68ae15de):
         """
         ...
 
+    @StratumData.setter
+    def StratumData(self, value: str) -> None:
+        ...
 
 __all__ = ['StratumCreationException']
 

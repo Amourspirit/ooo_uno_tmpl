@@ -31,4 +31,3 @@ class FolderPicker(XFolderPicker2_16a50e3b):
     """
     ...
 
-

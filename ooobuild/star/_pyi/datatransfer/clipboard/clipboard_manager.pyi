@@ -32,4 +32,3 @@ class ClipboardManager(XClipboardManager_28b01488, XComponent_98dc0ab5):
     """
     ...
 
-

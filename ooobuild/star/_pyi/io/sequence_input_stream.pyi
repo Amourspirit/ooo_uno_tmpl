@@ -36,4 +36,3 @@ class SequenceInputStream(XSeekableInputStream_fa7f0dd0):
         """
         ...
 
-

@@ -55,6 +55,9 @@ class InsertedObjectInfo(object):
         """
         ...
 
+    @Options.setter
+    def Options(self, value: typing.Tuple[NamedValue_a37a0af3, ...]) -> None:
+        ...
 
     @property
     def Object(self) -> XEmbeddedObject_ddee0cbe:
@@ -63,4 +66,7 @@ class InsertedObjectInfo(object):
         """
         ...
 
+    @Object.setter
+    def Object(self, value: XEmbeddedObject_ddee0cbe) -> None:
+        ...
 

@@ -52,11 +52,19 @@ class ContentResultSet(ResultSet_8ecf0a4f, XPropertySet_bc180bfa, XComponent_98d
         The implementation initially needs to set the value of this property to CursorTravelMode.BLOCKING.
         """
         ...
+
+    @CursorTravelMode.setter
+    def CursorTravelMode(self, value: int) -> None:
+        ...
     @property
     def IsRowCountFinal(self) -> bool:
         """
         indicates that all rows of the result set have been obtained.
         """
+        ...
+
+    @IsRowCountFinal.setter
+    def IsRowCountFinal(self, value: bool) -> None:
         ...
     @property
     def RowCount(self) -> int:
@@ -65,4 +73,7 @@ class ContentResultSet(ResultSet_8ecf0a4f, XPropertySet_bc180bfa, XComponent_98d
         """
         ...
 
+    @RowCount.setter
+    def RowCount(self, value: int) -> None:
+        ...
 

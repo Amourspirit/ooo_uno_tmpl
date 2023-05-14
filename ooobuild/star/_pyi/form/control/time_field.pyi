@@ -34,4 +34,3 @@ class TimeField(UnoControlTimeField_fdcd0dda, XBoundControl_bba00bed):
     """
     ...
 
-

@@ -34,4 +34,3 @@ class CheckBox(UnoControlCheckBox_ef690d6e, XBoundControl_bba00bed):
     """
     ...
 
-

@@ -52,6 +52,9 @@ class WelcomeDynamicResultSetStruct(object):
         """
         ...
 
+    @Old.setter
+    def Old(self, value: XResultSet_98e30aa7) -> None:
+        ...
 
     @property
     def New(self) -> XResultSet_98e30aa7:
@@ -60,4 +63,7 @@ class WelcomeDynamicResultSetStruct(object):
         """
         ...
 
+    @New.setter
+    def New(self, value: XResultSet_98e30aa7) -> None:
+        ...
 

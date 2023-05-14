@@ -30,4 +30,3 @@ class ReportControlFormat(XReportControlFormat_3d4e0fc2):
     """
     ...
 
-

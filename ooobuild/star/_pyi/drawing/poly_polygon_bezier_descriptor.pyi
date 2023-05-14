@@ -41,11 +41,19 @@ class PolyPolygonBezierDescriptor(ABC):
         These are the untransformed Bezier coordinates of this polygon.
         """
         ...
+
+    @Geometry.setter
+    def Geometry(self, value: 'PolyPolygonBezierCoords_7ec5114b') -> None:
+        ...
     @property
     def PolyPolygonBezier(self) -> 'PolyPolygonBezierCoords_7ec5114b':
         """
         These are the Bezier points of this polygon.
         """
+        ...
+
+    @PolyPolygonBezier.setter
+    def PolyPolygonBezier(self, value: 'PolyPolygonBezierCoords_7ec5114b') -> None:
         ...
     @property
     def PolygonKind(self) -> 'PolygonKind_ca6f0c62':
@@ -54,4 +62,7 @@ class PolyPolygonBezierDescriptor(ABC):
         """
         ...
 
+    @PolygonKind.setter
+    def PolygonKind(self, value: 'PolygonKind_ca6f0c62') -> None:
+        ...
 

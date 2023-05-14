@@ -31,4 +31,3 @@ class DDELinksEnumeration(XEnumeration_f2180daa):
     """
     ...
 
-

@@ -34,4 +34,3 @@ class PatternField(UnoControlPatternField_2add0f29, XBoundControl_bba00bed):
     """
     ...
 
-

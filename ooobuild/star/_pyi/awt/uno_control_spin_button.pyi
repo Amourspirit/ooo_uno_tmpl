@@ -34,4 +34,3 @@ class UnoControlSpinButton(UnoControl_8f2c0a67, XSpinValue_8e920a43):
     """
     ...
 
-

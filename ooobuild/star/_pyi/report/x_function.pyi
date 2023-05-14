@@ -39,6 +39,9 @@ class XFunction(XPropertySet_bc180bfa, XChild_a6390b07, XComponent_98dc0ab5):
         """
         ...
 
+    @DeepTraversing.setter
+    def DeepTraversing(self, value: bool) -> None:
+        ...
     @property
     def Formula(self) -> str:
         """
@@ -46,6 +49,9 @@ class XFunction(XPropertySet_bc180bfa, XChild_a6390b07, XComponent_98dc0ab5):
         """
         ...
 
+    @Formula.setter
+    def Formula(self, value: str) -> None:
+        ...
     @property
     def InitialFormula(self) -> object:
         """
@@ -53,6 +59,9 @@ class XFunction(XPropertySet_bc180bfa, XChild_a6390b07, XComponent_98dc0ab5):
         """
         ...
 
+    @InitialFormula.setter
+    def InitialFormula(self, value: object) -> None:
+        ...
     @property
     def Name(self) -> str:
         """
@@ -60,6 +69,9 @@ class XFunction(XPropertySet_bc180bfa, XChild_a6390b07, XComponent_98dc0ab5):
         """
         ...
 
+    @Name.setter
+    def Name(self, value: str) -> None:
+        ...
     @property
     def PreEvaluated(self) -> bool:
         """
@@ -67,4 +79,7 @@ class XFunction(XPropertySet_bc180bfa, XChild_a6390b07, XComponent_98dc0ab5):
         """
         ...
 
+    @PreEvaluated.setter
+    def PreEvaluated(self, value: bool) -> None:
+        ...
 

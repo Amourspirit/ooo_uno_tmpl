@@ -40,4 +40,3 @@ class ExtendedTypeDetectionFactory(XContainerQuery_1cdd0edc, XNameContainer_cb90
     """
     ...
 
-

@@ -35,11 +35,19 @@ class TableIndex(BaseIndex_8f0d0a40):
         determines if the name or the label of an object is used to create the index.
         """
         ...
+
+    @CreateFromLabels.setter
+    def CreateFromLabels(self, value: bool) -> None:
+        ...
     @property
     def LabelCategory(self) -> str:
         """
         determines the name of the sequence field that is evaluated to create the index.
         """
+        ...
+
+    @LabelCategory.setter
+    def LabelCategory(self, value: str) -> None:
         ...
     @property
     def LabelDisplayType(self) -> int:
@@ -48,4 +56,7 @@ class TableIndex(BaseIndex_8f0d0a40):
         """
         ...
 
+    @LabelDisplayType.setter
+    def LabelDisplayType(self, value: int) -> None:
+        ...
 

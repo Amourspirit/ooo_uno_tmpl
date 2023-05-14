@@ -30,4 +30,3 @@ class VBASpreadsheetEventProcessor(XVBAEventProcessor_52fa0ff7):
     """
     ...
 
-

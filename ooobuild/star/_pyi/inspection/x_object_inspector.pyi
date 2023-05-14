@@ -66,6 +66,9 @@ class XObjectInspector(XController_b00e0b8f, XDispatchProvider_fc690de6):
         """
         ...
 
+    @InspectorModel.setter
+    def InspectorModel(self, value: 'XObjectInspectorModel_9077119b') -> None:
+        ...
     @property
     def InspectorUI(self) -> 'XObjectInspectorUI_5ccd1048':
         """
@@ -79,4 +82,7 @@ class XObjectInspector(XController_b00e0b8f, XDispatchProvider_fc690de6):
         """
         ...
 
+    @InspectorUI.setter
+    def InspectorUI(self, value: 'XObjectInspectorUI_5ccd1048') -> None:
+        ...
 

@@ -40,4 +40,3 @@ class SimpleSetAccess(XTemplateContainer_928f11b7, XContainer_d6fb0cc6, XNameAcc
     """
     ...
 
-

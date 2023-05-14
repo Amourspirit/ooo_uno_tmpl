@@ -66,6 +66,9 @@ class DocumentEvent(EventObject_a3d70b03):
         """
         ...
 
+    @EventName.setter
+    def EventName(self, value: str) -> None:
+        ...
 
     @property
     def ViewController(self) -> XController2_bbcf0bc1:
@@ -76,6 +79,9 @@ class DocumentEvent(EventObject_a3d70b03):
         """
         ...
 
+    @ViewController.setter
+    def ViewController(self, value: XController2_bbcf0bc1) -> None:
+        ...
 
     @property
     def Supplement(self) -> object:
@@ -86,4 +92,7 @@ class DocumentEvent(EventObject_a3d70b03):
         """
         ...
 
+    @Supplement.setter
+    def Supplement(self, value: object) -> None:
+        ...
 

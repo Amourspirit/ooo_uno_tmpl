@@ -37,4 +37,3 @@ class XPathExtension(XXPathExtension_194c0ea6):
         """
         ...
 
-

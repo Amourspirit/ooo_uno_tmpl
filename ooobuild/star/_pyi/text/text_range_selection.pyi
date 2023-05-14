@@ -48,9 +48,15 @@ class TextRangeSelection(object):
     def Start(self) -> TextPosition_b2ae0bc7:
         ...
 
+    @Start.setter
+    def Start(self, value: TextPosition_b2ae0bc7) -> None:
+        ...
 
     @property
     def End(self) -> TextPosition_b2ae0bc7:
         ...
 
+    @End.setter
+    def End(self, value: TextPosition_b2ae0bc7) -> None:
+        ...
 

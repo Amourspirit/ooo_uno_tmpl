@@ -39,6 +39,9 @@ class XAnimateColor(XAnimate_ca680c52):
         """
         ...
 
+    @ColorInterpolation.setter
+    def ColorInterpolation(self, value: int) -> None:
+        ...
     @property
     def Direction(self) -> bool:
         """
@@ -50,4 +53,7 @@ class XAnimateColor(XAnimate_ca680c52):
         """
         ...
 
+    @Direction.setter
+    def Direction(self, value: bool) -> None:
+        ...
 

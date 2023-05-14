@@ -51,6 +51,9 @@ class SendMediaTypes(object):
         """
         ...
 
+    @Value.setter
+    def Value(self, value: typing.Tuple[str, ...]) -> None:
+        ...
 
     @property
     def ProtocolType(self) -> str:
@@ -61,4 +64,7 @@ class SendMediaTypes(object):
         """
         ...
 
+    @ProtocolType.setter
+    def ProtocolType(self, value: str) -> None:
+        ...
 

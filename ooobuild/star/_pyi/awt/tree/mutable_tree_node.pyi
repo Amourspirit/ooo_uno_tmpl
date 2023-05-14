@@ -31,4 +31,3 @@ class MutableTreeNode(XMutableTreeNode_17d80e6a):
     """
     ...
 
-

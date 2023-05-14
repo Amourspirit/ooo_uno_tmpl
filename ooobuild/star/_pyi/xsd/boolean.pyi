@@ -31,4 +31,3 @@ class Boolean(XDataType_83f209cb):
     """
     ...
 
-

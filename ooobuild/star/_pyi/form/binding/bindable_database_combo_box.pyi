@@ -34,4 +34,3 @@ class BindableDatabaseComboBox(BindableDataAwareControlModel_47091512, DatabaseC
     """
     ...
 
-

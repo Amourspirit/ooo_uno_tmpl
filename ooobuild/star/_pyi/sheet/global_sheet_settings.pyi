@@ -33,4 +33,3 @@ class GlobalSheetSettings(XGlobalSheetSettings_27ef0f14):
     """
     ...
 
-

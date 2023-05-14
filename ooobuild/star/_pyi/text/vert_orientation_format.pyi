@@ -56,6 +56,9 @@ class VertOrientationFormat(object):
         """
         ...
 
+    @YPos.setter
+    def YPos(self, value: int) -> None:
+        ...
 
     @property
     def VerticalOrientation(self) -> int:
@@ -66,6 +69,9 @@ class VertOrientationFormat(object):
         """
         ...
 
+    @VerticalOrientation.setter
+    def VerticalOrientation(self, value: int) -> None:
+        ...
 
     @property
     def VerticalRelation(self) -> int:
@@ -74,4 +80,7 @@ class VertOrientationFormat(object):
         """
         ...
 
+    @VerticalRelation.setter
+    def VerticalRelation(self, value: int) -> None:
+        ...
 

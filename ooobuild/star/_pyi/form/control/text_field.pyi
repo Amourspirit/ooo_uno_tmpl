@@ -37,4 +37,3 @@ class TextField(UnoControlEdit_bc4e0bed, XBoundControl_bba00bed, XChangeBroadcas
     """
     ...
 
-

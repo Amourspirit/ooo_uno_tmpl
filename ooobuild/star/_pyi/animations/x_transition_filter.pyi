@@ -39,6 +39,9 @@ class XTransitionFilter(XAnimate_ca680c52):
         """
         ...
 
+    @Direction.setter
+    def Direction(self, value: bool) -> None:
+        ...
     @property
     def FadeColor(self) -> int:
         """
@@ -48,6 +51,9 @@ class XTransitionFilter(XAnimate_ca680c52):
         """
         ...
 
+    @FadeColor.setter
+    def FadeColor(self, value: int) -> None:
+        ...
     @property
     def Mode(self) -> bool:
         """
@@ -59,6 +65,9 @@ class XTransitionFilter(XAnimate_ca680c52):
         """
         ...
 
+    @Mode.setter
+    def Mode(self, value: bool) -> None:
+        ...
     @property
     def Subtype(self) -> int:
         """
@@ -68,6 +77,9 @@ class XTransitionFilter(XAnimate_ca680c52):
         """
         ...
 
+    @Subtype.setter
+    def Subtype(self, value: int) -> None:
+        ...
     @property
     def Transition(self) -> int:
         """
@@ -77,4 +89,7 @@ class XTransitionFilter(XAnimate_ca680c52):
         """
         ...
 
+    @Transition.setter
+    def Transition(self, value: int) -> None:
+        ...
 

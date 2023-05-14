@@ -34,4 +34,3 @@ class MSOLEObjectSystemCreator(XEmbedObjectClipboardCreator_a6dc11f1):
     """
     ...
 
-

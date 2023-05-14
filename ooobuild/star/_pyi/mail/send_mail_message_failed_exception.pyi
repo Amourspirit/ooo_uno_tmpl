@@ -60,6 +60,9 @@ class SendMailMessageFailedException(MailException_ba9e0bdd):
         """
         ...
 
+    @InvalidAddresses.setter
+    def InvalidAddresses(self, value: typing.Tuple[str, ...]) -> None:
+        ...
     @property
     def ValidSentAddresses(self) -> typing.Tuple[str, ...]:
         """
@@ -67,6 +70,9 @@ class SendMailMessageFailedException(MailException_ba9e0bdd):
         """
         ...
 
+    @ValidSentAddresses.setter
+    def ValidSentAddresses(self, value: typing.Tuple[str, ...]) -> None:
+        ...
     @property
     def ValidUnsentAddresses(self) -> typing.Tuple[str, ...]:
         """
@@ -74,6 +80,9 @@ class SendMailMessageFailedException(MailException_ba9e0bdd):
         """
         ...
 
+    @ValidUnsentAddresses.setter
+    def ValidUnsentAddresses(self, value: typing.Tuple[str, ...]) -> None:
+        ...
 
 __all__ = ['SendMailMessageFailedException']
 

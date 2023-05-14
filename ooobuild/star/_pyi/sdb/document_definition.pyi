@@ -41,6 +41,10 @@ class DocumentDefinition(DefinitionContent_e0d20d25, XPropertySet_bc180bfa, XSub
         Indicates if the document is to be used as template, for example, if a report is to be filled with data.
         """
         ...
+
+    @AsTemplate.setter
+    def AsTemplate(self, value: bool) -> None:
+        ...
     @property
     def Name(self) -> str:
         """
@@ -50,4 +54,7 @@ class DocumentDefinition(DefinitionContent_e0d20d25, XPropertySet_bc180bfa, XSub
         """
         ...
 
+    @Name.setter
+    def Name(self, value: str) -> None:
+        ...
 

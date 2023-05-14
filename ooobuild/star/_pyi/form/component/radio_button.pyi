@@ -45,6 +45,10 @@ class RadioButton(UnoControlRadioButtonModel_6ad310c3, FormControlModel_e2990d22
         In a group of radio buttons only one button should be checked by default.
         """
         ...
+
+    @DefaultState.setter
+    def DefaultState(self, value: int) -> None:
+        ...
     @property
     def RefValue(self) -> str:
         """
@@ -52,6 +56,10 @@ class RadioButton(UnoControlRadioButtonModel_6ad310c3, FormControlModel_e2990d22
         
         If the form the control belongs to is to be submitted (see com.sun.star.form.XSubmit), and the control is checked, this reference value is used for submission.
         """
+        ...
+
+    @RefValue.setter
+    def RefValue(self, value: str) -> None:
         ...
     @property
     def UncheckedRefValue(self) -> str:
@@ -62,4 +70,7 @@ class RadioButton(UnoControlRadioButtonModel_6ad310c3, FormControlModel_e2990d22
         """
         ...
 
+    @UncheckedRefValue.setter
+    def UncheckedRefValue(self, value: str) -> None:
+        ...
 

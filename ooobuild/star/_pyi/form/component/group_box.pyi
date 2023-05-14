@@ -32,4 +32,3 @@ class GroupBox(UnoControlGroupBoxModel_3a380f8e, FormControlModel_e2990d22):
     """
     ...
 
-

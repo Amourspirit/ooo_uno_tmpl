@@ -41,6 +41,10 @@ class EmbeddedObjectDescriptor(ABC):
         allows to provide a dispatch interceptor for outplace activation.
         """
         ...
+
+    @OutplaceDispatchInterceptor.setter
+    def OutplaceDispatchInterceptor(self, value: 'XDispatchProviderInterceptor_afda1275') -> None:
+        ...
     @property
     def RecoveryStorage(self) -> 'XStorage_8e460a32':
         """
@@ -53,6 +57,10 @@ class EmbeddedObjectDescriptor(ABC):
         The object will still be based on the storage denoted in the XEmbedObjectCreator method call, i.e., subsequent save operations will still use that storage. RecoveryStorage is used at loading time only, and then discarded.
         """
         ...
+
+    @RecoveryStorage.setter
+    def RecoveryStorage(self, value: 'XStorage_8e460a32') -> None:
+        ...
     @property
     def StoreVisualReplacement(self) -> bool:
         """
@@ -62,4 +70,7 @@ class EmbeddedObjectDescriptor(ABC):
         """
         ...
 
+    @StoreVisualReplacement.setter
+    def StoreVisualReplacement(self, value: bool) -> None:
+        ...
 

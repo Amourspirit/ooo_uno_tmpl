@@ -64,6 +64,9 @@ class MergeRecoveryRequest(Exception_85530a09):
         """
         ...
 
+    @ErrorDetails.setter
+    def ErrorDetails(self, value: object) -> None:
+        ...
     @property
     def ErrorLayerId(self) -> str:
         """
@@ -71,6 +74,9 @@ class MergeRecoveryRequest(Exception_85530a09):
         """
         ...
 
+    @ErrorLayerId.setter
+    def ErrorLayerId(self, value: str) -> None:
+        ...
     @property
     def IsRemovalRequest(self) -> bool:
         """
@@ -80,6 +86,9 @@ class MergeRecoveryRequest(Exception_85530a09):
         """
         ...
 
+    @IsRemovalRequest.setter
+    def IsRemovalRequest(self, value: bool) -> None:
+        ...
 
 __all__ = ['MergeRecoveryRequest']
 

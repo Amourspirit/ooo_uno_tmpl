@@ -38,17 +38,29 @@ class Time(XDataType_83f209cb):
         specifies the exclusive upper bound for the value
         """
         ...
+
+    @MaxExclusiveTime.setter
+    def MaxExclusiveTime(self, value: 'Time_604e0855') -> None:
+        ...
     @property
     def MaxInclusiveTime(self) -> 'Time_604e0855':
         """
         specifies the inclusive upper bound for the value
         """
         ...
+
+    @MaxInclusiveTime.setter
+    def MaxInclusiveTime(self, value: 'Time_604e0855') -> None:
+        ...
     @property
     def MinExclusiveTime(self) -> 'Time_604e0855':
         """
         specifies the exclusive lower bound for the value
         """
+        ...
+
+    @MinExclusiveTime.setter
+    def MinExclusiveTime(self, value: 'Time_604e0855') -> None:
         ...
     @property
     def MinInclusiveTime(self) -> 'Time_604e0855':
@@ -57,4 +69,7 @@ class Time(XDataType_83f209cb):
         """
         ...
 
+    @MinInclusiveTime.setter
+    def MinInclusiveTime(self, value: 'Time_604e0855') -> None:
+        ...
 

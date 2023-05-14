@@ -40,4 +40,3 @@ class WebDAVFolderContent(XPropertiesChangeNotifier_7a7b111c, XPropertyContainer
     """
     ...
 
-

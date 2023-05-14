@@ -35,4 +35,3 @@ class SynchronousFrameLoader(XNamed_a6520b08, XSynchronousFrameLoader_5a8d1058, 
     """
     ...
 
-

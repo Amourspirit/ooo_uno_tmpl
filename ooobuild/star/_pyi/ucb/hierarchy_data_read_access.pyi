@@ -38,4 +38,3 @@ class HierarchyDataReadAccess(XHierarchicalNameAccess_9e2611b5, XNameAccess_e2ab
     """
     ...
 
-

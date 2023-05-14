@@ -61,6 +61,9 @@ class ConfigurationEvent(ContainerEvent_ea50e70):
         """
         ...
 
+    @ResourceURL.setter
+    def ResourceURL(self, value: str) -> None:
+        ...
 
     @property
     def aInfo(self) -> object:
@@ -71,4 +74,7 @@ class ConfigurationEvent(ContainerEvent_ea50e70):
         """
         ...
 
+    @aInfo.setter
+    def aInfo(self, value: object) -> None:
+        ...
 

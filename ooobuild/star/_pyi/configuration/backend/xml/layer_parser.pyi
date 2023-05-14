@@ -39,4 +39,3 @@ class LayerParser(XLayer_4cd50fcb, XActiveDataSink_b8d00ba3, XInitialization_d46
     """
     ...
 
-

@@ -31,4 +31,3 @@ class NamedRangesEnumeration(XEnumeration_f2180daa):
     """
     ...
 
-

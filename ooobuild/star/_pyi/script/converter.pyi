@@ -35,4 +35,3 @@ class Converter(XTypeConverter_e48b0d4f):
     """
     ...
 
-

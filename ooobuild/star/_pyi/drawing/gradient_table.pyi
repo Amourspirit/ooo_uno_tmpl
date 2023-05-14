@@ -33,4 +33,3 @@ class GradientTable(XNameContainer_cb90e47):
     """
     ...
 
-

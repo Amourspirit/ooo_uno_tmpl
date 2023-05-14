@@ -45,4 +45,3 @@ class TreeControl(XTreeControl_e0500cfb):
     """
     ...
 
-

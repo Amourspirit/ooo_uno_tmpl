@@ -59,6 +59,9 @@ class GraphicCrop(object):
         """
         ...
 
+    @Top.setter
+    def Top(self, value: int) -> None:
+        ...
 
     @property
     def Bottom(self) -> int:
@@ -67,6 +70,9 @@ class GraphicCrop(object):
         """
         ...
 
+    @Bottom.setter
+    def Bottom(self, value: int) -> None:
+        ...
 
     @property
     def Left(self) -> int:
@@ -75,6 +81,9 @@ class GraphicCrop(object):
         """
         ...
 
+    @Left.setter
+    def Left(self, value: int) -> None:
+        ...
 
     @property
     def Right(self) -> int:
@@ -83,4 +92,7 @@ class GraphicCrop(object):
         """
         ...
 
+    @Right.setter
+    def Right(self, value: int) -> None:
+        ...
 

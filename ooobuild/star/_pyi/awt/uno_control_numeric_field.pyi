@@ -39,4 +39,3 @@ class UnoControlNumericField(UnoControlEdit_bc4e0bed, XNumericField_af9f0b63, XS
     """
     ...
 
-

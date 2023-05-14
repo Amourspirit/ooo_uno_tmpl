@@ -33,4 +33,3 @@ class QueryDefinition(XQueryDefinition_d3bf0cb8):
     """
     ...
 
-

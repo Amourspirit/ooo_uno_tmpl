@@ -33,4 +33,3 @@ class FormattedField(UnoControlFormattedFieldModel_9fb511e2, FormControlModel_e2
     """
     ...
 
-

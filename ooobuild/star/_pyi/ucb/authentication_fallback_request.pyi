@@ -59,6 +59,9 @@ class AuthenticationFallbackRequest(ClassifiedInteractionRequest_9f72121b):
         """
         ...
 
+    @instructions.setter
+    def instructions(self, value: str) -> None:
+        ...
     @property
     def url(self) -> str:
         """
@@ -66,6 +69,9 @@ class AuthenticationFallbackRequest(ClassifiedInteractionRequest_9f72121b):
         """
         ...
 
+    @url.setter
+    def url(self, value: str) -> None:
+        ...
 
 __all__ = ['AuthenticationFallbackRequest']
 

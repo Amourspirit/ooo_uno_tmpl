@@ -35,11 +35,19 @@ class PagePrintSettings(ABC):
         contains the right margin of the printer page.
         """
         ...
+
+    @BottomMargin.setter
+    def BottomMargin(self, value: int) -> None:
+        ...
     @property
     def HoriMargin(self) -> int:
         """
         contains the margin between the rows of printed pages.
         """
+        ...
+
+    @HoriMargin.setter
+    def HoriMargin(self, value: int) -> None:
         ...
     @property
     def IsLandscape(self) -> bool:
@@ -47,11 +55,19 @@ class PagePrintSettings(ABC):
         defines if the printer page is used in landscape format.
         """
         ...
+
+    @IsLandscape.setter
+    def IsLandscape(self, value: bool) -> None:
+        ...
     @property
     def LeftMargin(self) -> int:
         """
         contains the left margin of the printer page.
         """
+        ...
+
+    @LeftMargin.setter
+    def LeftMargin(self, value: int) -> None:
         ...
     @property
     def PageColumns(self) -> int:
@@ -59,11 +75,19 @@ class PagePrintSettings(ABC):
         contains the number of pages per printed row of pages.
         """
         ...
+
+    @PageColumns.setter
+    def PageColumns(self, value: int) -> None:
+        ...
     @property
     def PageRows(self) -> int:
         """
         contains the number of pages per printed column of pages.
         """
+        ...
+
+    @PageRows.setter
+    def PageRows(self, value: int) -> None:
         ...
     @property
     def RightMargin(self) -> int:
@@ -71,11 +95,19 @@ class PagePrintSettings(ABC):
         contains the right margin of the printer page.
         """
         ...
+
+    @RightMargin.setter
+    def RightMargin(self, value: int) -> None:
+        ...
     @property
     def TopMargin(self) -> int:
         """
         contains the top margin of the printer page.
         """
+        ...
+
+    @TopMargin.setter
+    def TopMargin(self, value: int) -> None:
         ...
     @property
     def VertMargin(self) -> int:
@@ -84,4 +116,7 @@ class PagePrintSettings(ABC):
         """
         ...
 
+    @VertMargin.setter
+    def VertMargin(self, value: int) -> None:
+        ...
 

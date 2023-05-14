@@ -56,6 +56,9 @@ class UnsupportedNameClashException(Exception_85530a09):
         """
         ...
 
+    @NameClash.setter
+    def NameClash(self, value: int) -> None:
+        ...
 
 __all__ = ['UnsupportedNameClashException']
 

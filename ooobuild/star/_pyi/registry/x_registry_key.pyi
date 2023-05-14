@@ -283,4 +283,7 @@ class XRegistryKey(XInterface_8f010a43):
         """
         ...
 
+    @KeyName.setter
+    def KeyName(self, value: str) -> None:
+        ...
 

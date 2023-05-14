@@ -54,6 +54,9 @@ class LineBreakHyphenationOptions(object):
         """
         ...
 
+    @rHyphenator.setter
+    def rHyphenator(self, value: XHyphenator_ff4e0def) -> None:
+        ...
 
     @property
     def aHyphenationOptions(self) -> PropertyValues_d6470ce6:
@@ -62,6 +65,9 @@ class LineBreakHyphenationOptions(object):
         """
         ...
 
+    @aHyphenationOptions.setter
+    def aHyphenationOptions(self, value: PropertyValues_d6470ce6) -> None:
+        ...
 
     @property
     def hyphenIndex(self) -> int:
@@ -70,4 +76,7 @@ class LineBreakHyphenationOptions(object):
         """
         ...
 
+    @hyphenIndex.setter
+    def hyphenIndex(self, value: int) -> None:
+        ...
 

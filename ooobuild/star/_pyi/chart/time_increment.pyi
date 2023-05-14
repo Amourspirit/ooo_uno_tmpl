@@ -58,6 +58,9 @@ class TimeIncrement(object):
         """
         ...
 
+    @MajorTimeInterval.setter
+    def MajorTimeInterval(self, value: object) -> None:
+        ...
 
     @property
     def MinorTimeInterval(self) -> object:
@@ -68,6 +71,9 @@ class TimeIncrement(object):
         """
         ...
 
+    @MinorTimeInterval.setter
+    def MinorTimeInterval(self, value: object) -> None:
+        ...
 
     @property
     def TimeResolution(self) -> object:
@@ -78,4 +84,7 @@ class TimeIncrement(object):
         """
         ...
 
+    @TimeResolution.setter
+    def TimeResolution(self, value: object) -> None:
+        ...
 

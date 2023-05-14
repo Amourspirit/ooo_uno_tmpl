@@ -31,4 +31,3 @@ class CellStyle(Style_7336094a):
     """
     ...
 
-

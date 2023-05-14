@@ -48,6 +48,11 @@ class DataPilotSourceLevel(XPropertySet_bc180bfa, XNamed_a6520b08, XDataPilotMem
         The subtotals are calculated with the members of this level.
         """
         ...
+
+    @SubTotals.setter
+    def SubTotals(self, value: 'typing.Tuple[GeneralFunction_e2280d25, ...]') -> None:
+        ...
+
     @property
     def SubTotals2(self) -> uno.ByteSequence:
         """
@@ -60,6 +65,11 @@ class DataPilotSourceLevel(XPropertySet_bc180bfa, XNamed_a6520b08, XDataPilotMem
             LibreOffice 5.3
         """
         ...
+
+    @SubTotals2.setter
+    def SubTotals2(self, value: uno.ByteSequence) -> None:
+        ...
+
     @property
     def ShowEmpty(self) -> bool:
         """
@@ -67,4 +77,7 @@ class DataPilotSourceLevel(XPropertySet_bc180bfa, XNamed_a6520b08, XDataPilotMem
         """
         ...
 
+    @ShowEmpty.setter
+    def ShowEmpty(self, value: bool) -> None:
+        ...
 

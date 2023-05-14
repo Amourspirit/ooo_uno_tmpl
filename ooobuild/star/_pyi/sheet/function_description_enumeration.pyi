@@ -31,4 +31,3 @@ class FunctionDescriptionEnumeration(XEnumeration_f2180daa):
     """
     ...
 
-

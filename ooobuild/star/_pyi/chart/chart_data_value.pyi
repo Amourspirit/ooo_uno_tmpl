@@ -58,6 +58,9 @@ class ChartDataValue(object):
         """
         ...
 
+    @Value.setter
+    def Value(self, value: float) -> None:
+        ...
 
     @property
     def HighError(self) -> float:
@@ -66,6 +69,9 @@ class ChartDataValue(object):
         """
         ...
 
+    @HighError.setter
+    def HighError(self, value: float) -> None:
+        ...
 
     @property
     def LowError(self) -> float:
@@ -74,4 +80,7 @@ class ChartDataValue(object):
         """
         ...
 
+    @LowError.setter
+    def LowError(self, value: float) -> None:
+        ...
 

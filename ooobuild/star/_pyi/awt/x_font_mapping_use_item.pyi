@@ -58,6 +58,9 @@ class XFontMappingUseItem(object):
         """
         ...
 
+    @usedFonts.setter
+    def usedFonts(self, value: typing.Tuple[str, ...]) -> None:
+        ...
 
     @property
     def originalFont(self) -> str:
@@ -66,6 +69,9 @@ class XFontMappingUseItem(object):
         """
         ...
 
+    @originalFont.setter
+    def originalFont(self, value: str) -> None:
+        ...
 
     @property
     def count(self) -> int:
@@ -74,4 +80,7 @@ class XFontMappingUseItem(object):
         """
         ...
 
+    @count.setter
+    def count(self, value: int) -> None:
+        ...
 

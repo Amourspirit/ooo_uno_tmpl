@@ -45,4 +45,3 @@ class StatusIndicatorFactory(XStatusIndicatorFactory_49e4100c):
         """
         ...
 
-

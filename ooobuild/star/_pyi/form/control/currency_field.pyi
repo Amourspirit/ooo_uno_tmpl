@@ -34,4 +34,3 @@ class CurrencyField(UnoControlCurrencyField_3aa80f96, XBoundControl_bba00bed):
     """
     ...
 
-

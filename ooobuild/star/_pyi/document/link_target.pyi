@@ -37,4 +37,7 @@ class LinkTarget(XPropertySet_bc180bfa, XLinkTargetSupplier_4ac21008):
         """
         ...
 
+    @LinkDisplayName.setter
+    def LinkDisplayName(self, value: str) -> None:
+        ...
 

@@ -62,11 +62,19 @@ class XCertificate(XInterface_8f010a43):
         """
         ...
 
+    @Encoded.setter
+    def Encoded(self, value: uno.ByteSequence) -> None:
+        ...
+
     @property
     def Extensions(self) -> 'typing.Tuple[XCertificateExtension_6ead10f8, ...]':
         """
         all extensions of a certificate.
         """
+        ...
+
+    @Extensions.setter
+    def Extensions(self, value: 'typing.Tuple[XCertificateExtension_6ead10f8, ...]') -> None:
         ...
 
     @property
@@ -76,11 +84,19 @@ class XCertificate(XInterface_8f010a43):
         """
         ...
 
+    @IssuerUniqueID.setter
+    def IssuerUniqueID(self, value: uno.ByteSequence) -> None:
+        ...
+
     @property
     def MD5Thumbprint(self) -> uno.ByteSequence:
         """
         the MD5 thumbprint
         """
+        ...
+
+    @MD5Thumbprint.setter
+    def MD5Thumbprint(self, value: uno.ByteSequence) -> None:
         ...
 
     @property
@@ -90,11 +106,19 @@ class XCertificate(XInterface_8f010a43):
         """
         ...
 
+    @SHA1Thumbprint.setter
+    def SHA1Thumbprint(self, value: uno.ByteSequence) -> None:
+        ...
+
     @property
     def SerialNumber(self) -> uno.ByteSequence:
         """
         the serial number attribute of the certificate.
         """
+        ...
+
+    @SerialNumber.setter
+    def SerialNumber(self, value: uno.ByteSequence) -> None:
         ...
 
     @property
@@ -104,11 +128,19 @@ class XCertificate(XInterface_8f010a43):
         """
         ...
 
+    @SubjectPublicKeyValue.setter
+    def SubjectPublicKeyValue(self, value: uno.ByteSequence) -> None:
+        ...
+
     @property
     def SubjectUniqueID(self) -> uno.ByteSequence:
         """
         the subject unique ID attribute of the certificate.
         """
+        ...
+
+    @SubjectUniqueID.setter
+    def SubjectUniqueID(self, value: uno.ByteSequence) -> None:
         ...
 
     @property
@@ -122,6 +154,9 @@ class XCertificate(XInterface_8f010a43):
         """
         ...
 
+    @CertificateKind.setter
+    def CertificateKind(self, value: 'CertificateKind_ffd0e69') -> None:
+        ...
     @property
     def IssuerName(self) -> str:
         """
@@ -129,6 +164,9 @@ class XCertificate(XInterface_8f010a43):
         """
         ...
 
+    @IssuerName.setter
+    def IssuerName(self, value: str) -> None:
+        ...
     @property
     def NotValidAfter(self) -> 'DateTime_84de09d3':
         """
@@ -136,6 +174,9 @@ class XCertificate(XInterface_8f010a43):
         """
         ...
 
+    @NotValidAfter.setter
+    def NotValidAfter(self, value: 'DateTime_84de09d3') -> None:
+        ...
     @property
     def NotValidBefore(self) -> 'DateTime_84de09d3':
         """
@@ -143,6 +184,9 @@ class XCertificate(XInterface_8f010a43):
         """
         ...
 
+    @NotValidBefore.setter
+    def NotValidBefore(self, value: 'DateTime_84de09d3') -> None:
+        ...
     @property
     def SignatureAlgorithm(self) -> str:
         """
@@ -150,6 +194,9 @@ class XCertificate(XInterface_8f010a43):
         """
         ...
 
+    @SignatureAlgorithm.setter
+    def SignatureAlgorithm(self, value: str) -> None:
+        ...
     @property
     def SubjectName(self) -> str:
         """
@@ -157,6 +204,9 @@ class XCertificate(XInterface_8f010a43):
         """
         ...
 
+    @SubjectName.setter
+    def SubjectName(self, value: str) -> None:
+        ...
     @property
     def SubjectPublicKeyAlgorithm(self) -> str:
         """
@@ -164,6 +214,9 @@ class XCertificate(XInterface_8f010a43):
         """
         ...
 
+    @SubjectPublicKeyAlgorithm.setter
+    def SubjectPublicKeyAlgorithm(self, value: str) -> None:
+        ...
     @property
     def Version(self) -> int:
         """
@@ -171,4 +224,7 @@ class XCertificate(XInterface_8f010a43):
         """
         ...
 
+    @Version.setter
+    def Version(self, value: int) -> None:
+        ...
 

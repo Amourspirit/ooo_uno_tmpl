@@ -47,6 +47,9 @@ class XURI(XResource_842709e4):
         """
         ...
 
+    @LocalName.setter
+    def LocalName(self, value: str) -> None:
+        ...
     @property
     def Namespace(self) -> str:
         """
@@ -54,4 +57,7 @@ class XURI(XResource_842709e4):
         """
         ...
 
+    @Namespace.setter
+    def Namespace(self, value: str) -> None:
+        ...
 

@@ -47,9 +47,15 @@ class TimeFilterPair(object):
     def Time(self) -> float:
         ...
 
+    @Time.setter
+    def Time(self, value: float) -> None:
+        ...
 
     @property
     def Progress(self) -> float:
         ...
 
+    @Progress.setter
+    def Progress(self, value: float) -> None:
+        ...
 

@@ -30,4 +30,3 @@ class TransitionFactory(XTransitionFactory_8364117f):
     """
     ...
 
-

@@ -37,4 +37,3 @@ class AccessibleIconChoiceControlEntry(AccessibleContext_7e0e1143, XAccessibleCo
     """
     ...
 
-

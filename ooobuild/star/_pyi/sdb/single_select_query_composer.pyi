@@ -42,4 +42,7 @@ class SingleSelectQueryComposer(SingleSelectQueryAnalyzer_577c105f, XPropertySet
         """
         ...
 
+    @Original.setter
+    def Original(self, value: str) -> None:
+        ...
 

@@ -58,6 +58,9 @@ class UndoFailedException(Exception_85530a09):
         """
         ...
 
+    @Reason.setter
+    def Reason(self, value: object) -> None:
+        ...
 
 __all__ = ['UndoFailedException']
 

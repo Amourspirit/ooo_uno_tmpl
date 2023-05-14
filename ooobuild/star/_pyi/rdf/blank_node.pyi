@@ -44,4 +44,3 @@ class BlankNode(XBlankNode_8cf40a0a):
         """
         ...
 
-

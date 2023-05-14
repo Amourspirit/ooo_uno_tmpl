@@ -56,4 +56,7 @@ class ErrorEvent(EventObject_a3d70b03):
     def Reason(self) -> object:
         ...
 
+    @Reason.setter
+    def Reason(self, value: object) -> None:
+        ...
 

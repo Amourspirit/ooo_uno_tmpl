@@ -52,6 +52,10 @@ class XDatabaseDataProvider(XPropertySet_bc180bfa, XDataProvider_122f0e31, XRang
         """
         ...
 
+    @DetailFields.setter
+    def DetailFields(self, value: 'typing.Tuple[str, ...]') -> None:
+        ...
+
     @property
     def MasterFields(self) -> 'typing.Tuple[str, ...]':
         """
@@ -63,6 +67,10 @@ class XDatabaseDataProvider(XPropertySet_bc180bfa, XDataProvider_122f0e31, XRang
         """
         ...
 
+    @MasterFields.setter
+    def MasterFields(self, value: 'typing.Tuple[str, ...]') -> None:
+        ...
+
     @property
     def ActiveConnection(self) -> 'XConnection_a36a0b0c':
         """
@@ -70,6 +78,9 @@ class XDatabaseDataProvider(XPropertySet_bc180bfa, XDataProvider_122f0e31, XRang
         """
         ...
 
+    @ActiveConnection.setter
+    def ActiveConnection(self, value: 'XConnection_a36a0b0c') -> None:
+        ...
     @property
     def ApplyFilter(self) -> bool:
         """
@@ -77,6 +88,9 @@ class XDatabaseDataProvider(XPropertySet_bc180bfa, XDataProvider_122f0e31, XRang
         """
         ...
 
+    @ApplyFilter.setter
+    def ApplyFilter(self, value: bool) -> None:
+        ...
     @property
     def Command(self) -> str:
         """
@@ -86,6 +100,9 @@ class XDatabaseDataProvider(XPropertySet_bc180bfa, XDataProvider_122f0e31, XRang
         """
         ...
 
+    @Command.setter
+    def Command(self, value: str) -> None:
+        ...
     @property
     def CommandType(self) -> int:
         """
@@ -97,6 +114,9 @@ class XDatabaseDataProvider(XPropertySet_bc180bfa, XDataProvider_122f0e31, XRang
         """
         ...
 
+    @CommandType.setter
+    def CommandType(self, value: int) -> None:
+        ...
     @property
     def DataSourceName(self) -> str:
         """
@@ -104,6 +124,9 @@ class XDatabaseDataProvider(XPropertySet_bc180bfa, XDataProvider_122f0e31, XRang
         """
         ...
 
+    @DataSourceName.setter
+    def DataSourceName(self, value: str) -> None:
+        ...
     @property
     def EscapeProcessing(self) -> bool:
         """
@@ -115,6 +138,9 @@ class XDatabaseDataProvider(XPropertySet_bc180bfa, XDataProvider_122f0e31, XRang
         """
         ...
 
+    @EscapeProcessing.setter
+    def EscapeProcessing(self, value: bool) -> None:
+        ...
     @property
     def Filter(self) -> str:
         """
@@ -128,6 +154,9 @@ class XDatabaseDataProvider(XPropertySet_bc180bfa, XDataProvider_122f0e31, XRang
         """
         ...
 
+    @Filter.setter
+    def Filter(self, value: str) -> None:
+        ...
     @property
     def GroupBy(self) -> str:
         """
@@ -135,6 +164,9 @@ class XDatabaseDataProvider(XPropertySet_bc180bfa, XDataProvider_122f0e31, XRang
         """
         ...
 
+    @GroupBy.setter
+    def GroupBy(self, value: str) -> None:
+        ...
     @property
     def HavingClause(self) -> str:
         """
@@ -142,6 +174,9 @@ class XDatabaseDataProvider(XPropertySet_bc180bfa, XDataProvider_122f0e31, XRang
         """
         ...
 
+    @HavingClause.setter
+    def HavingClause(self, value: str) -> None:
+        ...
     @property
     def Order(self) -> str:
         """
@@ -149,6 +184,9 @@ class XDatabaseDataProvider(XPropertySet_bc180bfa, XDataProvider_122f0e31, XRang
         """
         ...
 
+    @Order.setter
+    def Order(self, value: str) -> None:
+        ...
     @property
     def RowLimit(self) -> int:
         """
@@ -158,4 +196,7 @@ class XDatabaseDataProvider(XPropertySet_bc180bfa, XDataProvider_122f0e31, XRang
         """
         ...
 
+    @RowLimit.setter
+    def RowLimit(self, value: int) -> None:
+        ...
 

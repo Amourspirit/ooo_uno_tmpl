@@ -54,6 +54,9 @@ class NoSuchFilterRequest(Exception_85530a09):
         """
         ...
 
+    @URL.setter
+    def URL(self, value: str) -> None:
+        ...
 
 __all__ = ['NoSuchFilterRequest']
 

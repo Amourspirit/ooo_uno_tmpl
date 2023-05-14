@@ -53,6 +53,9 @@ class BorderWidths(object):
         """
         ...
 
+    @Left.setter
+    def Left(self, value: int) -> None:
+        ...
 
     @property
     def Top(self) -> int:
@@ -61,6 +64,9 @@ class BorderWidths(object):
         """
         ...
 
+    @Top.setter
+    def Top(self, value: int) -> None:
+        ...
 
     @property
     def Right(self) -> int:
@@ -69,6 +75,9 @@ class BorderWidths(object):
         """
         ...
 
+    @Right.setter
+    def Right(self, value: int) -> None:
+        ...
 
     @property
     def Bottom(self) -> int:
@@ -77,4 +86,7 @@ class BorderWidths(object):
         """
         ...
 
+    @Bottom.setter
+    def Bottom(self, value: int) -> None:
+        ...
 

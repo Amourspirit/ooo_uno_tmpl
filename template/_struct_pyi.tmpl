@@ -104,7 +104,6 @@ class ${safe_name}($self.get_class_inherits($name, $inherits)):
 #set $index = tpl[1]
 #set $itm = $self.get_attrib_for_prop($index)
 #set $itm_name = $self.get_safe_word($itm['name'])
-
     @property
     def ${itm_name}(self) -> $itm['type']:
 #if $include_desc and $itm['desc']
@@ -121,5 +120,7 @@ class ${safe_name}($self.get_class_inherits($name, $inherits)):
 #else
         ...
 #end if
-
+    @${itm_name}.setter
+    def ${itm_name}(self, value: $itm['type']) -> None:
+        ...
 #end for

@@ -37,4 +37,3 @@ class ModuleManager(XModuleManager2_e0500cbe):
     """
     ...
 
-

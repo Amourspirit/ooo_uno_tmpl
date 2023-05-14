@@ -32,4 +32,3 @@ class CellAreaLinks(XEnumerationAccess_4bac0ffc, XAreaLinks_a3ce0af3):
     """
     ...
 
-

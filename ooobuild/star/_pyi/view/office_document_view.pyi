@@ -33,4 +33,3 @@ class OfficeDocumentView(XControlAccess_c89d0c4e, XSelectionSupplier_fed20e15, X
     """
     ...
 
-

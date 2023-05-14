@@ -55,6 +55,9 @@ class DispatchInformation(object):
         """
         ...
 
+    @Command.setter
+    def Command(self, value: str) -> None:
+        ...
 
     @property
     def GroupId(self) -> int:
@@ -63,4 +66,7 @@ class DispatchInformation(object):
         """
         ...
 
+    @GroupId.setter
+    def GroupId(self, value: int) -> None:
+        ...
 

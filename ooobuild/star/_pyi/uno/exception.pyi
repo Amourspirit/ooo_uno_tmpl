@@ -56,6 +56,9 @@ class Exception(BException):
         """
         ...
 
+    @Message.setter
+    def Message(self, value: str) -> None:
+        ...
     @property
     def Context(self) -> XInterface_8f010a43:
         """
@@ -65,6 +68,9 @@ class Exception(BException):
         """
         ...
 
+    @Context.setter
+    def Context(self, value: XInterface_8f010a43) -> None:
+        ...
 
 __all__ = ['Exception']
 

@@ -39,6 +39,10 @@ class ColumnSettings(XPropertySet_bc180bfa):
         If the value is VOID , a default alignment should be used according to the datatype of the column.
         """
         ...
+
+    @Align.setter
+    def Align(self, value: int) -> None:
+        ...
     @property
     def ControlDefault(self) -> str:
         """
@@ -47,6 +51,10 @@ class ColumnSettings(XPropertySet_bc180bfa):
         The default is NULL.
         """
         ...
+
+    @ControlDefault.setter
+    def ControlDefault(self, value: str) -> None:
+        ...
     @property
     def ControlModel(self) -> 'XPropertySet_bc180bfa':
         """
@@ -54,6 +62,10 @@ class ColumnSettings(XPropertySet_bc180bfa):
         
         The default is NULL.
         """
+        ...
+
+    @ControlModel.setter
+    def ControlModel(self, value: 'XPropertySet_bc180bfa') -> None:
         ...
     @property
     def FormatKey(self) -> int:
@@ -65,6 +77,10 @@ class ColumnSettings(XPropertySet_bc180bfa):
         If the value is VOID , a default number format should be used according to the datatype of the column.
         """
         ...
+
+    @FormatKey.setter
+    def FormatKey(self, value: int) -> None:
+        ...
     @property
     def HelpText(self) -> str:
         """
@@ -73,11 +89,19 @@ class ColumnSettings(XPropertySet_bc180bfa):
         The default is NULL.
         """
         ...
+
+    @HelpText.setter
+    def HelpText(self, value: str) -> None:
+        ...
     @property
     def Hidden(self) -> bool:
         """
         determines whether the column should be displayed or not.
         """
+        ...
+
+    @Hidden.setter
+    def Hidden(self, value: bool) -> None:
         ...
     @property
     def Position(self) -> int:
@@ -86,6 +110,10 @@ class ColumnSettings(XPropertySet_bc180bfa):
         
         If the value is VOID , the default position should be taken according.
         """
+        ...
+
+    @Position.setter
+    def Position(self, value: int) -> None:
         ...
     @property
     def Width(self) -> int:
@@ -96,4 +124,7 @@ class ColumnSettings(XPropertySet_bc180bfa):
         """
         ...
 
+    @Width.setter
+    def Width(self, value: int) -> None:
+        ...
 

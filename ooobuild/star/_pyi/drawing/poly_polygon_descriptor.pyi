@@ -41,11 +41,19 @@ class PolyPolygonDescriptor(ABC):
         These are the untransformed points of this polygon.
         """
         ...
+
+    @Geometry.setter
+    def Geometry(self, value: 'PointSequenceSequence_5c591070') -> None:
+        ...
     @property
     def PolyPolygon(self) -> 'PointSequenceSequence_5c591070':
         """
         These are the reference points for this polygon.
         """
+        ...
+
+    @PolyPolygon.setter
+    def PolyPolygon(self, value: 'PointSequenceSequence_5c591070') -> None:
         ...
     @property
     def PolygonKind(self) -> 'PolygonKind_ca6f0c62':
@@ -54,4 +62,7 @@ class PolyPolygonDescriptor(ABC):
         """
         ...
 
+    @PolygonKind.setter
+    def PolygonKind(self, value: 'PolygonKind_ca6f0c62') -> None:
+        ...
 

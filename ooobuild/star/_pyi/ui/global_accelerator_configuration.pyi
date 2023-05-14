@@ -35,4 +35,3 @@ class GlobalAcceleratorConfiguration(XAcceleratorConfiguration_46580ffb):
     """
     ...
 
-

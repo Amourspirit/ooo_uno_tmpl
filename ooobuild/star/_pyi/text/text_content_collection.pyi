@@ -32,4 +32,3 @@ class TextContentCollection(XContainer_d6fb0cc6, XNameAccess_e2ab0cf6):
     """
     ...
 
-

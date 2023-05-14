@@ -54,6 +54,9 @@ class InteractiveWrongMediumException(ClassifiedInteractionRequest_9f72121b):
         """
         ...
 
+    @Medium.setter
+    def Medium(self, value: object) -> None:
+        ...
 
 __all__ = ['InteractiveWrongMediumException']
 

@@ -54,6 +54,10 @@ class TextProperties(CharacterProperties_1d4f0ef3, CharacterPropertiesAsian_6d8a
         If this is TRUE, numbering is ON for the text of this Shape.
         """
         ...
+
+    @IsNumbering.setter
+    def IsNumbering(self, value: bool) -> None:
+        ...
     @property
     def NumberingRules(self) -> 'XIndexReplace_feed0dd7':
         """
@@ -62,11 +66,19 @@ class TextProperties(CharacterProperties_1d4f0ef3, CharacterPropertiesAsian_6d8a
         The different rules accessible with this com.sun.star.container.XIndexReplace interface are sequences of property values as described in the service com.sun.star.style.NumberingRule.
         """
         ...
+
+    @NumberingRules.setter
+    def NumberingRules(self, value: 'XIndexReplace_feed0dd7') -> None:
+        ...
     @property
     def TextAnimationAmount(self) -> int:
         """
         This is the number of pixels the text is moved in each animation step.
         """
+        ...
+
+    @TextAnimationAmount.setter
+    def TextAnimationAmount(self, value: int) -> None:
         ...
     @property
     def TextAnimationCount(self) -> int:
@@ -76,11 +88,19 @@ class TextProperties(CharacterProperties_1d4f0ef3, CharacterPropertiesAsian_6d8a
         If this is set to zero, the repeat is endless.
         """
         ...
+
+    @TextAnimationCount.setter
+    def TextAnimationCount(self, value: int) -> None:
+        ...
     @property
     def TextAnimationDelay(self) -> int:
         """
         This is the delay in thousandths of a second between each of the animation steps.
         """
+        ...
+
+    @TextAnimationDelay.setter
+    def TextAnimationDelay(self, value: int) -> None:
         ...
     @property
     def TextAnimationDirection(self) -> 'TextAnimationDirection_6c5510da':
@@ -88,11 +108,19 @@ class TextProperties(CharacterProperties_1d4f0ef3, CharacterPropertiesAsian_6d8a
         This enumeration defines the direction in which the text moves.
         """
         ...
+
+    @TextAnimationDirection.setter
+    def TextAnimationDirection(self, value: 'TextAnimationDirection_6c5510da') -> None:
+        ...
     @property
     def TextAnimationKind(self) -> 'TextAnimationKind_1c710ebf':
         """
         This value defines the type of animation.
         """
+        ...
+
+    @TextAnimationKind.setter
+    def TextAnimationKind(self, value: 'TextAnimationKind_1c710ebf') -> None:
         ...
     @property
     def TextAnimationStartInside(self) -> bool:
@@ -100,11 +128,19 @@ class TextProperties(CharacterProperties_1d4f0ef3, CharacterPropertiesAsian_6d8a
         If this value is TRUE, the text is visible at the start of the animation.
         """
         ...
+
+    @TextAnimationStartInside.setter
+    def TextAnimationStartInside(self, value: bool) -> None:
+        ...
     @property
     def TextAnimationStopInside(self) -> bool:
         """
         If this value is TRUE, the text is visible at the end of the animation.
         """
+        ...
+
+    @TextAnimationStopInside.setter
+    def TextAnimationStopInside(self, value: bool) -> None:
         ...
     @property
     def TextAutoGrowHeight(self) -> bool:
@@ -112,11 +148,19 @@ class TextProperties(CharacterProperties_1d4f0ef3, CharacterPropertiesAsian_6d8a
         If this value is TRUE, the height of the Shape is automatically expanded/shrunk when text is added to or removed from the Shape.
         """
         ...
+
+    @TextAutoGrowHeight.setter
+    def TextAutoGrowHeight(self, value: bool) -> None:
+        ...
     @property
     def TextAutoGrowWidth(self) -> bool:
         """
         If this value is TRUE, the width of the Shape is automatically expanded/shrunk when text is added to or removed from the Shape.
         """
+        ...
+
+    @TextAutoGrowWidth.setter
+    def TextAutoGrowWidth(self, value: bool) -> None:
         ...
     @property
     def TextColumns(self) -> 'XTextColumns_b17f0bab':
@@ -128,11 +172,19 @@ class TextProperties(CharacterProperties_1d4f0ef3, CharacterPropertiesAsian_6d8a
             LibreOffice 7.2
         """
         ...
+
+    @TextColumns.setter
+    def TextColumns(self, value: 'XTextColumns_b17f0bab') -> None:
+        ...
     @property
     def TextContourFrame(self) -> bool:
         """
         If this value is TRUE, the left edge of every line of text is aligned with the left edge of this Shape.
         """
+        ...
+
+    @TextContourFrame.setter
+    def TextContourFrame(self, value: bool) -> None:
         ...
     @property
     def TextFitToSize(self) -> 'TextFitToSizeType_1bd90ebc':
@@ -140,11 +192,19 @@ class TextProperties(CharacterProperties_1d4f0ef3, CharacterPropertiesAsian_6d8a
         With this set to a value other than NONE, the text inside of the Shape is stretched or scaled to fit into the Shape.
         """
         ...
+
+    @TextFitToSize.setter
+    def TextFitToSize(self, value: 'TextFitToSizeType_1bd90ebc') -> None:
+        ...
     @property
     def TextHorizontalAdjust(self) -> 'TextHorizontalAdjust_4cf9102e':
         """
         adjusts the horizontal position of the text inside of the Shape.
         """
+        ...
+
+    @TextHorizontalAdjust.setter
+    def TextHorizontalAdjust(self, value: 'TextHorizontalAdjust_4cf9102e') -> None:
         ...
     @property
     def TextLeftDistance(self) -> int:
@@ -154,6 +214,10 @@ class TextProperties(CharacterProperties_1d4f0ef3, CharacterPropertiesAsian_6d8a
         This is only useful if Text.TextHorizontalAdjust is BLOCK or STRETCH or if Text.TextFitSize is TRUE.
         """
         ...
+
+    @TextLeftDistance.setter
+    def TextLeftDistance(self, value: int) -> None:
+        ...
     @property
     def TextLowerDistance(self) -> int:
         """
@@ -161,6 +225,10 @@ class TextProperties(CharacterProperties_1d4f0ef3, CharacterPropertiesAsian_6d8a
         
         This is only useful if Text.TextVerticalAdjust is BLOCK or if Text.TextFitSize is TRUE.
         """
+        ...
+
+    @TextLowerDistance.setter
+    def TextLowerDistance(self, value: int) -> None:
         ...
     @property
     def TextMaximumFrameHeight(self) -> int:
@@ -170,6 +238,10 @@ class TextProperties(CharacterProperties_1d4f0ef3, CharacterPropertiesAsian_6d8a
         On edit, the auto grow feature will not grow the object higher than the value of this property.
         """
         ...
+
+    @TextMaximumFrameHeight.setter
+    def TextMaximumFrameHeight(self, value: int) -> None:
+        ...
     @property
     def TextMaximumFrameWidth(self) -> int:
         """
@@ -177,6 +249,10 @@ class TextProperties(CharacterProperties_1d4f0ef3, CharacterPropertiesAsian_6d8a
         
         On edit, the auto grow feature will not grow the objects wider than the value of this property.
         """
+        ...
+
+    @TextMaximumFrameWidth.setter
+    def TextMaximumFrameWidth(self, value: int) -> None:
         ...
     @property
     def TextMinimumFrameHeight(self) -> int:
@@ -186,6 +262,10 @@ class TextProperties(CharacterProperties_1d4f0ef3, CharacterPropertiesAsian_6d8a
         On edit, the auto grow feature will not shrink the objects height smaller than the value of this property.
         """
         ...
+
+    @TextMinimumFrameHeight.setter
+    def TextMinimumFrameHeight(self, value: int) -> None:
+        ...
     @property
     def TextMinimumFrameWidth(self) -> int:
         """
@@ -193,6 +273,10 @@ class TextProperties(CharacterProperties_1d4f0ef3, CharacterPropertiesAsian_6d8a
         
         On edit, the auto grow feature will not shrink the object width smaller than the value of this property.
         """
+        ...
+
+    @TextMinimumFrameWidth.setter
+    def TextMinimumFrameWidth(self, value: int) -> None:
         ...
     @property
     def TextRightDistance(self) -> int:
@@ -202,6 +286,10 @@ class TextProperties(CharacterProperties_1d4f0ef3, CharacterPropertiesAsian_6d8a
         This is only useful if Text.TextHorizontalAdjust is BLOCK or STRETCH or if Text.TextFitSize is TRUE.
         """
         ...
+
+    @TextRightDistance.setter
+    def TextRightDistance(self, value: int) -> None:
+        ...
     @property
     def TextUpperDistance(self) -> int:
         """
@@ -210,11 +298,19 @@ class TextProperties(CharacterProperties_1d4f0ef3, CharacterPropertiesAsian_6d8a
         This is only useful if Text.TextVerticalAdjust is BLOCK or if Text.TextFitSize is TRUE.
         """
         ...
+
+    @TextUpperDistance.setter
+    def TextUpperDistance(self, value: int) -> None:
+        ...
     @property
     def TextVerticalAdjust(self) -> 'TextVerticalAdjust_2c160f3e':
         """
         adjusts the vertical position of the text inside of the Shape.
         """
+        ...
+
+    @TextVerticalAdjust.setter
+    def TextVerticalAdjust(self, value: 'TextVerticalAdjust_2c160f3e') -> None:
         ...
     @property
     def TextWritingMode(self) -> 'WritingMode_a6dd0b36':
@@ -223,4 +319,7 @@ class TextProperties(CharacterProperties_1d4f0ef3, CharacterPropertiesAsian_6d8a
         """
         ...
 
+    @TextWritingMode.setter
+    def TextWritingMode(self, value: 'WritingMode_a6dd0b36') -> None:
+        ...
 

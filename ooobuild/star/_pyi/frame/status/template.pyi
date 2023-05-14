@@ -56,6 +56,9 @@ class Template(object):
         """
         ...
 
+    @StyleName.setter
+    def StyleName(self, value: str) -> None:
+        ...
 
     @property
     def Value(self) -> int:
@@ -64,6 +67,9 @@ class Template(object):
         """
         ...
 
+    @Value.setter
+    def Value(self, value: int) -> None:
+        ...
 
     @property
     def StyleNameIdentifier(self) -> str:
@@ -76,4 +82,7 @@ class Template(object):
         """
         ...
 
+    @StyleNameIdentifier.setter
+    def StyleNameIdentifier(self, value: str) -> None:
+        ...
 

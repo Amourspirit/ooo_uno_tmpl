@@ -32,4 +32,3 @@ class TableDescriptor(DataSettings_a3000b0c, TableDescriptor_e1470d23):
     """
     ...
 
-

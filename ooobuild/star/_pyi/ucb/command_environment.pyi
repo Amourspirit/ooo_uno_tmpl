@@ -38,4 +38,3 @@ class CommandEnvironment(XCommandEnvironment_fb330dee):
         """
         ...
 
-

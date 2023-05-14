@@ -64,6 +64,9 @@ class DocumentSaveRequest(ClassifiedInteractionRequest_9f72121b):
         """
         ...
 
+    @Content.setter
+    def Content(self, value: XContent_79db0975) -> None:
+        ...
     @property
     def Name(self) -> str:
         """
@@ -71,6 +74,9 @@ class DocumentSaveRequest(ClassifiedInteractionRequest_9f72121b):
         """
         ...
 
+    @Name.setter
+    def Name(self, value: str) -> None:
+        ...
 
 __all__ = ['DocumentSaveRequest']
 

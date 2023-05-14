@@ -37,4 +37,3 @@ class ProxyFactory(XProxyFactory_f030e85):
     """
     ...
 
-

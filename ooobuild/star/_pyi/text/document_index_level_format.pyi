@@ -33,4 +33,3 @@ class DocumentIndexLevelFormat(XIndexReplace_feed0dd7):
     """
     ...
 
-

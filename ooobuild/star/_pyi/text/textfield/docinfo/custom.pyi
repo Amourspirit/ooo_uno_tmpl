@@ -41,11 +41,19 @@ class Custom(TextField_90260a56):
         This property is useful for import/export purposes.
         """
         ...
+
+    @CurrentPresentation.setter
+    def CurrentPresentation(self, value: str) -> None:
+        ...
     @property
     def IsFixed(self) -> bool:
         """
         If this flag is set to FALSE, the content is updated when the document information changes.
         """
+        ...
+
+    @IsFixed.setter
+    def IsFixed(self, value: bool) -> None:
         ...
     @property
     def Name(self) -> str:
@@ -54,4 +62,7 @@ class Custom(TextField_90260a56):
         """
         ...
 
+    @Name.setter
+    def Name(self, value: str) -> None:
+        ...
 

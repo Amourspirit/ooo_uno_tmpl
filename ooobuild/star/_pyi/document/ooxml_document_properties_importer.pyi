@@ -31,4 +31,3 @@ class OOXMLDocumentPropertiesImporter(XOOXMLDocumentPropertiesImporter_34fc150c)
     """
     ...
 
-

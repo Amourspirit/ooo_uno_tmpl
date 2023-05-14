@@ -54,6 +54,9 @@ class InteractiveNetworkConnectException(InteractiveNetworkException_7ca31159):
         """
         ...
 
+    @Server.setter
+    def Server(self, value: str) -> None:
+        ...
 
 __all__ = ['InteractiveNetworkConnectException']
 

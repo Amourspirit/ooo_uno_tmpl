@@ -39,4 +39,3 @@ class OleBridgeSupplierVar1(OleBridgeSupplier2_18030e68):
     """
     ...
 
-

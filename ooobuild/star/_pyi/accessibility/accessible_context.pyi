@@ -38,4 +38,3 @@ class AccessibleContext(XAccessibleContext_8eae119b, XAccessibleEventBroadcaster
     """
     ...
 
-

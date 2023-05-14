@@ -63,6 +63,11 @@ class DataSeries(DataPointProperties_24a00efd, XDataSeries_b8150b89, XRegression
         This property is especially useful for large data series with only some formatted data points, because you do not have to iterate over all elements.
         """
         ...
+
+    @AttributedDataPoints.setter
+    def AttributedDataPoints(self, value: uno.ByteSequence) -> None:
+        ...
+
     @property
     def DeletedLegendEntries(self) -> uno.ByteSequence:
         """
@@ -73,6 +78,11 @@ class DataSeries(DataPointProperties_24a00efd, XDataSeries_b8150b89, XRegression
             LibreOffice 7.0
         """
         ...
+
+    @DeletedLegendEntries.setter
+    def DeletedLegendEntries(self, value: uno.ByteSequence) -> None:
+        ...
+
     @property
     def AttachedAxisIndex(self) -> int:
         """
@@ -85,6 +95,10 @@ class DataSeries(DataPointProperties_24a00efd, XDataSeries_b8150b89, XRegression
         If you want to scale a series at a different x or z axis you need to create an additional coordinate system and host this series there.
         """
         ...
+
+    @AttachedAxisIndex.setter
+    def AttachedAxisIndex(self, value: int) -> None:
+        ...
     @property
     def ShowCustomLeaderLines(self) -> bool:
         """
@@ -94,6 +108,10 @@ class DataSeries(DataPointProperties_24a00efd, XDataSeries_b8150b89, XRegression
         
             LibreOffice 7.1
         """
+        ...
+
+    @ShowCustomLeaderLines.setter
+    def ShowCustomLeaderLines(self, value: bool) -> None:
         ...
     @property
     def ShowLegendEntry(self) -> bool:
@@ -105,11 +123,19 @@ class DataSeries(DataPointProperties_24a00efd, XDataSeries_b8150b89, XRegression
             LibreOffice 6.3
         """
         ...
+
+    @ShowLegendEntry.setter
+    def ShowLegendEntry(self, value: bool) -> None:
+        ...
     @property
     def StackingDirection(self) -> 'StackingDirection_8060e21':
         """
         indicates whether this series should be stacked with respect to the previous series.
         """
+        ...
+
+    @StackingDirection.setter
+    def StackingDirection(self, value: 'StackingDirection_8060e21') -> None:
         ...
     @property
     def VaryColorsByPoint(self) -> bool:
@@ -118,4 +144,7 @@ class DataSeries(DataPointProperties_24a00efd, XDataSeries_b8150b89, XRegression
         """
         ...
 
+    @VaryColorsByPoint.setter
+    def VaryColorsByPoint(self, value: bool) -> None:
+        ...
 

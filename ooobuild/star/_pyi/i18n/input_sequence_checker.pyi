@@ -35,4 +35,3 @@ class InputSequenceChecker(XExtendedInputSequenceChecker_a1b711cf):
     """
     ...
 
-

@@ -40,4 +40,7 @@ class TimeField(UnoControlTimeFieldModel_48bd0fcb, FormControlModel_e2990d22, XR
         """
         ...
 
+    @DefaultTime.setter
+    def DefaultTime(self, value: int) -> None:
+        ...
 

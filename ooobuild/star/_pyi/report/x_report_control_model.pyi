@@ -53,6 +53,9 @@ class XReportControlModel(XContainer_d6fb0cc6, XIndexContainer_1c040ebe, XReport
         """
         ...
 
+    @ConditionalPrintExpression.setter
+    def ConditionalPrintExpression(self, value: str) -> None:
+        ...
     @property
     def DataField(self) -> str:
         """
@@ -62,6 +65,9 @@ class XReportControlModel(XContainer_d6fb0cc6, XIndexContainer_1c040ebe, XReport
         """
         ...
 
+    @DataField.setter
+    def DataField(self, value: str) -> None:
+        ...
     @property
     def PrintWhenGroupChange(self) -> bool:
         """
@@ -71,4 +77,7 @@ class XReportControlModel(XContainer_d6fb0cc6, XIndexContainer_1c040ebe, XReport
         """
         ...
 
+    @PrintWhenGroupChange.setter
+    def PrintWhenGroupChange(self, value: bool) -> None:
+        ...
 

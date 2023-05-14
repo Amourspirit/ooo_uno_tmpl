@@ -39,6 +39,10 @@ class TextSortDescriptor2(TableSortDescriptor2_27e00ef1):
         contains the character that marks the column separator when a selection of paragraphs is to be sorted.
         """
         ...
+
+    @Delimiter.setter
+    def Delimiter(self, value: str) -> None:
+        ...
     @property
     def IsSortInTable(self) -> bool:
         """
@@ -46,4 +50,7 @@ class TextSortDescriptor2(TableSortDescriptor2_27e00ef1):
         """
         ...
 
+    @IsSortInTable.setter
+    def IsSortInTable(self, value: bool) -> None:
+        ...
 

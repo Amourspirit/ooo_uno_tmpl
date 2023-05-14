@@ -38,4 +38,7 @@ class OrderColumn(Column_7b1d098a):
         """
         ...
 
+    @IsAscending.setter
+    def IsAscending(self, value: bool) -> None:
+        ...
 

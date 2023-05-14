@@ -76,4 +76,7 @@ class XTabPageContainer(ABC):
         """
         ...
 
+    @ActiveTabPageID.setter
+    def ActiveTabPageID(self, value: int) -> None:
+        ...
 

@@ -32,4 +32,3 @@ class ResultSet(ResultSet_9a6d0ac7, XColumnsSupplier_f0600da9):
     """
     ...
 
-

@@ -51,4 +51,7 @@ class ServiceManager(MultiServiceFactory_b940e5e, XPropertySet_bc180bfa, XConten
         """
         ...
 
+    @DefaultContext.setter
+    def DefaultContext(self, value: 'XComponentContext_e2e10d4a') -> None:
+        ...
 

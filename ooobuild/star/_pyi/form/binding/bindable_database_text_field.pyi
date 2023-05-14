@@ -34,4 +34,3 @@ class BindableDatabaseTextField(BindableDataAwareControlModel_47091512, Database
     """
     ...
 
-

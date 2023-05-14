@@ -48,11 +48,19 @@ class XSolver(XInterface_8f010a43):
         """
         ...
 
+    @Constraints.setter
+    def Constraints(self, value: 'typing.Tuple[SolverConstraint_f1e30dc1, ...]') -> None:
+        ...
+
     @property
     def Solution(self) -> 'typing.Tuple[float, ...]':
         """
         contains the solution's value for each of the variables, if a solution was found.
         """
+        ...
+
+    @Solution.setter
+    def Solution(self, value: 'typing.Tuple[float, ...]') -> None:
         ...
 
     @property
@@ -62,6 +70,10 @@ class XSolver(XInterface_8f010a43):
         """
         ...
 
+    @Variables.setter
+    def Variables(self, value: 'typing.Tuple[CellAddress_ae5f0b56, ...]') -> None:
+        ...
+
     @property
     def Document(self) -> 'XSpreadsheetDocument_2a1f0f30':
         """
@@ -69,6 +81,9 @@ class XSolver(XInterface_8f010a43):
         """
         ...
 
+    @Document.setter
+    def Document(self, value: 'XSpreadsheetDocument_2a1f0f30') -> None:
+        ...
     @property
     def Maximize(self) -> bool:
         """
@@ -76,6 +91,9 @@ class XSolver(XInterface_8f010a43):
         """
         ...
 
+    @Maximize.setter
+    def Maximize(self, value: bool) -> None:
+        ...
     @property
     def Objective(self) -> 'CellAddress_ae5f0b56':
         """
@@ -83,6 +101,9 @@ class XSolver(XInterface_8f010a43):
         """
         ...
 
+    @Objective.setter
+    def Objective(self, value: 'CellAddress_ae5f0b56') -> None:
+        ...
     @property
     def ResultValue(self) -> float:
         """
@@ -90,6 +111,9 @@ class XSolver(XInterface_8f010a43):
         """
         ...
 
+    @ResultValue.setter
+    def ResultValue(self, value: float) -> None:
+        ...
     @property
     def Success(self) -> bool:
         """
@@ -97,4 +121,7 @@ class XSolver(XInterface_8f010a43):
         """
         ...
 
+    @Success.setter
+    def Success(self, value: bool) -> None:
+        ...
 

@@ -227,6 +227,9 @@ class XSlideShowController(ABC):
         """
         ...
 
+    @AlwaysOnTop.setter
+    def AlwaysOnTop(self, value: bool) -> None:
+        ...
     @property
     def MouseVisible(self) -> bool:
         """
@@ -234,6 +237,9 @@ class XSlideShowController(ABC):
         """
         ...
 
+    @MouseVisible.setter
+    def MouseVisible(self, value: bool) -> None:
+        ...
     @property
     def PenColor(self) -> int:
         """
@@ -241,6 +247,9 @@ class XSlideShowController(ABC):
         """
         ...
 
+    @PenColor.setter
+    def PenColor(self, value: int) -> None:
+        ...
     @property
     def PenWidth(self) -> float:
         """
@@ -252,6 +261,9 @@ class XSlideShowController(ABC):
         """
         ...
 
+    @PenWidth.setter
+    def PenWidth(self, value: float) -> None:
+        ...
     @property
     def UsePen(self) -> bool:
         """
@@ -261,4 +273,7 @@ class XSlideShowController(ABC):
         """
         ...
 
+    @UsePen.setter
+    def UsePen(self, value: bool) -> None:
+        ...
 

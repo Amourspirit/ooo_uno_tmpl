@@ -39,6 +39,10 @@ class EventDescriptor(ABC):
         This list is extensible.
         """
         ...
+
+    @EventType.setter
+    def EventType(self, value: str) -> None:
+        ...
     @property
     def Script(self) -> str:
         """
@@ -46,4 +50,7 @@ class EventDescriptor(ABC):
         """
         ...
 
+    @Script.setter
+    def Script(self, value: str) -> None:
+        ...
 

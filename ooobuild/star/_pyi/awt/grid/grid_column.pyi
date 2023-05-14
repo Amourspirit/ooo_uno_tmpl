@@ -35,4 +35,3 @@ class GridColumn(XGridColumn_d2370c74):
     """
     ...
 
-

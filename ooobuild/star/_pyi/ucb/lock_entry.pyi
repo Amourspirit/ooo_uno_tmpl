@@ -53,6 +53,9 @@ class LockEntry(object):
         """
         ...
 
+    @Scope.setter
+    def Scope(self, value: LockScope_839109c5) -> None:
+        ...
 
     @property
     def Type(self) -> LockType_7a09096d:
@@ -61,4 +64,7 @@ class LockEntry(object):
         """
         ...
 
+    @Type.setter
+    def Type(self, value: LockType_7a09096d) -> None:
+        ...
 

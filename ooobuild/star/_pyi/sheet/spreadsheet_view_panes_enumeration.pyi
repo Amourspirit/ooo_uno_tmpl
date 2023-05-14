@@ -31,4 +31,3 @@ class SpreadsheetViewPanesEnumeration(XEnumeration_f2180daa):
     """
     ...
 
-

@@ -58,6 +58,9 @@ class StringContext(object):
         """
         ...
 
+    @Text.setter
+    def Text(self, value: str) -> None:
+        ...
 
     @property
     def StartPosition(self) -> int:
@@ -68,6 +71,9 @@ class StringContext(object):
         """
         ...
 
+    @StartPosition.setter
+    def StartPosition(self, value: int) -> None:
+        ...
 
     @property
     def Length(self) -> int:
@@ -78,4 +84,7 @@ class StringContext(object):
         """
         ...
 
+    @Length.setter
+    def Length(self, value: int) -> None:
+        ...
 

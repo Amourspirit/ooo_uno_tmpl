@@ -59,6 +59,9 @@ class NativeNumberXmlAttributes(object):
         """
         ...
 
+    @Locale.setter
+    def Locale(self, value: Locale_70d308fa) -> None:
+        ...
 
     @property
     def Format(self) -> str:
@@ -67,6 +70,9 @@ class NativeNumberXmlAttributes(object):
         """
         ...
 
+    @Format.setter
+    def Format(self, value: str) -> None:
+        ...
 
     @property
     def Style(self) -> str:
@@ -75,4 +81,7 @@ class NativeNumberXmlAttributes(object):
         """
         ...
 
+    @Style.setter
+    def Style(self, value: str) -> None:
+        ...
 

@@ -38,6 +38,10 @@ class ImageMapCircleObject(ImageMapObject_d1e20c63):
         This is the center point of the circle in pixels.
         """
         ...
+
+    @Center.setter
+    def Center(self, value: 'Point_5fb2085e') -> None:
+        ...
     @property
     def Radius(self) -> int:
         """
@@ -45,4 +49,7 @@ class ImageMapCircleObject(ImageMapObject_d1e20c63):
         """
         ...
 
+    @Radius.setter
+    def Radius(self, value: int) -> None:
+        ...
 

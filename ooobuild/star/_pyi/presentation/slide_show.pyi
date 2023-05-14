@@ -30,4 +30,3 @@ class SlideShow(XSlideShow_2a80e0e):
     """
     ...
 
-

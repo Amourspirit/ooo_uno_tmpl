@@ -38,4 +38,3 @@ class ScriptURIHelper(XScriptURIHelper_8ee61153):
         """
         ...
 
-

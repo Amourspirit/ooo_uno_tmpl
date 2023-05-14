@@ -31,4 +31,3 @@ class Collator(XCollator_892a09e0):
     """
     ...
 
-

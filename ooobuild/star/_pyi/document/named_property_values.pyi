@@ -34,4 +34,3 @@ class NamedPropertyValues(XNameContainer_cb90e47):
     """
     ...
 
-

@@ -31,4 +31,3 @@ class DrawingDocument(GenericDrawingDocument_6a2d10bc):
     """
     ...
 
-

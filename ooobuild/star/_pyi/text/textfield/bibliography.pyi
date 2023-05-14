@@ -39,4 +39,8 @@ class Bibliography(DependentTextField_fed90ded):
         """
         ...
 
+    @Fields.setter
+    def Fields(self, value: 'typing.Tuple[PropertyValue_c9610c73, ...]') -> None:
+        ...
+
 

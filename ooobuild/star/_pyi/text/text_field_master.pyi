@@ -38,11 +38,20 @@ class TextFieldMaster(XPropertySet_bc180bfa):
         contains a sequence of all fields that depend on this master.
         """
         ...
+
+    @DependentTextFields.setter
+    def DependentTextFields(self, value: 'typing.Tuple[XDependentTextField_c3d0e45, ...]') -> None:
+        ...
+
     @property
     def InstanceName(self) -> str:
         """
         contains the instance name as it is used in the com.sun.star.text.XTextFieldsSupplier.
         """
+        ...
+
+    @InstanceName.setter
+    def InstanceName(self, value: str) -> None:
         ...
     @property
     def Name(self) -> str:
@@ -53,4 +62,7 @@ class TextFieldMaster(XPropertySet_bc180bfa):
         """
         ...
 
+    @Name.setter
+    def Name(self, value: str) -> None:
+        ...
 

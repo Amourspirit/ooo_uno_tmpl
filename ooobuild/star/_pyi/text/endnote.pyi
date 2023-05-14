@@ -31,4 +31,3 @@ class Endnote(Footnote_86390a1b):
     """
     ...
 
-

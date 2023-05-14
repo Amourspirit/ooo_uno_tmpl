@@ -37,4 +37,3 @@ class PackageFolder(XPropertySet_bc180bfa, XChild_a6390b07, XEnumerationAccess_4
     """
     ...
 
-

@@ -34,4 +34,3 @@ class CommandDefinition(XRename_848c09cc):
     """
     ...
 
-

@@ -40,6 +40,10 @@ class MediaProperties(ABC):
         Additional properties that will be passed to the appropriate filter module.
         """
         ...
+
+    @FilterData.setter
+    def FilterData(self, value: 'PropertyValues_d6470ce6') -> None:
+        ...
     @property
     def InputStream(self) -> 'XInputStream_98d40ab4':
         """
@@ -47,6 +51,10 @@ class MediaProperties(ABC):
         
         A InputStream can be used instead of the URL property
         """
+        ...
+
+    @InputStream.setter
+    def InputStream(self, value: 'XInputStream_98d40ab4') -> None:
         ...
     @property
     def MimeType(self) -> str:
@@ -56,6 +64,10 @@ class MediaProperties(ABC):
         At the moment, the following mime types are supported for storing graphics:
         """
         ...
+
+    @MimeType.setter
+    def MimeType(self, value: str) -> None:
+        ...
     @property
     def OutputStream(self) -> 'XStream_678908a4':
         """
@@ -63,6 +75,10 @@ class MediaProperties(ABC):
         
         A OutputStream can be used instead of the URL property
         """
+        ...
+
+    @OutputStream.setter
+    def OutputStream(self, value: 'XStream_678908a4') -> None:
         ...
     @property
     def URL(self) -> str:
@@ -77,4 +93,7 @@ class MediaProperties(ABC):
         """
         ...
 
+    @URL.setter
+    def URL(self, value: str) -> None:
+        ...
 

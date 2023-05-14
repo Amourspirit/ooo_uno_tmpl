@@ -41,4 +41,3 @@ class GraphicStorageHandler(XGraphicStorageHandler_7c171110):
         """
         ...
 
-

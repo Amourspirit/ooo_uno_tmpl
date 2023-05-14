@@ -57,4 +57,7 @@ class LinguServiceEvent(EventObject_a3d70b03):
         """
         ...
 
+    @nEvent.setter
+    def nEvent(self, value: int) -> None:
+        ...
 

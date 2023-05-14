@@ -45,4 +45,7 @@ class RenderDescriptor(ABC):
         """
         ...
 
+    @PageSize.setter
+    def PageSize(self, value: 'Size_576707ef') -> None:
+        ...
 

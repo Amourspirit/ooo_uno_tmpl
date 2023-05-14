@@ -31,4 +31,3 @@ class Primitive2DTools(XPrimitive2DRenderer_46eb0fa4):
     """
     ...
 
-

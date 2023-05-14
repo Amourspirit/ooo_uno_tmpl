@@ -49,11 +49,20 @@ class DataSequence(XPropertySet_bc180bfa, XDataSequence_11f00e1f, XNumericalData
         a sequence of indexes that identify values that are hidden in the underlying data provider.
         """
         ...
+
+    @HiddenValues.setter
+    def HiddenValues(self, value: uno.ByteSequence) -> None:
+        ...
+
     @property
     def IncludeHiddenCells(self) -> bool:
         """
         If set to false FALSE, values from hidden cells are not returned.
         """
+        ...
+
+    @IncludeHiddenCells.setter
+    def IncludeHiddenCells(self, value: bool) -> None:
         ...
     @property
     def Role(self) -> 'DataSequenceRole_3f520f59':
@@ -66,4 +75,7 @@ class DataSequence(XPropertySet_bc180bfa, XDataSequence_11f00e1f, XNumericalData
         """
         ...
 
+    @Role.setter
+    def Role(self, value: 'DataSequenceRole_3f520f59') -> None:
+        ...
 

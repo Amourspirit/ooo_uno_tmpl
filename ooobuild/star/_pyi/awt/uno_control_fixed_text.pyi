@@ -33,4 +33,3 @@ class UnoControlFixedText(UnoControl_8f2c0a67, XFixedText_8e2a0a41, XLayoutConst
     """
     ...
 
-

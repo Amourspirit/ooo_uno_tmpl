@@ -57,10 +57,16 @@ class XServiceDocumenter(ABC):
         """
         ...
 
+    @CoreBaseUrl.setter
+    def CoreBaseUrl(self, value: str) -> None:
+        ...
     @property
     def ServiceBaseUrl(self) -> str:
         """
         """
         ...
 
+    @ServiceBaseUrl.setter
+    def ServiceBaseUrl(self, value: str) -> None:
+        ...
 

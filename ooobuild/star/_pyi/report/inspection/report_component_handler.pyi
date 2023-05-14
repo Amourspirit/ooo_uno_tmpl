@@ -31,4 +31,3 @@ class ReportComponentHandler(XPropertyHandler_3e950fbf):
     """
     ...
 
-

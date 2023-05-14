@@ -31,4 +31,3 @@ class AllListenerAdapter(XAllListenerAdapterService_9e8011e6):
     """
     ...
 
-

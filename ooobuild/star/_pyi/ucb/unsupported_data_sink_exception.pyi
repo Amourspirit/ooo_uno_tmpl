@@ -54,6 +54,9 @@ class UnsupportedDataSinkException(Exception_85530a09):
         """
         ...
 
+    @Sink.setter
+    def Sink(self, value: XInterface_8f010a43) -> None:
+        ...
 
 __all__ = ['UnsupportedDataSinkException']
 

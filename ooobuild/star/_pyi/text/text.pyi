@@ -46,6 +46,10 @@ class Text(XEnumerationAccess_4bac0ffc, XRelativeTextContentInsert_7dca1156, XTe
         The sequence contains the following properties
         """
         ...
+
+    @EndRedline.setter
+    def EndRedline(self, value: 'PropertyValues_d6470ce6') -> None:
+        ...
     @property
     def StartRedline(self) -> 'PropertyValues_d6470ce6':
         """
@@ -55,4 +59,7 @@ class Text(XEnumerationAccess_4bac0ffc, XRelativeTextContentInsert_7dca1156, XTe
         """
         ...
 
+    @StartRedline.setter
+    def StartRedline(self, value: 'PropertyValues_d6470ce6') -> None:
+        ...
 

@@ -39,6 +39,10 @@ class GetExpression(TextField_90260a56):
         contains the textual content of the field.
         """
         ...
+
+    @Content.setter
+    def Content(self, value: str) -> None:
+        ...
     @property
     def CurrentPresentation(self) -> str:
         """
@@ -46,6 +50,10 @@ class GetExpression(TextField_90260a56):
         
         This property is especially useful for import/export purposes.
         """
+        ...
+
+    @CurrentPresentation.setter
+    def CurrentPresentation(self, value: str) -> None:
         ...
     @property
     def IsFixedLanguage(self) -> bool:
@@ -57,11 +65,19 @@ class GetExpression(TextField_90260a56):
             OOo 1.1.2
         """
         ...
+
+    @IsFixedLanguage.setter
+    def IsFixedLanguage(self, value: bool) -> None:
+        ...
     @property
     def IsShowFormula(self) -> bool:
         """
         determines whether the content is displayed or evaluated.
         """
+        ...
+
+    @IsShowFormula.setter
+    def IsShowFormula(self, value: bool) -> None:
         ...
     @property
     def NumberFormat(self) -> int:
@@ -69,17 +85,29 @@ class GetExpression(TextField_90260a56):
         this is the number format for this field.
         """
         ...
+
+    @NumberFormat.setter
+    def NumberFormat(self, value: int) -> None:
+        ...
     @property
     def SubType(self) -> int:
         """
         determines the type of the variable as described in com.sun.star.text.SetVariableType
         """
         ...
+
+    @SubType.setter
+    def SubType(self, value: int) -> None:
+        ...
     @property
     def Value(self) -> float:
         """
         contains the numerical value of the field.
         """
+        ...
+
+    @Value.setter
+    def Value(self, value: float) -> None:
         ...
     @property
     def VariableSubtype(self) -> int:
@@ -88,4 +116,7 @@ class GetExpression(TextField_90260a56):
         """
         ...
 
+    @VariableSubtype.setter
+    def VariableSubtype(self, value: int) -> None:
+        ...
 

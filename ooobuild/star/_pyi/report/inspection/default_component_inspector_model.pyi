@@ -57,4 +57,3 @@ class DefaultComponentInspectorModel(XObjectInspectorModel_9077119b):
         """
         ...
 
-

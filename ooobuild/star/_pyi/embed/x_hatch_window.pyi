@@ -48,4 +48,7 @@ class XHatchWindow(XComponent_98dc0ab5):
         """
         ...
 
+    @HatchBorderSize.setter
+    def HatchBorderSize(self, value: 'Size_576707ef') -> None:
+        ...
 

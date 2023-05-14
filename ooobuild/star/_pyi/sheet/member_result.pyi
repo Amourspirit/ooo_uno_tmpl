@@ -57,6 +57,9 @@ class MemberResult(object):
         """
         ...
 
+    @Name.setter
+    def Name(self, value: str) -> None:
+        ...
 
     @property
     def Caption(self) -> str:
@@ -65,6 +68,9 @@ class MemberResult(object):
         """
         ...
 
+    @Caption.setter
+    def Caption(self, value: str) -> None:
+        ...
 
     @property
     def Flags(self) -> int:
@@ -73,6 +79,9 @@ class MemberResult(object):
         """
         ...
 
+    @Flags.setter
+    def Flags(self, value: int) -> None:
+        ...
 
     @property
     def Value(self) -> float:
@@ -87,4 +96,7 @@ class MemberResult(object):
         """
         ...
 
+    @Value.setter
+    def Value(self, value: float) -> None:
+        ...
 

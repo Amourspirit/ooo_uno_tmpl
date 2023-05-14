@@ -34,4 +34,3 @@ class DefaultViewController(Controller_a5330b37, XTitle_7ab0096d, XTitleChangeBr
     """
     ...
 
-

@@ -32,4 +32,3 @@ class CustomPresentationAccess(XNameContainer_cb90e47, XSingleServiceFactory_272
     """
     ...
 
-

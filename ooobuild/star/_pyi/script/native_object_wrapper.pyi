@@ -46,4 +46,7 @@ class NativeObjectWrapper(object):
     def ObjectId(self) -> object:
         ...
 
+    @ObjectId.setter
+    def ObjectId(self, value: object) -> None:
+        ...
 

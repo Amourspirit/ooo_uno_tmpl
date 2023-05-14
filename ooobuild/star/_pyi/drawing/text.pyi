@@ -32,4 +32,3 @@ class Text(TextProperties_f2980dc6, XText_690408ca):
     """
     ...
 
-

@@ -35,6 +35,10 @@ class Keywords(TextField_90260a56):
         contains content information.
         """
         ...
+
+    @Content.setter
+    def Content(self, value: str) -> None:
+        ...
     @property
     def CurrentPresentation(self) -> str:
         """
@@ -43,6 +47,10 @@ class Keywords(TextField_90260a56):
         This property is especially useful for import/export purposes.
         """
         ...
+
+    @CurrentPresentation.setter
+    def CurrentPresentation(self, value: str) -> None:
+        ...
     @property
     def IsFixed(self) -> bool:
         """
@@ -50,4 +58,7 @@ class Keywords(TextField_90260a56):
         """
         ...
 
+    @IsFixed.setter
+    def IsFixed(self, value: bool) -> None:
+        ...
 

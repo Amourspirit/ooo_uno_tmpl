@@ -57,6 +57,9 @@ class CheckinArgument(object):
         """
         ...
 
+    @MajorVersion.setter
+    def MajorVersion(self, value: bool) -> None:
+        ...
 
     @property
     def VersionComment(self) -> str:
@@ -65,6 +68,9 @@ class CheckinArgument(object):
         """
         ...
 
+    @VersionComment.setter
+    def VersionComment(self, value: str) -> None:
+        ...
 
     @property
     def SourceURL(self) -> str:
@@ -75,6 +81,9 @@ class CheckinArgument(object):
         """
         ...
 
+    @SourceURL.setter
+    def SourceURL(self, value: str) -> None:
+        ...
 
     @property
     def TargetURL(self) -> str:
@@ -83,6 +92,9 @@ class CheckinArgument(object):
         """
         ...
 
+    @TargetURL.setter
+    def TargetURL(self, value: str) -> None:
+        ...
 
     @property
     def NewTitle(self) -> str:
@@ -93,6 +105,9 @@ class CheckinArgument(object):
         """
         ...
 
+    @NewTitle.setter
+    def NewTitle(self, value: str) -> None:
+        ...
 
     @property
     def MimeType(self) -> str:
@@ -101,4 +116,7 @@ class CheckinArgument(object):
         """
         ...
 
+    @MimeType.setter
+    def MimeType(self, value: str) -> None:
+        ...
 

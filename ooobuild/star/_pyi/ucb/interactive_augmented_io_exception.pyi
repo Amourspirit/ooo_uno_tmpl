@@ -58,6 +58,9 @@ class InteractiveAugmentedIOException(InteractiveIOException_27a60f07):
         """
         ...
 
+    @Arguments.setter
+    def Arguments(self, value: typing.Tuple[object, ...]) -> None:
+        ...
 
 __all__ = ['InteractiveAugmentedIOException']
 

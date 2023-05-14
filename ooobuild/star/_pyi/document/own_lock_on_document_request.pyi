@@ -58,6 +58,9 @@ class OwnLockOnDocumentRequest(Exception_85530a09):
         """
         ...
 
+    @DocumentURL.setter
+    def DocumentURL(self, value: str) -> None:
+        ...
     @property
     def TimeInfo(self) -> str:
         """
@@ -65,6 +68,9 @@ class OwnLockOnDocumentRequest(Exception_85530a09):
         """
         ...
 
+    @TimeInfo.setter
+    def TimeInfo(self, value: str) -> None:
+        ...
     @property
     def IsStoring(self) -> bool:
         """
@@ -72,6 +78,9 @@ class OwnLockOnDocumentRequest(Exception_85530a09):
         """
         ...
 
+    @IsStoring.setter
+    def IsStoring(self, value: bool) -> None:
+        ...
 
 __all__ = ['OwnLockOnDocumentRequest']
 

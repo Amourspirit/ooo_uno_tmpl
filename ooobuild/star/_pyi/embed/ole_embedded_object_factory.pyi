@@ -34,4 +34,3 @@ class OLEEmbeddedObjectFactory(XEmbeddedObjectCreator_41d90f8e):
     """
     ...
 
-

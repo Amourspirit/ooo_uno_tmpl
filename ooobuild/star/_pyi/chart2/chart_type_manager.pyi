@@ -31,4 +31,3 @@ class ChartTypeManager(MultiServiceFactory_b940e5e):
     """
     ...
 
-

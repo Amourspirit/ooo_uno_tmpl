@@ -57,6 +57,9 @@ class PasswordRequest(ClassifiedInteractionRequest_9f72121b):
         """
         ...
 
+    @Mode.setter
+    def Mode(self, value: PasswordRequestMode_ec10e7c) -> None:
+        ...
 
 __all__ = ['PasswordRequest']
 

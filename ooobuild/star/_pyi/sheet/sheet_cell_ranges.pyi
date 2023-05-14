@@ -53,6 +53,10 @@ class SheetCellRanges(SheetRangesQuery_efbe0d90, CharacterProperties_1d4f0ef3, C
         \"$Sheet1.$B$2:$D$5\".
         """
         ...
+
+    @AbsoluteName.setter
+    def AbsoluteName(self, value: str) -> None:
+        ...
     @property
     def ConditionalFormat(self) -> 'XSheetConditionalEntries_694810c0':
         """
@@ -60,6 +64,10 @@ class SheetCellRanges(SheetRangesQuery_efbe0d90, CharacterProperties_1d4f0ef3, C
         
         After a conditional format has been changed it has to be reinserted into the property set.
         """
+        ...
+
+    @ConditionalFormat.setter
+    def ConditionalFormat(self, value: 'XSheetConditionalEntries_694810c0') -> None:
         ...
     @property
     def ConditionalFormatLocal(self) -> 'XSheetConditionalEntries_694810c0':
@@ -69,6 +77,10 @@ class SheetCellRanges(SheetRangesQuery_efbe0d90, CharacterProperties_1d4f0ef3, C
         After a conditional format has been changed it has to be reinserted into the property set.
         """
         ...
+
+    @ConditionalFormatLocal.setter
+    def ConditionalFormatLocal(self, value: 'XSheetConditionalEntries_694810c0') -> None:
+        ...
     @property
     def Validation(self) -> 'XPropertySet_bc180bfa':
         """
@@ -76,6 +88,10 @@ class SheetCellRanges(SheetRangesQuery_efbe0d90, CharacterProperties_1d4f0ef3, C
         
         After the data validation settings have been changed the validation has to be reinserted into the property set.
         """
+        ...
+
+    @Validation.setter
+    def Validation(self, value: 'XPropertySet_bc180bfa') -> None:
         ...
     @property
     def ValidationLocal(self) -> 'XPropertySet_bc180bfa':
@@ -86,4 +102,7 @@ class SheetCellRanges(SheetRangesQuery_efbe0d90, CharacterProperties_1d4f0ef3, C
         """
         ...
 
+    @ValidationLocal.setter
+    def ValidationLocal(self, value: 'XPropertySet_bc180bfa') -> None:
+        ...
 

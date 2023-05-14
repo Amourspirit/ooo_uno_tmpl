@@ -43,6 +43,10 @@ class MetadataField(TextField_90260a56, XChild_a6390b07, XEnumerationAccess_4bac
         determines whether changes in language attributes at the position of the text field also change the number format as appropriate for this language.
         """
         ...
+
+    @IsFixedLanguage.setter
+    def IsFixedLanguage(self, value: bool) -> None:
+        ...
     @property
     def NumberFormat(self) -> int:
         """
@@ -50,4 +54,7 @@ class MetadataField(TextField_90260a56, XChild_a6390b07, XEnumerationAccess_4bac
         """
         ...
 
+    @NumberFormat.setter
+    def NumberFormat(self, value: int) -> None:
+        ...
 

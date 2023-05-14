@@ -45,4 +45,7 @@ class UIElementSettings(XIndexAccess_f0910d6d, XSingleComponentFactory_46cc0fef)
         """
         ...
 
+    @UIName.setter
+    def UIName(self, value: str) -> None:
+        ...
 

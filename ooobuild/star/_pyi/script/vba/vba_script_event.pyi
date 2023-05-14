@@ -54,6 +54,9 @@ class VBAScriptEvent(EventObject_a3d70b03):
         """
         ...
 
+    @Identifier.setter
+    def Identifier(self, value: int) -> None:
+        ...
 
     @property
     def ModuleName(self) -> str:
@@ -62,4 +65,7 @@ class VBAScriptEvent(EventObject_a3d70b03):
         """
         ...
 
+    @ModuleName.setter
+    def ModuleName(self, value: str) -> None:
+        ...
 

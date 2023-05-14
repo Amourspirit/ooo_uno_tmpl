@@ -33,4 +33,3 @@ class Cell(CellProperties_d4360cbd, XCell_70d408e8, XText_690408ca):
     """
     ...
 
-

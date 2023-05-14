@@ -35,4 +35,3 @@ class GlobalEventBroadcaster(XGlobalEventBroadcaster_55351028):
     """
     ...
 
-

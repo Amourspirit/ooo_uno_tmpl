@@ -41,4 +41,3 @@ class DocumentProperties(XDocumentProperties_4c31102b):
         """
         ...
 
-

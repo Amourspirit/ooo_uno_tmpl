@@ -33,4 +33,3 @@ class DocumentIndexParagraphStyles(XIndexReplace_feed0dd7):
     """
     ...
 
-

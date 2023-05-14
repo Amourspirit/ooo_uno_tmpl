@@ -54,6 +54,9 @@ class ParamInfo(object):
         """
         ...
 
+    @aName.setter
+    def aName(self, value: str) -> None:
+        ...
 
     @property
     def aMode(self) -> ParamMode_d7260ca9:
@@ -62,6 +65,9 @@ class ParamInfo(object):
         """
         ...
 
+    @aMode.setter
+    def aMode(self, value: ParamMode_d7260ca9) -> None:
+        ...
 
     @property
     def aType(self) -> XIdlClass_d63a0c9a:
@@ -70,4 +76,7 @@ class ParamInfo(object):
         """
         ...
 
+    @aType.setter
+    def aType(self, value: XIdlClass_d63a0c9a) -> None:
+        ...
 

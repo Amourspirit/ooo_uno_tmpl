@@ -47,4 +47,7 @@ class UserDefinedAttributesSupplier(ABC):
         """
         ...
 
+    @UserDefinedAttributes.setter
+    def UserDefinedAttributes(self, value: 'XNameContainer_cb90e47') -> None:
+        ...
 

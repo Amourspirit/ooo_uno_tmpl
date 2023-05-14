@@ -30,4 +30,3 @@ class FormattedString(XFormattedString2_8010df3):
     """
     ...
 
-

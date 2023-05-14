@@ -32,4 +32,3 @@ class CellAnnotations(XEnumerationAccess_4bac0ffc, XSheetAnnotations_fd4a0e00):
     """
     ...
 
-

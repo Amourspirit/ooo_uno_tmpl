@@ -34,4 +34,3 @@ class AnimateColor(XAnimate_ca680c52):
     """
     ...
 
-

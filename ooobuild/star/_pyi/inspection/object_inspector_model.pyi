@@ -64,4 +64,3 @@ class ObjectInspectorModel(XObjectInspectorModel_9077119b):
         """
         ...
 
-

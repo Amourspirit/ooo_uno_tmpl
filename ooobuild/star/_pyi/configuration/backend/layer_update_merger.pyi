@@ -38,4 +38,3 @@ class LayerUpdateMerger(XUpdateHandler_d8f512ef, XInitialization_d46c0cca):
     """
     ...
 
-

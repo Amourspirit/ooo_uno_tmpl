@@ -31,4 +31,3 @@ class Solver(XSolver_853909f4):
     """
     ...
 
-

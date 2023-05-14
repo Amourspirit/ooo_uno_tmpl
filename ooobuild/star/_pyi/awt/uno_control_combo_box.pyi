@@ -32,4 +32,3 @@ class UnoControlComboBox(UnoControlEdit_bc4e0bed, XComboBox_83b409c5):
     """
     ...
 
-

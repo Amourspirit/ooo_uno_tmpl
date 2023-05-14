@@ -51,4 +51,7 @@ class DefaultProvider(ConfigurationProvider_cc8d1323, XLocalizable_aee00b64, XFl
         """
         ...
 
+    @EnableAsync.setter
+    def EnableAsync(self, value: bool) -> None:
+        ...
 

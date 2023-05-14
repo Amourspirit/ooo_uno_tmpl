@@ -41,6 +41,10 @@ class TreeControlModel(UnoControlModel_c8ce0c58):
         You can implement your own instance of XTreeDataModel or use the MutableTreeDataModel.
         """
         ...
+
+    @DataModel.setter
+    def DataModel(self, value: 'XTreeDataModel_f9fc0d85') -> None:
+        ...
     @property
     def Editable(self) -> bool:
         """
@@ -48,6 +52,10 @@ class TreeControlModel(UnoControlModel_c8ce0c58):
         
         The default value is FALSE
         """
+        ...
+
+    @Editable.setter
+    def Editable(self, value: bool) -> None:
         ...
     @property
     def InvokesStopNodeEditing(self) -> bool:
@@ -59,6 +67,10 @@ class TreeControlModel(UnoControlModel_c8ce0c58):
         The default value is FALSE
         """
         ...
+
+    @InvokesStopNodeEditing.setter
+    def InvokesStopNodeEditing(self, value: bool) -> None:
+        ...
     @property
     def RootDisplayed(self) -> bool:
         """
@@ -68,6 +80,10 @@ class TreeControlModel(UnoControlModel_c8ce0c58):
         
         The default value is TRUE
         """
+        ...
+
+    @RootDisplayed.setter
+    def RootDisplayed(self, value: bool) -> None:
         ...
     @property
     def RowHeight(self) -> int:
@@ -79,6 +95,10 @@ class TreeControlModel(UnoControlModel_c8ce0c58):
         The default value is 0
         """
         ...
+
+    @RowHeight.setter
+    def RowHeight(self, value: int) -> None:
+        ...
     @property
     def SelectionType(self) -> 'SelectionType_bd790c0b':
         """
@@ -86,6 +106,10 @@ class TreeControlModel(UnoControlModel_c8ce0c58):
         
         The default value is com.sun.star.view.SelectionType.NONE
         """
+        ...
+
+    @SelectionType.setter
+    def SelectionType(self, value: 'SelectionType_bd790c0b') -> None:
         ...
     @property
     def ShowsHandles(self) -> bool:
@@ -97,6 +121,10 @@ class TreeControlModel(UnoControlModel_c8ce0c58):
         The default value is TRUE
         """
         ...
+
+    @ShowsHandles.setter
+    def ShowsHandles(self, value: bool) -> None:
+        ...
     @property
     def ShowsRootHandles(self) -> bool:
         """
@@ -106,4 +134,7 @@ class TreeControlModel(UnoControlModel_c8ce0c58):
         """
         ...
 
+    @ShowsRootHandles.setter
+    def ShowsRootHandles(self, value: bool) -> None:
+        ...
 

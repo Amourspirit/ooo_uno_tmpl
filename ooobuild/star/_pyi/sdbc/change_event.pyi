@@ -57,6 +57,9 @@ class ChangeEvent(EventObject_a3d70b03):
         """
         ...
 
+    @Action.setter
+    def Action(self, value: int) -> None:
+        ...
 
     @property
     def Rows(self) -> int:
@@ -65,4 +68,7 @@ class ChangeEvent(EventObject_a3d70b03):
         """
         ...
 
+    @Rows.setter
+    def Rows(self, value: int) -> None:
+        ...
 

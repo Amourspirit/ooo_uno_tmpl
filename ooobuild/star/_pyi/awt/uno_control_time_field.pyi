@@ -39,4 +39,3 @@ class UnoControlTimeField(UnoControlEdit_bc4e0bed, XSpinField_8e3a0a2a, XTimeFie
     """
     ...
 
-

@@ -44,4 +44,7 @@ class XReifiedStatement(XResource_842709e4):
         """
         ...
 
+    @Statement.setter
+    def Statement(self, value: 'Statement_84a009f9') -> None:
+        ...
 

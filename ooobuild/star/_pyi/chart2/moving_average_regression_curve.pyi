@@ -34,4 +34,3 @@ class MovingAverageRegressionCurve(XRegressionCurve_fa3c0dca):
     """
     ...
 
-

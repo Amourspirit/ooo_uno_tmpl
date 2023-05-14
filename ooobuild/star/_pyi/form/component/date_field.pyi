@@ -40,4 +40,7 @@ class DateField(UnoControlDateFieldModel_47c90fba, FormControlModel_e2990d22, XR
         """
         ...
 
+    @DefaultDate.setter
+    def DefaultDate(self, value: int) -> None:
+        ...
 

@@ -51,4 +51,7 @@ class TreeExpansionEvent(EventObject_a3d70b03):
     def Node(self) -> XTreeNode_baaf0ba0:
         ...
 
+    @Node.setter
+    def Node(self, value: XTreeNode_baaf0ba0) -> None:
+        ...
 

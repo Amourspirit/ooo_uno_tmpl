@@ -37,4 +37,8 @@ class ColorScale(XConditionEntry_e2340d32):
         """
         ...
 
+    @ColorScaleEntries.setter
+    def ColorScaleEntries(self, value: 'typing.Tuple[XColorScaleEntry_ee810d72, ...]') -> None:
+        ...
+
 

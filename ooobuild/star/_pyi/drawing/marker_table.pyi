@@ -33,4 +33,3 @@ class MarkerTable(XNameContainer_cb90e47):
     """
     ...
 
-

@@ -44,6 +44,10 @@ class XShape(XReportControlModel_2d800f4a):
         """
         ...
 
+    @CustomShapeGeometry.setter
+    def CustomShapeGeometry(self, value: 'typing.Tuple[PropertyValue_c9610c73, ...]') -> None:
+        ...
+
     @property
     def CustomShapeData(self) -> str:
         """
@@ -51,6 +55,9 @@ class XShape(XReportControlModel_2d800f4a):
         """
         ...
 
+    @CustomShapeData.setter
+    def CustomShapeData(self, value: str) -> None:
+        ...
     @property
     def CustomShapeEngine(self) -> str:
         """
@@ -58,6 +65,9 @@ class XShape(XReportControlModel_2d800f4a):
         """
         ...
 
+    @CustomShapeEngine.setter
+    def CustomShapeEngine(self, value: str) -> None:
+        ...
     @property
     def Opaque(self) -> bool:
         """
@@ -65,6 +75,9 @@ class XShape(XReportControlModel_2d800f4a):
         """
         ...
 
+    @Opaque.setter
+    def Opaque(self, value: bool) -> None:
+        ...
     @property
     def Transformation(self) -> 'HomogenMatrix3_f0fb0d69':
         """
@@ -74,6 +87,9 @@ class XShape(XReportControlModel_2d800f4a):
         """
         ...
 
+    @Transformation.setter
+    def Transformation(self, value: 'HomogenMatrix3_f0fb0d69') -> None:
+        ...
     @property
     def ZOrder(self) -> int:
         """
@@ -81,4 +97,7 @@ class XShape(XReportControlModel_2d800f4a):
         """
         ...
 
+    @ZOrder.setter
+    def ZOrder(self, value: int) -> None:
+        ...
 

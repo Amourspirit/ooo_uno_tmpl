@@ -50,9 +50,15 @@ class PolyPolygonBezierCoords(object):
     def Coordinates(self) -> PointSequenceSequence_5c591070:
         ...
 
+    @Coordinates.setter
+    def Coordinates(self, value: PointSequenceSequence_5c591070) -> None:
+        ...
 
     @property
     def Flags(self) -> FlagSequenceSequence_49130fe0:
         ...
 
+    @Flags.setter
+    def Flags(self, value: FlagSequenceSequence_49130fe0) -> None:
+        ...
 

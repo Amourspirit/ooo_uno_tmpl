@@ -46,4 +46,3 @@ class Paragraph(TextTable_90440a5a, TextContent_a6810b4d, CharacterProperties_1d
     """
     ...
 
-

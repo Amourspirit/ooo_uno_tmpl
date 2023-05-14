@@ -31,4 +31,3 @@ class PropertiesManager(XPropertySetInfo_efa90d86):
     """
     ...
 
-

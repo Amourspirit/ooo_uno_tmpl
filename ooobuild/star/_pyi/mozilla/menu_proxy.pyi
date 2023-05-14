@@ -31,4 +31,3 @@ class MenuProxy(XMenuProxy_bdf90c0f):
     """
     ...
 
-

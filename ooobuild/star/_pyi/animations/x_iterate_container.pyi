@@ -39,6 +39,9 @@ class XIterateContainer(XTimeContainer_1cca0ec5):
         """
         ...
 
+    @IterateInterval.setter
+    def IterateInterval(self, value: float) -> None:
+        ...
     @property
     def IterateType(self) -> int:
         """
@@ -48,6 +51,9 @@ class XIterateContainer(XTimeContainer_1cca0ec5):
         """
         ...
 
+    @IterateType.setter
+    def IterateType(self, value: int) -> None:
+        ...
     @property
     def SubItem(self) -> int:
         """
@@ -57,6 +63,9 @@ class XIterateContainer(XTimeContainer_1cca0ec5):
         """
         ...
 
+    @SubItem.setter
+    def SubItem(self, value: int) -> None:
+        ...
     @property
     def Target(self) -> object:
         """
@@ -66,4 +75,7 @@ class XIterateContainer(XTimeContainer_1cca0ec5):
         """
         ...
 
+    @Target.setter
+    def Target(self, value: object) -> None:
+        ...
 

@@ -43,4 +43,3 @@ class CallableStatement(PreparedStatement_eef40d8c, XOutParameters_c6db0c48, XRo
     """
     ...
 
-

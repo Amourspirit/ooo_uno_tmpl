@@ -84,4 +84,7 @@ class XExternalSheetCache(ABC):
         """
         ...
 
+    @TokenIndex.setter
+    def TokenIndex(self, value: int) -> None:
+        ...
 

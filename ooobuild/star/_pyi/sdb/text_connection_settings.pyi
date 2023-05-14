@@ -34,4 +34,3 @@ class TextConnectionSettings(XTextConnectionSettings_380e0f9f):
     """
     ...
 
-

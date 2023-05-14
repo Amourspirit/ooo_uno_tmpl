@@ -39,4 +39,3 @@ class LayoutManager(XLayoutManager2_e1270cd6):
     """
     ...
 
-

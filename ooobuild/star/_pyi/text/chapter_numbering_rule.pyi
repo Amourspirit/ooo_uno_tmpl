@@ -46,4 +46,7 @@ class ChapterNumberingRule(NumberingRule_cb530c78):
         """
         ...
 
+    @HeadingStyleName.setter
+    def HeadingStyleName(self, value: str) -> None:
+        ...
 

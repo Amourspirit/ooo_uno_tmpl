@@ -53,4 +53,7 @@ class SQLErrorEvent(EventObject_a3d70b03):
         """
         ...
 
+    @Reason.setter
+    def Reason(self, value: object) -> None:
+        ...
 

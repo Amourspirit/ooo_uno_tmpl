@@ -57,6 +57,9 @@ class ContainerEvent(EventObject_a3d70b03):
         """
         ...
 
+    @Accessor.setter
+    def Accessor(self, value: object) -> None:
+        ...
 
     @property
     def Element(self) -> object:
@@ -65,6 +68,9 @@ class ContainerEvent(EventObject_a3d70b03):
         """
         ...
 
+    @Element.setter
+    def Element(self, value: object) -> None:
+        ...
 
     @property
     def ReplacedElement(self) -> object:
@@ -73,4 +79,7 @@ class ContainerEvent(EventObject_a3d70b03):
         """
         ...
 
+    @ReplacedElement.setter
+    def ReplacedElement(self, value: object) -> None:
+        ...
 

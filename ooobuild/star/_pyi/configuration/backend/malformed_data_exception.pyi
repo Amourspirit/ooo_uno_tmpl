@@ -62,6 +62,9 @@ class MalformedDataException(Exception_85530a09):
         """
         ...
 
+    @ErrorDetails.setter
+    def ErrorDetails(self, value: object) -> None:
+        ...
 
 __all__ = ['MalformedDataException']
 

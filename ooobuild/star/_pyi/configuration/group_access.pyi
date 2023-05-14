@@ -40,4 +40,3 @@ class GroupAccess(HierarchyAccess_5e871071, PropertyHierarchy_83841184):
     """
     ...
 
-

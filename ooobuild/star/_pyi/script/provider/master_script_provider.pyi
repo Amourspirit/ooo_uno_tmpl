@@ -31,4 +31,3 @@ class MasterScriptProvider(ScriptProvider_6fa610f6):
     """
     ...
 
-

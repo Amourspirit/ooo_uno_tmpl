@@ -53,6 +53,9 @@ class PostCommandArgument(object):
         """
         ...
 
+    @Source.setter
+    def Source(self, value: XInputStream_98d40ab4) -> None:
+        ...
 
     @property
     def Sink(self) -> XInterface_8f010a43:
@@ -61,4 +64,7 @@ class PostCommandArgument(object):
         """
         ...
 
+    @Sink.setter
+    def Sink(self, value: XInterface_8f010a43) -> None:
+        ...
 

@@ -51,6 +51,9 @@ class AtomDescription(object):
         """
         ...
 
+    @atom.setter
+    def atom(self, value: int) -> None:
+        ...
 
     @property
     def description(self) -> str:
@@ -59,4 +62,7 @@ class AtomDescription(object):
         """
         ...
 
+    @description.setter
+    def description(self, value: str) -> None:
+        ...
 

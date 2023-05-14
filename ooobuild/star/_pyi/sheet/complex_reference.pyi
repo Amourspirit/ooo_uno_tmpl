@@ -52,6 +52,9 @@ class ComplexReference(object):
         """
         ...
 
+    @Reference1.setter
+    def Reference1(self, value: SingleReference_e27e0d12) -> None:
+        ...
 
     @property
     def Reference2(self) -> SingleReference_e27e0d12:
@@ -60,4 +63,7 @@ class ComplexReference(object):
         """
         ...
 
+    @Reference2.setter
+    def Reference2(self, value: SingleReference_e27e0d12) -> None:
+        ...
 

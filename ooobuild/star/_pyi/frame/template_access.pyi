@@ -32,4 +32,3 @@ class TemplateAccess(XDocumentTemplates_b000e59, XLocalizable_aee00b64):
     """
     ...
 
-

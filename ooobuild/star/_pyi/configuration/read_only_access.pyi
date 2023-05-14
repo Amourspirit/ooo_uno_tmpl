@@ -41,4 +41,3 @@ class ReadOnlyAccess(XHierarchicalNameAccess_9e2611b5):
         """
         ...
 
-

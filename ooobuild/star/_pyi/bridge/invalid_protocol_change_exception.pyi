@@ -54,6 +54,9 @@ class InvalidProtocolChangeException(Exception_85530a09):
         """
         ...
 
+    @invalidProperty.setter
+    def invalidProperty(self, value: ProtocolProperty_ff280e2c) -> None:
+        ...
     @property
     def reason(self) -> int:
         """
@@ -61,6 +64,9 @@ class InvalidProtocolChangeException(Exception_85530a09):
         """
         ...
 
+    @reason.setter
+    def reason(self, value: int) -> None:
+        ...
 
 __all__ = ['InvalidProtocolChangeException']
 

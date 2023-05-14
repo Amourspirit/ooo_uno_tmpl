@@ -51,6 +51,9 @@ class SetPropertyTolerantFailed(object):
         """
         ...
 
+    @Name.setter
+    def Name(self, value: str) -> None:
+        ...
 
     @property
     def Result(self) -> int:
@@ -61,4 +64,7 @@ class SetPropertyTolerantFailed(object):
         """
         ...
 
+    @Result.setter
+    def Result(self, value: int) -> None:
+        ...
 

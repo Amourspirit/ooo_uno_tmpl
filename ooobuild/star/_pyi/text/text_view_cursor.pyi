@@ -32,4 +32,3 @@ class TextViewCursor(TextLayoutCursor_e5530d6e, XScreenCursor_bc4a0bf9):
     """
     ...
 
-

@@ -36,4 +36,3 @@ class AsyncJob(XAsyncJob_8eb50a2c, XCloseable_99ee0aa8):
     """
     ...
 
-

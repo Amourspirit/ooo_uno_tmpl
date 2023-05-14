@@ -35,11 +35,19 @@ class ViewSettings(XPropertySet_bc180bfa):
         If this property is TRUE, the horizontal ruler is displayed.
         """
         ...
+
+    @ShowHoriRuler.setter
+    def ShowHoriRuler(self, value: bool) -> None:
+        ...
     @property
     def ShowHoriScrollBar(self) -> bool:
         """
         If this property is TRUE, the horizontal scroll bar is displayed.
         """
+        ...
+
+    @ShowHoriScrollBar.setter
+    def ShowHoriScrollBar(self, value: bool) -> None:
         ...
     @property
     def ShowVertRuler(self) -> bool:
@@ -47,11 +55,19 @@ class ViewSettings(XPropertySet_bc180bfa):
         If this property is TRUE, the vertical ruler is displayed.
         """
         ...
+
+    @ShowVertRuler.setter
+    def ShowVertRuler(self, value: bool) -> None:
+        ...
     @property
     def ShowVertScrollBar(self) -> bool:
         """
         If this property is TRUE, the vertical scroll bar is displayed.
         """
+        ...
+
+    @ShowVertScrollBar.setter
+    def ShowVertScrollBar(self, value: bool) -> None:
         ...
     @property
     def ZoomValue(self) -> int:
@@ -60,4 +76,7 @@ class ViewSettings(XPropertySet_bc180bfa):
         """
         ...
 
+    @ZoomValue.setter
+    def ZoomValue(self, value: int) -> None:
+        ...
 

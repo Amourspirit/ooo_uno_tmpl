@@ -59,6 +59,9 @@ class TextHit(object):
         """
         ...
 
+    @EntryIndex.setter
+    def EntryIndex(self, value: int) -> None:
+        ...
 
     @property
     def IsLeadingEdge(self) -> bool:
@@ -69,4 +72,7 @@ class TextHit(object):
         """
         ...
 
+    @IsLeadingEdge.setter
+    def IsLeadingEdge(self, value: bool) -> None:
+        ...
 

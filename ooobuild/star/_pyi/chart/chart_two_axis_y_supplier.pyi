@@ -40,11 +40,19 @@ class ChartTwoAxisYSupplier(ChartAxisYSupplier_a9e0e4e, XTwoAxisYSupplier_fce40d
         determines if the secondary y-axis is shown or hidden.
         """
         ...
+
+    @HasSecondaryYAxis.setter
+    def HasSecondaryYAxis(self, value: bool) -> None:
+        ...
     @property
     def HasSecondaryYAxisDescription(self) -> bool:
         """
         determines for the secondary y-axis if the labels at the tick marks are shown or hidden.
         """
+        ...
+
+    @HasSecondaryYAxisDescription.setter
+    def HasSecondaryYAxisDescription(self, value: bool) -> None:
         ...
     @property
     def HasSecondaryYAxisTitle(self) -> bool:
@@ -57,4 +65,7 @@ class ChartTwoAxisYSupplier(ChartAxisYSupplier_a9e0e4e, XTwoAxisYSupplier_fce40d
         """
         ...
 
+    @HasSecondaryYAxisTitle.setter
+    def HasSecondaryYAxisTitle(self, value: bool) -> None:
+        ...
 

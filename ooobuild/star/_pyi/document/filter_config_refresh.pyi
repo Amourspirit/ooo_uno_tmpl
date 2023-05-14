@@ -34,4 +34,3 @@ class FilterConfigRefresh(XRefreshable_b0d60b81):
     """
     ...
 
-

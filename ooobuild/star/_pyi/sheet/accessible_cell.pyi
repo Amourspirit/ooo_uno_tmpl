@@ -38,4 +38,3 @@ class AccessibleCell(XAccessibleComponent_b2f21269, XAccessibleContext_8eae119b,
     """
     ...
 
-

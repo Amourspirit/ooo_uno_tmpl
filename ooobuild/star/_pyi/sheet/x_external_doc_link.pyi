@@ -58,4 +58,7 @@ class XExternalDocLink(XEnumerationAccess_4bac0ffc, XIndexAccess_f0910d6d, XName
         """
         ...
 
+    @TokenIndex.setter
+    def TokenIndex(self, value: int) -> None:
+        ...
 

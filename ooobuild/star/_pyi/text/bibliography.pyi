@@ -38,6 +38,10 @@ class Bibliography(BaseIndex_8f0d0a40):
         contains the locale of the index.
         """
         ...
+
+    @Locale.setter
+    def Locale(self, value: 'Locale_70d308fa') -> None:
+        ...
     @property
     def SortAlgorithm(self) -> str:
         """
@@ -45,4 +49,7 @@ class Bibliography(BaseIndex_8f0d0a40):
         """
         ...
 
+    @SortAlgorithm.setter
+    def SortAlgorithm(self, value: str) -> None:
+        ...
 

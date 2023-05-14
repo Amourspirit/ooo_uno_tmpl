@@ -50,6 +50,9 @@ class XDataType(XPropertySet_bc180bfa):
         """
         ...
 
+    @IsBasic.setter
+    def IsBasic(self, value: bool) -> None:
+        ...
     @property
     def Name(self) -> str:
         """
@@ -57,6 +60,9 @@ class XDataType(XPropertySet_bc180bfa):
         """
         ...
 
+    @Name.setter
+    def Name(self, value: str) -> None:
+        ...
     @property
     def Pattern(self) -> str:
         """
@@ -66,6 +72,9 @@ class XDataType(XPropertySet_bc180bfa):
         """
         ...
 
+    @Pattern.setter
+    def Pattern(self, value: str) -> None:
+        ...
     @property
     def TypeClass(self) -> int:
         """
@@ -73,6 +82,9 @@ class XDataType(XPropertySet_bc180bfa):
         """
         ...
 
+    @TypeClass.setter
+    def TypeClass(self, value: int) -> None:
+        ...
     @property
     def WhiteSpaceTreatment(self) -> int:
         """
@@ -82,4 +94,7 @@ class XDataType(XPropertySet_bc180bfa):
         """
         ...
 
+    @WhiteSpaceTreatment.setter
+    def WhiteSpaceTreatment(self, value: int) -> None:
+        ...
 

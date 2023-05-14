@@ -33,4 +33,3 @@ class X11DragSource(XDragSource_49900fb2, XComponent_98dc0ab5, XInitialization_d
     """
     ...
 
-

@@ -47,4 +47,7 @@ class ParaUserDefinedAttributesSupplier(ABC):
         """
         ...
 
+    @ParaUserDefinedAttributes.setter
+    def ParaUserDefinedAttributes(self, value: 'XNameContainer_cb90e47') -> None:
+        ...
 

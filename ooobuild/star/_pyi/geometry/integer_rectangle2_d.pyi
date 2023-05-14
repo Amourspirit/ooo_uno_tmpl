@@ -57,6 +57,9 @@ class IntegerRectangle2D(object):
         """
         ...
 
+    @X1.setter
+    def X1(self, value: int) -> None:
+        ...
 
     @property
     def Y1(self) -> int:
@@ -65,6 +68,9 @@ class IntegerRectangle2D(object):
         """
         ...
 
+    @Y1.setter
+    def Y1(self, value: int) -> None:
+        ...
 
     @property
     def X2(self) -> int:
@@ -75,6 +81,9 @@ class IntegerRectangle2D(object):
         """
         ...
 
+    @X2.setter
+    def X2(self, value: int) -> None:
+        ...
 
     @property
     def Y2(self) -> int:
@@ -85,4 +94,7 @@ class IntegerRectangle2D(object):
         """
         ...
 
+    @Y2.setter
+    def Y2(self, value: int) -> None:
+        ...
 

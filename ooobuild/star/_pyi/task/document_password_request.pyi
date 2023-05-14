@@ -62,6 +62,9 @@ class DocumentPasswordRequest(PasswordRequest_d7280cf7):
         """
         ...
 
+    @Name.setter
+    def Name(self, value: str) -> None:
+        ...
 
 __all__ = ['DocumentPasswordRequest']
 

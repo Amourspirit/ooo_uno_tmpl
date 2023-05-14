@@ -41,4 +41,3 @@ class CsvLogFormatter(XCsvLogFormatter_b560e49):
         """
         ...
 
-

@@ -46,6 +46,10 @@ class DatabaseAccessDataSource(XPropertySet_bc180bfa, XCompletedConnection_98a0e
         determines the password handling.
         """
         ...
+
+    @PasswordMode.setter
+    def PasswordMode(self, value: 'RememberAuthentication_28a80f31') -> None:
+        ...
     @property
     def URL(self) -> str:
         """
@@ -53,4 +57,7 @@ class DatabaseAccessDataSource(XPropertySet_bc180bfa, XCompletedConnection_98a0e
         """
         ...
 
+    @URL.setter
+    def URL(self, value: str) -> None:
+        ...
 

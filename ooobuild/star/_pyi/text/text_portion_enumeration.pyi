@@ -33,4 +33,3 @@ class TextPortionEnumeration(XEnumeration_f2180daa):
     """
     ...
 
-

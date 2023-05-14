@@ -33,10 +33,18 @@ class ConditionFormatEntry(XConditionEntry_e2340d32):
         """
         """
         ...
+
+    @Formula1.setter
+    def Formula1(self, value: str) -> None:
+        ...
     @property
     def Formula2(self) -> str:
         """
         """
+        ...
+
+    @Formula2.setter
+    def Formula2(self, value: str) -> None:
         ...
     @property
     def Operator(self) -> int:
@@ -44,10 +52,17 @@ class ConditionFormatEntry(XConditionEntry_e2340d32):
         See com.sun.star.sheet.ConditionFormatOperator for valid values.
         """
         ...
+
+    @Operator.setter
+    def Operator(self, value: int) -> None:
+        ...
     @property
     def StyleName(self) -> str:
         """
         """
         ...
 
+    @StyleName.setter
+    def StyleName(self, value: str) -> None:
+        ...
 

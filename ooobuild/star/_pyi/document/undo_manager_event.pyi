@@ -58,6 +58,9 @@ class UndoManagerEvent(EventObject_a3d70b03):
         """
         ...
 
+    @UndoActionTitle.setter
+    def UndoActionTitle(self, value: str) -> None:
+        ...
 
     @property
     def UndoContextDepth(self) -> int:
@@ -66,4 +69,7 @@ class UndoManagerEvent(EventObject_a3d70b03):
         """
         ...
 
+    @UndoContextDepth.setter
+    def UndoContextDepth(self, value: int) -> None:
+        ...
 

@@ -103,6 +103,9 @@ class XMap(XElementAccess_cd60e3f):
         """
         ...
 
+    @KeyType.setter
+    def KeyType(self, value: object) -> None:
+        ...
     @property
     def ValueType(self) -> object:
         """
@@ -112,4 +115,7 @@ class XMap(XElementAccess_cd60e3f):
         """
         ...
 
+    @ValueType.setter
+    def ValueType(self, value: object) -> None:
+        ...
 

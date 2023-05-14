@@ -34,4 +34,3 @@ class BindableDatabaseFormattedField(BindableDataAwareControlModel_47091512, Dat
     """
     ...
 
-

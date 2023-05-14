@@ -38,4 +38,3 @@ class Controller(XUserInputInterception_2a7e0f4f, XTransferableSupplier_b602128c
     """
     ...
 
-

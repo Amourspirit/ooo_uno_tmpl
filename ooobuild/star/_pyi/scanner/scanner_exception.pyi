@@ -53,6 +53,9 @@ class ScannerException(Exception_85530a09):
         """
         ...
 
+    @Error.setter
+    def Error(self, value: ScanError_b0d90b81) -> None:
+        ...
 
 __all__ = ['ScannerException']
 

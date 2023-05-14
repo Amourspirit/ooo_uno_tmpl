@@ -40,4 +40,3 @@ class Content(XPropertiesChangeNotifier_7a7b111c, XPropertyContainer_c600e71, XP
     """
     ...
 
-

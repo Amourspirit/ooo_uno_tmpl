@@ -31,4 +31,3 @@ class UnoControlDialog(XUnoControlDialog_e1740d0f):
     """
     ...
 
-

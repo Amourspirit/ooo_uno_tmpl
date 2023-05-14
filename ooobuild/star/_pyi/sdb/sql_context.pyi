@@ -59,6 +59,9 @@ class SQLContext(SQLWarning_96f10a6a):
         """
         ...
 
+    @Details.setter
+    def Details(self, value: str) -> None:
+        ...
 
 __all__ = ['SQLContext']
 

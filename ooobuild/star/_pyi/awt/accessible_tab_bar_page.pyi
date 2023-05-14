@@ -37,4 +37,3 @@ class AccessibleTabBarPage(XAccessibleContext_8eae119b, XAccessibleEventBroadcas
     """
     ...
 
-

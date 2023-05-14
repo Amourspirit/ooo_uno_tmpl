@@ -40,6 +40,10 @@ class RedlinePortion(TextPortion_a6f80b5d):
         determines whether the portion is member of a header or footer text.
         """
         ...
+
+    @IsInHeaderFooter.setter
+    def IsInHeaderFooter(self, value: bool) -> None:
+        ...
     @property
     def MergeLastPara(self) -> bool:
         """
@@ -48,11 +52,19 @@ class RedlinePortion(TextPortion_a6f80b5d):
         a text table)
         """
         ...
+
+    @MergeLastPara.setter
+    def MergeLastPara(self, value: bool) -> None:
+        ...
     @property
     def RedlineAuthor(self) -> str:
         """
         contains the name of the author of the change.
         """
+        ...
+
+    @RedlineAuthor.setter
+    def RedlineAuthor(self, value: str) -> None:
         ...
     @property
     def RedlineComment(self) -> str:
@@ -60,11 +72,19 @@ class RedlinePortion(TextPortion_a6f80b5d):
         contains a comment for the change.
         """
         ...
+
+    @RedlineComment.setter
+    def RedlineComment(self, value: str) -> None:
+        ...
     @property
     def RedlineDateTime(self) -> 'DateTime_84de09d3':
         """
         contains the date and time of the change.
         """
+        ...
+
+    @RedlineDateTime.setter
+    def RedlineDateTime(self, value: 'DateTime_84de09d3') -> None:
         ...
     @property
     def RedlineIdentifier(self) -> str:
@@ -74,6 +94,10 @@ class RedlinePortion(TextPortion_a6f80b5d):
         This is necessary for file export filters to able to recognize redline portions that point to the same redline.
         """
         ...
+
+    @RedlineIdentifier.setter
+    def RedlineIdentifier(self, value: str) -> None:
+        ...
     @property
     def RedlineSuccessorData(self) -> 'PropertyValues_d6470ce6':
         """
@@ -82,6 +106,10 @@ class RedlinePortion(TextPortion_a6f80b5d):
         The elements of the sequence are:
         """
         ...
+
+    @RedlineSuccessorData.setter
+    def RedlineSuccessorData(self, value: 'PropertyValues_d6470ce6') -> None:
+        ...
     @property
     def RedlineText(self) -> 'XText_690408ca':
         """
@@ -89,6 +117,10 @@ class RedlinePortion(TextPortion_a6f80b5d):
         
         This interface is only provided if the change is not visible. The visibility depends on the redline display options that are set at the documents property set (RedlineDisplayType).
         """
+        ...
+
+    @RedlineText.setter
+    def RedlineText(self, value: 'XText_690408ca') -> None:
         ...
     @property
     def RedlineType(self) -> str:
@@ -99,4 +131,7 @@ class RedlinePortion(TextPortion_a6f80b5d):
         """
         ...
 
+    @RedlineType.setter
+    def RedlineType(self, value: str) -> None:
+        ...
 

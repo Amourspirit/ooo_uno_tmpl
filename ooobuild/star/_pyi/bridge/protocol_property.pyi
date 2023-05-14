@@ -48,9 +48,15 @@ class ProtocolProperty(object):
     def Name(self) -> str:
         ...
 
+    @Name.setter
+    def Name(self, value: str) -> None:
+        ...
 
     @property
     def Value(self) -> object:
         ...
 
+    @Value.setter
+    def Value(self, value: object) -> None:
+        ...
 

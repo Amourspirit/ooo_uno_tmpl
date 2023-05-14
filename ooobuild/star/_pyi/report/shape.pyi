@@ -30,4 +30,3 @@ class Shape(XShape_862909ed):
     """
     ...
 
-

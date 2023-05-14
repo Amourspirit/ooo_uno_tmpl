@@ -50,4 +50,7 @@ class FilePickerEvent(EventObject_a3d70b03):
     def ElementId(self) -> int:
         ...
 
+    @ElementId.setter
+    def ElementId(self, value: int) -> None:
+        ...
 

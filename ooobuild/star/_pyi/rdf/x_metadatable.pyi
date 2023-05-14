@@ -58,4 +58,7 @@ class XMetadatable(XURI_5682078c):
         """
         ...
 
+    @MetadataReference.setter
+    def MetadataReference(self, value: 'StringPair_a4bc0b14') -> None:
+        ...
 

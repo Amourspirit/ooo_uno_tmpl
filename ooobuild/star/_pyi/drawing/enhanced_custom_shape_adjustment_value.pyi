@@ -53,11 +53,17 @@ class EnhancedCustomShapeAdjustmentValue(object):
         """
         ...
 
+    @Value.setter
+    def Value(self, value: object) -> None:
+        ...
 
     @property
     def State(self) -> PropertyState_c97b0c77:
         ...
 
+    @State.setter
+    def State(self, value: PropertyState_c97b0c77) -> None:
+        ...
 
     @property
     def Name(self) -> str:
@@ -66,4 +72,7 @@ class EnhancedCustomShapeAdjustmentValue(object):
         """
         ...
 
+    @Name.setter
+    def Name(self, value: str) -> None:
+        ...
 

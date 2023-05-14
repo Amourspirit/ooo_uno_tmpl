@@ -31,4 +31,3 @@ class ConfigurationRegistry(XSimpleRegistry_10150e9c, XFlushable_9a420ab4):
     """
     ...
 
-

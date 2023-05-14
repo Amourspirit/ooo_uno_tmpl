@@ -34,4 +34,3 @@ class AnimateSet(XAnimate_ca680c52):
     """
     ...
 
-

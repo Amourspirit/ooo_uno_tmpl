@@ -31,4 +31,3 @@ class TableChartsEnumeration(XEnumeration_f2180daa):
     """
     ...
 
-

@@ -31,4 +31,3 @@ class TableConditionalEntryEnumeration(XEnumeration_f2180daa):
     """
     ...
 
-

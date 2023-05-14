@@ -37,4 +37,3 @@ class DispatchRecorderSupplier(XDispatchRecorderSupplier_79301125):
     """
     ...
 
-

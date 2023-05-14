@@ -37,17 +37,29 @@ class TableColumn(XPropertySet_bc180bfa, XNamed_a6520b08, XCellRange_a2f70ad5):
         is TRUE, if there is a manual horizontal page break attached to the column.
         """
         ...
+
+    @IsStartOfNewPage.setter
+    def IsStartOfNewPage(self, value: bool) -> None:
+        ...
     @property
     def IsVisible(self) -> bool:
         """
         is TRUE, if the column is visible.
         """
         ...
+
+    @IsVisible.setter
+    def IsVisible(self, value: bool) -> None:
+        ...
     @property
     def OptimalWidth(self) -> bool:
         """
         is TRUE, if the column always keeps its optimal width.
         """
+        ...
+
+    @OptimalWidth.setter
+    def OptimalWidth(self, value: bool) -> None:
         ...
     @property
     def Width(self) -> int:
@@ -58,4 +70,7 @@ class TableColumn(XPropertySet_bc180bfa, XNamed_a6520b08, XCellRange_a2f70ad5):
         """
         ...
 
+    @Width.setter
+    def Width(self, value: int) -> None:
+        ...
 

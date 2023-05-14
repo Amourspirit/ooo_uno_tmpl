@@ -39,4 +39,3 @@ class PathSubstitution(XStringSubstitution_f660eb2):
     """
     ...
 
-

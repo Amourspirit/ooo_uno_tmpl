@@ -57,4 +57,7 @@ class PropertyValueInfo(PropertyValue_c9610c73):
         """
         ...
 
+    @ValueState.setter
+    def ValueState(self, value: PropertyValueState_f1050da5) -> None:
+        ...
 

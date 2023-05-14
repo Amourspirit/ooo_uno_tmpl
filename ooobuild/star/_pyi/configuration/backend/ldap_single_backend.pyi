@@ -35,4 +35,3 @@ class LdapSingleBackend(SingleBackend_c64d1280):
     """
     ...
 
-

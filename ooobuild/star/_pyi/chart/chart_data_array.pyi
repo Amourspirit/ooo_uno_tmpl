@@ -34,4 +34,3 @@ class ChartDataArray(ChartData_98ce0a86, XChartDataArray_df4c0cdd):
     """
     ...
 
-

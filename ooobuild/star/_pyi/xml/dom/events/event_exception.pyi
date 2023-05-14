@@ -50,6 +50,9 @@ class EventException(Exception_85530a09):
         """
         ...
 
+    @code.setter
+    def code(self, value: int) -> None:
+        ...
 
 __all__ = ['EventException']
 

@@ -39,4 +39,3 @@ class ChartGrid(LineProperties_f13f0da9, UserDefinedAttributesSupplier_9fbe1222,
     """
     ...
 
-

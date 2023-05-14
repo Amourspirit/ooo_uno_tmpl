@@ -51,6 +51,10 @@ class XFunctionDescription(XPropertySet_bc180bfa):
         """
         ...
 
+    @Arguments.setter
+    def Arguments(self, value: 'typing.Tuple[FunctionArgument_f1080daa, ...]') -> None:
+        ...
+
     @property
     def Category(self) -> 'XFunctionCategory_59e21055':
         """
@@ -58,6 +62,9 @@ class XFunctionDescription(XPropertySet_bc180bfa):
         """
         ...
 
+    @Category.setter
+    def Category(self, value: 'XFunctionCategory_59e21055') -> None:
+        ...
     @property
     def Description(self) -> str:
         """
@@ -65,6 +72,9 @@ class XFunctionDescription(XPropertySet_bc180bfa):
         """
         ...
 
+    @Description.setter
+    def Description(self, value: str) -> None:
+        ...
     @property
     def Name(self) -> str:
         """
@@ -72,6 +82,9 @@ class XFunctionDescription(XPropertySet_bc180bfa):
         """
         ...
 
+    @Name.setter
+    def Name(self, value: str) -> None:
+        ...
     @property
     def Signature(self) -> str:
         """
@@ -79,4 +92,7 @@ class XFunctionDescription(XPropertySet_bc180bfa):
         """
         ...
 
+    @Signature.setter
+    def Signature(self, value: str) -> None:
+        ...
 

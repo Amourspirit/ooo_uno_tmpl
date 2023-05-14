@@ -61,6 +61,9 @@ class FilePermission(object):
         """
         ...
 
+    @URL.setter
+    def URL(self, value: str) -> None:
+        ...
 
     @property
     def Actions(self) -> str:
@@ -69,4 +72,7 @@ class FilePermission(object):
         """
         ...
 
+    @Actions.setter
+    def Actions(self, value: str) -> None:
+        ...
 

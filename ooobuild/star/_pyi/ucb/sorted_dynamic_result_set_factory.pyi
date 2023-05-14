@@ -31,4 +31,3 @@ class SortedDynamicResultSetFactory(XSortedDynamicResultSetFactory_ae561253):
     """
     ...
 
-

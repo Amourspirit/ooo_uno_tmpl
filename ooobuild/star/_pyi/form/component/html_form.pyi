@@ -43,17 +43,29 @@ class HTMLForm(Form_ca1d0c51, XReset_71670917, XSubmit_7b060988):
         specifies the kind of encoding for submission.
         """
         ...
+
+    @SubmitEncoding.setter
+    def SubmitEncoding(self, value: 'FormSubmitEncoding_fdd50deb') -> None:
+        ...
     @property
     def SubmitMethod(self) -> 'FormSubmitMethod_e2a90d25':
         """
         specifies the kind of submission.
         """
         ...
+
+    @SubmitMethod.setter
+    def SubmitMethod(self, value: 'FormSubmitMethod_e2a90d25') -> None:
+        ...
     @property
     def TargetFrame(self) -> str:
         """
         describes the frame, where to open the document specified by the TargetURL.
         """
+        ...
+
+    @TargetFrame.setter
+    def TargetFrame(self, value: str) -> None:
         ...
     @property
     def TargetURL(self) -> str:
@@ -62,4 +74,7 @@ class HTMLForm(Form_ca1d0c51, XReset_71670917, XSubmit_7b060988):
         """
         ...
 
+    @TargetURL.setter
+    def TargetURL(self, value: str) -> None:
+        ...
 

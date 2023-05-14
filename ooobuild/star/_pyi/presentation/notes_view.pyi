@@ -35,4 +35,3 @@ class NotesView(DrawingDocumentDrawView_7c7d1128):
     """
     ...
 
-

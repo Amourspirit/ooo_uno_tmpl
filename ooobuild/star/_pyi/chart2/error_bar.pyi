@@ -35,25 +35,45 @@ class ErrorBar(LineProperties_f13f0da9, XDataSink_dbc40c7b, XDataSource_f6340d57
         """
         """
         ...
+
+    @ErrorBarStyle.setter
+    def ErrorBarStyle(self, value: int) -> None:
+        ...
     @property
     def NegativeError(self) -> float:
         """
         """
+        ...
+
+    @NegativeError.setter
+    def NegativeError(self, value: float) -> None:
         ...
     @property
     def PositiveError(self) -> float:
         """
         """
         ...
+
+    @PositiveError.setter
+    def PositiveError(self, value: float) -> None:
+        ...
     @property
     def ShowNegativeError(self) -> bool:
         """
         """
         ...
+
+    @ShowNegativeError.setter
+    def ShowNegativeError(self, value: bool) -> None:
+        ...
     @property
     def ShowPositiveError(self) -> bool:
         """
         """
+        ...
+
+    @ShowPositiveError.setter
+    def ShowPositiveError(self, value: bool) -> None:
         ...
     @property
     def Weight(self) -> float:
@@ -62,4 +82,7 @@ class ErrorBar(LineProperties_f13f0da9, XDataSink_dbc40c7b, XDataSource_f6340d57
         """
         ...
 
+    @Weight.setter
+    def Weight(self, value: float) -> None:
+        ...
 

@@ -51,19 +51,31 @@ class HomogenMatrix4(object):
     def Line1(self) -> HomogenMatrixLine4_2b170ef2:
         ...
 
+    @Line1.setter
+    def Line1(self, value: HomogenMatrixLine4_2b170ef2) -> None:
+        ...
 
     @property
     def Line2(self) -> HomogenMatrixLine4_2b170ef2:
         ...
 
+    @Line2.setter
+    def Line2(self, value: HomogenMatrixLine4_2b170ef2) -> None:
+        ...
 
     @property
     def Line3(self) -> HomogenMatrixLine4_2b170ef2:
         ...
 
+    @Line3.setter
+    def Line3(self, value: HomogenMatrixLine4_2b170ef2) -> None:
+        ...
 
     @property
     def Line4(self) -> HomogenMatrixLine4_2b170ef2:
         ...
 
+    @Line4.setter
+    def Line4(self, value: HomogenMatrixLine4_2b170ef2) -> None:
+        ...
 

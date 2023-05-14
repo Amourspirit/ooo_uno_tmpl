@@ -38,4 +38,3 @@ class LayerFilter(XLayer_4cd50fcb, XInitialization_d46c0cca):
     """
     ...
 
-

@@ -37,4 +37,3 @@ class ExternalDocLinks(XExternalDocLinks_fd2f0dd3):
     """
     ...
 
-

@@ -34,4 +34,3 @@ class BindableDatabaseDateField(BindableDataAwareControlModel_47091512, Database
     """
     ...
 
-

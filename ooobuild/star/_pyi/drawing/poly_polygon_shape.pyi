@@ -39,4 +39,3 @@ class PolyPolygonShape(FillProperties_f1200da8, LineProperties_f13f0da9, PolyPol
     """
     ...
 
-

@@ -56,6 +56,9 @@ class TimeWithTimezone(object):
         """
         ...
 
+    @TimeInTZ.setter
+    def TimeInTZ(self, value: Time_604e0855) -> None:
+        ...
 
     @property
     def Timezone(self) -> int:
@@ -66,4 +69,7 @@ class TimeWithTimezone(object):
         """
         ...
 
+    @Timezone.setter
+    def Timezone(self, value: int) -> None:
+        ...
 

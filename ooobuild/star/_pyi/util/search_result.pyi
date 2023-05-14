@@ -49,11 +49,17 @@ class SearchResult(object):
     def startOffset(self) -> uno.ByteSequence:
         ...
 
+    @startOffset.setter
+    def startOffset(self, value: uno.ByteSequence) -> None:
+        ...
 
     @property
     def endOffset(self) -> uno.ByteSequence:
         ...
 
+    @endOffset.setter
+    def endOffset(self, value: uno.ByteSequence) -> None:
+        ...
 
     @property
     def subRegExpressions(self) -> int:
@@ -70,4 +76,7 @@ class SearchResult(object):
         """
         ...
 
+    @subRegExpressions.setter
+    def subRegExpressions(self, value: int) -> None:
+        ...
 

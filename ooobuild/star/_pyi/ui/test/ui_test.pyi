@@ -30,4 +30,3 @@ class UITest(XUITest_97fa0a6a):
     """
     ...
 
-

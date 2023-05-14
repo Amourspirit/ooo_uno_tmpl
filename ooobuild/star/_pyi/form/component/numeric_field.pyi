@@ -40,4 +40,7 @@ class NumericField(UnoControlNumericFieldModel_7bf0110f, FormControlModel_e2990d
         """
         ...
 
+    @DefaultValue.setter
+    def DefaultValue(self, value: float) -> None:
+        ...
 

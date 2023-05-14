@@ -32,4 +32,3 @@ class DataPilotSourceHierarchy(XNamed_a6520b08, XLevelsSupplier_e2c30d38):
     """
     ...
 
-

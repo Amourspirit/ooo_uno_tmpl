@@ -32,4 +32,3 @@ class UnoControlScrollBar(UnoControl_8f2c0a67, XScrollBar_8e700a30):
     """
     ...
 
-

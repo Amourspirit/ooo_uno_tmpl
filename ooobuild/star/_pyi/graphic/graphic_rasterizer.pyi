@@ -31,4 +31,3 @@ class GraphicRasterizer(XGraphicRasterizer_29080f27):
     """
     ...
 
-

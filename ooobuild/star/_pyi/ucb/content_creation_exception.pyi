@@ -53,6 +53,9 @@ class ContentCreationException(Exception_85530a09):
         """
         ...
 
+    @eError.setter
+    def eError(self, value: ContentCreationError_b010e5c) -> None:
+        ...
 
 __all__ = ['ContentCreationException']
 

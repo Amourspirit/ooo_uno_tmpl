@@ -61,6 +61,9 @@ class DropTargetDragEvent(DropTargetEvent_8d651169):
         """
         ...
 
+    @Context.setter
+    def Context(self, value: XDropTargetDragContext_10221422) -> None:
+        ...
 
     @property
     def DropAction(self) -> int:
@@ -69,6 +72,9 @@ class DropTargetDragEvent(DropTargetEvent_8d651169):
         """
         ...
 
+    @DropAction.setter
+    def DropAction(self, value: int) -> None:
+        ...
 
     @property
     def LocationX(self) -> int:
@@ -77,6 +83,9 @@ class DropTargetDragEvent(DropTargetEvent_8d651169):
         """
         ...
 
+    @LocationX.setter
+    def LocationX(self, value: int) -> None:
+        ...
 
     @property
     def LocationY(self) -> int:
@@ -85,6 +94,9 @@ class DropTargetDragEvent(DropTargetEvent_8d651169):
         """
         ...
 
+    @LocationY.setter
+    def LocationY(self, value: int) -> None:
+        ...
 
     @property
     def SourceActions(self) -> int:
@@ -97,4 +109,7 @@ class DropTargetDragEvent(DropTargetEvent_8d651169):
         """
         ...
 
+    @SourceActions.setter
+    def SourceActions(self, value: int) -> None:
+        ...
 

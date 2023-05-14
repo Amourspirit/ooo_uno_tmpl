@@ -36,4 +36,3 @@ class LineShape(LineProperties_f13f0da9, PolyPolygonDescriptor_5d38109f, Rotatio
     """
     ...
 
-

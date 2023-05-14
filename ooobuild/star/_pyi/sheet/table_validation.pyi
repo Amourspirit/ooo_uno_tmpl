@@ -42,6 +42,10 @@ class TableValidation(XPropertySet_bc180bfa, XSheetCondition_e1940d19):
         This is used only if TableValidation.ShowErrorMessage is set to TRUE.
         """
         ...
+
+    @ErrorAlertStyle.setter
+    def ErrorAlertStyle(self, value: 'ValidationAlertStyle_2a930f35') -> None:
+        ...
     @property
     def ErrorMessage(self) -> str:
         """
@@ -49,6 +53,10 @@ class TableValidation(XPropertySet_bc180bfa, XSheetCondition_e1940d19):
         
         This is only used if TableValidation.ShowErrorMessage is set to TRUE.
         """
+        ...
+
+    @ErrorMessage.setter
+    def ErrorMessage(self, value: str) -> None:
         ...
     @property
     def ErrorTitle(self) -> str:
@@ -58,11 +66,19 @@ class TableValidation(XPropertySet_bc180bfa, XSheetCondition_e1940d19):
         This is only used if TableValidation.ShowErrorMessage is set to TRUE.
         """
         ...
+
+    @ErrorTitle.setter
+    def ErrorTitle(self, value: str) -> None:
+        ...
     @property
     def IgnoreBlankCells(self) -> bool:
         """
         specifies if blank cells should be allowed.
         """
+        ...
+
+    @IgnoreBlankCells.setter
+    def IgnoreBlankCells(self, value: bool) -> None:
         ...
     @property
     def InputMessage(self) -> str:
@@ -72,6 +88,10 @@ class TableValidation(XPropertySet_bc180bfa, XSheetCondition_e1940d19):
         This is only used if TableValidation.ShowInputMessage is set to TRUE.
         """
         ...
+
+    @InputMessage.setter
+    def InputMessage(self, value: str) -> None:
+        ...
     @property
     def InputTitle(self) -> str:
         """
@@ -80,17 +100,29 @@ class TableValidation(XPropertySet_bc180bfa, XSheetCondition_e1940d19):
         This is only used if TableValidation.ShowInputMessage is set to TRUE.
         """
         ...
+
+    @InputTitle.setter
+    def InputTitle(self, value: str) -> None:
+        ...
     @property
     def ShowErrorMessage(self) -> bool:
         """
         specifies if an error message is displayed when invalid data is entered.
         """
         ...
+
+    @ShowErrorMessage.setter
+    def ShowErrorMessage(self, value: bool) -> None:
+        ...
     @property
     def ShowInputMessage(self) -> bool:
         """
         specifies if an input message is shown when the cursor is in a cell with these validation settings.
         """
+        ...
+
+    @ShowInputMessage.setter
+    def ShowInputMessage(self, value: bool) -> None:
         ...
     @property
     def ShowList(self) -> int:
@@ -100,6 +132,10 @@ class TableValidation(XPropertySet_bc180bfa, XSheetCondition_e1940d19):
         See also TableValidationVisibility
         """
         ...
+
+    @ShowList.setter
+    def ShowList(self, value: int) -> None:
+        ...
     @property
     def Type(self) -> 'ValidationType_d6110cce':
         """
@@ -107,4 +143,7 @@ class TableValidation(XPropertySet_bc180bfa, XSheetCondition_e1940d19):
         """
         ...
 
+    @Type.setter
+    def Type(self, value: 'ValidationType_d6110cce') -> None:
+        ...
 

@@ -54,6 +54,9 @@ class CalendarItem(object):
         """
         ...
 
+    @ID.setter
+    def ID(self, value: str) -> None:
+        ...
 
     @property
     def AbbrevName(self) -> str:
@@ -62,6 +65,9 @@ class CalendarItem(object):
         """
         ...
 
+    @AbbrevName.setter
+    def AbbrevName(self, value: str) -> None:
+        ...
 
     @property
     def FullName(self) -> str:
@@ -70,4 +76,7 @@ class CalendarItem(object):
         """
         ...
 
+    @FullName.setter
+    def FullName(self, value: str) -> None:
+        ...
 

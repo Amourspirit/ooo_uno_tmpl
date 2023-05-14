@@ -55,6 +55,9 @@ class ItemEvent(EventObject_a3d70b03):
         """
         ...
 
+    @Selected.setter
+    def Selected(self, value: int) -> None:
+        ...
 
     @property
     def Highlighted(self) -> int:
@@ -63,6 +66,9 @@ class ItemEvent(EventObject_a3d70b03):
         """
         ...
 
+    @Highlighted.setter
+    def Highlighted(self, value: int) -> None:
+        ...
 
     @property
     def ItemId(self) -> int:
@@ -71,4 +77,7 @@ class ItemEvent(EventObject_a3d70b03):
         """
         ...
 
+    @ItemId.setter
+    def ItemId(self, value: int) -> None:
+        ...
 

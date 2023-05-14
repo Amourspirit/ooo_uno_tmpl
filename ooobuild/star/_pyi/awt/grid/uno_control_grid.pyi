@@ -45,4 +45,3 @@ class UnoControlGrid(UnoControl_8f2c0a67, XGridControl_df2e0ce7, XGridRowSelecti
     """
     ...
 
-

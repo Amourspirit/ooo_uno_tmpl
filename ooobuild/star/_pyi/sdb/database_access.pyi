@@ -45,6 +45,11 @@ class DatabaseAccess(XPropertySet_bc180bfa, XCompletedConnection_98a0e46, XDatab
         is a list of arbitrary string tag/value pairs as connection arguments; normally at least a \"user\" and \"password\" property should be included.
         """
         ...
+
+    @ConnectInfo.setter
+    def ConnectInfo(self, value: 'typing.Tuple[PropertyValue_c9610c73, ...]') -> None:
+        ...
+
     @property
     def TableFilter(self) -> 'typing.Tuple[str, ...]':
         """
@@ -53,6 +58,11 @@ class DatabaseAccess(XPropertySet_bc180bfa, XCompletedConnection_98a0e46, XDatab
         If empty, all tables are rejected.
         """
         ...
+
+    @TableFilter.setter
+    def TableFilter(self, value: 'typing.Tuple[str, ...]') -> None:
+        ...
+
     @property
     def TableTypeFilter(self) -> 'typing.Tuple[str, ...]':
         """
@@ -61,11 +71,20 @@ class DatabaseAccess(XPropertySet_bc180bfa, XCompletedConnection_98a0e46, XDatab
         If empty, all tables types are rejected.
         """
         ...
+
+    @TableTypeFilter.setter
+    def TableTypeFilter(self, value: 'typing.Tuple[str, ...]') -> None:
+        ...
+
     @property
     def ConnectURL(self) -> str:
         """
         indicates a database url of the form  jdbc:subprotocol:subname or  sdbc:subprotocol:subname
         """
+        ...
+
+    @ConnectURL.setter
+    def ConnectURL(self, value: str) -> None:
         ...
     @property
     def IsPasswordRequired(self) -> bool:
@@ -73,11 +92,19 @@ class DatabaseAccess(XPropertySet_bc180bfa, XCompletedConnection_98a0e46, XDatab
         indicates that a password is always necessary.
         """
         ...
+
+    @IsPasswordRequired.setter
+    def IsPasswordRequired(self, value: bool) -> None:
+        ...
     @property
     def IsReadOnly(self) -> bool:
         """
         determines whether modifications on the data access bean are allowed or not.
         """
+        ...
+
+    @IsReadOnly.setter
+    def IsReadOnly(self, value: bool) -> None:
         ...
     @property
     def NumberFormatsSupplier(self) -> 'XNumberFormatsSupplier_3afb0fb7':
@@ -85,11 +112,19 @@ class DatabaseAccess(XPropertySet_bc180bfa, XCompletedConnection_98a0e46, XDatab
         provides an object for formatting numbers.
         """
         ...
+
+    @NumberFormatsSupplier.setter
+    def NumberFormatsSupplier(self, value: 'XNumberFormatsSupplier_3afb0fb7') -> None:
+        ...
     @property
     def Title(self) -> str:
         """
         is the title of the bean.
         """
+        ...
+
+    @Title.setter
+    def Title(self, value: str) -> None:
         ...
     @property
     def URL(self) -> str:
@@ -98,4 +133,7 @@ class DatabaseAccess(XPropertySet_bc180bfa, XCompletedConnection_98a0e46, XDatab
         """
         ...
 
+    @URL.setter
+    def URL(self, value: str) -> None:
+        ...
 

@@ -34,4 +34,3 @@ class UpdateCheck(XJob_5fa1082e):
     """
     ...
 
-

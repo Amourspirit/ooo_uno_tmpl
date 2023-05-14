@@ -57,4 +57,7 @@ class ActionEvent(EventObject_a3d70b03):
         """
         ...
 
+    @ActionCommand.setter
+    def ActionCommand(self, value: str) -> None:
+        ...
 

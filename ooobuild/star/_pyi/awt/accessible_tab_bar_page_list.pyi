@@ -38,4 +38,3 @@ class AccessibleTabBarPageList(XAccessibleContext_8eae119b, XAccessibleEventBroa
     """
     ...
 
-

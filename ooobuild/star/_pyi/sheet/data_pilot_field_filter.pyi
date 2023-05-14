@@ -51,6 +51,9 @@ class DataPilotFieldFilter(object):
         """
         ...
 
+    @FieldName.setter
+    def FieldName(self, value: str) -> None:
+        ...
 
     @property
     def MatchValueName(self) -> str:
@@ -61,6 +64,9 @@ class DataPilotFieldFilter(object):
         """
         ...
 
+    @MatchValueName.setter
+    def MatchValueName(self, value: str) -> None:
+        ...
 
     @property
     def MatchValue(self) -> str:
@@ -71,4 +77,7 @@ class DataPilotFieldFilter(object):
         """
         ...
 
+    @MatchValue.setter
+    def MatchValue(self, value: str) -> None:
+        ...
 

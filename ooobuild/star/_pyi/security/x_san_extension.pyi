@@ -42,4 +42,8 @@ class XSanExtension(XCertificateExtension_6ead10f8):
         """
         ...
 
+    @AlternativeNames.setter
+    def AlternativeNames(self, value: 'typing.Tuple[CertAltNameEntry_1ce50ec2, ...]') -> None:
+        ...
+
 

@@ -35,4 +35,3 @@ class ContentTransmitter(XContentTransmitter_fcf30e12):
     """
     ...
 
-

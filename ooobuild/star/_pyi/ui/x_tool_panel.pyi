@@ -49,4 +49,7 @@ class XToolPanel(ABC):
         """
         ...
 
+    @Window.setter
+    def Window(self, value: 'XWindow_713b0924') -> None:
+        ...
 

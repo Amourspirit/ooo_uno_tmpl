@@ -33,4 +33,3 @@ class UnoControlCheckBox(UnoControl_8f2c0a67, XCheckBox_834809b3, XLayoutConstra
     """
     ...
 
-

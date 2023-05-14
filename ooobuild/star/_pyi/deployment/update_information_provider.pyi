@@ -35,4 +35,3 @@ class UpdateInformationProvider(XUpdateInformationProvider_f0c713d5):
     """
     ...
 
-

@@ -61,6 +61,9 @@ class ViewState(object):
         """
         ...
 
+    @AffineTransform.setter
+    def AffineTransform(self, value: AffineMatrix2D_ff040da8) -> None:
+        ...
 
     @property
     def Clip(self) -> XPolyPolygon2D_e1b0e20:
@@ -73,4 +76,7 @@ class ViewState(object):
         """
         ...
 
+    @Clip.setter
+    def Clip(self, value: XPolyPolygon2D_e1b0e20) -> None:
+        ...
 

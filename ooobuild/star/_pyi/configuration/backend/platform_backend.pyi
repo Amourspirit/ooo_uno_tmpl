@@ -31,4 +31,3 @@ class PlatformBackend(SingleLayerStratum_2a7614c5):
     """
     ...
 
-

@@ -57,4 +57,7 @@ class InputEvent(EventObject_a3d70b03):
         """
         ...
 
+    @Modifiers.setter
+    def Modifiers(self, value: int) -> None:
+        ...
 

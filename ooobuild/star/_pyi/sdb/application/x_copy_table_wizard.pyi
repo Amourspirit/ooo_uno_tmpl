@@ -69,6 +69,9 @@ class XCopyTableWizard(XExecutableDialog_450f0fa1):
         """
         ...
 
+    @CreatePrimaryKey.setter
+    def CreatePrimaryKey(self, value: object) -> None:
+        ...
     @property
     def DestinationTableName(self) -> str:
         """
@@ -82,6 +85,9 @@ class XCopyTableWizard(XExecutableDialog_450f0fa1):
         """
         ...
 
+    @DestinationTableName.setter
+    def DestinationTableName(self, value: str) -> None:
+        ...
     @property
     def Operation(self) -> int:
         """
@@ -97,6 +103,9 @@ class XCopyTableWizard(XExecutableDialog_450f0fa1):
         """
         ...
 
+    @Operation.setter
+    def Operation(self, value: int) -> None:
+        ...
     @property
     def UseHeaderLineAsColumnNames(self) -> bool:
         """
@@ -106,4 +115,7 @@ class XCopyTableWizard(XExecutableDialog_450f0fa1):
         """
         ...
 
+    @UseHeaderLineAsColumnNames.setter
+    def UseHeaderLineAsColumnNames(self, value: bool) -> None:
+        ...
 

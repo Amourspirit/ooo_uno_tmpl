@@ -44,6 +44,9 @@ class XAnnotation(XPropertySet_bc180bfa, XComponent_98dc0ab5):
         """
         ...
 
+    @Anchor.setter
+    def Anchor(self, value: object) -> None:
+        ...
     @property
     def Author(self) -> str:
         """
@@ -51,6 +54,9 @@ class XAnnotation(XPropertySet_bc180bfa, XComponent_98dc0ab5):
         """
         ...
 
+    @Author.setter
+    def Author(self, value: str) -> None:
+        ...
     @property
     def DateTime(self) -> 'DateTime_84de09d3':
         """
@@ -58,6 +64,9 @@ class XAnnotation(XPropertySet_bc180bfa, XComponent_98dc0ab5):
         """
         ...
 
+    @DateTime.setter
+    def DateTime(self, value: 'DateTime_84de09d3') -> None:
+        ...
     @property
     def Initials(self) -> str:
         """
@@ -65,6 +74,9 @@ class XAnnotation(XPropertySet_bc180bfa, XComponent_98dc0ab5):
         """
         ...
 
+    @Initials.setter
+    def Initials(self, value: str) -> None:
+        ...
     @property
     def Position(self) -> 'RealPoint2D_d6e70c78':
         """
@@ -74,6 +86,9 @@ class XAnnotation(XPropertySet_bc180bfa, XComponent_98dc0ab5):
         """
         ...
 
+    @Position.setter
+    def Position(self, value: 'RealPoint2D_d6e70c78') -> None:
+        ...
     @property
     def Size(self) -> 'RealSize2D_ca1a0c09':
         """
@@ -81,6 +96,9 @@ class XAnnotation(XPropertySet_bc180bfa, XComponent_98dc0ab5):
         """
         ...
 
+    @Size.setter
+    def Size(self, value: 'RealSize2D_ca1a0c09') -> None:
+        ...
     @property
     def TextRange(self) -> 'XText_690408ca':
         """
@@ -88,4 +106,7 @@ class XAnnotation(XPropertySet_bc180bfa, XComponent_98dc0ab5):
         """
         ...
 
+    @TextRange.setter
+    def TextRange(self, value: 'XText_690408ca') -> None:
+        ...
 

@@ -56,6 +56,9 @@ class AmbigousFilterRequest(Exception_85530a09):
         """
         ...
 
+    @URL.setter
+    def URL(self, value: str) -> None:
+        ...
     @property
     def SelectedFilter(self) -> str:
         """
@@ -63,6 +66,9 @@ class AmbigousFilterRequest(Exception_85530a09):
         """
         ...
 
+    @SelectedFilter.setter
+    def SelectedFilter(self, value: str) -> None:
+        ...
     @property
     def DetectedFilter(self) -> str:
         """
@@ -70,6 +76,9 @@ class AmbigousFilterRequest(Exception_85530a09):
         """
         ...
 
+    @DetectedFilter.setter
+    def DetectedFilter(self, value: str) -> None:
+        ...
 
 __all__ = ['AmbigousFilterRequest']
 

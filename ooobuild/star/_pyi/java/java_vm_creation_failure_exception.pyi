@@ -60,6 +60,9 @@ class JavaVMCreationFailureException(JavaInitializationException_8b6211a3):
         """
         ...
 
+    @ErrorCode.setter
+    def ErrorCode(self, value: int) -> None:
+        ...
 
 __all__ = ['JavaVMCreationFailureException']
 

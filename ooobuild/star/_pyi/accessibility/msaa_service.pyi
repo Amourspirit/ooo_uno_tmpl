@@ -30,4 +30,3 @@ class MSAAService(XMSAAService_28a50ebb):
     """
     ...
 
-

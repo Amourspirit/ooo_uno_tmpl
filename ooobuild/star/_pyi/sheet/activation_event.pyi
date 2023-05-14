@@ -60,4 +60,7 @@ class ActivationEvent(EventObject_a3d70b03):
         """
         ...
 
+    @ActiveSheet.setter
+    def ActiveSheet(self, value: XSpreadsheet_bc910bf1) -> None:
+        ...
 

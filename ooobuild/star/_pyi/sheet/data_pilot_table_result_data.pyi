@@ -60,6 +60,9 @@ class DataPilotTableResultData(object):
         """
         ...
 
+    @FieldFilters.setter
+    def FieldFilters(self, value: typing.Tuple[DataPilotFieldFilter_271e0eed, ...]) -> None:
+        ...
 
     @property
     def DataFieldIndex(self) -> int:
@@ -68,6 +71,9 @@ class DataPilotTableResultData(object):
         """
         ...
 
+    @DataFieldIndex.setter
+    def DataFieldIndex(self, value: int) -> None:
+        ...
 
     @property
     def Result(self) -> DataResult_a47d0b1a:
@@ -76,4 +82,7 @@ class DataPilotTableResultData(object):
         """
         ...
 
+    @Result.setter
+    def Result(self, value: DataResult_a47d0b1a) -> None:
+        ...
 

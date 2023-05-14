@@ -55,6 +55,9 @@ class ItemStatus(object):
         """
         ...
 
+    @State.setter
+    def State(self, value: int) -> None:
+        ...
 
     @property
     def aStateData(self) -> object:
@@ -65,4 +68,7 @@ class ItemStatus(object):
         """
         ...
 
+    @aStateData.setter
+    def aStateData(self, value: object) -> None:
+        ...
 

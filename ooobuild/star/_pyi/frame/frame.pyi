@@ -33,4 +33,3 @@ class Frame(XFrame2_83df0988):
     """
     ...
 
-

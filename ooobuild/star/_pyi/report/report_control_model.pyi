@@ -30,4 +30,3 @@ class ReportControlModel(XReportControlModel_2d800f4a):
     """
     ...
 
-

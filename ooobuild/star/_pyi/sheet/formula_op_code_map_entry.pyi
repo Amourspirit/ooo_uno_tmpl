@@ -52,6 +52,9 @@ class FormulaOpCodeMapEntry(object):
         """
         ...
 
+    @Name.setter
+    def Name(self, value: str) -> None:
+        ...
 
     @property
     def Token(self) -> FormulaToken_bd1c0bf8:
@@ -60,4 +63,7 @@ class FormulaOpCodeMapEntry(object):
         """
         ...
 
+    @Token.setter
+    def Token(self, value: FormulaToken_bd1c0bf8) -> None:
+        ...
 

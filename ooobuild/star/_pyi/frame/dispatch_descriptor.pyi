@@ -57,6 +57,9 @@ class DispatchDescriptor(object):
         """
         ...
 
+    @FeatureURL.setter
+    def FeatureURL(self, value: URL_57ad07b9) -> None:
+        ...
 
     @property
     def FrameName(self) -> str:
@@ -67,6 +70,9 @@ class DispatchDescriptor(object):
         """
         ...
 
+    @FrameName.setter
+    def FrameName(self, value: str) -> None:
+        ...
 
     @property
     def SearchFlags(self) -> int:
@@ -77,4 +83,7 @@ class DispatchDescriptor(object):
         """
         ...
 
+    @SearchFlags.setter
+    def SearchFlags(self, value: int) -> None:
+        ...
 

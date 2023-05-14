@@ -35,11 +35,19 @@ class ParagraphPropertiesAsian(ABC):
         determines if a distance between Asian text, western text or complex text is set.
         """
         ...
+
+    @ParaIsCharacterDistance.setter
+    def ParaIsCharacterDistance(self, value: bool) -> None:
+        ...
     @property
     def ParaIsForbiddenRules(self) -> bool:
         """
         determines if the rules for forbidden characters at the start or end of text lines are considered.
         """
+        ...
+
+    @ParaIsForbiddenRules.setter
+    def ParaIsForbiddenRules(self, value: bool) -> None:
         ...
     @property
     def ParaIsHangingPunctuation(self) -> bool:
@@ -48,4 +56,7 @@ class ParagraphPropertiesAsian(ABC):
         """
         ...
 
+    @ParaIsHangingPunctuation.setter
+    def ParaIsHangingPunctuation(self, value: bool) -> None:
+        ...
 

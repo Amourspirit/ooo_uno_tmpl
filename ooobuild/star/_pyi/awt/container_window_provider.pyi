@@ -31,4 +31,3 @@ class ContainerWindowProvider(XContainerWindowProvider_498e1012):
     """
     ...
 
-

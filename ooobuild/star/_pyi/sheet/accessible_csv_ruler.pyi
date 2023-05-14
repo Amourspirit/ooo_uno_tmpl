@@ -37,4 +37,3 @@ class AccessibleCsvRuler(XAccessibleComponent_b2f21269, XAccessibleContext_8eae1
     """
     ...
 
-

@@ -37,4 +37,3 @@ class TransientDocumentsContentProvider(XContentProvider_d4150cc0):
     """
     ...
 
-

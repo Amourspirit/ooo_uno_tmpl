@@ -31,4 +31,3 @@ class DataSink(XDataSink_dbc40c7b):
     """
     ...
 
-

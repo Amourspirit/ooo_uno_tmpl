@@ -36,17 +36,29 @@ class KeyDescriptor(Descriptor_a5200b3b, XColumnsSupplier_f0600da9):
         is the rule which is applied for deletions; only used for foreign keys.
         """
         ...
+
+    @DeleteRule.setter
+    def DeleteRule(self, value: int) -> None:
+        ...
     @property
     def ReferencedTable(self) -> str:
         """
         is the name of the referenced table, only used for foreign keys.
         """
         ...
+
+    @ReferencedTable.setter
+    def ReferencedTable(self, value: str) -> None:
+        ...
     @property
     def Type(self) -> int:
         """
         indicates the type of the key.
         """
+        ...
+
+    @Type.setter
+    def Type(self, value: int) -> None:
         ...
     @property
     def UpdateRule(self) -> int:
@@ -55,4 +67,7 @@ class KeyDescriptor(Descriptor_a5200b3b, XColumnsSupplier_f0600da9):
         """
         ...
 
+    @UpdateRule.setter
+    def UpdateRule(self, value: int) -> None:
+        ...
 

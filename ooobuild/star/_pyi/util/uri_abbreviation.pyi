@@ -33,4 +33,3 @@ class UriAbbreviation(XStringAbbreviation_cf10e6b):
     """
     ...
 
-

@@ -51,6 +51,9 @@ class Link(object):
         """
         ...
 
+    @Source.setter
+    def Source(self, value: str) -> None:
+        ...
 
     @property
     def Destination(self) -> str:
@@ -59,4 +62,7 @@ class Link(object):
         """
         ...
 
+    @Destination.setter
+    def Destination(self, value: str) -> None:
+        ...
 
