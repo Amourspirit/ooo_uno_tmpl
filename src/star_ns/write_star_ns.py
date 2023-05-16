@@ -18,25 +18,25 @@ class WriteStarNs:
 
         Args:
             config (AppConfig): App config
-            data (Dict[str, Component]): Dictionry of namespace, component where components are grouped by namespace.
+            data (Dict[str, Component]): Dictionary of namespace, component where components are grouped by namespace.
             rel_import (bool): If ``True`` imports are created as relative.
             log (logging.Logger, optional): Logger. Defaults to None.
         """
         self._data = data
         self._config = config
         self._log = log
-        self._dyn_ns_import_check = self._config.dyn_ns_import_check
+        self._dyn_ns_import_check = self._config.css_dyn_ns_import_check
         self._root_dir = Path(util.get_root())
         self._write_ns = write_ns
         if self._write_ns == WriteNsEnum.CSS_LO:
             self._write_root = Path(
-                self._root_dir, self._config.builld_dir, *self._config.com_sun_star_lo)
+                self._root_dir, self._config.build_dir, *self._config.com_sun_star_lo)
         elif self._write_ns == WriteNsEnum.CSS_DYN:
             self._write_root = Path(
-                self._root_dir, self._config.builld_dir, *self._config.com_sun_star_dyn)
+                self._root_dir, self._config.build_dir, *self._config.com_sun_star_dyn)
         elif self._write_ns == WriteNsEnum.STAR_PYI:
             self._write_root = Path(
-                self._root_dir, self._config.builld_dir, *self._config.com_sun_star_pyi)
+                self._root_dir, self._config.build_dir, *self._config.com_sun_star_pyi)
         else:
             raise ValueError(
                 "WriteStarNs.__init__() invalid option for write_ns")
@@ -44,7 +44,7 @@ class WriteStarNs:
 
     def _ensure_init_py(self) -> None:
         # ensure build/com/sun/star/__init__.py exist
-        p = Path(self._config.builld_dir)
+        p = Path(self._config.build_dir)
         if self._write_ns == WriteNsEnum.CSS_LO:
             names = self._config.com_sun_star_lo
         else:
@@ -80,6 +80,16 @@ class WriteStarNs:
 
         with open(Path(self._root_dir, self._config.inc_lic), 'r') as f_lic:
             header_lines.extend(f_lic.read().splitlines())
+        
+        if self._write_ns == WriteNsEnum.CSS_DYN and self._dyn_ns_import_check:
+            header_lines.append('\n')
+            header_lines.append('from contextlib import suppress')
+        
+        if self._write_ns == WriteNsEnum.CSS_DYN and self._config.css_dyn_ns_import_warn:
+            self._set_import_warning(header_lines)
+        
+        if self._write_ns == WriteNsEnum.CSS_LO and self._config.css_lo_ns_import_warn:
+            self._set_import_warning(header_lines, old_ns="csslo", new_ns="lo")
 
         for ns, c_data in self._data.items():
             self._write_components(ns, c_data, header_lines, init_file)
@@ -109,7 +119,7 @@ class WriteStarNs:
                 rel_ns_parts = [
                     f_name for f_name in self._config.com_sun_star_lo]
             elif self._write_ns == WriteNsEnum.STAR_PYI:
-                # pyi enums need to be writtent into a seperate module that matches the name of the enu.
+                # pyi enums need to be written into a separate module that matches the name of the enu.
                 rel_ns_parts = [
                     f_name for f_name in self._config.com_sun_star_pyi]
             else:
@@ -139,11 +149,15 @@ class WriteStarNs:
         pass
 
     def _get_import_check_text(self, lines: List[str]) -> str:
-        s = '# all imports are wrapped in try blocks for allowing of backwards compatibility.\n\n'
+        s = '\n'
+        errors = ", ".join(self._config.css_dyn_ns_import_exceptions)
+        suppress_ln = f"with suppress({errors}):\n"
         for line in lines:
-            s += "try:\n"
+            s += suppress_ln
             s += f"    {line}\n"
-            s += 'except ImportError:\n'
-            s += "    pass\n"
         return s
 
+    def _set_import_warning(self, header: List[str], old_ns: str = "cssdyn", new_ns: str = "dyn") -> None:
+        header.append('import warnings')
+        header.append("warnings.filterwarnings('module')")
+        header.append(f"warnings.warn('The {old_ns} namespace is deprecated. Use {new_ns} instead.', DeprecationWarning, stacklevel=2)")

@@ -3,7 +3,7 @@
 OOO_UNO_TMPL
 
 Libre Office API to Python code generator.
-Parses Libre Office API webiste and converts to Python classes and types.
+Parses Libre Office API website and converts to Python classes and types.
 Libre Office API consist of more than 4300 classes and types.
 
 
@@ -14,7 +14,7 @@ Requirements:
 Getting Started:
 
     This project already has data compiled of the entire LO API.
-    The file are compiled as *.JSON files, *.tmpl *.dyn, *.tpyi files in project root directorty 'lo'.
+    The file are compiled as *.JSON files, *.tmpl *.dyn, *.tpyi files in project root directory 'lo'.
 
     API file generation groups api into the following categories:
         const:      Constant classes
@@ -33,14 +33,14 @@ Make Command:
     make does not require any arguments by default.
     running 'python -m app make' will build all templates that require building.
     
-        *.tmpl, *.dyn and *.tpyi files that do not have corresponding *.py, *.dynpy and *.pyipy files respectivally
+        *.tmpl, *.dyn and *.tpyi files that do not have corresponding *.py, *.dynpy and *.pyipy files respectively
         are included in make.
         
         *.tmpl, *.dyn and *.tpyi files that have a newer modification date then corresponding *.py, *.dynpy and *.pyipy
-        files respectivally are included in make.
+        files respectively are included in make.
 
     '$ python -m app make -h' will show help for make.
-    make processes all template and json file in 'lo' directory recursivly.
+    make processes all template and json file in 'lo' directory recursively.
     make compiles any templates that have not yet been compiled.
     make takes care of generating inplace *.py, *.dynpy and *.pyipy files in lo sub directories
     make takes care of writing to ooobuild/lo and ooobuild/dyn directories and sub directories
@@ -80,7 +80,7 @@ Sequence of Build:
     module_links.json files can regenerated using link-json mod-links
         command line options.
         For instance: $ python -m app link-json mod-links --recursive --write-json --all
-        Writes a module_links.json files recursivly into the lo dir. Each dir represents a namespace of the LO API>
+        Writes a module_links.json files recursively into the lo dir. Each dir represents a namespace of the LO API>
 
 
 Compile Templates:
@@ -101,7 +101,7 @@ Compile Templates:
         By default caching is built in so that given url is not parsed if it is in the cache.
         The cache dir is in the systems tmp dir.
             The name of the sub dir in tmp dir is set in config.json cache_dir property.
-        The cache durration in seconds is set in config.json cache_duration property.
+        The cache duration in seconds is set in config.json cache_duration property.
         Note that the system tmp dir is cleared on most os's when the system is rebooted.
     
     The compile option allow for some, many or all templates to be created or overwritten.
@@ -113,19 +113,19 @@ Compile Templates:
 
 
 Type of Templates:
-    There are currently three types of templates outputed into lo dir, *.tmpl, *.dyn and *.tpyi.
+    There are currently three types of templates outputted into lo dir, *.tmpl, *.dyn and *.tpyi.
     
-    *.tmpl templates files are converted into corresonding *.py files and are written into
+    *.tmpl templates files are converted into corresponding *.py files and are written into
     ooobuild/lo sub directories
     
-    *.dyn template files are converted into corresonding *.dynpy files and are written into
+    *.dyn template files are converted into corresponding *.dynpy files and are written into
     ooobuild/dyn sub directories
     
-    *.tpyi template files are converted into corresonding *.pyipy files and are written into
+    *.tpyi template files are converted into corresponding *.pyipy files and are written into
     ooobuild/star/_pyi sub directories
     
-    By default *.tmpl *.dyn, *.tpyi files are just stubs that don't contain any acutal data.
-    The template files read from corresponging json files and converts data into actual LibreOffice classes as py files.
+    By default *.tmpl *.dyn, *.tpyi files are just stubs that don't contain any actual data.
+    The template files read from corresponding json files and converts data into actual LibreOffice classes as py files.
 
 
 Touch Files:
@@ -138,9 +138,9 @@ Touch Files:
         If tmpl files are touched then make will rebuild any *.tmpl file when run again.
         If dyn files are touched then make will rebuild any *.dyn file when run again.
         If tpyi files are touched then make will rebuild any *.tpyi file when run again.
-        If py files are touched then make will exclude any corrsponding *.tmpl template files.
-        If dynpy files are touched then make will exclude any corrsponding *.dyn template files.
-        If pyipy files are touched then make will exclude any corrsponding *.pyipy template files.
+        If py files are touched then make will exclude any corresponding *.tmpl template files.
+        If dynpy files are touched then make will exclude any corresponding *.dyn template files.
+        If pyipy files are touched then make will exclude any corresponding *.pyipy template files.
 
     Example:
         The following commands force make to rebuild all enum tmpl files:
@@ -153,7 +153,7 @@ Touch Files:
         
         Note on cached files:
             Because cached files are stored in system temp dir the cached files will be deleted on reboot.
-            If you need to restore after reboot then it is recommened to keep a zip file of the cached dir.
+            If you need to restore after reboot then it is recommend to keep a zip file of the cached dir.
             The name of the dir in the system tmp dir is determined by the cache_dir option in config.json, Default is ooo_uno_tmpl.
             After reboot copy you zip file into system tmp dir and extract it.
             Next run the above touch command to reset the date of the cached files.
@@ -162,7 +162,7 @@ Touch Files:
 
 url-links:
     url-links allow the compiling of a single url. Sort of like compile with more options and
-    only for a single url. Mostly use for testing and debuging.
+    only for a single url. Mostly use for testing and debugging.
     
     Note the url is expected to match the type of command.
     
@@ -183,15 +183,15 @@ Modifying Templates:
 
 
 Output Other Namespaces:
-    The make command outputs ooobuild/lo, ooobuild/dyn and ooobuild/star namesapce and files.
+    The make command outputs ooobuild/lo, ooobuild/dyn and ooobuild/star namespace and files.
     
-    Outputing ooobuild/csslo:
+    Outputting ooobuild/csslo:
         $ python -m app data star --css-lo
     
-    Outputing ooobulid/cssdyn:
+    Outputting ooobulid/cssdyn:
         $ python -m app data star --css-dyn
     
-    Outputing ooobulid/star:
+    Outputting ooobulid/star:
         $ python -m app data star --css-pyi
 
     Note:
@@ -219,7 +219,7 @@ Regeneration of Database:
     3. Created database if it does not exist.
         This is done by running the following on the command line.
         python app.py data init --init-db
-        If database is already existing this comamnd has no effect.
+        If database is already existing this command has no effect.
     4. Update database with 'ooodata/**/*.json' files.
         This is done by running the following on the command line.
         python app.py data update --write-all
@@ -267,7 +267,7 @@ Regeneration of a new LO API version.
         Remove database.
             delete 'resources/mod_info.sqlite'
         Remove entire contents of ooobuild dir.
-        Remvoe entire contents of ooodata dir.
+        Remove entire contents of ooodata dir.
         Remove entire contents of lo dir.
         Make sure cache_dir (set in config) is removed from system tmp dir.
             Defaults to "ooo_uno_tmpl"
@@ -309,7 +309,7 @@ Regeneration of a new LO API version.
             The output will is written into ooobuild dir.
         9. Generate csslo namespace and python files.
             $ python -m app data star --css-lo
-        10. Generate cssdyn namesapce and python files.
+        10. Generate cssdyn namespace and python files.
             $ python -m app data star --css-dyn
         11. Generate star sub namespaces and python files.
             $ python -m app data star --css-pyi
@@ -817,13 +817,13 @@ def _args_data_json(parser: argparse.ArgumentParser) -> None:
 
 def _args_data_star(parser: argparse.ArgumentParser, config: AppConfig) -> None:
     opt_group = parser.add_mutually_exclusive_group()
-    css_dir_lo = config.builld_dir + os.sep + os.sep.join(config.com_sun_star_lo)
-    css_dir_dyn = config.builld_dir + os.sep + os.sep.join(config.com_sun_star_dyn)
-    css_dir_pyi = config.builld_dir + os.sep + os.sep.join(config.com_sun_star_pyi)
+    css_dir_lo = config.build_dir + os.sep + os.sep.join(config.com_sun_star_lo)
+    css_dir_dyn = config.build_dir + os.sep + os.sep.join(config.com_sun_star_dyn)
+    css_dir_pyi = config.build_dir + os.sep + os.sep.join(config.com_sun_star_pyi)
     opt_group.add_argument(
         "-l",
         "--css-lo",
-        help=f"Writes imports for all '{config.builld_dir}/{config.uno_obj_dir}' files into  {css_dir_lo}... __init__.py files.",
+        help=f"Writes imports for all '{config.build_dir}/{config.uno_obj_dir}' files into  {css_dir_lo}... __init__.py files.",
         action="store_true",
         dest="write_lo",
         default=False,
@@ -832,7 +832,7 @@ def _args_data_star(parser: argparse.ArgumentParser, config: AppConfig) -> None:
     opt_group.add_argument(
         "-d",
         "--css-dyn",
-        help=f"Writes imports for all '{config.builld_dir}/{config.dyn_dir}' files into  {css_dir_dyn}... __init__.py files.",
+        help=f"Writes imports for all '{config.build_dir}/{config.dyn_dir}' files into  {css_dir_dyn}... __init__.py files.",
         action="store_true",
         dest="write_dyn",
         default=False,
@@ -842,7 +842,7 @@ def _args_data_star(parser: argparse.ArgumentParser, config: AppConfig) -> None:
     star_group.add_argument(
         "-i",
         "--css-pyi",
-        help=f"Writes imports for all '{config.builld_dir}/{os.sep.join(config.pyi_dir)}' files into  {css_dir_pyi}... __init__.pyi files.",
+        help=f"Writes imports for all '{config.build_dir}/{os.sep.join(config.pyi_dir)}' files into  {css_dir_pyi}... __init__.pyi files.",
         action="store_true",
         dest="write_pyi",
         default=False,
@@ -1706,7 +1706,7 @@ def main():
     )
     data_star = data.add_parser(
         name="star",
-        help=f"Writes imports for all '{config.builld_dir}/{config.uno_obj_dir}' files into  com.sun.star... __init__.py files.",
+        help=f"Writes imports for all '{config.build_dir}/{config.uno_obj_dir}' files into  com.sun.star... __init__.py files.",
     )
     # endregion data
 

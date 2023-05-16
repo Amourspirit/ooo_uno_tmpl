@@ -32,9 +32,17 @@ def enum_data(module_types):
 @pytest.fixture(scope="session")
 def const_data(module_types):
     lst = module_types["const"]
+    no_check = ("ooobuild.dyn.drawing.canvas_feature.CanvasFeature",)
+    # com.sun.star.drawing.CanvasFeature contains a reserved keyword of python (None)
+    # It can be imported com.sun.star.drawing import CanvasFeature
+    # but trying to access CanvasFeature.None_ will result in a syntax error.
+    # After import it is possible to access the value via the getattr(CanvasFeature, "None")
+    # which as a value of 0
     results = []
     for data in lst:
         name = f"{data['ns']}.{data['c_name']}.{data['name']}"
+        if name in no_check:
+            continue
         results.append(name)
     return results
 
@@ -63,8 +71,17 @@ def typedef_data(module_types):
 def struct_data(module_types):
     lst = module_types["struct"]
     results = []
+    no_check = (
+        "ooobuild.dyn.beans.defaulted.Defaulted",
+        "ooobuild.dyn.beans.optional.Optional",
+        "ooobuild.dyn.beans.pair.Pair",
+        "ooobuild.dyn.beans.ambiguous.Ambiguous",
+    )
+    # Generally the above exclusion are not real import of uno. They are more like generics.
     for data in lst:
         name = f"{data['ns']}.{data['c_name']}.{data['name']}"
+        if name in no_check:
+            continue
         results.append(name)
     return results
 
@@ -72,9 +89,16 @@ def struct_data(module_types):
 @pytest.fixture(scope="session")
 def interface_data(module_types):
     lst = module_types["interface"]
+    no_check = ("ooobuild.dyn.accessibility.x_accessible_state_set.XAccessibleStateSet",)
+    # I created a bug report for this issue:
+    # https://bugs.documentfoundation.org/show_bug.cgi?id=152476
+    # Import stopped working in LibreOffice 7.5
+
     results = []
     for data in lst:
         name = f"{data['ns']}.{data['c_name']}.{data['name']}"
+        if name in no_check:
+            continue
         results.append(name)
     return results
 
@@ -123,7 +147,6 @@ def test_imp_typedef(typedef_data: str, monkeypatch):
 
 
 def test_imp_struct(struct_data: str, monkeypatch):
-
     monkeypatch.setenv("ooouno_ignore_runtime", "True")
     imc = ImportCheck()
     assert imc.load_import(struct_data, True) == True

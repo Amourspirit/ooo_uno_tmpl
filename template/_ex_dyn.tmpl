@@ -43,11 +43,11 @@ $self.load_data()#slurp
 #if $libre_office_ver:
 # Libre Office Version: $libre_office_ver
 #end if
+import uno
 from typing import TYPE_CHECKING
 from $oenv import UNO_ENVIRONMENT, UNO_RUNTIME
 
 if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
-    import uno
 
     def _get_class():
         orig_init = None
@@ -73,6 +73,6 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     $safe_name = _get_class()
 
 else:
-    $self.get_rel_import(in_str=$uno_obj_in, ns=$uno_obj_ns) as $safe_name
+    from $namespace import $safe_name as $safe_name
 
 __all__ = ['$safe_name']

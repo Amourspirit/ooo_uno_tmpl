@@ -27,21 +27,21 @@ class AppConfig:
     """
     uno_obj_dir: str
     """Uno obj dir such as uno. This is the directory that templates and json data file are written to."""
-    builld_dir: str
+    build_dir: str
     """Output build dir such as build"""
     data_dir: str
     """Output data dir such as data"""
     dyn_dir: str
     """
-    Dynamic ouptput directory such as ``dyn``.
+    Dynamic output directory such as ``dyn``.
     
-    This will usually be a subdirectory of ``builld_dir``
+    This will usually be a subdirectory of ``build_dir``
     """
     pyi_dir: List[str]
     """
-    Pyi ouptput directory such as ``['star', '_pyi']``.
+    Pyi output directory such as ``['star', '_pyi']``.
     
-    This will usually be a subdirectory of ``builld_dir``
+    This will usually be a subdirectory of ``build_dir``
     """
     scratch_dir: str
     """Output scratch dir such as scratch"""
@@ -66,7 +66,7 @@ class AppConfig:
     """
     pixel_map_no_link: int
     """
-    Image maps have indexed colors. All shapes that have a link have one border coloer.
+    Image maps have indexed colors. All shapes that have a link have one border color.
     Shape that has no link has another border color. This is the no link border color.
     Used for finding shape within an image.
     """
@@ -95,11 +95,11 @@ class AppConfig:
     """enum helper mod name such as enum_helper"""
     env: str
     """
-    module path to oenv suca as ``ooo_uno.oenv``
+    module path to oenv such as ``ooo_uno.oenv``
     """
     remove_parent_inherited: bool
     """
-    Determins if parsers remove classes from inhertiance if an inherited class
+    Determines if parsers remove classes from inheritance if an inherited class
     is already inherited by a parent class.
     """
     use_long_import_names: bool
@@ -132,11 +132,11 @@ class AppConfig:
     template_dyn_ext: str
     """Extension for dynamic templates such as .dyn"""
     template_dyn_py_ext: str
-    """Extension for dynamic templates py ext sucha as .dynpy"""
+    """Extension for dynamic templates py ext such as .dynpy"""
     template_pyi_ext: str
     """Extension for pyi templates such as .tpyi"""
     template_pyi_py_ext: str
-    """Extensiong for pyi templates py ext sucha as .pyipy"""
+    """Extension for pyi templates py ext such as .pyipy"""
     component_types: List[str]
     com_sun_star_lo: List[str]
     """
@@ -152,23 +152,46 @@ class AppConfig:
     """
     inc_lic: str
     """Path to License Include File"""
-    dyn_ns_import_check: bool
+    css_dyn_ns_import_check: bool
     """
     Determines if import checks are done for cssdyn namespace exports
     
-    Some classes in the cssdyn namespace may not be availible on older version of LO
+    Some classes in the cssdyn namespace may not be available on older version of LO
     such as ``com.sun.star.util.XBinaryDataContainer`` which is a LO 7.2 interface.
     If an attempt to import this class in older ver then the entire process will fail
     Adding import check resolves this issue.
     
-    Newer releases of this lin can probally turn this off and user can then use previous
+    Newer releases of this lin can probably turn this off and user can then use previous
     version for backward compatibility.
     """
-    gloabal_ignore_import_error: str
+    css_dyn_ns_import_exceptions: List[str]
+    """
+    if ``dyn_ns_import_check`` is ``True`` then this is the exceptions to ignore.
+    Usually this is ``['ImportError', 'AttributeError']`` but can be other exceptions.
+    
+    Sometimes API classes are dropped and that would result in an ``ImportError``.
+    Also certain classes such as ``ooobuild.dyn.drawing.canvas_feature.CanvasFeature``
+    have attributes that can not be imported such as ``CanvasFeature.None``.
+    """
+    css_dyn_ns_import_excludes: List[str]
+    """
+    List of Full Namespaces to exclude from dyn import.
+    
+    Classes such as ``com.sun.star.beans.Ambiguous`` Should not be imported from dyn.
+    """
+    css_dyn_ns_import_warn: bool
+    """
+    Specifies if a Deprecation Warning should be raised for cssdyn imports.
+    """
+    css_lo_ns_import_warn: bool
+    """
+    Specifies if a Deprecation Warning should be raised for csslo imports.
+    """
+    global_ignore_import_error: str
     """
     This is the key used when creating com.sun.star.__init__.py for pyi.
     
-    Thsi global key is used in os.environ to check if import error should be
+    This global key is used in os.environ to check if import error should be
     raised when importing from com.sun.star (default is is error is raised if not TYPE_CHECKING).
     """
 
