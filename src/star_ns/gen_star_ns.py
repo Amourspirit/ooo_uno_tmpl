@@ -16,7 +16,7 @@ class GenerateStarNs:
 
         Args:
             config (AppConfig): App config
-            c_data (List[Component]): List of componets to build import lines for.
+            c_data (List[Component]): List of components to build import lines for.
             rel_ns (str, optional): relative namespace. Defaults to None.
         """
         self._c_data = c_data
@@ -41,7 +41,7 @@ class GenerateStarNs:
         Returns:
             List[str]: generated import statement in format of from ... import ...
         """
-        def buld_lines_rel(c: Component) -> List[str]:
+        def build_lines_rel(c: Component) -> List[str]:
             ns = c.namespace.removeprefix('com.sun.star.')
             in_str = self._import_frm + '.' + ns + '.' + c.name
             ns_im = RelInfo.get_rel_import(in_str=in_str, ns=self._rel)
@@ -65,11 +65,15 @@ class GenerateStarNs:
 
         lines: List[str] = []
         skip = ('enum', 'const')
+        exclude_imports = set(self._config.css_dyn_ns_import_excludes)
         for comp in self._c_data:
+            full_name = comp.namespace + '.' + comp.name
+            if full_name in exclude_imports:
+                continue
             if self._write_ns == WriteNsEnum.STAR_PYI and comp.type in skip:
                 continue
             if self._is_rel:
-                lines.extend(buld_lines_rel(comp))
+                lines.extend(build_lines_rel(comp))
             else:
                 lines.extend(build_lines(comp))
         return lines

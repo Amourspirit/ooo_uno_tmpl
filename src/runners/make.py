@@ -30,7 +30,7 @@ class Make(FilesBase):
         self._log = log
         self._clean = bool(kwargs.get('clean', False))
         self._root_dir = Path(util.get_root())
-        self._build = self._root_dir / self._config.builld_dir
+        self._build = self._root_dir / self._config.build_dir
         self._force_compile = bool(kwargs.get('force_compile', False))
         self._processed_dirs: Set[str] = set()
         self._processes = int(kwargs.get('processes', 4))
