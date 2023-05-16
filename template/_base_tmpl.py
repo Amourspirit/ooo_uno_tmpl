@@ -19,21 +19,50 @@ from src.logger.log_handle import get_logger
 
 
 # set up path for importing modules from main app
-_project_root = os.environ.get('project_root', None)
+_project_root = os.environ.get("project_root", None)
 if _project_root:
-    if not _project_root in sys.path:
+    if _project_root not in sys.path:
         sys.path.insert(0, _project_root)
 
-py_name_pattern = re.compile('[\W_]+')
+py_name_pattern = re.compile("[\W_]+")
+
+_REG_TO_SNAKE = re.compile(r"(?<!^)(?=[A-Z])|(?<=[A-zA-Z])(?=[0-9])")  # re.compile(r"(?<!^)(?=[A-Z])")
+_REG_LETTER_AFTER_NUMBER = re.compile(r"(?<=\d)(?=[a-zA-Z])")
 
 RESERVER_WORDS = {
-    'and', 'as', 'assert', 'break', 'class',
-    'continue', 'def', 'del', 'elif', 'else',
-    'except', 'False', 'finally', 'for',
-    'from', 'global', 'if', 'import', 'in',
-    'is', 'lambda', 'None', 'nonlocal',
-    'not', 'or', 'pass', 'raise', 'return',
-    'True', 'try', 'while', 'with', 'yield'
+    "and",
+    "as",
+    "assert",
+    "break",
+    "class",
+    "continue",
+    "def",
+    "del",
+    "elif",
+    "else",
+    "except",
+    "False",
+    "finally",
+    "for",
+    "from",
+    "global",
+    "if",
+    "import",
+    "in",
+    "is",
+    "lambda",
+    "None",
+    "nonlocal",
+    "not",
+    "or",
+    "pass",
+    "raise",
+    "return",
+    "True",
+    "try",
+    "while",
+    "with",
+    "yield",
 }
 
 # region Resource DB Related
@@ -54,26 +83,20 @@ class ExtendsInfo:
 
 class DbConnect:
     def __init__(self) -> None:
-        root_dir: Union[str, None] = os.environ.get('project_root', None)
-        resource_dir: Union[str, None] = os.environ.get(
-            'config_resource_dir', None)
-        db_name: Union[str, None] = os.environ.get(
-            'config_db_mod_info', None)
+        root_dir: Union[str, None] = os.environ.get("project_root", None)
+        resource_dir: Union[str, None] = os.environ.get("config_resource_dir", None)
+        db_name: Union[str, None] = os.environ.get("config_db_mod_info", None)
 
         if root_dir is None:
-            raise ValueError(
-                'DbConnect: Resource project_root environment value is not set')
+            raise ValueError("DbConnect: Resource project_root environment value is not set")
         if resource_dir is None:
-            raise ValueError(
-                'DbConnect: Resource config_resource_dir environment value is not set')
+            raise ValueError("DbConnect: Resource config_resource_dir environment value is not set")
         if db_name is None:
-            raise ValueError(
-                'DbConnect: Resource config_db_mod_info environment value is not set')
+            raise ValueError("DbConnect: Resource config_db_mod_info environment value is not set")
         self._db_name = db_name
         self._root_dir = Path(root_dir)
         self._resource_dir = resource_dir
-        self._conn = str(self._root_dir /
-                         self._resource_dir / self._db_name)
+        self._conn = str(self._root_dir / self._resource_dir / self._db_name)
 
     @property
     def connection_str(self) -> str:
@@ -95,8 +118,7 @@ class SqlCtx:
         # DateTime for sqlite:
         #   See: https://stackoverflow.com/a/37222799/1171746
         #   See: https://stackoverflow.com/a/1830499/1171746
-        self.connection: sql.Connection = sql.connect(
-            self._cstr, detect_types=sql.PARSE_DECLTYPES)
+        self.connection: sql.Connection = sql.connect(self._cstr, detect_types=sql.PARSE_DECLTYPES)
         self.connection.row_factory = sql.Row
         self.cursor: sql.Cursor = self.connection.cursor()
         return self
@@ -133,16 +155,11 @@ class SqlExtends(BaseSql):
         with SqlCtx(self.conn_str) as db:
             db.cursor.execute(query, {"namespace": namespace})
             for row in db.cursor:
-                results.append(ExtendsInfo(
-                    namespace=row['ns'],
-                    sort=-1,
-                    map_name=row['map_name'],
-                    parent=namespace
-                ))
+                results.append(ExtendsInfo(namespace=row["ns"], sort=-1, map_name=row["map_name"], parent=namespace))
             for ei in results:
                 db.cursor.execute(qry_sort, {"namespace": ei.namespace})
                 for row in db.cursor:
-                    ei.sort = int(row['sort'])
+                    ei.sort = int(row["sort"])
         return results
 
 
@@ -150,7 +167,7 @@ class SqlComponent(BaseSql):
     def __init__(self) -> None:
         super().__init__()
 
-    def is_type(self, namespace: str, tipe='typedef') -> bool:
+    def is_type(self, namespace: str, tipe="typedef") -> bool:
         query = """SELECT * FROM component
             WHERE component.id_component like :namespace
             and component.type like :type
@@ -163,7 +180,7 @@ class SqlComponent(BaseSql):
                 result = True
         return result
 
-    def is_type_from_map_name(self, map_name: str, tipe='typedef') -> bool:
+    def is_type_from_map_name(self, map_name: str, tipe="typedef") -> bool:
         query = """SELECT * FROM component
             WHERE component.map_name like :map_name
             and component.type like :type
@@ -175,6 +192,8 @@ class SqlComponent(BaseSql):
             if not row is None:
                 result = True
         return result
+
+
 # endregion Resource DB Related
 
 
@@ -191,7 +210,6 @@ class TmplConfig:
 
 
 class BaseTpml(Template):
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._is_class_init = True
@@ -199,25 +217,23 @@ class BaseTpml(Template):
         self._logger = None
         self.__cache = {}
         if not hasattr(self, "extends_map"):
-            setattr(self, 'extends_map', {})
+            setattr(self, "extends_map", {})
 
         self._logger: logging.Logger = get_logger(
-            logger_name="Template — " + self.__class__.__name__,
-            add_handler_console=False
+            logger_name="Template — " + self.__class__.__name__, add_handler_console=False
         )
         self._config = self._get_config()
         self._app_root = self._config.project_root
 
     def _get_config(self) -> TmplConfig:
-
-        project_root = os.environ['project_root']
-        resource_dir = os.environ['config_resource_dir']
-        uno_obj_dir = os.environ['config_uno_obj_dir']
-        dyn_dir = os.environ['config_dyn_dir']
-        helper_ns = os.environ['config_helper_ns']
-        helper_mod = os.environ['config_helper_mod']
-        enum_mod = os.environ['config_enum_mod']
-        env = os.environ['config_oenv_ns']
+        project_root = os.environ["project_root"]
+        resource_dir = os.environ["config_resource_dir"]
+        uno_obj_dir = os.environ["config_uno_obj_dir"]
+        dyn_dir = os.environ["config_dyn_dir"]
+        helper_ns = os.environ["config_helper_ns"]
+        helper_mod = os.environ["config_helper_mod"]
+        enum_mod = os.environ["config_enum_mod"]
+        env = os.environ["config_oenv_ns"]
 
         return TmplConfig(
             project_root=project_root,
@@ -227,7 +243,7 @@ class BaseTpml(Template):
             helper_ns=helper_ns,
             helper_mod=helper_mod,
             enum_mod=enum_mod,
-            env=env
+            env=env,
         )
 
     def init_data(self):
@@ -253,6 +269,7 @@ class BaseTpml(Template):
 
     def _lerr(self, msg: object, *args, **kwargs):
         self._log_to_logger(logging.ERROR, msg, *args, **kwargs)
+
     # endregion Logger
 
     def camel_to_snake(self, input: str) -> str:
@@ -272,13 +289,13 @@ class BaseTpml(Template):
         Removes all char from a string except for ``a-zA-Z0-9_``
 
         Args:
-            input (str): string to clean    
+            input (str): string to clean
 
         Returns:
             str: input with any other chars removed
         """
         # https://stackoverflow.com/questions/1276764/stripping-everything-but-alphanumeric-chars-from-a-string-in-python
-        return py_name_pattern.sub('', input)
+        return py_name_pattern.sub("", input)
 
     def line_gen(self, input) -> str:
         """
@@ -296,7 +313,7 @@ class BaseTpml(Template):
         for s in input:
             yield s
 
-    def dict_keys_to_str(self, input: dict, sep: str = ', ') -> str:
+    def dict_keys_to_str(self, input: dict, sep: str = ", ") -> str:
         """
         Converts a dictionary's keys into a string seperated by ``sep``
 
@@ -309,10 +326,10 @@ class BaseTpml(Template):
         """
         keys = list(input.keys())
         if len(keys) == 0:
-            return ''
+            return ""
         return sep.join(keys)
 
-    def lst_to_str(self, input, sep: str = ', ') -> str:
+    def lst_to_str(self, input, sep: str = ", ") -> str:
         """
         Writes list items into a str seperated by ``sep``.
         If input is ``str`` then it is returned verbatium
@@ -327,16 +344,16 @@ class BaseTpml(Template):
         if isinstance(input, str):
             return input
         if len(input) == 0:
-            return ''
+            return ""
         return sep.join(input)
 
     def is_out_arg(self, input: str) -> bool:
         """Gets if input is ``out`"""
         if not input:
             return False
-        return input == 'out'
+        return input == "out"
 
-    def get_last_part(self, input: str, sep='.') -> str:
+    def get_last_part(self, input: str, sep=".") -> str:
         """
         Splits a string and returns the last part
 
@@ -348,11 +365,11 @@ class BaseTpml(Template):
             str: last part of input
         """
         if not input:
-            return ''
+            return ""
         _parts = input.rsplit(sep=sep, maxsplit=1)
         return _parts.pop()
 
-    def convert_lst_last(self, lst: List[str], sep='.') -> List[str]:
+    def convert_lst_last(self, lst: List[str], sep=".") -> List[str]:
         """
         Converts a list of Long names such as ["com.sun.star.uno.XInterface"]
         into list of last part such as ["XInterface"]
@@ -436,7 +453,7 @@ class BaseTpml(Template):
         if not isinstance(in_str, str):
             return in_str
         if in_str in RESERVER_WORDS:
-            return in_str + '_'
+            return in_str + "_"
         return in_str
 
     def get_q_wrapped(self, in_str: str, quote: Optional[str] = "'") -> str:
@@ -490,39 +507,40 @@ class BaseTpml(Template):
         Returns:
             str: string formated for a from statement
         """
+
         def is_self_import(path: str, name: str) -> bool:
             # in theory this should not happend as parser check for this condition and remove self imports.
             if name != class_name:
                 return False
-            p_parts = path.rsplit(sep='.', maxsplit=1)
+            p_parts = path.rsplit(sep=".", maxsplit=1)
             if len(p_parts) != 2:
-                raise Exception(
-                    "get_from_import() Expected im_parts param to have a length of two!")
+                raise Exception("get_from_import() Expected im_parts param to have a length of two!")
             # in the cases where there is a single . such as .x_package then
             # im_parts will be ['', 'x_package']
             # This indicates that class it trying to import itself
-            return p_parts[0] == ''
+            return p_parts[0] == ""
 
         im_len = len(im_data)
         if im_len < 2:
             raise Exception(
-                f"{self.__class__.__name__}.get_from_import() Expected im_data param to have a min length of two!")
+                f"{self.__class__.__name__}.get_from_import() Expected im_data param to have a min length of two!"
+            )
         im = im_data[0]  # .sdbcx.table_descriptor
         name = im_data[1]  # DataSettings
         if is_self_import(im, name):
-            return ''
+            return ""
         if im_len == 3:
             s_as = im_data[2]
             return f"from {im} import {name} as {s_as}"
         if name == class_name:
             # can not extend a class with the same name.
             # Change the from import and elsewhere change the extends name to match
-            im_parts = im.rsplit(sep='.', maxsplit=1)
+            im_parts = im.rsplit(sep=".", maxsplit=1)
             # because there is a standerd through all templates for snake case name and name,
             # such table_descriptor, TableDescriptor
             # it means we can rely on this standerd to adjust import
             im_last = im_parts.pop()
-            im = '.'.join(im_parts)
+            im = ".".join(im_parts)
             return f"from {im} import {im_last}"
         return f"from {im} import {name}"
 
@@ -537,12 +555,14 @@ class BaseTpml(Template):
         Returns:
             str: comma sep string of inherits.
         """
+
         def get_import(name: str) -> str:
             def is_mapped(name: str) -> bool:
                 return name in self.extends_map
 
             def get_mapped(name: str) -> bool:
                 return self.extends_map[name]
+
             if is_mapped(name):
                 return get_mapped(name)
             _name = self.get_last_part(input=name)
@@ -550,22 +570,23 @@ class BaseTpml(Template):
                 return f"{self.camel_to_snake(_name)}.{_name}"
             else:
                 return _name
+
         if isinstance(imports, str):
             return get_import(imports)
         im_lst: List[str] = []
 
         for s in imports:
             im_lst.append(get_import(s))
-        s = 'object'
+        s = "object"
         for i, im in enumerate(im_lst):
             if i == 0:
-                s = ''
+                s = ""
             if i > 0:
-                s += ', '
+                s += ", "
             s += im
         return s
 
-    def get_class_inherits_from_db(self, default: str = 'object') -> str:
+    def get_class_inherits_from_db(self, default: str = "object") -> str:
         """
         Gets class inherits taking into accout if an inherit is the same name as the class.
 
@@ -576,7 +597,7 @@ class BaseTpml(Template):
         Returns:
             str: comma sep string of inherits.
         """
-        key = 'get_class_inherits_from_db_' + default
+        key = "get_class_inherits_from_db_" + default
         if key in self.__cache:
             return self.__cache[key]
 
@@ -586,6 +607,7 @@ class BaseTpml(Template):
 
             def get_mapped() -> bool:
                 return extend.map_name
+
             if is_mapped():
                 return get_mapped()
             _name = self.get_last_part(extend.namespace)
@@ -607,20 +629,21 @@ class BaseTpml(Template):
 
         for ex in extends:
             im_lst.append(get_import(ex))
-        s = 'object'
+        s = "object"
         for i, im in enumerate(im_lst):
             if i == 0:
-                s = ''
+                s = ""
             if i > 0:
-                s += ', '
+                s += ", "
             s += im
         self.__cache[key] = s
         return self.__cache[key]
+
     # endregion Class inherits and From Imports
 
     def get_abstract_imports(self, abm: List[bool], abp: List[bool]) -> List[str]:
         """
-        Gets a list with abstractmethod/abstractproperty appended as needed 
+        Gets a list with abstractmethod/abstractproperty appended as needed
 
         Args:
             abm (List[bool]): List of bools to test for abstractmethod
@@ -633,21 +656,93 @@ class BaseTpml(Template):
         a_prop = True in abp
         results = []
         if a_method:
-            results.append('abstractmethod')
+            results.append("abstractmethod")
         if a_prop:
-            results.append('abstractproperty')
+            results.append("abstractproperty")
         return results
 
-    def get_rel_import(self, in_str: str, ns: str, sep: str = '.') -> str:
+    def get_rel_import(self, in_str: str, ns: str, sep: str = ".") -> str:
         ri = RelInfo.get_rel_import(in_str=in_str, ns=ns, sep=sep)
         return f"from {ri.frm} import {ri.imp}"
 
-    def get_rel_import_long(self, in_str: str, ns: str, sep: str = '.') -> str:
+    def get_rel_import_long(self, in_str: str, ns: str, sep: str = ".") -> str:
         ri = RelInfo.get_rel_import_long(in_str=in_str, ns=ns, sep=sep)
         return f"from {ri.frm} import {ri.imp} as {ri.as_}"
+
+    # region Camel and Snake Caase
+    def to_camel_case(self, s: str) -> str:
+        """
+        Converts string to ``CamelCase``
+
+        Args:
+            s (str): string to convert such as ``snake_case_word`` or ``pascalCaseWord``
+
+        Returns:
+            str: string converted to ``CamelCaseWord``
+        """
+        s = s.strip()
+        if not s:
+            return ""
+        result = s
+        if "_" in s:
+            result = "".join(word.title() for word in s.split("_"))
+            return result
+        # convert to CamelCase if pascalCase was passed in.
+        result = result[:1].upper() + result[1:]
+        return result
+
+    def to_pascal_case(self, s: str) -> str:
+        """
+        Converts string to ``pascalCase``
+
+        Args:
+            s (str): string to convert such as ``snake_case_word`` or  ``CamelCaseWord``
+
+        Returns:
+            str: string converted to ``pascalCaseWord``
+        """
+        result = self.to_camel_case(s)
+        if result:
+            result = result[:1].lower() + result[1:]
+        return result
+
+    def to_snake_case(self, s: str) -> str:
+        """
+        Convert string to ``snake_case``
+
+        Args:
+            s (str): string to convert such as ``pascalCaseWord`` or  ``CamelCaseWord``
+
+        Returns:
+            str: string converted to ``snake_case_word``
+        """
+        s = s.strip()
+        if not s:
+            return ""
+        result = _REG_TO_SNAKE.sub("_", s)
+        result = _REG_LETTER_AFTER_NUMBER.sub("_", result)
+        return result.lower()
+
+    def to_snake_case_upper(self, s: str) -> str:
+        """
+        Convert string to ``SNAKE_CASE``
+
+        Args:
+            s (str): string to convert such as ``snake_case_word`` or ``pascalCaseWord`` or  ``CamelCaseWord``
+
+        Returns:
+            str: string converted to ``SNAKE_CASE_WORD``
+        """
+        result = self.to_snake_case(s)
+        if not s:
+            return ""
+        return result.upper()
+
+    # endregion Camel and Snake Caase
 
     # region Properties
     @property
     def config(self) -> TmplConfig:
         return self._config
+
     # endregion Properties

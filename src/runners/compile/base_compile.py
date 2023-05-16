@@ -12,7 +12,7 @@ class BaseCompile(FilesBase):
 
     def _ensure_build_init(self) -> None:
         # ensure build/uno_obj/__init__.py exist
-        p = Path(self._config.builld_dir, self._config.uno_obj_dir)
+        p = Path(self._config.build_dir, self._config.uno_obj_dir)
         if not p.is_absolute():
             p = self.root_dir.joinpath(p)
         self._mkdirp(p)
