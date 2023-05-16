@@ -29,12 +29,12 @@ def write_star_error() -> None:
     """
     config = util.get_app_cfg()
     root_dir = Path(util.get_root())
-    p = Path(config.builld_dir, *config.com_sun_star_pyi)
+    p = Path(config.build_dir, *config.com_sun_star_pyi)
     if not p.is_absolute():
         p = root_dir.joinpath(p)
     util.mkdirp(p)
     p = p.joinpath('__init__.py')
     # https://www.sitekickr.com/tools/line-break-remover/
-    contents = f'# coding: utf-8\nimport os\nfrom typing import TYPE_CHECKING\n\n__version_tmpl__ = "{__version__}"\n\n_IGNORE_IMPORT_ERROR = os.environ.get("{config.gloabal_ignore_import_error}", None) in ("True", "true", "yes")\n\nif TYPE_CHECKING == False and _IGNORE_IMPORT_ERROR == False:\n    raise ImportError\n'
+    contents = f'# coding: utf-8\nimport os\nfrom typing import TYPE_CHECKING\n\n__version_tmpl__ = "{__version__}"\n\n_IGNORE_IMPORT_ERROR = os.environ.get("{config.global_ignore_import_error}", None) in ("True", "true", "yes")\n\nif TYPE_CHECKING == False and _IGNORE_IMPORT_ERROR == False:\n    raise ImportError\n'
     with open(p, 'w') as file:
         file.write(contents)

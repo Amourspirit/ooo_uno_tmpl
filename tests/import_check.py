@@ -31,7 +31,7 @@ class ImportCheck:
 
     def load_imports(self, imports: List[str]) -> bool:
         """
-        Load a list of import names for later comparsion.
+        Load a list of import names for later comparison.
         Name can be in format of ``com.sun.star.accessibility.XAccessibleContext``
         or ``XAccessibleContext``
 
@@ -39,7 +39,7 @@ class ImportCheck:
             imports (List[str]): List of imports
     
         Returns:
-            True if all imorts succeed import; Otherwise False
+            True if all imports succeed import; Otherwise False
         """
         # imports will be in format of:
         # com.sun.star.accessibility.XAccessibleContext
@@ -54,14 +54,14 @@ class ImportCheck:
 
     def load_import(self, im: str, raise_err: bool = False) -> bool:
         """
-        Load an import name for later comparsion.
+        Load an import name for later comparison.
         Name is expected in format of ``scratch.uno_obj.form.component.rich_text_control.RichTextControl``
 
         Args:
             imports (List[str]): List of imports
 
         Returns:
-            True if imort succeeds; Otherwise False
+            True if import succeeds; Otherwise False
         """
         try:
             parts = im.split(sep='.')
@@ -70,7 +70,7 @@ class ImportCheck:
             pkg_name = '.'.join(parts)
             _, cl = self.dynamic_imp(pkg_name, mod_name, cls_name)
             names_lst = self.get_class_names(cl, False)
-        except Exception:
+        except Exception as e:
             if raise_err:
                 raise
             return False

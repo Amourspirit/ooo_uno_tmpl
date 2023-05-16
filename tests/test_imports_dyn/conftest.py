@@ -6,6 +6,8 @@ from tests.mod_types import get_module_types
 
 sys.path.append(os.path.realpath('.'))
 
+# os.environ['ooouno_ignore_import_error'] = 'True'
+
 
 MODULE_TYPES = get_module_types(build_dir=['ooobuild', 'dyn'])
 
