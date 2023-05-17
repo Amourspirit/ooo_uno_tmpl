@@ -40,22 +40,26 @@ $self.load_data()#slurp
 #if $libre_office_ver:
 # Libre Office Version: $libre_office_ver
 #end if
-from typing import TYPE_CHECKING
-if TYPE_CHECKING:
-    import uno
+from __future__ import annotations
+import uno
 #if $write_class
-from enum import Enum
 
-class ${safe_name}(Enum):
+
+class ${safe_name}(uno.Enum):
+#else
+## from com.sun.star._pyi.style.tab_align import TabAlign as TabAlign
+$self.get_pyi_com_import()
 #end if
 ${indt}"""
 ${indt}Enum
 
-    #if isinstance($desc, str)
+    #if isinstance($desc, str) and $desc
 ${indt}${desc}
     #else
         #for $line in $desc
+            #if $line
 ${indt}${line}
+            #end if
         #end for
     #end if
 #if $link:
@@ -69,7 +73,7 @@ ${indt}typeName: str = '$fullname'
 
 #for $key in $key_list
 ##$self.get_safe_word($key)$self.get_typing($self.get_safe_word($key))
-${indt}$self.get_safe_word($key): 'uno.Enum'
+${indt}$self.get_safe_word($key): Pyi${safe_name} = ...
     #set $value = $enum_dict[$key]
 ${indt}"""
 #if isinstance($value, str):

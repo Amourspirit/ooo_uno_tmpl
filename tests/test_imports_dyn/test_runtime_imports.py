@@ -52,9 +52,15 @@ def struct_data(module_types):
 @pytest.fixture(scope='session')
 def interface_data(module_types):
     lst = module_types["interface"]
+    no_check = ("ooobuild.dyn.accessibility.x_accessible_state_set.XAccessibleStateSet",)
+    # I created a bug report for this issue:
+    # https://bugs.documentfoundation.org/show_bug.cgi?id=152476
+    # Import stopped working in LibreOffice 7.5
     results = []
     for data in lst:
         name = f"{data['ns']}.{data['c_name']}.{data['name']}"
+        if name in no_check:
+            continue
         results.append(name)
     return results
 
