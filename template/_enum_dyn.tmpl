@@ -45,10 +45,16 @@ $self.load_data()#slurp
 #end if
 from __future__ import annotations
 import uno
-from typing import TYPE_CHECKING
+from typing import Any, TYPE_CHECKING
 
 
 if TYPE_CHECKING:
+
+#for $key in $key_list
+#set $value = $enum_dict[$key]
+#set $snaked = $self.to_snake_case_upper($safe_name)
+    from $fullname import $key as ${snaked}_${key}
+#end for
 
     class ${safe_name}(uno.Enum):
         """
@@ -69,18 +75,18 @@ if TYPE_CHECKING:
             `API $name <$link>`_
 #end if
         """
-        __ooo_ns__: str = ...
-        __ooo_full_ns__: str = ...
-        __ooo_type_name__: str = ...
 
-        @property
-        def typeName(self) -> str:
-            ...
+        def __init__(self, value: Any) -> None:
+            super().__init__('$fullname', value)
+
+        __ooo_ns__: str = '$namespace'
+        __ooo_full_ns__: str = '$fullname'
+        __ooo_type_name__: str = 'enum'
 
 #for $key in $key_list
 #set $value = $enum_dict[$key]
-#set $safe_key = $self.get_safe_word($key)
-        ${key}: ${safe_name} = ...
+#set $snaked = $self.to_snake_case_upper($safe_name)
+        ${key}: ${safe_name} = ${snaked}_${key}
         """
 #if isinstance($value, str):
         $value
