@@ -46,6 +46,9 @@ import uno
 
 
 class ${safe_name}(uno.Enum):
+#else
+## from com.sun.star._pyi.style.tab_align import TabAlign as TabAlign
+$self.get_pyi_com_import()
 #end if
 ${indt}"""
 ${indt}Enum
@@ -70,7 +73,7 @@ ${indt}typeName: str = '$fullname'
 
 #for $key in $key_list
 ##$self.get_safe_word($key)$self.get_typing($self.get_safe_word($key))
-${indt}$self.get_safe_word($key): ${safe_name} = ...
+${indt}$self.get_safe_word($key): Pyi${safe_name} = ...
     #set $value = $enum_dict[$key]
 ${indt}"""
 #if isinstance($value, str):

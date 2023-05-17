@@ -6,6 +6,10 @@ from verr import Version
 
 class BaseEnum(BaseJson):
     def __init__(self, *args, **kwargs):
+        self.namespace = ""
+        self.name = ""
+        self.url = ""
+        self.allow_db = False
         super().__init__(*args, **kwargs)
         # self._linfo('hello')
 
@@ -24,7 +28,7 @@ class BaseEnum(BaseJson):
         set_data('allow_db')
         set_data('desc')
         set_data('url', 'link')
-        # get lo ver if it exist. Defaut to False
+        # get lo ver if it exist. Default to False
         self.libre_office_ver = json_data.get('libre_office_ver', False)
         self.sort = bool(json_data['parser_args'].get('sort', False))
         quote: List[str] = data.get('quote', [])
@@ -36,7 +40,7 @@ class BaseEnum(BaseJson):
             # Format:
             # {
             # "ANY": [
-            #     "reflecting the any type; anys can carry any UNO value except of any values"
+            #     "reflecting the any type; any can carry any UNO value except of any values"
             # ],
             # "ARRAY": [
             #     "Deprecated, UNOIDL does not have an array concept."
