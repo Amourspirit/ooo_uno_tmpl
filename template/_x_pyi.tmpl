@@ -37,14 +37,16 @@ $self.load_data()#slurp
 # Libre Office Version: $libre_office_ver
 #end if
 # Namespace: $namespace
+import typing
 #if len($inherits) == 0
 #set $inherits = ['ABC']
 #set $abc_imports= $abc_imports + ['ABC']
 #end if
-from typing_extensions import Literal
-#if $requires_typing
-import typing
-#end if
+try:
+    from typing import Literal
+except ImportError:
+    from typing_extensions import Literal
+
 #for $imp in $imports
 import $imp
 #end for
@@ -60,6 +62,7 @@ if typing.TYPE_CHECKING:
     $self.get_from_import($name, $imp)
 #end for
 #end if
+
 
 #if $allow_db:
 class ${safe_name}($self.get_class_inherits_from_db('ABC')):

@@ -315,11 +315,11 @@ class BaseTpml(Template):
 
     def dict_keys_to_str(self, input: dict, sep: str = ", ") -> str:
         """
-        Converts a dictionary's keys into a string seperated by ``sep``
+        Converts a dictionary's keys into a string separated by ``sep``
 
         Args:
             input (dict): input dictionary
-            sep (str, optional): seperator. Defaults to ``', '``
+            sep (str, optional): separator. Defaults to ``', '``
 
         Returns:
             str: keys a string.
@@ -331,12 +331,12 @@ class BaseTpml(Template):
 
     def lst_to_str(self, input, sep: str = ", ") -> str:
         """
-        Writes list items into a str seperated by ``sep``.
-        If input is ``str`` then it is returned verbatium
+        Writes list items into a str separated by ``sep``.
+        If input is ``str`` then it is returned verbatim
 
         Args:
             input (str, Iterable[str]): input to parse
-            sep (str, optional): Seperate usd when joining list. Defaults to ', '.
+            sep (str, optional): Separate usd when joining list. Defaults to ', '.
 
         Returns:
             str: value
@@ -448,7 +448,7 @@ class BaseTpml(Template):
             in_str (object): input
 
         Returns:
-            object: if ``in_str`` is not str then it is returned verbatium. Otheriwse returns str.
+            object: if ``in_str`` is not str then it is returned verbatim. Otherwise returns str.
         """
         if not isinstance(in_str, str):
             return in_str
@@ -505,11 +505,11 @@ class BaseTpml(Template):
             im_data (List[str]): List of str expected to be a length of two or three.
 
         Returns:
-            str: string formated for a from statement
+            str: string formatted for a from statement
         """
 
         def is_self_import(path: str, name: str) -> bool:
-            # in theory this should not happend as parser check for this condition and remove self imports.
+            # in theory this should not happened as parser check for this condition and remove self imports.
             if name != class_name:
                 return False
             p_parts = path.rsplit(sep=".", maxsplit=1)
@@ -536,9 +536,9 @@ class BaseTpml(Template):
             # can not extend a class with the same name.
             # Change the from import and elsewhere change the extends name to match
             im_parts = im.rsplit(sep=".", maxsplit=1)
-            # because there is a standerd through all templates for snake case name and name,
+            # because there is a standard through all templates for snake case name and name,
             # such table_descriptor, TableDescriptor
-            # it means we can rely on this standerd to adjust import
+            # it means we can rely on this standard to adjust import
             im_last = im_parts.pop()
             im = ".".join(im_parts)
             return f"from {im} import {im_last}"
@@ -546,7 +546,7 @@ class BaseTpml(Template):
 
     def get_class_inherits(self, class_name: str, imports: Union[str, List[str]]) -> str:
         """
-        Gets class inherits taking into accout if an inherit is the same name as the class.
+        Gets class inherits taking into account if an inherit is the same name as the class.
 
         Args:
             class_name (str): Name of the class inheriting
@@ -588,7 +588,7 @@ class BaseTpml(Template):
 
     def get_class_inherits_from_db(self, default: str = "object") -> str:
         """
-        Gets class inherits taking into accout if an inherit is the same name as the class.
+        Gets class inherits taking into account if an inherit is the same name as the class.
 
         Args:
             class_name (str): Name of the class inheriting
@@ -646,8 +646,8 @@ class BaseTpml(Template):
         Gets a list with abstractmethod/abstractproperty appended as needed
 
         Args:
-            abm (List[bool]): List of bools to test for abstractmethod
-            abp (List[bool]): List of bools to test for abstractproperty
+            abm (List[bool]): List of booleans to test for abstractmethod
+            abp (List[bool]): List of booleans to test for abstractproperty
 
         Returns:
             List[str]: [description]
@@ -669,7 +669,7 @@ class BaseTpml(Template):
         ri = RelInfo.get_rel_import_long(in_str=in_str, ns=ns, sep=sep)
         return f"from {ri.frm} import {ri.imp} as {ri.as_}"
 
-    # region Camel and Snake Caase
+    # region Camel and Snake Case
     def to_camel_case(self, s: str) -> str:
         """
         Converts string to ``CamelCase``
@@ -738,7 +738,7 @@ class BaseTpml(Template):
             return ""
         return result.upper()
 
-    # endregion Camel and Snake Caase
+    # endregion Camel and Snake Case
 
     # region Properties
     @property

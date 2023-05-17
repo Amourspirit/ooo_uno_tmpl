@@ -3,7 +3,7 @@ from _base_enum import BaseEnum
 from _base_json import EventArgs
 import uno
 import os
-
+import re
 
 class BaseEnumPyi(BaseEnum):
 
@@ -26,3 +26,13 @@ class BaseEnumPyi(BaseEnum):
         except Exception as e:
             self._lerr(e)
         return ' = ...'
+  
+    def get_pyi_com_import(self) -> str:
+        """
+        Get import string in the format of ``from com.sun.star._pyi.drawing.line_end_type import LineEndType as PyiLineEndType```
+
+        Returns:
+            str: Import String
+        """
+        ns = self.namespace.replace("com.sun.star.", "com.sun.star._pyi.")
+        return f"from {ns}.{self.camel_to_snake(self.name)} import {self.name} as Pyi{self.name}"

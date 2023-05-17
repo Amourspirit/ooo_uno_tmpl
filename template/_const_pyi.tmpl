@@ -34,10 +34,11 @@ $self.load_data()#slurp
 # Libre Office Version: $libre_office_ver
 #end if
 # Namespace: $namespace
-from typing_extensions import Literal
-#if $requires_typing
 import typing
-#end if
+try:
+    from typing import Literal
+except ImportError:
+    from typing_extensions import Literal
 #for $imp in $imports
 import $imp
 #end for
