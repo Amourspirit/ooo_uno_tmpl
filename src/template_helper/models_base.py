@@ -10,6 +10,7 @@ from ..parser import mod_type
 
 class ModelsBase(ABC):
 
+    # region Constructor
     def __init__(self) -> None:
         super().__init__()
         self._config = util.get_app_cfg()
@@ -25,7 +26,7 @@ class ModelsBase(ABC):
             in_str (object): input
 
         Returns:
-            object: if ``in_str`` is not str then it is returned verbatium. Otheriwse returns str.
+            object: if ``in_str`` is not str then it is returned verbatim. Otherwise returns str.
         """
         if not isinstance(in_str, str):
             return in_str
@@ -35,7 +36,7 @@ class ModelsBase(ABC):
 
     def get_attrib_default(self, name: str, returns: str, uno_none: bool = False) -> str:
         """
-        Get defatul attribute value from uno
+        Get default attribute value from uno
 
         Args:
             name (str): Name of property to get attrib for.
@@ -46,8 +47,8 @@ class ModelsBase(ABC):
             str: attribute default value as string.
 
         Note:
-            If current exception/struct is not in the installled uno version then
-            all unknow value are either ``None`` or ``UNO_NONE``
+            If current exception/struct is not in the installed uno version then
+            all unknown value are either ``None`` or ``UNO_NONE``
             
             For instance ReadOnlyOpenRequest: https://tinyurl.com/ycu8u8wu
             is a 7.2 version

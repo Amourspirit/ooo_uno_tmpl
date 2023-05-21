@@ -16,19 +16,25 @@ class BaseConstPyi(BaseConst):
         if is_cls is not None and is_cls.lower() in ('true', '1', 't', 'y', 'yes'):
             self.write_class = True
 
-    def get_const_type(self, data: dict) -> str:
+    def get_const_type(self, data: dict, use_literal: bool = False) -> str:
         def get_from_val(val: Any) -> str:
             if isinstance(val, int):
-                return f"Literal[{val}]"
+                if use_literal:
+                    return f"Literal[{val}]"
+                else:
+                    return f"int = {val}"
             if isinstance(val, float):
                 return 'float'
-            return 'object'
+            return 'typing.Any'
         name: str = data['name']
         t: str = data['type']
         val_type = ValTypeEnum(data['value_type'])
         val = data['value']
         if val_type == ValTypeEnum.INTEGER:
-            return f"Literal[{val}]"
+            if use_literal:
+                return f"Literal[{val}]"
+            else:
+                return f"int = {val}"
         if val_type == ValTypeEnum.FLOAT:
             return "float"
         if val_type == ValTypeEnum.STRING:
@@ -45,4 +51,4 @@ class BaseConstPyi(BaseConst):
             return get_from_val(c)
         except Exception as e:
             self._lerr(e)
-        return 'object'
+        return 'typing.Any'
