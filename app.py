@@ -232,7 +232,7 @@ Other Notes:
         The config.json for app is located in src/cfg/config.json
     
     App Version:
-        App version is set in src/parser/__init__py
+        App version is set in src/__init__py
     
     Other Config:
         src/parsers/config directory contains special configuration files.
@@ -267,7 +267,8 @@ Regeneration of a new LO API version.
         Remove database.
             delete 'resources/mod_info.sqlite'
         Remove entire contents of ooobuild dir.
-        Remove entire contents of ooodata dir.
+        Remove entire contents of ooodata dir except for ``ooobuild/star/__init__.py``
+            Although there is a backup in ``resources/project/pyi_files/__init__.py``
         Remove entire contents of lo dir.
         Make sure cache_dir (set in config) is removed from system tmp dir.
             Defaults to "ooo_uno_tmpl"
@@ -311,7 +312,12 @@ Regeneration of a new LO API version.
             $ python -m app data star --css-lo
         10. Generate cssdyn namespace and python files.
             $ python -m app data star --css-dyn
-        11. Generate star sub namespaces and python files.
+        11. Old: Generate star sub namespaces and python files.
+            This was done in older version that wrote typings into ``star/_pyi/``.
+            The config.json properties still allow for this but are not used by default.
+            The config properties that control this are ``pyi_dir``, ``pyi_write_imports_in_init`` and ``pyi_write_star_dir_old_style``.
+
+            The command to generate star sub namespaces and python files is:
             $ python -m app data star --css-pyi
 """
 
