@@ -170,17 +170,17 @@ def parse(**kwargs):
         url (str): url to parse
         sort (str, optional): Sorting of results. Default ``True``
         cache (str, optional): Caching. Default ``True``
-        include_desc (str, optional): Description will be outputed in template. Default ``True``
+        include_desc (str, optional): Description will be outputted in template. Default ``True``
         json_out (bool, optional): returns json to caller if ``True``. Default ``False``
         long_template (str, optional): Writes a long format template.
             Requires write_template is set. Default ``False``
         clipboard (str, optional): Copy to clipboard. Default ``False``
-        print_json (str, optional): Print json to termainl. Default ``False``
+        print_json (str, optional): Print json to terminal. Default ``False``
         print_template (str, optional): Print template to terminal. Default ``False``
         write_template (str, optional): Write template file into obj_uno subfolder. Default ``False``
         write_json (str, optional): Write json file into obj_uno subfolder. Default ``False``
-        write_path (str, optional): The root path to write data files (json, tmpl) into. Defaut set in config ``uno_base_dir`` property.
-        verbose (str, optional): Verobose output.
+        write_path (str, optional): The root path to write data files (json, tmpl) into. Default set in config ``uno_base_dir`` property.
+        verbose (str, optional): Verbose output.
         log_file (str, optional): Log File
     """
     global logger
