@@ -42,10 +42,7 @@ import typing
 #set $inherits = ['ABC']
 #set $abc_imports= $abc_imports + ['ABC']
 #end if
-try:
-    from typing import Literal
-except ImportError:
-    from typing_extensions import Literal
+## from typing import Literal
 
 #for $imp in $imports
 import $imp
@@ -79,7 +76,8 @@ class ${safe_name}($self.get_class_inherits($name, $inherits)):
         `API $name <$link>`_
 #end if
     """
-    __pyunointerface__: Literal['$fullname']
+## do not use literal here. mypy will complain because of inheritance
+    __pyunointerface__: str = '$fullname'
 
 #if $is_method
 #set $methods = $attribs['methods']

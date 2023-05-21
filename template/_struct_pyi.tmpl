@@ -42,7 +42,7 @@ $self.load_data()#slurp
 #if $libre_office_ver:
 # Libre Office Version: $libre_office_ver
 #end if
-from typing_extensions import Literal
+## from typing_extensions import Literal
 #for $imp in $imports
 import $imp
 #end for
@@ -83,7 +83,8 @@ class ${safe_name}($self.get_class_inherits($name, $inherits)):
     #end if
     """
 #end if
-    typeName: Literal['$fullname']
+## using a literal for the typeName result in mypy error because of inheritance.
+    typeName: str = '$fullname'
 
 #set $_, $first_index = $sorted[0]
 #set $first_itm = $attribs[$first_index]

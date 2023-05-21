@@ -43,6 +43,21 @@ class AppConfig:
     
     This will usually be a subdirectory of ``build_dir``
     """
+    pyi_write_imports_in_init: bool
+    """
+    Write imports in ``__init__.py`` files in pyi_dir.
+    
+    If True then each import directory will have an ``__init__.py`` file with imports of all it modules in that directory.
+    
+    If True then ``pyi_write_star_dir_old_style`` Should be False and ``pyi_dir`` set to ['star'].
+    """
+    pyi_write_star_dir_old_style: bool
+    """
+    Specifies if make runs a special method to write all star modules into a star subdirectories and imports from the value
+    of ``pyi_dir``.
+    
+    This property is mainly for backwards compatibility with older versions of make.
+    """
     scratch_dir: str
     """Output scratch dir such as scratch"""
     resource_dir: str
