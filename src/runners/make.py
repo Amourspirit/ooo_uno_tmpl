@@ -460,11 +460,15 @@ class Make(FilesBase):
         p_dir = p_file.parent
         p_rel = p_dir.relative_to(self._root_dir)
         parts = list(p_rel.parts)
-        parts[0] = Path(*self._config.pyi_dir)  # replace lo with /star/_pyi
-        # build up to ooobuild/star/_pyi/somepath/somefile.pyi
+        parts[0] = Path(*self._config.pyi_dir)  # replace lo with /star
+        # build up to ooobuild/star/somepath/somefile.pyi
         p_scratch_dir = Path(self._build, *parts)
         self._mkdirp(p_scratch_dir)
-        p_scratch = Path(p_scratch_dir, f"{self.camel_to_snake(model.name)}{ext}")
+        if model.type== OooType.ENUM:
+            name = model.name
+        else:
+            name = self.camel_to_snake(model.name)
+        p_scratch = Path(p_scratch_dir, f"{name}{ext}")
         return p_scratch
 
     def _get_pyi_write_path_star(self, tmpl_file: Path, model: OooClass) -> Path:
@@ -495,6 +499,10 @@ class Make(FilesBase):
                 unique_lines = set(file.readlines())
             for info in sub_infos:
                 if info.model is None:
+                    continue
+                
+                if info.model.type == OooType.ENUM:
+                    # Enum are not written to __init__.pyi
                     continue
 
                 import_str = f"from .{info.scratch_path.stem} import {info.model.name} as {info.model.name}\n"
