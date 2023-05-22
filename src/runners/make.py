@@ -211,7 +211,7 @@ class Make(FilesBase):
                 self._log.error(e)
         if len(c_lst) == 0:
             return
-        self._env_extra = {"PYI_CLASS": "True"}
+        # self._env_extra = {"PYI_CLASS": "True"}
         pyi_dir = Path(self._build, *self._config.pyi_dir)
         self._ensure_init(pyi_dir, ".pyi")
         # run two pools. First to compile. Second to write

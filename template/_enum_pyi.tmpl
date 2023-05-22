@@ -13,7 +13,6 @@ $self.init_data()#slurp
 #attr $desc = "" ## str, list, tupple
 #attr $quote = set()
 #attr $typings = set()
-#attr $write_class = False
 ## $enum_dict
 #*
 key: const name
@@ -22,11 +21,6 @@ value: string or list, tuple of strings
 #attr $enum_dict = {}
 $self.load_data()#slurp
 ## Main Template
-#if $write_class
-#set $indt = "    "
-#else
-#set $indt = ""
-#end if
 #set $safe_name = $self.get_safe_word($name)
 #set $fullname = $namespace + '.' + $safe_name
 #set s_enum = ''
@@ -41,63 +35,25 @@ $self.load_data()#slurp
 # Libre Office Version: $libre_office_ver
 #end if
 from __future__ import annotations
-from typing import Any
-#if $write_class
-from enum import Enum
+from typing import cast
+from com.sun.star import UnoEnumProto
 
-
-class ${safe_name}(Enum):
-#else
-## from com.sun.star._pyi.style.tab_align import TabAlign as TabAlign
-$self.get_pyi_com_import()
-#end if
-${indt}"""
-${indt}Enum
-
-    #if isinstance($desc, str) and $desc
-${indt}${desc}
-    #else
-        #for $line in $desc
-            #if $line
-${indt}${line}
-            #end if
-        #end for
-    #end if
-#if $link:
-
-${indt}See Also:
-${indt}    `API $name <$link>`_
-#end if
-${indt}"""
-
-#if $write_class
-${indt}def __init__(self, value: Any) -> None: ...
-${indt}def __repr__(self) -> str: ...
-${indt}def __eq__(self, that: Any) -> bool: ...
-${indt}def __ne__(self,other: Any) -> bool: ...
-
-#else
-${indt}tvalue -> Any: ...
-
-#end if
-## Assign value because Literal is python 3.8 +
-${indt}typeName: str = '$fullname'
+class ${safe_name}Proto(UnoEnumProto):
+#for $key in $key_list
+    $self.get_safe_word($key): UnoEnumProto
+#end for
 
 #for $key in $key_list
 ##$self.get_safe_word($key)$self.get_typing($self.get_safe_word($key))
-#if $write_class
-${indt}$self.get_safe_word($key) = ...
-#else
-${indt}$self.get_safe_word($key): ${safe_name} = ...
-#end if
+$self.get_safe_word($key): cast(${safe_name}Proto, ...)
     #set $value = $enum_dict[$key]
-${indt}"""
-#if isinstance($value, str):
+"""
+    #if isinstance($value, str):
 ${indt}$value
-#else
-    #for $line in $value
-${indt}$line
-    #end for
-#end if
-${indt}"""
+    #else
+        #for $line in $value
+$line
+        #end for
+    #end if
+"""
 #end for
