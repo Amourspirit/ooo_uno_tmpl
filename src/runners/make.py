@@ -56,7 +56,7 @@ class Make(FilesBase):
     def _create_sys_links(self, dest: Path):
         """
         Ensures that all _base*.py file are linked from template dir to dest path.
-        The templates inherit fome _base*.py files.
+        The templates inherit from _base*.py files.
 
         By creating links the dest template files act as thought
         the class that is inherits from is in the dest path.
@@ -85,17 +85,17 @@ class Make(FilesBase):
     def _get_env(self) -> Dict[str, str]:
         """
         Gets Environment used for subprocess.
-        This allows temlates to have access to src directory imports.
+        This allows templates to have access to src directory imports.
         """
-        myenv = os.environ.copy()
-        pypath = ""
+        my_env = os.environ.copy()
+        py_path = ""
         p_sep = ";" if os.name == "nt" else ":"
         for d in sys.path:
-            pypath = pypath + d + p_sep
-        myenv["PYTHONPATH"] = pypath
+            py_path = py_path + d + p_sep
+        my_env["PYTHONPATH"] = py_path
         if self._env_extra is not None:
-            myenv.update(self._env_extra)
-        return myenv
+            my_env.update(self._env_extra)
+        return my_env
 
     def _make(self):
         self._env_extra = None
@@ -119,13 +119,13 @@ class Make(FilesBase):
         if std_out:
             self._log.info("Cheetah output: %s", std_out)
         if exit_status != 0:
-            self._log.warning("Cheeta error Outuput: %s", p.stderr.decode())
+            self._log.warning("Cheeta error Output: %s", p.stderr.decode())
 
     def _make_tmpl(self):
         """
         Gathers all *.tmpl files that have been changed and performs the following:
 
-        * Compiles the temlate into python file with *.py ext.
+        * Compiles the template into python file with *.py ext.
         * Runs the template and Writes the results of the template output to ``lo`` subfolder.
         """
         self._env_extra = None
@@ -212,6 +212,7 @@ class Make(FilesBase):
         if len(c_lst) == 0:
             return
         # self._env_extra = {"PYI_CLASS": "True"}
+        self._env_extra = {"PYI_CLASS_CONST": "True"}
         pyi_dir = Path(self._build, *self._config.pyi_dir)
         self._ensure_init(pyi_dir, ".pyi")
         # run two pools. First to compile. Second to write
@@ -290,13 +291,13 @@ class Make(FilesBase):
         if std_out:
             self._log.info("Cheetah output: %s", std_out)
         if exit_status != 0:
-            self._log.warning("Cheeta error Outuput: %s", p.stderr.decode())
+            self._log.warning("Cheeta error Output: %s", p.stderr.decode())
 
     def _make_dyn(self):
         """
         Gathers all *.dyn files that have been changed and performs the following:
 
-        * Compiles the temlate into python file with *.dynpy ext.
+        * Compiles the template into python file with *.dynpy ext.
         * Runs the template and Writes the results of the template output to ``lo`` subfolder.
         """
         self._env_extra = None
@@ -442,7 +443,7 @@ class Make(FilesBase):
         # https://tinyurl.com/lfl7fwd
         parts = list(p_rel.parts)
         parts[0] = self._config.dyn_dir  # replace lo with dyn
-        # build up to ooobuild/dyn/somepath/somefile.py
+        # build up to ooobuild/dyn/some_path/some_file.py
         p_scratch_dir = Path(self._build, *parts)
         self._mkdirp(p_scratch_dir)
         p_scratch = Path(p_scratch_dir, self.camel_to_snake(str(p_file.stem)) + ext)
@@ -461,7 +462,7 @@ class Make(FilesBase):
         p_rel = p_dir.relative_to(self._root_dir)
         parts = list(p_rel.parts)
         parts[0] = Path(*self._config.pyi_dir)  # replace lo with /star
-        # build up to ooobuild/star/somepath/somefile.pyi
+        # build up to ooobuild/star/some_path/some_file.pyi
         p_scratch_dir = Path(self._build, *parts)
         self._mkdirp(p_scratch_dir)
         if model.type== OooType.ENUM:
@@ -477,7 +478,7 @@ class Make(FilesBase):
         p_rel = p_dir.relative_to(self._root_dir)
         parts = list(p_rel.parts)
         parts[0] = Path(*self._config.com_sun_star_pyi)  # replace lo with /star
-        # build up to ooobuild/star//somepath/__init__.pyi
+        # build up to ooobuild/star/some_path/__init__.pyi
         p_scratch_dir = Path(self._build, *parts)
         p_scratch_dir = Path(p_scratch_dir, model.name)
 
