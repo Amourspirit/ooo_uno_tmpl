@@ -10,7 +10,7 @@ class BaseInterfacePyi(BaseInterface):
 
 
     # region Overrides
-    def _get_formated_arg(self, arg: Dict[str, str]) -> str:
+    def _get_formatted_arg(self, arg: Dict[str, str]) -> str:
         tipe = cast(str, arg['type'])
         if tipe == "object":
             return f"{self.get_safe_word(arg['name'])}: typing.Any"
@@ -21,7 +21,7 @@ class BaseInterfacePyi(BaseInterface):
         for i, arg in enumerate(args):
             if i > 0:
                 result += ', '
-            result += self._get_formated_arg(arg=arg)
+            result += self._get_formatted_arg(arg=arg)
         return result
     
     
