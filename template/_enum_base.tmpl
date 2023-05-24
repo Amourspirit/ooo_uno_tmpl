@@ -34,8 +34,10 @@ $self.load_data()#slurp
 #if $libre_office_ver:
 # Libre Office Version: $libre_office_ver
 #end if
+from typing import cast
 from enum import Enum
-
+## from com.sun.star.table.CellContentType import CellContentTypeProto
+from $fullname import ${safe_name}Proto
 
 class ${safe_name}(Enum):
     """
@@ -66,7 +68,7 @@ class ${safe_name}(Enum):
 
 #for $key in $key_list
 #set $value = $enum_dict[$key]
-    $self.get_safe_word($key) = '$key'
+    $self.get_safe_word($key) = cast(${safe_name}Proto, '$key')
     """
 #if isinstance($value, str):
     $value

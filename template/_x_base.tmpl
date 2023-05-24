@@ -21,6 +21,7 @@ $self.init_data()#slurp
 #attr $from_imports_typing = []
 #attr $attribs = {}
 $self.load_data()#slurp
+#set $self.using_future_annotations = True
 ## main Template
 #set $safe_name = $self.get_safe_word($name)
 #set $fullname = $namespace + '.' + $safe_name
@@ -36,6 +37,7 @@ $self.load_data()#slurp
 # Libre Office Version: $libre_office_ver
 #end if
 # Namespace: $namespace
+from __future__ import annotations
 #if len($inherits) == 0
 #set $inherits = ['ABC']
 #set $abc_imports= $abc_imports + ['ABC']
@@ -112,7 +114,7 @@ class ${safe_name}($self.get_class_inherits($name, $inherits)):
 #set $properties = $attribs['types']
 #for $property in $properties
 #set $p_name = $self.get_safe_word($property['name'])
-#set $p_return = $self.get_q_type($property['returns'])
+#set $p_return = $self.get_property_return($property)
 #set $p_desc = $property['desc']
     @abstractproperty
     def ${p_name}(self) -> $p_return:
@@ -140,7 +142,7 @@ class ${safe_name}($self.get_class_inherits($name, $inherits)):
 #set $properties = $attribs['properties']
 #for $property in $properties
 #set $p_name = $self.get_safe_word($property['name'])
-#set $p_return = $self.get_q_type($property['returns'])
+#set $p_return = $self.get_property_return($property)
 #set $p_desc = $property['desc']
     @abstractproperty
     def ${p_name}(self) -> $p_return:

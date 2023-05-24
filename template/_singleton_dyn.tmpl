@@ -77,6 +77,9 @@ if not TYPE_CHECKING and _DYNAMIC:
         $safe_name = _singleton_init
     _dynamic_singleton()
 else:
-    $self.get_rel_import(in_str=$uno_obj_in, ns=$uno_obj_ns) as $safe_name
+    if TYPE_CHECKING
+        from $namespace import $safe_name as $safe_name
+    else:
+        $self.get_rel_import(in_str=$uno_obj_in, ns=$uno_obj_ns) as $safe_name
 
 __all__ = ['$safe_name']

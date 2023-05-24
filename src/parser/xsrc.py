@@ -559,7 +559,7 @@ class Writer(base.WriteBase):
                 os.system('cls' if os.name == 'nt' else 'clear')
             if self._copy_clipboard:
                 xerox.copy(self._template)
-                logger.debug('copied to clipbord')
+                logger.debug('copied to clipboard')
             if self._print_template:
                 print(self._template)
             if self._print_json:
@@ -575,7 +575,7 @@ class Writer(base.WriteBase):
         except Exception as e:
             logger.exception(e)
 
-    def _get_json_type(sefl) -> str:
+    def _get_json_type(self) -> str:
         return "interface"
 
     def _get_json(self) -> str:
