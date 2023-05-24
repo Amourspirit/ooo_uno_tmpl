@@ -316,6 +316,7 @@ Regeneration of a new LO API version.
             This was done in older version that wrote typings into ``star/_pyi/``.
             The config.json properties still allow for this but are not used by default.
             The config properties that control this are ``pyi_dir``, ``pyi_write_imports_in_init`` and ``pyi_write_star_dir_old_style``.
+            Also Note: The template for enum pyi files is currently set to use the new protocol style.
 
             The command to generate star sub namespaces and python files is:
             $ python -m app data star --css-pyi

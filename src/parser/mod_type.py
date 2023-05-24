@@ -48,7 +48,7 @@ TYPE_MAP_PY_WRAPPER_REPEAT = {"tuple"}
 """
 Wrappers the repeat such as tuple
 
-Repeating wrappers are generally formated as 'typing.tuple[str, ...]'
+Repeating wrappers are generally formatted as 'typing.tuple[str, ...]'
 """
 # endregion Maps
 

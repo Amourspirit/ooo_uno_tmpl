@@ -16,6 +16,11 @@ from typing import Iterable, Tuple, List, Union, Optional
 from Cheetah.Template import Template
 from dataclasses import dataclass
 from src.logger.log_handle import get_logger
+from enum import Enum
+from src.data_manage.db_class.base_sql import BaseSql as DbBaseSql
+from src.data_manage.db_class.qry_component import QryComponent
+from src.data_manage.data_class.component import Component
+from src.data_manage.data_class.component_kind import ComponentKind
 
 
 # set up path for importing modules from main app
@@ -130,9 +135,10 @@ class SqlCtx:
         return self._conn
 
 
-class BaseSql:
+class BaseSql(DbBaseSql):
     def __init__(self) -> None:
         self._db_connect = DbConnect()
+        super().__init__(connect_str=self.conn_str)
 
     @property
     def conn_str(self) -> str:
@@ -166,32 +172,62 @@ class SqlExtends(BaseSql):
 class SqlComponent(BaseSql):
     def __init__(self) -> None:
         super().__init__()
+        self.qry_component = QryComponent(connect_str=self.conn_str)
 
-    def is_type(self, namespace: str, tipe="typedef") -> bool:
-        query = """SELECT * FROM component
-            WHERE component.id_component like :namespace
-            and component.type like :type
-            LIMIT 1;"""
-        result = False
-        with SqlCtx(self.conn_str) as db:
-            db.cursor.execute(query, {"namespace": namespace, "type": tipe})
-            row = db.cursor.fetchone()
-            if not row is None:
-                result = True
-        return result
+    def get_component(self, full_ns: str, tipe: str | ComponentKind = "") -> Union[Component, None]:
+        """
+        Gets component instance for a given namespace.
 
-    def is_type_from_map_name(self, map_name: str, tipe="typedef") -> bool:
-        query = """SELECT * FROM component
-            WHERE component.map_name like :map_name
-            and component.type like :type
-            LIMIT 1;"""
-        result = False
-        with SqlCtx(self.conn_str) as db:
-            db.cursor.execute(query, {"map_name": map_name, "type": tipe})
-            row = db.cursor.fetchone()
-            if not row is None:
-                result = True
-        return result
+        If the namespace does not start with ``com.sun.star.`` then ``None`` is returned without checking the database.
+
+        Args:
+            full_ns (str): full namespace used for match.
+            tipe (str, ComponentTypeKind, optional): Type to check for match.
+
+        Returns:
+            Union[Component, None]: Component instance if ``full_ns`` is a match; Otherwise, ``None``
+        """
+        return self.qry_component.get_component(full_ns, tipe=tipe)
+
+    def get_component_by_map_name(self, map_name: str) -> Union[Component, None]:
+        """
+        Gets component instance for a given map_name
+
+        Args:
+            map_name (str): map_name used for match.
+
+        Returns:
+            Union[Component, None]: Component instance if ``map_name`` is a match; Otherwise, ``None``
+        """
+        return self.qry_component.get_component_by_map_name(map_name)
+
+    def is_type(self, namespace: str, tipe: str | ComponentKind = "typedef") -> bool:
+        """
+        Gets if the namespace is a type of the given type.
+
+        If the namespace does not start with ``com.sun.star.`` then ``False`` is returned without checking the database.
+
+        Args:
+            namespace (str): Namespace to check such as ``com.sun.star.xsd.Year``.
+            tipe (str, ComponentTypeKind, optional): Type to check for match. Defaults to "typedef".
+
+        Returns:
+            bool: If the namespace is a type of the given type.
+        """
+        return self.qry_component.is_type(namespace, tipe)
+
+    def is_type_from_map_name(self, map_name: str, tipe: str | ComponentKind = "typedef") -> bool:
+        """
+        Gets if the map_name is a type of the given type.
+
+        Args:
+            map_name (str): Map name to check such as ``Year_578a07e8``.
+            tipe (str, ComponentTypeKind, optional): Type to check for match. Defaults to "typedef".
+
+        Returns:
+            bool: If the map_name is a type of the given type.
+        """
+        return self.qry_component.is_type_from_map_name(map_name, tipe)
 
 
 # endregion Resource DB Related
@@ -211,6 +247,7 @@ class TmplConfig:
 
 class BaseTpml(Template):
     def __init__(self, *args, **kwargs):
+        self.using_future_annotations = False
         super().__init__(*args, **kwargs)
         self._is_class_init = True
         self._is_class_data = False
@@ -478,8 +515,12 @@ class BaseTpml(Template):
         return False
 
     def get_q_type(self, in_type: object) -> object:
-        """If in_type is in quote then it is quoted.  Otherwise in_type is returned"""
-        if self.is_q_type(in_type=in_type):
+        """
+        If in_type is in quote then it is quoted.
+        Unless ``using_future_annotations`` property is ``True`` then it is returned verbatim.
+        """
+        
+        if not self.using_future_annotations and self.is_q_type(in_type=in_type):
             return self.get_q_wrapped(in_str=in_type)
         return in_type
 

@@ -31,5 +31,9 @@ $self.load_data()#slurp
 # Libre Office Version: $libre_office_ver
 # Namespace: $namespace
 #end if
+from typing import TYPE_CHECKING
 
-$self.get_rel_import(in_str=$uno_obj_in, ns=$uno_obj_ns) as $safe_name
+if TYPE_CHECKING:
+    from $namespace import $safe_name as $safe_name
+else:
+    $self.get_rel_import(in_str=$uno_obj_in, ns=$uno_obj_ns) as $safe_name

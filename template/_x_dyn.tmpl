@@ -49,11 +49,16 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
+    # document generators will most likely not see this.
     from $namespace import $safe_name as $safe_name
     setattr($safe_name, '__ooo_ns__', '$namespace')
     setattr($safe_name, '__ooo_full_ns__', '$fullname')
     setattr($safe_name, '__ooo_type_name__', 'interface')
 else:
-    from $namespace import $safe_name as $safe_name
+    if TYPE_CHECKING:
+        from $namespace import $safe_name as $safe_name
+    else:
+        # keep document generators happy
+        $self.get_rel_import(in_str=$uno_obj_in, ns=$uno_obj_ns) as $safe_name
 
 __all__ = ['$safe_name']

@@ -73,6 +73,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     $safe_name = _get_class()
 
 else:
-    from $namespace import $safe_name as $safe_name
+    if TYPE_CHECKING:
+        from $namespace import $safe_name as $safe_name
+    else:
+        $self.get_rel_import(in_str=$uno_obj_in, ns=$uno_obj_ns) as $safe_name
 
 __all__ = ['$safe_name']
