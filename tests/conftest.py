@@ -5,6 +5,10 @@ from pathlib import Path
 
 
 @pytest.fixture(scope="session")
+def env_ooouno_ignore_runtime():
+    return True
+
+@pytest.fixture(scope="session")
 def fixture_path(app_root: Path) -> Path:
     return app_root / "tests" / "fixture"
 
