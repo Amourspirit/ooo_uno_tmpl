@@ -20,6 +20,7 @@ value: string or list, tuple of strings
 *#
 #attr $enum_dict = {}
 $self.load_data()#slurp
+#set $self.using_future_annotations = True
 ## Main Template
 #set $safe_name = $self.get_safe_word($name)
 #set $fullname = $namespace + '.' + $safe_name
@@ -34,10 +35,12 @@ $self.load_data()#slurp
 #if $libre_office_ver:
 # Libre Office Version: $libre_office_ver
 #end if
-from typing import cast
+from __future__ import annotations
+from typing import cast, TYPE_CHECKING
 from enum import Enum
 ## from com.sun.star.table.CellContentType import CellContentTypeProto
-from $fullname import ${safe_name}Proto
+if TYPE_CHECKING:
+    from $fullname import ${safe_name}Proto
 
 class ${safe_name}(Enum):
     """
@@ -68,7 +71,7 @@ class ${safe_name}(Enum):
 
 #for $key in $key_list
 #set $value = $enum_dict[$key]
-    $self.get_safe_word($key) = cast(${safe_name}Proto, '$key')
+    $self.get_safe_word($key) = cast("${safe_name}Proto", '$key')
     """
 #if isinstance($value, str):
     $value
