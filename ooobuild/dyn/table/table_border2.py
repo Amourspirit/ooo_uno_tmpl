@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.table import TableBorder2 as TableBorder2
     else:
+        # keep document generators happy
         from ...lo.table.table_border2 import TableBorder2 as TableBorder2
 
 __all__ = ['TableBorder2']

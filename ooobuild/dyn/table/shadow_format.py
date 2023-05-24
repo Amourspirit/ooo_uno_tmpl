@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.table import ShadowFormat as ShadowFormat
     else:
+        # keep document generators happy
         from ...lo.table.shadow_format import ShadowFormat as ShadowFormat
 
 __all__ = ['ShadowFormat']

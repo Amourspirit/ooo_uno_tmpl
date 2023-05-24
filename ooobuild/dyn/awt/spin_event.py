@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.awt import SpinEvent as SpinEvent
     else:
+        # keep document generators happy
         from ...lo.awt.spin_event import SpinEvent as SpinEvent
 
 __all__ = ['SpinEvent']

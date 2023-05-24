@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.sheet import NameToken as NameToken
     else:
+        # keep document generators happy
         from ...lo.sheet.name_token import NameToken as NameToken
 
 __all__ = ['NameToken']

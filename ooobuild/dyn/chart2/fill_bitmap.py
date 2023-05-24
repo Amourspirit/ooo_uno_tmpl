@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.chart2 import FillBitmap as FillBitmap
     else:
+        # keep document generators happy
         from ...lo.chart2.fill_bitmap import FillBitmap as FillBitmap
 
 __all__ = ['FillBitmap']

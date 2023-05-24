@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.sheet import DDEItemInfo as DDEItemInfo
     else:
+        # keep document generators happy
         from ...lo.sheet.dde_item_info import DDEItemInfo as DDEItemInfo
 
 __all__ = ['DDEItemInfo']

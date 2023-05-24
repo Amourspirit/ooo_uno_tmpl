@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.datatransfer.clipboard import ClipboardEvent as ClipboardEvent
     else:
+        # keep document generators happy
         from ....lo.datatransfer.clipboard.clipboard_event import ClipboardEvent as ClipboardEvent
 
 __all__ = ['ClipboardEvent']

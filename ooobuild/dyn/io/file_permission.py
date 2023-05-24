@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.io import FilePermission as FilePermission
     else:
+        # keep document generators happy
         from ...lo.io.file_permission import FilePermission as FilePermission
 
 __all__ = ['FilePermission']

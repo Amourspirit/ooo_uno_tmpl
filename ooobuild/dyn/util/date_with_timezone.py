@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.util import DateWithTimezone as DateWithTimezone
     else:
+        # keep document generators happy
         from ...lo.util.date_with_timezone import DateWithTimezone as DateWithTimezone
 
 __all__ = ['DateWithTimezone']

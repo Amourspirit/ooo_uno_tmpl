@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.util import AtomClassRequest as AtomClassRequest
     else:
+        # keep document generators happy
         from ...lo.util.atom_class_request import AtomClassRequest as AtomClassRequest
 
 __all__ = ['AtomClassRequest']

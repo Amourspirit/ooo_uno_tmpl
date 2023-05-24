@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.chart import ChartDataChangeEvent as ChartDataChangeEvent
     else:
+        # keep document generators happy
         from ...lo.chart.chart_data_change_event import ChartDataChangeEvent as ChartDataChangeEvent
 
 __all__ = ['ChartDataChangeEvent']

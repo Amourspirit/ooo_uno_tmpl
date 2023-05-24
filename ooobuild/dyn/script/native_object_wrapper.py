@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.script import NativeObjectWrapper as NativeObjectWrapper
     else:
+        # keep document generators happy
         from ...lo.script.native_object_wrapper import NativeObjectWrapper as NativeObjectWrapper
 
 __all__ = ['NativeObjectWrapper']

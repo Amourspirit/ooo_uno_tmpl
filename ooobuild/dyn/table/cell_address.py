@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.table import CellAddress as CellAddress
     else:
+        # keep document generators happy
         from ...lo.table.cell_address import CellAddress as CellAddress
 
 __all__ = ['CellAddress']

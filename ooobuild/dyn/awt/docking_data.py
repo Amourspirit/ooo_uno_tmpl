@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.awt import DockingData as DockingData
     else:
+        # keep document generators happy
         from ...lo.awt.docking_data import DockingData as DockingData
 
 __all__ = ['DockingData']

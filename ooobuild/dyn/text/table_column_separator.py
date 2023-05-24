@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.text import TableColumnSeparator as TableColumnSeparator
     else:
+        # keep document generators happy
         from ...lo.text.table_column_separator import TableColumnSeparator as TableColumnSeparator
 
 __all__ = ['TableColumnSeparator']

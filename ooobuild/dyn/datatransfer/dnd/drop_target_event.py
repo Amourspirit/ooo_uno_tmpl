@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.datatransfer.dnd import DropTargetEvent as DropTargetEvent
     else:
+        # keep document generators happy
         from ....lo.datatransfer.dnd.drop_target_event import DropTargetEvent as DropTargetEvent
 
 __all__ = ['DropTargetEvent']

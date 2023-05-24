@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.script import InterruptEngineEvent as InterruptEngineEvent
     else:
+        # keep document generators happy
         from ...lo.script.interrupt_engine_event import InterruptEngineEvent as InterruptEngineEvent
 
 __all__ = ['InterruptEngineEvent']

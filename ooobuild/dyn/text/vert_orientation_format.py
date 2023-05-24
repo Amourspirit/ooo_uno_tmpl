@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.text import VertOrientationFormat as VertOrientationFormat
     else:
+        # keep document generators happy
         from ...lo.text.vert_orientation_format import VertOrientationFormat as VertOrientationFormat
 
 __all__ = ['VertOrientationFormat']

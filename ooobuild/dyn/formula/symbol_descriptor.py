@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.formula import SymbolDescriptor as SymbolDescriptor
     else:
+        # keep document generators happy
         from ...lo.formula.symbol_descriptor import SymbolDescriptor as SymbolDescriptor
 
 __all__ = ['SymbolDescriptor']

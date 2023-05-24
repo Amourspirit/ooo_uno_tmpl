@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.util import ElementChange as ElementChange
     else:
+        # keep document generators happy
         from ...lo.util.element_change import ElementChange as ElementChange
 
 __all__ = ['ElementChange']

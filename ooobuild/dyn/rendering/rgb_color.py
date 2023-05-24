@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.rendering import RGBColor as RGBColor
     else:
+        # keep document generators happy
         from ...lo.rendering.rgb_color import RGBColor as RGBColor
 
 __all__ = ['RGBColor']

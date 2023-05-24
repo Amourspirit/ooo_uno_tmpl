@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.drawing.framework import TabBarButton as TabBarButton
     else:
+        # keep document generators happy
         from ....lo.drawing.framework.tab_bar_button import TabBarButton as TabBarButton
 
 __all__ = ['TabBarButton']

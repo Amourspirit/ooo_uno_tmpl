@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.connection import SocketPermission as SocketPermission
     else:
+        # keep document generators happy
         from ...lo.connection.socket_permission import SocketPermission as SocketPermission
 
 __all__ = ['SocketPermission']

@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.script import InvocationInfo as InvocationInfo
     else:
+        # keep document generators happy
         from ...lo.script.invocation_info import InvocationInfo as InvocationInfo
 
 __all__ = ['InvocationInfo']

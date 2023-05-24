@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.sdb import DatabaseRegistrationEvent as DatabaseRegistrationEvent
     else:
+        # keep document generators happy
         from ...lo.sdb.database_registration_event import DatabaseRegistrationEvent as DatabaseRegistrationEvent
 
 __all__ = ['DatabaseRegistrationEvent']

@@ -138,38 +138,30 @@ class BaseInterface(BaseJson):
         def remove_from_imports(comps: Iterable[Component]):
             for comp in comps:
                 for imp in self.from_imports[:]:  # iterate over copy to we can remove from the list
-                    if imp[0] == comp.c_name:
-                        self._linfo(f"Removing enum from imports: {imp}")
+                    if imp[1] == comp.name:
                         self.from_imports.remove(imp)
 
         def remove_from_imports_typing(comps: Iterable[Component]):
             for comp in comps:
                 for imp in self.from_imports_typing[:]:  # iterate over copy to we can remove from the list
-                    if imp[0] == f".{comp.c_name}":
-                        self._linfo(f"Removing enum from imports typing: {imp}")
+                    if imp[1] == comp.name:
                         self.from_imports_typing.remove(imp)
 
         if not self.has_enums:
             return
         # remove from imports
         if self.enum_properties:
-            self._linfo(f"Removing enum properties from imports: {self.enum_properties.keys()}")
             remove_from_imports(self.enum_properties.values())
-            self._linfo(f"Removing enum properties from imports typing: {self.enum_properties.keys()}")
             remove_from_imports_typing(self.enum_properties.values())
 
         if self.enum_methods_return:
-            self._linfo(f"Removing enum methods return from imports: {self.enum_methods_return.keys()}")
             remove_from_imports(self.enum_methods_return.values())
-            self._linfo(f"Removing enum methods return from imports typing: {self.enum_methods_return.keys()}")
             remove_from_imports_typing(self.enum_methods_return.values())
 
         if self.enum_methods_args:
             for method_args in self.enum_methods_args.values():
                 for comp in method_args.values():
-                    self._linfo(f"Removing enum methods args from imports: {comp.name}")
                     remove_from_imports([comp])
-                    self._linfo(f"Removing enum methods args from imports typing: {comp.name}")
                     remove_from_imports_typing([comp])
 
     # endregion Adjust for Enums

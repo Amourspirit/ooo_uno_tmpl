@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.beans import SetPropertyTolerantFailed as SetPropertyTolerantFailed
     else:
+        # keep document generators happy
         from ...lo.beans.set_property_tolerant_failed import SetPropertyTolerantFailed as SetPropertyTolerantFailed
 
 __all__ = ['SetPropertyTolerantFailed']

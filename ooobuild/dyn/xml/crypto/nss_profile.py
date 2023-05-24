@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.xml.crypto import NSSProfile as NSSProfile
     else:
+        # keep document generators happy
         from ....lo.xml.crypto.nss_profile import NSSProfile as NSSProfile
 
 __all__ = ['NSSProfile']

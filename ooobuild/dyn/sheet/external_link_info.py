@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.sheet import ExternalLinkInfo as ExternalLinkInfo
     else:
+        # keep document generators happy
         from ...lo.sheet.external_link_info import ExternalLinkInfo as ExternalLinkInfo
 
 __all__ = ['ExternalLinkInfo']

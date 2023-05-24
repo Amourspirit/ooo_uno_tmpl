@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.bridge.oleautomation import SCode as SCode
     else:
+        # keep document generators happy
         from ....lo.bridge.oleautomation.s_code import SCode as SCode
 
 __all__ = ['SCode']

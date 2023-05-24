@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.deployment import UpdateInformationEntry as UpdateInformationEntry
     else:
+        # keep document generators happy
         from ...lo.deployment.update_information_entry import UpdateInformationEntry as UpdateInformationEntry
 
 __all__ = ['UpdateInformationEntry']

@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.sheet import DataPilotFieldAutoShowInfo as DataPilotFieldAutoShowInfo
     else:
+        # keep document generators happy
         from ...lo.sheet.data_pilot_field_auto_show_info import DataPilotFieldAutoShowInfo as DataPilotFieldAutoShowInfo
 
 __all__ = ['DataPilotFieldAutoShowInfo']

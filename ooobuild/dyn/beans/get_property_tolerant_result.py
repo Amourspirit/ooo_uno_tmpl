@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.beans import GetPropertyTolerantResult as GetPropertyTolerantResult
     else:
+        # keep document generators happy
         from ...lo.beans.get_property_tolerant_result import GetPropertyTolerantResult as GetPropertyTolerantResult
 
 __all__ = ['GetPropertyTolerantResult']

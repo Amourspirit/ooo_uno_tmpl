@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.embed import InsertedObjectInfo as InsertedObjectInfo
     else:
+        # keep document generators happy
         from ...lo.embed.inserted_object_info import InsertedObjectInfo as InsertedObjectInfo
 
 __all__ = ['InsertedObjectInfo']

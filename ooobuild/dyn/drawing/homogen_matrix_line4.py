@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.drawing import HomogenMatrixLine4 as HomogenMatrixLine4
     else:
+        # keep document generators happy
         from ...lo.drawing.homogen_matrix_line4 import HomogenMatrixLine4 as HomogenMatrixLine4
 
 __all__ = ['HomogenMatrixLine4']

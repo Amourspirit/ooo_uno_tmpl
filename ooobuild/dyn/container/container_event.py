@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.container import ContainerEvent as ContainerEvent
     else:
+        # keep document generators happy
         from ...lo.container.container_event import ContainerEvent as ContainerEvent
 
 __all__ = ['ContainerEvent']

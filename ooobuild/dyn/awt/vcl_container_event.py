@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.awt import VclContainerEvent as VclContainerEvent
     else:
+        # keep document generators happy
         from ...lo.awt.vcl_container_event import VclContainerEvent as VclContainerEvent
 
 __all__ = ['VclContainerEvent']

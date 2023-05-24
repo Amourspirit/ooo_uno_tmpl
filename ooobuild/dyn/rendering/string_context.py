@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.rendering import StringContext as StringContext
     else:
+        # keep document generators happy
         from ...lo.rendering.string_context import StringContext as StringContext
 
 __all__ = ['StringContext']

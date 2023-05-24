@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.frame import DispatchResultEvent as DispatchResultEvent
     else:
+        # keep document generators happy
         from ...lo.frame.dispatch_result_event import DispatchResultEvent as DispatchResultEvent
 
 __all__ = ['DispatchResultEvent']

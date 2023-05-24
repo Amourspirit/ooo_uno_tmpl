@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.chart2 import LightSource as LightSource
     else:
+        # keep document generators happy
         from ...lo.chart2.light_source import LightSource as LightSource
 
 __all__ = ['LightSource']

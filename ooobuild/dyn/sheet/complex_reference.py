@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.sheet import ComplexReference as ComplexReference
     else:
+        # keep document generators happy
         from ...lo.sheet.complex_reference import ComplexReference as ComplexReference
 
 __all__ = ['ComplexReference']

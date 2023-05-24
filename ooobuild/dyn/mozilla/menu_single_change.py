@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.mozilla import MenuSingleChange as MenuSingleChange
     else:
+        # keep document generators happy
         from ...lo.mozilla.menu_single_change import MenuSingleChange as MenuSingleChange
 
 __all__ = ['MenuSingleChange']

@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.drawing import BarCode as BarCode
     else:
+        # keep document generators happy
         from ...lo.drawing.bar_code import BarCode as BarCode
 
 __all__ = ['BarCode']

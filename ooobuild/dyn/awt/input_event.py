@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.awt import InputEvent as InputEvent
     else:
+        # keep document generators happy
         from ...lo.awt.input_event import InputEvent as InputEvent
 
 __all__ = ['InputEvent']

@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.util import SearchOptions as SearchOptions
     else:
+        # keep document generators happy
         from ...lo.util.search_options import SearchOptions as SearchOptions
 
 __all__ = ['SearchOptions']

@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.util import DataEditorEvent as DataEditorEvent
     else:
+        # keep document generators happy
         from ...lo.util.data_editor_event import DataEditorEvent as DataEditorEvent
 
 __all__ = ['DataEditorEvent']

@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.rendering import ColorProfile as ColorProfile
     else:
+        # keep document generators happy
         from ...lo.rendering.color_profile import ColorProfile as ColorProfile
 
 __all__ = ['ColorProfile']

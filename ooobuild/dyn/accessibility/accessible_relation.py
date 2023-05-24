@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.accessibility import AccessibleRelation as AccessibleRelation
     else:
+        # keep document generators happy
         from ...lo.accessibility.accessible_relation import AccessibleRelation as AccessibleRelation
 
 __all__ = ['AccessibleRelation']

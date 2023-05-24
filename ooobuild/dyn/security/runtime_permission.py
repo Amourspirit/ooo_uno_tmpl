@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.security import RuntimePermission as RuntimePermission
     else:
+        # keep document generators happy
         from ...lo.security.runtime_permission import RuntimePermission as RuntimePermission
 
 __all__ = ['RuntimePermission']

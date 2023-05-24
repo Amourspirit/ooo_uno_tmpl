@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.geometry import EllipticalArc as EllipticalArc
     else:
+        # keep document generators happy
         from ...lo.geometry.elliptical_arc import EllipticalArc as EllipticalArc
 
 __all__ = ['EllipticalArc']

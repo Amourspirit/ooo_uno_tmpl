@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.inspection import PropertyCategoryDescriptor as PropertyCategoryDescriptor
     else:
+        # keep document generators happy
         from ...lo.inspection.property_category_descriptor import PropertyCategoryDescriptor as PropertyCategoryDescriptor
 
 __all__ = ['PropertyCategoryDescriptor']

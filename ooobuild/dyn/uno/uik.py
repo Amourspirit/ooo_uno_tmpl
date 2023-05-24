@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.uno import Uik as Uik
     else:
+        # keep document generators happy
         from ...lo.uno.uik import Uik as Uik
 
 __all__ = ['Uik']

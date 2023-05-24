@@ -27,7 +27,6 @@ if typing.TYPE_CHECKING:
     from ..awt.rectangle import Rectangle as Rectangle_84b109e9
     from ..awt.size import Size as Size_576707ef
     from .x_frame import XFrame as XFrame_7a570956
-    from ..ui.docking_area import DockingArea as DockingArea_8daf0a1e
     from ..ui.x_docking_area_acceptor import XDockingAreaAcceptor as XDockingAreaAcceptor_f8d90da7
     from ..ui.xui_element import XUIElement as XUIElement_820509a6
     from com.sun.star.ui.DockingArea import DockingAreaProto

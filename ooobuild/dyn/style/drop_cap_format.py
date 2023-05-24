@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.style import DropCapFormat as DropCapFormat
     else:
+        # keep document generators happy
         from ...lo.style.drop_cap_format import DropCapFormat as DropCapFormat
 
 __all__ = ['DropCapFormat']

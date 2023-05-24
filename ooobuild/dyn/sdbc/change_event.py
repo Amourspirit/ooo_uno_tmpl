@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.sdbc import ChangeEvent as ChangeEvent
     else:
+        # keep document generators happy
         from ...lo.sdbc.change_event import ChangeEvent as ChangeEvent
 
 __all__ = ['ChangeEvent']

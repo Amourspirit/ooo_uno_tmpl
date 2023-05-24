@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.xml.crypto.sax import ElementStackItem as ElementStackItem
     else:
+        # keep document generators happy
         from .....lo.xml.crypto.sax.element_stack_item import ElementStackItem as ElementStackItem
 
 __all__ = ['ElementStackItem']

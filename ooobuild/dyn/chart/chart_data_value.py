@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.chart import ChartDataValue as ChartDataValue
     else:
+        # keep document generators happy
         from ...lo.chart.chart_data_value import ChartDataValue as ChartDataValue
 
 __all__ = ['ChartDataValue']

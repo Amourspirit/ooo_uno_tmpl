@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.text import HoriOrientationFormat as HoriOrientationFormat
     else:
+        # keep document generators happy
         from ...lo.text.hori_orientation_format import HoriOrientationFormat as HoriOrientationFormat
 
 __all__ = ['HoriOrientationFormat']

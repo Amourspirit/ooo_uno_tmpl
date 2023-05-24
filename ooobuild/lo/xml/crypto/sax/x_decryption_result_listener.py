@@ -23,7 +23,6 @@ import typing
 from abc import abstractmethod
 from ....uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
-    from ..security_operation_status import SecurityOperationStatus as SecurityOperationStatus_b66e12b5
     from com.sun.star.xml.crypto.SecurityOperationStatus import SecurityOperationStatusProto
 
 class XDecryptionResultListener(XInterface_8f010a43):

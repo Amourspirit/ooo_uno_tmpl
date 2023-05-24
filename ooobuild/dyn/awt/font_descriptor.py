@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.awt import FontDescriptor as FontDescriptor
     else:
+        # keep document generators happy
         from ...lo.awt.font_descriptor import FontDescriptor as FontDescriptor
 
 __all__ = ['FontDescriptor']

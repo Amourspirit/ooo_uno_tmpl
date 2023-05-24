@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.bridge.oleautomation import PropertyPutArgument as PropertyPutArgument
     else:
+        # keep document generators happy
         from ....lo.bridge.oleautomation.property_put_argument import PropertyPutArgument as PropertyPutArgument
 
 __all__ = ['PropertyPutArgument']

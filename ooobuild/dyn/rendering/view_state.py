@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.rendering import ViewState as ViewState
     else:
+        # keep document generators happy
         from ...lo.rendering.view_state import ViewState as ViewState
 
 __all__ = ['ViewState']

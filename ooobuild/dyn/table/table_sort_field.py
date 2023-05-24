@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.table import TableSortField as TableSortField
     else:
+        # keep document generators happy
         from ...lo.table.table_sort_field import TableSortField as TableSortField
 
 __all__ = ['TableSortField']

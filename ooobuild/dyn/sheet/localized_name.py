@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.sheet import LocalizedName as LocalizedName
     else:
+        # keep document generators happy
         from ...lo.sheet.localized_name import LocalizedName as LocalizedName
 
 __all__ = ['LocalizedName']

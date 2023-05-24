@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.geometry import IntegerBezierSegment2D as IntegerBezierSegment2D
     else:
+        # keep document generators happy
         from ...lo.geometry.integer_bezier_segment2_d import IntegerBezierSegment2D as IntegerBezierSegment2D
 
 __all__ = ['IntegerBezierSegment2D']

@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.i18n import LocaleDataItem as LocaleDataItem
     else:
+        # keep document generators happy
         from ...lo.i18n.locale_data_item import LocaleDataItem as LocaleDataItem
 
 __all__ = ['LocaleDataItem']

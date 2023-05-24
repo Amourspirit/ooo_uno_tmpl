@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.text import SectionFileLink as SectionFileLink
     else:
+        # keep document generators happy
         from ...lo.text.section_file_link import SectionFileLink as SectionFileLink
 
 __all__ = ['SectionFileLink']

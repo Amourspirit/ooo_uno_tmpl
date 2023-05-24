@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.geometry import IntegerSize2D as IntegerSize2D
     else:
+        # keep document generators happy
         from ...lo.geometry.integer_size2_d import IntegerSize2D as IntegerSize2D
 
 __all__ = ['IntegerSize2D']

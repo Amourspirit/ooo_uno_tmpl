@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.lang import EventObject as EventObject
     else:
+        # keep document generators happy
         from ...lo.lang.event_object import EventObject as EventObject
 
 __all__ = ['EventObject']

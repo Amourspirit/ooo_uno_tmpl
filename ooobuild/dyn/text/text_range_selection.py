@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.text import TextRangeSelection as TextRangeSelection
     else:
+        # keep document generators happy
         from ...lo.text.text_range_selection import TextRangeSelection as TextRangeSelection
 
 __all__ = ['TextRangeSelection']

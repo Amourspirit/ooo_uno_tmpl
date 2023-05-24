@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.beans import Defaulted as Defaulted
     else:
+        # keep document generators happy
         from ...lo.beans.defaulted import Defaulted as Defaulted
 
 __all__ = ['Defaulted']

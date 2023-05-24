@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.sdb.application import CopyTableRowEvent as CopyTableRowEvent
     else:
+        # keep document generators happy
         from ....lo.sdb.application.copy_table_row_event import CopyTableRowEvent as CopyTableRowEvent
 
 __all__ = ['CopyTableRowEvent']

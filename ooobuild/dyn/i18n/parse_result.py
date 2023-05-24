@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.i18n import ParseResult as ParseResult
     else:
+        # keep document generators happy
         from ...lo.i18n.parse_result import ParseResult as ParseResult
 
 __all__ = ['ParseResult']

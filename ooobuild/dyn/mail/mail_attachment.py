@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.mail import MailAttachment as MailAttachment
     else:
+        # keep document generators happy
         from ...lo.mail.mail_attachment import MailAttachment as MailAttachment
 
 __all__ = ['MailAttachment']

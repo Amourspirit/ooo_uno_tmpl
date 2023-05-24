@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.table import TableBorderDistances as TableBorderDistances
     else:
+        # keep document generators happy
         from ...lo.table.table_border_distances import TableBorderDistances as TableBorderDistances
 
 __all__ = ['TableBorderDistances']

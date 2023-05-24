@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.awt import EndPopupModeEvent as EndPopupModeEvent
     else:
+        # keep document generators happy
         from ...lo.awt.end_popup_mode_event import EndPopupModeEvent as EndPopupModeEvent
 
 __all__ = ['EndPopupModeEvent']

@@ -24,7 +24,6 @@ from abc import abstractproperty
 from .x_report_control_model import XReportControlModel as XReportControlModel_2d800f4a
 if typing.TYPE_CHECKING:
     from ..drawing.line_dash import LineDash as LineDash_a54e0afc
-    from ..drawing.line_style import LineStyle as LineStyle_b1600b8d
     from ..util.color import Color as Color_68e908c5
     from com.sun.star.drawing.LineStyle import LineStyleProto
 

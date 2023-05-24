@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.geometry import RealBezierSegment2D as RealBezierSegment2D
     else:
+        # keep document generators happy
         from ...lo.geometry.real_bezier_segment2_d import RealBezierSegment2D as RealBezierSegment2D
 
 __all__ = ['RealBezierSegment2D']

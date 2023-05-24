@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.sheet import TableFilterField2 as TableFilterField2
     else:
+        # keep document generators happy
         from ...lo.sheet.table_filter_field2 import TableFilterField2 as TableFilterField2
 
 __all__ = ['TableFilterField2']

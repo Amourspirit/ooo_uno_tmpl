@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.linguistic2 import DictionaryEvent as DictionaryEvent
     else:
+        # keep document generators happy
         from ...lo.linguistic2.dictionary_event import DictionaryEvent as DictionaryEvent
 
 __all__ = ['DictionaryEvent']

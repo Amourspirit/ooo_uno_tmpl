@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.ucb import SearchCriterium as SearchCriterium
     else:
+        # keep document generators happy
         from ...lo.ucb.search_criterium import SearchCriterium as SearchCriterium
 
 __all__ = ['SearchCriterium']

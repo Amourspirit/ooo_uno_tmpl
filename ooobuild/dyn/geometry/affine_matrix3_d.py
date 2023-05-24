@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.geometry import AffineMatrix3D as AffineMatrix3D
     else:
+        # keep document generators happy
         from ...lo.geometry.affine_matrix3_d import AffineMatrix3D as AffineMatrix3D
 
 __all__ = ['AffineMatrix3D']

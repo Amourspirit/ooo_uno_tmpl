@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.reflection import ParamInfo as ParamInfo
     else:
+        # keep document generators happy
         from ...lo.reflection.param_info import ParamInfo as ParamInfo
 
 __all__ = ['ParamInfo']

@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.embed import VisualRepresentation as VisualRepresentation
     else:
+        # keep document generators happy
         from ...lo.embed.visual_representation import VisualRepresentation as VisualRepresentation
 
 __all__ = ['VisualRepresentation']

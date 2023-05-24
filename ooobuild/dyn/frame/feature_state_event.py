@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.frame import FeatureStateEvent as FeatureStateEvent
     else:
+        # keep document generators happy
         from ...lo.frame.feature_state_event import FeatureStateEvent as FeatureStateEvent
 
 __all__ = ['FeatureStateEvent']

@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.drawing import EnhancedCustomShapeAdjustmentValue as EnhancedCustomShapeAdjustmentValue
     else:
+        # keep document generators happy
         from ...lo.drawing.enhanced_custom_shape_adjustment_value import EnhancedCustomShapeAdjustmentValue as EnhancedCustomShapeAdjustmentValue
 
 __all__ = ['EnhancedCustomShapeAdjustmentValue']

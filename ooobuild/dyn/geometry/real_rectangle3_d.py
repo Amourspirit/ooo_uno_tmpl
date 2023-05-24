@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.geometry import RealRectangle3D as RealRectangle3D
     else:
+        # keep document generators happy
         from ...lo.geometry.real_rectangle3_d import RealRectangle3D as RealRectangle3D
 
 __all__ = ['RealRectangle3D']

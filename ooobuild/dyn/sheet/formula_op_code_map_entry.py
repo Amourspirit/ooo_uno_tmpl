@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.sheet import FormulaOpCodeMapEntry as FormulaOpCodeMapEntry
     else:
+        # keep document generators happy
         from ...lo.sheet.formula_op_code_map_entry import FormulaOpCodeMapEntry as FormulaOpCodeMapEntry
 
 __all__ = ['FormulaOpCodeMapEntry']

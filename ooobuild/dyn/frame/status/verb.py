@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.frame.status import Verb as Verb
     else:
+        # keep document generators happy
         from ....lo.frame.status.verb import Verb as Verb
 
 __all__ = ['Verb']

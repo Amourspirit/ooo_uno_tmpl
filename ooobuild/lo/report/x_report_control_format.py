@@ -23,9 +23,7 @@ import typing
 from abc import abstractproperty, ABC
 if typing.TYPE_CHECKING:
     from ..awt.font_descriptor import FontDescriptor as FontDescriptor_bc110c0a
-    from ..awt.font_slant import FontSlant as FontSlant_849509ed
     from ..lang.locale import Locale as Locale_70d308fa
-    from ..style.vertical_alignment import VerticalAlignment as VerticalAlignment_8d0e12
     from ..util.color import Color as Color_68e908c5
     from com.sun.star.awt.FontSlant import FontSlantProto
     from com.sun.star.style.VerticalAlignment import VerticalAlignmentProto

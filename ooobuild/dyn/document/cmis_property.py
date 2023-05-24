@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.document import CmisProperty as CmisProperty
     else:
+        # keep document generators happy
         from ...lo.document.cmis_property import CmisProperty as CmisProperty
 
 __all__ = ['CmisProperty']

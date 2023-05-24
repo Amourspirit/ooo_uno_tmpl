@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.xml.sax import InputSource as InputSource
     else:
+        # keep document generators happy
         from ....lo.xml.sax.input_source import InputSource as InputSource
 
 __all__ = ['InputSource']

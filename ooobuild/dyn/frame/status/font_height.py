@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.frame.status import FontHeight as FontHeight
     else:
+        # keep document generators happy
         from ....lo.frame.status.font_height import FontHeight as FontHeight
 
 __all__ = ['FontHeight']

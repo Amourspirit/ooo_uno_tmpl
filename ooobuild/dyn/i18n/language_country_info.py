@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.i18n import LanguageCountryInfo as LanguageCountryInfo
     else:
+        # keep document generators happy
         from ...lo.i18n.language_country_info import LanguageCountryInfo as LanguageCountryInfo
 
 __all__ = ['LanguageCountryInfo']

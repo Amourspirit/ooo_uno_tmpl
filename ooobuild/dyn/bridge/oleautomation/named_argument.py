@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.bridge.oleautomation import NamedArgument as NamedArgument
     else:
+        # keep document generators happy
         from ....lo.bridge.oleautomation.named_argument import NamedArgument as NamedArgument
 
 __all__ = ['NamedArgument']

@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.script import ModuleInfo as ModuleInfo
     else:
+        # keep document generators happy
         from ...lo.script.module_info import ModuleInfo as ModuleInfo
 
 __all__ = ['ModuleInfo']

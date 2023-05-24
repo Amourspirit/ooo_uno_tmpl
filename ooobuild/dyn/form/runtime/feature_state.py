@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.form.runtime import FeatureState as FeatureState
     else:
+        # keep document generators happy
         from ....lo.form.runtime.feature_state import FeatureState as FeatureState
 
 __all__ = ['FeatureState']

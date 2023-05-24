@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.ucb import RecipientInfo as RecipientInfo
     else:
+        # keep document generators happy
         from ...lo.ucb.recipient_info import RecipientInfo as RecipientInfo
 
 __all__ = ['RecipientInfo']

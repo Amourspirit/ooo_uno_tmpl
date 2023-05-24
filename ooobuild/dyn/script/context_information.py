@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.script import ContextInformation as ContextInformation
     else:
+        # keep document generators happy
         from ...lo.script.context_information import ContextInformation as ContextInformation
 
 __all__ = ['ContextInformation']

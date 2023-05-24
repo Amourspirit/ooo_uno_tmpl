@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.geometry import RealPoint2D as RealPoint2D
     else:
+        # keep document generators happy
         from ...lo.geometry.real_point2_d import RealPoint2D as RealPoint2D
 
 __all__ = ['RealPoint2D']

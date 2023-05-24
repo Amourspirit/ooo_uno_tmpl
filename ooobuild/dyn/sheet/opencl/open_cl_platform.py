@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.sheet.opencl import OpenCLPlatform as OpenCLPlatform
     else:
+        # keep document generators happy
         from ....lo.sheet.opencl.open_cl_platform import OpenCLPlatform as OpenCLPlatform
 
 __all__ = ['OpenCLPlatform']

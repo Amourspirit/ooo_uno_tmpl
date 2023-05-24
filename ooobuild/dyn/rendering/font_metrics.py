@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.rendering import FontMetrics as FontMetrics
     else:
+        # keep document generators happy
         from ...lo.rendering.font_metrics import FontMetrics as FontMetrics
 
 __all__ = ['FontMetrics']

@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.chart2 import ScaleData as ScaleData
     else:
+        # keep document generators happy
         from ...lo.chart2.scale_data import ScaleData as ScaleData
 
 __all__ = ['ScaleData']

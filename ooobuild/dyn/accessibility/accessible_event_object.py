@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.accessibility import AccessibleEventObject as AccessibleEventObject
     else:
+        # keep document generators happy
         from ...lo.accessibility.accessible_event_object import AccessibleEventObject as AccessibleEventObject
 
 __all__ = ['AccessibleEventObject']

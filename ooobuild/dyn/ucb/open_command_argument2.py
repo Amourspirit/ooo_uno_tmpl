@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.ucb import OpenCommandArgument2 as OpenCommandArgument2
     else:
+        # keep document generators happy
         from ...lo.ucb.open_command_argument2 import OpenCommandArgument2 as OpenCommandArgument2
 
 __all__ = ['OpenCommandArgument2']

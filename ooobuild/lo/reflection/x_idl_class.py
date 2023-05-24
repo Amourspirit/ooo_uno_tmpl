@@ -26,7 +26,6 @@ if typing.TYPE_CHECKING:
     from .x_idl_array import XIdlArray as XIdlArray_d65d0ca3
     from .x_idl_field import XIdlField as XIdlField_d62c0c88
     from .x_idl_method import XIdlMethod as XIdlMethod_e3740d05
-    from ..uno.type_class import TypeClass as TypeClass_853109f2
     from ..uno.uik import Uik as Uik_4fac0783
     from com.sun.star.uno.TypeClass import TypeClassProto
 

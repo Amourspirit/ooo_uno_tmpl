@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.frame.status import ClipboardFormats as ClipboardFormats
     else:
+        # keep document generators happy
         from ....lo.frame.status.clipboard_formats import ClipboardFormats as ClipboardFormats
 
 __all__ = ['ClipboardFormats']

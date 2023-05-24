@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.ucb import SortingInfo as SortingInfo
     else:
+        # keep document generators happy
         from ...lo.ucb.sorting_info import SortingInfo as SortingInfo
 
 __all__ = ['SortingInfo']

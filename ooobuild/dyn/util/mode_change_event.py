@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.util import ModeChangeEvent as ModeChangeEvent
     else:
+        # keep document generators happy
         from ...lo.util.mode_change_event import ModeChangeEvent as ModeChangeEvent
 
 __all__ = ['ModeChangeEvent']

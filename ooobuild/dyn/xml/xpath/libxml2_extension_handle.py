@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.xml.xpath import Libxml2ExtensionHandle as Libxml2ExtensionHandle
     else:
+        # keep document generators happy
         from ....lo.xml.xpath.libxml2_extension_handle import Libxml2ExtensionHandle as Libxml2ExtensionHandle
 
 __all__ = ['Libxml2ExtensionHandle']

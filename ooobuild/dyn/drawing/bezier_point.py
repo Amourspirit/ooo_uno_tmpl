@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.drawing import BezierPoint as BezierPoint
     else:
+        # keep document generators happy
         from ...lo.drawing.bezier_point import BezierPoint as BezierPoint
 
 __all__ = ['BezierPoint']

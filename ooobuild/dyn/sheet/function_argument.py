@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.sheet import FunctionArgument as FunctionArgument
     else:
+        # keep document generators happy
         from ...lo.sheet.function_argument import FunctionArgument as FunctionArgument
 
 __all__ = ['FunctionArgument']

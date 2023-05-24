@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.rendering import FloatingPointBitmapLayout as FloatingPointBitmapLayout
     else:
+        # keep document generators happy
         from ...lo.rendering.floating_point_bitmap_layout import FloatingPointBitmapLayout as FloatingPointBitmapLayout
 
 __all__ = ['FloatingPointBitmapLayout']

@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.animations import TargetProperties as TargetProperties
     else:
+        # keep document generators happy
         from ...lo.animations.target_properties import TargetProperties as TargetProperties
 
 __all__ = ['TargetProperties']

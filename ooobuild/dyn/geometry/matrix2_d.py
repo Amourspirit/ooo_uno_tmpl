@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.geometry import Matrix2D as Matrix2D
     else:
+        # keep document generators happy
         from ...lo.geometry.matrix2_d import Matrix2D as Matrix2D
 
 __all__ = ['Matrix2D']

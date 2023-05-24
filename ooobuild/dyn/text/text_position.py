@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.text import TextPosition as TextPosition
     else:
+        # keep document generators happy
         from ...lo.text.text_position import TextPosition as TextPosition
 
 __all__ = ['TextPosition']

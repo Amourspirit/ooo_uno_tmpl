@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.document import UndoManagerEvent as UndoManagerEvent
     else:
+        # keep document generators happy
         from ...lo.document.undo_manager_event import UndoManagerEvent as UndoManagerEvent
 
 __all__ = ['UndoManagerEvent']

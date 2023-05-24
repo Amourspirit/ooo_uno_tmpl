@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.configuration.backend import PropertyInfo as PropertyInfo
     else:
+        # keep document generators happy
         from ....lo.configuration.backend.property_info import PropertyInfo as PropertyInfo
 
 __all__ = ['PropertyInfo']

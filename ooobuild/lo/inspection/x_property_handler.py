@@ -24,7 +24,6 @@ from abc import abstractmethod
 from ..lang.x_component import XComponent as XComponent_98dc0ab5
 if typing.TYPE_CHECKING:
     from ..beans.property import Property as Property_8f4e0a76
-    from ..beans.property_state import PropertyState as PropertyState_c97b0c77
     from ..beans.x_property_change_listener import XPropertyChangeListener as XPropertyChangeListener_58e4105a
     from .line_descriptor import LineDescriptor as LineDescriptor_1e460eeb
     from .x_object_inspector_ui import XObjectInspectorUI as XObjectInspectorUI_5ccd1048

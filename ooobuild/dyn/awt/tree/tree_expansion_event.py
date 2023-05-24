@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.awt.tree import TreeExpansionEvent as TreeExpansionEvent
     else:
+        # keep document generators happy
         from ....lo.awt.tree.tree_expansion_event import TreeExpansionEvent as TreeExpansionEvent
 
 __all__ = ['TreeExpansionEvent']

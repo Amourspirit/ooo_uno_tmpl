@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.sheet import MemberResult as MemberResult
     else:
+        # keep document generators happy
         from ...lo.sheet.member_result import MemberResult as MemberResult
 
 __all__ = ['MemberResult']

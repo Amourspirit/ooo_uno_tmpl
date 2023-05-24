@@ -23,7 +23,6 @@ import typing
 from abc import abstractmethod
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
-    from ..uno.type_class import TypeClass as TypeClass_853109f2
     from com.sun.star.uno.TypeClass import TypeClassProto
 
 class XTypeConverter(XInterface_8f010a43):

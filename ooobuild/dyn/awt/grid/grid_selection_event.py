@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.awt.grid import GridSelectionEvent as GridSelectionEvent
     else:
+        # keep document generators happy
         from ....lo.awt.grid.grid_selection_event import GridSelectionEvent as GridSelectionEvent
 
 __all__ = ['GridSelectionEvent']

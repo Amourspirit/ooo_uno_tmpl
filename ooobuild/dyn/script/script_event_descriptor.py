@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.script import ScriptEventDescriptor as ScriptEventDescriptor
     else:
+        # keep document generators happy
         from ...lo.script.script_event_descriptor import ScriptEventDescriptor as ScriptEventDescriptor
 
 __all__ = ['ScriptEventDescriptor']

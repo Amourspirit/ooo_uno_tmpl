@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.sheet import DataPilotTablePositionData as DataPilotTablePositionData
     else:
+        # keep document generators happy
         from ...lo.sheet.data_pilot_table_position_data import DataPilotTablePositionData as DataPilotTablePositionData
 
 __all__ = ['DataPilotTablePositionData']

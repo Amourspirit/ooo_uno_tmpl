@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.beans import PropertySetInfoChangeEvent as PropertySetInfoChangeEvent
     else:
+        # keep document generators happy
         from ...lo.beans.property_set_info_change_event import PropertySetInfoChangeEvent as PropertySetInfoChangeEvent
 
 __all__ = ['PropertySetInfoChangeEvent']

@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.frame import FrameActionEvent as FrameActionEvent
     else:
+        # keep document generators happy
         from ...lo.frame.frame_action_event import FrameActionEvent as FrameActionEvent
 
 __all__ = ['FrameActionEvent']

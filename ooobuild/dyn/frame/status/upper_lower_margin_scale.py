@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.frame.status import UpperLowerMarginScale as UpperLowerMarginScale
     else:
+        # keep document generators happy
         from ....lo.frame.status.upper_lower_margin_scale import UpperLowerMarginScale as UpperLowerMarginScale
 
 __all__ = ['UpperLowerMarginScale']

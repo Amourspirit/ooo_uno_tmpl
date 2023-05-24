@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.rdf import Statement as Statement
     else:
+        # keep document generators happy
         from ...lo.rdf.statement import Statement as Statement
 
 __all__ = ['Statement']

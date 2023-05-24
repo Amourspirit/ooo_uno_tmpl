@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.sheet import SolverConstraint as SolverConstraint
     else:
+        # keep document generators happy
         from ...lo.sheet.solver_constraint import SolverConstraint as SolverConstraint
 
 __all__ = ['SolverConstraint']

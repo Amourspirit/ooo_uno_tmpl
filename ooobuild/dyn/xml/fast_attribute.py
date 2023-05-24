@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.xml import FastAttribute as FastAttribute
     else:
+        # keep document generators happy
         from ...lo.xml.fast_attribute import FastAttribute as FastAttribute
 
 __all__ = ['FastAttribute']

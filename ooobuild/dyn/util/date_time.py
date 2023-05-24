@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.util import DateTime as DateTime
     else:
+        # keep document generators happy
         from ...lo.util.date_time import DateTime as DateTime
 
 __all__ = ['DateTime']

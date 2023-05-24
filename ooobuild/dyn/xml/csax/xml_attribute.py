@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.xml.csax import XMLAttribute as XMLAttribute
     else:
+        # keep document generators happy
         from ....lo.xml.csax.xml_attribute import XMLAttribute as XMLAttribute
 
 __all__ = ['XMLAttribute']

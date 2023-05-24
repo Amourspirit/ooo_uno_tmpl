@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.geometry import RealSize2D as RealSize2D
     else:
+        # keep document generators happy
         from ...lo.geometry.real_size2_d import RealSize2D as RealSize2D
 
 __all__ = ['RealSize2D']

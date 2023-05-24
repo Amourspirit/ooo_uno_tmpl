@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.linguistic2 import SingleProofreadingError as SingleProofreadingError
     else:
+        # keep document generators happy
         from ...lo.linguistic2.single_proofreading_error import SingleProofreadingError as SingleProofreadingError
 
 __all__ = ['SingleProofreadingError']

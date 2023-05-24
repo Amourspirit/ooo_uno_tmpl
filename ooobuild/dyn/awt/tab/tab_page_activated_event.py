@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.awt.tab import TabPageActivatedEvent as TabPageActivatedEvent
     else:
+        # keep document generators happy
         from ....lo.awt.tab.tab_page_activated_event import TabPageActivatedEvent as TabPageActivatedEvent
 
 __all__ = ['TabPageActivatedEvent']

@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.drawing import Position3D as Position3D
     else:
+        # keep document generators happy
         from ...lo.drawing.position3_d import Position3D as Position3D
 
 __all__ = ['Position3D']

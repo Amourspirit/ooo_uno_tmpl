@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.chart2 import SubIncrement as SubIncrement
     else:
+        # keep document generators happy
         from ...lo.chart2.sub_increment import SubIncrement as SubIncrement
 
 __all__ = ['SubIncrement']

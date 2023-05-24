@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.table import BorderLine2 as BorderLine2
     else:
+        # keep document generators happy
         from ...lo.table.border_line2 import BorderLine2 as BorderLine2
 
 __all__ = ['BorderLine2']

@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.datatransfer.dnd import DragGestureEvent as DragGestureEvent
     else:
+        # keep document generators happy
         from ....lo.datatransfer.dnd.drag_gesture_event import DragGestureEvent as DragGestureEvent
 
 __all__ = ['DragGestureEvent']

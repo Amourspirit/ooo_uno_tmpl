@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.i18n import Calendar2 as Calendar2
     else:
+        # keep document generators happy
         from ...lo.i18n.calendar2 import Calendar2 as Calendar2
 
 __all__ = ['Calendar2']

@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.scanner import ScannerContext as ScannerContext
     else:
+        # keep document generators happy
         from ...lo.scanner.scanner_context import ScannerContext as ScannerContext
 
 __all__ = ['ScannerContext']

@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.frame.status import LeftRightMargin as LeftRightMargin
     else:
+        # keep document generators happy
         from ....lo.frame.status.left_right_margin import LeftRightMargin as LeftRightMargin
 
 __all__ = ['LeftRightMargin']

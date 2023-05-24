@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.frame import TitleChangedEvent as TitleChangedEvent
     else:
+        # keep document generators happy
         from ...lo.frame.title_changed_event import TitleChangedEvent as TitleChangedEvent
 
 __all__ = ['TitleChangedEvent']

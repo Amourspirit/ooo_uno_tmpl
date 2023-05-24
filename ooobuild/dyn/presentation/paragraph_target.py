@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.presentation import ParagraphTarget as ParagraphTarget
     else:
+        # keep document generators happy
         from ...lo.presentation.paragraph_target import ParagraphTarget as ParagraphTarget
 
 __all__ = ['ParagraphTarget']

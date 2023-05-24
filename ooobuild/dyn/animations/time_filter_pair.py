@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.animations import TimeFilterPair as TimeFilterPair
     else:
+        # keep document generators happy
         from ...lo.animations.time_filter_pair import TimeFilterPair as TimeFilterPair
 
 __all__ = ['TimeFilterPair']

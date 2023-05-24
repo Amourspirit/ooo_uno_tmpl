@@ -23,7 +23,6 @@ import typing
 from abc import abstractmethod, ABC
 if typing.TYPE_CHECKING:
     from .x_title import XTitle as XTitle_833f09a6
-    from ..drawing.rectangle_point import RectanglePoint as RectanglePoint_f0ff0d93
     from com.sun.star.drawing.RectanglePoint import RectanglePointProto
 
 class XLabeled(ABC):

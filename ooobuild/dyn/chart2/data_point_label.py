@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.chart2 import DataPointLabel as DataPointLabel
     else:
+        # keep document generators happy
         from ...lo.chart2.data_point_label import DataPointLabel as DataPointLabel
 
 __all__ = ['DataPointLabel']

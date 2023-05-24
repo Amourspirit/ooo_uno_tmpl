@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.sheet.opencl import OpenCLDevice as OpenCLDevice
     else:
+        # keep document generators happy
         from ....lo.sheet.opencl.open_cl_device import OpenCLDevice as OpenCLDevice
 
 __all__ = ['OpenCLDevice']

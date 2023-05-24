@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.chart2.data import PivotTableFieldEntry as PivotTableFieldEntry
     else:
+        # keep document generators happy
         from ....lo.chart2.data.pivot_table_field_entry import PivotTableFieldEntry as PivotTableFieldEntry
 
 __all__ = ['PivotTableFieldEntry']

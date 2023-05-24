@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.awt import XFontMappingUseItem as XFontMappingUseItem
     else:
+        # keep document generators happy
         from ...lo.awt.x_font_mapping_use_item import XFontMappingUseItem as XFontMappingUseItem
 
 __all__ = ['XFontMappingUseItem']

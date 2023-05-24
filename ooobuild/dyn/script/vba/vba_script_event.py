@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.script.vba import VBAScriptEvent as VBAScriptEvent
     else:
+        # keep document generators happy
         from ....lo.script.vba.vba_script_event import VBAScriptEvent as VBAScriptEvent
 
 __all__ = ['VBAScriptEvent']

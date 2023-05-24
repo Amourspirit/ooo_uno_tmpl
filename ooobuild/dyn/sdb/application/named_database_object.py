@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.sdb.application import NamedDatabaseObject as NamedDatabaseObject
     else:
+        # keep document generators happy
         from ....lo.sdb.application.named_database_object import NamedDatabaseObject as NamedDatabaseObject
 
 __all__ = ['NamedDatabaseObject']

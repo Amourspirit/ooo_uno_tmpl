@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.chart import TimeIncrement as TimeIncrement
     else:
+        # keep document generators happy
         from ...lo.chart.time_increment import TimeIncrement as TimeIncrement
 
 __all__ = ['TimeIncrement']

@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.awt import EnhancedMouseEvent as EnhancedMouseEvent
     else:
+        # keep document generators happy
         from ...lo.awt.enhanced_mouse_event import EnhancedMouseEvent as EnhancedMouseEvent
 
 __all__ = ['EnhancedMouseEvent']

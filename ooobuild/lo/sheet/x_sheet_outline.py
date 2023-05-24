@@ -24,7 +24,6 @@ from abc import abstractmethod
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
     from ..table.cell_range_address import CellRangeAddress as CellRangeAddress_ec450d43
-    from ..table.table_orientation import TableOrientation as TableOrientation_ee780d84
     from com.sun.star.table.TableOrientation import TableOrientationProto
 
 class XSheetOutline(XInterface_8f010a43):

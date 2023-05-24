@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.i18n import LineBreakUserOptions as LineBreakUserOptions
     else:
+        # keep document generators happy
         from ...lo.i18n.line_break_user_options import LineBreakUserOptions as LineBreakUserOptions
 
 __all__ = ['LineBreakUserOptions']

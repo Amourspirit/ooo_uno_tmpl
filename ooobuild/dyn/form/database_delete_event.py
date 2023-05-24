@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.form import DatabaseDeleteEvent as DatabaseDeleteEvent
     else:
+        # keep document generators happy
         from ...lo.form.database_delete_event import DatabaseDeleteEvent as DatabaseDeleteEvent
 
 __all__ = ['DatabaseDeleteEvent']

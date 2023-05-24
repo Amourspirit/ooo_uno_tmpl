@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.security import DocumentSignatureInformation as DocumentSignatureInformation
     else:
+        # keep document generators happy
         from ...lo.security.document_signature_information import DocumentSignatureInformation as DocumentSignatureInformation
 
 __all__ = ['DocumentSignatureInformation']

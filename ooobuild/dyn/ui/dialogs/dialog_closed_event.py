@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.ui.dialogs import DialogClosedEvent as DialogClosedEvent
     else:
+        # keep document generators happy
         from ....lo.ui.dialogs.dialog_closed_event import DialogClosedEvent as DialogClosedEvent
 
 __all__ = ['DialogClosedEvent']

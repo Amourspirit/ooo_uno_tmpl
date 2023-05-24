@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.embed import VerbDescriptor as VerbDescriptor
     else:
+        # keep document generators happy
         from ...lo.embed.verb_descriptor import VerbDescriptor as VerbDescriptor
 
 __all__ = ['VerbDescriptor']

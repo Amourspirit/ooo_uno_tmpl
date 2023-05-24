@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.form import ErrorEvent as ErrorEvent
     else:
+        # keep document generators happy
         from ...lo.form.error_event import ErrorEvent as ErrorEvent
 
 __all__ = ['ErrorEvent']

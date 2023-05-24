@@ -48,9 +48,9 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
 
 else:
     if TYPE_CHECKING:
-        # keep document generators happy
         from com.sun.star.ui import ConfigurationEvent as ConfigurationEvent
     else:
+        # keep document generators happy
         from ...lo.ui.configuration_event import ConfigurationEvent as ConfigurationEvent
 
 __all__ = ['ConfigurationEvent']
