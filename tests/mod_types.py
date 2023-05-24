@@ -19,7 +19,7 @@ def get_module_types(build_dir = None) -> dict:
 
     def get_clean_classname(input: str) -> str:
         """
-        Clean a class name and changes name suah as ``Pair< T, U >`` to ``Pair``
+        Clean a class name and changes name such as ``Pair< T, U >`` to ``Pair``
 
         Args:
             input (str): name
