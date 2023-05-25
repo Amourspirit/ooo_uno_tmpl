@@ -45,7 +45,7 @@ $self.load_data()#slurp
 #end if
 from __future__ import annotations
 import uno
-from typing import Any, TYPE_CHECKING
+from typing import TYPE_CHECKING
 from ooo.oenv.env_const import UNO_ENVIRONMENT, UNO_RUNTIME
 
 _DYNAMIC = False
@@ -53,67 +53,11 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    # document generators will most likely not see this.
     from $uno_enum_namespace import UnoEnumMeta
     class ${safe_name}(metaclass=UnoEnumMeta, type_name="$fullname", name_space="$namespace"):
         """Dynamically created class that represents ``$fullname`` Enum. Class loosely mimics Enum"""
         pass
 else:
-    if TYPE_CHECKING:
-#for $key in $key_list
-#set $value = $enum_dict[$key]
-#set $snaked = $self.to_snake_case_upper($safe_name)
-        from $fullname import $key as ${snaked}_${key}
-#end for
+    $self.get_rel_import(in_str=$uno_obj_in, ns=$uno_obj_ns) as $safe_name
 
-        class ${safe_name}(uno.Enum):
-            """
-            Enum Class
-
-    #if isinstance($desc, str) and $desc
-            $desc
-    #else
-        #for $line in $desc
-            #if $line
-            $line
-            #end if
-        #end for
-    #end if
-#if $link:
-
-            See Also:
-                `API $name <$link>`_
-#end if
-            """
-
-            def __init__(self, value: Any) -> None:
-                super().__init__('$fullname', value)
-
-            __ooo_ns__: str = '$namespace'
-            __ooo_full_ns__: str = '$fullname'
-            __ooo_type_name__: str = 'enum'
-
-#for $key in $key_list
-#set $value = $enum_dict[$key]
-#set $snaked = $self.to_snake_case_upper($safe_name)
-            ${key} = ${snaked}_${key}
-            """
-#if isinstance($value, str):
-            $value
-#else
-    #for $line in $value
-        #if not $line
-
-        #else
-            $line
-        #end if
-    #end for
-#end if
-            """
-#end for
-    else:
-        # keep document generators happy
-        $self.get_rel_import(in_str=$uno_obj_in, ns=$uno_obj_ns) as $safe_name
-
-
-__all__ = ['$safe_name']
+__all__ = ["$safe_name"]
