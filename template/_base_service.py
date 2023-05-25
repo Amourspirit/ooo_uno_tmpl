@@ -113,10 +113,11 @@ class BaseService(BaseJson):
         """
 
         def add_to_imports(comp: Component):
+            prefix = "Proto  # type: ignore"
             for imp in self.from_imports_typing:
-                if imp[0] == comp.id_component and imp[1] == f"{comp.name}Proto":
+                if imp[0] == comp.id_component and imp[1] == f"{comp.name}{prefix}":
                     return
-            self.from_imports_typing.append((comp.id_component, f"{comp.name}Proto  # type: ignore"))
+            self.from_imports_typing.append((comp.id_component, f"{comp.name}{prefix}"))
 
         if not self.has_enums:
             return
