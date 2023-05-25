@@ -24,7 +24,10 @@ import typing
 from abc import ABC
 if typing.TYPE_CHECKING:
     from .x_title import XTitle as XTitle_833f09a6
-    from com.sun.star.drawing.RectanglePoint import RectanglePointProto
+    from com.sun.star.drawing.RectanglePoint import RectanglePointProto  # type: ignore
+    from com.sun.star.drawing.RectanglePoint import RectanglePointProto  # type: ignore
+    from com.sun.star.drawing.RectanglePoint import RectanglePointProto  # type: ignore
+    from com.sun.star.drawing.RectanglePoint import RectanglePointProto  # type: ignore
 
 
 class XLabeled(ABC):
@@ -67,5 +70,4 @@ class XLabeled(ABC):
         """
         """
         ...
-
 

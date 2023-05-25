@@ -23,7 +23,9 @@ import typing
 
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
-    from com.sun.star.sheet.SheetLinkMode import SheetLinkModeProto
+    from com.sun.star.sheet.SheetLinkMode import SheetLinkModeProto  # type: ignore
+    from com.sun.star.sheet.SheetLinkMode import SheetLinkModeProto  # type: ignore
+    from com.sun.star.sheet.SheetLinkMode import SheetLinkModeProto  # type: ignore
 
 
 class XSheetLinkable(XInterface_8f010a43):
@@ -86,5 +88,4 @@ class XSheetLinkable(XInterface_8f010a43):
         A SheetLink object with the same file name must exist already or the link will not work.
         """
         ...
-
 

@@ -23,7 +23,8 @@ import typing
 
 from ..awt.x_window import XWindow as XWindow_713b0924
 if typing.TYPE_CHECKING:
-    from com.sun.star.media.ZoomLevel import ZoomLevelProto
+    from com.sun.star.media.ZoomLevel import ZoomLevelProto  # type: ignore
+    from com.sun.star.media.ZoomLevel import ZoomLevelProto  # type: ignore
 
 
 class XPlayerWindow(XWindow_713b0924):
@@ -55,5 +56,4 @@ class XPlayerWindow(XWindow_713b0924):
         redraws the player window
         """
         ...
-
 

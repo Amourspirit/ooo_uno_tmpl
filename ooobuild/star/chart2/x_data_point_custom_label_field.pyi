@@ -23,7 +23,8 @@ import typing
 
 from .x_formatted_string2 import XFormattedString2 as XFormattedString2_8010df3
 if typing.TYPE_CHECKING:
-    from com.sun.star.chart2.DataPointCustomLabelFieldType import DataPointCustomLabelFieldTypeProto
+    from com.sun.star.chart2.DataPointCustomLabelFieldType import DataPointCustomLabelFieldTypeProto  # type: ignore
+    from com.sun.star.chart2.DataPointCustomLabelFieldType import DataPointCustomLabelFieldTypeProto  # type: ignore
 
 
 class XDataPointCustomLabelField(XFormattedString2_8010df3):
@@ -91,5 +92,4 @@ class XDataPointCustomLabelField(XFormattedString2_8010df3):
         """
         """
         ...
-
 

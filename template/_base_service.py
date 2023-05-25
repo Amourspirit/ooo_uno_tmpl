@@ -116,7 +116,7 @@ class BaseService(BaseJson):
             for imp in self.from_imports_typing:
                 if imp[0] == comp.id_component and imp[1] == f"{comp.name}Proto":
                     return
-            self.from_imports_typing.append((comp.id_component, f"{comp.name}Proto"))
+            self.from_imports_typing.append((comp.id_component, f"{comp.name}Proto  # type: ignore"))
 
         if not self.has_enums:
             return

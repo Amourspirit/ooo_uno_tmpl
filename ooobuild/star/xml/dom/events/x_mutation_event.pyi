@@ -24,7 +24,8 @@ import typing
 from .x_event import XEvent as XEvent_e0c30ce4
 if typing.TYPE_CHECKING:
     from ..x_node import XNode as XNode_83fb09a5
-    from com.sun.star.xml.dom.events.AttrChangeType import AttrChangeTypeProto
+    from com.sun.star.xml.dom.events.AttrChangeType import AttrChangeTypeProto  # type: ignore
+    from com.sun.star.xml.dom.events.AttrChangeType import AttrChangeTypeProto  # type: ignore
 
 
 class XMutationEvent(XEvent_e0c30ce4):
@@ -59,5 +60,4 @@ class XMutationEvent(XEvent_e0c30ce4):
         """
         """
         ...
-
 
