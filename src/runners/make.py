@@ -18,6 +18,7 @@ from ..cfg.config import AppConfig
 from ..utilities import util
 from ..model.shared.ooo_class import OooClass
 from ..model.shared.ooo_type import OooType
+from ..post.rules_post import RulesPost
 
 # endregion Imports
 
@@ -513,7 +514,6 @@ class Make(FilesBase):
                 self._log.info(f"Wrote {len(unique_lines)} lines to {str(init_file)}")
 
     def _write_multi(self, w_info: d_cls.WriteInfo):
-        is_pyi = w_info.ext == ".pyi"
 
         def ensure_init(path: Path):
             init_file = Path(path, f"__init__{w_info.ext}")
@@ -525,6 +525,9 @@ class Make(FilesBase):
         with open(w_info.scratch_path, "w") as outfile:
             subprocess.run([sys.executable, w_info.py_file], stdout=outfile, env=self._get_env())
             self._log.info("Wrote file: %s", str(w_info.scratch_path))
+        
+        rules_post = RulesPost(w_info.scratch_path, self._log)
+        rules_post.apply()
 
     def _write_multi_star(self, w_info: d_cls.WriteInfo):
         with open(w_info.scratch_path, "w") as outfile:
