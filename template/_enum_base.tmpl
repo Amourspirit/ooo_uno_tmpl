@@ -36,11 +36,8 @@ $self.load_data()#slurp
 # Libre Office Version: $libre_office_ver
 #end if
 from __future__ import annotations
-from typing import cast, TYPE_CHECKING
 from enum import Enum
-## from com.sun.star.table.CellContentType import CellContentTypeProto
-if TYPE_CHECKING:
-    from $fullname import ${safe_name}Proto
+
 
 class ${safe_name}(Enum):
     """
@@ -61,17 +58,17 @@ class ${safe_name}(Enum):
         `API $name <$link>`_
 #end if
     """
-    __ooo_ns__: str = '$namespace'
-    __ooo_full_ns__: str = '$fullname'
-    __ooo_type_name__: str = 'enum'
+    __ooo_ns__: str = "$namespace"
+    __ooo_full_ns__: str = "$fullname"
+    __ooo_type_name__: str = "enum"
 
     @property
     def typeName(self) -> str:
-        return '$fullname'
+        return "$fullname"
 
 #for $key in $key_list
 #set $value = $enum_dict[$key]
-    $self.get_safe_word($key) = cast("${safe_name}Proto", '$key')
+    $self.get_safe_word($key) = "$key"
     """
 #if isinstance($value, str):
     $value
@@ -83,4 +80,4 @@ class ${safe_name}(Enum):
     """
 #end for
 
-__all__ = ['$safe_name']
+__all__ = ["$safe_name"]
