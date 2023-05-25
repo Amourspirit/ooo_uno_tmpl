@@ -89,6 +89,7 @@ class BaseService(BaseJson):
             self.enum_properties = self.get_properties_enum_components()
             self.remove_enum_imports()
             self.add_enum_imports()
+            self._process_enum_post_lines()
         else:
             self.enum_methods_args = {}
             self.enum_methods_return = {}
@@ -165,6 +166,25 @@ class BaseService(BaseJson):
                     remove_from_imports([comp])
                     remove_from_imports_typing([comp])
 
+    def _process_enum_post_lines(self) -> None:
+        """
+        Processes the post lines for enums.
+        """
+        # see also src.post namespace
+        if not self.has_enums:
+            return
+        if self.enum_properties:
+            for comp in self.enum_properties.values():
+                self._set_post_process_str(f'find_replace:{comp.map_name}|{comp.name}Proto')
+
+        if self.enum_methods_return:
+            for comp in self.enum_methods_return.values():
+                self._set_post_process_str(f'find_replace:{comp.map_name}|{comp.name}Proto')
+
+        if self.enum_methods_args:
+            for method_args in self.enum_methods_args.values():
+                for comp in method_args.values():
+                    self._set_post_process_str(f'find_replace:{comp.map_name}|{comp.name}Proto')
 
     # endregion Adjust for Enums
 

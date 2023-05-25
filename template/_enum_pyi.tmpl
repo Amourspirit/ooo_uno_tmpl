@@ -35,11 +35,19 @@ $self.load_data()#slurp
 # Libre Office Version: $libre_office_ver
 #end if
 from __future__ import annotations
-from com.sun.star import UnoEnumProto
+from typing import Protocol, Any
+from typing_extensions import Literal
 
-class ${safe_name}Proto(UnoEnumProto):
+
+class ${safe_name}Proto(Protocol):
+    """Protocol for ${safe_name}"""
+
+    @property
+    def typeName(self) -> Literal["${fullname}"]:
+        ...
+    value: Any
 #for $key in $key_list
-    $self.get_safe_word($key): UnoEnumProto
+    $self.get_safe_word($key): ${safe_name}Proto
 #end for
 
 #for $key in $key_list
