@@ -24,7 +24,6 @@ import typing
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
     from com.sun.star.sheet.FillDirection import FillDirectionProto  # type: ignore
-    from com.sun.star.sheet.FillDirection import FillDirectionProto  # type: ignore
     from com.sun.star.sheet.FillMode import FillModeProto  # type: ignore
     from com.sun.star.sheet.FillDateMode import FillDateModeProto  # type: ignore
 

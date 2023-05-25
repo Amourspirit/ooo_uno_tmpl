@@ -25,7 +25,6 @@ from .x_shape import XShape as XShape_8fd00a3d
 if typing.TYPE_CHECKING:
     from .x_connectable_shape import XConnectableShape as XConnectableShape_1abe0e9b
     from com.sun.star.drawing.ConnectionType import ConnectionTypeProto  # type: ignore
-    from com.sun.star.drawing.ConnectionType import ConnectionTypeProto  # type: ignore
 
 
 class XConnectorShape(XShape_8fd00a3d):

@@ -24,9 +24,6 @@ import typing
 from ..task.x_interaction_continuation import XInteractionContinuation as XInteractionContinuation_5af0108e
 if typing.TYPE_CHECKING:
     from com.sun.star.ucb.RememberAuthentication import RememberAuthenticationProto  # type: ignore
-    from com.sun.star.ucb.RememberAuthentication import RememberAuthenticationProto  # type: ignore
-    from com.sun.star.ucb.RememberAuthentication import RememberAuthenticationProto  # type: ignore
-    from com.sun.star.ucb.RememberAuthentication import RememberAuthenticationProto  # type: ignore
 
 
 class XInteractionSupplyAuthentication(XInteractionContinuation_5af0108e):

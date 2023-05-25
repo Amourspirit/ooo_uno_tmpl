@@ -27,8 +27,6 @@ if typing.TYPE_CHECKING:
     from ..lang.locale import Locale as Locale_70d308fa
     from ..util.color import Color as Color_68e908c5
     from com.sun.star.awt.FontSlant import FontSlantProto  # type: ignore
-    from com.sun.star.awt.FontSlant import FontSlantProto  # type: ignore
-    from com.sun.star.awt.FontSlant import FontSlantProto  # type: ignore
     from com.sun.star.style.VerticalAlignment import VerticalAlignmentProto  # type: ignore
 
 

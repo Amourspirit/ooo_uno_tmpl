@@ -25,7 +25,6 @@ from ...uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
     from ..wrapper.xxml_element_wrapper import XXMLElementWrapper as XXMLElementWrapper_66c0107c
     from com.sun.star.xml.crypto.SecurityOperationStatus import SecurityOperationStatusProto  # type: ignore
-    from com.sun.star.xml.crypto.SecurityOperationStatus import SecurityOperationStatusProto  # type: ignore
 
 
 class XXMLSecurityTemplate(XInterface_8f010a43):

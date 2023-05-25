@@ -26,7 +26,6 @@ if typing.TYPE_CHECKING:
     from ..table.cell_address import CellAddress as CellAddress_ae5f0b56
     from ..table.cell_range_address import CellRangeAddress as CellRangeAddress_ec450d43
     from com.sun.star.sheet.GeneralFunction import GeneralFunctionProto  # type: ignore
-    from com.sun.star.sheet.GeneralFunction import GeneralFunctionProto  # type: ignore
 
 
 class XConsolidationDescriptor(XInterface_8f010a43):
