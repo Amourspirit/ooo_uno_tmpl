@@ -10,8 +10,6 @@ RUN apt-get update && apt-get -y install \
     python3-pip \
     python3.10-venv \
     && python3 -m pip install "poetry==$POETRY_VERSION"
-    # && python3 -m pip install pipx \
-    # && python3 -m pipx ensurepath
 
 RUN poetry config virtualenvs.in-project true
 
