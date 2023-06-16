@@ -13,15 +13,5 @@ RUN apt-get update \
     # && python3 -m pip install pipx \
     # && python3 -m pipx ensurepath
 
-# Add `pipx` to PATH
-# ENV PATH="${PATH}:/root/.local/bin"
-
-# RUN pipx install poetry==${POETRY_VERSION}
-
-# Copy only requirements to cache them in docker layer
-# WORKDIR /code
-# COPY poetry.lock pyproject.toml /code/
-
-# Creating folders, and files for a project:
-# COPY . /code
+RUN poetry config virtualenvs.in-project true
 
