@@ -1,15 +1,18 @@
-FROM mcr.microsoft.com/devcontainers/base:jammy
+FROM dockdock/libreoffice73pyenvpoetry:lo-7.5.3-RELEASE
 
-# Configure Poetry
-ENV POETRY_VERSION=1.5.1
+# Set Python version
+ARG PYTHON_VERSION='3.8.15'
 
+RUN pyenv install $PYTHON_VERSION \
+    && pyenv global $PYTHON_VERSION
 
-# Install poetry separated from system interpreter
-RUN apt-get update && apt-get -y install \
-    python3-cheetah \
-    python3-pip \
-    python3.10-venv \
-    && python3 -m pip install "poetry==$POETRY_VERSION"
+RUN pip install --upgrade pip \
+    && pyenv rehash \
+    && rm -rf ~/.cache/pip \
+    && poetry config virtualenvs.in-project true \
+    && poetry config virtualenvs.prefer-active-python true \
+    && poetry config virtualenvs.path --unset
 
-RUN poetry config virtualenvs.in-project true
+# RUN poetry env use $HOME/.pyenv/shims/python
 
+ENV PYENV_SHIMS="$HOME/.pyenv/shims/python"
