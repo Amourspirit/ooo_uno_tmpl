@@ -3,29 +3,23 @@
 {
 	"name": "Custom LibreOffice",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	// "image": "dockdock/libreoffice73pyenvpoetry:lo-7.5.3-RELEASE",
-	"build":{
-		"dockerfile": "Dockerfile"
-	},
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "app",
+	"workspaceFolder": "/workspace/ooo_uno_tmpl",
 	"customizations": {
 		"vscode": {
 			"extensions": [
 				"ms-python.python",
-				"ms-azuretools.vscode-docker",
 				"njpwerner.autodocstring",
-				"maptz.regionfolder"
+				"ms-python.black-formatter",
+				"ms-python.vscode-pylance",
+				"littlefoxteam.vscode-python-test-adapter",
+				"ms-vscode.test-adapter-converter",
+				"hbenl.vscode-test-explorer"
 			]
 		}
-	}
-	// Features to add to the dev container. More info: https://containers.dev/features.
-	// "features": {},
-	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [],
-	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "uname -a",
-	// "postCreateCommand": "poetry config virtualenvs.in-project true && poetry install && .venv/bin/activate"
-	// Configure tool-specific properties.
-	// "customizations": {},
-	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-	// "remoteUser": "root"
+	},
+	
+	"remoteUser": "root",
+	"initializeCommand": "if which git >/dev/null && [ x\"${HOME}\" != \"x\" ] && [ -n \"$(git config --global user.name)\" ] && [ -n \"$(git config --global user.email)\" ]; then echo \"GIT_AUTHOR_NAME=$(git config --global user.name)\nGIT_AUTHOR_EMAIL=$(git config --global user.email)\" > .devcontainer/.env || true; else echo \"GIT_AUTHOR_NAME=\"\"\nGIT_AUTHOR_EMAIL=\"\"\" > .devcontainer/.env || true; fi"
 }
