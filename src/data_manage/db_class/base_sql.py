@@ -32,3 +32,7 @@ class BaseSql:
             for _ in db.cursor:
                 has_data = True
         return has_data
+
+    def get_table_name(self) -> str:
+        """Table Name"""
+        raise NotImplementedError
