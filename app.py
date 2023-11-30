@@ -815,7 +815,7 @@ def _args_data_json(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
         "-n",
         "--namespace",
-        help="Genereate Json for a given namespace, ignores direct extends and uses child flattened extends but includes original extends methods and properties.",
+        help="Generate Json for a given namespace, ignores direct extends and uses child flattened extends but includes original extends methods and properties.",
         action="store",
         dest="namespace",
         default=None,
@@ -1639,7 +1639,7 @@ def main():
     # region    url-parse
     url_parser_subparser = subparser.add_parser(
         name="url-parse",
-        help=f"Parse url of a component into template/json files (compile singele class). Outputs to {config.uno_obj_dir} directory.",
+        help=f"Parse url of a component into template/json files (compile single class). Outputs to {config.uno_obj_dir} directory.",
     )
     url_parser = url_parser_subparser.add_subparsers(dest="command_data")
     url_const = url_parser.add_parser(name="const", help="Parse url to a const component into template/json file.")
@@ -1689,7 +1689,7 @@ def main():
     )
     data_update = data.add_parser(
         name="update",
-        help=f"Read json data from '{config.data_dir}' directory and write revelant data into '{config.resource_dir}/{config.db_mod_info}' database. Will add data if not existing. Requires that json file have been generated in '{config.data_dir}' directory.",
+        help=f"Read json data from '{config.data_dir}' directory and write relevant data into '{config.resource_dir}/{config.db_mod_info}' database. Will add data if not existing. Requires that json file have been generated in '{config.data_dir}' directory.",
     )
     data_component = data.add_parser(name="component", help="Queries database for component info.")
     data_url = data.add_parser(name="url", help="Queries database and gets info such as url for a namespace.")

@@ -11,7 +11,7 @@ class ParserBase:
 
     def get_id(self, ns: str) -> str:
         """
-        Creates and uniquie id for current componet based upon component id and ``ns``.
+        Creates and unique id for current component based upon component id and ``ns``.
 
         Args:
             ns (str): namespace
