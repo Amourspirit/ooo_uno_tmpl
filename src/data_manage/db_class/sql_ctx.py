@@ -20,5 +20,5 @@ class SqlCtx:
     def __exit__(self, exc_type, exc_value, traceback):
         self.connection.close()
 
-    def get_connection(self) -> sql.Connection:
-        return self._conn
+    # def get_connection(self) -> sql.Connection:
+    #     return self._conn

@@ -1,7 +1,7 @@
 # coding: utf-8
 """
 Reads Module Links Json data.
-Writes module_detail and module_info tables in databaase.
+Writes module_detail and module_info tables in database.
 """
 import verr
 import json
@@ -38,7 +38,7 @@ class ParseModuleLinks:
         # https://stackoverflow.com/questions/20638040/glob-exclude-pattern
         # root module_links.json needs to be remove from listing.
         # it will not need any processing here.
-        # using sets and deduct seem the simplist way.
+        # using sets and deduct seem the simplest way.
         pattern = dirname + f'/**/{self._app_config.module_links_file}'
         root_json = Path(dirname, self._app_config.module_links_file)
         files = set(glob.glob(pattern, recursive=True))
@@ -96,9 +96,9 @@ class ParseModuleLinks:
             "struct": 23
         }
 
-        # break down name to move version number into seperate field for sorting purposes.
+        # break down name to move version number into separate field for sorting purposes.
         # this reorders sorting.
-        #   Berfore sorting:
+        #   Before sorting:
         # id_namespace                          name                namespace       href                                                            component_type  sort
         # com.sun.star.io.XTextOutputStream     XTextOutputStream   com.sun.star.io interfacecom_1_1sun_1_1star_1_1io_1_1XTextOutputStream.html     interface       4811
         # com.sun.star.io.XTextOutputStream2    XTextOutputStream2  com.sun.star.io interfacecom_1_1sun_1_1star_1_1io_1_1XTextOutputStream2.html    interface       4813
