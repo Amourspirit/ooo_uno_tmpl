@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Any
 import uno
 from enum import Enum, EnumMeta, _EnumDict
-
+from .enums.enum_helper import EnumHelper
 
 def uno_enum_class_new(cls, value):
     """
@@ -307,3 +307,46 @@ class UnoConstMeta(type):
             # metaclass __dict__ is a mappingproxy
             # the only way to set attribute is to call super
             super().__setattr__(key, value)  # Transparent access.
+
+def gen_dynamic_enum(type_name: str) -> Enum:
+    """
+    Generate a dynamic Enum from a Uno Enum Type.
+
+    This is a replacement for UnoEnumMeta class.
+
+    Args:
+        type_name (str): The full name of the enumeration such as ``com.sun.star.awt.AdjustmentType``.
+
+    Returns:
+        Enum: The dynamic python enum.
+
+    Example:
+        This example is when the enum is info is for ``com.sun.star.awt.AdjustmentType``.
+        Any valid code name can be used for the dynamic enum.
+    
+    Example:
+        ..code-block:: python
+
+            >>> AdjustmentType = gen_dynamic_enum("com.sun.star.awt.AdjustmentType")
+            >>> e = AdjustmentType("ADJUST_LINE")
+            >>> print(e.value)
+            ADJUST_LINE
+            >>> e = AdjustmentType(AdjustmentType.ADJUST_ABS)
+            >>> print(e.value)
+            ADJUST_ABS
+            >>> e = AdjustmentType(AdjustmentType.ADJUST_ABS.value)
+            >>> print(e.value)
+            ADJUST_ABS
+    """
+    info = EnumHelper.get_enum_info(type_name)
+    if not info:
+        raise ValueError(f"Enumeration {type_name} not found.")
+    name_space, enum_name = type_name.rsplit(sep=".", maxsplit=1)
+    dy_enum = info.create_dynamic_enum(enum_name)
+    dy_enum.__module__ = type_name
+    dy_enum.typeName = type_name
+    dy_enum.__ooo_type_name__ = "enum"
+    dy_enum.__ooo_full_ns__ = type_name
+    dy_enum.__ooo_ns__ = name_space
+    dy_enum.__ooo_enum_name__ = enum_name
+    return dy_enum
