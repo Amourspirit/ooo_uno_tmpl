@@ -36,3 +36,12 @@ def test_adjustment_type():
 
 
 
+def test_font_slant():
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class FontSlant(metaclass=UnoEnumMeta, type_name="com.sun.star.awt.FontSlant", name_space="com.sun.star.awt"):
+        """Dynamically created class that represents ``com.sun.star.awt.FontSlant`` Enum. Class loosely mimics Enum"""
+        pass
+    
+    fs = FontSlant.ITALIC
+    assert fs.value == "ITALIC"
+

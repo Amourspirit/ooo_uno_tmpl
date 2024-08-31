@@ -46,7 +46,6 @@ def uno_enum_class_new(cls, value):
 def uno_enum_class_ne(self, other):
     return not self.__eq__(other)
 
-
 class UnoEnumMeta(type):
     """
     Get access to Uno Enum values without having to directly import them.
@@ -68,8 +67,8 @@ class UnoEnumMeta(type):
 
         ``from com.sun.star.sheet.FillMode import LINEAR, SIMPLE, GROWTH`` is valid import but cumbersome.
 
-        This metaclass use a just in time approach. If the enum is not yet an attribute it is automatiacally added dynamically.
-        All subsequent calls automatically use the dynamically added attribute.
+        This metaclass gets all the enum names using reflection and then looks up the values dynamically.
+        When the class is constructed all the value of the enum are present.
     """
     _initialized = False  # This class var is important. It is always False.
     # The instances will override this with their own,
@@ -92,7 +91,16 @@ class UnoEnumMeta(type):
         cls.__ooo_full_ns__ = type_name
         cls.__ooo_ns__ = name_space
         cls.__ooo_enum_name__: str = cls.__get_enum_name()
+        info = EnumHelper.get_enum_info(type_name)
+        if not info:
+            raise ValueError(f"Enumeration {type_name} not found.")
+        cls._names = info.get_enum_names()
+        for enum_name in cls._names:
+            e = uno.Enum(type_name, enum_name)
+            super().__setattr__(enum_name, e)
+
         cls._initialized = True
+
 
     def __call__(cls, value) -> uno.Enum:
         """
@@ -130,25 +138,6 @@ class UnoEnumMeta(type):
             return value
         raise TypeError("%r is not a valid %s" % (value, cls.__name__))
 
-    def __getattr__(cls, __name: str) -> uno.Enum | Any:
-        if cls._initialized:
-            # Provide the caller attributes in whatever ways interest you.
-            try:
-                key = __name
-                e = uno.Enum(cls.typeName, __name)
-                # metaclass __dict__ is a mappingproxy
-                # the only way to set attribute is to call super
-                super().__setattr__(key, e)
-                return cls.__dict__[key]
-            except Exception:
-                raise AttributeError(
-                    f"Enum {cls.typeName} has no attribute {__name}")
-        else:
-            try:
-                # Transparent access to instance vars.
-                return cls.__dict__[__name]
-            except KeyError:
-                raise AttributeError(__name)
 
     def __setattr__(cls, key, value):
         if cls._initialized:
@@ -321,46 +310,3 @@ class UnoConstMeta(type):
             # metaclass __dict__ is a mappingproxy
             # the only way to set attribute is to call super
             super().__setattr__(key, value)  # Transparent access.
-
-def gen_dynamic_enum(type_name: str) -> Enum:
-    """
-    Generate a dynamic Enum from a Uno Enum Type.
-
-    This is a replacement for UnoEnumMeta class.
-
-    Args:
-        type_name (str): The full name of the enumeration such as ``com.sun.star.awt.AdjustmentType``.
-
-    Returns:
-        Enum: The dynamic python enum.
-
-    Example:
-        This example is when the enum is info is for ``com.sun.star.awt.AdjustmentType``.
-        Any valid code name can be used for the dynamic enum.
-    
-    Example:
-        ..code-block:: python
-
-            >>> AdjustmentType = gen_dynamic_enum("com.sun.star.awt.AdjustmentType")
-            >>> e = AdjustmentType("ADJUST_LINE")
-            >>> print(e.value)
-            ADJUST_LINE
-            >>> e = AdjustmentType(AdjustmentType.ADJUST_ABS)
-            >>> print(e.value)
-            ADJUST_ABS
-            >>> e = AdjustmentType(AdjustmentType.ADJUST_ABS.value)
-            >>> print(e.value)
-            ADJUST_ABS
-    """
-    info = EnumHelper.get_enum_info(type_name)
-    if not info:
-        raise ValueError(f"Enumeration {type_name} not found.")
-    name_space, enum_name = type_name.rsplit(sep=".", maxsplit=1)
-    dy_enum = info.create_dynamic_enum(enum_name)
-    dy_enum.__module__ = type_name
-    dy_enum.typeName = type_name
-    dy_enum.__ooo_type_name__ = "enum"
-    dy_enum.__ooo_full_ns__ = type_name
-    dy_enum.__ooo_ns__ = name_space
-    dy_enum.__ooo_enum_name__ = enum_name
-    return dy_enum
