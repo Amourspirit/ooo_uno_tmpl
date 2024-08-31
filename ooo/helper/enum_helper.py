@@ -1,6 +1,7 @@
 # coding: utf-8
 from __future__ import annotations
 from typing import Any
+import sys
 import uno
 from enum import Enum, EnumMeta, _EnumDict
 from .enums.enum_helper import EnumHelper
@@ -214,10 +215,23 @@ class ConstEnumMeta(EnumMeta):
         cls.__ooo_enum_name__: str = cls.__ooo_name__ + "Enum"
         cls._initialized = True
 
-    def __call__(cls, value, names=None, *, module=None, qualname=None, type=None, start=1):
-        if isinstance(value, str) and value != cls.__ooo_enum_name__:
-            return cls.__get_enum_from_str(value)
-        return super().__call__(value=value, names=names, module=module, qualname=qualname, type=type, start=start)
+    # pytyon 3.12 has a different signature for __call__
+
+    if sys.version_info >= (3, 12):
+        # enum.py call is as follows:
+        # def __call__(cls, value, names=_not_given, *values, module=None, qualname=None, type=None, start=1, boundary=None):
+        def __call__(cls, value, names=None, *values, module=None, qualname=None, type=None, start=1, boundary=None):
+            if isinstance(value, str) and value != cls.__ooo_enum_name__:
+                return cls.__get_enum_from_str(value)
+            if names is None:
+                return super().__call__(value=value, *values, module=module, qualname=qualname, type=type, start=start, boundary=boundary)
+            return super().__call__(value=value, names=names, module=module, qualname=qualname, type=type, start=start, boundary=boundary)
+    else:
+
+        def __call__(cls, value, names=None, *, module=None, qualname=None, type=None, start=1):
+            if isinstance(value, str) and value != cls.__ooo_enum_name__:
+                return cls.__get_enum_from_str(value)
+            return super().__call__(value=value, names=names, module=module, qualname=qualname, type=type, start=start)
 
     def __get_enum_name(cls) -> str:
         return cls.__ooo_full_ns__.rsplit(sep=".", maxsplit=1)[1]
