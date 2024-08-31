@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.drawing
 from __future__ import annotations
 import typing
-from abc import abstractproperty, ABC
+from abc import abstractmethod, ABC
 if typing.TYPE_CHECKING:
     from .point_sequence_sequence import PointSequenceSequence as PointSequenceSequence_5c591070
     from com.sun.star.drawing.PolygonKind import PolygonKindProto  # type: ignore
@@ -40,21 +40,24 @@ class PolyPolygonDescriptor(ABC):
     __ooo_full_ns__: str = 'com.sun.star.drawing.PolyPolygonDescriptor'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Geometry(self) -> PointSequenceSequence_5c591070:
         """
         These are the untransformed points of this polygon.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def PolyPolygon(self) -> PointSequenceSequence_5c591070:
         """
         These are the reference points for this polygon.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def PolygonKind(self) -> PolygonKindProto:
         """
         This is the type of polygon.

@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.text
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from .x_text_columns import XTextColumns as XTextColumns_b17f0bab
 if typing.TYPE_CHECKING:
     from ..util.color import Color as Color_68e908c5
@@ -39,7 +39,8 @@ class TextColumns(XTextColumns_b17f0bab):
     __ooo_full_ns__: str = 'com.sun.star.text.TextColumns'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def AutomaticDistance(self) -> int:
         """
         contains the distance between the columns.
@@ -48,7 +49,8 @@ class TextColumns(XTextColumns_b17f0bab):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsAutomatic(self) -> bool:
         """
         determines whether the columns all have equal width.
@@ -57,42 +59,48 @@ class TextColumns(XTextColumns_b17f0bab):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SeparatorLineColor(self) -> Color_68e908c5:
         """
         determines the color of the separator lines between the columns.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SeparatorLineIsOn(self) -> bool:
         """
         determines whether separator lines are on.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SeparatorLineRelativeHeight(self) -> int:
         """
         determines the relative height of the separator lines between the columns.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SeparatorLineStyle(self) -> int:
         """
         determines the style of the separator lines between the columns.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SeparatorLineVerticalAlignment(self) -> VerticalAlignmentProto:
         """
         determines the vertical alignment of the separator lines between the columns.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SeparatorLineWidth(self) -> int:
         """
         determines the width of the separator lines between the columns.

@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from abc import ABC
 
 
@@ -40,7 +39,7 @@ class XBinaryDataContainer(ABC):
     """
     __pyunointerface__: str = 'com.sun.star.util.XBinaryDataContainer'
 
-    def getCopyAsByteSequence(self) -> uno.ByteSequence:
+    def getCopyAsByteSequence(self) -> typing.Tuple[int, ...]:
         """
         Get a copy of the contained data.
         """

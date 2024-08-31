@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.style
 from __future__ import annotations
 import typing
-from abc import abstractproperty, ABC
+from abc import abstractmethod, ABC
 if typing.TYPE_CHECKING:
     from ..lang.locale import Locale as Locale_70d308fa
     from com.sun.star.awt.FontSlant import FontSlantProto  # type: ignore
@@ -38,21 +38,24 @@ class CharacterPropertiesAsian(ABC):
     __ooo_full_ns__: str = 'com.sun.star.style.CharacterPropertiesAsian'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharFontCharSetAsian(self) -> int:
         """
         This property contains the text encoding of the font as specified in com.sun.star.awt.CharSet.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharFontFamilyAsian(self) -> int:
         """
         This property contains font family as specified in com.sun.star.awt.FontFamily .
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharFontNameAsian(self) -> str:
         """
         This property specifies the name of the font style.
@@ -61,14 +64,16 @@ class CharacterPropertiesAsian(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharFontPitchAsian(self) -> int:
         """
         This property contains the font pitch as specified in com.sun.star.awt.FontPitch.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharFontStyleNameAsian(self) -> str:
         """
         This property contains the name of the font style.
@@ -77,28 +82,32 @@ class CharacterPropertiesAsian(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharHeightAsian(self) -> float:
         """
         This value contains the height of the characters in point.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharLocaleAsian(self) -> Locale_70d308fa:
         """
         contains the value of the locale.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharPostureAsian(self) -> FontSlantProto:
         """
         This property contains the value of the posture of the document.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharWeightAsian(self) -> float:
         """
         This property contains the value of the font weight.

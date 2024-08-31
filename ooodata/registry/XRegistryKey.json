@@ -1,6 +1,6 @@
 {
   "id": "uno-ooo-parser",
-  "version": "2024.2.0",
+  "version": "0.4.0",
   "libre_office_ver": "2024.2",
   "name": "XRegistryKey",
   "type": "interface",
@@ -42,10 +42,12 @@
       "RegistryValueType_30390f79",
       "XRegistryKey",
       "typing.Tuple[XRegistryKey, ...]",
+      "typing.Tuple[int, ...]",
       "typing.Tuple[str, ...]"
     ],
     "typings": [
       "typing.Tuple[XRegistryKey, ...]",
+      "typing.Tuple[int, ...]",
       "typing.Tuple[str, ...]"
     ],
     "requires_typing": true,
@@ -58,9 +60,7 @@
         "com.sun.star.registry.RegistryValueType"
       ]
     },
-    "imports": [
-      "uno"
-    ],
+    "imports": [],
     "name": "XRegistryKey",
     "namespace": "com.sun.star.registry",
     "extends": [
@@ -194,7 +194,7 @@
         },
         {
           "name": "getBinaryValue",
-          "returns": "uno.ByteSequence",
+          "returns": "typing.Tuple[int, ...]",
           "returns_origin": "sequence< byte >",
           "desc": [],
           "raises": [
@@ -249,7 +249,7 @@
         },
         {
           "name": "getLongListValue",
-          "returns": "uno.ByteSequence",
+          "returns": "typing.Tuple[int, ...]",
           "returns_origin": "sequence< long >",
           "desc": [],
           "raises": [
@@ -432,7 +432,7 @@
           "args": [
             {
               "name": "value",
-              "type": "uno.ByteSequence",
+              "type": "typing.Tuple[int, ...]",
               "direction": "in",
               "origin": "sequence< byte >"
             }
@@ -453,7 +453,7 @@
           "args": [
             {
               "name": "seqValue",
-              "type": "uno.ByteSequence",
+              "type": "typing.Tuple[int, ...]",
               "direction": "in",
               "origin": "sequence< long >"
             }

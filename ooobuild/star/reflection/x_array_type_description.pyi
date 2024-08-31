@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from .x_type_description import XTypeDescription as XTypeDescription_3c210fb1
 
 
@@ -38,7 +37,7 @@ class XArrayTypeDescription(XTypeDescription_3c210fb1):
     """
     __pyunointerface__: str = 'com.sun.star.reflection.XArrayTypeDescription'
 
-    def getDimensions(self) -> uno.ByteSequence:
+    def getDimensions(self) -> typing.Tuple[int, ...]:
         """
         Returns dimensions of array (same length as getNumberOfDimensions()).
         """

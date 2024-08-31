@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.text.textfield
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..text_field import TextField as TextField_90260a56
 
 class Chapter(TextField_90260a56):
@@ -35,14 +35,16 @@ class Chapter(TextField_90260a56):
     __ooo_full_ns__: str = 'com.sun.star.text.textfield.Chapter'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ChapterFormat(self) -> int:
         """
         determines how the chapter should be displayed as described in com.sun.star.text.ChapterFormat.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Level(self) -> int:
         """
         determines which chapter level should be used.

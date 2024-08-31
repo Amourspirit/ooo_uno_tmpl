@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.rdf
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from .x_resource import XResource as XResource_842709e4
 
 class XURI(XResource_842709e4):
@@ -44,14 +44,16 @@ class XURI(XResource_842709e4):
     __ooo_type_name__: str = 'interface'
     __pyunointerface__: str = 'com.sun.star.rdf.XURI'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def LocalName(self) -> str:
         """
         suffix
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Namespace(self) -> str:
         """
         prefix

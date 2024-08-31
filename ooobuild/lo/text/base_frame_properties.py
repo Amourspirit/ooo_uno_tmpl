@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.text
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..xml.user_defined_attributes_supplier import UserDefinedAttributesSupplier as UserDefinedAttributesSupplier_9fbe1222
 if typing.TYPE_CHECKING:
     from ..awt.gradient import Gradient as Gradient_7a8a0982
@@ -52,7 +52,8 @@ class BaseFrameProperties(UserDefinedAttributesSupplier_9fbe1222):
     __ooo_full_ns__: str = 'com.sun.star.text.BaseFrameProperties'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def AllowOverlap(self) -> bool:
         """
         This defines if the frame is allowed to overlap with other anchored objects.
@@ -63,7 +64,8 @@ class BaseFrameProperties(UserDefinedAttributesSupplier_9fbe1222):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def AnchorFrame(self) -> XTextFrame_9a7e0ab5:
         """
         contains the text frame the current frame is anchored to.
@@ -72,7 +74,8 @@ class BaseFrameProperties(UserDefinedAttributesSupplier_9fbe1222):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def AnchorPageNo(self) -> int:
         """
         contains the number of the page where the objects are anchored.
@@ -81,14 +84,16 @@ class BaseFrameProperties(UserDefinedAttributesSupplier_9fbe1222):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BackColor(self) -> Color_68e908c5:
         """
         contains the color of the background of the object.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BackGraphic(self) -> XGraphic_a4da0afc:
         """
         contains the graphic for the background.
@@ -99,21 +104,24 @@ class BaseFrameProperties(UserDefinedAttributesSupplier_9fbe1222):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BackGraphicFilter(self) -> str:
         """
         contains the name of the file filter for the background graphic.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BackGraphicLocation(self) -> GraphicLocationProto:
         """
         determines the position of the background graphic.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BackGraphicURL(self) -> str:
         """
         contains the URL for the background graphic.
@@ -122,49 +130,56 @@ class BaseFrameProperties(UserDefinedAttributesSupplier_9fbe1222):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BackTransparent(self) -> bool:
         """
         If TRUE, the \"BackColor\" is ignored.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BorderDistance(self) -> int:
         """
         contains the distance from the border to the object.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BottomBorder(self) -> BorderLine_a3f80af6:
         """
         contains the bottom border of the object.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BottomBorderDistance(self) -> int:
         """
         contains the distance from the bottom border to the object.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BottomMargin(self) -> int:
         """
         contains the bottom margin of the object.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ContentProtected(self) -> bool:
         """
         determines if the content is protected.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Decorative(self) -> bool:
         """
         Determines if the frame is purely decorative.
@@ -177,7 +192,8 @@ class BaseFrameProperties(UserDefinedAttributesSupplier_9fbe1222):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Description(self) -> str:
         """
         contains description for the object
@@ -190,7 +206,8 @@ class BaseFrameProperties(UserDefinedAttributesSupplier_9fbe1222):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def FillGradient(self) -> Gradient_7a8a0982:
         """
         If the property FillStyle is set to FillStyle.GRADIENT, this describes the gradient used.
@@ -201,7 +218,8 @@ class BaseFrameProperties(UserDefinedAttributesSupplier_9fbe1222):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def FillGradientName(self) -> str:
         """
         If the property FillStyle is set to FillStyle.GRADIENT, this is the name of the gradient used.
@@ -212,7 +230,8 @@ class BaseFrameProperties(UserDefinedAttributesSupplier_9fbe1222):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def FillStyle(self) -> FillStyleProto:
         """
         This enumeration selects the style the area will be filled with.
@@ -225,7 +244,8 @@ class BaseFrameProperties(UserDefinedAttributesSupplier_9fbe1222):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def FrameInteropGrabBag(self) -> typing.Tuple[PropertyValue_c9610c73, ...]:
         """
         Grab bag of frame properties, used as a string-any map for interim interop purposes.
@@ -238,7 +258,8 @@ class BaseFrameProperties(UserDefinedAttributesSupplier_9fbe1222):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Height(self) -> int:
         """
         contains the height of the object (1/100 mm).
@@ -247,14 +268,16 @@ class BaseFrameProperties(UserDefinedAttributesSupplier_9fbe1222):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HoriOrient(self) -> int:
         """
         determines the horizontal orientation of the object.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HoriOrientPosition(self) -> int:
         """
         contains the horizontal position of the object (1/100 mm).
@@ -263,35 +286,40 @@ class BaseFrameProperties(UserDefinedAttributesSupplier_9fbe1222):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HoriOrientRelation(self) -> int:
         """
         determines the environment of the object to which the orientation is related.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HyperLinkName(self) -> str:
         """
         contains the name of the hyperlink that is set at the object.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HyperLinkTarget(self) -> str:
         """
         contains the name of the target for a hyperlink that is set at the object.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HyperLinkURL(self) -> str:
         """
         contains the URL of a hyperlink that is set at the object.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsSplitAllowed(self) -> bool:
         """
         If TRUE, the frame is allowed to be split at page breaks.
@@ -302,21 +330,24 @@ class BaseFrameProperties(UserDefinedAttributesSupplier_9fbe1222):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsSyncHeightToWidth(self) -> bool:
         """
         determines whether the height follows the width.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsSyncWidthToHeight(self) -> bool:
         """
         determines whether the width follows the height.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def LayoutSize(self) -> Size_576707ef:
         """
         returns the actual size of the object.
@@ -329,56 +360,64 @@ class BaseFrameProperties(UserDefinedAttributesSupplier_9fbe1222):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def LeftBorder(self) -> BorderLine_a3f80af6:
         """
         contains the left border of the object.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def LeftBorderDistance(self) -> int:
         """
         contains the distance from the left border to the object.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def LeftMargin(self) -> int:
         """
         contains the left margin of the object.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Opaque(self) -> bool:
         """
         determines if the object is opaque or transparent for text.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def PageToggle(self) -> bool:
         """
         determines if the object is mirrored on even pages.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def PositionProtected(self) -> bool:
         """
         determines if the position is protected.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Print(self) -> bool:
         """
         determines if the object is included in printing.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RelativeHeight(self) -> int:
         """
         contains the relative height of the object.
@@ -387,7 +426,8 @@ class BaseFrameProperties(UserDefinedAttributesSupplier_9fbe1222):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RelativeHeightRelation(self) -> int:
         """
         contains the relation of the relative height of the object.
@@ -400,7 +440,8 @@ class BaseFrameProperties(UserDefinedAttributesSupplier_9fbe1222):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RelativeWidth(self) -> int:
         """
         contains the relative width of the object.
@@ -409,7 +450,8 @@ class BaseFrameProperties(UserDefinedAttributesSupplier_9fbe1222):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RelativeWidthRelation(self) -> int:
         """
         contains the relation of the relative width of the object.
@@ -422,42 +464,48 @@ class BaseFrameProperties(UserDefinedAttributesSupplier_9fbe1222):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RightBorder(self) -> BorderLine_a3f80af6:
         """
         contains the right border of the object.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RightBorderDistance(self) -> int:
         """
         contains the distance from the right border to the object.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RightMargin(self) -> int:
         """
         contains the right margin of the object.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ServerMap(self) -> bool:
         """
         determines if the object gets an image map from a server.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ShadowFormat(self) -> ShadowFormat_bb840bdf:
         """
         contains the type of the shadow of the object.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ShadowTransparence(self) -> int:
         """
         This defines the degree of transparence of the shadow in percent.
@@ -470,35 +518,40 @@ class BaseFrameProperties(UserDefinedAttributesSupplier_9fbe1222):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Size(self) -> Size_576707ef:
         """
         contains the size of the object.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SizeProtected(self) -> bool:
         """
         determines if the size is protected.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Surround(self) -> WrapTextModeProto:
         """
         determines the type of the surrounding text.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SurroundAnchorOnly(self) -> bool:
         """
         determines if the text of the paragraph in which the object is anchored, wraps around the object.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Title(self) -> str:
         """
         contains short title for the object
@@ -511,7 +564,8 @@ class BaseFrameProperties(UserDefinedAttributesSupplier_9fbe1222):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Tooltip(self) -> str:
         """
         Contains popup text for the frame, used to for tooltip purposes if it's non-empty.
@@ -522,35 +576,40 @@ class BaseFrameProperties(UserDefinedAttributesSupplier_9fbe1222):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TopBorder(self) -> BorderLine_a3f80af6:
         """
         contains the top border of the object.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TopBorderDistance(self) -> int:
         """
         contains the distance from the top border to the object.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TopMargin(self) -> int:
         """
         contains the top margin of the object.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def VertOrient(self) -> int:
         """
         determines the vertical orientation of the object.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def VertOrientPosition(self) -> int:
         """
         contains the vertical position of the object (1/100 mm).
@@ -559,14 +618,16 @@ class BaseFrameProperties(UserDefinedAttributesSupplier_9fbe1222):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def VertOrientRelation(self) -> int:
         """
         determines the environment of the object to which the orientation is related.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Width(self) -> int:
         """
         contains the width of the object (1/100 mm).
@@ -575,7 +636,8 @@ class BaseFrameProperties(UserDefinedAttributesSupplier_9fbe1222):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def WrapInfluenceOnPosition(self) -> int:
         """
         determines the influence of the text wrap on the positioning of the shape
@@ -588,7 +650,8 @@ class BaseFrameProperties(UserDefinedAttributesSupplier_9fbe1222):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def WrapTextAtFlyStart(self) -> bool:
         """
         If TRUE, text wraps around a split fly on all pages.

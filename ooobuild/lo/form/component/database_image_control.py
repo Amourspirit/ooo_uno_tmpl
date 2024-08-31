@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.form.component
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ...awt.uno_control_image_control_model import UnoControlImageControlModel as UnoControlImageControlModel_7b36111c
 from ..data_aware_control_model import DataAwareControlModel as DataAwareControlModel_27110ef8
 from ..x_image_producer_supplier import XImageProducerSupplier as XImageProducerSupplier_37df0f8f
@@ -45,7 +45,8 @@ class DatabaseImageControl(UnoControlImageControlModel_7b36111c, DataAwareContro
     __ooo_full_ns__: str = 'com.sun.star.form.component.DatabaseImageControl'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ReadOnly(self) -> bool:
         """
         indicates if it is possible to change the image being displayed.

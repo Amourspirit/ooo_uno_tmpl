@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.sdb
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..awt.uno_control_model import UnoControlModel as UnoControlModel_c8ce0c58
 if typing.TYPE_CHECKING:
     from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
@@ -39,35 +39,40 @@ class ColumnDescriptorControlModel(UnoControlModel_c8ce0c58):
     __ooo_full_ns__: str = 'com.sun.star.sdb.ColumnDescriptorControlModel'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ActiveConnection(self) -> XConnection_a36a0b0c:
         """
         specifies the connection to a database.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Border(self) -> int:
         """
         specifies the border style of the control.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Column(self) -> XPropertySet_bc180bfa:
         """
         specifies the column descriptor where the values will be stored in.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Enabled(self) -> bool:
         """
         determines whether the control is enabled or disabled.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Tabstop(self) -> bool:
         """
         specifies that the control can be reached with the TAB key.

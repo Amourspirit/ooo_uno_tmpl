@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.form.component
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..x_reset import XReset as XReset_71670917
 from ..x_submit import XSubmit as XSubmit_7b060988
 from .form import Form as Form_ca1d0c51
@@ -43,28 +43,32 @@ class HTMLForm(Form_ca1d0c51, XReset_71670917, XSubmit_7b060988):
     __ooo_full_ns__: str = 'com.sun.star.form.component.HTMLForm'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SubmitEncoding(self) -> FormSubmitEncodingProto:
         """
         specifies the kind of encoding for submission.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SubmitMethod(self) -> FormSubmitMethodProto:
         """
         specifies the kind of submission.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TargetFrame(self) -> str:
         """
         describes the frame, where to open the document specified by the TargetURL.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TargetURL(self) -> str:
         """
         specifies the URL, which should be used for submission.

@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.lang
 from __future__ import annotations
-import uno
+import typing
 from abc import abstractmethod
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 
@@ -40,7 +40,7 @@ class XUnoTunnel(XInterface_8f010a43):
     __pyunointerface__: str = 'com.sun.star.lang.XUnoTunnel'
 
     @abstractmethod
-    def getSomething(self, aIdentifier: uno.ByteSequence) -> int:
+    def getSomething(self, aIdentifier: typing.Tuple[int, ...]) -> int:
         """
         Call this method to get something which is not specified in UNO, e.g.
         

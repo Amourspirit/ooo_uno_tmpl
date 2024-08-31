@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.io
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from .x_seekable import XSeekable as XSeekable_79540954
 from .x_stream import XStream as XStream_678908a4
 
@@ -35,21 +35,24 @@ class XTempFile(XSeekable_79540954, XStream_678908a4):
     __ooo_type_name__: str = 'interface'
     __pyunointerface__: str = 'com.sun.star.io.XTempFile'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RemoveFile(self) -> bool:
         """
         This attribute controls whether the file will be automatically removed on object destruction.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ResourceName(self) -> str:
         """
         This attribute specifies the temp file name.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Uri(self) -> str:
         """
         This attribute specifies the URL of the temp file.

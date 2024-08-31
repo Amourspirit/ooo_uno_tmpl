@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 
 
@@ -46,7 +45,7 @@ class XNumberingTypeInfo(XInterface_8f010a43):
         returns the corresponding numbering type to an identifier.
         """
         ...
-    def getSupportedNumberingTypes(self) -> uno.ByteSequence:
+    def getSupportedNumberingTypes(self) -> typing.Tuple[int, ...]:
         """
         returns the numbering type values that are supported by the component.
         """

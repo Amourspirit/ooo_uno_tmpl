@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.form.component
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ...awt.uno_control_currency_field_model import UnoControlCurrencyFieldModel as UnoControlCurrencyFieldModel_8e351187
 from ..form_control_model import FormControlModel as FormControlModel_e2990d22
 from ..x_reset import XReset as XReset_71670917
@@ -37,7 +37,8 @@ class CurrencyField(UnoControlCurrencyFieldModel_8e351187, FormControlModel_e299
     __ooo_full_ns__: str = 'com.sun.star.form.component.CurrencyField'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DefaultValue(self) -> float:
         """
         contains a default value for the control.

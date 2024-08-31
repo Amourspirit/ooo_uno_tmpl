@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
     from .size import Size as Size_576707ef
@@ -36,12 +35,12 @@ class XBitmap(XInterface_8f010a43):
     """
     __pyunointerface__: str = 'com.sun.star.awt.XBitmap'
 
-    def getDIB(self) -> uno.ByteSequence:
+    def getDIB(self) -> typing.Tuple[int, ...]:
         """
         returns the device independent bitmap.
         """
         ...
-    def getMaskDIB(self) -> uno.ByteSequence:
+    def getMaskDIB(self) -> typing.Tuple[int, ...]:
         """
         returns the transparency mask of the device independent bitmap.
         """

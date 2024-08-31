@@ -20,7 +20,6 @@
 # Namespace: com.sun.star.svg
 from __future__ import annotations
 import typing
-import uno
 from abc import abstractmethod
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
@@ -42,7 +41,7 @@ class XSVGWriter(XInterface_8f010a43):
     __pyunointerface__: str = 'com.sun.star.svg.XSVGWriter'
 
     @abstractmethod
-    def write(self, aHandler: XDocumentHandler_9b90e28, aMtf: uno.ByteSequence) -> None:
+    def write(self, aHandler: XDocumentHandler_9b90e28, aMtf: typing.Tuple[int, ...]) -> None:
         """
         """
         ...

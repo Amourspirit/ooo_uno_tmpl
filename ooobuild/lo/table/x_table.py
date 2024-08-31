@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.table
 from __future__ import annotations
 import typing
-from abc import abstractmethod, abstractproperty
+from abc import abstractmethod
 from ..beans.x_fast_property_set import XFastPropertySet as XFastPropertySet_ee6b0d88
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from ..lang.x_component import XComponent as XComponent_98dc0ab5
@@ -56,14 +56,16 @@ class XTable(XFastPropertySet_ee6b0d88, XPropertySet_bc180bfa, XComponent_98dc0a
             com.sun.star.lang.IllegalArgumentException: ``IllegalArgumentException``
         """
         ...
-    @abstractproperty
+    @property
+    @abstractmethod
     def ColumnCount(self) -> int:
         """
         stores the current column count of this table
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RowCount(self) -> int:
         """
         stores the current row count of this table

@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.document
 from __future__ import annotations
 import typing
-from abc import abstractproperty, ABC
+from abc import abstractmethod, ABC
 if typing.TYPE_CHECKING:
     from ..script.x_storage_based_library_container import XStorageBasedLibraryContainer as XStorageBasedLibraryContainer_d72a1321
 
@@ -40,7 +40,8 @@ class XEmbeddedScripts(ABC):
     __ooo_type_name__: str = 'interface'
     __pyunointerface__: str = 'com.sun.star.document.XEmbeddedScripts'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def AllowMacroExecution(self) -> bool:
         """
         determines whether executing macros from this document is allowed.
@@ -49,14 +50,16 @@ class XEmbeddedScripts(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BasicLibraries(self) -> XStorageBasedLibraryContainer_d72a1321:
         """
         is the container of StarBasic macro libraries contained in the document
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DialogLibraries(self) -> XStorageBasedLibraryContainer_d72a1321:
         """
         is the container of dialogs libraries contained in the document

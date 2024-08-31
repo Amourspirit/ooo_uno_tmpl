@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.form.component
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..x_database_parameter_broadcaster import XDatabaseParameterBroadcaster as XDatabaseParameterBroadcaster_ac7f1234
 from ..x_loadable import XLoadable as XLoadable_8e680a28
 from ..x_reset import XReset as XReset_71670917
@@ -47,7 +47,8 @@ class DataForm(Form_ca1d0c51, RowSet_67d208a5, XDatabaseParameterBroadcaster_ac7
     __ooo_full_ns__: str = 'com.sun.star.form.component.DataForm'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def AllowDeletes(self) -> bool:
         """
         determines if deletions of records of the form are allowed.
@@ -56,7 +57,8 @@ class DataForm(Form_ca1d0c51, RowSet_67d208a5, XDatabaseParameterBroadcaster_ac7
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def AllowInserts(self) -> bool:
         """
         determines if insertions into the form's row set are allowed.
@@ -65,7 +67,8 @@ class DataForm(Form_ca1d0c51, RowSet_67d208a5, XDatabaseParameterBroadcaster_ac7
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def AllowUpdates(self) -> bool:
         """
         determines if modifications of the current record of the form are allowed.
@@ -74,14 +77,16 @@ class DataForm(Form_ca1d0c51, RowSet_67d208a5, XDatabaseParameterBroadcaster_ac7
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Cycle(self) -> TabulatorCycleProto:
         """
         returns the kind of tabulator controlling.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DetailFields(self) -> typing.Tuple[str, ...]:
         """
         is used for subforms and contains the names of the columns of the subform which are related to the master fields of the parent form.
@@ -94,7 +99,8 @@ class DataForm(Form_ca1d0c51, RowSet_67d208a5, XDatabaseParameterBroadcaster_ac7
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def MasterFields(self) -> typing.Tuple[str, ...]:
         """
         is used for subforms and contains the names of columns of the parent form.
@@ -105,7 +111,8 @@ class DataForm(Form_ca1d0c51, RowSet_67d208a5, XDatabaseParameterBroadcaster_ac7
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def NavigationBarMode(self) -> NavigationBarModeProto:
         """
         determines how a navigation bar for this form should act.

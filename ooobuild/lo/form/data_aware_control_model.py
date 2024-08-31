@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.form
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from .form_control_model import FormControlModel as FormControlModel_e2990d22
 from .x_bound_component import XBoundComponent as XBoundComponent_d4830cbf
 from .x_load_listener import XLoadListener as XLoadListener_bb200bda
@@ -47,7 +47,8 @@ class DataAwareControlModel(FormControlModel_e2990d22, XBoundComponent_d4830cbf,
     __ooo_full_ns__: str = 'com.sun.star.form.DataAwareControlModel'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BoundField(self) -> XPropertySet_bc180bfa:
         """
         references to the cursor field to which the control is bound.
@@ -56,7 +57,8 @@ class DataAwareControlModel(FormControlModel_e2990d22, XBoundComponent_d4830cbf,
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DataField(self) -> str:
         """
         specifies the name of the bound database field.
@@ -67,7 +69,8 @@ class DataAwareControlModel(FormControlModel_e2990d22, XBoundComponent_d4830cbf,
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def InputRequired(self) -> bool:
         """
         determines whether or not input into this field is required, when it is actually bound to a database field.
@@ -80,7 +83,8 @@ class DataAwareControlModel(FormControlModel_e2990d22, XBoundComponent_d4830cbf,
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def LabelControl(self) -> XPropertySet_bc180bfa:
         """
         references to a control model within the same document which should be used as a label.

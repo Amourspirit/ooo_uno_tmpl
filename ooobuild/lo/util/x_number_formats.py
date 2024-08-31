@@ -20,7 +20,6 @@
 # Namespace: com.sun.star.util
 from __future__ import annotations
 import typing
-import uno
 from abc import abstractmethod
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
@@ -77,7 +76,7 @@ class XNumberFormats(XInterface_8f010a43):
         """
         ...
     @abstractmethod
-    def queryKeys(self, nType: int, nLocale: Locale_70d308fa, bCreate: bool) -> uno.ByteSequence:
+    def queryKeys(self, nType: int, nLocale: Locale_70d308fa, bCreate: bool) -> typing.Tuple[int, ...]:
         """
         """
         ...

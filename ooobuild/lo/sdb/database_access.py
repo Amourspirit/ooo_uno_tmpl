@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.sdb
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from .x_completed_connection import XCompletedConnection as XCompletedConnection_98a0e46
 from .x_database_access import XDatabaseAccess as XDatabaseAccess_c47a0c00
@@ -45,42 +45,48 @@ class DatabaseAccess(XPropertySet_bc180bfa, XCompletedConnection_98a0e46, XDatab
     __ooo_full_ns__: str = 'com.sun.star.sdb.DatabaseAccess'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ConnectInfo(self) -> typing.Tuple[PropertyValue_c9610c73, ...]:
         """
         is a list of arbitrary string tag/value pairs as connection arguments; normally at least a \"user\" and \"password\" property should be included.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ConnectURL(self) -> str:
         """
         indicates a database url of the form  jdbc:subprotocol:subname or  sdbc:subprotocol:subname
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsPasswordRequired(self) -> bool:
         """
         indicates that a password is always necessary.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsReadOnly(self) -> bool:
         """
         determines whether modifications on the data access bean are allowed or not.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def NumberFormatsSupplier(self) -> XNumberFormatsSupplier_3afb0fb7:
         """
         provides an object for formatting numbers.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TableFilter(self) -> typing.Tuple[str, ...]:
         """
         defines a list of tables, on which the bean should have it's focus.
@@ -89,7 +95,8 @@ class DatabaseAccess(XPropertySet_bc180bfa, XCompletedConnection_98a0e46, XDatab
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TableTypeFilter(self) -> typing.Tuple[str, ...]:
         """
         defines a list of table types, on which the bean should have it's focus.
@@ -98,14 +105,16 @@ class DatabaseAccess(XPropertySet_bc180bfa, XCompletedConnection_98a0e46, XDatab
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Title(self) -> str:
         """
         is the title of the bean.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def URL(self) -> str:
         """
         is the URL of the bean.

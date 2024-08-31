@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.drawing
 from __future__ import annotations
 import typing
-from abc import abstractproperty, ABC
+from abc import abstractmethod, ABC
 if typing.TYPE_CHECKING:
     from com.sun.star.drawing.ConnectorType import ConnectorTypeProto  # type: ignore
 
@@ -41,42 +41,48 @@ class ConnectorProperties(ABC):
     __ooo_full_ns__: str = 'com.sun.star.drawing.ConnectorProperties'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def EdgeKind(self) -> ConnectorTypeProto:
         """
         This property contains the kind of the connector.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def EdgeNode1HorzDist(self) -> int:
         """
         This property contains the horizontal distance of node 1.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def EdgeNode1VertDist(self) -> int:
         """
         This property contains the vertical distance of node 1.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def EdgeNode2HorzDist(self) -> int:
         """
         This property contains the horizontal distance of node 2.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def EdgeNode2VertDist(self) -> int:
         """
         This property contains the vertical distance of node 2.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def EdgeOOXMLCurve(self) -> bool:
         """
         If 'TRUE' a curved connector is routed compatible to OOXML.

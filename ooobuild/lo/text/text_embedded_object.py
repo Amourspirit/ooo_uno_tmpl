@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.text
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..document.x_embedded_object_supplier import XEmbeddedObjectSupplier as XEmbeddedObjectSupplier_8b631174
 from .base_frame import BaseFrame as BaseFrame_8f020a33
 if typing.TYPE_CHECKING:
@@ -40,20 +40,23 @@ class TextEmbeddedObject(BaseFrame_8f020a33, XEmbeddedObjectSupplier_8b631174):
     __ooo_full_ns__: str = 'com.sun.star.text.TextEmbeddedObject'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CLSID(self) -> str:
         """
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Component(self) -> XComponent_98dc0ab5:
         """
         This is the component for the OLE2 object.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Model(self) -> XModel_7a6e095c:
         """
         This is the model for the OLE2 object.

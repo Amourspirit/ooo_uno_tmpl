@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.form.component
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ...awt.uno_control_time_field_model import UnoControlTimeFieldModel as UnoControlTimeFieldModel_48bd0fcb
 from ..form_control_model import FormControlModel as FormControlModel_e2990d22
 from ..x_reset import XReset as XReset_71670917
@@ -37,7 +37,8 @@ class TimeField(UnoControlTimeFieldModel_48bd0fcb, FormControlModel_e2990d22, XR
     __ooo_full_ns__: str = 'com.sun.star.form.component.TimeField'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DefaultTime(self) -> int:
         """
         contains a default value for the control.

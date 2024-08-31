@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.text
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from .text_portion import TextPortion as TextPortion_a6f80b5d
 if typing.TYPE_CHECKING:
     from ..beans.property_values import PropertyValues as PropertyValues_d6470ce6
@@ -40,14 +40,16 @@ class RedlinePortion(TextPortion_a6f80b5d):
     __ooo_full_ns__: str = 'com.sun.star.text.RedlinePortion'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsInHeaderFooter(self) -> bool:
         """
         determines whether the portion is member of a header or footer text.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def MergeLastPara(self) -> bool:
         """
         determines whether the last paragraph of a redline text has to be merged with a possible following text content (i.e.
@@ -56,28 +58,32 @@ class RedlinePortion(TextPortion_a6f80b5d):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RedlineAuthor(self) -> str:
         """
         contains the name of the author of the change.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RedlineComment(self) -> str:
         """
         contains a comment for the change.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RedlineDateTime(self) -> DateTime_84de09d3:
         """
         contains the date and time of the change.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RedlineIdentifier(self) -> str:
         """
         contains a unique identifier for the redline.
@@ -86,7 +92,8 @@ class RedlinePortion(TextPortion_a6f80b5d):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RedlineSuccessorData(self) -> PropertyValues_d6470ce6:
         """
         contains the data of a second level redline data
@@ -95,7 +102,8 @@ class RedlinePortion(TextPortion_a6f80b5d):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RedlineText(self) -> XText_690408ca:
         """
         provides access to the text of the redline.
@@ -104,7 +112,8 @@ class RedlinePortion(TextPortion_a6f80b5d):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RedlineType(self) -> str:
         """
         contains the type of the change

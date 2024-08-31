@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.sdb.tools
 from __future__ import annotations
 import typing
-from abc import abstractmethod, abstractproperty, ABC
+from abc import abstractmethod, ABC
 if typing.TYPE_CHECKING:
     from ...beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 
@@ -61,14 +61,16 @@ class XTableName(ABC):
         sets a new composed table name
         """
         ...
-    @abstractproperty
+    @property
+    @abstractmethod
     def CatalogName(self) -> str:
         """
         denotes the name of the catalog which the table is a part of
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def NameForSelect(self) -> str:
         """
         represents the table name in a form to be used in a SELECT statement.
@@ -77,14 +79,16 @@ class XTableName(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SchemaName(self) -> str:
         """
         denotes the name of the schema which the table is a part of
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Table(self) -> XPropertySet_bc180bfa:
         """
         is the com.sun.star.sdb.Table object specified by the current name.
@@ -93,7 +97,8 @@ class XTableName(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TableName(self) -> str:
         """
         denotes the mere, unqualified table name, excluding any catalog and schema.

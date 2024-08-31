@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.chart2
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..drawing.line_properties import LineProperties as LineProperties_f13f0da9
 
 class GridProperties(LineProperties_f13f0da9):
@@ -35,7 +35,8 @@ class GridProperties(LineProperties_f13f0da9):
     __ooo_full_ns__: str = 'com.sun.star.chart2.GridProperties'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Show(self) -> bool:
         """
         Determines, whether the grid should be rendered by the view.

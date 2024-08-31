@@ -20,8 +20,7 @@
 # Namespace: com.sun.star.sheet
 from __future__ import annotations
 import typing
-import uno
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from ..container.x_named import XNamed as XNamed_a6520b08
 from .x_data_pilot_field import XDataPilotField as XDataPilotField_e0350cdf
@@ -54,14 +53,16 @@ class DataPilotField(XPropertySet_bc180bfa, XNamed_a6520b08, XDataPilotField_e03
     __ooo_full_ns__: str = 'com.sun.star.sheet.DataPilotField'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def AutoShowInfo(self) -> DataPilotFieldAutoShowInfo_88d7114d:
         """
         enables the automatic inclusion of only a number of items with the highest or lowest result values.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Function(self) -> GeneralFunctionProto:
         """
         specifies the function used to calculate results for this field.
@@ -70,7 +71,8 @@ class DataPilotField(XPropertySet_bc180bfa, XNamed_a6520b08, XDataPilotField_e03
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Function2(self) -> int:
         """
         specifies the function used to calculate results for this field.
@@ -83,7 +85,8 @@ class DataPilotField(XPropertySet_bc180bfa, XNamed_a6520b08, XDataPilotField_e03
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def GroupInfo(self) -> DataPilotFieldGroupInfo_56691020:
         """
         contains the grouping information of the DataPilot field.
@@ -92,49 +95,56 @@ class DataPilotField(XPropertySet_bc180bfa, XNamed_a6520b08, XDataPilotField_e03
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HasAutoShowInfo(self) -> bool:
         """
         specifies whether this field has auto show information.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HasLayoutInfo(self) -> bool:
         """
         specifies whether this field has layout information.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HasReference(self) -> bool:
         """
         specifies whether this field has a reference.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HasSortInfo(self) -> bool:
         """
         specifies whether this field has sorting information.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsGroupField(self) -> bool:
         """
         specifies whether this field is a group field.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def LayoutInfo(self) -> DataPilotFieldLayoutInfo_671e1091:
         """
         controls how the field's items are laid out in the result table.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Orientation(self) -> DataPilotFieldOrientationProto:
         """
         specifies the orientation of the field.
@@ -143,35 +153,40 @@ class DataPilotField(XPropertySet_bc180bfa, XNamed_a6520b08, XDataPilotField_e03
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Reference(self) -> DataPilotFieldReference_562f1016:
         """
         controls how the results are shown in relation to a selected reference result.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SelectedPage(self) -> str:
         """
         specifies the selected page which is used to filter the data pilot.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ShowEmpty(self) -> bool:
         """
         specifies whether to show this field also if it is empty or not.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SortInfo(self) -> DataPilotFieldSortInfo_466d0fbb:
         """
         controls how the field's items are sorted.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Subtotals(self) -> typing.Tuple[GeneralFunctionProto, ...]:
         """
         specifies the functions used to calculate subtotals for this field.
@@ -184,8 +199,9 @@ class DataPilotField(XPropertySet_bc180bfa, XNamed_a6520b08, XDataPilotField_e03
         """
         ...
 
-    @abstractproperty
-    def Subtotals2(self) -> uno.ByteSequence:
+    @property
+    @abstractmethod
+    def Subtotals2(self) -> typing.Tuple[int, ...]:
         """
         specifies the functions used to calculate subtotals for this field.
         
@@ -201,14 +217,16 @@ class DataPilotField(XPropertySet_bc180bfa, XNamed_a6520b08, XDataPilotField_e03
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def UseSelectedPage(self) -> bool:
         """
         specifies whether to use the selected page to filter the data pilot or show all.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def UsedHierarchy(self) -> str:
         """
         specifies which hierarchy of the dimension is used.

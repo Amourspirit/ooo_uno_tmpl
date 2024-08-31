@@ -20,7 +20,6 @@
 # Libre Office Version: 2024.2
 from ooo.oenv.env_const import UNO_NONE
 import typing
-import uno
 from ..uno.exception import Exception as Exception_85530a09
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 
@@ -43,14 +42,14 @@ class PDFExportException(Exception_85530a09):
     typeName: str = 'com.sun.star.task.PDFExportException'
     """Literal Constant ``com.sun.star.task.PDFExportException``"""
 
-    def __init__(self, Message: typing.Optional[str] = '', Context: typing.Optional[XInterface_8f010a43] = None, ErrorCodes: typing.Optional[uno.ByteSequence] = ()) -> None:
+    def __init__(self, Message: typing.Optional[str] = '', Context: typing.Optional[XInterface_8f010a43] = None, ErrorCodes: typing.Optional[typing.Tuple[int, ...]] = ()) -> None:
         """
         Constructor
 
         Arguments:
             Message (str, optional): Message value.
             Context (XInterface, optional): Context value.
-            ErrorCodes (uno.ByteSequence, optional): ErrorCodes value.
+            ErrorCodes (typing.Tuple[int, ...], optional): ErrorCodes value.
         """
         kargs = {
             "Message": Message,
@@ -68,14 +67,14 @@ class PDFExportException(Exception_85530a09):
         super()._init(**kargs)
 
     @property
-    def ErrorCodes(self) -> uno.ByteSequence:
+    def ErrorCodes(self) -> typing.Tuple[int, ...]:
         """
         contains a number of errors that occurred during PDFExport
         """
         return self._error_codes
     
     @ErrorCodes.setter
-    def ErrorCodes(self, value: uno.ByteSequence) -> None:
+    def ErrorCodes(self, value: typing.Tuple[int, ...]) -> None:
         self._error_codes = value
 
 

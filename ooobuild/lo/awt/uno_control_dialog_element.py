@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.awt
 from __future__ import annotations
-from abc import abstractproperty, ABC
+from abc import abstractmethod, ABC
 
 class UnoControlDialogElement(ABC):
     """
@@ -34,56 +34,64 @@ class UnoControlDialogElement(ABC):
     __ooo_full_ns__: str = 'com.sun.star.awt.UnoControlDialogElement'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Height(self) -> int:
         """
         specifies the height of the control.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Name(self) -> str:
         """
         specifies the name of the control.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def PositionX(self) -> str:
         """
         specifies the horizontal position of the control.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def PositionY(self) -> str:
         """
         specifies the vertical position of the control.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Step(self) -> int:
         """
         specifies the step of the control.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TabIndex(self) -> int:
         """
         specifies the tabindex of the control.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Tag(self) -> str:
         """
         specifies the tag of the control.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Width(self) -> int:
         """
         specifies the width of the control.

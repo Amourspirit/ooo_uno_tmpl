@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.form.binding
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ...beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from .x_value_binding import XValueBinding as XValueBinding_271b0ed5
 from ...lang.x_component import XComponent as XComponent_98dc0ab5
@@ -40,7 +40,8 @@ class ValueBinding(XPropertySet_bc180bfa, XValueBinding_271b0ed5, XComponent_98d
     __ooo_full_ns__: str = 'com.sun.star.form.binding.ValueBinding'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ReadOnly(self) -> bool:
         """
         determines whether the value is currently readonly
@@ -51,7 +52,8 @@ class ValueBinding(XPropertySet_bc180bfa, XValueBinding_271b0ed5, XComponent_98d
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Relevant(self) -> bool:
         """
         determines the relevance of the value represented by the binding

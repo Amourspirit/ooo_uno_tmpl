@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
     from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
@@ -69,7 +68,7 @@ class XNumberFormats(XInterface_8f010a43):
         finds a number format by its format string and returns its key.
         """
         ...
-    def queryKeys(self, nType: int, nLocale: Locale_70d308fa, bCreate: bool) -> uno.ByteSequence:
+    def queryKeys(self, nType: int, nLocale: Locale_70d308fa, bCreate: bool) -> typing.Tuple[int, ...]:
         """
         """
         ...

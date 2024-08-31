@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.chart2.data
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from .x_data_provider import XDataProvider as XDataProvider_122f0e31
 from .x_range_xml_conversion import XRangeXMLConversion as XRangeXMLConversion_6cef1070
 
@@ -35,7 +35,8 @@ class DataProvider(XDataProvider_122f0e31, XRangeXMLConversion_6cef1070):
     __ooo_full_ns__: str = 'com.sun.star.chart2.data.DataProvider'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IncludeHiddenCells(self) -> bool:
         """
         If set to false FALSE, values from hidden cells are not returned.

@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.xsd
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from .x_data_type import XDataType as XDataType_83f209cb
 
 class Day(XDataType_83f209cb):
@@ -35,28 +35,32 @@ class Day(XDataType_83f209cb):
     __ooo_full_ns__: str = 'com.sun.star.xsd.Day'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def MaxExclusiveInt(self) -> int:
         """
         specifies the exclusive upper bound for the value
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def MaxInclusiveInt(self) -> int:
         """
         specifies the inclusive upper bound for the value
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def MinExclusiveInt(self) -> int:
         """
         specifies the exclusive lower bound for the value
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def MinInclusiveInt(self) -> int:
         """
         specifies the inclusive lower bound for the value

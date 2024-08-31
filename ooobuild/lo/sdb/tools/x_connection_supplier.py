@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.sdb.tools
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ...lang.x_initialization import XInitialization as XInitialization_d46c0cca
 if typing.TYPE_CHECKING:
     from ...sdbc.x_connection import XConnection as XConnection_a36a0b0c
@@ -41,7 +41,8 @@ class XConnectionSupplier(XInitialization_d46c0cca):
     __ooo_type_name__: str = 'interface'
     __pyunointerface__: str = 'com.sun.star.sdb.tools.XConnectionSupplier'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ActiveConnection(self) -> XConnection_a36a0b0c:
         """
         returns the source connection.

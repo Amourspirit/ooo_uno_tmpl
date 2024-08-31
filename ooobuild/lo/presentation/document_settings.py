@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.presentation
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..document.header_footer_settings import HeaderFooterSettings as HeaderFooterSettings_5acd1070
 from ..document.settings import Settings as Settings_b2bc0bb8
 
@@ -36,56 +36,64 @@ class DocumentSettings(HeaderFooterSettings_5acd1070, Settings_b2bc0bb8):
     __ooo_full_ns__: str = 'com.sun.star.presentation.DocumentSettings'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsPrintDrawing(self) -> bool:
         """
         enables or disables the printing of the drawing pages
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsPrintFitPage(self) -> bool:
         """
         enables or disables the fitting of the page to the printable area during print
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsPrintHandout(self) -> bool:
         """
         enables or disables the printing of the handout pages
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsPrintHiddenPages(self) -> bool:
         """
         enables or disables the printing of draw pages that are marked hidden
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsPrintNotes(self) -> bool:
         """
         enables or disables the printing of the notes pages
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsPrintOutline(self) -> bool:
         """
         enables or disables the printing of the outline pages
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsPrintTilePage(self) -> bool:
         """
         if this is true and the paper size for printing is larger than the paper size of the printer than the content is tiled over multiple pages.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def PageNumberFormat(self) -> int:
         """
         is the number format used for page number fields
@@ -94,7 +102,8 @@ class DocumentSettings(HeaderFooterSettings_5acd1070, Settings_b2bc0bb8):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ParagraphSummation(self) -> bool:
         """
         If this is true, the distance between two paragraphs is the sum of ParaBottomMargin of the previous and ParaTopMargin of the next paragraph.

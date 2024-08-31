@@ -20,7 +20,6 @@
 # Namespace: com.sun.star.sdbc
 from __future__ import annotations
 import typing
-import uno
 from abc import abstractmethod
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
@@ -684,7 +683,7 @@ class XDatabaseMetaData(XInterface_8f010a43):
         """
         ...
     @abstractmethod
-    def getUDTs(self, catalog: object, schemaPattern: str, typeNamePattern: str, types: uno.ByteSequence) -> XResultSet_98e30aa7:
+    def getUDTs(self, catalog: object, schemaPattern: str, typeNamePattern: str, types: typing.Tuple[int, ...]) -> XResultSet_98e30aa7:
         """
         Gets a description of the user-defined types defined in a particular schema.
         

@@ -20,7 +20,6 @@
 # Namespace: com.sun.star.rendering
 from __future__ import annotations
 import typing
-import uno
 from abc import abstractmethod
 from .x_bitmap import XBitmap as XBitmap_b1b70b7b
 if typing.TYPE_CHECKING:
@@ -47,7 +46,7 @@ class XHalfFloatReadOnlyBitmap(XBitmap_b1b70b7b):
     __pyunointerface__: str = 'com.sun.star.rendering.XHalfFloatReadOnlyBitmap'
 
     @abstractmethod
-    def getData(self, rect: IntegerRectangle2D_3c5c0f4d) -> uno.ByteSequence:
+    def getData(self, rect: IntegerRectangle2D_3c5c0f4d) -> typing.Tuple[int, ...]:
         """
         Query the raw data of this bitmap.
         
@@ -65,7 +64,7 @@ class XHalfFloatReadOnlyBitmap(XBitmap_b1b70b7b):
         """
         ...
     @abstractmethod
-    def getPixel(self, pos: IntegerPoint2D_8f0dc2) -> uno.ByteSequence:
+    def getPixel(self, pos: IntegerPoint2D_8f0dc2) -> typing.Tuple[int, ...]:
         """
         Get a single pixel of the bitmap, returning its color value.
 

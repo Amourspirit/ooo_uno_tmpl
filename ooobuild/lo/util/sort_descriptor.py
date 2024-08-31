@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.util
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 if typing.TYPE_CHECKING:
     from ..lang.locale import Locale as Locale_70d308fa
@@ -42,7 +42,8 @@ class SortDescriptor(XPropertySet_bc180bfa):
     __ooo_full_ns__: str = 'com.sun.star.util.SortDescriptor'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CollatorAlgorithm(self) -> str:
         """
         specifies the algorithm for the compare operator (collator).
@@ -51,21 +52,24 @@ class SortDescriptor(XPropertySet_bc180bfa):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CollatorLocale(self) -> Locale_70d308fa:
         """
         specifies the locale for the compare operator (collator).
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsCaseSensitive(self) -> bool:
         """
         specifies if the case of letters is important when comparing entries.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SortAscending(self) -> bool:
         """
         specifies the sorting order.
@@ -74,7 +78,8 @@ class SortDescriptor(XPropertySet_bc180bfa):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SortColumns(self) -> bool:
         """
         specifies if the columns are sorted.

@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
     from .x_window_peer import XWindowPeer as XWindowPeer_99760ab0
@@ -36,7 +35,7 @@ class XSystemChildFactory(XInterface_8f010a43):
     """
     __pyunointerface__: str = 'com.sun.star.awt.XSystemChildFactory'
 
-    def createSystemChild(self, Parent: typing.Any, ProcessId: uno.ByteSequence, SystemType: int) -> XWindowPeer_99760ab0:
+    def createSystemChild(self, Parent: typing.Any, ProcessId: typing.Tuple[int, ...], SystemType: int) -> XWindowPeer_99760ab0:
         """
         creates a system child window.
         

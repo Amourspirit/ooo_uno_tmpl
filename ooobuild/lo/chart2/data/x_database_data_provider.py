@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.chart2.data
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ...beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from .x_data_provider import XDataProvider as XDataProvider_122f0e31
 from .x_range_xml_conversion import XRangeXMLConversion as XRangeXMLConversion_6cef1070
@@ -43,21 +43,24 @@ class XDatabaseDataProvider(XPropertySet_bc180bfa, XDataProvider_122f0e31, XRang
     __ooo_type_name__: str = 'interface'
     __pyunointerface__: str = 'com.sun.star.chart2.data.XDatabaseDataProvider'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ActiveConnection(self) -> XConnection_a36a0b0c:
         """
         specifies the active connection which is used to create the resulting report.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ApplyFilter(self) -> bool:
         """
         indicates whether the filter should be applied or not, default is FALSE.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Command(self) -> str:
         """
         is the command which should be executed, the type of command depends on the CommandType.
@@ -66,7 +69,8 @@ class XDatabaseDataProvider(XPropertySet_bc180bfa, XDataProvider_122f0e31, XRang
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CommandType(self) -> int:
         """
         specifies the type of the command to be executed to retrieve a result set.
@@ -77,14 +81,16 @@ class XDatabaseDataProvider(XPropertySet_bc180bfa, XDataProvider_122f0e31, XRang
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DataSourceName(self) -> str:
         """
         is the name of the data source to use, this could be a named data source or the URL of a data access component.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DetailFields(self) -> typing.Tuple[str, ...]:
         """
         is used for subreports and contains the names of the columns of the subreport which are related to the master fields of the parent report.
@@ -97,7 +103,8 @@ class XDatabaseDataProvider(XPropertySet_bc180bfa, XDataProvider_122f0e31, XRang
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def EscapeProcessing(self) -> bool:
         """
         specifies if the Command should be analyzed on the client side before sending it to the database server.
@@ -108,7 +115,8 @@ class XDatabaseDataProvider(XPropertySet_bc180bfa, XDataProvider_122f0e31, XRang
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Filter(self) -> str:
         """
         specifies an additional filter to optionally use.
@@ -121,21 +129,24 @@ class XDatabaseDataProvider(XPropertySet_bc180bfa, XDataProvider_122f0e31, XRang
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def GroupBy(self) -> str:
         """
         additional group by for the row set
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HavingClause(self) -> str:
         """
         additional having clause for the row set
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def MasterFields(self) -> typing.Tuple[str, ...]:
         """
         is used for subreports and contains the names of columns of the parent report.
@@ -146,14 +157,16 @@ class XDatabaseDataProvider(XPropertySet_bc180bfa, XDataProvider_122f0e31, XRang
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Order(self) -> str:
         """
         is an additional sort order definition for a row set.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RowLimit(self) -> int:
         """
         specifies the maximal count of rows which should be fetched.

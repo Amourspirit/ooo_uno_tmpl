@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.form.component
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..x_reset import XReset as XReset_71670917
 from .rich_text_control import RichTextControl as RichTextControl_6b7310c9
 
@@ -36,7 +36,8 @@ class TextField(RichTextControl_6b7310c9, XReset_71670917):
     __ooo_full_ns__: str = 'com.sun.star.form.component.TextField'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DefaultText(self) -> str:
         """
         contains a default value for the control.

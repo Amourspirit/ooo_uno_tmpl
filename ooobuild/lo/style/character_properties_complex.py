@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.style
 from __future__ import annotations
 import typing
-from abc import abstractproperty, ABC
+from abc import abstractmethod, ABC
 if typing.TYPE_CHECKING:
     from ..lang.locale import Locale as Locale_70d308fa
     from com.sun.star.awt.FontSlant import FontSlantProto  # type: ignore
@@ -38,21 +38,24 @@ class CharacterPropertiesComplex(ABC):
     __ooo_full_ns__: str = 'com.sun.star.style.CharacterPropertiesComplex'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharFontCharSetComplex(self) -> int:
         """
         This property contains the text encoding of the font as specified in com.sun.star.awt.CharSet.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharFontFamilyComplex(self) -> int:
         """
         This property contains font family as specified in com.sun.star.awt.FontFamily .
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharFontNameComplex(self) -> str:
         """
         This property specifies the name of the font style.
@@ -61,14 +64,16 @@ class CharacterPropertiesComplex(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharFontPitchComplex(self) -> int:
         """
         This property contains the font pitch as specified in com.sun.star.awt.FontPitch.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharFontStyleNameComplex(self) -> str:
         """
         This property contains the name of the font style.
@@ -77,28 +82,32 @@ class CharacterPropertiesComplex(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharHeightComplex(self) -> float:
         """
         This value contains the height of the characters in point.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharLocaleComplex(self) -> Locale_70d308fa:
         """
         contains the value of the locale.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharPostureComplex(self) -> FontSlantProto:
         """
         This property contains the value of the posture of the document.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharWeightComplex(self) -> float:
         """
         This property contains the value of the font weight.

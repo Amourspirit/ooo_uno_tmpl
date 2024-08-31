@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.configuration.backend
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from .x_composite_layer import XCompositeLayer as XCompositeLayer_ed7f137e
 from ...util.x_time_stamped import XTimeStamped as XTimeStamped_b09b0b7b
 
@@ -42,7 +42,8 @@ class Layer(XCompositeLayer_ed7f137e, XTimeStamped_b09b0b7b):
     __ooo_full_ns__: str = 'com.sun.star.configuration.backend.Layer'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def URL(self) -> str:
         """
         The URL of the layer data.

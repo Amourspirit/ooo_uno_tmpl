@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.form.component
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..data_aware_control_model import DataAwareControlModel as DataAwareControlModel_27110ef8
 from .list_box import ListBox as ListBox_f1530d82
 if typing.TYPE_CHECKING:
@@ -47,7 +47,8 @@ class DatabaseListBox(DataAwareControlModel_27110ef8, ListBox_f1530d82):
     __ooo_full_ns__: str = 'com.sun.star.form.component.DatabaseListBox'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BoundColumn(self) -> int:
         """
         specifies which column of the list result set should be used for data exchange.
@@ -58,7 +59,8 @@ class DatabaseListBox(DataAwareControlModel_27110ef8, ListBox_f1530d82):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ListSourceType(self) -> ListSourceTypeProto:
         """
         describes the kind of list source used.
@@ -67,14 +69,16 @@ class DatabaseListBox(DataAwareControlModel_27110ef8, ListBox_f1530d82):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SelectedValue(self) -> object:
         """
         The selected value, if there is at most one.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SelectedValues(self) -> typing.Tuple[object, ...]:
         """
         The selected values.

@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from .xsso_context import XSSOContext as XSSOContext_a2840aec
 
 
@@ -40,7 +39,7 @@ class XSSOAcceptorContext(XSSOContext_a2840aec):
     """
     __pyunointerface__: str = 'com.sun.star.auth.XSSOAcceptorContext'
 
-    def accept(self, Token: uno.ByteSequence) -> uno.ByteSequence:
+    def accept(self, Token: typing.Tuple[int, ...]) -> typing.Tuple[int, ...]:
         """
         accepts/authenticates an SSO token sent from the context initiator side.
         

@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.text.textfield
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..dependent_text_field import DependentTextField as DependentTextField_fed90ded
 
 class DatabaseSetNumber(DependentTextField_fed90ded):
@@ -41,14 +41,16 @@ class DatabaseSetNumber(DependentTextField_fed90ded):
     __ooo_full_ns__: str = 'com.sun.star.text.textfield.DatabaseSetNumber'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DataBaseName(self) -> str:
         """
         specifies the database name.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DataBaseResource(self) -> str:
         """
         indicates a connection URL, which locates a database driver.
@@ -59,7 +61,8 @@ class DatabaseSetNumber(DependentTextField_fed90ded):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DataBaseURL(self) -> str:
         """
         indicates the URL of a database file.
@@ -70,28 +73,32 @@ class DatabaseSetNumber(DependentTextField_fed90ded):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DataCommandType(self) -> int:
         """
         determines the interpretation of the property DataTableName.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DataTableName(self) -> str:
         """
         contains the name of the database table, query or a statement depending on the DataCommandType property.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def NumberingType(self) -> int:
         """
         specifies the type of the numbering as com.sun.star.style.NumberingType
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SetNumber(self) -> int:
         """
         contains the number of the database set.

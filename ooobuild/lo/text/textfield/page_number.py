@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.text.textfield
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..text_field import TextField as TextField_90260a56
 if typing.TYPE_CHECKING:
     from com.sun.star.text.PageNumberType import PageNumberTypeProto  # type: ignore
@@ -38,28 +38,32 @@ class PageNumber(TextField_90260a56):
     __ooo_full_ns__: str = 'com.sun.star.text.textfield.PageNumber'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def NumberingType(self) -> int:
         """
         determines the type of the numbering.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Offset(self) -> int:
         """
         determines an offset value to show a different page number.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SubType(self) -> PageNumberTypeProto:
         """
         determines which page the field refers to.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def UserText(self) -> str:
         """
         if the user text string is set then it is displayed when the value of NumberingType is set to com.sun.star.style.NumberingType.CHAR_SPECIAL

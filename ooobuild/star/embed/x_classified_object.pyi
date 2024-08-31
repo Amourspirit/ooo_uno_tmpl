@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 
 
@@ -34,7 +33,7 @@ class XClassifiedObject(XInterface_8f010a43):
     """
     __pyunointerface__: str = 'com.sun.star.embed.XClassifiedObject'
 
-    def getClassID(self) -> uno.ByteSequence:
+    def getClassID(self) -> typing.Tuple[int, ...]:
         """
         retrieves class ID of the object.
         """
@@ -44,7 +43,7 @@ class XClassifiedObject(XInterface_8f010a43):
         retrieves symbolic name for the object type to be used in UI.
         """
         ...
-    def setClassInfo(self, aClassID: uno.ByteSequence, sClassName: str) -> None:
+    def setClassInfo(self, aClassID: typing.Tuple[int, ...], sClassName: str) -> None:
         """
         sets the class ID and symbolic name to an object.
 

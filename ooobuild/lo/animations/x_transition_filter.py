@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.animations
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from .x_animate import XAnimate as XAnimate_ca680c52
 
 class XTransitionFilter(XAnimate_ca680c52):
@@ -34,7 +34,8 @@ class XTransitionFilter(XAnimate_ca680c52):
     __ooo_type_name__: str = 'interface'
     __pyunointerface__: str = 'com.sun.star.animations.XTransitionFilter'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Direction(self) -> bool:
         """
         This specifies the direction the transition will run.
@@ -43,7 +44,8 @@ class XTransitionFilter(XAnimate_ca680c52):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def FadeColor(self) -> int:
         """
         If the value of the Type attribute is TransitionType.FADE and the value of the Subtype attribute is TransitionSubType.FADETOCOLOR or TransitionSubType.FADEFROMCOLOR, then this attribute specifies the starting or ending color of the fade.
@@ -52,7 +54,8 @@ class XTransitionFilter(XAnimate_ca680c52):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Mode(self) -> bool:
         """
         Indicates whether the transitionFilter's parent element will transition in or out.
@@ -63,7 +66,8 @@ class XTransitionFilter(XAnimate_ca680c52):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Subtype(self) -> int:
         """
         This is the subtype of the transition.
@@ -72,7 +76,8 @@ class XTransitionFilter(XAnimate_ca680c52):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Transition(self) -> int:
         """
         This is the type or family of transition.

@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.document
 from __future__ import annotations
 import typing
-from abc import abstractproperty, ABC
+from abc import abstractmethod, ABC
 if typing.TYPE_CHECKING:
     from .x_embedded_scripts import XEmbeddedScripts as XEmbeddedScripts_1ab50eb1
 
@@ -46,7 +46,8 @@ class XScriptInvocationContext(ABC):
     __ooo_type_name__: str = 'interface'
     __pyunointerface__: str = 'com.sun.star.document.XScriptInvocationContext'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ScriptContainer(self) -> XEmbeddedScripts_1ab50eb1:
         """
         denotes the document which contains the scripts which are to be invoked from the component implementing the XScriptInvocationContext interface.

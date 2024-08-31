@@ -20,7 +20,6 @@
 # Namespace: com.sun.star.linguistic2
 from __future__ import annotations
 import typing
-import uno
 from abc import abstractmethod
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
@@ -41,7 +40,7 @@ class XPossibleHyphens(XInterface_8f010a43):
     __pyunointerface__: str = 'com.sun.star.linguistic2.XPossibleHyphens'
 
     @abstractmethod
-    def getHyphenationPositions(self) -> uno.ByteSequence:
+    def getHyphenationPositions(self) -> typing.Tuple[int, ...]:
         """
         """
         ...

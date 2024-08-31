@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.text.textfield
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..text_field import TextField as TextField_90260a56
 
 class Script(TextField_90260a56):
@@ -35,14 +35,16 @@ class Script(TextField_90260a56):
     __ooo_full_ns__: str = 'com.sun.star.text.textfield.Script'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Content(self) -> str:
         """
         contains the script text or a URL that points to a script depending on the URLContent property.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ScriptType(self) -> str:
         """
         contains the name of the script type (i.e.
@@ -51,7 +53,8 @@ class Script(TextField_90260a56):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def URLContent(self) -> bool:
         """
         determines whether the property Content contains a URL or a script.

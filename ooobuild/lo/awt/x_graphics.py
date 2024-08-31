@@ -20,7 +20,6 @@
 # Namespace: com.sun.star.awt
 from __future__ import annotations
 import typing
-import uno
 from abc import abstractmethod
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
@@ -103,19 +102,19 @@ class XGraphics(XInterface_8f010a43):
         """
         ...
     @abstractmethod
-    def drawPolyLine(self, DataX: uno.ByteSequence, DataY: uno.ByteSequence) -> None:
+    def drawPolyLine(self, DataX: typing.Tuple[int, ...], DataY: typing.Tuple[int, ...]) -> None:
         """
         draws multiple lines in the output device at once.
         """
         ...
     @abstractmethod
-    def drawPolyPolygon(self, DataX: typing.Tuple[uno.ByteSequence, ...], DataY: typing.Tuple[uno.ByteSequence, ...]) -> None:
+    def drawPolyPolygon(self, DataX: typing.Tuple[typing.Tuple[int, ...], ...], DataY: typing.Tuple[typing.Tuple[int, ...], ...]) -> None:
         """
         draws multiple polygons in the output device at once.
         """
         ...
     @abstractmethod
-    def drawPolygon(self, DataX: uno.ByteSequence, DataY: uno.ByteSequence) -> None:
+    def drawPolygon(self, DataX: typing.Tuple[int, ...], DataY: typing.Tuple[int, ...]) -> None:
         """
         draws a polygon line in the output device.
         """
@@ -139,7 +138,7 @@ class XGraphics(XInterface_8f010a43):
         """
         ...
     @abstractmethod
-    def drawTextArray(self, X: int, Y: int, Text: str, Longs: uno.ByteSequence) -> None:
+    def drawTextArray(self, X: int, Y: int, Text: str, Longs: typing.Tuple[int, ...]) -> None:
         """
         draws texts in the output device using an explicit kerning table.
         """

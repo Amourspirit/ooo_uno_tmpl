@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.style
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from .character_properties import CharacterProperties as CharacterProperties_1d4f0ef3
 from .style import Style as Style_7336094a
 
@@ -36,42 +36,48 @@ class CharacterStyle(CharacterProperties_1d4f0ef3, Style_7336094a):
     __ooo_full_ns__: str = 'com.sun.star.style.CharacterStyle'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharDiffHeight(self) -> float:
         """
         This value contains the character height as difference in point to the height of the character in the parent style.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharDiffHeightAsian(self) -> float:
         """
         This value contains the character height as difference in point to the height of the character in the parent style in Asian text.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharDiffHeightComplex(self) -> float:
         """
         This value contains the character height as difference in point to the height of the character in the parent style in complex text.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharPropHeight(self) -> int:
         """
         This value contains the character height as percentage value relative to the height of the character in the parent style.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharPropHeightAsian(self) -> int:
         """
         This value contains the character height as percentage value relative to the height of the character in the parent style in Asian text.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharPropHeightComplex(self) -> int:
         """
         This value contains the character height as percentage value relative to the height of the character in the parent style in complex text.

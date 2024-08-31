@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.form
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_bag import XPropertyBag as XPropertyBag_bbd00bd8
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from ..container.x_named import XNamed as XNamed_a6520b08
@@ -44,7 +44,8 @@ class FormComponent(XPropertyBag_bbd00bd8, XPropertySet_bc180bfa, XNamed_a6520b0
     __ooo_full_ns__: str = 'com.sun.star.form.FormComponent'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Name(self) -> str:
         """
         the name of the component.

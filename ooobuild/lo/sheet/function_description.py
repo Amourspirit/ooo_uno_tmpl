@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.sheet
 from __future__ import annotations
 import typing
-from abc import abstractproperty, ABC
+from abc import abstractmethod, ABC
 if typing.TYPE_CHECKING:
     from .function_argument import FunctionArgument as FunctionArgument_f1080daa
 
@@ -37,35 +37,40 @@ class FunctionDescription(ABC):
     __ooo_full_ns__: str = 'com.sun.star.sheet.FunctionDescription'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Arguments(self) -> typing.Tuple[FunctionArgument_f1080daa, ...]:
         """
         returns a sequence of localized descriptions of the function's arguments (in the order specified by the function).
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Category(self) -> int:
         """
         returns the function's category.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Description(self) -> str:
         """
         returns a localized description of the function.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Id(self) -> int:
         """
         returns the function's unique identifier.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Name(self) -> str:
         """
         returns the localized function's name.

@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.xml.crypto
 from __future__ import annotations
-import uno
+import typing
 from abc import abstractmethod
 from ...uno.x_interface import XInterface as XInterface_8f010a43
 
@@ -42,7 +42,7 @@ class XDigestContext(XInterface_8f010a43):
     __pyunointerface__: str = 'com.sun.star.xml.crypto.XDigestContext'
 
     @abstractmethod
-    def finalizeDigestAndDispose(self) -> uno.ByteSequence:
+    def finalizeDigestAndDispose(self) -> typing.Tuple[int, ...]:
         """
         finalizes digest and disposes context.
 
@@ -51,7 +51,7 @@ class XDigestContext(XInterface_8f010a43):
         """
         ...
     @abstractmethod
-    def updateDigest(self, aData: uno.ByteSequence) -> None:
+    def updateDigest(self, aData: typing.Tuple[int, ...]) -> None:
         """
         update the digest with the given data.
 

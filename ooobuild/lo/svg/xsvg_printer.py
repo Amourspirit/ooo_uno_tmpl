@@ -20,7 +20,6 @@
 # Namespace: com.sun.star.svg
 from __future__ import annotations
 import typing
-import uno
 from abc import abstractmethod
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
@@ -47,12 +46,12 @@ class XSVGPrinter(XInterface_8f010a43):
         """
         ...
     @abstractmethod
-    def printPage(self, aPrintPage: uno.ByteSequence) -> None:
+    def printPage(self, aPrintPage: typing.Tuple[int, ...]) -> None:
         """
         """
         ...
     @abstractmethod
-    def startJob(self, aHandler: XDocumentHandler_9b90e28, aJobSetup: uno.ByteSequence, aJobName: str, nCopies: int, bCollate: bool) -> bool:
+    def startJob(self, aHandler: XDocumentHandler_9b90e28, aJobSetup: typing.Tuple[int, ...], aJobName: str, nCopies: int, bCollate: bool) -> bool:
         """
         """
         ...

@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.drawing
 from __future__ import annotations
-from abc import abstractproperty, ABC
+from abc import abstractmethod, ABC
 
 class RotationDescriptor(ABC):
     """
@@ -40,7 +40,8 @@ class RotationDescriptor(ABC):
     __ooo_full_ns__: str = 'com.sun.star.drawing.RotationDescriptor'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RotateAngle(self) -> int:
         """
         This is the angle for rotation of this Shape.
@@ -51,7 +52,8 @@ class RotationDescriptor(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ShearAngle(self) -> int:
         """
         This is the amount of shearing for this Shape.

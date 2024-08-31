@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from ...uno.x_interface import XInterface as XInterface_8f010a43
 
 
@@ -34,7 +33,7 @@ class XScript(XInterface_8f010a43):
     """
     __pyunointerface__: str = 'com.sun.star.script.provider.XScript'
 
-    def invoke(self, aParams: typing.Tuple[object, ...], aOutParamIndex: uno.ByteSequence, aOutParam: typing.Tuple[object, ...]) -> typing.Any:
+    def invoke(self, aParams: typing.Tuple[object, ...], aOutParamIndex: typing.Tuple[int, ...], aOutParam: typing.Tuple[object, ...]) -> typing.Any:
         """
         invoke the script or function represented by the implementing object
         

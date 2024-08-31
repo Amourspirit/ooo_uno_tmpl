@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.text.textfield
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..text_field import TextField as TextField_90260a56
 if typing.TYPE_CHECKING:
     from ...util.date import Date as Date_60040844
@@ -43,35 +43,40 @@ class Annotation(TextField_90260a56):
     __ooo_full_ns__: str = 'com.sun.star.text.textfield.Annotation'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Author(self) -> str:
         """
         contains the name of the author of the annotation.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Content(self) -> str:
         """
         contains the annotation's content
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Date(self) -> Date_60040844:
         """
         contains the creation date.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DateTimeValue(self) -> DateTime_84de09d3:
         """
         contains the creation date.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Initials(self) -> str:
         """
         contains the initials of the author of the annotation.
@@ -82,7 +87,8 @@ class Annotation(TextField_90260a56):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Name(self) -> str:
         """
         contains the name of the annotation.

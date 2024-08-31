@@ -20,7 +20,6 @@
 # Namespace: com.sun.star.sdbc
 from __future__ import annotations
 import typing
-import uno
 from abc import abstractmethod
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
@@ -112,7 +111,7 @@ class XParameters(XInterface_8f010a43):
         """
         ...
     @abstractmethod
-    def setBytes(self, parameterIndex: int, x: uno.ByteSequence) -> None:
+    def setBytes(self, parameterIndex: int, x: typing.Tuple[int, ...]) -> None:
         """
         sets the designated parameter to a sequence of bytes.
         

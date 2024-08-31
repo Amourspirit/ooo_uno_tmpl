@@ -20,7 +20,6 @@
 # Namespace: com.sun.star.awt
 from __future__ import annotations
 import typing
-import uno
 from abc import abstractmethod
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
@@ -55,13 +54,13 @@ class XImageConsumer(XInterface_8f010a43):
         """
         ...
     @abstractmethod
-    def setColorModel(self, BitCount: int, RGBAPal: uno.ByteSequence, RedMask: int, GreenMask: int, BlueMask: int, AlphaMask: int) -> None:
+    def setColorModel(self, BitCount: int, RGBAPal: typing.Tuple[int, ...], RedMask: int, GreenMask: int, BlueMask: int, AlphaMask: int) -> None:
         """
         changes color model for next pixels typically called once after initialization.
         """
         ...
     @abstractmethod
-    def setPixelsByBytes(self, nX: int, nY: int, nWidth: int, nHeight: int, aProducerData: uno.ByteSequence, nOffset: int, nScanSize: int) -> None:
+    def setPixelsByBytes(self, nX: int, nY: int, nWidth: int, nHeight: int, aProducerData: typing.Tuple[int, ...], nOffset: int, nScanSize: int) -> None:
         """
         delivers a chunk of pixels as long values.
         
@@ -69,7 +68,7 @@ class XImageConsumer(XInterface_8f010a43):
         """
         ...
     @abstractmethod
-    def setPixelsByLongs(self, nX: int, nY: int, nWidth: int, nHeight: int, aProducerData: uno.ByteSequence, nOffset: int, nScanSize: int) -> None:
+    def setPixelsByLongs(self, nX: int, nY: int, nWidth: int, nHeight: int, aProducerData: typing.Tuple[int, ...], nOffset: int, nScanSize: int) -> None:
         """
         delivers a chunk of pixels as byte values.
         

@@ -20,7 +20,6 @@
 # Namespace: com.sun.star.sheet
 from __future__ import annotations
 import typing
-import uno
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from ..container.x_named import XNamed as XNamed_a6520b08
 from .x_data_pilot_member_results import XDataPilotMemberResults as XDataPilotMemberResults_56421045
@@ -62,7 +61,7 @@ class DataPilotSourceLevel(XPropertySet_bc180bfa, XNamed_a6520b08, XDataPilotMem
     def SubTotals(self, value: typing.Tuple[GeneralFunction_e2280d25, ...]) -> None:
         ...
     @property
-    def SubTotals2(self) -> uno.ByteSequence:
+    def SubTotals2(self) -> typing.Tuple[int, ...]:
         """
         specifies the subtotals that are inserted for the level.
         
@@ -74,6 +73,6 @@ class DataPilotSourceLevel(XPropertySet_bc180bfa, XNamed_a6520b08, XDataPilotMem
         """
         ...
     @SubTotals2.setter
-    def SubTotals2(self, value: uno.ByteSequence) -> None:
+    def SubTotals2(self, value: typing.Tuple[int, ...]) -> None:
         ...
 

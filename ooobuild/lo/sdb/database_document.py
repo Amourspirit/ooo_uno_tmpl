@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.sdb
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from ..sdbcx.x_data_descriptor_factory import XDataDescriptorFactory as XDataDescriptorFactory_46170fe5
 from ..sdbcx.x_rename import XRename as XRename_848c09cc
@@ -45,14 +45,16 @@ class DatabaseDocument(XPropertySet_bc180bfa, XDataDescriptorFactory_46170fe5, X
     __ooo_full_ns__: str = 'com.sun.star.sdb.DatabaseDocument'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Name(self) -> str:
         """
         is the name of the document.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def URL(self) -> str:
         """
         is the URL of the document.

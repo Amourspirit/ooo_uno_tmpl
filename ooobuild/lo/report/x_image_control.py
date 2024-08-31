@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.report
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..form.x_image_producer_supplier import XImageProducerSupplier as XImageProducerSupplier_37df0f8f
 from .x_report_control_model import XReportControlModel as XReportControlModel_2d800f4a
 
@@ -38,14 +38,16 @@ class XImageControl(XImageProducerSupplier_37df0f8f, XReportControlModel_2d800f4
     __ooo_type_name__: str = 'interface'
     __pyunointerface__: str = 'com.sun.star.report.XImageControl'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ImageURL(self) -> str:
         """
         specifies a URL to an image to use for the control.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def PreserveIRI(self) -> bool:
         """
         Specifies that the IRI given in the data field should be preserved, otherwise the content will be inserted in the resulting report document.
@@ -54,7 +56,8 @@ class XImageControl(XImageProducerSupplier_37df0f8f, XReportControlModel_2d800f4
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ScaleMode(self) -> int:
         """
         defines how to scale the image

@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.style
 from __future__ import annotations
 import typing
-from abc import abstractproperty, ABC
+from abc import abstractmethod, ABC
 if typing.TYPE_CHECKING:
     from com.sun.star.style.HorizontalAlignment import HorizontalAlignmentProto  # type: ignore
 
@@ -37,7 +37,8 @@ class NumberingAlignment(ABC):
     __ooo_full_ns__: str = 'com.sun.star.style.NumberingAlignment'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Alignment(self) -> HorizontalAlignmentProto:
         """
         set the alignment from the numbering.
@@ -46,21 +47,24 @@ class NumberingAlignment(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Insertion(self) -> int:
         """
         the distance between the numbering symbol and text.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TextMarginDistance(self) -> int:
         """
         the minimum distance between the numbering symbol and the following text.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TextNumberingDistance(self) -> int:
         """
         the distance between left margin and the numbering symbol.

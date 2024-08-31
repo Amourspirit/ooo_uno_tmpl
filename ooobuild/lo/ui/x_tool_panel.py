@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.ui
 from __future__ import annotations
 import typing
-from abc import abstractmethod, abstractproperty, ABC
+from abc import abstractmethod, ABC
 if typing.TYPE_CHECKING:
     from ..accessibility.x_accessible import XAccessible as XAccessible_1cbc0eb6
     from ..awt.x_window import XWindow as XWindow_713b0924
@@ -43,7 +43,8 @@ class XToolPanel(ABC):
         creates the root of the Accessibility object tree for the tool panel
         """
         ...
-    @abstractproperty
+    @property
+    @abstractmethod
     def Window(self) -> XWindow_713b0924:
         """
         provides access to the tool panel's main window.

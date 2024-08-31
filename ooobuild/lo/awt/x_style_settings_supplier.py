@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.awt
 from __future__ import annotations
 import typing
-from abc import abstractproperty, ABC
+from abc import abstractmethod, ABC
 if typing.TYPE_CHECKING:
     from .x_style_settings import XStyleSettings as XStyleSettings_bcc40c0e
 
@@ -36,7 +36,8 @@ class XStyleSettingsSupplier(ABC):
     __ooo_type_name__: str = 'interface'
     __pyunointerface__: str = 'com.sun.star.awt.XStyleSettingsSupplier'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def StyleSettings(self) -> XStyleSettings_bcc40c0e:
         """
         """

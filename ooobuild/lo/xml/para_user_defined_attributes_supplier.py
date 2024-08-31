@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.xml
 from __future__ import annotations
 import typing
-from abc import abstractproperty, ABC
+from abc import abstractmethod, ABC
 if typing.TYPE_CHECKING:
     from ..container.x_name_container import XNameContainer as XNameContainer_cb90e47
 
@@ -41,7 +41,8 @@ class ParaUserDefinedAttributesSupplier(ABC):
     __ooo_full_ns__: str = 'com.sun.star.xml.ParaUserDefinedAttributesSupplier'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ParaUserDefinedAttributes(self) -> XNameContainer_cb90e47:
         """
         This container holds the AttributeData elements that represent uninterpreted XML attributes of a paragraph.

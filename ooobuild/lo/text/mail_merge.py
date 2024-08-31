@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.text
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from ..sdb.data_access_descriptor import DataAccessDescriptor as DataAccessDescriptor_6c50e2c
 from ..task.x_job import XJob as XJob_5fa1082e
@@ -49,7 +49,8 @@ class MailMerge(DataAccessDescriptor_6c50e2c, XPropertySet_bc180bfa, XJob_5fa108
     __ooo_full_ns__: str = 'com.sun.star.text.MailMerge'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ActiveConnection(self) -> XConnection_a36a0b0c:
         """
         contains the connection to the database.
@@ -58,7 +59,8 @@ class MailMerge(DataAccessDescriptor_6c50e2c, XPropertySet_bc180bfa, XJob_5fa108
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def AddressFromColumn(self) -> str:
         """
         contains the name of the data base column that contains the e-Mail address to the e-Mail to.
@@ -71,7 +73,8 @@ class MailMerge(DataAccessDescriptor_6c50e2c, XPropertySet_bc180bfa, XJob_5fa108
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def AttachmentFilter(self) -> str:
         """
         contains the name of the document filter to save the attached mail merge document.
@@ -86,7 +89,8 @@ class MailMerge(DataAccessDescriptor_6c50e2c, XPropertySet_bc180bfa, XJob_5fa108
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def AttachmentName(self) -> str:
         """
         contains the name of the attachment.
@@ -101,7 +105,8 @@ class MailMerge(DataAccessDescriptor_6c50e2c, XPropertySet_bc180bfa, XJob_5fa108
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BlindCopiesTo(self) -> typing.Tuple[str, ...]:
         """
         This property is only evaluated for e-Mail output.
@@ -112,7 +117,8 @@ class MailMerge(DataAccessDescriptor_6c50e2c, XPropertySet_bc180bfa, XJob_5fa108
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Command(self) -> str:
         """
         contains the database command.
@@ -121,7 +127,8 @@ class MailMerge(DataAccessDescriptor_6c50e2c, XPropertySet_bc180bfa, XJob_5fa108
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CommandType(self) -> int:
         """
         determines the type of the database command as described in com.sun.star.sdb.CommandType
@@ -130,7 +137,8 @@ class MailMerge(DataAccessDescriptor_6c50e2c, XPropertySet_bc180bfa, XJob_5fa108
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CopiesTo(self) -> typing.Tuple[str, ...]:
         """
         contains a list of e-Mail addresses to
@@ -143,7 +151,8 @@ class MailMerge(DataAccessDescriptor_6c50e2c, XPropertySet_bc180bfa, XJob_5fa108
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DataSourceName(self) -> str:
         """
         contains the name of the data source that is to be used for merging.
@@ -152,7 +161,8 @@ class MailMerge(DataAccessDescriptor_6c50e2c, XPropertySet_bc180bfa, XJob_5fa108
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DocumentURL(self) -> str:
         """
         contains the URL of a text document that is to be processed.
@@ -161,7 +171,8 @@ class MailMerge(DataAccessDescriptor_6c50e2c, XPropertySet_bc180bfa, XJob_5fa108
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def EscapeProcessing(self) -> bool:
         """
         returns if escape processing is on or off.
@@ -170,7 +181,8 @@ class MailMerge(DataAccessDescriptor_6c50e2c, XPropertySet_bc180bfa, XJob_5fa108
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def FileNameFromColumn(self) -> bool:
         """
         determines whether file names of created files are generated using the content of a database column.
@@ -179,7 +191,8 @@ class MailMerge(DataAccessDescriptor_6c50e2c, XPropertySet_bc180bfa, XJob_5fa108
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def FileNamePrefix(self) -> str:
         """
         contains the name of the column to generate the output file names.
@@ -192,7 +205,8 @@ class MailMerge(DataAccessDescriptor_6c50e2c, XPropertySet_bc180bfa, XJob_5fa108
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Filter(self) -> str:
         """
         contains a filter expression for an SQL statement.
@@ -201,7 +215,8 @@ class MailMerge(DataAccessDescriptor_6c50e2c, XPropertySet_bc180bfa, XJob_5fa108
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def InServerPassword(self) -> str:
         """
         Contains the password of the incoming mail server.
@@ -216,7 +231,8 @@ class MailMerge(DataAccessDescriptor_6c50e2c, XPropertySet_bc180bfa, XJob_5fa108
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def MailBody(self) -> str:
         """
         contains the text of the mail body.
@@ -231,7 +247,8 @@ class MailMerge(DataAccessDescriptor_6c50e2c, XPropertySet_bc180bfa, XJob_5fa108
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Model(self) -> XModel_7a6e095c:
         """
         provides access to the model of the document to be processed.
@@ -240,7 +257,8 @@ class MailMerge(DataAccessDescriptor_6c50e2c, XPropertySet_bc180bfa, XJob_5fa108
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def OutServerPassword(self) -> str:
         """
         Contains the password of the outgoing mail server.
@@ -255,14 +273,16 @@ class MailMerge(DataAccessDescriptor_6c50e2c, XPropertySet_bc180bfa, XJob_5fa108
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def OutputType(self) -> int:
         """
         determines the destination of the mail merge action.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def OutputURL(self) -> str:
         """
         contains the path where generated files are created.
@@ -273,7 +293,8 @@ class MailMerge(DataAccessDescriptor_6c50e2c, XPropertySet_bc180bfa, XJob_5fa108
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def PrintOptions(self) -> typing.Tuple[PropertyValue_c9610c73, ...]:
         """
         contains the properties that are defined in <com.sun.star.view.PrintOptions>.
@@ -286,7 +307,8 @@ class MailMerge(DataAccessDescriptor_6c50e2c, XPropertySet_bc180bfa, XJob_5fa108
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ResultSet(self) -> XResultSet_98e30aa7:
         """
         provides access to a com.sun.star.sdbc.XResultSet of a com.sun.star.sdbc.ResultSet service.
@@ -297,7 +319,8 @@ class MailMerge(DataAccessDescriptor_6c50e2c, XPropertySet_bc180bfa, XJob_5fa108
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SaveAsSingleFile(self) -> bool:
         """
         determines that the output of the mail merge is saved in one single file.
@@ -310,7 +333,8 @@ class MailMerge(DataAccessDescriptor_6c50e2c, XPropertySet_bc180bfa, XJob_5fa108
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SaveFilter(self) -> str:
         """
         contains the name of the document filter to save the output file(s).
@@ -323,7 +347,8 @@ class MailMerge(DataAccessDescriptor_6c50e2c, XPropertySet_bc180bfa, XJob_5fa108
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Selection(self) -> typing.Tuple[object, ...]:
         """
         contains a selection that refers to bookmarks of the ResultSet.
@@ -336,7 +361,8 @@ class MailMerge(DataAccessDescriptor_6c50e2c, XPropertySet_bc180bfa, XJob_5fa108
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SendAsAttachment(self) -> bool:
         """
         determines that the created mail merge document is sent as attachment.
@@ -349,7 +375,8 @@ class MailMerge(DataAccessDescriptor_6c50e2c, XPropertySet_bc180bfa, XJob_5fa108
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SendAsHTML(self) -> bool:
         """
         determines that the created mail merge document is sent as body in HTML format.
@@ -364,7 +391,8 @@ class MailMerge(DataAccessDescriptor_6c50e2c, XPropertySet_bc180bfa, XJob_5fa108
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SinglePrintJobs(self) -> bool:
         """
         determines whether single print jobs will be generated per output document.
@@ -373,7 +401,8 @@ class MailMerge(DataAccessDescriptor_6c50e2c, XPropertySet_bc180bfa, XJob_5fa108
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Subject(self) -> str:
         """
         contains the subject of the e-Mail message.

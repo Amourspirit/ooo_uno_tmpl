@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from abc import ABC
 
 
@@ -38,7 +37,7 @@ class XShapes3(ABC):
     """
     __pyunointerface__: str = 'com.sun.star.drawing.XShapes3'
 
-    def sort(self, sortOrder: uno.ByteSequence) -> None:
+    def sort(self, sortOrder: typing.Tuple[int, ...]) -> None:
         """
         Sort shapes according to given sort order, for perf reason just rearrange and don't broadcast.
         

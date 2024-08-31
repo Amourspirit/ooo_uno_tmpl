@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from ...uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
     from ...beans.named_value import NamedValue as NamedValue_a37a0af3
@@ -41,7 +40,7 @@ class XCipherContextSupplier(XInterface_8f010a43):
     """
     __pyunointerface__: str = 'com.sun.star.xml.crypto.XCipherContextSupplier'
 
-    def getCipherContext(self, nCipherID: int, aKey: uno.ByteSequence, aInitializationVector: uno.ByteSequence, bEncryption: bool, aParams: typing.Tuple[NamedValue_a37a0af3, ...]) -> XCipherContext_1b110ec0:
+    def getCipherContext(self, nCipherID: int, aKey: typing.Tuple[int, ...], aInitializationVector: typing.Tuple[int, ...], bEncryption: bool, aParams: typing.Tuple[NamedValue_a37a0af3, ...]) -> XCipherContext_1b110ec0:
         """
         returns an object that allows to encrypt/decrypt data.
 

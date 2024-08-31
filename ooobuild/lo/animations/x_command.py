@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.animations
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from .x_animation_node import XAnimationNode as XAnimationNode_1cf10eb9
 
 class XCommand(XAnimationNode_1cf10eb9):
@@ -34,7 +34,8 @@ class XCommand(XAnimationNode_1cf10eb9):
     __ooo_type_name__: str = 'interface'
     __pyunointerface__: str = 'com.sun.star.animations.XCommand'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Command(self) -> int:
         """
         This identifies the application specific command.
@@ -43,7 +44,8 @@ class XCommand(XAnimationNode_1cf10eb9):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Parameter(self) -> object:
         """
         The application specific parameter for this command.
@@ -52,7 +54,8 @@ class XCommand(XAnimationNode_1cf10eb9):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Target(self) -> object:
         """
         The application specific target.

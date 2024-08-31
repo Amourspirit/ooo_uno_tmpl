@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.text
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from .x_footnote import XFootnote as XFootnote_901e0a73
 from .x_text import XText as XText_690408ca
 
@@ -36,7 +36,8 @@ class Footnote(XFootnote_901e0a73, XText_690408ca):
     __ooo_full_ns__: str = 'com.sun.star.text.Footnote'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ReferenceId(self) -> int:
         """
         contains an internal identifier for the use as SequenceNumber property in reference fields.

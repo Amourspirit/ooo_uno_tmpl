@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 
 
@@ -34,7 +33,7 @@ class XDeleteRows(XInterface_8f010a43):
     """
     __pyunointerface__: str = 'com.sun.star.sdbcx.XDeleteRows'
 
-    def deleteRows(self, rows: typing.Tuple[object, ...]) -> uno.ByteSequence:
+    def deleteRows(self, rows: typing.Tuple[object, ...]) -> typing.Tuple[int, ...]:
         """
         deletes one or more rows identified by their bookmarks.
 

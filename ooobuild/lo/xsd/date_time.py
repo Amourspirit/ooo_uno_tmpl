@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.xsd
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from .x_data_type import XDataType as XDataType_83f209cb
 if typing.TYPE_CHECKING:
     from ..util.date_time import DateTime as DateTime_84de09d3
@@ -38,28 +38,32 @@ class DateTime(XDataType_83f209cb):
     __ooo_full_ns__: str = 'com.sun.star.xsd.DateTime'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def MaxExclusiveDateTime(self) -> DateTime_84de09d3:
         """
         specifies the exclusive upper bound for the value
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def MaxInclusiveDateTime(self) -> DateTime_84de09d3:
         """
         specifies the inclusive upper bound for the value
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def MinExclusiveDateTime(self) -> DateTime_84de09d3:
         """
         specifies the exclusive lower bound for the value
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def MinInclusiveDateTime(self) -> DateTime_84de09d3:
         """
         specifies the inclusive lower bound for the value

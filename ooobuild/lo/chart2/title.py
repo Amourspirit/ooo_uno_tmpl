@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.chart2
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.property_set import PropertySet as PropertySet_b0e70ba2
 from .x_title import XTitle as XTitle_833f09a6
 from ..drawing.fill_properties import FillProperties as FillProperties_f1200da8
@@ -42,7 +42,8 @@ class Title(PropertySet_b0e70ba2, FillProperties_f1200da8, LineProperties_f13f0d
     __ooo_full_ns__: str = 'com.sun.star.chart2.Title'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ReferencePageSize(self) -> Size_576707ef:
         """
         contains the size of the page at the time when properties were set (e.g.
@@ -53,7 +54,8 @@ class Title(PropertySet_b0e70ba2, FillProperties_f1200da8, LineProperties_f13f0d
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RelativePosition(self) -> RelativePosition_fae10ddd:
         """
         The position is a relative position on the page.
@@ -62,14 +64,16 @@ class Title(PropertySet_b0e70ba2, FillProperties_f1200da8, LineProperties_f13f0d
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def StackCharacters(self) -> bool:
         """
         writes the characters of the title on top of each other if set to TRUE.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TextRotation(self) -> float:
         """
         the rotation of the title's text in degrees in the range [0,360).

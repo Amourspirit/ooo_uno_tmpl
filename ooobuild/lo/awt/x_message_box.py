@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.awt
 from __future__ import annotations
-from abc import abstractmethod, abstractproperty, ABC
+from abc import abstractmethod, ABC
 
 class XMessageBox(ABC):
     """
@@ -39,14 +39,16 @@ class XMessageBox(ABC):
         shows the message box.
         """
         ...
-    @abstractproperty
+    @property
+    @abstractmethod
     def CaptionText(self) -> str:
         """
         the caption text.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def MessageText(self) -> str:
         """
         the message text.

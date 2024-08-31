@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.sheet
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..table.table_sort_descriptor2 import TableSortDescriptor2 as TableSortDescriptor2_27e00ef1
 if typing.TYPE_CHECKING:
     from ..table.cell_address import CellAddress as CellAddress_ae5f0b56
@@ -44,35 +44,40 @@ class SheetSortDescriptor2(TableSortDescriptor2_27e00ef1):
     __ooo_full_ns__: str = 'com.sun.star.sheet.SheetSortDescriptor2'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BindFormatsToContent(self) -> bool:
         """
         specifies if cell formats are moved with the contents they belong to.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ContainsHeader(self) -> bool:
         """
         specifies whether the first row or column (depending on com.sun.star.table.TableSortDescriptor.Orientation) is a header which should not be sorted.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CopyOutputData(self) -> bool:
         """
         specifies if the sorted data should be copied to another position in the document.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsUserListEnabled(self) -> bool:
         """
         specifies if a user defined sorting list is used.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def OutputPosition(self) -> CellAddress_ae5f0b56:
         """
         specifies the position where sorted data are to be copied.
@@ -81,7 +86,8 @@ class SheetSortDescriptor2(TableSortDescriptor2_27e00ef1):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def UserListIndex(self) -> int:
         """
         specifies which user defined sorting list is used.

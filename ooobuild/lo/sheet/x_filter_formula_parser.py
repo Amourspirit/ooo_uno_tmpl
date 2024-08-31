@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.sheet
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from .x_formula_parser import XFormulaParser as XFormulaParser_d54d0cbc
 
 class XFilterFormulaParser(XFormulaParser_d54d0cbc):
@@ -34,7 +34,8 @@ class XFilterFormulaParser(XFormulaParser_d54d0cbc):
     __ooo_type_name__: str = 'interface'
     __pyunointerface__: str = 'com.sun.star.sheet.XFilterFormulaParser'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SupportedNamespace(self) -> str:
         """
         Specifies the namespace URL of the formula language supported by this implementation.

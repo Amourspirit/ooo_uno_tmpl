@@ -20,7 +20,6 @@
 # Namespace: com.sun.star.frame
 from __future__ import annotations
 import typing
-import uno
 from abc import abstractmethod
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
@@ -51,7 +50,7 @@ class XDispatchInformationProvider(XInterface_8f010a43):
         """
         ...
     @abstractmethod
-    def getSupportedCommandGroups(self) -> uno.ByteSequence:
+    def getSupportedCommandGroups(self) -> typing.Tuple[int, ...]:
         """
         returns all supported command groups.
         """

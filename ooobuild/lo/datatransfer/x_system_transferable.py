@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.datatransfer
 from __future__ import annotations
-import uno
+import typing
 from abc import abstractmethod
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 
@@ -38,7 +38,7 @@ class XSystemTransferable(XInterface_8f010a43):
     __pyunointerface__: str = 'com.sun.star.datatransfer.XSystemTransferable'
 
     @abstractmethod
-    def getData(self, aProcessId: uno.ByteSequence) -> object:
+    def getData(self, aProcessId: typing.Tuple[int, ...]) -> object:
         """
         Called by a data consumer to obtain a system specific data object from the source.
         

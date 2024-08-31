@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.sdb
 from __future__ import annotations
 import typing
-from abc import abstractproperty, ABC
+from abc import abstractmethod, ABC
 if typing.TYPE_CHECKING:
     from ..beans.property_value import PropertyValue as PropertyValue_c9610c73
     from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
@@ -48,7 +48,8 @@ class DataAccessDescriptor(ABC):
     __ooo_full_ns__: str = 'com.sun.star.sdb.DataAccessDescriptor'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ActiveConnection(self) -> XConnection_a36a0b0c:
         """
         is a connection to use.
@@ -59,7 +60,8 @@ class DataAccessDescriptor(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BookmarkSelection(self) -> bool:
         """
         specifies how to interpret Selection
@@ -70,7 +72,8 @@ class DataAccessDescriptor(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Column(self) -> XPropertySet_bc180bfa:
         """
         specifies a column object
@@ -81,7 +84,8 @@ class DataAccessDescriptor(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ColumnName(self) -> str:
         """
         specifies a column name.
@@ -90,7 +94,8 @@ class DataAccessDescriptor(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Command(self) -> str:
         """
         specifies the command to execute to retrieve a result set.
@@ -99,7 +104,8 @@ class DataAccessDescriptor(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CommandType(self) -> int:
         """
         specifies the type of the command to be executed to retrieve a result set.
@@ -110,7 +116,8 @@ class DataAccessDescriptor(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ConnectionInfo(self) -> typing.Tuple[PropertyValue_c9610c73, ...]:
         """
         specifies additional info to use when creating a connection from a ConnectionResource
@@ -121,7 +128,8 @@ class DataAccessDescriptor(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ConnectionResource(self) -> str:
         """
         specifies the database URL which locates a database driver.
@@ -130,7 +138,8 @@ class DataAccessDescriptor(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DataSourceName(self) -> str:
         """
         specifies the name of the datasource to access.
@@ -139,7 +148,8 @@ class DataAccessDescriptor(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DatabaseLocation(self) -> str:
         """
         specifies the URL of the database file.
@@ -148,7 +158,8 @@ class DataAccessDescriptor(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def EscapeProcessing(self) -> bool:
         """
         specifies if the Command should be analyzed on the client side before sending it to the database server.
@@ -159,7 +170,8 @@ class DataAccessDescriptor(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Filter(self) -> str:
         """
         specifies an additional filter to optionally use.
@@ -172,7 +184,8 @@ class DataAccessDescriptor(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def GroupBy(self) -> str:
         """
         specifies an additional GROUP BY clause which should be applied on top of the given Command.
@@ -181,7 +194,8 @@ class DataAccessDescriptor(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HavingClause(self) -> str:
         """
         specifies an additional HAVING clause which should be applied on top of the given Command.
@@ -190,7 +204,8 @@ class DataAccessDescriptor(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Order(self) -> str:
         """
         specifies an additional ORDER BY clause which should be applied on top of the given Command.
@@ -199,7 +214,8 @@ class DataAccessDescriptor(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ResultSet(self) -> XResultSet_98e30aa7:
         """
         specifies an already existent result set to use.
@@ -212,7 +228,8 @@ class DataAccessDescriptor(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Selection(self) -> typing.Tuple[object, ...]:
         """
         specifies a selection to confine the records in a result set.

@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.text.textfield
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..dependent_text_field import DependentTextField as DependentTextField_fed90ded
 if typing.TYPE_CHECKING:
     from ...beans.property_value import PropertyValue as PropertyValue_c9610c73
@@ -38,7 +38,8 @@ class Bibliography(DependentTextField_fed90ded):
     __ooo_full_ns__: str = 'com.sun.star.text.textfield.Bibliography'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Fields(self) -> typing.Tuple[PropertyValue_c9610c73, ...]:
         """
         contains the bibliography fields of the text field.

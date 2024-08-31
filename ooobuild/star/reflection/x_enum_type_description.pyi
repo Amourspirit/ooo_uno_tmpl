@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from .x_type_description import XTypeDescription as XTypeDescription_3c210fb1
 
 
@@ -44,7 +43,7 @@ class XEnumTypeDescription(XTypeDescription_3c210fb1):
         Returns the enum member values.
         """
         ...
-    def getEnumValues(self) -> uno.ByteSequence:
+    def getEnumValues(self) -> typing.Tuple[int, ...]:
         """
         Returns the enum member names.
         """

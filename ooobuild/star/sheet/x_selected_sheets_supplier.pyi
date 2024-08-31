@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 
 
@@ -37,7 +36,7 @@ class XSelectedSheetsSupplier(XInterface_8f010a43):
     """
     __pyunointerface__: str = 'com.sun.star.sheet.XSelectedSheetsSupplier'
 
-    def getSelectedSheets(self) -> uno.ByteSequence:
+    def getSelectedSheets(self) -> typing.Tuple[int, ...]:
         """
         returns the indices of currently selected sheets.
         

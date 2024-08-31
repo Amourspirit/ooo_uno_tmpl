@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.sdbc
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from .file_connection_properties import FILEConnectionProperties as FILEConnectionProperties_4e7f1001
 
 class FLATConnectionProperties(FILEConnectionProperties_4e7f1001):
@@ -39,42 +39,48 @@ class FLATConnectionProperties(FILEConnectionProperties_4e7f1001):
     __ooo_full_ns__: str = 'com.sun.star.sdbc.FLATConnectionProperties'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DecimalDelimiter(self) -> str:
         """
         A one character delimiter to separate the decimal.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Extension(self) -> str:
         """
         the extension of the files to be used.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def FieldDelimiter(self) -> str:
         """
         A one character delimiter to separate the fields.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HeaderLine(self) -> bool:
         """
         TRUE when the file contains a header line otherwise FALSE
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def StringDelimiter(self) -> str:
         """
         A one character delimiter to separate the strings.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ThousandDelimiter(self) -> str:
         """
         A one character delimiter to separate the thousands.

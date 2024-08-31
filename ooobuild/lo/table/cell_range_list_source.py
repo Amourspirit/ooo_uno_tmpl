@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.table
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..form.binding.list_entry_source import ListEntrySource as ListEntrySource_48260fe4
 from ..lang.x_initialization import XInitialization as XInitialization_d46c0cca
 if typing.TYPE_CHECKING:
@@ -41,7 +41,8 @@ class CellRangeListSource(ListEntrySource_48260fe4, XInitialization_d46c0cca):
     __ooo_full_ns__: str = 'com.sun.star.table.CellRangeListSource'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CellRange(self) -> CellRangeAddress_ec450d43:
         """
         specifies the cell range within a document to which the component is bound.

@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.report
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from ..container.x_child import XChild as XChild_a6390b07
 from ..drawing.x_shape import XShape as XShape_8fd00a3d
@@ -41,21 +41,24 @@ class XReportComponent(XPropertySet_bc180bfa, XChild_a6390b07, XShape_8fd00a3d, 
     __ooo_type_name__: str = 'interface'
     __pyunointerface__: str = 'com.sun.star.report.XReportComponent'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def AutoGrow(self) -> bool:
         """
         Specifies that the control containing data shall automatically grow to the optimal height to show the data without wasting space.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ControlBorder(self) -> int:
         """
         specifies the border style of the control.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ControlBorderColor(self) -> int:
         """
         specifies the color of the border, if present
@@ -64,7 +67,8 @@ class XReportComponent(XPropertySet_bc180bfa, XChild_a6390b07, XShape_8fd00a3d, 
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DetailFields(self) -> typing.Tuple[str, ...]:
         """
         is used for subreports and contains the names of the columns of the subreport which are related to the master fields of the parent report.
@@ -77,14 +81,16 @@ class XReportComponent(XPropertySet_bc180bfa, XChild_a6390b07, XShape_8fd00a3d, 
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Height(self) -> int:
         """
         specifies the height of the control.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def MasterFields(self) -> typing.Tuple[str, ...]:
         """
         is used for subreports and contains the names of columns of the parent report.
@@ -95,28 +101,32 @@ class XReportComponent(XPropertySet_bc180bfa, XChild_a6390b07, XShape_8fd00a3d, 
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Name(self) -> str:
         """
         the name of the component.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def PositionX(self) -> int:
         """
         specifies the horizontal position of the control.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def PositionY(self) -> int:
         """
         specifies the vertical position of the control.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def PrintRepeatedValues(self) -> bool:
         """
         Specifies that recurring values are printed.
@@ -125,7 +135,8 @@ class XReportComponent(XPropertySet_bc180bfa, XChild_a6390b07, XShape_8fd00a3d, 
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Section(self) -> XSection_9b630ad1:
         """
         Specifies the section where the control belongs to.
@@ -134,7 +145,8 @@ class XReportComponent(XPropertySet_bc180bfa, XChild_a6390b07, XShape_8fd00a3d, 
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Width(self) -> int:
         """
         specifies the width of the control.

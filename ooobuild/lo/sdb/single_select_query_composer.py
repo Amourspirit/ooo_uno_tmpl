@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.sdb
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from .single_select_query_analyzer import SingleSelectQueryAnalyzer as SingleSelectQueryAnalyzer_577c105f
 from .x_single_select_query_composer import XSingleSelectQueryComposer as XSingleSelectQueryComposer_66e310b9
@@ -41,7 +41,8 @@ class SingleSelectQueryComposer(SingleSelectQueryAnalyzer_577c105f, XPropertySet
     __ooo_full_ns__: str = 'com.sun.star.sdb.SingleSelectQueryComposer'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Original(self) -> str:
         """
         is the original SQL statement set with the interface com.sun.star.sdb.XSingleSelectQueryAnalyzer.

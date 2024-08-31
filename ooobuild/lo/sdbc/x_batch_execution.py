@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.sdbc
 from __future__ import annotations
-import uno
+import typing
 from abc import abstractmethod
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 
@@ -54,7 +54,7 @@ class XBatchExecution(XInterface_8f010a43):
         """
         ...
     @abstractmethod
-    def executeBatch(self) -> uno.ByteSequence:
+    def executeBatch(self) -> typing.Tuple[int, ...]:
         """
         submits a batch of commands to the database for execution.
 

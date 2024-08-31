@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.io
 from __future__ import annotations
-import uno
+import typing
 from abc import abstractmethod
 from .x_seekable_input_stream import XSeekableInputStream as XSeekableInputStream_fa7f0dd0
 
@@ -37,7 +37,7 @@ class SequenceInputStream(XSeekableInputStream_fa7f0dd0):
     __ooo_type_name__: str = 'service'
 
     @abstractmethod
-    def createStreamFromSequence(self, aData: uno.ByteSequence) -> None:
+    def createStreamFromSequence(self, aData: typing.Tuple[int, ...]) -> None:
         """
         allows to create a stream based on the sequence.
         """

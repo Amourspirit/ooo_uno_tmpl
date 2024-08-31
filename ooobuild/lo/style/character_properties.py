@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.style
 from __future__ import annotations
 import typing
-from abc import abstractproperty, ABC
+from abc import abstractmethod, ABC
 if typing.TYPE_CHECKING:
     from ..beans.property_value import PropertyValue as PropertyValue_c9610c73
     from ..container.x_name_container import XNameContainer as XNameContainer_cb90e47
@@ -47,7 +47,8 @@ class CharacterProperties(ABC):
     __ooo_full_ns__: str = 'com.sun.star.style.CharacterProperties'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharAutoKerning(self) -> bool:
         """
         This optional property determines whether the kerning tables from the current font are used.
@@ -56,21 +57,24 @@ class CharacterProperties(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharBackColor(self) -> Color_68e908c5:
         """
         This optional property contains the text background color.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharBackTransparent(self) -> bool:
         """
         This property determines if the text background color is set to transparent.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharBorderDistance(self) -> int:
         """
         This property contains the distance from the border to the object.
@@ -81,7 +85,8 @@ class CharacterProperties(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharBottomBorder(self) -> BorderLine2_af200b28:
         """
         This property contains the bottom border of the object.
@@ -92,7 +97,8 @@ class CharacterProperties(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharBottomBorderDistance(self) -> int:
         """
         This property contains the distance from the bottom border to the object.
@@ -103,21 +109,24 @@ class CharacterProperties(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharCaseMap(self) -> int:
         """
         This optional property contains the value of the case-mapping of the text for formatting and displaying.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharColor(self) -> Color_68e908c5:
         """
         This property contains the value of the text color.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharColorTheme(self) -> int:
         """
         If available, keeps the color theme index, so that the character can be re-colored easily based on a theme.
@@ -128,7 +137,8 @@ class CharacterProperties(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharColorTintOrShade(self) -> int:
         """
         Tint or shade of the character color.
@@ -139,7 +149,8 @@ class CharacterProperties(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharCombineIsOn(self) -> bool:
         """
         This optional property determines whether text is formatted in two lines.
@@ -148,7 +159,8 @@ class CharacterProperties(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharCombinePrefix(self) -> str:
         """
         This optional property contains the prefix (usually parenthesis) before text that is formatted in two lines.
@@ -157,7 +169,8 @@ class CharacterProperties(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharCombineSuffix(self) -> str:
         """
         This optional property contains the suffix (usually parenthesis) after text that is formatted in two lines.
@@ -166,28 +179,32 @@ class CharacterProperties(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharContoured(self) -> bool:
         """
         This optional property specifies if the characters are formatted and displayed with a contour effect.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharCrossedOut(self) -> bool:
         """
         This property is TRUE if the characters are crossed out.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharEmphasis(self) -> int:
         """
         This optional property contains the font emphasis value.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharEscapement(self) -> int:
         """
         specifies the percentage by which to raise/lower superscript/subscript characters.
@@ -196,7 +213,8 @@ class CharacterProperties(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharEscapementHeight(self) -> int:
         """
         This is the relative height used for subscript or superscript characters in units of percent.
@@ -205,28 +223,32 @@ class CharacterProperties(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharFlash(self) -> bool:
         """
         If this optional property is TRUE, then the characters are flashing.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharFontCharSet(self) -> int:
         """
         This property contains the text encoding of the font.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharFontFamily(self) -> int:
         """
         This property contains font family.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharFontName(self) -> str:
         """
         This property specifies the name of the font style.
@@ -235,14 +257,16 @@ class CharacterProperties(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharFontPitch(self) -> int:
         """
         This property contains the font pitch.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharFontStyleName(self) -> str:
         """
         This property contains the name of the font style.
@@ -251,21 +275,24 @@ class CharacterProperties(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharFontType(self) -> int:
         """
         This optional property specifies the fundamental technology of the font.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharHeight(self) -> float:
         """
         This value contains the height of the characters in point.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharHidden(self) -> bool:
         """
         If this optional property is TRUE, then the characters are invisible.
@@ -276,7 +303,8 @@ class CharacterProperties(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharHighlight(self) -> Color_68e908c5:
         """
         Determines the color of the highlight.
@@ -287,7 +315,8 @@ class CharacterProperties(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharInteropGrabBag(self) -> typing.Tuple[PropertyValue_c9610c73, ...]:
         """
         Grab bag of character properties, used as a string-any map for interim interop purposes.
@@ -300,7 +329,8 @@ class CharacterProperties(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharKeepTogether(self) -> bool:
         """
         This optional property marks a range of characters to prevent it from being broken into two lines.
@@ -309,14 +339,16 @@ class CharacterProperties(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharKerning(self) -> int:
         """
         This optional property contains the value of the kerning of the characters.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharLeftBorder(self) -> BorderLine2_af200b28:
         """
         This property contains the left border of the object.
@@ -327,7 +359,8 @@ class CharacterProperties(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharLeftBorderDistance(self) -> int:
         """
         This property contains the distance from the left border to the object.
@@ -338,14 +371,16 @@ class CharacterProperties(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharLocale(self) -> Locale_70d308fa:
         """
         This property contains the value of the locale.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharNoHyphenation(self) -> bool:
         """
         This optional property determines if the word can be hyphenated at the character by automatic hyphenation.
@@ -356,7 +391,8 @@ class CharacterProperties(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharNoLineBreak(self) -> bool:
         """
         This optional property marks a range of characters to ignore a line break in this area.
@@ -365,21 +401,24 @@ class CharacterProperties(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharPosture(self) -> FontSlantProto:
         """
         This property contains the value of the posture of the document.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharRelief(self) -> int:
         """
         This optional property contains the relief style of the characters.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharRightBorder(self) -> BorderLine2_af200b28:
         """
         This property contains the right border of the object.
@@ -390,7 +429,8 @@ class CharacterProperties(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharRightBorderDistance(self) -> int:
         """
         This property contains the distance from the right border to the object.
@@ -401,7 +441,8 @@ class CharacterProperties(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharRotation(self) -> int:
         """
         This optional property determines the rotation of a character in tenths of a degree.
@@ -410,14 +451,16 @@ class CharacterProperties(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharRotationIsFitToLine(self) -> bool:
         """
         This optional property determines whether the text formatting tries to fit rotated text into the surrounded line height.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharScaleWidth(self) -> int:
         """
         This optional property determines the percentage value for scaling the width of characters.
@@ -426,14 +469,16 @@ class CharacterProperties(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharShadingValue(self) -> int:
         """
         This optional property contains the text shading value.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharShadowFormat(self) -> ShadowFormat_bb840bdf:
         """
         Determines the type, color, and width of the shadow.
@@ -444,28 +489,32 @@ class CharacterProperties(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharShadowed(self) -> bool:
         """
         This optional property specifies if the characters are formatted and displayed with a shadow effect.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharStrikeout(self) -> int:
         """
         This property determines the type of the strike out of the character.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharStyleName(self) -> str:
         """
         This optional property specifies the name of the style of the font.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharStyleNames(self) -> typing.Tuple[str, ...]:
         """
         This optional property specifies the names of the all styles applied to the font.
@@ -478,7 +527,8 @@ class CharacterProperties(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharTopBorder(self) -> BorderLine2_af200b28:
         """
         This property contains the top border of the object.
@@ -489,7 +539,8 @@ class CharacterProperties(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharTopBorderDistance(self) -> int:
         """
         This property contains the distance from the top border to the object.
@@ -500,7 +551,8 @@ class CharacterProperties(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharTransparence(self) -> int:
         """
         This is the transparency of the character text.
@@ -513,77 +565,88 @@ class CharacterProperties(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharUnderline(self) -> int:
         """
         This property contains the value for the character underline.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharUnderlineColor(self) -> Color_68e908c5:
         """
         This property contains the color of the underline for the characters.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharUnderlineHasColor(self) -> bool:
         """
         This property specifies if the property CharUnderlineColor is used for an underline.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharWeight(self) -> float:
         """
         This property contains the value of the font weight.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharWordMode(self) -> bool:
         """
         If this property is TRUE, the underline and strike-through properties are not applied to white spaces.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HyperLinkName(self) -> str:
         """
         This optional property contains the name of the hyperlink.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HyperLinkTarget(self) -> str:
         """
         This optional property contains the name of the target for a hyperlink.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HyperLinkURL(self) -> str:
         """
         This optional property contains the URL of a hyperlink.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RubyAdjust(self) -> int:
         """
         This optional property determines the adjustment of the ruby .
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RubyCharStyleName(self) -> str:
         """
         This optional property contains the name of the character style that is applied to RubyText.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RubyIsAbove(self) -> bool:
         """
         This optional property determines whether the ruby text is printed above/left or below/right of the text.
@@ -592,7 +655,8 @@ class CharacterProperties(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RubyPosition(self) -> int:
         """
         This optional property determines the position of the ruby .
@@ -603,14 +667,16 @@ class CharacterProperties(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RubyText(self) -> str:
         """
         This optional property contains the text that is set as ruby.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TextUserDefinedAttributes(self) -> XNameContainer_cb90e47:
         """
         This property stores XML attributes.
@@ -619,14 +685,16 @@ class CharacterProperties(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def UnvisitedCharStyleName(self) -> str:
         """
         This optional property contains the character style name for unvisited hyperlinks.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def VisitedCharStyleName(self) -> str:
         """
         This optional property contains the character style name for visited hyperlinks.

@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.frame
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 
 class XUrlList(XInterface_8f010a43):
@@ -38,7 +38,8 @@ class XUrlList(XInterface_8f010a43):
     __ooo_type_name__: str = 'interface'
     __pyunointerface__: str = 'com.sun.star.frame.XUrlList'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def List(self) -> typing.Tuple[str, ...]:
         """
         """

@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from ..document.x_event_broadcaster import XEventBroadcaster as XEventBroadcaster_2b120f2b
 from .x_classified_object import XClassifiedObject as XClassifiedObject_fa3b0dab
 from .x_component_supplier import XComponentSupplier as XComponentSupplier_adb0e64
@@ -79,7 +78,7 @@ class XEmbeddedObject(XEventBroadcaster_2b120f2b, XClassifiedObject_fa3b0dab, XC
             com.sun.star.embed.WrongStateException: ``WrongStateException``
         """
         ...
-    def getReachableStates(self) -> uno.ByteSequence:
+    def getReachableStates(self) -> typing.Tuple[int, ...]:
         """
         returns supported states for the object.
 

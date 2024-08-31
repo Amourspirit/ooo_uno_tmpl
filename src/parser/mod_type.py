@@ -675,7 +675,7 @@ class RuleByteSequence(BaseRule):
         #     imports="uno"
         # )
         return PythonType(
-            type="typing.tuple[int, ...]",
+            type="typing.Tuple[int, ...]",
             requires_typing=True,
             is_py_type=True,  # don't want to quote.
             realtype="tuple",

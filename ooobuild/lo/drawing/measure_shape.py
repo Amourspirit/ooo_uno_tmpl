@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.drawing
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from .line_properties import LineProperties as LineProperties_f13f0da9
 from .measure_properties import MeasureProperties as MeasureProperties_1d340ef3
 from .rotation_descriptor import RotationDescriptor as RotationDescriptor_2cec0f63
@@ -43,14 +43,16 @@ class MeasureShape(LineProperties_f13f0da9, MeasureProperties_1d340ef3, Rotation
     __ooo_full_ns__: str = 'com.sun.star.drawing.MeasureShape'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def EndPosition(self) -> Point_5fb2085e:
         """
         this point is the end of the measured distance
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def StartPosition(self) -> Point_5fb2085e:
         """
         this point is the start of the measured distance

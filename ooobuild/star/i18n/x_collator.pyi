@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
     from ..lang.locale import Locale as Locale_70d308fa
@@ -51,7 +50,7 @@ class XCollator(XInterface_8f010a43):
         List all collator algorithms for a given locale.
         """
         ...
-    def listCollatorOptions(self, aAlgorithmName: str) -> uno.ByteSequence:
+    def listCollatorOptions(self, aAlgorithmName: str) -> typing.Tuple[int, ...]:
         """
         List all end user collator options for a given algorithm.
         """
@@ -61,7 +60,7 @@ class XCollator(XInterface_8f010a43):
         Load a particular collator algorithm for the locale.
         """
         ...
-    def loadCollatorAlgorithmWithEndUserOption(self, aAlgorithmName: str, aLocale: Locale_70d308fa, aCollatorOptions: uno.ByteSequence) -> None:
+    def loadCollatorAlgorithmWithEndUserOption(self, aAlgorithmName: str, aLocale: Locale_70d308fa, aCollatorOptions: typing.Tuple[int, ...]) -> None:
         """
         Load a collator algorithm with options chosen by end user.
         """

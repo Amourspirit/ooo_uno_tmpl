@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.chart2
 from __future__ import annotations
 import typing
-from abc import abstractproperty, ABC
+from abc import abstractmethod, ABC
 if typing.TYPE_CHECKING:
     from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 
@@ -37,21 +37,24 @@ class LogicTargetModel(ABC):
     __ooo_full_ns__: str = 'com.sun.star.chart2.LogicTargetModel'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CoordinateSystems(self) -> typing.Tuple[XPropertySet_bc180bfa, ...]:
         """
         not BOUND nor CONSTRAINED in terms of Listener notifications, each element in the sequence must implement the service com.sun.star.chart2.CoordinateSystem
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ID(self) -> str:
         """
         identifies an instance of this service within one chart document.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def LegendID(self) -> str:
         """
         identifies an instance of the service com.sun.star.chart2.LegendModel within one chart document.
@@ -60,7 +63,8 @@ class LogicTargetModel(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def LogicTargetModels(self) -> typing.Tuple[XPropertySet_bc180bfa, ...]:
         """
         MAYBEVOID, not BOUND nor CONSTRAINED in terms of Listener notifications, each element in the sequence must implement the service com.sun.star.chart2.LogicTargetModel.

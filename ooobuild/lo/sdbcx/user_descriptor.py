@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.sdbcx
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from .descriptor import Descriptor as Descriptor_a5200b3b
 
 class UserDescriptor(Descriptor_a5200b3b):
@@ -35,7 +35,8 @@ class UserDescriptor(Descriptor_a5200b3b):
     __ooo_full_ns__: str = 'com.sun.star.sdbcx.UserDescriptor'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Password(self) -> str:
         """
         is the password for the user.

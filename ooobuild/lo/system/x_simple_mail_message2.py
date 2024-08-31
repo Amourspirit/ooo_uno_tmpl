@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.system
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from .x_simple_mail_message import XSimpleMailMessage as XSimpleMailMessage_1d420eb7
 
 class XSimpleMailMessage2(XSimpleMailMessage_1d420eb7):
@@ -38,7 +38,8 @@ class XSimpleMailMessage2(XSimpleMailMessage_1d420eb7):
     __ooo_type_name__: str = 'interface'
     __pyunointerface__: str = 'com.sun.star.system.XSimpleMailMessage2'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Body(self) -> str:
         """
         """

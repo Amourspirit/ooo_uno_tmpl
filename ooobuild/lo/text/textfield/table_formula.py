@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.text.textfield
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..text_field import TextField as TextField_90260a56
 
 class TableFormula(TextField_90260a56):
@@ -39,7 +39,8 @@ class TableFormula(TextField_90260a56):
     __ooo_full_ns__: str = 'com.sun.star.text.textfield.TableFormula'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CurrentPresentation(self) -> str:
         """
         contains the current content of the text field.
@@ -48,21 +49,24 @@ class TableFormula(TextField_90260a56):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Formula(self) -> str:
         """
         contains the formula.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsShowFormula(self) -> bool:
         """
         determines whether the formula displayed as text or evaluated.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def NumberFormat(self) -> int:
         """
         this is the number format for this field.

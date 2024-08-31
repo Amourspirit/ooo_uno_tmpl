@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.text
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..util.sort_descriptor import SortDescriptor as SortDescriptor_ca680c8d
 
 class TextSortDescriptor(SortDescriptor_ca680c8d):
@@ -39,77 +39,88 @@ class TextSortDescriptor(SortDescriptor_ca680c8d):
     __ooo_full_ns__: str = 'com.sun.star.text.TextSortDescriptor'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Delimiter(self) -> str:
         """
         contains the character that marks the separation of columns.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsSortAscending0(self) -> bool:
         """
         determines if the sorting in the first search key is done in ascending or descending order.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsSortAscending1(self) -> bool:
         """
         determines if the sorting in the second search key is done in ascending or descending order.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsSortAscending2(self) -> bool:
         """
         determines if the sorting in the third search key is done in ascending or descending order.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsSortInTable(self) -> bool:
         """
         determines if the content of a table is to be sorted.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsSortNumeric0(self) -> bool:
         """
         determines if the sorting in the first search key is done numeric or alphanumeric order.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsSortNumeric1(self) -> bool:
         """
         determines if the sorting in the second search key is done in numeric or alphanumeric order.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsSortNumeric2(self) -> bool:
         """
         determines if the sorting in the third search key is done in numeric or alphanumeric order.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SortRowOrColumnNo0(self) -> int:
         """
         contains the row or column index used in the first search key.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SortRowOrColumnNo1(self) -> int:
         """
         contains the row or column index used in the second search key.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SortRowOrColumnNo2(self) -> int:
         """
         contains the row or column index used in the third search key.

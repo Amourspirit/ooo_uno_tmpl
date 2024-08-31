@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.sdbcx
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..sdbc.prepared_statement import PreparedStatement as PreparedStatement_eef40d8c
 
 class PreparedStatement(PreparedStatement_eef40d8c):
@@ -35,7 +35,8 @@ class PreparedStatement(PreparedStatement_eef40d8c):
     __ooo_full_ns__: str = 'com.sun.star.sdbcx.PreparedStatement'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def UseBookmarks(self) -> bool:
         """
         returns if a result set should allow the navigation with bookmarks or not.

@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.gallery
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from .x_gallery_item import XGalleryItem as XGalleryItem_d5730caf
 if typing.TYPE_CHECKING:
@@ -40,7 +40,8 @@ class GalleryItem(XPropertySet_bc180bfa, XGalleryItem_d5730caf):
     __ooo_full_ns__: str = 'com.sun.star.gallery.GalleryItem'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Drawing(self) -> XComponent_98dc0ab5:
         """
         the drawing content of the Gallery item
@@ -49,14 +50,16 @@ class GalleryItem(XPropertySet_bc180bfa, XGalleryItem_d5730caf):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def GalleryItemType(self) -> int:
         """
         The type of the Gallery item.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Graphic(self) -> XGraphic_a4da0afc:
         """
         the graphic content of the Gallery item
@@ -65,7 +68,8 @@ class GalleryItem(XPropertySet_bc180bfa, XGalleryItem_d5730caf):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Thumbnail(self) -> XGraphic_a4da0afc:
         """
         the thumbnail of the Gallery item
@@ -74,14 +78,16 @@ class GalleryItem(XPropertySet_bc180bfa, XGalleryItem_d5730caf):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Title(self) -> str:
         """
         the title of the Gallery item
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def URL(self) -> str:
         """
         the URL of the Gallery item

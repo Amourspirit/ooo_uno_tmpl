@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.awt
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from .uno_control_dialog_element import UnoControlDialogElement as UnoControlDialogElement_38ef0f81
 from .x_control_model import XControlModel as XControlModel_affc0b7e
 from ..beans.x_multi_property_set import XMultiPropertySet as XMultiPropertySet_fd880e05
@@ -43,7 +43,8 @@ class UnoControlModel(UnoControlDialogElement_38ef0f81, XControlModel_affc0b7e, 
     __ooo_full_ns__: str = 'com.sun.star.awt.UnoControlModel'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DefaultControl(self) -> str:
         """
         specifies the service name of the default control for this model.

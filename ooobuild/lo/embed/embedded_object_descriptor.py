@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.embed
 from __future__ import annotations
 import typing
-from abc import abstractproperty, ABC
+from abc import abstractmethod, ABC
 if typing.TYPE_CHECKING:
     from .x_storage import XStorage as XStorage_8e460a32
     from ..frame.x_dispatch_provider_interceptor import XDispatchProviderInterceptor as XDispatchProviderInterceptor_afda1275
@@ -40,14 +40,16 @@ class EmbeddedObjectDescriptor(ABC):
     __ooo_full_ns__: str = 'com.sun.star.embed.EmbeddedObjectDescriptor'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def OutplaceDispatchInterceptor(self) -> XDispatchProviderInterceptor_afda1275:
         """
         allows to provide a dispatch interceptor for outplace activation.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RecoveryStorage(self) -> XStorage_8e460a32:
         """
         denotes the storage from which the embedded object is to be recovered.
@@ -60,7 +62,8 @@ class EmbeddedObjectDescriptor(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def StoreVisualReplacement(self) -> bool:
         """
         lets the graphical representation of embedded document be stored.

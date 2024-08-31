@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.text
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..container.x_enumeration_access import XEnumerationAccess as XEnumerationAccess_4bac0ffc
 from .x_relative_text_content_insert import XRelativeTextContentInsert as XRelativeTextContentInsert_7dca1156
 from .x_text import XText as XText_690408ca
@@ -44,7 +44,8 @@ class Text(XEnumerationAccess_4bac0ffc, XRelativeTextContentInsert_7dca1156, XTe
     __ooo_full_ns__: str = 'com.sun.star.text.Text'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def EndRedline(self) -> PropertyValues_d6470ce6:
         """
         contains the properties of a redline at the start of the document.
@@ -53,7 +54,8 @@ class Text(XEnumerationAccess_4bac0ffc, XRelativeTextContentInsert_7dca1156, XTe
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def StartRedline(self) -> PropertyValues_d6470ce6:
         """
         contains the properties of a redline at the start of the document.

@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.chart2
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.property_set import PropertySet as PropertySet_b0e70ba2
 from ..drawing.fill_properties import FillProperties as FillProperties_f1200da8
 from ..drawing.line_properties import LineProperties as LineProperties_f13f0da9
@@ -41,43 +41,50 @@ class RegressionCurveEquation(PropertySet_b0e70ba2, FillProperties_f1200da8, Lin
     __ooo_full_ns__: str = 'com.sun.star.chart2.RegressionCurveEquation'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def NumberFormat(self) -> int:
         """
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ReferencePageSize(self) -> Size_576707ef:
         """
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RelativePosition(self) -> RelativePosition_fae10ddd:
         """
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ShowCorrelationCoefficient(self) -> bool:
         """
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ShowEquation(self) -> bool:
         """
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def XName(self) -> str:
         """
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def YName(self) -> str:
         """
         """

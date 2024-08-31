@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.connection
 from __future__ import annotations
-import uno
+import typing
 from abc import abstractmethod
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 
@@ -66,7 +66,7 @@ class XConnection(XInterface_8f010a43):
         """
         ...
     @abstractmethod
-    def read(self, aReadBytes: uno.ByteSequence, nBytesToRead: int) -> int:
+    def read(self, aReadBytes: typing.Tuple[int, ...], nBytesToRead: int) -> int:
         """
         reads a requested number of bytes from the connection.
         
@@ -81,7 +81,7 @@ class XConnection(XInterface_8f010a43):
         """
         ...
     @abstractmethod
-    def write(self, aData: uno.ByteSequence) -> None:
+    def write(self, aData: typing.Tuple[int, ...]) -> None:
         """
         writes the given bytesequence to the stream.
         

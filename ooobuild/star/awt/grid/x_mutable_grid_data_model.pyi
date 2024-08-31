@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from .x_grid_data_model import XGridDataModel as XGridDataModel_f8b20d71
 if typing.TYPE_CHECKING:
     from .x_grid_data_listener import XGridDataListener as XGridDataListener_23f10ec6
@@ -105,7 +104,7 @@ class XMutableGridDataModel(XGridDataModel_f8b20d71):
             com.sun.star.lang.IndexOutOfBoundsException: ``IndexOutOfBoundsException``
         """
         ...
-    def updateRowData(self, ColumnIndexes: uno.ByteSequence, RowIndex: int, Values: typing.Tuple[object, ...]) -> None:
+    def updateRowData(self, ColumnIndexes: typing.Tuple[int, ...], RowIndex: int, Values: typing.Tuple[object, ...]) -> None:
         """
         updates the content of a given row.
         

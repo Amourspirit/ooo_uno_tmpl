@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.image
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from .image_map_object import ImageMapObject as ImageMapObject_d1e20c63
 if typing.TYPE_CHECKING:
     from ..awt.rectangle import Rectangle as Rectangle_84b109e9
@@ -38,7 +38,8 @@ class ImageMapRectangleObject(ImageMapObject_d1e20c63):
     __ooo_full_ns__: str = 'com.sun.star.image.ImageMapRectangleObject'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Boundary(self) -> Rectangle_84b109e9:
         """
         This is the boundary of this rectangle object.

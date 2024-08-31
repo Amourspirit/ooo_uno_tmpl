@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.text.fieldmaster
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..text_field_master import TextFieldMaster as TextFieldMaster_d6410cc2
 
 class Database(TextFieldMaster_d6410cc2):
@@ -41,7 +41,8 @@ class Database(TextFieldMaster_d6410cc2):
     __ooo_full_ns__: str = 'com.sun.star.text.fieldmaster.Database'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CommandType(self) -> int:
         """
         contains the CommandType this can be the name of a data base table, a data query or a statement.
@@ -50,14 +51,16 @@ class Database(TextFieldMaster_d6410cc2):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DataBaseName(self) -> str:
         """
         specifies the database name.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DataBaseResource(self) -> str:
         """
         indicates a connection URL, which locates a database driver.
@@ -68,7 +71,8 @@ class Database(TextFieldMaster_d6410cc2):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DataBaseURL(self) -> str:
         """
         indicates the URL of a database file.
@@ -79,14 +83,16 @@ class Database(TextFieldMaster_d6410cc2):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DataColumnName(self) -> str:
         """
         contains the name of the data base table.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DataTableName(self) -> str:
         """
         contains the command string.
@@ -95,7 +101,8 @@ class Database(TextFieldMaster_d6410cc2):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Name(self) -> str:
         """
         contains the DataColumnName but it enables the fieldmaster and its depending fields to work without setting DataSourceName, DataTableName and CommandType

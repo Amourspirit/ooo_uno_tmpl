@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 
 
@@ -36,7 +35,7 @@ class XSystemTransferable(XInterface_8f010a43):
     """
     __pyunointerface__: str = 'com.sun.star.datatransfer.XSystemTransferable'
 
-    def getData(self, aProcessId: uno.ByteSequence) -> typing.Any:
+    def getData(self, aProcessId: typing.Tuple[int, ...]) -> typing.Any:
         """
         Called by a data consumer to obtain a system specific data object from the source.
         

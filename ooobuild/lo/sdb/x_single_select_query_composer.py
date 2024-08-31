@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.sdb
 from __future__ import annotations
 import typing
-from abc import abstractmethod, abstractproperty
+from abc import abstractmethod
 from .x_single_select_query_analyzer import XSingleSelectQueryAnalyzer as XSingleSelectQueryAnalyzer_66ad10b7
 if typing.TYPE_CHECKING:
     from ..beans.property_value import PropertyValue as PropertyValue_c9610c73
@@ -139,7 +139,8 @@ class XSingleSelectQueryComposer(XSingleSelectQueryAnalyzer_66ad10b7):
             com.sun.star.sdbc.SQLException: ``SQLException``
         """
         ...
-    @abstractproperty
+    @property
+    @abstractmethod
     def ElementaryQuery(self) -> str:
         """
         sets a new elementary query for the composer

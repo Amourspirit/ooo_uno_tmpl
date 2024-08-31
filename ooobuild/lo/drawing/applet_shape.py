@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.drawing
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from .shape import Shape as Shape_85cc09e5
 if typing.TYPE_CHECKING:
     from ..beans.property_value import PropertyValue as PropertyValue_c9610c73
@@ -40,7 +40,8 @@ class AppletShape(Shape_85cc09e5):
     __ooo_full_ns__: str = 'com.sun.star.drawing.AppletShape'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def AppletCode(self) -> str:
         """
         This property specifies one of the following: The name of the class file that contains the compiled applet subclass.
@@ -49,7 +50,8 @@ class AppletShape(Shape_85cc09e5):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def AppletCodeBase(self) -> str:
         """
         This property specifies the base URI for the applet.
@@ -58,21 +60,24 @@ class AppletShape(Shape_85cc09e5):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def AppletCommands(self) -> typing.Tuple[PropertyValue_c9610c73, ...]:
         """
         This sequence contains parameters that are passed to the applet when it is initialized.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def AppletIsScript(self) -> bool:
         """
         This property specifies whether or not the applet can be scripted.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def AppletName(self) -> str:
         """
         this is an optional name for the applet.

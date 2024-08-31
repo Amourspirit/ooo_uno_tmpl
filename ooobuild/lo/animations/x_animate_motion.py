@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.animations
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from .x_animate import XAnimate as XAnimate_ca680c52
 
 class XAnimateMotion(XAnimate_ca680c52):
@@ -34,7 +34,8 @@ class XAnimateMotion(XAnimate_ca680c52):
     __ooo_type_name__: str = 'interface'
     __pyunointerface__: str = 'com.sun.star.animations.XAnimateMotion'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Origin(self) -> object:
         """
         Specifies the origin of motion for the animation.
@@ -43,7 +44,8 @@ class XAnimateMotion(XAnimate_ca680c52):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Path(self) -> object:
         """
         Specifies an optional path.

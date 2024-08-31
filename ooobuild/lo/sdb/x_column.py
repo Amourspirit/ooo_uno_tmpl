@@ -20,7 +20,6 @@
 # Namespace: com.sun.star.sdb
 from __future__ import annotations
 import typing
-import uno
 from abc import abstractmethod
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
@@ -96,7 +95,7 @@ class XColumn(XInterface_8f010a43):
         """
         ...
     @abstractmethod
-    def getBytes(self) -> uno.ByteSequence:
+    def getBytes(self) -> typing.Tuple[int, ...]:
         """
         gets the value of a column in the current row as a byte array.
         

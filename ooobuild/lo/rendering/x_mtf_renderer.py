@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.rendering
 from __future__ import annotations
-import uno
+import typing
 from abc import abstractmethod
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 
@@ -40,7 +40,7 @@ class XMtfRenderer(XInterface_8f010a43):
         """
         ...
     @abstractmethod
-    def setMetafile(self, aMtf: uno.ByteSequence) -> None:
+    def setMetafile(self, aMtf: typing.Tuple[int, ...]) -> None:
         """
         """
         ...

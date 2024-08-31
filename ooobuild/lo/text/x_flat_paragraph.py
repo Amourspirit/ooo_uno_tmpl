@@ -20,7 +20,6 @@
 # Namespace: com.sun.star.text
 from __future__ import annotations
 import typing
-import uno
 from abc import abstractmethod
 from .x_text_markup import XTextMarkup as XTextMarkup_a5d60b3a
 if typing.TYPE_CHECKING:
@@ -71,7 +70,7 @@ class XFlatParagraph(XTextMarkup_a5d60b3a):
         """
         ...
     @abstractmethod
-    def getLanguagePortions(self) -> uno.ByteSequence:
+    def getLanguagePortions(self) -> typing.Tuple[int, ...]:
         """
         get a list of indexes that separate each two different languages
         """

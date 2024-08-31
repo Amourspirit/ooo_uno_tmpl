@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.sheet
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from ..container.x_named import XNamed as XNamed_a6520b08
 
@@ -42,14 +42,16 @@ class DataPilotSourceMember(XPropertySet_bc180bfa, XNamed_a6520b08):
     __ooo_full_ns__: str = 'com.sun.star.sheet.DataPilotSourceMember'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsVisible(self) -> bool:
         """
         specifies whether the member is visible.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Position(self) -> bool:
         """
         specifies the member's position in its hierarchy level if sorting is manual.
@@ -60,7 +62,8 @@ class DataPilotSourceMember(XPropertySet_bc180bfa, XNamed_a6520b08):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ShowDetails(self) -> bool:
         """
         specifies whether details for the member are shown.

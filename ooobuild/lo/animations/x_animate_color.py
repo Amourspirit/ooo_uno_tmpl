@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.animations
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from .x_animate import XAnimate as XAnimate_ca680c52
 
 class XAnimateColor(XAnimate_ca680c52):
@@ -36,14 +36,16 @@ class XAnimateColor(XAnimate_ca680c52):
     __ooo_type_name__: str = 'interface'
     __pyunointerface__: str = 'com.sun.star.animations.XAnimateColor'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ColorInterpolation(self) -> int:
         """
         defines the color space which is used to perform the interpolation.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Direction(self) -> bool:
         """
         defines the direction which is used to perform the interpolation inside the color space defined with ColorInterpolation.

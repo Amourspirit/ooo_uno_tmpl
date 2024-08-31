@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
     from ..beans.x_introspection_access import XIntrospectionAccess as XIntrospectionAccess_2a050f2c
@@ -67,7 +66,7 @@ class XInvocation(XInterface_8f010a43):
         ( XInvocation.hasProperty(), XInvocation.setValue() )!
         """
         ...
-    def invoke(self, aFunctionName: str, aParams: typing.Tuple[object, ...], aOutParamIndex: uno.ByteSequence, aOutParam: typing.Tuple[object, ...]) -> typing.Any:
+    def invoke(self, aFunctionName: str, aParams: typing.Tuple[object, ...], aOutParamIndex: typing.Tuple[int, ...], aOutParam: typing.Tuple[object, ...]) -> typing.Any:
         """
         provides access to methods exposed by an object.
         

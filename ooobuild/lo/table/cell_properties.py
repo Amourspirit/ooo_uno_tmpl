@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.table
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 if typing.TYPE_CHECKING:
     from ..beans.property_value import PropertyValue as PropertyValue_c9610c73
@@ -52,7 +52,8 @@ class CellProperties(XPropertySet_bc180bfa):
     __ooo_full_ns__: str = 'com.sun.star.table.CellProperties'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def AsianVerticalMode(self) -> bool:
         """
         selects Asian character orientation in vertical orientation.
@@ -61,14 +62,16 @@ class CellProperties(XPropertySet_bc180bfa):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BottomBorder(self) -> BorderLine_a3f80af6:
         """
         contains a description of the bottom border line of each cell.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BottomBorder2(self) -> BorderLine2_af200b28:
         """
         contains a description of the bottom border line of each cell.
@@ -81,14 +84,16 @@ class CellProperties(XPropertySet_bc180bfa):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CellBackColor(self) -> Color_68e908c5:
         """
         contains the cell background color.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CellInteropGrabBag(self) -> typing.Tuple[PropertyValue_c9610c73, ...]:
         """
         Grab bag of cell properties, used as a string-any map for interim interop purposes.
@@ -101,7 +106,8 @@ class CellProperties(XPropertySet_bc180bfa):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CellProtection(self) -> CellProtection_c9290c6d:
         """
         contains a description of the cell protection.
@@ -110,21 +116,24 @@ class CellProperties(XPropertySet_bc180bfa):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CellStyle(self) -> str:
         """
         contains the name of the style of the cell.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DiagonalBLTR(self) -> BorderLine_a3f80af6:
         """
         contains a description of the bottom left to top right diagonal line of each cell.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DiagonalBLTR2(self) -> BorderLine2_af200b28:
         """
         contains a description of the bottom left to top right diagonal line of each cell.
@@ -137,14 +146,16 @@ class CellProperties(XPropertySet_bc180bfa):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DiagonalTLBR(self) -> BorderLine_a3f80af6:
         """
         contains a description of the top left to bottom right diagonal line of each cell.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DiagonalTLBR2(self) -> BorderLine2_af200b28:
         """
         contains a description of the top left to bottom right diagonal line of each cell.
@@ -157,14 +168,16 @@ class CellProperties(XPropertySet_bc180bfa):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HoriJustify(self) -> CellHoriJustifyProto:
         """
         contains the horizontal alignment of the cell contents.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsCellBackgroundTransparent(self) -> bool:
         """
         is TRUE, if the cell background is transparent.
@@ -173,21 +186,24 @@ class CellProperties(XPropertySet_bc180bfa):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsTextWrapped(self) -> bool:
         """
         is TRUE, if text in the cells will be wrapped automatically at the right border.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def LeftBorder(self) -> BorderLine_a3f80af6:
         """
         contains a description of the left border line of each cell.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def LeftBorder2(self) -> BorderLine2_af200b28:
         """
         contains a description of the left border line of each cell.
@@ -200,7 +216,8 @@ class CellProperties(XPropertySet_bc180bfa):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def NumberFormat(self) -> int:
         """
         contains the index of the number format that is used in the cells.
@@ -209,7 +226,8 @@ class CellProperties(XPropertySet_bc180bfa):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Orientation(self) -> CellOrientationProto:
         """
         contains the orientation of the cell contents.
@@ -218,21 +236,24 @@ class CellProperties(XPropertySet_bc180bfa):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ParaIndent(self) -> int:
         """
         defines the indentation of the cell contents (in 1/100 mm).
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RightBorder(self) -> BorderLine_a3f80af6:
         """
         contains a description of the right border line of each cell.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RightBorder2(self) -> BorderLine2_af200b28:
         """
         contains a description of the right border line of each cell.
@@ -245,14 +266,16 @@ class CellProperties(XPropertySet_bc180bfa):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RotateAngle(self) -> int:
         """
         defines how much the content of cells is rotated (in 1/100 degrees).
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RotateReference(self) -> int:
         """
         defines at which edge rotated cells are aligned.
@@ -261,21 +284,24 @@ class CellProperties(XPropertySet_bc180bfa):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ShadowFormat(self) -> ShadowFormat_bb840bdf:
         """
         contains a description of the shadow.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ShrinkToFit(self) -> bool:
         """
         is TRUE, if the cell content will be shrunk to fit in the cell.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TableBorder(self) -> TableBorder_aedf0b56:
         """
         contains a description of the cell or cell range border.
@@ -284,7 +310,8 @@ class CellProperties(XPropertySet_bc180bfa):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TableBorder2(self) -> TableBorder2_ba670b88:
         """
         contains a description of the cell or cell range border.
@@ -299,14 +326,16 @@ class CellProperties(XPropertySet_bc180bfa):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TopBorder(self) -> BorderLine_a3f80af6:
         """
         contains a description of the top border line of each cell.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TopBorder2(self) -> BorderLine2_af200b28:
         """
         contains a description of the top border line of each cell.
@@ -319,7 +348,8 @@ class CellProperties(XPropertySet_bc180bfa):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def UserDefinedAttributes(self) -> XNameContainer_cb90e47:
         """
         stores additional attributes.
@@ -328,7 +358,8 @@ class CellProperties(XPropertySet_bc180bfa):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def VertJustify(self) -> int:
         """
         contains the vertical alignment of the cell contents.

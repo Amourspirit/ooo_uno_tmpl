@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.report
 from __future__ import annotations
 import typing
-from abc import abstractmethod, abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from ..lang.x_component import XComponent as XComponent_98dc0ab5
 if typing.TYPE_CHECKING:
@@ -90,14 +90,16 @@ class XReportEngine(XPropertySet_bc180bfa, XComponent_98dc0ab5):
             com.sun.star.uno.Exception: ``Exception``
         """
         ...
-    @abstractproperty
+    @property
+    @abstractmethod
     def ActiveConnection(self) -> XConnection_a36a0b0c:
         """
         specifies the active connection which is used to create the resulting report.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def MaxRows(self) -> int:
         """
         defines the maximum number of rows which should be fetched for the report.
@@ -106,14 +108,16 @@ class XReportEngine(XPropertySet_bc180bfa, XComponent_98dc0ab5):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ReportDefinition(self) -> XReportDefinition_ec30e81:
         """
         specifies the report definition object which is used to create the resulting report.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def StatusIndicator(self) -> XStatusIndicator_e2d00d34:
         """
         specifies the status indicator which shows the progress of the report generation process.

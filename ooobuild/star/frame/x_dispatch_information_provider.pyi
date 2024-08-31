@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
     from .dispatch_information import DispatchInformation as DispatchInformation_1a290ec9
@@ -47,7 +46,7 @@ class XDispatchInformationProvider(XInterface_8f010a43):
         returns additional information about supported commands of a given command group.
         """
         ...
-    def getSupportedCommandGroups(self) -> uno.ByteSequence:
+    def getSupportedCommandGroups(self) -> typing.Tuple[int, ...]:
         """
         returns all supported command groups.
         """

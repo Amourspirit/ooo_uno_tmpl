@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
     from ..io.x_input_stream import XInputStream as XInputStream_98d40ab4
@@ -103,7 +102,7 @@ class XParameters(XInterface_8f010a43):
             SQLException: ``SQLException``
         """
         ...
-    def setBytes(self, parameterIndex: int, x: uno.ByteSequence) -> None:
+    def setBytes(self, parameterIndex: int, x: typing.Tuple[int, ...]) -> None:
         """
         sets the designated parameter to a sequence of bytes.
         

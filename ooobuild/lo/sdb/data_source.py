@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.sdb
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from .x_bookmarks_supplier import XBookmarksSupplier as XBookmarksSupplier_ee870d96
 from .x_completed_connection import XCompletedConnection as XCompletedConnection_98a0e46
@@ -51,7 +51,8 @@ class DataSource(XPropertySet_bc180bfa, XBookmarksSupplier_ee870d96, XCompletedC
     __ooo_full_ns__: str = 'com.sun.star.sdb.DataSource'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Info(self) -> typing.Tuple[PropertyValue_c9610c73, ...]:
         """
         is a list of arbitrary string tag/value pairs as connection arguments
@@ -62,21 +63,24 @@ class DataSource(XPropertySet_bc180bfa, XBookmarksSupplier_ee870d96, XCompletedC
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsPasswordRequired(self) -> bool:
         """
         indicates that a password is always necessary.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsReadOnly(self) -> bool:
         """
         determines whether modifications on the data source are allowed or not.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Name(self) -> str:
         """
         is the name of the data source.
@@ -87,14 +91,16 @@ class DataSource(XPropertySet_bc180bfa, XBookmarksSupplier_ee870d96, XCompletedC
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def NumberFormatsSupplier(self) -> XNumberFormatsSupplier_3afb0fb7:
         """
         provides an object for formatting numbers.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Password(self) -> str:
         """
         determines a users password.
@@ -103,7 +109,8 @@ class DataSource(XPropertySet_bc180bfa, XBookmarksSupplier_ee870d96, XCompletedC
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Settings(self) -> XPropertySet_bc180bfa:
         """
         is a convenience wrapper around the Info property.
@@ -128,14 +135,16 @@ class DataSource(XPropertySet_bc180bfa, XBookmarksSupplier_ee870d96, XCompletedC
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SuppressVersionColumns(self) -> bool:
         """
         indicates that components displaying data obtained from this data source should suppress columns used for versioning.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TableFilter(self) -> typing.Tuple[str, ...]:
         """
         defines a list of tables, on which the DataSource should have it's focus.
@@ -144,7 +153,8 @@ class DataSource(XPropertySet_bc180bfa, XBookmarksSupplier_ee870d96, XCompletedC
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TableTypeFilter(self) -> typing.Tuple[str, ...]:
         """
         defines a list of table types, on which the DataSource should have it's focus.
@@ -153,14 +163,16 @@ class DataSource(XPropertySet_bc180bfa, XBookmarksSupplier_ee870d96, XCompletedC
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def URL(self) -> str:
         """
         indicates a database url of the form  jdbc:subprotocol:subname or sdbc:subprotocol:subname
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def User(self) -> str:
         """
         determines a users login name.

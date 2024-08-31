@@ -20,7 +20,6 @@
 # Namespace: com.sun.star.i18n
 from __future__ import annotations
 import typing
-import uno
 from abc import abstractmethod
 from .x_text_conversion import XTextConversion as XTextConversion_cd640c6b
 if typing.TYPE_CHECKING:
@@ -45,7 +44,7 @@ class XExtendedTextConversion(XTextConversion_cd640c6b):
     __pyunointerface__: str = 'com.sun.star.i18n.XExtendedTextConversion'
 
     @abstractmethod
-    def getConversionWithOffset(self, aText: str, nStartPos: int, nLength: int, aLocale: Locale_70d308fa, nTextConversionType: int, nTextConversionOptions: int, rOffset: uno.ByteSequence) -> str:
+    def getConversionWithOffset(self, aText: str, nStartPos: int, nLength: int, aLocale: Locale_70d308fa, nTextConversionType: int, nTextConversionOptions: int, rOffset: typing.Tuple[int, ...]) -> str:
         """
         The functionality of this method is same as com.sun.star.i18n.XTextConversion.getConversion(), except an additional output parameter rOffset.
 

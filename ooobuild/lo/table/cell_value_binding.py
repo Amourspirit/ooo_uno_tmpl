@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.table
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..form.binding.value_binding import ValueBinding as ValueBinding_18de0e7d
 from ..lang.x_initialization import XInitialization as XInitialization_d46c0cca
 if typing.TYPE_CHECKING:
@@ -45,7 +45,8 @@ class CellValueBinding(ValueBinding_18de0e7d, XInitialization_d46c0cca):
     __ooo_full_ns__: str = 'com.sun.star.table.CellValueBinding'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BoundCell(self) -> CellAddress_ae5f0b56:
         """
         specifies the cell within a document whose value is reflected by the binding.

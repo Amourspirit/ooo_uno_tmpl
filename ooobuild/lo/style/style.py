@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.style
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_multi_property_set import XMultiPropertySet as XMultiPropertySet_fd880e05
 from ..beans.x_multi_property_states import XMultiPropertyStates as XMultiPropertyStates_2a3e0f4d
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
@@ -47,7 +47,8 @@ class Style(UserDefinedAttributesSupplier_9fbe1222, XMultiPropertySet_fd880e05, 
     __ooo_full_ns__: str = 'com.sun.star.style.Style'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DisplayName(self) -> str:
         """
         contains the name of the style as it is displayed in the user interface.
@@ -56,7 +57,8 @@ class Style(UserDefinedAttributesSupplier_9fbe1222, XMultiPropertySet_fd880e05, 
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def FollowStyle(self) -> str:
         """
         contains the name of the style that is applied to the next paragraph.
@@ -65,7 +67,8 @@ class Style(UserDefinedAttributesSupplier_9fbe1222, XMultiPropertySet_fd880e05, 
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Hidden(self) -> bool:
         """
         Flag indicating whether to hide the style in the UI.
@@ -76,7 +79,8 @@ class Style(UserDefinedAttributesSupplier_9fbe1222, XMultiPropertySet_fd880e05, 
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsAutoUpdate(self) -> str:
         """
         determines if a style is automatically updated, if the properties of an object that the style is applied to are changed.
@@ -85,7 +89,8 @@ class Style(UserDefinedAttributesSupplier_9fbe1222, XMultiPropertySet_fd880e05, 
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsPhysical(self) -> bool:
         """
         determines if a style is physically created.
@@ -94,7 +99,8 @@ class Style(UserDefinedAttributesSupplier_9fbe1222, XMultiPropertySet_fd880e05, 
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ParaStyleConditions(self) -> typing.Tuple[NamedValue_a37a0af3, ...]:
         """
         defines the context and styles for conditional paragraphs.
@@ -113,7 +119,8 @@ class Style(UserDefinedAttributesSupplier_9fbe1222, XMultiPropertySet_fd880e05, 
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def StyleInteropGrabBag(self) -> typing.Tuple[PropertyValue_c9610c73, ...]:
         """
         Grab bag of style properties, used as a string-any map for interim interop purposes.

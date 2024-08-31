@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.text.textfield
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..dependent_text_field import DependentTextField as DependentTextField_fed90ded
 
 class DatabaseNextSet(DependentTextField_fed90ded):
@@ -41,21 +41,24 @@ class DatabaseNextSet(DependentTextField_fed90ded):
     __ooo_full_ns__: str = 'com.sun.star.text.textfield.DatabaseNextSet'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Condition(self) -> str:
         """
         determines whether the database selection is set to the next position or not.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DataBaseName(self) -> str:
         """
         specifies the database name.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DataBaseResource(self) -> str:
         """
         indicates a connection URL, which locates a database driver.
@@ -66,7 +69,8 @@ class DatabaseNextSet(DependentTextField_fed90ded):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DataBaseURL(self) -> str:
         """
         indicates the URL of a database file.
@@ -77,14 +81,16 @@ class DatabaseNextSet(DependentTextField_fed90ded):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DataCommandType(self) -> int:
         """
         determines the interpretation of the property DataTableName.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DataTableName(self) -> str:
         """
         contains the name of the database table, query or a statement depending on the DataCommandType property.

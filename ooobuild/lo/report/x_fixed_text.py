@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.report
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from .x_report_control_model import XReportControlModel as XReportControlModel_2d800f4a
 
 class XFixedText(XReportControlModel_2d800f4a):
@@ -33,7 +33,8 @@ class XFixedText(XReportControlModel_2d800f4a):
     __ooo_type_name__: str = 'interface'
     __pyunointerface__: str = 'com.sun.star.report.XFixedText'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Label(self) -> str:
         """
         specifies the label of the control.

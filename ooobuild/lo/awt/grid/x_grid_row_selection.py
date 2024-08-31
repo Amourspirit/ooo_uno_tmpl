@@ -20,7 +20,6 @@
 # Namespace: com.sun.star.awt.grid
 from __future__ import annotations
 import typing
-import uno
 from abc import abstractmethod, ABC
 if typing.TYPE_CHECKING:
     from .x_grid_selection_listener import XGridSelectionListener as XGridSelectionListener_759e10f2
@@ -63,7 +62,7 @@ class XGridRowSelection(ABC):
         """
         ...
     @abstractmethod
-    def getSelectedRows(self) -> uno.ByteSequence:
+    def getSelectedRows(self) -> typing.Tuple[int, ...]:
         """
         Returns the indices of all selected rows.
         """

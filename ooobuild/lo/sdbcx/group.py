@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.sdbcx
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from .x_authorizable import XAuthorizable as XAuthorizable_c8dd0c5e
 from .x_users_supplier import XUsersSupplier as XUsersSupplier_d6060cda
@@ -37,7 +37,8 @@ class Group(XPropertySet_bc180bfa, XAuthorizable_c8dd0c5e, XUsersSupplier_d6060c
     __ooo_full_ns__: str = 'com.sun.star.sdbcx.Group'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Name(self) -> str:
         """
         is the name of the group.

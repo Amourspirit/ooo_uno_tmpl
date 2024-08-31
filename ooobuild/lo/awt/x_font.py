@@ -20,7 +20,6 @@
 # Namespace: com.sun.star.awt
 from __future__ import annotations
 import typing
-import uno
 from abc import abstractmethod
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
@@ -48,7 +47,7 @@ class XFont(XInterface_8f010a43):
         """
         ...
     @abstractmethod
-    def getCharWidths(self, nFirst: str, nLast: str) -> uno.ByteSequence:
+    def getCharWidths(self, nFirst: str, nLast: str) -> typing.Tuple[int, ...]:
         """
         returns the widths of the specified characters.
         """
@@ -68,7 +67,7 @@ class XFont(XInterface_8f010a43):
         """
         ...
     @abstractmethod
-    def getKernPairs(self, Chars1: typing.Tuple[str, ...], Chars2: typing.Tuple[str, ...], Kerns: uno.ByteSequence) -> None:
+    def getKernPairs(self, Chars1: typing.Tuple[str, ...], Chars2: typing.Tuple[str, ...], Kerns: typing.Tuple[int, ...]) -> None:
         """
         queries the kerning pair table.
 
@@ -84,7 +83,7 @@ class XFont(XInterface_8f010a43):
         """
         ...
     @abstractmethod
-    def getStringWidthArray(self, str: str, aDXArray: uno.ByteSequence) -> int:
+    def getStringWidthArray(self, str: str, aDXArray: typing.Tuple[int, ...]) -> int:
         """
         returns the string and the character widths.
 

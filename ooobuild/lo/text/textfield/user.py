@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.text.textfield
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..dependent_text_field import DependentTextField as DependentTextField_fed90ded
 
 class User(DependentTextField_fed90ded):
@@ -39,7 +39,8 @@ class User(DependentTextField_fed90ded):
     __ooo_full_ns__: str = 'com.sun.star.text.textfield.User'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsFixedLanguage(self) -> bool:
         """
         determines whether changes in language attributes at the position the text field is located also change the number format as appropriate for this language.
@@ -50,21 +51,24 @@ class User(DependentTextField_fed90ded):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsShowFormula(self) -> bool:
         """
         determines if the content is shown as text rather than as value.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsVisible(self) -> bool:
         """
         determines if the field is visible.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def NumberFormat(self) -> int:
         """
         this is the number format for this field.

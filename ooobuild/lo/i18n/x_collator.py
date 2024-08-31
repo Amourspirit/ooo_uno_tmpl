@@ -20,7 +20,6 @@
 # Namespace: com.sun.star.i18n
 from __future__ import annotations
 import typing
-import uno
 from abc import abstractmethod
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
@@ -57,7 +56,7 @@ class XCollator(XInterface_8f010a43):
         """
         ...
     @abstractmethod
-    def listCollatorOptions(self, aAlgorithmName: str) -> uno.ByteSequence:
+    def listCollatorOptions(self, aAlgorithmName: str) -> typing.Tuple[int, ...]:
         """
         List all end user collator options for a given algorithm.
         """
@@ -69,7 +68,7 @@ class XCollator(XInterface_8f010a43):
         """
         ...
     @abstractmethod
-    def loadCollatorAlgorithmWithEndUserOption(self, aAlgorithmName: str, aLocale: Locale_70d308fa, aCollatorOptions: uno.ByteSequence) -> None:
+    def loadCollatorAlgorithmWithEndUserOption(self, aAlgorithmName: str, aLocale: Locale_70d308fa, aCollatorOptions: typing.Tuple[int, ...]) -> None:
         """
         Load a collator algorithm with options chosen by end user.
         """

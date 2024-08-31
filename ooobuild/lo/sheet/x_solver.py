@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.sheet
 from __future__ import annotations
 import typing
-from abc import abstractmethod, abstractproperty
+from abc import abstractmethod
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
     from .solver_constraint import SolverConstraint as SolverConstraint_f1e30dc1
@@ -45,56 +45,64 @@ class XSolver(XInterface_8f010a43):
         executes the calculation and tries to find a solution.
         """
         ...
-    @abstractproperty
+    @property
+    @abstractmethod
     def Constraints(self) -> typing.Tuple[SolverConstraint_f1e30dc1, ...]:
         """
         The constraints of the model.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Document(self) -> XSpreadsheetDocument_2a1f0f30:
         """
         The spreadsheet document that contains the cells.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Maximize(self) -> bool:
         """
         selects if the objective value is maximized or minimized.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Objective(self) -> CellAddress_ae5f0b56:
         """
         The address of the cell that contains the objective value.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ResultValue(self) -> float:
         """
         contains the objective value for the solution, if a solution was found.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Solution(self) -> typing.Tuple[float, ...]:
         """
         contains the solution's value for each of the variables, if a solution was found.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Success(self) -> bool:
         """
         contains TRUE if a solution was found.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Variables(self) -> typing.Tuple[CellAddress_ae5f0b56, ...]:
         """
         The addresses of the cells that contain the variables.

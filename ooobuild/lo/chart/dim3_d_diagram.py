@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.chart
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from .x3_d_default_setter import X3DDefaultSetter as X3DDefaultSetter_e9630d25
 from .x3_d_display import X3DDisplay as X3DDisplay_a1650abf
 
@@ -36,7 +36,8 @@ class Dim3DDiagram(X3DDefaultSetter_e9630d25, X3DDisplay_a1650abf):
     __ooo_full_ns__: str = 'com.sun.star.chart.Dim3DDiagram'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Dim3D(self) -> bool:
         """
         If set to TRUE, the chart becomes a three-dimensional chart.
@@ -45,21 +46,24 @@ class Dim3DDiagram(X3DDefaultSetter_e9630d25, X3DDisplay_a1650abf):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Perspective(self) -> int:
         """
         Perspective of 3D charts ( [0,100] ).
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RotationHorizontal(self) -> int:
         """
         Horizontal rotation of 3D charts in degrees ( ]-180,180] ).
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RotationVertical(self) -> int:
         """
         Vertical rotation of 3D charts in degrees ( ]-180,180] ).

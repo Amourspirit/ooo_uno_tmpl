@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.text
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from ..xml.user_defined_attributes_supplier import UserDefinedAttributesSupplier as UserDefinedAttributesSupplier_9fbe1222
 if typing.TYPE_CHECKING:
@@ -48,14 +48,16 @@ class CellProperties(UserDefinedAttributesSupplier_9fbe1222, XPropertySet_bc180b
     __ooo_full_ns__: str = 'com.sun.star.text.CellProperties'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BackColor(self) -> Color_68e908c5:
         """
         contains the background color.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BackGraphic(self) -> XGraphic_a4da0afc:
         """
         contains the graphic object that is displayed as background graphic.
@@ -66,21 +68,24 @@ class CellProperties(UserDefinedAttributesSupplier_9fbe1222, XPropertySet_bc180b
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BackGraphicFilter(self) -> str:
         """
         contains the name of the graphic filter of the background graphic.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BackGraphicLocation(self) -> GraphicLocationProto:
         """
         determines the position of the background graphic.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BackGraphicURL(self) -> str:
         """
         contains the URL to the background graphic.
@@ -89,35 +94,40 @@ class CellProperties(UserDefinedAttributesSupplier_9fbe1222, XPropertySet_bc180b
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BackTransparent(self) -> bool:
         """
         determines whether the background is transparent.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BottomBorder(self) -> BorderLine_a3f80af6:
         """
         contains the bottom border line.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BottomBorderDistance(self) -> int:
         """
         contains the distance of the bottom border.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CellName(self) -> str:
         """
         contains the cell name, see SwXTextTable.getCellByName for more information
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HasTextChangesOnly(self) -> bool:
         """
         If TRUE, the table cell wasn't deleted or inserted with its tracked cell content.
@@ -128,35 +138,40 @@ class CellProperties(UserDefinedAttributesSupplier_9fbe1222, XPropertySet_bc180b
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsProtected(self) -> bool:
         """
         determines whether the cell is write protected or not.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def LeftBorder(self) -> BorderLine_a3f80af6:
         """
         contains the left border line.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def LeftBorderDistance(self) -> int:
         """
         contains the distance of the left border.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def NumberFormat(self) -> int:
         """
         contains the number format.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ParentText(self) -> XText_690408ca:
         """
         Parent text of this table cell.
@@ -169,42 +184,48 @@ class CellProperties(UserDefinedAttributesSupplier_9fbe1222, XPropertySet_bc180b
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RightBorder(self) -> BorderLine_a3f80af6:
         """
         contains the right border line.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RightBorderDistance(self) -> int:
         """
         contains the distance of the right border.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TextSection(self) -> XTextSection_b1730b9f:
         """
         contains the text section the text table is contained in if there is any.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TopBorder(self) -> BorderLine_a3f80af6:
         """
         contains the top border line.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TopBorderDistance(self) -> int:
         """
         contains the distance of the top border.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def VertOrient(self) -> int:
         """
         the vertical orientation of the text inside of the table cells in this row.

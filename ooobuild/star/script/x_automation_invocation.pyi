@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from .x_invocation import XInvocation as XInvocation_be070c0f
 
 
@@ -33,7 +32,7 @@ class XAutomationInvocation(XInvocation_be070c0f):
     """
     __pyunointerface__: str = 'com.sun.star.script.XAutomationInvocation'
 
-    def invokeGetProperty(self, aFunctionName: str, aParams: typing.Tuple[object, ...], aOutParamIndex: uno.ByteSequence, aOutParam: typing.Tuple[object, ...]) -> typing.Any:
+    def invokeGetProperty(self, aFunctionName: str, aParams: typing.Tuple[object, ...], aOutParamIndex: typing.Tuple[int, ...], aOutParam: typing.Tuple[object, ...]) -> typing.Any:
         """
 
         * ``aOutParamIndex`` is an out direction argument.
@@ -45,7 +44,7 @@ class XAutomationInvocation(XInvocation_be070c0f):
             com.sun.star.reflection.InvocationTargetException: ``InvocationTargetException``
         """
         ...
-    def invokePutProperty(self, aFunctionName: str, aParams: typing.Tuple[object, ...], aOutParamIndex: uno.ByteSequence, aOutParam: typing.Tuple[object, ...]) -> typing.Any:
+    def invokePutProperty(self, aFunctionName: str, aParams: typing.Tuple[object, ...], aOutParamIndex: typing.Tuple[int, ...], aOutParam: typing.Tuple[object, ...]) -> typing.Any:
         """
 
         * ``aOutParamIndex`` is an out direction argument.

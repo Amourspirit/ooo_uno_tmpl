@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.bridge
 from __future__ import annotations
-import uno
+import typing
 from abc import abstractmethod
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 
@@ -46,7 +46,7 @@ class XBridgeSupplier2(XInterface_8f010a43):
     __pyunointerface__: str = 'com.sun.star.bridge.XBridgeSupplier2'
 
     @abstractmethod
-    def createBridge(self, aModelDepObject: object, aProcessId: uno.ByteSequence, nSourceModelType: int, nDestModelType: int) -> object:
+    def createBridge(self, aModelDepObject: object, aProcessId: typing.Tuple[int, ...], nSourceModelType: int, nDestModelType: int) -> object:
         """
         creates a bridge to provide an object of one object model with another.
 

@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.sdbc
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from .connection_properties import ConnectionProperties as ConnectionProperties_1a9f0ee1
 
 class FILEConnectionProperties(ConnectionProperties_1a9f0ee1):
@@ -39,7 +39,8 @@ class FILEConnectionProperties(ConnectionProperties_1a9f0ee1):
     __ooo_full_ns__: str = 'com.sun.star.sdbc.FILEConnectionProperties'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharSet(self) -> str:
         """
         specifies the encoding to use to translate the backend data

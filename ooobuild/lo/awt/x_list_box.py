@@ -20,7 +20,6 @@
 # Namespace: com.sun.star.awt
 from __future__ import annotations
 import typing
-import uno
 from abc import abstractmethod
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
@@ -110,7 +109,7 @@ class XListBox(XInterface_8f010a43):
         """
         ...
     @abstractmethod
-    def getSelectedItemsPos(self) -> uno.ByteSequence:
+    def getSelectedItemsPos(self) -> typing.Tuple[int, ...]:
         """
         returns the positions of all currently selected items.
         """
@@ -158,7 +157,7 @@ class XListBox(XInterface_8f010a43):
         """
         ...
     @abstractmethod
-    def selectItemsPos(self, aPositions: uno.ByteSequence, bSelect: bool) -> None:
+    def selectItemsPos(self, aPositions: typing.Tuple[int, ...], bSelect: bool) -> None:
         """
         selects/deselects multiple items at the specified positions.
         """

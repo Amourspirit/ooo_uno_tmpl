@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.util
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 if typing.TYPE_CHECKING:
     from .date import Date as Date_60040844
@@ -38,14 +38,16 @@ class NumberFormatSettings(XPropertySet_bc180bfa):
     __ooo_full_ns__: str = 'com.sun.star.util.NumberFormatSettings'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def NoZero(self) -> bool:
         """
         is set to indicate that a zero value should be formatted as an empty string.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def NullDate(self) -> Date_60040844:
         """
         specifies the date which is represented by the value 0.
@@ -54,14 +56,16 @@ class NumberFormatSettings(XPropertySet_bc180bfa):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def StandardDecimals(self) -> int:
         """
         specifies the maximum number of decimals used for the standard number format (\"General\").
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TwoDigitDateStart(self) -> int:
         """
         specifies the first year to be generated from a two-digit year input.

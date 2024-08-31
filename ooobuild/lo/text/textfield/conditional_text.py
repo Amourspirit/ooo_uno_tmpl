@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.text.textfield
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..text_field import TextField as TextField_90260a56
 
 class ConditionalText(TextField_90260a56):
@@ -35,14 +35,16 @@ class ConditionalText(TextField_90260a56):
     __ooo_full_ns__: str = 'com.sun.star.text.textfield.ConditionalText'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Condition(self) -> str:
         """
         contains the condition.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CurrentPresentation(self) -> str:
         """
         contains the current content of the text field.
@@ -51,14 +53,16 @@ class ConditionalText(TextField_90260a56):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def FalseContent(self) -> str:
         """
         contains the text that is displayed if the condition evaluates to FALSE.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsConditionTrue(self) -> bool:
         """
         contains the result of the last evaluation of the condition.
@@ -67,7 +71,8 @@ class ConditionalText(TextField_90260a56):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TrueContent(self) -> str:
         """
         contains the text that is displayed if the condition evaluates to TRUE.

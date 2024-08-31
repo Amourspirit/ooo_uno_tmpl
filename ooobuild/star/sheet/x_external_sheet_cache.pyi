@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from abc import ABC
 
 
@@ -38,7 +37,7 @@ class XExternalSheetCache(ABC):
     """
     __pyunointerface__: str = 'com.sun.star.sheet.XExternalSheetCache'
 
-    def getAllColumns(self, nRow: int) -> uno.ByteSequence:
+    def getAllColumns(self, nRow: int) -> typing.Tuple[int, ...]:
         """
         Given a row number, this method returns a list of all columns numbers that store cached cell values in that row.
         
@@ -48,7 +47,7 @@ class XExternalSheetCache(ABC):
             com.sun.star.lang.IllegalArgumentException: ``IllegalArgumentException``
         """
         ...
-    def getAllRows(self) -> uno.ByteSequence:
+    def getAllRows(self) -> typing.Tuple[int, ...]:
         """
         It returns a list of all row numbers where a cached cell or cells exist.
         

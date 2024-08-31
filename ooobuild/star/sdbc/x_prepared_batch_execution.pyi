@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 
 
@@ -52,7 +51,7 @@ class XPreparedBatchExecution(XInterface_8f010a43):
             SQLException: ``SQLException``
         """
         ...
-    def executeBatch(self) -> uno.ByteSequence:
+    def executeBatch(self) -> typing.Tuple[int, ...]:
         """
         submits a batch of commands to the database for execution.
 

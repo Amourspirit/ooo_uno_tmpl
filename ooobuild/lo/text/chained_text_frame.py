@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.text
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from .text_frame import TextFrame as TextFrame_90410a5d
 
 class ChainedTextFrame(TextFrame_90410a5d):
@@ -37,7 +37,8 @@ class ChainedTextFrame(TextFrame_90410a5d):
     __ooo_full_ns__: str = 'com.sun.star.text.ChainedTextFrame'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ChainNextName(self) -> str:
         """
         name of the previous frame in the chain
@@ -46,7 +47,8 @@ class ChainedTextFrame(TextFrame_90410a5d):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ChainPrevName(self) -> str:
         """
         name of the next frame in the chain

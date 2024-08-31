@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.animations
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from .x_animation_node import XAnimationNode as XAnimationNode_1cf10eb9
 
 class XAudio(XAnimationNode_1cf10eb9):
@@ -37,7 +37,8 @@ class XAudio(XAnimationNode_1cf10eb9):
     __ooo_type_name__: str = 'interface'
     __pyunointerface__: str = 'com.sun.star.animations.XAudio'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HideDuringShow(self) -> bool:
         """
         Specifies if the source shape should be hidden during slideshow (defaults to false).
@@ -48,7 +49,8 @@ class XAudio(XAnimationNode_1cf10eb9):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Narration(self) -> bool:
         """
         Specifies if the source shape is a narration for the slide (defaults to false).
@@ -59,14 +61,16 @@ class XAudio(XAnimationNode_1cf10eb9):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Source(self) -> object:
         """
         This attribute specifies the source element that contains the audio.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Volume(self) -> float:
         """
         """

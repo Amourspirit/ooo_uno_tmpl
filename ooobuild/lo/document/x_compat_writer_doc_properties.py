@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.document
 from __future__ import annotations
-from abc import abstractproperty, ABC
+from abc import abstractmethod, ABC
 
 class XCompatWriterDocProperties(ABC):
     """
@@ -32,19 +32,22 @@ class XCompatWriterDocProperties(ABC):
     __ooo_type_name__: str = 'interface'
     __pyunointerface__: str = 'com.sun.star.document.XCompatWriterDocProperties'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Category(self) -> str:
         """
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Company(self) -> str:
         """
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Manager(self) -> str:
         """
         """

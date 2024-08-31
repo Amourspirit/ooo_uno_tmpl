@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.sheet
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from .x_data_pilot_results import XDataPilotResults as XDataPilotResults_fc0c0ded
 from .x_dimensions_supplier import XDimensionsSupplier as XDimensionsSupplier_1baa0ee6
@@ -44,7 +44,8 @@ class DataPilotSource(XPropertySet_bc180bfa, XDataPilotResults_fc0c0ded, XDimens
     __ooo_full_ns__: str = 'com.sun.star.sheet.DataPilotSource'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ColumnFieldCount(self) -> int:
         """
         specifies the number of column fields.
@@ -55,14 +56,16 @@ class DataPilotSource(XPropertySet_bc180bfa, XDataPilotResults_fc0c0ded, XDimens
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ColumnGrand(self) -> bool:
         """
         specifies if grand totals for the columns are inserted.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DataFieldCount(self) -> int:
         """
         specifies the number of data fields.
@@ -73,7 +76,8 @@ class DataPilotSource(XPropertySet_bc180bfa, XDataPilotResults_fc0c0ded, XDimens
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RowFieldCount(self) -> int:
         """
         specifies the number of row fields.
@@ -84,7 +88,8 @@ class DataPilotSource(XPropertySet_bc180bfa, XDataPilotResults_fc0c0ded, XDimens
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RowGrand(self) -> bool:
         """
         specifies if grand totals for the rows are inserted.

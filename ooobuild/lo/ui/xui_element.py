@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.ui
 from __future__ import annotations
 import typing
-from abc import abstractmethod, abstractproperty
+from abc import abstractmethod
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
     from ..frame.x_frame import XFrame as XFrame_7a570956
@@ -45,7 +45,8 @@ class XUIElement(XInterface_8f010a43):
         returns an interface to get access to user interface type specific functions.
         """
         ...
-    @abstractproperty
+    @property
+    @abstractmethod
     def Frame(self) -> XFrame_7a570956:
         """
         determines the document frame to which this element is bound to.
@@ -54,14 +55,16 @@ class XUIElement(XInterface_8f010a43):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ResourceURL(self) -> str:
         """
         a resource URL which is a unique identifier of a user interface element.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Type(self) -> int:
         """
         determines the type of the user interface element.

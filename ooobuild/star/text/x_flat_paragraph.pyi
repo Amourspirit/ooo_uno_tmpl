@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from .x_text_markup import XTextMarkup as XTextMarkup_a5d60b3a
 if typing.TYPE_CHECKING:
     from ..beans.property_value import PropertyValue as PropertyValue_c9610c73
@@ -65,7 +64,7 @@ class XFlatParagraph(XTextMarkup_a5d60b3a):
             com.sun.star.lang.IllegalArgumentException: ``IllegalArgumentException``
         """
         ...
-    def getLanguagePortions(self) -> uno.ByteSequence:
+    def getLanguagePortions(self) -> typing.Tuple[int, ...]:
         """
         get a list of indexes that separate each two different languages
         """

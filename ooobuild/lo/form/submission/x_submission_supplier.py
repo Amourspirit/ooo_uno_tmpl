@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.form.submission
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ...uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
     from .x_submission import XSubmission as XSubmission_3cfd0fba
@@ -37,7 +37,8 @@ class XSubmissionSupplier(XInterface_8f010a43):
     __ooo_type_name__: str = 'interface'
     __pyunointerface__: str = 'com.sun.star.form.submission.XSubmissionSupplier'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Submission(self) -> XSubmission_3cfd0fba:
         """
         specifies the XSubmission instance to which the submission request should be delegated.

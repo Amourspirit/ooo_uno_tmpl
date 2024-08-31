@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.table
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from ..container.x_named import XNamed as XNamed_a6520b08
 from .x_cell_range import XCellRange as XCellRange_a2f70ad5
@@ -37,28 +37,32 @@ class TableColumn(XPropertySet_bc180bfa, XNamed_a6520b08, XCellRange_a2f70ad5):
     __ooo_full_ns__: str = 'com.sun.star.table.TableColumn'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsStartOfNewPage(self) -> bool:
         """
         is TRUE, if there is a manual horizontal page break attached to the column.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsVisible(self) -> bool:
         """
         is TRUE, if the column is visible.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def OptimalWidth(self) -> bool:
         """
         is TRUE, if the column always keeps its optimal width.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Width(self) -> int:
         """
         contains the width of the column (in 1/100th mm).

@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.ui
 from __future__ import annotations
 import typing
-from abc import abstractproperty, ABC
+from abc import abstractmethod, ABC
 if typing.TYPE_CHECKING:
     from ..awt.x_bitmap import XBitmap as XBitmap_70cd0909
     from ..container.x_index_container import XIndexContainer as XIndexContainer_1c040ebe
@@ -40,35 +40,40 @@ class ActionTrigger(ABC):
     __ooo_full_ns__: str = 'com.sun.star.ui.ActionTrigger'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CommandURL(self) -> str:
         """
         contains the command URL for the menu entry.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HelpURL(self) -> str:
         """
         contains the a URL that points to a help text.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Image(self) -> XBitmap_70cd0909:
         """
         contains the menu item image.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SubContainer(self) -> XIndexContainer_1c040ebe:
         """
         contains a sub menu.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Text(self) -> str:
         """
         contains the text of the menu entry.

@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.animations
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from .x_animate import XAnimate as XAnimate_ca680c52
 
 class XAnimatePhysics(XAnimate_ca680c52):
@@ -38,7 +38,8 @@ class XAnimatePhysics(XAnimate_ca680c52):
     __ooo_type_name__: str = 'interface'
     __pyunointerface__: str = 'com.sun.star.animations.XAnimatePhysics'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Bounciness(self) -> object:
         """
         Specifies an optional bounciness value.
@@ -47,7 +48,8 @@ class XAnimatePhysics(XAnimate_ca680c52):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Density(self) -> object:
         """
         Specifies an optional density value.
@@ -56,7 +58,8 @@ class XAnimatePhysics(XAnimate_ca680c52):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def StartVelocityX(self) -> object:
         """
         Specifies an optional horizontal starting velocity.
@@ -65,7 +68,8 @@ class XAnimatePhysics(XAnimate_ca680c52):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def StartVelocityY(self) -> object:
         """
         Specifies an optional vertical starting velocity.

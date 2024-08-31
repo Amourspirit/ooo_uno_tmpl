@@ -20,7 +20,6 @@
 # Namespace: com.sun.star.xml.crypto
 from __future__ import annotations
 import typing
-import uno
 from abc import abstractmethod
 from ...uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
@@ -61,7 +60,7 @@ class XSecurityEnvironment(XInterface_8f010a43):
         """
         ...
     @abstractmethod
-    def createCertificateFromRaw(self, rawCertificate: uno.ByteSequence) -> XCertificate_e55b0d3b:
+    def createCertificateFromRaw(self, rawCertificate: typing.Tuple[int, ...]) -> XCertificate_e55b0d3b:
         """
         Create certificate interface from raw DER encoded certificate.
 
@@ -83,7 +82,7 @@ class XSecurityEnvironment(XInterface_8f010a43):
         """
         ...
     @abstractmethod
-    def getCertificate(self, issuerName: str, serialNumber: uno.ByteSequence) -> XCertificate_e55b0d3b:
+    def getCertificate(self, issuerName: str, serialNumber: typing.Tuple[int, ...]) -> XCertificate_e55b0d3b:
         """
         Get certificate from the environment by issuer name and serial number.
 

@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.form.component
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..form_component import FormComponent as FormComponent_bc700c03
 
 class HiddenControl(FormComponent_bc700c03):
@@ -39,7 +39,8 @@ class HiddenControl(FormComponent_bc700c03):
     __ooo_full_ns__: str = 'com.sun.star.form.component.HiddenControl'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HiddenValue(self) -> str:
         """
         specifies the value of the component.

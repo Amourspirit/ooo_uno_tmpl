@@ -20,7 +20,6 @@
 # Namespace: com.sun.star.ui.dialogs
 from __future__ import annotations
 import typing
-import uno
 from abc import abstractmethod
 from .x_wizard import XWizard as XWizard_bae60bc0
 if typing.TYPE_CHECKING:
@@ -44,7 +43,7 @@ class Wizard(XWizard_bae60bc0):
     __ooo_type_name__: str = 'service'
 
     @abstractmethod
-    def createMultiplePathsWizard(self, PageIds: typing.Tuple[uno.ByteSequence, ...], Controller: XWizardController_469d0fe4) -> None:
+    def createMultiplePathsWizard(self, PageIds: typing.Tuple[typing.Tuple[int, ...], ...], Controller: XWizardController_469d0fe4) -> None:
         """
         creates a wizard with a multiple possible execution paths
 
@@ -53,7 +52,7 @@ class Wizard(XWizard_bae60bc0):
         """
         ...
     @abstractmethod
-    def createSinglePathWizard(self, PageIds: uno.ByteSequence, Controller: XWizardController_469d0fe4) -> None:
+    def createSinglePathWizard(self, PageIds: typing.Tuple[int, ...], Controller: XWizardController_469d0fe4) -> None:
         """
         creates a wizard with a single execution path
 

@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.drawing
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from ..beans.x_tolerant_multi_property_set import XTolerantMultiPropertySet as XTolerantMultiPropertySet_7bd4114e
 from .x_glue_points_supplier import XGluePointsSupplier as XGluePointsSupplier_3a770faa
@@ -49,7 +49,8 @@ class Shape(XPropertySet_bc180bfa, XTolerantMultiPropertySet_7bd4114e, XGluePoin
     __ooo_full_ns__: str = 'com.sun.star.drawing.Shape'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Decorative(self) -> bool:
         """
         Determines if the shape is purely decorative.
@@ -62,7 +63,8 @@ class Shape(XPropertySet_bc180bfa, XTolerantMultiPropertySet_7bd4114e, XGluePoin
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Description(self) -> str:
         """
         contains description for the object
@@ -75,14 +77,16 @@ class Shape(XPropertySet_bc180bfa, XTolerantMultiPropertySet_7bd4114e, XGluePoin
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Hyperlink(self) -> str:
         """
         this property lets you get and set a hyperlink for this shape.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def InteropGrabBag(self) -> typing.Tuple[PropertyValue_c9610c73, ...]:
         """
         Grab bag of shape properties, used as a string-any map for interim interop purposes.
@@ -95,35 +99,40 @@ class Shape(XPropertySet_bc180bfa, XTolerantMultiPropertySet_7bd4114e, XGluePoin
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def LayerID(self) -> int:
         """
         This is the ID of the Layer to which this Shape is attached.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def LayerName(self) -> str:
         """
         This is the name of the Layer to which this Shape is attached.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def MoveProtect(self) -> bool:
         """
         With this set to TRUE, this Shape cannot be moved interactively in the user interface.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Name(self) -> str:
         """
         This is the name of this Shape.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def NavigationOrder(self) -> int:
         """
         this property stores the navigation order of this shape.
@@ -132,14 +141,16 @@ class Shape(XPropertySet_bc180bfa, XTolerantMultiPropertySet_7bd4114e, XGluePoin
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Printable(self) -> bool:
         """
         If this is FALSE, the Shape is not visible on printer outputs.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RelativeHeight(self) -> int:
         """
         contains the relative height of the object.
@@ -152,7 +163,8 @@ class Shape(XPropertySet_bc180bfa, XTolerantMultiPropertySet_7bd4114e, XGluePoin
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RelativeHeightRelation(self) -> int:
         """
         contains the relation of the relative height of the object.
@@ -165,7 +177,8 @@ class Shape(XPropertySet_bc180bfa, XTolerantMultiPropertySet_7bd4114e, XGluePoin
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RelativeWidth(self) -> int:
         """
         contains the relative width of the object.
@@ -178,7 +191,8 @@ class Shape(XPropertySet_bc180bfa, XTolerantMultiPropertySet_7bd4114e, XGluePoin
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RelativeWidthRelation(self) -> int:
         """
         contains the relation of the relative width of the object.
@@ -191,7 +205,8 @@ class Shape(XPropertySet_bc180bfa, XTolerantMultiPropertySet_7bd4114e, XGluePoin
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ShapeUserDefinedAttributes(self) -> XNameContainer_cb90e47:
         """
         this property stores xml attributes.
@@ -200,21 +215,24 @@ class Shape(XPropertySet_bc180bfa, XTolerantMultiPropertySet_7bd4114e, XGluePoin
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SizeProtect(self) -> bool:
         """
         With this set to TRUE, this Shape may not be sized interactively in the user interface.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Style(self) -> XStyle_7c7f09a2:
         """
         this property lets you get and set a style for this shape.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Title(self) -> str:
         """
         contains short title for the object
@@ -227,7 +245,8 @@ class Shape(XPropertySet_bc180bfa, XTolerantMultiPropertySet_7bd4114e, XGluePoin
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Transformation(self) -> HomogenMatrix3_f0fb0d69:
         """
         this property lets you get and set the transformation matrix for this shape.
@@ -236,7 +255,8 @@ class Shape(XPropertySet_bc180bfa, XTolerantMultiPropertySet_7bd4114e, XGluePoin
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Visible(self) -> bool:
         """
         If this is FALSE, the Shape is not visible on screen outputs.
@@ -245,7 +265,8 @@ class Shape(XPropertySet_bc180bfa, XTolerantMultiPropertySet_7bd4114e, XGluePoin
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ZOrder(self) -> int:
         """
         is used to query or change the ZOrder of this Shape.

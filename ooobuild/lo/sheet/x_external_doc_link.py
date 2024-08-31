@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.sheet
 from __future__ import annotations
 import typing
-from abc import abstractmethod, abstractproperty
+from abc import abstractmethod
 from ..container.x_enumeration_access import XEnumerationAccess as XEnumerationAccess_4bac0ffc
 from ..container.x_index_access import XIndexAccess as XIndexAccess_f0910d6d
 from ..container.x_name_access import XNameAccess as XNameAccess_e2ab0cf6
@@ -51,7 +51,8 @@ class XExternalDocLink(XEnumerationAccess_4bac0ffc, XIndexAccess_f0910d6d, XName
         Note that a sheet name lookup is performed in a case-insensitive fashion.
         """
         ...
-    @abstractproperty
+    @property
+    @abstractmethod
     def TokenIndex(self) -> int:
         """
         Index corresponding to the external document link.

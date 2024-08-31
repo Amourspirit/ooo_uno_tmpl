@@ -20,7 +20,6 @@
 # Namespace: com.sun.star.accessibility
 from __future__ import annotations
 import typing
-import uno
 from abc import abstractmethod
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
@@ -173,13 +172,13 @@ class XAccessibleTable(XInterface_8f010a43):
         """
         ...
     @abstractmethod
-    def getSelectedAccessibleColumns(self) -> uno.ByteSequence:
+    def getSelectedAccessibleColumns(self) -> typing.Tuple[int, ...]:
         """
         Returns a list of the indices of completely selected columns in a table.
         """
         ...
     @abstractmethod
-    def getSelectedAccessibleRows(self) -> uno.ByteSequence:
+    def getSelectedAccessibleRows(self) -> typing.Tuple[int, ...]:
         """
         Returns a list of the indices of completely selected rows in a table.
         """

@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.container
 from __future__ import annotations
-from abc import abstractmethod, abstractproperty
+from abc import abstractmethod
 from .x_element_access import XElementAccess as XElementAccess_cd60e3f
 
 class XMap(XElementAccess_cd60e3f):
@@ -103,7 +103,8 @@ class XMap(XElementAccess_cd60e3f):
             com.sun.star.container.NoSuchElementException: ``NoSuchElementException``
         """
         ...
-    @abstractproperty
+    @property
+    @abstractmethod
     def KeyType(self) -> object:
         """
         denotes the type of the keys in the map.
@@ -112,7 +113,8 @@ class XMap(XElementAccess_cd60e3f):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ValueType(self) -> object:
         """
         denotes the type of the values in the map.

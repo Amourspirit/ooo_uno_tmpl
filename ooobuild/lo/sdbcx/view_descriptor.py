@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.sdbcx
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from .descriptor import Descriptor as Descriptor_a5200b3b
 
 class ViewDescriptor(Descriptor_a5200b3b):
@@ -35,21 +35,24 @@ class ViewDescriptor(Descriptor_a5200b3b):
     __ooo_full_ns__: str = 'com.sun.star.sdbcx.ViewDescriptor'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CatalogName(self) -> str:
         """
         is the name of the views catalog, may be empty.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CheckOption(self) -> int:
         """
         indicates if a check option should be used for the view.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Command(self) -> str:
         """
         is the command for creating the view.
@@ -58,7 +61,8 @@ class ViewDescriptor(Descriptor_a5200b3b):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SchemaName(self) -> str:
         """
         is the name of the views schema, may be empty.

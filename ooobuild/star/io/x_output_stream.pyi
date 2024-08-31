@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 
 
@@ -60,7 +59,7 @@ class XOutputStream(XInterface_8f010a43):
             com.sun.star.io.IOException: ``IOException``
         """
         ...
-    def writeBytes(self, aData: uno.ByteSequence) -> None:
+    def writeBytes(self, aData: typing.Tuple[int, ...]) -> None:
         """
         writes the whole sequence to the stream.
         

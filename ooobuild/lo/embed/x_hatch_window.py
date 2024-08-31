@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.embed
 from __future__ import annotations
 import typing
-from abc import abstractmethod, abstractproperty
+from abc import abstractmethod
 from ..lang.x_component import XComponent as XComponent_98dc0ab5
 if typing.TYPE_CHECKING:
     from ..awt.size import Size as Size_576707ef
@@ -46,7 +46,8 @@ class XHatchWindow(XComponent_98dc0ab5):
         sets the object that will control resizing/moving, if the object is not set the window can not be resized/moved.
         """
         ...
-    @abstractproperty
+    @property
+    @abstractmethod
     def HatchBorderSize(self) -> Size_576707ef:
         """
         """

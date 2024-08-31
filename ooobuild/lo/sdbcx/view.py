@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.sdbcx
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from .x_alter_view import XAlterView as XAlterView_a42a0b07
 from .x_rename import XRename as XRename_848c09cc
@@ -41,21 +41,24 @@ class View(XPropertySet_bc180bfa, XAlterView_a42a0b07, XRename_848c09cc):
     __ooo_full_ns__: str = 'com.sun.star.sdbcx.View'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CatalogName(self) -> str:
         """
         is the name of the views catalog, may be empty.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CheckOption(self) -> int:
         """
         indicates if a check option should be used for the view.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Command(self) -> str:
         """
         is the command for creating the view.
@@ -66,14 +69,16 @@ class View(XPropertySet_bc180bfa, XAlterView_a42a0b07, XRename_848c09cc):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Name(self) -> str:
         """
         is the name of the view.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SchemaName(self) -> str:
         """
         is the name of the view's schema, may be empty.

@@ -20,8 +20,7 @@
 # Namespace: com.sun.star.document
 from __future__ import annotations
 import typing
-import uno
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 if typing.TYPE_CHECKING:
     from ..i18n.x_forbidden_characters import XForbiddenCharacters as XForbiddenCharacters_df60e2d
@@ -45,61 +44,70 @@ class Settings(XPropertySet_bc180bfa):
     __ooo_full_ns__: str = 'com.sun.star.document.Settings'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def AddExternalLeading(self) -> bool:
         """
         layout engine should add value of a Font's \"external leading\" attribute to the line spacing.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ApplyUserData(self) -> bool:
         """
         specifies if the user-specific settings saved within a document should be loaded with the document.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def AutoCalculate(self) -> bool:
         """
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BitmapTableURL(self) -> str:
         """
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharacterCompressionType(self) -> int:
         """
         specifies the compression (character spacing) type used for Asian characters.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ColorTableURL(self) -> str:
         """
         contains the URL that points to a color table (file extension .soc) that will be used for showing a palette in dialogs using colors.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CurrentDatabaseCommand(self) -> str:
         """
         a string value, specifying the name of the object displayed currently (or the SQL statement used).
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CurrentDatabaseCommandType(self) -> int:
         """
         determines the interpretation of the property DataTableName.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CurrentDatabaseDataSource(self) -> str:
         """
         The name of the globally registered com.sun.star.sdb.DataSource from which the current data is taken.
@@ -108,19 +116,22 @@ class Settings(XPropertySet_bc180bfa):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DashTableURL(self) -> str:
         """
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DefaultTabStop(self) -> int:
         """
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def EmbedAsianScriptFonts(self) -> bool:
         """
         Whether to embed Asian script fonts.
@@ -131,7 +142,8 @@ class Settings(XPropertySet_bc180bfa):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def EmbedComplexScriptFonts(self) -> bool:
         """
         Whether to embed Complex script fonts.
@@ -142,7 +154,8 @@ class Settings(XPropertySet_bc180bfa):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def EmbedFonts(self) -> bool:
         """
         Whether to embed fonts used by the document (see e.g.
@@ -155,7 +168,8 @@ class Settings(XPropertySet_bc180bfa):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def EmbedLatinScriptFonts(self) -> bool:
         """
         Whether to embed Latin script fonts.
@@ -166,7 +180,8 @@ class Settings(XPropertySet_bc180bfa):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def EmbedOnlyUsedFonts(self) -> bool:
         """
         Whether to embed only the fonts that are used in the document.
@@ -177,7 +192,8 @@ class Settings(XPropertySet_bc180bfa):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def EmbedSystemFonts(self) -> bool:
         """
         Whether to embed also system fonts used by the document.
@@ -190,33 +206,38 @@ class Settings(XPropertySet_bc180bfa):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def FieldAutoUpdate(self) -> bool:
         """
         specifies if fields in text documents are updated automatically.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ForbiddenCharacters(self) -> XForbiddenCharacters_df60e2d:
         """
         gives access to the set of forbidden characters.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def GradientTableURL(self) -> str:
         """
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HatchTableURL(self) -> str:
         """
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsKernAsianPunctuation(self) -> bool:
         """
         specifies if kerning is applied to Asian punctuation.
@@ -225,7 +246,8 @@ class Settings(XPropertySet_bc180bfa):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsPrintBooklet(self) -> bool:
         """
         determines if the document will be printed as a booklet (brochure), i.e., two document pages are put together on one physical page, such that you can fold the print result and get a booklet.
@@ -234,7 +256,8 @@ class Settings(XPropertySet_bc180bfa):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsPrintBookletBack(self) -> bool:
         """
         is only effective, if IsPrintBooklet is TRUE.
@@ -245,7 +268,8 @@ class Settings(XPropertySet_bc180bfa):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsPrintBookletFront(self) -> bool:
         """
         is only effective, if IsPrintBooklet is TRUE.
@@ -256,13 +280,15 @@ class Settings(XPropertySet_bc180bfa):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def LineEndTableURL(self) -> str:
         """
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def LinkUpdateMode(self) -> int:
         """
         specifies the update mode for links when loading text documents.
@@ -271,14 +297,16 @@ class Settings(XPropertySet_bc180bfa):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def PrintQuality(self) -> int:
         """
         how printing uses color.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def PrinterIndependentLayout(self) -> int:
         """
         forbid use of printer metrics for layout
@@ -287,15 +315,17 @@ class Settings(XPropertySet_bc180bfa):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def PrinterName(self) -> str:
         """
         printer used by the document.
         """
         ...
 
-    @abstractproperty
-    def PrinterSetup(self) -> uno.ByteSequence:
+    @property
+    @abstractmethod
+    def PrinterSetup(self) -> typing.Tuple[int, ...]:
         """
         platform and driver dependent printer setup data.
         
@@ -303,14 +333,16 @@ class Settings(XPropertySet_bc180bfa):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SaveVersionOnClose(self) -> bool:
         """
         specifies if a new version is created if a document has been modified and you want to close it.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def UpdateFromTemplate(self) -> bool:
         """
         specifies if the document should be updated when the template it was created from changes.

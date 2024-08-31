@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.drawing
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from .fill_properties import FillProperties as FillProperties_f1200da8
 from .line_properties import LineProperties as LineProperties_f13f0da9
 from .rotation_descriptor import RotationDescriptor as RotationDescriptor_2cec0f63
@@ -40,7 +40,8 @@ class TextShape(FillProperties_f1200da8, LineProperties_f13f0da9, RotationDescri
     __ooo_full_ns__: str = 'com.sun.star.drawing.TextShape'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CornerRadius(self) -> int:
         """
         This is the radius of the corners.

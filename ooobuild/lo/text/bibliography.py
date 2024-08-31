@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.text
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from .base_index import BaseIndex as BaseIndex_8f0d0a40
 if typing.TYPE_CHECKING:
     from ..lang.locale import Locale as Locale_70d308fa
@@ -38,14 +38,16 @@ class Bibliography(BaseIndex_8f0d0a40):
     __ooo_full_ns__: str = 'com.sun.star.text.Bibliography'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Locale(self) -> Locale_70d308fa:
         """
         contains the locale of the index.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SortAlgorithm(self) -> str:
         """
         contains the name of the sort algorithm that is used to sort the entries.

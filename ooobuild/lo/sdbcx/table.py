@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.sdbcx
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from .x_alter_table import XAlterTable as XAlterTable_af4d0b54
 from .x_columns_supplier import XColumnsSupplier as XColumnsSupplier_f0600da9
@@ -47,14 +47,16 @@ class Table(XPropertySet_bc180bfa, XAlterTable_af4d0b54, XColumnsSupplier_f0600d
     __ooo_full_ns__: str = 'com.sun.star.sdbcx.Table'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CatalogName(self) -> str:
         """
         is the name of the table catalog.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Description(self) -> str:
         """
         supplies a comment on the table.
@@ -63,21 +65,24 @@ class Table(XPropertySet_bc180bfa, XAlterTable_af4d0b54, XColumnsSupplier_f0600d
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Name(self) -> str:
         """
         is the name of the table.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SchemaName(self) -> str:
         """
         is the name of the table schema.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Type(self) -> str:
         """
         indicates the type of the table like (TABLE, VIEW, SYSTEM TABLE).

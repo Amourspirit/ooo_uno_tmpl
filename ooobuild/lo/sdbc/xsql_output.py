@@ -20,7 +20,6 @@
 # Namespace: com.sun.star.sdbc
 from __future__ import annotations
 import typing
-import uno
 from abc import abstractmethod
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
@@ -97,7 +96,7 @@ class XSQLOutput(XInterface_8f010a43):
         """
         ...
     @abstractmethod
-    def writeBytes(self, x: uno.ByteSequence) -> None:
+    def writeBytes(self, x: typing.Tuple[int, ...]) -> None:
         """
         writes the next attribute to the stream as byte sequence.
 

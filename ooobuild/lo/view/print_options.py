@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.view
 from __future__ import annotations
-from abc import abstractproperty, ABC
+from abc import abstractmethod, ABC
 
 class PrintOptions(ABC):
     """
@@ -40,35 +40,40 @@ class PrintOptions(ABC):
     __ooo_full_ns__: str = 'com.sun.star.view.PrintOptions'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Collate(self) -> bool:
         """
         advises the printer to collate the pages of the copies.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CopyCount(self) -> int:
         """
         specifies the number of copies to print.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DuplexMode(self) -> int:
         """
         determines the duplex mode for the print job.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def FileName(self) -> str:
         """
         if set, specifies the name of a file to print to.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def JobName(self) -> bool:
         """
         The job name which is sent to the printer (can be seen in the Printer job queue).
@@ -81,7 +86,8 @@ class PrintOptions(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Pages(self) -> str:
         """
         specifies which pages to print.
@@ -90,28 +96,32 @@ class PrintOptions(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def PrinterName(self) -> str:
         """
         if set, specifies name of the printer to use.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SinglePrintJobs(self) -> bool:
         """
         advises the printer to create a single print job for each copy.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Sort(self) -> bool:
         """
         advises the printer to sort the pages of the copies.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Wait(self) -> bool:
         """
         if set to TRUE, the corresponding XPrintable.print() request will be executed synchronous.

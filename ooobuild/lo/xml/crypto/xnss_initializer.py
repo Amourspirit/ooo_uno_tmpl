@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.xml.crypto
 from __future__ import annotations
 import typing
-from abc import abstractmethod, abstractproperty
+from abc import abstractmethod
 from .x_cipher_context_supplier import XCipherContextSupplier as XCipherContextSupplier_9fd31214
 from .x_digest_context_supplier import XDigestContextSupplier as XDigestContextSupplier_a0151219
 if typing.TYPE_CHECKING:
@@ -51,7 +51,8 @@ class XNSSInitializer(XCipherContextSupplier_9fd31214, XDigestContextSupplier_a0
             LibreOffice 7.1
         """
         ...
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsNSSinitialized(self) -> bool:
         """
         the state of the NSS initialization
@@ -64,7 +65,8 @@ class XNSSInitializer(XCipherContextSupplier_9fd31214, XDigestContextSupplier_a0
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def NSSPath(self) -> str:
         """
         the current path to the NSS databases

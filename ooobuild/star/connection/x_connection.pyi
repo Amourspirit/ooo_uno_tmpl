@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 
 
@@ -61,7 +60,7 @@ class XConnection(XInterface_8f010a43):
         This string is different from the arguments to XConnection.accept() and XConnector.connect(). In general, the string contains an additional handle value. For example, \"socket,host=localhost,port=2002,uniqueValue=2324\".
         """
         ...
-    def read(self, aReadBytes: uno.ByteSequence, nBytesToRead: int) -> int:
+    def read(self, aReadBytes: typing.Tuple[int, ...], nBytesToRead: int) -> int:
         """
         reads a requested number of bytes from the connection.
         
@@ -75,7 +74,7 @@ class XConnection(XInterface_8f010a43):
             com.sun.star.io.IOException: ``IOException``
         """
         ...
-    def write(self, aData: uno.ByteSequence) -> None:
+    def write(self, aData: typing.Tuple[int, ...]) -> None:
         """
         writes the given bytesequence to the stream.
         

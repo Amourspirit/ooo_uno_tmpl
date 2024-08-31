@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 
 
@@ -34,7 +33,7 @@ class XSystemDependentWindowPeer(XInterface_8f010a43):
     """
     __pyunointerface__: str = 'com.sun.star.awt.XSystemDependentWindowPeer'
 
-    def getWindowHandle(self, ProcessId: uno.ByteSequence, SystemType: int) -> typing.Any:
+    def getWindowHandle(self, ProcessId: typing.Tuple[int, ...], SystemType: int) -> typing.Any:
         """
         returns a system-specific window handle.
         

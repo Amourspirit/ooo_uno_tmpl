@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.sdb
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from .data_settings import DataSettings as DataSettings_a3000b0c
 from ..sdbcx.descriptor import Descriptor as Descriptor_a5200b3b
 from ..sdbcx.x_columns_supplier import XColumnsSupplier as XColumnsSupplier_f0600da9
@@ -40,35 +40,40 @@ class QueryDescriptor(DataSettings_a3000b0c, Descriptor_a5200b3b, XColumnsSuppli
     __ooo_full_ns__: str = 'com.sun.star.sdb.QueryDescriptor'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Command(self) -> str:
         """
         is the command of the query, this is typically a select statement.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def EscapeProcessing(self) -> bool:
         """
         should we use escape processing for the query.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def UpdateCatalogName(self) -> str:
         """
         is the name of the update table catalog.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def UpdateSchemaName(self) -> str:
         """
         is the name of the update table schema.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def UpdateTableName(self) -> str:
         """
         is the name of the table which should be updated.

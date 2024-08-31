@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.text.textfield
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..text_field import TextField as TextField_90260a56
 
 class JumpEdit(TextField_90260a56):
@@ -35,21 +35,24 @@ class JumpEdit(TextField_90260a56):
     __ooo_full_ns__: str = 'com.sun.star.text.textfield.JumpEdit'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Hint(self) -> str:
         """
         determines a hint that is displayed at the user interface as tip.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def PlaceHolder(self) -> str:
         """
         determines the text of the place holder.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def PlaceHolderType(self) -> int:
         """
         determines the type of the place holder as described in com.sun.star.text.PlaceholderType.

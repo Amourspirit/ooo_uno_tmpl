@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.awt.tree
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..uno_control_model import UnoControlModel as UnoControlModel_c8ce0c58
 if typing.TYPE_CHECKING:
     from .x_tree_data_model import XTreeDataModel as XTreeDataModel_f9fc0d85
@@ -39,7 +39,8 @@ class TreeControlModel(UnoControlModel_c8ce0c58):
     __ooo_full_ns__: str = 'com.sun.star.awt.tree.TreeControlModel'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DataModel(self) -> XTreeDataModel_f9fc0d85:
         """
         Specifies the XTreeDataModel that is providing the hierarchical data.
@@ -48,7 +49,8 @@ class TreeControlModel(UnoControlModel_c8ce0c58):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Editable(self) -> bool:
         """
         Specifies whether the nodes of the tree are editable.
@@ -57,7 +59,8 @@ class TreeControlModel(UnoControlModel_c8ce0c58):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def InvokesStopNodeEditing(self) -> bool:
         """
         Specifies what happens when editing is interrupted by selecting another node in the tree, a change in the tree's data, or by some other means.
@@ -68,7 +71,8 @@ class TreeControlModel(UnoControlModel_c8ce0c58):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RootDisplayed(self) -> bool:
         """
         Specifies if the root node of the tree is displayed.
@@ -79,7 +83,8 @@ class TreeControlModel(UnoControlModel_c8ce0c58):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RowHeight(self) -> int:
         """
         Specifies the height of each row, in pixels.
@@ -90,7 +95,8 @@ class TreeControlModel(UnoControlModel_c8ce0c58):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SelectionType(self) -> SelectionTypeProto:
         """
         Specifies the selection mode that is enabled for this tree.
@@ -99,7 +105,8 @@ class TreeControlModel(UnoControlModel_c8ce0c58):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ShowsHandles(self) -> bool:
         """
         Specifies whether the node handles should be displayed.
@@ -110,7 +117,8 @@ class TreeControlModel(UnoControlModel_c8ce0c58):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ShowsRootHandles(self) -> bool:
         """
         Specifies whether the node handles should also be displayed at root level.

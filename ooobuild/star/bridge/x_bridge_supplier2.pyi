@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 
 
@@ -44,7 +43,7 @@ class XBridgeSupplier2(XInterface_8f010a43):
     """
     __pyunointerface__: str = 'com.sun.star.bridge.XBridgeSupplier2'
 
-    def createBridge(self, aModelDepObject: typing.Any, aProcessId: uno.ByteSequence, nSourceModelType: int, nDestModelType: int) -> typing.Any:
+    def createBridge(self, aModelDepObject: typing.Any, aProcessId: typing.Tuple[int, ...], nSourceModelType: int, nDestModelType: int) -> typing.Any:
         """
         creates a bridge to provide an object of one object model with another.
 

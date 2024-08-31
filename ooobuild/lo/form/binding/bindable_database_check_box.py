@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.form.binding
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from .bindable_data_aware_control_model import BindableDataAwareControlModel as BindableDataAwareControlModel_47091512
 from ..component.database_check_box import DatabaseCheckBox as DatabaseCheckBox_7a5910d9
 
@@ -40,7 +40,8 @@ class BindableDatabaseCheckBox(BindableDataAwareControlModel_47091512, DatabaseC
     __ooo_full_ns__: str = 'com.sun.star.form.binding.BindableDatabaseCheckBox'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SecondaryRefValue(self) -> str:
         """
         specifies a value which is to be associated with the control when it's not checked.

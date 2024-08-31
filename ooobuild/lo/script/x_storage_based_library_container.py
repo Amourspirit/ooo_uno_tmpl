@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.script
 from __future__ import annotations
 import typing
-from abc import abstractmethod, abstractproperty
+from abc import abstractmethod
 from .x_persistent_library_container import XPersistentLibraryContainer as XPersistentLibraryContainer_b6b2129e
 if typing.TYPE_CHECKING:
     from ..embed.x_storage import XStorage as XStorage_8e460a32
@@ -55,7 +55,8 @@ class XStorageBasedLibraryContainer(XPersistentLibraryContainer_b6b2129e):
             com.sun.star.lang.WrappedTargetException: ``WrappedTargetException``
         """
         ...
-    @abstractproperty
+    @property
+    @abstractmethod
     def RootStorage(self) -> XStorage_8e460a32:
         """
         denotes the root storage associated with the container.

@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.sdb
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from .x_completed_connection import XCompletedConnection as XCompletedConnection_98a0e46
 from ..sdbc.x_data_source import XDataSource as XDataSource_a2990ae7
@@ -46,14 +46,16 @@ class DatabaseAccessDataSource(XPropertySet_bc180bfa, XCompletedConnection_98a0e
     __ooo_full_ns__: str = 'com.sun.star.sdb.DatabaseAccessDataSource'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def PasswordMode(self) -> RememberAuthenticationProto:
         """
         determines the password handling.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def URL(self) -> str:
         """
         locates the database access bean.

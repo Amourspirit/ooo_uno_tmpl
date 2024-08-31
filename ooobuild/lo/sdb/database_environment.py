@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.sdb
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from .x_database_environment import XDatabaseEnvironment as XDatabaseEnvironment_8280e43
 if typing.TYPE_CHECKING:
@@ -43,7 +43,8 @@ class DatabaseEnvironment(XPropertySet_bc180bfa, XDatabaseEnvironment_8280e43):
     __ooo_full_ns__: str = 'com.sun.star.sdb.DatabaseEnvironment'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def NumberFormatsSupplier(self) -> XNumberFormatsSupplier_3afb0fb7:
         """
         provides an object for formatting numbers.

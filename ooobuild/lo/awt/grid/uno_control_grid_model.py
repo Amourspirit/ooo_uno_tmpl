@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.awt.grid
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..uno_control_model import UnoControlModel as UnoControlModel_c8ce0c58
 if typing.TYPE_CHECKING:
     from ..font_descriptor import FontDescriptor as FontDescriptor_bc110c0a
@@ -47,7 +47,8 @@ class UnoControlGridModel(UnoControlModel_c8ce0c58):
     __ooo_full_ns__: str = 'com.sun.star.awt.grid.UnoControlGridModel'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ActiveSelectionBackgroundColor(self) -> Color_68e908c5:
         """
         specifies the color to be used when drawing the background of selected cells, while the control has the focus.
@@ -56,7 +57,8 @@ class UnoControlGridModel(UnoControlModel_c8ce0c58):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ActiveSelectionTextColor(self) -> Color_68e908c5:
         """
         specifies the color to be used when drawing the text of selected cells, while the control has the focus.
@@ -65,7 +67,8 @@ class UnoControlGridModel(UnoControlModel_c8ce0c58):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ColumnHeaderHeight(self) -> int:
         """
         specifies the height of the column header row, if applicable.
@@ -78,7 +81,8 @@ class UnoControlGridModel(UnoControlModel_c8ce0c58):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ColumnModel(self) -> XGridColumnModel_16290e65:
         """
         Specifies the XGridColumnModel that is providing the column structure.
@@ -91,28 +95,32 @@ class UnoControlGridModel(UnoControlModel_c8ce0c58):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def FontDescriptor(self) -> FontDescriptor_bc110c0a:
         """
         specifies the font attributes of the text in the control.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def FontEmphasisMark(self) -> int:
         """
         specifies the com.sun.star.text.FontEmphasis value of the text in the control.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def FontRelief(self) -> int:
         """
         specifies the com.sun.star.text.FontRelief value of the text in the control.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def GridDataModel(self) -> XGridDataModel_f8b20d71:
         """
         Specifies the XGridDataModel that is providing the hierarchical data.
@@ -125,7 +133,8 @@ class UnoControlGridModel(UnoControlModel_c8ce0c58):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def GridLineColor(self) -> Color_68e908c5:
         """
         specifies the color to be used when drawing lines between cells
@@ -134,7 +143,8 @@ class UnoControlGridModel(UnoControlModel_c8ce0c58):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HScroll(self) -> bool:
         """
         Specifies the vertical scrollbar mode.
@@ -143,7 +153,8 @@ class UnoControlGridModel(UnoControlModel_c8ce0c58):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HeaderBackgroundColor(self) -> Color_68e908c5:
         """
         specifies the color to be used when drawing the background of row or column headers
@@ -152,7 +163,8 @@ class UnoControlGridModel(UnoControlModel_c8ce0c58):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HeaderTextColor(self) -> Color_68e908c5:
         """
         specifies the color to be used when drawing the text within row or column headers
@@ -161,21 +173,24 @@ class UnoControlGridModel(UnoControlModel_c8ce0c58):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HelpText(self) -> str:
         """
         specifies the help text of the control.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HelpURL(self) -> str:
         """
         specifies the help URL of the control.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def InactiveSelectionBackgroundColor(self) -> Color_68e908c5:
         """
         specifies the color to be used when drawing the background of selected cells, while the control does not have the focus.
@@ -184,7 +199,8 @@ class UnoControlGridModel(UnoControlModel_c8ce0c58):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def InactiveSelectionTextColor(self) -> Color_68e908c5:
         """
         specifies the color to be used when drawing the text of selected cells, while the control does not have the focus.
@@ -193,7 +209,8 @@ class UnoControlGridModel(UnoControlModel_c8ce0c58):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RowBackgroundColors(self) -> typing.Tuple[Color_68e908c5, ...]:
         """
         specifies the colors to be used as background for data rows.
@@ -206,7 +223,8 @@ class UnoControlGridModel(UnoControlModel_c8ce0c58):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RowHeaderWidth(self) -> int:
         """
         specifies the width of the row header column, if applicable.
@@ -217,7 +235,8 @@ class UnoControlGridModel(UnoControlModel_c8ce0c58):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RowHeight(self) -> int:
         """
         Specifies the height of rows in the grid control.
@@ -226,7 +245,8 @@ class UnoControlGridModel(UnoControlModel_c8ce0c58):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SelectionModel(self) -> SelectionTypeProto:
         """
         Specifies the selection mode that is enabled for this grid control.
@@ -235,7 +255,8 @@ class UnoControlGridModel(UnoControlModel_c8ce0c58):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ShowColumnHeader(self) -> bool:
         """
         Specifies whether the grid control should display a title row.
@@ -244,7 +265,8 @@ class UnoControlGridModel(UnoControlModel_c8ce0c58):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ShowRowHeader(self) -> bool:
         """
         Specifies whether the grid control should display a special header column.
@@ -253,14 +275,16 @@ class UnoControlGridModel(UnoControlModel_c8ce0c58):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Tabstop(self) -> bool:
         """
         Specifies that the control can be reached with the TAB key.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TextColor(self) -> Color_68e908c5:
         """
         specifies the color to be used when drawing cell texts
@@ -269,7 +293,8 @@ class UnoControlGridModel(UnoControlModel_c8ce0c58):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TextLineColor(self) -> Color_68e908c5:
         """
         specifies the color to be used when drawing text lines (underlining and strikethrough)
@@ -278,14 +303,16 @@ class UnoControlGridModel(UnoControlModel_c8ce0c58):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def UseGridLines(self) -> bool:
         """
         controls whether or not to paint horizontal and vertical lines between the grid cells.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def VScroll(self) -> bool:
         """
         Specifies the horizontal scrollbar mode.
@@ -294,7 +321,8 @@ class UnoControlGridModel(UnoControlModel_c8ce0c58):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def VerticalAlign(self) -> VerticalAlignmentProto:
         """
         specifies the vertical alignment of the content in the control.

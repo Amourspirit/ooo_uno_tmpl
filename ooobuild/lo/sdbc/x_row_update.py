@@ -20,7 +20,6 @@
 # Namespace: com.sun.star.sdbc
 from __future__ import annotations
 import typing
-import uno
 from abc import abstractmethod
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
@@ -69,7 +68,7 @@ class XRowUpdate(XInterface_8f010a43):
         """
         ...
     @abstractmethod
-    def updateBytes(self, columnIndex: int, x: uno.ByteSequence) -> None:
+    def updateBytes(self, columnIndex: int, x: typing.Tuple[int, ...]) -> None:
         """
         updates a column with a byte array value.
 

@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.document
 from __future__ import annotations
-from abc import abstractmethod, abstractproperty, ABC
+from abc import abstractmethod, ABC
 
 class XUndoAction(ABC):
     """
@@ -55,7 +55,8 @@ class XUndoAction(ABC):
             com.sun.star.document.UndoFailedException: ``UndoFailedException``
         """
         ...
-    @abstractproperty
+    @property
+    @abstractmethod
     def Title(self) -> str:
         """
         is the human-readable, localized description of the action.

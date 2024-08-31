@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.text
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from .text_content import TextContent as TextContent_a6810b4d
 
 class BaseIndexMark(TextContent_a6810b4d):
@@ -37,7 +37,8 @@ class BaseIndexMark(TextContent_a6810b4d):
     __ooo_full_ns__: str = 'com.sun.star.text.BaseIndexMark'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def AlternativeText(self) -> str:
         """
         the string that will be inserted into the corresponding index.

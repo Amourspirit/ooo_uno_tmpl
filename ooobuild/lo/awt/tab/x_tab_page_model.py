@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.awt.tab
 from __future__ import annotations
-from abc import abstractproperty, ABC
+from abc import abstractmethod, ABC
 
 class XTabPageModel(ABC):
     """
@@ -37,35 +37,40 @@ class XTabPageModel(ABC):
     __ooo_type_name__: str = 'interface'
     __pyunointerface__: str = 'com.sun.star.awt.tab.XTabPageModel'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Enabled(self) -> bool:
         """
         determines whether a tab page is enabled or disabled.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ImageURL(self) -> str:
         """
         specifies a URL that references a graphic that should be displayed in the tab bar.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TabPageID(self) -> int:
         """
         ID for tab page.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Title(self) -> str:
         """
         specifies the text that is displayed in the tab bar of the tab page.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ToolTip(self) -> str:
         """
         specifies a tooltip text that should be displayed in the tab bar.

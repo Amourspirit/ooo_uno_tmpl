@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.presentation
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..awt.x_window import XWindow as XWindow_713b0924
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from ..frame.controller import Controller as Controller_a5330b37
@@ -46,7 +46,8 @@ class OutlineView(Controller_a5330b37, XWindow_713b0924, XPropertySet_bc180bfa):
     __ooo_full_ns__: str = 'com.sun.star.presentation.OutlineView'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def VisibleArea(self) -> Rectangle_84b109e9:
         """
         This is the area that is currently visible.

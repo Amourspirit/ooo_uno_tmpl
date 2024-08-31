@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from .x_element_access import XElementAccess as XElementAccess_cd60e3f
 
 
@@ -42,7 +41,7 @@ class XIdentifierAccess(XElementAccess_cd60e3f):
             com.sun.star.lang.WrappedTargetException: ``WrappedTargetException``
         """
         ...
-    def getIdentifiers(self) -> uno.ByteSequence:
+    def getIdentifiers(self) -> typing.Tuple[int, ...]:
         """
         The order of the identifiers is not specified.
         """

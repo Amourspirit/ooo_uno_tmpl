@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
     from .x_connection import XConnection as XConnection_a36a0b0c
@@ -619,7 +618,7 @@ class XDatabaseMetaData(XInterface_8f010a43):
             SQLException: ``SQLException``
         """
         ...
-    def getUDTs(self, catalog: typing.Any, schemaPattern: str, typeNamePattern: str, types: uno.ByteSequence) -> XResultSet_98e30aa7:
+    def getUDTs(self, catalog: typing.Any, schemaPattern: str, typeNamePattern: str, types: typing.Tuple[int, ...]) -> XResultSet_98e30aa7:
         """
         Gets a description of the user-defined types defined in a particular schema.
         

@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.sdb.application
 from __future__ import annotations
 import typing
-from abc import abstractmethod, abstractproperty, ABC
+from abc import abstractmethod, ABC
 if typing.TYPE_CHECKING:
     from ...awt.x_window import XWindow as XWindow_713b0924
     from ...beans.property_value import PropertyValue as PropertyValue_c9610c73
@@ -153,7 +153,8 @@ class XDatabaseDocumentUI(ABC):
             com.sun.star.sdbc.SQLException: ``SQLException``
         """
         ...
-    @abstractproperty
+    @property
+    @abstractmethod
     def ActiveConnection(self) -> XConnection_a36a0b0c:
         """
         provides access to the current connection of the application
@@ -162,7 +163,8 @@ class XDatabaseDocumentUI(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ApplicationMainWindow(self) -> XWindow_713b0924:
         """
         provides access to the application's main window
@@ -171,14 +173,16 @@ class XDatabaseDocumentUI(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DataSource(self) -> XDataSource_a2990ae7:
         """
         provides access to the data source belong to the database document
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SubComponents(self) -> typing.Tuple[XComponent_98dc0ab5, ...]:
         """
         contains all sub components of the database document

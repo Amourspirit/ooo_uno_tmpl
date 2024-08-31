@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.document
 from __future__ import annotations
 import typing
-from abc import abstractmethod, abstractproperty
+from abc import abstractmethod
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
     from .cmis_property import CmisProperty as CmisProperty_e47d0d58
@@ -87,7 +87,8 @@ class XCmisDocument(XInterface_8f010a43):
         """
         """
         ...
-    @abstractproperty
+    @property
+    @abstractmethod
     def CmisProperties(self) -> typing.Tuple[CmisProperty_e47d0d58, ...]:
         """
         Contains the properties values named after their CMIS ID.

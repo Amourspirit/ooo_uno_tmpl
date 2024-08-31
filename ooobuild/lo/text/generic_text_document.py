@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.text
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from ..document.office_document import OfficeDocument as OfficeDocument_fecd0df2
 from ..lang.x_multi_service_factory import XMultiServiceFactory as XMultiServiceFactory_191e0eb6
@@ -71,21 +71,24 @@ class GenericTextDocument(OfficeDocument_fecd0df2, XPropertySet_bc180bfa, XMulti
     __ooo_full_ns__: str = 'com.sun.star.text.GenericTextDocument'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharLocale(self) -> Locale_70d308fa:
         """
         contains the identifier of the default locale of the document.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharacterCount(self) -> int:
         """
         contains the count of all characters in the document.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IndexAutoMarkFileURL(self) -> str:
         """
         specifies the concordance file taken into account when creating an index.
@@ -98,14 +101,16 @@ class GenericTextDocument(OfficeDocument_fecd0df2, XPropertySet_bc180bfa, XMulti
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ParagraphCount(self) -> int:
         """
         contains the count of all paragraphs in the document.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RecordChanges(self) -> bool:
         """
         specifies if change recording is active.
@@ -116,7 +121,8 @@ class GenericTextDocument(OfficeDocument_fecd0df2, XPropertySet_bc180bfa, XMulti
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TwoDigitYear(self) -> int:
         """
         specifies the first 4 digit year to be used when years are given in 2 digits.
@@ -129,14 +135,16 @@ class GenericTextDocument(OfficeDocument_fecd0df2, XPropertySet_bc180bfa, XMulti
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def WordCount(self) -> int:
         """
         contains the count of all words in the document.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def WordSeparator(self) -> str:
         """
         contains a string that consists of characters that mark the separation of words in counting the words in a document.

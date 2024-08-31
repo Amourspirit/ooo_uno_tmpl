@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.sheet
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from .x_condition_entry import XConditionEntry as XConditionEntry_e2340d32
 
 class ConditionFormatEntry(XConditionEntry_e2340d32):
@@ -34,26 +34,30 @@ class ConditionFormatEntry(XConditionEntry_e2340d32):
     __ooo_full_ns__: str = 'com.sun.star.sheet.ConditionFormatEntry'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Formula1(self) -> str:
         """
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Formula2(self) -> str:
         """
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Operator(self) -> int:
         """
         See com.sun.star.sheet.ConditionFormatOperator for valid values.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def StyleName(self) -> str:
         """
         """

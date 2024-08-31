@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
     from .atom_class_request import AtomClassRequest as AtomClassRequest_e2a60d36
@@ -56,7 +55,7 @@ class XAtomServer(XInterface_8f010a43):
         returns a whole atom class
         """
         ...
-    def getClasses(self, atomClasses: uno.ByteSequence) -> typing.Tuple[typing.Tuple[AtomDescription_d6080cdb, ...], ...]:
+    def getClasses(self, atomClasses: typing.Tuple[int, ...]) -> typing.Tuple[typing.Tuple[AtomDescription_d6080cdb, ...], ...]:
         """
         returns multiple atom classes
         """

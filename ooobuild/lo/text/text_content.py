@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.text
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from .x_text_content import XTextContent as XTextContent_b16e0ba5
 if typing.TYPE_CHECKING:
     from com.sun.star.text.TextContentAnchorType import TextContentAnchorTypeProto  # type: ignore
@@ -43,21 +43,24 @@ class TextContent(XTextContent_b16e0ba5):
     __ooo_full_ns__: str = 'com.sun.star.text.TextContent'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def AnchorType(self) -> TextContentAnchorTypeProto:
         """
         specifies how the text content is attached to its surrounding Text.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def AnchorTypes(self) -> typing.Tuple[TextContentAnchorTypeProto, ...]:
         """
         contains the anchor type of the text content.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TextWrap(self) -> WrapTextModeProto:
         """
         specifies if the text content is a shape and how the text is wrapped around the shape.

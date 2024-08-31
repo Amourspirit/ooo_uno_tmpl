@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.chart2
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from .x_chart_type_container import XChartTypeContainer as XChartTypeContainer_23c30edb
 from .x_coordinate_system import XCoordinateSystem as XCoordinateSystem_7ff0e31
 from ..util.x_cloneable import XCloneable as XCloneable_99d00aa3
@@ -36,7 +36,8 @@ class CoordinateSystem(XChartTypeContainer_23c30edb, XCoordinateSystem_7ff0e31, 
     __ooo_full_ns__: str = 'com.sun.star.chart2.CoordinateSystem'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SwapXAndYAxis(self) -> bool:
         """
         """

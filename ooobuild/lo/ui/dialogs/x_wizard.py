@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.ui.dialogs
 from __future__ import annotations
 import typing
-from abc import abstractmethod, abstractproperty
+from abc import abstractmethod
 from .x_executable_dialog import XExecutableDialog as XExecutableDialog_450f0fa1
 if typing.TYPE_CHECKING:
     from ...awt.x_window import XWindow as XWindow_713b0924
@@ -162,13 +162,15 @@ class XWizard(XExecutableDialog_450f0fa1):
         You usually call this method from within a wizard page whose state changed in a way that it affects the user's ability to reach other pages.
         """
         ...
-    @abstractproperty
+    @property
+    @abstractmethod
     def DialogWindow(self) -> XWindow_713b0924:
         """
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HelpURL(self) -> str:
         """
         is the help URL of the wizard's main window.

@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.form.runtime
 from __future__ import annotations
 import typing
-from abc import abstractmethod, abstractproperty
+from abc import abstractmethod
 from ...lang.x_component import XComponent as XComponent_98dc0ab5
 if typing.TYPE_CHECKING:
     from ...beans.named_value import NamedValue as NamedValue_a37a0af3
@@ -134,7 +134,8 @@ class XFormOperations(XComponent_98dc0ab5):
             com.sun.star.lang.WrappedTargetException: ``WrappedTargetException``
         """
         ...
-    @abstractproperty
+    @property
+    @abstractmethod
     def Controller(self) -> XFormController_4a570ffe:
         """
         provides access to the form controller which the instance is operating on.
@@ -143,14 +144,16 @@ class XFormOperations(XComponent_98dc0ab5):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Cursor(self) -> XRowSet_7a090960:
         """
         provides access to the cursor of the form the instance is operating on.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def FeatureInvalidation(self) -> XFeatureInvalidation_9f4211f4:
         """
         denotes the instance which should be notified about features whose state might have changed.
@@ -163,7 +166,8 @@ class XFormOperations(XComponent_98dc0ab5):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def UpdateCursor(self) -> XResultSetUpdate_e0fb0d0a:
         """
         provides access to the update cursor of the form the instance is operating on.

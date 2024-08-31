@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.text
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from .base_index import BaseIndex as BaseIndex_8f0d0a40
 
 class TableIndex(BaseIndex_8f0d0a40):
@@ -39,14 +39,16 @@ class TableIndex(BaseIndex_8f0d0a40):
     __ooo_full_ns__: str = 'com.sun.star.text.TableIndex'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CreateFromLabels(self) -> bool:
         """
         determines if the name or the label of an object is used to create the index.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CreateFromParagraphStyle(self) -> str:
         """
         determines if paragraphs with one particular style applied are included in the index.
@@ -57,14 +59,16 @@ class TableIndex(BaseIndex_8f0d0a40):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def LabelCategory(self) -> str:
         """
         determines the name of the sequence field that is evaluated to create the index.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def LabelDisplayType(self) -> int:
         """
         determines the way the paragraph containing a label is included in the index.

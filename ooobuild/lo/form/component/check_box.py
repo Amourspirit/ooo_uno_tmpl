@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.form.component
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ...awt.uno_control_check_box_model import UnoControlCheckBoxModel as UnoControlCheckBoxModel_383d0f5f
 from ..form_control_model import FormControlModel as FormControlModel_e2990d22
 from ..x_reset import XReset as XReset_71670917
@@ -39,7 +39,8 @@ class CheckBox(UnoControlCheckBoxModel_383d0f5f, FormControlModel_e2990d22, XRes
     __ooo_full_ns__: str = 'com.sun.star.form.component.CheckBox'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DefaultState(self) -> int:
         """
         contains a default value for the control.
@@ -48,7 +49,8 @@ class CheckBox(UnoControlCheckBoxModel_383d0f5f, FormControlModel_e2990d22, XRes
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RefValue(self) -> str:
         """
         contains a reference value which is used for submission in a HTML form

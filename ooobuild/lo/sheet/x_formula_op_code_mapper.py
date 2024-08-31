@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.sheet
 from __future__ import annotations
 import typing
-from abc import abstractmethod, abstractproperty, ABC
+from abc import abstractmethod, ABC
 if typing.TYPE_CHECKING:
     from .formula_op_code_map_entry import FormulaOpCodeMapEntry as FormulaOpCodeMapEntry_37da0f61
     from .formula_token import FormulaToken as FormulaToken_bd1c0bf8
@@ -65,7 +65,8 @@ class XFormulaOpCodeMapper(ABC):
             com.sun.star.lang.IllegalArgumentException: ``IllegalArgumentException``
         """
         ...
-    @abstractproperty
+    @property
+    @abstractmethod
     def OpCodeExternal(self) -> int:
         """
         OpCode value used for external Add-In functions.
@@ -74,7 +75,8 @@ class XFormulaOpCodeMapper(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def OpCodeUnknown(self) -> int:
         """
         OpCode value used for unknown functions.

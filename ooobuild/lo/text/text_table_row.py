@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.text
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 if typing.TYPE_CHECKING:
     from ..beans.property_value import PropertyValue as PropertyValue_c9610c73
@@ -46,14 +46,16 @@ class TextTableRow(XPropertySet_bc180bfa):
     __ooo_full_ns__: str = 'com.sun.star.text.TextTableRow'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BackColor(self) -> Color_68e908c5:
         """
         specifies the color of the background.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BackGraphic(self) -> XGraphic_a4da0afc:
         """
         contains the graphic of the background.
@@ -64,21 +66,24 @@ class TextTableRow(XPropertySet_bc180bfa):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BackGraphicFilter(self) -> str:
         """
         contains the name of the file filter of a background graphic.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BackGraphicLocation(self) -> GraphicLocationProto:
         """
         determines the position of the background graphic.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BackGraphicURL(self) -> str:
         """
         contains the URL of a background graphic.
@@ -87,14 +92,16 @@ class TextTableRow(XPropertySet_bc180bfa):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BackTransparent(self) -> bool:
         """
         If TRUE, the background color value in \"BackColor\" is not visible.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HasTextChangesOnly(self) -> bool:
         """
         If TRUE, the table row wasn't deleted or inserted with its tracked cell content.
@@ -105,21 +112,24 @@ class TextTableRow(XPropertySet_bc180bfa):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Height(self) -> int:
         """
         contains the height of the table row.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsAutoHeight(self) -> bool:
         """
         If the value of this property is TRUE, the height of the table row depends on the content of the table cells.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsSplitAllowed(self) -> bool:
         """
         If TRUE, the row is allowed to be split at page or column breaks.
@@ -130,7 +140,8 @@ class TextTableRow(XPropertySet_bc180bfa):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RowInteropGrabBag(self) -> typing.Tuple[PropertyValue_c9610c73, ...]:
         """
         Grab bag of row properties, used as a string-any map for interop purposes.
@@ -143,7 +154,8 @@ class TextTableRow(XPropertySet_bc180bfa):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TableColumnSeparators(self) -> typing.Tuple[TableColumnSeparator_1b630ed4, ...]:
         """
         contains the description of the columns in the table row.

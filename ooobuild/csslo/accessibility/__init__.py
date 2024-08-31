@@ -51,7 +51,6 @@ from ...lo.accessibility.x_accessible_key_binding import XAccessibleKeyBinding a
 from ...lo.accessibility.x_accessible_multi_line_text import XAccessibleMultiLineText as XAccessibleMultiLineText
 from ...lo.accessibility.x_accessible_relation_set import XAccessibleRelationSet as XAccessibleRelationSet
 from ...lo.accessibility.x_accessible_selection import XAccessibleSelection as XAccessibleSelection
-from ...lo.accessibility.x_accessible_state_set import XAccessibleStateSet as XAccessibleStateSet
 from ...lo.accessibility.x_accessible_table import XAccessibleTable as XAccessibleTable
 from ...lo.accessibility.x_accessible_table_selection import XAccessibleTableSelection as XAccessibleTableSelection
 from ...lo.accessibility.x_accessible_text import XAccessibleText as XAccessibleText

@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.script
 from __future__ import annotations
 import typing
-from abc import abstractmethod, abstractproperty, ABC
+from abc import abstractmethod, ABC
 if typing.TYPE_CHECKING:
     from ..lang.x_service_info import XServiceInfo as XServiceInfo_af180b5f
     from ..lang.x_type_provider import XTypeProvider as XTypeProvider_bbb40bef
@@ -56,13 +56,15 @@ class XServiceDocumenter(ABC):
         """
         """
         ...
-    @abstractproperty
+    @property
+    @abstractmethod
     def CoreBaseUrl(self) -> str:
         """
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ServiceBaseUrl(self) -> str:
         """
         """

@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.document
 from __future__ import annotations
 import typing
-from abc import abstractmethod, abstractproperty, ABC
+from abc import abstractmethod, ABC
 if typing.TYPE_CHECKING:
     from ..beans.named_value import NamedValue as NamedValue_a37a0af3
     from ..beans.property_value import PropertyValue as PropertyValue_c9610c73
@@ -119,14 +119,16 @@ class XDocumentProperties(ABC):
             com.sun.star.io.IOException: ``IOException``
         """
         ...
-    @abstractproperty
+    @property
+    @abstractmethod
     def Author(self) -> str:
         """
         contains the initial author of the document.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def AutoloadSecs(self) -> int:
         """
         contains the number of seconds after which a specified URL is to be loaded after the document is loaded into a desktop frame.
@@ -135,7 +137,8 @@ class XDocumentProperties(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def AutoloadURL(self) -> str:
         """
         contains the URL to load automatically at a specified time after the document is loaded into a desktop frame.
@@ -144,14 +147,16 @@ class XDocumentProperties(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CreationDate(self) -> DateTime_84de09d3:
         """
         contains the date and time when the document was created.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DefaultTarget(self) -> str:
         """
         contains the name of the default frame into which links should be loaded if no target is specified.
@@ -160,7 +165,8 @@ class XDocumentProperties(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Description(self) -> str:
         """
         contains a multi-line comment describing the document.
@@ -169,7 +175,8 @@ class XDocumentProperties(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DocumentStatistics(self) -> typing.Tuple[NamedValue_a37a0af3, ...]:
         """
         contains some statistics about the document.
@@ -178,21 +185,24 @@ class XDocumentProperties(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def EditingCycles(self) -> int:
         """
         describes how often the document was edited and saved.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def EditingDuration(self) -> int:
         """
         contains the net time of editing the document (in seconds).
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Generator(self) -> str:
         """
         identifies which application was used to create or last modify the document.
@@ -201,21 +211,24 @@ class XDocumentProperties(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Keywords(self) -> typing.Tuple[str, ...]:
         """
         contains a list of keywords for the document.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Language(self) -> Locale_70d308fa:
         """
         contains the default language of the document.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ModificationDate(self) -> DateTime_84de09d3:
         """
         contains the date and time of the last time the document was stored.
@@ -224,14 +237,16 @@ class XDocumentProperties(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ModifiedBy(self) -> str:
         """
         contains the name of the person who most recently stored the document.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def PrintDate(self) -> DateTime_84de09d3:
         """
         contains the date and time when the document was last printed.
@@ -240,28 +255,32 @@ class XDocumentProperties(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def PrintedBy(self) -> str:
         """
         contains the name of the person who most recently printed the document.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Subject(self) -> str:
         """
         contains the subject of the document.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TemplateDate(self) -> DateTime_84de09d3:
         """
         contains the date and time of when the document was created or updated from the template.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TemplateName(self) -> str:
         """
         contains the name of the template from which the document was created.
@@ -270,7 +289,8 @@ class XDocumentProperties(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TemplateURL(self) -> str:
         """
         contains the URL of the template from which the document was created.
@@ -279,7 +299,8 @@ class XDocumentProperties(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Title(self) -> str:
         """
         contains the title of the document.

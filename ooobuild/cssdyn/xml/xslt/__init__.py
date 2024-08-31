@@ -22,8 +22,6 @@ warnings.filterwarnings('module')
 warnings.warn('The cssdyn namespace is deprecated. Use dyn instead.', DeprecationWarning, stacklevel=2)
 
 with suppress(ImportError):
-    from ....dyn.xml.xslt.xslt2_transformer import XSLT2Transformer as XSLT2Transformer
-with suppress(ImportError):
     from ....dyn.xml.xslt.xslt_transformer import XSLTTransformer as XSLTTransformer
 with suppress(ImportError):
     from ....dyn.xml.xslt.xxslt_transformer import XXSLTTransformer as XXSLTTransformer

@@ -20,7 +20,6 @@
 # Namespace: com.sun.star.awt
 from __future__ import annotations
 import typing
-import uno
 from abc import abstractmethod
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
@@ -39,7 +38,7 @@ class XSystemChildFactory(XInterface_8f010a43):
     __pyunointerface__: str = 'com.sun.star.awt.XSystemChildFactory'
 
     @abstractmethod
-    def createSystemChild(self, Parent: object, ProcessId: uno.ByteSequence, SystemType: int) -> XWindowPeer_99760ab0:
+    def createSystemChild(self, Parent: object, ProcessId: typing.Tuple[int, ...], SystemType: int) -> XWindowPeer_99760ab0:
         """
         creates a system child window.
         

@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.logging
 from __future__ import annotations
 import typing
-from abc import abstractmethod, abstractproperty, ABC
+from abc import abstractmethod, ABC
 if typing.TYPE_CHECKING:
     from .x_log_handler import XLogHandler as XLogHandler_c7f80c27
 
@@ -78,14 +78,16 @@ class XLogger(ABC):
         removes the given handler from the list of handlers.
         """
         ...
-    @abstractproperty
+    @property
+    @abstractmethod
     def Level(self) -> int:
         """
         specifies which log events are logged or ignored.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Name(self) -> str:
         """
         denotes the name of the logger.

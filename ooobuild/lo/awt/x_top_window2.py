@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.awt
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from .x_top_window import XTopWindow as XTopWindow_8ebb0a57
 
 class XTopWindow2(XTopWindow_8ebb0a57):
@@ -34,7 +34,8 @@ class XTopWindow2(XTopWindow_8ebb0a57):
     __ooo_type_name__: str = 'interface'
     __pyunointerface__: str = 'com.sun.star.awt.XTopWindow2'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Display(self) -> int:
         """
         controls on which display the window is shown.
@@ -43,14 +44,16 @@ class XTopWindow2(XTopWindow_8ebb0a57):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsMaximized(self) -> bool:
         """
         controls whether the window is currently maximized
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsMinimized(self) -> bool:
         """
         controls whether the window is currently minimized

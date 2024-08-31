@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.style
 from __future__ import annotations
-from abc import abstractproperty, ABC
+from abc import abstractmethod, ABC
 
 class ParagraphPropertiesComplex(ABC):
     """
@@ -34,7 +34,8 @@ class ParagraphPropertiesComplex(ABC):
     __ooo_full_ns__: str = 'com.sun.star.style.ParagraphPropertiesComplex'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def WritingMode(self) -> int:
         """
         contains the writing direction, as represented by the com.sun.star.text.WritingMode2 constants

@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.text
 from __future__ import annotations
-from abc import abstractproperty, ABC
+from abc import abstractmethod, ABC
 
 class DocumentIndexMarkAsian(ABC):
     """
@@ -40,7 +40,8 @@ class DocumentIndexMarkAsian(ABC):
     __ooo_full_ns__: str = 'com.sun.star.text.DocumentIndexMarkAsian'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def PrimaryKeyReading(self) -> str:
         """
         contains the reading of the primary key of the index entry.
@@ -49,7 +50,8 @@ class DocumentIndexMarkAsian(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SecondaryKeyReading(self) -> str:
         """
         contains the reading the secondary key of the index entry.
@@ -58,7 +60,8 @@ class DocumentIndexMarkAsian(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TextReading(self) -> str:
         """
         contains the reading of the string which has been chosen for the index entry.

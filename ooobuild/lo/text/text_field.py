@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.text
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from .text_content import TextContent as TextContent_a6810b4d
 from .x_text_field import XTextField as XTextField_9a630aae
@@ -41,7 +41,8 @@ class TextField(TextContent_a6810b4d, XPropertySet_bc180bfa, XTextField_9a630aae
     __ooo_full_ns__: str = 'com.sun.star.text.TextField'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsFieldDisplayed(self) -> bool:
         """
         specifies if the text field is actually displayed.
@@ -54,7 +55,8 @@ class TextField(TextContent_a6810b4d, XPropertySet_bc180bfa, XTextField_9a630aae
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsFieldUsed(self) -> bool:
         """
         specifies if the text field is actually used in the document.
@@ -67,7 +69,8 @@ class TextField(TextContent_a6810b4d, XPropertySet_bc180bfa, XTextField_9a630aae
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Title(self) -> str:
         """
         Contains short title for the field, used to for tooltip purposes if it's non-empty.

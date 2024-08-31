@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.drawing
 from __future__ import annotations
-import uno
+import typing
 from abc import abstractmethod, ABC
 
 class XShapes3(ABC):
@@ -39,7 +39,7 @@ class XShapes3(ABC):
     __pyunointerface__: str = 'com.sun.star.drawing.XShapes3'
 
     @abstractmethod
-    def sort(self, sortOrder: uno.ByteSequence) -> None:
+    def sort(self, sortOrder: typing.Tuple[int, ...]) -> None:
         """
         Sort shapes according to given sort order, for perf reason just rearrange and don't broadcast.
         

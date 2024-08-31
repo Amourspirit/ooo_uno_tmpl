@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.awt
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from .uno_control_model import UnoControlModel as UnoControlModel_c8ce0c58
 from ..container.x_index_container import XIndexContainer as XIndexContainer_1c040ebe
 if typing.TYPE_CHECKING:
@@ -43,7 +43,8 @@ class UnoControlRoadmapModel(UnoControlModel_c8ce0c58, XIndexContainer_1c040ebe)
     __ooo_full_ns__: str = 'com.sun.star.awt.UnoControlRoadmapModel'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BackgroundColor(self) -> int:
         """
         specifies the background color (RGB) of the control.
@@ -52,14 +53,16 @@ class UnoControlRoadmapModel(UnoControlModel_c8ce0c58, XIndexContainer_1c040ebe)
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Border(self) -> int:
         """
         specifies the border style of the control.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Complete(self) -> bool:
         """
         determines whether the control container is complete or not.
@@ -68,7 +71,8 @@ class UnoControlRoadmapModel(UnoControlModel_c8ce0c58, XIndexContainer_1c040ebe)
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CurrentItemID(self) -> int:
         """
         refers to the ID of the currently selected item.
@@ -77,7 +81,8 @@ class UnoControlRoadmapModel(UnoControlModel_c8ce0c58, XIndexContainer_1c040ebe)
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Graphic(self) -> XGraphic_a4da0afc:
         """
         specifies a graphic to be displayed on the control
@@ -90,21 +95,24 @@ class UnoControlRoadmapModel(UnoControlModel_c8ce0c58, XIndexContainer_1c040ebe)
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HelpText(self) -> str:
         """
         specifies the help text of the control.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HelpURL(self) -> str:
         """
         specifies the help URL of the control.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ImageURL(self) -> str:
         """
         specifies a URL to an image to use for the control.
@@ -113,7 +121,8 @@ class UnoControlRoadmapModel(UnoControlModel_c8ce0c58, XIndexContainer_1c040ebe)
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Interactive(self) -> bool:
         """
         determines whether the control is interactive or not.
@@ -122,14 +131,16 @@ class UnoControlRoadmapModel(UnoControlModel_c8ce0c58, XIndexContainer_1c040ebe)
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Printable(self) -> bool:
         """
         specifies whether the control will be printed with the document.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Text(self) -> str:
         """
         specifies the text displayed in the control.

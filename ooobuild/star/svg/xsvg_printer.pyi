@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
     from ..xml.sax.x_document_handler import XDocumentHandler as XDocumentHandler_9b90e28
@@ -43,11 +42,11 @@ class XSVGPrinter(XInterface_8f010a43):
         """
         """
         ...
-    def printPage(self, aPrintPage: uno.ByteSequence) -> None:
+    def printPage(self, aPrintPage: typing.Tuple[int, ...]) -> None:
         """
         """
         ...
-    def startJob(self, aHandler: XDocumentHandler_9b90e28, aJobSetup: uno.ByteSequence, aJobName: str, nCopies: int, bCollate: bool) -> bool:
+    def startJob(self, aHandler: XDocumentHandler_9b90e28, aJobSetup: typing.Tuple[int, ...], aJobName: str, nCopies: int, bCollate: bool) -> bool:
         """
         """
         ...

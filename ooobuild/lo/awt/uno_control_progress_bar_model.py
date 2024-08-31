@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.awt
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from .uno_control_model import UnoControlModel as UnoControlModel_c8ce0c58
 if typing.TYPE_CHECKING:
     from ..util.color import Color as Color_68e908c5
@@ -42,21 +42,24 @@ class UnoControlProgressBarModel(UnoControlModel_c8ce0c58):
     __ooo_full_ns__: str = 'com.sun.star.awt.UnoControlProgressBarModel'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BackgroundColor(self) -> Color_68e908c5:
         """
         specifies the background color (RGB) of the control.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Border(self) -> int:
         """
         specifies the border style of the control.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BorderColor(self) -> int:
         """
         specifies the color of the border, if present
@@ -69,56 +72,64 @@ class UnoControlProgressBarModel(UnoControlModel_c8ce0c58):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Enabled(self) -> bool:
         """
         determines whether the control is enabled or disabled.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def FillColor(self) -> Color_68e908c5:
         """
         specifies the fill color (RGB) of the control.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HelpText(self) -> str:
         """
         specifies the help text of the control.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HelpURL(self) -> str:
         """
         specifies the help URL of the control.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Printable(self) -> bool:
         """
         specifies that the control will be printed with the document.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ProgressValue(self) -> int:
         """
         specifies the progress value of the control.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ProgressValueMax(self) -> int:
         """
         specifies the maximum progress value of the control.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ProgressValueMin(self) -> int:
         """
         specifies the minimum progress value of the control.

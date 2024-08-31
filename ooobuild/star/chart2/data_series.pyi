@@ -20,7 +20,6 @@
 # Namespace: com.sun.star.chart2
 from __future__ import annotations
 import typing
-import uno
 from .data_point_properties import DataPointProperties as DataPointProperties_24a00efd
 from .x_data_series import XDataSeries as XDataSeries_b8150b89
 from .x_regression_curve_container import XRegressionCurveContainer as XRegressionCurveContainer_8801116d
@@ -60,7 +59,7 @@ class DataSeries(DataPointProperties_24a00efd, XDataSeries_b8150b89, XRegression
     def AttachedAxisIndex(self, value: int) -> None:
         ...
     @property
-    def AttributedDataPoints(self) -> uno.ByteSequence:
+    def AttributedDataPoints(self) -> typing.Tuple[int, ...]:
         """
         This service will be used to render this data series.
         
@@ -80,10 +79,10 @@ class DataSeries(DataPointProperties_24a00efd, XDataSeries_b8150b89, XRegression
         """
         ...
     @AttributedDataPoints.setter
-    def AttributedDataPoints(self, value: uno.ByteSequence) -> None:
+    def AttributedDataPoints(self, value: typing.Tuple[int, ...]) -> None:
         ...
     @property
-    def DeletedLegendEntries(self) -> uno.ByteSequence:
+    def DeletedLegendEntries(self) -> typing.Tuple[int, ...]:
         """
         A sequence of indexes denoting which data points shouldn't be shown in the legend.
         
@@ -93,7 +92,7 @@ class DataSeries(DataPointProperties_24a00efd, XDataSeries_b8150b89, XRegression
         """
         ...
     @DeletedLegendEntries.setter
-    def DeletedLegendEntries(self, value: uno.ByteSequence) -> None:
+    def DeletedLegendEntries(self, value: typing.Tuple[int, ...]) -> None:
         ...
     @property
     def ShowCustomLeaderLines(self) -> bool:

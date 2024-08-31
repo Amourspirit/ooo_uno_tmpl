@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.chart
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from .chart_data_point_properties import ChartDataPointProperties as ChartDataPointProperties_677c10bd
 
 class ChartPieSegmentProperties(ChartDataPointProperties_677c10bd):
@@ -35,7 +35,8 @@ class ChartPieSegmentProperties(ChartDataPointProperties_677c10bd):
     __ooo_full_ns__: str = 'com.sun.star.chart.ChartPieSegmentProperties'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SegmentOffset(self) -> int:
         """
         reflects the offset of a pie segment in percent of the radius.

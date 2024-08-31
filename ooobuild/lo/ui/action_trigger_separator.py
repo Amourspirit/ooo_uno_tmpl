@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.ui
 from __future__ import annotations
-from abc import abstractproperty, ABC
+from abc import abstractmethod, ABC
 
 class ActionTriggerSeparator(ABC):
     """
@@ -36,7 +36,8 @@ class ActionTriggerSeparator(ABC):
     __ooo_full_ns__: str = 'com.sun.star.ui.ActionTriggerSeparator'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SeparatorType(self) -> int:
         """
         determines the type of the separator using constants from ActionTriggerSeparatorType.

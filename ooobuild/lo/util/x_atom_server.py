@@ -20,7 +20,6 @@
 # Namespace: com.sun.star.util
 from __future__ import annotations
 import typing
-import uno
 from abc import abstractmethod
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
@@ -62,7 +61,7 @@ class XAtomServer(XInterface_8f010a43):
         """
         ...
     @abstractmethod
-    def getClasses(self, atomClasses: uno.ByteSequence) -> typing.Tuple[typing.Tuple[AtomDescription_d6080cdb, ...], ...]:
+    def getClasses(self, atomClasses: typing.Tuple[int, ...]) -> typing.Tuple[typing.Tuple[AtomDescription_d6080cdb, ...], ...]:
         """
         returns multiple atom classes
         """

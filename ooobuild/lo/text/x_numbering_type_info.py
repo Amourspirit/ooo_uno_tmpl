@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.text
 from __future__ import annotations
-import uno
+import typing
 from abc import abstractmethod
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 
@@ -50,7 +50,7 @@ class XNumberingTypeInfo(XInterface_8f010a43):
         """
         ...
     @abstractmethod
-    def getSupportedNumberingTypes(self) -> uno.ByteSequence:
+    def getSupportedNumberingTypes(self) -> typing.Tuple[int, ...]:
         """
         returns the numbering type values that are supported by the component.
         """

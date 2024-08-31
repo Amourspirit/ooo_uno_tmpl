@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.sheet
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from .x_data_pilot_data_layout_field_supplier import XDataPilotDataLayoutFieldSupplier as XDataPilotDataLayoutFieldSupplier_c07142b
 from .x_data_pilot_descriptor import XDataPilotDescriptor as XDataPilotDescriptor_27650f1a
@@ -44,21 +44,24 @@ class DataPilotDescriptor(XPropertySet_bc180bfa, XDataPilotDataLayoutFieldSuppli
     __ooo_full_ns__: str = 'com.sun.star.sheet.DataPilotDescriptor'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ColumnGrand(self) -> bool:
         """
         specifies if columns for grand total results are created.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DrillDownOnDoubleClick(self) -> bool:
         """
         specifies whether to drill down to details or go into edit mode.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def GrandTotalName(self) -> str:
         """
         specifies a label for grand total results.
@@ -69,14 +72,16 @@ class DataPilotDescriptor(XPropertySet_bc180bfa, XDataPilotDataLayoutFieldSuppli
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IgnoreEmptyRows(self) -> bool:
         """
         specifies if empty rows in the source data are ignored.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ImportDescriptor(self) -> typing.Tuple[PropertyValue_c9610c73, ...]:
         """
         specifies parameters to create the data pilot table from a database.
@@ -87,21 +92,24 @@ class DataPilotDescriptor(XPropertySet_bc180bfa, XDataPilotDataLayoutFieldSuppli
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RepeatIfEmpty(self) -> bool:
         """
         specifies if empty category cells in the source data should be treated as repetition of the content from the previous row.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RowGrand(self) -> bool:
         """
         specifies if rows for grand total results are created.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ServiceArguments(self) -> typing.Tuple[PropertyValue_c9610c73, ...]:
         """
         specifies arguments that are passed to the implementation named by SourceServiceName.
@@ -112,14 +120,16 @@ class DataPilotDescriptor(XPropertySet_bc180bfa, XDataPilotDataLayoutFieldSuppli
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ShowFilterButton(self) -> bool:
         """
         specifies whether the filter button is shown.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SourceServiceName(self) -> str:
         """
         specifies the name of a DataPilotSource implementation for the data pilot table.

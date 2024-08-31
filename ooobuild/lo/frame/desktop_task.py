@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.frame
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from .x_desktop_task import XDesktopTask as XDesktopTask_bb4c0bd8
 from .x_frames_supplier import XFramesSupplier as XFramesSupplier_e12a0d1d
@@ -46,46 +46,53 @@ class DesktopTask(XPropertySet_bc180bfa, XDesktopTask_bb4c0bd8, XFramesSupplier_
     __ooo_full_ns__: str = 'com.sun.star.frame.DesktopTask'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsAlwaysVisible(self) -> bool:
         """
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsDesktop(self) -> bool:
         """
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsFloating(self) -> bool:
         """
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsVisible(self) -> bool:
         """
         use th visible state of the frame container window instead of this
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Position(self) -> Point_5fb2085e:
         """
         use the position of the frame container window instead of this
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Size(self) -> Size_576707ef:
         """
         use the size of the frame container window instead of this
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Title(self) -> str:
         """
         use property Frame.Title instead of that

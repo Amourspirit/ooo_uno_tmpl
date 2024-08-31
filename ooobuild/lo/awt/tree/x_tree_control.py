@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.awt.tree
 from __future__ import annotations
 import typing
-from abc import abstractmethod, abstractproperty
+from abc import abstractmethod
 from ...view.x_multi_selection_supplier import XMultiSelectionSupplier as XMultiSelectionSupplier_4b0d1020
 if typing.TYPE_CHECKING:
     from ..rectangle import Rectangle as Rectangle_84b109e9
@@ -189,7 +189,8 @@ class XTreeControl(XMultiSelectionSupplier_4b0d1020):
         Has no effect if the tree isn't being edited.
         """
         ...
-    @abstractproperty
+    @property
+    @abstractmethod
     def DefaultCollapsedGraphicURL(self) -> str:
         """
         If the given URL points to a loadable graphic, the graphic is rendered before collapsed non leaf nodes.
@@ -198,7 +199,8 @@ class XTreeControl(XMultiSelectionSupplier_4b0d1020):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DefaultExpandedGraphicURL(self) -> str:
         """
         If the given URL points to a loadable graphic, the graphic is rendered before expanded non leaf nodes.

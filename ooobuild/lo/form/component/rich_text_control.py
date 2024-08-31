@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.form.component
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ...awt.uno_control_edit_model import UnoControlEditModel as UnoControlEditModel_fd8e0dde
 from ..form_control_model import FormControlModel as FormControlModel_e2990d22
 from ...text.text_range import TextRange as TextRange_90540a5f
@@ -37,7 +37,8 @@ class RichTextControl(UnoControlEditModel_fd8e0dde, FormControlModel_e2990d22, T
     __ooo_full_ns__: str = 'com.sun.star.form.component.RichTextControl'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HardLineBreaks(self) -> bool:
         """
         specifies whether text should be automatically wrapped to fit into the control.
@@ -46,7 +47,8 @@ class RichTextControl(UnoControlEditModel_fd8e0dde, FormControlModel_e2990d22, T
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RichText(self) -> bool:
         """
         specifies whether the control should display the text including all its formatting.

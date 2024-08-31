@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.text
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from .x_text_view_cursor_supplier import XTextViewCursorSupplier as XTextViewCursorSupplier_4c931037
 from ..view.office_document_view import OfficeDocumentView as OfficeDocumentView_fd320de9
@@ -41,7 +41,8 @@ class TextDocumentView(OfficeDocumentView_fd320de9, XPropertySet_bc180bfa, XText
     __ooo_full_ns__: str = 'com.sun.star.text.TextDocumentView'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsConstantSpellcheck(self) -> bool:
         """
         specifies if spell checking should be done while typing.
@@ -52,7 +53,8 @@ class TextDocumentView(OfficeDocumentView_fd320de9, XPropertySet_bc180bfa, XText
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsHideSpellMarks(self) -> bool:
         """
         specifies if the marks for misspelled text should be displayed.
@@ -63,7 +65,8 @@ class TextDocumentView(OfficeDocumentView_fd320de9, XPropertySet_bc180bfa, XText
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def LineCount(self) -> int:
         """
         returns the number of lines in the document
@@ -78,7 +81,8 @@ class TextDocumentView(OfficeDocumentView_fd320de9, XPropertySet_bc180bfa, XText
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def PageCount(self) -> int:
         """
         returns the number of pages in the document

@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.chart2
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.property_set import PropertySet as PropertySet_b0e70ba2
 from .x_data_table import XDataTable as XDataTable_ac570b06
 from ..drawing.fill_properties import FillProperties as FillProperties_f1200da8
@@ -42,28 +42,32 @@ class DataTable(PropertySet_b0e70ba2, FillProperties_f1200da8, LineProperties_f1
     __ooo_full_ns__: str = 'com.sun.star.chart2.DataTable'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HBorder(self) -> bool:
         """
         Show the horizontal border of the data table.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Keys(self) -> bool:
         """
         Show the legend keys in the data table.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Outline(self) -> bool:
         """
         Show the outline of the data table.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def VBorder(self) -> bool:
         """
         Show the vertical border of the data table.

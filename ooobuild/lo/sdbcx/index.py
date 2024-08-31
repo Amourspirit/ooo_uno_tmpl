@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.sdbcx
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from .x_columns_supplier import XColumnsSupplier as XColumnsSupplier_f0600da9
 from .x_data_descriptor_factory import XDataDescriptorFactory as XDataDescriptorFactory_46170fe5
@@ -41,35 +41,40 @@ class Index(XPropertySet_bc180bfa, XColumnsSupplier_f0600da9, XDataDescriptorFac
     __ooo_full_ns__: str = 'com.sun.star.sdbcx.Index'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Catalog(self) -> str:
         """
         is the name of the index catalog, may be empty.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsClustered(self) -> bool:
         """
         indicates that the index is clustered.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsPrimaryKeyIndex(self) -> bool:
         """
         indicates that the index is used for the primary key.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsUnique(self) -> bool:
         """
         indicates that the index allow only unique values.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Name(self) -> str:
         """
         is the name of the index.

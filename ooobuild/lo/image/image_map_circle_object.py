@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.image
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from .image_map_object import ImageMapObject as ImageMapObject_d1e20c63
 if typing.TYPE_CHECKING:
     from ..awt.point import Point as Point_5fb2085e
@@ -38,14 +38,16 @@ class ImageMapCircleObject(ImageMapObject_d1e20c63):
     __ooo_full_ns__: str = 'com.sun.star.image.ImageMapCircleObject'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Center(self) -> Point_5fb2085e:
         """
         This is the center point of the circle in pixels.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Radius(self) -> int:
         """
         This is the radius of the circle in pixels.

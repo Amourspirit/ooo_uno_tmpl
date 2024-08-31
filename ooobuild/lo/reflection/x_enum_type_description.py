@@ -20,7 +20,6 @@
 # Namespace: com.sun.star.reflection
 from __future__ import annotations
 import typing
-import uno
 from abc import abstractmethod
 from .x_type_description import XTypeDescription as XTypeDescription_3c210fb1
 
@@ -49,7 +48,7 @@ class XEnumTypeDescription(XTypeDescription_3c210fb1):
         """
         ...
     @abstractmethod
-    def getEnumValues(self) -> uno.ByteSequence:
+    def getEnumValues(self) -> typing.Tuple[int, ...]:
         """
         Returns the enum member names.
         """

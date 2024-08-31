@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.text
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from .base_index_mark import BaseIndexMark as BaseIndexMark_bbb30bcb
 
 class DocumentIndexMark(BaseIndexMark_bbb30bcb):
@@ -35,7 +35,8 @@ class DocumentIndexMark(BaseIndexMark_bbb30bcb):
     __ooo_full_ns__: str = 'com.sun.star.text.DocumentIndexMark'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsMainEntry(self) -> bool:
         """
         determines if this entry is a main entry.
@@ -44,7 +45,8 @@ class DocumentIndexMark(BaseIndexMark_bbb30bcb):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def PrimaryKey(self) -> str:
         """
         contains the primary key of the index entry.
@@ -53,7 +55,8 @@ class DocumentIndexMark(BaseIndexMark_bbb30bcb):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SecondaryKey(self) -> str:
         """
         contains the secondary key of the index entry.

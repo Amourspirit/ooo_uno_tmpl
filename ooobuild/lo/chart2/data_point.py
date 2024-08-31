@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.chart2
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from .data_point_properties import DataPointProperties as DataPointProperties_24a00efd
 from ..style.character_properties import CharacterProperties as CharacterProperties_1d4f0ef3
 from ..style.character_properties_asian import CharacterPropertiesAsian as CharacterPropertiesAsian_6d8a10df
@@ -37,7 +37,8 @@ class DataPoint(DataPointProperties_24a00efd, CharacterProperties_1d4f0ef3, Char
     __ooo_full_ns__: str = 'com.sun.star.chart2.DataPoint'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Offset(self) -> float:
         """
         this property handles the style.

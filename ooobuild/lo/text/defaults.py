@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.text
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from ..style.character_properties import CharacterProperties as CharacterProperties_1d4f0ef3
 from ..style.character_properties_asian import CharacterPropertiesAsian as CharacterPropertiesAsian_6d8a10df
@@ -41,7 +41,8 @@ class Defaults(CharacterProperties_1d4f0ef3, CharacterPropertiesAsian_6d8a10df, 
     __ooo_full_ns__: str = 'com.sun.star.text.Defaults'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TabStopDistance(self) -> int:
         """
         default tab-distance to be used.

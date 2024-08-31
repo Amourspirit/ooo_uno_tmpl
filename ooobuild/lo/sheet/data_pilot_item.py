@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.sheet
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from ..container.x_named import XNamed as XNamed_a6520b08
 
@@ -40,14 +40,16 @@ class DataPilotItem(XPropertySet_bc180bfa, XNamed_a6520b08):
     __ooo_full_ns__: str = 'com.sun.star.sheet.DataPilotItem'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsHidden(self) -> bool:
         """
         specifies whether the item is hidden.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Position(self) -> int:
         """
         specifies the item's position in its field if sorting is manual.
@@ -58,7 +60,8 @@ class DataPilotItem(XPropertySet_bc180bfa, XNamed_a6520b08):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ShowDetail(self) -> bool:
         """
         specifies whether the item is showing detail.

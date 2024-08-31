@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
     from .x_accessible import XAccessible as XAccessible_1cbc0eb6
@@ -156,12 +155,12 @@ class XAccessibleTable(XInterface_8f010a43):
         Returns the summary description of the table.
         """
         ...
-    def getSelectedAccessibleColumns(self) -> uno.ByteSequence:
+    def getSelectedAccessibleColumns(self) -> typing.Tuple[int, ...]:
         """
         Returns a list of the indices of completely selected columns in a table.
         """
         ...
-    def getSelectedAccessibleRows(self) -> uno.ByteSequence:
+    def getSelectedAccessibleRows(self) -> typing.Tuple[int, ...]:
         """
         Returns a list of the indices of completely selected rows in a table.
         """

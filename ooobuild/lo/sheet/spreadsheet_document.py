@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.sheet
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..document.office_document import OfficeDocument as OfficeDocument_fecd0df2
 from ..document.x_action_lockable import XActionLockable as XActionLockable_cb30e3a
 from ..document.x_link_target_supplier import XLinkTargetSupplier as XLinkTargetSupplier_4ac21008
@@ -56,49 +56,56 @@ class SpreadsheetDocument(OfficeDocument_fecd0df2, SpreadsheetDocumentSettings_a
     __ooo_full_ns__: str = 'com.sun.star.sheet.SpreadsheetDocument'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def AreaLinks(self) -> XAreaLinks_a3ce0af3:
         """
         contains the collection of area links in the document.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ColumnLabelRanges(self) -> XLabelRanges_bac20bb9:
         """
         contains the collection of column label ranges in the document.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DDELinks(self) -> XNameAccess_e2ab0cf6:
         """
         contains the collection of DDE links in the document.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DatabaseRanges(self) -> XDatabaseRanges_e0690cee:
         """
         contains the collection of database ranges in the document.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def NamedRanges(self) -> XNamedRanges_bb030bbe:
         """
         contains the collection of named ranges in the document.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RowLabelRanges(self) -> XLabelRanges_bac20bb9:
         """
         contains the collection of row label ranges in the document.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SheetLinks(self) -> XNameAccess_e2ab0cf6:
         """
         contains the collection of sheet links in the document.

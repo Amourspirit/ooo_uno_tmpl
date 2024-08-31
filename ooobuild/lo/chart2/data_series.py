@@ -20,8 +20,7 @@
 # Namespace: com.sun.star.chart2
 from __future__ import annotations
 import typing
-import uno
-from abc import abstractproperty
+from abc import abstractmethod
 from .data_point_properties import DataPointProperties as DataPointProperties_24a00efd
 from .x_data_series import XDataSeries as XDataSeries_b8150b89
 from .x_regression_curve_container import XRegressionCurveContainer as XRegressionCurveContainer_8801116d
@@ -49,7 +48,8 @@ class DataSeries(DataPointProperties_24a00efd, XDataSeries_b8150b89, XRegression
     __ooo_full_ns__: str = 'com.sun.star.chart2.DataSeries'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def AttachedAxisIndex(self) -> int:
         """
         This property describes whether the series should be shown at the main value axis or at the secondary value axis.
@@ -62,8 +62,9 @@ class DataSeries(DataPointProperties_24a00efd, XDataSeries_b8150b89, XRegression
         """
         ...
 
-    @abstractproperty
-    def AttributedDataPoints(self) -> uno.ByteSequence:
+    @property
+    @abstractmethod
+    def AttributedDataPoints(self) -> typing.Tuple[int, ...]:
         """
         This service will be used to render this data series.
         
@@ -83,8 +84,9 @@ class DataSeries(DataPointProperties_24a00efd, XDataSeries_b8150b89, XRegression
         """
         ...
 
-    @abstractproperty
-    def DeletedLegendEntries(self) -> uno.ByteSequence:
+    @property
+    @abstractmethod
+    def DeletedLegendEntries(self) -> typing.Tuple[int, ...]:
         """
         A sequence of indexes denoting which data points shouldn't be shown in the legend.
         
@@ -94,7 +96,8 @@ class DataSeries(DataPointProperties_24a00efd, XDataSeries_b8150b89, XRegression
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ShowCustomLeaderLines(self) -> bool:
         """
         This property describes whether the data point and the data label are connected with a leader line.
@@ -105,7 +108,8 @@ class DataSeries(DataPointProperties_24a00efd, XDataSeries_b8150b89, XRegression
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ShowLegendEntry(self) -> bool:
         """
         This property describes whether the legend entry for the the data series should be shown.
@@ -116,14 +120,16 @@ class DataSeries(DataPointProperties_24a00efd, XDataSeries_b8150b89, XRegression
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def StackingDirection(self) -> StackingDirectionProto:
         """
         indicates whether this series should be stacked with respect to the previous series.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def VaryColorsByPoint(self) -> bool:
         """
         If TRUE, the data points of this series get different colors by default, like in a pie chart.

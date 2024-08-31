@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.report
 from __future__ import annotations
 import typing
-from abc import abstractmethod, abstractproperty
+from abc import abstractmethod
 from ..container.x_child import XChild as XChild_a6390b07
 from ..container.x_container import XContainer as XContainer_d6fb0cc6
 from ..container.x_index_container import XIndexContainer as XIndexContainer_1c040ebe
@@ -47,7 +47,8 @@ class XGroups(XChild_a6390b07, XContainer_d6fb0cc6, XIndexContainer_1c040ebe, XC
         factory method for XGroup.
         """
         ...
-    @abstractproperty
+    @property
+    @abstractmethod
     def ReportDefinition(self) -> XReportDefinition_ec30e81:
         """
         """

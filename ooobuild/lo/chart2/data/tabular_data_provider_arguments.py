@@ -20,8 +20,7 @@
 # Namespace: com.sun.star.chart2.data
 from __future__ import annotations
 import typing
-import uno
-from abc import abstractproperty, ABC
+from abc import abstractmethod, ABC
 if typing.TYPE_CHECKING:
     from com.sun.star.chart.ChartDataRowSource import ChartDataRowSourceProto  # type: ignore
 
@@ -37,7 +36,8 @@ class TabularDataProviderArguments(ABC):
     __ooo_full_ns__: str = 'com.sun.star.chart2.data.TabularDataProviderArguments'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CellRangeRepresentation(self) -> str:
         """
         the range address string spanning all data.
@@ -52,7 +52,8 @@ class TabularDataProviderArguments(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DataRowSource(self) -> ChartDataRowSourceProto:
         """
         determines, whether data sequences are created out of columns or rows in a table.
@@ -61,7 +62,8 @@ class TabularDataProviderArguments(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def FirstCellAsLabel(self) -> bool:
         """
         If data comes from columns, the first row will provide the labels for all sequences, if data comes from rows, the first column will provide the labels for all sequences.
@@ -72,7 +74,8 @@ class TabularDataProviderArguments(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HasCategories(self) -> bool:
         """
         If FALSE the data provider may create a data sequence containing generated categories that fit the rest of the data, like e.g.
@@ -85,8 +88,9 @@ class TabularDataProviderArguments(ABC):
         """
         ...
 
-    @abstractproperty
-    def SequenceMapping(self) -> uno.ByteSequence:
+    @property
+    @abstractmethod
+    def SequenceMapping(self) -> typing.Tuple[int, ...]:
         """
         determines the order of the created labeled sequences
         
@@ -98,7 +102,8 @@ class TabularDataProviderArguments(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TableNumberList(self) -> str:
         """
         This property is for providing proprietary table indexes for each table appearing in a range given in CellRangeRepresentation.

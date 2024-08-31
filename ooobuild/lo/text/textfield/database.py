@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.text.textfield
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..dependent_text_field import DependentTextField as DependentTextField_fed90ded
 
 class Database(DependentTextField_fed90ded):
@@ -35,7 +35,8 @@ class Database(DependentTextField_fed90ded):
     __ooo_full_ns__: str = 'com.sun.star.text.textfield.Database'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Content(self) -> str:
         """
         contains the database content that was merged in the last database merge action.
@@ -44,7 +45,8 @@ class Database(DependentTextField_fed90ded):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CurrentPresentation(self) -> str:
         """
         contains the current content of the text field.
@@ -53,14 +55,16 @@ class Database(DependentTextField_fed90ded):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DataBaseFormat(self) -> bool:
         """
         determines whether the number format is number display format is read from the database settings.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def NumberFormat(self) -> int:
         """
         this is the number format for this field.

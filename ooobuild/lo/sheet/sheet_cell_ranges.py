@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.sheet
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..chart.x_chart_data_array import XChartDataArray as XChartDataArray_df4c0cdd
 from ..container.x_enumeration_access import XEnumerationAccess as XEnumerationAccess_4bac0ffc
 from ..container.x_name_container import XNameContainer as XNameContainer_cb90e47
@@ -51,7 +51,8 @@ class SheetCellRanges(SheetRangesQuery_efbe0d90, CharacterProperties_1d4f0ef3, C
     __ooo_full_ns__: str = 'com.sun.star.sheet.SheetCellRanges'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def AbsoluteName(self) -> str:
         """
         Returns the absolute address of the ranges as string, e.g.
@@ -60,7 +61,8 @@ class SheetCellRanges(SheetRangesQuery_efbe0d90, CharacterProperties_1d4f0ef3, C
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ConditionalFormat(self) -> XSheetConditionalEntries_694810c0:
         """
         contains the conditional formatting settings for this cell.
@@ -69,7 +71,8 @@ class SheetCellRanges(SheetRangesQuery_efbe0d90, CharacterProperties_1d4f0ef3, C
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ConditionalFormatLocal(self) -> XSheetConditionalEntries_694810c0:
         """
         contains the conditional formatting settings for this cell, using localized formulas.
@@ -78,7 +81,8 @@ class SheetCellRanges(SheetRangesQuery_efbe0d90, CharacterProperties_1d4f0ef3, C
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Validation(self) -> XPropertySet_bc180bfa:
         """
         contains the data validation settings for this cell.
@@ -87,7 +91,8 @@ class SheetCellRanges(SheetRangesQuery_efbe0d90, CharacterProperties_1d4f0ef3, C
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ValidationLocal(self) -> XPropertySet_bc180bfa:
         """
         contains the data validation settings for this cell, using localized formulas.

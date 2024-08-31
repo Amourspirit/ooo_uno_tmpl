@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.rdf
 from __future__ import annotations
-from abc import abstractproperty, ABC
+from abc import abstractmethod, ABC
 
 class XNode(ABC):
     """
@@ -39,7 +39,8 @@ class XNode(ABC):
     __ooo_type_name__: str = 'interface'
     __pyunointerface__: str = 'com.sun.star.rdf.XNode'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def StringValue(self) -> str:
         """
         the string value of the node.

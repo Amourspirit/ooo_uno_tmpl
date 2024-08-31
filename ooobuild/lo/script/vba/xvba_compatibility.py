@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.script.vba
 from __future__ import annotations
 import typing
-from abc import abstractmethod, abstractproperty, ABC
+from abc import abstractmethod, ABC
 if typing.TYPE_CHECKING:
     from .xvba_script_listener import XVBAScriptListener as XVBAScriptListener_533e0ff0
 
@@ -50,19 +50,22 @@ class XVBACompatibility(ABC):
         """
         """
         ...
-    @abstractproperty
+    @property
+    @abstractmethod
     def ProjectName(self) -> str:
         """
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RunningVBAScripts(self) -> int:
         """
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def VBACompatibilityMode(self) -> bool:
         """
         """

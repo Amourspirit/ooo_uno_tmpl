@@ -20,8 +20,7 @@
 # Namespace: com.sun.star.form.component
 from __future__ import annotations
 import typing
-import uno
-from abc import abstractproperty
+from abc import abstractmethod
 from ...awt.uno_control_list_box_model import UnoControlListBoxModel as UnoControlListBoxModel_2a3c0f1d
 from ..form_control_model import FormControlModel as FormControlModel_e2990d22
 from ..x_reset import XReset as XReset_71670917
@@ -39,8 +38,9 @@ class ListBox(UnoControlListBoxModel_2a3c0f1d, FormControlModel_e2990d22, XReset
     __ooo_full_ns__: str = 'com.sun.star.form.component.ListBox'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
-    def DefaultSelection(self) -> uno.ByteSequence:
+    @property
+    @abstractmethod
+    def DefaultSelection(self) -> typing.Tuple[int, ...]:
         """
         contains the indexes of entries of the listbox, which should selected by default.
         
@@ -48,7 +48,8 @@ class ListBox(UnoControlListBoxModel_2a3c0f1d, FormControlModel_e2990d22, XReset
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ListSource(self) -> typing.Tuple[str, ...]:
         """
         contains the values associated to the strings to be displayed (which are specified by com.sun.star.awt.UnoControlListBoxModel.StringItemList)

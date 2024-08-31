@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.text
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..style.numbering_rule import NumberingRule as NumberingRule_cb530c78
 
 class ChapterNumberingRule(NumberingRule_cb530c78):
@@ -43,7 +43,8 @@ class ChapterNumberingRule(NumberingRule_cb530c78):
     __ooo_full_ns__: str = 'com.sun.star.text.ChapterNumberingRule'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HeadingStyleName(self) -> str:
         """
         contains the name of the paragraph style that marks this heading level.

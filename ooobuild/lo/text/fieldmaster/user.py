@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.text.fieldmaster
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..text_field_master import TextFieldMaster as TextFieldMaster_d6410cc2
 
 class User(TextFieldMaster_d6410cc2):
@@ -35,21 +35,24 @@ class User(TextFieldMaster_d6410cc2):
     __ooo_full_ns__: str = 'com.sun.star.text.fieldmaster.User'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Content(self) -> str:
         """
         contains the content.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsExpression(self) -> bool:
         """
         determines whether the field contains an expression.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Value(self) -> float:
         """
         contains the value.

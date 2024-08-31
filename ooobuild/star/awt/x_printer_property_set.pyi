@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 
 
@@ -36,7 +35,7 @@ class XPrinterPropertySet(XPropertySet_bc180bfa):
     """
     __pyunointerface__: str = 'com.sun.star.awt.XPrinterPropertySet'
 
-    def getBinarySetup(self) -> uno.ByteSequence:
+    def getBinarySetup(self) -> typing.Tuple[int, ...]:
         """
         returns a binary encoded version of the printer setup.
         """
@@ -57,7 +56,7 @@ class XPrinterPropertySet(XPropertySet_bc180bfa):
             com.sun.star.lang.IllegalArgumentException: ``IllegalArgumentException``
         """
         ...
-    def setBinarySetup(self, data: uno.ByteSequence) -> None:
+    def setBinarySetup(self, data: typing.Tuple[int, ...]) -> None:
         """
         sets the data specific to the printer driver.
         

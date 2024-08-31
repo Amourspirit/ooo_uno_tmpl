@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.sdb
 from __future__ import annotations
 import typing
-from abc import abstractproperty, ABC
+from abc import abstractmethod, ABC
 if typing.TYPE_CHECKING:
     from .x_office_database_document import XOfficeDatabaseDocument as XOfficeDatabaseDocument_327f0f39
 
@@ -38,7 +38,8 @@ class XDocumentDataSource(ABC):
     __ooo_type_name__: str = 'interface'
     __pyunointerface__: str = 'com.sun.star.sdb.XDocumentDataSource'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DatabaseDocument(self) -> XOfficeDatabaseDocument_327f0f39:
         """
         provides access to the one and only OfficeDatabaseDocument which the data source is based on.

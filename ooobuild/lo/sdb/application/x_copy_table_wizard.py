@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.sdb.application
 from __future__ import annotations
 import typing
-from abc import abstractmethod, abstractproperty
+from abc import abstractmethod
 from ...ui.dialogs.x_executable_dialog import XExecutableDialog as XExecutableDialog_450f0fa1
 if typing.TYPE_CHECKING:
     from .x_copy_table_listener import XCopyTableListener as XCopyTableListener_ad581224
@@ -57,7 +57,8 @@ class XCopyTableWizard(XExecutableDialog_450f0fa1):
         removes a listener
         """
         ...
-    @abstractproperty
+    @property
+    @abstractmethod
     def CreatePrimaryKey(self) -> object:
         """
         specifies that a new primary key is to be created in the target database
@@ -74,7 +75,8 @@ class XCopyTableWizard(XExecutableDialog_450f0fa1):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DestinationTableName(self) -> str:
         """
         specifies the name of the table in the destination database.
@@ -87,7 +89,8 @@ class XCopyTableWizard(XExecutableDialog_450f0fa1):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Operation(self) -> int:
         """
         specifies the basic operation for the wizard to execute.
@@ -102,7 +105,8 @@ class XCopyTableWizard(XExecutableDialog_450f0fa1):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def UseHeaderLineAsColumnNames(self) -> bool:
         """
         specifies that the first row should be used to identify column names.

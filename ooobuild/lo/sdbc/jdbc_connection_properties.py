@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.sdbc
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from .connection_properties import ConnectionProperties as ConnectionProperties_1a9f0ee1
 if typing.TYPE_CHECKING:
     from ..beans.named_value import NamedValue as NamedValue_a37a0af3
@@ -46,14 +46,16 @@ class JDBCConnectionProperties(ConnectionProperties_1a9f0ee1):
     __ooo_full_ns__: str = 'com.sun.star.sdbc.JDBCConnectionProperties'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def AutoRetrievingStatement(self) -> str:
         """
         specifies the statement which should be executed when asking an \"INSERT\" statement for the XGeneratedResultSet (future concept) interface.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsAutoRetrievingEnabled(self) -> bool:
         """
         specifies if retrieving of auto generated values should be enabled or not.
@@ -62,14 +64,16 @@ class JDBCConnectionProperties(ConnectionProperties_1a9f0ee1):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def JavaDriverClass(self) -> str:
         """
         which JDBC driver class should be loaded to create the connection.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def JavaDriverClassPath(self) -> str:
         """
         an optional class path to locate the com.sun.star.sdbc.JDBCConnectionProperties.JavaDriverClass
@@ -82,14 +86,16 @@ class JDBCConnectionProperties(ConnectionProperties_1a9f0ee1):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SystemProperties(self) -> typing.Tuple[NamedValue_a37a0af3, ...]:
         """
         specifies a set of properties to pass to java.lang.System.setProperty before loading the system's JDBC driver.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TypeInfoSettings(self) -> typing.Tuple[object, ...]:
         """
         specifies how the type info returned by com.sun.star.sdbc.XDatabaseMetaData.getTypeInfo() will be modified.

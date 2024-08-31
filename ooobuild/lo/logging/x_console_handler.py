@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.logging
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from .x_log_handler import XLogHandler as XLogHandler_c7f80c27
 
 class XConsoleHandler(XLogHandler_c7f80c27):
@@ -40,7 +40,8 @@ class XConsoleHandler(XLogHandler_c7f80c27):
     __ooo_type_name__: str = 'interface'
     __pyunointerface__: str = 'com.sun.star.logging.XConsoleHandler'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Threshold(self) -> int:
         """
         denotes the LogLevel threshold used to determine to which console the events should be logged.

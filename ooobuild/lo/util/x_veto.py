@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.util
 from __future__ import annotations
-from abc import abstractproperty, ABC
+from abc import abstractmethod, ABC
 
 class XVeto(ABC):
     """
@@ -33,7 +33,8 @@ class XVeto(ABC):
     __ooo_type_name__: str = 'interface'
     __pyunointerface__: str = 'com.sun.star.util.XVeto'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Details(self) -> object:
         """
         provides additional details about the veto.
@@ -42,7 +43,8 @@ class XVeto(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Reason(self) -> str:
         """
         describes the reason for the veto

@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.text
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from .base_frame import BaseFrame as BaseFrame_8f020a33
 from .x_text_frame import XTextFrame as XTextFrame_9a7e0ab5
 if typing.TYPE_CHECKING:
@@ -46,7 +46,8 @@ class TextFrame(BaseFrame_8f020a33, XTextFrame_9a7e0ab5):
     __ooo_full_ns__: str = 'com.sun.star.text.TextFrame'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def EditInReadonly(self) -> bool:
         """
         determines if the text frame should be editable in a read-only document.
@@ -55,14 +56,16 @@ class TextFrame(BaseFrame_8f020a33, XTextFrame_9a7e0ab5):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def FrameHeightAbsolute(self) -> int:
         """
         contains the metric height value of the frame.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def FrameHeightPercent(self) -> int:
         """
         specifies a width relative to the width of the surrounding text.
@@ -71,21 +74,24 @@ class TextFrame(BaseFrame_8f020a33, XTextFrame_9a7e0ab5):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def FrameIsAutomaticHeight(self) -> bool:
         """
         If \"AutomaticHeight\" is set, then the object grows if it is required by the frame content.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def FrameWidthAbsolute(self) -> int:
         """
         contains the metric width value of the frame.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def FrameWidthPercent(self) -> int:
         """
         specifies a width relative to the width of the surrounding text.
@@ -94,7 +100,8 @@ class TextFrame(BaseFrame_8f020a33, XTextFrame_9a7e0ab5):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsFollowingTextFlow(self) -> bool:
         """
         controls, if the frame follows the text flow or can leave its layout environment
@@ -107,7 +114,8 @@ class TextFrame(BaseFrame_8f020a33, XTextFrame_9a7e0ab5):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ParentText(self) -> XText_690408ca:
         """
         Parent text of this text frame.
@@ -120,14 +128,16 @@ class TextFrame(BaseFrame_8f020a33, XTextFrame_9a7e0ab5):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SizeType(self) -> int:
         """
         determines the interpretation of the height and relative height properties.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TextVerticalAdjust(self) -> TextVerticalAdjustProto:
         """
         adjusts the vertical position of the text inside of the frame.
@@ -138,7 +148,8 @@ class TextFrame(BaseFrame_8f020a33, XTextFrame_9a7e0ab5):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def WidthType(self) -> int:
         """
         determines the interpretation of the width and relative width properties.
@@ -149,7 +160,8 @@ class TextFrame(BaseFrame_8f020a33, XTextFrame_9a7e0ab5):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def WritingMode(self) -> int:
         """
         contains the writing direction, as represented by the com.sun.star.text.WritingMode2 constants

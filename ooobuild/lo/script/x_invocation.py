@@ -20,7 +20,6 @@
 # Namespace: com.sun.star.script
 from __future__ import annotations
 import typing
-import uno
 from abc import abstractmethod
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
@@ -74,7 +73,7 @@ class XInvocation(XInterface_8f010a43):
         """
         ...
     @abstractmethod
-    def invoke(self, aFunctionName: str, aParams: typing.Tuple[object, ...], aOutParamIndex: uno.ByteSequence, aOutParam: typing.Tuple[object, ...]) -> object:
+    def invoke(self, aFunctionName: str, aParams: typing.Tuple[object, ...], aOutParamIndex: typing.Tuple[int, ...], aOutParam: typing.Tuple[object, ...]) -> object:
         """
         provides access to methods exposed by an object.
         

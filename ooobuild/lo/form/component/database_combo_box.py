@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.form.component
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..data_aware_control_model import DataAwareControlModel as DataAwareControlModel_27110ef8
 from .combo_box import ComboBox as ComboBox_fecc0dd6
 if typing.TYPE_CHECKING:
@@ -41,7 +41,8 @@ class DatabaseComboBox(DataAwareControlModel_27110ef8, ComboBox_fecc0dd6):
     __ooo_full_ns__: str = 'com.sun.star.form.component.DatabaseComboBox'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ConvertEmptyToNull(self) -> bool:
         """
         determines if an empty text should be treated as a NULL value.
@@ -52,7 +53,8 @@ class DatabaseComboBox(DataAwareControlModel_27110ef8, ComboBox_fecc0dd6):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ListSource(self) -> str:
         """
         describes the source of items in the combo box's list.
@@ -61,7 +63,8 @@ class DatabaseComboBox(DataAwareControlModel_27110ef8, ComboBox_fecc0dd6):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ListSourceType(self) -> ListSourceTypeProto:
         """
         specifies the kind of list source.

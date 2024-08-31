@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.document
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from .x_document_properties import XDocumentProperties as XDocumentProperties_4c31102b
 
 class XDocumentProperties2(XDocumentProperties_4c31102b):
@@ -39,35 +39,40 @@ class XDocumentProperties2(XDocumentProperties_4c31102b):
     __ooo_type_name__: str = 'interface'
     __pyunointerface__: str = 'com.sun.star.document.XDocumentProperties2'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Contributor(self) -> typing.Tuple[str, ...]:
         """
         Contributors to the resource (other than the authors).
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Coverage(self) -> str:
         """
         The extent or scope of the resource.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Identifier(self) -> str:
         """
         Unique identifier of the resource.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Publisher(self) -> typing.Tuple[str, ...]:
         """
         Entities responsible for making the resource available.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Relation(self) -> typing.Tuple[str, ...]:
         """
         Relationships to other documents.
@@ -76,21 +81,24 @@ class XDocumentProperties2(XDocumentProperties_4c31102b):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Rights(self) -> str:
         """
         Informal rights statement.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Source(self) -> str:
         """
         Unique identifier of the work from which this resource was derived.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Type(self) -> str:
         """
         The nature or genre of the resource.

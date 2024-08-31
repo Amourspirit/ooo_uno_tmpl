@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.view
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 
 class ViewSettings(XPropertySet_bc180bfa):
@@ -35,35 +35,40 @@ class ViewSettings(XPropertySet_bc180bfa):
     __ooo_full_ns__: str = 'com.sun.star.view.ViewSettings'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ShowHoriRuler(self) -> bool:
         """
         If this property is TRUE, the horizontal ruler is displayed.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ShowHoriScrollBar(self) -> bool:
         """
         If this property is TRUE, the horizontal scroll bar is displayed.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ShowVertRuler(self) -> bool:
         """
         If this property is TRUE, the vertical ruler is displayed.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ShowVertScrollBar(self) -> bool:
         """
         If this property is TRUE, the vertical scroll bar is displayed.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ZoomValue(self) -> int:
         """
         specifies the zoom-value in percent.

@@ -20,8 +20,7 @@
 # Namespace: com.sun.star.awt
 from __future__ import annotations
 import typing
-import uno
-from abc import abstractproperty, abstractmethod
+from abc import abstractmethod
 from .uno_control_model import UnoControlModel as UnoControlModel_c8ce0c58
 from .x_item_list import XItemList as XItemList_83fb09d7
 if typing.TYPE_CHECKING:
@@ -53,21 +52,24 @@ class UnoControlListBoxModel(UnoControlModel_c8ce0c58, XItemList_83fb09d7):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BackgroundColor(self) -> Color_68e908c5:
         """
         specifies the background color (RGB) of the control.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Border(self) -> int:
         """
         specifies the border style of the control.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BorderColor(self) -> int:
         """
         specifies the color of the border, if present
@@ -80,56 +82,64 @@ class UnoControlListBoxModel(UnoControlModel_c8ce0c58, XItemList_83fb09d7):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Dropdown(self) -> bool:
         """
         specifies if the control has a drop down button.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Enabled(self) -> bool:
         """
         determines whether the control is enabled or disabled.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def FontDescriptor(self) -> FontDescriptor_bc110c0a:
         """
         specifies the font attributes of the text in the control.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def FontEmphasisMark(self) -> int:
         """
         specifies the com.sun.star.text.FontEmphasis value of the text in the control.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def FontRelief(self) -> int:
         """
         specifies the com.sun.star.text.FontRelief value of the text in the control.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HelpText(self) -> str:
         """
         specifies the help text of the control.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HelpURL(self) -> str:
         """
         specifies the help URL of the control.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HighlightColor(self) -> Color_68e908c5:
         """
         specifies the background color (RGB) of selected items in the control which are highlighted.
@@ -140,7 +150,8 @@ class UnoControlListBoxModel(UnoControlModel_c8ce0c58, XItemList_83fb09d7):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HighlightTextColor(self) -> Color_68e908c5:
         """
         specifies the text color (RGB) of selected items in the control which are highlighted.
@@ -151,7 +162,8 @@ class UnoControlListBoxModel(UnoControlModel_c8ce0c58, XItemList_83fb09d7):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ItemSeparatorPos(self) -> int:
         """
         specifies where an item separator - a horizontal line - is drawn.
@@ -164,14 +176,16 @@ class UnoControlListBoxModel(UnoControlModel_c8ce0c58, XItemList_83fb09d7):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def LineCount(self) -> int:
         """
         specifies the maximum line count displayed in the drop down box.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def MouseWheelBehavior(self) -> int:
         """
         defines how the mouse wheel can be used to scroll through the control's content.
@@ -180,63 +194,72 @@ class UnoControlListBoxModel(UnoControlModel_c8ce0c58, XItemList_83fb09d7):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def MultiSelection(self) -> bool:
         """
         specifies if more than one entry can be selected.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Printable(self) -> bool:
         """
         specifies that the control will be printed with the document.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ReadOnly(self) -> bool:
         """
         specifies that the content of the control cannot be modified by the user.
         """
         ...
 
-    @abstractproperty
-    def SelectedItems(self) -> uno.ByteSequence:
+    @property
+    @abstractmethod
+    def SelectedItems(self) -> typing.Tuple[int, ...]:
         """
         specifies the sequence of selected items, identified by the position.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def StringItemList(self) -> typing.Tuple[str, ...]:
         """
         specifies the list of items.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Tabstop(self) -> bool:
         """
         specifies that the control can be reached with the TAB key.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TextColor(self) -> Color_68e908c5:
         """
         specifies the text color (RGB) of the control.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TextLineColor(self) -> Color_68e908c5:
         """
         specifies the text line color (RGB) of the control.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TypedItemList(self) -> typing.Tuple[object, ...]:
         """
         specifies the list of raw typed (not stringized) items.
@@ -249,7 +272,8 @@ class UnoControlListBoxModel(UnoControlModel_c8ce0c58, XItemList_83fb09d7):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def WritingMode(self) -> int:
         """
         denotes the writing mode used in the control, as specified in the com.sun.star.text.WritingMode2 constants group.

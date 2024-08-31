@@ -32,13 +32,7 @@ with suppress(ImportError):
 with suppress(ImportError):
     from ....dyn.drawing.framework.border_type import BorderType as BorderType
 with suppress(ImportError):
-    from ....dyn.drawing.framework.configuration import Configuration as Configuration
-with suppress(ImportError):
     from ....dyn.drawing.framework.configuration_change_event import ConfigurationChangeEvent as ConfigurationChangeEvent
-with suppress(ImportError):
-    from ....dyn.drawing.framework.configuration_controller import ConfigurationController as ConfigurationController
-with suppress(ImportError):
-    from ....dyn.drawing.framework.module_controller import ModuleController as ModuleController
 with suppress(ImportError):
     from ....dyn.drawing.framework.resource_activation_mode import ResourceActivationMode as ResourceActivationMode
 with suppress(ImportError):

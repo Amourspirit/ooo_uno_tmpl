@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 
 
@@ -37,7 +36,7 @@ class XMtfRenderer(XInterface_8f010a43):
         """
         """
         ...
-    def setMetafile(self, aMtf: uno.ByteSequence) -> None:
+    def setMetafile(self, aMtf: typing.Tuple[int, ...]) -> None:
         """
         """
         ...

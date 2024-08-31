@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.image
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from ..document.x_events_supplier import XEventsSupplier as XEventsSupplier_ecd0e88
 
@@ -36,35 +36,40 @@ class ImageMapObject(XPropertySet_bc180bfa, XEventsSupplier_ecd0e88):
     __ooo_full_ns__: str = 'com.sun.star.image.ImageMapObject'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Description(self) -> str:
         """
         This is an optional description text for the link.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsActive(self) -> bool:
         """
         If an object is not active, it is ignored when the user clicks on the ImageMap.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Name(self) -> str:
         """
         Optionally, objects could be named.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Target(self) -> str:
         """
         This is the target frame.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def URL(self) -> str:
         """
         This is the URL for this object.

@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.sdbcx
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from .column import Column as Column_7b1d098a
 
 class IndexColumn(Column_7b1d098a):
@@ -37,7 +37,8 @@ class IndexColumn(Column_7b1d098a):
     __ooo_full_ns__: str = 'com.sun.star.sdbcx.IndexColumn'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsAscending(self) -> bool:
         """
         is the column sorted in ascending order.

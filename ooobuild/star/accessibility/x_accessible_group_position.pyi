@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 
 
@@ -33,7 +32,7 @@ class XAccessibleGroupPosition(XInterface_8f010a43):
     """
     __pyunointerface__: str = 'com.sun.star.accessibility.XAccessibleGroupPosition'
 
-    def getGroupPosition(self, accoject: typing.Any) -> uno.ByteSequence:
+    def getGroupPosition(self, accoject: typing.Any) -> typing.Tuple[int, ...]:
         """
 
         Raises:

@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.chart
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 if typing.TYPE_CHECKING:
     from com.sun.star.chart.ChartErrorCategory import ChartErrorCategoryProto  # type: ignore
@@ -42,7 +42,8 @@ class ChartStatistics(XPropertySet_bc180bfa):
     __ooo_full_ns__: str = 'com.sun.star.chart.ChartStatistics'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ConstantErrorHigh(self) -> float:
         """
         specifies the upper limit of the error range of a data row.
@@ -51,7 +52,8 @@ class ChartStatistics(XPropertySet_bc180bfa):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ConstantErrorLow(self) -> float:
         """
         specifies the lower limit of the error range of a data row.
@@ -60,7 +62,8 @@ class ChartStatistics(XPropertySet_bc180bfa):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ErrorBarRangeNegative(self) -> str:
         """
         contains a cell range string for negative error bars.
@@ -69,7 +72,8 @@ class ChartStatistics(XPropertySet_bc180bfa):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ErrorBarRangePositive(self) -> str:
         """
         contains a cell range string for positive error bars.
@@ -78,7 +82,8 @@ class ChartStatistics(XPropertySet_bc180bfa):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ErrorBarStyle(self) -> int:
         """
         determines the style of the error bars.
@@ -87,14 +92,16 @@ class ChartStatistics(XPropertySet_bc180bfa):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ErrorCategory(self) -> ChartErrorCategoryProto:
         """
         determines the type of error to indicate.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ErrorIndicator(self) -> ChartErrorIndicatorTypeProto:
         """
         determines how the error is indicated.
@@ -103,7 +110,8 @@ class ChartStatistics(XPropertySet_bc180bfa):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ErrorMargin(self) -> float:
         """
         specifies the percentage for the margin of errors.
@@ -114,14 +122,16 @@ class ChartStatistics(XPropertySet_bc180bfa):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def MeanValue(self) -> bool:
         """
         determines if the mean value for a data row is displayed as a line.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def PercentageError(self) -> float:
         """
         specifies the percentage that is used to display error bars.
@@ -132,7 +142,8 @@ class ChartStatistics(XPropertySet_bc180bfa):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RegressionCurves(self) -> ChartRegressionCurveTypeProto:
         """
         determines a type of regression for the data row values.

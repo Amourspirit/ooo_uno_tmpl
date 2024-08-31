@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.sdb
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 
 class ColumnSettings(XPropertySet_bc180bfa):
@@ -35,7 +35,8 @@ class ColumnSettings(XPropertySet_bc180bfa):
     __ooo_full_ns__: str = 'com.sun.star.sdb.ColumnSettings'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Align(self) -> int:
         """
         specifies the alignment of columns text.
@@ -44,7 +45,8 @@ class ColumnSettings(XPropertySet_bc180bfa):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ControlDefault(self) -> str:
         """
         describes the default value which should be displayed by a control when moving to a new row.
@@ -53,7 +55,8 @@ class ColumnSettings(XPropertySet_bc180bfa):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ControlModel(self) -> XPropertySet_bc180bfa:
         """
         indicates a control model which defines the settings for layouting.
@@ -62,7 +65,8 @@ class ColumnSettings(XPropertySet_bc180bfa):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def FormatKey(self) -> int:
         """
         contains the index of the number format that is used for the column.
@@ -73,7 +77,8 @@ class ColumnSettings(XPropertySet_bc180bfa):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HelpText(self) -> str:
         """
         describes an optional help text which can be used by UI components when representing this column.
@@ -82,14 +87,16 @@ class ColumnSettings(XPropertySet_bc180bfa):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Hidden(self) -> bool:
         """
         determines whether the column should be displayed or not.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Position(self) -> int:
         """
         Position of the column within a grid.
@@ -98,7 +105,8 @@ class ColumnSettings(XPropertySet_bc180bfa):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Width(self) -> int:
         """
         specifies the width of the column displayed in a grid, the unit is 10THMM.

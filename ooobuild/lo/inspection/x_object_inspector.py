@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.inspection
 from __future__ import annotations
 import typing
-from abc import abstractmethod, abstractproperty
+from abc import abstractmethod
 from ..frame.x_controller import XController as XController_b00e0b8f
 from ..frame.x_dispatch_provider import XDispatchProvider as XDispatchProvider_fc690de6
 if typing.TYPE_CHECKING:
@@ -57,7 +57,8 @@ class XObjectInspector(XController_b00e0b8f, XDispatchProvider_fc690de6):
             com.sun.star.util.VetoException: ``VetoException``
         """
         ...
-    @abstractproperty
+    @property
+    @abstractmethod
     def InspectorModel(self) -> XObjectInspectorModel_9077119b:
         """
         provides access to the current model of the inspector
@@ -70,7 +71,8 @@ class XObjectInspector(XController_b00e0b8f, XDispatchProvider_fc690de6):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def InspectorUI(self) -> XObjectInspectorUI_5ccd1048:
         """
         provides access to the user interface of the object inspector.

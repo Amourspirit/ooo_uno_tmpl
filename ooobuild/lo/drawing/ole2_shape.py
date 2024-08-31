@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.drawing
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from .shape import Shape as Shape_85cc09e5
 if typing.TYPE_CHECKING:
     from ..frame.x_model import XModel as XModel_7a6e095c
@@ -38,7 +38,8 @@ class OLE2Shape(Shape_85cc09e5):
     __ooo_full_ns__: str = 'com.sun.star.drawing.OLE2Shape'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CLSID(self) -> str:
         """
         If you get this property you get the CLSID of the OLE2 document stream contained in this OLE2 shape.
@@ -47,14 +48,16 @@ class OLE2Shape(Shape_85cc09e5):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsInternal(self) -> bool:
         """
         This property returns TRUE for all OLE2 that are internal Office components.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Model(self) -> XModel_7a6e095c:
         """
         This is the model for the OLE2 inside this shape.
@@ -63,7 +66,8 @@ class OLE2Shape(Shape_85cc09e5):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def PersistName(self) -> str:
         """
         this is the internal storage name that keeps this OLE2 persist.

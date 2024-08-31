@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.animations
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..container.x_child import XChild as XChild_a6390b07
 if typing.TYPE_CHECKING:
     from ..beans.named_value import NamedValue as NamedValue_a37a0af3
@@ -36,7 +36,8 @@ class XAnimationNode(XChild_a6390b07):
     __ooo_type_name__: str = 'interface'
     __pyunointerface__: str = 'com.sun.star.animations.XAnimationNode'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Acceleration(self) -> float:
         """
         defines the acceleration for this element.
@@ -47,7 +48,8 @@ class XAnimationNode(XChild_a6390b07):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def AutoReverse(self) -> bool:
         """
         defines the auto reverse settings for this element.
@@ -56,14 +58,16 @@ class XAnimationNode(XChild_a6390b07):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Begin(self) -> object:
         """
         a sequence of values that define the beginning of this element Begin is
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Decelerate(self) -> float:
         """
         defines the deceleration for this element.
@@ -74,7 +78,8 @@ class XAnimationNode(XChild_a6390b07):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Duration(self) -> object:
         """
         defines the length of the simple duration.
@@ -83,14 +88,16 @@ class XAnimationNode(XChild_a6390b07):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def End(self) -> object:
         """
         a sequence of values that define the ending of this element End is
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def EndSync(self) -> object:
         """
         controls the implicit duration of time containers, as a function of the children.
@@ -101,7 +108,8 @@ class XAnimationNode(XChild_a6390b07):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Fill(self) -> int:
         """
         the attribute that specify the behavior how an element should be extended beyond the active duration by freezing the final state of the element.
@@ -110,7 +118,8 @@ class XAnimationNode(XChild_a6390b07):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def FillDefault(self) -> int:
         """
         the default value for the fill behavior for this element and all descendants.
@@ -119,7 +128,8 @@ class XAnimationNode(XChild_a6390b07):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RepeatCount(self) -> object:
         """
         the number of iterations of the simple duration.
@@ -128,7 +138,8 @@ class XAnimationNode(XChild_a6390b07):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RepeatDuration(self) -> object:
         """
         the total duration for repeat.
@@ -137,7 +148,8 @@ class XAnimationNode(XChild_a6390b07):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Restart(self) -> int:
         """
         defines the restart behavior of this element.
@@ -146,21 +158,24 @@ class XAnimationNode(XChild_a6390b07):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RestartDefault(self) -> int:
         """
         defines the default restart behavior for this element and all descendants.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Type(self) -> int:
         """
         a value from AnimationNodeType.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def UserData(self) -> typing.Tuple[NamedValue_a37a0af3, ...]:
         """
         """

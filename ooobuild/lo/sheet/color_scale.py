@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.sheet
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from .x_condition_entry import XConditionEntry as XConditionEntry_e2340d32
 if typing.TYPE_CHECKING:
     from .x_color_scale_entry import XColorScaleEntry as XColorScaleEntry_ee810d72
@@ -37,7 +37,8 @@ class ColorScale(XConditionEntry_e2340d32):
     __ooo_full_ns__: str = 'com.sun.star.sheet.ColorScale'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ColorScaleEntries(self) -> typing.Tuple[XColorScaleEntry_ee810d72, ...]:
         """
         """

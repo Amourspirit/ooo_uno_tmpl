@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.text
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..table.table_sort_descriptor2 import TableSortDescriptor2 as TableSortDescriptor2_27e00ef1
 
 class TextSortDescriptor2(TableSortDescriptor2_27e00ef1):
@@ -39,14 +39,16 @@ class TextSortDescriptor2(TableSortDescriptor2_27e00ef1):
     __ooo_full_ns__: str = 'com.sun.star.text.TextSortDescriptor2'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Delimiter(self) -> str:
         """
         contains the character that marks the column separator when a selection of paragraphs is to be sorted.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsSortInTable(self) -> bool:
         """
         determines if the content of a table or a selection of paragraphs is to be sorted.

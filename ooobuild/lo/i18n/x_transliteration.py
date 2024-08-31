@@ -20,7 +20,6 @@
 # Namespace: com.sun.star.i18n
 from __future__ import annotations
 import typing
-import uno
 from abc import abstractmethod
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
@@ -80,7 +79,7 @@ class XTransliteration(XInterface_8f010a43):
         """
         ...
     @abstractmethod
-    def folding(self, aInStr: str, nStartPos: int, nCount: int, rOffset: uno.ByteSequence) -> str:
+    def folding(self, aInStr: str, nStartPos: int, nCount: int, rOffset: typing.Tuple[int, ...]) -> str:
         """
 
         * ``rOffset`` is an out direction argument.
@@ -139,7 +138,7 @@ class XTransliteration(XInterface_8f010a43):
         """
         ...
     @abstractmethod
-    def transliterate(self, aInStr: str, nStartPos: int, nCount: int, rOffset: uno.ByteSequence) -> str:
+    def transliterate(self, aInStr: str, nStartPos: int, nCount: int, rOffset: typing.Tuple[int, ...]) -> str:
         """
         Transliterate a substring.
         

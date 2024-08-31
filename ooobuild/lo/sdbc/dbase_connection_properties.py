@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.sdbc
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from .file_connection_properties import FILEConnectionProperties as FILEConnectionProperties_4e7f1001
 
 class DBASEConnectionProperties(FILEConnectionProperties_4e7f1001):
@@ -39,7 +39,8 @@ class DBASEConnectionProperties(FILEConnectionProperties_4e7f1001):
     __ooo_full_ns__: str = 'com.sun.star.sdbc.DBASEConnectionProperties'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ShowDeleted(self) -> bool:
         """
         TRUE when deleted rows should be shown, otherwise FALSE

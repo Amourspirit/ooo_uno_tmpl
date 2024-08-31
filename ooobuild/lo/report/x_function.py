@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.report
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from ..container.x_child import XChild as XChild_a6390b07
 from ..lang.x_component import XComponent as XComponent_98dc0ab5
@@ -36,35 +36,40 @@ class XFunction(XPropertySet_bc180bfa, XChild_a6390b07, XComponent_98dc0ab5):
     __ooo_type_name__: str = 'interface'
     __pyunointerface__: str = 'com.sun.star.report.XFunction'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DeepTraversing(self) -> bool:
         """
         specifies if sub reports should be traversed as well.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Formula(self) -> str:
         """
         defines the formula of this function
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def InitialFormula(self) -> object:
         """
         defines the formula for the initial value
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Name(self) -> str:
         """
         defines the name of the function
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def PreEvaluated(self) -> bool:
         """
         specifies if the function should be evaluated before the report element will be executed.

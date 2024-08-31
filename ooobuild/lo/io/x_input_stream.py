@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.io
 from __future__ import annotations
-import uno
+import typing
 from abc import abstractmethod
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 
@@ -62,7 +62,7 @@ class XInputStream(XInterface_8f010a43):
         """
         ...
     @abstractmethod
-    def readBytes(self, aData: uno.ByteSequence, nBytesToRead: int) -> int:
+    def readBytes(self, aData: typing.Tuple[int, ...], nBytesToRead: int) -> int:
         """
         reads the specified number of bytes in the given sequence.
         
@@ -77,7 +77,7 @@ class XInputStream(XInterface_8f010a43):
         """
         ...
     @abstractmethod
-    def readSomeBytes(self, aData: uno.ByteSequence, nMaxBytesToRead: int) -> int:
+    def readSomeBytes(self, aData: typing.Tuple[int, ...], nMaxBytesToRead: int) -> int:
         """
         reads the available number of bytes, at maximum nMaxBytesToRead.
         

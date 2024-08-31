@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.form
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..awt.uno_control_model import UnoControlModel as UnoControlModel_c8ce0c58
 from ..beans.x_fast_property_set import XFastPropertySet as XFastPropertySet_ee6b0d88
 from ..beans.x_property_state import XPropertyState as XPropertyState_d55c0ccf
@@ -40,14 +40,16 @@ class FormControlModel(UnoControlModel_c8ce0c58, FormComponent_bc700c03, XFastPr
     __ooo_full_ns__: str = 'com.sun.star.form.FormControlModel'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ClassId(self) -> int:
         """
         specifies the ID for classification of the component.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TabIndex(self) -> int:
         """
         determines the relative taborder of the control associated with the model.
@@ -60,7 +62,8 @@ class FormControlModel(UnoControlModel_c8ce0c58, FormComponent_bc700c03, XFastPr
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Tag(self) -> str:
         """
         used for additional information.

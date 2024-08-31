@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.text.textfield
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ...container.x_child import XChild as XChild_a6390b07
 from ...container.x_enumeration_access import XEnumerationAccess as XEnumerationAccess_4bac0ffc
 from ...rdf.x_metadatable import XMetadatable as XMetadatable_a3000af0
@@ -43,14 +43,16 @@ class MetadataField(TextField_90260a56, XChild_a6390b07, XEnumerationAccess_4bac
     __ooo_full_ns__: str = 'com.sun.star.text.textfield.MetadataField'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsFixedLanguage(self) -> bool:
         """
         determines whether changes in language attributes at the position of the text field also change the number format as appropriate for this language.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def NumberFormat(self) -> int:
         """
         this is the number format for this field.

@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.chart
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from .x_axis_x_supplier import XAxisXSupplier as XAxisXSupplier_d43a0cb3
 
 class ChartAxisXSupplier(XAxisXSupplier_d43a0cb3):
@@ -35,35 +35,40 @@ class ChartAxisXSupplier(XAxisXSupplier_d43a0cb3):
     __ooo_full_ns__: str = 'com.sun.star.chart.ChartAxisXSupplier'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HasXAxis(self) -> bool:
         """
         This property determines if the x-axis is shown or hidden.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HasXAxisDescription(self) -> bool:
         """
         Determines if the description of the x-axis is shown or hidden.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HasXAxisGrid(self) -> bool:
         """
         Determines if the major grid of the x-axis is shown or hidden.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HasXAxisHelpGrid(self) -> bool:
         """
         Determines if the minor grid of the x-axis is shown or hidden.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HasXAxisTitle(self) -> bool:
         """
         Determines if the title of the x-axis is shown or hidden.

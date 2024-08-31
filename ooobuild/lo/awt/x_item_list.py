@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.awt
 from __future__ import annotations
 import typing
-from abc import abstractmethod, abstractproperty, ABC
+from abc import abstractmethod, ABC
 if typing.TYPE_CHECKING:
     from .x_item_list_listener import XItemListListener as XItemListListener_e1020d1d
 
@@ -170,7 +170,8 @@ class XItemList(ABC):
             com.sun.star.lang.IndexOutOfBoundsException: ``IndexOutOfBoundsException``
         """
         ...
-    @abstractproperty
+    @property
+    @abstractmethod
     def ItemCount(self) -> int:
         """
         is the number of items in the list

@@ -20,7 +20,6 @@
 # Namespace: com.sun.star.sheet
 from __future__ import annotations
 import typing
-import uno
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from ..container.x_named import XNamed as XNamed_a6520b08
 from .x_data_pilot_field import XDataPilotField as XDataPilotField_e0350cdf
@@ -212,7 +211,7 @@ class DataPilotField(XPropertySet_bc180bfa, XNamed_a6520b08, XDataPilotField_e03
     def Subtotals(self, value: typing.Tuple[GeneralFunctionProto, ...]) -> None:
         ...
     @property
-    def Subtotals2(self) -> uno.ByteSequence:
+    def Subtotals2(self) -> typing.Tuple[int, ...]:
         """
         specifies the functions used to calculate subtotals for this field.
         
@@ -228,7 +227,7 @@ class DataPilotField(XPropertySet_bc180bfa, XNamed_a6520b08, XDataPilotField_e03
         """
         ...
     @Subtotals2.setter
-    def Subtotals2(self, value: uno.ByteSequence) -> None:
+    def Subtotals2(self, value: typing.Tuple[int, ...]) -> None:
         ...
     @property
     def UseSelectedPage(self) -> bool:

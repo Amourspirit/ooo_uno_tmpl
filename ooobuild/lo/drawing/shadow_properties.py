@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.drawing
 from __future__ import annotations
 import typing
-from abc import abstractproperty, ABC
+from abc import abstractmethod, ABC
 if typing.TYPE_CHECKING:
     from ..util.color import Color as Color_68e908c5
 
@@ -37,7 +37,8 @@ class ShadowProperties(ABC):
     __ooo_full_ns__: str = 'com.sun.star.drawing.ShadowProperties'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Shadow(self) -> bool:
         """
         enables/disables the shadow of a Shape.
@@ -46,35 +47,40 @@ class ShadowProperties(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ShadowBlur(self) -> int:
         """
         This defines the degree of blur of the shadow in points.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ShadowColor(self) -> Color_68e908c5:
         """
         This is the color of the shadow of this Shape.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ShadowTransparence(self) -> int:
         """
         This defines the degree of transparence of the shadow in percent.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ShadowXDistance(self) -> int:
         """
         This is the horizontal distance of the left edge of the Shape to the shadow.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ShadowYDistance(self) -> int:
         """
         This is the vertical distance of the top edge of the Shape to the shadow.

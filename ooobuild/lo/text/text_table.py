@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.text
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..chart.x_chart_data_array import XChartDataArray as XChartDataArray_df4c0cdd
 from ..container.x_named import XNamed as XNamed_a6520b08
 from ..sheet.x_cell_range_data import XCellRangeData as XCellRangeData_d2e70c60
@@ -63,14 +63,16 @@ class TextTable(TextContent_a6810b4d, UserDefinedAttributesSupplier_9fbe1222, XC
     __ooo_full_ns__: str = 'com.sun.star.text.TextTable'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BackColor(self) -> Color_68e908c5:
         """
         contains the color of the background.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BackGraphic(self) -> XGraphic_a4da0afc:
         """
         contains the graphic for the background.
@@ -81,21 +83,24 @@ class TextTable(TextContent_a6810b4d, UserDefinedAttributesSupplier_9fbe1222, XC
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BackGraphicFilter(self) -> str:
         """
         contains the name of the file filter for the background graphic.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BackGraphicLocation(self) -> GraphicLocationProto:
         """
         determines the position of the background graphic.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BackGraphicURL(self) -> str:
         """
         contains the URL for the background graphic.
@@ -104,154 +109,176 @@ class TextTable(TextContent_a6810b4d, UserDefinedAttributesSupplier_9fbe1222, XC
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BackTransparent(self) -> bool:
         """
         determines if the background color is transparent.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BottomMargin(self) -> int:
         """
         determines the bottom margin.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BreakType(self) -> BreakTypeProto:
         """
         determines the type of break that is applied at the beginning of the table.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ChartColumnAsLabel(self) -> bool:
         """
         determines if the first column of the table should be treated as axis labels when a chart is to be created.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ChartRowAsLabel(self) -> bool:
         """
         determines if the first row of the table should be treated as axis labels when a chart is to be created.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CollapsingBorders(self) -> bool:
         """
         determines whether borders of neighboring table cells are collapsed into one
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HeaderRowCount(self) -> int:
         """
         determines the number of rows of the table repeated on every new page.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HoriOrient(self) -> int:
         """
         contains the horizontal orientation.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsWidthRelative(self) -> bool:
         """
         determines if the value of the relative width is valid.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def KeepTogether(self) -> bool:
         """
         Setting this property to TRUE prevents page or column breaks between this table and the following paragraph or text table.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def LeftMargin(self) -> int:
         """
         contains the left margin of the table.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def PageDescName(self) -> str:
         """
         If this property is set, it creates a page break before the table and assigns the value as the name of the new page style sheet to use.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def PageNumberOffset(self) -> int:
         """
         If a page break property is set at the table, this property contains the new value for the page number.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RelativeWidth(self) -> int:
         """
         determines the width of the table relative to its environment.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RepeatHeadline(self) -> bool:
         """
         determines if the first row of the table is repeated on every new page.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RightMargin(self) -> int:
         """
         contains the right margin of the table.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ShadowFormat(self) -> ShadowFormat_bb840bdf:
         """
         determines the type, color and size of the shadow.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Split(self) -> bool:
         """
         Setting this property to FALSE prevents the table from getting spread on two pages.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TableBorder(self) -> TableBorder_aedf0b56:
         """
         contains the description of the table borders.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TableColumnRelativeSum(self) -> int:
         """
         contains the sum of the column width values used in TableColumnSeparators.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TableColumnSeparators(self) -> typing.Tuple[TableColumnSeparator_1b630ed4, ...]:
         """
         contains the column description of the table.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TableInteropGrabBag(self) -> typing.Tuple[PropertyValue_c9610c73, ...]:
         """
         Grab bag of table properties, used as a string-any map for interim interop purposes.
@@ -264,7 +291,8 @@ class TextTable(TextContent_a6810b4d, UserDefinedAttributesSupplier_9fbe1222, XC
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TableTemplateName(self) -> str:
         """
         contains the name of table style used by the table.
@@ -275,14 +303,16 @@ class TextTable(TextContent_a6810b4d, UserDefinedAttributesSupplier_9fbe1222, XC
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TopMargin(self) -> int:
         """
         determines the top margin.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Width(self) -> int:
         """
         contains the absolute table width.

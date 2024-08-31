@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.text
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from ..container.x_named import XNamed as XNamed_a6520b08
 from ..drawing.x_shape import XShape as XShape_8fd00a3d
@@ -39,7 +39,8 @@ class BaseFrame(BaseFrameProperties_b990e60, TextContent_a6810b4d, XPropertySet_
     __ooo_full_ns__: str = 'com.sun.star.text.BaseFrame'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def FrameStyleName(self) -> str:
         """
         contains the name of the frame style that is applied to this object.

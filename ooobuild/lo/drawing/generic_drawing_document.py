@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.drawing
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from ..document.office_document import OfficeDocument as OfficeDocument_fecd0df2
 from .x_draw_page_duplicator import XDrawPageDuplicator as XDrawPageDuplicator_37bd0f6e
@@ -49,28 +49,32 @@ class GenericDrawingDocument(OfficeDocument_fecd0df2, XPropertySet_bc180bfa, XDr
     __ooo_full_ns__: str = 'com.sun.star.drawing.GenericDrawingDocument'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharLocale(self) -> Locale_70d308fa:
         """
         contains the identifier of the default locale of the document.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ForbiddenCharacters(self) -> XForbiddenCharacters_df60e2d:
         """
         This property gives the XForbiddenCharacters.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TabStop(self) -> int:
         """
         This property specifies the length between the default tab stops inside text in this document in 1/100th mm.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def VisibleArea(self) -> Rectangle_84b109e9:
         """
         if this document is an OLE client, this is the current visible area in 100th mm

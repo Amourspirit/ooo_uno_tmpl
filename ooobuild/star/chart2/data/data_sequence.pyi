@@ -20,7 +20,6 @@
 # Namespace: com.sun.star.chart2.data
 from __future__ import annotations
 import typing
-import uno
 from ...beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from .x_data_sequence import XDataSequence as XDataSequence_11f00e1f
 from .x_numerical_data_sequence import XNumericalDataSequence as XNumericalDataSequence_a43011bf
@@ -45,13 +44,13 @@ class DataSequence(XPropertySet_bc180bfa, XDataSequence_11f00e1f, XNumericalData
         `API DataSequence <https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1chart2_1_1data_1_1DataSequence.html>`_
     """
     @property
-    def HiddenValues(self) -> uno.ByteSequence:
+    def HiddenValues(self) -> typing.Tuple[int, ...]:
         """
         a sequence of indexes that identify values that are hidden in the underlying data provider.
         """
         ...
     @HiddenValues.setter
-    def HiddenValues(self, value: uno.ByteSequence) -> None:
+    def HiddenValues(self, value: typing.Tuple[int, ...]) -> None:
         ...
     @property
     def IncludeHiddenCells(self) -> bool:

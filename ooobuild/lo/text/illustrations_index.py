@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.text
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from .base_index import BaseIndex as BaseIndex_8f0d0a40
 
 class IllustrationsIndex(BaseIndex_8f0d0a40):
@@ -39,13 +39,15 @@ class IllustrationsIndex(BaseIndex_8f0d0a40):
     __ooo_full_ns__: str = 'com.sun.star.text.IllustrationsIndex'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CreateFromLabels(self) -> bool:
         """
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CreateFromParagraphStyle(self) -> str:
         """
         determines if paragraphs with one particular style applied are included in the index.
@@ -56,13 +58,15 @@ class IllustrationsIndex(BaseIndex_8f0d0a40):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def LabelCategory(self) -> str:
         """
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def LabelDisplayType(self) -> int:
         """
         """

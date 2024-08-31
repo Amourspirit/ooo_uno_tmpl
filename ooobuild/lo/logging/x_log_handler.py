@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.logging
 from __future__ import annotations
 import typing
-from abc import abstractmethod, abstractproperty
+from abc import abstractmethod
 from ..lang.x_component import XComponent as XComponent_98dc0ab5
 if typing.TYPE_CHECKING:
     from .log_record import LogRecord as LogRecord_b0c20b70
@@ -56,7 +56,8 @@ class XLogHandler(XComponent_98dc0ab5):
         publish the given log record at the handler's output channel.
         """
         ...
-    @abstractproperty
+    @property
+    @abstractmethod
     def Encoding(self) -> str:
         """
         specifies MIME charset name for the encoding to be used by this handler
@@ -65,14 +66,16 @@ class XLogHandler(XComponent_98dc0ab5):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Formatter(self) -> XLogFormatter_e23d0d1d:
         """
         specifies the formatter to be used by this handler.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Level(self) -> int:
         """
         specifies the log level of this handler

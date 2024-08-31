@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.ui
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..container.x_index_access import XIndexAccess as XIndexAccess_f0910d6d
 from ..lang.x_single_component_factory import XSingleComponentFactory as XSingleComponentFactory_46cc0fef
 
@@ -42,7 +42,8 @@ class UIElementSettings(XIndexAccess_f0910d6d, XSingleComponentFactory_46cc0fef)
     __ooo_full_ns__: str = 'com.sun.star.ui.UIElementSettings'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def UIName(self) -> str:
         """
         determine an optional user interface name of the user interface element.

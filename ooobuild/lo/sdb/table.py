@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.sdb
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from .data_settings import DataSettings as DataSettings_a3000b0c
 from ..sdbcx.table import Table as Table_71780904
 
@@ -36,7 +36,8 @@ class Table(DataSettings_a3000b0c, Table_71780904):
     __ooo_full_ns__: str = 'com.sun.star.sdb.Table'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Privileges(self) -> int:
         """
         indicates the privileges for the table.

@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.text.fieldmaster
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..text_field_master import TextFieldMaster as TextFieldMaster_d6410cc2
 
 class SetExpression(TextFieldMaster_d6410cc2):
@@ -35,7 +35,8 @@ class SetExpression(TextFieldMaster_d6410cc2):
     __ooo_full_ns__: str = 'com.sun.star.text.fieldmaster.SetExpression'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ChapterNumberingLevel(self) -> int:
         """
         determines the number of the chapter.
@@ -44,14 +45,16 @@ class SetExpression(TextFieldMaster_d6410cc2):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def NumberingSeparator(self) -> str:
         """
         determines the numbering separator string if the field master is set as number sequence.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SubType(self) -> int:
         """
         determines the type of the field as com.sun.star.text.SetVariableType

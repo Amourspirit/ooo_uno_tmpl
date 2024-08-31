@@ -20,7 +20,6 @@
 # Namespace: com.sun.star.document
 from __future__ import annotations
 import typing
-import uno
 from abc import ABC
 if typing.TYPE_CHECKING:
     from ..beans.named_value import NamedValue as NamedValue_a37a0af3
@@ -435,7 +434,7 @@ class MediaDescriptor(ABC):
     def PickListEntry(self, value: bool) -> None:
         ...
     @property
-    def PostData(self) -> uno.ByteSequence:
+    def PostData(self) -> typing.Tuple[int, ...]:
         """
         contains the data for HTTP post method as a sequence of bytes.
         
@@ -443,7 +442,7 @@ class MediaDescriptor(ABC):
         """
         ...
     @PostData.setter
-    def PostData(self, value: uno.ByteSequence) -> None:
+    def PostData(self, value: typing.Tuple[int, ...]) -> None:
         ...
     @property
     def PostString(self) -> str:

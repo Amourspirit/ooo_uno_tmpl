@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.graphic
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
     from .x_graphic import XGraphic as XGraphic_a4da0afc
@@ -37,7 +37,8 @@ class XGraphicObject(XInterface_8f010a43):
     __ooo_type_name__: str = 'interface'
     __pyunointerface__: str = 'com.sun.star.graphic.XGraphicObject'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Graphic(self) -> XGraphic_a4da0afc:
         """
         is the associated image/graphic for this object.

@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.form
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_fast_property_set import XFastPropertySet as XFastPropertySet_ee6b0d88
 from ..beans.x_multi_property_set import XMultiPropertySet as XMultiPropertySet_fd880e05
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
@@ -48,7 +48,8 @@ class PropertyBrowserController(XFastPropertySet_ee6b0d88, XMultiPropertySet_fd8
     __ooo_full_ns__: str = 'com.sun.star.form.PropertyBrowserController'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CurrentPage(self) -> str:
         """
         controls the actually visible page.
@@ -59,7 +60,8 @@ class PropertyBrowserController(XFastPropertySet_ee6b0d88, XMultiPropertySet_fd8
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IntrospectedObject(self) -> XPropertySet_bc180bfa:
         """
         contains the object to inspect.

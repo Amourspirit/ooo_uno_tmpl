@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.mail
 from __future__ import annotations
 import typing
-from abc import abstractmethod, abstractproperty
+from abc import abstractmethod
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
     from ..datatransfer.x_transferable import XTransferable as XTransferable_2d800f38
@@ -98,7 +98,8 @@ class XMailMessage(XInterface_8f010a43):
         Return a sequence of the e-mail addresses of all recipients of this mail message.
         """
         ...
-    @abstractproperty
+    @property
+    @abstractmethod
     def Body(self) -> XTransferable_2d800f38:
         """
         The body of the mail message.
@@ -107,7 +108,8 @@ class XMailMessage(XInterface_8f010a43):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ReplyToAddress(self) -> str:
         """
         The e-mail address where replies on this mail message should be sent to.
@@ -116,7 +118,8 @@ class XMailMessage(XInterface_8f010a43):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SenderAddress(self) -> str:
         """
         The e-mail address of the sender of this mail message.
@@ -125,14 +128,16 @@ class XMailMessage(XInterface_8f010a43):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SenderName(self) -> str:
         """
         The display name of the sender of this mail message.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Subject(self) -> str:
         """
         The subject of a mail message.

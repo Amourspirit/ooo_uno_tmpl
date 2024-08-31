@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.chart
 from __future__ import annotations
-from abc import abstractproperty, ABC
+from abc import abstractmethod, ABC
 
 class StackableDiagram(ABC):
     """
@@ -34,14 +34,16 @@ class StackableDiagram(ABC):
     __ooo_full_ns__: str = 'com.sun.star.chart.StackableDiagram'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Percent(self) -> bool:
         """
         If TRUE, the series of the diagram are stacked and each category sums up to 100%.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Stacked(self) -> bool:
         """
         If TRUE, the series of the diagram are stacked.

@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.presentation
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..awt.x_window import XWindow as XWindow_713b0924
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from ..drawing.x_draw_view import XDrawView as XDrawView_b0b80b75
@@ -42,14 +42,16 @@ class PresentationView(Controller_a5330b37, XWindow_713b0924, XPropertySet_bc180
     __ooo_full_ns__: str = 'com.sun.star.presentation.PresentationView'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CurrentPage(self) -> XDrawPage_b07a0b57:
         """
         This is the drawing page that is currently visible.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def VisibleArea(self) -> Rectangle_84b109e9:
         """
         This is the area that is currently visible.

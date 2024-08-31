@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.chart2
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.property_set import PropertySet as PropertySet_b0e70ba2
 from .x_regression_curve import XRegressionCurve as XRegressionCurve_fa3c0dca
 from ..drawing.line_properties import LineProperties as LineProperties_f13f0da9
@@ -36,7 +36,8 @@ class RegressionCurve(PropertySet_b0e70ba2, LineProperties_f13f0da9, XRegression
     __ooo_full_ns__: str = 'com.sun.star.chart2.RegressionCurve'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def MovingAverageType(self) -> int:
         """
         """

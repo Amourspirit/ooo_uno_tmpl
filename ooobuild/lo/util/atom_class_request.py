@@ -19,7 +19,6 @@
 # Namespace: com.sun.star.util
 # Libre Office Version: 2024.2
 from ooo.oenv.env_const import UNO_NONE
-import uno
 import typing
 
 
@@ -38,13 +37,13 @@ class AtomClassRequest(object):
     typeName: str = 'com.sun.star.util.AtomClassRequest'
     """Literal Constant ``com.sun.star.util.AtomClassRequest``"""
 
-    def __init__(self, atomClass: typing.Optional[int] = 0, atoms: typing.Optional[uno.ByteSequence] = ()) -> None:
+    def __init__(self, atomClass: typing.Optional[int] = 0, atoms: typing.Optional[typing.Tuple[int, ...]] = ()) -> None:
         """
         Constructor
 
         Arguments:
             atomClass (int, optional): atomClass value.
-            atoms (uno.ByteSequence, optional): atoms value.
+            atoms (typing.Tuple[int, ...], optional): atoms value.
         """
         super().__init__()
 
@@ -77,14 +76,14 @@ class AtomClassRequest(object):
         self._atom_class = value
 
     @property
-    def atoms(self) -> uno.ByteSequence:
+    def atoms(self) -> typing.Tuple[int, ...]:
         """
         the atoms requested from class AtomClassRequest.atomClass().
         """
         return self._atoms
 
     @atoms.setter
-    def atoms(self, value: uno.ByteSequence) -> None:
+    def atoms(self, value: typing.Tuple[int, ...]) -> None:
         self._atoms = value
 
 

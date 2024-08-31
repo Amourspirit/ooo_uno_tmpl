@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.connection
 from __future__ import annotations
-import uno
+import typing
 from abc import abstractmethod
 from .x_connection import XConnection as XConnection_f2320da0
 
@@ -45,7 +45,7 @@ class XConnection2(XConnection_f2320da0):
         """
         ...
     @abstractmethod
-    def readSomeBytes(self, aData: uno.ByteSequence, nMaxBytesToRead: int) -> int:
+    def readSomeBytes(self, aData: typing.Tuple[int, ...], nMaxBytesToRead: int) -> int:
         """
         Blocks if no data is available otherwise reads at max nMaxBytesToRead but at least 1 byte.
 

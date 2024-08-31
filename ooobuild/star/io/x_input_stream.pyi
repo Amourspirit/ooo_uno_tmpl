@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 
 
@@ -58,7 +57,7 @@ class XInputStream(XInterface_8f010a43):
             com.sun.star.io.IOException: ``IOException``
         """
         ...
-    def readBytes(self, aData: uno.ByteSequence, nBytesToRead: int) -> int:
+    def readBytes(self, aData: typing.Tuple[int, ...], nBytesToRead: int) -> int:
         """
         reads the specified number of bytes in the given sequence.
         
@@ -72,7 +71,7 @@ class XInputStream(XInterface_8f010a43):
             com.sun.star.io.IOException: ``IOException``
         """
         ...
-    def readSomeBytes(self, aData: uno.ByteSequence, nMaxBytesToRead: int) -> int:
+    def readSomeBytes(self, aData: typing.Tuple[int, ...], nMaxBytesToRead: int) -> int:
         """
         reads the available number of bytes, at maximum nMaxBytesToRead.
         

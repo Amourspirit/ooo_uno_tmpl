@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.text
 from __future__ import annotations
 import typing
-from abc import abstractproperty, ABC
+from abc import abstractmethod, ABC
 if typing.TYPE_CHECKING:
     from ..awt.font_descriptor import FontDescriptor as FontDescriptor_bc110c0a
     from ..awt.size import Size as Size_576707ef
@@ -44,14 +44,16 @@ class NumberingLevel(ABC):
     __ooo_full_ns__: str = 'com.sun.star.text.NumberingLevel'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Adjust(self) -> int:
         """
         adjusts the numbering (HoriOrientation_LEFT/RIGHT/CENTER)
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BulletChar(self) -> str:
         """
         contains the symbol in the given font.
@@ -60,7 +62,8 @@ class NumberingLevel(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BulletColor(self) -> Color_68e908c5:
         """
         contains the color for the symbol.
@@ -69,14 +72,16 @@ class NumberingLevel(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BulletFont(self) -> FontDescriptor_bc110c0a:
         """
         the font used to paint the bullet.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BulletFontName(self) -> str:
         """
         the name of the font for the symbol.
@@ -85,7 +90,8 @@ class NumberingLevel(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BulletId(self) -> int:
         """
         the ID of the symbol in the given font.
@@ -94,7 +100,8 @@ class NumberingLevel(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BulletRelSize(self) -> int:
         """
         contains the size of the symbol relative to the high of the paragraph.
@@ -103,14 +110,16 @@ class NumberingLevel(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CharStyleName(self) -> str:
         """
         Name of the character style that is used for the numbering symbol.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def FirstLineIndent(self) -> int:
         """
         additional line indent for the first text line
@@ -123,14 +132,16 @@ class NumberingLevel(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def FirstLineOffset(self) -> int:
         """
         specifies the offset between the beginning of the first line and the beginning of the following lines of the paragraph.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def GraphicBitmap(self) -> XBitmap_70cd0909:
         """
         the graphic file that is used as the numbering symbol.
@@ -139,14 +150,16 @@ class NumberingLevel(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def GraphicSize(self) -> Size_576707ef:
         """
         size of the graphic that is used as bullet.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def GraphicURL(self) -> str:
         """
         the URL of the graphic file that is used as the numbering symbol.
@@ -157,7 +170,8 @@ class NumberingLevel(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HeadingStyleName(self) -> str:
         """
         contains the name of the paragraph style that is interpreted as the header of this level.
@@ -166,7 +180,8 @@ class NumberingLevel(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IndentAt(self) -> int:
         """
         indentation of the text lines
@@ -179,7 +194,8 @@ class NumberingLevel(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def LabelFollowedBy(self) -> int:
         """
         character following the list label
@@ -192,14 +208,16 @@ class NumberingLevel(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def LeftMargin(self) -> int:
         """
         specifies the left margin of the numbering
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ListtabStopPosition(self) -> int:
         """
         list tab position
@@ -212,14 +230,16 @@ class NumberingLevel(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def NumberingType(self) -> int:
         """
         specifies the type of numbering.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ParagraphStyleName(self) -> str:
         """
         contains the name of the paragraph style that should use this numbering.
@@ -232,14 +252,16 @@ class NumberingLevel(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ParentNumbering(self) -> int:
         """
         number of upper levels that are included in the current numbering symbol.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def PositionAndSpaceMode(self) -> int:
         """
         position and space mode
@@ -252,14 +274,16 @@ class NumberingLevel(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Prefix(self) -> str:
         """
         the prefix of the numbering symbol.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def StartWith(self) -> int:
         """
         specifies the start value for the numbering.
@@ -268,21 +292,24 @@ class NumberingLevel(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Suffix(self) -> str:
         """
         the suffix of the numbering symbol.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SymbolTextDistance(self) -> int:
         """
         specifies the distance between the numbering symbol and the text of the paragraph.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def VertOrient(self) -> int:
         """
         contains the vertical orientation of a graphic.

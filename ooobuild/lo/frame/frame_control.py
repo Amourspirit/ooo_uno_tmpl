@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.frame
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..awt.uno_control import UnoControl as UnoControl_8f2c0a67
 
 class FrameControl(UnoControl_8f2c0a67):
@@ -37,14 +37,16 @@ class FrameControl(UnoControl_8f2c0a67):
     __ooo_full_ns__: str = 'com.sun.star.frame.FrameControl'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ComponentUrl(self) -> str:
         """
         contains the type of the component which is loaded into the frame, or the document which implicitly specifies the type
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Frame(self) -> str:
         """
         the frame held by this control

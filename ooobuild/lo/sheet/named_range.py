@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.sheet
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from .x_cell_range_referrer import XCellRangeReferrer as XCellRangeReferrer_91c0e23
 from .x_named_range import XNamedRange as XNamedRange_af450b4b
 
@@ -42,7 +42,8 @@ class NamedRange(XCellRangeReferrer_91c0e23, XNamedRange_af450b4b):
     __ooo_full_ns__: str = 'com.sun.star.sheet.NamedRange'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsSharedFormula(self) -> bool:
         """
         Determines if this defined name represents a shared formula.
@@ -57,7 +58,8 @@ class NamedRange(XCellRangeReferrer_91c0e23, XNamedRange_af450b4b):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TokenIndex(self) -> int:
         """
         returns the index used to refer to this name in token arrays.

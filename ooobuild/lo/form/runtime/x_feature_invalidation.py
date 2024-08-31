@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.form.runtime
 from __future__ import annotations
-import uno
+import typing
 from abc import abstractmethod, ABC
 
 class XFeatureInvalidation(ABC):
@@ -47,7 +47,7 @@ class XFeatureInvalidation(ABC):
         """
         ...
     @abstractmethod
-    def invalidateFeatures(self, Features: uno.ByteSequence) -> None:
+    def invalidateFeatures(self, Features: typing.Tuple[int, ...]) -> None:
         """
         invalidates the given FormFeatures
         

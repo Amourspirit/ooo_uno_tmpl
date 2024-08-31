@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.text
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 if typing.TYPE_CHECKING:
     from .x_dependent_text_field import XDependentTextField as XDependentTextField_c3d0e45
@@ -38,21 +38,24 @@ class TextFieldMaster(XPropertySet_bc180bfa):
     __ooo_full_ns__: str = 'com.sun.star.text.TextFieldMaster'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DependentTextFields(self) -> typing.Tuple[XDependentTextField_c3d0e45, ...]:
         """
         contains a sequence of all fields that depend on this master.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def InstanceName(self) -> str:
         """
         contains the instance name as it is used in the com.sun.star.text.XTextFieldsSupplier.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Name(self) -> str:
         """
         determines the name of the field master.

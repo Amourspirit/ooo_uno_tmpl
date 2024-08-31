@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.sheet
 from __future__ import annotations
 import typing
-from abc import abstractproperty, ABC
+from abc import abstractmethod, ABC
 
 class XGlobalSheetSettings(ABC):
     """
@@ -37,35 +37,40 @@ class XGlobalSheetSettings(ABC):
     __ooo_type_name__: str = 'interface'
     __pyunointerface__: str = 'com.sun.star.sheet.XGlobalSheetSettings'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DoAutoComplete(self) -> bool:
         """
         specifies whether automatic completion of text in a cell is used.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def EnterEdit(self) -> bool:
         """
         specifies whether the enter key can be used to start editing a cell.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ExpandReferences(self) -> bool:
         """
         specifies whether formula references are extended when cells are inserted below or to the right of them.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ExtendFormat(self) -> bool:
         """
         specifies whether cell formatting is extended when entering data.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def LinkUpdateMode(self) -> int:
         """
         specifies the update mode for external linked data.
@@ -78,56 +83,64 @@ class XGlobalSheetSettings(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def MarkHeader(self) -> bool:
         """
         specifies whether the current selection is highlighted in column and row headers.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Metric(self) -> int:
         """
         contains the metric for all spreadsheet documents.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def MoveDirection(self) -> int:
         """
         contains the direction the cursor moves after entering cells.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def MoveSelection(self) -> bool:
         """
         specifies whether the cursor is moved after entering into cells.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def PrintAllSheets(self) -> bool:
         """
         specifies whether all sheets or only selected sheets are printed.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def PrintEmptyPages(self) -> bool:
         """
         specifies whether empty pages are printed.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RangeFinder(self) -> bool:
         """
         specifies whether ranges are highlighted on the sheet when editing a formula.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ReplaceCellsWarning(self) -> bool:
         """
         specifies whether a warning is shown before replacing cells (i.e.
@@ -136,7 +149,8 @@ class XGlobalSheetSettings(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Scale(self) -> int:
         """
         contains the default scale for new spreadsheet documents (in percent).
@@ -151,28 +165,32 @@ class XGlobalSheetSettings(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def StatusBarFunction(self) -> int:
         """
         contains the function that is displayed in the status bar.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def UsePrinterMetrics(self) -> bool:
         """
         specifies whether printer metrics are used for display.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def UseTabCol(self) -> bool:
         """
         specifies whether the enter key moves the cursor to the column it was in before using the tab key to change columns.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def UserLists(self) -> typing.Tuple[str, ...]:
         """
         contains the string lists used for sorting and filling.

@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.form.component
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ...awt.uno_control_image_control_model import UnoControlImageControlModel as UnoControlImageControlModel_7b36111c
 from ..form_control_model import FormControlModel as FormControlModel_e2990d22
 from ..x_image_producer_supplier import XImageProducerSupplier as XImageProducerSupplier_37df0f8f
@@ -42,14 +42,16 @@ class ImageButton(UnoControlImageControlModel_7b36111c, FormControlModel_e2990d2
     __ooo_full_ns__: str = 'com.sun.star.form.component.ImageButton'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ButtonType(self) -> FormButtonTypeProto:
         """
         describes the action to be executed by the button when pressed.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TargetFrame(self) -> str:
         """
         describes the frame, where to open the document specified by the TargetURL.
@@ -60,7 +62,8 @@ class ImageButton(UnoControlImageControlModel_7b36111c, FormControlModel_e2990d2
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TargetURL(self) -> str:
         """
         specifies the URL, which should be opened if the button was clicked.

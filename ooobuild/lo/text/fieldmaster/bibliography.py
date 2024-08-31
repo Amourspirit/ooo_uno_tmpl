@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.text.fieldmaster
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..text_field_master import TextFieldMaster as TextFieldMaster_d6410cc2
 if typing.TYPE_CHECKING:
     from ...beans.property_values import PropertyValues as PropertyValues_d6470ce6
@@ -39,21 +39,24 @@ class Bibliography(TextFieldMaster_d6410cc2):
     __ooo_full_ns__: str = 'com.sun.star.text.fieldmaster.Bibliography'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BracketAfter(self) -> str:
         """
         determines the closing bracket used to display the bibliography text fields.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BracketBefore(self) -> str:
         """
         determines the opening bracket used to display the bibliography text fields.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsNumberEntries(self) -> bool:
         """
         determines whether the bibliography text fields are numbered.
@@ -62,7 +65,8 @@ class Bibliography(TextFieldMaster_d6410cc2):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsSortByPosition(self) -> bool:
         """
         determines whether the bibliography entries in a bibliography index are sorted by the document position.
@@ -71,21 +75,24 @@ class Bibliography(TextFieldMaster_d6410cc2):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Locale(self) -> Locale_70d308fa:
         """
         contains the locale of the field master
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SortAlgorithm(self) -> str:
         """
         contains the name of the sort algorithm that is used to sort the text fields.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SortKeys(self) -> typing.Tuple[PropertyValues_d6470ce6, ...]:
         """
         determines the sorting of the bibliography entries in a bibliography index.

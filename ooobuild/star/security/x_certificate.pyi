@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
     from .x_certificate_extension import XCertificateExtension as XCertificateExtension_6ead10f8
@@ -44,7 +43,7 @@ class XCertificate(XInterface_8f010a43):
     """
     __pyunointerface__: str = 'com.sun.star.security.XCertificate'
 
-    def findCertificateExtension(self, oid: uno.ByteSequence) -> XCertificateExtension_6ead10f8:
+    def findCertificateExtension(self, oid: typing.Tuple[int, ...]) -> XCertificateExtension_6ead10f8:
         """
         Find an extension with an object identifier.
         """
@@ -71,13 +70,13 @@ class XCertificate(XInterface_8f010a43):
     def CertificateKind(self, value: CertificateKindProto) -> None:
         ...
     @property
-    def Encoded(self) -> uno.ByteSequence:
+    def Encoded(self) -> typing.Tuple[int, ...]:
         """
         the DER encoded form of the certificate
         """
         ...
     @Encoded.setter
-    def Encoded(self, value: uno.ByteSequence) -> None:
+    def Encoded(self, value: typing.Tuple[int, ...]) -> None:
         ...
     @property
     def Extensions(self) -> typing.Tuple[XCertificateExtension_6ead10f8, ...]:
@@ -98,22 +97,22 @@ class XCertificate(XInterface_8f010a43):
     def IssuerName(self, value: str) -> None:
         ...
     @property
-    def IssuerUniqueID(self) -> uno.ByteSequence:
+    def IssuerUniqueID(self) -> typing.Tuple[int, ...]:
         """
         the issuer unique ID attribute of the certificate.
         """
         ...
     @IssuerUniqueID.setter
-    def IssuerUniqueID(self, value: uno.ByteSequence) -> None:
+    def IssuerUniqueID(self, value: typing.Tuple[int, ...]) -> None:
         ...
     @property
-    def MD5Thumbprint(self) -> uno.ByteSequence:
+    def MD5Thumbprint(self) -> typing.Tuple[int, ...]:
         """
         the MD5 thumbprint
         """
         ...
     @MD5Thumbprint.setter
-    def MD5Thumbprint(self, value: uno.ByteSequence) -> None:
+    def MD5Thumbprint(self, value: typing.Tuple[int, ...]) -> None:
         ...
     @property
     def NotValidAfter(self) -> DateTime_84de09d3:
@@ -134,22 +133,22 @@ class XCertificate(XInterface_8f010a43):
     def NotValidBefore(self, value: DateTime_84de09d3) -> None:
         ...
     @property
-    def SHA1Thumbprint(self) -> uno.ByteSequence:
+    def SHA1Thumbprint(self) -> typing.Tuple[int, ...]:
         """
         the SHA-1 thumbprint
         """
         ...
     @SHA1Thumbprint.setter
-    def SHA1Thumbprint(self, value: uno.ByteSequence) -> None:
+    def SHA1Thumbprint(self, value: typing.Tuple[int, ...]) -> None:
         ...
     @property
-    def SerialNumber(self) -> uno.ByteSequence:
+    def SerialNumber(self) -> typing.Tuple[int, ...]:
         """
         the serial number attribute of the certificate.
         """
         ...
     @SerialNumber.setter
-    def SerialNumber(self, value: uno.ByteSequence) -> None:
+    def SerialNumber(self, value: typing.Tuple[int, ...]) -> None:
         ...
     @property
     def SignatureAlgorithm(self) -> str:
@@ -179,22 +178,22 @@ class XCertificate(XInterface_8f010a43):
     def SubjectPublicKeyAlgorithm(self, value: str) -> None:
         ...
     @property
-    def SubjectPublicKeyValue(self) -> uno.ByteSequence:
+    def SubjectPublicKeyValue(self) -> typing.Tuple[int, ...]:
         """
         the value of the subject public key
         """
         ...
     @SubjectPublicKeyValue.setter
-    def SubjectPublicKeyValue(self, value: uno.ByteSequence) -> None:
+    def SubjectPublicKeyValue(self, value: typing.Tuple[int, ...]) -> None:
         ...
     @property
-    def SubjectUniqueID(self) -> uno.ByteSequence:
+    def SubjectUniqueID(self) -> typing.Tuple[int, ...]:
         """
         the subject unique ID attribute of the certificate.
         """
         ...
     @SubjectUniqueID.setter
-    def SubjectUniqueID(self, value: uno.ByteSequence) -> None:
+    def SubjectUniqueID(self, value: typing.Tuple[int, ...]) -> None:
         ...
     @property
     def Version(self) -> int:

@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.reflection
 from __future__ import annotations
-import uno
+import typing
 from abc import abstractmethod
 from .x_type_description import XTypeDescription as XTypeDescription_3c210fb1
 
@@ -40,7 +40,7 @@ class XArrayTypeDescription(XTypeDescription_3c210fb1):
     __pyunointerface__: str = 'com.sun.star.reflection.XArrayTypeDescription'
 
     @abstractmethod
-    def getDimensions(self) -> uno.ByteSequence:
+    def getDimensions(self) -> typing.Tuple[int, ...]:
         """
         Returns dimensions of array (same length as getNumberOfDimensions()).
         """

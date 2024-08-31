@@ -20,7 +20,6 @@
 # Namespace: com.sun.star.rendering
 from __future__ import annotations
 import typing
-import uno
 from abc import abstractmethod, ABC
 if typing.TYPE_CHECKING:
     from ..beans.property_value import PropertyValue as PropertyValue_c9610c73
@@ -120,7 +119,7 @@ class XColorSpace(ABC):
         """
         ...
     @abstractmethod
-    def getComponentTags(self) -> uno.ByteSequence:
+    def getComponentTags(self) -> typing.Tuple[int, ...]:
         """
         Query the kind for each color component.
         

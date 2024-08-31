@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.awt
 from __future__ import annotations
 import typing
-from abc import abstractmethod, abstractproperty
+from abc import abstractmethod
 from ..container.x_container import XContainer as XContainer_d6fb0cc6
 
 class XAnimatedImages(XContainer_d6fb0cc6):
@@ -83,7 +83,8 @@ class XAnimatedImages(XContainer_d6fb0cc6):
             com.sun.star.lang.IndexOutOfBoundsException: ``IndexOutOfBoundsException``
         """
         ...
-    @abstractproperty
+    @property
+    @abstractmethod
     def AutoRepeat(self) -> bool:
         """
         specifies whether the animation should start over with the first image of the image series when the last image has been played.
@@ -92,7 +93,8 @@ class XAnimatedImages(XContainer_d6fb0cc6):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ScaleMode(self) -> int:
         """
         controls the way the images are scaled up or down, when the available space is larger or smaller than what is needed for them.
@@ -101,7 +103,8 @@ class XAnimatedImages(XContainer_d6fb0cc6):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def StepTime(self) -> int:
         """
         specifies the time in milliseconds between two animation steps.

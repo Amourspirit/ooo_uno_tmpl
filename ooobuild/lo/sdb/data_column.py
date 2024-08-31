@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.sdb
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from .result_column import ResultColumn as ResultColumn_a4980b2e
 from .x_column import XColumn as XColumn_70650907
 from .x_column_update import XColumnUpdate as XColumnUpdate_aebd0b6a
@@ -37,14 +37,16 @@ class DataColumn(ResultColumn_a4980b2e, XColumn_70650907, XColumnUpdate_aebd0b6a
     __ooo_full_ns__: str = 'com.sun.star.sdb.DataColumn'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def OriginalValue(self) -> object:
         """
         contains the original value of the column.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Value(self) -> object:
         """
         contains the column's value.

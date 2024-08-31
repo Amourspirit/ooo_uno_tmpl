@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.document
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from .x_document_event_broadcaster import XDocumentEventBroadcaster as XDocumentEventBroadcaster_b2f1126a
 from .x_document_properties_supplier import XDocumentPropertiesSupplier as XDocumentPropertiesSupplier_dc4b137f
 from .x_embedded_scripts import XEmbeddedScripts as XEmbeddedScripts_1ab50eb1
@@ -55,7 +55,8 @@ class OfficeDocument(XDocumentEventBroadcaster_b2f1126a, XDocumentPropertiesSupp
     __ooo_full_ns__: str = 'com.sun.star.document.OfficeDocument'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ApplyFormDesignMode(self) -> bool:
         """
         controls the initial (on-load) behavior of the form controls in the document
@@ -64,7 +65,8 @@ class OfficeDocument(XDocumentEventBroadcaster_b2f1126a, XDocumentPropertiesSupp
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def AutomaticControlFocus(self) -> bool:
         """
         controls the focus behavior of the form controls in the document
@@ -73,7 +75,8 @@ class OfficeDocument(XDocumentEventBroadcaster_b2f1126a, XDocumentPropertiesSupp
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def InteropGrabBag(self) -> typing.Tuple[PropertyValue_c9610c73, ...]:
         """
         Grab bag of document properties, used as a string-any map for interim interop purposes.
@@ -86,7 +89,8 @@ class OfficeDocument(XDocumentEventBroadcaster_b2f1126a, XDocumentPropertiesSupp
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RuntimeUID(self) -> str:
         """
         contains a unique id for the document

@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.sdbc
 from __future__ import annotations
-from abc import abstractproperty, ABC
+from abc import abstractmethod, ABC
 
 class ConnectionProperties(ABC):
     """
@@ -38,14 +38,16 @@ class ConnectionProperties(ABC):
     __ooo_full_ns__: str = 'com.sun.star.sdbc.ConnectionProperties'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def password(self) -> str:
         """
         the password
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def user(self) -> str:
         """
         the username

@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.report.meta
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ...beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from ...lang.x_component import XComponent as XComponent_98dc0ab5
 from ...sheet.x_formula_parser import XFormulaParser as XFormulaParser_d54d0cbc
@@ -40,14 +40,16 @@ class XFormulaParser(XPropertySet_bc180bfa, XComponent_98dc0ab5, XFormulaParser_
     __ooo_type_name__: str = 'interface'
     __pyunointerface__: str = 'com.sun.star.report.meta.XFormulaParser'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def FormulaOpCodeMapper(self) -> XFormulaOpCodeMapper_27ff0eee:
         """
         return the mapper for op codes.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def OpCodeMap(self) -> typing.Tuple[FormulaOpCodeMapEntry_37da0f61, ...]:
         """
         The complete mapping of Names to OpCodes.

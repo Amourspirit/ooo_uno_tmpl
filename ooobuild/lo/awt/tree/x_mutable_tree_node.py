@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.awt.tree
 from __future__ import annotations
-from abc import abstractmethod, abstractproperty
+from abc import abstractmethod
 from .x_tree_node import XTreeNode as XTreeNode_baaf0ba0
 
 class XMutableTreeNode(XTreeNode_baaf0ba0):
@@ -98,7 +98,8 @@ class XMutableTreeNode(XTreeNode_baaf0ba0):
         If this URL is empty, no graphic is rendered.
         """
         ...
-    @abstractproperty
+    @property
+    @abstractmethod
     def DataValue(self) -> object:
         """
         Stores an implementation dependent value.

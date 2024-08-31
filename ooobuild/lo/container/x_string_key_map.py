@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.container
 from __future__ import annotations
-from abc import abstractmethod, abstractproperty, ABC
+from abc import abstractmethod, ABC
 
 class XStringKeyMap(ABC):
     """
@@ -80,7 +80,8 @@ class XStringKeyMap(ABC):
             com.sun.star.container.ElementExistException: ``ElementExistException``
         """
         ...
-    @abstractproperty
+    @property
+    @abstractmethod
     def Count(self) -> int:
         """
         the number of elements in the map.

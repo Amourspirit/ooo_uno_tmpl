@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.text.textfield
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..text_field import TextField as TextField_90260a56
 
 class FileName(TextField_90260a56):
@@ -35,7 +35,8 @@ class FileName(TextField_90260a56):
     __ooo_full_ns__: str = 'com.sun.star.text.textfield.FileName'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CurrentPresentation(self) -> str:
         """
         contains the current content of the text field.
@@ -44,14 +45,16 @@ class FileName(TextField_90260a56):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def FileFormat(self) -> int:
         """
         determines the format the file name is displayed as specified in com.sun.star.text.FilenameDisplayFormat.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsFixed(self) -> bool:
         """
         If this flag is set to FALSE the content is regularly updated.

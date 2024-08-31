@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.text
 from __future__ import annotations
-from abc import abstractproperty, ABC
+from abc import abstractmethod, ABC
 
 class PagePrintSettings(ABC):
     """
@@ -34,63 +34,72 @@ class PagePrintSettings(ABC):
     __ooo_full_ns__: str = 'com.sun.star.text.PagePrintSettings'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BottomMargin(self) -> int:
         """
         contains the right margin of the printer page.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HoriMargin(self) -> int:
         """
         contains the margin between the rows of printed pages.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsLandscape(self) -> bool:
         """
         defines if the printer page is used in landscape format.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def LeftMargin(self) -> int:
         """
         contains the left margin of the printer page.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def PageColumns(self) -> int:
         """
         contains the number of pages per printed row of pages.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def PageRows(self) -> int:
         """
         contains the number of pages per printed column of pages.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RightMargin(self) -> int:
         """
         contains the right margin of the printer page.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TopMargin(self) -> int:
         """
         contains the top margin of the printer page.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def VertMargin(self) -> int:
         """
         contains the margin between the columns of printed pages.

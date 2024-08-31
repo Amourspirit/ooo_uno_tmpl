@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
     from .transliteration_modules_new import TransliterationModulesNew as TransliterationModulesNew_6260108e
@@ -74,7 +73,7 @@ class XTransliteration(XInterface_8f010a43):
         * ``rMatch2`` is an out direction argument.
         """
         ...
-    def folding(self, aInStr: str, nStartPos: int, nCount: int, rOffset: uno.ByteSequence) -> str:
+    def folding(self, aInStr: str, nStartPos: int, nCount: int, rOffset: typing.Tuple[int, ...]) -> str:
         """
 
         * ``rOffset`` is an out direction argument.
@@ -125,7 +124,7 @@ class XTransliteration(XInterface_8f010a43):
         Output of one module is fed as input to the next module in the sequence. The object created by this call has TransliterationType CASCADE and IGNORE types.
         """
         ...
-    def transliterate(self, aInStr: str, nStartPos: int, nCount: int, rOffset: uno.ByteSequence) -> str:
+    def transliterate(self, aInStr: str, nStartPos: int, nCount: int, rOffset: typing.Tuple[int, ...]) -> str:
         """
         Transliterate a substring.
         

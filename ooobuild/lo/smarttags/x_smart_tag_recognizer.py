@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.smarttags
 from __future__ import annotations
 import typing
-from abc import abstractmethod, abstractproperty
+from abc import abstractmethod
 from ..lang.x_initialization import XInitialization as XInitialization_d46c0cca
 if typing.TYPE_CHECKING:
     from ..frame.x_controller import XController as XController_b00e0b8f
@@ -99,7 +99,8 @@ class XSmartTagRecognizer(XInitialization_d46c0cca):
         recognizes smart tags.
         """
         ...
-    @abstractproperty
+    @property
+    @abstractmethod
     def SmartTagCount(self) -> int:
         """
         The number of smart tag types supported by this recognizer component.

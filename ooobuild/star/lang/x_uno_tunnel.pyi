@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 
 
@@ -38,7 +37,7 @@ class XUnoTunnel(XInterface_8f010a43):
     """
     __pyunointerface__: str = 'com.sun.star.lang.XUnoTunnel'
 
-    def getSomething(self, aIdentifier: uno.ByteSequence) -> int:
+    def getSomething(self, aIdentifier: typing.Tuple[int, ...]) -> int:
         """
         Call this method to get something which is not specified in UNO, e.g.
         

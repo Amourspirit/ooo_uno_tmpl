@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.drawing
 from __future__ import annotations
 import typing
-from abc import abstractproperty, ABC
+from abc import abstractmethod, ABC
 if typing.TYPE_CHECKING:
     from com.sun.star.drawing.EnhancedCustomShapeTextPathMode import EnhancedCustomShapeTextPathModeProto  # type: ignore
 
@@ -37,14 +37,16 @@ class EnhancedCustomShapeTextPath(ABC):
     __ooo_full_ns__: str = 'com.sun.star.drawing.EnhancedCustomShapeTextPath'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ScaleX(self) -> bool:
         """
         This property specifies if the text is scaled using the shape path.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TextPath(self) -> bool:
         """
         This property specifies if a text path is used.
@@ -53,7 +55,8 @@ class EnhancedCustomShapeTextPath(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TextPathMode(self) -> EnhancedCustomShapeTextPathModeProto:
         """
         This property specifies how the text is drawn.

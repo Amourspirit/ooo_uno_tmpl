@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.sdb
 from __future__ import annotations
 import typing
-from abc import abstractproperty, ABC
+from abc import abstractmethod, ABC
 if typing.TYPE_CHECKING:
     from ..awt.font_descriptor import FontDescriptor as FontDescriptor_bc110c0a
     from ..util.color import Color as Color_68e908c5
@@ -38,56 +38,64 @@ class DataSettings(ABC):
     __ooo_full_ns__: str = 'com.sun.star.sdb.DataSettings'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ApplyFilter(self) -> bool:
         """
         indicates whether the filter should be applied or not, default is FALSE.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Filter(self) -> str:
         """
         additional filter for the data object.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def FontDescriptor(self) -> FontDescriptor_bc110c0a:
         """
         specifies the font attributes for data displaying.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def GroupBy(self) -> str:
         """
         additional group by for the data object.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HavingClause(self) -> str:
         """
         additional having clause for the data object.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Order(self) -> str:
         """
         is an additional sort order definition.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RowHeight(self) -> int:
         """
         specifies the height of a data row.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TextColor(self) -> Color_68e908c5:
         """
         specifies the text color (RGB) for displaying text.

@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.drawing
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from .shape import Shape as Shape_85cc09e5
 
 class PageShape(Shape_85cc09e5):
@@ -37,7 +37,8 @@ class PageShape(Shape_85cc09e5):
     __ooo_full_ns__: str = 'com.sun.star.drawing.PageShape'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def PageNumber(self) -> int:
         """
         this is the page number that is used for the preview.

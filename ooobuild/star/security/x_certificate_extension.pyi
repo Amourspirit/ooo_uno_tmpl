@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 
 
@@ -43,21 +42,21 @@ class XCertificateExtension(XInterface_8f010a43):
         ...
 
     @property
-    def ExtensionId(self) -> uno.ByteSequence:
+    def ExtensionId(self) -> typing.Tuple[int, ...]:
         """
         Get the extension object identifier in string.
         """
         ...
     @ExtensionId.setter
-    def ExtensionId(self, value: uno.ByteSequence) -> None:
+    def ExtensionId(self, value: typing.Tuple[int, ...]) -> None:
         ...
     @property
-    def ExtensionValue(self) -> uno.ByteSequence:
+    def ExtensionValue(self) -> typing.Tuple[int, ...]:
         """
         Get the extension value.
         """
         ...
     @ExtensionValue.setter
-    def ExtensionValue(self, value: uno.ByteSequence) -> None:
+    def ExtensionValue(self, value: typing.Tuple[int, ...]) -> None:
         ...
 

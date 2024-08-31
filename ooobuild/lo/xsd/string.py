@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.xsd
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from .x_data_type import XDataType as XDataType_83f209cb
 
 class String(XDataType_83f209cb):
@@ -35,7 +35,8 @@ class String(XDataType_83f209cb):
     __ooo_full_ns__: str = 'com.sun.star.xsd.String'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Length(self) -> int:
         """
         specifies the length of the string
@@ -44,7 +45,8 @@ class String(XDataType_83f209cb):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def MaxLength(self) -> int:
         """
         specifies the maximum length of the string
@@ -53,7 +55,8 @@ class String(XDataType_83f209cb):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def MinLength(self) -> int:
         """
         specifies the minimum length of the string

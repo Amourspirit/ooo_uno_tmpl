@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
     from ..beans.property_value import PropertyValue as PropertyValue_c9610c73
@@ -37,7 +36,7 @@ class XLinkFactory(XInterface_8f010a43):
     """
     __pyunointerface__: str = 'com.sun.star.embed.XLinkFactory'
 
-    def createInstanceLinkUserInit(self, aClassID: uno.ByteSequence, ClassName: str, xStorage: XStorage_8e460a32, sEntryName: str, aArgs: typing.Tuple[PropertyValue_c9610c73, ...], aObjectArgs: typing.Tuple[PropertyValue_c9610c73, ...]) -> XInterface_8f010a43:
+    def createInstanceLinkUserInit(self, aClassID: typing.Tuple[int, ...], ClassName: str, xStorage: XStorage_8e460a32, sEntryName: str, aArgs: typing.Tuple[PropertyValue_c9610c73, ...], aObjectArgs: typing.Tuple[PropertyValue_c9610c73, ...]) -> XInterface_8f010a43:
         """
         creates a new link and transport parameters for persistent initialization.
         

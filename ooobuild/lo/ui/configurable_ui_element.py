@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.ui
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from .ui_element import UIElement as UIElement_78af094e
 from .xui_element_settings import XUIElementSettings as XUIElementSettings_ddbb0cf7
 if typing.TYPE_CHECKING:
@@ -45,7 +45,8 @@ class ConfigurableUIElement(UIElement_78af094e, XUIElementSettings_ddbb0cf7):
     __ooo_full_ns__: str = 'com.sun.star.ui.ConfigurableUIElement'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ConfigurationSource(self) -> XUIConfigurationManager_24e20eef:
         """
         specifies the configuration source of this user interface element.
@@ -54,7 +55,8 @@ class ConfigurableUIElement(UIElement_78af094e, XUIElementSettings_ddbb0cf7):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Persistent(self) -> bool:
         """
         specifies if the user interface element stores changes of its structure to its creator source defined by the property ConfigurationSource.

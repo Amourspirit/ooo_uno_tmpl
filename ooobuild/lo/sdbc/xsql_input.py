@@ -20,7 +20,6 @@
 # Namespace: com.sun.star.sdbc
 from __future__ import annotations
 import typing
-import uno
 from abc import abstractmethod
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
@@ -95,7 +94,7 @@ class XSQLInput(XInterface_8f010a43):
         """
         ...
     @abstractmethod
-    def readBytes(self) -> uno.ByteSequence:
+    def readBytes(self) -> typing.Tuple[int, ...]:
         """
         reads the next attribute in the stream as sequence of bytes.
 

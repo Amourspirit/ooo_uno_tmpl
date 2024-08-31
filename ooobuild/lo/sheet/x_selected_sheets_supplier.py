@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.sheet
 from __future__ import annotations
-import uno
+import typing
 from abc import abstractmethod
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 
@@ -39,7 +39,7 @@ class XSelectedSheetsSupplier(XInterface_8f010a43):
     __pyunointerface__: str = 'com.sun.star.sheet.XSelectedSheetsSupplier'
 
     @abstractmethod
-    def getSelectedSheets(self) -> uno.ByteSequence:
+    def getSelectedSheets(self) -> typing.Tuple[int, ...]:
         """
         returns the indices of currently selected sheets.
         

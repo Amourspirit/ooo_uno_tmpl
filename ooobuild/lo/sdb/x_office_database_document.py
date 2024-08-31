@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.sdb
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..document.x_document_sub_storage_supplier import XDocumentSubStorageSupplier as XDocumentSubStorageSupplier_da021351
 from .x_form_documents_supplier import XFormDocumentsSupplier as XFormDocumentsSupplier_27dc0f33
 from .x_report_documents_supplier import XReportDocumentsSupplier as XReportDocumentsSupplier_490a101b
@@ -39,7 +39,8 @@ class XOfficeDatabaseDocument(XDocumentSubStorageSupplier_da021351, XFormDocumen
     __ooo_type_name__: str = 'interface'
     __pyunointerface__: str = 'com.sun.star.sdb.XOfficeDatabaseDocument'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DataSource(self) -> XDataSource_a2990ae7:
         """
         provides access to the one and only DataSource associated with this document

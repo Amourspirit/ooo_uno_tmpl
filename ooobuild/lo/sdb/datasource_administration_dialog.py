@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.sdb
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from ..lang.x_initialization import XInitialization as XInitialization_d46c0cca
 from ..ui.dialogs.x_executable_dialog import XExecutableDialog as XExecutableDialog_450f0fa1
@@ -42,7 +42,8 @@ class DatasourceAdministrationDialog(XPropertySet_bc180bfa, XInitialization_d46c
     __ooo_full_ns__: str = 'com.sun.star.sdb.DatasourceAdministrationDialog'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ParentWindow(self) -> XWindow_713b0924:
         """
         parent window to use for the administration dialog
@@ -51,7 +52,8 @@ class DatasourceAdministrationDialog(XPropertySet_bc180bfa, XInitialization_d46c
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Title(self) -> str:
         """
         the title of the (dialog) window

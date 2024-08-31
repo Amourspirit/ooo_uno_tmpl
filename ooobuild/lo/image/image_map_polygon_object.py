@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.image
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from .image_map_object import ImageMapObject as ImageMapObject_d1e20c63
 if typing.TYPE_CHECKING:
     from ..drawing.point_sequence import PointSequence as PointSequence_e43f0d37
@@ -38,7 +38,8 @@ class ImageMapPolygonObject(ImageMapObject_d1e20c63):
     __ooo_full_ns__: str = 'com.sun.star.image.ImageMapPolygonObject'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Polygon(self) -> PointSequence_e43f0d37:
         """
         This sequence of points outlines the click area of this image map object.

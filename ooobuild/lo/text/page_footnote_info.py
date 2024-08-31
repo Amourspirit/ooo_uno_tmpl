@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.text
 from __future__ import annotations
 import typing
-from abc import abstractproperty, ABC
+from abc import abstractmethod, ABC
 if typing.TYPE_CHECKING:
     from com.sun.star.text.HorizontalAdjust import HorizontalAdjustProto  # type: ignore
 
@@ -37,14 +37,16 @@ class PageFootnoteInfo(ABC):
     __ooo_full_ns__: str = 'com.sun.star.text.PageFootnoteInfo'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def FootnoteBottomDistance(self) -> int:
         """
         contains the distance between the separator line and the footnote section.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def FootnoteHeight(self) -> int:
         """
         contains the maximum height of the footnote section.
@@ -53,35 +55,40 @@ class PageFootnoteInfo(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def FootnoteSeparatorLineAdjust(self) -> HorizontalAdjustProto:
         """
         contains the adjustment of the footnote separator line.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def FootnoteSeparatorLinePenWidth(self) -> int:
         """
         contains the width of the pen for the footnote separator line.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def FootnoteSeparatorLineWidth(self) -> int:
         """
         contains the relative width of the footnote separator line.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def FootnoteSeparatorLineWidthPercent(self) -> int:
         """
         contains the relative width of the footnote separator line.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def FootnoteTopDistance(self) -> int:
         """
         contains the distance between the text and footnote section.

@@ -19,8 +19,8 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.security
 from __future__ import annotations
-import uno
-from abc import abstractmethod, abstractproperty
+import typing
+from abc import abstractmethod
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 
 class XCertificateExtension(XInterface_8f010a43):
@@ -43,15 +43,17 @@ class XCertificateExtension(XInterface_8f010a43):
         Check whether it is a critical extension.
         """
         ...
-    @abstractproperty
-    def ExtensionId(self) -> uno.ByteSequence:
+    @property
+    @abstractmethod
+    def ExtensionId(self) -> typing.Tuple[int, ...]:
         """
         Get the extension object identifier in string.
         """
         ...
 
-    @abstractproperty
-    def ExtensionValue(self) -> uno.ByteSequence:
+    @property
+    @abstractmethod
+    def ExtensionValue(self) -> typing.Tuple[int, ...]:
         """
         Get the extension value.
         """

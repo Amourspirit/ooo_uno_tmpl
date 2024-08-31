@@ -20,7 +20,6 @@
 # Namespace: com.sun.star.script
 from __future__ import annotations
 import typing
-import uno
 from abc import abstractmethod
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
@@ -43,7 +42,7 @@ class XStarBasicAccess(XInterface_8f010a43):
     __pyunointerface__: str = 'com.sun.star.script.XStarBasicAccess'
 
     @abstractmethod
-    def addDialog(self, LibraryName: str, DialogName: str, Data: uno.ByteSequence) -> None:
+    def addDialog(self, LibraryName: str, DialogName: str, Data: typing.Tuple[int, ...]) -> None:
         """
         Adds an old style basic dialog (SI controls) to an existing (e.g., created by createLibrary) library.
         

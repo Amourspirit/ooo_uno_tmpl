@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 
 
@@ -39,14 +38,14 @@ class XRecentFunctions(XInterface_8f010a43):
         returns the maximum number of entries that will be stored as recently used functions.
         """
         ...
-    def getRecentFunctionIds(self) -> uno.ByteSequence:
+    def getRecentFunctionIds(self) -> typing.Tuple[int, ...]:
         """
         returns a sequence of those functions that were most recently used.
         
         The functions are represented by their identifiers.
         """
         ...
-    def setRecentFunctionIds(self, aRecentFunctionIds: uno.ByteSequence) -> None:
+    def setRecentFunctionIds(self, aRecentFunctionIds: typing.Tuple[int, ...]) -> None:
         """
         sets the list of those functions that were most recently used.
         

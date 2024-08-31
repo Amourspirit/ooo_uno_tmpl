@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.text
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from .base_index import BaseIndex as BaseIndex_8f0d0a40
 if typing.TYPE_CHECKING:
     from ..container.x_index_replace import XIndexReplace as XIndexReplace_feed0dd7
@@ -38,28 +38,32 @@ class ContentIndex(BaseIndex_8f0d0a40):
     __ooo_full_ns__: str = 'com.sun.star.text.ContentIndex'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CreateFromMarks(self) -> bool:
         """
         contains TRUE if the document index marks are included in this index.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CreateFromOutline(self) -> bool:
         """
         determines if the document index is created from outlines.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Level(self) -> int:
         """
         determines the depth of outline levels that are included into the content index.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def LevelParagraphStyles(self) -> XIndexReplace_feed0dd7:
         """
         contains the interface to access the paragraph style names that are included in this index.

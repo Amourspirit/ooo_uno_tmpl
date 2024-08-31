@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from .x_half_float_read_only_bitmap import XHalfFloatReadOnlyBitmap as XHalfFloatReadOnlyBitmap_ad83120a
 if typing.TYPE_CHECKING:
     from ..geometry.integer_point2_d import IntegerPoint2D as IntegerPoint2D_8f0dc2
@@ -40,7 +39,7 @@ class XHalfFloatBitmap(XHalfFloatReadOnlyBitmap_ad83120a):
     """
     __pyunointerface__: str = 'com.sun.star.rendering.XHalfFloatBitmap'
 
-    def setData(self, data: uno.ByteSequence, bitmapLayout: FloatingPointBitmapLayout_c66812df, rect: IntegerRectangle2D_3c5c0f4d) -> None:
+    def setData(self, data: typing.Tuple[int, ...], bitmapLayout: FloatingPointBitmapLayout_c66812df, rect: IntegerRectangle2D_3c5c0f4d) -> None:
         """
         Set raw data of a bitmap.
         
@@ -51,7 +50,7 @@ class XHalfFloatBitmap(XHalfFloatReadOnlyBitmap_ad83120a):
             com.sun.star.lang.IndexOutOfBoundsException: ``IndexOutOfBoundsException``
         """
         ...
-    def setPixel(self, color: uno.ByteSequence, bitmapLayout: FloatingPointBitmapLayout_c66812df, pos: IntegerPoint2D_8f0dc2) -> None:
+    def setPixel(self, color: typing.Tuple[int, ...], bitmapLayout: FloatingPointBitmapLayout_c66812df, pos: IntegerPoint2D_8f0dc2) -> None:
         """
         Set a single pixel of the bitmap with the given color value.
         

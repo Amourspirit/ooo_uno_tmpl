@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
     from ..lang.locale import Locale as Locale_70d308fa
@@ -38,7 +37,7 @@ class XPossibleHyphens(XInterface_8f010a43):
     """
     __pyunointerface__: str = 'com.sun.star.linguistic2.XPossibleHyphens'
 
-    def getHyphenationPositions(self) -> uno.ByteSequence:
+    def getHyphenationPositions(self) -> typing.Tuple[int, ...]:
         """
         """
         ...

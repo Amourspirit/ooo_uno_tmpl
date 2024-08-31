@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.util
 from __future__ import annotations
-import uno
+import typing
 from abc import abstractmethod, ABC
 
 class XBinaryDataContainer(ABC):
@@ -41,7 +41,7 @@ class XBinaryDataContainer(ABC):
     __pyunointerface__: str = 'com.sun.star.util.XBinaryDataContainer'
 
     @abstractmethod
-    def getCopyAsByteSequence(self) -> uno.ByteSequence:
+    def getCopyAsByteSequence(self) -> typing.Tuple[int, ...]:
         """
         Get a copy of the contained data.
         """

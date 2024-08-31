@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.report
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from .x_report_control_model import XReportControlModel as XReportControlModel_2d800f4a
 if typing.TYPE_CHECKING:
     from ..util.x_number_formats_supplier import XNumberFormatsSupplier as XNumberFormatsSupplier_3afb0fb7
@@ -37,7 +37,8 @@ class XFormattedField(XReportControlModel_2d800f4a):
     __ooo_type_name__: str = 'interface'
     __pyunointerface__: str = 'com.sun.star.report.XFormattedField'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def FormatKey(self) -> int:
         """
         specifies the format to be used when formatting the field input and output.
@@ -46,7 +47,8 @@ class XFormattedField(XReportControlModel_2d800f4a):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def FormatsSupplier(self) -> XNumberFormatsSupplier_3afb0fb7:
         """
         supplies the formats the field should work with.

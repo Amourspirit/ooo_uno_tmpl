@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.text.textfield.docinfo
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ...text_field import TextField as TextField_90260a56
 
 class ChangeDateTime(TextField_90260a56):
@@ -39,7 +39,8 @@ class ChangeDateTime(TextField_90260a56):
     __ooo_full_ns__: str = 'com.sun.star.text.textfield.docinfo.ChangeDateTime'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CurrentPresentation(self) -> str:
         """
         contains the current content of the text field.
@@ -48,14 +49,16 @@ class ChangeDateTime(TextField_90260a56):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DateTimeValue(self) -> float:
         """
         contains the date and time as double value.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsDate(self) -> bool:
         """
         If this flag is set to TRUE this field represents, a date with an optional time.
@@ -64,7 +67,8 @@ class ChangeDateTime(TextField_90260a56):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsFixed(self) -> bool:
         """
         If this flag is set to false the author will be overridden by the current author each time the document is saved.
@@ -77,14 +81,16 @@ class ChangeDateTime(TextField_90260a56):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsFixedLanguage(self) -> bool:
         """
         determines whether changes in language attributes at the position the text field is located also change the number format as appropriate for this language.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def NumberFormat(self) -> int:
         """
         this is the number format for this field.

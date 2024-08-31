@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.sheet
 from __future__ import annotations
-from abc import abstractmethod, abstractproperty
+from abc import abstractmethod
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 
 class XSolverDescription(XInterface_8f010a43):
@@ -40,14 +40,16 @@ class XSolverDescription(XInterface_8f010a43):
         returns a short description for a property in the component's com.sun.star.beans.XPropertySet interface.
         """
         ...
-    @abstractproperty
+    @property
+    @abstractmethod
     def ComponentDescription(self) -> str:
         """
         A user-visible name of the component.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def StatusDescription(self) -> str:
         """
         After calling solve, a message describing the status (explaining why no solution was found).

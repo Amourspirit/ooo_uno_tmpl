@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from abc import ABC
 
 
@@ -45,7 +44,7 @@ class XFeatureInvalidation(ABC):
         This method is used of it cannot be exactly and reliably determined which features might actually have changed their state. In this case, the callee should assume all features it is interested in must be required.
         """
         ...
-    def invalidateFeatures(self, Features: uno.ByteSequence) -> None:
+    def invalidateFeatures(self, Features: typing.Tuple[int, ...]) -> None:
         """
         invalidates the given FormFeatures
         

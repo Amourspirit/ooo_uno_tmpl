@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.chart2
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from .data.x_data_sink import XDataSink as XDataSink_dbc40c7b
 from .data.x_data_source import XDataSource as XDataSource_f6340d57
 from ..drawing.line_properties import LineProperties as LineProperties_f13f0da9
@@ -36,37 +36,43 @@ class ErrorBar(LineProperties_f13f0da9, XDataSink_dbc40c7b, XDataSource_f6340d57
     __ooo_full_ns__: str = 'com.sun.star.chart2.ErrorBar'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ErrorBarStyle(self) -> int:
         """
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def NegativeError(self) -> float:
         """
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def PositiveError(self) -> float:
         """
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ShowNegativeError(self) -> bool:
         """
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ShowPositiveError(self) -> bool:
         """
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Weight(self) -> float:
         """
         The weight for the standard deviation.

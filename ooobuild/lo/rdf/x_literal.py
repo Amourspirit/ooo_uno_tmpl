@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.rdf
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from .x_node import XNode as XNode_5ee40822
 if typing.TYPE_CHECKING:
     from .xuri import XURI as XURI_5682078c
@@ -45,21 +45,24 @@ class XLiteral(XNode_5ee40822):
     __ooo_type_name__: str = 'interface'
     __pyunointerface__: str = 'com.sun.star.rdf.XLiteral'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Datatype(self) -> XURI_5682078c:
         """
         the data type of the literal; may be NULL
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Language(self) -> str:
         """
         the language of the literal; may be the empty string
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Value(self) -> str:
         """
         the content of the literal

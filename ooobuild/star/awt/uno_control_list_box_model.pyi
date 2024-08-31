@@ -20,7 +20,6 @@
 # Namespace: com.sun.star.awt
 from __future__ import annotations
 import typing
-import uno
 from .uno_control_model import UnoControlModel as UnoControlModel_c8ce0c58
 from .x_item_list import XItemList as XItemList_83fb09d7
 if typing.TYPE_CHECKING:
@@ -234,13 +233,13 @@ class UnoControlListBoxModel(UnoControlModel_c8ce0c58, XItemList_83fb09d7):
     def ReadOnly(self, value: bool) -> None:
         ...
     @property
-    def SelectedItems(self) -> uno.ByteSequence:
+    def SelectedItems(self) -> typing.Tuple[int, ...]:
         """
         specifies the sequence of selected items, identified by the position.
         """
         ...
     @SelectedItems.setter
-    def SelectedItems(self, value: uno.ByteSequence) -> None:
+    def SelectedItems(self, value: typing.Tuple[int, ...]) -> None:
         ...
     @property
     def StringItemList(self) -> typing.Tuple[str, ...]:

@@ -20,7 +20,6 @@
 # Namespace: com.sun.star.sdbc
 from __future__ import annotations
 import typing
-import uno
 from abc import abstractmethod
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
@@ -52,7 +51,7 @@ class XBlob(XInterface_8f010a43):
         """
         ...
     @abstractmethod
-    def getBytes(self, pos: int, length: int) -> uno.ByteSequence:
+    def getBytes(self, pos: int, length: int) -> typing.Tuple[int, ...]:
         """
         returns as an array of bytes part or all of the  BLOB  value that this Blob object designates.
         
@@ -72,7 +71,7 @@ class XBlob(XInterface_8f010a43):
         """
         ...
     @abstractmethod
-    def position(self, pattern: uno.ByteSequence, start: int) -> int:
+    def position(self, pattern: typing.Tuple[int, ...], start: int) -> int:
         """
         determines the byte position at which the specified byte pattern begins within the  BLOB  value that this Blob object represents.
         

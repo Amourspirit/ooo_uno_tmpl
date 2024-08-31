@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.table
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..util.sort_descriptor import SortDescriptor as SortDescriptor_ca680c8d
 if typing.TYPE_CHECKING:
     from ..util.sort_field import SortField as SortField_90080a52
@@ -45,21 +45,24 @@ class TableSortDescriptor(SortDescriptor_ca680c8d):
     __ooo_full_ns__: str = 'com.sun.star.table.TableSortDescriptor'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ContainsHeader(self) -> bool:
         """
         specifies whether the first row or column (depending on com.sun.star.util.SortDescriptor.SortColumns) is a header which should not be sorted.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def MaxFieldCount(self) -> int:
         """
         contains the maximum number of sort fields the descriptor can hold.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Orientation(self) -> TableOrientationProto:
         """
         specifies the sorting orientation (sort rows or columns).
@@ -68,7 +71,8 @@ class TableSortDescriptor(SortDescriptor_ca680c8d):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SortFields(self) -> typing.Tuple[SortField_90080a52, ...]:
         """
         specifies the descriptions of the individual sort fields.

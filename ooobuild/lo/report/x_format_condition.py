@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.report
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from .x_report_control_format import XReportControlFormat as XReportControlFormat_3d4e0fc2
 
@@ -35,14 +35,16 @@ class XFormatCondition(XPropertySet_bc180bfa, XReportControlFormat_3d4e0fc2):
     __ooo_type_name__: str = 'interface'
     __pyunointerface__: str = 'com.sun.star.report.XFormatCondition'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Enabled(self) -> bool:
         """
         specifies if the condition is enabled or not.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Formula(self) -> str:
         """
         defines the formula of the format condition.

@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 
 
@@ -38,7 +37,7 @@ class XStarBasicDialogInfo(XInterface_8f010a43):
     """
     __pyunointerface__: str = 'com.sun.star.script.XStarBasicDialogInfo'
 
-    def getData(self) -> uno.ByteSequence:
+    def getData(self) -> typing.Tuple[int, ...]:
         """
         returns binary data describing the SIDialog in SBX stream format
         """

@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.text
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from .x_text_content import XTextContent as XTextContent_b16e0ba5
 if typing.TYPE_CHECKING:
     from ..beans.property_value import PropertyValue as PropertyValue_c9610c73
@@ -44,7 +44,8 @@ class ContentControl(XTextContent_b16e0ba5):
     __ooo_full_ns__: str = 'com.sun.star.text.ContentControl'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Alias(self) -> str:
         """
         The alias: kind of a human-readable title / description, show up on the UI.
@@ -57,7 +58,8 @@ class ContentControl(XTextContent_b16e0ba5):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Appearance(self) -> str:
         """
         The appearance: just remembered.
@@ -68,35 +70,40 @@ class ContentControl(XTextContent_b16e0ba5):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Checkbox(self) -> bool:
         """
         Display the content control as a checkbox.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Checked(self) -> bool:
         """
         If Checkbox is true, is the checkbox checked?
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CheckedState(self) -> str:
         """
         If Checkbox is true, the value of a checked checkbox.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Color(self) -> str:
         """
         The color: just remembered.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ComboBox(self) -> bool:
         """
         Combo box that allows free-form text as well, i.e.
@@ -109,35 +116,40 @@ class ContentControl(XTextContent_b16e0ba5):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CurrentDate(self) -> str:
         """
         Date in YYYY-MM-DDT00:00:00Z format.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DataBindingPrefixMappings(self) -> str:
         """
         The data bindings's prefix mappings: just remembered.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DataBindingStoreItemID(self) -> str:
         """
         The data bindings's store item ID: just remembered.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DataBindingXpath(self) -> str:
         """
         The data bindings's XPath: just remembered.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Date(self) -> bool:
         """
         Display the content control as a date.
@@ -146,21 +158,24 @@ class ContentControl(XTextContent_b16e0ba5):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DateFormat(self) -> str:
         """
         If Date is true, the date format in a syntax accepted by the NumberFormatter.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DateLanguage(self) -> str:
         """
         If Date is true, the date's BCP 47 language tag.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DateString(self) -> str:
         """
         The formatted date string, based on DateFormat, DateLanguage and CurrentDate.
@@ -171,7 +186,8 @@ class ContentControl(XTextContent_b16e0ba5):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DropDown(self) -> bool:
         """
         Drop-down that does not allow free-form text, i.e.
@@ -184,7 +200,8 @@ class ContentControl(XTextContent_b16e0ba5):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Id(self) -> int:
         """
         A unique numeric id, used by macros to identify a specific control.
@@ -195,14 +212,16 @@ class ContentControl(XTextContent_b16e0ba5):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ListItems(self) -> typing.Tuple[typing.Tuple[PropertyValue_c9610c73, ...], ...]:
         """
         List items of a dropdown: DisplayText + Value pairs with string values for each item.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Lock(self) -> str:
         """
         Describes whether the control itself and/or its data can be modified or deleted by the user.
@@ -213,7 +232,8 @@ class ContentControl(XTextContent_b16e0ba5):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def MultiLine(self) -> str:
         """
         Indicates if the control accepts soft breaks.
@@ -224,21 +244,24 @@ class ContentControl(XTextContent_b16e0ba5):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Picture(self) -> bool:
         """
         Display the content control as a picture.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def PlaceholderDocPart(self) -> str:
         """
         The placeholder's doc part: just remembered.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def PlainText(self) -> bool:
         """
         Plain text, i.e.
@@ -247,14 +270,16 @@ class ContentControl(XTextContent_b16e0ba5):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ShowingPlaceHolder(self) -> bool:
         """
         Current content is placeholder text.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TabIndex(self) -> int:
         """
         Describes the order in which keyboard navigation moves between controls.
@@ -265,7 +290,8 @@ class ContentControl(XTextContent_b16e0ba5):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Tag(self) -> str:
         """
         The tag: similar to Alias, but is meant to be machine-readable.
@@ -278,7 +304,8 @@ class ContentControl(XTextContent_b16e0ba5):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def UncheckedState(self) -> str:
         """
         If Checkbox is true, the value of an unchecked checkbox.

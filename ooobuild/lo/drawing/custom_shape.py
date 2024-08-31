@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.drawing
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from .fill_properties import FillProperties as FillProperties_f1200da8
 from .line_properties import LineProperties as LineProperties_f13f0da9
 from .rotation_descriptor import RotationDescriptor as RotationDescriptor_2cec0f63
@@ -43,21 +43,24 @@ class CustomShape(FillProperties_f1200da8, LineProperties_f13f0da9, RotationDesc
     __ooo_full_ns__: str = 'com.sun.star.drawing.CustomShape'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CustomShapeData(self) -> str:
         """
         This property can be used to store data that the CustomShapeEngine may use for rendering.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CustomShapeEngine(self) -> str:
         """
         This property contains the CustomShapeEngine service name that has to be used for rendering.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CustomShapeGeometry(self) -> typing.Tuple[PropertyValue_c9610c73, ...]:
         """
         This property describes the geometry of the CustomShape.
@@ -68,7 +71,8 @@ class CustomShape(FillProperties_f1200da8, LineProperties_f13f0da9, RotationDesc
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CustomShapeReplacementURL(self) -> str:
         """
         This property describes the URL to a replacement graphic that could be displayed if the CustomShape engine is not available.

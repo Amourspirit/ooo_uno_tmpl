@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.linguistic2
 from __future__ import annotations
-import uno
+import typing
 from abc import abstractmethod
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 
@@ -39,7 +39,7 @@ class XSupportedLanguages(XInterface_8f010a43):
     __pyunointerface__: str = 'com.sun.star.linguistic2.XSupportedLanguages'
 
     @abstractmethod
-    def getLanguages(self) -> uno.ByteSequence:
+    def getLanguages(self) -> typing.Tuple[int, ...]:
         """
         """
         ...

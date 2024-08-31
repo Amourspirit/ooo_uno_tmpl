@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.drawing
 from __future__ import annotations
 import typing
-from abc import abstractproperty, ABC
+from abc import abstractmethod, ABC
 if typing.TYPE_CHECKING:
     from ..awt.size import Size as Size_576707ef
     from .enhanced_custom_shape_parameter_pair import EnhancedCustomShapeParameterPair as EnhancedCustomShapeParameterPair_262914a3
@@ -40,7 +40,8 @@ class EnhancedCustomShapePath(ABC):
     __ooo_full_ns__: str = 'com.sun.star.drawing.EnhancedCustomShapePath'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ConcentricGradientFillAllowed(self) -> bool:
         """
         This property specifies if this shape supports concentric gradient fill.
@@ -49,14 +50,16 @@ class EnhancedCustomShapePath(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Coordinates(self) -> typing.Tuple[EnhancedCustomShapeParameterPair_262914a3, ...]:
         """
         This property is specifying the points that makes the geometry of the shape.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ExtrusionAllowed(self) -> bool:
         """
         This property specifies if this shape supports the EnhancedCustomShapeExtrusion properties.
@@ -65,14 +68,16 @@ class EnhancedCustomShapePath(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def GluePointLeavingDirections(self) -> typing.Tuple[float, ...]:
         """
         This property specifies GluePoint leaving directions.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def GluePointType(self) -> int:
         """
         This property defines the GluePoint type.
@@ -81,21 +86,24 @@ class EnhancedCustomShapePath(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def GluePoints(self) -> typing.Tuple[EnhancedCustomShapeParameterPair_262914a3, ...]:
         """
         This property specifies custom gluepoints.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Segments(self) -> typing.Tuple[EnhancedCustomShapeSegment_b07b1249, ...]:
         """
         This property specifies the commands and the way the Coordinates have to be interpreted.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def StretchX(self) -> int:
         """
         This property specifies the horizontal StretchPoint that has to be used.
@@ -104,7 +112,8 @@ class EnhancedCustomShapePath(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def StretchY(self) -> int:
         """
         This property specifies the vertical StretchPoint that has to be used.
@@ -113,14 +122,16 @@ class EnhancedCustomShapePath(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SubViewSize(self) -> typing.Tuple[Size_576707ef, ...]:
         """
         This property specifies view size per sub path.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TextFrames(self) -> typing.Tuple[EnhancedCustomShapeTextFrame_d6321306, ...]:
         """
         This property specifies the text frames that can be used with the shape.
@@ -129,7 +140,8 @@ class EnhancedCustomShapePath(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TextPathAllowed(self) -> bool:
         """
         This property specifies if this shape supports concentric gradient fill.

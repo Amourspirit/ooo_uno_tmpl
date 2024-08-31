@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 
 
@@ -34,7 +33,7 @@ class XTypeProvider(XInterface_8f010a43):
     """
     __pyunointerface__: str = 'com.sun.star.lang.XTypeProvider'
 
-    def getImplementationId(self) -> uno.ByteSequence:
+    def getImplementationId(self) -> typing.Tuple[int, ...]:
         """
         Obsolete unique identifier.
         

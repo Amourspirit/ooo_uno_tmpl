@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.chart
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..drawing.shape import Shape as Shape_85cc09e5
 from ..xml.user_defined_attributes_supplier import UserDefinedAttributesSupplier as UserDefinedAttributesSupplier_9fbe1222
 
@@ -42,7 +42,8 @@ class ChartTitle(Shape_85cc09e5, UserDefinedAttributesSupplier_9fbe1222):
     __ooo_full_ns__: str = 'com.sun.star.chart.ChartTitle'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def AutomaticPosition(self) -> bool:
         """
         If this property is TRUE the position is calculated by the application automatically.
@@ -51,7 +52,8 @@ class ChartTitle(Shape_85cc09e5, UserDefinedAttributesSupplier_9fbe1222):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def String(self) -> str:
         """
         contains the text of the title.
@@ -60,7 +62,8 @@ class ChartTitle(Shape_85cc09e5, UserDefinedAttributesSupplier_9fbe1222):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TextRotation(self) -> int:
         """
         specifies the rotation of the shape in 100th of degrees.

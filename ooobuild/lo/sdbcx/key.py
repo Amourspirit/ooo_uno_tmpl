@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.sdbcx
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from .x_columns_supplier import XColumnsSupplier as XColumnsSupplier_f0600da9
 from .x_data_descriptor_factory import XDataDescriptorFactory as XDataDescriptorFactory_46170fe5
@@ -37,35 +37,40 @@ class Key(XPropertySet_bc180bfa, XColumnsSupplier_f0600da9, XDataDescriptorFacto
     __ooo_full_ns__: str = 'com.sun.star.sdbcx.Key'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DeleteRule(self) -> int:
         """
         is the rule which is applied for deletions; only used for foreign keys.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Name(self) -> str:
         """
         is the name of the key
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ReferencedTable(self) -> str:
         """
         is the name of the referenced table, only used for foreign keys.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Type(self) -> int:
         """
         indicates the type of the key.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def UpdateRule(self) -> int:
         """
         is the rule which is applied for updates; only used for foreign keys.

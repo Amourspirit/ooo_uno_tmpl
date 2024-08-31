@@ -1,8 +1,9 @@
+# coding: utf-8
 import os
 from typing import Any, TYPE_CHECKING
 
-__version__ = "1.0.5"
-__version_tmpl__ = "0.3.0"
+__version__ = "1.0.5" # I think this is for python-types-unopy, https://github.com/Amourspirit/python-types-unopy
+__version_tmpl__ = "0.4.0"
 
 _IGNORE_IMPORT_ERROR = os.environ.get(
     "ooouno_ignore_import_error", None) in ("True", "true", "yes")

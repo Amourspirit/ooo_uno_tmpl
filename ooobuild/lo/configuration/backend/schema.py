@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.configuration.backend
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from .x_schema import XSchema as XSchema_5ce7101f
 
 class Schema(XSchema_5ce7101f):
@@ -43,7 +43,8 @@ class Schema(XSchema_5ce7101f):
     __ooo_full_ns__: str = 'com.sun.star.configuration.backend.Schema'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def URL(self) -> str:
         """
         The URL of the layer data.

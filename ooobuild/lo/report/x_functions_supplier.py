@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.report
 from __future__ import annotations
 import typing
-from abc import abstractproperty, ABC
+from abc import abstractmethod, ABC
 if typing.TYPE_CHECKING:
     from .x_functions import XFunctions as XFunctions_b2680bb5
 
@@ -36,7 +36,8 @@ class XFunctionsSupplier(ABC):
     __ooo_type_name__: str = 'interface'
     __pyunointerface__: str = 'com.sun.star.report.XFunctionsSupplier'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Functions(self) -> XFunctions_b2680bb5:
         """
         access to the functions

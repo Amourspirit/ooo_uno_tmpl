@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.drawing
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 
 class Layer(XPropertySet_bc180bfa):
@@ -39,28 +39,32 @@ class Layer(XPropertySet_bc180bfa):
     __ooo_full_ns__: str = 'com.sun.star.drawing.Layer'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsLocked(self) -> bool:
         """
         If a Layer is locked, the objects in this Layer cannot be edited in the user interface.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsPrintable(self) -> bool:
         """
         If a Layer is not printable, the objects in this Layer are not printed.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsVisible(self) -> bool:
         """
         If a Layer is not visible, the objects in this Layer are not shown in the user interface.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Name(self) -> str:
         """
         The name of a Layer is used to identify the Layer in the user interface.

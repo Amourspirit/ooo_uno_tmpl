@@ -20,7 +20,6 @@
 # Namespace: com.sun.star.awt
 from __future__ import annotations
 import typing
-import uno
 from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 
@@ -39,7 +38,7 @@ class XPrinterPropertySet(XPropertySet_bc180bfa):
     __pyunointerface__: str = 'com.sun.star.awt.XPrinterPropertySet'
 
     @abstractmethod
-    def getBinarySetup(self) -> uno.ByteSequence:
+    def getBinarySetup(self) -> typing.Tuple[int, ...]:
         """
         returns a binary encoded version of the printer setup.
         """
@@ -63,7 +62,7 @@ class XPrinterPropertySet(XPropertySet_bc180bfa):
         """
         ...
     @abstractmethod
-    def setBinarySetup(self, data: uno.ByteSequence) -> None:
+    def setBinarySetup(self, data: typing.Tuple[int, ...]) -> None:
         """
         sets the data specific to the printer driver.
         

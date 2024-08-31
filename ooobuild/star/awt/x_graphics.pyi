@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
     from .font_descriptor import FontDescriptor as FontDescriptor_bc110c0a
@@ -91,17 +90,17 @@ class XGraphics(XInterface_8f010a43):
         sets a single pixel in the output device.
         """
         ...
-    def drawPolyLine(self, DataX: uno.ByteSequence, DataY: uno.ByteSequence) -> None:
+    def drawPolyLine(self, DataX: typing.Tuple[int, ...], DataY: typing.Tuple[int, ...]) -> None:
         """
         draws multiple lines in the output device at once.
         """
         ...
-    def drawPolyPolygon(self, DataX: typing.Tuple[uno.ByteSequence, ...], DataY: typing.Tuple[uno.ByteSequence, ...]) -> None:
+    def drawPolyPolygon(self, DataX: typing.Tuple[typing.Tuple[int, ...], ...], DataY: typing.Tuple[typing.Tuple[int, ...], ...]) -> None:
         """
         draws multiple polygons in the output device at once.
         """
         ...
-    def drawPolygon(self, DataX: uno.ByteSequence, DataY: uno.ByteSequence) -> None:
+    def drawPolygon(self, DataX: typing.Tuple[int, ...], DataY: typing.Tuple[int, ...]) -> None:
         """
         draws a polygon line in the output device.
         """
@@ -121,7 +120,7 @@ class XGraphics(XInterface_8f010a43):
         draws text in the output device.
         """
         ...
-    def drawTextArray(self, X: int, Y: int, Text: str, Longs: uno.ByteSequence) -> None:
+    def drawTextArray(self, X: int, Y: int, Text: str, Longs: typing.Tuple[int, ...]) -> None:
         """
         draws texts in the output device using an explicit kerning table.
         """

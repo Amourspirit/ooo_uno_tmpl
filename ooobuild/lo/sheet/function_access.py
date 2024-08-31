@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.sheet
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from .spreadsheet_document_settings import SpreadsheetDocumentSettings as SpreadsheetDocumentSettings_a1641229
 from .x_function_access import XFunctionAccess as XFunctionAccess_e2000d11
 
@@ -40,7 +40,8 @@ class FunctionAccess(SpreadsheetDocumentSettings_a1641229, XFunctionAccess_e2000
     __ooo_full_ns__: str = 'com.sun.star.sheet.FunctionAccess'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsArrayFunction(self) -> bool:
         """
         specifies whether the function call is performed as array function call.

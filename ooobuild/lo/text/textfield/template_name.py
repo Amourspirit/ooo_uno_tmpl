@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.text.textfield
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..text_field import TextField as TextField_90260a56
 
 class TemplateName(TextField_90260a56):
@@ -35,7 +35,8 @@ class TemplateName(TextField_90260a56):
     __ooo_full_ns__: str = 'com.sun.star.text.textfield.TemplateName'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def FileFormat(self) -> int:
         """
         determines the format the template file name is displayed as specified in com.sun.star.text.FilenameDisplayFormat.

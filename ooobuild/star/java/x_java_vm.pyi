@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 
 
@@ -38,7 +37,7 @@ class XJavaVM(XInterface_8f010a43):
     """
     __pyunointerface__: str = 'com.sun.star.java.XJavaVM'
 
-    def getJavaVM(self, processID: uno.ByteSequence) -> typing.Any:
+    def getJavaVM(self, processID: typing.Tuple[int, ...]) -> typing.Any:
         """
         returns the address of the Java Virtual Machine.
         

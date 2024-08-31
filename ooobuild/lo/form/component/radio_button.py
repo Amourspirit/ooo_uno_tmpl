@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.form.component
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ...awt.uno_control_radio_button_model import UnoControlRadioButtonModel as UnoControlRadioButtonModel_6ad310c3
 from ..form_control_model import FormControlModel as FormControlModel_e2990d22
 from ..x_reset import XReset as XReset_71670917
@@ -41,7 +41,8 @@ class RadioButton(UnoControlRadioButtonModel_6ad310c3, FormControlModel_e2990d22
     __ooo_full_ns__: str = 'com.sun.star.form.component.RadioButton'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DefaultState(self) -> int:
         """
         contains a default value for the control.
@@ -52,7 +53,8 @@ class RadioButton(UnoControlRadioButtonModel_6ad310c3, FormControlModel_e2990d22
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RefValue(self) -> str:
         """
         contains a reference value which is used for submission in a HTML form.
@@ -61,7 +63,8 @@ class RadioButton(UnoControlRadioButtonModel_6ad310c3, FormControlModel_e2990d22
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def UncheckedRefValue(self) -> str:
         """
         specifies a value which is to be associated with the control when it's not selected.

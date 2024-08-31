@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.text
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from .base_index import BaseIndex as BaseIndex_8f0d0a40
 
 class ObjectIndex(BaseIndex_8f0d0a40):
@@ -39,14 +39,16 @@ class ObjectIndex(BaseIndex_8f0d0a40):
     __ooo_full_ns__: str = 'com.sun.star.text.ObjectIndex'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CreateFromOtherEmbeddedObjects(self) -> bool:
         """
         Determines if external embedded objects are included in the index.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CreateFromParagraphStyle(self) -> str:
         """
         determines if paragraphs with one particular style applied are included in the index.
@@ -57,28 +59,32 @@ class ObjectIndex(BaseIndex_8f0d0a40):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CreateFromStarCalc(self) -> bool:
         """
         Determines if LibreOffice Calc objects are included in the index.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CreateFromStarChart(self) -> bool:
         """
         Determines if LibreOffice Chart objects are included in the index.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CreateFromStarDraw(self) -> bool:
         """
         Determines if LibreOffice Draw objects are included in the index.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CreateFromStarMath(self) -> bool:
         """
         Determines if LibreOffice Math objects are included in the index.

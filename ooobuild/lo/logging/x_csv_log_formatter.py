@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.logging
 from __future__ import annotations
 import typing
-from abc import abstractmethod, abstractproperty
+from abc import abstractmethod
 from .x_log_formatter import XLogFormatter as XLogFormatter_e23d0d1d
 
 class XCsvLogFormatter(XLogFormatter_e23d0d1d):
@@ -49,7 +49,8 @@ class XCsvLogFormatter(XLogFormatter_e23d0d1d):
         XLoggerInstance.log(1000, XCsvLogFormatterInstance.formatMultiColumn(columnData))
         """
         ...
-    @abstractproperty
+    @property
+    @abstractmethod
     def Columnnames(self) -> typing.Tuple[str, ...]:
         """
         Defines the names of the additional columns this defaults to only one row titled \"message\".
@@ -58,28 +59,32 @@ class XCsvLogFormatter(XLogFormatter_e23d0d1d):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def LogEventNo(self) -> bool:
         """
         Defines if the EventNo should be logged.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def LogSource(self) -> bool:
         """
         Defines if the Source should be logged.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def LogThread(self) -> bool:
         """
         Defines if the ThreadId should be logged.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def LogTimestamp(self) -> bool:
         """
         Defines if the Timestamp should be logged.

@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.sheet
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from .x_condition_entry import XConditionEntry as XConditionEntry_e2340d32
 if typing.TYPE_CHECKING:
     from .x_icon_set_entry import XIconSetEntry as XIconSetEntry_c7620c40
@@ -37,26 +37,30 @@ class IconSet(XConditionEntry_e2340d32):
     __ooo_full_ns__: str = 'com.sun.star.sheet.IconSet'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IconSetEntries(self) -> typing.Tuple[XIconSetEntry_c7620c40, ...]:
         """
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Icons(self) -> int:
         """
         See com.sun.star.sheet.IconSetType for possible values.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Reverse(self) -> bool:
         """
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ShowValue(self) -> bool:
         """
         """

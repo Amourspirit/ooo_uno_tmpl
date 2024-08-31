@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.xsd
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from .x_data_type import XDataType as XDataType_83f209cb
 
 class Decimal(XDataType_83f209cb):
@@ -35,7 +35,8 @@ class Decimal(XDataType_83f209cb):
     __ooo_full_ns__: str = 'com.sun.star.xsd.Decimal'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def FractionDigits(self) -> int:
         """
         fractionDigits is the maximum number of digits in the fractional part of values of decimal data
@@ -46,35 +47,40 @@ class Decimal(XDataType_83f209cb):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def MaxExclusiveDouble(self) -> float:
         """
         specifies the exclusive upper bound for the value
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def MaxInclusiveDouble(self) -> float:
         """
         specifies the inclusive upper bound for the value
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def MinExclusiveDouble(self) -> float:
         """
         specifies the exclusive lower bound for the value
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def MinInclusiveDouble(self) -> float:
         """
         specifies the inclusive lower bound for the value
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TotalDigits(self) -> int:
         """
         totalDigits is the maximum number of digits in values of decimal data types.

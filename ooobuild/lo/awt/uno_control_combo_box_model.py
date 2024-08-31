@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.awt
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from .uno_control_model import UnoControlModel as UnoControlModel_c8ce0c58
 from .x_item_list import XItemList as XItemList_83fb09d7
 if typing.TYPE_CHECKING:
@@ -44,35 +44,40 @@ class UnoControlComboBoxModel(UnoControlModel_c8ce0c58, XItemList_83fb09d7):
     __ooo_full_ns__: str = 'com.sun.star.awt.UnoControlComboBoxModel'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Align(self) -> int:
         """
         specifies the horizontal alignment of the text in the control.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Autocomplete(self) -> bool:
         """
         specifies whether automatic completion of text is enabled.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BackgroundColor(self) -> Color_68e908c5:
         """
         specifies the background color (RGB) of the control.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Border(self) -> int:
         """
         specifies the border style of the control.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BorderColor(self) -> int:
         """
         specifies the color of the border, if present
@@ -85,56 +90,64 @@ class UnoControlComboBoxModel(UnoControlModel_c8ce0c58, XItemList_83fb09d7):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Dropdown(self) -> bool:
         """
         specifies if the control has a drop down button.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Enabled(self) -> bool:
         """
         determines whether the control is enabled or disabled.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def FontDescriptor(self) -> FontDescriptor_bc110c0a:
         """
         specifies the font attributes of the text in the control.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def FontEmphasisMark(self) -> int:
         """
         specifies the com.sun.star.text.FontEmphasis value of the text in the control.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def FontRelief(self) -> int:
         """
         specifies the com.sun.star.text.FontRelief value of the text in the control.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HelpText(self) -> str:
         """
         specifies the help text of the control.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HelpURL(self) -> str:
         """
         specifies the help URL of the control.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HideInactiveSelection(self) -> bool:
         """
         specifies whether the selection in the control should be hidden when the control is not active (focused).
@@ -145,7 +158,8 @@ class UnoControlComboBoxModel(UnoControlModel_c8ce0c58, XItemList_83fb09d7):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HighlightColor(self) -> Color_68e908c5:
         """
         specifies the background color (RGB) of selected items in the control which are highlighted.
@@ -156,7 +170,8 @@ class UnoControlComboBoxModel(UnoControlModel_c8ce0c58, XItemList_83fb09d7):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HighlightTextColor(self) -> Color_68e908c5:
         """
         specifies the text color (RGB) of selected items in the control which are highlighted.
@@ -167,14 +182,16 @@ class UnoControlComboBoxModel(UnoControlModel_c8ce0c58, XItemList_83fb09d7):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def LineCount(self) -> int:
         """
         specifies the maximum line count displayed in the drop down box.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def MaxTextLen(self) -> int:
         """
         specifies the maximum character count.
@@ -183,7 +200,8 @@ class UnoControlComboBoxModel(UnoControlModel_c8ce0c58, XItemList_83fb09d7):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def MouseWheelBehavior(self) -> int:
         """
         defines how the mouse wheel can be used to scroll through the control's content.
@@ -192,56 +210,64 @@ class UnoControlComboBoxModel(UnoControlModel_c8ce0c58, XItemList_83fb09d7):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Printable(self) -> bool:
         """
         specifies that the control will be printed with the document.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ReadOnly(self) -> bool:
         """
         specifies that the content of the control cannot be modified by the user.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def StringItemList(self) -> typing.Tuple[str, ...]:
         """
         specifies the list of items.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Tabstop(self) -> bool:
         """
         specifies that the control can be reached with the TAB key.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Text(self) -> str:
         """
         specifies the text displayed in the control.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TextColor(self) -> Color_68e908c5:
         """
         specifies the text color (RGB) of the control.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TextLineColor(self) -> Color_68e908c5:
         """
         specifies the text line color (RGB) of the control.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TypedItemList(self) -> typing.Tuple[object, ...]:
         """
         specifies the list of raw typed (not stringized) items.
@@ -256,7 +282,8 @@ class UnoControlComboBoxModel(UnoControlModel_c8ce0c58, XItemList_83fb09d7):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def WritingMode(self) -> int:
         """
         denotes the writing mode used in the control, as specified in the com.sun.star.text.WritingMode2 constants group.

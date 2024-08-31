@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.rdf
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from .x_resource import XResource as XResource_842709e4
 if typing.TYPE_CHECKING:
     from .statement import Statement as Statement_84a009f9
@@ -41,7 +41,8 @@ class XReifiedStatement(XResource_842709e4):
     __ooo_type_name__: str = 'interface'
     __pyunointerface__: str = 'com.sun.star.rdf.XReifiedStatement'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Statement(self) -> Statement_84a009f9:
         """
         the statement that is reified

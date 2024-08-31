@@ -102,8 +102,6 @@ with suppress(ImportError):
 with suppress(ImportError):
     from ...dyn.accessibility.x_accessible_selection import XAccessibleSelection as XAccessibleSelection
 with suppress(ImportError):
-    from ...dyn.accessibility.x_accessible_state_set import XAccessibleStateSet as XAccessibleStateSet
-with suppress(ImportError):
     from ...dyn.accessibility.x_accessible_table import XAccessibleTable as XAccessibleTable
 with suppress(ImportError):
     from ...dyn.accessibility.x_accessible_table_selection import XAccessibleTableSelection as XAccessibleTableSelection

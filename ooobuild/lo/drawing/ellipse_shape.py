@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.drawing
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from .fill_properties import FillProperties as FillProperties_f1200da8
 from .line_properties import LineProperties as LineProperties_f13f0da9
 from .rotation_descriptor import RotationDescriptor as RotationDescriptor_2cec0f63
@@ -43,21 +43,24 @@ class EllipseShape(FillProperties_f1200da8, LineProperties_f13f0da9, RotationDes
     __ooo_full_ns__: str = 'com.sun.star.drawing.EllipseShape'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CircleEndAngle(self) -> int:
         """
         If the kind specifies an open circle, this is the end angle.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CircleKind(self) -> CircleKindProto:
         """
         This is the kind of circle.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CircleStartAngle(self) -> int:
         """
         If the kind specifies an open circle, this is the start angle.

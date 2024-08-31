@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.xsd
 from __future__ import annotations
-from abc import abstractmethod, abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 
 class XDataType(XPropertySet_bc180bfa):
@@ -46,7 +46,8 @@ class XDataType(XPropertySet_bc180bfa):
         TODO.
         """
         ...
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsBasic(self) -> bool:
         """
         specifies whether the type is a basic type
@@ -55,14 +56,16 @@ class XDataType(XPropertySet_bc180bfa):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Name(self) -> str:
         """
         provides access to the name of the type
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Pattern(self) -> str:
         """
         specifies the pattern which strings conforming to this type comply to
@@ -71,14 +74,16 @@ class XDataType(XPropertySet_bc180bfa):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TypeClass(self) -> int:
         """
         class of the type
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def WhiteSpaceTreatment(self) -> int:
         """
         specifies how strings of this data type are to be processed, with respect to white spaces

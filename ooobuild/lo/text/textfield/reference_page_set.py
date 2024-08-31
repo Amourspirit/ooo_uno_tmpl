@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.text.textfield
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..text_field import TextField as TextField_90260a56
 
 class ReferencePageSet(TextField_90260a56):
@@ -35,14 +35,16 @@ class ReferencePageSet(TextField_90260a56):
     __ooo_full_ns__: str = 'com.sun.star.text.textfield.ReferencePageSet'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def NameOn(self) -> bool:
         """
         determines whether the ReferencePageGet text fields are displayed or not.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Offset(self) -> int:
         """
         determines an offset value to change the displayed value of a ReferencePageGet text field.

@@ -20,7 +20,6 @@
 # Namespace: com.sun.star.script
 from __future__ import annotations
 import typing
-import uno
 from abc import abstractmethod
 from .x_invocation import XInvocation as XInvocation_be070c0f
 
@@ -36,7 +35,7 @@ class XAutomationInvocation(XInvocation_be070c0f):
     __pyunointerface__: str = 'com.sun.star.script.XAutomationInvocation'
 
     @abstractmethod
-    def invokeGetProperty(self, aFunctionName: str, aParams: typing.Tuple[object, ...], aOutParamIndex: uno.ByteSequence, aOutParam: typing.Tuple[object, ...]) -> object:
+    def invokeGetProperty(self, aFunctionName: str, aParams: typing.Tuple[object, ...], aOutParamIndex: typing.Tuple[int, ...], aOutParam: typing.Tuple[object, ...]) -> object:
         """
 
         * ``aOutParamIndex`` is an out direction argument.
@@ -49,7 +48,7 @@ class XAutomationInvocation(XInvocation_be070c0f):
         """
         ...
     @abstractmethod
-    def invokePutProperty(self, aFunctionName: str, aParams: typing.Tuple[object, ...], aOutParamIndex: uno.ByteSequence, aOutParam: typing.Tuple[object, ...]) -> object:
+    def invokePutProperty(self, aFunctionName: str, aParams: typing.Tuple[object, ...], aOutParamIndex: typing.Tuple[int, ...], aOutParam: typing.Tuple[object, ...]) -> object:
         """
 
         * ``aOutParamIndex`` is an out direction argument.

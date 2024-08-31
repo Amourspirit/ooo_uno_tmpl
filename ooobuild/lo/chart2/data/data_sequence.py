@@ -20,8 +20,7 @@
 # Namespace: com.sun.star.chart2.data
 from __future__ import annotations
 import typing
-import uno
-from abc import abstractproperty
+from abc import abstractmethod
 from ...beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from .x_data_sequence import XDataSequence as XDataSequence_11f00e1f
 from .x_numerical_data_sequence import XNumericalDataSequence as XNumericalDataSequence_a43011bf
@@ -49,21 +48,24 @@ class DataSequence(XPropertySet_bc180bfa, XDataSequence_11f00e1f, XNumericalData
     __ooo_full_ns__: str = 'com.sun.star.chart2.data.DataSequence'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
-    def HiddenValues(self) -> uno.ByteSequence:
+    @property
+    @abstractmethod
+    def HiddenValues(self) -> typing.Tuple[int, ...]:
         """
         a sequence of indexes that identify values that are hidden in the underlying data provider.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IncludeHiddenCells(self) -> bool:
         """
         If set to false FALSE, values from hidden cells are not returned.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Role(self) -> DataSequenceRole_3f520f59:
         """
         The key (index) of the number format that this sequence should be formatted with.

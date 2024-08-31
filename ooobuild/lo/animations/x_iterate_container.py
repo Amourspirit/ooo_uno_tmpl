@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.animations
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from .x_time_container import XTimeContainer as XTimeContainer_1cca0ec5
 
 class XIterateContainer(XTimeContainer_1cca0ec5):
@@ -36,14 +36,16 @@ class XIterateContainer(XTimeContainer_1cca0ec5):
     __ooo_type_name__: str = 'interface'
     __pyunointerface__: str = 'com.sun.star.animations.XIterateContainer'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IterateInterval(self) -> float:
         """
         the time interval in second before the next iterated content is animated.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IterateType(self) -> int:
         """
         the type of iteration, this depends on the target.
@@ -52,7 +54,8 @@ class XIterateContainer(XTimeContainer_1cca0ec5):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SubItem(self) -> int:
         """
         This attribute specifies an optional subitem from the target element that should be animated.
@@ -61,7 +64,8 @@ class XIterateContainer(XTimeContainer_1cca0ec5):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Target(self) -> object:
         """
         a target that contains iterable contents, f.e.

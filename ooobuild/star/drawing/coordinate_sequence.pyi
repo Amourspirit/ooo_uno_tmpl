@@ -19,9 +19,8 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.drawing
 import typing
-import uno
 
-CoordinateSequence = typing.NewType('CoordinateSequence', uno.ByteSequence)
+CoordinateSequence = typing.NewType('CoordinateSequence', typing.Tuple[int, ...])
 """
 TypeDef type alias
 

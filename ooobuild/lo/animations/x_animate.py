@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.animations
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from .x_animation_node import XAnimationNode as XAnimationNode_1cf10eb9
 if typing.TYPE_CHECKING:
     from .time_filter_pair import TimeFilterPair as TimeFilterPair_1d250ebc
@@ -37,28 +37,32 @@ class XAnimate(XAnimationNode_1cf10eb9):
     __ooo_type_name__: str = 'interface'
     __pyunointerface__: str = 'com.sun.star.animations.XAnimate'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Accumulate(self) -> bool:
         """
         Controls whether or not the animation is cumulative.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Additive(self) -> int:
         """
         Controls whether or not the animation is additive.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def AttributeName(self) -> str:
         """
         Specifies the target attribute.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def By(self) -> object:
         """
         Specifies a relative offset value for the animation.
@@ -67,7 +71,8 @@ class XAnimate(XAnimationNode_1cf10eb9):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CalcMode(self) -> int:
         """
         Specifies the interpolation mode for the animation.
@@ -76,7 +81,8 @@ class XAnimate(XAnimationNode_1cf10eb9):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Formula(self) -> str:
         """
         if this string is set, its contents will be parsed as a formula.
@@ -85,7 +91,8 @@ class XAnimate(XAnimationNode_1cf10eb9):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def From(self) -> object:
         """
         Specifies the starting value of the animation.
@@ -94,13 +101,15 @@ class XAnimate(XAnimationNode_1cf10eb9):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def KeyTimes(self) -> typing.Tuple[float, ...]:
         """
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SubItem(self) -> int:
         """
         This attribute specifies an optional subitem from the target element that should be animated.
@@ -109,7 +118,8 @@ class XAnimate(XAnimationNode_1cf10eb9):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Target(self) -> object:
         """
         This attribute specifies the target element to be animated.
@@ -118,14 +128,16 @@ class XAnimate(XAnimationNode_1cf10eb9):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TimeFilter(self) -> typing.Tuple[TimeFilterPair_1d250ebc, ...]:
         """
         todo: timeFilter=\"0,0; 0.14,0.36; 0.43,0.73; 0.71,0.91; 1.0,1.0\" ?
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def To(self) -> object:
         """
         Specifies the ending value of the animation.
@@ -134,13 +146,15 @@ class XAnimate(XAnimationNode_1cf10eb9):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ValueType(self) -> int:
         """
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Values(self) -> typing.Tuple[object, ...]:
         """
         A sequence of one or more values, each of which must be a legal value for the specified attribute.

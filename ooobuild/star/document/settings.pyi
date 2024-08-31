@@ -20,7 +20,6 @@
 # Namespace: com.sun.star.document
 from __future__ import annotations
 import typing
-import uno
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 if typing.TYPE_CHECKING:
     from ..i18n.x_forbidden_characters import XForbiddenCharacters as XForbiddenCharacters_df60e2d
@@ -350,7 +349,7 @@ class Settings(XPropertySet_bc180bfa):
     def PrinterName(self, value: str) -> None:
         ...
     @property
-    def PrinterSetup(self) -> uno.ByteSequence:
+    def PrinterSetup(self) -> typing.Tuple[int, ...]:
         """
         platform and driver dependent printer setup data.
         
@@ -358,7 +357,7 @@ class Settings(XPropertySet_bc180bfa):
         """
         ...
     @PrinterSetup.setter
-    def PrinterSetup(self, value: uno.ByteSequence) -> None:
+    def PrinterSetup(self, value: typing.Tuple[int, ...]) -> None:
         ...
     @property
     def SaveVersionOnClose(self) -> bool:

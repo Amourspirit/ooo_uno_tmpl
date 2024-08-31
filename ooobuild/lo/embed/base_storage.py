@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.embed
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from .x_storage import XStorage as XStorage_8e460a32
 
@@ -36,7 +36,8 @@ class BaseStorage(XPropertySet_bc180bfa, XStorage_8e460a32):
     __ooo_full_ns__: str = 'com.sun.star.embed.BaseStorage'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def OpenMode(self) -> int:
         """
         allows to get the mode the storage is opened in.
@@ -45,7 +46,8 @@ class BaseStorage(XPropertySet_bc180bfa, XStorage_8e460a32):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def URL(self) -> str:
         """
         allows to retrieve URL the storage is based on.

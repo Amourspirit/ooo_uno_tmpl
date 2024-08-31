@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.lang
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from .service_manager import ServiceManager as ServiceManager_c7920c36
 from .x_initialization import XInitialization as XInitialization_d46c0cca
 if typing.TYPE_CHECKING:
@@ -41,7 +41,8 @@ class RegistryServiceManager(ServiceManager_c7920c36, XInitialization_d46c0cca):
     __ooo_full_ns__: str = 'com.sun.star.lang.RegistryServiceManager'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Registry(self) -> XSimpleRegistry_10150e9c:
         """
         Specifies the current registry to be read from.

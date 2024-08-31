@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.view
 from __future__ import annotations
 import typing
-from abc import abstractproperty, ABC
+from abc import abstractmethod, ABC
 if typing.TYPE_CHECKING:
     from ..awt.size import Size as Size_576707ef
 
@@ -41,7 +41,8 @@ class RenderDescriptor(ABC):
     __ooo_full_ns__: str = 'com.sun.star.view.RenderDescriptor'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def PageSize(self) -> Size_576707ef:
         """
         specifies the page size for the current renderer.

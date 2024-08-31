@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.sheet
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from ..container.x_enumeration_access import XEnumerationAccess as XEnumerationAccess_4bac0ffc
 from ..container.x_index_access import XIndexAccess as XIndexAccess_f0910d6d
@@ -40,42 +40,48 @@ class TableAutoFormat(XPropertySet_bc180bfa, XEnumerationAccess_4bac0ffc, XIndex
     __ooo_full_ns__: str = 'com.sun.star.sheet.TableAutoFormat'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IncludeBackground(self) -> bool:
         """
         specifies whether the background settings from the fields are used.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IncludeBorder(self) -> bool:
         """
         specifies whether the border settings from the fields are used.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IncludeFont(self) -> bool:
         """
         specifies whether the font settings from the fields are used.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IncludeJustify(self) -> bool:
         """
         specifies whether the justification settings from the fields are used.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IncludeNumberFormat(self) -> bool:
         """
         specifies whether the number format settings from the fields are used.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IncludeWidthAndHeight(self) -> bool:
         """
         specifies whether the column widths and row heights should be updated after applying the format.

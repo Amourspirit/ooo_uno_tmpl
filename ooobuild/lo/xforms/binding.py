@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.xforms
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..form.binding.list_entry_source import ListEntrySource as ListEntrySource_48260fe4
 from ..form.binding.value_binding import ValueBinding as ValueBinding_18de0e7d
 from ..form.validation.x_validator import XValidator as XValidator_2a5c0f13
@@ -40,7 +40,8 @@ class Binding(ListEntrySource_48260fe4, ValueBinding_18de0e7d, XValidator_2a5c0f
     __ooo_full_ns__: str = 'com.sun.star.xforms.Binding'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def BindingNamespaces(self) -> XNameContainer_cb90e47:
         """
         among other properties, there is this one

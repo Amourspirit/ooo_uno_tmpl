@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from .x_output_stream import XOutputStream as XOutputStream_a4e00b35
 
 
@@ -34,7 +33,7 @@ class XSequenceOutputStream(XOutputStream_a4e00b35):
     """
     __pyunointerface__: str = 'com.sun.star.io.XSequenceOutputStream'
 
-    def getWrittenBytes(self) -> uno.ByteSequence:
+    def getWrittenBytes(self) -> typing.Tuple[int, ...]:
         """
         allows to get access to the written data
 

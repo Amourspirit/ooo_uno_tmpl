@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.sdbc
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from ..lang.x_component import XComponent as XComponent_98dc0ab5
 from .x_closeable import XCloseable as XCloseable_98290a86
@@ -60,7 +60,8 @@ class ResultSet(XPropertySet_bc180bfa, XComponent_98dc0ab5, XCloseable_98290a86,
     __ooo_full_ns__: str = 'com.sun.star.sdbc.ResultSet'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CursorName(self) -> str:
         """
         defines the SQL cursor name that will be used by subsequent Statement execute methods.
@@ -71,7 +72,8 @@ class ResultSet(XPropertySet_bc180bfa, XComponent_98dc0ab5, XCloseable_98290a86,
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def FetchDirection(self) -> int:
         """
         retrieves the direction for fetching rows from database tables that is the default for result sets generated from this com.sun.star.sdbcx.Statement object.
@@ -80,7 +82,8 @@ class ResultSet(XPropertySet_bc180bfa, XComponent_98dc0ab5, XCloseable_98290a86,
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def FetchSize(self) -> int:
         """
         retrieves the number of result set rows that is the default fetch size for result sets generated from this com.sun.star.sdbcx.Statement object.
@@ -89,14 +92,16 @@ class ResultSet(XPropertySet_bc180bfa, XComponent_98dc0ab5, XCloseable_98290a86,
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ResultSetConcurrency(self) -> int:
         """
         retrieves the result set concurrency.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ResultSetType(self) -> int:
         """
         determines the result set type.

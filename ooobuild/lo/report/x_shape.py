@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.report
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from .x_report_control_model import XReportControlModel as XReportControlModel_2d800f4a
 if typing.TYPE_CHECKING:
     from ..beans.property_value import PropertyValue as PropertyValue_c9610c73
@@ -37,21 +37,24 @@ class XShape(XReportControlModel_2d800f4a):
     __ooo_type_name__: str = 'interface'
     __pyunointerface__: str = 'com.sun.star.report.XShape'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CustomShapeData(self) -> str:
         """
         This property can be used to store data that the CustomShapeEngine may use for rendering.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CustomShapeEngine(self) -> str:
         """
         This property contains the CustomShapeEngine service name that has to be used for rendering.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CustomShapeGeometry(self) -> typing.Tuple[PropertyValue_c9610c73, ...]:
         """
         This property describes the geometry of the CustomShape.
@@ -62,14 +65,16 @@ class XShape(XReportControlModel_2d800f4a):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Opaque(self) -> bool:
         """
         determines if the object is opaque or transparent for text.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Transformation(self) -> HomogenMatrix3_f0fb0d69:
         """
         this property lets you get and set the transformation matrix for this shape.
@@ -78,7 +83,8 @@ class XShape(XReportControlModel_2d800f4a):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ZOrder(self) -> int:
         """
         is used to query or change the ZOrder of this Shape.

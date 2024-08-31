@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from ...uno.x_interface import XInterface as XInterface_8f010a43
 
 
@@ -40,7 +39,7 @@ class XDigestContext(XInterface_8f010a43):
     """
     __pyunointerface__: str = 'com.sun.star.xml.crypto.XDigestContext'
 
-    def finalizeDigestAndDispose(self) -> uno.ByteSequence:
+    def finalizeDigestAndDispose(self) -> typing.Tuple[int, ...]:
         """
         finalizes digest and disposes context.
 
@@ -48,7 +47,7 @@ class XDigestContext(XInterface_8f010a43):
             com.sun.star.lang.DisposedException: ``DisposedException``
         """
         ...
-    def updateDigest(self, aData: uno.ByteSequence) -> None:
+    def updateDigest(self, aData: typing.Tuple[int, ...]) -> None:
         """
         update the digest with the given data.
 

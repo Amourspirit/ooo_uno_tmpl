@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.document
 from __future__ import annotations
-from abc import abstractproperty, ABC
+from abc import abstractmethod, ABC
 
 class EventDescriptor(ABC):
     """
@@ -34,7 +34,8 @@ class EventDescriptor(ABC):
     __ooo_full_ns__: str = 'com.sun.star.document.EventDescriptor'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def EventType(self) -> str:
         """
         specifies the type of the event handler
@@ -45,7 +46,8 @@ class EventDescriptor(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Script(self) -> str:
         """
         specifies the script source code

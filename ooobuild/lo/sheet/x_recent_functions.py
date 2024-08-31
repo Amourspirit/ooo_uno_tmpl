@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.sheet
 from __future__ import annotations
-import uno
+import typing
 from abc import abstractmethod
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 
@@ -42,7 +42,7 @@ class XRecentFunctions(XInterface_8f010a43):
         """
         ...
     @abstractmethod
-    def getRecentFunctionIds(self) -> uno.ByteSequence:
+    def getRecentFunctionIds(self) -> typing.Tuple[int, ...]:
         """
         returns a sequence of those functions that were most recently used.
         
@@ -50,7 +50,7 @@ class XRecentFunctions(XInterface_8f010a43):
         """
         ...
     @abstractmethod
-    def setRecentFunctionIds(self, aRecentFunctionIds: uno.ByteSequence) -> None:
+    def setRecentFunctionIds(self, aRecentFunctionIds: typing.Tuple[int, ...]) -> None:
         """
         sets the list of those functions that were most recently used.
         

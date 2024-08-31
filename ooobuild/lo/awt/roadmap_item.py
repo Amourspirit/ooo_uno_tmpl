@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.awt
 from __future__ import annotations
-from abc import abstractproperty, ABC
+from abc import abstractmethod, ABC
 
 class RoadmapItem(ABC):
     """
@@ -33,14 +33,16 @@ class RoadmapItem(ABC):
     __ooo_full_ns__: str = 'com.sun.star.awt.RoadmapItem'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Enabled(self) -> bool:
         """
         determines whether a control is enabled or disabled.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ID(self) -> int:
         """
         The ID uniquely identifies the roadmap item.
@@ -49,7 +51,8 @@ class RoadmapItem(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Interactive(self) -> bool:
         """
         When \"Interactive\" is true the RoadmapItem supports a certain \"HyperLabelfunctionality\": Moving the mouse pointer over the RoadmapItem will change it to a Refhand and underline the Label for the time the mouse pointer resides over the RoadmapItem.
@@ -58,7 +61,8 @@ class RoadmapItem(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Label(self) -> str:
         """
         The Label of the RoadmapItem does not include its Prefix that is automatically set after the following algorithm: (Index + 1) + \". \" + Label.

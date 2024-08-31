@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.chart2
 from __future__ import annotations
-from abc import abstractproperty, ABC
+from abc import abstractmethod, ABC
 
 class StandardDiagramCreationParameters(ABC):
     """
@@ -34,14 +34,16 @@ class StandardDiagramCreationParameters(ABC):
     __ooo_full_ns__: str = 'com.sun.star.chart2.StandardDiagramCreationParameters'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HasCategories(self) -> bool:
         """
         States whether the first XLabeledDataSequence in a data-source is used as categories.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def UseCategoriesAsX(self) -> bool:
         """
         If categories are given they should be used as x values also if a chart type requires x values.

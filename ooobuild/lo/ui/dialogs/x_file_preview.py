@@ -20,7 +20,6 @@
 # Namespace: com.sun.star.ui.dialogs
 from __future__ import annotations
 import typing
-import uno
 from abc import abstractmethod
 from ...uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
@@ -63,7 +62,7 @@ class XFilePreview(XInterface_8f010a43):
         """
         ...
     @abstractmethod
-    def getSupportedImageFormats(self) -> uno.ByteSequence:
+    def getSupportedImageFormats(self) -> typing.Tuple[int, ...]:
         """
         The method returns all image formats that the preview supports.
         """

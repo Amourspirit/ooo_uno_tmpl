@@ -19,7 +19,6 @@
 # Namespace: com.sun.star.packages.zip
 # Libre Office Version: 2024.2
 from ooo.oenv.env_const import UNO_NONE
-import uno
 import typing
 
 
@@ -40,7 +39,7 @@ class ZipEntry(object):
     typeName: str = 'com.sun.star.packages.zip.ZipEntry'
     """Literal Constant ``com.sun.star.packages.zip.ZipEntry``"""
 
-    def __init__(self, nVersion: typing.Optional[int] = 0, nFlag: typing.Optional[int] = 0, nMethod: typing.Optional[int] = 0, nTime: typing.Optional[int] = 0, nCrc: typing.Optional[int] = 0, nCompressedSize: typing.Optional[int] = 0, nSize: typing.Optional[int] = 0, nOffset: typing.Optional[int] = 0, nDiskNumber: typing.Optional[int] = 0, sName: typing.Optional[str] = '', extra: typing.Optional[uno.ByteSequence] = UNO_NONE, sComment: typing.Optional[str] = '') -> None:
+    def __init__(self, nVersion: typing.Optional[int] = 0, nFlag: typing.Optional[int] = 0, nMethod: typing.Optional[int] = 0, nTime: typing.Optional[int] = 0, nCrc: typing.Optional[int] = 0, nCompressedSize: typing.Optional[int] = 0, nSize: typing.Optional[int] = 0, nOffset: typing.Optional[int] = 0, nDiskNumber: typing.Optional[int] = 0, sName: typing.Optional[str] = '', extra: typing.Optional[typing.Tuple[int, ...]] = UNO_NONE, sComment: typing.Optional[str] = '') -> None:
         """
         Constructor
 
@@ -55,7 +54,7 @@ class ZipEntry(object):
             nOffset (int, optional): nOffset value.
             nDiskNumber (int, optional): nDiskNumber value.
             sName (str, optional): sName value.
-            extra (uno.ByteSequence, optional): extra value.
+            extra (typing.Tuple[int, ...], optional): extra value.
             sComment (str, optional): sComment value.
         """
         super().__init__()
@@ -220,14 +219,14 @@ class ZipEntry(object):
         self._s_name = value
 
     @property
-    def extra(self) -> uno.ByteSequence:
+    def extra(self) -> typing.Tuple[int, ...]:
         """
         optional extra field data for entry
         """
         return self._extra
 
     @extra.setter
-    def extra(self, value: uno.ByteSequence) -> None:
+    def extra(self, value: typing.Tuple[int, ...]) -> None:
         self._extra = value
 
     @property

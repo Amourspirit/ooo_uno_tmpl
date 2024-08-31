@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.sheet
 from __future__ import annotations
 import typing
-from abc import abstractproperty, ABC
+from abc import abstractmethod, ABC
 if typing.TYPE_CHECKING:
     from com.sun.star.sheet.DataImportMode import DataImportModeProto  # type: ignore
 
@@ -41,7 +41,8 @@ class DatabaseImportDescriptor(ABC):
     __ooo_full_ns__: str = 'com.sun.star.sheet.DatabaseImportDescriptor'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ConnectionResource(self) -> str:
         """
         indicates a connection URL, which locates a database driver.
@@ -52,14 +53,16 @@ class DatabaseImportDescriptor(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DatabaseName(self) -> str:
         """
         specifies the name of the database from which data is imported.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsNative(self) -> bool:
         """
         specifies whether the SQL statement is given directly to the database or is parsed before.
@@ -70,7 +73,8 @@ class DatabaseImportDescriptor(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SourceObject(self) -> str:
         """
         specifies the table, query, or statement from which data is imported.
@@ -79,7 +83,8 @@ class DatabaseImportDescriptor(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SourceType(self) -> DataImportModeProto:
         """
         enables importing and specifies from what type of source data is imported.

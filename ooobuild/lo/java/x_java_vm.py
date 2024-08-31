@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.java
 from __future__ import annotations
-import uno
+import typing
 from abc import abstractmethod
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 
@@ -40,7 +40,7 @@ class XJavaVM(XInterface_8f010a43):
     __pyunointerface__: str = 'com.sun.star.java.XJavaVM'
 
     @abstractmethod
-    def getJavaVM(self, processID: uno.ByteSequence) -> object:
+    def getJavaVM(self, processID: typing.Tuple[int, ...]) -> object:
         """
         returns the address of the Java Virtual Machine.
         

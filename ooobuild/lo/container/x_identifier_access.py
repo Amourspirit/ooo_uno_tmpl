@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.container
 from __future__ import annotations
-import uno
+import typing
 from abc import abstractmethod
 from .x_element_access import XElementAccess as XElementAccess_cd60e3f
 
@@ -45,7 +45,7 @@ class XIdentifierAccess(XElementAccess_cd60e3f):
         """
         ...
     @abstractmethod
-    def getIdentifiers(self) -> uno.ByteSequence:
+    def getIdentifiers(self) -> typing.Tuple[int, ...]:
         """
         The order of the identifiers is not specified.
         """

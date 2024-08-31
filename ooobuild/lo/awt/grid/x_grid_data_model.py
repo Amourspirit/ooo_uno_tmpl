@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.awt.grid
 from __future__ import annotations
 import typing
-from abc import abstractmethod, abstractproperty
+from abc import abstractmethod
 from ...lang.x_component import XComponent as XComponent_98dc0ab5
 from ...util.x_cloneable import XCloneable as XCloneable_99d00aa3
 
@@ -88,14 +88,16 @@ class XGridDataModel(XComponent_98dc0ab5, XCloneable_99d00aa3):
             com.sun.star.lang.IndexOutOfBoundsException: ``IndexOutOfBoundsException``
         """
         ...
-    @abstractproperty
+    @property
+    @abstractmethod
     def ColumnCount(self) -> int:
         """
         denotes the number of columns for which the model can provide data
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RowCount(self) -> int:
         """
         denotes the number of rows for which the model can provide data

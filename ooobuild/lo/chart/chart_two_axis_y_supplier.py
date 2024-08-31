@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.chart
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from .chart_axis_y_supplier import ChartAxisYSupplier as ChartAxisYSupplier_a9e0e4e
 from .x_two_axis_y_supplier import XTwoAxisYSupplier as XTwoAxisYSupplier_fce40dee
 
@@ -40,21 +40,24 @@ class ChartTwoAxisYSupplier(ChartAxisYSupplier_a9e0e4e, XTwoAxisYSupplier_fce40d
     __ooo_full_ns__: str = 'com.sun.star.chart.ChartTwoAxisYSupplier'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HasSecondaryYAxis(self) -> bool:
         """
         determines if the secondary y-axis is shown or hidden.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HasSecondaryYAxisDescription(self) -> bool:
         """
         determines for the secondary y-axis if the labels at the tick marks are shown or hidden.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def HasSecondaryYAxisTitle(self) -> bool:
         """
         determines if the title of the secondary y-axis is shown or hidden.

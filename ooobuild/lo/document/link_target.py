@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.document
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from .x_link_target_supplier import XLinkTargetSupplier as XLinkTargetSupplier_4ac21008
 
@@ -36,7 +36,8 @@ class LinkTarget(XPropertySet_bc180bfa, XLinkTargetSupplier_4ac21008):
     __ooo_full_ns__: str = 'com.sun.star.document.LinkTarget'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def LinkDisplayName(self) -> str:
         """
         contains a human readable name for this object that could be displayed in a user interface.

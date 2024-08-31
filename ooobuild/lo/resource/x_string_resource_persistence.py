@@ -20,7 +20,6 @@
 # Namespace: com.sun.star.resource
 from __future__ import annotations
 import typing
-import uno
 from abc import abstractmethod
 from .x_string_resource_manager import XStringResourceManager as XStringResourceManager_80421142
 if typing.TYPE_CHECKING:
@@ -40,7 +39,7 @@ class XStringResourcePersistence(XStringResourceManager_80421142):
     __pyunointerface__: str = 'com.sun.star.resource.XStringResourcePersistence'
 
     @abstractmethod
-    def exportBinary(self) -> uno.ByteSequence:
+    def exportBinary(self) -> typing.Tuple[int, ...]:
         """
         Returns a sequence of byte representing the complete string resource in a binary format.
         
@@ -50,7 +49,7 @@ class XStringResourcePersistence(XStringResourceManager_80421142):
         """
         ...
     @abstractmethod
-    def importBinary(self, Data: uno.ByteSequence) -> None:
+    def importBinary(self, Data: typing.Tuple[int, ...]) -> None:
         """
         Initializes the string resource with binary data.
         

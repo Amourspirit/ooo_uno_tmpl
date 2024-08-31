@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.awt
 from __future__ import annotations
-import uno
+import typing
 from abc import abstractmethod
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 
@@ -36,7 +36,7 @@ class XSystemDependentMenuPeer(XInterface_8f010a43):
     __pyunointerface__: str = 'com.sun.star.awt.XSystemDependentMenuPeer'
 
     @abstractmethod
-    def getMenuHandle(self, ProcessId: uno.ByteSequence, SystemType: int) -> object:
+    def getMenuHandle(self, ProcessId: typing.Tuple[int, ...], SystemType: int) -> object:
         """
         returns a system-specific window handle.
         

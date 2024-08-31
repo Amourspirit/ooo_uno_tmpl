@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from .xsso_context import XSSOContext as XSSOContext_a2840aec
 
 
@@ -40,7 +39,7 @@ class XSSOInitiatorContext(XSSOContext_a2840aec):
     """
     __pyunointerface__: str = 'com.sun.star.auth.XSSOInitiatorContext'
 
-    def init(self, Token: uno.ByteSequence) -> uno.ByteSequence:
+    def init(self, Token: typing.Tuple[int, ...]) -> typing.Tuple[int, ...]:
         """
         initializes an SSO Token to send to the acceptor side and authenticates an SSO Token returned by the acceptor if the context supports mutual authentication.
         

@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.sheet
 from __future__ import annotations
-from abc import abstractproperty, ABC
+from abc import abstractmethod, ABC
 
 class RangeSelectionArguments(ABC):
     """
@@ -38,21 +38,24 @@ class RangeSelectionArguments(ABC):
     __ooo_full_ns__: str = 'com.sun.star.sheet.RangeSelectionArguments'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CloseOnMouseRelease(self) -> bool:
         """
         specifies if the range selection is finished when the mouse button is released, after selecting cells.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def InitialValue(self) -> str:
         """
         contains the initial value for the range descriptor.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SingleCellMode(self) -> bool:
         """
         specifies if the range selection is limited to a single cell only.
@@ -65,7 +68,8 @@ class RangeSelectionArguments(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Title(self) -> str:
         """
         contains a title for the operation.

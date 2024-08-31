@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.ui.dialogs
 from __future__ import annotations
 import typing
-from abc import abstractmethod, abstractproperty
+from abc import abstractmethod
 from ...lang.x_component import XComponent as XComponent_98dc0ab5
 if typing.TYPE_CHECKING:
     from ...awt.x_window import XWindow as XWindow_713b0924
@@ -65,7 +65,8 @@ class XWizardPage(XComponent_98dc0ab5):
         An implementation can veto the leave by returning FALSE here. Usually, the decision about this depends on the current state of the page.
         """
         ...
-    @abstractproperty
+    @property
+    @abstractmethod
     def PageId(self) -> int:
         """
         denotes the ID of the page.
@@ -74,7 +75,8 @@ class XWizardPage(XComponent_98dc0ab5):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Window(self) -> XWindow_713b0924:
         """
         provides read-only access to the window of the page

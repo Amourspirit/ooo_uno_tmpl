@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.text.textfield
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..text_field import TextField as TextField_90260a56
 
 class URL(TextField_90260a56):
@@ -35,14 +35,16 @@ class URL(TextField_90260a56):
     __ooo_full_ns__: str = 'com.sun.star.text.textfield.URL'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Format(self) -> int:
         """
         Specifies how the URL is formatted on output.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Representation(self) -> str:
         """
         contains the content that will be displayed to the user.
@@ -51,14 +53,16 @@ class URL(TextField_90260a56):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TargetFrame(self) -> str:
         """
         Specifies the frame name in that the URL will be opened.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def URL(self) -> str:
         """
         contains the unparsed original URL, for example, http://me:pass@www.sun.de:8080/pub/test/foo.txt?a=b#xyz

@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.lang
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from ..container.x_content_enumeration_access import XContentEnumerationAccess as XContentEnumerationAccess_c71012d7
 from ..container.x_set import XSet as XSet_90c40a4f
@@ -50,7 +50,8 @@ class ServiceManager(MultiServiceFactory_b940e5e, XPropertySet_bc180bfa, XConten
     __ooo_full_ns__: str = 'com.sun.star.lang.ServiceManager'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DefaultContext(self) -> XComponentContext_e2e10d4a:
         """
         specifies the default component context to be used, if instantiating services via XMultiServiceFactory

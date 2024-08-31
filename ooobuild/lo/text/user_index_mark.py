@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.text
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from .base_index_mark import BaseIndexMark as BaseIndexMark_bbb30bcb
 
 class UserIndexMark(BaseIndexMark_bbb30bcb):
@@ -35,7 +35,8 @@ class UserIndexMark(BaseIndexMark_bbb30bcb):
     __ooo_full_ns__: str = 'com.sun.star.text.UserIndexMark'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def UserIndexName(self) -> str:
         """
         contains the name of the user index it belongs to.

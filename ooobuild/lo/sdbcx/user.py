@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.sdbcx
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from .x_groups_supplier import XGroupsSupplier as XGroupsSupplier_e3410d48
 from .x_user import XUser as XUser_718e0913
@@ -37,7 +37,8 @@ class User(XPropertySet_bc180bfa, XGroupsSupplier_e3410d48, XUser_718e0913):
     __ooo_full_ns__: str = 'com.sun.star.sdbcx.User'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Name(self) -> str:
         """
         is the name of the user.

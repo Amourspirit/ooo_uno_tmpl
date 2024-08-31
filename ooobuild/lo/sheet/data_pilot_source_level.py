@@ -20,8 +20,7 @@
 # Namespace: com.sun.star.sheet
 from __future__ import annotations
 import typing
-import uno
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from ..container.x_named import XNamed as XNamed_a6520b08
 from .x_data_pilot_member_results import XDataPilotMemberResults as XDataPilotMemberResults_56421045
@@ -46,14 +45,16 @@ class DataPilotSourceLevel(XPropertySet_bc180bfa, XNamed_a6520b08, XDataPilotMem
     __ooo_full_ns__: str = 'com.sun.star.sheet.DataPilotSourceLevel'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ShowEmpty(self) -> bool:
         """
         specifies whether empty members are shown.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SubTotals(self) -> typing.Tuple[GeneralFunction_e2280d25, ...]:
         """
         specifies the subtotals that are inserted for the level.
@@ -62,8 +63,9 @@ class DataPilotSourceLevel(XPropertySet_bc180bfa, XNamed_a6520b08, XDataPilotMem
         """
         ...
 
-    @abstractproperty
-    def SubTotals2(self) -> uno.ByteSequence:
+    @property
+    @abstractmethod
+    def SubTotals2(self) -> typing.Tuple[int, ...]:
         """
         specifies the subtotals that are inserted for the level.
         

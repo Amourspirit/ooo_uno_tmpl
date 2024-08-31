@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from ...uno.x_interface import XInterface as XInterface_8f010a43
 
 
@@ -38,12 +37,12 @@ class XFastTokenHandler(XInterface_8f010a43):
     """
     __pyunointerface__: str = 'com.sun.star.xml.sax.XFastTokenHandler'
 
-    def getTokenFromUTF8(self, Identifier: uno.ByteSequence) -> int:
+    def getTokenFromUTF8(self, Identifier: typing.Tuple[int, ...]) -> int:
         """
         returns an integer token for the given string
         """
         ...
-    def getUTF8Identifier(self, Token: int) -> uno.ByteSequence:
+    def getUTF8Identifier(self, Token: int) -> typing.Tuple[int, ...]:
         """
         returns an identifier for the given integer token as a byte sequence encoded in UTF-8.
         """

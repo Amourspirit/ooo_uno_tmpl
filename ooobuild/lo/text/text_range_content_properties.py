@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.text
 from __future__ import annotations
 import typing
-from abc import abstractproperty, ABC
+from abc import abstractmethod, ABC
 if typing.TYPE_CHECKING:
     from ..table.x_cell import XCell as XCell_70d408e8
     from .x_document_index import XDocumentIndex as XDocumentIndex_c9330c5c
@@ -48,14 +48,16 @@ class TextRangeContentProperties(ABC):
     __ooo_full_ns__: str = 'com.sun.star.text.TextRangeContentProperties'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Cell(self) -> XCell_70d408e8:
         """
         may contain a table cell.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ContentControl(self) -> XTextContent_b16e0ba5:
         """
         may contain a content control.
@@ -66,35 +68,40 @@ class TextRangeContentProperties(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DocumentIndex(self) -> XDocumentIndex_c9330c5c:
         """
         may contain a document index.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DocumentIndexMark(self) -> XDocumentIndexMark_fe490de7:
         """
         may contain a document index mark.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Endnote(self) -> XFootnote_901e0a73:
         """
         may contain an endnote.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Footnote(self) -> XFootnote_901e0a73:
         """
         may contain a footnote.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def LineBreak(self) -> XTextContent_b16e0ba5:
         """
         Properties of the linebreak, e.g.
@@ -107,7 +114,8 @@ class TextRangeContentProperties(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def NestedTextContent(self) -> XTextContent_b16e0ba5:
         """
         may contain a nested text content.
@@ -116,21 +124,24 @@ class TextRangeContentProperties(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ReferenceMark(self) -> XTextContent_b16e0ba5:
         """
         may contain a reference mark.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TextFrame(self) -> XTextFrame_9a7e0ab5:
         """
         may contain a text frame.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TextParagraph(self) -> XTextContent_b16e0ba5:
         """
         Paragraph for the start of this range.
@@ -141,14 +152,16 @@ class TextRangeContentProperties(ABC):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TextSection(self) -> XTextSection_b1730b9f:
         """
         may contain a text section.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TextTable(self) -> XTextTable_9a810ab2:
         """
         may contain a text table.

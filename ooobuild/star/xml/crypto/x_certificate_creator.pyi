@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from ...uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
     from ...security.x_certificate import XCertificate as XCertificate_e55b0d3b
@@ -40,12 +39,12 @@ class XCertificateCreator(XInterface_8f010a43):
     """
     __pyunointerface__: str = 'com.sun.star.xml.crypto.XCertificateCreator'
 
-    def addDERCertificateToTheDatabase(self, aDerCertificate: uno.ByteSequence, aTrustString: str) -> XCertificate_e55b0d3b:
+    def addDERCertificateToTheDatabase(self, aDerCertificate: typing.Tuple[int, ...], aTrustString: str) -> XCertificate_e55b0d3b:
         """
         Adds a certificate to the certificate database with the trust provided by the trust string.
         """
         ...
-    def createDERCertificateWithPrivateKey(self, aDerCertificate: uno.ByteSequence, aPrivateKey: uno.ByteSequence) -> XCertificate_e55b0d3b:
+    def createDERCertificateWithPrivateKey(self, aDerCertificate: typing.Tuple[int, ...], aPrivateKey: typing.Tuple[int, ...]) -> XCertificate_e55b0d3b:
         """
         Create certificate from raw DER encoded certificate and associate the private key with the certificate.
 

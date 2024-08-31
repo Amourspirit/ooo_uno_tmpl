@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.drawing
 from __future__ import annotations
 import typing
-from abc import abstractproperty, ABC
+from abc import abstractmethod, ABC
 if typing.TYPE_CHECKING:
     from .poly_polygon_bezier_coords import PolyPolygonBezierCoords as PolyPolygonBezierCoords_7ec5114b
     from com.sun.star.drawing.PolygonKind import PolygonKindProto  # type: ignore
@@ -40,21 +40,24 @@ class PolyPolygonBezierDescriptor(ABC):
     __ooo_full_ns__: str = 'com.sun.star.drawing.PolyPolygonBezierDescriptor'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Geometry(self) -> PolyPolygonBezierCoords_7ec5114b:
         """
         These are the untransformed Bezier coordinates of this polygon.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def PolyPolygonBezier(self) -> PolyPolygonBezierCoords_7ec5114b:
         """
         These are the Bezier points of this polygon.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def PolygonKind(self) -> PolygonKindProto:
         """
         This is the type of this polygon.

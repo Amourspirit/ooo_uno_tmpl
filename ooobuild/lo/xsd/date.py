@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.xsd
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from .x_data_type import XDataType as XDataType_83f209cb
 if typing.TYPE_CHECKING:
     from ..util.date import Date as Date_60040844
@@ -38,28 +38,32 @@ class Date(XDataType_83f209cb):
     __ooo_full_ns__: str = 'com.sun.star.xsd.Date'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def MaxExclusiveDate(self) -> Date_60040844:
         """
         specifies the exclusive upper bound for the value
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def MaxInclusiveDate(self) -> Date_60040844:
         """
         specifies the inclusive upper bound for the value
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def MinExclusiveDate(self) -> Date_60040844:
         """
         specifies the exclusive lower bound for the value
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def MinInclusiveDate(self) -> Date_60040844:
         """
         specifies the inclusive lower bound for the value

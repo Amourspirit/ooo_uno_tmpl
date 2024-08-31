@@ -19,7 +19,6 @@
 # Namespace: com.sun.star.mozilla
 # Libre Office Version: 2024.2
 from ooo.oenv.env_const import UNO_NONE
-import uno
 import typing
 
 
@@ -38,7 +37,7 @@ class MenuMultipleChange(object):
     typeName: str = 'com.sun.star.mozilla.MenuMultipleChange'
     """Literal Constant ``com.sun.star.mozilla.MenuMultipleChange``"""
 
-    def __init__(self, ID: typing.Optional[int] = 0, GroupID: typing.Optional[int] = 0, PreItemID: typing.Optional[int] = 0, ItemText: typing.Optional[str] = '', IsVisible: typing.Optional[bool] = False, IsActive: typing.Optional[bool] = False, IsCheckable: typing.Optional[bool] = False, IsChecked: typing.Optional[bool] = False, Image: typing.Optional[uno.ByteSequence] = UNO_NONE) -> None:
+    def __init__(self, ID: typing.Optional[int] = 0, GroupID: typing.Optional[int] = 0, PreItemID: typing.Optional[int] = 0, ItemText: typing.Optional[str] = '', IsVisible: typing.Optional[bool] = False, IsActive: typing.Optional[bool] = False, IsCheckable: typing.Optional[bool] = False, IsChecked: typing.Optional[bool] = False, Image: typing.Optional[typing.Tuple[int, ...]] = UNO_NONE) -> None:
         """
         Constructor
 
@@ -51,7 +50,7 @@ class MenuMultipleChange(object):
             IsActive (bool, optional): IsActive value.
             IsCheckable (bool, optional): IsCheckable value.
             IsChecked (bool, optional): IsChecked value.
-            Image (uno.ByteSequence, optional): Image value.
+            Image (typing.Tuple[int, ...], optional): Image value.
         """
         super().__init__()
 
@@ -184,14 +183,14 @@ class MenuMultipleChange(object):
         self._is_checked = value
 
     @property
-    def Image(self) -> uno.ByteSequence:
+    def Image(self) -> typing.Tuple[int, ...]:
         """
         sequence of bytes representing a possible image
         """
         return self._image
 
     @Image.setter
-    def Image(self, value: uno.ByteSequence) -> None:
+    def Image(self, value: typing.Tuple[int, ...]) -> None:
         self._image = value
 
 

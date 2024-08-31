@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.chart
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from .chart_axis_x_supplier import ChartAxisXSupplier as ChartAxisXSupplier_a950e4d
 from .chart_statistics import ChartStatistics as ChartStatistics_e2190d37
 from .chart_two_axis_y_supplier import ChartTwoAxisYSupplier as ChartTwoAxisYSupplier_380d0f88
@@ -49,7 +49,8 @@ class StockDiagram(ChartAxisXSupplier_a950e4d, ChartStatistics_e2190d37, ChartTw
     __ooo_full_ns__: str = 'com.sun.star.chart.StockDiagram'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def UpDown(self) -> bool:
         """
         indicates if a stock chart contains data representing the value of stocks on the opening and closing date.
@@ -62,7 +63,8 @@ class StockDiagram(ChartAxisXSupplier_a950e4d, ChartStatistics_e2190d37, ChartTw
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Volume(self) -> bool:
         """
         indicates if a stock chart contains data representing the volume of stocks.

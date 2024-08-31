@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.text
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_tolerant_multi_property_set import XTolerantMultiPropertySet as XTolerantMultiPropertySet_7bd4114e
 from .text_range import TextRange as TextRange_90540a5f
 if typing.TYPE_CHECKING:
@@ -47,35 +47,40 @@ class TextPortion(TextRange_90540a5f, XTolerantMultiPropertySet_7bd4114e):
     __ooo_full_ns__: str = 'com.sun.star.text.TextPortion'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Bookmark(self) -> XTextContent_b16e0ba5:
         """
         contains the bookmark of a text portion of type Bookmark.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ControlCharacter(self) -> int:
         """
         contains the control character of a text portion of type ControlCharacter.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DocumentIndexMark(self) -> XTextContent_b16e0ba5:
         """
         contains the document index mark of a text portion of type DocumentIndexMark.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Footnote(self) -> XFootnote_901e0a73:
         """
         contains the footnote of a text portion of type Footnote.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def InContentMetadata(self) -> XTextContent_b16e0ba5:
         """
         contains the text range of a text portion of type InContentMetadata.
@@ -86,14 +91,16 @@ class TextPortion(TextRange_90540a5f, XTolerantMultiPropertySet_7bd4114e):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsCollapsed(self) -> bool:
         """
         contains whether the portion is a point only.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsStart(self) -> bool:
         """
         contains whether the portion is the start of the portion.
@@ -102,21 +109,24 @@ class TextPortion(TextRange_90540a5f, XTolerantMultiPropertySet_7bd4114e):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ReferenceMark(self) -> XTextContent_b16e0ba5:
         """
         contains the bookmark of a text portion of type ReferenceMark.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TextField(self) -> XTextField_9a630aae:
         """
         contains the text field of a text portion of type TextField.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def TextPortionType(self) -> str:
         """
         contains the type of the text portion.

@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.inspection
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from .x_property_control import XPropertyControl as XPropertyControl_3f260fe2
 
 class XNumericControl(XPropertyControl_3f260fe2):
@@ -38,14 +38,16 @@ class XNumericControl(XPropertyControl_3f260fe2):
     __ooo_type_name__: str = 'interface'
     __pyunointerface__: str = 'com.sun.star.inspection.XNumericControl'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DecimalDigits(self) -> int:
         """
         describes the number of decimal digits to use for the value
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DisplayUnit(self) -> int:
         """
         describes a com.sun.star.util.MeasureUnit to be applied for displaying values.
@@ -54,21 +56,24 @@ class XNumericControl(XPropertyControl_3f260fe2):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def MaxValue(self) -> object:
         """
         describes the maximum value which is allowed to be entered in the control
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def MinValue(self) -> object:
         """
         describes the minimum value which is allowed to be entered in the control
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ValueUnit(self) -> int:
         """
         describes a com.sun.star.util.MeasureUnit to be applied for transferring values.

@@ -19,7 +19,6 @@
 # Namespace: com.sun.star.frame.status
 # Libre Office Version: 2024.2
 from ooo.oenv.env_const import UNO_NONE
-import uno
 import typing
 
 
@@ -42,12 +41,12 @@ class ClipboardFormats(object):
     typeName: str = 'com.sun.star.frame.status.ClipboardFormats'
     """Literal Constant ``com.sun.star.frame.status.ClipboardFormats``"""
 
-    def __init__(self, Identifiers: typing.Optional[uno.ByteSequence] = (), Names: typing.Optional[typing.Tuple[str, ...]] = ()) -> None:
+    def __init__(self, Identifiers: typing.Optional[typing.Tuple[int, ...]] = (), Names: typing.Optional[typing.Tuple[str, ...]] = ()) -> None:
         """
         Constructor
 
         Arguments:
-            Identifiers (uno.ByteSequence, optional): Identifiers value.
+            Identifiers (typing.Tuple[int, ...], optional): Identifiers value.
             Names (typing.Tuple[str, ...], optional): Names value.
         """
         super().__init__()
@@ -70,14 +69,14 @@ class ClipboardFormats(object):
 
 
     @property
-    def Identifiers(self) -> uno.ByteSequence:
+    def Identifiers(self) -> typing.Tuple[int, ...]:
         """
         specifies a sequence of format IDs which are contained in the system clipboard.
         """
         return self._identifiers
 
     @Identifiers.setter
-    def Identifiers(self, value: uno.ByteSequence) -> None:
+    def Identifiers(self, value: typing.Tuple[int, ...]) -> None:
         self._identifiers = value
 
     @property

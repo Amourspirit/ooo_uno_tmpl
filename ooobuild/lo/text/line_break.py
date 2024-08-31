@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.text
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from .x_text_content import XTextContent as XTextContent_b16e0ba5
 
 class LineBreak(XTextContent_b16e0ba5):
@@ -39,7 +39,8 @@ class LineBreak(XTextContent_b16e0ba5):
     __ooo_full_ns__: str = 'com.sun.star.text.LineBreak'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Clear(self) -> int:
         """
         The type of the clearing break.

@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.accessibility
 from __future__ import annotations
-import uno
+import typing
 from abc import abstractmethod
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 
@@ -35,7 +35,7 @@ class XAccessibleGroupPosition(XInterface_8f010a43):
     __pyunointerface__: str = 'com.sun.star.accessibility.XAccessibleGroupPosition'
 
     @abstractmethod
-    def getGroupPosition(self, accoject: object) -> uno.ByteSequence:
+    def getGroupPosition(self, accoject: object) -> typing.Tuple[int, ...]:
         """
 
         Raises:

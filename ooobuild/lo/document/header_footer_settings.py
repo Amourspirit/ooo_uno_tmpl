@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.document
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 
 class HeaderFooterSettings(XPropertySet_bc180bfa):
@@ -35,21 +35,24 @@ class HeaderFooterSettings(XPropertySet_bc180bfa):
     __ooo_full_ns__: str = 'com.sun.star.document.HeaderFooterSettings'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsPrintDate(self) -> bool:
         """
         enables or disables the printing of the date in the header or footer
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsPrintPageName(self) -> bool:
         """
         enables or disables the printing of the page name in the header or footer
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsPrintTime(self) -> bool:
         """
         enables or disables the printing of the current time in the header or footer

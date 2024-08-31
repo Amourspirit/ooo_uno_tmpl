@@ -20,7 +20,6 @@
 # Namespace: com.sun.star.chart2.data
 from __future__ import annotations
 import typing
-import uno
 from abc import ABC
 if typing.TYPE_CHECKING:
     from com.sun.star.chart.ChartDataRowSource import ChartDataRowSourceProto  # type: ignore
@@ -90,7 +89,7 @@ class TabularDataProviderArguments(ABC):
     def HasCategories(self, value: bool) -> None:
         ...
     @property
-    def SequenceMapping(self) -> uno.ByteSequence:
+    def SequenceMapping(self) -> typing.Tuple[int, ...]:
         """
         determines the order of the created labeled sequences
         
@@ -102,7 +101,7 @@ class TabularDataProviderArguments(ABC):
         """
         ...
     @SequenceMapping.setter
-    def SequenceMapping(self, value: uno.ByteSequence) -> None:
+    def SequenceMapping(self, value: typing.Tuple[int, ...]) -> None:
         ...
     @property
     def TableNumberList(self) -> str:

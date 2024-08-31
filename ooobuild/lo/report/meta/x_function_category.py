@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.report.meta
 from __future__ import annotations
 import typing
-from abc import abstractmethod, abstractproperty
+from abc import abstractmethod
 from ...beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from ...container.x_index_access import XIndexAccess as XIndexAccess_f0910d6d
 if typing.TYPE_CHECKING:
@@ -48,14 +48,16 @@ class XFunctionCategory(XPropertySet_bc180bfa, XIndexAccess_f0910d6d):
             com.sun.star.lang.WrappedTargetException: ``WrappedTargetException``
         """
         ...
-    @abstractproperty
+    @property
+    @abstractmethod
     def Name(self) -> str:
         """
         returns the localized category's name.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Number(self) -> int:
         """
         specifies the category number.

@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.sdbcx
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..sdbc.result_set import ResultSet as ResultSet_8ecf0a4f
 from .x_delete_rows import XDeleteRows as XDeleteRows_af5c0b72
 from .x_row_locate import XRowLocate as XRowLocate_a4730b04
@@ -38,7 +38,8 @@ class ResultSet(ResultSet_8ecf0a4f, XDeleteRows_af5c0b72, XRowLocate_a4730b04, X
     __ooo_full_ns__: str = 'com.sun.star.sdbcx.ResultSet'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CanUpdateInsertedRows(self) -> bool:
         """
         returns whether the result set supports updating of newly inserted rows.
@@ -47,7 +48,8 @@ class ResultSet(ResultSet_8ecf0a4f, XDeleteRows_af5c0b72, XRowLocate_a4730b04, X
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsBookmarkable(self) -> bool:
         """
         returns if the result set supports bookmark navigation.

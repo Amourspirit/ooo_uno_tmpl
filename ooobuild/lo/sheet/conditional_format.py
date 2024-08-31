@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.sheet
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from .x_conditional_format import XConditionalFormat as XConditionalFormat_be90e56
 if typing.TYPE_CHECKING:
@@ -39,13 +39,15 @@ class ConditionalFormat(XPropertySet_bc180bfa, XConditionalFormat_be90e56):
     __ooo_full_ns__: str = 'com.sun.star.sheet.ConditionalFormat'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ID(self) -> int:
         """
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Range(self) -> XSheetCellRanges_edef0d52:
         """
         represents the range for the conditional format All ranges have to be in the same sheet.

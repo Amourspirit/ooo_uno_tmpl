@@ -20,8 +20,7 @@
 # Namespace: com.sun.star.registry
 from __future__ import annotations
 import typing
-import uno
-from abc import abstractmethod, abstractproperty
+from abc import abstractmethod
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
     from com.sun.star.registry.RegistryKeyType import RegistryKeyTypeProto  # type: ignore
@@ -107,7 +106,7 @@ class XRegistryKey(XInterface_8f010a43):
         """
         ...
     @abstractmethod
-    def getBinaryValue(self) -> uno.ByteSequence:
+    def getBinaryValue(self) -> typing.Tuple[int, ...]:
         """
 
         Raises:
@@ -140,7 +139,7 @@ class XRegistryKey(XInterface_8f010a43):
         """
         ...
     @abstractmethod
-    def getLongListValue(self) -> uno.ByteSequence:
+    def getLongListValue(self) -> typing.Tuple[int, ...]:
         """
 
         Raises:
@@ -251,7 +250,7 @@ class XRegistryKey(XInterface_8f010a43):
         """
         ...
     @abstractmethod
-    def setBinaryValue(self, value: uno.ByteSequence) -> None:
+    def setBinaryValue(self, value: typing.Tuple[int, ...]) -> None:
         """
         sets a binary value to the key.
         
@@ -262,7 +261,7 @@ class XRegistryKey(XInterface_8f010a43):
         """
         ...
     @abstractmethod
-    def setLongListValue(self, seqValue: uno.ByteSequence) -> None:
+    def setLongListValue(self, seqValue: typing.Tuple[int, ...]) -> None:
         """
         sets a long list value to the key.
         
@@ -305,7 +304,8 @@ class XRegistryKey(XInterface_8f010a43):
             com.sun.star.registry.InvalidRegistryException: ``InvalidRegistryException``
         """
         ...
-    @abstractproperty
+    @property
+    @abstractmethod
     def KeyName(self) -> str:
         """
         This is the key of the entry relative to its parent.

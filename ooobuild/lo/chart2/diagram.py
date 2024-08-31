@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.chart2
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..chart.x3_d_default_setter import X3DDefaultSetter as X3DDefaultSetter_e9630d25
 from .x_coordinate_system_container import XCoordinateSystemContainer as XCoordinateSystemContainer_995411d4
 from .x_diagram import XDiagram as XDiagram_96fe0a59
@@ -41,20 +41,23 @@ class Diagram(X3DDefaultSetter_e9630d25, XCoordinateSystemContainer_995411d4, XD
     __ooo_full_ns__: str = 'com.sun.star.chart2.Diagram'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ConnectBars(self) -> bool:
         """
         Draw connection lines for stacked bar charts.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ExternalData(self) -> str:
         """
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def GroupBarsPerAxis(self) -> bool:
         """
         If bars of a bar or column chart are attached to different axis, this property determines how to display those.
@@ -67,28 +70,32 @@ class Diagram(X3DDefaultSetter_e9630d25, XCoordinateSystemContainer_995411d4, XD
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def MissingValueTreatment(self) -> int:
         """
         specifies how empty or invalid cells in the provided data should be handled when displayed
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Perspective(self) -> int:
         """
         Perspective of 3D charts ( [0,100] ).
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def PosSizeExcludeLabels(self) -> bool:
         """
         The attributes RelativePosition and RelativeSize should be used for the inner coordinate region without axis labels and without data labels.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RelativePosition(self) -> RelativePosition_fae10ddd:
         """
         The position is as a relative position on the page.
@@ -97,41 +104,47 @@ class Diagram(X3DDefaultSetter_e9630d25, XCoordinateSystemContainer_995411d4, XD
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RelativeSize(self) -> RelativeSize_c6020c23:
         """
         The size of the diagram as relative size of the page size.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RightAngledAxes(self) -> bool:
         """
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RotationHorizontal(self) -> int:
         """
         Horizontal rotation of 3D charts in degrees ( ]-180,180] ).
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RotationVertical(self) -> int:
         """
         Vertical rotation of 3D charts in degrees ( ]-180,180] ).
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SortByXValues(self) -> bool:
         """
         Sort data points by x values for rendering.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def StartingAngle(self) -> int:
         """
         Starting angle in degrees for pie charts and doughnut charts.

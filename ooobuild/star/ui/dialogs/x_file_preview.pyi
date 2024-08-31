@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from ...uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
     from ...util.color import Color as Color_68e908c5
@@ -57,7 +56,7 @@ class XFilePreview(XInterface_8f010a43):
         A value of FALSE if the preview window is invisible.
         """
         ...
-    def getSupportedImageFormats(self) -> uno.ByteSequence:
+    def getSupportedImageFormats(self) -> typing.Tuple[int, ...]:
         """
         The method returns all image formats that the preview supports.
         """

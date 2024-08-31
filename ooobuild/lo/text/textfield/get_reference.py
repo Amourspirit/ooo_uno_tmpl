@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.text.textfield
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..text_field import TextField as TextField_90260a56
 
 class GetReference(TextField_90260a56):
@@ -39,7 +39,8 @@ class GetReference(TextField_90260a56):
     __ooo_full_ns__: str = 'com.sun.star.text.textfield.GetReference'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CurrentPresentation(self) -> str:
         """
         contains the current content of the text field.
@@ -48,7 +49,8 @@ class GetReference(TextField_90260a56):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ReferenceFieldFlags(self) -> int:
         """
         contains extra flags which can modify the behaviour of the field
@@ -59,7 +61,8 @@ class GetReference(TextField_90260a56):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ReferenceFieldLanguage(self) -> str:
         """
         contains the language id of the alternative language-dependent references.
@@ -74,28 +77,32 @@ class GetReference(TextField_90260a56):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ReferenceFieldPart(self) -> int:
         """
         contains the type of the reference.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ReferenceFieldSource(self) -> int:
         """
         contains the source of the reference.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SequenceNumber(self) -> int:
         """
         contains the sequence number of a set expression field that is used as sequence field or the value of the ReferenceId property of a footnote or endnote.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def SourceName(self) -> str:
         """
         contains the name of the source.

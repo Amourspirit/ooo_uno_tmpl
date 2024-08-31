@@ -19,8 +19,8 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.sheet
 from __future__ import annotations
-import uno
-from abc import abstractmethod, abstractproperty, ABC
+import typing
+from abc import abstractmethod, ABC
 
 class XExternalSheetCache(ABC):
     """
@@ -39,7 +39,7 @@ class XExternalSheetCache(ABC):
     __pyunointerface__: str = 'com.sun.star.sheet.XExternalSheetCache'
 
     @abstractmethod
-    def getAllColumns(self, nRow: int) -> uno.ByteSequence:
+    def getAllColumns(self, nRow: int) -> typing.Tuple[int, ...]:
         """
         Given a row number, this method returns a list of all columns numbers that store cached cell values in that row.
         
@@ -50,7 +50,7 @@ class XExternalSheetCache(ABC):
         """
         ...
     @abstractmethod
-    def getAllRows(self) -> uno.ByteSequence:
+    def getAllRows(self) -> typing.Tuple[int, ...]:
         """
         It returns a list of all row numbers where a cached cell or cells exist.
         
@@ -79,7 +79,8 @@ class XExternalSheetCache(ABC):
             com.sun.star.lang.IllegalArgumentException: ``IllegalArgumentException``
         """
         ...
-    @abstractproperty
+    @property
+    @abstractmethod
     def TokenIndex(self) -> int:
         """
         Index corresponding to this instance of an external sheet cache for usage in formula tokens.

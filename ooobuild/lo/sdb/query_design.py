@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.sdb
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..frame.x_controller import XController as XController_b00e0b8f
 from ..lang.x_initialization import XInitialization as XInitialization_d46c0cca
 
@@ -50,14 +50,16 @@ class QueryDesign(XController_b00e0b8f, XInitialization_d46c0cca):
     __ooo_full_ns__: str = 'com.sun.star.sdb.QueryDesign'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ActiveCommand(self) -> str:
         """
         reflects the designed SQL command at the moment it was last saved by the user.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def EscapeProcessing(self) -> bool:
         """
         specifies whether the user enabled escape processing for the statement being designed.

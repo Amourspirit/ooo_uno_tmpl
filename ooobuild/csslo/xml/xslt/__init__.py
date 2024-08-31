@@ -17,6 +17,5 @@
 import warnings
 warnings.filterwarnings('module')
 warnings.warn('The csslo namespace is deprecated. Use lo instead.', DeprecationWarning, stacklevel=2)
-from ....lo.xml.xslt.xslt2_transformer import XSLT2Transformer as XSLT2Transformer
 from ....lo.xml.xslt.xslt_transformer import XSLTTransformer as XSLTTransformer
 from ....lo.xml.xslt.xxslt_transformer import XXSLTTransformer as XXSLTTransformer

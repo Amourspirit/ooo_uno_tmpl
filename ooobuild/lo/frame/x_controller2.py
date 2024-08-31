@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.frame
 from __future__ import annotations
 import typing
-from abc import abstractmethod, abstractproperty
+from abc import abstractmethod
 from .x_controller import XController as XController_b00e0b8f
 if typing.TYPE_CHECKING:
     from ..awt.x_window import XWindow as XWindow_713b0924
@@ -53,7 +53,8 @@ class XController2(XController_b00e0b8f):
             LibreOffice 5.1
         """
         ...
-    @abstractproperty
+    @property
+    @abstractmethod
     def ComponentWindow(self) -> XWindow_713b0924:
         """
         denotes the \"root window\" of the controller.
@@ -62,7 +63,8 @@ class XController2(XController_b00e0b8f):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CreationArguments(self) -> typing.Tuple[PropertyValue_c9610c73, ...]:
         """
         denotes the arguments used to create the instance.
@@ -71,7 +73,8 @@ class XController2(XController_b00e0b8f):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ViewControllerName(self) -> str:
         """
         specifies the view name of the controller.

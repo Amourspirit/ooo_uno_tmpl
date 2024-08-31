@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.sheet
 from __future__ import annotations
 import typing
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.property_set import PropertySet as PropertySet_b0e70ba2
 from .x_formula_parser import XFormulaParser as XFormulaParser_d54d0cbc
 if typing.TYPE_CHECKING:
@@ -43,7 +43,8 @@ class FormulaParser(PropertySet_b0e70ba2, XFormulaParser_d54d0cbc):
     __ooo_full_ns__: str = 'com.sun.star.sheet.FormulaParser'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CompileEnglish(self) -> bool:
         """
         specifies whether to use English parser and formatter.
@@ -52,7 +53,8 @@ class FormulaParser(PropertySet_b0e70ba2, XFormulaParser_d54d0cbc):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ExternalLinks(self) -> typing.Tuple[ExternalLinkInfo_f09b0d7e, ...]:
         """
         contains a list of external links referenced in formulas.
@@ -65,20 +67,23 @@ class FormulaParser(PropertySet_b0e70ba2, XFormulaParser_d54d0cbc):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def FormulaConvention(self) -> int:
         """
         specifies which address reference style convention to use when parsing a formula string.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IgnoreLeadingSpaces(self) -> bool:
         """
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def OpCodeMap(self) -> typing.Tuple[FormulaOpCodeMapEntry_37da0f61, ...]:
         """
         contains the complete mapping of names to op-codes.
@@ -87,13 +92,15 @@ class FormulaParser(PropertySet_b0e70ba2, XFormulaParser_d54d0cbc):
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ParameterSeparator(self) -> str:
         """
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RefConventionChartOOXML(self) -> bool:
         """
         specifies that use special ooxml chart syntax in case of OOXML reference convention, when parsing a formula string.

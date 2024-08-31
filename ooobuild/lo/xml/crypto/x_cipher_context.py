@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.xml.crypto
 from __future__ import annotations
-import uno
+import typing
 from abc import abstractmethod
 from ...uno.x_interface import XInterface as XInterface_8f010a43
 
@@ -42,7 +42,7 @@ class XCipherContext(XInterface_8f010a43):
     __pyunointerface__: str = 'com.sun.star.xml.crypto.XCipherContext'
 
     @abstractmethod
-    def convertWithCipherContext(self, aData: uno.ByteSequence) -> uno.ByteSequence:
+    def convertWithCipherContext(self, aData: typing.Tuple[int, ...]) -> typing.Tuple[int, ...]:
         """
         encrypts/decrypts the data using the cipher.
         
@@ -56,7 +56,7 @@ class XCipherContext(XInterface_8f010a43):
         """
         ...
     @abstractmethod
-    def finalizeCipherContextAndDispose(self) -> uno.ByteSequence:
+    def finalizeCipherContextAndDispose(self) -> typing.Tuple[int, ...]:
         """
         finalizes cipher and disposes context.
 

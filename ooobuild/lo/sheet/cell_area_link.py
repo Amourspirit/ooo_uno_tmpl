@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.sheet
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from .x_area_link import XAreaLink as XAreaLink_98db0a80
 from ..util.x_refreshable import XRefreshable as XRefreshable_b0d60b81
@@ -43,28 +43,32 @@ class CellAreaLink(XPropertySet_bc180bfa, XAreaLink_98db0a80, XRefreshable_b0d60
     __ooo_full_ns__: str = 'com.sun.star.sheet.CellAreaLink'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Filter(self) -> str:
         """
         specifies the name of the filter used to load the source document.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def FilterOptions(self) -> str:
         """
         specifies the filter options needed to load the source document.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RefreshDelay(self) -> int:
         """
         specifies the delay time between two refresh actions in seconds.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RefreshPeriod(self) -> int:
         """
         specifies the time between two refresh actions in seconds.
@@ -75,7 +79,8 @@ class CellAreaLink(XPropertySet_bc180bfa, XAreaLink_98db0a80, XRefreshable_b0d60
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Url(self) -> str:
         """
         specifies the URL of the source document.

@@ -20,7 +20,7 @@
 # Namespace: com.sun.star.util
 from __future__ import annotations
 import typing
-from abc import abstractproperty, ABC
+from abc import abstractmethod, ABC
 if typing.TYPE_CHECKING:
     from ..lang.locale import Locale as Locale_70d308fa
 
@@ -37,28 +37,32 @@ class NumberFormatProperties(ABC):
     __ooo_full_ns__: str = 'com.sun.star.util.NumberFormatProperties'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Comment(self) -> str:
         """
         contains a comment regarding the number format for display to the user.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def FormatString(self) -> str:
         """
         contains the format string of the number format.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Locale(self) -> Locale_70d308fa:
         """
         contains the locale of the number format.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Type(self) -> int:
         """
         contains the type of the number format.

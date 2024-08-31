@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.form.component
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ...awt.uno_control_file_control_model import UnoControlFileControlModel as UnoControlFileControlModel_6a4410b9
 from ..form_control_model import FormControlModel as FormControlModel_e2990d22
 from ..x_reset import XReset as XReset_71670917
@@ -37,7 +37,8 @@ class FileControl(UnoControlFileControlModel_6a4410b9, FormControlModel_e2990d22
     __ooo_full_ns__: str = 'com.sun.star.form.component.FileControl'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def DefaultText(self) -> str:
         """
         contains a default value for the control.

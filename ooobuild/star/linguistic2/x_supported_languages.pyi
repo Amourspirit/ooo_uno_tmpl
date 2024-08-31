@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 
 
@@ -37,7 +36,7 @@ class XSupportedLanguages(XInterface_8f010a43):
     """
     __pyunointerface__: str = 'com.sun.star.linguistic2.XSupportedLanguages'
 
-    def getLanguages(self) -> uno.ByteSequence:
+    def getLanguages(self) -> typing.Tuple[int, ...]:
         """
         """
         ...

@@ -21,7 +21,6 @@
 from __future__ import annotations
 import typing
 
-import uno
 from ..uno.x_interface import XInterface as XInterface_8f010a43
 if typing.TYPE_CHECKING:
     from ..io.x_input_stream import XInputStream as XInputStream_98d40ab4
@@ -63,7 +62,7 @@ class XRowUpdate(XInterface_8f010a43):
             SQLException: ``SQLException``
         """
         ...
-    def updateBytes(self, columnIndex: int, x: uno.ByteSequence) -> None:
+    def updateBytes(self, columnIndex: int, x: typing.Tuple[int, ...]) -> None:
         """
         updates a column with a byte array value.
 

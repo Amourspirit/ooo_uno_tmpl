@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.form.component
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..data_aware_control_model import DataAwareControlModel as DataAwareControlModel_27110ef8
 from .text_field import TextField as TextField_db00e46
 
@@ -36,7 +36,8 @@ class DatabaseTextField(DataAwareControlModel_27110ef8, TextField_db00e46):
     __ooo_full_ns__: str = 'com.sun.star.form.component.DatabaseTextField'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def ConvertEmptyToNull(self) -> bool:
         """
         determines if an empty text should be treated as a NULL value.

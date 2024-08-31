@@ -19,7 +19,7 @@
 # Libre Office Version: 2024.2
 # Namespace: com.sun.star.ucb
 from __future__ import annotations
-from abc import abstractproperty
+from abc import abstractmethod
 from ..beans.x_property_set import XPropertySet as XPropertySet_bc180bfa
 from ..lang.x_component import XComponent as XComponent_98dc0ab5
 from ..sdbc.result_set import ResultSet as ResultSet_8ecf0a4f
@@ -44,7 +44,8 @@ class ContentResultSet(ResultSet_8ecf0a4f, XPropertySet_bc180bfa, XComponent_98d
     __ooo_full_ns__: str = 'com.sun.star.ucb.ContentResultSet'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def CursorTravelMode(self) -> int:
         """
         controls the travel mode of the result set cursor.
@@ -59,14 +60,16 @@ class ContentResultSet(ResultSet_8ecf0a4f, XPropertySet_bc180bfa, XComponent_98d
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def IsRowCountFinal(self) -> bool:
         """
         indicates that all rows of the result set have been obtained.
         """
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def RowCount(self) -> int:
         """
         contains the number of rows obtained (so far) from the data source.
