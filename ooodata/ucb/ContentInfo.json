@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.2.15",
-  "libre_office_ver": "7.4",
+  "version": "2024.2.0",
+  "libre_office_ver": "2024.2",
   "type": "struct",
   "name": "ContentInfo",
   "namespace": "com.sun.star.ucb",
@@ -49,21 +49,6 @@
     "extends": [],
     "items": [
       {
-        "name": "Properties",
-        "type": "typing.Tuple[Property_8f4e0a76, ...]",
-        "origtype": null,
-        "origin": "sequence< com.sun.star.beans.Property >",
-        "desc": [
-          "This field contains a list with the properties which must be set at a content that was just created using XContentCreator.createNewContent() before it can be committed (by executing the command \\\"insert\\\" at the new content).",
-          "",
-          "If one of the properties is missing, the insert command will fail.",
-          "",
-          "In example, a new file system folder content will need a title. The Properties member of the ContentInfo provided for this kind of content must include the property \\\"Title\\\".",
-          "",
-          "Important: The required properties must have one of the following basic data types (in order to make it possible to implement client applications with a small set of generic input methods for the values):"
-        ]
-      },
-      {
         "name": "Type",
         "type": "str",
         "origtype": null,
@@ -87,6 +72,21 @@
           "It is highly recommended to fill these flags very accurately, as they are very important when transferring contents between different ContentProviders.",
           "",
           "The value can be one of the ContentInfoAttribute constants."
+        ]
+      },
+      {
+        "name": "Properties",
+        "type": "typing.Tuple[Property_8f4e0a76, ...]",
+        "origtype": null,
+        "origin": "sequence< com.sun.star.beans.Property >",
+        "desc": [
+          "This field contains a list with the properties which must be set at a content that was just created using XContentCreator.createNewContent() before it can be committed (by executing the command \\\"insert\\\" at the new content).",
+          "",
+          "If one of the properties is missing, the insert command will fail.",
+          "",
+          "In example, a new file system folder content will need a title. The Properties member of the ContentInfo provided for this kind of content must include the property \\\"Title\\\".",
+          "",
+          "Important: The required properties must have one of the following basic data types (in order to make it possible to implement client applications with a small set of generic input methods for the values):"
         ]
       }
     ]

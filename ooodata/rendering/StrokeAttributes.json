@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.2.15",
-  "libre_office_ver": "7.4",
+  "version": "2024.2.0",
+  "libre_office_ver": "2024.2",
   "type": "struct",
   "name": "StrokeAttributes",
   "namespace": "com.sun.star.rendering",
@@ -43,28 +43,6 @@
     "extends": [],
     "items": [
       {
-        "name": "DashArray",
-        "type": "typing.Tuple[float, ...]",
-        "origtype": null,
-        "origin": "sequence< double >",
-        "desc": [
-          "Array of ink on and off lengths, measured in user coordinate space.",
-          "",
-          "The first element specifies the length of the first \\\"on\\\" segment of the dashing, the second element the length of the first \\\"off\\\" segment, and so forth. Give zero elements here for solid strokes. This array always have an even number of elements, with zero, as usual, counting as even here. Furthermore, each entry in this array must have a value that is positive (or 0.0)"
-        ]
-      },
-      {
-        "name": "LineArray",
-        "type": "typing.Tuple[float, ...]",
-        "origtype": null,
-        "origin": "sequence< double >",
-        "desc": [
-          "Array of line widths and spacings for multiple-line strokes.",
-          "",
-          "The entries here are relative to the StrokeAttributes.StrokeWidth attribute above, i.e. the total width of all lines and spacings will always equal StrokeAttributes.StrokeWidth. The first element specifies the width of the rightmost line, when traveling from the start point of the path to the end point. The second element specifies the space between the first line and the second line, and so forth. If the array ends with a spacing, this spacing is included in the total width of the multiple-line stroke. That is, the stroke becomes asymmetric."
-        ]
-      },
-      {
         "name": "StrokeWidth",
         "type": "float",
         "origtype": null,
@@ -86,6 +64,28 @@
           "This attribute is only used when StrokeAttributes.JoinType is set to PathJoinType.MITER. Should the length of a corner's diagonal exceed this limit, a beveled join is used instead. This value must be positive (or 0.0, which is equivalent to setting StrokeAttributes.JoinType to PathJoinType.BEVEL.",
           "",
           "Before performing the actual comparison, implementations will multiply the MiterLimit with the current StrokeWidth, such that, with phi being the angle between the two joining segments, MiterLimit=1/sin(phi/2.0)."
+        ]
+      },
+      {
+        "name": "DashArray",
+        "type": "typing.Tuple[float, ...]",
+        "origtype": null,
+        "origin": "sequence< double >",
+        "desc": [
+          "Array of ink on and off lengths, measured in user coordinate space.",
+          "",
+          "The first element specifies the length of the first \\\"on\\\" segment of the dashing, the second element the length of the first \\\"off\\\" segment, and so forth. Give zero elements here for solid strokes. This array always have an even number of elements, with zero, as usual, counting as even here. Furthermore, each entry in this array must have a value that is positive (or 0.0)"
+        ]
+      },
+      {
+        "name": "LineArray",
+        "type": "typing.Tuple[float, ...]",
+        "origtype": null,
+        "origin": "sequence< double >",
+        "desc": [
+          "Array of line widths and spacings for multiple-line strokes.",
+          "",
+          "The entries here are relative to the StrokeAttributes.StrokeWidth attribute above, i.e. the total width of all lines and spacings will always equal StrokeAttributes.StrokeWidth. The first element specifies the width of the rightmost line, when traveling from the start point of the path to the end point. The second element specifies the space between the first line and the second line, and so forth. If the array ends with a spacing, this spacing is included in the total width of the multiple-line stroke. That is, the stroke becomes asymmetric."
         ]
       },
       {

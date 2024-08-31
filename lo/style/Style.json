@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.2.15",
-  "libre_office_ver": "7.4",
+  "version": "2024.2.0",
+  "libre_office_ver": "2024.2",
   "name": "Style",
   "type": "service",
   "namespace": "com.sun.star.style",
@@ -98,52 +98,10 @@
       "",
       "**since**",
       "",
-      "    OOo 2.0.1"
+      "    LibreOffice 4.0"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1style_1_1Style.html",
     "items": {
-      "types": [
-        {
-          "name": "ParaStyleConditions",
-          "returns": "typing.Tuple[NamedValue_a37a0af3, ...]",
-          "origtype": null,
-          "origin": "sequence< com.sun.star.beans.NamedValue >",
-          "desc": [
-            "defines the context and styles for conditional paragraphs.",
-            "",
-            "This property is only available if the style is a conditional paragraph style.",
-            "",
-            "The sequence consists of pairs where the name part of the pair defines the context where it should be applied and the value part is a string naming the style to be used in that context.",
-            "",
-            "Assigning an empty string to the style name will disable the conditional style for that context.",
-            "",
-            "The allowed strings (contexts) for the name part of an entry of the sequence are:",
-            "",
-            "**since**",
-            "",
-            "    OOo 2.0.1"
-          ],
-          "raises_get": "",
-          "raises_set": ""
-        },
-        {
-          "name": "StyleInteropGrabBag",
-          "returns": "typing.Tuple[PropertyValue_c9610c73, ...]",
-          "origtype": null,
-          "origin": "sequence< com.sun.star.beans.PropertyValue >",
-          "desc": [
-            "Grab bag of style properties, used as a string-any map for interim interop purposes.",
-            "",
-            "This property is intentionally not handled by the ODF filter. Any member that should be handled there should be first moved out from this grab bag to a separate property.",
-            "",
-            "**since**",
-            "",
-            "    LibreOffice 4.2"
-          ],
-          "raises_get": "",
-          "raises_set": ""
-        }
-      ],
       "properties": [
         {
           "name": "DisplayName",
@@ -208,6 +166,46 @@
             "determines if a style is physically created.",
             "",
             "Built in styles may not be created until they are needed. To prevent standard style properties from being exported, it may be useful to check if the style is created first."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ParaStyleConditions",
+          "returns": "typing.Tuple[NamedValue_a37a0af3, ...]",
+          "origtype": null,
+          "origin": "sequence< com.sun.star.beans.NamedValue >",
+          "desc": [
+            "defines the context and styles for conditional paragraphs.",
+            "",
+            "This property is only available if the style is a conditional paragraph style.",
+            "",
+            "The sequence consists of pairs where the name part of the pair defines the context where it should be applied and the value part is a string naming the style to be used in that context.",
+            "",
+            "Assigning an empty string to the style name will disable the conditional style for that context.",
+            "",
+            "The allowed strings (contexts) for the name part of an entry of the sequence are:",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.0.1"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "StyleInteropGrabBag",
+          "returns": "typing.Tuple[PropertyValue_c9610c73, ...]",
+          "origtype": null,
+          "origin": "sequence< com.sun.star.beans.PropertyValue >",
+          "desc": [
+            "Grab bag of style properties, used as a string-any map for interim interop purposes.",
+            "",
+            "This property is intentionally not handled by the ODF filter. Any member that should be handled there should be first moved out from this grab bag to a separate property.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 4.2"
           ],
           "raises_get": "",
           "raises_set": ""

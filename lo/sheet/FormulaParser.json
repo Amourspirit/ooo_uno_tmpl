@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.2.15",
-  "libre_office_ver": "7.4",
+  "version": "2024.2.0",
+  "libre_office_ver": "2024.2",
   "name": "FormulaParser",
   "type": "service",
   "namespace": "com.sun.star.sheet",
@@ -77,7 +77,20 @@
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1sheet_1_1FormulaParser.html",
     "items": {
-      "types": [
+      "properties": [
+        {
+          "name": "CompileEnglish",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "specifies whether to use English parser and formatter.",
+            "",
+            "Note: When changing this, an already existing OpCodeMap needs to be recreated internally, so for performance reasons set this before setting the OpCodeMap."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
         {
           "name": "ExternalLinks",
           "returns": "typing.Tuple[ExternalLinkInfo_f09b0d7e, ...]",
@@ -91,34 +104,6 @@
             "**since**",
             "",
             "    OOo 3.1"
-          ],
-          "raises_get": "",
-          "raises_set": ""
-        },
-        {
-          "name": "OpCodeMap",
-          "returns": "typing.Tuple[FormulaOpCodeMapEntry_37da0f61, ...]",
-          "origtype": null,
-          "origin": "sequence< FormulaOpCodeMapEntry >",
-          "desc": [
-            "contains the complete mapping of names to op-codes.",
-            "",
-            "Names and symbols not defined here lead to a parser/print error."
-          ],
-          "raises_get": "",
-          "raises_set": ""
-        }
-      ],
-      "properties": [
-        {
-          "name": "CompileEnglish",
-          "returns": "bool",
-          "origtype": null,
-          "origin": "boolean",
-          "desc": [
-            "specifies whether to use English parser and formatter.",
-            "",
-            "Note: When changing this, an already existing OpCodeMap needs to be recreated internally, so for performance reasons set this before setting the OpCodeMap."
           ],
           "raises_get": "",
           "raises_set": ""
@@ -140,6 +125,19 @@
           "origtype": null,
           "origin": "boolean",
           "desc": [],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "OpCodeMap",
+          "returns": "typing.Tuple[FormulaOpCodeMapEntry_37da0f61, ...]",
+          "origtype": null,
+          "origin": "sequence< FormulaOpCodeMapEntry >",
+          "desc": [
+            "contains the complete mapping of names to op-codes.",
+            "",
+            "Names and symbols not defined here lead to a parser/print error."
+          ],
           "raises_get": "",
           "raises_set": ""
         },

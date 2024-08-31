@@ -266,9 +266,9 @@ Regeneration of a new LO API version.
     Cleaning before regeneration:
         Remove database.
             delete 'resources/mod_info.sqlite'
-        Remove entire contents of ooobuild dir.
-        Remove entire contents of ooodata dir except for ``ooobuild/star/__init__.py``
+        Remove entire contents of ooobuild dir except for ``ooobuild/star/__init__.py``
             Although there is a backup in ``resources/project/pyi_files/__init__.py``
+        Remove entire contents of ooodata dir
         Remove entire contents of lo dir.
         Make sure cache_dir (set in config) is removed from system tmp dir.
             Defaults to "ooo_uno_tmpl"

@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.2.15",
-  "libre_office_ver": "7.4",
+  "version": "2024.2.0",
+  "libre_office_ver": "2024.2",
   "name": "Shape",
   "type": "service",
   "namespace": "com.sun.star.drawing",
@@ -111,11 +111,56 @@
       "",
       "**since**",
       "",
-      "    LibreOffice 4.2"
+      "    LibreOffice 7.6"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1drawing_1_1Shape.html",
     "items": {
-      "types": [
+      "properties": [
+        {
+          "name": "Decorative",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "Determines if the shape is purely decorative.",
+            "",
+            "If TRUE, it is considered not part of the document content, and may be ignored by assistive technologies.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 7.6"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Description",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "contains description for the object",
+            "",
+            "The long description text can be entered to describe an object in more detail to users with screen reader software. The description is visible as an alternative tag for accessibility tools.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.2"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Hyperlink",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "this property lets you get and set a hyperlink for this shape."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
         {
           "name": "InteropGrabBag",
           "returns": "typing.Tuple[PropertyValue_c9610c73, ...]",
@@ -129,19 +174,6 @@
             "**since**",
             "",
             "    LibreOffice 4.2"
-          ],
-          "raises_get": "",
-          "raises_set": ""
-        }
-      ],
-      "properties": [
-        {
-          "name": "Hyperlink",
-          "returns": "str",
-          "origtype": null,
-          "origin": "string",
-          "desc": [
-            "this property lets you get and set a hyperlink for this shape."
           ],
           "raises_get": "",
           "raises_set": ""
@@ -313,6 +345,23 @@
           "origin": "com.sun.star.style.XStyle",
           "desc": [
             "this property lets you get and set a style for this shape."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Title",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "contains short title for the object",
+            "",
+            "This short title is visible as an alternative tag in HTML format. Accessibility tools can read this text.",
+            "",
+            "**since**",
+            "",
+            "    OOo 2.2"
           ],
           "raises_get": "",
           "raises_set": ""

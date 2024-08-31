@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.2.15",
-  "libre_office_ver": "7.4",
+  "version": "2024.2.0",
+  "libre_office_ver": "2024.2",
   "name": "DataSeries",
   "type": "service",
   "namespace": "com.sun.star.chart2",
@@ -96,7 +96,24 @@
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1chart2_1_1DataSeries.html",
     "items": {
-      "types": [
+      "properties": [
+        {
+          "name": "AttachedAxisIndex",
+          "returns": "int",
+          "origtype": null,
+          "origin": "long",
+          "desc": [
+            "This property describes whether the series should be shown at the main value axis or at the secondary value axis.",
+            "",
+            "Having this property not set or setting it to 0 means that this data series will be scaled at the primary y-axis ( of the coordinate system in which this series is hosted ).",
+            "",
+            "Setting this property to 1 means that this series should be scaled at the secondary y-axis. If there is no secondary axis the main axis should be used for scaling instead.",
+            "",
+            "If you want to scale a series at a different x or z axis you need to create an additional coordinate system and host this series there."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
         {
           "name": "AttributedDataPoints",
           "returns": "uno.ByteSequence",
@@ -133,25 +150,6 @@
             "**since**",
             "",
             "    LibreOffice 7.0"
-          ],
-          "raises_get": "",
-          "raises_set": ""
-        }
-      ],
-      "properties": [
-        {
-          "name": "AttachedAxisIndex",
-          "returns": "int",
-          "origtype": null,
-          "origin": "long",
-          "desc": [
-            "This property describes whether the series should be shown at the main value axis or at the secondary value axis.",
-            "",
-            "Having this property not set or setting it to 0 means that this data series will be scaled at the primary y-axis ( of the coordinate system in which this series is hosted ).",
-            "",
-            "Setting this property to 1 means that this series should be scaled at the secondary y-axis. If there is no secondary axis the main axis should be used for scaling instead.",
-            "",
-            "If you want to scale a series at a different x or z axis you need to create an additional coordinate system and host this series there."
           ],
           "raises_get": "",
           "raises_set": ""

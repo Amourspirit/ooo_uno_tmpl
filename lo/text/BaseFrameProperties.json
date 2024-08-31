@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.2.15",
-  "libre_office_ver": "7.4",
+  "version": "2024.2.0",
+  "libre_office_ver": "2024.2",
   "name": "BaseFrameProperties",
   "type": "service",
   "namespace": "com.sun.star.text",
@@ -128,29 +128,10 @@
       "",
       "**since**",
       "",
-      "    LibreOffice 4.2"
+      "    OOo 2.1"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1text_1_1BaseFrameProperties.html",
     "items": {
-      "types": [
-        {
-          "name": "FrameInteropGrabBag",
-          "returns": "typing.Tuple[PropertyValue_c9610c73, ...]",
-          "origtype": null,
-          "origin": "sequence< com.sun.star.beans.PropertyValue >",
-          "desc": [
-            "Grab bag of frame properties, used as a string-any map for interim interop purposes.",
-            "",
-            "This property is intentionally not handled by the ODF filter. Any member that should be handled there should be first moved out from this grab bag to a separate property.",
-            "",
-            "**since**",
-            "",
-            "    LibreOffice 4.2"
-          ],
-          "raises_get": "",
-          "raises_set": ""
-        }
-      ],
       "properties": [
         {
           "name": "AllowOverlap",
@@ -321,6 +302,23 @@
           "raises_set": ""
         },
         {
+          "name": "Decorative",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "Determines if the frame is purely decorative.",
+            "",
+            "If TRUE, it is considered not part of the document content, and may be ignored by assistive technologies.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 7.5"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
           "name": "Description",
           "returns": "str",
           "origtype": null,
@@ -380,6 +378,23 @@
             "**since**",
             "",
             "    LibreOffice 4.1"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "FrameInteropGrabBag",
+          "returns": "typing.Tuple[PropertyValue_c9610c73, ...]",
+          "origtype": null,
+          "origin": "sequence< com.sun.star.beans.PropertyValue >",
+          "desc": [
+            "Grab bag of frame properties, used as a string-any map for interim interop purposes.",
+            "",
+            "This property is intentionally not handled by the ODF filter. Any member that should be handled there should be first moved out from this grab bag to a separate property.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 4.2"
           ],
           "raises_get": "",
           "raises_set": ""
@@ -461,6 +476,21 @@
           "origin": "string",
           "desc": [
             "contains the URL of a hyperlink that is set at the object."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "IsSplitAllowed",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "If TRUE, the frame is allowed to be split at page breaks.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 7.6"
           ],
           "raises_get": "",
           "raises_set": ""
@@ -883,6 +913,21 @@
             "**since**",
             "",
             "    OOo 2.0"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "WrapTextAtFlyStart",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "If TRUE, text wraps around a split fly on all pages.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 24.2"
           ],
           "raises_get": "",
           "raises_set": ""

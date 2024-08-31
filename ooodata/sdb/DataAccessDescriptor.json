@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.2.15",
-  "libre_office_ver": "7.4",
+  "version": "2024.2.0",
+  "libre_office_ver": "2024.2",
   "name": "DataAccessDescriptor",
   "type": "service",
   "namespace": "com.sun.star.sdb",
@@ -77,40 +77,6 @@
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1sdb_1_1DataAccessDescriptor.html",
     "items": {
-      "types": [
-        {
-          "name": "ConnectionInfo",
-          "returns": "typing.Tuple[PropertyValue_c9610c73, ...]",
-          "origtype": null,
-          "origin": "sequence< .com.sun.star.beans.PropertyValue >",
-          "desc": [
-            "specifies additional info to use when creating a connection from a ConnectionResource",
-            "",
-            "This member is evaluated only when ConnectionResource is used: In this case, com.sun.star.sdbc.XDriverManager.getConnectionWithInfo() is used to create a connection for the given connection resource, instead of com.sun.star.sdbc.XDriverManager.getConnection().",
-            "",
-            "If the sequence is empty, it is ignored."
-          ],
-          "raises_get": "",
-          "raises_set": ""
-        },
-        {
-          "name": "Selection",
-          "returns": "typing.Tuple[object, ...]",
-          "origtype": null,
-          "origin": "sequence< any >",
-          "desc": [
-            "specifies a selection to confine the records in a result set.",
-            "",
-            "When you specify a result set either implicitly (DataSourceName, Command, CommandType) or explicitly (ResultSet), the set of results can be additionally refined with this property.",
-            "",
-            "The single elements of the Selection are either record numbers (see com.sun.star.sdbc.XResultSet.getRow()), or bookmarks (see com.sun.star.sdbcx.XRowLocate.getBookmark()).It is up to the component which provides or requires a DataAccessDescriptor to specify which of the two alternatives it expects. If it does not specify this, then the property BookmarkSelection becomes mandatory.",
-            "",
-            "If the elements specify bookmarks, and a ResultSet has been specified, then this result set is required to support the com.sun.star.sdbcx.XRowLocate interface."
-          ],
-          "raises_get": "",
-          "raises_set": ""
-        }
-      ],
       "properties": [
         {
           "name": "ActiveConnection",
@@ -194,6 +160,21 @@
             "Command needs to be interpreted depending on the value of this property.",
             "",
             "This property is only meaningful together with the Command property, thus either both or none of them are present."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "ConnectionInfo",
+          "returns": "typing.Tuple[PropertyValue_c9610c73, ...]",
+          "origtype": null,
+          "origin": "sequence< .com.sun.star.beans.PropertyValue >",
+          "desc": [
+            "specifies additional info to use when creating a connection from a ConnectionResource",
+            "",
+            "This member is evaluated only when ConnectionResource is used: In this case, com.sun.star.sdbc.XDriverManager.getConnectionWithInfo() is used to create a connection for the given connection resource, instead of com.sun.star.sdbc.XDriverManager.getConnection().",
+            "",
+            "If the sequence is empty, it is ignored."
           ],
           "raises_get": "",
           "raises_set": ""
@@ -321,6 +302,23 @@
             "The object will at least support the com.sun.star.sdbc.ResultSet service.",
             "",
             "Note that any superservices of com.sun.star.sdbc.ResultSet are also allowed. Especially, this member can denote an instance of the com.sun.star.sdb.RowSet, or an instance obtained by calling com.sun.star.sdb.XResultSetAccess.createResultSet() on such a com.sun.star.sdb.RowSet. This becomes important in conjunction with the Selection property."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Selection",
+          "returns": "typing.Tuple[object, ...]",
+          "origtype": null,
+          "origin": "sequence< any >",
+          "desc": [
+            "specifies a selection to confine the records in a result set.",
+            "",
+            "When you specify a result set either implicitly (DataSourceName, Command, CommandType) or explicitly (ResultSet), the set of results can be additionally refined with this property.",
+            "",
+            "The single elements of the Selection are either record numbers (see com.sun.star.sdbc.XResultSet.getRow()), or bookmarks (see com.sun.star.sdbcx.XRowLocate.getBookmark()).It is up to the component which provides or requires a DataAccessDescriptor to specify which of the two alternatives it expects. If it does not specify this, then the property BookmarkSelection becomes mandatory.",
+            "",
+            "If the elements specify bookmarks, and a ResultSet has been specified, then this result set is required to support the com.sun.star.sdbcx.XRowLocate interface."
           ],
           "raises_get": "",
           "raises_set": ""
