@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.2.15",
-  "libre_office_ver": "7.4",
+  "version": "0.4.0",
+  "libre_office_ver": "2024.2",
   "type": "struct",
   "name": "RenderState",
   "namespace": "com.sun.star.rendering",
@@ -69,17 +69,6 @@
     "extends": [],
     "items": [
       {
-        "name": "DeviceColor",
-        "type": "typing.Tuple[ColorComponent_e4c0e78, ...]",
-        "origtype": null,
-        "origin": "sequence< ColorComponent >",
-        "desc": [
-          "The device color associated with this render operation.",
-          "",
-          "Note that this need not be RGB here, but depends on the active device color space."
-        ]
-      },
-      {
         "name": "AffineTransform",
         "type": "AffineMatrix2D_ff040da8",
         "origtype": "com.sun.star.geometry.AffineMatrix2D",
@@ -101,6 +90,17 @@
           "This clipping is interpreted in the user coordinate system, i.e. subject to the render state transform followed by the view transform before mapped to device coordinate space.",
           "",
           "Specifying an empty interface denotes no clipping, i.e. everything rendered to the canvas will be visible (subject to device-dependent constraints, of course). Specifying an empty XPolyPolygon2D, i.e. a poly-polygon containing zero polygons, or an XPolyPolygon2D with any number of empty sub-polygons, denotes the NULL clip. That means, nothing rendered to the canvas will be visible."
+        ]
+      },
+      {
+        "name": "DeviceColor",
+        "type": "typing.Tuple[ColorComponent_e4c0e78, ...]",
+        "origtype": null,
+        "origin": "sequence< ColorComponent >",
+        "desc": [
+          "The device color associated with this render operation.",
+          "",
+          "Note that this need not be RGB here, but depends on the active device color space."
         ]
       },
       {

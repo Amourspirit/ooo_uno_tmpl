@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.2.15",
-  "libre_office_ver": "7.4",
+  "version": "0.4.0",
+  "libre_office_ver": "2024.2",
   "name": "MediaDescriptor",
   "type": "service",
   "namespace": "com.sun.star.document",
@@ -55,10 +55,12 @@
       "XInteractionHandler_bf80e51",
       "XOutputStream_a4e00b35",
       "XStatusIndicator_e2d00d34",
-      "typing.Tuple[NamedValue_a37a0af3, ...]"
+      "typing.Tuple[NamedValue_a37a0af3, ...]",
+      "typing.Tuple[int, ...]"
     ],
     "typings": [
-      "typing.Tuple[NamedValue_a37a0af3, ...]"
+      "typing.Tuple[NamedValue_a37a0af3, ...]",
+      "typing.Tuple[int, ...]"
     ],
     "requires_typing": true,
     "full_imports": {
@@ -72,9 +74,7 @@
         "com.sun.star.task.XStatusIndicator"
       ]
     },
-    "imports": [
-      "uno"
-    ],
+    "imports": [],
     "name": "MediaDescriptor",
     "namespace": "com.sun.star.document",
     "extends": [],
@@ -91,36 +91,6 @@
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1document_1_1MediaDescriptor.html",
     "items": {
-      "types": [
-        {
-          "name": "EncryptionData",
-          "returns": "typing.Tuple[NamedValue_a37a0af3, ...]",
-          "origtype": null,
-          "origin": "sequence< .com.sun.star.beans.NamedValue >",
-          "desc": [
-            "encryption information for encryption/decryption of documents",
-            "",
-            "It contains the necessary information for encryption/decryption of a component (if necessary). If neither password nor encryption data is specified, loading of a password protected document will fail, storing will be done without encryption. If both are provided, the encryption data is used ( if the filter supports it ).",
-            "",
-            "The encryption data is generated based on the password."
-          ],
-          "raises_get": "",
-          "raises_set": ""
-        },
-        {
-          "name": "PostData",
-          "returns": "uno.ByteSequence",
-          "origtype": null,
-          "origin": "sequence< byte >",
-          "desc": [
-            "contains the data for HTTP post method as a sequence of bytes.",
-            "",
-            "Data to send to a location described by the media descriptor to get a result in return that will be loaded as a component (usually in webforms). Default is: no PostData."
-          ],
-          "raises_get": "",
-          "raises_set": ""
-        }
-      ],
       "properties": [
         {
           "name": "Aborted",
@@ -222,6 +192,21 @@
             "document title",
             "",
             "This parameter can be used to specify a title for a document."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "EncryptionData",
+          "returns": "typing.Tuple[NamedValue_a37a0af3, ...]",
+          "origtype": null,
+          "origin": "sequence< .com.sun.star.beans.NamedValue >",
+          "desc": [
+            "encryption information for encryption/decryption of documents",
+            "",
+            "It contains the necessary information for encryption/decryption of a component (if necessary). If neither password nor encryption data is specified, loading of a password protected document will fail, storing will be done without encryption. If both are provided, the encryption data is used ( if the filter supports it ).",
+            "",
+            "The encryption data is generated based on the password."
           ],
           "raises_get": "",
           "raises_set": ""
@@ -556,6 +541,19 @@
             "**since**",
             "",
             "    LibreOffice 5.1"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "PostData",
+          "returns": "typing.Tuple[int, ...]",
+          "origtype": null,
+          "origin": "sequence< byte >",
+          "desc": [
+            "contains the data for HTTP post method as a sequence of bytes.",
+            "",
+            "Data to send to a location described by the media descriptor to get a result in return that will be loaded as a component (usually in webforms). Default is: no PostData."
           ],
           "raises_get": "",
           "raises_set": ""

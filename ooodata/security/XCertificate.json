@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.2.15",
-  "libre_office_ver": "7.4",
+  "version": "0.4.0",
+  "libre_office_ver": "2024.2",
   "name": "XCertificate",
   "type": "interface",
   "namespace": "com.sun.star.security",
@@ -46,10 +46,12 @@
       "CertificateKind_ffd0e69",
       "DateTime_84de09d3",
       "XCertificateExtension_6ead10f8",
-      "typing.Tuple[XCertificateExtension_6ead10f8, ...]"
+      "typing.Tuple[XCertificateExtension_6ead10f8, ...]",
+      "typing.Tuple[int, ...]"
     ],
     "typings": [
-      "typing.Tuple[XCertificateExtension_6ead10f8, ...]"
+      "typing.Tuple[XCertificateExtension_6ead10f8, ...]",
+      "typing.Tuple[int, ...]"
     ],
     "requires_typing": true,
     "full_imports": {
@@ -62,9 +64,7 @@
         "com.sun.star.util.DateTime"
       ]
     },
-    "imports": [
-      "uno"
-    ],
+    "imports": [],
     "name": "XCertificate",
     "namespace": "com.sun.star.security",
     "extends": [
@@ -93,7 +93,7 @@
           "args": [
             {
               "name": "oid",
-              "type": "uno.ByteSequence",
+              "type": "typing.Tuple[int, ...]",
               "direction": "in",
               "origin": "sequence< byte >"
             }
@@ -112,10 +112,25 @@
           "args": []
         }
       ],
-      "types": [
+      "properties": [
+        {
+          "name": "CertificateKind",
+          "returns": "CertificateKind_ffd0e69",
+          "origtype": "com.sun.star.security.CertificateKind",
+          "origin": "com.sun.star.security.CertificateKind",
+          "desc": [
+            "the kind of certificate, X.509 or OpenPGP",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 5.4"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
         {
           "name": "Encoded",
-          "returns": "uno.ByteSequence",
+          "returns": "typing.Tuple[int, ...]",
           "origtype": null,
           "origin": "sequence< byte >",
           "desc": [
@@ -136,8 +151,19 @@
           "raises_set": ""
         },
         {
+          "name": "IssuerName",
+          "returns": "str",
+          "origtype": null,
+          "origin": "string",
+          "desc": [
+            "the issuer name attribute of the certificate."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
           "name": "IssuerUniqueID",
-          "returns": "uno.ByteSequence",
+          "returns": "typing.Tuple[int, ...]",
           "origtype": null,
           "origin": "sequence< byte >",
           "desc": [
@@ -148,83 +174,11 @@
         },
         {
           "name": "MD5Thumbprint",
-          "returns": "uno.ByteSequence",
+          "returns": "typing.Tuple[int, ...]",
           "origtype": null,
           "origin": "sequence< byte >",
           "desc": [
             "the MD5 thumbprint"
-          ],
-          "raises_get": "",
-          "raises_set": ""
-        },
-        {
-          "name": "SHA1Thumbprint",
-          "returns": "uno.ByteSequence",
-          "origtype": null,
-          "origin": "sequence< byte >",
-          "desc": [
-            "the SHA-1 thumbprint"
-          ],
-          "raises_get": "",
-          "raises_set": ""
-        },
-        {
-          "name": "SerialNumber",
-          "returns": "uno.ByteSequence",
-          "origtype": null,
-          "origin": "sequence< byte >",
-          "desc": [
-            "the serial number attribute of the certificate."
-          ],
-          "raises_get": "",
-          "raises_set": ""
-        },
-        {
-          "name": "SubjectPublicKeyValue",
-          "returns": "uno.ByteSequence",
-          "origtype": null,
-          "origin": "sequence< byte >",
-          "desc": [
-            "the value of the subject public key"
-          ],
-          "raises_get": "",
-          "raises_set": ""
-        },
-        {
-          "name": "SubjectUniqueID",
-          "returns": "uno.ByteSequence",
-          "origtype": null,
-          "origin": "sequence< byte >",
-          "desc": [
-            "the subject unique ID attribute of the certificate."
-          ],
-          "raises_get": "",
-          "raises_set": ""
-        }
-      ],
-      "properties": [
-        {
-          "name": "CertificateKind",
-          "returns": "CertificateKind_ffd0e69",
-          "origtype": "com.sun.star.security.CertificateKind",
-          "origin": "com.sun.star.security.CertificateKind",
-          "desc": [
-            "the kind of certificate, X.509 or OpenPGP",
-            "",
-            "**since**",
-            "",
-            "    LibreOffice 5.4"
-          ],
-          "raises_get": "",
-          "raises_set": ""
-        },
-        {
-          "name": "IssuerName",
-          "returns": "str",
-          "origtype": null,
-          "origin": "string",
-          "desc": [
-            "the issuer name attribute of the certificate."
           ],
           "raises_get": "",
           "raises_set": ""
@@ -247,6 +201,28 @@
           "origin": "com.sun.star.util.DateTime",
           "desc": [
             "the validity NotBefore date attribute of the certificate."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SHA1Thumbprint",
+          "returns": "typing.Tuple[int, ...]",
+          "origtype": null,
+          "origin": "sequence< byte >",
+          "desc": [
+            "the SHA-1 thumbprint"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SerialNumber",
+          "returns": "typing.Tuple[int, ...]",
+          "origtype": null,
+          "origin": "sequence< byte >",
+          "desc": [
+            "the serial number attribute of the certificate."
           ],
           "raises_get": "",
           "raises_set": ""
@@ -280,6 +256,28 @@
           "origin": "string",
           "desc": [
             "the algorithm of the subject public key"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SubjectPublicKeyValue",
+          "returns": "typing.Tuple[int, ...]",
+          "origtype": null,
+          "origin": "sequence< byte >",
+          "desc": [
+            "the value of the subject public key"
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SubjectUniqueID",
+          "returns": "typing.Tuple[int, ...]",
+          "origtype": null,
+          "origin": "sequence< byte >",
+          "desc": [
+            "the subject unique ID attribute of the certificate."
           ],
           "raises_get": "",
           "raises_set": ""

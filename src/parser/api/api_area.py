@@ -36,7 +36,7 @@ class ApiArea(BlockObj):
 
     def get_obj(self) -> List[Area]:
         """List of area items"""
-        if not self._data is None:
+        if self._data is not None:
             return self._data
         self._data = []
         tag = self._block.get_obj()

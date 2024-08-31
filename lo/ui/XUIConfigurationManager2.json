@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.2.15",
-  "libre_office_ver": "7.4",
+  "version": "0.4.0",
+  "libre_office_ver": "2024.2",
   "name": "XUIConfigurationManager2",
   "type": "interface",
   "namespace": "com.sun.star.ui",
@@ -42,7 +42,13 @@
         "XUIConfigurationStorage_25ac0f09"
       ]
     ],
-    "from_imports_typing": [],
+    "from_imports_typing": [
+      [
+        ".x_accelerator_configuration",
+        "XAcceleratorConfiguration",
+        "XAcceleratorConfiguration_46580ffb"
+      ]
+    ],
     "extends_map": {
       "com.sun.star.lang.XComponent": "XComponent_98dc0ab5",
       "com.sun.star.ui.XUIConfiguration": "XUIConfiguration_c4eb0c34",
@@ -50,9 +56,11 @@
       "com.sun.star.ui.XUIConfigurationPersistence": "XUIConfigurationPersistence_661010b9",
       "com.sun.star.ui.XUIConfigurationStorage": "XUIConfigurationStorage_25ac0f09"
     },
-    "quote": [],
+    "quote": [
+      "XAcceleratorConfiguration_46580ffb"
+    ],
     "typings": [],
-    "requires_typing": false,
+    "requires_typing": true,
     "full_imports": {
       "general": [
         "com.sun.star.lang.XComponent",
@@ -61,7 +69,9 @@
         "com.sun.star.ui.XUIConfigurationPersistence",
         "com.sun.star.ui.XUIConfigurationStorage"
       ],
-      "typing": []
+      "typing": [
+        "com.sun.star.ui.XAcceleratorConfiguration"
+      ]
     },
     "imports": [],
     "name": "XUIConfigurationManager2",
@@ -80,6 +90,25 @@
       "    LibreOffice 4.1"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1ui_1_1XUIConfigurationManager2.html",
-    "items": {}
+    "items": {
+      "methods": [
+        {
+          "name": "createShortCutManager",
+          "returns": "XAcceleratorConfiguration_46580ffb",
+          "returns_origin": "com.sun.star.ui.XAcceleratorConfiguration",
+          "desc": [
+            "Creates a new configuration manager in case there are different views with different languages.",
+            "",
+            "This function enables those views to have short cut keys specific to the languages.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 7.6"
+          ],
+          "raises": [],
+          "args": []
+        }
+      ]
+    }
   }
 }

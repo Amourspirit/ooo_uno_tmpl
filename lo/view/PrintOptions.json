@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.2.15",
-  "libre_office_ver": "7.4",
+  "version": "0.4.0",
+  "libre_office_ver": "2024.2",
   "name": "PrintOptions",
   "type": "service",
   "namespace": "com.sun.star.view",
@@ -32,7 +32,11 @@
     "desc": [
       "describes the options for print jobs.",
       "",
-      "These options are only valid for a single print job. They do not change layout or formatting of the document."
+      "These options are only valid for a single print job. They do not change layout or formatting of the document.",
+      "",
+      "**since**",
+      "",
+      "    LibreOffice 7.5"
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1view_1_1PrintOptions.html",
     "items": {
@@ -77,6 +81,23 @@
           "origin": "string",
           "desc": [
             "if set, specifies the name of a file to print to."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "JobName",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "The job name which is sent to the printer (can be seen in the Printer job queue).",
+            "",
+            "If omitted, the document title will be used as default.",
+            "",
+            "**since**",
+            "",
+            "    LibreOffice 7.5"
           ],
           "raises_get": "",
           "raises_set": ""
@@ -133,7 +154,9 @@
           "origtype": null,
           "origin": "boolean",
           "desc": [
-            "if set to TRUE, the corresponding XPrintable.print() request will be executed synchronous."
+            "if set to TRUE, the corresponding XPrintable.print() request will be executed synchronous.",
+            "",
+            "Default is the asynchronous print mode."
           ],
           "raises_get": "",
           "raises_set": ""

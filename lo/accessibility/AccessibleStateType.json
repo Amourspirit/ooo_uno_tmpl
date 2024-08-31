@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.2.15",
-  "libre_office_ver": "7.4",
+  "version": "0.4.0",
+  "libre_office_ver": "2024.2",
   "name": "AccessibleStateType",
   "type": "const",
   "pytype": "int",
@@ -12,14 +12,14 @@
   },
   "writer_args": {
     "hex": false,
-    "flags": false,
+    "flags": true,
     "include_desc": true
   },
   "data": {
     "name": "AccessibleStateType",
     "namespace": "com.sun.star.accessibility",
     "url": "https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1accessibility_1_1AccessibleStateType.html",
-    "flags": false,
+    "flags": true,
     "pytype": "int",
     "allow_db": true,
     "quote": [],
@@ -36,6 +36,8 @@
       "The comments describing the states is taken verbatim from the Java Accessibility API 1.4 documentation.",
       "",
       "We are using constants instead of a more typesafe enum. The reason for this is that IDL enums may not be extended. Therefore, in order to include future extensions to the set of roles we have to use constants here.",
+      "",
+      "These states are giving values corresponding to the bits of a 64-bit value, since we OR them together to create bitsets to represent the combined state of an accessibility object .",
       "",
       "**since**",
       "",
@@ -73,7 +75,7 @@
         "name": "BUSY",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 3,
+        "value": 4,
         "lines": [
           "Indicates the current object is busy."
         ]
@@ -82,7 +84,7 @@
         "name": "CHECKED",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 4,
+        "value": 8,
         "lines": [
           "Indicates this object is currently checked."
         ]
@@ -91,7 +93,7 @@
         "name": "DEFUNC",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 5,
+        "value": 16,
         "lines": [
           "User interface object corresponding to this object no longer exists.",
           "",
@@ -102,7 +104,7 @@
         "name": "EDITABLE",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 6,
+        "value": 32,
         "lines": [
           "Indicates the user can change the contents of this object."
         ]
@@ -111,7 +113,7 @@
         "name": "ENABLED",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 7,
+        "value": 64,
         "lines": [
           "Indicates this object is enabled."
         ]
@@ -120,7 +122,7 @@
         "name": "EXPANDABLE",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 8,
+        "value": 128,
         "lines": [
           "Indicates this object allows progressive disclosure of its children."
         ]
@@ -129,7 +131,7 @@
         "name": "EXPANDED",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 9,
+        "value": 256,
         "lines": [
           "Indicates this object is expanded."
         ]
@@ -138,7 +140,7 @@
         "name": "FOCUSABLE",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 10,
+        "value": 512,
         "lines": [
           "Object can accept the keyboard focus.",
           "",
@@ -149,7 +151,7 @@
         "name": "FOCUSED",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 11,
+        "value": 1024,
         "lines": [
           "Indicates this object currently has the keyboard focus."
         ]
@@ -158,7 +160,7 @@
         "name": "HORIZONTAL",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 12,
+        "value": 2048,
         "lines": [
           "Indicates the orientation of this object is horizontal."
         ]
@@ -167,7 +169,7 @@
         "name": "ICONIFIED",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 13,
+        "value": 4096,
         "lines": [
           "Indicates this object is minimized and is represented only by an icon."
         ]
@@ -176,7 +178,7 @@
         "name": "INDETERMINATE",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 14,
+        "value": 8192,
         "lines": [
           "Sometimes UI elements can have a state indeterminate.",
           "",
@@ -187,7 +189,7 @@
         "name": "MANAGES_DESCENDANTS",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 15,
+        "value": 16384,
         "lines": [
           "Indicates the most (all) children are transient and it is not necessary to add listener to the children.",
           "",
@@ -200,7 +202,7 @@
         "name": "MODAL",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 16,
+        "value": 32768,
         "lines": [
           "Object is modal.",
           "",
@@ -211,7 +213,7 @@
         "name": "MULTI_LINE",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 17,
+        "value": 65536,
         "lines": [
           "Indicates this (text) object can contain multiple lines of text."
         ]
@@ -220,7 +222,7 @@
         "name": "MULTI_SELECTABLE",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 18,
+        "value": 131072,
         "lines": [
           "More than one child may be selected at the same time.",
           "",
@@ -231,7 +233,7 @@
         "name": "OPAQUE",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 19,
+        "value": 262144,
         "lines": [
           "Indicates this object paints every pixel within its rectangular region."
         ]
@@ -240,7 +242,7 @@
         "name": "PRESSED",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 20,
+        "value": 524288,
         "lines": [
           "Indicates this object is currently pressed."
         ]
@@ -249,7 +251,7 @@
         "name": "RESIZABLE",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 21,
+        "value": 1048576,
         "lines": [
           "Indicates the size of this object is not fixed."
         ]
@@ -258,7 +260,7 @@
         "name": "SELECTABLE",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 22,
+        "value": 2097152,
         "lines": [
           "Object is selectable.",
           "",
@@ -269,7 +271,7 @@
         "name": "SELECTED",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 23,
+        "value": 4194304,
         "lines": [
           "Object is selected.",
           "",
@@ -280,7 +282,7 @@
         "name": "SENSITIVE",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 24,
+        "value": 8388608,
         "lines": [
           "Indicates this object is sensitive."
         ]
@@ -289,7 +291,7 @@
         "name": "SHOWING",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 25,
+        "value": 16777216,
         "lines": [
           "Object is displayed on the screen.",
           "",
@@ -300,7 +302,7 @@
         "name": "SINGLE_LINE",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 26,
+        "value": 33554432,
         "lines": [
           "Indicates this (text) object can contain only a single line of text."
         ]
@@ -309,7 +311,7 @@
         "name": "STALE",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 27,
+        "value": 67108864,
         "lines": [
           "Object information is stale and might not be up to date.",
           "",
@@ -320,7 +322,7 @@
         "name": "TRANSIENT",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 28,
+        "value": 134217728,
         "lines": [
           "Indicates this object is transient."
         ]
@@ -329,7 +331,7 @@
         "name": "VERTICAL",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 29,
+        "value": 268435456,
         "lines": [
           "Indicates the orientation of this object is vertical."
         ]
@@ -338,7 +340,7 @@
         "name": "VISIBLE",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 30,
+        "value": 536870912,
         "lines": [
           "Object wants to be displayed on the screen.",
           "",
@@ -349,7 +351,7 @@
         "name": "MOVEABLE",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 31,
+        "value": 1073741824,
         "lines": [
           "Indicates the position of the object is not fixed."
         ]
@@ -358,7 +360,7 @@
         "name": "DEFAULT",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 32,
+        "value": 2147483648,
         "lines": [
           "Indicates the object is the default button in a window."
         ]
@@ -367,7 +369,7 @@
         "name": "OFFSCREEN",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 33,
+        "value": 4294967296,
         "lines": [
           "Indicates the object is outside of the screen area."
         ]
@@ -376,9 +378,20 @@
         "name": "COLLAPSE",
         "type": "int",
         "value_type": "INTEGER",
-        "value": 34,
+        "value": 8589934592,
         "lines": [
           "Indicates that the object is collapsed."
+        ]
+      },
+      {
+        "name": "CHECKABLE",
+        "type": "int",
+        "value_type": "INTEGER",
+        "value": 17179869184,
+        "lines": [
+          "Indicates this object is checkable, i.e.",
+          "",
+          "it has the potential to be checked. See also the CHECKED state."
         ]
       }
     ]

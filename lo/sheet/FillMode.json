@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.2.15",
-  "libre_office_ver": "7.4",
+  "version": "0.4.0",
+  "libre_office_ver": "2024.2",
   "name": "FillMode",
   "type": "enum",
   "namespace": "com.sun.star.sheet",
@@ -26,7 +26,11 @@
         "desc": [
           "specifies the use of a user-defined list.",
           "",
-          "function is determined automatically."
+          "function is determined automatically.",
+          "",
+          "The cells are filled using a user-defined series.",
+          "",
+          "If the values are all numerical, SUM is used, otherwise COUNT."
         ]
       },
       {
@@ -35,28 +39,36 @@
         "desc": [
           "specifies an arithmetic series for date values.",
           "",
-          "any date value matching the specified condition is valid."
+          "any date value matching the specified condition is valid.",
+          "",
+          "Cell by cell, the value used to fill the cells is increased by a specified number of days"
         ]
       },
       {
         "name": "GROWTH",
         "value": "GROWTH",
         "desc": [
-          "specifies a geometric series."
+          "specifies a geometric series.",
+          "",
+          "Cell by cell, the value used to fill the cells is multiplied by a specified value."
         ]
       },
       {
         "name": "LINEAR",
         "value": "LINEAR",
         "desc": [
-          "specifies an arithmetic series."
+          "specifies an arithmetic series.",
+          "",
+          "Cell by cell, the value used to fill the cells is increased by an additive value."
         ]
       },
       {
         "name": "SIMPLE",
         "value": "SIMPLE",
         "desc": [
-          "specifies a constant series."
+          "specifies a constant series.",
+          "",
+          "All cells are filled with the same value."
         ]
       }
     ]

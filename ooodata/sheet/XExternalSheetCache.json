@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.2.15",
-  "libre_office_ver": "7.4",
+  "version": "0.4.0",
+  "libre_office_ver": "2024.2",
   "name": "XExternalSheetCache",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
@@ -18,16 +18,18 @@
     "from_imports": [],
     "from_imports_typing": [],
     "extends_map": {},
-    "quote": [],
-    "typings": [],
-    "requires_typing": false,
+    "quote": [
+      "typing.Tuple[int, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[int, ...]"
+    ],
+    "requires_typing": true,
     "full_imports": {
       "general": [],
       "typing": []
     },
-    "imports": [
-      "uno"
-    ],
+    "imports": [],
     "name": "XExternalSheetCache",
     "namespace": "com.sun.star.sheet",
     "extends": [],
@@ -43,7 +45,7 @@
       "methods": [
         {
           "name": "getAllColumns",
-          "returns": "uno.ByteSequence",
+          "returns": "typing.Tuple[int, ...]",
           "returns_origin": "sequence< long >",
           "desc": [
             "Given a row number, this method returns a list of all columns numbers that store cached cell values in that row.",
@@ -64,7 +66,7 @@
         },
         {
           "name": "getAllRows",
-          "returns": "uno.ByteSequence",
+          "returns": "typing.Tuple[int, ...]",
           "returns_origin": "sequence< long >",
           "desc": [
             "It returns a list of all row numbers where a cached cell or cells exist.",

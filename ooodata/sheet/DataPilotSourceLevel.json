@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.2.15",
-  "libre_office_ver": "7.4",
+  "version": "0.4.0",
+  "libre_office_ver": "2024.2",
   "name": "DataPilotSourceLevel",
   "type": "service",
   "namespace": "com.sun.star.sheet",
@@ -51,10 +51,12 @@
       "com.sun.star.sheet.XMembersSupplier": "XMembersSupplier_efd10d98"
     },
     "quote": [
-      "typing.Tuple[GeneralFunction_e2280d25, ...]"
+      "typing.Tuple[GeneralFunction_e2280d25, ...]",
+      "typing.Tuple[int, ...]"
     ],
     "typings": [
-      "typing.Tuple[GeneralFunction_e2280d25, ...]"
+      "typing.Tuple[GeneralFunction_e2280d25, ...]",
+      "typing.Tuple[int, ...]"
     ],
     "requires_typing": true,
     "full_imports": {
@@ -68,9 +70,7 @@
         "com.sun.star.sheet.GeneralFunction"
       ]
     },
-    "imports": [
-      "uno"
-    ],
+    "imports": [],
     "name": "DataPilotSourceLevel",
     "namespace": "com.sun.star.sheet",
     "extends": [
@@ -88,7 +88,18 @@
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1sheet_1_1DataPilotSourceLevel.html",
     "items": {
-      "types": [
+      "properties": [
+        {
+          "name": "ShowEmpty",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "specifies whether empty members are shown."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
         {
           "name": "SubTotals",
           "returns": "typing.Tuple[GeneralFunction_e2280d25, ...]",
@@ -104,7 +115,7 @@
         },
         {
           "name": "SubTotals2",
-          "returns": "uno.ByteSequence",
+          "returns": "typing.Tuple[int, ...]",
           "origtype": null,
           "origin": "sequence< short >",
           "desc": [
@@ -115,19 +126,6 @@
             "**since**",
             "",
             "    LibreOffice 5.3"
-          ],
-          "raises_get": "",
-          "raises_set": ""
-        }
-      ],
-      "properties": [
-        {
-          "name": "ShowEmpty",
-          "returns": "bool",
-          "origtype": null,
-          "origin": "boolean",
-          "desc": [
-            "specifies whether empty members are shown."
           ],
           "raises_get": "",
           "raises_set": ""

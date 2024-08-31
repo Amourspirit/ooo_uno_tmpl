@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.2.15",
-  "libre_office_ver": "7.4",
+  "version": "0.4.0",
+  "libre_office_ver": "2024.2",
   "name": "XSolver",
   "type": "interface",
   "namespace": "com.sun.star.sheet",
@@ -88,7 +88,7 @@
           "args": []
         }
       ],
-      "types": [
+      "properties": [
         {
           "name": "Constraints",
           "returns": "typing.Tuple[SolverConstraint_f1e30dc1, ...]",
@@ -100,30 +100,6 @@
           "raises_get": "",
           "raises_set": ""
         },
-        {
-          "name": "Solution",
-          "returns": "typing.Tuple[float, ...]",
-          "origtype": null,
-          "origin": "sequence< double >",
-          "desc": [
-            "contains the solution's value for each of the variables, if a solution was found."
-          ],
-          "raises_get": "",
-          "raises_set": ""
-        },
-        {
-          "name": "Variables",
-          "returns": "typing.Tuple[CellAddress_ae5f0b56, ...]",
-          "origtype": null,
-          "origin": "sequence< com.sun.star.table.CellAddress >",
-          "desc": [
-            "The addresses of the cells that contain the variables."
-          ],
-          "raises_get": "",
-          "raises_set": ""
-        }
-      ],
-      "properties": [
         {
           "name": "Document",
           "returns": "XSpreadsheetDocument_2a1f0f30",
@@ -169,12 +145,34 @@
           "raises_set": ""
         },
         {
+          "name": "Solution",
+          "returns": "typing.Tuple[float, ...]",
+          "origtype": null,
+          "origin": "sequence< double >",
+          "desc": [
+            "contains the solution's value for each of the variables, if a solution was found."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
           "name": "Success",
           "returns": "bool",
           "origtype": null,
           "origin": "boolean",
           "desc": [
             "contains TRUE if a solution was found."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "Variables",
+          "returns": "typing.Tuple[CellAddress_ae5f0b56, ...]",
+          "origtype": null,
+          "origin": "sequence< com.sun.star.table.CellAddress >",
+          "desc": [
+            "The addresses of the cells that contain the variables."
           ],
           "raises_get": "",
           "raises_set": ""

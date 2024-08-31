@@ -80,3 +80,30 @@ def test_font_weight_const_enum():
     assert FontWeightEnum.THIN.value == FontWeight.THIN
     assert FontWeightEnum.ULTRABOLD.value == FontWeight.ULTRABOLD
     assert FontWeightEnum.ULTRALIGHT.value == FontWeight.ULTRALIGHT
+
+
+def test_msg_box_enums():
+    from ooobuild.dyn.awt.message_box_results import MessageBoxResultsEnum
+    assert MessageBoxResultsEnum.OK == MessageBoxResultsEnum.OK
+    assert MessageBoxResultsEnum.CANCEL.value == 0
+    assert MessageBoxResultsEnum.OK.value == 1
+    assert MessageBoxResultsEnum.YES.value == 2
+    assert MessageBoxResultsEnum.NO.value == 3
+    assert MessageBoxResultsEnum.RETRY.value == 4
+    assert MessageBoxResultsEnum.IGNORE.value == 5
+
+    assert MessageBoxResultsEnum.CANCEL == 0
+    assert MessageBoxResultsEnum.OK == 1
+    assert MessageBoxResultsEnum.YES == 2
+    assert MessageBoxResultsEnum.NO == 3
+    assert MessageBoxResultsEnum.RETRY == 4
+    assert MessageBoxResultsEnum.IGNORE == 5
+
+    e = MessageBoxResultsEnum(MessageBoxResultsEnum.CANCEL)
+    assert e == MessageBoxResultsEnum.CANCEL
+
+    e = MessageBoxResultsEnum(MessageBoxResultsEnum.OK.value)
+    assert e == MessageBoxResultsEnum.OK
+
+    e = MessageBoxResultsEnum("IGNORE")
+    assert e == MessageBoxResultsEnum.IGNORE

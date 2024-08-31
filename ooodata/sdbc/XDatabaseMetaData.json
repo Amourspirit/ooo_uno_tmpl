@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.2.15",
-  "libre_office_ver": "7.4",
+  "version": "0.4.0",
+  "libre_office_ver": "2024.2",
   "name": "XDatabaseMetaData",
   "type": "interface",
   "namespace": "com.sun.star.sdbc",
@@ -40,9 +40,11 @@
     "quote": [
       "XConnection_a36a0b0c",
       "XResultSet_98e30aa7",
+      "typing.Tuple[int, ...]",
       "typing.Tuple[str, ...]"
     ],
     "typings": [
+      "typing.Tuple[int, ...]",
       "typing.Tuple[str, ...]"
     ],
     "requires_typing": true,
@@ -55,9 +57,7 @@
         "com.sun.star.sdbc.XResultSet"
       ]
     },
-    "imports": [
-      "uno"
-    ],
+    "imports": [],
     "name": "XDatabaseMetaData",
     "namespace": "com.sun.star.sdbc",
     "extends": [
@@ -1241,7 +1241,7 @@
             },
             {
               "name": "types",
-              "type": "uno.ByteSequence",
+              "type": "typing.Tuple[int, ...]",
               "direction": "in",
               "origin": "sequence< long >"
             }
@@ -1838,7 +1838,9 @@
           "name": "supportsExtendedSQLGrammar",
           "returns": "bool",
           "returns_origin": "boolean",
-          "desc": [],
+          "desc": [
+            "TRUE, if the database supports ODBC Extended SQL grammar, otherwise FALSE."
+          ],
           "raises": [
             "SQLException"
           ],

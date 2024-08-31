@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.2.15",
-  "libre_office_ver": "7.4",
+  "version": "0.4.0",
+  "libre_office_ver": "2024.2",
   "name": "XIntegerBitmapColorSpace",
   "type": "interface",
   "namespace": "com.sun.star.rendering",
@@ -47,12 +47,14 @@
       "XIntegerBitmapColorSpace",
       "typing.Tuple[ARGBColor_c6ee0be1, ...]",
       "typing.Tuple[ColorComponent_e4c0e78, ...]",
-      "typing.Tuple[RGBColor_bbdf0ba0, ...]"
+      "typing.Tuple[RGBColor_bbdf0ba0, ...]",
+      "typing.Tuple[int, ...]"
     ],
     "typings": [
       "typing.Tuple[ARGBColor_c6ee0be1, ...]",
       "typing.Tuple[ColorComponent_e4c0e78, ...]",
-      "typing.Tuple[RGBColor_bbdf0ba0, ...]"
+      "typing.Tuple[RGBColor_bbdf0ba0, ...]",
+      "typing.Tuple[int, ...]"
     ],
     "requires_typing": true,
     "full_imports": {
@@ -65,9 +67,7 @@
         "com.sun.star.rendering.RGBColor"
       ]
     },
-    "imports": [
-      "uno"
-    ],
+    "imports": [],
     "name": "XIntegerBitmapColorSpace",
     "namespace": "com.sun.star.rendering",
     "extends": [
@@ -96,7 +96,7 @@
           "args": [
             {
               "name": "deviceColor",
-              "type": "uno.ByteSequence",
+              "type": "typing.Tuple[int, ...]",
               "direction": "in",
               "origin": "sequence< byte >"
             },
@@ -110,7 +110,7 @@
         },
         {
           "name": "convertIntegerFromARGB",
-          "returns": "uno.ByteSequence",
+          "returns": "typing.Tuple[int, ...]",
           "returns_origin": "sequence< byte >",
           "desc": [
             "Convert sRGB color with linear alpha into this color space.",
@@ -131,7 +131,7 @@
         },
         {
           "name": "convertIntegerFromPARGB",
-          "returns": "uno.ByteSequence",
+          "returns": "typing.Tuple[int, ...]",
           "returns_origin": "sequence< byte >",
           "desc": [
             "Convert premultiplied sRGB color with linear alpha into this color space.",
@@ -152,7 +152,7 @@
         },
         {
           "name": "convertIntegerFromRGB",
-          "returns": "uno.ByteSequence",
+          "returns": "typing.Tuple[int, ...]",
           "returns_origin": "sequence< byte >",
           "desc": [
             "Convert sRGB color to an integer representation in this color space.",
@@ -186,7 +186,7 @@
           "args": [
             {
               "name": "deviceColor",
-              "type": "uno.ByteSequence",
+              "type": "typing.Tuple[int, ...]",
               "direction": "in",
               "origin": "sequence< byte >"
             }
@@ -207,7 +207,7 @@
           "args": [
             {
               "name": "deviceColor",
-              "type": "uno.ByteSequence",
+              "type": "typing.Tuple[int, ...]",
               "direction": "in",
               "origin": "sequence< byte >"
             }
@@ -228,7 +228,7 @@
           "args": [
             {
               "name": "deviceColor",
-              "type": "uno.ByteSequence",
+              "type": "typing.Tuple[int, ...]",
               "direction": "in",
               "origin": "sequence< byte >"
             }
@@ -236,7 +236,7 @@
         },
         {
           "name": "convertToIntegerColorSpace",
-          "returns": "uno.ByteSequence",
+          "returns": "typing.Tuple[int, ...]",
           "returns_origin": "sequence< byte >",
           "desc": [
             "Convert integer bitmap color to integer bitmap color of another integer bitmap color space.",
@@ -249,7 +249,7 @@
           "args": [
             {
               "name": "deviceColor",
-              "type": "uno.ByteSequence",
+              "type": "typing.Tuple[int, ...]",
               "direction": "in",
               "origin": "sequence< byte >"
             },
@@ -275,7 +275,7 @@
         },
         {
           "name": "getComponentBitCounts",
-          "returns": "uno.ByteSequence",
+          "returns": "typing.Tuple[int, ...]",
           "returns_origin": "sequence< long >",
           "desc": [
             "Query the number of bits used for each component.",

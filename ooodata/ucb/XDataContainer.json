@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.2.15",
-  "libre_office_ver": "7.4",
+  "version": "0.4.0",
+  "libre_office_ver": "2024.2",
   "name": "XDataContainer",
   "type": "interface",
   "namespace": "com.sun.star.ucb",
@@ -26,18 +26,20 @@
     "extends_map": {
       "com.sun.star.container.XIndexContainer": "XIndexContainer_1c040ebe"
     },
-    "quote": [],
-    "typings": [],
-    "requires_typing": false,
+    "quote": [
+      "typing.Tuple[int, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[int, ...]"
+    ],
+    "requires_typing": true,
     "full_imports": {
       "general": [
         "com.sun.star.container.XIndexContainer"
       ],
       "typing": []
     },
-    "imports": [
-      "uno"
-    ],
+    "imports": [],
     "name": "XDataContainer",
     "namespace": "com.sun.star.ucb",
     "extends": [
@@ -67,7 +69,7 @@
         },
         {
           "name": "getData",
-          "returns": "uno.ByteSequence",
+          "returns": "typing.Tuple[int, ...]",
           "returns_origin": "sequence< byte >",
           "desc": [
             "returns the data of the data container."
@@ -115,7 +117,7 @@
           "args": [
             {
               "name": "aData",
-              "type": "uno.ByteSequence",
+              "type": "typing.Tuple[int, ...]",
               "direction": "in",
               "origin": "sequence< byte >"
             }

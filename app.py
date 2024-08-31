@@ -266,15 +266,18 @@ Regeneration of a new LO API version.
     Cleaning before regeneration:
         Remove database.
             delete 'resources/mod_info.sqlite'
-        Remove entire contents of ooobuild dir.
-        Remove entire contents of ooodata dir except for ``ooobuild/star/__init__.py``
+        Remove entire contents of ooobuild dir except for ``ooobuild/star/__init__.py``
             Although there is a backup in ``resources/project/pyi_files/__init__.py``
+        Remove entire contents of ooodata dir
         Remove entire contents of lo dir.
         Make sure cache_dir (set in config) is removed from system tmp dir.
             Defaults to "ooo_uno_tmpl"
             EG: $ rm -rf /tmp/ooo_uno_tmpl
+        
+        Logs can be clear by running the following command: ./clear_logs.sh in the project root dir.
 
     Regeneration steps:
+
         1. Set config to new version of LO API.
             config.json is found in src/cfg/
             config property is libre_office_ver

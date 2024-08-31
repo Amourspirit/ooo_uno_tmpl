@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.2.15",
-  "libre_office_ver": "7.4",
+  "version": "0.4.0",
+  "libre_office_ver": "2024.2",
   "type": "struct",
   "name": "SearchResult",
   "namespace": "com.sun.star.util",
@@ -20,14 +20,16 @@
     "namespace": "com.sun.star.util",
     "url": "https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1util_1_1SearchResult.html",
     "from_imports": [],
-    "imports": [
-      "uno"
-    ],
+    "imports": [],
     "from_imports_typing": [],
     "extends_map": {},
-    "quote": [],
-    "typings": [],
-    "requires_typing": false,
+    "quote": [
+      "typing.Tuple[int, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[int, ...]"
+    ],
+    "requires_typing": true,
     "full_imports": {
       "general": [],
       "typing": []
@@ -36,20 +38,6 @@
     "desc": [],
     "extends": [],
     "items": [
-      {
-        "name": "startOffset",
-        "type": "uno.ByteSequence",
-        "origtype": null,
-        "origin": "sequence< long >",
-        "desc": []
-      },
-      {
-        "name": "endOffset",
-        "type": "uno.ByteSequence",
-        "origtype": null,
-        "origin": "sequence< long >",
-        "desc": []
-      },
       {
         "name": "subRegExpressions",
         "type": "int",
@@ -66,6 +54,20 @@
           "",
           "For regular expressions it can be greater than 1. If the value is 1, startoffset[0] and endoffset[0] points to the matching sub string if value is > 1, still startoffset[0] and endoffset[0] points to the matching substring for whole regular expression startoffset[i] and endoffset[i] points to the matching substring of i th matching substring."
         ]
+      },
+      {
+        "name": "startOffset",
+        "type": "typing.Tuple[int, ...]",
+        "origtype": null,
+        "origin": "sequence< long >",
+        "desc": []
+      },
+      {
+        "name": "endOffset",
+        "type": "typing.Tuple[int, ...]",
+        "origtype": null,
+        "origin": "sequence< long >",
+        "desc": []
       }
     ]
   }

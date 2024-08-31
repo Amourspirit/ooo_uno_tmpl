@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.2.15",
-  "libre_office_ver": "7.4",
+  "version": "0.4.0",
+  "libre_office_ver": "2024.2",
   "name": "EnhancedCustomShapePath",
   "type": "service",
   "namespace": "com.sun.star.drawing",
@@ -72,7 +72,20 @@
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1drawing_1_1EnhancedCustomShapePath.html",
     "items": {
-      "types": [
+      "properties": [
+        {
+          "name": "ConcentricGradientFillAllowed",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "This property specifies if this shape supports concentric gradient fill.",
+            "",
+            "The default is false."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
         {
           "name": "Coordinates",
           "returns": "typing.Tuple[EnhancedCustomShapeParameterPair_262914a3, ...]",
@@ -85,12 +98,38 @@
           "raises_set": ""
         },
         {
+          "name": "ExtrusionAllowed",
+          "returns": "bool",
+          "origtype": null,
+          "origin": "boolean",
+          "desc": [
+            "This property specifies if this shape supports the EnhancedCustomShapeExtrusion properties.",
+            "",
+            "The default is true."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
           "name": "GluePointLeavingDirections",
           "returns": "typing.Tuple[float, ...]",
           "origtype": null,
           "origin": "sequence< double >",
           "desc": [
             "This property specifies GluePoint leaving directions."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "GluePointType",
+          "returns": "int",
+          "origtype": null,
+          "origin": "short",
+          "desc": [
+            "This property defines the GluePoint type.",
+            "",
+            "The values that can be used are specified in com.sun.star.drawing.EnhancedCustomShapeGluePointType"
           ],
           "raises_get": "",
           "raises_set": ""
@@ -118,71 +157,6 @@
           "raises_set": ""
         },
         {
-          "name": "SubViewSize",
-          "returns": "typing.Tuple[Size_576707ef, ...]",
-          "origtype": null,
-          "origin": "sequence< .com.sun.star.awt.Size >",
-          "desc": [
-            "This property specifies view size per sub path."
-          ],
-          "raises_get": "",
-          "raises_set": ""
-        },
-        {
-          "name": "TextFrames",
-          "returns": "typing.Tuple[EnhancedCustomShapeTextFrame_d6321306, ...]",
-          "origtype": null,
-          "origin": "sequence<.com.sun.star.drawing.EnhancedCustomShapeTextFrame >",
-          "desc": [
-            "This property specifies the text frames that can be used with the shape.",
-            "",
-            "In general the first text frame is used, except the shape is containing vertical text, then the object tries to use the second text frame. The default text frame will be as big as the shape."
-          ],
-          "raises_get": "",
-          "raises_set": ""
-        }
-      ],
-      "properties": [
-        {
-          "name": "ConcentricGradientFillAllowed",
-          "returns": "bool",
-          "origtype": null,
-          "origin": "boolean",
-          "desc": [
-            "This property specifies if this shape supports concentric gradient fill.",
-            "",
-            "The default is false."
-          ],
-          "raises_get": "",
-          "raises_set": ""
-        },
-        {
-          "name": "ExtrusionAllowed",
-          "returns": "bool",
-          "origtype": null,
-          "origin": "boolean",
-          "desc": [
-            "This property specifies if this shape supports the EnhancedCustomShapeExtrusion properties.",
-            "",
-            "The default is true."
-          ],
-          "raises_get": "",
-          "raises_set": ""
-        },
-        {
-          "name": "GluePointType",
-          "returns": "int",
-          "origtype": null,
-          "origin": "short",
-          "desc": [
-            "This property defines the GluePoint type.",
-            "",
-            "The values that can be used are specified in com.sun.star.drawing.EnhancedCustomShapeGluePointType"
-          ],
-          "raises_get": "",
-          "raises_set": ""
-        },
-        {
           "name": "StretchX",
           "returns": "int",
           "origtype": null,
@@ -204,6 +178,30 @@
             "This property specifies the vertical StretchPoint that has to be used.",
             "",
             "No stretching is used if this property is omitted."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "SubViewSize",
+          "returns": "typing.Tuple[Size_576707ef, ...]",
+          "origtype": null,
+          "origin": "sequence< .com.sun.star.awt.Size >",
+          "desc": [
+            "This property specifies view size per sub path."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "TextFrames",
+          "returns": "typing.Tuple[EnhancedCustomShapeTextFrame_d6321306, ...]",
+          "origtype": null,
+          "origin": "sequence<.com.sun.star.drawing.EnhancedCustomShapeTextFrame >",
+          "desc": [
+            "This property specifies the text frames that can be used with the shape.",
+            "",
+            "In general the first text frame is used, except the shape is containing vertical text, then the object tries to use the second text frame. The default text frame will be as big as the shape."
           ],
           "raises_get": "",
           "raises_set": ""

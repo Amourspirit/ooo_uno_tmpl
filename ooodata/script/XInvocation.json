@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.2.15",
-  "libre_office_ver": "7.4",
+  "version": "0.4.0",
+  "libre_office_ver": "2024.2",
   "name": "XInvocation",
   "type": "interface",
   "namespace": "com.sun.star.script",
@@ -34,9 +34,11 @@
     },
     "quote": [
       "XIntrospectionAccess_2a050f2c",
+      "typing.Tuple[int, ...]",
       "typing.Tuple[object, ...]"
     ],
     "typings": [
+      "typing.Tuple[int, ...]",
       "typing.Tuple[object, ...]"
     ],
     "requires_typing": true,
@@ -48,9 +50,7 @@
         "com.sun.star.beans.XIntrospectionAccess"
       ]
     },
-    "imports": [
-      "uno"
-    ],
+    "imports": [],
     "name": "XInvocation",
     "namespace": "com.sun.star.script",
     "extends": [
@@ -117,7 +117,11 @@
           "returns": "bool",
           "returns_origin": "boolean",
           "desc": [
-            "returns TRUE if the property with the specified name exists, else FALSE."
+            "returns TRUE if the property with the specified name exists, else FALSE.",
+            "",
+            "This optimizes the calling sequence ( XInvocation.hasProperty(), XInvocation.getValue() ) or",
+            "",
+            "( XInvocation.hasProperty(), XInvocation.setValue() )!"
           ],
           "raises": [],
           "args": [
@@ -158,7 +162,7 @@
             },
             {
               "name": "aOutParamIndex",
-              "type": "uno.ByteSequence",
+              "type": "typing.Tuple[int, ...]",
               "direction": "out",
               "origin": "sequence< short >"
             },

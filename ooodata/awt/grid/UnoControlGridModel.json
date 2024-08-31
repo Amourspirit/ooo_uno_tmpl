@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.2.15",
-  "libre_office_ver": "7.4",
+  "version": "0.4.0",
+  "libre_office_ver": "2024.2",
   "name": "UnoControlGridModel",
   "type": "service",
   "namespace": "com.sun.star.awt.grid",
@@ -98,25 +98,6 @@
     ],
     "url": "https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1awt_1_1grid_1_1UnoControlGridModel.html",
     "items": {
-      "types": [
-        {
-          "name": "RowBackgroundColors",
-          "returns": "typing.Tuple[Color_68e908c5, ...]",
-          "origtype": null,
-          "origin": "sequence< .com.sun.star.util.Color >",
-          "desc": [
-            "specifies the colors to be used as background for data rows.",
-            "",
-            "If this sequence is non-empty, the data rows will be rendered with alternating background colors: Assuming the sequence has n elements, each row will use the background color as specified by its number's remainder modulo n.",
-            "",
-            "If this sequence is empty, all rows will use the same background color as the control as whole.",
-            "",
-            "If this property has a value of VOID, rows will be painted in alternating background colors, every second row having a background color derived from the control's selection color."
-          ],
-          "raises_get": "",
-          "raises_set": ""
-        }
-      ],
       "properties": [
         {
           "name": "ActiveSelectionBackgroundColor",
@@ -324,6 +305,23 @@
             "specifies the color to be used when drawing the text of selected cells, while the control does not have the focus.",
             "",
             "If this property has a value of VOID, the grid control renderer will use some default color, depending on the control's style settings."
+          ],
+          "raises_get": "",
+          "raises_set": ""
+        },
+        {
+          "name": "RowBackgroundColors",
+          "returns": "typing.Tuple[Color_68e908c5, ...]",
+          "origtype": null,
+          "origin": "sequence< .com.sun.star.util.Color >",
+          "desc": [
+            "specifies the colors to be used as background for data rows.",
+            "",
+            "If this sequence is non-empty, the data rows will be rendered with alternating background colors: Assuming the sequence has n elements, each row will use the background color as specified by its number's remainder modulo n.",
+            "",
+            "If this sequence is empty, all rows will use the same background color as the control as whole.",
+            "",
+            "If this property has a value of VOID, rows will be painted in alternating background colors, every second row having a background color derived from the control's selection color."
           ],
           "raises_get": "",
           "raises_set": ""

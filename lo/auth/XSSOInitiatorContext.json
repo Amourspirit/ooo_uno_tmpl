@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.2.15",
-  "libre_office_ver": "7.4",
+  "version": "0.4.0",
+  "libre_office_ver": "2024.2",
   "name": "XSSOInitiatorContext",
   "type": "interface",
   "namespace": "com.sun.star.auth",
@@ -26,18 +26,20 @@
     "extends_map": {
       "com.sun.star.auth.XSSOContext": "XSSOContext_a2840aec"
     },
-    "quote": [],
-    "typings": [],
-    "requires_typing": false,
+    "quote": [
+      "typing.Tuple[int, ...]"
+    ],
+    "typings": [
+      "typing.Tuple[int, ...]"
+    ],
+    "requires_typing": true,
     "full_imports": {
       "general": [
         "com.sun.star.auth.XSSOContext"
       ],
       "typing": []
     },
-    "imports": [
-      "uno"
-    ],
+    "imports": [],
     "name": "XSSOInitiatorContext",
     "namespace": "com.sun.star.auth",
     "extends": [
@@ -57,7 +59,7 @@
       "methods": [
         {
           "name": "init",
-          "returns": "uno.ByteSequence",
+          "returns": "typing.Tuple[int, ...]",
           "returns_origin": "sequence< byte >",
           "desc": [
             "initializes an SSO Token to send to the acceptor side and authenticates an SSO Token returned by the acceptor if the context supports mutual authentication.",
@@ -73,7 +75,7 @@
           "args": [
             {
               "name": "Token",
-              "type": "uno.ByteSequence",
+              "type": "typing.Tuple[int, ...]",
               "direction": "in",
               "origin": "sequence< byte >"
             }

@@ -645,6 +645,10 @@ class RuleByteSequence(BaseRule):
     Rule for sequence< byte >
 
     This type is uno.ByteSequence
+
+    Note:
+        Prior to version ``0.4.0`` this returned a type of ``uno.ByteSequence``.
+        It seems this is not correct and should return a tuple of int.
     """
 
     def __init__(self, rules: ITypeRules) -> None:
@@ -661,13 +665,21 @@ class RuleByteSequence(BaseRule):
 
     def get_python_type(self, in_type: str) -> PythonType:
         orig_type = self._match[1]
+        # Pre 0.4.0
+        # return PythonType(
+        #     type="uno.ByteSequence",
+        #     requires_typing=False,
+        #     is_py_type=True,  # don't want to quote.
+        #     realtype="uno.ByteSequence",
+        #     origin=f"sequence< {orig_type} >",
+        #     imports="uno"
+        # )
         return PythonType(
-            type="uno.ByteSequence",
-            requires_typing=False,
+            type="typing.Tuple[int, ...]",
+            requires_typing=True,
             is_py_type=True,  # don't want to quote.
-            realtype="uno.ByteSequence",
+            realtype="tuple",
             origin=f"sequence< {orig_type} >",
-            imports="uno"
         )
 
     def _set_default(self):
@@ -715,7 +727,7 @@ class RuleSeqLikePrimative(BaseRule):
         # sequence< com.sun.star.beans.Pair< string, string > >
 
     def _set_match(self, in_type: str) -> None:
-        if not self._match is False:
+        if self._match is not False:
             return
         self._match = self._rx.match(in_type)
 
@@ -1020,7 +1032,7 @@ class RuleTuple2Like(BaseRule):
         self._recursive_state = False
 
     def _set_match(self, in_type: str) -> None:
-        if not self._match is False:
+        if self._match is not False:
             return
         self._match = self._rx.match(in_type)
 

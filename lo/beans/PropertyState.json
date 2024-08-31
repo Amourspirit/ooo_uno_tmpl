@@ -1,7 +1,7 @@
 {
   "id": "uno-ooo-parser",
-  "version": "0.2.15",
-  "libre_office_ver": "7.4",
+  "version": "0.4.0",
+  "libre_office_ver": "2024.2",
   "name": "PropertyState",
   "type": "enum",
   "namespace": "com.sun.star.beans",
@@ -33,14 +33,18 @@
         "name": "DEFAULT_VALUE",
         "value": "DEFAULT_VALUE",
         "desc": [
-          "The value of the property is available from a master (e.g., template)."
+          "The value of the property is available from a master (e.g., template).",
+          "",
+          "The PropertyAttribute field in the struct Property must contain the PropertyAttribute.MAYBEDEFAULT flag. The property value must be available and of the specified type. If the PropertyAttribute field in the struct Property contains PropertyAttribute.MAYBEVOID, then the value may be void."
         ]
       },
       {
         "name": "DIRECT_VALUE",
         "value": "DIRECT_VALUE",
         "desc": [
-          "The value of the property is stored in the PropertySet itself."
+          "The value of the property is stored in the PropertySet itself.",
+          "",
+          "The property value must be available and of the specified type. If the PropertyAttribute field in the struct Property contains PropertyAttribute.MAYBEVOID, then the value may be void."
         ]
       }
     ]
