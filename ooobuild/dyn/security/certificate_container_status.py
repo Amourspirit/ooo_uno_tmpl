@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    CertificateContainerStatus = gen_dynamic_enum("com.sun.star.security.CertificateContainerStatus")
-    # Dynamically created class that represents ``com.sun.star.security.CertificateContainerStatus`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class CertificateContainerStatus(metaclass=UnoEnumMeta, type_name="com.sun.star.security.CertificateContainerStatus", name_space="com.sun.star.security"):
+        """Dynamically created class that represents ``com.sun.star.security.CertificateContainerStatus`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.security.certificate_container_status import CertificateContainerStatus as CertificateContainerStatus
 

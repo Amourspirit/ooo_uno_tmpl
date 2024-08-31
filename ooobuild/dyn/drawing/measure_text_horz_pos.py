@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    MeasureTextHorzPos = gen_dynamic_enum("com.sun.star.drawing.MeasureTextHorzPos")
-    # Dynamically created class that represents ``com.sun.star.drawing.MeasureTextHorzPos`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class MeasureTextHorzPos(metaclass=UnoEnumMeta, type_name="com.sun.star.drawing.MeasureTextHorzPos", name_space="com.sun.star.drawing"):
+        """Dynamically created class that represents ``com.sun.star.drawing.MeasureTextHorzPos`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.drawing.measure_text_horz_pos import MeasureTextHorzPos as MeasureTextHorzPos
 

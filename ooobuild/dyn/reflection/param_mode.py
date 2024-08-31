@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    ParamMode = gen_dynamic_enum("com.sun.star.reflection.ParamMode")
-    # Dynamically created class that represents ``com.sun.star.reflection.ParamMode`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class ParamMode(metaclass=UnoEnumMeta, type_name="com.sun.star.reflection.ParamMode", name_space="com.sun.star.reflection"):
+        """Dynamically created class that represents ``com.sun.star.reflection.ParamMode`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.reflection.param_mode import ParamMode as ParamMode
 

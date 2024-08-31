@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    SearchAlgorithms = gen_dynamic_enum("com.sun.star.util.SearchAlgorithms")
-    # Dynamically created class that represents ``com.sun.star.util.SearchAlgorithms`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class SearchAlgorithms(metaclass=UnoEnumMeta, type_name="com.sun.star.util.SearchAlgorithms", name_space="com.sun.star.util"):
+        """Dynamically created class that represents ``com.sun.star.util.SearchAlgorithms`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.util.search_algorithms import SearchAlgorithms as SearchAlgorithms
 

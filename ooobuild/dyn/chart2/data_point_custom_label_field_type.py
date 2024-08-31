@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    DataPointCustomLabelFieldType = gen_dynamic_enum("com.sun.star.chart2.DataPointCustomLabelFieldType")
-    # Dynamically created class that represents ``com.sun.star.chart2.DataPointCustomLabelFieldType`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class DataPointCustomLabelFieldType(metaclass=UnoEnumMeta, type_name="com.sun.star.chart2.DataPointCustomLabelFieldType", name_space="com.sun.star.chart2"):
+        """Dynamically created class that represents ``com.sun.star.chart2.DataPointCustomLabelFieldType`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.chart2.data_point_custom_label_field_type import DataPointCustomLabelFieldType as DataPointCustomLabelFieldType
 

@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    ScanError = gen_dynamic_enum("com.sun.star.scanner.ScanError")
-    # Dynamically created class that represents ``com.sun.star.scanner.ScanError`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class ScanError(metaclass=UnoEnumMeta, type_name="com.sun.star.scanner.ScanError", name_space="com.sun.star.scanner"):
+        """Dynamically created class that represents ``com.sun.star.scanner.ScanError`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.scanner.scan_error import ScanError as ScanError
 

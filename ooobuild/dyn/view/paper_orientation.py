@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    PaperOrientation = gen_dynamic_enum("com.sun.star.view.PaperOrientation")
-    # Dynamically created class that represents ``com.sun.star.view.PaperOrientation`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class PaperOrientation(metaclass=UnoEnumMeta, type_name="com.sun.star.view.PaperOrientation", name_space="com.sun.star.view"):
+        """Dynamically created class that represents ``com.sun.star.view.PaperOrientation`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.view.paper_orientation import PaperOrientation as PaperOrientation
 

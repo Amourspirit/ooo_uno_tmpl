@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    LockType = gen_dynamic_enum("com.sun.star.ucb.LockType")
-    # Dynamically created class that represents ``com.sun.star.ucb.LockType`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class LockType(metaclass=UnoEnumMeta, type_name="com.sun.star.ucb.LockType", name_space="com.sun.star.ucb"):
+        """Dynamically created class that represents ``com.sun.star.ucb.LockType`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.ucb.lock_type import LockType as LockType
 

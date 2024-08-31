@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    ElementMarkType = gen_dynamic_enum("com.sun.star.xml.crypto.sax.ElementMarkType")
-    # Dynamically created class that represents ``com.sun.star.xml.crypto.sax.ElementMarkType`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class ElementMarkType(metaclass=UnoEnumMeta, type_name="com.sun.star.xml.crypto.sax.ElementMarkType", name_space="com.sun.star.xml.crypto.sax"):
+        """Dynamically created class that represents ``com.sun.star.xml.crypto.sax.ElementMarkType`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from .....lo.xml.crypto.sax.element_mark_type import ElementMarkType as ElementMarkType
 

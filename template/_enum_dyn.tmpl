@@ -53,9 +53,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from $uno_enum_namespace import gen_dynamic_enum
-    ${safe_name} = gen_dynamic_enum("$fullname")
-    # Dynamically created class that represents ``$fullname`` Enum.
+    from $uno_enum_namespace import UnoEnumMeta
+    class ${safe_name}(metaclass=UnoEnumMeta, type_name="$fullname", name_space="$namespace"):
+        """Dynamically created class that represents ``$fullname`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     $self.get_rel_import(in_str=$uno_obj_in, ns=$uno_obj_ns) as $safe_name
 

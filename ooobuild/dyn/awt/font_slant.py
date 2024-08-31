@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    FontSlant = gen_dynamic_enum("com.sun.star.awt.FontSlant")
-    # Dynamically created class that represents ``com.sun.star.awt.FontSlant`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class FontSlant(metaclass=UnoEnumMeta, type_name="com.sun.star.awt.FontSlant", name_space="com.sun.star.awt"):
+        """Dynamically created class that represents ``com.sun.star.awt.FontSlant`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.awt.font_slant import FontSlant as FontSlant
 

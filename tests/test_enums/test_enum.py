@@ -19,14 +19,18 @@ def test_adjustment_type():
     assert AdjustmentType.typeName == "com.sun.star.awt.AdjustmentType"
 
     assert AdjustmentType.ADJUST_ABS == ADJUST_ABS
-    assert AdjustmentType.ADJUST_ABS == ADJUST_ABS
-
+    assert AdjustmentType.ADJUST_PAGE == ADJUST_PAGE
     assert AdjustmentType.ADJUST_LINE == ADJUST_LINE
     atype = AdjustmentType("ADJUST_PAGE")
     assert atype == ADJUST_PAGE
 
     atype = AdjustmentType(ADJUST_LINE)
     assert atype == ADJUST_LINE
+
+    assert len(AdjustmentType) == 3
+
+    for e in AdjustmentType:
+        assert e in AdjustmentType
 
     with pytest.raises(TypeError):
         AdjustmentType(10)
@@ -35,4 +39,18 @@ def test_adjustment_type():
         AdjustmentType("ADJUST")
 
 
+
+def test_font_slant():
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class FontSlant(metaclass=UnoEnumMeta, type_name="com.sun.star.awt.FontSlant", name_space="com.sun.star.awt"):
+        """Dynamically created class that represents ``com.sun.star.awt.FontSlant`` Enum. Class loosely mimics Enum"""
+        pass
+    
+    fs = FontSlant.ITALIC
+    assert fs.value == "ITALIC"
+
+    assert len(FontSlant) == 6
+
+    for e in FontSlant:
+        assert e in FontSlant
 

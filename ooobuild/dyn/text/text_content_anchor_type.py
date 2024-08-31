@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    TextContentAnchorType = gen_dynamic_enum("com.sun.star.text.TextContentAnchorType")
-    # Dynamically created class that represents ``com.sun.star.text.TextContentAnchorType`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class TextContentAnchorType(metaclass=UnoEnumMeta, type_name="com.sun.star.text.TextContentAnchorType", name_space="com.sun.star.text"):
+        """Dynamically created class that represents ``com.sun.star.text.TextContentAnchorType`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.text.text_content_anchor_type import TextContentAnchorType as TextContentAnchorType
 

@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    FieldAccessMode = gen_dynamic_enum("com.sun.star.reflection.FieldAccessMode")
-    # Dynamically created class that represents ``com.sun.star.reflection.FieldAccessMode`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class FieldAccessMode(metaclass=UnoEnumMeta, type_name="com.sun.star.reflection.FieldAccessMode", name_space="com.sun.star.reflection"):
+        """Dynamically created class that represents ``com.sun.star.reflection.FieldAccessMode`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.reflection.field_access_mode import FieldAccessMode as FieldAccessMode
 

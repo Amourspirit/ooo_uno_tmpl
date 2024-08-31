@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    CellHoriJustify = gen_dynamic_enum("com.sun.star.table.CellHoriJustify")
-    # Dynamically created class that represents ``com.sun.star.table.CellHoriJustify`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class CellHoriJustify(metaclass=UnoEnumMeta, type_name="com.sun.star.table.CellHoriJustify", name_space="com.sun.star.table"):
+        """Dynamically created class that represents ``com.sun.star.table.CellHoriJustify`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.table.cell_hori_justify import CellHoriJustify as CellHoriJustify
 

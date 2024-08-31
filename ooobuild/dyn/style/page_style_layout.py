@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    PageStyleLayout = gen_dynamic_enum("com.sun.star.style.PageStyleLayout")
-    # Dynamically created class that represents ``com.sun.star.style.PageStyleLayout`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class PageStyleLayout(metaclass=UnoEnumMeta, type_name="com.sun.star.style.PageStyleLayout", name_space="com.sun.star.style"):
+        """Dynamically created class that represents ``com.sun.star.style.PageStyleLayout`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.style.page_style_layout import PageStyleLayout as PageStyleLayout
 

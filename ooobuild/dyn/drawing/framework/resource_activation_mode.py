@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    ResourceActivationMode = gen_dynamic_enum("com.sun.star.drawing.framework.ResourceActivationMode")
-    # Dynamically created class that represents ``com.sun.star.drawing.framework.ResourceActivationMode`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class ResourceActivationMode(metaclass=UnoEnumMeta, type_name="com.sun.star.drawing.framework.ResourceActivationMode", name_space="com.sun.star.drawing.framework"):
+        """Dynamically created class that represents ``com.sun.star.drawing.framework.ResourceActivationMode`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ....lo.drawing.framework.resource_activation_mode import ResourceActivationMode as ResourceActivationMode
 

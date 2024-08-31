@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    MessageBoxType = gen_dynamic_enum("com.sun.star.awt.MessageBoxType")
-    # Dynamically created class that represents ``com.sun.star.awt.MessageBoxType`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class MessageBoxType(metaclass=UnoEnumMeta, type_name="com.sun.star.awt.MessageBoxType", name_space="com.sun.star.awt"):
+        """Dynamically created class that represents ``com.sun.star.awt.MessageBoxType`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.awt.message_box_type import MessageBoxType as MessageBoxType
 

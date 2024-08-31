@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    XPathObjectType = gen_dynamic_enum("com.sun.star.xml.xpath.XPathObjectType")
-    # Dynamically created class that represents ``com.sun.star.xml.xpath.XPathObjectType`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class XPathObjectType(metaclass=UnoEnumMeta, type_name="com.sun.star.xml.xpath.XPathObjectType", name_space="com.sun.star.xml.xpath"):
+        """Dynamically created class that represents ``com.sun.star.xml.xpath.XPathObjectType`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ....lo.xml.xpath.x_path_object_type import XPathObjectType as XPathObjectType
 

@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    TransferCommandOperation = gen_dynamic_enum("com.sun.star.ucb.TransferCommandOperation")
-    # Dynamically created class that represents ``com.sun.star.ucb.TransferCommandOperation`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class TransferCommandOperation(metaclass=UnoEnumMeta, type_name="com.sun.star.ucb.TransferCommandOperation", name_space="com.sun.star.ucb"):
+        """Dynamically created class that represents ``com.sun.star.ucb.TransferCommandOperation`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.ucb.transfer_command_operation import TransferCommandOperation as TransferCommandOperation
 

@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    BreakType = gen_dynamic_enum("com.sun.star.style.BreakType")
-    # Dynamically created class that represents ``com.sun.star.style.BreakType`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class BreakType(metaclass=UnoEnumMeta, type_name="com.sun.star.style.BreakType", name_space="com.sun.star.style"):
+        """Dynamically created class that represents ``com.sun.star.style.BreakType`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.style.break_type import BreakType as BreakType
 

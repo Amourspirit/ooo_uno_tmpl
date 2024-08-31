@@ -27,6 +27,6 @@ TypeDef type alias
 
 
 See Also:
-    `API PointSequenceSequence <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1drawing.html#a74f8af1a8832994bee18d13ff6855f87>`_
+    `API PointSequenceSequence <https://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1drawing.html#abb1f8aae85aa23771084f01ce9f52f2f>`_
 """
 

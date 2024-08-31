@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    ChartErrorCategory = gen_dynamic_enum("com.sun.star.chart.ChartErrorCategory")
-    # Dynamically created class that represents ``com.sun.star.chart.ChartErrorCategory`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class ChartErrorCategory(metaclass=UnoEnumMeta, type_name="com.sun.star.chart.ChartErrorCategory", name_space="com.sun.star.chart"):
+        """Dynamically created class that represents ``com.sun.star.chart.ChartErrorCategory`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.chart.chart_error_category import ChartErrorCategory as ChartErrorCategory
 

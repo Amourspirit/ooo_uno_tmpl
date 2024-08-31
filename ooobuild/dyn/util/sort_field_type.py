@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    SortFieldType = gen_dynamic_enum("com.sun.star.util.SortFieldType")
-    # Dynamically created class that represents ``com.sun.star.util.SortFieldType`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class SortFieldType(metaclass=UnoEnumMeta, type_name="com.sun.star.util.SortFieldType", name_space="com.sun.star.util"):
+        """Dynamically created class that represents ``com.sun.star.util.SortFieldType`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.util.sort_field_type import SortFieldType as SortFieldType
 

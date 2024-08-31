@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    FinishReason = gen_dynamic_enum("com.sun.star.script.FinishReason")
-    # Dynamically created class that represents ``com.sun.star.script.FinishReason`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class FinishReason(metaclass=UnoEnumMeta, type_name="com.sun.star.script.FinishReason", name_space="com.sun.star.script"):
+        """Dynamically created class that represents ``com.sun.star.script.FinishReason`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.script.finish_reason import FinishReason as FinishReason
 

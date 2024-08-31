@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    FrameAction = gen_dynamic_enum("com.sun.star.frame.FrameAction")
-    # Dynamically created class that represents ``com.sun.star.frame.FrameAction`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class FrameAction(metaclass=UnoEnumMeta, type_name="com.sun.star.frame.FrameAction", name_space="com.sun.star.frame"):
+        """Dynamically created class that represents ``com.sun.star.frame.FrameAction`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.frame.frame_action import FrameAction as FrameAction
 

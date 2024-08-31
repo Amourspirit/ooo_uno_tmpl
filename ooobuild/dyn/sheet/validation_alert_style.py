@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    ValidationAlertStyle = gen_dynamic_enum("com.sun.star.sheet.ValidationAlertStyle")
-    # Dynamically created class that represents ``com.sun.star.sheet.ValidationAlertStyle`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class ValidationAlertStyle(metaclass=UnoEnumMeta, type_name="com.sun.star.sheet.ValidationAlertStyle", name_space="com.sun.star.sheet"):
+        """Dynamically created class that represents ``com.sun.star.sheet.ValidationAlertStyle`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.sheet.validation_alert_style import ValidationAlertStyle as ValidationAlertStyle
 

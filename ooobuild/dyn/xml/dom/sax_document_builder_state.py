@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    SAXDocumentBuilderState = gen_dynamic_enum("com.sun.star.xml.dom.SAXDocumentBuilderState")
-    # Dynamically created class that represents ``com.sun.star.xml.dom.SAXDocumentBuilderState`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class SAXDocumentBuilderState(metaclass=UnoEnumMeta, type_name="com.sun.star.xml.dom.SAXDocumentBuilderState", name_space="com.sun.star.xml.dom"):
+        """Dynamically created class that represents ``com.sun.star.xml.dom.SAXDocumentBuilderState`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ....lo.xml.dom.sax_document_builder_state import SAXDocumentBuilderState as SAXDocumentBuilderState
 

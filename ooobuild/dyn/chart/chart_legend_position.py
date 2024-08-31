@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    ChartLegendPosition = gen_dynamic_enum("com.sun.star.chart.ChartLegendPosition")
-    # Dynamically created class that represents ``com.sun.star.chart.ChartLegendPosition`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class ChartLegendPosition(metaclass=UnoEnumMeta, type_name="com.sun.star.chart.ChartLegendPosition", name_space="com.sun.star.chart"):
+        """Dynamically created class that represents ``com.sun.star.chart.ChartLegendPosition`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.chart.chart_legend_position import ChartLegendPosition as ChartLegendPosition
 

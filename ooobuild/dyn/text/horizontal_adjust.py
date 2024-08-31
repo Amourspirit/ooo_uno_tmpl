@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    HorizontalAdjust = gen_dynamic_enum("com.sun.star.text.HorizontalAdjust")
-    # Dynamically created class that represents ``com.sun.star.text.HorizontalAdjust`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class HorizontalAdjust(metaclass=UnoEnumMeta, type_name="com.sun.star.text.HorizontalAdjust", name_space="com.sun.star.text"):
+        """Dynamically created class that represents ``com.sun.star.text.HorizontalAdjust`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.text.horizontal_adjust import HorizontalAdjust as HorizontalAdjust
 

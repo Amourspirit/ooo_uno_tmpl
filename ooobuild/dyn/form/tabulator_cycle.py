@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    TabulatorCycle = gen_dynamic_enum("com.sun.star.form.TabulatorCycle")
-    # Dynamically created class that represents ``com.sun.star.form.TabulatorCycle`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class TabulatorCycle(metaclass=UnoEnumMeta, type_name="com.sun.star.form.TabulatorCycle", name_space="com.sun.star.form"):
+        """Dynamically created class that represents ``com.sun.star.form.TabulatorCycle`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.form.tabulator_cycle import TabulatorCycle as TabulatorCycle
 

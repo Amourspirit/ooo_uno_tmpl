@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    TypeDescriptionSearchDepth = gen_dynamic_enum("com.sun.star.reflection.TypeDescriptionSearchDepth")
-    # Dynamically created class that represents ``com.sun.star.reflection.TypeDescriptionSearchDepth`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class TypeDescriptionSearchDepth(metaclass=UnoEnumMeta, type_name="com.sun.star.reflection.TypeDescriptionSearchDepth", name_space="com.sun.star.reflection"):
+        """Dynamically created class that represents ``com.sun.star.reflection.TypeDescriptionSearchDepth`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.reflection.type_description_search_depth import TypeDescriptionSearchDepth as TypeDescriptionSearchDepth
 

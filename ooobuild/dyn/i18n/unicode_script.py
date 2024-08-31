@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    UnicodeScript = gen_dynamic_enum("com.sun.star.i18n.UnicodeScript")
-    # Dynamically created class that represents ``com.sun.star.i18n.UnicodeScript`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class UnicodeScript(metaclass=UnoEnumMeta, type_name="com.sun.star.i18n.UnicodeScript", name_space="com.sun.star.i18n"):
+        """Dynamically created class that represents ``com.sun.star.i18n.UnicodeScript`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.i18n.unicode_script import UnicodeScript as UnicodeScript
 

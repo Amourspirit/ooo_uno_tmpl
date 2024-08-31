@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    ZoomLevel = gen_dynamic_enum("com.sun.star.media.ZoomLevel")
-    # Dynamically created class that represents ``com.sun.star.media.ZoomLevel`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class ZoomLevel(metaclass=UnoEnumMeta, type_name="com.sun.star.media.ZoomLevel", name_space="com.sun.star.media"):
+        """Dynamically created class that represents ``com.sun.star.media.ZoomLevel`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.media.zoom_level import ZoomLevel as ZoomLevel
 

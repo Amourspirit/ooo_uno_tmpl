@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    EventType = gen_dynamic_enum("com.sun.star.xml.dom.events.EventType")
-    # Dynamically created class that represents ``com.sun.star.xml.dom.events.EventType`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class EventType(metaclass=UnoEnumMeta, type_name="com.sun.star.xml.dom.events.EventType", name_space="com.sun.star.xml.dom.events"):
+        """Dynamically created class that represents ``com.sun.star.xml.dom.events.EventType`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from .....lo.xml.dom.events.event_type import EventType as EventType
 
