@@ -116,7 +116,8 @@ class ${safe_name}($self.get_class_inherits($name, $inherits)):
 #set $p_name = $self.get_safe_word($property['name'])
 #set $p_return = $self.get_property_return($property)
 #set $p_desc = $property['desc']
-    @abstractproperty
+    @property
+    @abstractmethod
     def ${p_name}(self) -> $p_return:
         """
     #for $line in $self.line_gen($p_desc)
@@ -144,7 +145,8 @@ class ${safe_name}($self.get_class_inherits($name, $inherits)):
 #set $p_name = $self.get_safe_word($property['name'])
 #set $p_return = $self.get_property_return($property)
 #set $p_desc = $property['desc']
-    @abstractproperty
+    @property
+    @abstractmethod
     def ${p_name}(self) -> $p_return:
         """
     #for $line in $self.line_gen($p_desc)

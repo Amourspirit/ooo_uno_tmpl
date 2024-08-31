@@ -645,7 +645,7 @@ class BaseTpml(Template):
 
         def get_import(extend: ExtendsInfo) -> str:
             def is_mapped() -> bool:
-                return not extend.map_name is None
+                return extend.map_name is not None
 
             def get_mapped() -> bool:
                 return extend.map_name
@@ -697,10 +697,17 @@ class BaseTpml(Template):
         a_method = True in abm
         a_prop = True in abp
         results = []
-        if a_method:
+        if a_method or a_prop:
             results.append("abstractmethod")
-        if a_prop:
-            results.append("abstractproperty")
+        # if a_prop:
+        # https://docs.python.org/3/library/abc.html
+        # abstractproperty is deprecated in Python 3.9
+        # now use:
+        # @property
+        # @abstractmethod
+        # def my_abstract_property(self):
+        # results.append("abstractproperty")
+
         return results
 
     def get_rel_import(self, in_str: str, ns: str, sep: str = ".") -> str:
