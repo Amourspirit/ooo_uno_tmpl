@@ -21,7 +21,7 @@
 from __future__ import annotations
 import typing
 import uno
-from abc import abstractproperty
+from abc import abstractproperty, abstractmethod
 from .uno_control_model import UnoControlModel as UnoControlModel_c8ce0c58
 from .x_item_list import XItemList as XItemList_83fb09d7
 if typing.TYPE_CHECKING:
@@ -45,7 +45,8 @@ class UnoControlListBoxModel(UnoControlModel_c8ce0c58, XItemList_83fb09d7):
     __ooo_full_ns__: str = 'com.sun.star.awt.UnoControlListBoxModel'
     __ooo_type_name__: str = 'service'
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def Align(self) -> int:
         """
         specifies the horizontal alignment of the text in the control.

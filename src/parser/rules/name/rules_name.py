@@ -4,7 +4,6 @@ from typing import List, Union
 from ...dataclass.name_info import NameInfo
 from .i_rules_name import IRulesName
 from .i_rule_name import IRuleName
-from .i_rules_name import IRulesName
 from ...common.log_load import Log
 log = Log()
 
