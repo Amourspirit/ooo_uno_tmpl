@@ -27,6 +27,11 @@ def test_adjustment_type():
     atype = AdjustmentType(ADJUST_LINE)
     assert atype == ADJUST_LINE
 
+    assert len(AdjustmentType) == 3
+
+    for e in AdjustmentType:
+        assert e in AdjustmentType
+
     with pytest.raises(TypeError):
         AdjustmentType(10)
 
@@ -43,4 +48,9 @@ def test_font_slant():
     
     fs = FontSlant.ITALIC
     assert fs.value == "ITALIC"
+
+    assert len(FontSlant) == 6
+
+    for e in FontSlant:
+        assert e in FontSlant
 

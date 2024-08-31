@@ -69,6 +69,8 @@ class UnoEnumMeta(type):
 
         This metaclass gets all the enum names using reflection and then looks up the values dynamically.
         When the class is constructed all the value of the enum are present.
+
+        This class also support contains, len, and iteration.
     """
     _initialized = False  # This class var is important. It is always False.
     # The instances will override this with their own,
@@ -147,6 +149,23 @@ class UnoEnumMeta(type):
             # the only way to set attribute is to call super
             super().__setattr__(key, value)  # Transparent access.
 
+    def __len__(cls) -> int:
+        return len(cls._names)
+
+    
+    def __iter__(cls):
+        for name in cls._names:
+            yield getattr(cls, name)
+    
+    def __contains__(cls, value: Any) -> bool:
+        if isinstance(value, str):
+            return value in cls._names
+        if isinstance(value, uno.Enum):
+            if value.typeName != cls.typeName:
+                return False
+            return value.value in cls._names
+        return False
+    
     def __get_enum_name(cls) -> str:
         return cls.__ooo_full_ns__.rsplit(sep=".", maxsplit=1)[1]
 
