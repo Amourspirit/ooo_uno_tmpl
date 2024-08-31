@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    MozillaProductType = gen_dynamic_enum("com.sun.star.mozilla.MozillaProductType")
-    # Dynamically created class that represents ``com.sun.star.mozilla.MozillaProductType`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class MozillaProductType(metaclass=UnoEnumMeta, type_name="com.sun.star.mozilla.MozillaProductType", name_space="com.sun.star.mozilla"):
+        """Dynamically created class that represents ``com.sun.star.mozilla.MozillaProductType`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.mozilla.mozilla_product_type import MozillaProductType as MozillaProductType
 

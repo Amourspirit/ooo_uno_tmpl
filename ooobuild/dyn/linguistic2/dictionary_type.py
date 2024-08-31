@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    DictionaryType = gen_dynamic_enum("com.sun.star.linguistic2.DictionaryType")
-    # Dynamically created class that represents ``com.sun.star.linguistic2.DictionaryType`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class DictionaryType(metaclass=UnoEnumMeta, type_name="com.sun.star.linguistic2.DictionaryType", name_space="com.sun.star.linguistic2"):
+        """Dynamically created class that represents ``com.sun.star.linguistic2.DictionaryType`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.linguistic2.dictionary_type import DictionaryType as DictionaryType
 

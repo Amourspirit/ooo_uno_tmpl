@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    ShadowLocation = gen_dynamic_enum("com.sun.star.table.ShadowLocation")
-    # Dynamically created class that represents ``com.sun.star.table.ShadowLocation`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class ShadowLocation(metaclass=UnoEnumMeta, type_name="com.sun.star.table.ShadowLocation", name_space="com.sun.star.table"):
+        """Dynamically created class that represents ``com.sun.star.table.ShadowLocation`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.table.shadow_location import ShadowLocation as ShadowLocation
 

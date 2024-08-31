@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    SolverConstraintOperator = gen_dynamic_enum("com.sun.star.sheet.SolverConstraintOperator")
-    # Dynamically created class that represents ``com.sun.star.sheet.SolverConstraintOperator`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class SolverConstraintOperator(metaclass=UnoEnumMeta, type_name="com.sun.star.sheet.SolverConstraintOperator", name_space="com.sun.star.sheet"):
+        """Dynamically created class that represents ``com.sun.star.sheet.SolverConstraintOperator`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.sheet.solver_constraint_operator import SolverConstraintOperator as SolverConstraintOperator
 

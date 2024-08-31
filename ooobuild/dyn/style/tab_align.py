@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    TabAlign = gen_dynamic_enum("com.sun.star.style.TabAlign")
-    # Dynamically created class that represents ``com.sun.star.style.TabAlign`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class TabAlign(metaclass=UnoEnumMeta, type_name="com.sun.star.style.TabAlign", name_space="com.sun.star.style"):
+        """Dynamically created class that represents ``com.sun.star.style.TabAlign`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.style.tab_align import TabAlign as TabAlign
 

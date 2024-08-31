@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    OutgoingMessageState = gen_dynamic_enum("com.sun.star.ucb.OutgoingMessageState")
-    # Dynamically created class that represents ``com.sun.star.ucb.OutgoingMessageState`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class OutgoingMessageState(metaclass=UnoEnumMeta, type_name="com.sun.star.ucb.OutgoingMessageState", name_space="com.sun.star.ucb"):
+        """Dynamically created class that represents ``com.sun.star.ucb.OutgoingMessageState`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.ucb.outgoing_message_state import OutgoingMessageState as OutgoingMessageState
 

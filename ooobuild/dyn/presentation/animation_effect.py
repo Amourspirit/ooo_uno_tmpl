@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    AnimationEffect = gen_dynamic_enum("com.sun.star.presentation.AnimationEffect")
-    # Dynamically created class that represents ``com.sun.star.presentation.AnimationEffect`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class AnimationEffect(metaclass=UnoEnumMeta, type_name="com.sun.star.presentation.AnimationEffect", name_space="com.sun.star.presentation"):
+        """Dynamically created class that represents ``com.sun.star.presentation.AnimationEffect`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.presentation.animation_effect import AnimationEffect as AnimationEffect
 

@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    FormButtonType = gen_dynamic_enum("com.sun.star.form.FormButtonType")
-    # Dynamically created class that represents ``com.sun.star.form.FormButtonType`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class FormButtonType(metaclass=UnoEnumMeta, type_name="com.sun.star.form.FormButtonType", name_space="com.sun.star.form"):
+        """Dynamically created class that represents ``com.sun.star.form.FormButtonType`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.form.form_button_type import FormButtonType as FormButtonType
 

@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    FillDirection = gen_dynamic_enum("com.sun.star.sheet.FillDirection")
-    # Dynamically created class that represents ``com.sun.star.sheet.FillDirection`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class FillDirection(metaclass=UnoEnumMeta, type_name="com.sun.star.sheet.FillDirection", name_space="com.sun.star.sheet"):
+        """Dynamically created class that represents ``com.sun.star.sheet.FillDirection`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.sheet.fill_direction import FillDirection as FillDirection
 

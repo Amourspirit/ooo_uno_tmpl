@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    EnhancedCustomShapeTextPathMode = gen_dynamic_enum("com.sun.star.drawing.EnhancedCustomShapeTextPathMode")
-    # Dynamically created class that represents ``com.sun.star.drawing.EnhancedCustomShapeTextPathMode`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class EnhancedCustomShapeTextPathMode(metaclass=UnoEnumMeta, type_name="com.sun.star.drawing.EnhancedCustomShapeTextPathMode", name_space="com.sun.star.drawing"):
+        """Dynamically created class that represents ``com.sun.star.drawing.EnhancedCustomShapeTextPathMode`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.drawing.enhanced_custom_shape_text_path_mode import EnhancedCustomShapeTextPathMode as EnhancedCustomShapeTextPathMode
 

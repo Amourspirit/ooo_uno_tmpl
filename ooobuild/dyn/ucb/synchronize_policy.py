@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    SynchronizePolicy = gen_dynamic_enum("com.sun.star.ucb.SynchronizePolicy")
-    # Dynamically created class that represents ``com.sun.star.ucb.SynchronizePolicy`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class SynchronizePolicy(metaclass=UnoEnumMeta, type_name="com.sun.star.ucb.SynchronizePolicy", name_space="com.sun.star.ucb"):
+        """Dynamically created class that represents ``com.sun.star.ucb.SynchronizePolicy`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.ucb.synchronize_policy import SynchronizePolicy as SynchronizePolicy
 

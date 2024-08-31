@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    WrapTextMode = gen_dynamic_enum("com.sun.star.text.WrapTextMode")
-    # Dynamically created class that represents ``com.sun.star.text.WrapTextMode`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class WrapTextMode(metaclass=UnoEnumMeta, type_name="com.sun.star.text.WrapTextMode", name_space="com.sun.star.text"):
+        """Dynamically created class that represents ``com.sun.star.text.WrapTextMode`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.text.wrap_text_mode import WrapTextMode as WrapTextMode
 

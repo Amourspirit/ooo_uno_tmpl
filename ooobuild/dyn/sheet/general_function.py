@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    GeneralFunction = gen_dynamic_enum("com.sun.star.sheet.GeneralFunction")
-    # Dynamically created class that represents ``com.sun.star.sheet.GeneralFunction`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class GeneralFunction(metaclass=UnoEnumMeta, type_name="com.sun.star.sheet.GeneralFunction", name_space="com.sun.star.sheet"):
+        """Dynamically created class that represents ``com.sun.star.sheet.GeneralFunction`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.sheet.general_function import GeneralFunction as GeneralFunction
 

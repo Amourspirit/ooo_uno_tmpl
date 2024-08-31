@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    DOMExceptionType = gen_dynamic_enum("com.sun.star.xml.dom.DOMExceptionType")
-    # Dynamically created class that represents ``com.sun.star.xml.dom.DOMExceptionType`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class DOMExceptionType(metaclass=UnoEnumMeta, type_name="com.sun.star.xml.dom.DOMExceptionType", name_space="com.sun.star.xml.dom"):
+        """Dynamically created class that represents ``com.sun.star.xml.dom.DOMExceptionType`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ....lo.xml.dom.dom_exception_type import DOMExceptionType as DOMExceptionType
 

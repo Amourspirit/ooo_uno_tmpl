@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    PushButtonType = gen_dynamic_enum("com.sun.star.awt.PushButtonType")
-    # Dynamically created class that represents ``com.sun.star.awt.PushButtonType`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class PushButtonType(metaclass=UnoEnumMeta, type_name="com.sun.star.awt.PushButtonType", name_space="com.sun.star.awt"):
+        """Dynamically created class that represents ``com.sun.star.awt.PushButtonType`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.awt.push_button_type import PushButtonType as PushButtonType
 

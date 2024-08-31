@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    FilterConnection = gen_dynamic_enum("com.sun.star.sheet.FilterConnection")
-    # Dynamically created class that represents ``com.sun.star.sheet.FilterConnection`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class FilterConnection(metaclass=UnoEnumMeta, type_name="com.sun.star.sheet.FilterConnection", name_space="com.sun.star.sheet"):
+        """Dynamically created class that represents ``com.sun.star.sheet.FilterConnection`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.sheet.filter_connection import FilterConnection as FilterConnection
 

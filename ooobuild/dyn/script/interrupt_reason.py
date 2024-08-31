@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    InterruptReason = gen_dynamic_enum("com.sun.star.script.InterruptReason")
-    # Dynamically created class that represents ``com.sun.star.script.InterruptReason`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class InterruptReason(metaclass=UnoEnumMeta, type_name="com.sun.star.script.InterruptReason", name_space="com.sun.star.script"):
+        """Dynamically created class that represents ``com.sun.star.script.InterruptReason`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.script.interrupt_reason import InterruptReason as InterruptReason
 

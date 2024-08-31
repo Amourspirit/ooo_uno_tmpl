@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    FolderListCommand = gen_dynamic_enum("com.sun.star.ucb.FolderListCommand")
-    # Dynamically created class that represents ``com.sun.star.ucb.FolderListCommand`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class FolderListCommand(metaclass=UnoEnumMeta, type_name="com.sun.star.ucb.FolderListCommand", name_space="com.sun.star.ucb"):
+        """Dynamically created class that represents ``com.sun.star.ucb.FolderListCommand`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.ucb.folder_list_command import FolderListCommand as FolderListCommand
 

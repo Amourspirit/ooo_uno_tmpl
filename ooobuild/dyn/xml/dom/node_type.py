@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    NodeType = gen_dynamic_enum("com.sun.star.xml.dom.NodeType")
-    # Dynamically created class that represents ``com.sun.star.xml.dom.NodeType`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class NodeType(metaclass=UnoEnumMeta, type_name="com.sun.star.xml.dom.NodeType", name_space="com.sun.star.xml.dom"):
+        """Dynamically created class that represents ``com.sun.star.xml.dom.NodeType`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ....lo.xml.dom.node_type import NodeType as NodeType
 

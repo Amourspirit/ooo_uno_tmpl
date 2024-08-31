@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    InteractiveSelectionResult = gen_dynamic_enum("com.sun.star.inspection.InteractiveSelectionResult")
-    # Dynamically created class that represents ``com.sun.star.inspection.InteractiveSelectionResult`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class InteractiveSelectionResult(metaclass=UnoEnumMeta, type_name="com.sun.star.inspection.InteractiveSelectionResult", name_space="com.sun.star.inspection"):
+        """Dynamically created class that represents ``com.sun.star.inspection.InteractiveSelectionResult`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.inspection.interactive_selection_result import InteractiveSelectionResult as InteractiveSelectionResult
 

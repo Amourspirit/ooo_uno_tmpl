@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    ListSourceType = gen_dynamic_enum("com.sun.star.form.ListSourceType")
-    # Dynamically created class that represents ``com.sun.star.form.ListSourceType`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class ListSourceType(metaclass=UnoEnumMeta, type_name="com.sun.star.form.ListSourceType", name_space="com.sun.star.form"):
+        """Dynamically created class that represents ``com.sun.star.form.ListSourceType`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.form.list_source_type import ListSourceType as ListSourceType
 

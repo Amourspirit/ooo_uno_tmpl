@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    DataPilotFieldOrientation = gen_dynamic_enum("com.sun.star.sheet.DataPilotFieldOrientation")
-    # Dynamically created class that represents ``com.sun.star.sheet.DataPilotFieldOrientation`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class DataPilotFieldOrientation(metaclass=UnoEnumMeta, type_name="com.sun.star.sheet.DataPilotFieldOrientation", name_space="com.sun.star.sheet"):
+        """Dynamically created class that represents ``com.sun.star.sheet.DataPilotFieldOrientation`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.sheet.data_pilot_field_orientation import DataPilotFieldOrientation as DataPilotFieldOrientation
 

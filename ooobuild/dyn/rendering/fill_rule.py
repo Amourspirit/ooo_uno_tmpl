@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    FillRule = gen_dynamic_enum("com.sun.star.rendering.FillRule")
-    # Dynamically created class that represents ``com.sun.star.rendering.FillRule`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class FillRule(metaclass=UnoEnumMeta, type_name="com.sun.star.rendering.FillRule", name_space="com.sun.star.rendering"):
+        """Dynamically created class that represents ``com.sun.star.rendering.FillRule`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.rendering.fill_rule import FillRule as FillRule
 

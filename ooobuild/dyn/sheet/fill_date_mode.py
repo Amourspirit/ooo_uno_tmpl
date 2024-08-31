@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    FillDateMode = gen_dynamic_enum("com.sun.star.sheet.FillDateMode")
-    # Dynamically created class that represents ``com.sun.star.sheet.FillDateMode`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class FillDateMode(metaclass=UnoEnumMeta, type_name="com.sun.star.sheet.FillDateMode", name_space="com.sun.star.sheet"):
+        """Dynamically created class that represents ``com.sun.star.sheet.FillDateMode`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.sheet.fill_date_mode import FillDateMode as FillDateMode
 

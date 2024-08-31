@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    RegistryValueType = gen_dynamic_enum("com.sun.star.registry.RegistryValueType")
-    # Dynamically created class that represents ``com.sun.star.registry.RegistryValueType`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class RegistryValueType(metaclass=UnoEnumMeta, type_name="com.sun.star.registry.RegistryValueType", name_space="com.sun.star.registry"):
+        """Dynamically created class that represents ``com.sun.star.registry.RegistryValueType`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.registry.registry_value_type import RegistryValueType as RegistryValueType
 

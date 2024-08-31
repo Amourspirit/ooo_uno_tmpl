@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    ContextMenuInterceptorAction = gen_dynamic_enum("com.sun.star.ui.ContextMenuInterceptorAction")
-    # Dynamically created class that represents ``com.sun.star.ui.ContextMenuInterceptorAction`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class ContextMenuInterceptorAction(metaclass=UnoEnumMeta, type_name="com.sun.star.ui.ContextMenuInterceptorAction", name_space="com.sun.star.ui"):
+        """Dynamically created class that represents ``com.sun.star.ui.ContextMenuInterceptorAction`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.ui.context_menu_interceptor_action import ContextMenuInterceptorAction as ContextMenuInterceptorAction
 

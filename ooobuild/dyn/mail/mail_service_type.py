@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    MailServiceType = gen_dynamic_enum("com.sun.star.mail.MailServiceType")
-    # Dynamically created class that represents ``com.sun.star.mail.MailServiceType`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class MailServiceType(metaclass=UnoEnumMeta, type_name="com.sun.star.mail.MailServiceType", name_space="com.sun.star.mail"):
+        """Dynamically created class that represents ``com.sun.star.mail.MailServiceType`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.mail.mail_service_type import MailServiceType as MailServiceType
 

@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    SymbolStyle = gen_dynamic_enum("com.sun.star.chart2.SymbolStyle")
-    # Dynamically created class that represents ``com.sun.star.chart2.SymbolStyle`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class SymbolStyle(metaclass=UnoEnumMeta, type_name="com.sun.star.chart2.SymbolStyle", name_space="com.sun.star.chart2"):
+        """Dynamically created class that represents ``com.sun.star.chart2.SymbolStyle`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.chart2.symbol_style import SymbolStyle as SymbolStyle
 

@@ -19,8 +19,7 @@ def test_adjustment_type():
     assert AdjustmentType.typeName == "com.sun.star.awt.AdjustmentType"
 
     assert AdjustmentType.ADJUST_ABS == ADJUST_ABS
-    assert AdjustmentType.ADJUST_ABS == ADJUST_ABS
-
+    assert AdjustmentType.ADJUST_PAGE == ADJUST_PAGE
     assert AdjustmentType.ADJUST_LINE == ADJUST_LINE
     atype = AdjustmentType("ADJUST_PAGE")
     assert atype == ADJUST_PAGE

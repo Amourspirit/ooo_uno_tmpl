@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    SecurityOperationStatus = gen_dynamic_enum("com.sun.star.xml.crypto.SecurityOperationStatus")
-    # Dynamically created class that represents ``com.sun.star.xml.crypto.SecurityOperationStatus`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class SecurityOperationStatus(metaclass=UnoEnumMeta, type_name="com.sun.star.xml.crypto.SecurityOperationStatus", name_space="com.sun.star.xml.crypto"):
+        """Dynamically created class that represents ``com.sun.star.xml.crypto.SecurityOperationStatus`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ....lo.xml.crypto.security_operation_status import SecurityOperationStatus as SecurityOperationStatus
 

@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    WritingMode = gen_dynamic_enum("com.sun.star.text.WritingMode")
-    # Dynamically created class that represents ``com.sun.star.text.WritingMode`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class WritingMode(metaclass=UnoEnumMeta, type_name="com.sun.star.text.WritingMode", name_space="com.sun.star.text"):
+        """Dynamically created class that represents ``com.sun.star.text.WritingMode`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.text.writing_mode import WritingMode as WritingMode
 

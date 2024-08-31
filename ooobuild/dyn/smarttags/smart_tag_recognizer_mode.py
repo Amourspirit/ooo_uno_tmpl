@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    SmartTagRecognizerMode = gen_dynamic_enum("com.sun.star.smarttags.SmartTagRecognizerMode")
-    # Dynamically created class that represents ``com.sun.star.smarttags.SmartTagRecognizerMode`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class SmartTagRecognizerMode(metaclass=UnoEnumMeta, type_name="com.sun.star.smarttags.SmartTagRecognizerMode", name_space="com.sun.star.smarttags"):
+        """Dynamically created class that represents ``com.sun.star.smarttags.SmartTagRecognizerMode`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.smarttags.smart_tag_recognizer_mode import SmartTagRecognizerMode as SmartTagRecognizerMode
 

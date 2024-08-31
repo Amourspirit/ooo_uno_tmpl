@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    PasswordRequestMode = gen_dynamic_enum("com.sun.star.task.PasswordRequestMode")
-    # Dynamically created class that represents ``com.sun.star.task.PasswordRequestMode`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class PasswordRequestMode(metaclass=UnoEnumMeta, type_name="com.sun.star.task.PasswordRequestMode", name_space="com.sun.star.task"):
+        """Dynamically created class that represents ``com.sun.star.task.PasswordRequestMode`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.task.password_request_mode import PasswordRequestMode as PasswordRequestMode
 

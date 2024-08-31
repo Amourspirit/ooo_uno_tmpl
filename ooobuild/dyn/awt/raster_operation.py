@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    RasterOperation = gen_dynamic_enum("com.sun.star.awt.RasterOperation")
-    # Dynamically created class that represents ``com.sun.star.awt.RasterOperation`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class RasterOperation(metaclass=UnoEnumMeta, type_name="com.sun.star.awt.RasterOperation", name_space="com.sun.star.awt"):
+        """Dynamically created class that represents ``com.sun.star.awt.RasterOperation`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.awt.raster_operation import RasterOperation as RasterOperation
 

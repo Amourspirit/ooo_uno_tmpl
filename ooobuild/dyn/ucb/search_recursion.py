@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    SearchRecursion = gen_dynamic_enum("com.sun.star.ucb.SearchRecursion")
-    # Dynamically created class that represents ``com.sun.star.ucb.SearchRecursion`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class SearchRecursion(metaclass=UnoEnumMeta, type_name="com.sun.star.ucb.SearchRecursion", name_space="com.sun.star.ucb"):
+        """Dynamically created class that represents ``com.sun.star.ucb.SearchRecursion`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.ucb.search_recursion import SearchRecursion as SearchRecursion
 

@@ -28,9 +28,10 @@ if (not TYPE_CHECKING) and UNO_RUNTIME and UNO_ENVIRONMENT:
     _DYNAMIC = True
 
 if not TYPE_CHECKING and _DYNAMIC:
-    from ooo.helper.enum_helper import gen_dynamic_enum
-    ExtAltNameType = gen_dynamic_enum("com.sun.star.security.ExtAltNameType")
-    # Dynamically created class that represents ``com.sun.star.security.ExtAltNameType`` Enum.
+    from ooo.helper.enum_helper import UnoEnumMeta
+    class ExtAltNameType(metaclass=UnoEnumMeta, type_name="com.sun.star.security.ExtAltNameType", name_space="com.sun.star.security"):
+        """Dynamically created class that represents ``com.sun.star.security.ExtAltNameType`` Enum. Class loosely mimics Enum"""
+        pass
 else:
     from ...lo.security.ext_alt_name_type import ExtAltNameType as ExtAltNameType
 
